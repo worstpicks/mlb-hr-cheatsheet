@@ -19,11 +19,27 @@ $ErrorActionPreference = "Stop"
 $here = $PSScriptRoot
 Set-Location $here
 
-$git = Get-Command git -ErrorAction SilentlyContinue
-if (-not $git) {
-    Write-Host "Git not found in PATH. Install Git for Windows, then re-open PowerShell:" -ForegroundColor Yellow
+function Resolve-GitExe {
+    $cmd = Get-Command git -ErrorAction SilentlyContinue
+    if ($cmd -and $cmd.Source) { return $cmd.Source }
+    foreach ($candidate in @(
+            "${env:ProgramFiles}\Git\bin\git.exe",
+            "${env:ProgramFiles(x86)}\Git\bin\git.exe",
+            "${env:LOCALAPPDATA}\Programs\Git\bin\git.exe"
+        )) {
+        if ($candidate -and (Test-Path -LiteralPath $candidate)) { return $candidate }
+    }
+    return $null
+}
+
+$gitExe = Resolve-GitExe
+if (-not $gitExe) {
+    Write-Host "Git not found (PATH or standard install locations). Install Git for Windows:" -ForegroundColor Yellow
     Write-Host "  https://git-scm.com/download/win" -ForegroundColor Cyan
     exit 1
+}
+if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
+    Write-Host "Using Git at: $gitExe (add Git\bin to PATH so `"git`" works everywhere)" -ForegroundColor DarkGray
 }
 
 if (-not (Test-Path (Join-Path $here "index.html"))) {
@@ -32,24 +48,24 @@ if (-not (Test-Path (Join-Path $here "index.html"))) {
 }
 
 if (-not (Test-Path (Join-Path $here ".git"))) {
-    & git init
+    & $gitExe init
 }
 
 # Local identity only for this repo (override with your own if you prefer)
-$email = (& git config user.email 2>$null)
+$email = (& $gitExe config user.email 2>$null)
 if (-not $email) {
-    & git config user.email "cheatsheet@local"
-    & git config user.name "MLB HR Cheatsheet"
+    & $gitExe config user.email "cheatsheet@local"
+    & $gitExe config user.name "MLB HR Cheatsheet"
 }
 
-& git add index.html README.md .gitignore setup-github-pages.ps1
-& git status
-$status = & git status --porcelain
+& $gitExe add index.html README.md .gitignore setup-github-pages.ps1
+& $gitExe status
+$status = & $gitExe status --porcelain
 if ($status) {
-    & git commit -m "Initial MLB HR cheat sheet for GitHub Pages"
+    & $gitExe commit -m "Initial MLB HR cheat sheet for GitHub Pages"
 }
 
-& git branch -M main 2>$null
+& $gitExe branch -M main 2>$null
 
 $remoteUrl = "https://github.com/$GitHubUser/$RepoName.git"
 Write-Host ""
@@ -57,9 +73,9 @@ Write-Host "=== Next: create empty repo on GitHub ===" -ForegroundColor Green
 Write-Host "  https://github.com/new?name=$RepoName (empty repo, no README)"
 Write-Host ""
 Write-Host "=== Then run (first time only) ===" -ForegroundColor Green
-Write-Host "  git remote remove origin 2>`$null"
-Write-Host "  git remote add origin $remoteUrl"
-Write-Host "  git push -u origin main"
+Write-Host "  & `"$gitExe`" remote remove origin 2>`$null"
+Write-Host "  & `"$gitExe`" remote add origin $remoteUrl"
+Write-Host "  & `"$gitExe`" push -u origin main"
 Write-Host ""
 Write-Host "=== Enable Pages ===" -ForegroundColor Green
 Write-Host "  Repo → Settings → Pages → Branch main, folder / (root)"

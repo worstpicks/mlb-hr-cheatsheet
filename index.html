@@ -9,7 +9,24 @@
         html { -webkit-text-size-adjust: 100%; }
         body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: radial-gradient(ellipse at top, #1a0d08 0%, #0d0705 42%, #040302 100%); color: #f5efe9; min-height: 100vh; padding: 16px; overflow-x: hidden; }
         .container { max-width: 2480px; margin: 0 auto; background: linear-gradient(135deg, rgba(23,12,8,0.96) 0%, rgba(17,10,10,0.97) 50%, rgba(12,18,30,0.96) 100%); border: 2px solid rgba(251,146,60,0.42); border-radius: 20px; overflow: hidden; min-width: 0; }
-        header { padding: 28px 18px 24px; text-align: center; background: linear-gradient(135deg, #2b1210 0%, #7c2d12 55%, #1d4ed8 100%); border-bottom: 3px solid rgba(254,215,170,0.65); }
+        header { position: relative; padding: 28px 18px 24px; text-align: center; background: linear-gradient(135deg, #2b1210 0%, #7c2d12 55%, #1d4ed8 100%); border-bottom: 3px solid rgba(254,215,170,0.65); }
+        .social-x {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(15,23,42,0.55);
+            border: 1px solid rgba(254,215,170,0.4);
+            color: #e7e9ea;
+            text-decoration: none;
+        }
+        .social-x:hover { background: rgba(15,23,42,0.85); color: #fff; }
+        .social-x svg { width: 20px; height: 20px; display: block; }
         .brand-tag { display: inline-flex; padding: 6px 12px; margin-bottom: 12px; border-radius: 999px; border: 1px solid rgba(254,215,170,0.4); background: rgba(15,23,42,0.28); color: #ffedd5; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
         header h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; color: #fff7ed; }
         header p { font-size: 1.02rem; color: #ffedd5; font-weight: 600; }
@@ -145,12 +162,39 @@
             .emoji-row { font-size: 0.85rem; letter-spacing: 0.5px; }
             .player-rpg-label { font-size: 0.6rem; }
             .star-meter { font-size: 0.72rem; letter-spacing: 1px; }
+            .social-x { top: 10px; right: 8px; width: 38px; height: 38px; }
+            .social-x svg { width: 18px; height: 18px; }
+        }
+        .to-top-fab {
+            position: fixed;
+            right: 16px;
+            bottom: 22px;
+            z-index: 60;
+            border: 1px solid rgba(254,215,170,0.5);
+            background: rgba(127,29,29,0.92);
+            color: #fff7ed;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.82rem;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.4);
+        }
+        .to-top-fab:hover { background: rgba(153,27,27,0.96); }
+        @media (max-width: 640px) {
+            .to-top-fab { right: 12px; bottom: 16px; padding: 9px 14px; font-size: 0.78rem; }
+        }
+        @media print {
+            .to-top-fab, .social-x, .brand-tag { display: none !important; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <a class="social-x" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer" aria-label="Worst Pickz on X">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
             <div class="brand-tag">Worst Picks Cheat Sheet</div>
             <h1>5/14 MLB Cheat Sheet</h1>
             <p>Thursday, May 14, 2026 — Worst Pickz starred HR favorites, listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a></p>
@@ -250,11 +294,8 @@
         </section>
         <section class="games-grid" id="gamesGrid"></section>
     </div>
-    
-    
-    
-    
-    
+    <button type="button" class="to-top-fab" id="toTop" aria-label="Back to top of page">↑ Top</button>
+
     <script>
         (() => {
             const favoritePlayers = new Set([
@@ -385,6 +426,8 @@
             }
             renderGames();
             enhanceRows();
+            const toTop = document.getElementById("toTop");
+            if (toTop) toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
         })();
     </script>
 </body>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>5/14 MLB Cheat Sheet — UX preview</title>
+    <meta property="og:title" content="MLB HR Cheat Sheet (UX preview)">
+    <meta property="og:description" content="Worst Picks HR cheat sheet — preview build for navigation, filter, and layout.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: radial-gradient(ellipse at top, #1a0d08 0%, #0d0705 42%, #040302 100%); color: #f5efe9; min-height: 100vh; padding: 16px; overflow-x: hidden; }
+        .container { max-width: 2480px; margin: 0 auto; background: linear-gradient(135deg, rgba(23,12,8,0.96) 0%, rgba(17,10,10,0.97) 50%, rgba(12,18,30,0.96) 100%); border: 2px solid rgba(251,146,60,0.42); border-radius: 20px; overflow: hidden; min-width: 0; }
+        header { padding: 28px 18px 24px; text-align: center; background: linear-gradient(135deg, #2b1210 0%, #7c2d12 55%, #1d4ed8 100%); border-bottom: 3px solid rgba(254,215,170,0.65); }
+        .brand-tag { display: inline-flex; padding: 6px 12px; margin-bottom: 12px; border-radius: 999px; border: 1px solid rgba(254,215,170,0.4); background: rgba(15,23,42,0.28); color: #ffedd5; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
+        header h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; color: #fff7ed; }
+        header p { font-size: 1.02rem; color: #ffedd5; font-weight: 600; }
+        .intro, .summary-grid, .games-grid { display: grid; gap: 14px; }
+        .intro { grid-template-columns: 1.18fr 1fr; padding: 14px; background: linear-gradient(135deg, rgba(26,13,8,0.92) 0%, rgba(17,24,39,0.88) 100%); border-bottom: 1px solid rgba(251,146,60,0.16); }
+        .panel, .summary-card, .game-card { background: rgba(15,23,42,0.66); border: 1px solid rgba(251,146,60,0.16); border-radius: 14px; min-width: 0; }
+        .panel, .summary-card { padding: 14px; }
+        .panel h2, .summary-card h3 { color: #fed7aa; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 10px; }
+        .criteria-grid, .bands-grid { display: grid; gap: 10px; }
+        .criteria-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+        .bands-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+        .criterion, .band { background: rgba(8,15,28,0.78); border: 1px solid rgba(125,211,252,0.10); border-radius: 12px; padding: 12px; }
+        .criterion strong, .band strong { display: block; color: #fff7ed; font-size: 0.95rem; margin-bottom: 5px; }
+        .criterion span, .band span, .model-note, .game-header p, .pick-note, .summary-item small { color: #d7dbe2; line-height: 1.45; }
+        .elite-band { background: rgba(22,101,52,0.24); }
+        .strong-band { background: rgba(30,64,175,0.24); }
+        .playable-band { background: rgba(180,83,9,0.24); }
+        .thin-band { background: rgba(71,85,105,0.24); }
+        .summary-section { padding: 14px; background: linear-gradient(135deg, rgba(19,11,8,0.88) 0%, rgba(10,17,31,0.90) 100%); border-bottom: 1px solid rgba(251,146,60,0.16); }
+        .summary-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .summary-card.full-width, .emoji-key-card { grid-column: 1 / -1; }
+        .top-five-card { border: 2px solid rgba(250,204,21,0.35); background: linear-gradient(135deg, rgba(40,18,10,0.96) 0%, rgba(17,24,39,0.93) 52%, rgba(16,38,30,0.90) 100%); }
+        .top-five-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .top-five-item { border-radius: 16px; padding: 14px; border: 1px solid rgba(125,211,252,0.20); background: rgba(8,15,28,0.84); }
+        .top-five-item strong { display: block; margin-top: 8px; color: #fef08a; font-size: 1.12rem; }
+        .summary-note { font-size: 0.84rem; margin: -6px 0 12px 0; }
+        .summary-list { display: grid; gap: 8px; }
+        .summary-item { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; background: rgba(8,15,28,0.75); border: 1px solid rgba(96,165,250,0.14); color: #e2e8f0; font-size: 0.92rem; min-width: 0; }
+        .summary-item span { min-width: 0; flex: 1; }
+        .summary-item strong { flex-shrink: 0; }
+        .games-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr)); align-items: start; padding: 14px; background: linear-gradient(135deg, rgba(9,11,18,0.90) 0%, rgba(12,17,28,0.95) 100%); min-width: 0; }
+        .game-header { padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); }
+        .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; overflow-wrap: anywhere; line-height: 1.25; }
+        .game-header p { overflow-wrap: anywhere; hyphens: auto; }
+        .pick-list { display: grid; gap: 10px; padding: 12px; }
+        .pick-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1.5fr); gap: 12px; align-items: start; padding: 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); min-width: 0; }
+        .pick-name { font-weight: 800; color: #fff7ed; margin-bottom: 4px; }
+        .pick-odds { color: #a7f3d0; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; }
+        .emoji-row { margin-top: 6px; color: #fef08a; font-size: 0.96rem; letter-spacing: 1px; }
+        .pick-row.elite { border-color: rgba(34,197,94,0.45); }
+        .pick-row.strong { border-color: rgba(59,130,246,0.45); }
+        .pick-row.playable { border-color: rgba(245,158,11,0.32); }
+        .pick-row.thin { border-color: rgba(148,163,184,0.26); }
+        .pick-row.favorite {
+            border: 2px solid rgba(244,63,94,0.75);
+            background: linear-gradient(135deg, rgba(69,10,10,0.96) 0%, rgba(127,29,29,0.90) 55%, rgba(30,41,59,0.90) 100%);
+            box-shadow: 0 0 0 1px rgba(251,113,133,0.28), 0 10px 22px rgba(127,29,29,0.28);
+            position: relative;
+            padding-top: 24px;
+        }
+        .favorite-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            position: absolute;
+            top: -11px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ef4444 0%, #be123c 100%);
+            color: #fff1f2;
+            border: 1px solid rgba(255,228,230,0.35);
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+        .rating-box { min-width: 86px; padding: 8px 10px; border-radius: 12px; text-align: center; font-weight: 800; color: #fff; line-height: 1.1; }
+        .rating-box.elite { background: linear-gradient(135deg, #166534 0%, #22c55e 100%); }
+        .rating-box.strong { background: linear-gradient(135deg, #1d4ed8 0%, #38bdf8 100%); }
+        .rating-box.playable { background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%); }
+        .rating-box.thin { background: linear-gradient(135deg, #475569 0%, #94a3b8 100%); }
+        .rating-box span { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.7px; }
+        .rating-box strong { display: block; font-size: 1.3rem; margin-top: 3px; }
+        .rating-stack { min-width: 92px; display: grid; gap: 8px; }
+        .letter-box { min-width: 86px; padding: 7px 10px; border-radius: 12px; text-align: center; font-weight: 800; color: #fff; line-height: 1.1; border: 1px solid rgba(255,255,255,0.14); }
+        .letter-box.s-plus { background: linear-gradient(135deg, #fef08a 0%, #f59e0b 40%, #f97316 100%); color: #1f1300; }
+        .letter-box.s { background: linear-gradient(135deg, #fde68a 0%, #f59e0b 55%, #ea580c 100%); color: #271300; }
+        .letter-box.a { background: linear-gradient(135deg, #86efac 0%, #22c55e 52%, #15803d 100%); }
+        .letter-box.b-plus { background: linear-gradient(135deg, #67e8f9 0%, #38bdf8 52%, #2563eb 100%); }
+        .letter-box.b { background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 55%, #1d4ed8 100%); }
+        .letter-box.c-plus { background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 55%, #d97706 100%); color: #281300; }
+        .letter-box.c { background: linear-gradient(135deg, #fdba74 0%, #f97316 55%, #c2410c 100%); }
+        .letter-box.d { background: linear-gradient(135deg, #fda4af 0%, #f43f5e 55%, #be123c 100%); }
+        .letter-box.f { background: linear-gradient(135deg, #9ca3af 0%, #6b7280 55%, #374151 100%); }
+        .letter-box span { display: block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.7px; }
+        .letter-box strong { display: block; font-size: 1rem; margin-top: 4px; }
+        .player-rpg { padding: 10px 14px; border-radius: 12px; background: rgba(7,12,22,0.92); border: 1px solid rgba(96,165,250,0.16); display: grid; gap: 10px; }
+        .player-rpg-wide { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; }
+        .player-rpg-title { grid-column: 1 / -1; color: #93c5fd; font-size: 0.64rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.9px; text-align: center; }
+        .player-rpg-row { display: grid; gap: 5px; justify-items: center; text-align: center; padding: 0 8px; }
+        .player-rpg-label { color: #dbeafe; font-size: 0.68rem; line-height: 1.2; }
+        .star-meter { position: relative; display: inline-block; width: fit-content; font-size: 0.82rem; line-height: 1; letter-spacing: 1.4px; }
+        .star-base { color: rgba(148,163,184,0.34); }
+        .star-fill { position: absolute; inset: 0 auto 0 0; overflow: hidden; white-space: nowrap; width: calc(var(--rating, 0) / 5 * 100%); }
+        .star-meter.power .star-fill { color: #fb7185; }
+        .star-meter.park .star-fill { color: #facc15; }
+        .star-meter.attack .star-fill { color: #60a5fa; }
+        .pick-note { font-size: 0.88rem; margin-bottom: 7px; }
+        .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+        .chip { padding: 4px 8px; border-radius: 999px; background: rgba(30,41,59,0.92); border: 1px solid rgba(96,165,250,0.14); color: #dbeafe; font-size: 0.76rem; }
+        .emoji-key-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+        .emoji-key-item { padding: 10px 12px; border-radius: 12px; background: rgba(8,15,28,0.78); border: 1px solid rgba(96,165,250,0.14); color: #d7dbe2; font-size: 0.9rem; }
+        .weather-link { color: #93c5fd; word-break: break-word; }
+        @media (max-width: 1100px) { .intro, .games-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 960px) { .intro { grid-template-columns: 1fr; } }
+        @media (max-width: 1024px) {
+            .pick-row { grid-template-columns: 1fr; gap: 10px; }
+            .pick-row .rating-stack { display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; gap: 10px; width: 100%; min-width: 0; }
+            .pick-row .rating-stack .rating-box, .pick-row .rating-stack .letter-box { min-width: 0; flex: 1 1 auto; }
+            .player-rpg-wide { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            body { padding: 8px; }
+            .container { border-radius: 14px; }
+            header { padding: 18px 12px 16px; }
+            header h1 { font-size: clamp(1.2rem, 6.5vw, 1.85rem); line-height: 1.15; }
+            header p { font-size: 0.86rem; line-height: 1.45; padding: 0 2px; }
+            .intro, .summary-section, .games-grid { padding: 10px; }
+            .panel, .summary-card { padding: 12px; }
+            .summary-grid { grid-template-columns: 1fr; gap: 10px; }
+            .top-five-list { grid-template-columns: 1fr; }
+            .criteria-grid, .bands-grid { grid-template-columns: 1fr; }
+            .emoji-key-grid { grid-template-columns: 1fr; }
+            .summary-item { flex-wrap: wrap; align-items: center; }
+            .summary-item strong { margin-left: auto; }
+            .pick-list { padding: 10px; }
+            .pick-note { font-size: 0.84rem; }
+            .game-header { padding: 10px 12px; }
+            .game-header h3 { font-size: 0.92rem; }
+            .chip { font-size: 0.72rem; }
+            .emoji-row { font-size: 0.85rem; letter-spacing: 0.5px; }
+            .player-rpg-label { font-size: 0.6rem; }
+            .star-meter { font-size: 0.72rem; letter-spacing: 1px; }
+        }
+
+        /* —— UX preview (games + toolbar) —— */
+        html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+        a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+            outline: 2px solid #93c5fd;
+            outline-offset: 3px;
+        }
+        .preview-banner {
+            background: linear-gradient(90deg, rgba(234,179,8,0.22), rgba(251,146,60,0.18));
+            border-bottom: 1px solid rgba(251,191,36,0.45);
+            color: #fffbeb;
+            padding: 10px 14px;
+            font-size: 0.84rem;
+            line-height: 1.45;
+            text-align: center;
+        }
+        .preview-banner a { color: #fef9c3; font-weight: 700; text-decoration: underline; }
+        .sheet-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(8, 6, 5, 0.94);
+            border-bottom: 1px solid rgba(251,146,60,0.35);
+            backdrop-filter: blur(10px);
+            padding: 10px 12px 12px;
+            display: grid;
+            gap: 10px;
+        }
+        .toolbar-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0; }
+        .toolbar-title {
+            font-weight: 800;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fed7aa;
+            flex-shrink: 0;
+        }
+        .toolbar-toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+            min-width: 0;
+            justify-content: flex-start;
+        }
+        .toolbar-toc a {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(30,41,59,0.95);
+            border: 1px solid rgba(96,165,250,0.35);
+            color: #e0f2fe;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-decoration: none;
+            max-width: 11rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .toolbar-toc a:hover { background: rgba(51,65,85,0.95); color: #fff; }
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1 1 220px;
+            min-width: 0;
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: #fed7aa;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        #playerFilter {
+            flex: 1;
+            min-width: 0;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(251,146,60,0.35);
+            background: rgba(15,23,42,0.95);
+            color: #f8fafc;
+            font-size: 0.95rem;
+        }
+        .to-top {
+            border: 1px solid rgba(254,215,170,0.45);
+            background: rgba(127,29,29,0.55);
+            color: #fff7ed;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.78rem;
+        }
+        .to-top:hover { background: rgba(153,27,27,0.7); }
+        .last-updated { font-size: 0.72rem; color: #94a3b8; margin: 0; width: 100%; }
+        .game-card { scroll-margin-top: 6.5rem; }
+        .pick-row.pick-hidden { display: none !important; }
+        @media (min-width: 1100px) {
+            .pick-note { max-width: 52rem; }
+        }
+        .legend-fold {
+            border: 1px solid rgba(251,146,60,0.2);
+            border-radius: 12px;
+            padding: 0 12px 4px;
+            margin-top: 6px;
+            background: rgba(8,15,28,0.35);
+        }
+        .legend-fold > summary {
+            cursor: pointer;
+            font-weight: 800;
+            color: #fed7aa;
+            padding: 10px 0;
+            list-style: none;
+        }
+        .legend-fold > summary::-webkit-details-marker { display: none; }
+        .legend-fold > summary::before { content: "▸ "; color: #fb923c; }
+        .legend-fold[open] > summary::before { content: "▾ "; }
+        @media (min-width: 641px) {
+            .legend-fold { border: none; background: transparent; padding: 0; margin-top: 0; }
+            .legend-fold > summary { display: none; }
+        }
+        @media print {
+            body { background: #fff !important; color: #111 !important; padding: 0 !important; overflow: visible !important; }
+            .container { border: none !important; box-shadow: none !important; max-width: none !important; }
+            .preview-banner, .sheet-toolbar, .to-top, .brand-tag { display: none !important; }
+            .game-card, .pick-row, .panel, .summary-card { break-inside: avoid; }
+            .pick-row { border: 1px solid #ccc !important; background: #fafafa !important; }
+            .game-header { background: #eee !important; color: #111 !important; }
+            .game-header h3, .pick-name { color: #111 !important; }
+            .pick-note, .model-note, .game-header p { color: #222 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand-tag">Worst Picks Cheat Sheet</div>
+            <h1>5/14 MLB Cheat Sheet</h1>
+            <p>Thursday, May 14, 2026 — Worst Pickz starred HR favorites, listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a></p>
+        </header>
+        <div class="preview-banner" role="status">
+            <strong>UX preview</strong> — try jump links, player filter, and sticky bar here first.
+            <a href="../index.html">Open the live sheet</a> (same day’s data).
+        </div>
+        <nav class="sheet-toolbar" id="sheetToolbar" aria-label="Sheet tools">
+            <div class="toolbar-row">
+                <span class="toolbar-title" id="toolbarTitle">Jump to</span>
+                <div class="toolbar-toc" id="toolbarToc"></div>
+            </div>
+            <div class="toolbar-row">
+                <label class="filter-label" for="playerFilter">Filter <input type="search" id="playerFilter" placeholder="Player name…" autocomplete="off" enterkeyhint="search"></label>
+                <button type="button" class="to-top" id="toTop" aria-label="Back to top of page">↑ Top</button>
+            </div>
+            <p class="last-updated" id="lastUpdated" aria-live="polite"></p>
+        </nav>
+        <section class="intro">
+            <div class="panel">
+                <h2>Worst Picks HR Rating Model</h2>
+                <div class="criteria-grid">
+                    <div class="criterion"><strong>Power Profile - 30 pts</strong><span>Barrels, pull-air, launch shape, and one-swing damage.</span></div>
+                    <div class="criterion"><strong>Batter vs Pitcher Hand Edge - 15 pts</strong><span>Platoon lane and pitch-mix fit versus opposing starter.</span></div>
+                    <div class="criterion"><strong>Pitcher HR Weakness + Fly-Ball Risk - 25 pts</strong><span>HR/9 leakage, hard contact, and hittable zones.</span></div>
+                    <div class="criterion"><strong>Pitcher Weak Spots - 5 pts</strong><span>Order-slot weakness and split exposure.</span></div>
+                    <div class="criterion"><strong>Park + Weather - 10 pts</strong><span>HR row, wind, temperature, and roof impact.</span></div>
+                    <div class="criterion"><strong>Recent Form + Price - 15 pts</strong><span>Current quality and value versus listed odds.</span></div>
+                </div>
+            </div>
+            <div class="panel">
+                <h2>Score Bands</h2>
+                <div class="bands-grid">
+                    <div class="band elite-band"><strong>90-100 Elite HR Target</strong><span>High-end profile plus clean matchup lane.</span></div>
+                    <div class="band strong-band"><strong>80-89 Strong Target</strong><span>Live HR setup with manageable drag.</span></div>
+                    <div class="band playable-band"><strong>70-79 Playable</strong><span>Usable lane, mostly price-sensitive.</span></div>
+                    <div class="band thin-band"><strong>69 and Lower Thin / Fade</strong><span>Mostly longshot-only exposure.</span></div>
+                </div>
+                <p class="model-note">This board covers <strong>55 listed HR props</strong> across <strong>11 games</strong>, with <strong>10 user-starred Worst Pickz Favorite</strong> rows.</p>
+            </div>
+        </section>
+        <section class="summary-section">
+            <div class="summary-grid">
+                <div class="summary-card full-width top-five-card">
+                    <h3>Top 5 HR Tickets (Holistic)</h3>
+                    <p class="model-note summary-note">Ranks blend batter damage, opposing starter HR leakage, park/weather, and listed price.</p>
+                    <div class="top-five-list">
+                        <div class="top-five-item"><span>Shea Langeliers <small>Sutter +21% vs McGreevy in Sacramento heat</small></span><strong>93</strong></div>
+                        <div class="top-five-item"><span>James Wood <small>GABP + Burns LHB HR-risk split</small></span><strong>91</strong></div>
+                        <div class="top-five-item"><span>Luke Raley <small>Daikin + Burrows LHB lane + BvP chip</small></span><strong>90</strong></div>
+                        <div class="top-five-item"><span>Yordan Alvarez <small>Castillo HR/9 + fly-ball damage</small></span><strong>88</strong></div>
+                        <div class="top-five-item"><span>Mark Vientos <small>Montero fly-ball HR profile + Citi context</small></span><strong>86</strong></div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <h3>Best Park / Weather HR Rows (slate)</h3>
+                    <div class="summary-list">
+                        <div class="summary-item"><span>STL @ ATH <small>Sutter Health +21% HR, 80s heat</small></span><strong>+21%</strong></div>
+                        <div class="summary-item"><span>SEA @ HOU <small>Daikin roof, +5% HR</small></span><strong>+5%</strong></div>
+                        <div class="summary-item"><span>SD @ MIL <small>Roof closed, +6% HR row</small></span><strong>+6%</strong></div>
+                        <div class="summary-item"><span>SF @ LAD <small>Dodger Stadium +6% HR</small></span><strong>+6%</strong></div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <h3>Top 5 Weather Heavy HR Plays</h3>
+                    <div class="summary-list">
+                        <div class="summary-item"><span>#1 Shea Langeliers <small>Sutter heat + McGreevy contact</small></span><strong>93</strong></div>
+                        <div class="summary-item"><span>#2 Nick Kurtz <small>Sacramento carry vs McGreevy</small></span><strong>85</strong></div>
+                        <div class="summary-item"><span>#3 Tyler Soderstrom <small>ATH park row vs McGreevy</small></span><strong>84</strong></div>
+                        <div class="summary-item"><span>#4 Luke Raley <small>Daikin dome + Burrows LHB</small></span><strong>90</strong></div>
+                        <div class="summary-item"><span>#5 Miguel Vargas <small>Rate small OF + Kay RHB leak</small></span><strong>86</strong></div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <h3>Best Plus-Money HR (Listed)</h3>
+                    <div class="summary-list">
+                        <div class="summary-item"><span>Jose Tena <small>+1000 vs Burns</small></span><strong>80</strong></div>
+                        <div class="summary-item"><span>J.T. Realmuto <small>+1000 vs Luzardo</small></span><strong>68</strong></div>
+                        <div class="summary-item"><span>Jarren Duran <small>+1000 vs Luzardo</small></span><strong>73</strong></div>
+                        <div class="summary-item"><span>Isaac Collins <small>+825 vs Bubic</small></span><strong>71</strong></div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <h3>Harsh Environment Fades</h3>
+                    <div class="summary-list">
+                        <div class="summary-item"><span>PHI @ BOS <small>Fenway -18% HR, 90% rain</small></span><strong>-18%</strong></div>
+                        <div class="summary-item"><span>DET @ NYM <small>Citi -8% HR, 62% rain</small></span><strong>-8%</strong></div>
+                        <div class="summary-item"><span>MIA @ MIN <small>Target -9% HR row</small></span><strong>-9%</strong></div>
+                        <div class="summary-item"><span>KC @ CWS <small>Rate -11%, cool air</small></span><strong>-11%</strong></div>
+                    </div>
+                </div>
+                <div class="summary-card emoji-key-card">
+                    <h3>Legend</h3>
+                    <details class="legend-fold" id="legendFold">
+                        <summary>Legend key &amp; reading guide</summary>
+                        <div class="legend-fold-body">
+                    <p class="model-note"><strong>How to read rows:</strong> Player (hand) — listed HR line text — emoji tags — model score. Notes are <strong>batter vs opposing starter only</strong>. <strong>⭐</strong> = user-starred Worst Pickz Favorite row. <strong>🕊️</strong> = PropFinder HR-risk split clearly favors this batter's lane (see legend).</p>
+                    <p class="model-note"><strong>Grade:</strong> <strong>S+ / S</strong> = premium HR setup, <strong>A-B</strong> = strong playable lane, <strong>C-F</strong> = thinner or more flawed spot.</p>
+                    <div class="emoji-key-grid">
+                        <div class="emoji-key-item"><strong>💎</strong> Underrated / I like</div>
+                        <div class="emoji-key-item"><strong>⚾</strong> Pitcher Hand Weakness / HR Target</div>
+                        <div class="emoji-key-item"><strong>⭐</strong> My Favorite (see ribbon)</div>
+                        <div class="emoji-key-item"><strong>🚀</strong> 100+ mph EV / loud EV profile</div>
+                        <div class="emoji-key-item"><strong>💣</strong> Strong blast profile</div>
+                        <div class="emoji-key-item"><strong>🌕</strong> Moonshot - Elite HR Targetability</div>
+                        <div class="emoji-key-item"><strong>🏟️</strong> Good Park / weather support</div>
+                        <div class="emoji-key-item"><strong>🩹</strong> Sharp Spot</div>
+                        <div class="emoji-key-item"><strong>📜</strong> BvP History</div>
+                        <div class="emoji-key-item"><strong>🕊️</strong> Clear pitcher HR-risk advantage (PropFinder HR-risk split favors this batter's handedness / lane)</div>
+                        <div class="emoji-key-item"><strong>🧤</strong> Bum onna Mound / HR-leaky SP in game title</div>
+                    </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+        <section class="games-grid" id="gamesGrid"></section>
+    </div>
+    
+    
+    
+    
+    
+    <script>
+        (() => {
+            const favoritePlayers = new Set([
+                "Mickey Moniak (L)",
+                "Sal Stewart (R)",
+                "James Wood (L)",
+                "CJ Abrams (L)",
+                "Jose Tena (L)",
+                "Spencer Torkelson (R)",
+                "Byron Buxton (R)",
+                "Kyle Schwarber (L)",
+                "Miguel Vargas (R)",
+                "Salvador Perez (R)"
+            ]);
+
+            const games = [
+                { title: "COL @ PIT - Mason Montgomery (L, COL) vs Chase Dollander \ud83e\udde4 (R, PIT)", description: "PNC Park - Ballpark Pal -14% HR row; ~52F with ~10 mph out-blowing wind partially offsets cold. Montgomery's tiny-sample RHB lane is softer than his LHB work; Dollander sits near 1.0 HR/9 with whiff-heavy but hittable fly contact.", rows: [
+                    { name: "Brandon Lowe (L)", odds: "Listed +450 - Over 0.5 HR", score: 76, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Loud L5 window (two HR, 17.6% barrels) but Montgomery's vs-LHB profile has been stingy in a cold PNC carry.", chips: ["vs Montgomery"] },
+                    { name: "Mickey Moniak (L)", odds: "Listed +600 - Over 0.5 HR", score: 78, emojis: "\ud83d\ude80", blast: "good", note: "Favorite with a homer in the pitch-mix sample and pull-side damage; same-side Montgomery keeps it from elite.", chips: ["vs Montgomery"] }
+                ]},
+                { title: "WSH @ CIN - Foster Griffin \ud83e\udde4 (L, WSH) vs Chase Burns \ud83e\udde4 (R, CIN)", description: "Great American Ball Park - +1% HR row; modest wind, small park. Burns' split shows a clear LHB HR-risk lane while Griffin's season line still carries homer leakage.", rows: [
+                    { name: "James Wood (L)", odds: "Listed +375 - Over 0.5 HR", score: 91, emojis: "\ud83d\ude80 \ud83c\udf15 \u26be \ud83c\udfdf\ufe0f \ud83d\udd4a\ufe0f", blast: "high", note: "Favorite with 100+ EV, 30.8% barrels, and Burns' LHB HR-risk lane (PropFinder green vs lefties) lining up in GABP\u2014clear pitcher HR-risk advantage on handedness.", chips: ["vs Burns"] },
+                    { name: "CJ Abrams (L)", odds: "Listed +488 - Over 0.5 HR", score: 84, emojis: "\u26be \ud83c\udfdf\ufe0f \ud83d\udd4a\ufe0f", blast: "good", note: "Favorite with pull-air and hard contact in the window; same Burns LHB HR-risk advantage as Wood, just with fewer barrels in the sample.", chips: ["vs Burns"] },
+                    { name: "Jose Tena (L)", odds: "Listed +1000 - Over 0.5 HR", score: 80, emojis: "\ud83d\udc8e \u26be \ud83d\udd4a\ufe0f", blast: "good", note: "Favorite longshot with 18.2% barrels and near-HR noise; clear pitcher HR-risk advantage into Burns' LHB fly-ball lane at a long price.", chips: ["vs Burns"] },
+                    { name: "Luis Garcia (L)", odds: "Listed +650 - Over 0.5 HR", score: 77, emojis: "\u26be \ud83d\udd4a\ufe0f", note: "Solid HH rates in the window; clear pitcher HR-risk advantage\u2014Burns' vs-LHB HR-risk index stays on the batter-friendly side of the model.", chips: ["vs Burns"] },
+                    { name: "Sal Stewart (R)", odds: "Listed +325 - Over 0.5 HR", score: 74, emojis: "\ud83d\ude80", note: "Favorite with elite L5 ISO and barrel spike; note Burns' vs-RHB HR-risk split runs red for batters in the export\u2014no clear pitcher HR-risk advantage despite the loud stick.", chips: ["vs Burns"] },
+                    { name: "JJ Bleday (L)", odds: "Listed +505 - Over 0.5 HR", score: 73, emojis: "\u26be \ud83d\udd4a\ufe0f", note: "Patient on-base shape with some lift; clear pitcher HR-risk advantage versus Burns' LHB HR-risk lane even if the barrel totals are quieter.", chips: ["vs Burns"] },
+                    { name: "Elly De La Cruz (S)", odds: "Listed +390 - Over 0.5 HR", score: 79, emojis: "\ud83d\ude80 \ud83c\udfdf\ufe0f \ud83d\udd4a\ufe0f", blast: "good", note: "Switch speed/power; PropFinder treats SHB on the opposite of the pitcher's hand\u2014here that still lands you in Burns' batter-friendly LHB HR-risk bucket with GABP volatility.", chips: ["vs Burns"] },
+                    { name: "Tyler Stephenson (R)", odds: "Listed +525 - Over 0.5 HR", score: 71, emojis: "\ud83d\udc8e", note: "Catcher DH pop with a workable price; Griffin is not an extreme same-side HR gift, so this stays scoreboard-dependent.", chips: ["vs Griffin"] }
+                ]},
+                { title: "DET @ NYM - Keider Montero (R, DET) vs Nolan McLean \ud83e\udde4 (R, NYM)", description: "Citi Field - -8% HR row with heavy rain risk (PropFinder/Ballpark Pal). Montero shows a real LHB HR lane; McLean's RHB-side chip is the cleaner power hook for Detroit.", rows: [
+                    { name: "Mark Vientos (R)", odds: "Listed +436 - Over 0.5 HR", score: 86, emojis: "\ud83d\ude80 \ud83c\udf15", blast: "high", note: "Three HR and five near-HR in the window with big barrel/HH rates; as a visiting Met he draws Montero's fly-ball HR profile (PropFinder RHB HR-risk chip is only mild\u2014this row is mostly damage form).", chips: ["vs Montero"] },
+                    { name: "MJ Melendez (L)", odds: "Listed +425 - Over 0.5 HR", score: 80, emojis: "\ud83d\ude80 \u26be \ud83d\udd4a\ufe0f", blast: "good", note: "Loud barrel/HH sample with swing-and-miss; clear pitcher HR-risk advantage\u2014Montero's vs-LHB lane grades green for batters in the export, so the same-side HR path is real.", chips: ["vs Montero"] },
+                    { name: "Spencer Torkelson (R)", odds: "Listed +550 - Over 0.5 HR", score: 78, emojis: "\ud83d\udc8e \ud83d\udd4a\ufe0f", blast: "good", note: "Favorite with big-fly reputation; clear pitcher HR-risk advantage\u2014McLean's vs-RHB split is heavily green for batters even with Citi's rain/HR drag.", chips: ["vs McLean"] },
+                    { name: "Dillon Dingler (R)", odds: "Listed +591 - Over 0.5 HR", score: 72, emojis: "\ud83d\udc8e \ud83d\udd4a\ufe0f", note: "Young catcher showing HH and pull-air hints; same McLean RHB HR-risk edge as Torkelson, but thinner barrel floor keeps the score lower.", chips: ["vs McLean"] }
+                ]},
+                { title: "MIA @ MIN - Braxton Garrett (L, MIA) vs Zebby Matthews (R, MIN)", description: "Target Field - -9% HR row but warm Target Field temps and strong wind flags; Matthews has no 2026 Statcast body yet\u2014PropFinder falls back to 2025 arsenal\u2014so volatility is elevated both ways.", rows: [
+                    { name: "Byron Buxton (R)", odds: "Listed +316 - Over 0.5 HR", score: 85, emojis: "\ud83d\ude80 \ud83c\udf15", blast: "high", note: "Favorite with 30% barrels in the window and pull-air; Garrett's limited sample still shows homer leakage to righties.", chips: ["vs Garrett"] },
+                    { name: "Matt Wallner (L)", odds: "Listed +700 - Over 0.5 HR", score: 74, emojis: "\ud83d\udc8e", note: "Minnesota power lefty with huge whiff rates; if he connects, wind/temps help more than the HR row hurts.", chips: ["vs Garrett"] },
+                    { name: "Kody Clemens (L)", odds: "Listed N/A - Over 0.5 HR", score: 68, emojis: "\ud83d\udc8e", note: "No listed HR price in the matchup export, but small-sample ISO spike and a volatile unknown starter keep a thin HR dart alive.", chips: ["vs Garrett"] },
+                    { name: "Kyle Stowers (L)", odds: "Listed +432 - Over 0.5 HR", score: 77, emojis: "\ud83d\ude80", note: "Lefty loft and near-HR counts; Garrett's fly-ball shape is still the better lever than the park's HR tax.", chips: ["vs Garrett"] },
+                    { name: "Otto Lopez (R)", odds: "Listed +650 - Over 0.5 HR", score: 66, emojis: "\ud83d\udc8e", note: "Contact-over-power profile; Matthews' unknown RHB split keeps this mostly a price play.", chips: ["vs Matthews"] }
+                ]},
+                { title: "SD @ MIL - Griffin Canning \ud83e\udde4 (R, SD) vs Kyle Harrison (L, MIL)", description: "American Family Field - roof assumed closed (~60F outside); +6% HR row with negative hit-value offsets. Harrison grades as the tougher arm; Canning's early-season line is loud but short on innings.", rows: [
+                    { name: "Jackson Chourio (R)", odds: "Listed +480 - Over 0.5 HR", score: 79, emojis: "\ud83d\ude80 \ud83d\udd4a\ufe0f", blast: "good", note: "Elite EV and HH rates in the window; modest pitcher HR-risk advantage on Harrison's vs-RHB lane\u2014still more star-power than a free pass, but the split helps.", chips: ["vs Harrison"] },
+                    { name: "Jake Bauers (L)", odds: "Listed +450 - Over 0.5 HR", score: 76, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Huge L5 ISO and HH rates; Harrison's vs-LHB HR-risk split is not a clear batter advantage in the export\u2014same-side keeps Bauers off the \ud83d\udd4a\ufe0f tag despite the loud stick.", chips: ["vs Harrison"] },
+                    { name: "Nick Castellanos (R)", odds: "Listed +680 - Over 0.5 HR", score: 75, emojis: "\ud83d\udcdc \ud83d\udc8e \ud83d\udd4a\ufe0f", note: "Statcast window shows big HH and pull-air; modest pitcher HR-risk advantage\u2014Harrison's vs-RHB HR-risk chip is green for batters, plus tiny-sample BvP versus Harrison.", chips: ["vs Harrison"] },
+                    { name: "Rodolfo Duran (R)", odds: "Listed N/A - Over 0.5 HR", score: 62, emojis: "\ud83d\udd4a\ufe0f", note: "Micro-sample catcher pop with no listed price in the export; modest pitcher HR-risk advantage on Harrison's vs-RHB lane\u2014still thin contact upside.", chips: ["vs Harrison"] }
+                ]},
+                { title: "SEA @ HOU - Luis Castillo \ud83e\udde4 (R, SEA) vs Mike Burrows \ud83e\udde4 (R, HOU)", description: "Daikin Park - roof closed, +5% HR row with 90F indoor game script. Castillo carries slate-top HR-risk markers; Burrows' LHB lane is a clear attack point for Seattle lefties.", rows: [
+                    { name: "Luke Raley (L)", odds: "Listed +390 - Over 0.5 HR", score: 90, emojis: "\ud83d\ude80 \ud83c\udf15 \u26be \ud83d\udcdc \ud83d\udd4a\ufe0f", blast: "high", note: "Three HR in the window with huge ISO and pull-air; clear pitcher HR-risk advantage\u2014Burrows' vs-LHB lane is green for batters, plus tiny-sample BvP.", chips: ["vs Burrows"] },
+                    { name: "Yordan Alvarez (L)", odds: "Listed +250 - Over 0.5 HR", score: 88, emojis: "\ud83d\ude80 \ud83c\udf15 \u26be \ud83d\udd4a\ufe0f", blast: "high", note: "Short price but elite damage; clear pitcher HR-risk advantage\u2014Castillo's vs-LHB HR-risk and HR/9 both sit in the slate's danger tier inside Daikin.", chips: ["vs Castillo"] },
+                    { name: "Christian Walker (R)", odds: "Listed +410 - Over 0.5 HR", score: 82, emojis: "\ud83d\ude80 \ud83d\udd4a\ufe0f", blast: "good", note: "Two HR and strong fly-ball shape; Castillo still shows a positive vs-RHB HR-risk chip with big fly-ball damage allowed\u2014usable pitcher HR-risk edge even if it trails his LHB lane.", chips: ["vs Castillo"] },
+                    { name: "Julio Rodriguez (R)", odds: "Listed +456 - Over 0.5 HR", score: 81, emojis: "\ud83d\ude80 \ud83d\udcdc", blast: "good", note: "Two HR with pull-side fly-ball fit; BvP note: prior extra-base success in tiny samples versus Burrows.", chips: ["vs Burrows"] },
+                    { name: "Jose Altuve (R)", odds: "Listed +540 - Over 0.5 HR", score: 74, emojis: "\ud83d\udc8e", note: "Still runs quality contact; Castillo's RHB lane is less charitable than his LHB damage, so this stays a fair-ticket cut.", chips: ["vs Castillo"] }
+                ]},
+                { title: "STL @ ATH - Michael McGreevy (R, STL) vs Jacob Lopez \ud83e\udde4 (L, ATH)", description: "Sutter Health Park - Ballpark Pal +21% HR row with 80s heat and very high receptiveness. Lopez leads the slate in HR/9 and hard-contact leakage\u2014Athletics bats get the weather-heavy headline.", rows: [
+                    { name: "Shea Langeliers (R)", odds: "Listed +350 - Over 0.5 HR", score: 93, emojis: "\ud83d\ude80 \ud83c\udf15 \ud83c\udfdf\ufe0f", blast: "high", note: "Four HR in the window with massive barrels/HH and the best park/weather stack on the board versus McGreevy in Sacramento heat.", chips: ["vs McGreevy"] },
+                    { name: "Nick Kurtz (L)", odds: "Listed +300 - Over 0.5 HR", score: 85, emojis: "\ud83d\ude80 \ud83c\udfdf\ufe0f \ud83d\udd4a\ufe0f", blast: "high", note: "Premium price with huge EV and disciplined power; modest pitcher HR-risk advantage\u2014McGreevy's vs-LHB split is green for batters, and Sutter's HR row does the rest.", chips: ["vs McGreevy"] },
+                    { name: "Tyler Soderstrom (L)", odds: "Listed +429 - Over 0.5 HR", score: 84, emojis: "\ud83d\ude80 \ud83c\udfdf\ufe0f \ud83d\udd4a\ufe0f", blast: "high", note: "Lefty loft with pull-side metrics; same McGreevy vs-LHB HR-risk advantage as Kurtz with Sacramento carry baked in.", chips: ["vs McGreevy"] },
+                    { name: "Jordan Walker (R)", odds: "Listed +320 - Over 0.5 HR", score: 78, emojis: "\ud83d\ude80 \ud83c\udf15 \u26be \ud83c\udfdf\ufe0f \ud83d\udd4a\ufe0f", blast: "good", note: "Short ticket with big EV; clear pitcher HR-risk advantage\u2014Lopez's vs-RHB HR-risk index is one of the most batter-friendly marks on the sheet in Sacramento heat.", chips: ["vs Lopez"] }
+                ]},
+                { title: "PHI @ BOS - Jesus Luzardo \ud83e\udde4 (L, PHI) vs Ranger Suarez (L, BOS)", description: "Fenway Park - -18% HR row with 90% rain and humid, heavy air; Luzardo's K-heavy line is less HR-leaky than the weather headline suggests. Suarez grades as a contact manager with modest HR splits.", rows: [
+                    { name: "Kyle Schwarber (L)", odds: "Listed +425 - Over 0.5 HR", score: 81, emojis: "\ud83d\ude80 \ud83c\udf15", blast: "high", note: "Favorite with nuclear L5 ISO/barrels even into Suarez's left-on-left profile; postponement risk is the real fade lever.", chips: ["vs Suarez"] },
+                    { name: "Adolis Garcia (R)", odds: "Listed +675 - Over 0.5 HR", score: 79, emojis: "\ud83d\ude80 \u26be \ud83d\udd4a\ufe0f", blast: "good", note: "Huge HH and pull-air in the window with swing-and-miss; modest pitcher HR-risk advantage\u2014Luzardo's vs-RHB HR-risk chip is the only clearly green lane for Boston bats in this box.", chips: ["vs Luzardo"] },
+                    { name: "Willson Contreras (R)", odds: "Listed +525 - Over 0.5 HR", score: 74, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Barrel-heavy micro sample with real whiff; Luzardo still misses bats, so this is volatility-first.", chips: ["vs Luzardo"] },
+                    { name: "Ceddanne Rafaela (R)", odds: "Listed +900 - Over 0.5 HR", score: 70, emojis: "\ud83d\udc8e", note: "Big ISO spike in a tiny window; same-side Suarez keeps this as a weather-risk moonshot.", chips: ["vs Suarez"] },
+                    { name: "Jarren Duran (L)", odds: "Listed +1000 - Over 0.5 HR", score: 73, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Loud L5 SLG with premium EV; Luzardo's vs-LHB HR-risk split is not a clear batter advantage in the export\u2014Fenway rain and the HR row keep this boom-or-bust without the HR-risk edge tag.", chips: ["vs Luzardo"] },
+                    { name: "J.T. Realmuto (R)", odds: "Listed +1000 - Over 0.5 HR", score: 68, emojis: "\ud83d\udc8e", note: "Long price with light recent HR output; Luzardo's chase stuff caps the realistic ceiling.", chips: ["vs Luzardo"] }
+                ]},
+                { title: "CHC @ ATL - Ben Brown (R, CHC) vs Chris Sale (L, ATL)", description: "Truist Park - -6% HR row with clear 69F air; Sale's overall HR index is near neutral with excellent swing-miss, while Brown has been one of 2026's better HR suppressors.", rows: [
+                    { name: "Austin Riley (R)", odds: "Listed +509 - Over 0.5 HR", score: 82, emojis: "\ud83d\ude80", blast: "good", note: "Three HR in the window with elite EV/HH; Brown is still a tough young arm, so this is star talent over a soft park row.", chips: ["vs Brown"] },
+                    { name: "Michael Harris II (L)", odds: "Listed +525 - Over 0.5 HR", score: 76, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Premium EV with huge HH rates; same-side Sale is the main drag even with Truist warmth.", chips: ["vs Sale"] },
+                    { name: "Dansby Swanson (R)", odds: "Listed +700 - Over 0.5 HR", score: 74, emojis: "\ud83d\udc8e", note: "Pull-side fly-ball shape with solid EV; Sale's RHB line is workable but not a classic HR leak.", chips: ["vs Sale"] }
+                ]},
+                { title: "KC @ CWS - Kris Bubic (L, KC) vs Anthony Kay \ud83e\udde4 (L, CWS)", description: "Rate Field - -11% HR row with cool in-game temps; Kay carries slate-top HR-risk markers to RHB while Bubic's line is more neutral\u2014White Sox righties are the clearest leverage side.", rows: [
+                    { name: "Miguel Vargas (R)", odds: "Listed +740 - Over 0.5 HR", score: 86, emojis: "\ud83d\ude80 \ud83c\udf15 \u26be \ud83d\udd4a\ufe0f", blast: "high", note: "Favorite with big barrel/HH rates; clear pitcher HR-risk advantage\u2014Kay's vs-RHB HR-risk index is one of the slate's most extreme green batter lanes in a tiny outfield.", chips: ["vs Kay"] },
+                    { name: "Munetaka Murakami (L)", odds: "Listed +410 - Over 0.5 HR", score: 78, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Huge raw power with swing-and-miss; Kay's vs-LHB HR-risk split is strongly pitcher-sided in the export\u2014no clear pitcher HR-risk advantage despite the price.", chips: ["vs Kay"] },
+                    { name: "Derek Hill (R)", odds: "Listed +1000 - Over 0.5 HR", score: 75, emojis: "\ud83d\udc8e \u26be \ud83d\udd4a\ufe0f", note: "Two HR in a tiny window with huge ISO; clear pitcher HR-risk advantage on Kay's vs-RHB lane for a long-ticket dart.", chips: ["vs Kay"] },
+                    { name: "Salvador Perez (R)", odds: "Listed +471 - Over 0.5 HR", score: 83, emojis: "\u26be \ud83d\udd4a\ufe0f", blast: "good", note: "Favorite with veteran fly-ball pop; clear pitcher HR-risk advantage\u2014Kay's RHB HR-risk and HR/9 profile are the structural reason this price exists.", chips: ["vs Kay"] },
+                    { name: "Isaac Collins (S)", odds: "Listed +825 - Over 0.5 HR", score: 71, emojis: "\ud83d\udc8e", note: "Switch bat with barrel/HH hints; Bubic is not a premier HR target, so this stays a secondary cut.", chips: ["vs Bubic"] },
+                    { name: "Jac Caglianone (L)", odds: "Listed N/A - Over 0.5 HR", score: 69, emojis: "\ud83d\udc8e", note: "No listed price in the export; lefty power upside exists, but same-side Bubic keeps the profile thin.", chips: ["vs Bubic"] },
+                    { name: "Maikel Garcia (R)", odds: "Listed +725 - Over 0.5 HR", score: 80, emojis: "\ud83d\ude80 \u26be \ud83d\udd4a\ufe0f", blast: "good", note: "Two HR with strong HH and pull-air; clear pitcher HR-risk advantage on Kay's vs-RHB split versus the quieter Bubic side for this KC stack.", chips: ["vs Kay"] }
+                ]},
+                { title: "SF @ LAD - Landen Roupp (R, SF) vs Emmet Sheehan \ud83e\udde4 (R, LAD)", description: "Dodger Stadium - +6% HR row with consistent out-blowing wind per Ballpark Pal. Sheehan's blended HR/9 and barrel rates are elevated; Roupp has been elite at limiting barrels even with Dodger power stacked.", rows: [
+                    { name: "Max Muncy (L)", odds: "Listed +390 - Over 0.5 HR", score: 84, emojis: "\ud83d\ude80 \u26be \ud83c\udfdf\ufe0f \ud83d\udd4a\ufe0f", blast: "high", note: "Barrels, HH, and pull-side fit; clear pitcher HR-risk advantage\u2014Sheehan's vs-LHB HR-risk index is one of the highest green batter marks on the slate, plus Dodger Stadium wind.", chips: ["vs Sheehan"] },
+                    { name: "Andy Pages (R)", odds: "Listed +630 - Over 0.5 HR", score: 76, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Two HR in the window with strong HH; Roupp's 2026 contact suppression is real, so this is upside-only.", chips: ["vs Roupp"] },
+                    { name: "Will Smith (R)", odds: "Listed +575 - Over 0.5 HR", score: 73, emojis: "\ud83d\udc8e", note: "Catcher pop with big HH in the sample; he draws Roupp's elite barrel-suppression line more than a platoon HR gift.", chips: ["vs Roupp"] },
+                    { name: "Rafael Devers (L)", odds: "Listed +410 - Over 0.5 HR", score: 83, emojis: "\ud83d\ude80 \u26be \ud83d\udd4a\ufe0f", blast: "good", note: "Two HR with huge HH and pull-air; clear pitcher HR-risk advantage versus Sheehan's LHB HR-risk lane\u2014same mismatch as Muncy with a bit more whiff noise.", chips: ["vs Sheehan"] },
+                    { name: "Heliot Ramos (R)", odds: "Listed +515 - Over 0.5 HR", score: 72, emojis: "\ud83d\udc8e", note: "Hard-hit tail with HR in the window; Sheehan's blended HR/9 and barrel rates are elevated but he still misses bats.", chips: ["vs Sheehan"] },
+                    { name: "Casey Schmitt (R)", odds: "Listed +500 - Over 0.5 HR", score: 73, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Barrel/HH spike in the window versus Sheehan's fly-ball HR leakage; whiff risk keeps it out of the elite band.", chips: ["vs Sheehan"] },
+                    { name: "Eric Haase (R)", odds: "Listed N/A - Over 0.5 HR", score: 60, emojis: "", note: "Listed as Eric Hasse on the prop export\u2014treated as Haase (R) with no priced line in the matchup table; bench/platoon risk caps the model.", chips: ["vs Sheehan"] }
+                ]},
+            ];
+
+            const grid = document.getElementById("gamesGrid");
+            const blastBonusMap = { good: 1, high: 2 };
+            function bandClass(score) { if (score >= 90) return "elite"; if (score >= 80) return "strong"; if (score >= 70) return "playable"; return "thin"; }
+            function renderGames() {
+                grid.innerHTML = games.map((game, gi) => `<article class="game-card" id="game-${gi}"><div class="game-header"><h3>${game.title}</h3><p>${game.description}</p></div><div class="pick-list">${game.rows.map((row) => { const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const hasBlast = blastTier === "good" || blastTier === "high"; const isFavorite = favoritePlayers.has(row.name); const emojiBase = hasBlast && !row.emojis.includes("💣") ? `${row.emojis} 💣` : row.emojis; const emojiText = isFavorite ? `${emojiBase} ⭐` : emojiBase; const favoriteClass = isFavorite ? " favorite" : ""; const favoriteBadge = isFavorite ? '<div class="favorite-badge">⭐ Worst Pickz Favorite</div>' : ""; return `<div class="pick-row ${band}${favoriteClass}" data-blast="${blastTier}"><div><div class="pick-name">${row.name}</div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiText}</div>${favoriteBadge}</div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></article>`).join("");
+            }
+            const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+            function parkStars(card) { const t = card.querySelector(".game-header p")?.textContent || ""; const m = t.match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i); let p = 0; if (m) p = parseInt(m[1] || m[2], 10); if (Number.isNaN(p)) p = 0; if (p >= 15) return 5; if (p >= 5) return 4; if (p >= -3) return 3; if (p >= -12) return 2; return 1; }
+            function powerStars(score, emojiText, noteText) { let stars = 1; if (score >= 84) stars += 2; else if (score >= 76) stars += 1; if (emojiText.includes("🚀")) stars += 1; if (emojiText.includes("🌕")) stars += 1; if (emojiText.includes("💣")) stars += 1; if (/(longshot|price-based)/i.test(noteText) && !/[🚀🌕💣]/.test(emojiText)) stars -= 1; return clamp(stars, 1, 5); }
+            function attackStars(score, emojiText, noteText) { let stars = 1; if (emojiText.includes("⚾")) stars += 1; if (/(best|elite|strong|clean|leak|lane|fit|ceiling)/i.test(noteText)) stars += 1; if (score >= 82) stars += 1; if (/(suppressive|cold|drag)/i.test(noteText)) stars -= 1; return clamp(stars, 1, 5); }
+            function metricRow(label, metricClass, value) { return `<div class="player-rpg-row"><span class="player-rpg-label">${label}</span><span class="star-meter ${metricClass}" style="--rating:${value}"><span class="star-base">★★★★★</span><span class="star-fill">★★★★★</span></span></div>`; }
+            function letterGrade(score, power, park, attack, blastBonus) { const total = score + power * 3 + park * 2 + attack * 3 + blastBonus; if (total >= 118 && power >= 5 && attack >= 4) return "S+"; if (total >= 112) return "S"; if (total >= 106) return "A"; if (total >= 99) return "B+"; if (total >= 92) return "B"; if (total >= 85) return "C+"; if (total >= 78) return "C"; if (total >= 71) return "D"; return "F"; }
+            function letterGradeClass(grade) { return { "S+": "s-plus", "S": "s", "A": "a", "B+": "b-plus", "B": "b", "C+": "c-plus", "C": "c", "D": "d", "F": "f" }[grade] || "f"; }
+            function enhanceRows() {
+                document.querySelectorAll(".pick-row").forEach((row) => {
+                    const ratingBox = row.querySelector(".rating-box");
+                    const card = row.closest(".game-card");
+                    const score = parseInt(ratingBox.querySelector("strong")?.textContent || "0", 10);
+                    const emojiText = row.querySelector(".emoji-row")?.textContent || "";
+                    const noteText = row.querySelector(".pick-note")?.textContent || "";
+                    const blastBonus = blastBonusMap[row.dataset.blast || ""] || 0;
+                    const power = powerStars(score, emojiText, noteText);
+                    const park = parkStars(card);
+                    const attack = attackStars(score, emojiText, noteText);
+                    const grade = letterGrade(score, power, park, attack, blastBonus);
+                    row.insertAdjacentHTML("beforeend", `<div class="player-rpg player-rpg-wide"><div class="player-rpg-title">Damage Window Stats</div>${metricRow("Power / HH / FlyBall", "power", power)}${metricRow("Park / Weather", "park", park)}${metricRow("Pitcher / Pitch Mix Attackability", "attack", attack)}</div>`);
+                    const stack = document.createElement("div");
+                    stack.className = "rating-stack";
+                    ratingBox.parentNode.insertBefore(stack, ratingBox);
+                    stack.appendChild(ratingBox);
+                    stack.insertAdjacentHTML("beforeend", `<div class="letter-box ${letterGradeClass(grade)}"><span>Grade</span><strong>${grade}</strong></div>`);
+                });
+            }
+            renderGames();
+            enhanceRows();
+
+            const toolbarToc = document.getElementById("toolbarToc");
+            if (toolbarToc) {
+                toolbarToc.innerHTML = games.map((g, i) => {
+                    const label = (g.title.split(" - ")[0] || g.title).trim();
+                    const safe = label.replace(/</g, "");
+                    return `<a href="#game-${i}">${safe}</a>`;
+                }).join("");
+            }
+            const lastEl = document.getElementById("lastUpdated");
+            if (lastEl) {
+                const d = new Date(document.lastModified);
+                lastEl.textContent = Number.isNaN(d.getTime()) ? "" : `Last file update: ${d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}`;
+            }
+            const legendFold = document.getElementById("legendFold");
+            function syncLegendFold() {
+                if (!legendFold) return;
+                legendFold.open = window.matchMedia("(min-width: 641px)").matches;
+            }
+            syncLegendFold();
+            window.addEventListener("resize", syncLegendFold);
+
+            const filterInput = document.getElementById("playerFilter");
+            function applyPlayerFilter() {
+                const q = (filterInput && filterInput.value || "").trim().toLowerCase();
+                document.querySelectorAll(".pick-row").forEach((row) => {
+                    const nameEl = row.querySelector(".pick-name");
+                    const text = (nameEl && nameEl.textContent || "").toLowerCase();
+                    if (!q || text.includes(q)) row.classList.remove("pick-hidden");
+                    else row.classList.add("pick-hidden");
+                });
+            }
+            if (filterInput) {
+                filterInput.addEventListener("input", applyPlayerFilter);
+                filterInput.addEventListener("search", applyPlayerFilter);
+            }
+            const toTop = document.getElementById("toTop");
+            if (toTop) toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+        })();
+    </script>
+</body>
+</html>

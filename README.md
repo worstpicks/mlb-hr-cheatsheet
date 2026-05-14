@@ -18,7 +18,7 @@ This folder is the **live site**: `index.html` is the full cheat sheet. Your bui
    .\setup-github-pages.ps1 -GitHubUser YOUR_GITHUB_USERNAME -RepoName mlb-hr-cheatsheet
    ```
 
-   If the script says `git` was not found, fix your PATH or open **Git Bash** and run the `git` commands printed at the end of the script manually.
+   If `git` is missing in **Cursor’s** terminal but Git is installed, the script still looks under `C:\Program Files\Git\bin\git.exe` and prints full-path `git` commands. Otherwise restart the terminal, fix PATH, or use **Git Bash**.
 
 4. On GitHub: **Settings → Pages → Build and deployment**  
    - **Source:** Deploy from a branch  

@@ -2,6 +2,9 @@
 
 This folder is the **live site**: `index.html` is the full cheat sheet. Your builder copies the latest sheet here as `index.html` so the URL never changes—only the file updates.
 
+**GitHub repo:** [worstpicks/mlb-hr-cheatsheet](https://github.com/worstpicks/mlb-hr-cheatsheet)  
+**GitHub Pages URL** (after you enable Pages on `main` / root): [https://worstpicks.github.io/mlb-hr-cheatsheet/](https://worstpicks.github.io/mlb-hr-cheatsheet/)
+
 ## One-time: GitHub Pages
 
 1. Install **Git for Windows**: https://git-scm.com/download/win  
@@ -15,7 +18,7 @@ This folder is the **live site**: `index.html` is the full cheat sheet. Your bui
 
    ```powershell
    cd $HOME\mlb-hr-cheatsheet-web
-   .\setup-github-pages.ps1 -GitHubUser YOUR_GITHUB_USERNAME -RepoName mlb-hr-cheatsheet
+   .\setup-github-pages.ps1 -GitHubUser worstpicks -RepoName mlb-hr-cheatsheet
    ```
 
    If `git` is missing in **Cursor’s** terminal but Git is installed, the script still looks under `C:\Program Files\Git\bin\git.exe` and prints full-path `git` commands. Otherwise restart the terminal, fix PATH, or use **Git Bash**.
@@ -27,7 +30,7 @@ This folder is the **live site**: `index.html` is the full cheat sheet. Your bui
 
 5. Your site (after a minute or two):
 
-   `https://YOUR_GITHUB_USERNAME.github.io/mlb-hr-cheatsheet/`
+   `https://worstpicks.github.io/mlb-hr-cheatsheet/`
 
 ## After each new cheat sheet
 

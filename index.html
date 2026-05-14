@@ -6,15 +6,16 @@
     <title>5/14 MLB Cheat Sheet</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: radial-gradient(ellipse at top, #1a0d08 0%, #0d0705 42%, #040302 100%); color: #f5efe9; min-height: 100vh; padding: 16px; }
-        .container { max-width: 2480px; margin: 0 auto; background: linear-gradient(135deg, rgba(23,12,8,0.96) 0%, rgba(17,10,10,0.97) 50%, rgba(12,18,30,0.96) 100%); border: 2px solid rgba(251,146,60,0.42); border-radius: 20px; overflow: hidden; }
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: radial-gradient(ellipse at top, #1a0d08 0%, #0d0705 42%, #040302 100%); color: #f5efe9; min-height: 100vh; padding: 16px; overflow-x: hidden; }
+        .container { max-width: 2480px; margin: 0 auto; background: linear-gradient(135deg, rgba(23,12,8,0.96) 0%, rgba(17,10,10,0.97) 50%, rgba(12,18,30,0.96) 100%); border: 2px solid rgba(251,146,60,0.42); border-radius: 20px; overflow: hidden; min-width: 0; }
         header { padding: 28px 18px 24px; text-align: center; background: linear-gradient(135deg, #2b1210 0%, #7c2d12 55%, #1d4ed8 100%); border-bottom: 3px solid rgba(254,215,170,0.65); }
         .brand-tag { display: inline-flex; padding: 6px 12px; margin-bottom: 12px; border-radius: 999px; border: 1px solid rgba(254,215,170,0.4); background: rgba(15,23,42,0.28); color: #ffedd5; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
         header h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; color: #fff7ed; }
         header p { font-size: 1.02rem; color: #ffedd5; font-weight: 600; }
         .intro, .summary-grid, .games-grid { display: grid; gap: 14px; }
         .intro { grid-template-columns: 1.18fr 1fr; padding: 14px; background: linear-gradient(135deg, rgba(26,13,8,0.92) 0%, rgba(17,24,39,0.88) 100%); border-bottom: 1px solid rgba(251,146,60,0.16); }
-        .panel, .summary-card, .game-card { background: rgba(15,23,42,0.66); border: 1px solid rgba(251,146,60,0.16); border-radius: 14px; }
+        .panel, .summary-card, .game-card { background: rgba(15,23,42,0.66); border: 1px solid rgba(251,146,60,0.16); border-radius: 14px; min-width: 0; }
         .panel, .summary-card { padding: 14px; }
         .panel h2, .summary-card h3 { color: #fed7aa; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 10px; }
         .criteria-grid, .bands-grid { display: grid; gap: 10px; }
@@ -36,12 +37,15 @@
         .top-five-item strong { display: block; margin-top: 8px; color: #fef08a; font-size: 1.12rem; }
         .summary-note { font-size: 0.84rem; margin: -6px 0 12px 0; }
         .summary-list { display: grid; gap: 8px; }
-        .summary-item { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: rgba(8,15,28,0.75); border: 1px solid rgba(96,165,250,0.14); color: #e2e8f0; font-size: 0.92rem; }
-        .games-grid { grid-template-columns: repeat(auto-fit, minmax(560px, 1fr)); align-items: start; padding: 14px; background: linear-gradient(135deg, rgba(9,11,18,0.90) 0%, rgba(12,17,28,0.95) 100%); }
+        .summary-item { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; background: rgba(8,15,28,0.75); border: 1px solid rgba(96,165,250,0.14); color: #e2e8f0; font-size: 0.92rem; min-width: 0; }
+        .summary-item span { min-width: 0; flex: 1; }
+        .summary-item strong { flex-shrink: 0; }
+        .games-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr)); align-items: start; padding: 14px; background: linear-gradient(135deg, rgba(9,11,18,0.90) 0%, rgba(12,17,28,0.95) 100%); min-width: 0; }
         .game-header { padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); }
-        .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; }
+        .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; overflow-wrap: anywhere; line-height: 1.25; }
+        .game-header p { overflow-wrap: anywhere; hyphens: auto; }
         .pick-list { display: grid; gap: 10px; padding: 12px; }
-        .pick-row { display: grid; grid-template-columns: minmax(150px, 0.9fr) minmax(90px, auto) 1.5fr; gap: 12px; align-items: start; padding: 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); }
+        .pick-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1.5fr); gap: 12px; align-items: start; padding: 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); min-width: 0; }
         .pick-name { font-weight: 800; color: #fff7ed; margin-bottom: 4px; }
         .pick-odds { color: #a7f3d0; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; }
         .emoji-row { margin-top: 6px; color: #fef08a; font-size: 0.96rem; letter-spacing: 1px; }
@@ -110,9 +114,38 @@
         .chip { padding: 4px 8px; border-radius: 999px; background: rgba(30,41,59,0.92); border: 1px solid rgba(96,165,250,0.14); color: #dbeafe; font-size: 0.76rem; }
         .emoji-key-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
         .emoji-key-item { padding: 10px 12px; border-radius: 12px; background: rgba(8,15,28,0.78); border: 1px solid rgba(96,165,250,0.14); color: #d7dbe2; font-size: 0.9rem; }
-        .weather-link { color: #93c5fd; }
+        .weather-link { color: #93c5fd; word-break: break-word; }
         @media (max-width: 1100px) { .intro, .games-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 800px) { .pick-row, .player-rpg-wide { grid-template-columns: 1fr; } }
+        @media (max-width: 960px) { .intro { grid-template-columns: 1fr; } }
+        @media (max-width: 1024px) {
+            .pick-row { grid-template-columns: 1fr; gap: 10px; }
+            .pick-row .rating-stack { display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; gap: 10px; width: 100%; min-width: 0; }
+            .pick-row .rating-stack .rating-box, .pick-row .rating-stack .letter-box { min-width: 0; flex: 1 1 auto; }
+            .player-rpg-wide { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            body { padding: 8px; }
+            .container { border-radius: 14px; }
+            header { padding: 18px 12px 16px; }
+            header h1 { font-size: clamp(1.2rem, 6.5vw, 1.85rem); line-height: 1.15; }
+            header p { font-size: 0.86rem; line-height: 1.45; padding: 0 2px; }
+            .intro, .summary-section, .games-grid { padding: 10px; }
+            .panel, .summary-card { padding: 12px; }
+            .summary-grid { grid-template-columns: 1fr; gap: 10px; }
+            .top-five-list { grid-template-columns: 1fr; }
+            .criteria-grid, .bands-grid { grid-template-columns: 1fr; }
+            .emoji-key-grid { grid-template-columns: 1fr; }
+            .summary-item { flex-wrap: wrap; align-items: center; }
+            .summary-item strong { margin-left: auto; }
+            .pick-list { padding: 10px; }
+            .pick-note { font-size: 0.84rem; }
+            .game-header { padding: 10px 12px; }
+            .game-header h3 { font-size: 0.92rem; }
+            .chip { font-size: 0.72rem; }
+            .emoji-row { font-size: 0.85rem; letter-spacing: 0.5px; }
+            .player-rpg-label { font-size: 0.6rem; }
+            .star-meter { font-size: 0.72rem; letter-spacing: 1px; }
+        }
     </style>
 </head>
 <body>

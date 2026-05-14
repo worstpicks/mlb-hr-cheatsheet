@@ -2,4 +2,4 @@
 
 Static daily sheet (this repo’s `index.html`).
 
-**Site:** [worstpickz.win](https://worstpickz.win/) (also [worstpicks.github.io/mlb-hr-cheatsheet](https://worstpicks.github.io/mlb-hr-cheatsheet/))
+**Site:** [www.worstpickz.win](https://www.worstpickz.win/) (also [worstpicks.github.io/mlb-hr-cheatsheet](https://worstpicks.github.io/mlb-hr-cheatsheet/))

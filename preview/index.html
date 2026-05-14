@@ -180,16 +180,6 @@
             outline: 2px solid #93c5fd;
             outline-offset: 3px;
         }
-        .preview-banner {
-            background: linear-gradient(90deg, rgba(234,179,8,0.22), rgba(251,146,60,0.18));
-            border-bottom: 1px solid rgba(251,191,36,0.45);
-            color: #fffbeb;
-            padding: 10px 14px;
-            font-size: 0.84rem;
-            line-height: 1.45;
-            text-align: center;
-        }
-        .preview-banner a { color: #fef9c3; font-weight: 700; text-decoration: underline; }
         .sheet-toolbar {
             position: sticky;
             top: 0;
@@ -305,7 +295,7 @@
         @media print {
             body { background: #fff !important; color: #111 !important; padding: 0 !important; overflow: visible !important; }
             .container { border: none !important; box-shadow: none !important; max-width: none !important; }
-            .preview-banner, .sheet-toolbar, .to-top, .brand-tag { display: none !important; }
+            .sheet-toolbar, .to-top-fab, .social-x, .brand-tag { display: none !important; }
             .game-card, .pick-row, .panel, .summary-card { break-inside: avoid; }
             .pick-row { border: 1px solid #ccc !important; background: #fafafa !important; }
             .game-header { background: #eee !important; color: #111 !important; }
@@ -317,14 +307,13 @@
 <body>
     <div class="container">
         <header>
+            <a class="social-x" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer" aria-label="Worst Pickz on X">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
             <div class="brand-tag">Worst Picks Cheat Sheet</div>
             <h1>5/14 MLB Cheat Sheet</h1>
             <p>Thursday, May 14, 2026 — Worst Pickz starred HR favorites, listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a></p>
         </header>
-        <div class="preview-banner" role="status">
-            <strong>UX preview</strong> — try jump links, player filter, and sticky bar here first.
-            <a href="../index.html">Open the live sheet</a> (same day’s data).
-        </div>
         <nav class="sheet-toolbar" id="sheetToolbar" aria-label="Sheet tools">
             <div class="toolbar-row">
                 <span class="toolbar-title" id="toolbarTitle">Jump to</span>
@@ -332,7 +321,6 @@
             </div>
             <div class="toolbar-row">
                 <label class="filter-label" for="playerFilter">Filter <input type="search" id="playerFilter" placeholder="Player name…" autocomplete="off" enterkeyhint="search"></label>
-                <button type="button" class="to-top" id="toTop" aria-label="Back to top of page">↑ Top</button>
             </div>
             <p class="last-updated" id="lastUpdated" aria-live="polite"></p>
         </nav>

@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("worstpickz-theme") === "light") document.documentElement.classList.add("theme-light");
+            } catch (e) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:; font-src 'self' data:; connect-src 'self' https://statsapi.mlb.com; object-src 'none'; worker-src 'none'">
     <meta name="robots" content="noindex, nofollow">
     <title>5/14 MLB Cheat Sheet — UX preview</title>
+    <meta name="sheet-date" content="2026-05-14">
+    <!-- Mirror preview/sheets-manifest.json: used when fetch(sheets-manifest.json) fails (e.g. file://). -->
+    <script type="application/json" id="sheets-manifest-fallback">{"version":1,"sheets":[{"date":"2026-05-14","label":"May 14, 2026 — current slate","href":"./index.html"}]}</script>
     <meta property="og:title" content="MLB HR Cheat Sheet (UX preview)">
     <meta property="og:description" content="Worst Picks HR cheat sheet — preview build for navigation, filter, and layout.">
     <meta property="og:type" content="website">
@@ -15,10 +27,32 @@
         body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: radial-gradient(ellipse at top, #1a0d08 0%, #0d0705 42%, #040302 100%); color: #f5efe9; min-height: 100vh; padding: 16px; overflow-x: hidden; }
         .container { max-width: 2480px; margin: 0 auto; background: linear-gradient(135deg, rgba(23,12,8,0.96) 0%, rgba(17,10,10,0.97) 50%, rgba(12,18,30,0.96) 100%); border: 2px solid rgba(251,146,60,0.42); border-radius: 20px; overflow: hidden; min-width: 0; }
         header { position: relative; padding: 28px 18px 24px; text-align: center; background: linear-gradient(135deg, #2b1210 0%, #7c2d12 55%, #1d4ed8 100%); border-bottom: 3px solid rgba(254,215,170,0.65); }
-        .social-x {
+        .header-actions {
             position: absolute;
             top: 14px;
             right: 14px;
+            z-index: 6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(254, 215, 170, 0.4);
+            color: #e7e9ea;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            padding: 0;
+        }
+        .theme-toggle:hover { background: rgba(15, 23, 42, 0.88); color: #fff; }
+        .social-x {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -35,7 +69,7 @@
         .brand-tag { display: inline-flex; padding: 6px 12px; margin-bottom: 12px; border-radius: 999px; border: 1px solid rgba(254,215,170,0.4); background: rgba(15,23,42,0.28); color: #ffedd5; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
         header h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; color: #fff7ed; }
         header p { font-size: 1.02rem; color: #ffedd5; font-weight: 600; }
-        .intro, .summary-grid, .games-grid { display: grid; gap: 14px; }
+        .intro, .summary-grid, .games-section { display: grid; gap: 14px; }
         .intro { grid-template-columns: 1.18fr 1fr; padding: 14px; background: linear-gradient(135deg, rgba(26,13,8,0.92) 0%, rgba(17,24,39,0.88) 100%); border-bottom: 1px solid rgba(251,146,60,0.16); }
         .panel, .summary-card, .game-card { background: rgba(15,23,42,0.66); border: 1px solid rgba(251,146,60,0.16); border-radius: 14px; min-width: 0; }
         .panel, .summary-card { padding: 14px; }
@@ -62,12 +96,76 @@
         .summary-item { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; background: rgba(8,15,28,0.75); border: 1px solid rgba(96,165,250,0.14); color: #e2e8f0; font-size: 0.92rem; min-width: 0; }
         .summary-item span { min-width: 0; flex: 1; }
         .summary-item strong { flex-shrink: 0; }
-        .games-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr)); align-items: start; padding: 14px; background: linear-gradient(135deg, rgba(9,11,18,0.90) 0%, rgba(12,17,28,0.95) 100%); min-width: 0; }
+        .games-section {
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(9, 11, 18, 0.9) 0%, rgba(12, 17, 28, 0.95) 100%);
+            min-width: 0;
+        }
+        .games-section > .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr));
+            gap: 14px;
+            align-items: start;
+        }
         .game-header { padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); }
         .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; overflow-wrap: anywhere; line-height: 1.25; }
         .game-header p { overflow-wrap: anywhere; hyphens: auto; }
         .pick-list { display: grid; gap: 10px; padding: 12px; }
-        .pick-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1.5fr); gap: 12px; align-items: start; padding: 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); min-width: 0; }
+        .pick-row { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, auto) minmax(0, 1.5fr); gap: 12px; align-items: start; padding: 12px 56px 12px 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); min-width: 0; position: relative; }
+        .gambly-pick-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+            align-self: start;
+            margin-top: 3px;
+        }
+        .pick-cb.pick-cb--gambly {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+        .gambly-pick-btn {
+            appearance: none;
+            font: inherit;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 116, 139, 0.42);
+            background: linear-gradient(165deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.88) 100%);
+            color: #e2e8f0;
+            cursor: pointer;
+            max-width: 148px;
+            text-align: center;
+            transition: border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease, color 0.16s ease;
+        }
+        .gambly-pick-btn:hover {
+            border-color: rgba(45, 212, 191, 0.35);
+            color: #f8fafc;
+        }
+        .gambly-pick-btn:focus-visible {
+            outline: 2px solid rgba(147, 197, 253, 0.95);
+            outline-offset: 2px;
+        }
+        .gambly-pick-btn.is-on {
+            border-color: rgba(45, 212, 191, 0.45);
+            background: linear-gradient(165deg, rgba(13, 148, 136, 0.45) 0%, rgba(15, 118, 110, 0.82) 100%);
+            color: #ccfbf1;
+            box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.15);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .gambly-pick-btn { transition: none; }
+        }
         .pick-name { font-weight: 800; color: #fff7ed; margin-bottom: 4px; }
         .pick-odds { color: #a7f3d0; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; }
         .emoji-row { margin-top: 6px; color: #fef08a; font-size: 0.96rem; letter-spacing: 1px; }
@@ -75,31 +173,10 @@
         .pick-row.strong { border-color: rgba(59,130,246,0.45); }
         .pick-row.playable { border-color: rgba(245,158,11,0.32); }
         .pick-row.thin { border-color: rgba(148,163,184,0.26); }
-        .pick-row.favorite {
-            border: 2px solid rgba(244,63,94,0.75);
-            background: linear-gradient(135deg, rgba(69,10,10,0.96) 0%, rgba(127,29,29,0.90) 55%, rgba(30,41,59,0.90) 100%);
-            box-shadow: 0 0 0 1px rgba(251,113,133,0.28), 0 10px 22px rgba(127,29,29,0.28);
-            position: relative;
-            padding-top: 24px;
+        .game-card .pick-row.is-saved {
+            box-shadow: inset 3px 0 0 rgba(45, 212, 191, 0.75);
         }
-        .favorite-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            position: absolute;
-            top: -11px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 4px 9px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #ef4444 0%, #be123c 100%);
-            color: #fff1f2;
-            border: 1px solid rgba(255,228,230,0.35);
-            font-size: 0.68rem;
-            font-weight: 800;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-        }
+        .game-card .pick-row.is-saved.bet-win { box-shadow: inset 3px 0 0 rgba(34, 197, 94, 0.95); }
         .rating-box { min-width: 86px; padding: 8px 10px; border-radius: 12px; text-align: center; font-weight: 800; color: #fff; line-height: 1.1; }
         .rating-box.elite { background: linear-gradient(135deg, #166534 0%, #22c55e 100%); }
         .rating-box.strong { background: linear-gradient(135deg, #1d4ed8 0%, #38bdf8 100%); }
@@ -120,6 +197,79 @@
         .letter-box.f { background: linear-gradient(135deg, #9ca3af 0%, #6b7280 55%, #374151 100%); }
         .letter-box span { display: block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.7px; }
         .letter-box strong { display: block; font-size: 1rem; margin-top: 4px; }
+        .letter-result-col {
+            display: grid;
+            gap: 8px;
+            justify-items: center;
+            align-content: start;
+            min-width: 0;
+        }
+        .hr-row-result {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .hr-row-result__pill {
+            display: grid;
+            gap: 3px;
+            justify-items: center;
+            text-align: center;
+            min-width: 76px;
+            padding: 7px 12px 8px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+        .hr-row-result__pill-label {
+            font-size: 0.58rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.1;
+            color: rgba(226, 232, 240, 0.92);
+        }
+        .hr-row-result__pill-value {
+            font-size: 0.76rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            line-height: 1.15;
+            color: #fff;
+        }
+        .hr-row-result__pill--pending {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            border-color: rgba(148, 163, 184, 0.35);
+        }
+        .hr-row-result__pill--pending .hr-row-result__pill-label,
+        .hr-row-result__pill--pending .hr-row-result__pill-value {
+            color: #f1f5f9;
+        }
+        .hr-row-result__pill--win {
+            background: linear-gradient(180deg, #166534 0%, #14532d 100%);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+        .hr-row-result__pill--loss {
+            background: linear-gradient(180deg, #991b1b 0%, #7f1d1d 100%);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        .hr-row-result__pill--void {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            border-color: rgba(226, 232, 240, 0.2);
+        }
+        .hr-row-result__pill--na {
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(148, 163, 184, 0.28);
+        }
+        .hr-row-result__pill--na .hr-row-result__pill-label,
+        .hr-row-result__pill--na .hr-row-result__pill-value {
+            color: #94a3b8;
+            font-weight: 800;
+        }
+        .hr-row-result__pill--na .hr-row-result__pill-value {
+            text-transform: none;
+            letter-spacing: 0.04em;
+            font-weight: 800;
+        }
         .player-rpg { padding: 10px 14px; border-radius: 12px; background: rgba(7,12,22,0.92); border: 1px solid rgba(96,165,250,0.16); display: grid; gap: 10px; }
         .player-rpg-wide { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; }
         .player-rpg-title { grid-column: 1 / -1; color: #93c5fd; font-size: 0.64rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.9px; text-align: center; }
@@ -137,12 +287,25 @@
         .emoji-key-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
         .emoji-key-item { padding: 10px 12px; border-radius: 12px; background: rgba(8,15,28,0.78); border: 1px solid rgba(96,165,250,0.14); color: #d7dbe2; font-size: 0.9rem; }
         .weather-link { color: #93c5fd; word-break: break-word; }
-        @media (max-width: 1100px) { .intro, .games-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 1100px) { .intro, .games-section > .games-grid { grid-template-columns: 1fr; } }
         @media (max-width: 960px) { .intro { grid-template-columns: 1fr; } }
         @media (max-width: 1024px) {
             .pick-row { grid-template-columns: 1fr; gap: 10px; }
-            .pick-row .rating-stack { display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; gap: 10px; width: 100%; min-width: 0; }
-            .pick-row .rating-stack .rating-box, .pick-row .rating-stack .letter-box { min-width: 0; flex: 1 1 auto; }
+            .gambly-pick-wrap { margin-top: 0; }
+            .pick-row .rating-stack {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: flex-start;
+                gap: 10px;
+                width: 100%;
+                min-width: 0;
+            }
+            .pick-row .rating-stack .rating-box,
+            .pick-row .rating-stack .letter-result-col {
+                min-width: 0;
+                flex: 1 1 0;
+            }
             .player-rpg-wide { grid-template-columns: 1fr; }
         }
         @media (max-width: 640px) {
@@ -151,9 +314,11 @@
             header { padding: 18px 12px 16px; }
             header h1 { font-size: clamp(1.2rem, 6.5vw, 1.85rem); line-height: 1.15; }
             header p { font-size: 0.86rem; line-height: 1.45; padding: 0 2px; }
-            .social-x { top: 10px; right: 8px; width: 38px; height: 38px; }
+            .header-actions { top: 10px; right: 8px; gap: 6px; }
+            .header-actions .social-x,
+            .header-actions .theme-toggle { width: 38px; height: 38px; }
             .social-x svg { width: 18px; height: 18px; }
-            .intro, .summary-section, .games-grid { padding: 10px; }
+            .intro, .summary-section, .games-section { padding: 10px; }
             .panel, .summary-card { padding: 12px; }
             .summary-grid { grid-template-columns: 1fr; gap: 10px; }
             .top-five-list { grid-template-columns: 1fr; }
@@ -163,6 +328,101 @@
             .summary-item strong { margin-left: auto; }
             .pick-list { padding: 10px; }
             .pick-note { font-size: 0.84rem; }
+            .pick-row {
+                padding: 10px 50px 10px 10px;
+                gap: 8px;
+            }
+            .pick-row .rating-stack {
+                gap: 8px;
+            }
+            .pick-row .rating-stack .rating-box {
+                flex: 0 0 auto;
+                min-width: 72px;
+                max-width: 92px;
+                padding: 6px 8px;
+                border-radius: 10px;
+            }
+            .pick-row .rating-stack .rating-box span {
+                font-size: 0.58rem;
+                letter-spacing: 0.5px;
+            }
+            .pick-row .rating-stack .rating-box strong {
+                font-size: 1.12rem;
+                margin-top: 2px;
+            }
+            .pick-row .rating-stack .letter-result-col {
+                display: flex;
+                flex-direction: row;
+                align-items: stretch;
+                gap: 6px;
+                flex: 1 1 0;
+                min-width: 0;
+                justify-content: flex-end;
+            }
+            .pick-row .rating-stack .letter-box {
+                flex: 1 1 0;
+                min-width: 0;
+                padding: 6px 8px;
+                border-radius: 10px;
+            }
+            .pick-row .rating-stack .letter-box span {
+                font-size: 0.55rem;
+                letter-spacing: 0.5px;
+            }
+            .pick-row .rating-stack .letter-box strong {
+                font-size: 0.9rem;
+                margin-top: 2px;
+            }
+            .pick-row .rating-stack .hr-row-result {
+                flex: 1 1 0;
+                min-width: 68px;
+            }
+            .pick-row .rating-stack .hr-row-result__pill {
+                width: 100%;
+                min-width: 0;
+                max-width: none;
+                padding: 5px 7px 6px;
+                border-radius: 11px;
+                gap: 2px;
+            }
+            .pick-row .rating-stack .hr-row-result__pill-label {
+                font-size: 0.5rem;
+                letter-spacing: 0.07em;
+            }
+            .pick-row .rating-stack .hr-row-result__pill-value {
+                font-size: 0.62rem;
+                letter-spacing: 0.05em;
+            }
+            .pick-row .player-rpg-wide {
+                padding: 8px 10px;
+                gap: 8px;
+            }
+            .pick-row .player-rpg-title {
+                font-size: 0.58rem;
+            }
+            .pick-odds { font-size: 0.78rem; }
+            .player-pop { padding: 10px; }
+            .player-pop__panel {
+                padding: 14px 16px;
+                max-height: min(90vh, 100%);
+                border-radius: 12px;
+            }
+            .player-pop__head {
+                gap: 10px;
+            }
+            .player-pop__result-bubble {
+                min-width: 0;
+                width: 100%;
+                max-width: 200px;
+                margin-left: auto;
+                padding: 7px 10px 8px;
+            }
+            .player-pop__result-label {
+                font-size: 0.54rem;
+            }
+            .player-pop__result-value {
+                font-size: 0.72rem;
+            }
             .game-header { padding: 10px 12px; }
             .game-header h3 { font-size: 0.92rem; }
             .chip { font-size: 0.72rem; }
@@ -170,9 +430,39 @@
             .player-rpg-label { font-size: 0.6rem; }
             .star-meter { font-size: 0.72rem; letter-spacing: 1px; }
         }
-
-        /* —— UX preview (games + toolbar) —— */
-        html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+        @media (max-width: 380px) {
+            .pick-row .rating-stack {
+                gap: 6px;
+            }
+            .pick-row .rating-stack .letter-result-col {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+                justify-content: flex-start;
+            }
+            .pick-row .rating-stack .letter-box {
+                align-self: center;
+                max-width: 104px;
+            }
+            .pick-row .rating-stack .hr-row-result {
+                align-self: center;
+                min-width: 0;
+                width: 100%;
+                max-width: 132px;
+            }
+            .pick-row .rating-stack .hr-row-result__pill {
+                padding: 4px 8px 5px;
+            }
+            .pick-row .rating-stack .rating-box {
+                min-width: 64px;
+                max-width: 76px;
+                padding: 5px 6px;
+            }
+            .pick-row .rating-stack .rating-box strong {
+                font-size: 1.02rem;
+            }
+        }
+        html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; color-scheme: dark; }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
         }
@@ -192,6 +482,49 @@
             gap: 10px;
         }
         .toolbar-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0; }
+        .toolbar-row--sheet-nav {
+            width: 100%;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        .toolbar-row--sheet-nav .filter-label--compact {
+            flex: 0 1 auto;
+            min-width: 0;
+            max-width: 100%;
+            text-transform: none;
+            letter-spacing: 0.03em;
+            font-size: 0.74rem;
+        }
+        #sheetDatePicker,
+        .archive-sheet-select {
+            padding: 7px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(251, 146, 60, 0.35);
+            background: rgba(15, 23, 42, 0.95);
+            color: #f8fafc;
+            font-size: 0.88rem;
+            font-weight: 600;
+            min-height: 38px;
+        }
+        .archive-sheet-select {
+            min-width: min(100%, 16rem);
+            max-width: min(100%, 24rem);
+            cursor: pointer;
+        }
+        #sheetDatePicker:disabled,
+        .archive-sheet-select:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+        .archive-sheet-status {
+            flex: 1 1 120px;
+            min-width: 0;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fca5a5;
+            line-height: 1.35;
+        }
+        .archive-sheet-status.is-ok { color: #86efac; }
         .toolbar-title {
             font-weight: 800;
             font-size: 0.82rem;
@@ -266,8 +599,952 @@
             .to-top-fab { right: 12px; bottom: 16px; padding: 9px 14px; font-size: 0.78rem; }
         }
         .last-updated { font-size: 0.72rem; color: #94a3b8; margin: 0; width: 100%; }
+        .toolbar-view-tools {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .seg-toggle {
+            display: inline-flex;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(251, 146, 60, 0.35);
+        }
+        .seg-toggle button {
+            border: none;
+            padding: 7px 14px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            cursor: pointer;
+            background: rgba(15, 23, 42, 0.95);
+            color: #cbd5e1;
+        }
+        .seg-toggle button.is-active {
+            background: linear-gradient(135deg, rgba(124, 45, 18, 0.95) 0%, rgba(30, 64, 175, 0.55) 100%);
+            color: #fff7ed;
+        }
+        .filter-chip-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; flex: 1; min-width: 0; }
+        .filter-chip {
+            border-radius: 999px;
+            padding: 5px 11px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(30, 41, 59, 0.85);
+            color: #e2e8f0;
+        }
+        .filter-emoji-row .filter-chip[data-emoji] {
+            font-size: 1.05rem;
+            line-height: 1;
+            padding: 5px 9px;
+            min-width: 38px;
+            justify-content: center;
+        }
+        .toolbar-row--emoji-filters {
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+        .filter-emoji-toolbar-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: #fed7aa;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            flex: 0 0 auto;
+            align-self: center;
+        }
+        .filter-chip.is-active {
+            border-color: rgba(52, 211, 153, 0.55);
+            color: #ecfdf5;
+            background: rgba(6, 78, 59, 0.55);
+        }
+        .pick-head { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+        .bet-save-corner {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 3;
+        }
+        .bet-save-corner__btn {
+            display: block;
+            min-width: 46px;
+            padding: 4px 7px;
+            border: 1px solid rgba(45, 212, 191, 0.45);
+            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.94);
+            color: #ccfbf1;
+            font-size: 0.58rem;
+            font-weight: 900;
+            line-height: 1.15;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        }
+        .bet-save-corner__btn:hover { border-color: rgba(94, 234, 212, 0.65); color: #f0fdfa; }
+        .bet-save-corner__btn.is-on {
+            border-color: rgba(52, 211, 153, 0.75);
+            background: rgba(6, 78, 59, 0.65);
+            color: #ecfdf5;
+        }
+        .bet-save-corner__btn--table {
+            min-width: 0;
+            padding: 3px 6px;
+            font-size: 0.55rem;
+            margin: 0 auto;
+        }
+        .props-table .td-bet-sheet { text-align: center; vertical-align: middle; width: 44px; }
+        .bet-row-tag {
+            font-size: 0.62rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 999px;
+            letter-spacing: 0.04em;
+            flex-shrink: 0;
+            align-self: center;
+        }
+        .bet-row-tag--win { background: rgba(22, 101, 52, 0.55); color: #ecfdf5; }
+        .bet-row-tag--loss { background: rgba(127, 29, 29, 0.55); color: #ffe4e6; }
+        .bet-row-tag--void { background: rgba(71, 85, 105, 0.55); color: #e2e8f0; }
+        .bet-row-tag--pending { background: rgba(180, 83, 9, 0.35); color: #fef3c7; }
+        .favorite-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            position: absolute;
+            top: -11px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ef4444 0%, #be123c 100%);
+            color: #fff1f2;
+            border: 1px solid rgba(255, 228, 230, 0.35);
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.55px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+        }
+        /* In-flow on game cards so the badge is not clipped by outer overflow (e.g. .container). */
+        .game-card .pick-row > .favorite-badge {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            grid-column: 1 / -1;
+            justify-self: center;
+            margin: 0 auto 10px;
+        }
+        .favorite-badge.favorite-badge--pop {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+        }
+        .game-card .pick-row.pick-row--worst-pickz-fav,
+        .game-card .pick-row.pick-row--worst-pickz-fav.elite,
+        .game-card .pick-row.pick-row--worst-pickz-fav.strong,
+        .game-card .pick-row.pick-row--worst-pickz-fav.playable,
+        .game-card .pick-row.pick-row--worst-pickz-fav.thin {
+            position: relative;
+            padding-top: 14px;
+            border: 2px solid rgba(244, 63, 94, 0.78) !important;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(69, 10, 10, 0.96) 0%, rgba(127, 29, 29, 0.9) 55%, rgba(30, 41, 59, 0.9) 100%) !important;
+            box-shadow: 0 0 0 1px rgba(251, 113, 133, 0.28), 0 10px 22px rgba(127, 29, 29, 0.28) !important;
+        }
+        .game-card .pick-row.pick-row--worst-pickz-fav.is-saved,
+        .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved,
+        .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved,
+        .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved,
+        .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.28),
+                0 10px 22px rgba(127, 29, 29, 0.28),
+                inset 3px 0 0 rgba(45, 212, 191, 0.88);
+        }
+        .game-card .pick-row.pick-row--worst-pickz-fav.is-saved.bet-win,
+        .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved.bet-win,
+        .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved.bet-win,
+        .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved.bet-win,
+        .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved.bet-win {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.28),
+                0 10px 22px rgba(127, 29, 29, 0.28),
+                inset 3px 0 0 rgba(34, 197, 94, 0.95);
+        }
+        .game-card .pick-row.pick-row--worst-pickz-fav.is-saved.bet-loss,
+        .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved.bet-loss,
+        .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved.bet-loss,
+        .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved.bet-loss,
+        .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved.bet-loss {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.28),
+                0 10px 22px rgba(127, 29, 29, 0.28),
+                inset 3px 0 0 rgba(244, 63, 94, 0.92);
+        }
+        .game-card .pick-row.pick-row--worst-pickz-fav.is-saved.bet-void,
+        .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved.bet-void,
+        .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved.bet-void,
+        .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved.bet-void,
+        .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved.bet-void {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.28),
+                0 10px 22px rgba(127, 29, 29, 0.28),
+                inset 3px 0 0 rgba(148, 163, 184, 0.88);
+        }
+        .game-card .pick-row.is-saved.bet-loss { box-shadow: inset 3px 0 0 rgba(244, 63, 94, 0.92); }
+        .game-card .pick-row.is-saved.bet-void { box-shadow: inset 3px 0 0 rgba(148, 163, 184, 0.88); }
+        .props-table tbody tr.is-saved { box-shadow: inset 3px 0 0 rgba(45, 212, 191, 0.75); }
+        .props-table tbody tr.is-saved.bet-win { box-shadow: inset 3px 0 0 rgba(34, 197, 94, 0.95); }
+        .props-table tbody tr.is-saved.bet-loss { box-shadow: inset 3px 0 0 rgba(244, 63, 94, 0.92); }
+        .props-table tbody tr.is-saved.bet-void { box-shadow: inset 3px 0 0 rgba(148, 163, 184, 0.88); }
+        .props-table tbody tr.pick-row--worst-pickz-fav {
+            box-shadow: inset 0 0 0 2px rgba(244, 63, 94, 0.82);
+        }
+        .props-table tbody tr.pick-row--worst-pickz-fav td {
+            background: rgba(127, 29, 29, 0.07);
+        }
+        .props-table tbody tr.pick-row--worst-pickz-fav.is-saved,
+        .props-table tbody tr.pick-row--worst-pickz-fav.is-saved.bet-win,
+        .props-table tbody tr.pick-row--worst-pickz-fav.is-saved.bet-loss,
+        .props-table tbody tr.pick-row--worst-pickz-fav.is-saved.bet-void {
+            box-shadow:
+                inset 0 0 0 2px rgba(244, 63, 94, 0.78),
+                inset 5px 0 0 rgba(45, 212, 191, 0.75);
+        }
+        .props-table tbody tr.pick-row--worst-pickz-fav.is-saved.bet-win {
+            box-shadow:
+                inset 0 0 0 2px rgba(244, 63, 94, 0.78),
+                inset 5px 0 0 rgba(34, 197, 94, 0.95);
+        }
+        .props-table tbody tr.pick-row--worst-pickz-fav.is-saved.bet-loss {
+            box-shadow:
+                inset 0 0 0 2px rgba(244, 63, 94, 0.78),
+                inset 5px 0 0 rgba(244, 63, 94, 0.92);
+        }
+        .props-table tbody tr.pick-row--worst-pickz-fav.is-saved.bet-void {
+            box-shadow:
+                inset 0 0 0 2px rgba(244, 63, 94, 0.78),
+                inset 5px 0 0 rgba(148, 163, 184, 0.88);
+        }
+        .props-table td .bet-row-tag { display: block; margin-top: 4px; }
+        .pick-name-open {
+            background: none;
+            border: none;
+            font: inherit;
+            color: inherit;
+            font-weight: 800;
+            text-align: left;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            min-width: 0;
+        }
+        .pick-name-open:hover { text-decoration: underline; text-underline-offset: 3px; }
+        .games-section.is-table-view > .games-grid { display: none !important; }
+        .games-section.is-table-view #tableView { display: block !important; }
+        #tableView { display: none; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 6px 2px 20px; }
+        .props-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            min-width: 800px;
+        }
+        .props-table th, .props-table td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(71, 85, 105, 0.45);
+            vertical-align: middle;
+        }
+        .props-table th {
+            color: #fed7aa;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: rgba(8, 15, 28, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            white-space: nowrap;
+        }
+        .props-table th.sortable { cursor: pointer; user-select: none; }
+        .props-table th.sortable:hover { color: #fff; }
+        .props-table th .sort-ind { opacity: 0.45; font-size: 0.65rem; margin-left: 2px; }
+        .props-table tbody tr { background: rgba(8, 15, 28, 0.55); }
+        .props-table tbody tr:nth-child(even) { background: rgba(8, 15, 28, 0.72); }
+        .props-table tbody tr:hover { background: rgba(30, 41, 59, 0.55); }
+        .props-table .park-pct { font-variant-numeric: tabular-nums; font-weight: 800; }
+        .props-table .park-pct--boost { color: #4ade80; }
+        .props-table .park-pct--fade { color: #fb7185; }
+        .props-table .park-pct--neutral { color: #94a3b8; }
+        .props-table .band-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        .props-table .band-pill.elite { background: rgba(22, 101, 52, 0.55); color: #ecfdf5; }
+        .props-table .band-pill.strong { background: rgba(30, 64, 175, 0.55); color: #e0f2fe; }
+        .props-table .band-pill.playable { background: rgba(180, 83, 9, 0.45); color: #fffbeb; }
+        .props-table .band-pill.thin { background: rgba(71, 85, 105, 0.55); color: #e2e8f0; }
+        .props-table .go-game {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #93c5fd;
+            text-decoration: none;
+            white-space: nowrap;
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: rgba(30, 58, 138, 0.25);
+            border: 1px solid rgba(96, 165, 250, 0.22);
+        }
+        .props-table .go-game:hover {
+            text-decoration: none;
+            background: rgba(59, 130, 246, 0.28);
+            color: #e0f2fe;
+        }
+        #tableView .table-wrap-inner {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 116, 139, 0.38);
+            background: linear-gradient(165deg, rgba(15, 23, 42, 0.98) 0%, rgba(8, 15, 28, 0.95) 45%, rgba(12, 20, 35, 0.96) 100%);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.15),
+                0 16px 40px rgba(0, 0, 0, 0.38),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .props-table {
+            min-width: 900px;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.84rem;
+        }
+        .props-table thead th {
+            padding: 12px 11px;
+            border-bottom: 2px solid rgba(251, 146, 60, 0.38);
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.99) 0%, rgba(15, 23, 42, 0.97) 100%);
+            color: #fde68a;
+            font-size: 0.64rem;
+            font-weight: 800;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            vertical-align: middle;
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+        }
+        .props-table thead th.th-sheet,
+        .props-table thead th.th-tags {
+            text-align: center;
+        }
+        .props-table thead th.th-tags {
+            color: #fef08a;
+            min-width: 150px;
+            max-width: 240px;
+            white-space: normal;
+            line-height: 1.25;
+        }
+        .props-table tbody td {
+            padding: 11px 12px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.42);
+            vertical-align: middle;
+        }
+        .props-table tbody tr:last-child td { border-bottom: none; }
+        .props-table tbody tr {
+            transition: background 0.14s ease;
+        }
+        .props-table tbody tr:hover {
+            background: rgba(30, 58, 95, 0.28);
+        }
+        .props-table tbody tr:nth-child(even) { background: rgba(8, 15, 28, 0.62); }
+        .props-table tbody tr:nth-child(even):hover { background: rgba(30, 58, 95, 0.32); }
+        .props-table .td-player {
+            min-width: 132px;
+            max-width: 220px;
+        }
+        .props-table .table-player-name {
+            color: #fff7ed;
+            font-weight: 800;
+            font-size: 0.88rem;
+            line-height: 1.35;
+            text-align: left;
+        }
+        .props-table .table-player-name:hover { color: #fef3c7; }
+        .props-table .td-tags {
+            text-align: center;
+            vertical-align: middle;
+            min-width: 150px;
+            max-width: 260px;
+        }
+        .props-table .table-emoji-tags {
+            display: inline-block;
+            font-size: 1.08rem;
+            line-height: 1.5;
+            letter-spacing: 0.22em;
+            color: #fef08a;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            word-break: break-word;
+        }
+        .props-table .table-emoji-tags--empty {
+            letter-spacing: normal;
+            color: rgba(148, 163, 184, 0.4);
+            font-size: 0.9rem;
+        }
+        .props-table .td-listed {
+            min-width: 168px;
+            max-width: 280px;
+            font-size: 0.78rem;
+            line-height: 1.45;
+            color: #e2e8f0;
+        }
+        .props-table tbody td .band-pill {
+            font-size: 0.64rem;
+            padding: 3px 9px;
+        }
+        .props-table .td-score {
+            text-align: center;
+            white-space: nowrap;
+        }
+        .props-table thead th .sort-h {
+            background: none;
+            border: none;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            text-align: left;
+        }
+        .props-table thead th .sort-h:hover { color: #fff; }
+        .quick-legend {
+            position: fixed;
+            right: 12px;
+            bottom: 72px;
+            z-index: 55;
+            max-width: 220px;
+        }
+        .quick-legend-toggle {
+            width: 100%;
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-weight: 800;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            border: 1px solid rgba(251, 146, 60, 0.45);
+            background: rgba(8, 6, 5, 0.94);
+            color: #fed7aa;
+        }
+        .quick-legend-panel {
+            display: none;
+            margin-top: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            background: rgba(15, 23, 42, 0.96);
+            font-size: 0.72rem;
+            line-height: 1.45;
+            color: #e2e8f0;
+            max-height: 50vh;
+            overflow-y: auto;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+        }
+        .quick-legend.is-open .quick-legend-panel { display: block; }
+        .quick-legend-item {
+            display: block;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+            cursor: default;
+        }
+        .quick-legend-item:last-child { border-bottom: none; }
+        .player-pop {
+            position: fixed;
+            inset: 0;
+            z-index: 190;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .player-pop__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.7); cursor: pointer; }
+        .player-pop__panel {
+            position: relative;
+            max-width: 520px;
+            width: 100%;
+            max-height: min(85vh, 640px);
+            overflow-y: auto;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            border: 1px solid rgba(251, 146, 60, 0.28);
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        }
+        .player-pop__head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+        .player-pop__head-main {
+            flex: 1 1 220px;
+            min-width: 0;
+        }
+        .player-pop__result-bubble {
+            flex: 0 0 auto;
+            min-width: 88px;
+            padding: 8px 12px 9px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            display: grid;
+            gap: 4px;
+            justify-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+        }
+        .player-pop__result-label {
+            display: block;
+            font-size: 0.58rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(241, 245, 249, 0.95);
+            line-height: 1.1;
+        }
+        .player-pop__result-value {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 1.15;
+        }
+        .player-pop__result-bubble.is-win {
+            background: linear-gradient(180deg, #166534 0%, #14532d 100%);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+        .player-pop__result-bubble.is-loss {
+            background: linear-gradient(180deg, #991b1b 0%, #7f1d1d 100%);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        .player-pop__result-bubble.is-void {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            border-color: rgba(226, 232, 240, 0.2);
+        }
+        .player-pop__result-bubble.is-pending,
+        .player-pop__result-bubble.is-loading {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            border-color: rgba(148, 163, 184, 0.35);
+        }
+        .player-pop__result-bubble.is-na,
+        .player-pop__result-bubble.is-error {
+            background: rgba(30, 41, 59, 0.88);
+            border-color: rgba(148, 163, 184, 0.3);
+        }
+        .player-pop__result-bubble.is-na .player-pop__result-label,
+        .player-pop__result-bubble.is-na .player-pop__result-value,
+        .player-pop__result-bubble.is-error .player-pop__result-label,
+        .player-pop__result-bubble.is-error .player-pop__result-value {
+            color: #94a3b8;
+        }
+        .player-pop__result-bubble.is-na .player-pop__result-value,
+        .player-pop__result-bubble.is-error .player-pop__result-value {
+            text-transform: none;
+            letter-spacing: 0.04em;
+            font-weight: 800;
+        }
+        .player-pop__title { font-size: 1.2rem; color: #fff7ed; margin: 0 0 6px 0; }
+        .player-pop__fav {
+            display: flex;
+            justify-content: center;
+            margin: 0 0 12px 0;
+        }
+        .player-pop__emoji {
+            font-size: 0.95rem;
+            letter-spacing: 0.06em;
+            color: #fef08a;
+            margin: 0 0 12px 0;
+            line-height: 1.35;
+        }
+        .player-pop__meta { font-size: 0.8rem; color: #a7f3d0; margin-bottom: 10px; font-weight: 700; }
+        .player-pop__match { font-size: 0.78rem; color: #cbd5e1; margin-bottom: 12px; line-height: 1.4; }
+        .player-pop__note { font-size: 0.88rem; color: #e2e8f0; line-height: 1.5; margin-bottom: 12px; }
+        .player-pop__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+        .player-pop__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+        @media (max-width: 900px) {
+            .quick-legend { right: 8px; bottom: 68px; max-width: min(200px, 46vw); }
+        }
+        @media (max-width: 640px) {
+            .quick-legend { display: none; }
+        }
+        .toolbar-parlay {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .toolbar-parlay-stack {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        .toolbar-parlay-row1 {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .parlay-panel {
+            padding: 8px 10px;
+            border-radius: 12px;
+            background: rgba(8, 15, 28, 0.55);
+            border: 1px solid rgba(251, 146, 60, 0.22);
+        }
+        .parlay-panel[hidden] { display: none !important; }
+        .parlay-panel-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .parlay-panel-head h4 {
+            margin: 0;
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fed7aa;
+        }
+        .parlay-disclaimer {
+            font-size: 0.62rem;
+            color: #94a3b8;
+            line-height: 1.35;
+            max-width: 720px;
+        }
+        .parlay-legs {
+            list-style: none;
+            margin: 0 0 8px 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .parlay-leg {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(30, 41, 59, 0.65);
+            border: 1px dashed rgba(148, 163, 184, 0.35);
+            cursor: grab;
+            font-size: 0.74rem;
+            color: #e2e8f0;
+        }
+        .parlay-leg:active { cursor: grabbing; }
+        .parlay-leg .parlay-drag-hint { font-size: 0.62rem; color: #64748b; flex-shrink: 0; }
+        .parlay-leg .parlay-leg-odds { margin-left: auto; font-weight: 900; color: #a7f3d0; font-variant-numeric: tabular-nums; }
+        .parlay-combined {
+            font-size: 0.88rem;
+            font-weight: 900;
+            color: #fef08a;
+        }
+        .pick-count { font-size: 0.78rem; color: #cbd5e1; flex: 1; min-width: 0; }
+        .btn-secondary, .btn-gambly {
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-weight: 800;
+            font-size: 0.78rem;
+            cursor: pointer;
+            border: 1px solid rgba(148,163,184,0.35);
+            background: rgba(30,41,59,0.9);
+            color: #e2e8f0;
+        }
+        .btn-secondary:hover { background: rgba(51,65,85,0.95); }
+        .btn-secondary:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+        .btn-gambly {
+            border-color: rgba(52,211,153,0.55);
+            background: linear-gradient(135deg, rgba(6,78,59,0.9) 0%, rgba(20,83,45,0.92) 100%);
+            color: #ecfdf5;
+        }
+        .btn-gambly:hover:not(:disabled) { filter: brightness(1.08); }
+        .btn-gambly:disabled { opacity: 0.45; cursor: not-allowed; }
+        .gambly-export-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .gambly-export-modal__backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.68);
+            cursor: pointer;
+        }
+        .gambly-export-modal__panel {
+            position: relative;
+            max-width: 480px;
+            width: 100%;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+        }
+        .gambly-export-modal__title {
+            margin: 0 0 10px 0;
+            font-size: 1.05rem;
+            color: #fff7ed;
+        }
+        .gambly-export-modal__note {
+            margin: 0 0 12px 0;
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            line-height: 1.45;
+        }
+        .gambly-export-modal__ta {
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 140px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(251, 146, 60, 0.28);
+            background: rgba(15, 23, 42, 0.96);
+            color: #f8fafc;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            margin-bottom: 14px;
+            resize: vertical;
+        }
+        .gambly-export-modal__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .gambly-export-modal__actions .btn-gambly {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bet-sheet-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 205;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .bet-sheet-modal__backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            cursor: pointer;
+        }
+        .bet-sheet-modal__panel {
+            position: relative;
+            width: 100%;
+            max-width: 720px;
+            max-height: min(88vh, 720px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            border: 1px solid rgba(251, 146, 60, 0.35);
+            border-radius: 14px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        }
+        .bet-sheet-modal__head {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(71, 85, 105, 0.45);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .bet-sheet-modal__head h2 {
+            margin: 0;
+            font-size: 1.05rem;
+            color: #fff7ed;
+        }
+        .bet-sheet-modal__head p {
+            margin: 0;
+            font-size: 0.76rem;
+            color: #94a3b8;
+            width: 100%;
+        }
+        .bet-sheet-modal__scroll {
+            overflow: auto;
+            padding: 12px 14px 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .bet-sheet-empty { color: #94a3b8; font-size: 0.88rem; line-height: 1.5; margin: 8px 4px; }
+        .bet-sheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+        .bet-sheet-table th, .bet-sheet-table td {
+            padding: 8px 6px;
+            text-align: left;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+            vertical-align: top;
+        }
+        .bet-sheet-table th { color: #fed7aa; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .bet-sheet-actions { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+        .bet-remove-btn {
+            font-size: 0.65rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #fb923c;
+            text-decoration: underline;
+            padding: 2px 4px;
+        }
+        .bet-status-pill {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 999px;
+            font-size: 0.62rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        .bet-status-pill--pending { background: rgba(180, 83, 9, 0.35); color: #fef3c7; }
+        .bet-status-pill--win { background: rgba(22, 101, 52, 0.5); color: #ecfdf5; }
+        .bet-status-pill--loss { background: rgba(127, 29, 29, 0.55); color: #ffe4e6; }
+        .bet-status-pill--void { background: rgba(71, 85, 105, 0.55); color: #e2e8f0; }
+        .bet-sheet-modal__panel--wide {
+            max-width: min(96vw, 920px);
+        }
+        .bet-tracker-lede {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            line-height: 1.45;
+            margin: 0 0 10px 0;
+        }
+        .bet-tracker-summary {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #fed7aa;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .bet-tracker-summary .bet-tracker-pl-total {
+            font-variant-numeric: tabular-nums;
+            color: #a7f3d0;
+        }
+        .bet-tracker-summary .bet-tracker-pl-total.is-neg { color: #fecaca; }
+        .bet-tracker-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            align-items: end;
+            margin-bottom: 12px;
+        }
+        .bet-tracker-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+        .bet-tracker-field span {
+            font-size: 0.62rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fed7aa;
+        }
+        .bet-tracker-input {
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(251, 146, 60, 0.35);
+            background: rgba(15, 23, 42, 0.95);
+            color: #f8fafc;
+            font-size: 0.82rem;
+            width: 100%;
+            min-width: 0;
+        }
+        .bet-tracker-field--wide { grid-column: 1 / -1; }
+        .bet-tracker-actions-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .bet-tracker-hint {
+            font-size: 0.72rem;
+            color: #86efac;
+            font-weight: 700;
+        }
+        .bet-tracker-table .bet-tracker-pl {
+            font-variant-numeric: tabular-nums;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+        .bet-tracker-table .bet-tracker-pl--pos { color: #86efac; }
+        .bet-tracker-table .bet-tracker-pl--neg { color: #fecaca; }
+        .bet-tracker-table .bet-tracker-pl--zero { color: #94a3b8; }
+        .bet-tracker-remove-btn {
+            font-size: 0.65rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #fb923c;
+            text-decoration: underline;
+            padding: 2px 4px;
+        }
         .game-card { scroll-margin-top: 6.5rem; }
-        .pick-row.pick-hidden { display: none !important; }
+        .pick-row.pick-hidden,
+        .pick-table-row.pick-hidden,
+        .pick-row.quick-filter-hidden,
+        .pick-table-row.quick-filter-hidden,
+        .pick-row.emoji-filter-hidden,
+        .pick-table-row.emoji-filter-hidden { display: none !important; }
+        .props-table th .sort-h {
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            text-transform: inherit;
+            letter-spacing: inherit;
+        }
         @media (min-width: 1100px) {
             .pick-note { max-width: 52rem; }
         }
@@ -292,12 +1569,353 @@
             .legend-fold { border: none; background: transparent; padding: 0; margin-top: 0; }
             .legend-fold > summary { display: none; }
         }
+        html.theme-light { color-scheme: light; }
+        html.theme-light body {
+            background: linear-gradient(180deg, #e8edf5 0%, #dce6f4 45%, #cfdcf0 100%);
+            color: #0f172a;
+        }
+        html.theme-light .container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+            border-color: rgba(100, 116, 139, 0.45);
+        }
+        html.theme-light header {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 42%, #bfdbfe 100%);
+            border-bottom-color: rgba(234, 88, 12, 0.35);
+        }
+        html.theme-light .brand-tag {
+            background: rgba(255, 255, 255, 0.65);
+            border-color: rgba(148, 163, 184, 0.45);
+            color: #334155;
+        }
+        html.theme-light header h1 { color: #7c2d12; }
+        html.theme-light header p { color: #334155; }
+        html.theme-light .weather-link { color: #1d4ed8; }
+        html.theme-light .header-actions .theme-toggle,
+        html.theme-light .header-actions .social-x {
+            background: rgba(255, 255, 255, 0.82);
+            border-color: rgba(100, 116, 139, 0.4);
+            color: #0f172a;
+        }
+        html.theme-light .header-actions .theme-toggle:hover,
+        html.theme-light .header-actions .social-x:hover {
+            background: #fff;
+            color: #0f172a;
+        }
+        html.theme-light .intro {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-bottom-color: rgba(148, 163, 184, 0.25);
+        }
+        html.theme-light .summary-section,
+        html.theme-light .games-section {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e8eef7 100%);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+        }
+        html.theme-light .panel,
+        html.theme-light .summary-card,
+        html.theme-light .game-card {
+            background: #ffffff;
+            border-color: rgba(148, 163, 184, 0.4);
+        }
+        html.theme-light .panel h2,
+        html.theme-light .summary-card h3 { color: #c2410c; }
+        html.theme-light .criterion,
+        html.theme-light .band {
+            background: #f8fafc;
+            border-color: rgba(148, 163, 184, 0.35);
+        }
+        html.theme-light .criterion strong,
+        html.theme-light .band strong { color: #0f172a; }
+        html.theme-light .criterion span,
+        html.theme-light .band span,
+        html.theme-light .model-note,
+        html.theme-light .game-header p,
+        html.theme-light .pick-note,
+        html.theme-light .summary-item small { color: #475569; }
+        html.theme-light .summary-item {
+            background: #fff;
+            border-color: #e2e8f0;
+            color: #334155;
+        }
+        html.theme-light .top-five-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #f8fafc 55%, #ecfdf5 100%);
+            border-color: rgba(250, 204, 21, 0.45);
+        }
+        html.theme-light .top-five-item {
+            background: #f8fafc;
+            border-color: rgba(148, 163, 184, 0.35);
+        }
+        html.theme-light .game-header {
+            background: linear-gradient(135deg, #fffbeb 0%, #e0f2fe 100%);
+            border-bottom-color: rgba(251, 146, 60, 0.28);
+        }
+        html.theme-light .game-header h3 { color: #0f172a; }
+        html.theme-light .pick-row {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.elite,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.strong,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.playable,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.thin {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 48%, #f8fafc 100%) !important;
+            border-color: rgba(190, 18, 60, 0.82) !important;
+            box-shadow: 0 0 0 1px rgba(251, 113, 133, 0.4), 0 12px 28px rgba(190, 18, 60, 0.12) !important;
+        }
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.is-saved,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.4),
+                0 12px 28px rgba(190, 18, 60, 0.12),
+                inset 3px 0 0 rgba(45, 212, 191, 0.88);
+        }
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.is-saved.bet-win,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved.bet-win,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved.bet-win,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved.bet-win,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved.bet-win {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.4),
+                0 12px 28px rgba(190, 18, 60, 0.12),
+                inset 3px 0 0 rgba(34, 197, 94, 0.95);
+        }
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.is-saved.bet-loss,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved.bet-loss,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved.bet-loss,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved.bet-loss,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved.bet-loss {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.4),
+                0 12px 28px rgba(190, 18, 60, 0.12),
+                inset 3px 0 0 rgba(244, 63, 94, 0.92);
+        }
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.is-saved.bet-void,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.elite.is-saved.bet-void,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.strong.is-saved.bet-void,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.playable.is-saved.bet-void,
+        html.theme-light .game-card .pick-row.pick-row--worst-pickz-fav.thin.is-saved.bet-void {
+            box-shadow:
+                0 0 0 1px rgba(251, 113, 133, 0.4),
+                0 12px 28px rgba(190, 18, 60, 0.12),
+                inset 3px 0 0 rgba(148, 163, 184, 0.88);
+        }
+        html.theme-light .props-table tbody tr.pick-row--worst-pickz-fav td {
+            background: rgba(254, 226, 231, 0.55);
+        }
+        html.theme-light .pick-name,
+        html.theme-light .pick-name-open { color: #0f172a; }
+        html.theme-light .pick-odds { color: #047857; }
+        html.theme-light .emoji-row { color: #854d0e; }
+        html.theme-light .hr-row-result__pill--win .hr-row-result__pill-label,
+        html.theme-light .hr-row-result__pill--win .hr-row-result__pill-value {
+            color: #fff;
+        }
+        html.theme-light .hr-row-result__pill--loss .hr-row-result__pill-label,
+        html.theme-light .hr-row-result__pill--loss .hr-row-result__pill-value {
+            color: #fff;
+        }
+        html.theme-light .hr-row-result__pill--void .hr-row-result__pill-label,
+        html.theme-light .hr-row-result__pill--void .hr-row-result__pill-value {
+            color: #f8fafc;
+        }
+        html.theme-light .hr-row-result__pill--pending .hr-row-result__pill-label,
+        html.theme-light .hr-row-result__pill--pending .hr-row-result__pill-value {
+            color: #fff;
+        }
+        html.theme-light .hr-row-result__pill--win {
+            background: linear-gradient(180deg, #15803d 0%, #166534 100%);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        html.theme-light .hr-row-result__pill--loss {
+            background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        html.theme-light .hr-row-result__pill--void {
+            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        html.theme-light .hr-row-result__pill--pending {
+            background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        html.theme-light .hr-row-result__pill--na {
+            background: #e2e8f0;
+            border-color: rgba(100, 116, 139, 0.35);
+        }
+        html.theme-light .hr-row-result__pill--na .hr-row-result__pill-label,
+        html.theme-light .hr-row-result__pill--na .hr-row-result__pill-value {
+            color: #64748b;
+        }
+        html.theme-light .player-pop__result-bubble.is-loading,
+        html.theme-light .player-pop__result-bubble.is-pending {
+            background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        html.theme-light .player-pop__result-bubble.is-win {
+            background: linear-gradient(180deg, #15803d 0%, #166534 100%);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        html.theme-light .player-pop__result-bubble.is-loss {
+            background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        html.theme-light .player-pop__result-bubble.is-void {
+            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        html.theme-light .player-pop__result-bubble.is-na,
+        html.theme-light .player-pop__result-bubble.is-error {
+            background: #e2e8f0;
+            border-color: rgba(100, 116, 139, 0.35);
+        }
+        html.theme-light .player-pop__result-bubble.is-win .player-pop__result-label,
+        html.theme-light .player-pop__result-bubble.is-win .player-pop__result-value,
+        html.theme-light .player-pop__result-bubble.is-loss .player-pop__result-label,
+        html.theme-light .player-pop__result-bubble.is-loss .player-pop__result-value,
+        html.theme-light .player-pop__result-bubble.is-void .player-pop__result-label,
+        html.theme-light .player-pop__result-bubble.is-void .player-pop__result-value,
+        html.theme-light .player-pop__result-bubble.is-loading .player-pop__result-label,
+        html.theme-light .player-pop__result-bubble.is-loading .player-pop__result-value,
+        html.theme-light .player-pop__result-bubble.is-pending .player-pop__result-label,
+        html.theme-light .player-pop__result-bubble.is-pending .player-pop__result-value {
+            color: #fff;
+        }
+        html.theme-light .player-pop__result-bubble.is-na .player-pop__result-label,
+        html.theme-light .player-pop__result-bubble.is-na .player-pop__result-value,
+        html.theme-light .player-pop__result-bubble.is-error .player-pop__result-label,
+        html.theme-light .player-pop__result-bubble.is-error .player-pop__result-value {
+            color: #64748b;
+        }
+        html.theme-light .chip {
+            background: #f1f5f9;
+            border-color: rgba(59, 130, 246, 0.25);
+            color: #1e3a5f;
+        }
+        html.theme-light .sheet-toolbar {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom-color: rgba(148, 163, 184, 0.45);
+        }
+        html.theme-light .toolbar-title,
+        html.theme-light .filter-label { color: #9a3412; }
+        html.theme-light .toolbar-toc a {
+            background: #f1f5f9;
+            border-color: rgba(59, 130, 246, 0.35);
+            color: #1e40af;
+        }
+        html.theme-light .toolbar-toc a:hover { background: #e2e8f0; color: #0f172a; }
+        html.theme-light #playerFilter {
+            background: #fff;
+            border-color: rgba(148, 163, 184, 0.45);
+            color: #0f172a;
+        }
+        html.theme-light #sheetDatePicker,
+        html.theme-light .archive-sheet-select {
+            background: #fff;
+            border-color: rgba(148, 163, 184, 0.45);
+            color: #0f172a;
+        }
+        html.theme-light .archive-sheet-status { color: #b91c1c; }
+        html.theme-light .archive-sheet-status.is-ok { color: #15803d; }
+        html.theme-light .filter-chip {
+            background: #f1f5f9;
+            border-color: rgba(148, 163, 184, 0.4);
+            color: #334155;
+        }
+        html.theme-light .filter-chip.is-active {
+            background: rgba(6, 78, 59, 0.12);
+            border-color: rgba(52, 211, 153, 0.55);
+            color: #065f46;
+        }
+        html.theme-light .seg-toggle button {
+            background: #f8fafc;
+            color: #475569;
+        }
+        html.theme-light .seg-toggle button.is-active {
+            background: #e0f2fe;
+            color: #0c4a6e;
+        }
+        html.theme-light .btn-secondary {
+            background: #f1f5f9;
+            border-color: rgba(148, 163, 184, 0.45);
+            color: #334155;
+        }
+        html.theme-light .btn-secondary:hover { background: #e2e8f0; }
+        html.theme-light .pick-count { color: #475569; }
+        html.theme-light .parlay-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(148, 163, 184, 0.4);
+        }
+        html.theme-light .parlay-leg {
+            background: #f8fafc;
+            border-color: rgba(148, 163, 184, 0.35);
+            color: #334155;
+        }
+        html.theme-light .parlay-combined { color: #854d0e; }
+        html.theme-light .player-pop__panel,
+        html.theme-light .bet-sheet-modal__panel {
+            background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+            border-color: rgba(148, 163, 184, 0.45);
+        }
+        html.theme-light .player-pop__title { color: #0f172a; }
+        html.theme-light .player-pop__meta { color: #047857; }
+        html.theme-light .player-pop__match,
+        html.theme-light .player-pop__note { color: #475569; }
+        html.theme-light .player-pop__emoji { color: #a16207; }
+        html.theme-light .bet-sheet-modal__head h2 { color: #0f172a; }
+        html.theme-light .bet-sheet-modal__head p { color: #475569; }
+        html.theme-light .gambly-export-modal__panel {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            border-color: rgba(148, 163, 184, 0.45);
+        }
+        html.theme-light .gambly-export-modal__title { color: #0f172a; }
+        html.theme-light .gambly-export-modal__note { color: #475569; }
+        html.theme-light .gambly-export-modal__ta {
+            background: #fff;
+            border-color: rgba(148, 163, 184, 0.4);
+            color: #0f172a;
+        }
+        html.theme-light .bet-tracker-summary { color: #9a3412; }
+        html.theme-light .bet-tracker-summary .bet-tracker-pl-total { color: #15803d; }
+        html.theme-light .bet-tracker-summary .bet-tracker-pl-total.is-neg { color: #b91c1c; }
+        html.theme-light .bet-tracker-field span { color: #9a3412; }
+        html.theme-light .bet-tracker-input {
+            background: #fff;
+            border-color: rgba(148, 163, 184, 0.45);
+            color: #0f172a;
+        }
+        html.theme-light .bet-tracker-lede { color: #64748b; }
+        html.theme-light .bet-tracker-hint { color: #15803d; }
+        html.theme-light .table-wrap-inner {
+            border-color: rgba(148, 163, 184, 0.45);
+            background: linear-gradient(165deg, #ffffff 0%, #f8fafc 100%);
+        }
+        html.theme-light .props-table thead th {
+            background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #9a3412;
+            border-bottom-color: rgba(251, 146, 60, 0.35);
+        }
+        html.theme-light .props-table tbody tr { background: rgba(248, 250, 252, 0.95); }
+        html.theme-light .props-table tbody tr:nth-child(even) { background: #eef2f7; }
+        html.theme-light .props-table tbody tr:hover { background: rgba(219, 234, 254, 0.55); }
+        html.theme-light .props-table .table-player-name { color: #0f172a; }
+        html.theme-light .props-table .td-listed { color: #334155; }
+        html.theme-light .quick-legend-toggle {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(148, 163, 184, 0.45);
+            color: #334155;
+        }
+        html.theme-light .quick-legend-panel { color: #334155; }
+        html.theme-light .last-updated { color: #64748b; }
         @media print {
             body { background: #fff !important; color: #111 !important; padding: 0 !important; overflow: visible !important; }
             .container { border: none !important; box-shadow: none !important; max-width: none !important; }
-            .sheet-toolbar, .to-top-fab, .social-x, .brand-tag { display: none !important; }
+            .sheet-toolbar, .to-top-fab, .header-actions, .brand-tag, .quick-legend, #tableView, #betTrackerModal, #playerPreviewModal, #parlayPanel { display: none !important; }
             .game-card, .pick-row, .panel, .summary-card { break-inside: avoid; }
             .pick-row { border: 1px solid #ccc !important; background: #fafafa !important; }
+            .gambly-pick-wrap { display: none !important; }
             .game-header { background: #eee !important; color: #111 !important; }
             .game-header h3, .pick-name { color: #111 !important; }
             .pick-note, .model-note, .game-header p { color: #222 !important; }
@@ -307,20 +1925,75 @@
 <body>
     <div class="container">
         <header>
-            <a class="social-x" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer" aria-label="Worst Pickz on X">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
+            <div class="header-actions">
+                <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false" title="Switch to light mode" aria-label="Switch to light mode">☀️</button>
+                <a class="social-x" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer" aria-label="Worst Pickz on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
             <div class="brand-tag">Worst Picks Cheat Sheet</div>
             <h1>5/14 MLB Cheat Sheet</h1>
-            <p>Thursday, May 14, 2026 — Worst Pickz starred HR favorites, listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a></p>
+            <p>Thursday, May 14, 2026 — Worst Pickz HR cheat sheet with listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong> get the rose border and ⭐ in the emoji row; the top-right <strong>Save</strong> box adds props to your local <strong>bet tracker</strong>.</p>
         </header>
         <nav class="sheet-toolbar" id="sheetToolbar" aria-label="Sheet tools">
+            <div class="toolbar-row toolbar-row--sheet-nav" id="sheetNavRow" aria-label="Sheet date and archive">
+                <span class="toolbar-title" id="sheetNavTitle">Sheet</span>
+                <label class="filter-label filter-label--compact" for="sheetDatePicker">Go to date <input type="date" id="sheetDatePicker" autocomplete="off" aria-describedby="archiveSheetStatus"></label>
+                <label class="filter-label filter-label--compact" for="archiveSheetSelect">Archive <select id="archiveSheetSelect" class="archive-sheet-select" aria-label="Open a saved cheat sheet by date"></select></label>
+                <span class="archive-sheet-status" id="archiveSheetStatus" role="status" aria-live="polite"></span>
+            </div>
             <div class="toolbar-row">
                 <span class="toolbar-title" id="toolbarTitle">Jump to</span>
                 <div class="toolbar-toc" id="toolbarToc"></div>
             </div>
             <div class="toolbar-row">
-                <label class="filter-label" for="playerFilter">Filter <input type="search" id="playerFilter" placeholder="Player name…" autocomplete="off" enterkeyhint="search"></label>
+                <label class="filter-label" for="playerFilter">Player <input type="search" id="playerFilter" placeholder="Search name…" autocomplete="off" enterkeyhint="search"></label>
+            </div>
+            <div class="toolbar-row toolbar-row--emoji-filters">
+                <span class="filter-emoji-toolbar-label" id="emojiFilterLabel">Emoji</span>
+                <div class="filter-chip-row filter-emoji-row" id="emojiFilterRow" role="group" aria-labelledby="emojiFilterLabel" title="Select one or more. A row must include every selected emoji (AND).">
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="💎" aria-pressed="false" title="Underrated / I like">💎</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="⚾" aria-pressed="false" title="Pitcher hand weakness / HR target">⚾</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="⭐" aria-pressed="false" title="Designated Worst Pickz Favorite (sheet list)">⭐</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🚀" aria-pressed="false" title="100+ mph EV">🚀</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="💣" aria-pressed="false" title="Strong blast profile">💣</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🌕" aria-pressed="false" title="Moonshot / elite HR targetability">🌕</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🏟️" aria-pressed="false" title="Good park / weather">🏟️</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🩹" aria-pressed="false" title="Sharp spot">🩹</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="📜" aria-pressed="false" title="BvP history">📜</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🕊️" aria-pressed="false" title="Pitcher HR-risk advantage">🕊️</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🧤" aria-pressed="false" title="Bum onna mound / HR-leaky SP (glove in game title)">🧤</button>
+                    <button type="button" class="filter-chip" id="clearEmojiFiltersBtn" title="Clear emoji tag filters">Clear tags</button>
+                </div>
+            </div>
+            <div class="toolbar-row toolbar-view-tools">
+                <span class="toolbar-title">Props</span>
+                <div class="seg-toggle" role="group" aria-label="Layout">
+                    <button type="button" class="is-active" id="viewCardsBtn" aria-pressed="true">Cards</button>
+                    <button type="button" id="viewTableBtn" aria-pressed="false">Table</button>
+                </div>
+                <button type="button" class="btn-secondary" id="betTrackerBtn" aria-haspopup="dialog">Bet tracker</button>
+                <div class="filter-chip-row" id="quickFilterRow" aria-label="Quick filters">
+                    <button type="button" class="filter-chip is-active" data-filter="all">All</button>
+                    <button type="button" class="filter-chip" data-filter="elite">Elite 90+</button>
+                    <button type="button" class="filter-chip" data-filter="longshot" title="Listed HR price is +700 American or higher">Longshot odds (+700+)</button>
+                    <button type="button" class="filter-chip" data-filter="park">Park boost +5%</button>
+                </div>
+            </div>
+            <div class="toolbar-row toolbar-parlay toolbar-parlay-stack">
+                <div class="toolbar-parlay-row1">
+                    <span class="pick-count" id="pickCount" aria-live="polite">Gambly: use Cards view and Add on each row. Table view is for sorting, tracker saves, and export.</span>
+                    <button type="button" class="btn-secondary" id="clearPicks">Clear picks</button>
+                    <button type="button" class="btn-gambly" id="exportGambly" disabled>Export to Gambly</button>
+                </div>
+                <div class="parlay-panel" id="parlayPanel" hidden>
+                    <div class="parlay-panel-head">
+                        <h4>Parlay math (uncorrelated)</h4>
+                        <p class="parlay-disclaimer">Same-game legs are correlated; books shorten SGPs. This is the naive product of listed American prices from each row.</p>
+                    </div>
+                    <ul class="parlay-legs" id="parlayLegs" aria-label="Parlay legs, drag to reorder"></ul>
+                    <div class="parlay-combined" id="parlayCombined" aria-live="polite"></div>
+                </div>
             </div>
             <p class="last-updated" id="lastUpdated" aria-live="polite"></p>
         </nav>
@@ -344,7 +2017,7 @@
                     <div class="band playable-band"><strong>70-79 Playable</strong><span>Usable lane, mostly price-sensitive.</span></div>
                     <div class="band thin-band"><strong>69 and Lower Thin / Fade</strong><span>Mostly longshot-only exposure.</span></div>
                 </div>
-                <p class="model-note">This board covers <strong>55 listed HR props</strong> across <strong>11 games</strong>, with <strong>10 user-starred Worst Pickz Favorite</strong> rows.</p>
+                <p class="model-note">This board covers <strong>55 listed HR props</strong> across <strong>11 games</strong>, with <strong>10 Worst Pickz Favorite</strong> rows (⭐). Use the <strong>Save</strong> box on each row to add that prop to your <strong>bet tracker</strong> (this device). Open <strong>Bet tracker</strong> to set units and odds; <strong>win / loss / void</strong> come from the MLB Stats API automatically (including when you browse archive sheets).</p>
             </div>
         </section>
         <section class="summary-section">
@@ -380,7 +2053,7 @@
                     </div>
                 </div>
                 <div class="summary-card">
-                    <h3>Best Plus-Money HR (Listed)</h3>
+                    <h3>Best longshot HR (listed +700+)</h3>
                     <div class="summary-list">
                         <div class="summary-item"><span>Jose Tena <small>+1000 vs Burns</small></span><strong>80</strong></div>
                         <div class="summary-item"><span>J.T. Realmuto <small>+1000 vs Luzardo</small></span><strong>68</strong></div>
@@ -402,12 +2075,13 @@
                     <details class="legend-fold" id="legendFold">
                         <summary>Legend key &amp; reading guide</summary>
                         <div class="legend-fold-body">
-                    <p class="model-note"><strong>How to read rows:</strong> Player (hand) — listed HR line text — emoji tags — model score. Notes are <strong>batter vs opposing starter only</strong>. <strong>⭐</strong> = user-starred Worst Pickz Favorite row. <strong>🕊️</strong> = PropFinder HR-risk split clearly favors this batter's lane (see legend).</p>
+                    <p class="model-note"><strong>How to read rows:</strong> Player (hand) — listed HR line text — emoji tags — model score. Notes are <strong>batter vs opposing starter only</strong>. <strong>⭐</strong> appears only on designated <strong>Worst Pickz Favorites</strong> (rose border — set on the sheet, not toggled in the browser). Use <strong>Add to Gambly</strong> on each row you want in <strong>Gambly export</strong>. The <strong>Save</strong> box (top-right on each row) adds the prop to your <strong>bet tracker</strong>; a teal bar shows tracked picks. Bet outcomes update from <strong>MLB box scores</strong> (see <strong>Bet tracker</strong>). <strong>🕊️</strong> = PropFinder HR-risk split clearly favors this batter's lane (see legend).</p>
                     <p class="model-note"><strong>Grade:</strong> <strong>S+ / S</strong> = premium HR setup, <strong>A-B</strong> = strong playable lane, <strong>C-F</strong> = thinner or more flawed spot.</p>
                     <div class="emoji-key-grid">
                         <div class="emoji-key-item"><strong>💎</strong> Underrated / I like</div>
                         <div class="emoji-key-item"><strong>⚾</strong> Pitcher Hand Weakness / HR Target</div>
-                        <div class="emoji-key-item"><strong>⭐</strong> My Favorite (see ribbon)</div>
+                        <div class="emoji-key-item"><strong>⭐</strong> Worst Pickz Favorite (sheet-designated; rose border)</div>
+                        <div class="emoji-key-item"><strong>Save box</strong> — Bet tracker (top-right; teal bar when tracked)</div>
                         <div class="emoji-key-item"><strong>🚀</strong> 100+ mph EV / loud EV profile</div>
                         <div class="emoji-key-item"><strong>💣</strong> Strong blast profile</div>
                         <div class="emoji-key-item"><strong>🌕</strong> Moonshot - Elite HR Targetability</div>
@@ -422,25 +2096,32 @@
                 </div>
             </div>
         </section>
-        <section class="games-grid" id="gamesGrid"></section>
+        <aside class="quick-legend" id="quickLegend" aria-label="Emoji legend">
+            <button type="button" class="quick-legend-toggle" id="quickLegendToggle" aria-expanded="false">Legend</button>
+            <div class="quick-legend-panel" id="quickLegendPanel" role="region" aria-label="Legend entries">
+                <span class="quick-legend-item" title="Underrated / I like this spot">💎 Underrated / I like</span>
+                <span class="quick-legend-item" title="Pitcher handedness or mix leans HR-vulnerable">⚾ Pitcher HR target</span>
+                <span class="quick-legend-item" title="Designated Worst Pickz Favorite on this sheet">⭐ Favorite</span>
+                <span class="quick-legend-item" title="Save prop to bet tracker">💾 Tracker</span>
+                <span class="quick-legend-item" title="100+ mph EV or loud exit velo">🚀 Loud EV</span>
+                <span class="quick-legend-item" title="Strong blast / barrel shape">💣 Blast profile</span>
+                <span class="quick-legend-item" title="Elite HR targetability ceiling">🌕 Moonshot</span>
+                <span class="quick-legend-item" title="Park or weather helps HR">🏟️ Park / weather</span>
+                <span class="quick-legend-item" title="Sharp situational spot">🩹 Sharp spot</span>
+                <span class="quick-legend-item" title="Head-to-head history chip">📜 BvP</span>
+                <span class="quick-legend-item" title="PropFinder HR-risk split favors this batter lane">🕊️ HR-risk edge</span>
+                <span class="quick-legend-item" title="Leaky starter called out in game line">🧤 HR-leaky SP</span>
+            </div>
+        </aside>
+        <section class="games-section" id="gamesSection">
+            <div class="games-grid" id="gamesGrid"></div>
+            <div id="tableView" hidden></div>
+        </section>
     </div>
     <button type="button" class="to-top-fab" id="toTop" aria-label="Back to top of page">↑ Top</button>
 
     <script>
         (() => {
-            const favoritePlayers = new Set([
-                "Mickey Moniak (L)",
-                "Sal Stewart (R)",
-                "James Wood (L)",
-                "CJ Abrams (L)",
-                "Jose Tena (L)",
-                "Spencer Torkelson (R)",
-                "Byron Buxton (R)",
-                "Kyle Schwarber (L)",
-                "Miguel Vargas (R)",
-                "Salvador Perez (R)"
-            ]);
-
             const games = [
                 { title: "COL @ PIT - Mason Montgomery (L, COL) vs Chase Dollander \ud83e\udde4 (R, PIT)", description: "PNC Park - Ballpark Pal -14% HR row; ~52F with ~10 mph out-blowing wind partially offsets cold. Montgomery's tiny-sample RHB lane is softer than his LHB work; Dollander sits near 1.0 HR/9 with whiff-heavy but hittable fly contact.", rows: [
                     { name: "Brandon Lowe (L)", odds: "Listed +450 - Over 0.5 HR", score: 76, emojis: "\ud83d\ude80 \ud83d\udc8e", note: "Loud L5 window (two HR, 17.6% barrels) but Montgomery's vs-LHB profile has been stingy in a cold PNC carry.", chips: ["vs Montgomery"] },
@@ -522,21 +2203,792 @@
             ];
 
             const grid = document.getElementById("gamesGrid");
+            const gamesSection = document.getElementById("gamesSection");
+            const tableView = document.getElementById("tableView");
+            const themeToggle = document.getElementById("themeToggle");
+            const rootEl = document.documentElement;
+            const THEME_STORAGE_KEY = "worstpickz-theme";
+            function syncThemeToggle() {
+                if (!themeToggle) return;
+                const light = rootEl.classList.contains("theme-light");
+                themeToggle.textContent = light ? "🌙" : "☀️";
+                themeToggle.setAttribute("aria-pressed", light ? "true" : "false");
+                const tip = light ? "Switch to dark mode" : "Switch to light mode";
+                themeToggle.title = tip;
+                themeToggle.setAttribute("aria-label", tip);
+            }
+            function setUiTheme(light) {
+                if (light) rootEl.classList.add("theme-light");
+                else rootEl.classList.remove("theme-light");
+                try { localStorage.setItem(THEME_STORAGE_KEY, light ? "light" : "dark"); } catch (e) {}
+                syncThemeToggle();
+            }
+            if (themeToggle) {
+                syncThemeToggle();
+                themeToggle.addEventListener("click", () => setUiTheme(!rootEl.classList.contains("theme-light")));
+            }
+
+            const sheetDatePicker = document.getElementById("sheetDatePicker");
+            const archiveSheetSelect = document.getElementById("archiveSheetSelect");
+            const archiveSheetStatus = document.getElementById("archiveSheetStatus");
+
+            function normalizeSheetPageUrl(hrefAbs) {
+                const u = new URL(hrefAbs);
+                u.hash = "";
+                let p = u.pathname;
+                if (p.endsWith("/index.html")) p = p.slice(0, -10) || "/";
+                if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
+                u.pathname = p || "/";
+                return u.href;
+            }
+            function currentSheetPageUrl() {
+                return normalizeSheetPageUrl(window.location.href);
+            }
+            function findManifestEntryForPage(sheets) {
+                const meta = document.querySelector('meta[name="sheet-date"]');
+                const metaDate = meta && meta.getAttribute("content") ? meta.getAttribute("content").trim() : "";
+                if (metaDate) {
+                    const hit = sheets.find((s) => s.date === metaDate);
+                    if (hit) return hit;
+                }
+                const here = currentSheetPageUrl();
+                return sheets.find((s) => {
+                    try {
+                        return normalizeSheetPageUrl(new URL(s.href, window.location.href).href) === here;
+                    } catch (e) {
+                        return false;
+                    }
+                });
+            }
+            function setArchiveStatus(msg, ok) {
+                if (!archiveSheetStatus) return;
+                archiveSheetStatus.textContent = msg || "";
+                archiveSheetStatus.classList.toggle("is-ok", !!ok && !!msg);
+            }
+            /** When opened as file:// or fetch fails, browsers often block sheets-manifest.json; fall back so the picker still works for at least this build. */
+            function sheetsManifestFallback() {
+                const embedded = document.getElementById("sheets-manifest-fallback");
+                if (embedded && embedded.textContent.trim()) {
+                    try {
+                        const o = JSON.parse(embedded.textContent);
+                        if (o && Array.isArray(o.sheets) && o.sheets.length) return o;
+                    } catch (e) {}
+                }
+                const meta = document.querySelector('meta[name="sheet-date"]');
+                const d = meta && meta.getAttribute("content") ? meta.getAttribute("content").trim() : "";
+                if (!d) return null;
+                return {
+                    version: 1,
+                    sheets: [{ date: d, label: "This sheet (offline / local file)", href: "./index.html" }],
+                };
+            }
+            async function loadSheetsManifest() {
+                const candidates = [];
+                try {
+                    candidates.push(new URL("./sheets-manifest.json", window.location.href).href);
+                } catch (e) {}
+                try {
+                    const u = new URL("sheets-manifest.json", window.location.href);
+                    if (!candidates.includes(u.href)) candidates.push(u.href);
+                } catch (e) {}
+                for (const href of candidates) {
+                    try {
+                        const res = await fetch(href, { cache: "no-store" });
+                        if (!res.ok) continue;
+                        return await res.json();
+                    } catch (e) {
+                        continue;
+                    }
+                }
+                const fb = sheetsManifestFallback();
+                if (fb) return fb;
+                throw new Error("no manifest");
+            }
+            async function initSheetArchiveNav() {
+                if (!sheetDatePicker || !archiveSheetSelect) return;
+                let manifest = { sheets: [] };
+                try {
+                    manifest = await loadSheetsManifest();
+                } catch (e) {
+                    sheetDatePicker.disabled = true;
+                    archiveSheetSelect.disabled = true;
+                    setArchiveStatus("Sheet list unavailable (offline or missing sheets-manifest.json).", false);
+                    return;
+                }
+                const raw = Array.isArray(manifest.sheets) ? manifest.sheets : [];
+                const sheets = raw
+                    .filter((s) => s && typeof s.date === "string" && typeof s.href === "string")
+                    .map((s) => ({
+                        date: s.date,
+                        label: typeof s.label === "string" && s.label.trim() ? s.label.trim() : s.date,
+                        href: s.href.trim(),
+                    }));
+                if (!sheets.length) {
+                    sheetDatePicker.disabled = true;
+                    archiveSheetSelect.disabled = true;
+                    setArchiveStatus("No sheets listed in sheets-manifest.json yet.", false);
+                    return;
+                }
+                sheets.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+                const dates = sheets.map((s) => s.date).sort();
+                sheetDatePicker.min = dates[0];
+                sheetDatePicker.max = dates[dates.length - 1];
+                const current = findManifestEntryForPage(sheets);
+                if (current) sheetDatePicker.value = current.date;
+                else sheetDatePicker.value = dates[0];
+
+                archiveSheetSelect.innerHTML = "";
+                sheets.forEach((s) => {
+                    const opt = document.createElement("option");
+                    opt.value = new URL(s.href, window.location.href).href;
+                    opt.textContent = s.label;
+                    archiveSheetSelect.appendChild(opt);
+                });
+                if (current) {
+                    try {
+                        archiveSheetSelect.value = new URL(current.href, window.location.href).href;
+                    } catch (e) {
+                        archiveSheetSelect.selectedIndex = 0;
+                    }
+                }
+                setArchiveStatus("", false);
+
+                function navigateToSheet(targetUrl) {
+                    let dest;
+                    try {
+                        dest = new URL(targetUrl, window.location.href).href;
+                    } catch (e) {
+                        setArchiveStatus("Invalid sheet link in manifest.", false);
+                        return;
+                    }
+                    if (normalizeSheetPageUrl(dest) === currentSheetPageUrl()) {
+                        setArchiveStatus("", false);
+                        return;
+                    }
+                    window.location.href = dest;
+                }
+
+                sheetDatePicker.addEventListener("change", () => {
+                    const v = sheetDatePicker.value;
+                    if (!v) return;
+                    const hit = sheets.find((s) => s.date === v);
+                    if (!hit) {
+                        setArchiveStatus("No cheat sheet for that date in the archive.", false);
+                        if (current) sheetDatePicker.value = current.date;
+                        return;
+                    }
+                    setArchiveStatus("", false);
+                    navigateToSheet(hit.href);
+                });
+
+                archiveSheetSelect.addEventListener("change", () => {
+                    const v = archiveSheetSelect.value;
+                    if (!v) return;
+                    navigateToSheet(v);
+                });
+            }
+            void initSheetArchiveNav();
+
             const blastBonusMap = { good: 1, high: 2 };
             function bandClass(score) { if (score >= 90) return "elite"; if (score >= 80) return "strong"; if (score >= 70) return "playable"; return "thin"; }
+            function matchupShort(title) { return (title.split(" - ")[0] || title || "").trim(); }
+            function parkHrPctFromDescription(desc) {
+                const m = (desc || "").match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i);
+                if (!m) return null;
+                const n = parseInt(m[1] || m[2], 10);
+                return Number.isNaN(n) ? null : n;
+            }
+            function weatherTone(pct) {
+                if (pct == null) return "neutral";
+                if (pct >= 5) return "boost";
+                if (pct <= -5) return "fade";
+                return "neutral";
+            }
+            function parseListedNumber(oddsStr) {
+                const m = (oddsStr || "").match(/Listed\s*([+-]?\d+)/i);
+                if (!m) return null;
+                if (/N\/A/i.test(oddsStr)) return null;
+                const n = parseInt(m[1], 10);
+                return Number.isNaN(n) ? null : n;
+            }
+            /** Listed American +700 or higher (longshot HR price on the board). */
+            function isLongshotListedHrOdds(oddsStr) {
+                const n = parseListedNumber(oddsStr);
+                return n != null && n >= 700;
+            }
+
+            function escapeHtml(s) {
+                return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            }
+
+            const BET_TRACKER_LS = "worstpickz-bet-tracker-v1";
+            let betTracker = [];
+            function getSheetDateMeta() {
+                const m = document.querySelector('meta[name="sheet-date"]');
+                return m && m.getAttribute("content") ? m.getAttribute("content").trim() : "";
+            }
+            function newTrackerId() {
+                return "t-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+            }
+            function loadBetTracker() {
+                try {
+                    const raw = localStorage.getItem(BET_TRACKER_LS);
+                    const arr = raw ? JSON.parse(raw) : [];
+                    betTracker = Array.isArray(arr) ? arr : [];
+                } catch (e) {
+                    betTracker = [];
+                }
+            }
+            function persistBetTracker() {
+                try {
+                    localStorage.setItem(BET_TRACKER_LS, JSON.stringify(betTracker));
+                } catch (e) {}
+            }
+            function trackerRowForPicker(gi, ri) {
+                const sd = getSheetDateMeta() || "unknown";
+                return betTracker.find((t) => t.sheetDate === sd && t.gi === gi && t.ri === ri);
+            }
+            function isTrackedSheetRow(gi, ri) {
+                return !!trackerRowForPicker(gi, ri);
+            }
+            function toggleBetTrackerFromSheetRow(gi, ri) {
+                const sd = getSheetDateMeta() || "unknown";
+                const i = betTracker.findIndex((t) => t.sheetDate === sd && t.gi === gi && t.ri === ri);
+                if (i >= 0) {
+                    betTracker.splice(i, 1);
+                } else {
+                    const game = games[gi];
+                    const row = game && game.rows[ri];
+                    if (!row) return;
+                    betTracker.push({
+                        id: newTrackerId(),
+                        createdAt: new Date().toISOString(),
+                        sheetDate: sd,
+                        gi,
+                        ri,
+                        name: row.name,
+                        line: row.odds,
+                        matchup: matchupShort(game.title),
+                        score: typeof row.score === "number" ? row.score : null,
+                        units: 1,
+                        americanOdds: parseListedNumber(row.odds),
+                        result: null,
+                        notes: "",
+                        source: "sheet",
+                    });
+                }
+                persistBetTracker();
+                updateBetTrackerBtnLabel();
+            }
+            function updateBetTrackerBtnLabel() {
+                const btn = document.getElementById("betTrackerBtn");
+                if (!btn) return;
+                btn.textContent = betTracker.length ? `Bet tracker (${betTracker.length})` : "Bet tracker";
+            }
+            loadBetTracker();
+            updateBetTrackerBtnLabel();
+
+            /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
+            const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                "Mickey Moniak (L)",
+                "Sal Stewart (R)",
+                "James Wood (L)",
+                "CJ Abrams (L)",
+                "Jose Tena (L)",
+                "Spencer Torkelson (R)",
+                "Byron Buxton (R)",
+                "Kyle Schwarber (L)",
+                "Miguel Vargas (R)",
+                "Salvador Perez (R)"
+            ]);
+            function isWorstPickzFavoriteRow(row) {
+                return WORST_PICKZ_FAVORITE_NAMES.has(row.name);
+            }
+
+            let betTrackerModalEl = null;
+
+            function closeBetTrackerModal() {
+                if (betTrackerModalEl) {
+                    try {
+                        document.removeEventListener("keydown", betTrackerModalEl._trackerEsc, true);
+                    } catch (e) {}
+                    betTrackerModalEl.remove();
+                    betTrackerModalEl = null;
+                }
+            }
+            function parseAmericanManualInput(raw) {
+                const s = String(raw || "").trim();
+                if (!s) return null;
+                const m = s.match(/^([+-]?\d+)$/);
+                if (!m) return null;
+                const n = parseInt(m[1], 10);
+                return Number.isNaN(n) ? null : n;
+            }
+            function normalizeTrackerUnits(n) {
+                const x = Number(n);
+                if (!Number.isFinite(x) || x <= 0) return 1;
+                return Math.min(100000, Math.round(x * 1000) / 1000);
+            }
+            function profitUnitsForTrackerEntry(e) {
+                const u = Number(e.units);
+                if (!Number.isFinite(u) || u <= 0) return null;
+                const am = e.americanOdds;
+                const result = e.result;
+                if (result === "void") return 0;
+                if (result !== "win" && result !== "loss") return null;
+                const stake = Math.abs(u);
+                if (result === "loss") return -stake;
+                if (am == null || typeof am !== "number" || Number.isNaN(am)) return null;
+                if (am > 0) return stake * (am / 100);
+                return stake * (100 / Math.abs(am));
+            }
+            function computeBetTrackerStats() {
+                let w = 0;
+                let l = 0;
+                let v = 0;
+                let pend = 0;
+                let pl = 0;
+                betTracker.forEach((e) => {
+                    const r = e.result;
+                    if (!r) {
+                        pend++;
+                        return;
+                    }
+                    if (r === "win") w++;
+                    else if (r === "loss") l++;
+                    else if (r === "void") v++;
+                    const p = profitUnitsForTrackerEntry(e);
+                    if (p != null) pl += p;
+                });
+                return { w, l, v, pend, pl };
+            }
+            function formatPlUnits(x) {
+                if (x == null || Number.isNaN(x)) return "—";
+                const s = (Math.round(x * 100) / 100).toFixed(2);
+                if (x > 0) return "+" + s;
+                if (x === 0) return "0.00";
+                return s;
+            }
+            function trackerRowPlClass(x) {
+                if (x == null || Number.isNaN(x)) return "";
+                if (x > 0) return "bet-tracker-pl--pos";
+                if (x < 0) return "bet-tracker-pl--neg";
+                return "bet-tracker-pl--zero";
+            }
+            function removeBetTrackerEntry(id) {
+                const i = betTracker.findIndex((t) => t.id === id);
+                if (i >= 0) {
+                    betTracker.splice(i, 1);
+                    persistBetTracker();
+                    updateBetTrackerBtnLabel();
+                }
+            }
+            function renderBetTrackerModal(wrap) {
+                const sumEl = wrap.querySelector("#betTrackerSummary");
+                const host = wrap.querySelector("#betTrackerTableHost");
+                if (!sumEl || !host) return;
+                const st = computeBetTrackerStats();
+                const plNum = st.pl;
+                const plClass = plNum < 0 ? "bet-tracker-pl-total is-neg" : "bet-tracker-pl-total";
+                sumEl.innerHTML = `Settled: <strong>${st.w}-${st.l}</strong>${st.v ? `, void ${st.v}` : ""}${st.pend ? ` · <span style="color:#94a3b8;font-weight:700;">${st.pend} pending</span>` : ""} · Units P/L: <span class="${plClass}">${formatPlUnits(plNum)}</span>`;
+                if (!betTracker.length) {
+                    host.innerHTML = "<p class=\"bet-sheet-empty\">No tracked bets yet. Add a row with the form above, or tap <strong>Save</strong> on any card or table row to pull that prop in (deduped by slate date + row).</p>";
+                    return;
+                }
+                const rows = betTracker
+                    .slice()
+                    .sort((a, b) => (a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0))
+                    .map((e) => {
+                        const res = e.result || "pending";
+                        const pillClass = res === "win" ? "win" : res === "loss" ? "loss" : res === "void" ? "void" : "pending";
+                        const pillText = res === "win" ? "Won" : res === "loss" ? "Lost" : res === "void" ? "Void" : "Pending";
+                        const when = e.createdAt ? new Date(e.createdAt).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" }) : "";
+                        const pl = profitUnitsForTrackerEntry(e);
+                        const plDisp = formatPlUnits(pl);
+                        const plCls = trackerRowPlClass(pl);
+                        const sdNote = e.sheetDate ? `<div style="font-size:0.62rem;color:#64748b;margin-top:2px;">Slate ${escapeHtml(e.sheetDate)}</div>` : "";
+                        return `<tr data-tracker-id="${escapeHtml(e.id)}"><td style="font-size:0.68rem;color:#94a3b8;white-space:nowrap;">${escapeHtml(when)}</td><td><strong>${escapeHtml(e.name)}</strong>${e.matchup ? `<div style="font-size:0.68rem;color:#94a3b8;margin-top:2px;">${escapeHtml(e.matchup)}</div>` : ""}${sdNote}</td><td>${escapeHtml(e.line || "")}</td><td style="font-variant-numeric:tabular-nums;">${escapeHtml(String(e.units != null ? e.units : 1))}</td><td>${e.score != null ? escapeHtml(String(e.score)) : "—"}</td><td><span class="bet-status-pill bet-status-pill--${pillClass}">${pillText}</span></td><td class="bet-tracker-pl ${plCls}">${escapeHtml(plDisp)}</td><td><div class="bet-sheet-actions"><button type="button" class="bet-tracker-remove-btn" data-tracker-id="${escapeHtml(e.id)}">Remove</button></div></td></tr>`;
+                    })
+                    .join("");
+                host.innerHTML = `<table class="bet-sheet-table bet-tracker-table"><thead><tr><th>Added</th><th>Pick</th><th>Line</th><th>U</th><th>Model</th><th>Result</th><th>P/L</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table>`;
+            }
+            function openBetTrackerModal() {
+                closeBetTrackerModal();
+                const wrap = document.createElement("div");
+                wrap.id = "betTrackerModal";
+                wrap.className = "bet-sheet-modal";
+                wrap.setAttribute("role", "dialog");
+                wrap.setAttribute("aria-modal", "true");
+                wrap.setAttribute("aria-labelledby", "betTrackerTitle");
+                wrap.innerHTML = "<div class=\"bet-sheet-modal__backdrop\" data-tracker-close=\"1\"></div><div class=\"bet-sheet-modal__panel bet-sheet-modal__panel--wide\"><div class=\"bet-sheet-modal__head\"><div><h2 id=\"betTrackerTitle\">Bet tracker</h2><p>Local log of HR props with units and P/L. Tracked rows use each pick’s <strong>saved slate date</strong> and matchup so results stay correct on archive sheets. Use <strong>Save</strong> on a row to add a prop (deduped by slate + row). Outcomes are <strong>not</strong> set by hand — the MLB Stats API fills in pending / win / loss / void after games go final.</p></div><button type=\"button\" class=\"btn-secondary\" id=\"betTrackerModalClose\">Close</button></div><div class=\"bet-sheet-modal__scroll\"><p class=\"bet-tracker-lede\">P/L uses American odds parsed from the line (e.g. Listed +450). <strong>Wins / losses / voids</strong> come from MLB only: final box — 1+ HR → win; 0 HR with PA → loss; postponed or canceled → void; 0 PA (did not play) → void; not final or no game match → pending. <strong>Every time you open Bet tracker</strong>, pending rows are checked against MLB (also once in the background after the sheet loads). Manual adds must include game <strong>Away @ Home</strong> (e.g. WSH @ STL) matching the pick’s slate.</p><div class=\"bet-tracker-summary\" id=\"betTrackerSummary\"></div><div class=\"bet-tracker-actions-row bet-tracker-mlb-row\" aria-live=\"polite\"><span class=\"bet-tracker-hint\" id=\"betTrackerMlbSettleHint\" role=\"status\"></span></div><form id=\"betTrackerAddForm\" class=\"bet-tracker-form\" autocomplete=\"off\"><div class=\"bet-tracker-field bet-tracker-field--wide\"><span>Player / label</span><input class=\"bet-tracker-input\" id=\"betTrackerPick\" name=\"pick\" required maxlength=\"120\" placeholder=\"e.g. James Wood (L)\"></div><div class=\"bet-tracker-field bet-tracker-field--wide\"><span>Market / line</span><input class=\"bet-tracker-input\" id=\"betTrackerLine\" name=\"line\" required maxlength=\"200\" placeholder=\"e.g. Listed +375 - Over 0.5 HR\"></div><div class=\"bet-tracker-field bet-tracker-field--wide\"><span>Game (Away @ Home)</span><input class=\"bet-tracker-input\" id=\"betTrackerMatchup\" name=\"matchup\" required maxlength=\"40\" placeholder=\"e.g. WSH @ STL\"></div><div class=\"bet-tracker-field\"><span>American odds</span><input class=\"bet-tracker-input\" id=\"betTrackerAmerican\" name=\"american\" inputmode=\"numeric\" maxlength=\"8\" placeholder=\"+375 or -150\"></div><div class=\"bet-tracker-field\"><span>Units (risk)</span><input class=\"bet-tracker-input\" id=\"betTrackerUnits\" name=\"units\" type=\"number\" step=\"any\" min=\"0.01\" value=\"1\"></div><div class=\"bet-tracker-field\"><span>&nbsp;</span><button type=\"submit\" class=\"btn-secondary\" id=\"betTrackerAddBtn\">Add bet</button></div></form><div id=\"betTrackerTableHost\"></div></div></div>";
+                betTrackerModalEl = wrap;
+                wrap._trackerEsc = (ev) => {
+                    if (ev.key === "Escape") closeBetTrackerModal();
+                };
+                document.addEventListener("keydown", wrap._trackerEsc, true);
+                document.body.appendChild(wrap);
+                wrap.querySelector("[data-tracker-close]").addEventListener("click", closeBetTrackerModal);
+                wrap.querySelector("#betTrackerModalClose").addEventListener("click", closeBetTrackerModal);
+                const form = wrap.querySelector("#betTrackerAddForm");
+                if (form) {
+                    form.addEventListener("submit", (ev) => {
+                        ev.preventDefault();
+                        const pick = (wrap.querySelector("#betTrackerPick") && wrap.querySelector("#betTrackerPick").value || "").trim();
+                        const line = (wrap.querySelector("#betTrackerLine") && wrap.querySelector("#betTrackerLine").value || "").trim();
+                        const matchupMt = wrap.querySelector("#betTrackerMatchup");
+                        const matchup = (matchupMt && matchupMt.value || "").trim();
+                        const amRaw = wrap.querySelector("#betTrackerAmerican") && wrap.querySelector("#betTrackerAmerican").value;
+                        const unitsRaw = wrap.querySelector("#betTrackerUnits") && wrap.querySelector("#betTrackerUnits").value;
+                        if (!pick || !line) return;
+                        if (!parseGameTeamAbbrs(matchup)) {
+                            if (matchupMt) {
+                                matchupMt.setCustomValidity("Use Away @ Home with abbreviations, e.g. WSH @ STL");
+                                matchupMt.reportValidity();
+                            }
+                            return;
+                        }
+                        if (matchupMt) matchupMt.setCustomValidity("");
+                        const americanFromField = parseAmericanManualInput(amRaw);
+                        const americanFromLine = parseListedNumber(line);
+                        const americanOdds = americanFromField != null ? americanFromField : americanFromLine;
+                        const units = normalizeTrackerUnits(unitsRaw);
+                        betTracker.push({
+                            id: newTrackerId(),
+                            createdAt: new Date().toISOString(),
+                            sheetDate: getSheetDateMeta() || "",
+                            gi: null,
+                            ri: null,
+                            name: pick,
+                            line,
+                            matchup,
+                            score: null,
+                            units,
+                            americanOdds,
+                            result: null,
+                            notes: "",
+                            source: "manual",
+                        });
+                        persistBetTracker();
+                        updateBetTrackerBtnLabel();
+                        form.reset();
+                        const uIn = wrap.querySelector("#betTrackerUnits");
+                        if (uIn) uIn.value = "1";
+                        void runMlbTrackerSettlementUI(wrap);
+                    });
+                }
+                wrap.addEventListener("click", (ev) => {
+                    const rm = ev.target.closest(".bet-tracker-remove-btn");
+                    if (rm && wrap.contains(rm)) {
+                        const id = rm.getAttribute("data-tracker-id");
+                        if (!id) return;
+                        removeBetTrackerEntry(id);
+                        renderBetTrackerModal(wrap);
+                    }
+                });
+                renderBetTrackerModal(wrap);
+                void runMlbTrackerSettlementUI(wrap);
+            }
+            function normalizePlayerForOdds(name) {
+                let s = (name || "").replace(/\s*\([LRS]\)\s*$/i, "").trim();
+                s = s.replace(/,?\s*(jr\.?|sr\.?|iii|ii|iv)\s*$/i, "").trim();
+                try {
+                    s = s.normalize("NFD").replace(/\p{M}+/gu, "");
+                } catch (e) {}
+                return s.toLowerCase().replace(/\./g, "").replace(/\s+/g, " ").trim();
+            }
+            const MLB_TEAM_FROM_ABBR = {
+                COL: "Colorado Rockies",
+                PIT: "Pittsburgh Pirates",
+                WSH: "Washington Nationals",
+                CIN: "Cincinnati Reds",
+                DET: "Detroit Tigers",
+                NYM: "New York Mets",
+                MIA: "Miami Marlins",
+                MIN: "Minnesota Twins",
+                SD: "San Diego Padres",
+                SDP: "San Diego Padres",
+                MIL: "Milwaukee Brewers",
+                SEA: "Seattle Mariners",
+                HOU: "Houston Astros",
+                STL: "St. Louis Cardinals",
+                ATH: "Athletics",
+                PHI: "Philadelphia Phillies",
+                BOS: "Boston Red Sox",
+                CHC: "Chicago Cubs",
+                ATL: "Atlanta Braves",
+                KC: "Kansas City Royals",
+                CWS: "Chicago White Sox",
+                SF: "San Francisco Giants",
+                LAD: "Los Angeles Dodgers"
+            };
+            function parseGameTeamAbbrs(title) {
+                const head = (title.split(" - ")[0] || "").trim();
+                const m = head.match(/^([A-Za-z]+)\s*@\s*([A-Za-z]+)$/);
+                if (!m) return null;
+                return { awayAbbr: m[1].toUpperCase(), homeAbbr: m[2].toUpperCase() };
+            }
+            function apiTeamMatch(apiName, abbr) {
+                const full = MLB_TEAM_FROM_ABBR[abbr];
+                if (!full || !apiName) return false;
+                const a = apiName.toLowerCase();
+                const f = full.toLowerCase();
+                if (a === f) return true;
+                if (abbr === "ATH" && a.includes("athletic")) return true;
+                const nick = f.split(" ").pop();
+                return a.includes(nick);
+            }
+            function formatAmerican(am) {
+                if (!Number.isFinite(am)) return "—";
+                return (am > 0 ? "+" : "") + Math.round(am);
+            }
+            function americanToDecimal(am) {
+                const n = Number(am);
+                if (!Number.isFinite(n) || n === 0) return null;
+                if (n > 0) return 1 + n / 100;
+                return 1 + 100 / Math.abs(n);
+            }
+            function decimalToAmerican(d) {
+                if (!Number.isFinite(d) || d <= 1) return null;
+                if (d >= 2) return Math.round((d - 1) * 100);
+                return Math.round(-100 / (d - 1));
+            }
+            function parlayAmericanFromLegs(americanLegs) {
+                const decs = americanLegs.map(americanToDecimal).filter((x) => x != null);
+                if (!decs.length) return null;
+                const prod = decs.reduce((a, b) => a * b, 1);
+                return decimalToAmerican(prod);
+            }
+
+            const MLB_STATS_API_BASE = "https://statsapi.mlb.com/api/v1";
+            async function mlbStatsGetJson(pathQuery) {
+                const res = await fetch(`${MLB_STATS_API_BASE}${pathQuery}`);
+                if (!res.ok) throw new Error(`MLB Stats API ${res.status}: ${pathQuery}`);
+                return res.json();
+            }
+            async function mlbStatsScheduleGamesForDate(ymd) {
+                const data = await mlbStatsGetJson(`/schedule?sportId=1&date=${encodeURIComponent(ymd)}`);
+                const out = [];
+                const dates = Array.isArray(data.dates) ? data.dates : [];
+                for (const d of dates) {
+                    if (d && Array.isArray(d.games)) out.push(...d.games);
+                }
+                return out;
+            }
+            function statsApiGamesMatchingAbbrs(scheduleGames, awayAbbr, homeAbbr) {
+                if (!scheduleGames || !awayAbbr || !homeAbbr) return [];
+                return scheduleGames.filter(
+                    (g) =>
+                        g &&
+                        g.teams &&
+                        g.teams.away &&
+                        g.teams.home &&
+                        apiTeamMatch(g.teams.away.team.name, awayAbbr) &&
+                        apiTeamMatch(g.teams.home.team.name, homeAbbr)
+                );
+            }
+            function statsApiPickFinalGame(matches) {
+                if (!matches.length) return null;
+                const finals = matches.filter((g) => g.status && g.status.abstractGameState === "Final");
+                const pool = finals.length ? finals : matches;
+                pool.sort((a, b) => (a.gameNumber || 1) - (b.gameNumber || 1));
+                return pool[0];
+            }
+            function sheetMatchupLineForTrackerEntry(e) {
+                const stored = (e.matchup || "").trim();
+                if (stored) return stored;
+                const sd = (e.sheetDate || "").trim();
+                const cur = getSheetDateMeta() || "";
+                if (e.gi != null && e.ri != null && games[e.gi] && (!sd || !cur || sd === cur)) return matchupShort(games[e.gi].title);
+                return "";
+            }
+            function battingGameLineFromBoxPlayer(pl) {
+                const b = pl && pl.stats && pl.stats.batting;
+                if (!b || typeof b !== "object") return null;
+                if (!Object.keys(b).length) return null;
+                const pa = Number(b.plateAppearances != null ? b.plateAppearances : 0);
+                const hr = Number(b.homeRuns != null ? b.homeRuns : 0);
+                return { pa, hr };
+            }
+            function homeRunsFromBoxscoreForPlayer(box, playerLabel) {
+                const want = normalizePlayerForOdds(playerLabel);
+                if (!want || !box || !box.teams) return { found: false, pa: 0, hr: 0 };
+                let best = null;
+                for (const side of ["away", "home"]) {
+                    const sideObj = box.teams[side];
+                    if (!sideObj || !sideObj.players) continue;
+                    const players = sideObj.players;
+                    for (const pid of Object.keys(players)) {
+                        const pl = players[pid];
+                        const full = pl && pl.person && pl.person.fullName ? String(pl.person.fullName) : "";
+                        if (!full) continue;
+                        const n = normalizePlayerForOdds(full);
+                        if (n !== want) continue;
+                        const line = battingGameLineFromBoxPlayer(pl);
+                        if (!line) continue;
+                        best = line;
+                        break;
+                    }
+                    if (best) break;
+                }
+                if (best) return { found: true, pa: best.pa, hr: best.hr };
+                return { found: false, pa: 0, hr: 0 };
+            }
+            /**
+             * Over 0.5 HR settlement from MLB Stats API (same rules as bet tracker).
+             * @returns {{ code: "win"|"loss"|"void"|"pending"|"no_game"|"no_player"|"no_date"|"bad_matchup" }}
+             */
+            async function mlbStatsResolveHr05ForPick({ sheetDate, matchupLine, playerName, scheduleByDate, boxByPk }) {
+                const sd = ((sheetDate || "").trim() || "").trim();
+                const mline = (matchupLine || "").trim();
+                if (!sd) return { code: "no_date" };
+                const ab = parseGameTeamAbbrs(mline);
+                if (!ab) return { code: "bad_matchup" };
+                let sched = scheduleByDate[sd];
+                if (!Array.isArray(sched)) {
+                    sched = await mlbStatsScheduleGamesForDate(sd);
+                    scheduleByDate[sd] = sched;
+                }
+                const matches = statsApiGamesMatchingAbbrs(sched, ab.awayAbbr, ab.homeAbbr);
+                if (!matches.length) return { code: "no_game" };
+                const allPpd = matches.every((g) => {
+                    const det = String((g.status && g.status.detailedState) || "").toLowerCase();
+                    return /postponed|cancelled|canceled/.test(det);
+                });
+                if (allPpd) return { code: "void" };
+                const g = statsApiPickFinalGame(matches);
+                if (!g || !g.gamePk) return { code: "pending" };
+                if (g.status && g.status.abstractGameState !== "Final") return { code: "pending" };
+                const pk = g.gamePk;
+                if (!boxByPk[pk]) boxByPk[pk] = await mlbStatsGetJson(`/game/${pk}/boxscore`);
+                const box = boxByPk[pk];
+                const hit = homeRunsFromBoxscoreForPlayer(box, playerName);
+                if (!hit.found) return { code: "no_player" };
+                if (hit.pa <= 0) return { code: "void" };
+                if (hit.hr >= 1) return { code: "win" };
+                return { code: "loss" };
+            }
+            async function settleBetTrackerHrFromMlbStats() {
+                const datesNeeded = new Set();
+                for (const e of betTracker) {
+                    if (e.result) continue;
+                    const sd = ((e.sheetDate || "").trim() || getSheetDateMeta() || "").trim();
+                    if (sd) datesNeeded.add(sd);
+                }
+                if (!datesNeeded.size) return "No pending bets to settle (or missing slate dates).";
+                const scheduleByDate = Object.create(null);
+                for (const d of datesNeeded) {
+                    scheduleByDate[d] = await mlbStatsScheduleGamesForDate(d);
+                }
+                const boxByPk = Object.create(null);
+                let wins = 0;
+                let losses = 0;
+                let voids = 0;
+                let skipped = 0;
+                let pending = 0;
+                let noGame = 0;
+                let noPlayer = 0;
+                for (const e of betTracker) {
+                    if (e.result) continue;
+                    const sd = ((e.sheetDate || "").trim() || getSheetDateMeta() || "").trim();
+                    const mline = sheetMatchupLineForTrackerEntry(e);
+                    const r = await mlbStatsResolveHr05ForPick({
+                        sheetDate: sd,
+                        matchupLine: mline,
+                        playerName: e.name,
+                        scheduleByDate,
+                        boxByPk
+                    });
+                    if (r.code === "no_date" || r.code === "bad_matchup") {
+                        skipped++;
+                        continue;
+                    }
+                    if (r.code === "no_game") {
+                        noGame++;
+                        continue;
+                    }
+                    if (r.code === "pending") {
+                        pending++;
+                        continue;
+                    }
+                    if (r.code === "no_player") {
+                        noPlayer++;
+                        continue;
+                    }
+                    if (r.code === "void") {
+                        e.result = "void";
+                        voids++;
+                    } else if (r.code === "win") {
+                        e.result = "win";
+                        wins++;
+                    } else if (r.code === "loss") {
+                        e.result = "loss";
+                        losses++;
+                    } else {
+                        skipped++;
+                    }
+                }
+                persistBetTracker();
+                return `MLB Stats API: updated pending rows — ${wins} win, ${losses} loss, ${voids} void. Skipped (no matchup): ${skipped}. No schedule match: ${noGame}. Game not final: ${pending}. No box name match: ${noPlayer}. (Over 0.5 HR: 1+ HR → win, 0 HR with PA → loss, 0 PA or PPD → void.)`;
+            }
+
+            async function runMlbTrackerSettlementUI(wrap, opts) {
+                const mlbHint = wrap.querySelector("#betTrackerMlbSettleHint");
+                const initialMsg = opts && opts.initialMsg;
+                if (mlbHint) mlbHint.textContent = initialMsg || "Checking MLB schedule & box scores…";
+                try {
+                    const msg = await settleBetTrackerHrFromMlbStats();
+                    if (mlbHint) mlbHint.textContent = msg;
+                } catch (ex) {
+                    if (mlbHint) mlbHint.textContent = String(ex && ex.message ? ex.message : ex);
+                } finally {
+                    renderBetTrackerModal(wrap);
+                    updateBetTrackerBtnLabel();
+                    try {
+                        refreshPicksUI();
+                    } catch (err) {}
+                }
+            }
+
+            async function runMlbTrackerSettlementFromPage() {
+                try {
+                    await settleBetTrackerHrFromMlbStats();
+                } catch (e) {}
+                updateBetTrackerBtnLabel();
+                try {
+                    refreshPicksUI();
+                } catch (e) {}
+            }
+
+            let tableSort = { key: "score", dir: "desc" };
+            let activeQuickFilter = "all";
+            let activeEmojiFilters = new Set();
+            function effectiveEmojiTagsForRow(row, game) {
+                const blastTier = (row.blast || "").toLowerCase();
+                const hasBlast = blastTier === "good" || blastTier === "high";
+                const em = row.emojis || "";
+                let emojiBase = em;
+                if (hasBlast && !em.includes("💣")) emojiBase = `${em} 💣`.trim();
+                const fav = isWorstPickzFavoriteRow(row);
+                if (fav && !emojiBase.includes("⭐")) emojiBase = `${emojiBase} ⭐`.trim();
+                const bumOnMound = "\u{1F9E4}";
+                const title = game && game.title ? game.title : "";
+                if (title.includes(bumOnMound) && !emojiBase.includes(bumOnMound)) emojiBase = `${emojiBase} ${bumOnMound}`.trim();
+                return emojiBase;
+            }
             function renderGames() {
-                grid.innerHTML = games.map((game, gi) => `<article class="game-card" id="game-${gi}"><div class="game-header"><h3>${game.title}</h3><p>${game.description}</p></div><div class="pick-list">${game.rows.map((row) => { const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const hasBlast = blastTier === "good" || blastTier === "high"; const isFavorite = favoritePlayers.has(row.name); const emojiBase = hasBlast && !row.emojis.includes("💣") ? `${row.emojis} 💣` : row.emojis; const emojiText = isFavorite ? `${emojiBase} ⭐` : emojiBase; const favoriteClass = isFavorite ? " favorite" : ""; const favoriteBadge = isFavorite ? '<div class="favorite-badge">⭐ Worst Pickz Favorite</div>' : ""; return `<div class="pick-row ${band}${favoriteClass}" data-blast="${blastTier}"><div><div class="pick-name">${row.name}</div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiText}</div>${favoriteBadge}</div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></article>`).join("");
+                grid.innerHTML = games.map((game, gi) => `<article class="game-card" id="game-${gi}"><div class="game-header"><h3>${game.title}</h3><p>${game.description}</p></div><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></article>`).join("");
             }
             const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-            function parkStars(card) { const t = card.querySelector(".game-header p")?.textContent || ""; const m = t.match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i); let p = 0; if (m) p = parseInt(m[1] || m[2], 10); if (Number.isNaN(p)) p = 0; if (p >= 15) return 5; if (p >= 5) return 4; if (p >= -3) return 3; if (p >= -12) return 2; return 1; }
+            function parkStars(card) { if (!card) return 1; const t = card.querySelector(".game-header p")?.textContent || ""; const m = t.match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i); let p = 0; if (m) p = parseInt(m[1] || m[2], 10); if (Number.isNaN(p)) p = 0; if (p >= 15) return 5; if (p >= 5) return 4; if (p >= -3) return 3; if (p >= -12) return 2; return 1; }
             function powerStars(score, emojiText, noteText) { let stars = 1; if (score >= 84) stars += 2; else if (score >= 76) stars += 1; if (emojiText.includes("🚀")) stars += 1; if (emojiText.includes("🌕")) stars += 1; if (emojiText.includes("💣")) stars += 1; if (/(longshot|price-based)/i.test(noteText) && !/[🚀🌕💣]/.test(emojiText)) stars -= 1; return clamp(stars, 1, 5); }
             function attackStars(score, emojiText, noteText) { let stars = 1; if (emojiText.includes("⚾")) stars += 1; if (/(best|elite|strong|clean|leak|lane|fit|ceiling)/i.test(noteText)) stars += 1; if (score >= 82) stars += 1; if (/(suppressive|cold|drag)/i.test(noteText)) stars -= 1; return clamp(stars, 1, 5); }
             function metricRow(label, metricClass, value) { return `<div class="player-rpg-row"><span class="player-rpg-label">${label}</span><span class="star-meter ${metricClass}" style="--rating:${value}"><span class="star-base">★★★★★</span><span class="star-fill">★★★★★</span></span></div>`; }
             function letterGrade(score, power, park, attack, blastBonus) { const total = score + power * 3 + park * 2 + attack * 3 + blastBonus; if (total >= 118 && power >= 5 && attack >= 4) return "S+"; if (total >= 112) return "S"; if (total >= 106) return "A"; if (total >= 99) return "B+"; if (total >= 92) return "B"; if (total >= 85) return "C+"; if (total >= 78) return "C"; if (total >= 71) return "D"; return "F"; }
             function letterGradeClass(grade) { return { "S+": "s-plus", "S": "s", "A": "a", "B+": "b-plus", "B": "b", "C+": "c-plus", "C": "c", "D": "d", "F": "f" }[grade] || "f"; }
             function enhanceRows() {
-                document.querySelectorAll(".pick-row").forEach((row) => {
+                document.querySelectorAll(".game-card .pick-row").forEach((row) => {
                     const ratingBox = row.querySelector(".rating-box");
+                    if (!ratingBox || !ratingBox.parentNode) return;
                     const card = row.closest(".game-card");
                     const score = parseInt(ratingBox.querySelector("strong")?.textContent || "0", 10);
                     const emojiText = row.querySelector(".emoji-row")?.textContent || "";
@@ -551,11 +3003,417 @@
                     stack.className = "rating-stack";
                     ratingBox.parentNode.insertBefore(stack, ratingBox);
                     stack.appendChild(ratingBox);
-                    stack.insertAdjacentHTML("beforeend", `<div class="letter-box ${letterGradeClass(grade)}"><span>Grade</span><strong>${grade}</strong></div>`);
+                    const giStr = row.getAttribute("data-gi") || "";
+                    const riStr = row.getAttribute("data-ri") || "";
+                    stack.insertAdjacentHTML(
+                        "beforeend",
+                        `<div class="letter-result-col"><div class="letter-box ${letterGradeClass(grade)}"><span>Grade</span><strong>${grade}</strong></div><div class="hr-row-result" data-hr-res-gi="${giStr}" data-hr-res-ri="${riStr}"><div class="hr-row-result__pill hr-row-result__pill--pending"><span class="hr-row-result__pill-label">Result</span><span class="hr-row-result__pill-value">…</span></div></div></div>`
+                    );
                 });
+            }
+            let hrResultsHydrateToken = 0;
+            async function hydratePickRowHrResultsFromMlb() {
+                const token = ++hrResultsHydrateToken;
+                const sd = (getSheetDateMeta() || "").trim();
+                const nodes = Array.from(document.querySelectorAll(".game-card .pick-row .hr-row-result"));
+                if (!nodes.length) return;
+                const scheduleByDate = Object.create(null);
+                const boxByPk = Object.create(null);
+                const setPill = (host, state, val) => {
+                    const pill = host.querySelector(".hr-row-result__pill");
+                    const valEl = host.querySelector(".hr-row-result__pill-value");
+                    if (!pill || !valEl) return;
+                    pill.className = "hr-row-result__pill hr-row-result__pill--" + state;
+                    valEl.textContent = val;
+                };
+                if (sd) {
+                    try {
+                        scheduleByDate[sd] = await mlbStatsScheduleGamesForDate(sd);
+                    } catch (e) {
+                        if (token !== hrResultsHydrateToken) return;
+                        nodes.forEach((host) => setPill(host, "na", "—"));
+                        return;
+                    }
+                }
+                for (const host of nodes) {
+                    if (token !== hrResultsHydrateToken) return;
+                    const gi = parseInt(host.getAttribute("data-hr-res-gi") || "", 10);
+                    const ri = parseInt(host.getAttribute("data-hr-res-ri") || "", 10);
+                    const game = games[gi];
+                    const row = game && game.rows[ri];
+                    if (!row || !game) {
+                        setPill(host, "na", "—");
+                        continue;
+                    }
+                    if (!/Over\s*0\.5\s*HR/i.test(row.odds || "")) {
+                        setPill(host, "na", "N/A");
+                        continue;
+                    }
+                    if (!sd) {
+                        setPill(host, "na", "—");
+                        continue;
+                    }
+                    try {
+                        const r = await mlbStatsResolveHr05ForPick({
+                            sheetDate: sd,
+                            matchupLine: matchupShort(game.title),
+                            playerName: row.name,
+                            scheduleByDate,
+                            boxByPk
+                        });
+                        if (token !== hrResultsHydrateToken) return;
+                        if (r.code === "win") setPill(host, "win", "Won");
+                        else if (r.code === "loss") setPill(host, "loss", "Lost");
+                        else if (r.code === "void") setPill(host, "void", "Void");
+                        else if (r.code === "pending") setPill(host, "pending", "Pending");
+                        else setPill(host, "na", "—");
+                    } catch (err) {
+                        if (token !== hrResultsHydrateToken) return;
+                        setPill(host, "na", "—");
+                    }
+                }
             }
             renderGames();
             enhanceRows();
+            void hydratePickRowHrResultsFromMlb();
+
+            function buildFlatProps() {
+                const flat = [];
+                games.forEach((game, gi) => {
+                    const parkPct = parkHrPctFromDescription(game.description);
+                    const parkTone = weatherTone(parkPct);
+                    const matchup = matchupShort(game.title);
+                    game.rows.forEach((row, ri) => {
+                        const band = bandClass(row.score);
+                        flat.push({ gi, ri, row, game, band, parkPct, parkTone, matchup, listed: parseListedNumber(row.odds) });
+                    });
+                });
+                const mul = tableSort.dir === "asc" ? 1 : -1;
+                flat.sort((a, b) => {
+                    if (tableSort.key === "player") return mul * a.row.name.localeCompare(b.row.name);
+                    if (tableSort.key === "odds") {
+                        const av = a.listed == null ? 999999 : a.listed;
+                        const bv = b.listed == null ? 999999 : b.listed;
+                        return mul * (av - bv);
+                    }
+                    if (tableSort.key === "park") {
+                        const av = a.parkPct == null ? -999 : a.parkPct;
+                        const bv = b.parkPct == null ? -999 : b.parkPct;
+                        return mul * (av - bv);
+                    }
+                    if (tableSort.key === "band") {
+                        const order = { thin: 0, playable: 1, strong: 2, elite: 3 };
+                        return mul * ((order[a.band] || 0) - (order[b.band] || 0));
+                    }
+                    return mul * (a.row.score - b.row.score);
+                });
+                return flat;
+            }
+            function applyEmojiFiltersToAll() {
+                const tagTextFromEl = (el) => {
+                    const raw = el.getAttribute("data-emoji-tags");
+                    if (!raw) return "";
+                    try {
+                        return decodeURIComponent(raw);
+                    } catch (err) {
+                        return "";
+                    }
+                };
+                const hideFor = (el) => {
+                    if (!activeEmojiFilters.size) {
+                        el.classList.remove("emoji-filter-hidden");
+                        return;
+                    }
+                    const tagText = tagTextFromEl(el);
+                    const miss = [...activeEmojiFilters].some((ch) => !tagText.includes(ch));
+                    el.classList.toggle("emoji-filter-hidden", miss);
+                };
+                document.querySelectorAll(".game-card .pick-row").forEach(hideFor);
+                document.querySelectorAll("tr.pick-table-row").forEach(hideFor);
+            }
+            function buildPropsTable() {
+                if (!tableView) return;
+                const flat = buildFlatProps();
+                const ind = (key) => {
+                    if (tableSort.key !== key) return "⇅";
+                    const ascKeys = key === "player" || key === "odds";
+                    if (ascKeys) return tableSort.dir === "asc" ? "▲" : "▼";
+                    return tableSort.dir === "desc" ? "▼" : "▲";
+                };
+                const rowsHtml = flat.map(({ gi, ri, row, game, band, parkPct, parkTone, matchup }) => {
+                    const tracked = isTrackedSheetRow(gi, ri);
+                    const savedClass = tracked ? " is-saved" : "";
+                    const te = tracked ? trackerRowForPicker(gi, ri) : null;
+                    const betRes = te && te.result ? te.result : null;
+                    const betOutcomeClass = betRes ? " bet-" + betRes : "";
+                    const fav = isWorstPickzFavoriteRow(row);
+                    const favClass = fav ? " pick-row--worst-pickz-fav" : "";
+                    const enc = encodeURIComponent(row.name);
+                    const parkClass = `park-pct park-pct--${parkTone}`;
+                    const parkTxt = parkPct == null ? "—" : `${parkPct > 0 ? "+" : ""}${parkPct}%`;
+                    const blastTier = (row.blast || "").toLowerCase();
+                    const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0";
+                    const safeName = String(row.name).replace(/</g, "");
+                    const safeOdds = String(row.odds).replace(/</g, "");
+                    const safeMatch = String(matchup).replace(/</g, "");
+                    const emojiRowDisplay = effectiveEmojiTagsForRow(row, game);
+                    const emojiTagsEnc = encodeURIComponent(emojiRowDisplay);
+                    const emojiCell = emojiRowDisplay.trim()
+                        ? `<span class="table-emoji-tags">${escapeHtml(emojiRowDisplay)}</span>`
+                        : '<span class="table-emoji-tags table-emoji-tags--empty">—</span>';
+                    return `<tr class="pick-table-row pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${emojiTagsEnc}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-blast="${blastTier}" data-band="${band}" data-score="${row.score}" data-listed="" data-park="${parkPct == null ? "" : parkPct}" data-longshot="${dataLongshot}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}"><td class="td-bet-sheet"><button type="button" class="bet-save-corner__btn bet-save-corner__btn--table bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="Bet tracker">${tracked ? "✓" : "+"}</button></td><td class="td-player"><button type="button" class="pick-name-open table-player-name" data-gi="${gi}" data-ri="${ri}">${safeName}</button></td><td class="td-tags">${emojiCell}</td><td class="td-listed">${safeOdds}</td><td class="td-score"><strong>${row.score}</strong></td><td><span class="band-pill ${band}">${band}</span></td><td class="${parkClass}">${parkTxt}</td><td><a class="go-game" href="#game-${gi}">${safeMatch}</a></td></tr>`;
+                }).join("");
+                tableView.innerHTML = `<div class="table-wrap-inner"><table class="props-table"><thead><tr><th class="th-sheet" scope="col" title="Add to bet tracker">Track</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="player">Player <span class="sort-ind">${ind("player")}</span></button></th><th class="th-tags" scope="col" title="Emoji tags (same as card rows)">Tags</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="odds">Listed <span class="sort-ind">${ind("odds")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="score">Score <span class="sort-ind">${ind("score")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="band">Band <span class="sort-ind">${ind("band")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="park">Park % <span class="sort-ind">${ind("park")}</span></button></th><th scope="col">Game</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+                applyQuickFilterToTable();
+                applyEmojiFiltersToAll();
+            }
+            let tableSortWired = false;
+            function wireTableSortOnce() {
+                if (tableSortWired || !tableView) return;
+                tableSortWired = true;
+                tableView.addEventListener("click", (e) => {
+                    const h = e.target.closest(".sort-h");
+                    if (!h || !tableView.contains(h)) return;
+                    const key = h.getAttribute("data-sort");
+                    if (!key) return;
+                    if (tableSort.key === key) tableSort.dir = tableSort.dir === "asc" ? "desc" : "asc";
+                    else {
+                        tableSort.key = key;
+                        tableSort.dir = key === "player" || key === "odds" ? "asc" : "desc";
+                    }
+                    buildPropsTable();
+                });
+            }
+            function applyQuickFilterToTable() {
+                if (!tableView) return;
+                tableView.querySelectorAll("tbody tr.pick-table-row").forEach((tr) => {
+                    const score = parseInt(tr.getAttribute("data-score") || "0", 10);
+                    const park = tr.getAttribute("data-park");
+                    const parkN = park === "" ? null : parseInt(park, 10);
+                    let hide = false;
+                    if (activeQuickFilter === "elite" && score < 90) hide = true;
+                    if (activeQuickFilter === "longshot" && tr.getAttribute("data-longshot") !== "1") hide = true;
+                    if (activeQuickFilter === "park" && (parkN == null || parkN < 5)) hide = true;
+                    tr.classList.toggle("quick-filter-hidden", hide);
+                });
+            }
+            function applyQuickFilterAll() {
+                document.querySelectorAll(".game-card .pick-row").forEach((row) => {
+                    const score = parseInt(row.getAttribute("data-score") || "0", 10);
+                    const park = row.getAttribute("data-park");
+                    const parkN = park === "" ? null : parseInt(park, 10);
+                    let hide = false;
+                    if (activeQuickFilter === "elite" && score < 90) hide = true;
+                    if (activeQuickFilter === "longshot" && row.getAttribute("data-longshot") !== "1") hide = true;
+                    if (activeQuickFilter === "park" && (parkN == null || parkN < 5)) hide = true;
+                    row.classList.toggle("quick-filter-hidden", hide);
+                });
+                applyQuickFilterToTable();
+                applyEmojiFiltersToAll();
+            }
+            function refreshPicksUI() {
+                const gamblyOn = new Set();
+                document.querySelectorAll(".game-card .pick-row[data-gi][data-ri] .pick-cb.pick-cb--gambly").forEach((cb) => {
+                    if (!cb.checked) return;
+                    const row = cb.closest(".pick-row[data-gi][data-ri]");
+                    if (row) gamblyOn.add(`${row.getAttribute("data-gi")}|${row.getAttribute("data-ri")}`);
+                });
+                renderGames();
+                enhanceRows();
+                void hydratePickRowHrResultsFromMlb();
+                buildPropsTable();
+                wireTableSortOnce();
+                applyQuickFilterAll();
+                applyPlayerFilter();
+                gamblyOn.forEach((k) => {
+                    const sep = k.indexOf("|");
+                    if (sep < 0) return;
+                    const gi = k.slice(0, sep);
+                    const ri = k.slice(sep + 1);
+                    const row = document.querySelector(`.game-card .pick-row[data-gi="${gi}"][data-ri="${ri}"]`);
+                    if (!row || row.classList.contains("pick-hidden")) return;
+                    const cb = row.querySelector(".pick-cb.pick-cb--gambly");
+                    if (cb) cb.checked = true;
+                });
+                updatePickCount();
+            }
+            function closePlayerPop() {
+                const el = document.getElementById("playerPreviewModal");
+                if (el) el.remove();
+            }
+            async function fillPlayerPopHrResultFromMlb(wrap, game, row) {
+                const bubble = wrap.querySelector("#playerPopHrBubble");
+                const valEl = wrap.querySelector("#playerPopHrResultVal");
+                if (!bubble || !valEl || !row || !game) return;
+                const setState = (cls, text) => {
+                    bubble.classList.remove("is-loading", "is-win", "is-loss", "is-void", "is-pending", "is-na", "is-error");
+                    if (cls) bubble.classList.add(cls);
+                    valEl.textContent = text;
+                    bubble.setAttribute("aria-busy", cls === "is-loading" ? "true" : "false");
+                };
+                if (!/Over\s*0\.5\s*HR/i.test(row.odds || "")) {
+                    setState("is-na", "N/A");
+                    return;
+                }
+                setState("is-loading", "…");
+                const sd = (getSheetDateMeta() || "").trim();
+                if (!sd) {
+                    setState("is-na", "—");
+                    return;
+                }
+                try {
+                    const scheduleByDate = Object.create(null);
+                    const boxByPk = Object.create(null);
+                    const r = await mlbStatsResolveHr05ForPick({
+                        sheetDate: sd,
+                        matchupLine: matchupShort(game.title),
+                        playerName: row.name,
+                        scheduleByDate,
+                        boxByPk
+                    });
+                    if (r.code === "win") setState("is-win", "Won");
+                    else if (r.code === "loss") setState("is-loss", "Lost");
+                    else if (r.code === "void") setState("is-void", "Void");
+                    else if (r.code === "pending") setState("is-pending", "Pending");
+                    else setState("is-na", "—");
+                } catch (err) {
+                    setState("is-error", "—");
+                }
+            }
+            function openPlayerPreview(gi, ri) {
+                closePlayerPop();
+                const game = games[gi];
+                const row = game && game.rows[ri];
+                if (!row || !game) return;
+                const matchup = matchupShort(game.title);
+                const chips = (row.chips || []).map((c) => `<span class="chip">${escapeHtml(c)}</span>`).join("");
+                const favHtml = isWorstPickzFavoriteRow(row)
+                    ? `<div class="player-pop__fav"><span class="favorite-badge favorite-badge--pop" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span></div>`
+                    : "";
+                const emojiLine = effectiveEmojiTagsForRow(row, game).trim();
+                const emojiHtml = emojiLine
+                    ? `<p class="player-pop__emoji" aria-label="Emoji tags for this row">${escapeHtml(emojiLine)}</p>`
+                    : "";
+                const resultBubble = `<aside class="player-pop__result-bubble is-loading" id="playerPopHrBubble" aria-live="polite" aria-busy="true"><span class="player-pop__result-label">Result</span><span class="player-pop__result-value" id="playerPopHrResultVal">…</span></aside>`;
+                const wrap = document.createElement("div");
+                wrap.id = "playerPreviewModal";
+                wrap.className = "player-pop";
+                wrap.innerHTML = `<div class="player-pop__backdrop" data-close-player="1"></div><div class="player-pop__panel" role="dialog" aria-modal="true" aria-labelledby="playerPopTitle"><div class="player-pop__head"><div class="player-pop__head-main"><h3 class="player-pop__title" id="playerPopTitle">${escapeHtml(row.name)}</h3>${favHtml}</div>${resultBubble}</div><p class="player-pop__meta">Model score <strong>${row.score}</strong> · ${escapeHtml(row.odds)}</p>${emojiHtml}<p class="player-pop__match">${escapeHtml(matchup)}</p><p class="player-pop__note">${escapeHtml(row.note)}</p><div class="player-pop__chips">${chips}</div><div class="player-pop__actions"><a class="btn-secondary go-game" href="#game-${gi}" style="text-decoration:none;">Jump to game</a><button type="button" class="btn-secondary" id="playerPopClose">Close</button></div></div>`;
+                document.body.appendChild(wrap);
+                const go = wrap.querySelector("a.go-game");
+                if (go) go.addEventListener("click", () => { closePlayerPop(); });
+                wrap.querySelector("[data-close-player]").addEventListener("click", closePlayerPop);
+                wrap.querySelector("#playerPopClose").addEventListener("click", closePlayerPop);
+                void fillPlayerPopHrResultFromMlb(wrap, game, row);
+            }
+            buildPropsTable();
+            wireTableSortOnce();
+            applyQuickFilterAll();
+            if (gamesSection) {
+                gamesSection.addEventListener("click", (e) => {
+                    const gamblyBtn = e.target.closest(".gambly-pick-btn");
+                    if (gamblyBtn && gamesSection.contains(gamblyBtn)) {
+                        e.preventDefault();
+                        const wrap = gamblyBtn.closest(".gambly-pick-wrap");
+                        const cb = wrap && wrap.querySelector(".pick-cb.pick-cb--gambly");
+                        if (cb) {
+                            cb.checked = !cb.checked;
+                            updatePickCount();
+                        }
+                        return;
+                    }
+                    const betSave = e.target.closest(".bet-tracker-save-btn");
+                    if (betSave && gamesSection.contains(betSave)) {
+                        e.preventDefault();
+                        const gi = parseInt(betSave.getAttribute("data-gi"), 10);
+                        const ri = parseInt(betSave.getAttribute("data-ri"), 10);
+                        if (Number.isNaN(gi) || Number.isNaN(ri)) return;
+                        toggleBetTrackerFromSheetRow(gi, ri);
+                        refreshPicksUI();
+                        return;
+                    }
+                    const btn = e.target.closest(".pick-name-open");
+                    if (btn && gamesSection.contains(btn)) {
+                        const gi = parseInt(btn.getAttribute("data-gi"), 10);
+                        const ri = parseInt(btn.getAttribute("data-ri"), 10);
+                        if (Number.isNaN(gi) || Number.isNaN(ri)) return;
+                        openPlayerPreview(gi, ri);
+                    }
+                });
+            }
+            if (betTrackerBtn) betTrackerBtn.addEventListener("click", () => openBetTrackerModal());
+            const viewCardsBtn = document.getElementById("viewCardsBtn");
+            const viewTableBtn = document.getElementById("viewTableBtn");
+            if (viewTableBtn && viewCardsBtn && gamesSection && tableView) {
+                viewTableBtn.addEventListener("click", () => {
+                    gamesSection.classList.add("is-table-view");
+                    tableView.removeAttribute("hidden");
+                    viewTableBtn.classList.add("is-active");
+                    viewCardsBtn.classList.remove("is-active");
+                    viewTableBtn.setAttribute("aria-pressed", "true");
+                    viewCardsBtn.setAttribute("aria-pressed", "false");
+                    buildPropsTable();
+                    applyPlayerFilter();
+                    updatePickCount();
+                });
+                viewCardsBtn.addEventListener("click", () => {
+                    gamesSection.classList.remove("is-table-view");
+                    tableView.setAttribute("hidden", "");
+                    viewCardsBtn.classList.add("is-active");
+                    viewTableBtn.classList.remove("is-active");
+                    viewCardsBtn.setAttribute("aria-pressed", "true");
+                    viewTableBtn.setAttribute("aria-pressed", "false");
+                });
+            }
+            const quickFilterRow = document.getElementById("quickFilterRow");
+            if (quickFilterRow) {
+                quickFilterRow.addEventListener("click", (e) => {
+                    const chip = e.target.closest(".filter-chip");
+                    if (!chip) return;
+                    activeQuickFilter = chip.getAttribute("data-filter") || "all";
+                    quickFilterRow.querySelectorAll(".filter-chip").forEach((c) => c.classList.toggle("is-active", c === chip));
+                    applyQuickFilterAll();
+                });
+            }
+            const emojiFilterRow = document.getElementById("emojiFilterRow");
+            if (emojiFilterRow) {
+                emojiFilterRow.addEventListener("click", (e) => {
+                    const clearBtn = e.target.closest("#clearEmojiFiltersBtn");
+                    if (clearBtn) {
+                        activeEmojiFilters.clear();
+                        emojiFilterRow.querySelectorAll(".filter-chip[data-emoji]").forEach((b) => {
+                            b.classList.remove("is-active");
+                            b.setAttribute("aria-pressed", "false");
+                        });
+                        applyEmojiFiltersToAll();
+                        updatePickCount();
+                        return;
+                    }
+                    const chip = e.target.closest(".filter-chip[data-emoji]");
+                    if (!chip || !emojiFilterRow.contains(chip)) return;
+                    const em = chip.getAttribute("data-emoji");
+                    if (!em) return;
+                    if (activeEmojiFilters.has(em)) {
+                        activeEmojiFilters.delete(em);
+                        chip.classList.remove("is-active");
+                        chip.setAttribute("aria-pressed", "false");
+                    } else {
+                        activeEmojiFilters.add(em);
+                        chip.classList.add("is-active");
+                        chip.setAttribute("aria-pressed", "true");
+                    }
+                    applyEmojiFiltersToAll();
+                    updatePickCount();
+                });
+            }
+            const quickLegend = document.getElementById("quickLegend");
+            const quickLegendToggle = document.getElementById("quickLegendToggle");
+            if (quickLegend && quickLegendToggle) {
+                quickLegendToggle.addEventListener("click", () => {
+                    quickLegend.classList.toggle("is-open");
+                    quickLegendToggle.setAttribute("aria-expanded", quickLegend.classList.contains("is-open") ? "true" : "false");
+                });
+            }
 
             const toolbarToc = document.getElementById("toolbarToc");
             if (toolbarToc) {
@@ -581,17 +3439,282 @@
             const filterInput = document.getElementById("playerFilter");
             function applyPlayerFilter() {
                 const q = (filterInput && filterInput.value || "").trim().toLowerCase();
-                document.querySelectorAll(".pick-row").forEach((row) => {
-                    const nameEl = row.querySelector(".pick-name");
+                document.querySelectorAll(".game-card .pick-row").forEach((row) => {
+                    const nameEl = row.querySelector(".pick-name-open, .pick-name");
                     const text = (nameEl && nameEl.textContent || "").toLowerCase();
                     if (!q || text.includes(q)) row.classList.remove("pick-hidden");
-                    else row.classList.add("pick-hidden");
+                    else {
+                        row.classList.add("pick-hidden");
+                        const cb = row.querySelector(".pick-cb.pick-cb--gambly");
+                        if (cb) cb.checked = false;
+                    }
+                });
+                document.querySelectorAll("tr.pick-table-row").forEach((tr) => {
+                    let name = "";
+                    try {
+                        name = decodeURIComponent(tr.getAttribute("data-player") || "");
+                    } catch (e) {
+                        name = tr.getAttribute("data-player") || "";
+                    }
+                    const text = name.toLowerCase();
+                    if (!q || text.includes(q)) tr.classList.remove("pick-hidden");
+                    else {
+                        tr.classList.add("pick-hidden");
+                    }
                 });
             }
             if (filterInput) {
-                filterInput.addEventListener("input", applyPlayerFilter);
-                filterInput.addEventListener("search", applyPlayerFilter);
+                filterInput.addEventListener("input", () => {
+                    applyPlayerFilter();
+                    updatePickCount();
+                });
+                filterInput.addEventListener("search", () => {
+                    applyPlayerFilter();
+                    updatePickCount();
+                });
             }
+            buildPropsTable();
+            wireTableSortOnce();
+            applyQuickFilterAll();
+            applyPlayerFilter();
+
+            const pickCountEl = document.getElementById("pickCount");
+            const clearPicksBtn = document.getElementById("clearPicks");
+            const exportGamblyBtn = document.getElementById("exportGambly");
+            function getAmericanFromGiRi(giStr, riStr) {
+                const gi = parseInt(giStr, 10);
+                const ri = parseInt(riStr, 10);
+                if (!Number.isFinite(gi) || !Number.isFinite(ri)) return null;
+                const row = games[gi] && games[gi].rows[ri];
+                return row ? parseListedNumber(row.odds) : null;
+            }
+            function recalcParlayFromUl() {
+                const ul = document.getElementById("parlayLegs");
+                const sumEl = document.getElementById("parlayCombined");
+                if (!ul || !sumEl) return;
+                const ams = [...ul.querySelectorAll("li.parlay-leg")].map((li) => {
+                    const v = li.getAttribute("data-american");
+                    if (v == null || v === "") return null;
+                    const n = parseInt(v, 10);
+                    return Number.isFinite(n) ? n : null;
+                }).filter((x) => x != null);
+                const comb = parlayAmericanFromLegs(ams);
+                sumEl.textContent = ams.length ? `Rough combined: ${comb == null ? "—" : formatAmerican(comb)} · ${ams.length}-leg (naive / uncorrelated)` : "";
+            }
+            function rebuildParlayPanel() {
+                const panel = document.getElementById("parlayPanel");
+                const ul = document.getElementById("parlayLegs");
+                if (!panel || !ul) return;
+                const rows = [...document.querySelectorAll(".pick-cb.pick-cb--gambly:checked")]
+                    .map((cb) => cb.closest(".pick-row, tr.pick-table-row"))
+                    .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"));
+                if (!rows.length) {
+                    panel.hidden = true;
+                    ul.innerHTML = "";
+                    recalcParlayFromUl();
+                    return;
+                }
+                panel.hidden = false;
+                ul.innerHTML = rows.map((r) => {
+                    const gi = r.getAttribute("data-gi");
+                    const ri = r.getAttribute("data-ri");
+                    let nm = "";
+                    try {
+                        const raw = r.getAttribute("data-gambly-batter");
+                        if (raw) nm = decodeURIComponent(raw);
+                    } catch (e) {
+                        nm = "";
+                    }
+                    if (!nm) {
+                        const el = r.querySelector(".pick-name-open, .pick-name");
+                        nm = el ? el.textContent.trim() : "";
+                    }
+                    const am = getAmericanFromGiRi(gi, ri);
+                    const amAttr = am == null ? "" : String(Math.round(am));
+                    const amTxt = am == null ? "no listed price" : formatAmerican(am);
+                    return `<li class="parlay-leg" draggable="true" data-gi="${gi}" data-ri="${ri}" data-american="${amAttr}"><span class="parlay-drag-hint" aria-hidden="true">↕</span><span>${escapeHtml(nm)}</span><span class="parlay-leg-odds">${escapeHtml(amTxt)}</span></li>`;
+                }).join("");
+                let dragEl = null;
+                ul.querySelectorAll("li.parlay-leg").forEach((li) => {
+                    li.addEventListener("dragstart", (e) => {
+                        dragEl = li;
+                        try {
+                            e.dataTransfer.setData("text/plain", "parlay");
+                            e.dataTransfer.effectAllowed = "move";
+                        } catch (err) {}
+                    });
+                    li.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        try {
+                            e.dataTransfer.dropEffect = "move";
+                        } catch (err) {}
+                    });
+                    li.addEventListener("drop", (e) => {
+                        e.preventDefault();
+                        const target = e.target.closest("li.parlay-leg");
+                        if (!dragEl || !target || dragEl === target) return;
+                        const rect = target.getBoundingClientRect();
+                        const before = e.clientY < rect.top + rect.height / 2;
+                        if (before) ul.insertBefore(dragEl, target);
+                        else ul.insertBefore(dragEl, target.nextSibling);
+                        recalcParlayFromUl();
+                    });
+                });
+                recalcParlayFromUl();
+            }
+            function syncAllGamblyPickButtons() {
+                document.querySelectorAll(".gambly-pick-wrap").forEach((wrap) => {
+                    const cb = wrap.querySelector(".pick-cb.pick-cb--gambly");
+                    const btn = wrap.querySelector(".gambly-pick-btn");
+                    if (!cb || !btn) return;
+                    const on = cb.checked;
+                    btn.classList.toggle("is-on", on);
+                    btn.setAttribute("aria-pressed", on ? "true" : "false");
+                    const dense = btn.classList.contains("gambly-pick-btn--dense");
+                    btn.textContent = on ? (dense ? "Added" : "Added to Gambly") : (dense ? "Add" : "Add to Gambly");
+                    btn.setAttribute("aria-label", on ? "Remove this row from Gambly export" : "Add this row to Gambly export");
+                });
+            }
+            function updatePickCount() {
+                syncAllGamblyPickButtons();
+                const n = document.querySelectorAll(".pick-cb.pick-cb--gambly:checked").length;
+                if (pickCountEl) pickCountEl.textContent = n ? `${n} pick${n === 1 ? "" : "s"} selected.` : "Gambly: use Cards view and Add on each row. Table view is for sorting, sheet saves, and export.";
+                if (exportGamblyBtn) exportGamblyBtn.disabled = n === 0;
+                rebuildParlayPanel();
+            }
+            function copyToClipboardSyncExec(text) {
+                const ta = document.createElement("textarea");
+                ta.value = text;
+                ta.setAttribute("readonly", "");
+                ta.style.cssText = "position:fixed;left:0;top:0;width:120px;height:80px;margin:0;padding:8px;border:1px solid transparent;opacity:0.02;font-size:12px;z-index:-1;";
+                document.body.appendChild(ta);
+                ta.focus({ preventScroll: true });
+                ta.select();
+                ta.setSelectionRange(0, text.length);
+                let ok = false;
+                try {
+                    ok = document.execCommand("copy");
+                } catch (e) {
+                    ok = false;
+                }
+                document.body.removeChild(ta);
+                return ok;
+            }
+            function copyToClipboardSmart(text) {
+                if (copyToClipboardSyncExec(text)) return Promise.resolve(true);
+                if (navigator.clipboard && window.isSecureContext) {
+                    return navigator.clipboard.writeText(text).then(() => true).catch(() => false);
+                }
+                return Promise.resolve(false);
+            }
+            function closeGamblyFallbackModal() {
+                const el = document.getElementById("gamblyExportModal");
+                if (el) {
+                    el.remove();
+                    document.removeEventListener("keydown", onGamblyModalKeydown);
+                }
+            }
+            function onGamblyModalKeydown(e) {
+                if (e.key === "Escape") closeGamblyFallbackModal();
+            }
+            function showGamblyFallbackModal(text) {
+                closeGamblyFallbackModal();
+                const wrap = document.createElement("div");
+                wrap.id = "gamblyExportModal";
+                wrap.className = "gambly-export-modal";
+                wrap.setAttribute("role", "dialog");
+                wrap.setAttribute("aria-modal", "true");
+                wrap.innerHTML = "<div class=\"gambly-export-modal__backdrop\" tabindex=\"-1\" data-close=\"1\"></div><div class=\"gambly-export-modal__panel\"><h3 class=\"gambly-export-modal__title\">Exported HR props</h3><p class=\"gambly-export-modal__note\"></p><textarea class=\"gambly-export-modal__ta\" rows=\"10\" readonly></textarea><div class=\"gambly-export-modal__actions\"><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalSelectAll\">Select all</button><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalCopy\">Copy</button><a class=\"btn-gambly\" href=\"https://gambly.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Open Gambly</a><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalClose\">Close</button></div></div>";
+                const note = wrap.querySelector(".gambly-export-modal__note");
+                note.textContent = "Below are the HR props you added for Gambly—one line per pick (batter and home run over line). Select all or Copy, then Open Gambly and paste when you are ready.";
+                const ta = wrap.querySelector("textarea");
+                ta.value = text;
+                wrap.querySelector("[data-close]").addEventListener("click", closeGamblyFallbackModal);
+                wrap.querySelector("#gamblyModalClose").addEventListener("click", closeGamblyFallbackModal);
+                wrap.querySelector("#gamblyModalSelectAll").addEventListener("click", () => {
+                    ta.focus();
+                    ta.select();
+                });
+                const copyBtn = wrap.querySelector("#gamblyModalCopy");
+                copyBtn.addEventListener("click", () => {
+                    const payload = ta.value;
+                    const label = copyBtn.textContent;
+                    copyToClipboardSmart(payload).then((ok) => {
+                        copyBtn.textContent = ok ? "Copied!" : "Select all, then copy";
+                        setTimeout(() => { copyBtn.textContent = label; }, 1800);
+                    });
+                });
+                document.body.appendChild(wrap);
+                document.addEventListener("keydown", onGamblyModalKeydown);
+                requestAnimationFrame(() => {
+                    ta.focus();
+                    ta.select();
+                });
+            }
+            if (gamesSection) {
+                gamesSection.addEventListener("change", (e) => {
+                    if (e.target && e.target.classList && e.target.classList.contains("pick-cb--gambly")) updatePickCount();
+                });
+            }
+            if (clearPicksBtn) {
+                clearPicksBtn.addEventListener("click", () => {
+                    document.querySelectorAll(".pick-cb.pick-cb--gambly:checked").forEach((cb) => { cb.checked = false; });
+                    updatePickCount();
+                });
+            }
+            function gamblyDecodeDataAttr(el, attr) {
+                const v = el && el.getAttribute(attr);
+                if (v == null || v === "") return "";
+                try {
+                    return decodeURIComponent(v);
+                } catch (e) {
+                    return v;
+                }
+            }
+            function gamblyBatterNameForPaste(raw) {
+                let s = (raw || "").trim();
+                const vs = /\s+vs\.?\s+/i.exec(s);
+                if (vs) s = s.slice(0, vs.index).trim();
+                return s;
+            }
+            function gamblyHrPropLine(oddsText) {
+                const t = (oddsText || "").trim();
+                const m = t.match(/over\s+([\d.]+)\s*(?:hr|hrs|home\s*runs?)\b/i);
+                if (m) return `Over ${m[1]} homerun`;
+                return "Over 0.5 homerun";
+            }
+            if (exportGamblyBtn) {
+                exportGamblyBtn.addEventListener("click", () => {
+                    const rows = [...document.querySelectorAll(".pick-cb.pick-cb--gambly:checked")]
+                        .map((cb) => cb.closest(".pick-row, tr.pick-table-row"))
+                        .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"));
+                    if (!rows.length) return;
+                    const lines = rows.map((row) => {
+                        const nameRaw = gamblyDecodeDataAttr(row, "data-gambly-batter") || (row.querySelector(".pick-name") && row.querySelector(".pick-name").textContent || "").trim();
+                        const oddsRaw = gamblyDecodeDataAttr(row, "data-gambly-odds") || (row.querySelector(".pick-odds") && row.querySelector(".pick-odds").textContent || "").trim();
+                        const name = gamblyBatterNameForPaste(nameRaw);
+                        return `${name} — ${gamblyHrPropLine(oddsRaw)}`;
+                    });
+                    const body = lines.join("\n");
+                    copyToClipboardSmart(body).finally(() => {
+                        showGamblyFallbackModal(body);
+                    });
+                });
+            }
+            updatePickCount();
+
+            if (betTracker.some((e) => !e.result)) {
+                window.setTimeout(() => {
+                    void runMlbTrackerSettlementFromPage();
+                }, 600);
+            }
+
+            /** Full page reload on this interval so the latest published sheet HTML is loaded; MLB result pills and bet tracker re-run on load. */
+            const SHEET_AUTO_REFRESH_MS = 60 * 60 * 1000;
+            window.setInterval(() => {
+                window.location.reload();
+            }, SHEET_AUTO_REFRESH_MS);
+
             const toTop = document.getElementById("toTop");
             if (toTop) toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
         })();

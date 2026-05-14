@@ -1,0 +1,4 @@
+# Netlify: publish the preview sheet (static).
+
+[build]
+  publish = "preview"

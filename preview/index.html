@@ -11,22 +11,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:; font-src 'self' data:; connect-src 'self' https://statsapi.mlb.com; object-src 'none'; worker-src 'none'">
+    <!-- Google tag (gtag.js) — keep high in <head> for GA4 / Tag Assistant. No meta CSP: strict CSP blocked gtag iframes & collect in several setups. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CCSPFX3FHN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-CCSPFX3FHN');
+    </script>
     <meta name="robots" content="noindex, nofollow">
-    <title>5/14 MLB Cheat Sheet — UX preview</title>
+    <title>Worst Pickz Cheat Sheet — UX preview</title>
     <meta name="sheet-date" content="2026-05-14">
     <!-- Mirror preview/sheets-manifest.json: used when fetch(sheets-manifest.json) fails (e.g. file://). -->
     <script type="application/json" id="sheets-manifest-fallback">{"version":1,"sheets":[{"date":"2026-05-14","label":"May 14, 2026 — current slate","href":"./index.html"}]}</script>
-    <meta property="og:title" content="MLB HR Cheat Sheet (UX preview)">
-    <meta property="og:description" content="Worst Picks HR cheat sheet — preview build for navigation, filter, and layout.">
+    <meta property="og:title" content="Worst Pickz Cheat Sheet (UX preview)">
+    <meta property="og:description" content="Worst Pickz HR cheat sheet — preview build for navigation, filter, and layout.">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://worstpickz.win/assets/worst-pickz-hero.png">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
+        :root {
+            --wpz-color-text: #f5efe9;
+            --wpz-color-text-soft: #ffedd5;
+            --wpz-color-heading: #fffbeb;
+            --wpz-color-paragraph: #fde2c8;
+            --wpz-bg-body: radial-gradient(ellipse at top, #0f1a14 0%, #0a0d0a 42%, #030201 100%);
+            --wpz-bg-container: linear-gradient(135deg, rgba(12, 28, 18, 0.97) 0%, rgba(22, 10, 14, 0.96) 48%, rgba(10, 18, 32, 0.97) 100%);
+            --wpz-border-container: rgba(234, 179, 8, 0.42);
+            --wpz-bg-header: linear-gradient(145deg, #071910 0%, #241010 38%, #152238 100%);
+            --wpz-border-header: rgba(248, 113, 113, 0.42);
+            --wpz-brand-tag-bg: rgba(8, 26, 16, 0.52);
+            --wpz-brand-tag-border: rgba(74, 222, 128, 0.38);
+            --wpz-brand-tag-text: #ecfccb;
+            --wpz-hero-frame: rgba(234, 179, 8, 0.4);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { -webkit-text-size-adjust: 100%; }
-        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: radial-gradient(ellipse at top, #1a0d08 0%, #0d0705 42%, #040302 100%); color: #f5efe9; min-height: 100vh; padding: 16px; overflow-x: hidden; }
-        .container { max-width: 2480px; margin: 0 auto; background: linear-gradient(135deg, rgba(23,12,8,0.96) 0%, rgba(17,10,10,0.97) 50%, rgba(12,18,30,0.96) 100%); border: 2px solid rgba(251,146,60,0.42); border-radius: 20px; overflow: hidden; min-width: 0; }
-        header { position: relative; padding: 28px 18px 24px; text-align: center; background: linear-gradient(135deg, #2b1210 0%, #7c2d12 55%, #1d4ed8 100%); border-bottom: 3px solid rgba(254,215,170,0.65); }
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: var(--wpz-bg-body); color: var(--wpz-color-text); min-height: 100vh; padding: 16px; overflow-x: hidden; }
+        .container { max-width: 2480px; margin: 0 auto; background: var(--wpz-bg-container); border: 2px solid var(--wpz-border-container); border-radius: 20px; overflow: hidden; min-width: 0; }
+        header { position: relative; padding: 28px 18px 26px; text-align: center; background: var(--wpz-bg-header); border-bottom: 3px solid var(--wpz-border-header); }
         .header-actions {
             position: absolute;
             top: 14px;
@@ -66,9 +90,48 @@
         }
         .social-x:hover { background: rgba(15,23,42,0.85); color: #fff; }
         .social-x svg { width: 20px; height: 20px; display: block; }
-        .brand-tag { display: inline-flex; padding: 6px 12px; margin-bottom: 12px; border-radius: 999px; border: 1px solid rgba(254,215,170,0.4); background: rgba(15,23,42,0.28); color: #ffedd5; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
-        header h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; color: #fff7ed; }
-        header p { font-size: 1.02rem; color: #ffedd5; font-weight: 600; }
+        .brand-tag { display: inline-flex; padding: 6px 12px; margin-bottom: 12px; border-radius: 999px; border: 1px solid var(--wpz-brand-tag-border); background: var(--wpz-brand-tag-bg); color: var(--wpz-brand-tag-text); font-size: 0.78rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
+        header h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; color: var(--wpz-color-heading); }
+        header p { font-size: 1.02rem; color: var(--wpz-color-paragraph); font-weight: 600; line-height: 1.5; }
+        .header-brand {
+            display: grid;
+            grid-template-columns: minmax(140px, 220px) minmax(0, 1fr);
+            gap: 22px 28px;
+            align-items: center;
+            justify-content: center;
+            max-width: 1040px;
+            margin: 8px auto 0;
+            padding: 0 8px;
+            text-align: left;
+        }
+        .header-intro { min-width: 0; }
+        .header-intro .brand-tag { margin-bottom: 12px; }
+        .header-hero-wrap {
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid var(--wpz-hero-frame);
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.45),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            background: #050805;
+        }
+        .header-hero {
+            display: block;
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+        @media (max-width: 720px) {
+            .header-brand {
+                grid-template-columns: 1fr;
+                text-align: center;
+                margin-top: 6px;
+            }
+            .header-hero-wrap {
+                max-width: 260px;
+                margin: 0 auto;
+            }
+        }
         .intro, .summary-grid, .games-section { display: grid; gap: 14px; }
         .intro { grid-template-columns: 1.18fr 1fr; padding: 14px; background: linear-gradient(135deg, rgba(26,13,8,0.92) 0%, rgba(17,24,39,0.88) 100%); border-bottom: 1px solid rgba(251,146,60,0.16); }
         .panel, .summary-card, .game-card { background: rgba(15,23,42,0.66); border: 1px solid rgba(251,146,60,0.16); border-radius: 14px; min-width: 0; }
@@ -699,6 +762,9 @@
             margin: 0 auto;
         }
         .props-table .td-bet-sheet { text-align: center; vertical-align: middle; width: 44px; }
+        .props-table .td-gambly { text-align: center; vertical-align: middle; width: 68px; padding: 6px 8px; }
+        .props-table .gambly-pick-wrap { margin-top: 0; justify-content: center; align-self: center; }
+        .props-table .gambly-pick-btn--dense { font-size: 0.55rem; padding: 4px 7px; max-width: none; }
         .bet-row-tag {
             font-size: 0.62rem;
             font-weight: 900;
@@ -946,7 +1012,8 @@
             box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2);
         }
         .props-table thead th.th-sheet,
-        .props-table thead th.th-tags {
+        .props-table thead th.th-tags,
+        .props-table thead th.th-gambly {
             text-align: center;
         }
         .props-table thead th.th-tags {
@@ -1579,8 +1646,12 @@
             border-color: rgba(100, 116, 139, 0.45);
         }
         html.theme-light header {
-            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 42%, #bfdbfe 100%);
-            border-bottom-color: rgba(234, 88, 12, 0.35);
+            background: linear-gradient(135deg, #ecfdf5 0%, #fef3c7 42%, #fee2e2 100%);
+            border-bottom-color: rgba(22, 101, 52, 0.35);
+        }
+        html.theme-light .header-hero-wrap {
+            border-color: rgba(22, 101, 52, 0.35);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
         }
         html.theme-light .brand-tag {
             background: rgba(255, 255, 255, 0.65);
@@ -1912,7 +1983,7 @@
         @media print {
             body { background: #fff !important; color: #111 !important; padding: 0 !important; overflow: visible !important; }
             .container { border: none !important; box-shadow: none !important; max-width: none !important; }
-            .sheet-toolbar, .to-top-fab, .header-actions, .brand-tag, .quick-legend, #tableView, #betTrackerModal, #playerPreviewModal, #parlayPanel { display: none !important; }
+            .sheet-toolbar, .to-top-fab, .header-actions, .brand-tag, .header-hero-wrap, .quick-legend, #tableView, #betTrackerModal, #playerPreviewModal, #parlayPanel { display: none !important; }
             .game-card, .pick-row, .panel, .summary-card { break-inside: avoid; }
             .pick-row { border: 1px solid #ccc !important; background: #fafafa !important; }
             .gambly-pick-wrap { display: none !important; }
@@ -1931,9 +2002,16 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
             </div>
-            <div class="brand-tag">Worst Picks Cheat Sheet</div>
-            <h1>5/14 MLB Cheat Sheet</h1>
-            <p>Thursday, May 14, 2026 — Worst Pickz HR cheat sheet with listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong> get the rose border and ⭐ in the emoji row; the top-right <strong>Save</strong> box adds props to your local <strong>bet tracker</strong>.</p>
+            <div class="header-brand">
+                <div class="header-hero-wrap">
+                    <img class="header-hero" src="./assets/worst-pickz-hero.png" width="400" height="400" alt="Worst Pickz mascot on a pile of gold" decoding="async" fetchpriority="high">
+                </div>
+                <div class="header-intro">
+                    <div class="brand-tag">Worst Pickz Cheat Sheet</div>
+                    <h1>Worst Pickz Cheat Sheet</h1>
+                    <p>Thursday, May 14, 2026 — Worst Pickz HR cheat sheet with listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong> get the rose border and ⭐ in the emoji row; the top-right <strong>Save</strong> box adds props to your local <strong>bet tracker</strong>.</p>
+                </div>
+            </div>
         </header>
         <nav class="sheet-toolbar" id="sheetToolbar" aria-label="Sheet tools">
             <div class="toolbar-row toolbar-row--sheet-nav" id="sheetNavRow" aria-label="Sheet date and archive">
@@ -1982,7 +2060,7 @@
             </div>
             <div class="toolbar-row toolbar-parlay toolbar-parlay-stack">
                 <div class="toolbar-parlay-row1">
-                    <span class="pick-count" id="pickCount" aria-live="polite">Gambly: use Cards view and Add on each row. Table view is for sorting, tracker saves, and export.</span>
+                    <span class="pick-count" id="pickCount" aria-live="polite">Gambly: use Add on each row (cards or table), then export.</span>
                     <button type="button" class="btn-secondary" id="clearPicks">Clear picks</button>
                     <button type="button" class="btn-gambly" id="exportGambly" disabled>Export to Gambly</button>
                 </div>
@@ -3161,9 +3239,9 @@
                     const emojiCell = emojiRowDisplay.trim()
                         ? `<span class="table-emoji-tags">${escapeHtml(emojiRowDisplay)}</span>`
                         : '<span class="table-emoji-tags table-emoji-tags--empty">—</span>';
-                    return `<tr class="pick-table-row pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${emojiTagsEnc}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-blast="${blastTier}" data-band="${band}" data-score="${row.score}" data-listed="" data-park="${parkPct == null ? "" : parkPct}" data-longshot="${dataLongshot}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}"><td class="td-bet-sheet"><button type="button" class="bet-save-corner__btn bet-save-corner__btn--table bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="Bet tracker">${tracked ? "✓" : "+"}</button></td><td class="td-player"><button type="button" class="pick-name-open table-player-name" data-gi="${gi}" data-ri="${ri}">${safeName}</button></td><td class="td-tags">${emojiCell}</td><td class="td-listed">${safeOdds}</td><td class="td-score"><strong>${row.score}</strong></td><td><span class="band-pill ${band}">${band}</span></td><td class="${parkClass}">${parkTxt}</td><td><a class="go-game" href="#game-${gi}">${safeMatch}</a></td></tr>`;
+                    return `<tr class="pick-table-row pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${emojiTagsEnc}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-blast="${blastTier}" data-band="${band}" data-score="${row.score}" data-listed="" data-park="${parkPct == null ? "" : parkPct}" data-longshot="${dataLongshot}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}"><td class="td-bet-sheet"><button type="button" class="bet-save-corner__btn bet-save-corner__btn--table bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="Bet tracker">${tracked ? "✓" : "+"}</button></td><td class="td-gambly"><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn gambly-pick-btn--dense" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add</button></div></td><td class="td-player"><button type="button" class="pick-name-open table-player-name" data-gi="${gi}" data-ri="${ri}">${safeName}</button></td><td class="td-tags">${emojiCell}</td><td class="td-listed">${safeOdds}</td><td class="td-score"><strong>${row.score}</strong></td><td><span class="band-pill ${band}">${band}</span></td><td class="${parkClass}">${parkTxt}</td><td><a class="go-game" href="#game-${gi}">${safeMatch}</a></td></tr>`;
                 }).join("");
-                tableView.innerHTML = `<div class="table-wrap-inner"><table class="props-table"><thead><tr><th class="th-sheet" scope="col" title="Add to bet tracker">Track</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="player">Player <span class="sort-ind">${ind("player")}</span></button></th><th class="th-tags" scope="col" title="Emoji tags (same as card rows)">Tags</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="odds">Listed <span class="sort-ind">${ind("odds")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="score">Score <span class="sort-ind">${ind("score")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="band">Band <span class="sort-ind">${ind("band")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="park">Park % <span class="sort-ind">${ind("park")}</span></button></th><th scope="col">Game</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+                tableView.innerHTML = `<div class="table-wrap-inner"><table class="props-table"><thead><tr><th class="th-sheet" scope="col" title="Add to bet tracker">Track</th><th class="th-gambly" scope="col" title="Add row to Gambly export">Gambly</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="player">Player <span class="sort-ind">${ind("player")}</span></button></th><th class="th-tags" scope="col" title="Emoji tags (same as card rows)">Tags</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="odds">Listed <span class="sort-ind">${ind("odds")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="score">Score <span class="sort-ind">${ind("score")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="band">Band <span class="sort-ind">${ind("band")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="park">Park % <span class="sort-ind">${ind("park")}</span></button></th><th scope="col">Game</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
                 applyQuickFilterToTable();
                 applyEmojiFiltersToAll();
             }
@@ -3182,6 +3260,10 @@
                         tableSort.dir = key === "player" || key === "odds" ? "asc" : "desc";
                     }
                     buildPropsTable();
+                    document.querySelectorAll(".game-card .pick-row[data-gi][data-ri] .pick-cb.pick-cb--gambly").forEach((cardCb) => {
+                        syncGamblyPickRowCheckboxesFrom(cardCb);
+                    });
+                    updatePickCount();
                 });
             }
             function applyQuickFilterToTable() {
@@ -3213,7 +3295,7 @@
             }
             function refreshPicksUI() {
                 const gamblyOn = new Set();
-                document.querySelectorAll(".game-card .pick-row[data-gi][data-ri] .pick-cb.pick-cb--gambly").forEach((cb) => {
+                document.querySelectorAll(".pick-row[data-gi][data-ri] .pick-cb.pick-cb--gambly").forEach((cb) => {
                     if (!cb.checked) return;
                     const row = cb.closest(".pick-row[data-gi][data-ri]");
                     if (row) gamblyOn.add(`${row.getAttribute("data-gi")}|${row.getAttribute("data-ri")}`);
@@ -3230,10 +3312,11 @@
                     if (sep < 0) return;
                     const gi = k.slice(0, sep);
                     const ri = k.slice(sep + 1);
-                    const row = document.querySelector(`.game-card .pick-row[data-gi="${gi}"][data-ri="${ri}"]`);
-                    if (!row || row.classList.contains("pick-hidden")) return;
-                    const cb = row.querySelector(".pick-cb.pick-cb--gambly");
-                    if (cb) cb.checked = true;
+                    document.querySelectorAll(`.pick-row[data-gi="${gi}"][data-ri="${ri}"]`).forEach((row) => {
+                        if (!row || row.classList.contains("pick-hidden")) return;
+                        const cb = row.querySelector(".pick-cb.pick-cb--gambly");
+                        if (cb) cb.checked = true;
+                    });
                 });
                 updatePickCount();
             }
@@ -3318,6 +3401,7 @@
                         const cb = wrap && wrap.querySelector(".pick-cb.pick-cb--gambly");
                         if (cb) {
                             cb.checked = !cb.checked;
+                            syncGamblyPickRowCheckboxesFrom(cb);
                             updatePickCount();
                         }
                         return;
@@ -3353,6 +3437,9 @@
                     viewTableBtn.setAttribute("aria-pressed", "true");
                     viewCardsBtn.setAttribute("aria-pressed", "false");
                     buildPropsTable();
+                    document.querySelectorAll(".game-card .pick-row[data-gi][data-ri] .pick-cb.pick-cb--gambly").forEach((cardCb) => {
+                        syncGamblyPickRowCheckboxesFrom(cardCb);
+                    });
                     applyPlayerFilter();
                     updatePickCount();
                 });
@@ -3446,7 +3533,10 @@
                     else {
                         row.classList.add("pick-hidden");
                         const cb = row.querySelector(".pick-cb.pick-cb--gambly");
-                        if (cb) cb.checked = false;
+                        if (cb) {
+                            cb.checked = false;
+                            syncGamblyPickRowCheckboxesFrom(cb);
+                        }
                     }
                 });
                 document.querySelectorAll("tr.pick-table-row").forEach((tr) => {
@@ -3460,6 +3550,11 @@
                     if (!q || text.includes(q)) tr.classList.remove("pick-hidden");
                     else {
                         tr.classList.add("pick-hidden");
+                        const tcb = tr.querySelector(".pick-cb.pick-cb--gambly");
+                        if (tcb) {
+                            tcb.checked = false;
+                            syncGamblyPickRowCheckboxesFrom(tcb);
+                        }
                     }
                 });
             }
@@ -3474,6 +3569,9 @@
                 });
             }
             buildPropsTable();
+            document.querySelectorAll(".game-card .pick-row[data-gi][data-ri] .pick-cb.pick-cb--gambly").forEach((cardCb) => {
+                syncGamblyPickRowCheckboxesFrom(cardCb);
+            });
             wireTableSortOnce();
             applyQuickFilterAll();
             applyPlayerFilter();
@@ -3505,9 +3603,16 @@
                 const panel = document.getElementById("parlayPanel");
                 const ul = document.getElementById("parlayLegs");
                 if (!panel || !ul) return;
+                const rowsSeen = new Set();
                 const rows = [...document.querySelectorAll(".pick-cb.pick-cb--gambly:checked")]
-                    .map((cb) => cb.closest(".pick-row, tr.pick-table-row"))
-                    .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"));
+                    .map((cb) => cb.closest(".pick-row[data-gi][data-ri]"))
+                    .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"))
+                    .filter((r) => {
+                        const k = `${r.getAttribute("data-gi")}|${r.getAttribute("data-ri")}`;
+                        if (rowsSeen.has(k)) return false;
+                        rowsSeen.add(k);
+                        return true;
+                    });
                 if (!rows.length) {
                     panel.hidden = true;
                     ul.innerHTML = "";
@@ -3562,6 +3667,17 @@
                 });
                 recalcParlayFromUl();
             }
+            function syncGamblyPickRowCheckboxesFrom(sourceCb) {
+                const row = sourceCb && sourceCb.closest(".pick-row[data-gi][data-ri]");
+                if (!row || !sourceCb) return;
+                const gi = row.getAttribute("data-gi");
+                const ri = row.getAttribute("data-ri");
+                if (gi == null || ri == null) return;
+                const on = sourceCb.checked;
+                document.querySelectorAll(`.pick-row[data-gi="${gi}"][data-ri="${ri}"] .pick-cb.pick-cb--gambly`).forEach((x) => {
+                    x.checked = on;
+                });
+            }
             function syncAllGamblyPickButtons() {
                 document.querySelectorAll(".gambly-pick-wrap").forEach((wrap) => {
                     const cb = wrap.querySelector(".pick-cb.pick-cb--gambly");
@@ -3577,8 +3693,13 @@
             }
             function updatePickCount() {
                 syncAllGamblyPickButtons();
-                const n = document.querySelectorAll(".pick-cb.pick-cb--gambly:checked").length;
-                if (pickCountEl) pickCountEl.textContent = n ? `${n} pick${n === 1 ? "" : "s"} selected.` : "Gambly: use Cards view and Add on each row. Table view is for sorting, sheet saves, and export.";
+                const gamblyKeySet = new Set();
+                document.querySelectorAll(".pick-cb.pick-cb--gambly:checked").forEach((cb) => {
+                    const r = cb.closest(".pick-row[data-gi][data-ri]");
+                    if (r) gamblyKeySet.add(`${r.getAttribute("data-gi")}|${r.getAttribute("data-ri")}`);
+                });
+                const n = gamblyKeySet.size;
+                if (pickCountEl) pickCountEl.textContent = n ? `${n} pick${n === 1 ? "" : "s"} selected.` : "Gambly: use Add on each row (cards or table), then export.";
                 if (exportGamblyBtn) exportGamblyBtn.disabled = n === 0;
                 rebuildParlayPanel();
             }
@@ -3653,7 +3774,10 @@
             }
             if (gamesSection) {
                 gamesSection.addEventListener("change", (e) => {
-                    if (e.target && e.target.classList && e.target.classList.contains("pick-cb--gambly")) updatePickCount();
+                    if (e.target && e.target.classList && e.target.classList.contains("pick-cb--gambly")) {
+                        syncGamblyPickRowCheckboxesFrom(e.target);
+                        updatePickCount();
+                    }
                 });
             }
             if (clearPicksBtn) {
@@ -3685,12 +3809,20 @@
             }
             if (exportGamblyBtn) {
                 exportGamblyBtn.addEventListener("click", () => {
+                    const rowsSeen = new Set();
                     const rows = [...document.querySelectorAll(".pick-cb.pick-cb--gambly:checked")]
-                        .map((cb) => cb.closest(".pick-row, tr.pick-table-row"))
-                        .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"));
+                        .map((cb) => cb.closest(".pick-row[data-gi][data-ri]"))
+                        .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"))
+                        .filter((r) => {
+                            const k = `${r.getAttribute("data-gi")}|${r.getAttribute("data-ri")}`;
+                            if (rowsSeen.has(k)) return false;
+                            rowsSeen.add(k);
+                            return true;
+                        });
                     if (!rows.length) return;
                     const lines = rows.map((row) => {
-                        const nameRaw = gamblyDecodeDataAttr(row, "data-gambly-batter") || (row.querySelector(".pick-name") && row.querySelector(".pick-name").textContent || "").trim();
+                        const nameEl = row.querySelector(".pick-name, .table-player-name");
+                        const nameRaw = gamblyDecodeDataAttr(row, "data-gambly-batter") || (nameEl ? nameEl.textContent : "").trim();
                         const oddsRaw = gamblyDecodeDataAttr(row, "data-gambly-odds") || (row.querySelector(".pick-odds") && row.querySelector(".pick-odds").textContent || "").trim();
                         const name = gamblyBatterNameForPaste(nameRaw);
                         return `${name} — ${gamblyHrPropLine(oddsRaw)}`;

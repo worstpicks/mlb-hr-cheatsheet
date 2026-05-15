@@ -662,6 +662,7 @@
             line-height: 1.35;
         }
         .archive-sheet-status.is-ok { color: #86efac; }
+        .last-updated.is-ok { color: #86efac; }
         .current-slate-btn {
             display: inline-flex;
             align-items: center;
@@ -2183,6 +2184,7 @@
                     <button type="button" class="is-active" id="viewCardsBtn" aria-pressed="true">Cards</button>
                     <button type="button" id="viewTableBtn" aria-pressed="false">Table</button>
                 </div>
+                <button type="button" class="btn-secondary" id="refreshDataBtn" title="Refresh MLB Stats API — bet tracker outcomes and row result pills">Refresh</button>
                 <button type="button" class="btn-secondary" id="betTrackerBtn" aria-haspopup="dialog">Bet tracker</button>
                 <div class="filter-chip-row" id="quickFilterRow" aria-label="Quick filters">
                     <button type="button" class="filter-chip is-active" data-filter="all">All</button>
@@ -3684,10 +3686,44 @@
                 }).join("");
             }
             const lastEl = document.getElementById("lastUpdated");
-            if (lastEl) {
-                const d = new Date(document.lastModified);
-                lastEl.textContent = Number.isNaN(d.getTime()) ? "" : `Last file update: ${d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}`;
+            const refreshDataBtn = document.getElementById("refreshDataBtn");
+            function setLastUpdatedMessage(msg, ok) {
+                if (!lastEl) return;
+                lastEl.textContent = msg || "";
+                lastEl.classList.toggle("is-ok", !!ok);
             }
+            if (lastEl) {
+                setLastUpdatedMessage("Tap Refresh to load the latest MLB results and bet tracker data.", false);
+            }
+            async function refreshLiveApiData() {
+                if (refreshDataBtn) {
+                    refreshDataBtn.disabled = true;
+                    refreshDataBtn.textContent = "Refreshing…";
+                }
+                setLastUpdatedMessage("Refreshing MLB schedule, box scores, and bet tracker…", false);
+                hrResultsHydrateToken++;
+                try {
+                    const trackerMsg = await settleBetTrackerHrFromMlbStats();
+                    await hydratePickRowHrResultsFromMlb();
+                    updateBetTrackerBtnLabel();
+                    try { refreshPicksUI(); } catch (err) {}
+                    if (betTrackerModalEl) renderBetTrackerModal(betTrackerModalEl);
+                    const ts = new Date().toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+                    const shortTracker = trackerMsg && trackerMsg.length > 120 ? trackerMsg.slice(0, 117) + "…" : trackerMsg;
+                    setLastUpdatedMessage(
+                        shortTracker ? `Last refreshed: ${ts} · ${shortTracker}` : `Last refreshed: ${ts}`,
+                        true
+                    );
+                } catch (ex) {
+                    setLastUpdatedMessage(`Refresh failed: ${ex && ex.message ? ex.message : ex}`, false);
+                } finally {
+                    if (refreshDataBtn) {
+                        refreshDataBtn.disabled = false;
+                        refreshDataBtn.textContent = "Refresh";
+                    }
+                }
+            }
+            if (refreshDataBtn) refreshDataBtn.addEventListener("click", () => { void refreshLiveApiData(); });
             const legendFold = document.getElementById("legendFold");
             function syncLegendFold() {
                 if (!legendFold) return;
@@ -4010,15 +4046,9 @@
 
             if (betTracker.some((e) => !e.result)) {
                 window.setTimeout(() => {
-                    void runMlbTrackerSettlementFromPage();
+                    void refreshLiveApiData();
                 }, 600);
             }
-
-            /** Full page reload on this interval so the latest published sheet HTML is loaded; MLB result pills and bet tracker re-run on load. */
-            const SHEET_AUTO_REFRESH_MS = 12 * 60 * 60 * 1000;
-            window.setInterval(() => {
-                window.location.reload();
-            }, SHEET_AUTO_REFRESH_MS);
 
             const toTop = document.getElementById("toTop");
             if (toTop) toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));

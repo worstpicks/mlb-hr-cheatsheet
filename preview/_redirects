@@ -1,0 +1,4 @@
+# `publish` folder is `preview/`, so the app lives at `/`, not `/preview/`.
+# Send old /preview/ links to the site root.
+/preview   /   301
+/preview/  /   301

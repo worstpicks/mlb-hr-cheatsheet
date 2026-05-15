@@ -21,12 +21,12 @@
         gtag('config', 'G-CCSPFX3FHN');
     </script>
     <meta name="robots" content="noindex, nofollow">
-    <title>Worst Pickz Cheat Sheet — UX preview</title>
+    <title>Worst Pickz Cheat Daily MLB Sheet</title>
     <meta name="sheet-date" content="2026-05-14">
     <!-- Mirror preview/sheets-manifest.json: used when fetch(sheets-manifest.json) fails (e.g. file://). -->
     <script type="application/json" id="sheets-manifest-fallback">{"version":1,"sheets":[{"date":"2026-05-14","label":"May 14, 2026 — current slate","href":"./index.html"}]}</script>
-    <meta property="og:title" content="Worst Pickz Cheat Sheet (UX preview)">
-    <meta property="og:description" content="Worst Pickz HR cheat sheet — preview build for navigation, filter, and layout.">
+    <meta property="og:title" content="Worst Pickz Cheat Daily MLB Sheet">
+    <meta property="og:description" content="Daily MLB HR cheat sheet — listed odds, filters, bet tracker, and Gambly export.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://worstpickz.win/assets/worst-pickz-hero.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -169,6 +169,80 @@
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr));
             gap: 14px;
             align-items: start;
+        }
+        .site-footer-cta {
+            position: relative;
+            z-index: 2;
+            margin: 0;
+            padding: 28px 20px 96px;
+            text-align: center;
+            border-top: 3px solid rgba(234, 179, 8, 0.55);
+            background: linear-gradient(180deg, rgba(22, 78, 45, 0.35) 0%, rgba(8, 12, 22, 0.98) 45%, rgba(5, 8, 14, 1) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+        .site-footer-cta__title {
+            margin: 0 0 10px 0;
+            font-size: 1.15rem;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #fef9c3;
+        }
+        .site-footer-cta__text {
+            margin: 0 auto 16px;
+            max-width: 36rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fef3c7;
+            line-height: 1.6;
+            letter-spacing: 0.015em;
+        }
+        .site-footer-cta__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+        .site-footer-cta__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-size: 0.92rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #0f172a;
+            background: linear-gradient(165deg, #fef08a 0%, #facc15 45%, #eab308 100%);
+            border: 2px solid rgba(254, 243, 199, 0.55);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
+        .site-footer-cta__btn:hover {
+            filter: brightness(1.06);
+            color: #0f172a;
+        }
+        .site-footer-cta__btn:focus-visible {
+            outline: 3px solid rgba(147, 197, 253, 0.95);
+            outline-offset: 3px;
+        }
+        .site-footer-cta__link {
+            color: #a5f3fc;
+            font-weight: 800;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(103, 232, 249, 0.55);
+        }
+        .site-footer-cta__link:hover {
+            color: #ecfeff;
+            border-bottom-color: rgba(236, 254, 255, 0.95);
+        }
+        .site-footer-cta__link:focus-visible {
+            outline: 2px solid rgba(147, 197, 253, 0.95);
+            outline-offset: 3px;
+            border-radius: 4px;
         }
         .game-header { padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); }
         .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; overflow-wrap: anywhere; line-height: 1.25; }
@@ -1681,6 +1755,26 @@
             background: linear-gradient(135deg, #f1f5f9 0%, #e8eef7 100%);
             border-bottom-color: rgba(148, 163, 184, 0.22);
         }
+        html.theme-light .site-footer-cta {
+            border-top-color: rgba(22, 101, 52, 0.45);
+            background: linear-gradient(180deg, #ecfdf5 0%, #e2e8f0 55%, #f8fafc 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+        html.theme-light .site-footer-cta__title { color: #14532d; }
+        html.theme-light .site-footer-cta__text { color: #334155; }
+        html.theme-light .site-footer-cta__btn {
+            color: #0f172a;
+            background: linear-gradient(165deg, #fde047 0%, #eab308 100%);
+            border-color: rgba(202, 138, 4, 0.45);
+        }
+        html.theme-light .site-footer-cta__link {
+            color: #1d4ed8;
+            border-bottom-color: rgba(29, 78, 216, 0.45);
+        }
+        html.theme-light .site-footer-cta__link:hover {
+            color: #1e3a8a;
+            border-bottom-color: rgba(30, 58, 138, 0.85);
+        }
         html.theme-light .panel,
         html.theme-light .summary-card,
         html.theme-light .game-card {
@@ -1990,6 +2084,19 @@
             .game-header { background: #eee !important; color: #111 !important; }
             .game-header h3, .pick-name { color: #111 !important; }
             .pick-note, .model-note, .game-header p { color: #222 !important; }
+            .site-footer-cta {
+                border-top: 2px solid #94a3b8 !important;
+                background: #f1f5f9 !important;
+            }
+            .site-footer-cta__title { color: #0f172a !important; }
+            .site-footer-cta__text { color: #334155 !important; }
+            .site-footer-cta__btn {
+                background: #e2e8f0 !important;
+                border: 1px solid #64748b !important;
+                color: #0f172a !important;
+                box-shadow: none !important;
+            }
+            .site-footer-cta__link { color: #0f172a !important; text-decoration: underline !important; border-bottom: none !important; }
         }
     </style>
 </head>
@@ -2007,8 +2114,8 @@
                     <img class="header-hero" src="./assets/worst-pickz-hero.png" width="400" height="400" alt="Worst Pickz mascot on a pile of gold" decoding="async" fetchpriority="high">
                 </div>
                 <div class="header-intro">
-                    <div class="brand-tag">Worst Pickz Cheat Sheet</div>
-                    <h1>Worst Pickz Cheat Sheet</h1>
+                    <div class="brand-tag">Worst Pickz Cheat Daily MLB Sheet</div>
+                    <h1>Worst Pickz Cheat Daily MLB Sheet</h1>
                     <p>Thursday, May 14, 2026 — Worst Pickz HR cheat sheet with listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong> get the rose border and ⭐ in the emoji row; the top-right <strong>Save</strong> box adds props to your local <strong>bet tracker</strong>.</p>
                 </div>
             </div>
@@ -2194,6 +2301,14 @@
         <section class="games-section" id="gamesSection">
             <div class="games-grid" id="gamesGrid"></div>
             <div id="tableView" hidden></div>
+            <footer class="site-footer-cta" role="contentinfo">
+                <h2 class="site-footer-cta__title">Follow Worst Pickz</h2>
+                <p class="site-footer-cta__text">Follow <strong>@WorstPickz</strong> on X for daily sheet drops and bad-beat solidarity. Reply with your leans, quote-tweet when the board hits, and keep the timeline on the sheet.</p>
+                <div class="site-footer-cta__actions">
+                    <a class="site-footer-cta__btn" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer">Open @WorstPickz on X</a>
+                    <a class="site-footer-cta__link" href="https://x.com/intent/tweet?text=From%20the%20%40WorstPickz%20MLB%20sheet%20%E2%80%94%20" target="_blank" rel="noopener noreferrer">Share on X</a>
+                </div>
+            </footer>
         </section>
     </div>
     <button type="button" class="to-top-fab" id="toTop" aria-label="Back to top of page">↑ Top</button>

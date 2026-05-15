@@ -246,6 +246,13 @@
         }
         .game-header { padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); }
         .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; overflow-wrap: anywhere; line-height: 1.25; }
+        .game-header h3 .pitcher-bum {
+            display: inline-block;
+            font-size: 1.12em;
+            line-height: 1;
+            vertical-align: -0.05em;
+            filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.75));
+        }
         .game-header p { overflow-wrap: anywhere; hyphens: auto; }
         .pick-list { display: grid; gap: 10px; padding: 12px; }
         .pick-row { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, auto) minmax(0, 1.5fr); gap: 12px; align-items: start; padding: 12px 56px 12px 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); min-width: 0; position: relative; }
@@ -2323,7 +2330,7 @@
                     { name: "Ryan O'Hearn (L)", odds: "Listed +760 - Over 0.5 HR", score: 74, emojis: "💎", note: "Five HR and six near-HR in the pitch-mix sample; Nola still grades tough to lefties overall.", chips: ["vs Nola"] },
                     { name: "Brandon Lowe (L)", odds: "Listed +440 - Over 0.5 HR", score: 76, emojis: "🚀 💎", blast: "good", note: "Six HR and eight near-HR with 22.2% barrels; clear pitcher HR-risk advantage—Nola's vs-LHB HR-risk index is green for batters.", chips: ["vs Nola"] }
                 ]},
-                { title: "BAL @ WSH - Shane Baz (R, BAL) vs Zack Littell 🧤 (R, WSH)", description: "Nationals Park — -7% HR row with 6 mph wind. Littell carries slate-high HR/9 (3.47) and a huge vs-LHB HR-risk lane (2.25); Baz is more contact-suppressing but still leaks to righties.", rows: [
+                { title: "BAL @ WSH - Shane Baz 🧤 (R, BAL) vs Zack Littell 🧤 (R, WSH)", description: "Nationals Park — -7% HR row with 6 mph wind. Littell carries slate-high HR/9 (3.47) and a huge vs-LHB HR-risk lane (2.25); Baz is more contact-suppressing but still leaks to righties.", rows: [
                     { name: "James Wood (L)", odds: "Listed +310 - Over 0.5 HR", score: 91, emojis: "🚀 🌕 ⚾ 🏟️ 🕊️", blast: "high", note: "Nine HR and 16 near-HR with 29.9% barrels; clear pitcher HR-risk advantage—Baz's vs-LHB HR-risk lane (2.25 green) is the slate's best lefty attack point.", chips: ["vs Baz"] },
                     { name: "CJ Abrams (L)", odds: "Listed +520 - Over 0.5 HR", score: 85, emojis: "🚀 ⚾ 🕊️", blast: "good", note: "Nine HR and 11 near-HR with pull-air; same Baz LHB HR-risk edge as Wood with slightly fewer barrels.", chips: ["vs Baz"] },
                     { name: "Daylen Lile (L)", odds: "Listed +610 - Over 0.5 HR", score: 80, emojis: "🚀 ⚾ 🕊️", blast: "good", note: "Six HR and 10 near-HR; clear pitcher HR-risk advantage into Baz's LHB fly-ball lane at plus money.", chips: ["vs Baz"] },
@@ -2339,7 +2346,7 @@
                     { name: "Daulton Varsho (L)", odds: "Listed +586 - Over 0.5 HR", score: 75, emojis: "💎 🕊️", note: "Four HR and six near-HR; Madden's RHB HR-risk lane is green even with Comerica's carry tax.", chips: ["vs Madden"] },
                     { name: "Yohendrick Pinango (L)", odds: "Listed N/A - Over 0.5 HR", score: 68, emojis: "💎", note: "No listed price in the export but loud .529 SLG in the window; thin sample versus Madden.", chips: ["vs Madden"] }
                 ]},
-                { title: "MIA @ TB - Janson Junk (R, MIA) vs Jesse Scholtens (R, TB)", description: "Tropicana Field dome — weather-neutral. Scholtens' vs-RHB HR-risk is modestly green; Junk's fly-ball shape is hittable in a closed dome.", rows: [
+                { title: "MIA @ TB - Janson Junk 🧤 (R, MIA) vs Jesse Scholtens 🧤 (R, TB)", description: "Tropicana Field dome — weather-neutral. Scholtens' vs-RHB HR-risk is modestly green; Junk's fly-ball shape is hittable in a closed dome.", rows: [
                     { name: "Jonathan Aranda (L)", odds: "Listed +384 - Over 0.5 HR", score: 83, emojis: "🚀 ⚾ 🕊️", blast: "good", note: "Seven HR and nine near-HR with 11.9% barrels; clear pitcher HR-risk advantage—Junk's vs-LHB HR-risk index is green for batters.", chips: ["vs Junk"] },
                     { name: "Junior Caminero (R)", odds: "Listed +320 - Over 0.5 HR", score: 81, emojis: "🚀 ⚾", blast: "good", note: "Eight HR and eight near-HR with pull-side fly balls; Junk's fly-ball shape is the lever more than the dome.", chips: ["vs Junk"] },
                     { name: "Ryan Vilade (R)", odds: "Listed N/A - Over 0.5 HR", score: 66, emojis: "💎", note: "Micro-sample HR versus Junk with no listed price; thin contact floor.", chips: ["vs Junk"] },
@@ -2369,7 +2376,7 @@
                     { name: "Ryan McMahon (L)", odds: "Listed +390 - Over 0.5 HR", score: 74, emojis: "💎", note: "Veteran lefty power versus Holmes; Holmes' HR/9 is low—mostly price and platoon.", chips: ["vs Holmes"] },
                     { name: "Trent Grisham (L)", odds: "Listed +380 - Over 0.5 HR", score: 73, emojis: "💎", note: "Contact spike in the window; Holmes suppresses HR better than Schlittler's side for NYM.", chips: ["vs Holmes"] }
                 ]},
-                { title: "BOS @ ATL - Connelly Early (L, BOS) vs Spencer Strider (R, ATL)", description: "Truist Park — -11% HR row but 74°F clear air and 1,050 ft altitude help contact. Strider's overall HR index is near neutral with elite whiff; Early's LHB lane is the Boston leverage side.", rows: [
+                { title: "BOS @ ATL - Connelly Early 🧤 (L, BOS) vs Spencer Strider (R, ATL)", description: "Truist Park — -11% HR row but 74°F clear air and 1,050 ft altitude help contact. Strider's overall HR index is near neutral with elite whiff; Early's LHB lane is the Boston leverage side.", rows: [
                     { name: "Drake Baldwin (L)", odds: "Listed +540 - Over 0.5 HR", score: 85, emojis: "🚀 🌕", blast: "high", note: "Three HR and four near-HR with 23.1% barrels in a tiny window; Strider still misses bats—damage form drives the score.", chips: ["vs Strider"] },
                     { name: "Matt Olson (L)", odds: "Listed +483 - Over 0.5 HR", score: 78, emojis: "🚀 💎", blast: "good", note: "One HR and two near-HR with 33.3% barrels in the sample; same-side Strider is the drag.", chips: ["vs Strider"] },
                     { name: "Ceddanne Rafaela (R)", odds: "Listed +690 - Over 0.5 HR", score: 74, emojis: "💎", note: "One HR in the L5 window; Strider's RHB line is workable but not a classic HR leak.", chips: ["vs Strider"] },
@@ -2398,25 +2405,25 @@
                     { name: "JJ Wetherholt (L)", odds: "Listed +570 - Over 0.5 HR", score: 75, emojis: "💎", note: "One HR and two near-HR; Wacha is contact-managed more than a pure HR leak.", chips: ["vs Wacha"] },
                     { name: "Nolan Gorman (L)", odds: "Listed +390 - Over 0.5 HR", score: 73, emojis: "🚀 💎", note: "Pull-side pop with whiff; Wacha's LHB lane is only modestly green.", chips: ["vs Wacha"] }
                 ]},
-                { title: "ARI @ COL - Merrill Kelly (R, ARI) vs Kyle Freeland 🧤 (L, COL)", description: "Coors Field — +19% HR row with 75°F and 8 mph out wind; Freeland's vs-LHB HR-risk is extreme (1.97). Kelly's road line is hittable for Colorado lefties and switch bats.", rows: [
+                { title: "ARI @ COL - Merrill Kelly 🧤 (R, ARI) vs Kyle Freeland 🧤 (L, COL)", description: "Coors Field — +19% HR row with 75°F and 8 mph out wind; Freeland's vs-LHB HR-risk is extreme (1.97). Kelly's road line is hittable for Colorado lefties and switch bats.", rows: [
                     { name: "TJ Rumfield (L)", odds: "Listed +525 - Over 0.5 HR", score: 78, emojis: "🚀 🏟️", blast: "good", note: "Two HR and three near-HR; Coors carry versus Kelly's road line is the main lever.", chips: ["vs Kelly"] },
                     { name: "Willi Castro (S)", odds: "Listed +525 - Over 0.5 HR", score: 77, emojis: "🚀 🏟️", blast: "good", note: "One HR with pull-air; Freeland's vs-SHB/LHB damage is the Coors headline for Colorado.", chips: ["vs Kelly"] },
                     { name: "Gabriel Moreno (R)", odds: "Listed +525 - Over 0.5 HR", score: 76, emojis: "🏟️", blast: "good", note: "One HR and three near-HR; Freeland's vs-RHB HR-risk is only mildly green—park does the work.", chips: ["vs Freeland"] },
                     { name: "Ildemaro Vargas (S)", odds: "Listed +520 - Over 0.5 HR", score: 75, emojis: "🏟️ 🕊️", note: "One HR versus Freeland; clear Coors environment with Freeland's LHB HR-risk extreme.", chips: ["vs Freeland"] }
                 ]},
-                { title: "LAD @ LAA - Blake Snell (L, LAD) vs Jack Kochanowicz (R, LAA)", description: "Angel Stadium — +3% HR row with 7 mph out-blowing wind. Snell's tiny 2026 sample is elite on HR suppression; Kochanowicz's vs-LHB lane is the only real Angels HR path.", rows: [
+                { title: "LAD @ LAA - Blake Snell (L, LAD) vs Jack Kochanowicz 🧤 (R, LAA)", description: "Angel Stadium — +3% HR row with 7 mph out-blowing wind. Snell's tiny 2026 sample is elite on HR suppression; Kochanowicz's vs-LHB lane is the only real Angels HR path.", rows: [
                     { name: "Jo Adell (R)", odds: "Listed +525 - Over 0.5 HR", score: 78, emojis: "🚀", blast: "good", note: "Two HR with 23.1% barrels; Snell's tiny sample is elite on suppression—upside-only.", chips: ["vs Snell"] },
                     { name: "Max Muncy (L)", odds: "Listed +390 - Over 0.5 HR", score: 84, emojis: "🚀 ⚾ 🏟️ 🕊️", blast: "high", note: "Two HR and four near-HR; clear pitcher HR-risk advantage—Kochanowicz's vs-LHB lane is the Angels' only real HR path.", chips: ["vs Kochanowicz"] },
                     { name: "Shohei Ohtani (L)", odds: "Listed +246 - Over 0.5 HR", score: 80, emojis: "🚀 ⚾ 🕊️", blast: "good", note: "One HR with pull-air; Kochanowicz's LHB HR-risk chip is green even at a short price.", chips: ["vs Kochanowicz"] },
                     { name: "Will Smith (R)", odds: "Listed +520 - Over 0.5 HR", score: 76, emojis: "💎", blast: "good", note: "One HR and four near-HR; catcher pop versus Kochanowicz's fly-ball leakage.", chips: ["vs Kochanowicz"] }
                 ]},
-                { title: "SD @ SEA - Randy Vasquez (R, SD) vs Emerson Hancock (R, SEA)", description: "T-Mobile Park — +0% HR row but -32% on extra-base hits; 51°F with 56% rain risk. Hancock's vs-RHB HR-risk is green (0.91); Vasquez's vs-LHB lane helps Seattle lefties.", rows: [
+                { title: "SD @ SEA - Randy Vasquez 🧤 (R, SD) vs Emerson Hancock 🧤 (R, SEA)", description: "T-Mobile Park — +0% HR row but -32% on extra-base hits; 51°F with 56% rain risk. Hancock's vs-RHB HR-risk is green (0.91); Vasquez's vs-LHB lane helps Seattle lefties.", rows: [
                     { name: "Luke Raley (L)", odds: "Listed +550 - Over 0.5 HR", score: 85, emojis: "🚀 🌕 ⚾ 🕊️", blast: "high", note: "Four HR and four near-HR with 35.7% barrels; clear pitcher HR-risk advantage—Vasquez's vs-LHB HR-risk lane is green.", chips: ["vs Vasquez"] },
                     { name: "Julio Rodriguez (R)", odds: "Listed +500 - Over 0.5 HR", score: 78, emojis: "🚀", blast: "good", note: "One HR with pull-side fit; Hancock is the softer Seattle arm for righties.", chips: ["vs Vasquez"] },
                     { name: "Nick Castellanos (R)", odds: "Listed +710 - Over 0.5 HR", score: 74, emojis: "💎 📜", note: "One HR in the window; Hancock's vs-RHB HR-risk is green for batters, plus prior extra-base success versus Hancock in tiny BvP samples.", chips: ["vs Hancock"] },
                     { name: "Ramon Laureano (R)", odds: "Listed +800 - Over 0.5 HR", score: 73, emojis: "💎", note: "One HR with huge EV spike; long price versus Hancock's RHB lane.", chips: ["vs Hancock"] }
                 ]},
-                { title: "SF @ ATH - Tyler Mahle (R, SF) vs Aaron Civale 🧤 (R, ATH)", description: "Sutter Health Park — +29% HR row with 85°F and very high receptiveness. Civale's vs-RHB HR-risk is strongly green (1.61); Mahle is hittable for Sacramento's righty power.", rows: [
+                { title: "SF @ ATH - Tyler Mahle 🧤 (R, SF) vs Aaron Civale 🧤 (R, ATH)", description: "Sutter Health Park — +29% HR row with 85°F and very high receptiveness. Civale's vs-RHB HR-risk is strongly green (1.61); Mahle is hittable for Sacramento's righty power.", rows: [
                     { name: "Shea Langeliers (R)", odds: "Listed +250 - Over 0.5 HR", score: 92, emojis: "🚀 🌕 🏟️", blast: "high", note: "Two HR with 27.3% barrels and 36.4% pull-air; Sutter +29% HR row versus Mahle in Sacramento heat.", chips: ["vs Mahle"] },
                     { name: "Zack Gelof (R)", odds: "Listed +550 - Over 0.5 HR", score: 80, emojis: "🚀 🏟️", blast: "good", note: "Three HR and four near-HR in the window; Mahle's fly-ball HR leakage plus the park row.", chips: ["vs Mahle"] },
                     { name: "Brent Rooker (R)", odds: "Listed +330 - Over 0.5 HR", score: 83, emojis: "🚀 🏟️", blast: "good", note: "Two HR with 11% barrels; same Mahle contact profile in the best HR park on the slate.", chips: ["vs Mahle"] },
@@ -3191,6 +3198,25 @@
             let tableSort = { key: "score", dir: "desc" };
             let activeQuickFilter = "all";
             let activeEmojiFilters = new Set();
+            const BUM_ON_MOUND = "\u{1F9E4}";
+            function leakingPitcherKeysFromTitle(title) {
+                if (!title) return [];
+                const keys = [];
+                const re = /([\w.'\-\s]+?)\s*\u{1F9E4}\s*\(/gu;
+                let m;
+                while ((m = re.exec(title)) !== null) {
+                    const last = m[1].trim().split(/\s+/).pop();
+                    if (last) keys.push(last.toLowerCase());
+                }
+                return keys;
+            }
+            function formatGameTitleHtml(title) {
+                if (!title) return "";
+                return title.replace(
+                    /([\w.'\-\s]+?)\s*(\u{1F9E4})\s*(\([LR],\s*[A-Z]{2,4}\))/gu,
+                    '$1 <span class="pitcher-bum" title="Bum onna Mound — HR-leaky starter">$2</span> $3'
+                );
+            }
             function effectiveEmojiTagsForRow(row, game) {
                 const blastTier = (row.blast || "").toLowerCase();
                 const hasBlast = blastTier === "good" || blastTier === "high";
@@ -3199,13 +3225,17 @@
                 if (hasBlast && !em.includes("💣")) emojiBase = `${em} 💣`.trim();
                 const fav = isWorstPickzFavoriteRow(row);
                 if (fav && !emojiBase.includes("⭐")) emojiBase = `${emojiBase} ⭐`.trim();
-                const bumOnMound = "\u{1F9E4}";
                 const title = game && game.title ? game.title : "";
-                if (title.includes(bumOnMound) && !emojiBase.includes(bumOnMound)) emojiBase = `${emojiBase} ${bumOnMound}`.trim();
+                const chip = row.chips && row.chips[0] ? row.chips[0] : "";
+                const vsKey = chip.replace(/^vs\s+/i, "").trim().toLowerCase();
+                const bumKeys = leakingPitcherKeysFromTitle(title);
+                if (vsKey && bumKeys.includes(vsKey) && !emojiBase.includes(BUM_ON_MOUND)) {
+                    emojiBase = `${emojiBase} ${BUM_ON_MOUND}`.trim();
+                }
                 return emojiBase;
             }
             function renderGames() {
-                grid.innerHTML = games.map((game, gi) => `<article class="game-card" id="game-${gi}"><div class="game-header"><h3>${game.title}</h3><p>${game.description}</p></div><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></article>`).join("");
+                grid.innerHTML = games.map((game, gi) => `<article class="game-card" id="game-${gi}"><div class="game-header"><h3>${formatGameTitleHtml(game.title)}</h3><p>${game.description}</p></div><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></article>`).join("");
             }
             const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
             function parkStars(card) { if (!card) return 1; const t = card.querySelector(".game-header p")?.textContent || ""; const m = t.match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i); let p = 0; if (m) p = parseInt(m[1] || m[2], 10); if (Number.isNaN(p)) p = 0; if (p >= 15) return 5; if (p >= 5) return 4; if (p >= -3) return 3; if (p >= -12) return 2; return 1; }

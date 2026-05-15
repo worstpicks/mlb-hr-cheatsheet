@@ -2632,10 +2632,10 @@
                 const currentSlate = findCurrentSlateEntry(sheets);
                 if (currentSlateBtn && currentSlate) {
                     const currentHref = resolveManifestHref(currentSlate.href);
-                    const onCurrent =
-                        current && normalizeSheetPageUrl(resolveManifestHref(current.href)) === currentSheetPageUrl();
+                    const onCurrentSlate =
+                        normalizeSheetPageUrl(currentHref) === currentSheetPageUrl();
                     currentSlateBtn.href = currentHref;
-                    currentSlateBtn.hidden = !!onCurrent;
+                    currentSlateBtn.hidden = onCurrentSlate;
                 }
                 setArchiveStatus("", false);
 

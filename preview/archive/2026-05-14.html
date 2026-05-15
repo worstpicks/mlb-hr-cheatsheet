@@ -4015,7 +4015,7 @@
             }
 
             /** Full page reload on this interval so the latest published sheet HTML is loaded; MLB result pills and bet tracker re-run on load. */
-            const SHEET_AUTO_REFRESH_MS = 2 * 60 * 60 * 1000;
+            const SHEET_AUTO_REFRESH_MS = 12 * 60 * 60 * 1000;
             window.setInterval(() => {
                 window.location.reload();
             }, SHEET_AUTO_REFRESH_MS);

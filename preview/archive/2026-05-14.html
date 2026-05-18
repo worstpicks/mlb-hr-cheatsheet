@@ -21,15 +21,22 @@
         gtag('config', 'G-CCSPFX3FHN');
     </script>
     <meta name="robots" content="noindex, nofollow">
-    <title>Worst Pickz Cheat Daily MLB Sheet</title>
+    <title>Archived Worst Pickz Cheat Sheet</title>
     <meta name="sheet-date" content="2026-05-14">
     <!-- Mirror preview/sheets-manifest.json: used when fetch(sheets-manifest.json) fails (e.g. file://). -->
-    <script type="application/json" id="sheets-manifest-fallback">{"version":1,"sheets":[{"date":"2026-05-15","label":"May 15, 2026 \u2014 current slate","href":"/index.html"},{"date":"2026-05-14","label":"May 14, 2026","href":"/archive/2026-05-14.html"}]}</script>
-    <meta property="og:title" content="Worst Pickz Cheat Daily MLB Sheet">
+    <script type="application/json" id="sheets-manifest-fallback">{"version": 1, "sheets": [{"date": "2026-05-18", "label": "May 18, 2026 — current slate", "href": "index.html"}, {"date": "2026-05-16", "label": "May 16, 2026", "href": "archive/2026-05-16.html"}, {"date": "2026-05-15", "label": "May 15, 2026", "href": "archive/2026-05-15.html"}, {"date": "2026-05-14", "label": "May 14, 2026", "href": "archive/2026-05-14.html"}]}</script>
+    <meta property="og:title" content="Archived Worst Pickz Cheat Sheet">
     <meta property="og:description" content="Daily MLB HR cheat sheet — listed odds, filters, bet tracker, and Gambly export.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://worstpickz.win/assets/worst-pickz-hero.png">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0f1a14">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Worst Pickz">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/apple-touch-icon.png" type="image/png">
     <style>
         :root {
             --wpz-color-text: #f5efe9;
@@ -55,7 +62,7 @@
             position: absolute;
             top: 14px;
             right: 14px;
-            z-index: 6;
+            z-index: 20;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -76,6 +83,41 @@
             padding: 0;
         }
         .theme-toggle:hover { background: rgba(15, 23, 42, 0.88); color: #fff; }
+        .pikkit-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: #000000;
+            text-decoration: none;
+            overflow: hidden;
+            flex-shrink: 0;
+            line-height: 0;
+            position: relative;
+            z-index: 12;
+            isolation: isolate;
+        }
+        .pikkit-link:hover {
+            filter: brightness(1.1);
+            border-color: rgba(79, 95, 255, 0.55);
+        }
+        .pikkit-link:focus-visible {
+            outline: 2px solid rgba(251, 191, 36, 0.95);
+            outline-offset: 2px;
+        }
+        .pikkit-link__icon {
+            display: block;
+            width: 42px;
+            height: 42px;
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            flex-shrink: 0;
+        }
         .social-x {
             display: inline-flex;
             align-items: center;
@@ -90,6 +132,29 @@
         }
         .social-x:hover { background: rgba(15,23,42,0.85); color: #fff; }
         .social-x svg { width: 20px; height: 20px; display: block; }
+        .header-install-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 0 11px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(254, 215, 170, 0.4);
+            color: #e7e9ea;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.66rem;
+            font-weight: 800;
+            line-height: 1.15;
+            text-align: center;
+            max-width: 118px;
+        }
+        .header-install-btn:hover {
+            background: rgba(15, 23, 42, 0.88);
+            color: #fff;
+        }
+        .header-install-btn__short { display: none; }
         .brand-tag { display: inline-flex; padding: 6px 12px; margin-bottom: 12px; border-radius: 999px; border: 1px solid var(--wpz-brand-tag-border); background: var(--wpz-brand-tag-bg); color: var(--wpz-brand-tag-text); font-size: 0.78rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
         header h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; color: var(--wpz-color-heading); }
         header p { font-size: 1.02rem; color: var(--wpz-color-paragraph); font-weight: 600; line-height: 1.5; }
@@ -246,6 +311,13 @@
         }
         .game-header { padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); }
         .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; overflow-wrap: anywhere; line-height: 1.25; }
+        .game-header h3 .pitcher-bum {
+            display: inline-block;
+            font-size: 1.12em;
+            line-height: 1;
+            vertical-align: -0.05em;
+            filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.75));
+        }
         .game-header p { overflow-wrap: anywhere; hyphens: auto; }
         .pick-list { display: grid; gap: 10px; padding: 12px; }
         .pick-row { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, auto) minmax(0, 1.5fr); gap: 12px; align-items: start; padding: 12px 56px 12px 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); min-width: 0; position: relative; }
@@ -398,6 +470,96 @@
             border-color: rgba(148, 163, 184, 0.28);
         }
         .hr-row-result__pill--na .hr-row-result__pill-label,
+
+        .batters-won-section {
+            padding: 14px;
+            margin: 0;
+            background: linear-gradient(135deg, rgba(6, 48, 32, 0.94) 0%, rgba(10, 17, 28, 0.96) 55%, rgba(14, 10, 20, 0.95) 100%);
+            border-top: 1px solid rgba(34, 197, 94, 0.28);
+            border-bottom: 1px solid rgba(251, 146, 60, 0.14);
+            min-width: 0;
+        }
+        .batters-won-section[hidden] {
+            display: none !important;
+        }
+        .batters-won-panel {
+            border-color: rgba(34, 197, 94, 0.45);
+            background: rgba(15, 23, 42, 0.5);
+            padding: 14px;
+        }
+        .batters-won-panel h2 {
+            color: #86efac;
+            font-size: inherit;
+            margin: 0 0 0.5rem;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+        .batters-won-lede {
+            margin: 0 0 12px;
+            color: var(--wpz-color-paragraph);
+            font-size: 0.92rem;
+            line-height: 1.45;
+            max-width: 72ch;
+        }
+        .batters-won-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+            gap: 10px;
+        }
+        .batters-won-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2px 12px;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.62);
+            border: 1px solid rgba(34, 197, 94, 0.28);
+            min-width: 0;
+        }
+        .batters-won-item--fav {
+            border-color: rgba(244, 63, 94, 0.5);
+            box-shadow: inset 3px 0 0 rgba(244, 63, 94, 0.85);
+        }
+        .batters-won-name {
+            font-weight: 800;
+            color: #ecfdf5;
+            font-size: 0.95rem;
+        }
+        .batters-won-meta {
+            grid-column: 1;
+            font-size: 0.76rem;
+            color: rgba(226, 232, 240, 0.78);
+        }
+        .batters-won-meta small {
+            opacity: 0.9;
+        }
+        .batters-won-score {
+            grid-row: 1 / span 2;
+            grid-column: 2;
+            font-size: 1.1rem;
+            color: #86efac;
+        }
+        html.theme-light .batters-won-section {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f1f5f9 50%, #e8eef7 100%);
+            border-top-color: rgba(22, 163, 74, 0.35);
+        }
+        html.theme-light .batters-won-panel {
+            border-color: rgba(22, 163, 74, 0.45);
+            background: rgba(255, 255, 255, 0.72);
+        }
+        html.theme-light .batters-won-panel h2 { color: #15803d; }
+        html.theme-light .batters-won-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(22, 163, 74, 0.35);
+        }
+        html.theme-light .batters-won-name { color: #14532d; }
+        html.theme-light .batters-won-meta { color: #334155; }
+        html.theme-light .batters-won-score { color: #15803d; }
+
         .hr-row-result__pill--na .hr-row-result__pill-value {
             color: #94a3b8;
             font-weight: 800;
@@ -454,8 +616,18 @@
             .header-actions { top: 10px; right: 8px; gap: 6px; }
             .header-actions .social-x,
             .header-actions .theme-toggle { width: 38px; height: 38px; }
+            .header-actions .pikkit-link,
+            .header-actions .pikkit-link__icon { width: 38px; height: 38px; }
+            .header-actions .header-install-btn {
+                min-height: 38px;
+                padding: 0 8px;
+                max-width: 80px;
+                font-size: 0.6rem;
+            }
+            .header-install-btn__long { display: none; }
+            .header-install-btn__short { display: inline; }
             .social-x svg { width: 18px; height: 18px; }
-            .intro, .summary-section, .games-section { padding: 10px; }
+            .intro, .summary-section, .games-section, .batters-won-section { padding: 10px; }
             .panel, .summary-card { padding: 12px; }
             .summary-grid { grid-template-columns: 1fr; gap: 10px; }
             .top-five-list { grid-template-columns: 1fr; }
@@ -687,7 +859,6 @@
             outline-offset: 2px;
         }
         .current-slate-btn[hidden] { display: none !important; }
-
         .toolbar-title {
             font-weight: 800;
             font-size: 0.82rem;
@@ -742,26 +913,59 @@
             color: #f8fafc;
             font-size: 0.95rem;
         }
-        .to-top-fab {
-            position: fixed;
-            right: 16px;
-            bottom: 22px;
-            z-index: 60;
+                .scroll-jump-fab {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: stretch;
+            gap: 4px;
+        }
+        .scroll-jump-fab__btn {
             border: 1px solid rgba(254,215,170,0.5);
             background: rgba(127,29,29,0.92);
             color: #fff7ed;
-            padding: 10px 18px;
+            padding: 6px 12px;
             border-radius: 999px;
             font-weight: 800;
             cursor: pointer;
-            font-size: 0.82rem;
+            font-size: 0.72rem;
+            line-height: 1.2;
             box-shadow: 0 6px 22px rgba(0,0,0,0.4);
+            font-family: inherit;
         }
-        .to-top-fab:hover { background: rgba(153,27,27,0.96); }
+        .scroll-jump-fab__btn:hover { background: rgba(153,27,27,0.96); }
+        .scroll-jump-fab__btn:focus-visible {
+            outline: 2px solid rgba(251, 191, 36, 0.95);
+            outline-offset: 2px;
+        }
+        :root {
+            --fab-edge: 12px;
+            --fab-gap: 6px;
+        }
+        .fab-stack {
+            position: fixed;
+            right: var(--fab-edge);
+            bottom: var(--fab-edge);
+            z-index: 60;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+            gap: var(--fab-gap);
+        }
         @media (max-width: 640px) {
-            .to-top-fab { right: 12px; bottom: 16px; padding: 9px 14px; font-size: 0.78rem; }
+            :root { --fab-edge: 10px; --fab-gap: 6px; }
+            .fab-stack { right: var(--fab-edge); bottom: var(--fab-edge); }
+            .scroll-jump-fab__btn { padding: 7px 12px; font-size: 0.74rem; }
         }
         .last-updated { font-size: 0.72rem; color: #94a3b8; margin: 0; width: 100%; }
+        .ios-install-steps {
+            margin: 12px 0 0 0;
+            padding-left: 1.15rem;
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            line-height: 1.55;
+        }
+        .ios-install-steps li { margin-bottom: 8px; }
+        html.theme-light .ios-install-steps { color: #475569; }
         .toolbar-view-tools {
             display: flex;
             flex-wrap: wrap;
@@ -1194,19 +1398,17 @@
             text-align: left;
         }
         .props-table thead th .sort-h:hover { color: #fff; }
-        .quick-legend {
-            position: fixed;
-            right: 12px;
-            bottom: 72px;
-            z-index: 55;
+                .quick-legend {
+            position: static;
+            z-index: 1;
             max-width: 220px;
         }
         .quick-legend-toggle {
             width: 100%;
             border-radius: 12px;
-            padding: 8px 12px;
+            padding: 6px 10px;
             font-weight: 800;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             cursor: pointer;
@@ -1216,7 +1418,7 @@
         }
         .quick-legend-panel {
             display: none;
-            margin-top: 8px;
+            margin-top: 6px;
             padding: 10px 12px;
             border-radius: 12px;
             border: 1px solid rgba(96, 165, 250, 0.25);
@@ -1229,6 +1431,7 @@
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
         }
         .quick-legend.is-open .quick-legend-panel { display: block; }
+        .fab-stack .quick-legend.is-open { z-index: 62; }
         .quick-legend-item {
             display: block;
             padding: 4px 0;
@@ -1354,12 +1557,93 @@
         .player-pop__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
         .player-pop__actions { display: flex; flex-wrap: wrap; gap: 10px; }
         @media (max-width: 900px) {
-            .quick-legend { right: 8px; bottom: 68px; max-width: min(200px, 46vw); }
+            .fab-stack .quick-legend { max-width: min(200px, 46vw); }
         }
         @media (max-width: 640px) {
             .quick-legend { display: none; }
         }
-        .toolbar-parlay {
+        .my-slip-fab {
+            position: static;
+            z-index: 1;
+            padding: 10px 14px; border-radius: 999px;
+            border: 1px solid rgba(251, 146, 60, 0.5);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.98) 0%, rgba(127, 29, 29, 0.95) 100%);
+            color: #fff7ed; font-weight: 800; font-size: 0.8rem; cursor: pointer;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+        }
+        .my-slip-fab:hover { filter: brightness(1.08); }
+        .my-slip-fab:focus-visible {
+            outline: 2px solid rgba(251, 191, 36, 0.95);
+            outline-offset: 2px;
+        }
+        .my-slip-fab-count {
+            display: inline-block; min-width: 1.25rem; margin-left: 6px;
+            padding: 2px 6px; border-radius: 999px; background: rgba(15, 23, 42, 0.65);
+            font-variant-numeric: tabular-nums;
+        }
+        .my-slip-backdrop {
+            position: fixed; inset: 0; z-index: 85;
+            background: rgba(0, 0, 0, 0.55);
+            opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+        }
+        .my-slip-backdrop.is-open { opacity: 1; pointer-events: auto; }
+        .my-slip-panel {
+            position: fixed; top: 0; right: 0; z-index: 90;
+            width: min(100%, 360px); height: 100%; max-height: 100dvh;
+            display: flex; flex-direction: column;
+            background: linear-gradient(180deg, #0f172a 0%, #1e0a0a 100%);
+            border-left: 2px solid rgba(251, 146, 60, 0.45);
+            box-shadow: -12px 0 40px rgba(0, 0, 0, 0.5);
+            transform: translateX(100%);
+            transition: transform 0.22s ease;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .my-slip-panel.is-open {
+            transform: translateX(0);
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .my-slip-panel__head {
+            display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+            padding: 14px 14px 12px; border-bottom: 1px solid rgba(251, 146, 60, 0.25);
+            flex-shrink: 0;
+        }
+        .my-slip-panel__head h2 { font-size: 1.1rem; color: #fed7aa; margin: 0; }
+        .my-slip-panel__head p { font-size: 0.72rem; color: #94a3b8; margin: 4px 0 0; line-height: 1.35; }
+        .my-slip-panel__body {
+            flex: 1; overflow: auto; padding: 12px 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .my-slip-panel__body .parlay-legs { margin: 0; }
+        .my-slip-panel__body .parlay-combined { margin-top: 10px; }
+        .my-slip-panel__actions {
+            display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 14px max(16px, env(safe-area-inset-bottom));
+            border-top: 1px solid rgba(251, 146, 60, 0.25);
+            flex-shrink: 0;
+        }
+        .my-slip-panel__actions .btn-gambly,
+        .my-slip-panel__actions .btn-secondary { flex: 1; min-width: 7rem; }
+        .parlay-leg--empty {
+            cursor: default; opacity: 0.85; font-size: 0.82rem; color: #94a3b8;
+            border-style: dashed;
+        }
+        .toolbar-parlay-stack { display: none !important; }
+        body.my-slip-open { overflow: hidden; }
+        html.theme-light .my-slip-panel {
+            background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%);
+            border-left-color: rgba(234, 88, 12, 0.35);
+        }
+        html.theme-light .my-slip-panel__head h2 { color: #9a3412; }
+        html.theme-light .my-slip-panel__head p { color: #64748b; }
+        html.theme-light .my-slip-fab {
+            color: #fff7ed;
+            border-color: rgba(234, 88, 12, 0.45);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .my-slip-panel, .my-slip-backdrop { transition: none; }
+        }
+                .toolbar-parlay {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -1618,6 +1902,69 @@
             line-height: 1.45;
             margin: 0 0 10px 0;
         }
+        .ios-install-hint__preview {
+            display: flex;
+            justify-content: center;
+            margin: 0 0 14px;
+        }
+        .ios-install-hint__preview img {
+            width: 96px;
+            height: 96px;
+            border-radius: 22%;
+            border: 2px solid rgba(251, 146, 60, 0.35);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            object-fit: cover;
+        }
+        .ios-install-hint__steps {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: #e2e8f0;
+            font-size: 0.85rem;
+            line-height: 1.55;
+        }
+        .ios-install-hint__steps li { margin-bottom: 8px; }
+        .ios-install-hint__note {
+            margin-top: 12px;
+            font-size: 0.76rem;
+            color: #94a3b8;
+            line-height: 1.45;
+        }
+        .bet-sheet-modal__head .install-hint__lede {
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .install-hint__platform {
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fed7aa;
+            margin: 0 0 8px;
+        }
+        .install-hint__divider {
+            border: 0;
+            border-top: 1px solid rgba(71, 85, 105, 0.55);
+            margin: 16px 0;
+        }
+        .install-hint__chrome-teaser {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .install-hint__chrome-install {
+            margin: 0 0 12px;
+            width: 100%;
+            justify-content: center;
+        }
+        @media (display-mode: standalone) {
+            body {
+                padding-top: calc(16px + env(safe-area-inset-top, 0px));
+                padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+                padding-left: calc(16px + env(safe-area-inset-left, 0px));
+                padding-right: calc(16px + env(safe-area-inset-right, 0px));
+            }
+        }
         .bet-tracker-summary {
             font-size: 0.8rem;
             font-weight: 800;
@@ -1698,6 +2045,8 @@
         .pick-table-row.quick-filter-hidden,
         .pick-row.emoji-filter-hidden,
         .pick-table-row.emoji-filter-hidden { display: none !important; }
+        .pick-row.advanced-filter-hidden,
+        .pick-table-row.advanced-filter-hidden { display: none !important; }
         .props-table th .sort-h {
             background: none;
             border: none;
@@ -1762,13 +2111,19 @@
         html.theme-light header p { color: #334155; }
         html.theme-light .weather-link { color: #1d4ed8; }
         html.theme-light .header-actions .theme-toggle,
-        html.theme-light .header-actions .social-x {
+        html.theme-light .header-actions .social-x,
+        html.theme-light .header-actions .header-install-btn {
             background: rgba(255, 255, 255, 0.82);
             border-color: rgba(100, 116, 139, 0.4);
             color: #0f172a;
         }
+        html.theme-light .pikkit-link {
+            background: transparent;
+            border-color: rgba(15, 23, 42, 0.2);
+        }
         html.theme-light .header-actions .theme-toggle:hover,
-        html.theme-light .header-actions .social-x:hover {
+        html.theme-light .header-actions .social-x:hover,
+        html.theme-light .header-actions .header-install-btn:hover {
             background: #fff;
             color: #0f172a;
         }
@@ -2057,6 +2412,11 @@
         html.theme-light .player-pop__emoji { color: #a16207; }
         html.theme-light .bet-sheet-modal__head h2 { color: #0f172a; }
         html.theme-light .bet-sheet-modal__head p { color: #475569; }
+        html.theme-light .bet-sheet-modal__head .install-hint__lede { color: #475569; }
+        html.theme-light .install-hint__platform { color: #9a3412; }
+        html.theme-light .ios-install-hint__steps { color: #334155; }
+        html.theme-light .ios-install-hint__note { color: #64748b; }
+        html.theme-light .install-hint__divider { border-top-color: rgba(148, 163, 184, 0.55); }
         html.theme-light .gambly-export-modal__panel {
             background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
             border-color: rgba(148, 163, 184, 0.45);
@@ -2103,7 +2463,7 @@
         @media print {
             body { background: #fff !important; color: #111 !important; padding: 0 !important; overflow: visible !important; }
             .container { border: none !important; box-shadow: none !important; max-width: none !important; }
-            .sheet-toolbar, .to-top-fab, .header-actions, .brand-tag, .header-hero-wrap, .quick-legend, #tableView, #betTrackerModal, #playerPreviewModal, #parlayPanel { display: none !important; }
+            .sheet-toolbar, .fab-stack, .header-actions, .brand-tag, .header-hero-wrap, .quick-legend, #tableView, #betTrackerModal, #playerPreviewModal, #installHintModal, #parlayPanel { display: none !important; }
             .game-card, .pick-row, .panel, .summary-card { break-inside: avoid; }
             .pick-row { border: 1px solid #ccc !important; background: #fafafa !important; }
             .gambly-pick-wrap { display: none !important; }
@@ -2128,20 +2488,23 @@
 </head>
 <body>
     <div class="container">
+
         <header>
             <div class="header-actions">
                 <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false" title="Switch to light mode" aria-label="Switch to light mode">☀️</button>
+                <button type="button" class="header-install-btn" id="installShortcutBtn" hidden title="Add Worst Pickz to your Home Screen — fullscreen app-style view, optimized on mobile" aria-label="Install Worst Pickz shortcut on your Home Screen"><span class="header-install-btn__long">Install shortcut</span><span class="header-install-btn__short" aria-hidden="true">Install</span></button>
+                <a class="pikkit-link" href="https://links.pikkit.com/invite/worst" target="_blank" rel="noopener noreferrer" aria-label="Track on Pikkit — code WORST" title="Track on Pikkit — code WORST"><img class="pikkit-link__icon" src="../assets/pikkit-icon.svg" width="42" height="42" alt="" decoding="async" loading="eager"></a>
                 <a class="social-x" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer" aria-label="Worst Pickz on X">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
             </div>
             <div class="header-brand">
                 <div class="header-hero-wrap">
-                    <img class="header-hero" src="./assets/worst-pickz-hero.png" width="400" height="400" alt="Worst Pickz mascot on a pile of gold" decoding="async" fetchpriority="high">
+                    <img class="header-hero" src="../assets/worst-pickz-hero.png" width="400" height="400" alt="Worst Pickz mascot on a pile of gold" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='https://worstpickz.win/assets/worst-pickz-hero.png'">
                 </div>
                 <div class="header-intro">
-                    <div class="brand-tag">Worst Pickz Cheat Daily MLB Sheet</div>
-                    <h1>Worst Pickz Cheat Daily MLB Sheet</h1>
+                    <div class="brand-tag" id="sheetBrandTag">Worst Pickz Cheat Daily MLB Sheet</div>
+                                        <h1 id="sheetLiveTitle">Archived Worst Pickz Cheat Sheet</h1>
                     <p>Thursday, May 14, 2026 — Worst Pickz HR cheat sheet with listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong> get the rose border and ⭐ in the emoji row; the top-right <strong>Save</strong> box adds props to your local <strong>bet tracker</strong>.</p>
                 </div>
             </div>
@@ -2151,15 +2514,21 @@
                 <span class="toolbar-title" id="sheetNavTitle">Sheet</span>
                 <label class="filter-label filter-label--compact" for="sheetDatePicker">Go to date <input type="date" id="sheetDatePicker" autocomplete="off" aria-describedby="archiveSheetStatus"></label>
                 <label class="filter-label filter-label--compact" for="archiveSheetSelect">Archive <select id="archiveSheetSelect" class="archive-sheet-select" aria-label="Open a saved cheat sheet by date"></select></label>
-                <a href="/index.html" id="currentSlateBtn" class="current-slate-btn">Current slate</a>
+                <a href="index.html" id="currentSlateBtn" class="current-slate-btn">Current slate</a>
                 <span class="archive-sheet-status" id="archiveSheetStatus" role="status" aria-live="polite"></span>
             </div>
             <div class="toolbar-row">
                 <span class="toolbar-title" id="toolbarTitle">Jump to</span>
                 <div class="toolbar-toc" id="toolbarToc"></div>
             </div>
-            <div class="toolbar-row">
-                <label class="filter-label" for="playerFilter">Player <input type="search" id="playerFilter" placeholder="Search name…" autocomplete="off" enterkeyhint="search"></label>
+            <div class="toolbar-row toolbar-row--global-filters" aria-label="Search and filters">
+                <span class="toolbar-title">Find</span>
+                <label class="filter-label" for="playerFilter">Player <input type="search" id="playerFilter" placeholder="Search name…" autocomplete="off"></label>
+                <label class="filter-label" for="scoreMinFilter">Min score <input type="number" id="scoreMinFilter" min="0" max="100" placeholder="Any"></label>
+                <label class="filter-label" for="gradeFilter">Grade
+                    <select id="gradeFilter"><option value="">All</option><option>S+</option><option>S</option><option>A</option><option>B+</option><option>B</option><option>C+</option><option>C</option><option>D</option><option>F</option></select>
+                </label>
+                <button type="button" class="filter-chip" id="clearAllFiltersBtn">Clear filters</button>
             </div>
             <div class="toolbar-row toolbar-row--emoji-filters">
                 <span class="filter-emoji-toolbar-label" id="emojiFilterLabel">Emoji</span>
@@ -2175,6 +2544,7 @@
                     <button type="button" class="filter-chip filter-chip--emoji" data-emoji="📜" aria-pressed="false" title="BvP history">📜</button>
                     <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🕊️" aria-pressed="false" title="Pitcher HR-risk advantage">🕊️</button>
                     <button type="button" class="filter-chip filter-chip--emoji" data-emoji="🧤" aria-pressed="false" title="Bum onna mound / HR-leaky SP (glove in game title)">🧤</button>
+                    <button type="button" class="filter-chip filter-chip--emoji" data-emoji="💤" aria-pressed="false" title="Overdue">💤</button>
                     <button type="button" class="filter-chip" id="clearEmojiFiltersBtn" title="Clear emoji tag filters">Clear tags</button>
                 </div>
             </div>
@@ -2191,6 +2561,8 @@
                     <button type="button" class="filter-chip" data-filter="elite">Elite 90+</button>
                     <button type="button" class="filter-chip" data-filter="longshot" title="Listed HR price is +700 American or higher">Longshot odds (+700+)</button>
                     <button type="button" class="filter-chip" data-filter="park">Park boost +5%</button>
+                    <button type="button" class="filter-chip" data-filter="favorites">⭐ Favorites</button>
+                    <button type="button" class="filter-chip" data-filter="moonshot">🌕 Moonshots</button>
                 </div>
             </div>
             <div class="toolbar-row toolbar-parlay toolbar-parlay-stack">
@@ -2204,8 +2576,8 @@
                         <h4>Parlay math (uncorrelated)</h4>
                         <p class="parlay-disclaimer">Same-game legs are correlated; books shorten SGPs. This is the naive product of listed American prices from each row.</p>
                     </div>
-                    <ul class="parlay-legs" id="parlayLegs" aria-label="Parlay legs, drag to reorder"></ul>
-                    <div class="parlay-combined" id="parlayCombined" aria-live="polite"></div>
+                    <ul class="parlay-legs" id="parlayLegsToolbar" aria-label="Parlay legs, drag to reorder"></ul>
+                    <div class="parlay-combined" id="parlayCombinedToolbar" aria-live="polite"></div>
                 </div>
             </div>
             <p class="last-updated" id="lastUpdated" aria-live="polite"></p>
@@ -2230,7 +2602,6 @@
                     <div class="band playable-band"><strong>70-79 Playable</strong><span>Usable lane, mostly price-sensitive.</span></div>
                     <div class="band thin-band"><strong>69 and Lower Thin / Fade</strong><span>Mostly longshot-only exposure.</span></div>
                 </div>
-                <p class="model-note">This board covers <strong>55 listed HR props</strong> across <strong>11 games</strong>, with <strong>10 Worst Pickz Favorite</strong> rows (⭐). Use the <strong>Save</strong> box on each row to add that prop to your <strong>bet tracker</strong> (this device). Open <strong>Bet tracker</strong> to set units and odds; <strong>win / loss / void</strong> come from the MLB Stats API automatically (including when you browse archive sheets).</p>
             </div>
         </section>
         <section class="summary-section">
@@ -2288,20 +2659,17 @@
                     <details class="legend-fold" id="legendFold">
                         <summary>Legend key &amp; reading guide</summary>
                         <div class="legend-fold-body">
-                    <p class="model-note"><strong>How to read rows:</strong> Player (hand) — listed HR line text — emoji tags — model score. Notes are <strong>batter vs opposing starter only</strong>. <strong>⭐</strong> appears only on designated <strong>Worst Pickz Favorites</strong> (rose border — set on the sheet, not toggled in the browser). Use <strong>Add to Gambly</strong> on each row you want in <strong>Gambly export</strong>. The <strong>Save</strong> box (top-right on each row) adds the prop to your <strong>bet tracker</strong>; a teal bar shows tracked picks. Bet outcomes update from <strong>MLB box scores</strong> (see <strong>Bet tracker</strong>). <strong>🕊️</strong> = PropFinder HR-risk split clearly favors this batter's lane (see legend).</p>
-                    <p class="model-note"><strong>Grade:</strong> <strong>S+ / S</strong> = premium HR setup, <strong>A-B</strong> = strong playable lane, <strong>C-F</strong> = thinner or more flawed spot.</p>
                     <div class="emoji-key-grid">
                         <div class="emoji-key-item"><strong>💎</strong> Underrated / I like</div>
                         <div class="emoji-key-item"><strong>⚾</strong> Pitcher Hand Weakness / HR Target</div>
                         <div class="emoji-key-item"><strong>⭐</strong> Worst Pickz Favorite (sheet-designated; rose border)</div>
-                        <div class="emoji-key-item"><strong>Save box</strong> — Bet tracker (top-right; teal bar when tracked)</div>
                         <div class="emoji-key-item"><strong>🚀</strong> 100+ mph EV / loud EV profile</div>
                         <div class="emoji-key-item"><strong>💣</strong> Strong blast profile</div>
                         <div class="emoji-key-item"><strong>🌕</strong> Moonshot - Elite HR Targetability</div>
                         <div class="emoji-key-item"><strong>🏟️</strong> Good Park / weather support</div>
                         <div class="emoji-key-item"><strong>🩹</strong> Sharp Spot</div>
                         <div class="emoji-key-item"><strong>📜</strong> BvP History</div>
-                        <div class="emoji-key-item"><strong>🕊️</strong> Clear pitcher HR-risk advantage (PropFinder HR-risk split favors this batter's handedness / lane)</div>
+                        <div class="emoji-key-item"><strong>🕊️</strong> Pitcher HR-risk advantage</div>
                         <div class="emoji-key-item"><strong>🧤</strong> Bum onna Mound / HR-leaky SP in game title</div>
                     </div>
                         </div>
@@ -2309,37 +2677,71 @@
                 </div>
             </div>
         </section>
+        <section class="games-section" id="gamesSection">
+            <div class="games-grid" id="gamesGrid"></div>
+            <div id="tableView" hidden></div>
+            </section>
+        <section class="batters-won-section" id="battersWonSection" aria-labelledby="battersWonHeading">
+            <div class="panel batters-won-panel">
+                <h2 id="battersWonHeading">Batters Won</h2>
+                <p class="batters-won-lede" id="battersWonLede" aria-live="polite">Checking homers from MLB box scores…</p>
+                <ol class="batters-won-list" id="battersWonList"></ol>
+            </div>
+        </section>
+        <footer class="site-footer-cta" role="contentinfo">
+                <h2 class="site-footer-cta__title">Follow Worst Pickz</h2>
+                <p class="site-footer-cta__text">Follow <strong>@WorstPickz</strong> on X for daily sheet drops. Reply with your leans, quote-tweet when the board hits, and keep the timeline on the sheet.</p>
+                <div class="site-footer-cta__actions">
+                    <a class="site-footer-cta__btn" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer">Open @WorstPickz on X</a>
+                    <a class="site-footer-cta__link" href="https://x.com/intent/tweet?text=From%20the%20%40WorstPickz%20MLB%20sheet%20%E2%80%94%20" target="_blank" rel="noopener noreferrer">Share on X</a>
+                </div>
+            </footer>
+        
+    </div>
+
+
+
+    <div class="fab-stack" aria-label="Sheet shortcuts">
+    <button type="button" class="my-slip-fab" id="mySlipFab">My Slip<span class="my-slip-fab-count" id="mySlipFabCount">0</span></button>
+    <div class="scroll-jump-fab" role="group" aria-label="Scroll page">
+        <button type="button" class="scroll-jump-fab__btn" id="scrollToTop" aria-label="Back to top of page">↑ Top</button>
+        <button type="button" class="scroll-jump-fab__btn" id="scrollToBottom" aria-label="Go to bottom of page">↓ Bottom</button>
+    </div>
         <aside class="quick-legend" id="quickLegend" aria-label="Emoji legend">
             <button type="button" class="quick-legend-toggle" id="quickLegendToggle" aria-expanded="false">Legend</button>
             <div class="quick-legend-panel" id="quickLegendPanel" role="region" aria-label="Legend entries">
                 <span class="quick-legend-item" title="Underrated / I like this spot">💎 Underrated / I like</span>
                 <span class="quick-legend-item" title="Pitcher handedness or mix leans HR-vulnerable">⚾ Pitcher HR target</span>
                 <span class="quick-legend-item" title="Designated Worst Pickz Favorite on this sheet">⭐ Favorite</span>
-                <span class="quick-legend-item" title="Save prop to bet tracker">💾 Tracker</span>
                 <span class="quick-legend-item" title="100+ mph EV or loud exit velo">🚀 Loud EV</span>
                 <span class="quick-legend-item" title="Strong blast / barrel shape">💣 Blast profile</span>
                 <span class="quick-legend-item" title="Elite HR targetability ceiling">🌕 Moonshot</span>
                 <span class="quick-legend-item" title="Park or weather helps HR">🏟️ Park / weather</span>
                 <span class="quick-legend-item" title="Sharp situational spot">🩹 Sharp spot</span>
                 <span class="quick-legend-item" title="Head-to-head history chip">📜 BvP</span>
-                <span class="quick-legend-item" title="PropFinder HR-risk split favors this batter lane">🕊️ HR-risk edge</span>
+                <span class="quick-legend-item" title="Pitcher HR-risk advantage">🕊️ HR-risk edge</span>
                 <span class="quick-legend-item" title="Leaky starter called out in game line">🧤 HR-leaky SP</span>
+                <span class="quick-legend-item" title="Overdue">💤 Overdue</span>
             </div>
         </aside>
-        <section class="games-section" id="gamesSection">
-            <div class="games-grid" id="gamesGrid"></div>
-            <div id="tableView" hidden></div>
-            <footer class="site-footer-cta" role="contentinfo">
-                <h2 class="site-footer-cta__title">Follow Worst Pickz</h2>
-                <p class="site-footer-cta__text">Follow <strong>@WorstPickz</strong> on X for daily sheet drops and bad-beat solidarity. Reply with your leans, quote-tweet when the board hits, and keep the timeline on the sheet.</p>
-                <div class="site-footer-cta__actions">
-                    <a class="site-footer-cta__btn" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer">Open @WorstPickz on X</a>
-                    <a class="site-footer-cta__link" href="https://x.com/intent/tweet?text=From%20the%20%40WorstPickz%20MLB%20sheet%20%E2%80%94%20" target="_blank" rel="noopener noreferrer">Share on X</a>
-                </div>
-            </footer>
-        </section>
     </div>
-    <button type="button" class="to-top-fab" id="toTop" aria-label="Back to top of page">↑ Top</button>
+
+    <div class="my-slip-backdrop" id="mySlipBackdrop" hidden></div>
+    <aside class="my-slip-panel" id="mySlipPanel" aria-hidden="true">
+        <div class="my-slip-panel__head">
+            <div><h2>My Slip</h2><p>Saved HR props + combined odds (uncorrelated). Export or track on Pikkit.</p></div>
+            <button type="button" class="btn-secondary" id="mySlipClose">Close</button>
+        </div>
+        <div class="my-slip-panel__body">
+            <ul class="parlay-legs" id="mySlipLegs"></ul>
+            <div class="parlay-combined" id="mySlipCombined"></div>
+        </div>
+        <div class="my-slip-panel__actions">
+            <button type="button" class="btn-secondary" id="clearPicksSlip">Clear</button>
+            <button type="button" class="btn-gambly" id="exportGamblySlip" disabled>Export Gambly</button>
+        </div>
+    </aside>
+
 
     <script>
         (() => {
@@ -2455,12 +2857,42 @@
             const currentSlateBtn = document.getElementById("currentSlateBtn");
             let sheetsManifestBaseUrl = null;
 
+            function isArchivedSheetPage() {
+                return /\/archive\//i.test(window.location.pathname || "");
+            }
+
+            function getSheetSiteRoot() {
+                let p = window.location.pathname || "/";
+                if (p.endsWith("/index.html")) {
+                    p = p.slice(0, -"/index.html".length);
+                } else if (/\/archive\/[^/]+\.html$/i.test(p)) {
+                    p = p.replace(/\/archive\/[^/]+\.html$/i, "");
+                } else if (/\.html$/i.test(p)) {
+                    p = p.replace(/\/[^/]+$/, "");
+                }
+                if (!p || p === "/") return "";
+                return p;
+            }
+            function manifestBaseUrl() {
+                if (sheetsManifestBaseUrl) return sheetsManifestBaseUrl;
+                if (window.location.protocol === "file:") {
+                    return new URL("./", window.location.href).href;
+                }
+                return new URL((getSheetSiteRoot() || "") + "/", window.location.origin).href;
+            }
             function resolveManifestHref(href) {
                 const h = (href || "").trim();
                 if (!h) return window.location.href;
-                if (h.startsWith("/")) return new URL(h, window.location.origin).href;
-                const base = sheetsManifestBaseUrl || new URL("/", window.location.href).href;
-                return new URL(h, base).href;
+                if (/^https?:\/\//i.test(h)) return h;
+                if (h.startsWith("/")) {
+                    if (window.location.protocol === "file:") {
+                        return new URL("." + h, window.location.href).href;
+                    }
+                    const root = getSheetSiteRoot();
+                    const path = ((root || "") + h).replace(/\/{2,}/g, "/");
+                    return new URL(path, window.location.origin).href;
+                }
+                return new URL(h, manifestBaseUrl()).href;
             }
             function normalizeSheetPageUrl(hrefAbs) {
                 const u = new URL(hrefAbs);
@@ -2544,7 +2976,9 @@
                 }
                 const fb = sheetsManifestFallback();
                 if (fb) {
-                    sheetsManifestBaseUrl = new URL("/", window.location.href).href;
+                    sheetsManifestBaseUrl = isArchivedSheetPage()
+                        ? new URL("../", window.location.href).href
+                        : new URL("./", window.location.href).href;
                     return fb;
                 }
                 throw new Error("no manifest");
@@ -2558,6 +2992,14 @@
                     sheetDatePicker.disabled = true;
                     archiveSheetSelect.disabled = true;
                     setArchiveStatus("Sheet list unavailable (offline or missing sheets-manifest.json).", false);
+                    if (currentSlateBtn && isArchivedSheetPage()) {
+                        try {
+                            currentSlateBtn.href = resolveManifestHref("index.html");
+                        } catch (err) {
+                            currentSlateBtn.href = "index.html";
+                        }
+                        currentSlateBtn.hidden = false;
+                    }
                     return;
                 }
                 const raw = Array.isArray(manifest.sheets) ? manifest.sheets : [];
@@ -2585,24 +3027,30 @@
                 archiveSheetSelect.innerHTML = "";
                 sheets.forEach((s) => {
                     const opt = document.createElement("option");
-                    opt.value = resolveManifestHref(s.href);
+                    opt.value = s.href;
                     opt.textContent = s.label;
                     archiveSheetSelect.appendChild(opt);
                 });
                 if (current) {
-                    try {
-                        archiveSheetSelect.value = resolveManifestHref(current.href);
-                    } catch (e) {
+                    const curHref = current.href;
+                    if ([...archiveSheetSelect.options].some((o) => o.value === curHref)) {
+                        archiveSheetSelect.value = curHref;
+                    } else {
                         archiveSheetSelect.selectedIndex = 0;
                     }
                 }
                 const currentSlate = findCurrentSlateEntry(sheets);
-                if (currentSlateBtn && currentSlate) {
-                    const currentHref = resolveManifestHref(currentSlate.href);
-                    const onCurrentSlate =
-                        normalizeSheetPageUrl(currentHref) === currentSheetPageUrl();
-                    currentSlateBtn.href = currentHref;
-                    currentSlateBtn.hidden = onCurrentSlate;
+                if (currentSlateBtn) {
+                    if (currentSlate) {
+                        const currentHref = resolveManifestHref(currentSlate.href);
+                        const onCurrentSlate =
+                            normalizeSheetPageUrl(currentHref) === currentSheetPageUrl();
+                        currentSlateBtn.href = currentHref;
+                        currentSlateBtn.hidden = onCurrentSlate;
+                    }
+                    if (isArchivedSheetPage()) {
+                        currentSlateBtn.hidden = false;
+                    }
                 }
                 setArchiveStatus("", false);
 
@@ -2697,16 +3145,60 @@
                     localStorage.setItem(BET_TRACKER_LS, JSON.stringify(betTracker));
                 } catch (e) {}
             }
-            function trackerRowForPicker(gi, ri) {
+            function trackerMatchupForGame(gi) {
+                const game = games[gi];
+                return game ? matchupShort(game.title) : "";
+            }
+            function findTrackerEntryForSheetRow(gi, ri) {
                 const sd = getSheetDateMeta() || "unknown";
-                return betTracker.find((t) => t.sheetDate === sd && t.gi === gi && t.ri === ri);
+                const game = games[gi];
+                const row = game && game.rows[ri];
+                if (!row) return null;
+                const matchup = trackerMatchupForGame(gi);
+                const byStable = betTracker.find(
+                    (t) =>
+                        t.sheetDate === sd &&
+                        t.name === row.name &&
+                        (!t.matchup || t.matchup === matchup || !matchup)
+                );
+                if (byStable) return byStable;
+                const legacy = betTracker.find((t) => t.sheetDate === sd && t.gi === gi && t.ri === ri);
+                if (legacy && legacy.name === row.name) return legacy;
+                return null;
+            }
+            function migrateTrackerIndicesForCurrentSheet() {
+                const sd = (getSheetDateMeta() || "").trim();
+                if (!sd || !Array.isArray(games)) return;
+                let changed = false;
+                betTracker.forEach((e) => {
+                    if ((e.sheetDate || "").trim() !== sd) return;
+                    for (let gi = 0; gi < games.length; gi++) {
+                        const game = games[gi];
+                        const matchup = matchupShort(game.title);
+                        if (e.matchup && e.matchup !== matchup) continue;
+                        const ri = game.rows.findIndex((r) => r.name === e.name);
+                        if (ri < 0) continue;
+                        if (e.gi !== gi || e.ri !== ri || e.matchup !== matchup) {
+                            e.gi = gi;
+                            e.ri = ri;
+                            e.matchup = matchup;
+                            changed = true;
+                        }
+                        break;
+                    }
+                });
+                if (changed) persistBetTracker();
+            }
+            function trackerRowForPicker(gi, ri) {
+                return findTrackerEntryForSheetRow(gi, ri);
             }
             function isTrackedSheetRow(gi, ri) {
                 return !!trackerRowForPicker(gi, ri);
             }
             function toggleBetTrackerFromSheetRow(gi, ri) {
                 const sd = getSheetDateMeta() || "unknown";
-                const i = betTracker.findIndex((t) => t.sheetDate === sd && t.gi === gi && t.ri === ri);
+                const existing = findTrackerEntryForSheetRow(gi, ri);
+                const i = existing ? betTracker.findIndex((t) => t.id === existing.id) : -1;
                 if (i >= 0) {
                     betTracker.splice(i, 1);
                 } else {
@@ -2739,10 +3231,11 @@
                 btn.textContent = betTracker.length ? `Bet tracker (${betTracker.length})` : "Bet tracker";
             }
             loadBetTracker();
+            migrateTrackerIndicesForCurrentSheet();
             updateBetTrackerBtnLabel();
 
             /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
-            const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                        const WORST_PICKZ_FAVORITE_NAMES = new Set([
                 "Mickey Moniak (L)",
                 "Sal Stewart (R)",
                 "James Wood (L)",
@@ -2950,29 +3443,40 @@
                 return s.toLowerCase().replace(/\./g, "").replace(/\s+/g, " ").trim();
             }
             const MLB_TEAM_FROM_ABBR = {
-                COL: "Colorado Rockies",
-                PIT: "Pittsburgh Pirates",
-                WSH: "Washington Nationals",
-                CIN: "Cincinnati Reds",
-                DET: "Detroit Tigers",
-                NYM: "New York Mets",
-                MIA: "Miami Marlins",
-                MIN: "Minnesota Twins",
-                SD: "San Diego Padres",
-                SDP: "San Diego Padres",
-                MIL: "Milwaukee Brewers",
-                SEA: "Seattle Mariners",
-                HOU: "Houston Astros",
-                STL: "St. Louis Cardinals",
-                ATH: "Athletics",
-                PHI: "Philadelphia Phillies",
+                ARI: "Arizona Diamondbacks",
+                ATL: "Atlanta Braves",
+                BAL: "Baltimore Orioles",
                 BOS: "Boston Red Sox",
                 CHC: "Chicago Cubs",
-                ATL: "Atlanta Braves",
-                KC: "Kansas City Royals",
+                CIN: "Cincinnati Reds",
+                CLE: "Cleveland Guardians",
+                COL: "Colorado Rockies",
                 CWS: "Chicago White Sox",
+                CHW: "Chicago White Sox",
+                DET: "Detroit Tigers",
+                HOU: "Houston Astros",
+                KC: "Kansas City Royals",
+                LAA: "Los Angeles Angels",
+                LAD: "Los Angeles Dodgers",
+                MIA: "Miami Marlins",
+                MIL: "Milwaukee Brewers",
+                MIN: "Minnesota Twins",
+                NYM: "New York Mets",
+                NYY: "New York Yankees",
+                ATH: "Athletics",
+                OAK: "Athletics",
+                PHI: "Philadelphia Phillies",
+                PIT: "Pittsburgh Pirates",
+                SD: "San Diego Padres",
+                SDP: "San Diego Padres",
+                SEA: "Seattle Mariners",
                 SF: "San Francisco Giants",
-                LAD: "Los Angeles Dodgers"
+                STL: "St. Louis Cardinals",
+                TB: "Tampa Bay Rays",
+                TEX: "Texas Rangers",
+                TOR: "Toronto Blue Jays",
+                WSH: "Washington Nationals",
+                WAS: "Washington Nationals"
             };
             function parseGameTeamAbbrs(title) {
                 const head = (title.split(" - ")[0] || "").trim();
@@ -3120,14 +3624,19 @@
                 if (hit.hr >= 1) return { code: "win" };
                 return { code: "loss" };
             }
-            async function settleBetTrackerHrFromMlbStats() {
+            async function settleBetTrackerHrFromMlbStats(opts) {
+                const force = !!(opts && opts.force);
                 const datesNeeded = new Set();
                 for (const e of betTracker) {
-                    if (e.result) continue;
+                    if (!force && e.result) continue;
                     const sd = ((e.sheetDate || "").trim() || getSheetDateMeta() || "").trim();
                     if (sd) datesNeeded.add(sd);
                 }
-                if (!datesNeeded.size) return "No pending bets to settle (or missing slate dates).";
+                if (!datesNeeded.size) {
+                    return force
+                        ? "No tracked bets on file for this refresh."
+                        : "No pending bets to settle (or missing slate dates).";
+                }
                 const scheduleByDate = Object.create(null);
                 for (const d of datesNeeded) {
                     scheduleByDate[d] = await mlbStatsScheduleGamesForDate(d);
@@ -3141,7 +3650,7 @@
                 let noGame = 0;
                 let noPlayer = 0;
                 for (const e of betTracker) {
-                    if (e.result) continue;
+                    if (!force && e.result) continue;
                     const sd = ((e.sheetDate || "").trim() || getSheetDateMeta() || "").trim();
                     const mline = sheetMatchupLineForTrackerEntry(e);
                     const r = await mlbStatsResolveHr05ForPick({
@@ -3215,6 +3724,25 @@
             let tableSort = { key: "score", dir: "desc" };
             let activeQuickFilter = "all";
             let activeEmojiFilters = new Set();
+            const BUM_ON_MOUND = "\u{1F9E4}";
+            function leakingPitcherKeysFromTitle(title) {
+                if (!title) return [];
+                const keys = [];
+                const re = /([\w.'\-\s]+?)\s*\u{1F9E4}\s*\(/gu;
+                let m;
+                while ((m = re.exec(title)) !== null) {
+                    const last = m[1].trim().split(/\s+/).pop();
+                    if (last) keys.push(last.toLowerCase());
+                }
+                return keys;
+            }
+            function formatGameTitleHtml(title) {
+                if (!title) return "";
+                return title.replace(
+                    /([\w.'\-\s]+?)\s*(\u{1F9E4})\s*(\([LR],\s*[A-Z]{2,4}\))/gu,
+                    '$1 <span class="pitcher-bum" title="Bum onna Mound — HR-leaky starter">$2</span> $3'
+                );
+            }
             function effectiveEmojiTagsForRow(row, game) {
                 const blastTier = (row.blast || "").toLowerCase();
                 const hasBlast = blastTier === "good" || blastTier === "high";
@@ -3223,25 +3751,57 @@
                 if (hasBlast && !em.includes("💣")) emojiBase = `${em} 💣`.trim();
                 const fav = isWorstPickzFavoriteRow(row);
                 if (fav && !emojiBase.includes("⭐")) emojiBase = `${emojiBase} ⭐`.trim();
-                const bumOnMound = "\u{1F9E4}";
                 const title = game && game.title ? game.title : "";
-                if (title.includes(bumOnMound) && !emojiBase.includes(bumOnMound)) emojiBase = `${emojiBase} ${bumOnMound}`.trim();
+                const chip = row.chips && row.chips[0] ? row.chips[0] : "";
+                const vsKey = chip.replace(/^vs\s+/i, "").trim().toLowerCase();
+                const bumKeys = leakingPitcherKeysFromTitle(title);
+                if (vsKey && bumKeys.includes(vsKey) && !emojiBase.includes(BUM_ON_MOUND)) {
+                    emojiBase = `${emojiBase} ${BUM_ON_MOUND}`.trim();
+                }
+                const OVERDUE_SLEEP = "\u{1F4A4}";
+                if (row.overdue && !emojiBase.includes(OVERDUE_SLEEP)) {
+                    emojiBase = `${emojiBase} ${OVERDUE_SLEEP}`.trim();
+                }
                 return emojiBase;
             }
             function renderGames() {
-                grid.innerHTML = games.map((game, gi) => `<article class="game-card" id="game-${gi}"><div class="game-header"><h3>${game.title}</h3><p>${game.description}</p></div><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></article>`).join("");
+                grid.innerHTML = games.map((game, gi) => `<details class="game-card" open id="game-${gi}"><summary class="game-header"><h3>${formatGameTitleHtml(game.title)}</h3><p>${game.description}</p></summary><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></details>`).join("");
             }
             const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
             function parkStars(card) { if (!card) return 1; const t = card.querySelector(".game-header p")?.textContent || ""; const m = t.match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i); let p = 0; if (m) p = parseInt(m[1] || m[2], 10); if (Number.isNaN(p)) p = 0; if (p >= 15) return 5; if (p >= 5) return 4; if (p >= -3) return 3; if (p >= -12) return 2; return 1; }
             function powerStars(score, emojiText, noteText) { let stars = 1; if (score >= 84) stars += 2; else if (score >= 76) stars += 1; if (emojiText.includes("🚀")) stars += 1; if (emojiText.includes("🌕")) stars += 1; if (emojiText.includes("💣")) stars += 1; if (/(longshot|price-based)/i.test(noteText) && !/[🚀🌕💣]/.test(emojiText)) stars -= 1; return clamp(stars, 1, 5); }
             function attackStars(score, emojiText, noteText) { let stars = 1; if (emojiText.includes("⚾")) stars += 1; if (/(best|elite|strong|clean|leak|lane|fit|ceiling)/i.test(noteText)) stars += 1; if (score >= 82) stars += 1; if (/(suppressive|cold|drag)/i.test(noteText)) stars -= 1; return clamp(stars, 1, 5); }
             function metricRow(label, metricClass, value) { return `<div class="player-rpg-row"><span class="player-rpg-label">${label}</span><span class="star-meter ${metricClass}" style="--rating:${value}"><span class="star-base">★★★★★</span><span class="star-fill">★★★★★</span></span></div>`; }
+
+            function gradeForGiRi(gi, ri) {
+                const game = games[gi];
+                const row = game && game.rows[ri];
+                if (!row) return "";
+                const emojiRow = effectiveEmojiTagsForRow(row, game);
+                const blastBonus = blastBonusMap[(row.blast || "").toLowerCase()] || 0;
+                const card = document.getElementById("game-" + gi);
+                const power = powerStars(row.score, emojiRow, row.note || "");
+                const park = parkStars(card);
+                const attack = attackStars(row.score, emojiRow, row.note || "");
+                return letterGrade(row.score, power, park, attack, blastBonus);
+            }
+            function gradeForPickEl(el) {
+                const dg = el.getAttribute("data-grade");
+                if (dg) return dg.trim();
+                const strong = el.querySelector(".letter-box strong");
+                if (strong) return strong.textContent.trim();
+                const gi = parseInt(el.getAttribute("data-gi") || "", 10);
+                const ri = parseInt(el.getAttribute("data-ri") || "", 10);
+                if (!Number.isNaN(gi) && !Number.isNaN(ri)) return gradeForGiRi(gi, ri);
+                return "";
+            }
             function letterGrade(score, power, park, attack, blastBonus) { const total = score + power * 3 + park * 2 + attack * 3 + blastBonus; if (total >= 118 && power >= 5 && attack >= 4) return "S+"; if (total >= 112) return "S"; if (total >= 106) return "A"; if (total >= 99) return "B+"; if (total >= 92) return "B"; if (total >= 85) return "C+"; if (total >= 78) return "C"; if (total >= 71) return "D"; return "F"; }
             function letterGradeClass(grade) { return { "S+": "s-plus", "S": "s", "A": "a", "B+": "b-plus", "B": "b", "C+": "c-plus", "C": "c", "D": "d", "F": "f" }[grade] || "f"; }
             function enhanceRows() {
                 document.querySelectorAll(".game-card .pick-row").forEach((row) => {
                     const ratingBox = row.querySelector(".rating-box");
                     if (!ratingBox || !ratingBox.parentNode) return;
+                    if (row.querySelector(".rating-stack")) return;
                     const card = row.closest(".game-card");
                     const score = parseInt(ratingBox.querySelector("strong")?.textContent || "0", 10);
                     const emojiText = row.querySelector(".emoji-row")?.textContent || "";
@@ -3251,6 +3811,7 @@
                     const park = parkStars(card);
                     const attack = attackStars(score, emojiText, noteText);
                     const grade = letterGrade(score, power, park, attack, blastBonus);
+                    row.setAttribute("data-grade", grade);
                     row.insertAdjacentHTML("beforeend", `<div class="player-rpg player-rpg-wide"><div class="player-rpg-title">Damage Window Stats</div>${metricRow("Power / HH / FlyBall", "power", power)}${metricRow("Park / Weather", "park", park)}${metricRow("Pitcher / Pitch Mix Attackability", "attack", attack)}</div>`);
                     const stack = document.createElement("div");
                     stack.className = "rating-stack";
@@ -3264,6 +3825,90 @@
                     );
                 });
             }
+
+            function listedOddsLabel(oddsStr) {
+                const n = parseListedNumber(oddsStr);
+                if (n == null) return String(oddsStr || "").replace(/^Listed\s*/i, "").trim();
+                return n > 0 ? "+" + n : String(n);
+            }
+            function updateBattersWonRecap() {
+                const section = document.getElementById("battersWonSection");
+                const listEl = document.getElementById("battersWonList");
+                const ledeEl = document.getElementById("battersWonLede");
+                if (!section || !listEl || !ledeEl) return;
+                section.hidden = false;
+                const wins = [];
+                let pending = 0;
+                let settled = 0;
+                document.querySelectorAll(".game-card .pick-row").forEach((rowEl) => {
+                    const pill = rowEl.querySelector(".hr-row-result__pill");
+                    if (!pill) return;
+                    if (pill.classList.contains("hr-row-result__pill--pending")) pending++;
+                    else if (
+                        pill.classList.contains("hr-row-result__pill--win") ||
+                        pill.classList.contains("hr-row-result__pill--loss") ||
+                        pill.classList.contains("hr-row-result__pill--void")
+                    ) {
+                        settled++;
+                    }
+                    if (!pill.classList.contains("hr-row-result__pill--win")) return;
+                    const gi = parseInt(rowEl.getAttribute("data-gi") || "", 10);
+                    const ri = parseInt(rowEl.getAttribute("data-ri") || "", 10);
+                    const game = games[gi];
+                    const row = game && game.rows[ri];
+                    if (!row || !game) return;
+                    wins.push({
+                        name: row.name,
+                        odds: row.odds,
+                        score: row.score,
+                        matchup: matchupShort(game.title),
+                        fav: isWorstPickzFavoriteRow(row),
+                    });
+                });
+                const totalProps = games.reduce((n, g) => n + (g.rows ? g.rows.length : 0), 0);
+                wins.sort((a, b) => b.score - a.score);
+                if (wins.length) {
+                    ledeEl.textContent =
+                        wins.length +
+                        " of " +
+                        totalProps +
+                        " listed batters homered (Over 0.5 HR cashed per MLB box score).";
+                    listEl.innerHTML = wins
+                        .map((w) => {
+                            const favCls = w.fav ? " batters-won-item--fav" : "";
+                            const favTag = w.fav ? " ⭐" : "";
+                            return (
+                                '<li class="batters-won-item' +
+                                favCls +
+                                '"><span class="batters-won-name">' +
+                                escapeHtml(w.name) +
+                                favTag +
+                                '</span><span class="batters-won-meta"><small>' +
+                                escapeHtml(w.matchup) +
+                                "</small> · Listed " +
+                                escapeHtml(listedOddsLabel(w.odds)) +
+                                '</span><strong class="batters-won-score">' +
+                                w.score +
+                                "</strong></li>"
+                            );
+                        })
+                        .join("");
+                    return;
+                }
+                listEl.innerHTML = "";
+                if (pending > 0) {
+                    ledeEl.textContent =
+                        "No homers recorded yet for listed props — " +
+                        pending +
+                        " still waiting on final box scores (" +
+                        settled +
+                        " settled).";
+                } else {
+                    ledeEl.textContent =
+                        "None of the " + totalProps + " listed batters hit Over 0.5 HR on this slate.";
+                }
+            }
+
             let hrResultsHydrateToken = 0;
             async function hydratePickRowHrResultsFromMlb() {
                 const token = ++hrResultsHydrateToken;
@@ -3325,9 +3970,12 @@
                         setPill(host, "na", "—");
                     }
                 }
+            
+                updateBattersWonRecap();
             }
             renderGames();
             enhanceRows();
+            updateBattersWonRecap();
             void hydratePickRowHrResultsFromMlb();
 
             function buildFlatProps() {
@@ -3414,11 +4062,13 @@
                     const emojiCell = emojiRowDisplay.trim()
                         ? `<span class="table-emoji-tags">${escapeHtml(emojiRowDisplay)}</span>`
                         : '<span class="table-emoji-tags table-emoji-tags--empty">—</span>';
-                    return `<tr class="pick-table-row pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${emojiTagsEnc}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-blast="${blastTier}" data-band="${band}" data-score="${row.score}" data-listed="" data-park="${parkPct == null ? "" : parkPct}" data-longshot="${dataLongshot}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}"><td class="td-bet-sheet"><button type="button" class="bet-save-corner__btn bet-save-corner__btn--table bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="Bet tracker">${tracked ? "✓" : "+"}</button></td><td class="td-gambly"><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn gambly-pick-btn--dense" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add</button></div></td><td class="td-player"><button type="button" class="pick-name-open table-player-name" data-gi="${gi}" data-ri="${ri}">${safeName}</button></td><td class="td-tags">${emojiCell}</td><td class="td-listed">${safeOdds}</td><td class="td-score"><strong>${row.score}</strong></td><td><span class="band-pill ${band}">${band}</span></td><td class="${parkClass}">${parkTxt}</td><td><a class="go-game" href="#game-${gi}">${safeMatch}</a></td></tr>`;
+                    const grade = gradeForGiRi(gi, ri);
+                    return `<tr class="pick-table-row pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${emojiTagsEnc}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-blast="${blastTier}" data-band="${band}" data-score="${row.score}" data-listed="" data-park="${parkPct == null ? "" : parkPct}" data-longshot="${dataLongshot}" data-grade="${grade}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}"><td class="td-bet-sheet"><button type="button" class="bet-save-corner__btn bet-save-corner__btn--table bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="Bet tracker">${tracked ? "✓" : "+"}</button></td><td class="td-gambly"><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn gambly-pick-btn--dense" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add</button></div></td><td class="td-player"><button type="button" class="pick-name-open table-player-name" data-gi="${gi}" data-ri="${ri}">${safeName}</button></td><td class="td-tags">${emojiCell}</td><td class="td-listed">${safeOdds}</td><td class="td-score"><strong>${row.score}</strong></td><td><span class="band-pill ${band}">${band}</span></td><td class="${parkClass}">${parkTxt}</td><td><a class="go-game" href="#game-${gi}">${safeMatch}</a></td></tr>`;
                 }).join("");
                 tableView.innerHTML = `<div class="table-wrap-inner"><table class="props-table"><thead><tr><th class="th-sheet" scope="col" title="Add to bet tracker">Track</th><th class="th-gambly" scope="col" title="Add row to Gambly export">Gambly</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="player">Player <span class="sort-ind">${ind("player")}</span></button></th><th class="th-tags" scope="col" title="Emoji tags (same as card rows)">Tags</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="odds">Listed <span class="sort-ind">${ind("odds")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="score">Score <span class="sort-ind">${ind("score")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="band">Band <span class="sort-ind">${ind("band")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="park">Park % <span class="sort-ind">${ind("park")}</span></button></th><th scope="col">Game</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
                 applyQuickFilterToTable();
                 applyEmojiFiltersToAll();
+                if (typeof applyRowVisibilityFilters === "function") applyRowVisibilityFilters();
             }
             let tableSortWired = false;
             function wireTableSortOnce() {
@@ -3567,20 +4217,12 @@
             buildPropsTable();
             wireTableSortOnce();
             applyQuickFilterAll();
+            const pickCountEl = document.getElementById("pickCount");
+            const clearPicksBtn = document.getElementById("clearPicks");
+            const exportGamblyBtn = document.getElementById("exportGambly");
+            document.addEventListener("click", handleGamblyPickButtonClick);
             if (gamesSection) {
                 gamesSection.addEventListener("click", (e) => {
-                    const gamblyBtn = e.target.closest(".gambly-pick-btn");
-                    if (gamblyBtn && gamesSection.contains(gamblyBtn)) {
-                        e.preventDefault();
-                        const wrap = gamblyBtn.closest(".gambly-pick-wrap");
-                        const cb = wrap && wrap.querySelector(".pick-cb.pick-cb--gambly");
-                        if (cb) {
-                            cb.checked = !cb.checked;
-                            syncGamblyPickRowCheckboxesFrom(cb);
-                            updatePickCount();
-                        }
-                        return;
-                    }
                     const betSave = e.target.closest(".bet-tracker-save-btn");
                     if (betSave && gamesSection.contains(betSave)) {
                         e.preventDefault();
@@ -3635,6 +4277,7 @@
                     activeQuickFilter = chip.getAttribute("data-filter") || "all";
                     quickFilterRow.querySelectorAll(".filter-chip").forEach((c) => c.classList.toggle("is-active", c === chip));
                     applyQuickFilterAll();
+                    if (typeof applyRowVisibilityFilters === "function") applyRowVisibilityFilters();
                 });
             }
             const emojiFilterRow = document.getElementById("emojiFilterRow");
@@ -3703,7 +4346,8 @@
                 setLastUpdatedMessage("Refreshing MLB schedule, box scores, and bet tracker…", false);
                 hrResultsHydrateToken++;
                 try {
-                    const trackerMsg = await settleBetTrackerHrFromMlbStats();
+                    migrateTrackerIndicesForCurrentSheet();
+                    const trackerMsg = await settleBetTrackerHrFromMlbStats({ force: true });
                     await hydratePickRowHrResultsFromMlb();
                     updateBetTrackerBtnLabel();
                     try { refreshPicksUI(); } catch (err) {}
@@ -3724,6 +4368,98 @@
                 }
             }
             if (refreshDataBtn) refreshDataBtn.addEventListener("click", () => { void refreshLiveApiData(); });
+
+            let deferredInstallPrompt = null;
+            window.addEventListener("beforeinstallprompt", (e) => {
+                e.preventDefault();
+                deferredInstallPrompt = e;
+            });
+            window.addEventListener("appinstalled", () => {
+                deferredInstallPrompt = null;
+            });
+
+            const installShortcutBtn = document.getElementById("installShortcutBtn");
+            function isIosLikeDevice() {
+                const ua = navigator.userAgent || "";
+                if (/iPad|iPhone|iPod/i.test(ua)) return true;
+                return navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+            }
+            function isAndroid() {
+                return /Android/i.test(navigator.userAgent || "");
+            }
+            function isRunningStandalone() {
+                return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+            }
+            function shouldOfferInstallShortcut() {
+                if (isRunningStandalone()) return false;
+                return isIosLikeDevice() || isAndroid();
+            }
+            function openInstallHintModal() {
+                let wrap = document.getElementById("installHintModal");
+                if (wrap) wrap.remove();
+                wrap = document.createElement("div");
+                wrap.id = "installHintModal";
+                wrap.className = "bet-sheet-modal";
+                wrap.setAttribute("role", "dialog");
+                wrap.setAttribute("aria-modal", "true");
+                wrap.setAttribute("aria-labelledby", "installHintTitle");
+                wrap.innerHTML =
+                    "<div class=\"bet-sheet-modal__backdrop\" data-install-hint-close=\"1\"></div>" +
+                    "<div class=\"bet-sheet-modal__panel\">" +
+                    "<div class=\"bet-sheet-modal__head\"><div>" +
+                    "<h2 id=\"installHintTitle\">Install shortcut</h2>" +
+                    "<p class=\"install-hint__lede\"><strong>Fullscreen, app-style view</strong> — opens from your Home Screen without Safari/Chrome toolbars cluttering the screen. Easier one-thumb scrolling through props and filters on mobile.</p>" +
+                    "</div>" +
+                    "<button type=\"button\" class=\"btn-secondary\" id=\"installHintClose\">Close</button>" +
+                    "</div>" +
+                    "<div class=\"bet-sheet-modal__scroll\">" +
+                    "<div class=\"ios-install-hint__preview\"><img src=\"/apple-touch-icon.png\" width=\"180\" height=\"180\" alt=\"Worst Pickz icon\"></div>" +
+                    "<p class=\"install-hint__platform\">iPhone / iPad (Safari)</p>" +
+                    "<ol class=\"ios-install-hint__steps\">" +
+                    "<li>Open worstpickz.win in <strong>Safari</strong>.</li>" +
+                    "<li>Tap <strong>Share</strong> <span aria-hidden=\"true\">(square with arrow up)</span>, then <strong>Add to Home Screen</strong>.</li>" +
+                    "<li>Tap <strong>Add</strong>. Launch from the icon anytime.</li>" +
+                    "</ol>" +
+                    "<hr class=\"install-hint__divider\" />" +
+                    "<p class=\"install-hint__platform\">Android (Chrome)</p>" +
+                    "<p class=\"ios-install-hint__note install-hint__chrome-teaser\">If Chrome shows an install banner, tap it. Otherwise use the button below (when available) or the menu steps.</p>" +
+                    "<button type=\"button\" class=\"btn-gambly install-hint__chrome-install\" id=\"installHintChromeInstall\" hidden>Install app (Chrome)</button>" +
+                    "<ol class=\"ios-install-hint__steps\">" +
+                    "<li>Open worstpickz.win in <strong>Google Chrome</strong>.</li>" +
+                    "<li>Tap <strong>⋮</strong> → <strong>Install app</strong> or <strong>Add to Home screen</strong> (wording varies by version).</li>" +
+                    "<li>Confirm — it runs in its own window for the cleanest cheat-sheet layout.</li>" +
+                    "</ol>" +
+                    "<p class=\"ios-install-hint__note\">Other Android browsers may not offer install; Chrome is the reliable option. Already installed? This shortcut button stays hidden.</p>" +
+                    "</div></div>";
+                document.body.appendChild(wrap);
+                const chromeInstallBtn = wrap.querySelector("#installHintChromeInstall");
+                if (chromeInstallBtn && deferredInstallPrompt && isAndroid()) {
+                    chromeInstallBtn.hidden = false;
+                    chromeInstallBtn.addEventListener("click", async () => {
+                        try {
+                            await deferredInstallPrompt.prompt();
+                            await deferredInstallPrompt.userChoice;
+                        } catch (err) {}
+                        deferredInstallPrompt = null;
+                        chromeInstallBtn.hidden = true;
+                    });
+                }
+                const close = () => {
+                    document.removeEventListener("keydown", onEsc, true);
+                    wrap.remove();
+                };
+                function onEsc(e) {
+                    if (e.key === "Escape") close();
+                }
+                document.addEventListener("keydown", onEsc, true);
+                wrap.querySelector("[data-install-hint-close]").addEventListener("click", close);
+                wrap.querySelector("#installHintClose").addEventListener("click", close);
+            }
+            if (installShortcutBtn) {
+                installShortcutBtn.hidden = !shouldOfferInstallShortcut();
+                installShortcutBtn.addEventListener("click", () => openInstallHintModal());
+            }
+
             const legendFold = document.getElementById("legendFold");
             function syncLegendFold() {
                 if (!legendFold) return;
@@ -3767,6 +4503,196 @@
                     }
                 });
             }
+
+            const SHEET_TITLE_DAILY = 'Worst Pickz Cheat Daily MLB Sheet';
+            const SHEET_TITLE_ARCHIVED = 'Archived Worst Pickz Cheat Sheet';
+            function isArchivedSheetPage() {
+                return /\/archive\//i.test(window.location.pathname || "");
+            }
+            function syncSheetLiveHeader() {
+                const brand = document.getElementById("sheetBrandTag");
+                const h1 = document.getElementById("sheetLiveTitle");
+                const archived = isArchivedSheetPage();
+                if (archived) {
+                    if (brand) brand.textContent = SHEET_TITLE_ARCHIVED;
+                    if (h1) h1.textContent = SHEET_TITLE_ARCHIVED;
+                    document.title = SHEET_TITLE_ARCHIVED;
+                    const og = document.querySelector('meta[property="og:title"]');
+                    if (og) og.setAttribute("content", SHEET_TITLE_ARCHIVED);
+                } else if (brand) {
+                    brand.textContent = SHEET_TITLE_DAILY;
+                }
+                const sd = (getSheetDateMeta() || "").trim();
+                if (!sd || sd.length < 10) {
+                    if (!archived && h1) h1.textContent = SHEET_TITLE_DAILY;
+                    return;
+                }
+                const p = sd.split("-");
+                const d = new Date(+p[0], +p[1] - 1, +p[2]);
+                const t = new Date();
+                const isToday = !archived && t.getFullYear() === d.getFullYear() && t.getMonth() === d.getMonth() && t.getDate() === d.getDate();
+                if (!archived && h1) h1.textContent = isToday ? "Today's MLB HR Cheat Sheet" : "MLB HR Cheat Sheet";
+                if (!archived) {
+                    document.title = isToday ? "Today's MLB HR Cheat Sheet — Worst Pickz" : SHEET_TITLE_DAILY;
+                    const og = document.querySelector('meta[property="og:title"]');
+                    if (og) og.setAttribute("content", isToday ? "Today's MLB HR Cheat Sheet" : SHEET_TITLE_DAILY);
+                }
+            }
+            function rowPassesAdvancedFilters(el) {
+                const score = parseInt(el.getAttribute("data-score") || "0", 10);
+                const parkN = el.getAttribute("data-park") === "" ? null : parseInt(el.getAttribute("data-park"), 10);
+                const sm = document.getElementById("scoreMinFilter");
+                const gf = document.getElementById("gradeFilter");
+                if (sm && sm.value !== "" && score < parseInt(sm.value, 10)) return false;
+                if (gf && gf.value) {
+                    if (gradeForPickEl(el) !== gf.value) return false;
+                }
+                if (activeQuickFilter === "elite" && score < 90) return false;
+                if (activeQuickFilter === "longshot" && el.getAttribute("data-longshot") !== "1") return false;
+                if (activeQuickFilter === "park" && (parkN == null || parkN < 5)) return false;
+                if (activeQuickFilter === "favorites" && !el.classList.contains("pick-row--worst-pickz-fav")) return false;
+                if (activeQuickFilter === "moonshot") {
+                    let tags = el.getAttribute("data-emoji-tags") || "";
+                    try { tags = decodeURIComponent(tags); } catch (e) {}
+                    if (!tags.includes("🌕")) return false;
+                }
+                if (activeEmojiFilters.size) {
+                    let tags = el.getAttribute("data-emoji-tags") || "";
+                    try { tags = decodeURIComponent(tags); } catch (e) {}
+                    if ([...activeEmojiFilters].some((ch) => !tags.includes(ch))) return false;
+                }
+                return true;
+            }
+            function applyRowVisibilityFilters() {
+                document.querySelectorAll(".game-card .pick-row, tr.pick-table-row").forEach((el) => {
+                    const q = (document.getElementById("playerFilter")?.value || "").trim().toLowerCase();
+                    let name = "";
+                    if (el.matches("tr")) {
+                        try { name = decodeURIComponent(el.getAttribute("data-player") || "").toLowerCase(); } catch (e) { name = ""; }
+                    } else {
+                        name = (el.querySelector(".pick-name-open, .pick-name")?.textContent || "").toLowerCase();
+                    }
+                    const nameOk = !q || name.includes(q);
+                    const adv = rowPassesAdvancedFilters(el);
+                    el.classList.toggle("pick-hidden", !nameOk);
+                    el.classList.toggle("advanced-filter-hidden", nameOk && !adv);
+                });
+                document.querySelectorAll("details.game-card").forEach((card) => {
+                    const vis = [...card.querySelectorAll(".pick-row")].some((r) =>
+                        !r.classList.contains("pick-hidden") && !r.classList.contains("advanced-filter-hidden") &&
+                        !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"));
+                    card.style.display = vis ? "" : "none";
+                });
+            }
+            function syncMobileGameCards() {
+                const mob = window.matchMedia("(max-width: 640px)").matches;
+                document.querySelectorAll("details.game-card").forEach((d) => {
+                    if (!d.classList.contains("user-opened")) d.open = !mob;
+                });
+            }
+            function openMySlip() {
+                const panel = document.getElementById("mySlipPanel");
+                const b = document.getElementById("mySlipBackdrop");
+                const fab = document.getElementById("mySlipFab");
+                rebuildParlayPanel();
+                if (panel) {
+                    panel.classList.add("is-open");
+                    panel.setAttribute("aria-hidden", "false");
+                }
+                if (b) {
+                    b.hidden = false;
+                    b.classList.add("is-open");
+                }
+                if (fab) fab.setAttribute("aria-expanded", "true");
+                document.body.classList.add("my-slip-open");
+            }
+            function closeMySlip() {
+                const panel = document.getElementById("mySlipPanel");
+                const b = document.getElementById("mySlipBackdrop");
+                const fab = document.getElementById("mySlipFab");
+                if (panel) {
+                    panel.classList.remove("is-open");
+                    panel.setAttribute("aria-hidden", "true");
+                }
+                if (b) {
+                    b.hidden = true;
+                    b.classList.remove("is-open");
+                }
+                if (fab) fab.setAttribute("aria-expanded", "false");
+                document.body.classList.remove("my-slip-open");
+            }
+            function wireMySlipControls() {
+                const fab = document.getElementById("mySlipFab");
+                if (!fab || fab.dataset.mySlipWired === "1") return;
+                fab.dataset.mySlipWired = "1";
+                fab.addEventListener("click", (e) => { e.preventDefault(); openMySlip(); });
+                document.getElementById("mySlipClose")?.addEventListener("click", closeMySlip);
+                document.getElementById("mySlipBackdrop")?.addEventListener("click", closeMySlip);
+            }
+            function wireUxEnhancements() {
+                syncSheetLiveHeader();
+                syncMobileGameCards();
+                window.addEventListener("resize", syncMobileGameCards);
+                document.querySelectorAll("details.game-card").forEach((d) => {
+                    d.addEventListener("toggle", () => d.classList.add("user-opened"));
+                });
+                wireMySlipControls();
+                document.getElementById("mySlipClose")?.addEventListener("click", closeMySlip);
+                document.getElementById("mySlipBackdrop")?.addEventListener("click", closeMySlip);
+                document.getElementById("exportGamblySlip")?.addEventListener("click", () => document.getElementById("exportGambly")?.click());
+                                document.getElementById("clearPicksSlip")?.addEventListener("click", () => document.getElementById("clearPicks")?.click());
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape" && document.getElementById("mySlipPanel")?.classList.contains("is-open")) closeMySlip();
+                });
+                const run = () => { applyRowVisibilityFilters(); updatePickCount(); };
+                document.getElementById("scoreMinFilter")?.addEventListener("input", run);
+                document.getElementById("gradeFilter")?.addEventListener("change", run);
+                document.getElementById("playerFilter")?.addEventListener("input", run);
+                document.getElementById("clearAllFiltersBtn")?.addEventListener("click", () => {
+                    const pf = document.getElementById("playerFilter");
+                    if (pf) pf.value = "";
+                    const sm = document.getElementById("scoreMinFilter");
+                    if (sm) sm.value = "";
+                    const gf = document.getElementById("gradeFilter");
+                    if (gf) gf.value = "";
+                    activeQuickFilter = "all";
+                    activeEmojiFilters.clear();
+                    document.querySelectorAll("#emojiFilterRow .filter-chip[data-emoji]").forEach((b) => {
+                        b.classList.remove("is-active"); b.setAttribute("aria-pressed", "false");
+                    });
+                    document.querySelectorAll("#quickFilterRow .filter-chip").forEach((c) => c.classList.toggle("is-active", c.getAttribute("data-filter") === "all"));
+                    run();
+                });
+                const origQuick = applyQuickFilterAll;
+                applyQuickFilterAll = function () { origQuick(); applyRowVisibilityFilters(); };
+                const origEmoji = applyEmojiFiltersToAll;
+                applyEmojiFiltersToAll = function () { origEmoji(); applyRowVisibilityFilters(); };
+                const origApplyPlayer = applyPlayerFilter;
+                applyPlayerFilter = function () { applyRowVisibilityFilters(); };
+                const origUpdate = updatePickCount;
+                updatePickCount = function () {
+                    origUpdate();
+                    const gamblyFabKeys = new Set();
+                    document.querySelectorAll(".pick-cb.pick-cb--gambly:checked").forEach((cb) => {
+                        const r = cb.closest(".pick-row[data-gi][data-ri]");
+                        if (r) gamblyFabKeys.add(`${r.getAttribute("data-gi")}|${r.getAttribute("data-ri")}`);
+                    });
+                    const n = gamblyFabKeys.size;
+                    const c = document.getElementById("mySlipFabCount");
+                    if (c) c.textContent = String(n);
+                    const se = document.getElementById("exportGamblySlip");
+                    const eg = document.getElementById("exportGambly");
+                    if (se && eg) se.disabled = eg.disabled;
+                };
+                document.querySelectorAll(".emoji-key-item strong, .quick-legend-item").forEach((el) => {
+                    const tip = el.closest("[title]")?.title || el.parentElement?.title;
+                    if (!el.parentElement?.title && el.textContent) el.parentElement.title = el.textContent.trim();
+                });
+                run();
+            }
+
+            wireUxEnhancements();
+            wireMySlipControls();
             if (filterInput) {
                 filterInput.addEventListener("input", () => {
                     applyPlayerFilter();
@@ -3785,9 +4711,6 @@
             applyQuickFilterAll();
             applyPlayerFilter();
 
-            const pickCountEl = document.getElementById("pickCount");
-            const clearPicksBtn = document.getElementById("clearPicks");
-            const exportGamblyBtn = document.getElementById("exportGambly");
             function getAmericanFromGiRi(giStr, riStr) {
                 const gi = parseInt(giStr, 10);
                 const ri = parseInt(riStr, 10);
@@ -3795,9 +4718,28 @@
                 const row = games[gi] && games[gi].rows[ri];
                 return row ? parseListedNumber(row.odds) : null;
             }
+            function mySlipParlayLegsEl() {
+                return document.getElementById("mySlipLegs");
+            }
+            function mySlipParlayCombinedEl() {
+                return document.getElementById("mySlipCombined");
+            }
+            function handleGamblyPickButtonClick(e) {
+                const gamblyBtn = e.target.closest(".gambly-pick-btn");
+                if (!gamblyBtn) return;
+                const zone = gamblyBtn.closest("#gamesSection");
+                if (!zone) return;
+                e.preventDefault();
+                const wrap = gamblyBtn.closest(".gambly-pick-wrap");
+                const cb = wrap && wrap.querySelector(".pick-cb.pick-cb--gambly");
+                if (!cb) return;
+                cb.checked = !cb.checked;
+                syncGamblyPickRowCheckboxesFrom(cb);
+                updatePickCount();
+            }
             function recalcParlayFromUl() {
-                const ul = document.getElementById("parlayLegs");
-                const sumEl = document.getElementById("parlayCombined");
+                const ul = mySlipParlayLegsEl();
+                const sumEl = mySlipParlayCombinedEl();
                 if (!ul || !sumEl) return;
                 const ams = [...ul.querySelectorAll("li.parlay-leg")].map((li) => {
                     const v = li.getAttribute("data-american");
@@ -3809,13 +4751,13 @@
                 sumEl.textContent = ams.length ? `Rough combined: ${comb == null ? "—" : formatAmerican(comb)} · ${ams.length}-leg (naive / uncorrelated)` : "";
             }
             function rebuildParlayPanel() {
-                const panel = document.getElementById("parlayPanel");
-                const ul = document.getElementById("parlayLegs");
-                if (!panel || !ul) return;
+                const ul = mySlipParlayLegsEl();
+                const sumEl = mySlipParlayCombinedEl();
+                if (!ul) return;
                 const rowsSeen = new Set();
                 const rows = [...document.querySelectorAll(".pick-cb.pick-cb--gambly:checked")]
                     .map((cb) => cb.closest(".pick-row[data-gi][data-ri]"))
-                    .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"))
+                    .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden") && !r.classList.contains("advanced-filter-hidden"))
                     .filter((r) => {
                         const k = `${r.getAttribute("data-gi")}|${r.getAttribute("data-ri")}`;
                         if (rowsSeen.has(k)) return false;
@@ -3823,12 +4765,11 @@
                         return true;
                     });
                 if (!rows.length) {
-                    panel.hidden = true;
-                    ul.innerHTML = "";
+                    ul.innerHTML = '<li class="parlay-leg parlay-leg--empty">No picks yet — use <strong>Add to Gambly</strong> on any row, then open My Slip here.</li>';
+                    if (sumEl) sumEl.textContent = "";
                     recalcParlayFromUl();
                     return;
                 }
-                panel.hidden = false;
                 ul.innerHTML = rows.map((r) => {
                     const gi = r.getAttribute("data-gi");
                     const ri = r.getAttribute("data-ri");
@@ -4021,7 +4962,7 @@
                     const rowsSeen = new Set();
                     const rows = [...document.querySelectorAll(".pick-cb.pick-cb--gambly:checked")]
                         .map((cb) => cb.closest(".pick-row[data-gi][data-ri]"))
-                        .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden"))
+                        .filter((r) => r && !r.classList.contains("pick-hidden") && !r.classList.contains("quick-filter-hidden") && !r.classList.contains("emoji-filter-hidden") && !r.classList.contains("advanced-filter-hidden"))
                         .filter((r) => {
                             const k = `${r.getAttribute("data-gi")}|${r.getAttribute("data-ri")}`;
                             if (rowsSeen.has(k)) return false;
@@ -4042,6 +4983,7 @@
                     });
                 });
             }
+            wireUxEnhancements();
             updatePickCount();
 
             if (betTracker.some((e) => !e.result)) {
@@ -4050,9 +4992,25 @@
                 }, 600);
             }
 
-            const toTop = document.getElementById("toTop");
-            if (toTop) toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+            function pageScrollBehavior() {
+                return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+            }
+            const scrollToTopBtn = document.getElementById("scrollToTop");
+            const scrollToBottomBtn = document.getElementById("scrollToBottom");
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: pageScrollBehavior() });
+                });
+            }
+            if (scrollToBottomBtn) {
+                scrollToBottomBtn.addEventListener("click", () => {
+                    const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                    window.scrollTo({ top: maxY, behavior: pageScrollBehavior() });
+                });
+            }
         })();
     </script>
+
+
 </body>
 </html>

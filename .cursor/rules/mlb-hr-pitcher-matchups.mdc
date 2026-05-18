@@ -1,0 +1,19 @@
+---
+description: MLB HR cheat sheet — verify batter vs opposing SP and list all mound bums
+globs: "**/index.html,**/build-sheet*.py,**/fix-batter-vs-pitcher.py,**/preview/**/*.html"
+alwaysApply: false
+---
+
+# Pitcher matchups (MLB HR cheat sheet)
+
+Before shipping or patching any sheet:
+
+1. **Opposing SP only** — Away batters face the **home** starter; home batters face the **away** starter. Never assign `vs` chips or notes to a batter's **own** team's pitcher. Parse game titles by team code in `(hand, TEAM)`, not by name order in the title.
+
+2. **Double-check every row** — Run `python validate-index-matchups.py` on `preview/index.html`. Fix with `python fix-batter-vs-pitcher.py` (updates build source + index). Re-run validation until zero errors.
+
+3. **Bums onna mound (🧤)** — Every HR-leaky starter for that game must appear in the game **title** with 🧤 before `(hand, TEAM)` so the filter and row auto-tag work. If both starters are attackable, mark **both** (see archive sheets). Do not let 🧤 sit inside the name token used for `vs` parsing.
+
+4. **Source of truth** — After fixing chips in HTML, sync `build-sheet-YYYY-MM-DD.py` and regenerate `_games-*.txt` so the next patch does not revert matchups.
+
+5. **Archives** — Do not bulk-patch archive HTML with a different date's `games` block unless intentionally updating that archive date.

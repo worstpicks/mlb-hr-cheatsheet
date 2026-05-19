@@ -310,7 +310,13 @@
             outline-offset: 3px;
             border-radius: 4px;
         }
-        .game-header { padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); }
+        .game-header { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 12px 14px; background: linear-gradient(135deg, rgba(38,16,10,0.98) 0%, rgba(30,64,175,0.55) 100%); border-bottom: 1px solid rgba(251,146,60,0.18); cursor: default; list-style: none; }
+        .game-header::-webkit-details-marker { display: none; }
+        .game-card-toggle { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin-top: 1px; border-radius: 999px; border: 1px solid rgba(254, 215, 170, 0.45); background: rgba(15, 23, 42, 0.58); color: #fed7aa; cursor: pointer; font-size: 1rem; line-height: 1; touch-action: manipulation; }
+        .game-card-toggle:hover, .game-card-toggle:focus-visible { background: rgba(251, 146, 60, 0.18); color: #fff7ed; outline: none; box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.22); }
+        .game-card-toggle__icon { display: inline-block; transition: transform 0.16s ease; }
+        .game-card:not([open]) .game-card-toggle__icon { transform: rotate(-90deg); }
+        .game-header-copy { min-width: 0; }
         .game-header h3 { color: #fff7ed; font-size: 1rem; margin-bottom: 4px; overflow-wrap: anywhere; line-height: 1.25; }
         .game-header h3 .pitcher-bum {
             display: inline-block;
@@ -560,6 +566,48 @@
         html.theme-light .batters-won-name { color: #14532d; }
         html.theme-light .batters-won-meta { color: #334155; }
         html.theme-light .batters-won-score { color: #15803d; }
+
+        .batters-hit-section {
+            padding: 0 14px 14px;
+            margin: 0;
+            background: linear-gradient(135deg, rgba(9, 11, 18, 0.9) 0%, rgba(12, 17, 28, 0.95) 100%);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.16);
+            min-width: 0;
+        }
+        .batters-hit-panel {
+            border-color: rgba(34, 197, 94, 0.34);
+            background: rgba(15, 23, 42, 0.46);
+            padding: 14px;
+        }
+        .batters-hit-panel h2 {
+            color: #bbf7d0;
+            font-size: inherit;
+            margin: 0 0 6px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .batters-hit-lede {
+            margin: 0 0 10px;
+            color: var(--wpz-color-paragraph);
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+        .batters-hit-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+        .batters-hit-name { display: inline-flex; align-items: center; min-height: 30px; padding: 5px 10px; border-radius: 999px; background: rgba(22, 101, 52, 0.36); border: 1px solid rgba(74, 222, 128, 0.28); color: #ecfdf5; font-weight: 800; font-size: 0.84rem; }
+        html.theme-light .batters-hit-section {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f1f5f9 50%, #e8eef7 100%);
+            border-bottom-color: rgba(22, 163, 74, 0.25);
+        }
+        html.theme-light .batters-hit-panel {
+            border-color: rgba(22, 163, 74, 0.34);
+            background: rgba(255, 255, 255, 0.72);
+        }
+        html.theme-light .batters-hit-panel h2 { color: #15803d; }
+        html.theme-light .batters-hit-name {
+            background: #dcfce7;
+            border-color: rgba(22, 163, 74, 0.28);
+            color: #14532d;
+        }
 
         .hr-row-result__pill--na .hr-row-result__pill-value {
             color: #94a3b8;
@@ -2699,6 +2747,13 @@
                 <ol class="batters-won-list" id="battersWonList"></ol>
             </div>
         </section>
+        <section class="batters-hit-section" id="battersHitSection" aria-labelledby="battersHitHeading">
+            <div class="panel batters-hit-panel">
+                <h2 id="battersHitHeading">Batters Who Got Hits</h2>
+                <p class="batters-hit-lede" id="battersHitLede" aria-live="polite">Checking hits from MLB box scores...</p>
+                <div class="batters-hit-list" id="battersHitList"></div>
+            </div>
+        </section>
         <footer class="site-footer-cta" role="contentinfo">
                 <h2 class="site-footer-cta__title">Follow Worst Pickz</h2>
                 <p class="site-footer-cta__text">Follow <strong>@WorstPickz</strong> on X for daily sheet drops. Reply with your leans, quote-tweet when the board hits, and keep the timeline on the sheet.</p>
@@ -2941,6 +2996,8 @@
             const grid = document.getElementById("gamesGrid");
             const gamesSection = document.getElementById("gamesSection");
             const tableView = document.getElementById("tableView");
+            const battersHitList = document.getElementById("battersHitList");
+            const battersHitLede = document.getElementById("battersHitLede");
             const themeToggle = document.getElementById("themeToggle");
             const rootEl = document.documentElement;
             const THEME_STORAGE_KEY = "worstpickz-theme";
@@ -3681,7 +3738,8 @@
                 if (!Object.keys(b).length) return null;
                 const pa = Number(b.plateAppearances != null ? b.plateAppearances : 0);
                 const hr = Number(b.homeRuns != null ? b.homeRuns : 0);
-                return { pa, hr };
+                const hits = Number(b.hits != null ? b.hits : 0);
+                return { pa, hr, hits };
             }
             function homeRunsFromBoxscoreForPlayer(box, playerLabel) {
                 const want = normalizePlayerForOdds(playerLabel);
@@ -3704,8 +3762,8 @@
                     }
                     if (best) break;
                 }
-                if (best) return { found: true, pa: best.pa, hr: best.hr };
-                return { found: false, pa: 0, hr: 0 };
+                if (best) return { found: true, pa: best.pa, hr: best.hr, hits: best.hits };
+                return { found: false, pa: 0, hr: 0, hits: 0 };
             }
             /**
              * Over 0.5 HR settlement from MLB Stats API (same rules as bet tracker).
@@ -3737,9 +3795,9 @@
                 const box = boxByPk[pk];
                 const hit = homeRunsFromBoxscoreForPlayer(box, playerName);
                 if (!hit.found) return { code: "no_player" };
-                if (hit.pa <= 0) return { code: "void" };
-                if (hit.hr >= 1) return { code: "win" };
-                return { code: "loss" };
+                if (hit.pa <= 0) return { code: "void", hits: hit.hits || 0 };
+                if (hit.hr >= 1) return { code: "win", hits: hit.hits || 0 };
+                return { code: "loss", hits: hit.hits || 0 };
             }
             async function settleBetTrackerHrFromMlbStats(opts) {
                 const force = !!(opts && opts.force);
@@ -3884,6 +3942,54 @@
             function renderGames() {
                 grid.innerHTML = games.map((game, gi) => `<details class="game-card" open id="game-${gi}"><summary class="game-header"><h3>${formatGameTitleHtml(game.title)}</h3><p>${game.description}</p></summary><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></details>`).join("");
             }
+            function setGameCardCollapsed(card, collapsed, markUser) {
+                if (!card) return;
+                card.open = !collapsed;
+                if (markUser) card.classList.add("user-opened");
+                const btn = card.querySelector(".game-card-toggle");
+                if (btn) {
+                    const expanded = !collapsed;
+                    btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+                    btn.setAttribute("aria-label", expanded ? "Collapse game" : "Expand game");
+                }
+            }
+            function decorateGameCardToggles() {
+                const mob = window.matchMedia("(max-width: 640px)").matches;
+                document.querySelectorAll("details.game-card").forEach((card) => {
+                    const header = card.querySelector(".game-header");
+                    if (!header) return;
+                    if (!header.querySelector(".game-header-copy")) {
+                        const copy = document.createElement("div");
+                        copy.className = "game-header-copy";
+                        while (header.firstChild) copy.appendChild(header.firstChild);
+                        header.appendChild(copy);
+                    }
+                    if (!header.querySelector(".game-card-toggle")) {
+                        const btn = document.createElement("span");
+                        btn.className = "game-card-toggle";
+                        btn.setAttribute("role", "button");
+                        btn.setAttribute("tabindex", "0");
+                        btn.innerHTML = `<span class="game-card-toggle__icon" aria-hidden="true">&#9662;</span>`;
+                        header.insertBefore(btn, header.firstChild);
+                    }
+                    if (!card.classList.contains("user-opened")) setGameCardCollapsed(card, mob, false);
+                    else setGameCardCollapsed(card, !card.open, false);
+                });
+            }
+            function captureUserGameCardStates() {
+                const states = new Map();
+                document.querySelectorAll("details.game-card.user-opened").forEach((card) => {
+                    if (card.id) states.set(card.id, !card.open);
+                });
+                return states;
+            }
+            function restoreUserGameCardStates(states) {
+                if (!states) return;
+                states.forEach((collapsed, id) => {
+                    const card = document.getElementById(id);
+                    if (card) setGameCardCollapsed(card, collapsed, true);
+                });
+            }
             const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
             function parkStars(card) { if (!card) return 1; const t = card.querySelector(".game-header p")?.textContent || ""; const m = t.match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i); let p = 0; if (m) p = parseInt(m[1] || m[2], 10); if (Number.isNaN(p)) p = 0; if (p >= 15) return 5; if (p >= 5) return 4; if (p >= -3) return 3; if (p >= -12) return 2; return 1; }
             function powerStars(score, emojiText, noteText) { let stars = 1; if (score >= 84) stars += 2; else if (score >= 76) stars += 1; if (emojiText.includes("🚀")) stars += 1; if (emojiText.includes("🌕")) stars += 1; if (emojiText.includes("💣")) stars += 1; if (/(longshot|price-based)/i.test(noteText) && !/[🚀🌕💣]/.test(emojiText)) stars -= 1; return clamp(stars, 1, 5); }
@@ -4027,13 +4133,41 @@
             }
 
             let hrResultsHydrateToken = 0;
+            function cleanBatterDisplayName(name) {
+                return String(name || "").replace(/\s+\([LRS]\)\s*$/i, "").trim();
+            }
+            function staticBattersHitNames() {
+                const section = document.getElementById("battersHitSection");
+                const raw = section ? section.getAttribute("data-static-hit-names") : "";
+                if (!raw) return [];
+                try {
+                    const parsed = JSON.parse(raw);
+                    return Array.isArray(parsed) ? parsed : [];
+                } catch (e) {
+                    return [];
+                }
+            }
+            function battersHitStatusText(names) {
+                return names.length ? `${names.length} cheat-sheet batter${names.length === 1 ? "" : "s"} recorded a hit.` : "No cheat-sheet batters with hits yet.";
+            }
+            function renderBattersHitSummary(names, statusText) {
+                if (battersHitLede) battersHitLede.textContent = statusText || "";
+                if (!battersHitList) return;
+                const unique = Array.from(new Set((names || []).map(cleanBatterDisplayName).filter(Boolean)));
+                battersHitList.innerHTML = unique.length
+                    ? unique.map((name) => `<span class="batters-hit-name">${escapeHtml(name)}</span>`).join("")
+                    : "";
+            }
             async function hydratePickRowHrResultsFromMlb() {
                 const token = ++hrResultsHydrateToken;
                 const sd = (getSheetDateMeta() || "").trim();
                 const nodes = Array.from(document.querySelectorAll(".game-card .pick-row .hr-row-result"));
                 if (!nodes.length) return;
+                const staticHitNames = staticBattersHitNames();
+                renderBattersHitSummary(staticHitNames, staticHitNames.length ? battersHitStatusText(staticHitNames) : (sd ? "Checking MLB box scores for hit names..." : "No sheet date found for MLB hit lookup."));
                 const scheduleByDate = Object.create(null);
                 const boxByPk = Object.create(null);
+                const hitNames = [];
                 const setPill = (host, state, val) => {
                     const pill = host.querySelector(".hr-row-result__pill");
                     const valEl = host.querySelector(".hr-row-result__pill-value");
@@ -4089,8 +4223,12 @@
                 }
             
                 updateBattersWonRecap();
+                if (token !== hrResultsHydrateToken) return;
+                const finalHitNames = hitNames.length ? hitNames : staticHitNames;
+                renderBattersHitSummary(finalHitNames, battersHitStatusText(finalHitNames));
             }
             renderGames();
+            decorateGameCardToggles();
             enhanceRows();
             updateBattersWonRecap();
             void hydratePickRowHrResultsFromMlb();
@@ -4236,6 +4374,7 @@
                 applyEmojiFiltersToAll();
             }
             function refreshPicksUI() {
+                const gameCardStates = captureUserGameCardStates();
                 const gamblyOn = new Set();
                 document.querySelectorAll(".pick-row[data-gi][data-ri] .pick-cb.pick-cb--gambly").forEach((cb) => {
                     if (!cb.checked) return;
@@ -4243,6 +4382,8 @@
                     if (row) gamblyOn.add(`${row.getAttribute("data-gi")}|${row.getAttribute("data-ri")}`);
                 });
                 renderGames();
+                decorateGameCardToggles();
+                restoreUserGameCardStates(gameCardStates);
                 enhanceRows();
                 void hydratePickRowHrResultsFromMlb();
                 buildPropsTable();
@@ -4340,6 +4481,19 @@
             document.addEventListener("click", handleGamblyPickButtonClick);
             if (gamesSection) {
                 gamesSection.addEventListener("click", (e) => {
+                    const gameToggle = e.target.closest(".game-card-toggle");
+                    if (gameToggle && gamesSection.contains(gameToggle)) {
+                        e.preventDefault();
+                        const card = gameToggle.closest(".game-card");
+                        if (!card) return;
+                        setGameCardCollapsed(card, card.open, true);
+                        return;
+                    }
+                    const gameHeader = e.target.closest(".game-header");
+                    if (gameHeader && gamesSection.contains(gameHeader)) {
+                        e.preventDefault();
+                        return;
+                    }
                     const betSave = e.target.closest(".bet-tracker-save-btn");
                     if (betSave && gamesSection.contains(betSave)) {
                         e.preventDefault();
@@ -4750,6 +4904,7 @@
                 syncSheetLiveHeader();
                 syncMobileGameCards();
                 window.addEventListener("resize", syncMobileGameCards);
+            window.addEventListener("resize", decorateGameCardToggles);
                 document.querySelectorAll("details.game-card").forEach((d) => {
                     d.addEventListener("toggle", () => d.classList.add("user-opened"));
                 });

@@ -33,6 +33,14 @@ def check_html(path: Path):
     checks.append(ok(f"{rel} row count {EXPECTED_ROWS}") if row_count == EXPECTED_ROWS else fail(f"{rel} wrong row count: {row_count}"))
     checks.append(ok(f"{rel} Pikkit wordmark") if "pikkit-link__wordmark" in text else fail(f"{rel} missing Pikkit wordmark"))
     checks.append(ok(f"{rel} Top over Bottom buttons") if text.find('id="scrollToTop"') < text.find('id="scrollToBottom"') else fail(f"{rel} scroll buttons not Top over Bottom"))
+    top_card = re.search(r'<div class="summary-card full-width top-five-card">([\s\S]*?)</div>\s*</div>', text)
+    if top_card:
+        top_items = top_card.group(0).count('class="top-five-item"')
+        checks.append(ok(f"{rel} top five has 5 items") if top_items == 5 else fail(f"{rel} top five item count {top_items}"))
+    else:
+        checks.append(fail(f"{rel} missing top five card"))
+    stale_summary = ["Austin Riley", "Coby Mayo", "SD @ SEA", "MIL @ MIN", "BOS @ ATL", "PHI @ PIT"]
+    checks.append(ok(f"{rel} no stale summary cards") if not any(s in text for s in stale_summary) else fail(f"{rel} stale summary card text found"))
     fav_match = re.search(r"const WORST_PICKZ_FAVORITE_NAMES = new Set\(\[([\s\S]*?)\]\);", text)
     if fav_match:
         favs = re.findall(r'"([^"]+)"', fav_match.group(1))

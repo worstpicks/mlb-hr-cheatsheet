@@ -31,13 +31,17 @@ FAV_SET = (
     + "\n            ]);"
 )
 
-TOP5 = """                    <div class="top-five-list">
+TOP_CARD = """                <div class="summary-card full-width top-five-card">
+                    <h3>Top 5 HR Tickets (Holistic)</h3>
+                    <p class="model-note summary-note">Ranks blend batter damage, opposing starter HR leakage, park/weather, and listed price.</p>
+                    <div class="top-five-list">
                         <div class="top-five-item"><span>Ryan Jeffers <small>3 HR, 1.000 ISO vs McCullers</small></span><strong>96</strong></div>
                         <div class="top-five-item"><span>Yordan Alvarez <small>100.4 mph EV vs Matthews</small></span><strong>94</strong></div>
                         <div class="top-five-item"><span>Drake Baldwin <small>37.5% barrels vs Garrett</small></span><strong>93</strong></div>
                         <div class="top-five-item"><span>Kyle Schwarber <small>Citizens Bank +37% HR vs Burns</small></span><strong>92</strong></div>
                         <div class="top-five-item"><span>Gavin Sheets <small>3 HR vs Sheehan's LHB leak</small></span><strong>92</strong></div>
-                    </div>"""
+                    </div>
+                </div>"""
 
 PARK_INNER = """
                         <div class="summary-item"><span>CIN @ PHI <small>Citizens Bank +37% HR, 91°F, wind out</small></span><strong>+37%</strong></div>
@@ -117,7 +121,12 @@ def patch_file(path: Path, manifest):
     text = re.sub(r'<meta name="sheet-date" content="[^"]*">', '<meta name="sheet-date" content="2026-05-19">', text, count=1)
     text = re.sub(r'<script type="application/json" id="sheets-manifest-fallback">.*?</script>', lambda _m: manifest_fallback(manifest), text, count=1, flags=re.DOTALL)
     text = re.sub(r"<p>(?:Friday|Saturday|Sunday|Monday|Tuesday), May \d+, 2026 — Worst Pickz HR cheat sheet", "<p>Tuesday, May 19, 2026 — Worst Pickz HR cheat sheet", text, count=1)
-    text = re.sub(r"(\s*)<div class=\"top-five-list\">.*?</div>", lambda m: m.group(1) + TOP5.strip(), text, count=1, flags=re.DOTALL)
+    text = re.sub(
+        r'                <div class="summary-card full-width top-five-card">[\s\S]*?\n                </div>\n                <div class="summary-card">',
+        TOP_CARD + '\n                <div class="summary-card">',
+        text,
+        count=1,
+    )
     text = replace_summary_list(text, "Best Park / Weather HR Rows (slate)", PARK_INNER)
     text = replace_summary_list(text, "Top 5 Weather Heavy HR Plays", WEATHER5_INNER)
     text = replace_summary_list(text, "Best longshot HR (listed +700+)", LONGSHOT_INNER)

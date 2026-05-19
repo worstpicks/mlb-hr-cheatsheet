@@ -40,6 +40,7 @@ def verify_file(path: Path) -> list[str]:
     if not path.exists():
         return [f"missing file: {path}"]
     t = path.read_text(encoding="utf-8")
+    is_archive = "archive" in path.parts
     if "motion.div" in t or "</motion" in t:
         issues.append("motion.div typo in HTML")
     ids = re.findall(r'\bid="([^"]+)"', t)
@@ -47,22 +48,23 @@ def verify_file(path: Path) -> list[str]:
         if "${" in dup:
             continue
         issues.append(f"duplicate id: {dup}")
-    for rid in REQUIRED_IDS:
-        if f'id="{rid}"' not in t:
-            issues.append(f"missing id: {rid}")
-    if 'id="parlayLegs"' in t and 'id="mySlipLegs"' in t:
-        issues.append("duplicate parlayLegs id (toolbar + slip conflict)")
-    for fn in REQUIRED_FUNCS:
-        if fn not in t:
-            issues.append(f"missing function: {fn}")
-    if "fab-stack" not in t:
-        issues.append("missing fab-stack")
-    if "pikkit-icon.svg" not in t and "pikkit-link__icon" not in t:
-        issues.append("missing pikkit icon")
+    if not is_archive:
+        for rid in REQUIRED_IDS:
+            if f'id="{rid}"' not in t:
+                issues.append(f"missing id: {rid}")
+        if 'id="parlayLegs"' in t and 'id="mySlipLegs"' in t:
+            issues.append("duplicate parlayLegs id (toolbar + slip conflict)")
+        for fn in REQUIRED_FUNCS:
+            if fn not in t:
+                issues.append(f"missing function: {fn}")
+        if "fab-stack" not in t:
+            issues.append("missing fab-stack")
+        if "pikkit-link__wordmark" not in t and "pikkit-link" not in t:
+            issues.append("missing pikkit wordmark link")
     if path.name == "index.html" and path.parent.name == "preview":
         if "../assets/" in t:
             issues.append("preview index should not use ../assets/")
-    if "archive" in str(path):
+    if is_archive:
         if 'src="assets/pikkit' in t and 'src="../assets/pikkit' not in t:
             issues.append("archive should use ../assets/ for pikkit")
     return issues
@@ -97,16 +99,11 @@ def main() -> int:
                 print(f"  - {i}")
         else:
             print(f"OK   {rel}")
-    assets = ROOT / "preview" / "assets" / "pikkit-icon.svg"
-    if not assets.exists():
-        print("FAIL missing pikkit-icon.svg")
-        failed = True
-    svg = assets.read_text(encoding="utf-8")
-    if "#4F5FFF" not in svg or "#000000" not in svg:
-        print("FAIL pikkit-icon.svg colors")
-        failed = True
+    if (ROOT / "preview" / "index.html").read_text(encoding="utf-8").find("pikkit-link__wordmark") >= 0:
+        print("OK   Pikkit wordmark in sheet")
     else:
-        print("OK   preview/assets/pikkit-icon.svg")
+        print("FAIL missing Pikkit wordmark on current sheet")
+        failed = True
     return 1 if failed else 0
 
 

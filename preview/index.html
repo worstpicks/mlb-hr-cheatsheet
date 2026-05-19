@@ -22,9 +22,9 @@
     </script>
     <meta name="robots" content="noindex, nofollow">
     <title>Worst Pickz Cheat Daily MLB Sheet</title>
-    <meta name="sheet-date" content="2026-05-18">
+    <meta name="sheet-date" content="2026-05-19">
     <!-- Mirror preview/sheets-manifest.json: used when fetch(sheets-manifest.json) fails (e.g. file://). -->
-    <script type="application/json" id="sheets-manifest-fallback">{"version": 1, "sheets": [{"date": "2026-05-18", "label": "May 18, 2026 — current slate", "href": "index.html"}, {"date": "2026-05-16", "label": "May 16, 2026", "href": "archive/2026-05-16.html"}, {"date": "2026-05-15", "label": "May 15, 2026", "href": "archive/2026-05-15.html"}, {"date": "2026-05-14", "label": "May 14, 2026", "href": "archive/2026-05-14.html"}]}</script>
+    <script type="application/json" id="sheets-manifest-fallback">{"version": 1, "sheets": [{"date": "2026-05-19", "label": "May 19, 2026 — current slate", "href": "index.html"}, {"date": "2026-05-18", "label": "May 18, 2026", "href": "archive/2026-05-18.html"}, {"date": "2026-05-16", "label": "May 16, 2026", "href": "archive/2026-05-16.html"}, {"date": "2026-05-15", "label": "May 15, 2026", "href": "archive/2026-05-15.html"}, {"date": "2026-05-14", "label": "May 14, 2026", "href": "archive/2026-05-14.html"}]}</script>
     <meta property="og:title" content="Worst Pickz Cheat Daily MLB Sheet">
     <meta property="og:description" content="Daily MLB HR cheat sheet — listed odds, filters, bet tracker, and Gambly export.">
     <meta property="og:type" content="website">
@@ -54,7 +54,7 @@
             --wpz-hero-frame: rgba(234, 179, 8, 0.4);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { -webkit-text-size-adjust: 100%; }
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
         body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: var(--wpz-bg-body); color: var(--wpz-color-text); min-height: 100vh; padding: 16px; overflow-x: hidden; }
         .container { max-width: 2480px; margin: 0 auto; background: var(--wpz-bg-container); border: 2px solid var(--wpz-border-container); border-radius: 20px; overflow: hidden; min-width: 0; }
         header { position: relative; padding: 28px 18px 26px; text-align: center; background: var(--wpz-bg-header); border-bottom: 3px solid var(--wpz-border-header); }
@@ -87,36 +87,37 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 42px;
-            height: 42px;
-            padding: 0;
+            min-height: 42px;
+            padding: 0 12px;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            background: #000000;
+            border: 1px solid rgba(254, 215, 170, 0.4);
+            background: rgba(15, 23, 42, 0.55);
             text-decoration: none;
-            overflow: hidden;
             flex-shrink: 0;
-            line-height: 0;
+            line-height: 1;
             position: relative;
             z-index: 12;
-            isolation: isolate;
         }
         .pikkit-link:hover {
-            filter: brightness(1.1);
-            border-color: rgba(79, 95, 255, 0.55);
+            background: rgba(15, 23, 42, 0.88);
         }
         .pikkit-link:focus-visible {
             outline: 2px solid rgba(251, 191, 36, 0.95);
             outline-offset: 2px;
         }
-        .pikkit-link__icon {
-            display: block;
-            width: 42px;
-            height: 42px;
-            position: relative;
-            z-index: 2;
+        .pikkit-link__wordmark {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.03em;
+            line-height: 1;
+            color: #fff7ed;
             pointer-events: none;
-            flex-shrink: 0;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .pikkit-link:hover .pikkit-link__wordmark {
+            color: #fff;
         }
         .social-x {
             display: inline-flex;
@@ -616,8 +617,11 @@
             .header-actions { top: 10px; right: 8px; gap: 6px; }
             .header-actions .social-x,
             .header-actions .theme-toggle { width: 38px; height: 38px; }
-            .header-actions .pikkit-link,
-            .header-actions .pikkit-link__icon { width: 38px; height: 38px; }
+            .header-actions .pikkit-link {
+                min-height: 38px;
+                padding: 0 10px;
+            }
+            .header-actions .pikkit-link__wordmark { font-size: 0.88rem; }
             .header-actions .header-install-btn {
                 min-height: 38px;
                 padding: 0 8px;
@@ -785,6 +789,7 @@
             z-index: 50;
             background: rgba(8, 6, 5, 0.94);
             border-bottom: 1px solid rgba(251,146,60,0.35);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             padding: 10px 12px 12px;
             display: grid;
@@ -915,7 +920,7 @@
         }
                 .scroll-jump-fab {
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
             align-items: stretch;
             gap: 4px;
         }
@@ -1248,7 +1253,7 @@
             z-index: 2;
             white-space: nowrap;
         }
-        .props-table th.sortable { cursor: pointer; user-select: none; }
+        .props-table th.sortable { cursor: pointer; -webkit-user-select: none; user-select: none; }
         .props-table th.sortable:hover { color: #fff; }
         .props-table th .sort-ind { opacity: 0.45; font-size: 0.65rem; margin-left: 2px; }
         .props-table tbody tr { background: rgba(8, 15, 28, 0.55); }
@@ -2112,17 +2117,16 @@
         html.theme-light .weather-link { color: #1d4ed8; }
         html.theme-light .header-actions .theme-toggle,
         html.theme-light .header-actions .social-x,
+        html.theme-light .header-actions .pikkit-link,
         html.theme-light .header-actions .header-install-btn {
             background: rgba(255, 255, 255, 0.82);
             border-color: rgba(100, 116, 139, 0.4);
             color: #0f172a;
         }
-        html.theme-light .pikkit-link {
-            background: transparent;
-            border-color: rgba(15, 23, 42, 0.2);
-        }
+        html.theme-light .pikkit-link__wordmark { color: #0f172a; }
         html.theme-light .header-actions .theme-toggle:hover,
         html.theme-light .header-actions .social-x:hover,
+        html.theme-light .header-actions .pikkit-link:hover,
         html.theme-light .header-actions .header-install-btn:hover {
             background: #fff;
             color: #0f172a;
@@ -2493,7 +2497,7 @@
             <div class="header-actions">
                 <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false" title="Switch to light mode" aria-label="Switch to light mode">☀️</button>
                 <button type="button" class="header-install-btn" id="installShortcutBtn" hidden title="Add Worst Pickz to your Home Screen — fullscreen app-style view, optimized on mobile" aria-label="Install Worst Pickz shortcut on your Home Screen"><span class="header-install-btn__long">Install shortcut</span><span class="header-install-btn__short" aria-hidden="true">Install</span></button>
-                <a class="pikkit-link" href="https://links.pikkit.com/invite/worst" target="_blank" rel="noopener noreferrer" aria-label="Track on Pikkit — code WORST" title="Track on Pikkit — code WORST"><img class="pikkit-link__icon" src="assets/pikkit-icon.svg" width="42" height="42" alt="" decoding="async" loading="eager"></a>
+                <a class="pikkit-link" href="https://links.pikkit.com/invite/worst" target="_blank" rel="noopener noreferrer" aria-label="Track on Pikkit — code WORST" title="Track on Pikkit — code WORST"><span class="pikkit-link__wordmark" aria-hidden="true">Pikkit</span></a>
                 <a class="social-x" href="https://x.com/WorstPickz" target="_blank" rel="noopener noreferrer" aria-label="Worst Pickz on X">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
@@ -2505,7 +2509,7 @@
                 <div class="header-intro">
                     <div class="brand-tag" id="sheetBrandTag">Worst Pickz Cheat Daily MLB Sheet</div>
                     <h1 id="sheetLiveTitle">Worst Pickz Cheat Daily MLB Sheet</h1>
-                    <p>Monday, May 18, 2026 — Worst Pickz HR cheat sheet with listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong> get the rose border and ⭐ in the emoji row; the top-right <strong>Save</strong> box adds props to your local <strong>bet tracker</strong>.</p>
+                    <p>Tuesday, May 19, 2026 — Worst Pickz HR cheat sheet with listed home run odds where available, confirmed/projected lineups, PropFinder batter data, pitcher weak spots, and Ballpark Pal rows via <a class="weather-link" href="https://propfinder.app/weather" target="_blank" rel="noopener">PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong> get the rose border and ⭐ in the emoji row; the top-right <strong>Save</strong> box adds props to your local <strong>bet tracker</strong>.</p>
                 </div>
             </div>
         </header>
@@ -2610,7 +2614,12 @@
                     <h3>Top 5 HR Tickets (Holistic)</h3>
                     <p class="model-note summary-note">Ranks blend batter damage, opposing starter HR leakage, park/weather, and listed price.</p>
                                         <div class="top-five-list">
-                        <div class="top-five-item"><span>Shea Langeliers <small>Four HR vs Urena at Angel Stadium</small></span><strong>94</strong></div>
+                        <div class="top-five-item"><span>Ryan Jeffers <small>3 HR, 1.000 ISO vs McCullers</small></span><strong>96</strong></div>
+                        <div class="top-five-item"><span>Yordan Alvarez <small>100.4 mph EV vs Matthews</small></span><strong>94</strong></div>
+                        <div class="top-five-item"><span>Drake Baldwin <small>37.5% barrels vs Garrett</small></span><strong>93</strong></div>
+                        <div class="top-five-item"><span>Kyle Schwarber <small>Citizens Bank +37% HR vs Burns</small></span><strong>92</strong></div>
+                        <div class="top-five-item"><span>Gavin Sheets <small>3 HR vs Sheehan's LHB leak</small></span><strong>92</strong></div>
+                    </div>
                         <div class="top-five-item"><span>Austin Riley <small>Three HR vs Meyer in Miami</small></span><strong>93</strong></div>
                         <div class="top-five-item"><span>Byron Buxton <small>.842 SLG vs Imai at Target</small></span><strong>92</strong></div>
                         <div class="top-five-item"><span>Coby Mayo <small>McClanahan RHB lane at Tropicana</small></span><strong>91</strong></div>
@@ -2620,31 +2629,34 @@
                 <div class="summary-card">
                     <h3>Best Park / Weather HR Rows (slate)</h3>
                     <div class="summary-list">
-                        <div class="summary-item"><span>MIL @ CHC <small>Wrigley +42% HR, 17 mph out</small></span><strong>+42%</strong></div>
-                        <div class="summary-item"><span>BOS @ KC <small>Kauffman +35% HR, 18 mph out</small></span><strong>+35%</strong></div>
-                        <div class="summary-item"><span>CIN @ PHI <small>Citizens Bank +31% HR, 88°F</small></span><strong>+31%</strong></div>
-                        <div class="summary-item"><span>NYM @ WSH <small>Nationals Park +9% HR, 92°F</small></span><strong>+9%</strong></div>
+                        <div class="summary-item"><span>CIN @ PHI <small>Citizens Bank +37% HR, 91°F, wind out</small></span><strong>+37%</strong></div>
+                        <div class="summary-item"><span>TOR @ NYY <small>Yankee Stadium +18% HR, 89°F, wind out</small></span><strong>+18%</strong></div>
+                        <div class="summary-item"><span>NYM @ WSH <small>Nationals Park +5% HR, 93°F</small></span><strong>+5%</strong></div>
+                        <div class="summary-item"><span>ATH @ LAA <small>Angel Stadium +5% HR, mild out-blowing pattern</small></span><strong>+5%</strong></div>
+                    
                     
                     </div>
                 </div>
                 <div class="summary-card">
                     <h3>Top 5 Weather Heavy HR Plays</h3>
                     <div class="summary-list">
-                        <div class="summary-item"><span>#1 Kyle Schwarber <small>Citizens Bank +31% vs Lodolo</small></span><strong>90</strong></div>
-                        <div class="summary-item"><span>#2 James Wood <small>Nationals Park 92°F vs Scott</small></span><strong>89</strong></div>
-                        <div class="summary-item"><span>#3 Seiya Suzuki <small>Wrigley +42% vs Sproat</small></span><strong>90</strong></div>
-                        <div class="summary-item"><span>#4 Michael Conforto <small>Wrigley wind row vs Sproat</small></span><strong>86</strong></div>
-                        <div class="summary-item"><span>#5 Michael Massey <small>Kauffman +35% vs Gray</small></span><strong>84</strong></div>
+                        <div class="summary-item"><span>#1 Kyle Schwarber <small>91°F and +37% HR at Citizens Bank</small></span><strong>92</strong></div>
+                        <div class="summary-item"><span>#2 Bryce Harper <small>same Phillies lefty lane vs Burns</small></span><strong>87</strong></div>
+                        <div class="summary-item"><span>#3 Aaron Judge <small>Yankee Stadium +18% HR, wind out</small></span><strong>86</strong></div>
+                        <div class="summary-item"><span>#4 Mark Vientos <small>Nationals Park heat vs Griffin</small></span><strong>84</strong></div>
+                        <div class="summary-item"><span>#5 Jo Adell <small>Angel Stadium plus Lopez's RHB leak</small></span><strong>90</strong></div>
+                    
                     
                     </div>
                 </div>
                 <div class="summary-card">
                     <h3>Best longshot HR (listed +700+)</h3>
                     <div class="summary-list">
-                        <div class="summary-item"><span>Travis Bazzana <small>+1500 vs Valdez</small></span><strong>72</strong></div>
-                        <div class="summary-item"><span>Luis Arraez <small>+1800 vs Ray</small></span><strong>68</strong></div>
-                        <div class="summary-item"><span>Harrison Bader <small>+1200 vs Ray</small></span><strong>70</strong></div>
-                        <div class="summary-item"><span>Ernie Clement <small>+1120 vs Weathers</small></span><strong>68</strong></div>
+                        <div class="summary-item"><span>Yohendrick Pinango <small>+700 vs Will Warren at Yankee Stadium</small></span><strong>78</strong></div>
+                        <div class="summary-item"><span>Justin Crawford <small>+1160 in Citizens Bank weather</small></span><strong>82</strong></div>
+                        <div class="summary-item"><span>Harrison Bader <small>+800 vs Ryne Nelson's RHB split</small></span><strong>82</strong></div>
+                        <div class="summary-item"><span>Nick Loftin <small>+1280 contact dart vs Suarez</small></span><strong>72</strong></div>
+                    
                     
                     </div>
                 </div>
@@ -2750,126 +2762,186 @@
     <script>
         (() => {
             const games = [
-                { title: "BAL @ TB - Shane McClanahan 🧤 (L, TB) vs Trevor Rogers 🧤 (L, BAL)", description: "Tropicana Field — closed dome, weather-neutral (-6% HR row). McClanahan suppresses both hands overall; Rogers' vs-RHB HR-risk (0.25) is the main Baltimore righty lane.", rows: [
-                    { name: "Junior Caminero (R)", odds: "Listed +360 - Over 0.5 HR", score: 86, emojis: "🚀 🌕 ⚾", blast: "high", note: "One HR and one near-HR with 96.2 mph EV and 54.5% hard-hit; Rogers' vs-RHB split is the clearest Orioles attack point into Tampa.", chips: ["vs Rogers"] },
-                    { name: "Coby Mayo (R)", odds: "Listed +600 - Over 0.5 HR", score: 91, emojis: "🚀 🌕 💣 ⚾", blast: "high", note: "Three HR and three near-HR with 33.3% barrels, 55.6% pull-air, and 1.000 SLG in the window; same McClanahan RHB lane with elite damage rate.", chips: ["vs McClanahan"] },
-                    { name: "Pete Alonso (R)", odds: "Listed +441 - Over 0.5 HR", score: 88, emojis: "🚀 🌕 ⚾", blast: "high", note: "Two HR and two near-HR with 98.7 mph EV and 22.2% barrels; Rogers's vs-RHB line (-0.48) is softer than his lefty suppression.", chips: ["vs Rogers", "📜 3-3 vs Rogers"] },
-                    { name: "Samuel Basallo (L)", odds: "Listed +600 - Over 0.5 HR", score: 79, emojis: "🚀 💎", note: "One HR and two near-HR with 52.9% squared-up contact; McClanahan LHB lane is modest but Basallo's 94.9 mph EV keeps him playable.", chips: ["vs McClanahan"] },
-                    { name: "Yandy Diaz (R)", odds: "Listed +550 - Over 0.5 HR", score: 74, emojis: "🚀 💎", note: "One HR with 50% hard-hit; Rogers's overall HR suppression (-1.07 composite) caps the ceiling despite Diaz's pull-side fly balls.", chips: ["vs Rogers"] },
-                ]},
-                { title: "CIN @ PHI - Andrew Painter 🧤 (R, PHI) vs Nick Lodolo 🧤 (L, CIN)", description: "Citizens Bank Park — +31% HR row, 88°F, 11 mph blowing out. Painter's vs-RHB HR-risk (1.95) and 3.14 HR/9 to righties headline the Phillies side; Lodolo is hittable for RHB (1.04) in a small park.", rows: [
-                    { name: "Kyle Schwarber (L)", odds: "Listed +230 - Over 0.5 HR", score: 90, emojis: "🚀 🌕 ⚾ 🕊️ 🏟️ 💤", blast: "high", overdue: true, note: "One HR with 33.3% barrels and .857 ISO; clear pitcher HR-risk advantage—Lodolo's vs-LHB index (0.18) is red for pitchers but Lodolo's RHB leakage powers Philly lefty pull at a short price.", chips: ["vs Lodolo"] },
-                    { name: "Adolis Garcia (R)", odds: "Listed +450 - Over 0.5 HR", score: 85, emojis: "🚀 🌕 ⚾ 🕊️ 💤", blast: "high", overdue: true, note: "One HR with 97.5 mph EV and 80% hard-hit; clear pitcher HR-risk advantage on Lodolo's vs-RHB split (1.04) in the slate's top HR park row.", chips: ["vs Lodolo"] },
-                    { name: "Alec Bohm (R)", odds: "Listed +680 - Over 0.5 HR", score: 82, emojis: "🚀 ⚾ 🕊️ 💤", blast: "good", overdue: true, note: "One HR with 92.7 mph EV and 42.9% pull-air; Lodolo's RHB HR/9 (3.14) and 38.5% HR/FB to righties fit Bohm's damage.", chips: ["vs Lodolo"] },
-                    { name: "JJ Bleday (L)", odds: "Listed +390 - Over 0.5 HR", score: 84, emojis: "🚀 🌕 💎 💤", blast: "high", overdue: true, note: "One HR and two near-HR with .545 ISO and 60% pull-air; Painter's LHB line is only mildly green—Bleday's L5 stick and Citizens Bank carry do the work.", chips: ["vs Painter"] },
-                    { name: "Elly De La Cruz (S)", odds: "Listed +410 - Over 0.5 HR", score: 80, emojis: "🚀 💎", blast: "good", note: "One HR and two near-HR with 97.7 mph EV; SHB uses Painter's RHB mix where Philadelphia's attack is cleaner than the Reds side.", chips: ["vs Painter"] },
-                    { name: "Tyler Stephenson (R)", odds: "Listed +552 - Over 0.5 HR", score: 76, emojis: "💎 ⚾", note: "One HR with pull-side contact; Painter RHB leak at plus money—Stephenson's K rate is the drag.", chips: ["vs Painter"] },
-                    { name: "Matt McLain (R)", odds: "Listed +790 - Over 0.5 HR", score: 73, emojis: "💎", note: "One HR with 45.5% hard-hit; Painter's vs-RHB HR-risk is the angle at long price.", chips: ["vs Painter"] },
-                    { name: "J.T. Realmuto (R)", odds: "Listed +575 - Over 0.5 HR", score: 71, emojis: "💎", note: "Modest L5 line but 53.3% hard-hit; Lodolo RHB lane—mostly catcher pop longshot.", chips: ["vs Lodolo"] },
-                    { name: "Will Benson (L)", odds: "Listed +410 - Over 0.5 HR", score: 72, emojis: "💎", note: "14.3% barrels and 97.3 mph EV in a small window; Painter suppresses lefties overall—favorite tag is form/price sensitive.", chips: ["vs Painter"] },
-                ]},
-                { title: "ATL @ MIA - JR Ritchie 🧤 (R, ATL) vs Max Meyer (R, MIA)", description: "loanDepot park — partial roof, 81°F, 13% precip. Ritchie's vs-LHB HR-risk (1.29) powers Atlanta; Meyer is contact-heavy with modest RHB leakage (0.41).", rows: [
-                    { name: "Austin Riley (R)", odds: "Listed +570 - Over 0.5 HR", score: 93, emojis: "🚀 🌕 💣 ⚾", blast: "high", note: "Three HR and five near-HR with 23.8% barrels and 47.6% pull-air; Meyer's vs-LHB HR-risk (1.29) is the clearest Braves lane despite Meyer's overall suppression.", chips: ["vs Meyer"] },
-                    { name: "Matt Olson (L)", odds: "Listed +451 - Over 0.5 HR", score: 86, emojis: "🚀 🌕 ⚾", blast: "high", note: "Three HR and three near-HR with 16.7% barrels and 96.4 mph EV; Meyer limits HR overall but Olson's pull-side ceiling versus RHP stays elite.", chips: ["vs Meyer"] },
-                    { name: "Mike Yastrzemski (L)", odds: "Listed +800 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "Two HR and two near-HR with 28.6% pull-air; Meyer's LHB leakage (2.63 HR/9 to lefties in split) is the Atlanta lefty path.", chips: ["vs Meyer"] },
-                    { name: "Jakob Marsee (L)", odds: "Listed +850 - Over 0.5 HR", score: 74, emojis: "💎", note: "One HR and two near-HR with 35.5% squared-up rate; Ritchie RHB context at plus money.", chips: ["vs Ritchie"] },
-                    { name: "Otto Lopez (R)", odds: "Listed +790 - Over 0.5 HR", score: 68, emojis: "💎", note: "Modest contact versus Ritchie's stingy RHB line (-1.73)—longshot only.", chips: ["vs Ritchie"] },
-                    { name: "Xavier Edwards (S)", odds: "Listed +1450 - Over 0.5 HR", score: 65, emojis: "💎", note: "SHB versus Ritchie with limited pull-air; mostly price dart.", chips: ["vs Ritchie"] },
-                ]},
-                { title: "CLE @ DET - Slade Cecconi 🧤 (R, CLE) vs Framber Valdez 🧤 (L, DET)", description: "Comerica Park — -1% runs row, 84°F, 16 mph wind. Valdez allows RHB damage (0.56 HR-risk); Cecconi's vs-RHB split (0.24) is mildly hittable for Detroit righties.", rows: [
-                    { name: "Dillon Dingler (R)", odds: "Listed +610 - Over 0.5 HR", score: 77, emojis: "🚀 💎", note: "40% hard-hit with pull-side fly balls; Cecconi's RHB line is the Cleveland attack lane into Detroit.", chips: ["vs Cecconi"] },
-                    { name: "Rhys Hoskins (R)", odds: "Listed +575 - Over 0.5 HR", score: 75, emojis: "🚀 💎", blast: "good", note: "One near-HR with 96.7 mph EV and 80% hard-hit; Cecconi RHB context—Hoskins' tiny sample K rate is the drag.", chips: ["vs Cecconi"] },
-                    { name: "Travis Bazzana (L)", odds: "Listed +1500 - Over 0.5 HR", score: 72, emojis: "💎", note: "One HR with .750 SLG in the window; Valdez LHB lane at long price for the Tigers prospect bat.", chips: ["vs Valdez"] },
-                ]},
-                { title: "NYM @ WSH - Christian Scott (R, NYM) vs Jake Irvin 🧤 (R, WSH)", description: "Nationals Park — +9% HR row, 92°F, 10 mph. Irvin's vs-RHB HR-risk (0.48) and Scott's LHB suppression (-1.29) set up a hot-air Mets righty path versus Washington.", rows: [
-                    { name: "James Wood (L)", odds: "Listed +295 - Over 0.5 HR", score: 89, emojis: "🚀 🌕 ⚾ 🏟️", blast: "high", note: "Two near-HR with 99.5 mph EV and 72.7% hard-hit; Scott's RHB leakage plus Nationals Park heat is the slate's top lefty environment row.", chips: ["vs Scott"] },
-                    { name: "Mark Vientos (R)", odds: "Listed +390 - Over 0.5 HR", score: 81, emojis: "🚀 💎", blast: "good", note: "Two near-HR with 37.5% hard-hit; Irvin's vs-RHB line (0.39) is workable for Mets righty pull.", chips: ["vs Irvin"] },
-                    { name: "Jose Tena (L)", odds: "Listed +750 - Over 0.5 HR", score: 78, emojis: "🚀 💎", blast: "good", note: "One HR with 103.6 mph EV and .667 ISO; Scott LHB context at plus money.", chips: ["vs Scott"] },
-                    { name: "Juan Soto (L)", odds: "Listed +280 - Over 0.5 HR", score: 76, emojis: "💎", note: "Two HR in window but .158 BA—mostly pedigree and Irvin exposure at a short price; Irvin suppresses lefties.", chips: ["vs Irvin", "📜 2-9 vs Irvin"] },
-                    { name: "MJ Melendez (L)", odds: "Listed +450 - Over 0.5 HR", score: 70, emojis: "💎", note: "One near-HR with 96.1 mph EV; Irvin RHB lane for Mets bench bat—high K risk.", chips: ["vs Irvin"] },
-                ]},
-                { title: "TOR @ NYY - Patrick Corbin (L, TOR) vs Ryan Weathers 🧤 (L, NYY)", description: "Yankee Stadium — -7% HR row, 73°F, 10 mph R-L. Weathers' vs-RHB HR-risk (0.59) is the Toronto righty lane; Corbin suppresses both hands in the Bronx.", rows: [
-                    { name: "Paul Goldschmidt (R)", odds: "Listed +450 - Over 0.5 HR", score: 84, emojis: "🚀 🌕 💎", blast: "high", note: "One HR with 16.7% barrels and 50% hard-hit; Weathers' vs-RHB split is the cleaner Blue Jays attack lane.", chips: ["vs Weathers", "📜 1-18 vs Weathers"] },
-                    { name: "Trent Grisham (L)", odds: "Listed +510 - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "One HR with 18.2% barrels and 54.5% hard-hit; Corbin's LHB suppression (-0.79) is real but Grisham's pull-side fit versus lefty keeps him live.", chips: ["vs Corbin"] },
-                    { name: "George Springer (R)", odds: "Listed +575 - Over 0.5 HR", score: 77, emojis: "🚀 💎", note: "One near-HR with 54.5% hard-hit and 50% fastball contact; Weathers RHB lane.", chips: ["vs Weathers"] },
-                    { name: "Kazuma Okamoto (R)", odds: "Listed +480 - Over 0.5 HR", score: 79, emojis: "🚀 ⚾", blast: "good", note: "One HR with 101.6 mph EV and 77.8% hard-hit; Weathers vs-RHB HR-risk fits Japanese slugger's pull profile.", chips: ["vs Weathers"] },
-                    { name: "Jazz Chisholm Jr. (L)", odds: "Listed +650 - Over 0.5 HR", score: 72, emojis: "💎", note: "Modest L5 versus Corbin; mostly athleticism longshot.", chips: ["vs Corbin"] },
-                    { name: "Amed Rosario (R)", odds: "Listed +980 - Over 0.5 HR", score: 71, emojis: "💎", note: "One HR with 95 mph EV; Weathers RHB at long price.", chips: ["vs Weathers"] },
-                    { name: "Ernie Clement (R)", odds: "Listed +1120 - Over 0.5 HR", score: 68, emojis: "💎", note: "One HR with .700 SLG in tiny window; Weathers exposure only.", chips: ["vs Weathers"] },
-                ]},
-                { title: "HOU @ MIN - Tatsuya Imai 🧤 (R, HOU) vs Kendry Rojas (L, MIN)", description: "Target Field — flat HR row (0%), 59°F, 56% precip risk. Imai's vs-LHB HR-risk (0.76) helps Houston lefties; Rojas is stingy to both hands in a cold night script.", rows: [
-                    { name: "Byron Buxton (R)", odds: "Listed +297 - Over 0.5 HR", score: 92, emojis: "🚀 🌕 ⚾ 🕊️", blast: "high", note: "Three HR and five near-HR with 46.2% barrels and .842 SLG; clear pitcher HR-risk advantage—Imai's vs-RHB line (-0.02) is neutral but Buxton's damage form is slate-breaking.", chips: ["vs Imai"] },
-                    { name: "Yordan Alvarez (L)", odds: "Listed +340 - Over 0.5 HR", score: 88, emojis: "🚀 🌕 ⚾ 🕊️", blast: "high", note: "One HR with 92.5 mph EV and 47.1% hard-hit; clear pitcher HR-risk advantage on Rojas's vs-LHB split (0.76) despite Target's carry tax.", chips: ["vs Rojas"] },
-                    { name: "Ryan Jeffers (R)", odds: "Listed +592 - Over 0.5 HR", score: 83, emojis: "🚀 ⚾", blast: "good", note: "One HR with 33.3% barrels and 66.7% hard-hit; Imai RHB lane with Jeffers' pull-side damage.", chips: ["vs Imai"] },
-                    { name: "Brice Matthews (R)", odds: "Listed +590 - Over 0.5 HR", score: 76, emojis: "💎", note: "One HR with 83.9 mph EV; Rojas RHB context—Matthews' K rate caps score.", chips: ["vs Rojas"] },
-                    { name: "Zach Dezenzo (R)", odds: "Listed +725 - Over 0.5 HR", score: 80, emojis: "🚀 💎", blast: "good", note: "One HR and two near-HR with 66.7% barrels in micro-sample; Rojas hittable for Houston righties at plus money.", chips: ["vs Rojas"] },
-                    { name: "Tristan Gray (L)", odds: "Listed +900 - Over 0.5 HR", score: 68, emojis: "💎", note: "One near-HR with 95.8 mph EV; Rojas LHB lane—limited PA window.", chips: ["vs Rojas"] },
-                ]},
-                { title: "BOS @ KC - Sonny Gray 🧤 (R, BOS) vs Seth Lugo 🧤 (R, KC)", description: "Kauffman Stadium — +35% HR row, 79°F, 18 mph blowing out. Lugo's HR suppression (0.48 HR/9 season) fights the park; Gray's modest RHB leak pairs with Kansas City's wind-receptive outfield.", rows: [
-                    { name: "Bobby Witt Jr. (R)", odds: "Listed +475 - Over 0.5 HR", score: 87, emojis: "🚀 🌕 ⚾ 🏟️ 🕊️", blast: "high", note: "Two HR and two near-HR with 96.3 mph EV and 69.2% hard-hit; Kauffman's +35% HR row plus Gray's RHB lane (0.56 HR-risk for opponents) is the Royals' premium stack.", chips: ["vs Gray", "📜 17-17 vs Gray"] },
-                    { name: "Michael Massey (L)", odds: "Listed +850 - Over 0.5 HR", score: 84, emojis: "🚀 🌕 🏟️", blast: "high", note: "Two HR and three near-HR with 23.5% barrels and 76.5% HR/FB; Gray suppresses HR but Massey's pull-air wins in the wind.", chips: ["vs Gray"] },
-                    { name: "Salvador Perez (R)", odds: "Listed +538 - Over 0.5 HR", score: 80, emojis: "🚀 ⚾ 🏟️", note: "One HR and two near-HR with 21.4% pull-air; Gray RHB exposure in Kansas City heat.", chips: ["vs Gray", "📜 34-34 vs Gray"] },
-                    { name: "Jac Caglianone (L)", odds: "Listed +900 - Over 0.5 HR", score: 78, emojis: "🚀 💎 🏟️", blast: "good", note: "One HR with 27.3% barrels and 54.5% hard-hit; Gray LHB lane plus Kauffman carry.", chips: ["vs Gray"] },
-                    { name: "Ceddanne Rafaela (R)", odds: "Listed +750 - Over 0.5 HR", score: 75, emojis: "💎 🏟️", note: "One HR with pull-air chip; Lugo RHB at plus money in the wind.", chips: ["vs Lugo"] },
-                    { name: "Wilyer Abreu (L)", odds: "Listed +375 - Over 0.5 HR", score: 74, emojis: "💎", note: "Modest barrels but Lugo's fly-ball profile is hittable for Boston lefties—price is short.", chips: ["vs Lugo"] },
-                    { name: "Mickey Gasper (S)", odds: "Listed +650 - Over 0.5 HR", score: 70, emojis: "💎", note: "11.8% barrels and 93.2 mph EV; SHB versus Lugo—bench dart.", chips: ["vs Lugo"] },
-                ]},
-                { title: "MIL @ CHC - Brandon Sproat 🧤 (R, MIL) vs Shota Imanaga (L, CHC)", description: "Wrigley Field — +42% HR row (slate headliner), 76°F, 17 mph out. Sproat's vs-LHB HR-risk (0.45) and 2.00 HR/9 power Milwaukee's lefty pull; Imanaga suppresses RHB (-0.43).", rows: [
-                    { name: "Seiya Suzuki (R)", odds: "Listed +375 - Over 0.5 HR", score: 90, emojis: "🚀 🌕 ⚾ 🏟️ 🕊️ 💤", blast: "high", overdue: true, note: "Two HR and two near-HR with 20% barrels; clear pitcher HR-risk advantage—Sproat's vs-RHB line (-0.01) in Wrigley's +42% HR environment is the Cubs' top righty lane.", chips: ["vs Sproat"] },
-                    { name: "Michael Busch (L)", odds: "Listed +358 - Over 0.5 HR", score: 88, emojis: "🚀 🌕 🏟️ 💤", blast: "high", overdue: true, note: "One HR and two near-HR with 20% barrels and 60% hard-hit; Sproat LHB leakage plus Wrigley wind receptivity.", chips: ["vs Sproat"] },
-                    { name: "Michael Conforto (L)", odds: "Listed +449 - Over 0.5 HR", score: 86, emojis: "🚀 🌕 🏟️ 💤", blast: "high", overdue: true, note: "Two HR and three near-HR with 12.5% barrels and 96.9 mph EV; same Sproat LHB attack in the slate's best HR park row.", chips: ["vs Sproat"] },
-                    { name: "Ian Happ (S)", odds: "Listed +359 - Over 0.5 HR", score: 82, emojis: "🚀 🏟️", note: "Two near-HR with 20% barrels and 60% hard-hit; SHB uses Sproat's LHB mix—Happ's K rate is the drag in a strong park.", chips: ["vs Sproat"] },
-                    { name: "Pete Crow-Armstrong (L)", odds: "Listed +500 - Over 0.5 HR", score: 79, emojis: "🚀 💎 🏟️", note: "One HR with 22.2% BB rate and pull-side fly balls; Sproat LHB at Wrigley.", chips: ["vs Sproat"] },
-                    { name: "Andrew Vaughn (R)", odds: "Listed +378 - Over 0.5 HR", score: 77, emojis: "🚀 💎", blast: "good", note: "Micro-sample power versus Imanaga; mostly price and park.", chips: ["vs Imanaga"] },
-                    { name: "Jake Bauers (L)", odds: "Listed +820 - Over 0.5 HR", score: 74, emojis: "💎 🏟️", note: "One HR with .545 ISO in tiny window; Sproat LHB longshot in Wrigley.", chips: ["vs Sproat"] },
-                ]},
-                { title: "TEX @ COL - Jose Quintana 🧤 (L, TEX) vs MacKenzie Gore (L, COL)", description: "Coors Field — +3% combined HR row at 36°F (Ballpark Pal: weather suppresses carry ~30%). Quintana's vs-LHB HR-risk (1.68) is extreme; Gore is modest overall in the cold.", rows: [
-                    { name: "Hunter Goodman (R)", odds: "Listed +361 - Over 0.5 HR", score: 83, emojis: "🚀 ⚾", note: "One near-HR with 50% hard-hit; Quintana's vs-RHB suppression (-0.79) is the drag—Goodman's Coors familiarity still grades playable.", chips: ["vs Quintana"] },
-                    { name: "Jordan Beck (R)", odds: "Listed +650 - Over 0.5 HR", score: 72, emojis: "💎", note: "Modest contact versus Quintana; cold Coors limits ceiling.", chips: ["vs Quintana"] },
-                    { name: "Kyle Karros (R)", odds: "Listed +1050 - Over 0.5 HR", score: 76, emojis: "🚀 💎", blast: "good", note: "98.5 mph EV and 71.4% hard-hit in small window; Quintana RHB leak at long price.", chips: ["vs Quintana"] },
-                    { name: "Mickey Moniak (L)", odds: "Listed +525 - Over 0.5 HR", score: 78, emojis: "💎", note: "One HR with 37.5% HR/FB; Quintana LHB lane in altitude despite cold air.", chips: ["vs Quintana"] },
-                    { name: "Jake Burger (R)", odds: "Listed +440 - Over 0.5 HR", score: 75, emojis: "💎", note: "One near-HR with 50% hard-hit; Gore RHB context.", chips: ["vs Gore"] },
-                    { name: "Kyle Higashioka (R)", odds: "Listed +540 - Over 0.5 HR", score: 70, emojis: "💎", note: "Modest L5 versus Gore; catcher pop longshot.", chips: ["vs Gore"] },
-                ]},
-                { title: "ATH @ LAA - J.T. Ginn 🧤 (R, ATH) vs Walbert Urena (R, LAA)", description: "Angel Stadium — +3% HR row, 70°F, 9 mph out. Ginn's vs-LHB HR-risk (0.27) helps Oakland lefties; Urena suppresses HR overall (0.66 HR/9).", rows: [
-                    { name: "Shea Langeliers (R)", odds: "Listed +333 - Over 0.5 HR", score: 94, emojis: "🚀 🌕 💣 🧤", blast: "high", note: "Four HR and four near-HR with 35.3% barrels and 29.6% blast rate; Urena's contact management cannot contain Langeliers' pull-side damage.", chips: ["vs Urena"] },
-                    { name: "Brent Rooker (R)", odds: "Listed +425 - Over 0.5 HR", score: 86, emojis: "🚀 🌕", blast: "high", note: "One HR and two near-HR with 21.1% barrels and 95.4 mph EV; Urena RHB lane with consistent out-blowing Angel Stadium pattern.", chips: ["vs Urena"] },
-                    { name: "Zack Gelof (R)", odds: "Listed +600 - Over 0.5 HR", score: 84, emojis: "🚀 ⚾", blast: "good", note: "Two HR and two near-HR with 15.8% barrels; same Urena exposure.", chips: ["vs Urena"] },
-                    { name: "Jorge Soler (R)", odds: "Listed +470 - Over 0.5 HR", score: 80, emojis: "🚀 💎", blast: "good", note: "One HR and two near-HR with 25% barrels; Ginn LHB suppression is real but Soler's pull loft versus RHP stays live.", chips: ["vs Ginn"] },
-                    { name: "Mike Trout (R)", odds: "Listed +390 - Over 0.5 HR", score: 78, emojis: "💎", note: "One near-HR with 33.3% pull-air; Ginn RHB line—Trout's K spike is the fade factor.", chips: ["vs Ginn"] },
-                    { name: "Yoan Moncada (S)", odds: "Listed +590 - Over 0.5 HR", score: 71, emojis: "💎", note: "40% pull-air in window; SHB versus Ginn—mostly longshot.", chips: ["vs Ginn"] },
-                ]},
-                { title: "CHW @ SEA - Noah Schultz (L, CHW) vs Bryan Woo 🧤 (R, SEA)", description: "T-Mobile Park — -21% runs row, dome, 61°F. Woo suppresses HR (1.02 HR/9); Schultz is contact-oriented—White Sox lefty pull is the only real HR path.", rows: [
-                    { name: "Munetaka Murakami (L)", odds: "Listed +365 - Over 0.5 HR", score: 85, emojis: "🚀 🌕 ⚾ 🕊️", blast: "high", note: "One HR with 99 mph EV and 28.6% barrels; clear pitcher HR-risk advantage—Schultz's vs-LHB HR-risk (0.85) is green for batters despite T-Mobile's carry tax.", chips: ["vs Schultz"] },
-                    { name: "Colson Montgomery (L)", odds: "Listed +439 - Over 0.5 HR", score: 83, emojis: "🚀 ⚾", blast: "good", note: "One HR and two near-HR with 18.2% pull-air; Woo LHB lane for Chicago lefty.", chips: ["vs Woo"] },
-                    { name: "Miguel Vargas (R)", odds: "Listed +725 - Over 0.5 HR", score: 81, emojis: "🚀 ⚾", blast: "good", note: "Two HR and three near-HR with 26.3% barrels; Woo RHB context at plus money.", chips: ["vs Woo"] },
-                    { name: "Andrew Benintendi (L)", odds: "Listed +725 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "One HR and two near-HR with 66.7% hard-hit; Woo LHB split.", chips: ["vs Woo"] },
-                    { name: "Jarred Kelenic (L)", odds: "Listed +725 - Over 0.5 HR", score: 77, emojis: "🚀 💎", note: "33.3% barrels and 101 mph EV; Woo LHB—park fade caps ceiling.", chips: ["vs Woo"] },
-                    { name: "Julio Rodriguez (R)", odds: "Listed +500 - Over 0.5 HR", score: 76, emojis: "💎", note: "One HR with 62.5% pull; Schultz suppresses RHB—mostly pedigree.", chips: ["vs Schultz"] },
-                    { name: "Randy Arozarena (R)", odds: "Listed +525 - Over 0.5 HR", score: 73, emojis: "💎", note: "One HR with 58.3% hard-hit; Schultz RHB longshot.", chips: ["vs Schultz"] },
-                    { name: "Rob Refsnyder (R)", odds: "Listed +800 - Over 0.5 HR", score: 68, emojis: "💎", note: "Modest contact versus Schultz; bench dart.", chips: ["vs Schultz"] },
-                ]},
-                { title: "LAD @ SD - Yoshinobu Yamamoto (R, LAD) vs Michael King 🧤 (R, SD)", description: "Petco Park — -7% HR row, 66°F, 8 mph out. Yamamoto's modest HR-risk (0.31); King's vs-RHB suppression (-0.62) headlines San Diego—Dodgers lefty pull is the cleaner lane.", rows: [
-                    { name: "Shohei Ohtani (L)", odds: "Listed +327 - Over 0.5 HR", score: 88, emojis: "🚀 🌕 ⚾", blast: "high", note: "One HR and two near-HR with 15% barrels and 40% hard-hit; King's LHB line is softer than his RHB suppression—Ohtani's short price reflects the lane.", chips: ["vs King"] },
-                    { name: "Mookie Betts (R)", odds: "Listed +690 - Over 0.5 HR", score: 84, emojis: "🚀 🌕", blast: "high", note: "Two HR and three near-HR with 11.8% barrels; King RHB context at Petco.", chips: ["vs King"] },
-                    { name: "Will Smith (R)", odds: "Listed +650 - Over 0.5 HR", score: 82, emojis: "🚀 🌕", blast: "high", note: "One HR and six near-HR with 35% barrels and 94.8 mph EV; King hittable for catcher pop.", chips: ["vs King"] },
-                    { name: "Andy Pages (R)", odds: "Listed +750 - Over 0.5 HR", score: 80, emojis: "🚀 💎", blast: "good", note: "Four HR and four near-HR with 22.2% barrels; King fly-ball profile.", chips: ["vs King"] },
-                    { name: "Jackson Merrill (L)", odds: "Listed +650 - Over 0.5 HR", score: 75, emojis: "💎", note: "One near-HR with 54.5% hard-hit; Yamamoto LHB—favorite tag despite Petco fade.", chips: ["vs Yamamoto"] },
-                    { name: "Manny Machado (R)", odds: "Listed +650 - Over 0.5 HR", score: 74, emojis: "💎", note: "One HR with 23.1% pull-air; Yamamoto RHB for Padres.", chips: ["vs Yamamoto", "📜 8-8 vs Yamamoto"] },
-                    { name: "Gavin Sheets (L)", odds: "Listed +840 - Over 0.5 HR", score: 72, emojis: "💎", note: "Two HR in window; Yamamoto LHB at long price—duplicate prop angle if rostered.", chips: ["vs Yamamoto"] },
-                ]},
-                { title: "SF @ ARI - Robbie Ray 🧤 (L, SF) vs Zac Gallen (R, ARI)", description: "Chase Field — roof open, +8% HR row, 85°F, 8 mph. Ray's vs-RHB HR-risk (0.89) and 2.35 HR/9 to righties power Arizona; Gallen is contact-heavy overall.", rows: [
-                    { name: "Corbin Carroll (L)", odds: "Listed +650 - Over 0.5 HR", score: 82, emojis: "🚀 ⚾ 🏟️", blast: "good", note: "One near-HR with 58.3% hard-hit and 25% pull-air; Ray LHB leakage in Chase heat.", chips: ["vs Ray"] },
-                    { name: "Nolan Arenado (R)", odds: "Listed +570 - Over 0.5 HR", score: 85, emojis: "🚀 📜 🏟️", blast: "good", note: "One near-HR with 50% hard-hit; clear Ray RHB HR-risk (0.89) plus BvP (3-43, .790 SLG).", chips: ["vs Ray", "📜 3-43 vs Ray"] },
-                    { name: "Rafael Devers (L)", odds: "Listed +500 - Over 0.5 HR", score: 83, emojis: "🚀 ⚾ 📜", blast: "good", note: "One HR and two near-HR with 50% hard-hit; Ray LHB lane in open-roof Chase.", chips: ["vs Ray", "📜 1-9 vs Ray"] },
-                    { name: "Willy Adames (R)", odds: "Listed +650 - Over 0.5 HR", score: 80, emojis: "🚀 💎", blast: "good", note: "Two near-HR with 50% hard-hit and 94 mph EV; Ray RHB split is the D-backs' primary HR path.", chips: ["vs Ray"] },
-                    { name: "Gabriel Moreno (R)", odds: "Listed +875 - Over 0.5 HR", score: 76, emojis: "💎", note: "One HR and two near-HR with 50% HR/FB; Ray RHB at long price.", chips: ["vs Ray"] },
-                    { name: "Casey Schmitt (R)", odds: "Listed +650 - Over 0.5 HR", score: 72, emojis: "💎", note: "31.2% HR/FB in window; Ray RHB exposure.", chips: ["vs Ray"] },
-                    { name: "Harrison Bader (R)", odds: "Listed +1200 - Over 0.5 HR", score: 70, emojis: "💎", note: "One HR and three near-HR with 35.3% pull-air; Ray RHB longshot.", chips: ["vs Ray"] },
-                    { name: "Eric Haase (R)", odds: "Listed +900 - Over 0.5 HR", score: 71, emojis: "💎", note: "One HR with .700 SLG in micro-sample; Ray RHB.", chips: ["vs Ray"] },
-                    { name: "Luis Arraez (L)", odds: "Listed +1800 - Over 0.5 HR", score: 68, emojis: "💎", note: "One HR with .571 SLG; Ray LHB at extreme long price in hitter-friendly air.", chips: ["vs Ray"] },
-                ]},
-            ];
+    {
+        title: "ATL @ MIA - Martin Perez 🧤 (L, ATL) vs Braxton Garrett (L, MIA)",
+        description: "loanDepot park — roof game, HR factor -14%. Miami suppresses homers, but Garrett has tiny 2026 sample with 6.75 WHIP and Atlanta's lefty power still belongs on the sheet.",
+        rows: [
+            { name: "Drake Baldwin (L)", odds: "Listed +600 - Over 0.5 HR", score: 93, emojis: "🚀 🌕 💣", note: "Worst Pickz favorite with two HR, four near-HR, 101.5 mph EV and 37.5% barrel rate in the HR matchup table Draws opposing starter Garrett; roof suppresses weather.", chips: ["vs Garrett"], blast: "high" },
+            { name: "Matt Olson (L)", odds: "Listed +460 - Over 0.5 HR", score: 88, emojis: "🚀 🌕 ⚾", note: "Worst Pickz favorite with 97.5 mph EV and a clean lefty power lane Draws opposing starter Garrett; roof suppresses carry but the bat profile travels.", chips: ["vs Garrett"], blast: "high" },
+            { name: "Jorge Mateo (R)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "Listed prop with a 1 HR recent window and speed/pull-air upside Draws opposing starter Garrett; roof keeps him as a dart.", chips: ["vs Garrett"] },
+            { name: "Xavier Edwards (S)", odds: "Listed +1250 - Over 0.5 HR", score: 70, emojis: "💎", note: "Switch bat with one HR and one near-HR in the selected pitch mix Draws opposing starter Perez; Miami park is a fade but price is long.", chips: ["vs Perez"] },
+        ],
+    },
+    {
+        title: "BAL @ TB - Kyle Bradish 🧤 (R, BAL) vs Griffin Jax (R, TB)",
+        description: "Tropicana Field — dome, HR factor -2%. Bradish is the leaky arm on this game by HR-risk, while Jax is more neutral but vulnerable to right-handed pull damage.",
+        rows: [
+            { name: "Pete Alonso (R)", odds: "Listed +480 - Over 0.5 HR", score: 86, emojis: "🚀 🌕 ⚾", note: "Worst Pickz favorite with premium raw power and a plus matchup versus Jax's RHB split Draws opposing starter Jax; closed dome removes weather help.", chips: ["vs Jax"], blast: "high" },
+            { name: "Samuel Basallo (L)", odds: "Listed +650 - Over 0.5 HR", score: 83, emojis: "🚀 🌕", note: "Listed prop with 94.1 mph EV, 13.0% barrels and strong recent slug Draws opposing starter Jax; dome is neutral-to-cold for HRs.", chips: ["vs Jax"], blast: "good" },
+            { name: "Tyler O'Neill (R)", odds: "Listed +575 - Over 0.5 HR", score: 81, emojis: "🚀 💎", note: "Three near-HR and classic pull-air power at plus money Draws opposing starter Jax; park is the only real drag.", chips: ["vs Jax"], blast: "good" },
+            { name: "Jonathan Aranda (L)", odds: "Listed +750 - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "Tampa lefty gets the better pitcher side with Bradish showing a green LHB HR-risk lane Draws opposing starter Bradish; Tropicana caps the ceiling.", chips: ["vs Bradish"] },
+            { name: "Taylor Walls (S)", odds: "Listed +1800 - Over 0.5 HR", score: 67, emojis: "💎", note: "Included from your Taylor Wells/Walls prop; switch-hit profile keeps him listed Draws opposing starter Bradish; longshot only in a dome.", chips: ["vs Bradish"] },
+        ],
+    },
+    {
+        title: "CIN @ PHI - Chase Burns 🧤 (R, CIN) vs Jesus Luzardo (L, PHI)",
+        description: "Citizens Bank Park — +37% HR, 91F, wind blowing out. This is one of the slate's top HR environments, especially for Philadelphia lefties against Burns' LHB risk.",
+        rows: [
+            { name: "Kyle Schwarber (L)", odds: "Listed +215 - Over 0.5 HR", score: 92, emojis: "🚀 🌕 💣 🏟️", note: "Worst Pickz favorite with three HR, 98.0 mph EV and 36.4% barrels in the recent pitch mix Draws opposing starter Burns; Citizens Bank is +37% HR with out-blowing wind.", chips: ["vs Burns"], blast: "high" },
+            { name: "Bryce Harper (L)", odds: "Listed +363 - Over 0.5 HR", score: 87, emojis: "🚀 🌕 🏟️", note: "One HR with .429 ISO and elite plate discipline in the sample Draws opposing starter Burns; heat plus small outfield boosts pull carry.", chips: ["vs Burns"], blast: "high" },
+            { name: "Bryson Stott (L)", odds: "Listed +710 - Over 0.5 HR", score: 86, emojis: "🚀 🌕 🏟️", note: "Two HR, three near-HR and .471 ISO make him one of the better mid-price Phillies Draws opposing starter Burns; same top-tier Philly weather lane.", chips: ["vs Burns"], blast: "high" },
+            { name: "Justin Crawford (L)", odds: "Listed +1160 - Over 0.5 HR", score: 82, emojis: "🚀 💎 🏟️", note: "One HR with 91.9 mph EV and strong contact quality Draws opposing starter Burns; Citizens Bank gives longshot legs.", chips: ["vs Burns"], blast: "good" },
+            { name: "Spencer Steer (R)", odds: "Listed +570 - Over 0.5 HR", score: 85, emojis: "🚀 🌕 🏟️", note: "Worst Pickz favorite with one HR, three near-HR, .353 ISO and 94.5 mph EV Draws opposing starter Luzardo; elite weather keeps Cincinnati righties live.", chips: ["vs Luzardo"], blast: "high" },
+            { name: "Dane Myers (R)", odds: "Listed +680 - Over 0.5 HR", score: 80, emojis: "🚀 💎 🏟️", note: "One HR and solid righty damage profile at plus money Draws opposing starter Luzardo; park helps the righty longball path.", chips: ["vs Luzardo"] },
+            { name: "Elly De La Cruz (S)", odds: "Listed +528 - Over 0.5 HR", score: 79, emojis: "🚀 💎 🏟️", note: "Two near-HR with 93.7 mph EV and speed/power ceiling Draws opposing starter Luzardo; wind gives his fly balls a boost.", chips: ["vs Luzardo"] },
+            { name: "Sal Stewart (R)", odds: "Listed +409 - Over 0.5 HR", score: 78, emojis: "🚀 💎 🏟️", note: "One HR and two near-HR with 10.0% barrels Draws opposing starter Luzardo; price is short but environment is strong.", chips: ["vs Luzardo"] },
+        ],
+    },
+    {
+        title: "CLE @ DET - Parker Messick (L, CLE) vs Keider Montero 🧤 (R, DET)",
+        description: "Comerica Park — delay risk, big wind, HR factor -2%. Montero carries the bigger HR-risk mark, while Messick is lower risk but still allows right-handed balls in play.",
+        rows: [
+            { name: "Matt Vierling (R)", odds: "Listed +850 - Over 0.5 HR", score: 82, emojis: "🚀 🌕", note: "One HR, two near-HR and .364 ISO from the right side Draws opposing starter Messick; Comerica is large but wind is active.", chips: ["vs Messick"], blast: "good" },
+            { name: "Riley Greene (L)", odds: "Listed +575 - Over 0.5 HR", score: 79, emojis: "🚀 💎", note: "Hot recent contact with .535 wOBA in the pitch-mix table Draws opposing starter Messick; park size knocks the score down.", chips: ["vs Messick"] },
+            { name: "Hao-Yu Lee (R)", odds: "Listed +830 - Over 0.5 HR", score: 76, emojis: "💎", note: "Listed prop with 91.1 mph EV and 72.7% fly-ball profile Draws opposing starter Messick; righty lane is playable.", chips: ["vs Messick"] },
+            { name: "Angel Martinez (S)", odds: "Listed +630 - Over 0.5 HR", score: 84, emojis: "🚀 🌕", note: "Three HR, four near-HR and strong switch-hit damage keep him near the top of this game Draws opposing starter Montero; Montero is the glove arm in this game.", chips: ["vs Montero"], blast: "good" },
+            { name: "Chase DeLauter (L)", odds: "Listed +650 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "93.9 mph EV with sturdy contact quality Draws opposing starter Montero; LHB HR-risk is the favorable side against Montero.", chips: ["vs Montero"] },
+        ],
+    },
+    {
+        title: "NYM @ WSH - Nolan McLean (R, NYM) vs Foster Griffin 🧤 (L, WSH)",
+        description: "Nationals Park — +5% HR, 93F. Hot air boosts this game, and Griffin's HR-risk is the main Mets path while Washington lefties face a tougher McLean profile.",
+        rows: [
+            { name: "James Wood (L)", odds: "Listed +390 - Over 0.5 HR", score: 88, emojis: "🚀 🌕 🏟️", note: "Two HR, six near-HR, 96.3 mph EV and 27.3% barrels Draws opposing starter McLean; 93F air keeps the ceiling alive.", chips: ["vs McLean"], blast: "high" },
+            { name: "Jose Tena (L)", odds: "Listed +990 - Over 0.5 HR", score: 81, emojis: "🚀 💎 🏟️", note: "One HR with 95.4 mph EV and 21.7% barrels Draws opposing starter McLean; heat supports the lefty longshot.", chips: ["vs McLean"] },
+            { name: "CJ Abrams (L)", odds: "Listed +500 - Over 0.5 HR", score: 77, emojis: "💎 🏟️", note: "Listed prop with pull-air upside from the left side Draws opposing starter McLean; hot weather helps but McLean suppresses LHBs.", chips: ["vs McLean"] },
+            { name: "Mark Vientos (R)", odds: "Listed +460 - Over 0.5 HR", score: 84, emojis: "🚀 🌕 🏟️", note: "One HR, three near-HR, 95.2 mph EV and 60.0% hard-hit Draws opposing starter Griffin; Mets righties get the glove pitcher.", chips: ["vs Griffin"], blast: "good" },
+            { name: "Brett Baty (L)", odds: "Listed +650 - Over 0.5 HR", score: 74, emojis: "💎 🏟️", note: "93.0 mph EV but high whiff/K drag Draws opposing starter Griffin; heat is doing most of the work.", chips: ["vs Griffin"] },
+            { name: "Luis Torrens (R)", odds: "Listed +930 - Over 0.5 HR", score: 70, emojis: "💎", note: "Listed prop against the lower-rated starter side Draws opposing starter Griffin; longshot catcher power.", chips: ["vs Griffin"] },
+        ],
+    },
+    {
+        title: "TOR @ NYY - Dylan Cease (R, TOR) vs Will Warren 🧤 (R, NYY)",
+        description: "Yankee Stadium — +18% HR, 89F, wind blowing out. Warren is the pitcher to attack, while Cease is a strong suppressor despite Yankee Stadium's short porch.",
+        rows: [
+            { name: "Ben Rice (L)", odds: "Listed +360 - Over 0.5 HR", score: 87, emojis: "🚀 🌕 🏟️", note: "Worst Pickz favorite with two HR, 50.0% barrels and .462 ISO Draws opposing starter Cease; Yankee Stadium weather helps lefty lift.", chips: ["vs Cease"], blast: "high" },
+            { name: "Aaron Judge (R)", odds: "Listed +240 - Over 0.5 HR", score: 86, emojis: "🚀 🌕 🏟️", note: "One HR and premium raw power in the slate's second-best HR weather row Draws opposing starter Cease; elite park/weather offsets tough pitcher.", chips: ["vs Cease"], blast: "high" },
+            { name: "Austin Wells (L)", odds: "Listed +750 - Over 0.5 HR", score: 73, emojis: "💎 🏟️", note: "Listed prop with catcher pop but cold recent results Draws opposing starter Cease; short porch helps if he lifts it.", chips: ["vs Cease"] },
+            { name: "Kazuma Okamoto (R)", odds: "Listed +391 - Over 0.5 HR", score: 82, emojis: "🚀 💎 🏟️", note: "94.5 mph EV and 16.7% barrels against Warren's higher HR-risk side Draws opposing starter Warren; Toronto righties get the leaky starter.", chips: ["vs Warren"], blast: "good" },
+            { name: "Yohendrick Pinango (L)", odds: "Listed +700 - Over 0.5 HR", score: 78, emojis: "💎 🏟️", note: "One HR and two near-HR at a playable price Draws opposing starter Warren; Warren's LHB HR-risk is green.", chips: ["vs Warren"] },
+            { name: "Daulton Varsho (L)", odds: "Listed +410 - Over 0.5 HR", score: 81, emojis: "🚀 💎 🏟️", note: "One HR, two near-HR and 15.0% barrels Draws opposing starter Warren; same LHB lane into Yankee carry.", chips: ["vs Warren"], blast: "good" },
+        ],
+    },
+    {
+        title: "HOU @ MIN - Lance McCullers Jr. 🧤 (R, HOU) vs Zebby Matthews (R, MIN)",
+        description: "Target Field — cold 50F air, HR factor -22%. McCullers is the biggest HR-risk arm on the slate, but the weather is harsh for carry.",
+        rows: [
+            { name: "Ryan Jeffers (R)", odds: "Listed +500 - Over 0.5 HR", score: 96, emojis: "🚀 🌕 💣", note: "Worst Pickz favorite with three HR, 1.000 ISO, 96.8 mph EV and 30.0% barrels Draws opposing starter McCullers Jr.; cold air is the only real drawback.", chips: ["vs McCullers Jr."], blast: "high" },
+            { name: "Byron Buxton (R)", odds: "Listed prop - Over 0.5 HR", score: 89, emojis: "🚀 🌕", note: "Two HR with 41.7% pull-air and elite speed/power damage Draws opposing starter McCullers Jr.; weather suppresses but pitcher is leaky.", chips: ["vs McCullers Jr."], blast: "high" },
+            { name: "Josh Bell (S)", odds: "Listed +700 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "One HR with 91.3 mph EV and 15.4% barrels Draws opposing starter McCullers Jr.; switch bat gets the glove pitcher.", chips: ["vs McCullers Jr."] },
+            { name: "Ryan Kreidler (R)", odds: "Listed prop - Over 0.5 HR", score: 75, emojis: "💎", note: "One HR in a tiny window keeps him on the prop card Draws opposing starter McCullers Jr.; small sample but live pitcher.", chips: ["vs McCullers Jr."] },
+            { name: "Yordan Alvarez (L)", odds: "Listed +306 - Over 0.5 HR", score: 94, emojis: "🚀 🌕 💣", note: "Worst Pickz favorite with two HR, 100.4 mph EV and 69.2% hard-hit Draws opposing starter Matthews; Matthews is lower-risk but Yordan's bat is the separator.", chips: ["vs Matthews"], blast: "high" },
+            { name: "Christian Walker (R)", odds: "Listed +450 - Over 0.5 HR", score: 88, emojis: "🚀 🌕", note: "Worst Pickz favorite with two HR and 16.7% barrels Draws opposing starter Matthews; cold lowers the total.", chips: ["vs Matthews"], blast: "high" },
+            { name: "Zach Cole (L)", odds: "Listed +542 - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "One HR with 91.1 mph EV and 55.6% hard-hit Draws opposing starter Matthews; lefty power at plus money.", chips: ["vs Matthews"], blast: "good" },
+            { name: "Zach Dezenzo (R)", odds: "Listed prop - Over 0.5 HR", score: 76, emojis: "💎", note: "96.2 mph EV and big contact when he connects Draws opposing starter Matthews; longshot Astros righty.", chips: ["vs Matthews"] },
+        ],
+    },
+    {
+        title: "BOS @ KC - Ranger Suarez (L, BOS) vs Luinder Avila 🧤 (R, KC)",
+        description: "Kauffman Stadium — HR factor -21% but wind noted in from the projected lineup feed. Avila has limited/primary data and a high ERA, making Boston bats the better attack point.",
+        rows: [
+            { name: "Jarren Duran (L)", odds: "Listed +725 - Over 0.5 HR", score: 78, emojis: "💎", note: "Listed prop with 94.8 mph EV in the available pitch-mix sample Draws opposing starter Avila; Kauffman is spacious with wind in.", chips: ["vs Avila"] },
+            { name: "Ceddanne Rafaela (R)", odds: "Listed +800 - Over 0.5 HR", score: 76, emojis: "💎", note: "100.0 mph EV in a small sample keeps the longshot alive Draws opposing starter Avila; park is a drag but matchup data is thin.", chips: ["vs Avila"] },
+            { name: "Nick Loftin (R)", odds: "Listed +1280 - Over 0.5 HR", score: 72, emojis: "💎", note: "Longshot with one near-HR and low whiff profile Draws opposing starter Suarez; KC environment is not ideal.", chips: ["vs Suarez"] },
+        ],
+    },
+    {
+        title: "MIL @ CHC - Jacob Misiorowski (R, MIL) vs Ben Brown (R, CHC)",
+        description: "Wrigley Field — HR factor -1% on Ballpark Pal despite strong crosswind. Both starters grade as HR suppressors, so this game is more bat-form than pitcher leak.",
+        rows: [
+            { name: "Michael Conforto (L)", odds: "Listed +700 - Over 0.5 HR", score: 86, emojis: "🚀 🌕", note: "Worst Pickz favorite with two HR, three near-HR, .600 ISO and 95.6 mph EV Draws opposing starter Misiorowski; Wrigley can still flip if wind helps carry.", chips: ["vs Misiorowski"], blast: "high" },
+            { name: "Ian Happ (S)", odds: "Listed +600 - Over 0.5 HR", score: 84, emojis: "🚀 🌕", note: "Worst Pickz favorite with 37.5% barrels and 96.5 mph EV Draws opposing starter Misiorowski; switch-hit power in Wrigley keeps him live.", chips: ["vs Misiorowski"], blast: "good" },
+            { name: "Miguel Amaya (R)", odds: "Listed prop - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "Two HR and two near-HR with 25.0% barrels Draws opposing starter Misiorowski; pitcher is tough but form is loud.", chips: ["vs Misiorowski"] },
+            { name: "Pete Crow-Armstrong (L)", odds: "Listed +725 - Over 0.5 HR", score: 77, emojis: "💎", note: "One HR with pull-side lift in the sample Draws opposing starter Misiorowski; speed-power dart against a tough arm.", chips: ["vs Misiorowski"] },
+            { name: "Michael Busch (L)", odds: "Listed +510 - Over 0.5 HR", score: 79, emojis: "🚀 💎", note: "93.2 mph EV and strong on-base power traits Draws opposing starter Misiorowski; lefty pull profile is the Cubs angle.", chips: ["vs Misiorowski"] },
+            { name: "Jake Bauers (L)", odds: "Listed +575 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "98.0 mph EV and 28.6% barrels Draws opposing starter Brown; Brown is HR-suppressive, so this is bat-form driven.", chips: ["vs Brown"] },
+            { name: "Jackson Chourio (R)", odds: "Listed +500 - Over 0.5 HR", score: 74, emojis: "💎", note: "Listed prop despite Brown's low HR-risk Draws opposing starter Brown; raw talent play versus a strong pitcher.", chips: ["vs Brown"] },
+            { name: "Garrett Mitchell (L)", odds: "Listed +1000 - Over 0.5 HR", score: 73, emojis: "💎", note: "99.2 mph EV but difficult pitcher context Draws opposing starter Brown; longshot only.", chips: ["vs Brown"] },
+        ],
+    },
+    {
+        title: "PIT @ STL - Mitch Keller (R, PIT) vs Matthew Liberatore 🧤 (L, STL)",
+        description: "Busch Stadium — delay risk, HR factor -20%. Liberatore is a clear HR-risk arm, but the park/weather context is harsh.",
+        rows: [
+            { name: "Willson Contreras (R)", odds: "Listed +500 - Over 0.5 HR", score: 85, emojis: "🚀 🌕", note: "Worst Pickz favorite with one HR, two near-HR and 40.0% barrels Draws opposing starter Keller; Busch is cold for HRs.", chips: ["vs Keller"], blast: "good" },
+            { name: "Alec Burleson (L)", odds: "Listed prop - Over 0.5 HR", score: 77, emojis: "💎", note: "Included from your prop list with a playable BvP/history note Draws opposing starter Keller; lefty contact profile in a pitcher park.", chips: ["vs Keller"] },
+            { name: "Pedro Pages (R)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "Listed prop with some historical contact versus Keller Draws opposing starter Keller; catcher pop in a hard park.", chips: ["vs Keller"] },
+            { name: "Masyn Winn (R)", odds: "Listed prop - Over 0.5 HR", score: 71, emojis: "💎", note: "Listed prop but HR park factor is poor Draws opposing starter Keller; mostly a longshot speed-contact profile.", chips: ["vs Keller"] },
+            { name: "Brandon Lowe (L)", odds: "Listed prop - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "Worst Pickz favorite and lefty pull-power path for Pittsburgh Draws opposing starter Liberatore; Liberatore is the leaky starter but Busch suppresses carry.", chips: ["vs Liberatore"], blast: "good" },
+            { name: "Marcell Ozuna (R)", odds: "Listed prop - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "Right-handed thump into Liberatore's weaker side Draws opposing starter Liberatore; pitcher leak offsets park drag.", chips: ["vs Liberatore"] },
+        ],
+    },
+    {
+        title: "TEX @ COL - Kumar Rocker (R, TEX) vs Tanner Gordon 🧤 (R, COL)",
+        description: "Coors Field — top run environment but HR factor -5% by Coors standards, cold 40s and delay risk. Gordon's projected 5.57 ERA/primary data makes Texas bats important to list.",
+        rows: [
+            { name: "Mickey Moniak (L)", odds: "Listed +390 - Over 0.5 HR", score: 82, emojis: "🚀 💎 🏟️", note: "Listed prop with lefty lift and a favorable game total Draws opposing starter Rocker; Coors altitude still matters even with cold air.", chips: ["vs Rocker"], blast: "good" },
+            { name: "Willi Castro (S)", odds: "Listed +875 - Over 0.5 HR", score: 78, emojis: "💎 🏟️", note: "One HR and two near-HR with 41.7% pull-air Draws opposing starter Rocker; cold Coors keeps this below the elite tier.", chips: ["vs Rocker"] },
+            { name: "Hunter Goodman (R)", odds: "Listed +360 - Over 0.5 HR", score: 81, emojis: "🚀 💎 🏟️", note: "Listed prop with 93.0 mph EV and pull-air fit Draws opposing starter Rocker; home Coors pop is enough to include.", chips: ["vs Rocker"] },
+            { name: "Justin Foscue (R)", odds: "Listed +760 - Over 0.5 HR", score: 80, emojis: "🚀 💎 🏟️", note: "One HR in a micro-sample with 103.2 mph EV Draws opposing starter Gordon; Texas gets the glove starter in Coors.", chips: ["vs Gordon"] },
+            { name: "Jake Burger (R)", odds: "Listed +460 - Over 0.5 HR", score: 77, emojis: "💎 🏟️", note: "Listed prop with a pull-heavy HR profile Draws opposing starter Gordon; power plays anywhere but cold weather holds score down.", chips: ["vs Gordon"] },
+        ],
+    },
+    {
+        title: "ATH @ LAA - Jacob Lopez 🧤 (L, ATH) vs Reid Detmers (L, LAA)",
+        description: "Angel Stadium — +5% HR, mild weather and usual out-blowing pattern. Lopez is one of the slate's clear RHB attack arms with 2.23 HR/9 and a 1.19 vs-RHB HR-risk.",
+        rows: [
+            { name: "Jo Adell (R)", odds: "Listed +350 - Over 0.5 HR", score: 90, emojis: "🚀 🌕 💣", note: "Worst Pickz favorite with two HR, 98.8 mph EV and 36.4% barrels against the slate's third-ranked HR-risk arm Draws opposing starter Lopez; Angel Stadium gives a small HR push.", chips: ["vs Lopez"], blast: "high" },
+            { name: "Mike Trout (R)", odds: "Listed +362 - Over 0.5 HR", score: 85, emojis: "🚀 🌕", note: "Listed prop with 92.1 mph EV and elite raw power against Lopez's RHB weakness Draws opposing starter Lopez; righty power lane is obvious.", chips: ["vs Lopez"], blast: "good" },
+            { name: "Jorge Soler (R)", odds: "Listed +440 - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "Listed prop with pull-air power even through recent whiff risk Draws opposing starter Lopez; same RHB pitcher leak.", chips: ["vs Lopez"] },
+            { name: "Oswald Peraza (R)", odds: "Listed +579 - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "One HR and two near-HR with 93.7 mph EV Draws opposing starter Lopez; plus matchup for righty lift.", chips: ["vs Lopez"] },
+            { name: "Zack Gelof (R)", odds: "Listed +700 - Over 0.5 HR", score: 81, emojis: "🚀 💎", note: "One HR with 93.3 mph EV and 16.7% barrels Draws opposing starter Detmers; Oakland righties face the steadier arm.", chips: ["vs Detmers"] },
+            { name: "Nick Kurtz (L)", odds: "Listed +440 - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "One HR with 96.2 mph EV and 33.3% barrels Draws opposing starter Detmers; left-on-left but raw damage is real.", chips: ["vs Detmers"] },
+            { name: "Brent Rooker (R)", odds: "Listed +440 - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "One HR and 50.0% pull-air in the table Draws opposing starter Detmers; righty power survives the pitcher context.", chips: ["vs Detmers"] },
+            { name: "Tyler Soderstrom (L)", odds: "Listed +550 - Over 0.5 HR", score: 79, emojis: "🚀 💎", note: "One HR, two near-HR and 28.6% barrels Draws opposing starter Detmers; lefty power dart.", chips: ["vs Detmers"] },
+        ],
+    },
+    {
+        title: "CWS @ SEA - Anthony Kay 🧤 (L, CWS) vs Luis Castillo 🧤 (R, SEA)",
+        description: "T-Mobile Park — HR factor -11%, roof environment. Kay has a dangerous RHB split and Castillo's projected 6.34 ERA/primary data keeps Chicago's top lefty power on the board.",
+        rows: [
+            { name: "Julio Rodriguez (R)", odds: "Listed +470 - Over 0.5 HR", score: 94, emojis: "🚀 🌕 💣", note: "Four HR, four near-HR and 94.4 mph EV against Anthony Kay's leaky righty lane Draws opposing starter Kay; park is harsh but pitcher split is excellent for RHBs.", chips: ["vs Kay"], blast: "high" },
+            { name: "Randy Arozarena (R)", odds: "Listed +550 - Over 0.5 HR", score: 84, emojis: "🚀 🌕", note: "One HR, two near-HR and 95.7 mph EV Draws opposing starter Kay; RHB angle is the Mariners' path.", chips: ["vs Kay"], blast: "good" },
+            { name: "Miguel Vargas (R)", odds: "Listed +550 - Over 0.5 HR", score: 86, emojis: "🚀 🌕", note: "Two HR, five near-HR and .346 ISO Draws opposing starter Castillo; T-Mobile suppresses carry but his form is loud.", chips: ["vs Castillo"], blast: "high" },
+            { name: "Munetaka Murakami (L)", odds: "Listed +320 - Over 0.5 HR", score: 88, emojis: "🚀 🌕 💣", note: "Three HR, 96.6 mph EV and 27.8% barrels Draws opposing starter Castillo; park is a fade but talent/form grades through.", chips: ["vs Castillo"], blast: "high" },
+            { name: "Jarred Kelenic (L)", odds: "Listed +650 - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "98.1 mph EV and 31.2% barrels keep him playable Draws opposing starter Castillo; former Seattle power in a tough park.", chips: ["vs Castillo"] },
+        ],
+    },
+    {
+        title: "LAD @ SD - Emmet Sheehan 🧤 (R, LAD) vs Griffin Canning (R, SD)",
+        description: "Petco Park — HR factor -6%, marine layer risk. Sheehan's LHB split is the Padres angle, while Canning's overall form makes Dodgers power viable despite the park.",
+        rows: [
+            { name: "Gavin Sheets (L)", odds: "Listed +580 - Over 0.5 HR", score: 92, emojis: "🚀 🌕 💣", note: "Worst Pickz favorite with three HR, .625 ISO and 14.3% barrels Draws opposing starter Sheehan; Petco is harsh but Sheehan's LHB HR-risk is high.", chips: ["vs Sheehan"], blast: "high" },
+            { name: "Jackson Merrill (L)", odds: "Listed +600 - Over 0.5 HR", score: 78, emojis: "💎", note: "Two near-HR and 92.6 mph EV Draws opposing starter Sheehan; lefty matchup is playable but recent K rate is high.", chips: ["vs Sheehan"] },
+            { name: "Manny Machado (R)", odds: "Listed +630 - Over 0.5 HR", score: 76, emojis: "💎", note: "Listed prop with 91.1 mph EV and pull-side damage history Draws opposing starter Sheehan; righty lane is tougher.", chips: ["vs Sheehan"] },
+            { name: "Max Muncy (L)", odds: "Listed +440 - Over 0.5 HR", score: 91, emojis: "🚀 🌕 💣", note: "Three HR, five near-HR, 95.2 mph EV and 42.9% barrels Draws opposing starter Canning; Dodgers lefty pull power can beat Petco.", chips: ["vs Canning"], blast: "high" },
+            { name: "Shohei Ohtani (L)", odds: "Listed +310 - Over 0.5 HR", score: 87, emojis: "🚀 🌕", note: "Listed prop with 88.4 mph EV in this table but elite season-long power Draws opposing starter Canning; short price but premium barrel profile.", chips: ["vs Canning"], blast: "high" },
+            { name: "Will Smith (R)", odds: "Listed +600 - Over 0.5 HR", score: 84, emojis: "🚀 🌕", note: "One HR, five near-HR and 25.0% barrels Draws opposing starter Canning; catcher power at plus money.", chips: ["vs Canning"], blast: "good" },
+        ],
+    },
+    {
+        title: "SF @ ARI - Landen Roupp (R, SF) vs Ryne Nelson 🧤 (R, ARI)",
+        description: "Chase Field — roof scheduled open, HR factor -7% but warm, dry air. Nelson is the clear glove pitcher with 1.80 HR/9 and a 1.61 vs-RHB HR-risk.",
+        rows: [
+            { name: "Willy Adames (R)", odds: "Listed +500 - Over 0.5 HR", score: 86, emojis: "🚀 🌕", note: "One HR, three near-HR and 92.3 mph EV against Nelson's worst split Draws opposing starter Nelson; open-roof Chase helps the righty path.", chips: ["vs Nelson"], blast: "high" },
+            { name: "Harrison Bader (R)", odds: "Listed +800 - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "One HR, three near-HR and 54.5% pull-air Draws opposing starter Nelson; RHB lane is the target.", chips: ["vs Nelson"], blast: "good" },
+            { name: "Luis Arraez (L)", odds: "Listed +1450 - Over 0.5 HR", score: 72, emojis: "💎", note: "One HR and two near-HR in the table but usually low-HR batted ball shape Draws opposing starter Nelson; contact profile longshot.", chips: ["vs Nelson"] },
+            { name: "Ketel Marte (S)", odds: "Listed +525 - Over 0.5 HR", score: 83, emojis: "🚀 💎", note: "Switch-hit pop with one near-HR and solid contact quality Draws opposing starter Roupp; home side faces the lower-risk starter.", chips: ["vs Roupp"], blast: "good" },
+            { name: "Corbin Carroll (L)", odds: "Listed +650 - Over 0.5 HR", score: 84, emojis: "🚀 🌕", note: "One HR, three near-HR and 95.0 mph EV Draws opposing starter Roupp; warm Chase air is the helper.", chips: ["vs Roupp"], blast: "good" },
+            { name: "Nolan Arenado (R)", odds: "Listed +980 - Over 0.5 HR", score: 81, emojis: "🚀 💎", note: "One HR with .500 ISO in the recent table Draws opposing starter Roupp; righty longshot in a playable roof-open setting.", chips: ["vs Roupp"] },
+        ],
+    },
+];
 
             const grid = document.getElementById("gamesGrid");
             const gamesSection = document.getElementById("gamesSection");
@@ -3281,26 +3353,21 @@
             updateBetTrackerBtnLabel();
 
             /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
-            const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                        const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                "Drake Baldwin (L)",
+                "Matt Olson (L)",
+                "Pete Alonso (R)",
                 "Kyle Schwarber (L)",
-                "JJ Bleday (L)",
-                "Will Benson (L)",
-                "James Wood (L)",
-                "Juan Soto (L)",
-                "Byron Buxton (R)",
+                "Spencer Steer (R)",
+                "Ben Rice (L)",
+                "Ryan Jeffers (R)",
+                "Christian Walker (R)",
                 "Yordan Alvarez (L)",
-                "Bobby Witt Jr. (R)",
+                "Willson Contreras (R)",
                 "Ian Happ (S)",
-                "Seiya Suzuki (R)",
-                "Michael Busch (L)",
                 "Michael Conforto (L)",
-                "Hunter Goodman (R)",
-                "Miguel Vargas (R)",
-                "Gavin Sheets (L)",
-                "Jackson Merrill (L)",
-                "Julio Rodriguez (R)",
-                "Will Smith (R)",
-                "Shohei Ohtani (L)"
+                "Jo Adell (R)",
+                "Gavin Sheets (L)"
             ]);
             function isWorstPickzFavoriteRow(row) {
                 return WORST_PICKZ_FAVORITE_NAMES.has(row.name);

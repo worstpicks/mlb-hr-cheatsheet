@@ -49,16 +49,16 @@ def data_attr(lines):
 
 GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-card">
                     <h3>Goblin's Insight</h3>
-                    <p class="model-note summary-note">Full-slate view built from weather, pitcher HR risk, current power form, and batter-vs-pitcher history.</p>
+                    <p class="model-note summary-note">Full-slate view built from weather, pitcher HR risk, current power form, and batter-vs-pitcher history. <strong>HOU @ CHC excluded from parlays</strong> (first game already final).</p>
                     <div class="best-bets-grid">
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Yordan Alvarez HR</strong><small>Jameson Taillon is slate-high HR risk; Alvarez is the cleanest attack lane.</small></li>
+                                <li><strong>Kyle Schwarber HR</strong><small>Gavin Williams RHB HR risk; Schwarber replaces the finished HOU @ CHC lane with slate-best power form.</small></li>
                                 <li><strong>Bobby Witt Jr. HR</strong><small>Logan Gilbert RHB HR risk at Kauffman; Witt has BvP HR history off Gilbert.</small></li>
                                 <li><strong>Austin Riley HR</strong><small>Miles Mikolas LHB/RHB HR risk; Riley's form is slate-elite versus the glove arm.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Yordan Alvarez - Over 0.5 homerun", "Bobby Witt Jr. - Over 0.5 homerun", "Austin Riley - Over 0.5 homerun"])}'>Add 3 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Kyle Schwarber - Over 0.5 homerun", "Bobby Witt Jr. - Over 0.5 homerun", "Austin Riley - Over 0.5 homerun"])}'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
@@ -71,10 +71,10 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>Alvarez, Schwarber, Rice, Soto, Riley, Witt</strong><small>Top attack-pitcher lanes with recent contact.</small></li>
-                                <li><strong>Julio Rodriguez, Yastrzemski, Elly De La Cruz, Paredes, Muncy, Yandy Diaz</strong><small>Hot hitters vs Gilbert, Mikolas, Leahy, Taillon, Henderson, Martinez.</small></li>
+                                <li><strong>Schwarber, Rice, Soto, Riley, Witt, Carroll</strong><small>Top attack-pitcher lanes with recent contact (HOU @ CHC removed).</small></li>
+                                <li><strong>Julio Rodriguez, Yastrzemski, Elly De La Cruz, Muncy, Yandy Diaz, Brandon Lowe</strong><small>Hot hitters vs Gilbert, Mikolas, Leahy, Henderson, Martinez, Gausman.</small></li>
                             </ul>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Yordan Alvarez - Over 0.5 hits", "Kyle Schwarber - Over 0.5 hits", "Ben Rice - Over 0.5 hits", "Juan Soto - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Bobby Witt Jr. - Over 0.5 hits", "Julio Rodriguez - Over 0.5 hits", "Mike Yastrzemski - Over 0.5 hits", "Elly De La Cruz - Over 0.5 hits", "Isaac Paredes - Over 0.5 hits", "Max Muncy - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Kyle Schwarber - Over 0.5 hits", "Ben Rice - Over 0.5 hits", "Juan Soto - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Bobby Witt Jr. - Over 0.5 hits", "Corbin Carroll - Over 0.5 hits", "Julio Rodriguez - Over 0.5 hits", "Mike Yastrzemski - Over 0.5 hits", "Elly De La Cruz - Over 0.5 hits", "Max Muncy - Over 0.5 hits", "Yandy Diaz - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
@@ -98,7 +98,7 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Top 5 Pitchers To Attack</h4>
                             <ol>
-                                <li><strong>Jameson Taillon</strong><small>Slate-high HR risk; Yordan Alvarez is the cleanest lane.</small></li>
+                                <li><strong>Jameson Taillon</strong><small>Slate-high HR risk; HOU @ CHC is final — pivot to Williams/Martinez lanes for live parlays.</small></li>
                                 <li><strong>Logan Gilbert</strong><small>RHB HR risk at Kauffman; Julio Rodriguez fits best.</small></li>
                                 <li><strong>Miles Mikolas</strong><small>LHB HR risk; Yastrzemski/Riley/Harris all live.</small></li>
                                 <li><strong>Jacob deGrom</strong><small>LHB HR risk in Angel Stadium carry.</small></li>

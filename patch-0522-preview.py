@@ -54,19 +54,19 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Kyle Schwarber HR</strong><small>5 HR/5 near-HR, 36.8% barrels vs Williams.</small></li>
-                                <li><strong>Juan Soto HR</strong><small>4 HR/5 near-HR with Perez RHB HR risk.</small></li>
-                                <li><strong>Ben Rice HR</strong><small>4 HR/4 near-HR vs Martinez LHB split at Yankee Stadium.</small></li>
+                                <li><strong>Yordan Alvarez HR</strong><small>Jameson Taillon is slate-high HR risk; Alvarez is the cleanest attack lane.</small></li>
+                                <li><strong>Bobby Witt Jr. HR</strong><small>Logan Gilbert RHB HR risk at Kauffman; Witt has BvP HR history off Gilbert.</small></li>
+                                <li><strong>Austin Riley HR</strong><small>Miles Mikolas LHB/RHB HR risk; Riley's form is slate-elite versus the glove arm.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Kyle Schwarber - Over 0.5 homerun", "Juan Soto - Over 0.5 homerun", "Ben Rice - Over 0.5 homerun"])}'>Add 3 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Yordan Alvarez - Over 0.5 homerun", "Bobby Witt Jr. - Over 0.5 homerun", "Austin Riley - Over 0.5 homerun"])}'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Corbin Carroll HR</strong><small>3 HR/4 near-HR, 50% barrels vs Sugano LHB risk.</small></li>
-                                <li><strong>Max Muncy HR</strong><small>2 HR/4 near-HR, 40% barrels vs Henderson.</small></li>
+                                <li><strong>Julio Rodriguez HR</strong><small>Kauffman +6% carry with out-blowing wind fits his pull-side power vs Cameron.</small></li>
+                                <li><strong>Elly De La Cruz HR</strong><small>GABP +5% HR row plus Leahy RHB split; switch pull-air matches the wind lane.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Corbin Carroll - Over 0.5 homerun", "Max Muncy - Over 0.5 homerun"])}'>Add 2 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Julio Rodriguez - Over 0.5 homerun", "Elly De La Cruz - Over 0.5 homerun"])}'>Add 2 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>

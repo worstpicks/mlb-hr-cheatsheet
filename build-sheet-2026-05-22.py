@@ -131,9 +131,44 @@ def n(player, pitcher, park, angle):
     return f"{angle}. Draws opposing starter {pitcher}; {park}."
 
 
+BUM_PITCHERS = {
+    "Taillon",
+    "Williams",
+    "Leahy",
+    "Martinez",
+    "Chandler",
+    "Myers",
+    "Perez",
+    "Flaherty",
+    "Bassitt",
+    "Mikolas",
+    "Henderson",
+    "Gilbert",
+    "Cameron",
+    "deGrom",
+    "Springs",
+    "Sugano",
+    "Martin",
+    "McDonald",
+    "Wrobleski",
+}
+
+
+def add_bum_row_emojis(entry):
+    chip = entry["chips"][0].replace("vs ", "").strip()
+    if chip not in BUM_PITCHERS:
+        return
+    em = entry["emojis"]
+    if "⚾" not in em:
+        em = f"{em} ⚾".strip()
+    if "🕊️" not in em:
+        em = f"{em} 🕊️".strip()
+    entry["emojis"] = em
+
+
 games = [
     {
-        "title": "HOU @ CHC - Spencer Arrighetti (R, HOU) vs Jameson Taillon (R, CHC)",
+        "title": "HOU @ CHC - Spencer Arrighetti (R, HOU) vs Jameson Taillon 🧤 (R, CHC)",
         "description": "Wrigley Field — Ballpark Pal grades -16% HR with cool 55°F air, 16 mph wind and extreme wind receptivity. Jameson Taillon is the slate's top HR-risk arm; Houston lefties get the cleaner attack lane despite the park drag.",
         "rows": [
             row("Ian Happ", "S", "+850", 74, "💎", ["vs Arrighetti"], n("Ian Happ", "Arrighetti", "Wrigley wind is the main obstacle", "0 HR but 90.3 mph EV and 25.0% hard-hit in the pitch-mix sample")),
@@ -145,7 +180,7 @@ games = [
         ],
     },
     {
-        "title": "CLE @ PHI - Gavin Williams (R, CLE) vs Cristopher Sanchez (L, PHI)",
+        "title": "CLE @ PHI - Gavin Williams 🧤 (R, CLE) vs Cristopher Sanchez (L, PHI)",
         "description": "Citizens Bank Park — -14% HR model with overcast 59°F air and 29% rain risk. Cristopher Sanchez suppresses overall, but Kyle Schwarber's form is slate-best tier and Rhys Hoskins gets a loud RHB split read.",
         "rows": [
             row("Kyle Schwarber", "L", "+240", 96, "🚀 ⭐ 🌕 💣", ["vs Williams"], n("Kyle Schwarber", "Williams", "Williams is attackable to LHB contact quality", "Worst Pickz favorite with 5 HR, 5 near-HR, 96.7 mph EV and 36.8% barrels"), "high"),
@@ -155,7 +190,7 @@ games = [
         ],
     },
     {
-        "title": "STL @ CIN - Kyle Leahy (R, STL) vs Chris Paddack (R, CIN)",
+        "title": "STL @ CIN - Kyle Leahy 🧤 (R, STL) vs Chris Paddack (R, CIN)",
         "description": "Great American Ball Park — slate's #2 HR environment at +5% with 71°F air, though 92% rain risk is real. Leahy is weaker to RHB; Paddack gives up quality Cardinals lefty contact in a small park.",
         "rows": [
             row("Will Benson", "L", "+461", 81, "🚀 💎 🏟️", ["vs Leahy"], n("Will Benson", "Leahy", "GABP heat helps lefty lift", "0 HR but 96.3 mph EV, 45.5% barrels and 54.5% hard-hit")),
@@ -166,7 +201,7 @@ games = [
         ],
     },
     {
-        "title": "TB @ NYY - Nick Martinez (R, TB) vs Gerrit Cole (R, NYY)",
+        "title": "TB @ NYY - Nick Martinez 🧤 (R, TB) vs Gerrit Cole (R, NYY)",
         "description": "Yankee Stadium — -30% HR model (slate's harshest short-porch drag) with cool air and wind in. Nick Martinez is weaker to LHB; Cole has no 2026 splits in the feed, so Rays bats lean on form and BvP.",
         "rows": [
             row("Ben Rice", "L", "+260", 94, "🚀 ⭐ 🌕 💣", ["vs Martinez"], n("Ben Rice", "Martinez", "Martinez LHB lane plus short porch", "Worst Pickz favorite with 4 HR, 4 near-HR, 94.0 mph EV and 25.0% barrels"), "high"),
@@ -176,7 +211,7 @@ games = [
         ],
     },
     {
-        "title": "PIT @ TOR - Bubba Chandler (R, PIT) vs Kevin Gausman (R, TOR)",
+        "title": "PIT @ TOR - Bubba Chandler 🧤 (R, PIT) vs Kevin Gausman (R, TOR)",
         "description": "Rogers Centre — roof closed, +2% HR model. Bubba Chandler is a top-10 HR-risk arm; Kevin Gausman is tougher but Brandon Lowe's form is loud enough to keep Pittsburgh bats live.",
         "rows": [
             row("Vladimir Guerrero Jr.", "R", "+472", 74, "💎", ["vs Chandler"], n("Vladimir Guerrero Jr.", "Chandler", "Chandler RHB risk helps but form is lighter", "1 HR, 1 near-HR, 84.0 mph EV and 30.8% hard-hit")),
@@ -188,7 +223,7 @@ games = [
         ],
     },
     {
-        "title": "NYM @ MIA - Tobias Myers (R, NYM) vs Eury Perez (R, MIA)",
+        "title": "NYM @ MIA - Tobias Myers 🧤 (R, NYM) vs Eury Perez 🧤 (R, MIA)",
         "description": "loanDepot park — roof closed, -13% HR. Tobias Myers is weaker to RHB; Eury Perez owns the slate's best RHB HR-risk split, making Juan Soto and the Mets lefties the premium attack lane.",
         "rows": [
             row("Owen Caissie", "L", "+800", 87, "🚀 ⭐ 🌕 💎", ["vs Myers"], n("Owen Caissie", "Myers", "Myers RHB risk helps Miami lefties", "Worst Pickz favorite with 2 HR, 2 near-HR, 97.8 mph EV and 50.0% barrels"), "good"),
@@ -210,7 +245,7 @@ games = [
         ],
     },
     {
-        "title": "DET @ BAL - Jack Flaherty (R, DET) vs Chris Bassitt (R, BAL)",
+        "title": "DET @ BAL - Jack Flaherty 🧤 (R, DET) vs Chris Bassitt 🧤 (R, BAL)",
         "description": "Oriole Park — -27% HR with rain/overcast and wind in. Jack Flaherty is attackable; Chris Bassitt is the slate's #2 fade arm for RHB, but Pete Alonso's form keeps Baltimore bats listed.",
         "rows": [
             row("Pete Alonso", "R", "+440", 88, "🚀 ⭐ 🌕 💎 📜", ["vs Flaherty"], n("Pete Alonso", "Flaherty", "Flaherty RHB split plus BvP HR signal", "Worst Pickz favorite with 1 HR, 1 near-HR, 101.6 mph EV and career HR off Flaherty"), "good"),
@@ -222,7 +257,7 @@ games = [
         ],
     },
     {
-        "title": "WSH @ ATL - Miles Mikolas (R, WSH) vs Bryce Elder (R, ATL)",
+        "title": "WSH @ ATL - Miles Mikolas 🧤 (R, WSH) vs Bryce Elder (R, ATL)",
         "description": "Truist Park — -10% HR with 73% rain risk and warm 75°F air. Miles Mikolas is HR-risky to LHB; Bryce Elder suppresses but Atlanta's top bats have the loudest form on the board.",
         "rows": [
             row("Michael Harris II", "L", "+464", 90, "🚀 🌕 💣", ["vs Mikolas"], n("Michael Harris II", "Mikolas", "Mikolas LHB HR risk fits Harris' lefty power", "2 HR, 3 near-HR, 92.6 mph EV and 61.9% hard-hit"), "high"),
@@ -234,7 +269,7 @@ games = [
         ],
     },
     {
-        "title": "LAD @ MIL - Justin Wrobleski (L, LAD) vs Logan Henderson (R, MIL)",
+        "title": "LAD @ MIL - Justin Wrobleski 🧤 (L, LAD) vs Logan Henderson 🧤 (R, MIL)",
         "description": "American Family Field — roof closed, -4% HR. Justin Wrobleski is weaker to RHB; Logan Henderson has a small sample but LAD lefties have the slate's loudest power indicators.",
         "rows": [
             row("Max Muncy", "L", "+326", 94, "🚀 🌕 💣", ["vs Henderson"], n("Max Muncy", "Henderson", "Henderson LHB lane plus Muncy's elite form", "2 HR, 4 near-HR, 92.9 mph EV and 40.0% barrels"), "high"),
@@ -244,7 +279,7 @@ games = [
         ],
     },
     {
-        "title": "SEA @ KC - Logan Gilbert (R, SEA) vs Noah Cameron (L, KC)",
+        "title": "SEA @ KC - Logan Gilbert 🧤 (R, SEA) vs Noah Cameron 🧤 (L, KC)",
         "description": "Kauffman Stadium — slate-best HR weather at +6% with mild 68°F air and the largest non-Coors outfield. Logan Gilbert is HR-risky; Noah Cameron is attackable to RHB in the best carry environment.",
         "rows": [
             row("Jac Caglianone", "L", "+525", 86, "🚀 💎 🏟️", ["vs Gilbert"], n("Jac Caglianone", "Gilbert", "Gilbert RHB risk plus Kauffman carry", "1 HR, 1 near-HR, 99.1 mph EV and 81.8% hard-hit"), "good"),
@@ -254,7 +289,7 @@ games = [
         ],
     },
     {
-        "title": "TEX @ LAA - Jacob deGrom (R, TEX) vs Grayson Rodriguez (R, LAA)",
+        "title": "TEX @ LAA - Jacob deGrom 🧤 (R, TEX) vs Grayson Rodriguez (R, LAA)",
         "description": "Angel Stadium — +4% HR with mild 68°F air and typical out-blowing carry. Jacob deGrom is HR-risky to LHB; Grayson Rodriguez has a tiny 2026 sample but Texas bats get the cleaner form read.",
         "rows": [
             row("Vaughn Grissom", "R", "+840", 76, "💎 🏟️", ["vs deGrom"], n("Vaughn Grissom", "deGrom", "deGrom LHB risk is the Angels angle", "1 HR, 1 near-HR, 91.5 mph EV and 66.7% hard-hit")),
@@ -266,7 +301,7 @@ games = [
         ],
     },
     {
-        "title": "ATH @ SD - Jeffrey Springs (L, ATH) vs Walker Buehler (R, SD)",
+        "title": "ATH @ SD - Jeffrey Springs 🧤 (L, ATH) vs Walker Buehler (R, SD)",
         "description": "Petco Park — -4% HR with mild coastal air. Jeffrey Springs is weaker to RHB; Walker Buehler suppresses but Nick Kurtz and Shea Langeliers have the loudest A's power form.",
         "rows": [
             row("Fernando Tatis Jr.", "R", "+430", 76, "💎", ["vs Springs"], n("Fernando Tatis Jr.", "Springs", "Springs RHB split is the Padres lane", "0 HR, 96.9 mph EV and 75.0% hard-hit")),
@@ -276,7 +311,7 @@ games = [
         ],
     },
     {
-        "title": "COL @ ARI - Tomoyuki Sugano (R, COL) vs Michael Soroka (R, ARI)",
+        "title": "COL @ ARI - Tomoyuki Sugano 🧤 (R, COL) vs Michael Soroka (R, ARI)",
         "description": "Chase Field — roof closed, 92°F desert air but -10% HR model. Tomoyuki Sugano is HR-risky to LHB; Soroka suppresses but Carroll's form is slate-elite in the heat.",
         "rows": [
             row("Corbin Carroll", "L", "+375", 95, "🚀 ⭐ 🌕 💣", ["vs Sugano"], n("Corbin Carroll", "Sugano", "Sugano LHB HR risk in Chase heat", "Worst Pickz favorite with 3 HR, 4 near-HR, 98.9 mph EV and 50.0% barrels"), "high"),
@@ -284,7 +319,7 @@ games = [
         ],
     },
     {
-        "title": "CWS @ SF - Davis Martin (R, CWS) vs Trevor McDonald (R, SF)",
+        "title": "CWS @ SF - Davis Martin 🧤 (R, CWS) vs Trevor McDonald 🧤 (R, SF)",
         "description": "Oracle Park — -26% HR with cool air and wind. Davis Martin is weaker to LHB; Trevor McDonald is a fade arm to RHB, giving Chicago lefties the cleaner attack path despite Oracle's drag.",
         "rows": [
             row("Willy Adames", "R", "+720", 86, "🚀 💎", ["vs McDonald"], n("Willy Adames", "McDonald", "McDonald RHB fade helps Giants righties", "2 HR, 3 near-HR, 97.3 mph EV and 22.2% barrels"), "good"),
@@ -305,6 +340,7 @@ if missing:
 
 for game in games:
     for entry in game["rows"]:
+        add_bum_row_emojis(entry)
         apply_inferred_due(entry, game)
 
 

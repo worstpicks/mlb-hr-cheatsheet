@@ -71,10 +71,10 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>Schwarber, Soto, Rice, Carroll, Muncy, Julio Rodriguez</strong></li>
-                                <li><strong>Brandon Lowe, Yordan Alvarez, Austin Riley, Mike Yastrzemski, Nick Kurtz, Pete Alonso</strong></li>
+                                <li><strong>Alvarez, Schwarber, Rice, Soto, Riley, Witt</strong><small>Top attack-pitcher lanes with recent contact.</small></li>
+                                <li><strong>Julio Rodriguez, Yastrzemski, Elly De La Cruz, Paredes, Muncy, Yandy Diaz</strong><small>Hot hitters vs Gilbert, Mikolas, Leahy, Taillon, Henderson, Martinez.</small></li>
                             </ul>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Kyle Schwarber - Over 0.5 hits", "Juan Soto - Over 0.5 hits", "Ben Rice - Over 0.5 hits", "Corbin Carroll - Over 0.5 hits", "Max Muncy - Over 0.5 hits", "Julio Rodriguez - Over 0.5 hits", "Brandon Lowe - Over 0.5 hits", "Yordan Alvarez - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Mike Yastrzemski - Over 0.5 hits", "Nick Kurtz - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Yordan Alvarez - Over 0.5 hits", "Kyle Schwarber - Over 0.5 hits", "Ben Rice - Over 0.5 hits", "Juan Soto - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Bobby Witt Jr. - Over 0.5 hits", "Julio Rodriguez - Over 0.5 hits", "Mike Yastrzemski - Over 0.5 hits", "Elly De La Cruz - Over 0.5 hits", "Isaac Paredes - Over 0.5 hits", "Max Muncy - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>

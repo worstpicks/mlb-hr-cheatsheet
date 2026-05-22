@@ -163,6 +163,8 @@ def add_bum_row_emojis(entry):
         em = f"{em} ⚾".strip()
     if "🕊️" not in em:
         em = f"{em} 🕊️".strip()
+    if "🧤" not in em:
+        em = f"{em} 🧤".strip()
     entry["emojis"] = em
 
 

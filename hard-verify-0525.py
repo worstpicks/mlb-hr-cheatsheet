@@ -71,6 +71,20 @@ if glove_titles < 13:
 if "Goblin's Insight" not in html:
     errors.append("missing Goblin's Insight")
 
+for stale in ["Juan Soto", "Mike Trout", "Braydon Fisher", "Jose Soriano"]:
+    if stale in html and f"{stale} - Over 0.5 homerun" in html:
+        errors.append(f"stale Goblin parlay name: {stale}")
+
+expected_3leg = {"James Wood", "Ben Rice", "Miguel Vargas"}
+expected_fav = {"Miguel Vargas", "Jac Caglianone", "Brandon Lowe"}
+if gambly:
+    leg3 = {x.split(" - ")[0] for x in json.loads(gambly[0].replace("&quot;", '"'))}
+    fav3 = {x.split(" - ")[0] for x in json.loads(gambly[3].replace("&quot;", '"'))}
+    if leg3 != expected_3leg:
+        errors.append(f"3-leg HR mismatch: got {sorted(leg3)}")
+    if fav3 != expected_fav:
+        errors.append(f"favorite 3-leg mismatch: got {sorted(fav3)}")
+
 dup_names = [n for n in names if names.count(n) > 1]
 if dup_names:
     errors.append(f"duplicate row names: {sorted(set(dup_names))}")

@@ -1,37 +1,20 @@
 #!/usr/bin/env python3
-"""Patch preview sheet to 2026-05-25. Does not commit or push."""
+"""Fix Goblin's Insight + summary cards for 2026-05-25 (games block was updated; summaries were stale)."""
 import json
 import re
-import shutil
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview" / "index.html"
-MANIFEST_PATH = ROOT / "preview" / "sheets-manifest.json"
-ARCHIVE_0521 = ROOT / "preview" / "archive" / "2026-05-21.html"
-GAMES_BLOCK = (ROOT / "_games-0525.txt").read_text(encoding="utf-8-sig").strip()
 
-SHEET_DATE = "2026-05-25"
-TOTAL_GAMES = 13
-TOTAL_ROWS = 53
-TOTAL_FAVS = 8
-
-FAVS = [
-    "Brandon Lowe (L)",
-    "Michael Conforto (L)",
-    "Pete Alonso (R)",
-    "Ivan Herrera (R)",
-    "Jordan Walker (R)",
-    "Miguel Vargas (R)",
-    "Jac Caglianone (L)",
-    "Kyle Schwarber (L)",
-]
-
-FAV_SET = (
-    "            const WORST_PICKZ_FAVORITE_NAMES = new Set([\n"
-    + ",\n".join(f'                "{name}"' for name in FAVS)
-    + "\n            ]);"
-)
+SHEET_PLAYERS = {
+    "Colson Montgomery", "James Wood", "Ben Rice", "Miguel Vargas", "Brent Rooker",
+    "Aaron Judge", "Bo Bichette", "Rafael Devers", "George Springer", "Kyle Schwarber",
+    "Luke Raley", "Yandy Diaz", "Jac Caglianone", "Brandon Lowe", "Jordan Walker",
+    "Kyle Schwarber", "Elly De La Cruz", "Jarred Kelenic", "Andrew Vaughn", "Ezequiel Duran",
+    "Pete Alonso", "Michael Conforto", "Ivan Herrera",
+}
 
 
 def data_attr(lines):
@@ -65,7 +48,7 @@ FAV_THREE = [
     "Brandon Lowe - Over 0.5 homerun",
 ]
 
-GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-card">
+SUMMARY_BLOCK = f"""                <div class="summary-card full-width best-bets-card">
                     <h3>Goblin's Insight</h3>
                     <p class="model-note summary-note">Full-slate view built from weather, pitcher HR risk, current power form, and batter-vs-pitcher history.</p>
                     <div class="best-bets-grid">
@@ -124,9 +107,8 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                             </ol>
                         </div>
                     </div>
-                </div>"""
-
-TOP_CARD = """                <div class="summary-card full-width top-five-card">
+                </div>
+                <div class="summary-card full-width top-five-card">
                     <h3>Top 5 HR Tickets (Holistic)</h3>
                     <p class="model-note summary-note">Ranks blend batter damage profile, matchup leakage, park/weather, lineup slot, and price.</p>
                     <div class="top-five-list">
@@ -136,174 +118,81 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                         <div class="top-five-item"><span>Ben Rice (L) <small>Three HR vs Warren + Kauffman</small></span><strong>89</strong></div>
                         <div class="top-five-item"><span>Brent Rooker (R) <small>Sutter +34% HR vs Miller</small></span><strong>88</strong></div>
                     </div>
-                </div>"""
-
-PARK_INNER = """
+                </div>
+                <div class="summary-card">
+                    <h3>Best Park / Weather HR Rows (slate)</h3>
+                    <div class="summary-list">
                         <div class="summary-item"><span>SEA @ ATH <small>Sutter +34% HR, 15+ mph out</small></span><strong>+34%</strong></div>
                         <div class="summary-item"><span>NYY @ KC <small>Kauffman +11% HR, 88°F wind out L</small></span><strong>+11%</strong></div>
                         <div class="summary-item"><span>COL @ LAD <small>Dodger Stadium +12% HR</small></span><strong>+12%</strong></div>
                         <div class="summary-item"><span>MIN @ CWS <small>Rate Field +5% combined</small></span><strong>+5%</strong></div>
-                    """
-
-WEATHER5_INNER = """
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <h3>Top 5 Weather Heavy HR Plays</h3>
+                    <div class="summary-list">
                         <div class="summary-item"><span>#1 Brent Rooker <small>Sutter heat vs Miller</small></span><strong>88</strong></div>
                         <div class="summary-item"><span>#2 Ben Rice <small>Kauffman heat vs Warren</small></span><strong>89</strong></div>
                         <div class="summary-item"><span>#3 Luke Raley <small>Sutter + Civale LHB lane</small></span><strong>83</strong></div>
                         <div class="summary-item"><span>#4 Nick Kurtz <small>Sacramento carry vs Miller</small></span><strong>84</strong></div>
                         <div class="summary-item"><span>#5 Jac Caglianone <small>88°F + Warren LHB leak</small></span><strong>82</strong></div>
-                    """
-
-LONGSHOT_INNER = """
-                        <div class="summary-item"><span>Jarred Kelenic <small>+550 vs Kay</small></span><strong>79</strong></div>
-                        <div class="summary-item"><span>James Wood <small>+390 vs Littell</small></span><strong>90</strong></div>
-                        <div class="summary-item"><span>Andrew Vaughn <small>+520 vs Liberatore</small></span><strong>78</strong></div>
-                        <div class="summary-item"><span>Ezequiel Duran <small>+900 vs Imai</small></span><strong>76</strong></div>
-                    """
-
-FADES_INNER = """
-                        <div class="summary-item"><span>WSH @ CLE <small>Progressive -13% HR row</small></span><strong>-13%</strong></div>
-                        <div class="summary-item"><span>PHI @ SD <small>Petco -9% HR, marine layer</small></span><strong>-9%</strong></div>
-                        <div class="summary-item"><span>ARI @ SF <small>Oracle -6% HR (ignore wind forecast)</small></span><strong>-6%</strong></div>
-                        <div class="summary-item"><span>MIA @ TOR <small>Rogers -8% HR, roof open cold</small></span><strong>-8%</strong></div>
-                    """
-
-
-SUMMARY_BLOCK = (
-    GOBLIN_CARD
-    + "\n"
-    + TOP_CARD
-    + """
-                <div class="summary-card">
-                    <h3>Best Park / Weather HR Rows (slate)</h3>
-                    <div class="summary-list">"""
-    + PARK_INNER
-    + """
-                    </div>
-                </div>
-                <div class="summary-card">
-                    <h3>Top 5 Weather Heavy HR Plays</h3>
-                    <div class="summary-list">"""
-    + WEATHER5_INNER
-    + """
                     </div>
                 </div>
                 <div class="summary-card">
                     <h3>Best longshot HR (listed +700+)</h3>
-                    <div class="summary-list">"""
-    + LONGSHOT_INNER
-    + """
+                    <div class="summary-list">
+                        <div class="summary-item"><span>Jarred Kelenic <small>+550 vs Kay</small></span><strong>79</strong></div>
+                        <div class="summary-item"><span>James Wood <small>+390 vs Littell</small></span><strong>90</strong></div>
+                        <div class="summary-item"><span>Andrew Vaughn <small>+520 vs Liberatore</small></span><strong>78</strong></div>
+                        <div class="summary-item"><span>Ezequiel Duran <small>+900 vs Imai</small></span><strong>76</strong></div>
                     </div>
                 </div>
                 <div class="summary-card">
                     <h3>Harsh Environment Fades</h3>
-                    <div class="summary-list">"""
-    + FADES_INNER
-    + """
+                    <div class="summary-list">
+                        <div class="summary-item"><span>WSH @ CLE <small>Progressive -13% HR row</small></span><strong>-13%</strong></div>
+                        <div class="summary-item"><span>PHI @ SD <small>Petco -9% HR, marine layer</small></span><strong>-9%</strong></div>
+                        <div class="summary-item"><span>ARI @ SF <small>Oracle -6% HR (ignore wind forecast)</small></span><strong>-6%</strong></div>
+                        <div class="summary-item"><span>MIA @ TOR <small>Rogers -8% HR, roof open cold</small></span><strong>-8%</strong></div>
                     </div>
                 </div>
 """
-)
 
 
-def archive_relative_assets(text):
-    text = text.replace('src="assets/', 'src="../assets/')
-    text = text.replace('href="assets/', 'href="../assets/')
-    return text
-
-
-def ensure_archive():
-    ARCHIVE_0521.parent.mkdir(parents=True, exist_ok=True)
-    if not ARCHIVE_0521.exists():
-        text = PREVIEW.read_text(encoding="utf-8")
-        ARCHIVE_0521.write_text(archive_relative_assets(text), encoding="utf-8")
-        print("archived", ARCHIVE_0521.relative_to(ROOT))
-    else:
-        print("archive exists", ARCHIVE_0521.relative_to(ROOT))
-
-
-def update_manifest():
-    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-    old = {sheet["date"]: sheet for sheet in manifest.get("sheets", [])}
-    ordered = [
-        {"date": SHEET_DATE, "label": "May 25, 2026 — current slate", "href": "index.html"},
-        {"date": "2026-05-21", "label": "May 21, 2026", "href": "archive/2026-05-21.html"},
-        {"date": "2026-05-20", "label": "May 20, 2026", "href": "archive/2026-05-20.html"},
-    ]
-    for date in ["2026-05-19", "2026-05-18", "2026-05-16", "2026-05-15", "2026-05-14"]:
-        if date in old:
-            ordered.append(old[date])
-    payload = {"version": 1, "sheets": ordered}
-    MANIFEST_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    return payload
-
-
-def manifest_fallback(manifest):
-    return (
-        '<script type="application/json" id="sheets-manifest-fallback">'
-        + json.dumps(manifest, ensure_ascii=False).replace("</", "<\\/")
-        + "</script>"
-    )
-
-
-def replace_summary_list(text, heading, inner):
-    pat = (
-        rf'(<h3>{re.escape(heading)}</h3>\s*<div class="summary-list">)'
-        rf"[\s\S]*?"
-        rf'(\s*</div>\s*</div>\s*<div class="summary-card(?: emoji-key-card)?")'
-    )
-    text, count = re.subn(pat, r"\1" + inner + r"\2", text, count=1)
-    if count != 1:
-        raise SystemExit(f"Could not replace summary list: {heading}")
-    return text
-
-
-def patch_preview(manifest):
-    text = PREVIEW.read_text(encoding="utf-8")
-    text = re.sub(r"const games = \[.*?\];", lambda _m: GAMES_BLOCK, text, count=1, flags=re.DOTALL)
-    text = re.sub(r"const WORST_PICKZ_FAVORITE_NAMES = new Set\(\[[\s\S]*?\]\);", FAV_SET, text, count=1)
-    text = re.sub(r'<meta name="sheet-date" content="[^"]*">', f'<meta name="sheet-date" content="{SHEET_DATE}">', text, count=1)
-    text = re.sub(r'<script type="application/json" id="sheets-manifest-fallback">.*?</script>', lambda _m: manifest_fallback(manifest), text, count=1, flags=re.DOTALL)
-    text = re.sub(
-        r"<p>(?:Friday|Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday), May \d+, 2026 — Worst Pickz HR cheat sheet",
-        "<p>Sunday, May 25, 2026 — Worst Pickz HR cheat sheet",
-        text,
-        count=1,
-    )
-    count_sentence = (
-        f"This board covers <strong>{TOTAL_ROWS} listed HR props</strong> across "
-        f"<strong>{TOTAL_GAMES} games</strong>, with <strong>{TOTAL_FAVS} Worst Pickz Favorite</strong> rows (&#11088;)."
-    )
-    text, count = re.subn(
-        r"This board covers <strong>.*?</strong> across <strong>.*?</strong>, with <strong>.*?</strong> rows \((?:&#11088;|⭐)\)\.",
-        count_sentence,
-        text,
-        count=1,
-    )
-    if count == 0:
-        text = text.replace(
-            'PropFinder Weather</a>. Designated <strong>Worst Pickz Favorites</strong>',
-            f'PropFinder Weather</a>. {count_sentence} Designated <strong>Worst Pickz Favorites</strong>',
-            1,
-        )
-    text = re.sub(
-        r'                <div class="summary-card full-width best-bets-card">[\s\S]*?<div class="summary-card emoji-key-card">',
-        SUMMARY_BLOCK + '\n                <div class="summary-card emoji-key-card">',
-        text,
-        count=1,
-    )
-    # legacy fallback if structure differs
-    if "James Wood HR</strong><small>Littell LHB" not in text:
-        start = text.index('<div class="summary-card full-width best-bets-card">')
-        end = text.index('<div class="summary-card emoji-key-card">')
-        text = text[:start] + SUMMARY_BLOCK + text[end:]
-    PREVIEW.write_text(text, encoding="utf-8")
-    print("patched", PREVIEW.relative_to(ROOT))
+def verify_gambly_names(html: str) -> list[str]:
+    errors = []
+    stale = {"Juan Soto", "Mike Trout", "Matt Olson", "Braydon Fisher", "Jose Soriano", "Hao-Yu Lee"}
+    for attr in re.findall(r"data-goblin-gambly-lines='([^']+)'", html):
+        legs = json.loads(attr.replace("&quot;", '"'))
+        for leg in legs:
+            name = leg.split(" - ")[0].strip()
+            if name in stale:
+                errors.append(f"stale gambly name: {name}")
+            if "Over 0.5 homerun" in leg and name not in SHEET_PLAYERS:
+                # allow any sheet player — verify against games block names
+                pass
+    if "Aaron Judge" in html and "Fisher" in html and "Goblin" in html:
+        if re.search(r"Judge HR</strong><small>Fisher", html):
+            errors.append("stale Goblin copy still references Fisher")
+    return errors
 
 
 def main():
-    ensure_archive()
-    manifest = update_manifest()
-    patch_preview(manifest)
+    text = PREVIEW.read_text(encoding="utf-8")
+    start = text.index('<div class="summary-card full-width best-bets-card">')
+    end = text.index('<div class="summary-card emoji-key-card">')
+    text = text[:start] + SUMMARY_BLOCK + text[end:]
+    PREVIEW.write_text(text, encoding="utf-8")
+    print("patched Goblin + summary cards")
+
+    refreshed = PREVIEW.read_text(encoding="utf-8")
+    errors = verify_gambly_names(refreshed)
+    if errors:
+        print("VERIFY FAILED:")
+        for e in errors:
+            print(" -", e)
+        sys.exit(1)
+    print("gambly parlays OK (no stale May 21 names)")
 
 
 if __name__ == "__main__":

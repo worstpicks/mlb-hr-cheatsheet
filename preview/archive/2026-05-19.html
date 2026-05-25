@@ -24,7 +24,7 @@
     <title>Worst Pickz Cheat Daily MLB Sheet</title>
     <meta name="sheet-date" content="2026-05-19">
     <!-- Mirror preview/sheets-manifest.json: used when fetch(sheets-manifest.json) fails (e.g. file://). -->
-    <script type="application/json" id="sheets-manifest-fallback">{"version": 1, "sheets": [{"date": "2026-05-19", "label": "May 19, 2026 — current slate", "href": "index.html"}, {"date": "2026-05-18", "label": "May 18, 2026", "href": "archive/2026-05-18.html"}, {"date": "2026-05-16", "label": "May 16, 2026", "href": "archive/2026-05-16.html"}, {"date": "2026-05-15", "label": "May 15, 2026", "href": "archive/2026-05-15.html"}, {"date": "2026-05-14", "label": "May 14, 2026", "href": "archive/2026-05-14.html"}]}</script>
+    <script type="application/json" id="sheets-manifest-fallback">{"version": 1, "sheets": [{"date": "2026-05-25", "label": "May 25, 2026 — current slate", "href": "index.html"}, {"date": "2026-05-21", "label": "May 21, 2026", "href": "archive/2026-05-21.html"}, {"date": "2026-05-20", "label": "May 20, 2026", "href": "archive/2026-05-20.html"}, {"date": "2026-05-19", "label": "May 19, 2026", "href": "archive/2026-05-19.html"}, {"date": "2026-05-18", "label": "May 18, 2026", "href": "archive/2026-05-18.html"}, {"date": "2026-05-16", "label": "May 16, 2026", "href": "archive/2026-05-16.html"}, {"date": "2026-05-15", "label": "May 15, 2026", "href": "archive/2026-05-15.html"}, {"date": "2026-05-14", "label": "May 14, 2026", "href": "archive/2026-05-14.html"}]}</script>
     <meta property="og:title" content="Worst Pickz Cheat Daily MLB Sheet">
     <meta property="og:description" content="Daily MLB HR cheat sheet — listed odds, filters, bet tracker, and Gambly export.">
     <meta property="og:type" content="website">
@@ -218,6 +218,16 @@
         .summary-card.full-width, .emoji-key-card { grid-column: 1 / -1; }
         .top-five-card { border: 2px solid rgba(250,204,21,0.35); background: linear-gradient(135deg, rgba(40,18,10,0.96) 0%, rgba(17,24,39,0.93) 52%, rgba(16,38,30,0.90) 100%); }
         .top-five-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .best-bets-card { border: 2px solid rgba(45, 212, 191, 0.34); background: linear-gradient(135deg, rgba(6, 78, 59, 0.44) 0%, rgba(15, 23, 42, 0.92) 52%, rgba(50, 19, 10, 0.88) 100%); }
+        .best-bets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+        .best-bets-group { border-radius: 14px; padding: 12px; background: rgba(8, 15, 28, 0.78); border: 1px solid rgba(125, 211, 252, 0.14); min-width: 0; }
+        .best-bets-group h4 { margin: 0 0 8px; color: #ccfbf1; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; }
+        .best-bets-group ol, .best-bets-group ul { margin: 0; padding-left: 1.15rem; display: grid; gap: 6px; }
+        .best-bets-group li { color: #e2e8f0; line-height: 1.35; font-size: 0.9rem; }
+        .best-bets-group strong { color: #fff7ed; }
+        .best-bets-group small { display: block; color: #cbd5e1; font-weight: 600; margin-top: 1px; }
+        .best-bets-actions { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .best-bets-gambly-btn { min-height: 34px; padding: 7px 12px; font-size: 0.68rem; }
         .top-five-item { border-radius: 16px; padding: 14px; border: 1px solid rgba(125,211,252,0.20); background: rgba(8,15,28,0.84); }
         .top-five-item strong { display: block; margin-top: 8px; color: #fef08a; font-size: 1.12rem; }
         .summary-note { font-size: 0.84rem; margin: -6px 0 12px 0; }
@@ -400,6 +410,7 @@
         .rating-box.thin { background: linear-gradient(135deg, #475569 0%, #94a3b8 100%); }
         .rating-box span { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.7px; }
         .rating-box strong { display: block; font-size: 1.3rem; margin-top: 3px; }
+        .rating-box small { display: block; margin-top: 3px; color: rgba(255, 255, 255, 0.86); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.04em; }
         .rating-stack { min-width: 92px; display: grid; gap: 8px; }
         .letter-box { min-width: 86px; padding: 7px 10px; border-radius: 12px; text-align: center; font-weight: 800; color: #fff; line-height: 1.1; border: 1px solid rgba(255,255,255,0.14); }
         .letter-box.s-plus { background: linear-gradient(135deg, #fef08a 0%, #f59e0b 40%, #f97316 100%); color: #1f1300; }
@@ -2742,7 +2753,7 @@
             </section>
         <section class="batters-won-section" id="battersWonSection" aria-labelledby="battersWonHeading">
             <div class="panel batters-won-panel">
-                <h2 id="battersWonHeading">Batters Won</h2>
+                <h2 id="battersWonHeading">HR Props That Cashed</h2>
                 <p class="batters-won-lede" id="battersWonLede" aria-live="polite">Checking homers from MLB box scores…</p>
                 <ol class="batters-won-list" id="battersWonList"></ol>
             </div>
@@ -3262,6 +3273,7 @@
 
             const blastBonusMap = { good: 1, high: 2 };
             function bandClass(score) { if (score >= 90) return "elite"; if (score >= 80) return "strong"; if (score >= 70) return "playable"; return "thin"; }
+            function confidenceTierText(score) { if (score >= 90) return "Elite"; if (score >= 80) return "Strong"; if (score >= 70) return "Playable"; return "Longshot only"; }
             function matchupShort(title) { return (title.split(" - ")[0] || title || "").trim(); }
             function parkHrPctFromDescription(desc) {
                 const m = (desc || "").match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i);
@@ -3405,7 +3417,7 @@
             updateBetTrackerBtnLabel();
 
             /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
-                        const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                                                                                                const WORST_PICKZ_FAVORITE_NAMES = new Set([
                 "Drake Baldwin (L)",
                 "Matt Olson (L)",
                 "Pete Alonso (R)",
@@ -3940,7 +3952,7 @@
                 return emojiBase;
             }
             function renderGames() {
-                grid.innerHTML = games.map((game, gi) => `<details class="game-card" open id="game-${gi}"><summary class="game-header"><h3>${formatGameTitleHtml(game.title)}</h3><p>${game.description}</p></summary><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Score</span><strong>${row.score}</strong></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></details>`).join("");
+                grid.innerHTML = games.map((game, gi) => `<details class="game-card" open id="game-${gi}"><summary class="game-header"><h3>${formatGameTitleHtml(game.title)}</h3><p>${game.description}</p></summary><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const confidenceTier = confidenceTierText(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Confidence</span><strong>${confidenceTier}</strong><small>Score ${row.score}</small></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></details>`).join("");
             }
             function setGameCardCollapsed(card, collapsed, markUser) {
                 if (!card) return;
@@ -4026,7 +4038,7 @@
                     if (!ratingBox || !ratingBox.parentNode) return;
                     if (row.querySelector(".rating-stack")) return;
                     const card = row.closest(".game-card");
-                    const score = parseInt(ratingBox.querySelector("strong")?.textContent || "0", 10);
+                    const score = parseInt(row.getAttribute("data-score") || "0", 10);
                     const emojiText = row.querySelector(".emoji-row")?.textContent || "";
                     const noteText = row.querySelector(".pick-note")?.textContent || "";
                     const blastBonus = blastBonusMap[row.dataset.blast || ""] || 0;
@@ -4321,9 +4333,9 @@
                         ? `<span class="table-emoji-tags">${escapeHtml(emojiRowDisplay)}</span>`
                         : '<span class="table-emoji-tags table-emoji-tags--empty">—</span>';
                     const grade = gradeForGiRi(gi, ri);
-                    return `<tr class="pick-table-row pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${emojiTagsEnc}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-blast="${blastTier}" data-band="${band}" data-score="${row.score}" data-listed="" data-park="${parkPct == null ? "" : parkPct}" data-longshot="${dataLongshot}" data-grade="${grade}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}"><td class="td-bet-sheet"><button type="button" class="bet-save-corner__btn bet-save-corner__btn--table bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="Bet tracker">${tracked ? "✓" : "+"}</button></td><td class="td-gambly"><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn gambly-pick-btn--dense" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add</button></div></td><td class="td-player"><button type="button" class="pick-name-open table-player-name" data-gi="${gi}" data-ri="${ri}">${safeName}</button></td><td class="td-tags">${emojiCell}</td><td class="td-listed">${safeOdds}</td><td class="td-score"><strong>${row.score}</strong></td><td><span class="band-pill ${band}">${band}</span></td><td class="${parkClass}">${parkTxt}</td><td><a class="go-game" href="#game-${gi}">${safeMatch}</a></td></tr>`;
+                    return `<tr class="pick-table-row pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${emojiTagsEnc}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-blast="${blastTier}" data-band="${band}" data-score="${row.score}" data-listed="" data-park="${parkPct == null ? "" : parkPct}" data-longshot="${dataLongshot}" data-grade="${grade}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}"><td class="td-bet-sheet"><button type="button" class="bet-save-corner__btn bet-save-corner__btn--table bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="Bet tracker">${tracked ? "✓" : "+"}</button></td><td class="td-gambly"><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn gambly-pick-btn--dense" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add</button></div></td><td class="td-player"><button type="button" class="pick-name-open table-player-name" data-gi="${gi}" data-ri="${ri}">${safeName}</button></td><td class="td-tags">${emojiCell}</td><td class="td-listed">${safeOdds}</td><td class="td-score"><strong>${confidenceTierText(row.score)}</strong><small>Score ${row.score}</small></td><td><span class="band-pill ${band}">${confidenceTierText(row.score)}</span></td><td class="${parkClass}">${parkTxt}</td><td><a class="go-game" href="#game-${gi}">${safeMatch}</a></td></tr>`;
                 }).join("");
-                tableView.innerHTML = `<div class="table-wrap-inner"><table class="props-table"><thead><tr><th class="th-sheet" scope="col" title="Add to bet tracker">Track</th><th class="th-gambly" scope="col" title="Add row to Gambly export">Gambly</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="player">Player <span class="sort-ind">${ind("player")}</span></button></th><th class="th-tags" scope="col" title="Emoji tags (same as card rows)">Tags</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="odds">Listed <span class="sort-ind">${ind("odds")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="score">Score <span class="sort-ind">${ind("score")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="band">Band <span class="sort-ind">${ind("band")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="park">Park % <span class="sort-ind">${ind("park")}</span></button></th><th scope="col">Game</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+                tableView.innerHTML = `<div class="table-wrap-inner"><table class="props-table"><thead><tr><th class="th-sheet" scope="col" title="Add to bet tracker">Track</th><th class="th-gambly" scope="col" title="Add row to Gambly export">Gambly</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="player">Player <span class="sort-ind">${ind("player")}</span></button></th><th class="th-tags" scope="col" title="Emoji tags (same as card rows)">Tags</th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="odds">Listed <span class="sort-ind">${ind("odds")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="score">Confidence <span class="sort-ind">${ind("score")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="band">Tier <span class="sort-ind">${ind("band")}</span></button></th><th scope="col" class="sortable"><button type="button" class="sort-h" data-sort="park">Park % <span class="sort-ind">${ind("park")}</span></button></th><th scope="col">Game</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
                 applyQuickFilterToTable();
                 applyEmojiFiltersToAll();
                 if (typeof applyRowVisibilityFilters === "function") applyRowVisibilityFilters();
@@ -5163,16 +5175,16 @@
             function onGamblyModalKeydown(e) {
                 if (e.key === "Escape") closeGamblyFallbackModal();
             }
-            function showGamblyFallbackModal(text) {
+            function showGamblyFallbackModal(text, customNote) {
                 closeGamblyFallbackModal();
                 const wrap = document.createElement("div");
                 wrap.id = "gamblyExportModal";
                 wrap.className = "gambly-export-modal";
                 wrap.setAttribute("role", "dialog");
                 wrap.setAttribute("aria-modal", "true");
-                wrap.innerHTML = "<div class=\"gambly-export-modal__backdrop\" tabindex=\"-1\" data-close=\"1\"></div><div class=\"gambly-export-modal__panel\"><h3 class=\"gambly-export-modal__title\">Exported HR props</h3><p class=\"gambly-export-modal__note\"></p><textarea class=\"gambly-export-modal__ta\" rows=\"10\" readonly></textarea><div class=\"gambly-export-modal__actions\"><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalSelectAll\">Select all</button><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalCopy\">Copy</button><a class=\"btn-gambly\" href=\"https://gambly.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Open Gambly</a><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalClose\">Close</button></div></div>";
+                wrap.innerHTML = "<div class=\"gambly-export-modal__backdrop\" tabindex=\"-1\" data-close=\"1\"></div><div class=\"gambly-export-modal__panel\"><h3 class=\"gambly-export-modal__title\">Exported Props</h3><p class=\"gambly-export-modal__note\"></p><textarea class=\"gambly-export-modal__ta\" rows=\"10\" readonly></textarea><div class=\"gambly-export-modal__actions\"><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalSelectAll\">Select all</button><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalCopy\">Copy</button><a class=\"btn-gambly\" href=\"https://gambly.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Open Gambly</a><button type=\"button\" class=\"btn-secondary\" id=\"gamblyModalClose\">Close</button></div></div>";
                 const note = wrap.querySelector(".gambly-export-modal__note");
-                note.textContent = "Below are the HR props you added for Gambly—one line per pick (batter and home run over line). Select all or Copy, then Open Gambly and paste when you are ready.";
+                note.textContent = customNote || "Below are the HR props you added for Gambly - one line per pick. Select all or Copy, then Open Gambly and paste when you are ready.";
                 const ta = wrap.querySelector("textarea");
                 ta.value = text;
                 wrap.querySelector("[data-close]").addEventListener("click", closeGamblyFallbackModal);
@@ -5197,6 +5209,22 @@
                     ta.select();
                 });
             }
+            document.addEventListener("click", (e) => {
+                const btn = e.target.closest("[data-goblin-gambly-lines]");
+                if (!btn) return;
+                e.preventDefault();
+                let lines = [];
+                try {
+                    lines = JSON.parse(btn.getAttribute("data-goblin-gambly-lines") || "[]");
+                } catch (err) {
+                    lines = [];
+                }
+                if (!Array.isArray(lines) || !lines.length) return;
+                const body = lines.join("\n");
+                copyToClipboardSmart(body).finally(() => {
+                    showGamblyFallbackModal(body, "Goblin's Insight copied these legs for Gambly. Select all or Copy, then Open Gambly and paste when you are ready.");
+                });
+            });
             if (gamesSection) {
                 gamesSection.addEventListener("change", (e) => {
                     if (e.target && e.target.classList && e.target.classList.contains("pick-cb--gambly")) {

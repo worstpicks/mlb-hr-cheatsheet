@@ -41,6 +41,45 @@ def data_attr(lines):
     return json.dumps(lines).replace('"', "&quot;")
 
 
+HRRBI_PLAY = [
+    "Jonathan Aranda - Over 1.5 hits + runs + RBIs",
+    "Brandon Lowe - Over 1.5 hits + runs + RBIs",
+    "Yordan Alvarez - Over 1.5 hits + runs + RBIs",
+    "Junior Caminero - Over 1.5 hits + runs + RBIs",
+    "Oneil Cruz - Over 1.5 hits + runs + RBIs",
+    "Shohei Ohtani - Over 1.5 hits + runs + RBIs",
+    "Matt Olson - Over 1.5 hits + runs + RBIs",
+    "Jarren Duran - Over 1.5 hits + runs + RBIs",
+]
+
+THREE_LEG_HR = [
+    "Brandon Lowe - Over 0.5 homerun",
+    "Kyle Schwarber - Over 0.5 homerun",
+    "Yordan Alvarez - Over 0.5 homerun",
+]
+
+FAV_THREE_LEG = [
+    "Jonathan Aranda - Over 0.5 homerun",
+    "Jarren Duran - Over 0.5 homerun",
+    "Elly De La Cruz - Over 0.5 homerun",
+]
+
+
+def _gambly_batter(line: str) -> str:
+    return line.split(" - ", 1)[0].strip()
+
+
+def assert_goblin_hr_parlays_distinct() -> None:
+    three = {_gambly_batter(x) for x in THREE_LEG_HR}
+    fav = {_gambly_batter(x) for x in FAV_THREE_LEG}
+    overlap = three & fav
+    if overlap:
+        raise SystemExit(f"3 Leg HR and Favorite 3 Leg share batters: {sorted(overlap)}")
+
+
+assert_goblin_hr_parlays_distinct()
+
+
 GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-card">
                     <h3>Goblin's Insight</h3>
                     <p class="model-note summary-note">Full-slate view built from weather, pitcher HR risk, current power form, and batter-vs-pitcher history.</p>
@@ -52,7 +91,7 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                                 <li><strong>Kyle Schwarber HR</strong><small>Schwarber's slate-best power form versus Walker Buehler's RHB split keeps Philly live even in Petco drag.</small></li>
                                 <li><strong>Yordan Alvarez HR</strong><small>Jacob deGrom LHB HR risk plus BvP HR history; Alvarez has 7 HR and 18.0% barrels.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Brandon Lowe - Over 0.5 homerun", "Kyle Schwarber - Over 0.5 homerun", "Yordan Alvarez - Over 0.5 homerun"])}'>Add 3 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(THREE_LEG_HR)}'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
@@ -71,23 +110,21 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Kyle Schwarber - Over 0.5 hits", "Bryce Harper - Over 0.5 hits", "Brandon Lowe - Over 0.5 hits", "Jonathan Aranda - Over 0.5 hits", "Yordan Alvarez - Over 0.5 hits", "Paul Goldschmidt - Over 0.5 hits", "Jarren Duran - Over 0.5 hits", "Oneil Cruz - Over 0.5 hits", "Matt Olson - Over 0.5 hits", "Bobby Witt Jr. - Over 0.5 hits", "Miguel Vargas - Over 0.5 hits", "Brandon Nimmo - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
-                            <h4>Worst Pickz Favorite 3 Leg</h4>
-                            <ol>
-                                <li><strong>Kyle Schwarber HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with slate-best power form.</small></li>
-                                <li><strong>Brandon Lowe HR &#11088; &#127765;</strong><small>Worst Pickz Favorite versus Taillon HR leakage.</small></li>
-                                <li><strong>Yordan Alvarez HR &#11088; &#127765;</strong><small>Worst Pickz Favorite versus deGrom LHB split.</small></li>
-                            </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Kyle Schwarber - Over 0.5 homerun", "Brandon Lowe - Over 0.5 homerun", "Yordan Alvarez - Over 0.5 homerun"])}'>Add Favorite 3 Leg to Gambly</button></div>
+                            <h4>2 Hits + Runs + RBI Play</h4>
+                            <ul>
+                                <li><strong>Aranda, Caminero, Lowe, Cruz</strong><small>Top contact versus Gibson and Taillon — the slate's #1 and #2 pitchers to attack.</small></li>
+                                <li><strong>Alvarez, Ohtani, Olson, Duran</strong><small>Run/RBI upside versus deGrom, Sugano, Early, and Elder in the best run environments.</small></li>
+                            </ul>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(HRRBI_PLAY)}'>Add 2 Hits + Runs + RBI to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
-                            <h4>Top 5 Weather Games</h4>
+                            <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>NYY @ KC</strong><small>+9% HR at Kauffman with mild air and X-Large outfield.</small></li>
-                                <li><strong>TB @ BAL</strong><small>+8% HR at Oriole Park with warm 82°F air.</small></li>
-                                <li><strong>ATL @ BOS</strong><small>+1% HR but +19% runs at Fenway with high receptivity.</small></li>
-                                <li><strong>CHC @ PIT</strong><small>+5% runs row despite -4% HR at PNC.</small></li>
-                                <li><strong>MIN @ CWS</strong><small>+1% combined at Rate Field with 11 mph L-R wind.</small></li>
+                                <li><strong>Jonathan Aranda HR &#11088; &#127765;</strong><small>Worst Pickz Favorite moonshot versus Gibson at Oriole Park (+8% HR) — slate #1 pitcher to attack.</small></li>
+                                <li><strong>Jarren Duran HR &#11088; &#127765;</strong><small>Worst Pickz Favorite moonshot at Fenway (+19% runs) versus Elder in the board's best run environment.</small></li>
+                                <li><strong>Elly De La Cruz HR &#11088; &#127765;</strong><small>Worst Pickz Favorite moonshot versus Tong RHB HR leakage — clean attack-pitcher lane.</small></li>
                             </ol>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(FAV_THREE_LEG)}'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Top 5 Pitchers To Attack</h4>
@@ -115,10 +152,11 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                 </div>"""
 
 PARK_INNER = """
-                        <div class="summary-item"><span>NYY @ KC <small>Kauffman +9% HR, mild air, X-Large outfield</small></span><strong>+9%</strong></div>
-                        <div class="summary-item"><span>TB @ BAL <small>Oriole Park +8% HR, warm 82°F air</small></span><strong>+8%</strong></div>
-                        <div class="summary-item"><span>ATL @ BOS <small>Fenway +1% HR, +19% runs, high receptivity</small></span><strong>+1%</strong></div>
-                        <div class="summary-item"><span>CHC @ PIT <small>PNC +5% runs row despite -4% HR</small></span><strong>+5%</strong></div>
+                        <div class="summary-item"><span>NYY @ KC <small>+9% HR at Kauffman with mild air and X-Large outfield</small></span><strong>+9%</strong></div>
+                        <div class="summary-item"><span>TB @ BAL <small>+8% HR at Oriole Park with warm 82°F air</small></span><strong>+8%</strong></div>
+                        <div class="summary-item"><span>ATL @ BOS <small>+1% HR but +19% runs at Fenway with high receptivity</small></span><strong>+19% runs</strong></div>
+                        <div class="summary-item"><span>CHC @ PIT <small>+5% runs row despite -4% HR at PNC</small></span><strong>+5% runs</strong></div>
+                        <div class="summary-item"><span>MIN @ CWS <small>+1% combined at Rate Field with 11 mph L-R wind</small></span><strong>+1%</strong></div>
                     """
 
 WEATHER5_INNER = """
@@ -149,7 +187,7 @@ SUMMARY_BLOCK = (
     + TOP_CARD
     + """
                 <div class="summary-card">
-                    <h3>Best Park / Weather HR Rows (slate)</h3>
+                    <h3>Top 5 Weather Games</h3>
                     <div class="summary-list">"""
     + PARK_INNER
     + """
@@ -271,6 +309,7 @@ def patch_preview(manifest):
         start = text.index('<div class="summary-card full-width best-bets-card">')
         end = text.index('<div class="summary-card emoji-key-card">')
         text = text[:start] + SUMMARY_BLOCK + text[end:]
+    assert_goblin_hr_parlays_distinct()
     PREVIEW.write_text(text, encoding="utf-8")
     print("patched", PREVIEW.relative_to(ROOT))
 

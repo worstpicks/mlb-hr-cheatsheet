@@ -76,8 +76,10 @@ def main() -> int:
     root = Path(__file__).resolve().parent
     html_text = (root / "preview" / "index.html").read_text(encoding="utf-8")
     fav_names = None
-    build = root / "build-sheet-2026-05-27.py"
-    if build.is_file():
+    date_m = re.search(r'<meta name="sheet-date" content="([^"]+)">', html_text)
+    sheet_date = date_m.group(1) if date_m else None
+    build = root / f"build-sheet-{sheet_date}.py" if sheet_date else None
+    if build and build.is_file():
         import importlib.util
 
         spec = importlib.util.spec_from_file_location("build_sheet", build)

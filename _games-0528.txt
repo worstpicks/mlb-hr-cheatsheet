@@ -1,7 +1,7 @@
 const games = [
     {
         title: "LAA @ DET - Jack Flaherty 🧤 (L, LAA) vs Grayson Rodriguez 🧤 (R, DET)",
-        description: "Comerica Park — Ballpark Pal grades -13% HR and -5% runs with cool 62°F air, 15 mph L-R wind, and high air pressure. Grayson Rodriguez carries 1.58 LHB HR risk; Jack Flaherty's RHB split is the cleaner Angels attack lane despite Detroit's large outfield.",
+        description: "Comerica Park — Ballpark Pal grades -6% HR and +5% combined runs with clear 62°F air, 15 mph wind, and 1022 mb high pressure. Grayson Rodriguez carries 1.58 LHB HR risk; Jack Flaherty's RHB split is the cleaner Angels attack lane despite Detroit's large outfield.",
         rows: [
             { name: "Zach Neto (R)", odds: "Listed +460 - Over 0.5 HR", score: 80, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "1 HR, 2 near-HR with 95.5 mph EV and 25.0% barrels. Draws opposing starter Rodriguez; Rodriguez RHB HR risk fits Neto's pull-side power.", chips: ["vs Rodriguez"], blast: "high" },
             { name: "Mike Trout (R)", odds: "Listed +380 - Over 0.5 HR", score: 82, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR but 88.9 mph EV and 14.3% barrels in the pitch-mix window. Draws opposing starter Rodriguez; Rodriguez RHB sample keeps Trout's pull-air live.", chips: ["vs Rodriguez"], blast: "good" },
@@ -14,7 +14,7 @@ const games = [
     },
     {
         title: "MIN @ CWS - Taj Bradley (R, MIN) vs Davis Martin (R, CWS)",
-        description: "Rate Field — -3% HR row with -1% combined runs, cool 64°F air, 14 mph L-R wind, and 1022 mb high pressure. Davis Martin suppresses HRs; Chicago bats get the form-driven lane versus a Twins arm with limited sample.",
+        description: "Rate Field — flat +0% HR row with 0% combined runs, clear 64°F air, 15 mph wind, and 1023 mb high pressure. Davis Martin suppresses HRs; Chicago bats get the form-driven lane versus a Twins arm with limited sample.",
         rows: [
             { name: "Miguel Vargas (R)", odds: "Listed +460 - Over 0.5 HR", score: 83, emojis: "🌕 💣", note: "1 HR, 1 near-HR with 98.3 mph EV and 25.0% barrels. Draws opposing starter Bradley; Bradley RHB split fits Vargas' elite power window.", chips: ["vs Bradley"], blast: "high" },
             { name: "Munetaka Murakami (L)", odds: "Listed +360 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "0 HR with 84.6 mph EV and loud hard-hit in the pitch-mix window. Draws opposing starter Bradley; lefty pull-air versus Bradley's limited LHB sample.", chips: ["vs Bradley"], blast: "high" },
@@ -25,19 +25,19 @@ const games = [
     },
     {
         title: "ATL @ BOS - Chris Sale (L, ATL) vs Payton Tolle (L, BOS)",
-        description: "Fenway Park — -18% HR row with -4% runs, cool 61°F air, and 6 mph in-blowing wind despite high receptivity. Chris Sale suppresses Boston; Braves lefties face Payton Tolle's limited sample in a pitcher-friendly Thursday environment.",
+        description: "Fenway Park — -15% HR row with -1% combined runs, 65°F partially cloudy air, and 6 mph in-blowing wind despite high receptivity. Chris Sale suppresses Boston; Braves lefties face Payton Tolle's limited sample in a pitcher-friendly Thursday environment.",
         rows: [
             { name: "Matt Olson (L)", odds: "Listed +440 - Over 0.5 HR", score: 76, emojis: "🌕 💎", note: "1 HR, 1 near-HR with 93.0 mph EV and 7.1% barrels. Draws opposing starter Tolle; Tolle LHB sample is the Braves lefty lane at Fenway.", chips: ["vs Tolle"], blast: "high" },
             { name: "Jorge Mateo (R)", odds: "Listed prop - Over 0.5 HR", score: 61, emojis: "💎", note: "1 HR, 1 near-HR with 90.4 mph EV and 11.1% barrels versus Tolle. Draws opposing starter Tolle; 1 HR in sample but no listed odds posted.", chips: ["vs Tolle"] },
             { name: "Mauricio Dubon (R)", odds: "Listed +900 - Over 0.5 HR", score: 62, emojis: "💎", note: "0 HR, 1 near-HR with 91.0 mph EV in the pitch-mix window. Draws opposing starter Tolle; Tolle RHB split is the Braves righty angle.", chips: ["vs Tolle"] },
             { name: "Wilyer Abreu (L)", odds: "Listed +820 - Over 0.5 HR", score: 78, emojis: "⭐ 💎", note: "Worst Pickz favorite with 0 HR but 12.5% barrels and pull-side fit versus Sale. Draws opposing starter Sale; Sale LHB split is suppressive but Abreu carries 87.9 mph EV.", chips: ["vs Sale"], blast: "good" },
-            { name: "Jarren Duran (L)", odds: "Listed +880 - Over 0.5 HR", score: 77, emojis: "💎", note: "0 HR with 93.0 mph EV and 57.1% hard-hit versus Sale. Draws opposing starter Sale; lefty lane versus Sale despite Fenway's -18% HR drag.", chips: ["vs Sale"], blast: "good" },
+            { name: "Jarren Duran (L)", odds: "Listed +880 - Over 0.5 HR", score: 77, emojis: "💎", note: "0 HR with 93.0 mph EV and 57.1% hard-hit versus Sale. Draws opposing starter Sale; lefty lane versus Sale despite Fenway's -15% HR drag.", chips: ["vs Sale"], blast: "good" },
             { name: "Isiah Kiner-Falefa (R)", odds: "Listed +1700 - Over 0.5 HR", score: 63, emojis: "💎", note: "1 HR, 1 near-HR with 85.3 mph EV in a small sample. Draws opposing starter Sale; Sale RHB split is the Red Sox righty longshot lane.", chips: ["vs Sale"] },
         ],
     },
     {
         title: "TOR @ BAL - Patrick Corbin 🧤 (L, TOR) vs Chris Bassitt (R, BAL)",
-        description: "Oriole Park — -22% HR row (slate-worst) with -6% runs, warm 70°F air, and 13 mph wind. Patrick Corbin's 0.27 vs-RHB HR risk keeps Baltimore righties live despite the brutal HR model.",
+        description: "Oriole Park — -19% HR row (slate-worst) with -8% combined runs, clear 74°F air, and 10 mph wind. Patrick Corbin's 0.27 vs-RHB HR risk keeps Baltimore righties live despite the brutal HR model.",
         rows: [
             { name: "Coby Mayo (R)", odds: "Listed +500 - Over 0.5 HR", score: 86, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 2 near-HR with 93.1 mph EV and 21.4% barrels. Draws opposing starter Corbin; Corbin RHB HR leakage is the Orioles' clearest attack lane.", chips: ["vs Corbin"], blast: "high" },
             { name: "Pete Alonso (R)", odds: "Listed +360 - Over 0.5 HR", score: 85, emojis: "⭐ 🌕 💣 ⚾ 🕊️ 🧤", note: "Worst Pickz favorite with 0 HR, 1 near-HR and 22.2% barrels versus Corbin. Draws opposing starter Corbin; Corbin RHB split plus Alonso's 97.1 mph EV peak.", chips: ["vs Corbin"], blast: "high" },
@@ -45,12 +45,12 @@ const games = [
             { name: "Adley Rutschman (S)", odds: "Listed +610 - Over 0.5 HR", score: 67, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR with 14.3% barrels and 88.8 mph EV versus Corbin. Draws opposing starter Corbin; switch lane versus Corbin's RHB weakness.", chips: ["vs Corbin"] },
             { name: "Yohendrick Pinango (L)", odds: "Listed +840 - Over 0.5 HR", score: 93, emojis: "🚀 ⭐ 🌕 💣", note: "Worst Pickz favorite with 1 HR, 2 near-HR and slate-best EV in the window. Draws opposing starter Bassitt; 105.4 mph EV and 40.0% barrels versus Bassitt.", chips: ["vs Bassitt"], blast: "high" },
             { name: "Ernie Clement (R)", odds: "Listed +1220 - Over 0.5 HR", score: 69, emojis: "💎", note: "1 HR, 2 near-HR with 78.5 mph EV and 15.4% barrels. Draws opposing starter Bassitt; 1 HR, 2 near-HR with pull-side air versus Bassitt.", chips: ["vs Bassitt"], blast: "good" },
-            { name: "Daulton Varsho (L)", odds: "Listed +500 - Over 0.5 HR", score: 68, emojis: "💎", note: "0 HR with 86.8 mph EV and 41.7% hard-hit versus Bassitt. Draws opposing starter Bassitt; lefty lane versus Bassitt at Camden's -22% HR row.", chips: ["vs Bassitt"] },
+            { name: "Daulton Varsho (L)", odds: "Listed +500 - Over 0.5 HR", score: 68, emojis: "💎", note: "0 HR with 86.8 mph EV and 41.7% hard-hit versus Bassitt. Draws opposing starter Bassitt; lefty lane versus Bassitt at Camden's -19% HR row.", chips: ["vs Bassitt"] },
         ],
     },
     {
         title: "CHC @ PIT - Colin Rea 🧤 (R, CHC) vs Paul Skenes (R, PIT)",
-        description: "PNC Park — -18% HR row with -3% runs, cooling 66°F air, and 9 mph wind. Colin Rea is the slate's top HR-risk arm (1.21, 1.70 vs RHB); Paul Skenes suppresses Chicago bats despite Pittsburgh's shallow right side.",
+        description: "PNC Park — -15% HR row with -3% combined runs, clear 69°F air, and 11 mph wind. Colin Rea is the slate's top HR-risk arm (1.21, 1.70 vs RHB); Paul Skenes suppresses Chicago bats despite Pittsburgh's shallow right side.",
         rows: [
             { name: "Brandon Lowe (L)", odds: "Listed +410 - Over 0.5 HR", score: 96, emojis: "⭐ 🌕 💣 ⚾ 🕊️ 🧤", note: "Worst Pickz favorite with 3 HR, 5 near-HR and 98.3 mph EV versus Rea. Draws opposing starter Rea; Rea is slate-high HR risk with 3 HR and 38.5% barrels in the window.", chips: ["vs Rea"], blast: "high" },
             { name: "Spencer Horwitz (L)", odds: "Listed +870 - Over 0.5 HR", score: 81, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "Worst Pickz favorite with 2 HR, 2 near-HR, 88.0 mph EV and 30.0% barrels versus Rea. Draws opposing starter Rea; Rea LHB leakage plus Horwitz's 2 HR in the sample.", chips: ["vs Rea"], blast: "good" },

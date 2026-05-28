@@ -148,19 +148,19 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                 </div>"""
 
 PARK_INNER = """
-                        <div class="summary-item"><span>MIN @ CWS <small>Rate Field -3% HR, -1% combined, 64°F high pressure</small></span><strong>-1%</strong></div>
-                        <div class="summary-item"><span>CHC @ PIT <small>PNC -18% HR but +7% 2B/3B row, cooling air</small></span><strong>-3% runs</strong></div>
-                        <div class="summary-item"><span>ATL @ BOS <small>Fenway -18% HR, in-blowing 6 mph wind</small></span><strong>-4% runs</strong></div>
-                        <div class="summary-item"><span>LAA @ DET <small>Comerica -13% HR, 15 mph L-R, 1022 mb pressure</small></span><strong>-5%</strong></div>
-                        <div class="summary-item"><span>TOR @ BAL <small>Oriole Park -22% HR, slate-worst HR row</small></span><strong>-6%</strong></div>
-                        <div class="summary-item"><span>HOU @ TEX <small>Globe Life -11% HR, roof closed</small></span><strong>-7%</strong></div>
+                        <div class="summary-item"><span>LAA @ DET <small>Comerica -6% HR, +5% combined runs, 62°F clear</small></span><strong>+5%</strong></div>
+                        <div class="summary-item"><span>MIN @ CWS <small>Rate Field flat +0% HR, 0% combined, 64°F clear</small></span><strong>0%</strong></div>
+                        <div class="summary-item"><span>ATL @ BOS <small>Fenway -15% HR, -1% combined, 6 mph in</small></span><strong>-1%</strong></div>
+                        <div class="summary-item"><span>CHC @ PIT <small>PNC -15% HR but +6% 2B/3B row, 69°F clear</small></span><strong>-3% runs</strong></div>
+                        <div class="summary-item"><span>HOU @ TEX <small>Globe Life -11% HR, roof closed, 83°F dome</small></span><strong>-7%</strong></div>
+                        <div class="summary-item"><span>TOR @ BAL <small>Oriole Park -19% HR, slate-worst HR row</small></span><strong>-8%</strong></div>
                     """
 
 WEATHER5_INNER = """
-                        <div class="summary-item"><span>#1 Brandon Lowe <small>Rea HR leakage despite PNC -18% drag</small></span><strong>96</strong></div>
+                        <div class="summary-item"><span>#1 Brandon Lowe <small>Rea HR leakage despite PNC -15% drag</small></span><strong>96</strong></div>
                         <div class="summary-item"><span>#2 Yohendrick Pinango <small>105.4 mph EV versus Bassitt</small></span><strong>93</strong></div>
                         <div class="summary-item"><span>#3 Yordan Alvarez <small>Eovaldi LHB risk at the dome</small></span><strong>92</strong></div>
-                        <div class="summary-item"><span>#4 Byron Buxton <small>3 HR versus Martin at Rate Field</small></span><strong>90</strong></div>
+                        <div class="summary-item"><span>#4 Byron Buxton <small>3 HR versus Martin at flat Rate Field</small></span><strong>90</strong></div>
                         <div class="summary-item"><span>#5 Coby Mayo <small>Corbin RHB HR risk at Camden</small></span><strong>86</strong></div>
                     """
 
@@ -172,10 +172,10 @@ LONGSHOT_INNER = """
                     """
 
 FADES_INNER = """
-                        <div class="summary-item"><span>TOR @ BAL <small>Oriole Park -22% HR, slate-worst row</small></span><strong>-22%</strong></div>
-                        <div class="summary-item"><span>ATL @ BOS <small>Fenway -18% HR, in-blowing wind</small></span><strong>-18%</strong></div>
-                        <div class="summary-item"><span>CHC @ PIT <small>PNC -18% HR, cool evening air</small></span><strong>-18%</strong></div>
-                        <div class="summary-item"><span>LAA @ DET <small>Comerica -13% HR, high pressure</small></span><strong>-13%</strong></div>
+                        <div class="summary-item"><span>TOR @ BAL <small>Oriole Park -19% HR, slate-worst row</small></span><strong>-19%</strong></div>
+                        <div class="summary-item"><span>ATL @ BOS <small>Fenway -15% HR, in-blowing wind</small></span><strong>-15%</strong></div>
+                        <div class="summary-item"><span>CHC @ PIT <small>PNC -15% HR, clear evening air</small></span><strong>-15%</strong></div>
+                        <div class="summary-item"><span>HOU @ TEX <small>Globe Life -11% HR, roof closed</small></span><strong>-11%</strong></div>
                     """
 
 SUMMARY_BLOCK = (

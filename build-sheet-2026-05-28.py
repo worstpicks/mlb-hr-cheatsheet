@@ -109,7 +109,7 @@ def add_bum_row_emojis(entry):
 games = [
     {
         "title": "LAA @ DET - Jack Flaherty 🧤 (L, LAA) vs Grayson Rodriguez 🧤 (R, DET)",
-        "description": "Comerica Park — Ballpark Pal grades -13% HR and -5% runs with cool 62°F air, 15 mph L-R wind, and high air pressure. Grayson Rodriguez carries 1.58 LHB HR risk; Jack Flaherty's RHB split is the cleaner Angels attack lane despite Detroit's large outfield.",
+        "description": "Comerica Park — Ballpark Pal grades -6% HR and +5% combined runs with clear 62°F air, 15 mph wind, and 1022 mb high pressure. Grayson Rodriguez carries 1.58 LHB HR risk; Jack Flaherty's RHB split is the cleaner Angels attack lane despite Detroit's large outfield.",
         "rows": [
             row("Zach Neto", "R", "+460", 80, "🌕 💣", ["vs Rodriguez"], n("Zach Neto", "Rodriguez", "Rodriguez RHB HR risk fits Neto's pull-side power", "1 HR, 2 near-HR with 95.5 mph EV and 25.0% barrels"), "high"),
             row("Mike Trout", "R", "+380", 82, "💎", ["vs Rodriguez"], n("Mike Trout", "Rodriguez", "Rodriguez RHB sample keeps Trout's pull-air live", "0 HR but 88.9 mph EV and 14.3% barrels in the pitch-mix window"), "good"),
@@ -122,7 +122,7 @@ games = [
     },
     {
         "title": "MIN @ CWS - Taj Bradley (R, MIN) vs Davis Martin (R, CWS)",
-        "description": "Rate Field — -3% HR row with -1% combined runs, cool 64°F air, 14 mph L-R wind, and 1022 mb high pressure. Davis Martin suppresses HRs; Chicago bats get the form-driven lane versus a Twins arm with limited sample.",
+        "description": "Rate Field — flat +0% HR row with 0% combined runs, clear 64°F air, 15 mph wind, and 1023 mb high pressure. Davis Martin suppresses HRs; Chicago bats get the form-driven lane versus a Twins arm with limited sample.",
         "rows": [
             row("Miguel Vargas", "R", "+460", 83, "🌕 💣", ["vs Bradley"], n("Miguel Vargas", "Bradley", "Bradley RHB split fits Vargas' elite power window", "1 HR, 1 near-HR with 98.3 mph EV and 25.0% barrels"), "high"),
             row("Munetaka Murakami", "L", "+360", 84, "🌕 💣", ["vs Bradley"], n("Munetaka Murakami", "Bradley", "lefty pull-air versus Bradley's limited LHB sample", "0 HR with 84.6 mph EV and loud hard-hit in the pitch-mix window"), "high"),
@@ -133,19 +133,19 @@ games = [
     },
     {
         "title": "ATL @ BOS - Chris Sale (L, ATL) vs Payton Tolle (L, BOS)",
-        "description": "Fenway Park — -18% HR row with -4% runs, cool 61°F air, and 6 mph in-blowing wind despite high receptivity. Chris Sale suppresses Boston; Braves lefties face Payton Tolle's limited sample in a pitcher-friendly Thursday environment.",
+        "description": "Fenway Park — -15% HR row with -1% combined runs, 65°F partially cloudy air, and 6 mph in-blowing wind despite high receptivity. Chris Sale suppresses Boston; Braves lefties face Payton Tolle's limited sample in a pitcher-friendly Thursday environment.",
         "rows": [
             row("Matt Olson", "L", "+440", 76, "🌕 💎", ["vs Tolle"], n("Matt Olson", "Tolle", "Tolle LHB sample is the Braves lefty lane at Fenway", "1 HR, 1 near-HR with 93.0 mph EV and 7.1% barrels"), "high"),
             row("Jorge Mateo", "R", "N/A", 61, "💎", ["vs Tolle"], n("Jorge Mateo", "Tolle", "1 HR in sample but no listed odds posted", "1 HR, 1 near-HR with 90.4 mph EV and 11.1% barrels versus Tolle")),
             row("Mauricio Dubon", "R", "+900", 62, "💎", ["vs Tolle"], n("Mauricio Dubon", "Tolle", "Tolle RHB split is the Braves righty angle", "0 HR, 1 near-HR with 91.0 mph EV in the pitch-mix window")),
             row("Wilyer Abreu", "L", "+820", 78, "⭐ 💎", ["vs Sale"], n("Wilyer Abreu", "Sale", "Sale LHB split is suppressive but Abreu carries 87.9 mph EV", "Worst Pickz favorite with 0 HR but 12.5% barrels and pull-side fit versus Sale"), "good"),
-            row("Jarren Duran", "L", "+880", 77, "💎", ["vs Sale"], n("Jarren Duran", "Sale", "lefty lane versus Sale despite Fenway's -18% HR drag", "0 HR with 93.0 mph EV and 57.1% hard-hit versus Sale"), "good"),
+            row("Jarren Duran", "L", "+880", 77, "💎", ["vs Sale"], n("Jarren Duran", "Sale", "lefty lane versus Sale despite Fenway's -15% HR drag", "0 HR with 93.0 mph EV and 57.1% hard-hit versus Sale"), "good"),
             row("Isiah Kiner-Falefa", "R", "+1700", 63, "💎", ["vs Sale"], n("Isiah Kiner-Falefa", "Sale", "Sale RHB split is the Red Sox righty longshot lane", "1 HR, 1 near-HR with 85.3 mph EV in a small sample")),
         ],
     },
     {
         "title": "TOR @ BAL - Patrick Corbin 🧤 (L, TOR) vs Chris Bassitt (R, BAL)",
-        "description": "Oriole Park — -22% HR row (slate-worst) with -6% runs, warm 70°F air, and 13 mph wind. Patrick Corbin's 0.27 vs-RHB HR risk keeps Baltimore righties live despite the brutal HR model.",
+        "description": "Oriole Park — -19% HR row (slate-worst) with -8% combined runs, clear 74°F air, and 10 mph wind. Patrick Corbin's 0.27 vs-RHB HR risk keeps Baltimore righties live despite the brutal HR model.",
         "rows": [
             row("Coby Mayo", "R", "+500", 86, "🌕 💣", ["vs Corbin"], n("Coby Mayo", "Corbin", "Corbin RHB HR leakage is the Orioles' clearest attack lane", "2 HR, 2 near-HR with 93.1 mph EV and 21.4% barrels"), "high"),
             row("Pete Alonso", "R", "+360", 85, "⭐ 🌕 💣", ["vs Corbin"], n("Pete Alonso", "Corbin", "Corbin RHB split plus Alonso's 97.1 mph EV peak", "Worst Pickz favorite with 0 HR, 1 near-HR and 22.2% barrels versus Corbin"), "high"),
@@ -153,12 +153,12 @@ games = [
             row("Adley Rutschman", "S", "+610", 67, "💎", ["vs Corbin"], n("Adley Rutschman", "Corbin", "switch lane versus Corbin's RHB weakness", "0 HR with 14.3% barrels and 88.8 mph EV versus Corbin")),
             row("Yohendrick Pinango", "L", "+840", 93, "🚀 ⭐ 🌕 💣", ["vs Bassitt"], n("Yohendrick Pinango", "Bassitt", "105.4 mph EV and 40.0% barrels versus Bassitt", "Worst Pickz favorite with 1 HR, 2 near-HR and slate-best EV in the window"), "high"),
             row("Ernie Clement", "R", "+1220", 69, "💎", ["vs Bassitt"], n("Ernie Clement", "Bassitt", "1 HR, 2 near-HR with pull-side air versus Bassitt", "1 HR, 2 near-HR with 78.5 mph EV and 15.4% barrels"), "good"),
-            row("Daulton Varsho", "L", "+500", 68, "💎", ["vs Bassitt"], n("Daulton Varsho", "Bassitt", "lefty lane versus Bassitt at Camden's -22% HR row", "0 HR with 86.8 mph EV and 41.7% hard-hit versus Bassitt")),
+            row("Daulton Varsho", "L", "+500", 68, "💎", ["vs Bassitt"], n("Daulton Varsho", "Bassitt", "lefty lane versus Bassitt at Camden's -19% HR row", "0 HR with 86.8 mph EV and 41.7% hard-hit versus Bassitt")),
         ],
     },
     {
         "title": "CHC @ PIT - Colin Rea 🧤 (R, CHC) vs Paul Skenes (R, PIT)",
-        "description": "PNC Park — -18% HR row with -3% runs, cooling 66°F air, and 9 mph wind. Colin Rea is the slate's top HR-risk arm (1.21, 1.70 vs RHB); Paul Skenes suppresses Chicago bats despite Pittsburgh's shallow right side.",
+        "description": "PNC Park — -15% HR row with -3% combined runs, clear 69°F air, and 11 mph wind. Colin Rea is the slate's top HR-risk arm (1.21, 1.70 vs RHB); Paul Skenes suppresses Chicago bats despite Pittsburgh's shallow right side.",
         "rows": [
             row("Brandon Lowe", "L", "+410", 96, "⭐ 🌕 💣", ["vs Rea"], n("Brandon Lowe", "Rea", "Rea is slate-high HR risk with 3 HR and 38.5% barrels in the window", "Worst Pickz favorite with 3 HR, 5 near-HR and 98.3 mph EV versus Rea"), "high"),
             row("Spencer Horwitz", "L", "+870", 81, "⭐ 💎", ["vs Rea"], n("Spencer Horwitz", "Rea", "Rea LHB leakage plus Horwitz's 2 HR in the sample", "Worst Pickz favorite with 2 HR, 2 near-HR, 88.0 mph EV and 30.0% barrels versus Rea"), "good"),

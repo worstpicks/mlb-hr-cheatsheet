@@ -91,7 +91,7 @@ TWO_LEG_HR = [
 
 STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width straight-of-day-card">
                     <h3>Worst Pickz Straight of the Day</h3>
-                    <p class="model-note summary-note">Two highest-conviction HR straight plays &mdash; Over 0.5 and Over 1.5 &mdash; rechecked against today&apos;s PropFinder HR-risk splits, contact form, park, and weather.</p>
+                    <p class="model-note summary-note">Our highest-rated HR straight picks on the slate.</p>
                     <div class="straight-picks-grid">
                         <div class="straight-pick-hero">
                             <span class="straight-pick-tag">Over 0.5 HR Straight</span>

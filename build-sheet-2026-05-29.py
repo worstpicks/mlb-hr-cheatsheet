@@ -32,6 +32,7 @@ FAVS = {
     "Shohei Ohtani (L)",
     "Kyle Schwarber (L)",
     "Bryce Harper (L)",
+    "Rafael Devers (L)",
 }
 
 PLAYER_TEAMS = {
@@ -108,6 +109,7 @@ PLAYER_TEAMS = {
     "Owen Caissie (L)": "MIA",
     "Patrick Wisdom (R)": "SEA",
     "Pete Crow-Armstrong (L)": "CHC",
+    "Rafael Devers (L)": "SF",
     "Ramon Laureano (R)": "SD",
     "Rhys Hoskins (R)": "CLE",
     "Richie Palacios (L)": "TB",
@@ -123,6 +125,7 @@ PLAYER_TEAMS = {
     "Spencer Torkelson (R)": "DET",
     "Tj Rumfield (L)": "COL",
     "Will Smith (R)": "LAD",
+    "Willy Adames (R)": "SF",
     "Willson Contreras (R)": "BOS",
     "Xavier Edwards (S)": "MIA",
     "Yandy Diaz (R)": "TB",
@@ -320,6 +323,8 @@ games = [
         "title": "SF @ COL - Logan Webb (R, SF) vs Michael Lorenzen 🧤 (R, COL)",
         "description": "Coors Field \u2014 slate-best +14% HR and +30% combined runs with 77\u00b0F air and 6 mph wind. Michael Lorenzen is a bum arm (1.24 HR risk, 2.29 vs LHB); Rockies bats are live despite Webb on the mound.",
         "rows": [
+            row("Willy Adames", "R", "+540", 84, "🌕 💣", ["vs Lorenzen"], """2 HR, 3 near-HR, 96.5 mph EV and 22.0% barrels. Draws opposing starter Lorenzen; Coors Field.""", blast="high"),
+            row("Rafael Devers", "L", "+380", 88, "⭐ 🌕 💣", ["vs Lorenzen"], """Worst Pickz favorite with 2 HR, 3 near-HR, 98.4 mph EV and 28.0% barrels. Draws opposing starter Lorenzen; Coors Field.""", blast="high"),
             row("Tj Rumfield", "L", "+880", 74, "💎", ["vs Webb"], """1 HR, 3 near-HR, 82.5 mph EV and 11.1% barrels. Draws opposing starter Webb; Coors Field.""", blast="good"),
             row("Hunter Goodman", "R", "+410", 78, "💎", ["vs Webb"], """1 HR, 1 near-HR, 89.8 mph EV and 11.1% barrels. Draws opposing starter Webb; Coors Field.""", blast="good"),
         ],

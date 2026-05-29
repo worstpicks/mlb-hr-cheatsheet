@@ -25,9 +25,9 @@ checks = [
     ("Holmes bum title", "Grant Holmes 🧤 (R, ATL)" in t),
     ("Fedde bum title", "Erick Fedde 🧤 (R, CWS)" in t),
     ("Sheet date meta", 'content="2026-05-29"' in t),
-    ("94 props count", "94 listed HR props" in t),
+    ("96 props count", "96 listed HR props" in t),
     ("15 games count", "15 games</strong>" in t),
-    ("24 favorites count", "24 Worst Pickz Favorite" in t),
+    ("25 favorites count", "25 Worst Pickz Favorite" in t),
     ("May 29 header", "Friday, May 29, 2026 — Worst Pickz HR cheat sheet" in t),
 ]
 

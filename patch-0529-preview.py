@@ -13,8 +13,8 @@ GAMES_BLOCK = (ROOT / "_games-0529.txt").read_text(encoding="utf-8-sig").strip()
 
 SHEET_DATE = "2026-05-29"
 TOTAL_GAMES = 15
-TOTAL_ROWS = 94
-TOTAL_FAVS = 24
+TOTAL_ROWS = 96
+TOTAL_FAVS = 25
 
 FAVS = [
     "Ben Rice (L)",
@@ -37,6 +37,7 @@ FAVS = [
     "Miguel Vargas (R)",
     "Mike Yastrzemski (L)",
     "Munetaka Murakami (L)",
+    "Rafael Devers (L)",
     "Rhys Hoskins (R)",
     "Salvador Perez (R)",
     "Shohei Ohtani (L)",

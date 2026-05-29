@@ -81,7 +81,8 @@ def assert_goblin_hr_parlays_distinct() -> None:
 
 assert_goblin_hr_parlays_distinct()
 
-STRAIGHT_OF_DAY = "Rhys Hoskins - Over 0.5 homerun"
+STRAIGHT_OF_DAY = "Brandon Lowe - Over 0.5 homerun"
+STRAIGHT_O15_DAY = "Spencer Horwitz - Over 1.5 homeruns"
 
 TWO_LEG_HR = [
     "Rhys Hoskins - Over 0.5 homerun",
@@ -90,23 +91,37 @@ TWO_LEG_HR = [
 
 STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width straight-of-day-card">
                     <h3>Worst Pickz Straight of the Day</h3>
-                    <p class="model-note summary-note">One HR straight play &mdash; the slate&apos;s highest-conviction lane when pitcher leakage, contact quality, park geometry, and weather all scream over.</p>
-                    <div class="straight-pick-hero">
-                        <div class="straight-pick-header">
-                            <strong class="straight-pick-name">Rhys Hoskins &mdash; Over 0.5 HR vs Brayan Bello</strong>
-                            <span class="straight-pick-meta">Listed +507 &middot; Score 88 &middot; BOS @ CLE</span>
+                    <p class="model-note summary-note">Two highest-conviction HR straight plays &mdash; Over 0.5 and Over 1.5 &mdash; rechecked against today&apos;s PropFinder HR-risk splits, contact form, park, and weather.</p>
+                    <div class="straight-picks-grid">
+                        <div class="straight-pick-hero">
+                            <span class="straight-pick-tag">Over 0.5 HR Straight</span>
+                            <div class="straight-pick-header">
+                                <strong class="straight-pick-name">Brandon Lowe &mdash; vs Taj Bradley</strong>
+                                <span class="straight-pick-meta">Listed +340 &middot; Score 92 &middot; MIN @ PIT</span>
+                            </div>
+                            <ul class="straight-pick-factors">
+                                <li><strong>Pitcher HR risk</strong><small>Bradley <strong>+0.66 vs LHB</strong> — lefties are the live side.</small></li>
+                                <li><strong>Recent form</strong><small>2 HR, 4 near-HR, 97.6 mph EV, 30.8% barrels.</small></li>
+                                <li><strong>Weather</strong><small>10 mph out-blowing wind at PNC supports lefty pull-side carry.</small></li>
+                            </ul>
+                            <div class="straight-pick-actions">
+                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add O0.5 Straight to Gambly</button>
+                            </div>
                         </div>
-                        <p class="straight-pick-lede">This is the straight where the contact profile is too loud to pass: Hoskins walks in with <strong>2 HR and 3 near-HR</strong> at a slate-leading <strong>101.1 mph EV</strong> and <strong>37.5% barrels</strong> &mdash; five batted-ball events that were either gone or screaming off the bat. That is not a hitter hunting a mistake; it is a righty repeatedly squaring up RHP and turning Bello&apos;s mix into elevated damage. The form says the next barrel clears the fence even at a neutral Progressive Field.</p>
-                        <ul class="straight-pick-factors">
-                            <li><strong>Pitcher matchup</strong><small>Hoskins draws <strong>Brayan Bello</strong> as a righty with pull-side power versus an RHP lane the board flags as live to hard contact; Bello is not a shutdown suppressor in this spot.</small></li>
-                            <li><strong>Recent form &amp; contact</strong><small>101.1 mph EV and 37.5% barrels lead the realistic-volume group on the slate &mdash; lasers, line drives, and warning-track fly outs that say the HR is already showing up in the batted-ball data.</small></li>
-                            <li><strong>Pitch-mix lane</strong><small>Righty versus RHP fastball/slider mix with the swing plane already producing elite barrel rate &mdash; the pitch profile Hoskins has been punishing all week.</small></li>
-                            <li><strong>Weather &amp; wind</strong><small>72&deg;F clear air with 5 mph wind at Progressive &mdash; enough carry support that 100+ mph elevated contact is not dying on the track.</small></li>
-                            <li><strong>Park &amp; environment</strong><small>Progressive is flat (+0% HR), so this straight is powered by contact quality, not park charity &mdash; when the EV and barrels are this loud, the park does not need to be Coors.</small></li>
-                            <li><strong>Why this straight</strong><small>Not the automatic #1 holistic score &mdash; this is the purest &ldquo;the data says he is hitting a homer today&rdquo; read on the board: elite EV, elite barrels, and five near-miss or over-the-fence events in the window.</small></li>
-                        </ul>
-                        <div class="straight-pick-actions">
-                            <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add Straight to Gambly</button>
+                        <div class="straight-pick-hero straight-pick-hero--o15">
+                            <span class="straight-pick-tag">Over 1.5 HR Straight</span>
+                            <div class="straight-pick-header">
+                                <strong class="straight-pick-name">Spencer Horwitz &mdash; vs Taj Bradley</strong>
+                                <span class="straight-pick-meta">Listed +730 &middot; Score 86 &middot; MIN @ PIT</span>
+                            </div>
+                            <ul class="straight-pick-factors">
+                                <li><strong>Pitcher HR risk</strong><small>Bradley <strong>+0.66 vs LHB</strong> — best platoon split for a 3-HR bat on the slate.</small></li>
+                                <li><strong>Multi-HR form</strong><small>3 HR, 3 near-HR, 87.4 mph EV, 30.8% barrels.</small></li>
+                                <li><strong>Weather</strong><small>10 mph out-blowing wind at PNC supports lefty pull-side carry.</small></li>
+                            </ul>
+                            <div class="straight-pick-actions">
+                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_O15_DAY])}'>Add O1.5 Straight to Gambly</button>
+                            </div>
                         </div>
                     </div>
                 </div>"""
@@ -118,7 +133,7 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Juan Soto HR</strong><small>6 HR, 7 near-HR, and 43.8% barrels versus Max Meyer at Citi Field.</small></li>
+                                <li><strong>Juan Soto HR</strong><small>6 HR, 7 near-HR, and 33.3% barrels versus Max Meyer at Citi Field.</small></li>
                                 <li><strong>Brandon Lowe HR</strong><small>2 HR, 4 near-HR, and 30.8% barrels versus Taj Bradley's LHB split.</small></li>
                                 <li><strong>Manny Machado HR</strong><small>100.5 mph EV and 16.7% barrels versus Andrew Alvarez at Nationals Park (+8% HR).</small></li>
                             </ol>
@@ -152,11 +167,11 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Top 5 Pitchers To Attack</h4>
                             <ol>
-                                <li><strong>Erick Fedde</strong><small>Slate-high HR risk (1.69); 3.65 HR/9 versus RHB at Rate Field.</small></li>
-                                <li><strong>Michael Lorenzen</strong><small>1.24 HR risk with 3.13 HR/9 versus LHB at Coors Field.</small></li>
-                                <li><strong>Grant Holmes</strong><small>1.21 HR risk; Reds righties and switch hitters get the GABP boost.</small></li>
+                                <li><strong>Erick Fedde</strong><small>Slate-high HR risk (1.67); 2.68 HR/9 with 1.94 vs RHB at Rate Field.</small></li>
+                                <li><strong>Michael Lorenzen</strong><small>1.24 HR risk with 2.29 vs LHB split at Coors Field.</small></li>
+                                <li><strong>Grant Holmes</strong><small>1.22 HR risk; Reds righties and switch hitters get the GABP boost.</small></li>
                                 <li><strong>Shota Imanaga</strong><small>1.04 HR risk with 2.12 HR/9 versus LHB; Jordan Walker is the Cardinal anchor.</small></li>
-                                <li><strong>Trevor Rogers</strong><small>0.80 HR risk with 0.84 versus RHB; Blue Jays righties live at Camden.</small></li>
+                                <li><strong>Trevor Rogers</strong><small>0.82 HR risk with 0.87 vs RHB; Blue Jays righties live at Camden.</small></li>
                             </ol>
                         </div>
                     </div>
@@ -166,7 +181,7 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                     <h3>Top 5 HR Tickets (Holistic)</h3>
                     <p class="model-note summary-note">Ranks blend batter damage, opposing starter HR leakage, park/weather, and listed price.</p>
                     <div class="top-five-list">
-                        <div class="top-five-item"><span>Juan Soto <small>6 HR, Meyer RHB split, 43.8% barrels</small></span><strong>95</strong></div>
+                        <div class="top-five-item"><span>Juan Soto <small>6 HR, Meyer RHB split, 33.3% barrels</small></span><strong>95</strong></div>
                         <div class="top-five-item"><span>Brandon Lowe <small>2 HR, Bradley LHB risk, 30.8% barrels</small></span><strong>92</strong></div>
                         <div class="top-five-item"><span>Kyle Schwarber <small>3 HR, Wrobleski LHB split, 30.0% barrels</small></span><strong>92</strong></div>
                         <div class="top-five-item"><span>Munetaka Murakami <small>2 HR versus Melton, 101.1 mph EV</small></span><strong>91</strong></div>

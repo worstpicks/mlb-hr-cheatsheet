@@ -1,0 +1,30 @@
+Matchup,TOR @ BAL
+Pitcher,Austin Voth
+Pitcher Team,TOR
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="0-1",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Second,="1-1",1.000,1.000,0.000,0,0,0,1,0.0,1.000,2.000
+Batting Third,="0-1",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Fourth,="0-2",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Fifth,="0-1",.000,.000,0.000,0,0,0,0,0.0,.500,.500
+Batting Sixth,="1-2",.500,1.000,0.500,0,1,0,1,0.0,.500,1.500
+Batting Seventh,="0-1",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Eighth,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,1.000,2.000
+Batting Ninth,="0-1",.000,.000,0.000,0,0,0,0,100.0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="30-124",.242,.347,0.105,2,7,0,13,20.3,22,.351,.698
+Gunnar Henderson LHB,Batting Second ​,="30-131",.229,.473,0.244,9,5,0,19,26.8,8,.282,.755
+Adley Rutschman SHB,Batting Third ​,="30-112",.268,.527,0.259,7,8,0,23,16.1,10,.331,.858
+Pete Alonso RHB,Batting Fourth ​,="32-131",.244,.481,0.237,8,7,0,24,20.0,13,.310,.791
+Tyler O'Neill RHB,Batting Fifth ​,="6-45",.133,.133,0.000,0,0,0,1,25.0,6,.250,.383
+Samuel Basallo LHB,Batting Fifth ​,="22-99",.222,.323,0.101,1,5,1,10,25.9,8,.278,.601
+Leody Taveras SHB,Batting Sixth ​,="23-78",.295,.410,0.115,1,6,0,9,17.8,9,.375,.785
+Colton Cowser LHB,Batting Seventh ​,="11-62",.177,.177,0.000,0,0,0,5,28.8,9,.278,.455
+Weston Wilson RHB,Batting Eighth ​,="6-21",.286,.429,0.143,1,0,0,1,20.8,3,.375,.804
+Coby Mayo RHB,Batting Eighth ​,="13-73",.178,.274,0.096,2,1,0,7,33.3,7,.259,.533
+Jackson Holliday LHB,Batting Eighth ​,="1-10",.100,.100,0.000,0,0,0,1,50.0,1,.167,.267
+Jeremiah Jackson RHB,Batting Ninth ​,="17-68",.250,.382,0.132,2,3,0,9,19.7,1,.254,.636
+Blaze Alexander RHB,Batting Ninth ​,="23-100",.230,.270,0.040,0,4,0,5,29.7,7,.287,.557

@@ -1,0 +1,30 @@
+Matchup,NYY @ ATH
+Pitcher,Carlos Rodon
+Pitcher Team,NYY
+Opposing Team,ATH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.2,1.80,="1-6",.167,.333,0.166,0,1,0,0,25.0,2,.375,.708
+Batting Second,1.0,5.00,="2-4",.500,.500,0.000,0,0,0,0,0.0,3,.714,1.214
+Batting Third,1.0,5.00,="2-5",.400,.600,0.200,0,1,0,1,25.0,3,.625,1.225
+Batting Fourth,1.2,0.60,="0-5",.000,.000,0.000,0,0,0,0,50.0,1,.167,.167
+Batting Fifth,1.0,2.00,="1-4",.250,.500,0.250,0,1,0,0,33.3,1,.500,1.000
+Batting Sixth,2.0,0.00,="0-6",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Seventh,1.2,0.60,="0-4",.000,.000,0.000,0,0,0,1,50.0,1,.167,.167
+Batting Eighth,1.1,1.50,="2-6",.333,.500,0.167,0,1,0,3,16.7,0,.333,.833
+Batting Ninth,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,20.0,0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nick Kurtz LHB,Batting First ​,="28-96",.292,.521,0.229,5,5,1,16,28.5,25,.447,.968
+Shea Langeliers RHB,Batting Second ​,="48-144",.333,.632,0.299,11,10,0,24,18.4,15,.405,1.037
+Colby Thomas RHB,Batting Third ​,="4-11",.364,.545,0.181,0,2,0,3,45.5,0,.364,.909
+Brent Rooker RHB,Batting Fourth ​,="26-122",.213,.402,0.189,7,2,0,24,29.8,16,.305,.707
+Tyler Soderstrom LHB,Batting Fourth ​,="15-73",.205,.425,0.220,3,7,0,11,9.6,9,.289,.714
+Carlos Cortes LHB,Batting Fifth ​,="10-35",.286,.400,0.114,0,2,1,3,11.1,1,.306,.706
+Jeff McNeil LHB,Batting Sixth ​,="16-44",.364,.477,0.113,1,2,0,4,6.1,4,.417,.894
+Zack Gelof RHB,Batting Sixth ​,="5-42",.119,.214,0.095,1,1,0,4,24.4,3,.178,.392
+Henry Bolte RHB,Batting Sixth ​,="4-16",.250,.250,0.000,0,0,0,0,25.0,0,.250,.500
+Jonah Heim SHB,Batting Eighth ​,="7-33",.212,.303,0.091,0,3,0,3,16.2,4,.297,.600
+Lawrence Butler LHB,Batting Eighth ​,="7-48",.146,.229,0.083,1,1,0,6,21.1,9,.281,.510
+Alika Williams RHB,Batting Ninth ​,="1-4",.250,.250,0.000,0,0,0,1,25.0,0,.250,.500
+Darell Hernaiz RHB,Batting Ninth ​,="11-44",.250,.273,0.023,0,1,0,1,6.1,3,.313,.586

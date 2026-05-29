@@ -1,0 +1,66 @@
+---
+description: MLB HR cheat sheet — start every slate by importing Downloads CSVs and using them for straights/HR risk
+alwaysApply: true
+---
+
+# MLB HR cheat sheet — slate workflow (always do this)
+
+When building, patching, auditing, or double-checking **any** daily MLB HR cheat sheet in this repo, **start by importing that slate's CSV exports** from Downloads. Do not skip this step.
+
+## Step 0 — Import slate CSVs (required)
+
+Run **before** building rows, Goblin parlays, or Straight of the Day picks:
+
+```powershell
+cd C:\Users\allmi\mlb-hr-cheatsheet-web
+python import-sheet-csvs.py --date YYYY-MM-DD
+```
+
+Shorthand dates work: `--date 05-29` → `2026-05-29`.
+
+Or use preview meta if the sheet date is already set:
+
+```powershell
+python import-sheet-csvs.py
+```
+
+Windows shortcut:
+
+```powershell
+.\start-slate.ps1 -Date 05-29
+```
+
+### What gets imported
+
+From `%USERPROFILE%\Downloads`, copy every `.csv` whose filename contains the slate date, e.g.:
+
+- `hr-targets-overall-2026-05-29.csv`
+- `hr-matchups-MIN-at-PIT-Taj-Bradley-2026-05-29.csv`
+
+Destination: `data/` + `data/manifest-YYYY-MM-DD.json`.
+
+**Do not** manually ask the user to paste CSVs if files exist in Downloads — run the import script yourself.
+
+## Step 0b — Use CSV data for straights & HR risk
+
+After import, validate Straight of the Day and platoon lanes against PropFinder splits:
+
+```powershell
+python recheck-straight.py --date YYYY-MM-DD --import
+```
+
+Rules when picking straights:
+
+- Match batter hand to pitcher **vs LHB** / **vs RHB** columns (positive split only).
+- Reject loud form on **negative** platoon splits (e.g. LHB vs Paddack -0.03, Soto vs Meyer -0.39).
+- O1.5 needs multi-HR form **and** positive split **and** park/wind support.
+
+Primary HR-risk file: `data/hr-targets-overall-YYYY-MM-DD.csv`.
+
+## Rest of slate checklist (after CSV import)
+
+1. `python build-sheet-YYYY-MM-DD.py` → `python patch-XXXX-preview.py`
+2. `python validate-index-matchups.py` — zero matchup errors
+3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)
+4. Goblin 3-leg vs Favorite 3-leg distinct (`python goblin_parlay_rules.py`)
+5. `python verify-deploy.py` before push — **only push when user asks**

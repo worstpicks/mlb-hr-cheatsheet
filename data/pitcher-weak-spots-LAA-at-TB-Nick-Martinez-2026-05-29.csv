@@ -1,0 +1,29 @@
+Matchup,LAA @ TB
+Pitcher,Nick Martinez
+Pitcher Team,TB
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.2,1.65,="8-28",.286,.429,0.143,0,4,0,0,9.7,3,.355,.784
+Batting Second,6.0,2.00,="10-28",.357,.536,0.179,1,2,0,2,9.7,2,.419,.955
+Batting Third,8.0,0.88,="6-29",.207,.241,0.034,0,1,0,1,13.3,1,.233,.474
+Batting Fourth,6.1,1.26,="7-27",.259,.407,0.148,1,1,0,1,21.4,1,.286,.693
+Batting Fifth,7.1,0.68,="5-27",.185,.222,0.037,0,1,0,0,14.8,0,.185,.407
+Batting Sixth,6.2,1.05,="6-24",.250,.375,0.125,0,1,1,1,11.5,1,.280,.655
+Batting Seventh,6.0,1.33,="7-24",.292,.500,0.208,1,2,0,2,20.0,1,.320,.820
+Batting Eighth,6.2,0.60,="2-21",.095,.095,0.000,0,0,0,0,17.4,2,.174,.269
+Batting Ninth,5.1,0.75,="3-18",.167,.333,0.166,1,0,0,2,19.0,1,.238,.571
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="48-214",.224,.421,0.197,9,13,1,24,30.6,29,.327,.748
+Mike Trout RHB,Batting Second ​,="47-197",.239,.487,0.248,13,10,0,30,23.4,52,.405,.892
+Vaughn Grissom RHB,Batting Third ​,="10-40",.250,.400,0.150,1,3,0,14,13.6,2,.273,.673
+Jorge Soler RHB,Batting Fourth ​,="41-191",.215,.403,0.188,9,9,0,31,32.3,20,.295,.698
+Wade Meckler LHB,Batting Fifth ​,="2-11",.182,.182,0.000,0,0,0,0,18.2,0,.182,.364
+Jo Adell RHB,Batting Sixth ​,="25-98",.255,.357,0.102,2,4,0,7,27.5,2,.284,.641
+Oswald Peraza RHB,Batting Sixth ​,="8-42",.190,.238,0.048,0,0,1,0,23.4,1,.277,.515
+Jose Siri RHB,Batting Seventh ​,="0-6",.000,.000,0.000,0,0,0,0,66.7,0,.000,.000
+Sebastián Rivero RHB,Batting Eighth ​,="4-34",.118,.118,0.000,0,0,0,1,18.9,2,.167,.285
+Logan O'Hoppe RHB,Batting Eighth ​,="18-87",.207,.253,0.046,1,1,0,8,25.5,8,.286,.539
+Donovan Walton LHB,Batting Ninth ​,="3-11",.273,.273,0.000,0,0,0,0,16.7,1,.333,.606
+Adam Frazier LHB,Batting Ninth ​,="15-65",.231,.369,0.138,1,4,1,5,29.3,7,.315,.684

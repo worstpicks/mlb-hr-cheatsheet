@@ -1,0 +1,30 @@
+Matchup,KC @ TEX
+Pitcher,Stephen Kolek
+Pitcher Team,KC
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,1.00,="2-12",.167,.250,0.083,0,1,0,0,7.7,1,.231,.481
+Batting Second,3.1,0.90,="1-11",.091,.091,0.000,0,0,0,0,15.4,2,.231,.322
+Batting Third,3.1,0.90,="2-11",.182,.182,0.000,0,0,0,1,0.0,1,.250,.432
+Batting Fourth,3.1,0.60,="1-11",.091,.091,0.000,0,0,0,0,16.7,1,.167,.258
+Batting Fifth,1.2,3.60,="6-11",.545,1.182,0.637,2,1,0,6,18.2,0,.545,1.727
+Batting Sixth,2.0,1.50,="3-9",.333,.333,0.000,0,0,0,0,0.0,0,.400,.733
+Batting Seventh,3.1,0.00,="0-9",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Eighth,3.0,0.33,="1-9",.111,.111,0.000,0,0,0,0,11.1,0,.111,.222
+Batting Ninth,3.0,0.33,="1-9",.111,.444,0.333,1,0,0,1,33.3,0,.111,.555
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Brandon Nimmo LHB,Batting First ​,="42-152",.276,.414,0.138,4,7,1,12,19.1,17,.358,.772
+Jake Burger RHB,Batting Fourth ​,="24-109",.220,.394,0.174,5,4,0,14,31.3,5,.261,.655
+Josh Jung RHB,Batting Fourth ​,="25-71",.352,.535,0.183,3,4,0,7,11.7,5,.403,.938
+Joc Pederson LHB,Batting Fifth ​,="12-54",.222,.352,0.130,2,1,0,4,25.4,6,.302,.654
+Evan Carter LHB,Batting Sixth ​,="10-50",.200,.420,0.220,3,0,1,8,24.1,4,.259,.679
+Alejandro Osuna LHB,Batting Seventh ​,="6-26",.231,.269,0.038,0,1,0,5,21.9,3,.375,.644
+Danny Jansen RHB,Batting Eighth ​,="7-40",.175,.225,0.050,0,2,0,1,21.3,3,.283,.508
+Kyle Higashioka RHB,Batting Ninth ​,="4-26",.154,.385,0.231,2,0,0,5,25.8,4,.290,.675
+Sam Haggerty SHB,Batting Ninth ​,="3-16",.188,.250,0.062,0,1,0,0,43.8,0,.188,.438
+Nicky Lopez LHB,Batting Ninth ​,="0-6",.000,.000,0.000,0,0,0,0,14.3,1,.143,.143
+Ezequiel Duran RHB,Batting Ninth ​,="11-39",.282,.436,0.154,1,3,0,4,17.8,6,.378,.814
+Justin Foscue RHB,Batting Ninth ​,="3-14",.214,.429,0.215,1,0,0,1,28.6,0,.214,.643
+Michael Helman RHB,Batting Ninth ​,="1-8",.125,.125,0.000,0,0,0,0,37.5,0,.125,.250

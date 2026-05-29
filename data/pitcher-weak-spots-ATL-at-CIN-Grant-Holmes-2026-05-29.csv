@@ -1,0 +1,30 @@
+Matchup,ATL @ CIN
+Pitcher,Grant Holmes
+Pitcher Team,ATL
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.2,2.29,="8-25",.320,.480,0.160,1,1,0,2,16.7,5,.433,.913
+Batting Second,6.1,1.42,="5-23",.217,.478,0.261,2,0,0,4,25.9,4,.333,.811
+Batting Third,7.0,1.00,="5-25",.200,.480,0.280,2,1,0,4,25.9,2,.259,.739
+Batting Fourth,7.0,0.71,="4-24",.167,.333,0.166,1,1,0,3,15.4,1,.192,.525
+Batting Fifth,4.2,2.14,="6-20",.300,.600,0.300,2,0,0,4,29.2,4,.417,1.017
+Batting Sixth,5.1,1.50,="6-22",.273,.409,0.136,0,1,1,0,16.7,2,.333,.742
+Batting Seventh,6.1,0.63,="1-20",.050,.050,0.000,0,0,0,3,13.0,3,.174,.224
+Batting Eighth,5.2,0.88,="4-21",.190,.381,0.191,1,1,0,2,31.8,1,.227,.608
+Batting Ninth,4.1,1.62,="5-18",.278,.389,0.111,0,2,0,0,20.0,2,.350,.739
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dane Myers RHB,Batting First ​,="8-35",.229,.514,0.285,3,1,0,6,32.6,7,.372,.886
+TJ Friedl LHB,Batting First ​,="26-137",.190,.277,0.087,2,6,0,7,22.6,12,.270,.547
+Blake Dunn RHB,Batting First ​,="6-20",.300,.300,0.000,0,0,0,1,22.7,1,.364,.664
+JJ Bleday LHB,Batting Second ​,="7-27",.259,.630,0.371,3,1,0,5,20.0,3,.333,.963
+Matt McLain RHB,Batting Second ​,="23-117",.197,.299,0.102,2,6,0,9,26.8,19,.319,.618
+Elly De La Cruz SHB,Batting Third ​,="49-168",.292,.518,0.226,10,8,0,29,28.0,17,.355,.873
+Sal Stewart RHB,Batting Fourth ​,="47-177",.266,.503,0.237,11,9,0,33,19.0,25,.356,.859
+Eugenio Suarez RHB,Batting Fifth ​,="25-105",.238,.371,0.133,3,5,0,13,28.8,13,.322,.693
+Nathaniel Lowe LHB,Batting Sixth ​,="17-57",.298,.509,0.211,2,6,0,12,19.4,10,.403,.912
+Spencer Steer RHB,Batting Sixth ​,="18-91",.198,.319,0.121,3,2,0,6,28.8,9,.288,.607
+Tyler Stephenson RHB,Batting Seventh ​,="11-65",.169,.277,0.108,2,1,0,10,32.5,11,.286,.563
+Will Benson LHB,Batting Seventh ​,="8-31",.258,.452,0.194,1,1,1,2,25.6,7,.395,.847
+P.J. Higgins RHB,Batting Ninth ​,="4-14",.286,.286,0.000,0,0,0,3,31.3,1,.313,.599

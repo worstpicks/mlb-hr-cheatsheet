@@ -1,0 +1,30 @@
+Matchup,BOS @ CLE
+Pitcher,Slade Cecconi
+Pitcher Team,CLE
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.0,2.00,="10-28",.357,.643,0.286,2,2,0,8,21.9,2,.438,1.081
+Batting Second,6.2,2.10,="8-26",.308,.538,0.230,2,0,0,3,18.8,6,.438,.976
+Batting Third,8.0,1.25,="9-30",.300,.433,0.133,1,1,0,3,19.4,1,.323,.756
+Batting Fourth,5.2,2.29,="10-26",.385,.692,0.307,2,2,0,6,16.7,3,.433,1.125
+Batting Fifth,7.2,0.78,="5-27",.185,.333,0.148,1,1,0,2,24.1,1,.241,.574
+Batting Sixth,6.2,1.05,="6-26",.231,.269,0.038,0,1,0,3,18.5,1,.259,.528
+Batting Seventh,4.2,2.57,="10-21",.476,.667,0.191,1,1,0,4,0.0,2,.480,1.147
+Batting Eighth,5.2,1.24,="5-22",.227,.273,0.046,0,1,0,1,12.5,2,.292,.565
+Batting Ninth,6.1,0.63,="2-21",.095,.143,0.048,0,1,0,2,34.8,2,.174,.317
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jarren Duran LHB,Batting First ​,="29-133",.218,.421,0.203,7,4,1,18,26.0,10,.281,.702
+Ceddanne Rafaela RHB,Batting Second ​,="9-40",.225,.350,0.125,1,2,0,4,14.0,2,.279,.629
+Mickey Gasper SHB,Batting Second ​,="8-28",.286,.286,0.000,0,0,0,1,20.0,0,.310,.596
+Wilyer Abreu LHB,Batting Third ​,="27-103",.262,.369,0.107,2,5,0,8,18.9,6,.300,.669
+Masataka Yoshida LHB,Batting Third ​,="7-33",.212,.273,0.061,0,2,0,1,10.8,3,.297,.570
+Willson Contreras RHB,Batting Fourth ​,="31-110",.282,.482,0.200,5,3,2,18,26.0,9,.358,.840
+Andruw Monasterio RHB,Batting Sixth ​,="6-22",.273,.318,0.045,0,1,0,2,27.3,0,.273,.591
+Nick Sogard SHB,Batting Sixth ​,="5-19",.263,.368,0.105,0,0,1,1,17.4,4,.391,.759
+Marcelo Mayer LHB,Batting Seventh ​,="20-88",.227,.330,0.103,1,6,0,7,15.8,9,.300,.630
+Connor Wong RHB,Batting Eighth ​,="9-46",.196,.261,0.065,0,3,0,7,29.6,4,.288,.549
+Carlos Narvaez RHB,Batting Eighth ​,="15-72",.208,.292,0.084,1,3,0,1,29.6,6,.288,.580
+Isiah Kiner-Falefa RHB,Batting Ninth ​,="10-45",.222,.311,0.089,1,1,0,8,14.3,4,.286,.597
+Caleb Durbin RHB,Batting Ninth ​,="8-56",.143,.179,0.036,0,2,0,6,15.0,2,.186,.365

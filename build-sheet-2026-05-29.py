@@ -183,7 +183,7 @@ def add_bum_row_emojis(entry):
 games = [
     {
         "title": "ATL @ CIN - Grant Holmes 🧤 (R, ATL) vs Chris Paddack (R, CIN)",
-        "description": "Great American Ball Park \u2014 Ballpark Pal grades +9% HR and +13% combined runs with 75\u00b0F partially cloudy air and 2 mph wind. Grant Holmes carries 1.21 HR risk; Chris Paddack is attackable to both splits at the smallest outfield in MLB.",
+        "description": "Great American Ball Park \u2014 Ballpark Pal grades +9% HR and +13% combined runs with 75\u00b0F partially cloudy air and 2 mph wind. Grant Holmes carries 1.22 HR risk; Chris Paddack is attackable to both splits at the smallest outfield in MLB.",
         "rows": [
             row("Michael Harris II", "L", "+311", 88, "🌕 💣", ["vs Paddack"], """3 HR, 4 near-HR, 90.1 mph EV and 18.8% barrels. Draws opposing starter Paddack; Great American Ball Park.""", blast="high"),
             row("Austin Riley", "R", "+360", 86, "🌕 💣", ["vs Paddack"], """2 HR, 2 near-HR, 95.6 mph EV and 14.3% barrels. Draws opposing starter Paddack; Great American Ball Park.""", blast="high"),
@@ -197,7 +197,7 @@ games = [
     },
     {
         "title": "SD @ WSH - Lucas Giolito (R, SD) vs Andrew Alvarez (L, WSH)",
-        "description": "Nationals Park \u2014 +8% HR row with +6% combined runs, 75\u00b0F clear air, and 7 mph wind. Lucas Giolito suppresses (-1.62 HR risk); Nationals bats get the cleaner attack lane versus Alvarez.",
+        "description": "Nationals Park \u2014 +8% HR row with +6% combined runs, 75\u00b0F clear air, and 7 mph wind. Lucas Giolito suppresses (-1.58 HR risk); Nationals bats get the cleaner attack lane versus Alvarez.",
         "rows": [
             row("Ramon Laureano", "R", "+500", 74, "💎", ["vs Alvarez"], """0 HR, 91.3 mph EV. Draws opposing starter Alvarez; Nationals Park."""),
             row("Manny Machado", "R", "+470", 90, "🚀 🌕 💣", ["vs Alvarez"], """1 HR, 1 near-HR, 100.5 mph EV and 16.7% barrels. Draws opposing starter Alvarez; Nationals Park.""", blast="high"),
@@ -222,7 +222,7 @@ games = [
     },
     {
         "title": "TOR @ BAL - Austin Voth (R, TOR) vs Trevor Rogers (L, BAL)",
-        "description": "Oriole Park \u2014 +1% HR row with 74\u00b0F clear air and 6 mph L-R crosswind. Trevor Rogers owns a 0.84 vs-RHB HR risk split; Baltimore righties are the premium attack lane.",
+        "description": "Oriole Park \u2014 +1% HR row with 74\u00b0F clear air and 6 mph L-R crosswind. Trevor Rogers owns a 0.87 vs-RHB HR risk split; Baltimore righties are the premium attack lane.",
         "rows": [
             row("George Springer", "R", "N/A", 76, "⭐ 💎", ["vs Rogers"], """Worst Pickz favorite with 1 HR, 2 near-HR, 94.5 mph EV and 16.7% barrels. Draws opposing starter Rogers; Oriole Park.""", blast="good"),
             row("Kazuma Okamoto", "R", "N/A", 70, "⭐ 💎", ["vs Rogers"], """Worst Pickz favorite with 1 HR, 1 near-HR, 83.4 mph EV and 16.7% barrels. Draws opposing starter Rogers; Oriole Park."""),
@@ -234,15 +234,15 @@ games = [
     },
     {
         "title": "LAA @ TB - Walbert Urena (R, LAA) vs Nick Martinez (R, TB)",
-        "description": "Tropicana Field \u2014 closed dome, flat +0% HR row. Nick Martinez suppresses overall (-0.70 HR risk); Angels bats lean on form and Trout BvP history.",
+        "description": "Tropicana Field \u2014 closed dome, flat +0% HR row. Nick Martinez suppresses overall (-0.67 HR risk); Angels bats lean on form and Trout BvP history.",
         "rows": [
             row("Zach Neto", "R", "+450", 87, "🌕 💣", ["vs Martinez"], """3 HR, 4 near-HR, 92.5 mph EV and 27.8% barrels. Draws opposing starter Martinez; Tropicana Field.""", blast="high"),
             row("Jo Adell", "R", "+496", 81, "⭐ 💎", ["vs Martinez"], """Worst Pickz favorite with 1 HR, 3 near-HR, 95.5 mph EV and 23.1% barrels. Draws opposing starter Martinez; Tropicana Field.""", blast="good"),
             row("Mike Trout", "R", "+363", 79, "💎 📜", ["vs Martinez"], """1 HR, 1 near-HR, 89.7 mph EV and 12.5% barrels; 25 AB BvP versus Martinez. Draws opposing starter Martinez; Tropicana Field.""", blast="good"),
-            row("Yandy Diaz", "R", "+710", 83, "💎", ["vs Urena"], """2 HR, 3 near-HR, 91.3 mph EV and 26.7% barrels. Draws opposing starter Urena; Tropicana Field.""", blast="good"),
-            row("Hunter Feduccia", "L", "+1360", 68, "💎", ["vs Urena"], """1 HR, 3 near-HR, 89.5 mph EV and 11.1% barrels. Draws opposing starter Urena; Tropicana Field."""),
-            row("Jonathan Aranda", "L", "+578", 82, "⭐ 💎", ["vs Urena"], """Worst Pickz favorite with 0 HR, 2 near-HR, 98.9 mph EV and 22.2% barrels. Draws opposing starter Urena; Tropicana Field.""", blast="good"),
-            row("Richie Palacios", "L", "+1300", 66, "💎", ["vs Urena"], """0 HR, 1 near-HR, 91.3 mph EV and 8.3% barrels. Draws opposing starter Urena; Tropicana Field."""),
+            row("Yandy Diaz", "R", "+710", 83, "💎", ["vs Urena"], """3 HR, 5 near-HR, 92.1 mph EV and 21.7% barrels. Draws opposing starter Urena; Tropicana Field.""", blast="good"),
+            row("Hunter Feduccia", "L", "+1360", 68, "💎", ["vs Urena"], """1 HR, 3 near-HR, 84.8 mph EV and 6.2% barrels. Draws opposing starter Urena; Tropicana Field."""),
+            row("Jonathan Aranda", "L", "+578", 82, "⭐ 💎", ["vs Urena"], """Worst Pickz favorite with 1 HR, 5 near-HR, 94.1 mph EV and 26.1% barrels. Draws opposing starter Urena; Tropicana Field.""", blast="good"),
+            row("Richie Palacios", "L", "+1300", 66, "💎", ["vs Urena"], """0 HR, 1 near-HR, 89.7 mph EV and 4.2% barrels. Draws opposing starter Urena; Tropicana Field."""),
         ],
     },
     {
@@ -252,8 +252,8 @@ games = [
             row("Owen Caissie", "L", "+760", 84, "💎", ["vs Peralta"], """1 HR, 1 near-HR, 97.6 mph EV and 33.3% barrels. Draws opposing starter Peralta; Citi Field.""", blast="good"),
             row("Xavier Edwards", "S", "+1300", 62, "💎", ["vs Peralta"], """0 HR, 84.3 mph EV and 5.6% barrels. Draws opposing starter Peralta; Citi Field."""),
             row("Heriberto Hernandez", "R", "N/A", 80, "💎", ["vs Peralta"], """1 HR, 1 near-HR, 96.3 mph EV and 18.2% barrels. Draws opposing starter Peralta; Citi Field.""", blast="good"),
-            row("Juan Soto", "L", "+350", 95, "⭐ 🌕 💣", ["vs Meyer"], """Worst Pickz favorite with 6 HR, 7 near-HR, 99.2 mph EV and 43.8% barrels. Draws opposing starter Meyer; Citi Field.""", blast="high"),
-            row("AJ Ewing", "L", "+790", 71, "💎", ["vs Meyer"], """0 HR, 90.8 mph EV and 9.1% barrels. Draws opposing starter Meyer; Citi Field."""),
+            row("Juan Soto", "L", "+350", 95, "⭐ 🌕 💣", ["vs Meyer"], """Worst Pickz favorite with 6 HR, 7 near-HR, 93.9 mph EV and 33.3% barrels. Draws opposing starter Meyer; Citi Field.""", blast="high"),
+            row("AJ Ewing", "L", "+790", 71, "💎", ["vs Meyer"], """0 HR, 89.9 mph EV and 6.7% barrels. Draws opposing starter Meyer; Citi Field."""),
             row("Jared Young", "L", "N/A", 73, "💎", ["vs Meyer"], """0 HR, 1 near-HR, 88.8 mph EV and 33.3% barrels. Draws opposing starter Meyer; Citi Field."""),
         ],
     },
@@ -271,19 +271,19 @@ games = [
     },
     {
         "title": "CHC @ STL - Shota Imanaga 🧤 (L, CHC) vs Kyle Leahy (R, STL)",
-        "description": "Busch Stadium \u2014 slate-harsh -15% HR row with -9% combined runs, 78\u00b0F overcast, and 19% rain risk. Shota Imanaga is a bum arm (1.04 HR risk, 1.69 vs LHB); Cardinals lefties are the clearest attack lane.",
+        "description": "Busch Stadium \u2014 slate-harsh -15% HR row with -9% combined runs, 78\u00b0F overcast, and 19% rain risk. Shota Imanaga is a bum arm (1.04 HR risk, 1.68 vs LHB); Cardinals lefties are the clearest attack lane.",
         "rows": [
             row("Ian Happ", "S", "+525", 76, "💎", ["vs Leahy"], """1 HR, 1 near-HR, 87.9 mph EV and 14.3% barrels. Draws opposing starter Leahy; Busch Stadium.""", blast="good"),
             row("Michael Conforto", "L", "N/A", 72, "💎", ["vs Leahy"], """0 HR, 1 near-HR, 89.4 mph EV. Draws opposing starter Leahy; Busch Stadium."""),
             row("Pete Crow-Armstrong", "L", "+525", 79, "💎", ["vs Leahy"], """1 HR, 2 near-HR, 93.7 mph EV and 16.7% barrels. Draws opposing starter Leahy; Busch Stadium.""", blast="good"),
-            row("Jordan Walker", "R", "+410", 86, "🚀 ⭐ 🌕 💣", ["vs Imanaga"], """Worst Pickz favorite with 1 HR, 2 near-HR, 101.8 mph EV and 25.0% barrels. Draws opposing starter Imanaga; Busch Stadium.""", blast="high"),
+            row("Jordan Walker", "R", "+410", 86, "⭐ 🌕 💣", ["vs Imanaga"], """Worst Pickz favorite with 1 HR, 2 near-HR, 96.3 mph EV and 11.8% barrels. Draws opposing starter Imanaga; Busch Stadium.""", blast="high"),
             row("Nolan Gorman", "L", "N/A", 68, "💎", ["vs Imanaga"], """0 HR, 1 near-HR, 86.6 mph EV and 14.3% barrels. Draws opposing starter Imanaga; Busch Stadium."""),
-            row("JJ Wetherholt", "L", "+590", 75, "💎", ["vs Imanaga"], """0 HR, 1 near-HR, 97.5 mph EV and 16.7% barrels. Draws opposing starter Imanaga; Busch Stadium.""", blast="good"),
+            row("JJ Wetherholt", "L", "+590", 75, "💎", ["vs Imanaga"], """0 HR, 1 near-HR, 91.6 mph EV and 15.4% barrels. Draws opposing starter Imanaga; Busch Stadium.""", blast="good"),
         ],
     },
     {
         "title": "DET @ CWS - Troy Melton (R, DET) vs Erick Fedde 🧤 (R, CWS)",
-        "description": "Rate Field \u2014 -2% HR row with -4% combined runs, cool 66\u00b0F air, and 7 mph wind. Erick Fedde is the slate's top HR-risk arm (1.69, 1.94 vs RHB); Tigers bats are the premium attack lane versus Fedde.",
+        "description": "Rate Field \u2014 -2% HR row with -4% combined runs, cool 66\u00b0F air, and 7 mph wind. Erick Fedde is the slate's top HR-risk arm (1.67, 1.94 vs RHB); Tigers bats are the premium attack lane versus Fedde.",
         "rows": [
             row("Riley Greene", "L", "+410", 84, "💎 📜", ["vs Fedde"], """0 HR, 97.9 mph EV and 10.0% barrels; 7 AB BvP versus Fedde. Draws opposing starter Fedde; Rate Field.""", blast="good"),
             row("Spencer Torkelson", "R", "+500", 72, "💎", ["vs Fedde"], """0 HR, 1 near-HR, 88.4 mph EV and 12.5% barrels. Draws opposing starter Fedde; Rate Field."""),
@@ -305,7 +305,7 @@ games = [
     },
     {
         "title": "MIL @ HOU - Coleman Crow (R, MIL) vs Kai-Wei Teng (R, HOU)",
-        "description": "Daikin Park \u2014 roof closed, -4% combined runs despite 87\u00b0F air. Coleman Crow suppresses (-1.09 HR risk); Houston bats get the cleaner attack lane versus Crow.",
+        "description": "Daikin Park \u2014 roof closed, -4% combined runs despite 87\u00b0F air. Coleman Crow suppresses (-1.04 HR risk); Houston bats get the cleaner attack lane versus Crow.",
         "rows": [
             row("Jackson Chourio", "R", "+490", 83, "⭐ 💎", ["vs Teng"], """Worst Pickz favorite with 0 HR, 1 near-HR, 99.7 mph EV and 35.7% barrels. Draws opposing starter Teng; Daikin Park.""", blast="good"),
             row("Christian Yelich", "L", "+590", 76, "💎", ["vs Teng"], """1 HR, 1 near-HR, 92.0 mph EV and 10.0% barrels. Draws opposing starter Teng; Daikin Park.""", blast="good"),
@@ -318,7 +318,7 @@ games = [
     },
     {
         "title": "SF @ COL - Logan Webb (R, SF) vs Michael Lorenzen 🧤 (R, COL)",
-        "description": "Coors Field \u2014 slate-best +14% HR and +30% combined runs with 77\u00b0F air and 6 mph wind. Michael Lorenzen is a bum arm (1.24 HR risk, 2.32 vs LHB); Rockies bats are live despite Webb on the mound.",
+        "description": "Coors Field \u2014 slate-best +14% HR and +30% combined runs with 77\u00b0F air and 6 mph wind. Michael Lorenzen is a bum arm (1.24 HR risk, 2.29 vs LHB); Rockies bats are live despite Webb on the mound.",
         "rows": [
             row("Tj Rumfield", "L", "+880", 74, "💎", ["vs Webb"], """1 HR, 3 near-HR, 82.5 mph EV and 11.1% barrels. Draws opposing starter Webb; Coors Field.""", blast="good"),
             row("Hunter Goodman", "R", "+410", 78, "💎", ["vs Webb"], """1 HR, 1 near-HR, 89.8 mph EV and 11.1% barrels. Draws opposing starter Webb; Coors Field.""", blast="good"),
@@ -354,7 +354,7 @@ games = [
     },
     {
         "title": "PHI @ LAD - Zack Wheeler (R, PHI) vs Justin Wrobleski (L, LAD)",
-        "description": "Dodger Stadium \u2014 +6% HR row with 63\u00b0F clear air and consistent 11 mph out-blowing wind. Zack Wheeler suppresses (-0.72 HR risk); Dodgers lefties are the premium attack lane versus Wrobleski.",
+        "description": "Dodger Stadium \u2014 +6% HR row with 63\u00b0F clear air and consistent 11 mph out-blowing wind. Zack Wheeler suppresses (-0.68 HR risk); Dodgers lefties are the premium attack lane versus Wrobleski.",
         "rows": [
             row("Kyle Schwarber", "L", "+290", 92, "⭐ 🌕 💣", ["vs Wrobleski"], """Worst Pickz favorite with 3 HR, 3 near-HR, 95.1 mph EV and 30.0% barrels. Draws opposing starter Wrobleski; Dodger Stadium.""", blast="high"),
             row("Bryce Harper", "L", "+500", 80, "⭐ 💎", ["vs Wrobleski"], """Worst Pickz favorite with 0 HR, 2 near-HR, 95.4 mph EV and 22.2% barrels. Draws opposing starter Wrobleski; Dodger Stadium.""", blast="good"),

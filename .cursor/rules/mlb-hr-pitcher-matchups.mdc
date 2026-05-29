@@ -8,6 +8,8 @@ alwaysApply: false
 
 Before shipping or patching any sheet:
 
+0. **Import slate CSVs from Downloads (required)** — See always-on rule `mlb-hr-slate-workflow.mdc`. Run `python import-sheet-csvs.py --date YYYY-MM-DD` before building or picking straights. Then `python recheck-straight.py --import` for HR-risk validation.
+
 1. **Opposing SP only** — Away batters face the **home** starter; home batters face the **away** starter. Never assign `vs` chips or notes to a batter's **own** team's pitcher. Parse game titles by team code in `(hand, TEAM)`, not by name order in the title.
 
 2. **Double-check every row** — Run `python validate-index-matchups.py` on `preview/index.html`. Fix with `python fix-batter-vs-pitcher.py` (updates build source + index). Re-run validation until zero errors.

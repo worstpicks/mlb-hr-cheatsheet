@@ -6,6 +6,10 @@ import goblin_parlay_rules as gpr
 t = Path("preview/index.html").read_text(encoding="utf-8")
 
 checks = [
+    ("Straight of the Day section", "Worst Pickz Straight of the Day" in t),
+    ("Straight pick Hoskins", "Rhys Hoskins &mdash; Over 0.5 HR vs Brayan Bello" in t),
+    ("Straight Gambly line", "Rhys Hoskins - Over 0.5 homerun" in t),
+    ("2-leg Hoskins/Lowe", all(x in t for x in ("Rhys Hoskins HR</strong><small>101.1 mph", "Brandon Lowe HR</strong><small>2 HR, 4 near-HR"))),
     ("3-leg Soto/Lowe/Machado", all(x in t for x in ("Juan Soto HR</strong><small>6 HR", "Brandon Lowe HR</strong><small>2 HR", "Manny Machado HR</strong><small>100.5 mph"))),
     ("Top5 Soto 95", "Juan Soto <small>6 HR, Meyer RHB split, 43.8% barrels</small></span><strong>95</strong>" in t),
     ("Weather section title", "<h3>Top 5 Weather Games</h3>" in t),

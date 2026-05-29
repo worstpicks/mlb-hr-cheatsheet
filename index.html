@@ -216,6 +216,21 @@
         .summary-section { padding: 14px; background: linear-gradient(135deg, rgba(19,11,8,0.88) 0%, rgba(10,17,31,0.90) 100%); border-bottom: 1px solid rgba(251,146,60,0.16); }
         .summary-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         .summary-card.full-width, .emoji-key-card { grid-column: 1 / -1; }
+        .straight-of-day-card {
+            border: 2px solid rgba(244, 63, 94, 0.55);
+            background: linear-gradient(135deg, rgba(76, 5, 25, 0.96) 0%, rgba(15, 23, 42, 0.94) 48%, rgba(40, 18, 10, 0.92) 100%);
+            box-shadow: 0 0 0 1px rgba(251, 113, 133, 0.18), 0 18px 40px rgba(190, 18, 60, 0.14);
+        }
+        .straight-of-day-card h3 { color: #fecdd3; }
+        .straight-pick-hero { border-radius: 16px; padding: 16px; background: rgba(8, 15, 28, 0.82); border: 1px solid rgba(251, 113, 133, 0.24); }
+        .straight-pick-header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+        .straight-pick-name { color: #fff1f2; font-size: 1.28rem; letter-spacing: 0.02em; }
+        .straight-pick-meta { color: #fda4af; font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+        .straight-pick-lede { color: #f8fafc; line-height: 1.55; font-size: 0.96rem; margin: 0 0 12px 0; }
+        .straight-pick-factors { margin: 0; padding-left: 1.15rem; display: grid; gap: 8px; color: #e2e8f0; font-size: 0.9rem; line-height: 1.45; }
+        .straight-pick-factors strong { color: #fecdd3; }
+        .straight-pick-factors small { display: block; color: #cbd5e1; font-weight: 600; margin-top: 2px; }
+        .straight-pick-actions { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
         .top-five-card { border: 2px solid rgba(250,204,21,0.35); background: linear-gradient(135deg, rgba(40,18,10,0.96) 0%, rgba(17,24,39,0.93) 52%, rgba(16,38,30,0.90) 100%); }
         .top-five-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
         .best-bets-card { border: 2px solid rgba(45, 212, 191, 0.34); background: linear-gradient(135deg, rgba(6, 78, 59, 0.44) 0%, rgba(15, 23, 42, 0.92) 52%, rgba(50, 19, 10, 0.88) 100%); }
@@ -2245,6 +2260,22 @@
             border-color: #e2e8f0;
             color: #334155;
         }
+        html.theme-light .straight-of-day-card {
+            background: linear-gradient(135deg, #fff1f2 0%, #f8fafc 52%, #fffbeb 100%);
+            border-color: rgba(190, 18, 60, 0.45);
+            box-shadow: 0 12px 28px rgba(190, 18, 60, 0.08);
+        }
+        html.theme-light .straight-of-day-card h3 { color: #be123c; }
+        html.theme-light .straight-pick-hero {
+            background: #ffffff;
+            border-color: rgba(251, 113, 133, 0.35);
+        }
+        html.theme-light .straight-pick-name { color: #0f172a; }
+        html.theme-light .straight-pick-meta { color: #be123c; }
+        html.theme-light .straight-pick-lede { color: #334155; }
+        html.theme-light .straight-pick-factors { color: #475569; }
+        html.theme-light .straight-pick-factors strong { color: #be123c; }
+        html.theme-light .straight-pick-factors small { color: #64748b; }
         html.theme-light .top-five-card {
             background: linear-gradient(135deg, #fffbeb 0%, #f8fafc 55%, #ecfdf5 100%);
             border-color: rgba(250, 204, 21, 0.45);
@@ -2669,7 +2700,29 @@
         </section>
         <section class="summary-section">
             <div class="summary-grid">
-                                                                                                                <div class="summary-card full-width best-bets-card">
+                                                                                                                <div class="summary-card full-width straight-of-day-card">
+                    <h3>Worst Pickz Straight of the Day</h3>
+                    <p class="model-note summary-note">One HR straight play &mdash; the slate&apos;s highest-conviction lane when pitcher leakage, contact quality, park geometry, and weather all scream over.</p>
+                    <div class="straight-pick-hero">
+                        <div class="straight-pick-header">
+                            <strong class="straight-pick-name">Rhys Hoskins &mdash; Over 0.5 HR vs Brayan Bello</strong>
+                            <span class="straight-pick-meta">Listed +507 &middot; Score 88 &middot; BOS @ CLE</span>
+                        </div>
+                        <p class="straight-pick-lede">This is the straight where the contact profile is too loud to pass: Hoskins walks in with <strong>2 HR and 3 near-HR</strong> at a slate-leading <strong>101.1 mph EV</strong> and <strong>37.5% barrels</strong> &mdash; five batted-ball events that were either gone or screaming off the bat. That is not a hitter hunting a mistake; it is a righty repeatedly squaring up RHP and turning Bello&apos;s mix into elevated damage. The form says the next barrel clears the fence even at a neutral Progressive Field.</p>
+                        <ul class="straight-pick-factors">
+                            <li><strong>Pitcher matchup</strong><small>Hoskins draws <strong>Brayan Bello</strong> as a righty with pull-side power versus an RHP lane the board flags as live to hard contact; Bello is not a shutdown suppressor in this spot.</small></li>
+                            <li><strong>Recent form &amp; contact</strong><small>101.1 mph EV and 37.5% barrels lead the realistic-volume group on the slate &mdash; lasers, line drives, and warning-track fly outs that say the HR is already showing up in the batted-ball data.</small></li>
+                            <li><strong>Pitch-mix lane</strong><small>Righty versus RHP fastball/slider mix with the swing plane already producing elite barrel rate &mdash; the pitch profile Hoskins has been punishing all week.</small></li>
+                            <li><strong>Weather &amp; wind</strong><small>72&deg;F clear air with 5 mph wind at Progressive &mdash; enough carry support that 100+ mph elevated contact is not dying on the track.</small></li>
+                            <li><strong>Park &amp; environment</strong><small>Progressive is flat (+0% HR), so this straight is powered by contact quality, not park charity &mdash; when the EV and barrels are this loud, the park does not need to be Coors.</small></li>
+                            <li><strong>Why this straight</strong><small>Not the automatic #1 holistic score &mdash; this is the purest &ldquo;the data says he is hitting a homer today&rdquo; read on the board: elite EV, elite barrels, and five near-miss or over-the-fence events in the window.</small></li>
+                        </ul>
+                        <div class="straight-pick-actions">
+                            <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Rhys Hoskins - Over 0.5 homerun&quot;]'>Add Straight to Gambly</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary-card full-width best-bets-card">
                     <h3>Goblin's Insight</h3>
                     <p class="model-note summary-note">Full-slate view built from weather, pitcher HR risk, current power form, and batter-vs-pitcher history.</p>
                     <div class="best-bets-grid">
@@ -2685,10 +2738,10 @@
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Michael Harris II HR</strong><small>3 HR, 4 near-HR at GABP (+9% HR) versus Chris Paddack.</small></li>
-                                <li><strong>Austin Riley HR</strong><small>2 HR, 95.6 mph EV versus Paddack in the smallest outfield in MLB.</small></li>
+                                <li><strong>Rhys Hoskins HR</strong><small>101.1 mph EV and 37.5% barrels versus Brayan Bello &mdash; slate-leading contact profile.</small></li>
+                                <li><strong>Brandon Lowe HR</strong><small>2 HR, 4 near-HR, and 30.8% barrels versus Taj Bradley&apos;s LHB split with 10 mph out wind at PNC.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Michael Harris II - Over 0.5 homerun&quot;, &quot;Austin Riley - Over 0.5 homerun&quot;]'>Add 2 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Rhys Hoskins - Over 0.5 homerun&quot;, &quot;Brandon Lowe - Over 0.5 homerun&quot;]'>Add 2 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>

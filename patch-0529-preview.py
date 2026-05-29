@@ -81,6 +81,35 @@ def assert_goblin_hr_parlays_distinct() -> None:
 
 assert_goblin_hr_parlays_distinct()
 
+STRAIGHT_OF_DAY = "Rhys Hoskins - Over 0.5 homerun"
+
+TWO_LEG_HR = [
+    "Rhys Hoskins - Over 0.5 homerun",
+    "Brandon Lowe - Over 0.5 homerun",
+]
+
+STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width straight-of-day-card">
+                    <h3>Worst Pickz Straight of the Day</h3>
+                    <p class="model-note summary-note">One HR straight play &mdash; the slate&apos;s highest-conviction lane when pitcher leakage, contact quality, park geometry, and weather all scream over.</p>
+                    <div class="straight-pick-hero">
+                        <div class="straight-pick-header">
+                            <strong class="straight-pick-name">Rhys Hoskins &mdash; Over 0.5 HR vs Brayan Bello</strong>
+                            <span class="straight-pick-meta">Listed +507 &middot; Score 88 &middot; BOS @ CLE</span>
+                        </div>
+                        <p class="straight-pick-lede">This is the straight where the contact profile is too loud to pass: Hoskins walks in with <strong>2 HR and 3 near-HR</strong> at a slate-leading <strong>101.1 mph EV</strong> and <strong>37.5% barrels</strong> &mdash; five batted-ball events that were either gone or screaming off the bat. That is not a hitter hunting a mistake; it is a righty repeatedly squaring up RHP and turning Bello&apos;s mix into elevated damage. The form says the next barrel clears the fence even at a neutral Progressive Field.</p>
+                        <ul class="straight-pick-factors">
+                            <li><strong>Pitcher matchup</strong><small>Hoskins draws <strong>Brayan Bello</strong> as a righty with pull-side power versus an RHP lane the board flags as live to hard contact; Bello is not a shutdown suppressor in this spot.</small></li>
+                            <li><strong>Recent form &amp; contact</strong><small>101.1 mph EV and 37.5% barrels lead the realistic-volume group on the slate &mdash; lasers, line drives, and warning-track fly outs that say the HR is already showing up in the batted-ball data.</small></li>
+                            <li><strong>Pitch-mix lane</strong><small>Righty versus RHP fastball/slider mix with the swing plane already producing elite barrel rate &mdash; the pitch profile Hoskins has been punishing all week.</small></li>
+                            <li><strong>Weather &amp; wind</strong><small>72&deg;F clear air with 5 mph wind at Progressive &mdash; enough carry support that 100+ mph elevated contact is not dying on the track.</small></li>
+                            <li><strong>Park &amp; environment</strong><small>Progressive is flat (+0% HR), so this straight is powered by contact quality, not park charity &mdash; when the EV and barrels are this loud, the park does not need to be Coors.</small></li>
+                            <li><strong>Why this straight</strong><small>Not the automatic #1 holistic score &mdash; this is the purest &ldquo;the data says he is hitting a homer today&rdquo; read on the board: elite EV, elite barrels, and five near-miss or over-the-fence events in the window.</small></li>
+                        </ul>
+                        <div class="straight-pick-actions">
+                            <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add Straight to Gambly</button>
+                        </div>
+                    </div>
+                </div>"""
 
 GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-card">
                     <h3>Goblin's Insight</h3>
@@ -98,10 +127,10 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Michael Harris II HR</strong><small>3 HR, 4 near-HR at GABP (+9% HR) versus Chris Paddack.</small></li>
-                                <li><strong>Austin Riley HR</strong><small>2 HR, 95.6 mph EV versus Paddack in the smallest outfield in MLB.</small></li>
+                                <li><strong>Rhys Hoskins HR</strong><small>101.1 mph EV and 37.5% barrels versus Brayan Bello &mdash; slate-leading contact profile.</small></li>
+                                <li><strong>Brandon Lowe HR</strong><small>2 HR, 4 near-HR, and 30.8% barrels versus Taj Bradley&apos;s LHB split with 10 mph out wind at PNC.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Michael Harris II - Over 0.5 homerun", "Austin Riley - Over 0.5 homerun"])}'>Add 2 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(TWO_LEG_HR)}'>Add 2 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
@@ -176,7 +205,9 @@ FADES_INNER = """
                     """
 
 SUMMARY_BLOCK = (
-    GOBLIN_CARD
+    STRAIGHT_OF_DAY_CARD
+    + "\n"
+    + GOBLIN_CARD
     + "\n"
     + TOP_CARD
     + """
@@ -292,7 +323,7 @@ def patch_preview(manifest):
             1,
         )
     summary_pat = (
-        r'<div class="summary-card full-width best-bets-card">[\s\S]*?'
+        r'(?:<div class="summary-card full-width straight-of-day-card">|<div class="summary-card full-width best-bets-card">)[\s\S]*?'
         r'<div class="summary-card emoji-key-card">'
     )
     text = re.sub(

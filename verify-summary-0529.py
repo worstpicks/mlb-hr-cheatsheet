@@ -6,7 +6,7 @@ import goblin_parlay_rules as gpr
 t = Path("preview/index.html").read_text(encoding="utf-8")
 
 checks = [
-    ("Straight of the Day section", "Worst Pickz Straight of the Day" in t),
+    ("Straights of the Day section", "Worst Pickz Straights of the Day" in t),
     ("Straight pick Lowe O0.5", "Over 0.5 HR Straight" in t and "Brandon Lowe &mdash; vs Taj Bradley" in t),
     ("Straight pick Horwitz O1.5", "Over 1.5 HR Straight" in t and "Spencer Horwitz &mdash; vs Taj Bradley" in t),
     ("Straight Gambly O0.5", "Brandon Lowe - Over 0.5 homerun" in t),

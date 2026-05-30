@@ -7,10 +7,12 @@ t = Path("preview/index.html").read_text(encoding="utf-8")
 
 checks = [
     ("Straights of the Day section", "Worst Pickz Straights of the Day" in t),
-    ("Straight pick Lowe O0.5", "Brandon Lowe &mdash; vs Taj Bradley" in t),
-    ("Straight pick Horwitz O1.5", "Spencer Horwitz &mdash; vs Taj Bradley" in t),
-    ("Straight Gambly O0.5", "Brandon Lowe - Over 0.5 homerun" in t),
-    ("Straight Gambly O1.5", "Spencer Horwitz - Over 1.5 homeruns" in t),
+    ("Straight pick Soto O0.5", "Juan Soto &mdash; vs Max Meyer" in t),
+    ("Straight pick Schwarber O1.5", "Kyle Schwarber &mdash; vs Justin Wrobleski" in t),
+    ("Straight Gambly O0.5", "Juan Soto - Over 0.5 homerun" in t),
+    ("Straight Gambly O1.5", "Kyle Schwarber - Over 1.5 homeruns" in t),
+    ("Not yesterday Lowe straight", "Brandon Lowe &mdash; vs Taj Bradley" not in t.split("Worst Pickz Straights of the Day")[1].split("Goblin")[0]),
+    ("Not yesterday Horwitz straight", "Spencer Horwitz &mdash; vs Taj Bradley" not in t.split("Worst Pickz Straights of the Day")[1].split("Goblin")[0]),
     ("3-leg Soto/Lowe/Alonso", all(
         x in t for x in (
             "Juan Soto HR</strong><small>6 HR",

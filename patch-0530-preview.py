@@ -76,8 +76,8 @@ def assert_goblin_hr_parlays_distinct() -> None:
 
 assert_goblin_hr_parlays_distinct()
 
-STRAIGHT_OF_DAY = "Brandon Lowe - Over 0.5 homerun"
-STRAIGHT_O15_DAY = "Spencer Horwitz - Over 1.5 homeruns"
+STRAIGHT_OF_DAY = "Juan Soto - Over 0.5 homerun"
+STRAIGHT_O15_DAY = "Kyle Schwarber - Over 1.5 homeruns"
 
 TWO_LEG_HR = [
     "Kyle Schwarber - Over 0.5 homerun",
@@ -91,13 +91,13 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                         <div class="straight-pick-hero">
                             <span class="straight-pick-tag">Over 0.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Brandon Lowe &mdash; vs Taj Bradley</strong>
-                                <span class="straight-pick-meta">Listed +340 &middot; Score 92 &middot; MIN @ PIT</span>
+                                <strong class="straight-pick-name">Juan Soto &mdash; vs Max Meyer</strong>
+                                <span class="straight-pick-meta">Listed +350 &middot; Score 95 &middot; MIA @ NYM</span>
                             </div>
                             <ul class="straight-pick-factors">
-                                <li><strong>Pitcher HR risk</strong><small>Bradley <strong>+0.66 vs LHB</strong> — lefties are the live side.</small></li>
-                                <li><strong>Recent form</strong><small>2 HR, 4 near-HR, 97.6 mph EV, 30.8% barrels.</small></li>
-                                <li><strong>Weather</strong><small>10 mph out-blowing wind at PNC supports lefty pull-side carry.</small></li>
+                                <li><strong>Recent form</strong><small>Slate-best <strong>6 HR, 7 near-HR</strong>, 99.2 mph EV, 43.8% barrels.</small></li>
+                                <li><strong>Matchup</strong><small>Meyer draws the league&apos;s hottest lefty power bat at Citi Field.</small></li>
+                                <li><strong>Weather</strong><small>12 mph out-blowing wind supports pull-side carry despite Citi drag.</small></li>
                             </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add O0.5 Straight to Gambly</button>
@@ -106,13 +106,13 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                         <div class="straight-pick-hero straight-pick-hero--o15">
                             <span class="straight-pick-tag">Over 1.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Spencer Horwitz &mdash; vs Taj Bradley</strong>
-                                <span class="straight-pick-meta">Listed +730 &middot; Score 86 &middot; MIN @ PIT</span>
+                                <strong class="straight-pick-name">Kyle Schwarber &mdash; vs Justin Wrobleski</strong>
+                                <span class="straight-pick-meta">Listed +680 &middot; Score 92 &middot; PHI @ LAD</span>
                             </div>
                             <ul class="straight-pick-factors">
-                                <li><strong>Pitcher HR risk</strong><small>Bradley <strong>+0.66 vs LHB</strong> — best platoon split for a 3-HR bat on the slate.</small></li>
-                                <li><strong>Multi-HR form</strong><small>3 HR, 3 near-HR, 87.4 mph EV, 30.8% barrels.</small></li>
-                                <li><strong>Weather</strong><small>10 mph out-blowing wind at PNC supports lefty pull-side carry.</small></li>
+                                <li><strong>Multi-HR form</strong><small>Worst Pickz Favorite with <strong>3 HR, 3 near-HR</strong>, 95.1 mph EV, 30.0% barrels.</small></li>
+                                <li><strong>Pitcher target</strong><small>Wrobleski is the Dodger attack lane with Wheeler suppressing on the other side.</small></li>
+                                <li><strong>Weather</strong><small>Dodger Stadium +6% HR row with consistent 13 mph out-blowing wind.</small></li>
                             </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_O15_DAY])}'>Add O1.5 Straight to Gambly</button>

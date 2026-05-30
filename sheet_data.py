@@ -97,6 +97,14 @@ def import_sheet_csvs(
         shutil.copy2(src, target)
         copied.append(target)
 
+    # Drop stale matchup/weak-spots exports for this date not in today's Downloads pull.
+    if not dry_run and copied:
+        keep = {p.name for p in copied}
+        for pattern in (f"hr-matchups-*-{sheet_date}.csv", f"pitcher-weak-spots-*-{sheet_date}.csv"):
+            for stale in dest.glob(pattern):
+                if stale.name not in keep:
+                    stale.unlink()
+
     manifest = {
         "sheet_date": sheet_date,
         "imported_at": datetime.now().isoformat(timespec="seconds"),

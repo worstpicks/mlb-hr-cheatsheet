@@ -1,0 +1,30 @@
+Matchup,SF @ COL
+Pitcher,Ryan Feltner
+Pitcher Team,COL
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,2.50,="3-10",.300,.700,0.400,1,1,0,3,8.3,2,.417,1.117
+Batting Second,2.2,1.50,="4-12",.333,.583,0.250,1,0,0,2,33.3,0,.333,.916
+Batting Third,2.2,1.13,="2-10",.200,.400,0.200,0,2,0,1,36.4,1,.273,.673
+Batting Fourth,1.0,7.00,="5-8",.625,1.375,0.750,1,1,1,3,10.0,2,.700,2.075
+Batting Fifth,3.0,0.67,="1-9",.111,.111,0.000,0,0,0,1,20.0,1,.200,.311
+Batting Sixth,2.0,1.50,="2-8",.250,.750,0.500,1,1,0,3,11.1,1,.333,1.083
+Batting Seventh,1.2,1.80,="3-8",.375,.875,0.500,1,1,0,1,0.0,0,.375,1.250
+Batting Eighth,2.1,0.43,="0-7",.000,.000,0.000,0,0,0,0,25.0,1,.125,.125
+Batting Ninth,2.1,0.86,="2-8",.250,.250,0.000,0,0,0,0,25.0,0,.250,.500
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Willy Adames RHB,Batting First ​,="29-123",.236,.480,0.244,5,13,1,9,28.5,7,.277,.757
+Jung Hoo Lee LHB,Batting First ​,="18-68",.265,.382,0.117,1,3,1,5,9.9,1,.296,.678
+Luis Arraez LHB,Batting Second ​,="50-134",.373,.485,0.112,2,5,2,12,2.0,12,.427,.912
+Matt Chapman RHB,Batting Third ​,="18-64",.281,.344,0.063,0,2,1,7,19.2,9,.370,.714
+Casey Schmitt RHB,Batting Third ​,="20-77",.260,.481,0.221,5,2,0,12,19.8,2,.284,.765
+Rafael Devers LHB,Batting Fourth ​,="38-144",.264,.458,0.194,5,13,0,22,29.1,6,.298,.756
+Bryce Eldridge LHB,Batting Seventh ​,="6-28",.214,.286,0.072,0,2,0,1,25.0,4,.313,.599
+Harrison Bader RHB,Batting Eighth ​,="8-35",.229,.514,0.285,2,4,0,5,31.4,0,.229,.743
+Drew Gilbert LHB,Batting Eighth ​,="12-65",.185,.246,0.061,1,1,0,6,20.8,5,.254,.500
+Daniel Susac RHB,Batting Eighth ​,="11-25",.440,.600,0.160,0,2,1,3,18.5,2,.481,1.081
+Eric Haase RHB,Batting Ninth ​,="5-23",.217,.565,0.348,2,2,0,4,25.0,1,.250,.815
+Victor Bericoto RHB,Batting Ninth ​,="1-4",.250,.250,0.000,0,0,0,0,25.0,0,.250,.500
+Jesus Rodriguez RHB,Batting Ninth ​,="4-22",.182,.318,0.136,1,0,0,4,16.7,1,.250,.568

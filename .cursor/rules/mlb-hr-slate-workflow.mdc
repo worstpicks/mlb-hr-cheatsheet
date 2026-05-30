@@ -1,9 +1,11 @@
 ---
-description: MLB HR cheat sheet — start every slate by importing Downloads CSVs and using them for straights/HR risk
+description: MLB HR cheat sheet — always import freshest Downloads CSVs; never reuse prior-day probables or stale data
 alwaysApply: true
 ---
 
 # MLB HR cheat sheet — slate workflow (always do this)
+
+**Golden rule:** Always use the **newest, freshest PropFinder CSV exports** from Downloads for the **current slate date**. Never copy yesterday's probables, `GAME_META`, straights, summary copy, or `data/` matchup files onto today's sheet.
 
 When building, patching, auditing, or double-checking **any** daily MLB HR cheat sheet in this repo, **start by importing that slate's CSV exports** from Downloads. Do not skip this step.
 
@@ -41,6 +43,27 @@ Destination: `data/` + `data/manifest-YYYY-MM-DD.json`.
 
 **Do not** manually ask the user to paste CSVs if files exist in Downloads — run the import script yourself.
 
+## Step 0a — Derive probables from manifest (never reuse prior day)
+
+Game titles, `vs` chips, and bum-on-mound (🧤) labels **must** come from **that slate's** `hr-matchups-*-YYYY-MM-DD.csv` files in `data/manifest-YYYY-MM-DD.json`.
+
+**Never:**
+
+- Copy `GAME_META` / game titles from yesterday's sheet or archive
+- Seed a new manifest from the prior day's pitcher pool
+- Leave stale `hr-matchups-*` / `pitcher-weak-spots-*` files in `data/` after import
+
+**Always:**
+
+```powershell
+python import-sheet-csvs.py --date YYYY-MM-DD   # removes stale matchup files for that date
+python rebuild-YYYY-MM-DD-from-csv.py           # or equivalent: csv_slate_meta → build-sheet
+python build-sheet-YYYY-MM-DD.py
+python validate-index-matchups.py               # zero errors vs manifest SPs
+```
+
+If a batter row shows the wrong SP in the title or `chips: ["vs …"]`, re-run import + rebuild — do not hand-edit individual matchups.
+
 ## Step 0b — Use CSV data for straights & HR risk
 
 After import, validate Straight of the Day and platoon lanes against PropFinder splits:
@@ -57,8 +80,49 @@ Rules when picking straights:
 
 Primary HR-risk file: `data/hr-targets-overall-YYYY-MM-DD.csv`.
 
+## Step 1 — Worst Pickz Straights of the Day (required every slate)
+
+**Never copy yesterday's straights.** The `Worst Pickz Straights of the Day` block must be rebuilt for the **current slate only** — not left stale from the prior day or archive.
+
+### Where it lives
+
+In `patch-YYYY-MM-DD-preview.py`:
+
+- `STRAIGHT_OF_DAY` / `STRAIGHT_O15_DAY` — Gambly line strings
+- `STRAIGHT_OF_DAY_CARD` — full HTML for the summary card (O0.5 + O1.5 heroes)
+- Included in `SUMMARY_BLOCK` → patched into `preview/index.html` via `resync-YYYY-MM-DD.py`
+
+### Pick rules (current slate)
+
+| Leg | Pick from |
+|-----|-----------|
+| **O0.5 HR** | Top current-slate prop: highest score + form + platoon-positive split vs **that day's** opposing SP |
+| **O1.5 HR** | Best multi-HR bat (3+ HR in note) with positive split; **different player/game than O0.5 when possible** |
+
+Both picks must:
+
+1. Exist on **today's** `build-sheet-YYYY-MM-DD.py` / `games` block (correct `vs` chip, not yesterday's SP).
+2. Use **today's** listed odds, score, game label (`AWY @ HOM`), and factor bullets from today's row + game description.
+3. **Not** match the previous slate's straight pair (compare to `preview/archive/` for prior date).
+
+### After updating straights
+
+```powershell
+python resync-YYYY-MM-DD.py
+python verify-summary-YYYY-MM-DD.py   # must include straight pick + Gambly + not-yesterday checks
+```
+
+Confirm in `preview/index.html`:
+
+- `Worst Pickz Straights of the Day` shows today's batter names and SPs
+- Gambly buttons use `STRAIGHT_OF_DAY` / `STRAIGHT_O15_DAY` strings
+- Summary patch succeeded (no stale prior-day Goblin/straight copy)
+
+**Common failure:** `SUMMARY_BLOCK` is correct in the patch file but `preview/index.html` still shows yesterday — re-run `resync` and verify straight-of-day-card content on disk before push.
+
 ## Rest of slate checklist (after CSV import)
 
+0. **Straights of the Day** — update `STRAIGHT_OF_DAY_CARD` in `patch-YYYY-MM-DD-preview.py`, resync, verify (Step 1 above)
 1. `python build-sheet-YYYY-MM-DD.py` → `python patch-XXXX-preview.py`
 2. `python validate-index-matchups.py` — zero matchup errors
 3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)

@@ -50,9 +50,9 @@ def data_attr(lines):
 
 
 THREE_LEG_HR = [
-    "Juan Soto - Over 0.5 homerun",
-    "Brandon Lowe - Over 0.5 homerun",
     "Pete Alonso - Over 0.5 homerun",
+    "Brandon Lowe - Over 0.5 homerun",
+    "Byron Buxton - Over 0.5 homerun",
 ]
 
 FAV_THREE_LEG = [
@@ -76,7 +76,7 @@ def assert_goblin_hr_parlays_distinct() -> None:
 
 assert_goblin_hr_parlays_distinct()
 
-STRAIGHT_OF_DAY = "Juan Soto - Over 0.5 homerun"
+STRAIGHT_OF_DAY = "Pete Alonso - Over 0.5 homerun"
 STRAIGHT_O15_DAY = "Kyle Schwarber - Over 1.5 homeruns"
 
 TWO_LEG_HR = [
@@ -91,13 +91,13 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                         <div class="straight-pick-hero">
                             <span class="straight-pick-tag">Over 0.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Juan Soto &mdash; vs Max Meyer</strong>
-                                <span class="straight-pick-meta">Listed +350 &middot; Score 95 &middot; MIA @ NYM</span>
+                                <strong class="straight-pick-name">Pete Alonso &mdash; vs Trey Yesavage</strong>
+                                <span class="straight-pick-meta">Listed +410 &middot; Score 98 &middot; TOR @ BAL</span>
                             </div>
                             <ul class="straight-pick-factors">
-                                <li><strong>Recent form</strong><small>Slate-best <strong>6 HR, 7 near-HR</strong>, 99.2 mph EV, 43.8% barrels.</small></li>
-                                <li><strong>Matchup</strong><small>Meyer draws the league&apos;s hottest lefty power bat at Citi Field.</small></li>
-                                <li><strong>Weather</strong><small>12 mph out-blowing wind supports pull-side carry despite Citi drag.</small></li>
+                                <li><strong>Recent form</strong><small><strong>3 HR, 3 near-HR</strong>, 97.8 mph EV, 20.0% barrels on the slate.</small></li>
+                                <li><strong>Matchup</strong><small>Yesavage is a rookie righty with limited HR suppression in the CSV pool.</small></li>
+                                <li><strong>Park</strong><small>Camden Yards short right field supports Alonso&apos;s pull-side power lane.</small></li>
                             </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add O0.5 Straight to Gambly</button>
@@ -106,13 +106,13 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                         <div class="straight-pick-hero straight-pick-hero--o15">
                             <span class="straight-pick-tag">Over 1.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Kyle Schwarber &mdash; vs Justin Wrobleski</strong>
-                                <span class="straight-pick-meta">Listed +680 &middot; Score 92 &middot; PHI @ LAD</span>
+                                <strong class="straight-pick-name">Kyle Schwarber &mdash; vs Roki Sasaki</strong>
+                                <span class="straight-pick-meta">Listed +680 &middot; Score 98 &middot; PHI @ LAD</span>
                             </div>
                             <ul class="straight-pick-factors">
-                                <li><strong>Multi-HR form</strong><small>Worst Pickz Favorite with <strong>3 HR, 3 near-HR</strong>, 95.1 mph EV, 30.0% barrels.</small></li>
-                                <li><strong>Pitcher target</strong><small>Wrobleski is the Dodger attack lane with Wheeler suppressing on the other side.</small></li>
-                                <li><strong>Weather</strong><small>Dodger Stadium +6% HR row with consistent 13 mph out-blowing wind.</small></li>
+                                <li><strong>Multi-HR form</strong><small>Worst Pickz Favorite with <strong>3 HR, 3 near-HR</strong>, 101.7 mph EV, 30.0% barrels.</small></li>
+                                <li><strong>Pitcher target</strong><small>Sasaki is the Dodger attack lane with Luzardo on the other side.</small></li>
+                                <li><strong>Weather</strong><small>Dodger Stadium +6% HR row with consistent out-blowing wind.</small></li>
                             </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_O15_DAY])}'>Add O1.5 Straight to Gambly</button>
@@ -128,45 +128,45 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Juan Soto HR</strong><small>6 HR, 7 near-HR, and 43.8% barrels versus Max Meyer at Citi Field.</small></li>
-                                <li><strong>Brandon Lowe HR</strong><small>2 HR, 4 near-HR, and 30.8% barrels versus Taj Bradley&apos;s LHB split.</small></li>
-                                <li><strong>Pete Alonso HR</strong><small>2 HR and 97.5 mph EV versus Austin Voth at Camden Yards.</small></li>
+                                <li><strong>Pete Alonso HR</strong><small>3 HR, 3 near-HR, and 97.8 mph EV versus Trey Yesavage at Camden Yards.</small></li>
+                                <li><strong>Brandon Lowe HR</strong><small>2 HR, 4 near-HR, and 30.8% barrels versus Bailey Ober.</small></li>
+                                <li><strong>Byron Buxton HR</strong><small>3 HR, 3 near-HR, and 91.5 mph EV versus Mitch Keller at PNC Park.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(THREE_LEG_HR)}'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Kyle Schwarber HR</strong><small>3 HR and 30.0% barrels versus Justin Wrobleski with 13 mph out wind at Dodger Stadium.</small></li>
-                                <li><strong>Pete Alonso HR</strong><small>2 HR versus Austin Voth with HR-friendly Camden right field.</small></li>
+                                <li><strong>Kyle Schwarber HR</strong><small>3 HR and 30.0% barrels versus Roki Sasaki at Dodger Stadium.</small></li>
+                                <li><strong>Pete Alonso HR</strong><small>3 HR versus Trey Yesavage with HR-friendly Camden right field.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(TWO_LEG_HR)}'>Add 2 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>Soto, Lowe, Riley, Machado, Schwarber, Devers</strong><small>Top attack lanes versus Meyer, Bradley, Paddack, Alvarez, Wrobleski, and Lorenzen.</small></li>
-                                <li><strong>Alonso, Buxton, Freeman, Neto, Tatis, Olson</strong><small>Hot hitters versus Rogers, Jones, Wheeler, Martinez, Giolito, and Paddack.</small></li>
+                                <li><strong>Lowe, Adames, Schwarber, Devers, Mitchell, Olson</strong><small>Top attack lanes versus Ober, Feltner, Sasaki, Singer, Lambert, and Brown.</small></li>
+                                <li><strong>Alonso, Buxton, Freeman, Neto, Judge, Riley</strong><small>Hot hitters versus Yesavage, Keller, Griffin, Rasmussen, Ginn, and Perez.</small></li>
                             </ul>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Juan Soto - Over 0.5 hits", "Brandon Lowe - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Manny Machado - Over 0.5 hits", "Kyle Schwarber - Over 0.5 hits", "Rafael Devers - Over 0.5 hits", "Pete Alonso - Over 0.5 hits", "Byron Buxton - Over 0.5 hits", "Freddie Freeman - Over 0.5 hits", "Zach Neto - Over 0.5 hits", "Fernando Tatis - Over 0.5 hits", "Matt Olson - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>Kyle Schwarber HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 3 HR versus Justin Wrobleski LHB split.</small></li>
-                                <li><strong>Willy Adames HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 2 HR versus Michael Lorenzen at Coors Field.</small></li>
-                                <li><strong>Jordan Walker HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 101.8 mph EV versus Shota Imanaga LHB risk.</small></li>
+                                <li><strong>Kyle Schwarber HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 3 HR versus Roki Sasaki LHB split.</small></li>
+                                <li><strong>Willy Adames HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 4 HR versus Ryan Feltner at Coors Field.</small></li>
+                                <li><strong>Jordan Walker HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 95.3 mph EV versus Ben Brown.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(FAV_THREE_LEG)}'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Top 5 Pitchers To Attack</h4>
                             <ol>
-                                <li><strong>Erick Fedde</strong><small>Slate-high HR risk (1.67); 1.94 vs RHB at Rate Field — Dingler and Vargas are live.</small></li>
-                                <li><strong>Michael Lorenzen</strong><small>1.24 HR risk with 2.29 vs LHB; Devers and Adames anchor the Giants at Coors.</small></li>
-                                <li><strong>Grant Holmes</strong><small>1.22 HR risk; Suarez and Elly get the GABP small-park boost.</small></li>
-                                <li><strong>Shota Imanaga</strong><small>1.04 HR risk with 1.68 vs LHB; Burleson and Walker are the Cardinal anchors.</small></li>
-                                <li><strong>Trevor Rogers</strong><small>0.82 HR risk with 0.87 vs RHB; Jesus Sanchez and Blaze Alexander are the Toronto attack lane.</small></li>
+                                <li><strong>Brady Singer</strong><small>Slate-high HR risk (2.44); 2.61 vs LHB at GABP — Elly and Suarez are live.</small></li>
+                                <li><strong>Ryan Feltner</strong><small>1.64 HR risk with 1.79 vs RHB; Adames and Devers anchor the Giants at Coors.</small></li>
+                                <li><strong>Roki Sasaki</strong><small>0.91 HR risk; Schwarber, Turner, and Harper attack the Dodger lane.</small></li>
+                                <li><strong>Ryne Nelson</strong><small>0.66 HR risk with 1.19 vs RHB; Marte and Carroll at T-Mobile.</small></li>
+                                <li><strong>Kyle Leahy</strong><small>0.65 HR risk with 1.15 vs LHB; Burleson and Walker at Busch.</small></li>
                             </ol>
                         </div>
                     </div>
@@ -176,11 +176,11 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                     <h3>Top 5 HR Tickets (Holistic)</h3>
                     <p class="model-note summary-note">Ranks blend batter damage, opposing starter HR leakage, park/weather, and listed price.</p>
                     <div class="top-five-list">
-                        <div class="top-five-item"><span>Juan Soto <small>6 HR, Meyer RHB split, 43.8% barrels</small></span><strong>95</strong></div>
-                        <div class="top-five-item"><span>Brandon Lowe <small>2 HR, Bradley LHB risk, 30.8% barrels</small></span><strong>92</strong></div>
-                        <div class="top-five-item"><span>Kyle Schwarber <small>3 HR, Wrobleski LHB split, 30.0% barrels</small></span><strong>92</strong></div>
-                        <div class="top-five-item"><span>Byron Buxton <small>2 HR, 98.6 mph EV versus Jared Jones</small></span><strong>91</strong></div>
-                        <div class="top-five-item"><span>Shohei Ohtani <small>2 HR, 96.6 mph EV versus Zack Wheeler</small></span><strong>90</strong></div>
+                        <div class="top-five-item"><span>Pete Alonso <small>3 HR, Yesavage RHB split, 97.8 mph EV</small></span><strong>98</strong></div>
+                        <div class="top-five-item"><span>Willy Adames <small>4 HR, Feltner at Coors, 22.0% barrels</small></span><strong>98</strong></div>
+                        <div class="top-five-item"><span>Kyle Schwarber <small>3 HR, Sasaki LHB split, 30.0% barrels</small></span><strong>98</strong></div>
+                        <div class="top-five-item"><span>Brandon Lowe <small>2 HR, Ober matchup, 30.8% barrels</small></span><strong>98</strong></div>
+                        <div class="top-five-item"><span>Byron Buxton <small>3 HR, 91.5 mph EV versus Keller</small></span><strong>95</strong></div>
                     </div>
                 </div>"""
 
@@ -193,18 +193,18 @@ PARK_INNER = """
                     """
 
 WEATHER5_INNER = """
-                        <div class="summary-item"><span>#1 Juan Soto <small>6 HR versus Meyer despite Citi drag</small></span><strong>95</strong></div>
-                        <div class="summary-item"><span>#2 Brandon Lowe <small>Bradley LHB leakage at PNC</small></span><strong>92</strong></div>
-                        <div class="summary-item"><span>#3 Kyle Schwarber <small>3 HR, 13 mph out wind at Dodger Stadium</small></span><strong>92</strong></div>
-                        <div class="summary-item"><span>#4 Shohei Ohtani <small>2 HR, 96.6 mph EV versus Wheeler</small></span><strong>90</strong></div>
-                        <div class="summary-item"><span>#5 Manny Machado <small>100.5 mph EV versus Alvarez at Nationals</small></span><strong>90</strong></div>
+                        <div class="summary-item"><span>#1 Pete Alonso <small>3 HR versus Yesavage at Camden</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>#2 Willy Adames <small>4 HR versus Feltner at Coors</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>#3 Kyle Schwarber <small>3 HR versus Sasaki at Dodger Stadium</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>#4 Brandon Lowe <small>2 HR versus Ober at PNC</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>#5 Byron Buxton <small>3 HR, 91.5 mph EV versus Keller</small></span><strong>95</strong></div>
                     """
 
 LONGSHOT_INNER = """
-                        <div class="summary-item"><span>Spencer Horwitz <small>+730 with 3 HR versus Bradley</small></span><strong>86</strong></div>
-                        <div class="summary-item"><span>Brett Baty <small>+710 with 1 HR versus Meyer</small></span><strong>77</strong></div>
-                        <div class="summary-item"><span>Patrick Bailey <small>+1140 with 1 HR versus Bello</small></span><strong>70</strong></div>
-                        <div class="summary-item"><span>Bryan Torres <small>+1120 versus Imanaga LHB leak</small></span><strong>66</strong></div>
+                        <div class="summary-item"><span>Garrett Mitchell <small>+790 with 2 HR versus Lambert</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>Spencer Horwitz <small>+730 with 3 HR versus Ober</small></span><strong>82</strong></div>
+                        <div class="summary-item"><span>Jackson Holliday <small>+850 versus Yesavage at Camden</small></span><strong>87</strong></div>
+                        <div class="summary-item"><span>Jesus Sanchez <small>+720 versus Brandon Young</small></span><strong>86</strong></div>
                     """
 
 FADES_INNER = """

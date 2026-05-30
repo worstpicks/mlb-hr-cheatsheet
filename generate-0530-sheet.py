@@ -53,6 +53,11 @@ BVP = {
     "Kyle Higashioka": "2 AB BvP versus Kolek with 1 HR",
 }
 
+BUM_PITCHERS = {
+    "Singer",
+    "Feltner",
+}
+
 # name, hand, odds, score, chip, hr, near, ev, barrel, angle, blast
 PROPS = [
     # ATL @ CIN
@@ -387,9 +392,19 @@ def fav_emojis(name, hand):
     return em
 
 
-def build_emojis(name, hand, chip, score, blast):
+def bvp_line(name, pitcher):
+    if name not in BVP:
+        return None
+    text = BVP[name]
+    plast = pitcher.split()[-1].lower()
+    if plast in text.lower():
+        return text
+    return None
+
+
+def build_emojis(name, hand, pitcher, score, blast, ev=None):
     em = fav_emojis(name, hand)
-    if name in ROCKET and "🚀" not in em:
+    if ev is not None and ev >= 100.0 and "🚀" not in em:
         em.insert(0, "🚀")
     if score >= 88 or blast == "high":
         if "🌕" not in em:
@@ -402,7 +417,7 @@ def build_emojis(name, hand, chip, score, blast):
     elif score >= 70:
         if "💎" not in em:
             em.append("💎")
-    if name in BVP:
+    if bvp_line(name, pitcher):
         if "📜" not in em:
             em.append("📜")
     return " ".join(em) if em else "💎"
@@ -419,8 +434,9 @@ def note_for(name, pitcher, park, hr, near, ev, barrel, angle, hand):
     disp = f"{name} ({hand})"
     if disp in FAVS:
         stat = f"Worst Pickz favorite with {stat}"
-    if name in BVP:
-        stat += f"; {BVP[name]}"
+    bvp = bvp_line(name, pitcher)
+    if bvp:
+        stat += f"; {bvp}"
     return f"{stat}. Draws opposing starter {pitcher}; {park}."
 
 
@@ -447,6 +463,9 @@ def emit_build():
         lines.append(f'    "{name} ({hand})": "{team}",')
     lines.append("}")
     lines.append("")
+    bum_block = "BUM_PITCHERS = {\n" + "\n".join(
+        f'    "{b}",' for b in sorted(BUM_PITCHERS)
+    ) + "\n}"
     lines.extend(
         textwrap.dedent(
             """
@@ -472,14 +491,13 @@ def emit_build():
                 return item
 
 
-            BUM_PITCHERS = {
-                "Fedde",
-                "Lorenzen",
-                "Holmes",
-                "Imanaga",
-            }
-
-
+            """
+        ).strip().splitlines()
+    )
+    lines.append(bum_block)
+    lines.extend(
+        textwrap.dedent(
+            """
             def add_bum_row_emojis(entry):
                 chip = entry["chips"][0].replace("vs ", "").strip()
                 if chip not in BUM_PITCHERS:
@@ -509,7 +527,7 @@ def emit_build():
             team = TEAM_MAP[name]
             opp_sp = gm["home_sp"] if team == gm["away"] else gm["away_sp"]
             park = gm["desc"].split(" — ")[0]
-            em = build_emojis(name, hand, chip, score, blast)
+            em = build_emojis(name, hand, opp_sp, score, blast, ev)
             note = note_for(name, opp_sp, park, hr, near, ev, barrel, angle, hand)
             blast_s = f', blast="{blast}"' if blast else ""
             lines.append(

@@ -4189,6 +4189,46 @@ const games = [
                 if (n == null) return String(oddsStr || "").replace(/^Listed\s*/i, "").trim();
                 return n > 0 ? "+" + n : String(n);
             }
+
+            function pickRowHrResultState(rowEl) {
+                const pill = rowEl.querySelector(".hr-row-result__pill");
+                if (!pill) return "none";
+                if (pill.classList.contains("hr-row-result__pill--win")) return "win";
+                if (pill.classList.contains("hr-row-result__pill--loss")) return "loss";
+                if (pill.classList.contains("hr-row-result__pill--void")) return "void";
+                if (pill.classList.contains("hr-row-result__pill--pending")) return "pending";
+                if (pill.classList.contains("hr-row-result__pill--na")) return "na";
+                return "other";
+            }
+            function isListedHr05PickRow(rowEl) {
+                const gi = parseInt(rowEl.getAttribute("data-gi") || "", 10);
+                const ri = parseInt(rowEl.getAttribute("data-ri") || "", 10);
+                const row = games[gi] && games[gi].rows[ri];
+                return !!(row && /Over\s*0\.5\s*HR/i.test(row.odds || ""));
+            }
+            function countActiveSheetBatters() {
+                let active = 0;
+                document.querySelectorAll(".game-card .pick-row").forEach((rowEl) => {
+                    if (!isListedHr05PickRow(rowEl)) return;
+                    const st = pickRowHrResultState(rowEl);
+                    if (st === "win" || st === "loss" || st === "pending") active++;
+                });
+                return active;
+            }
+            function filterHitNamesToActivePlayers(names) {
+                const allowed = new Set();
+                document.querySelectorAll(".game-card .pick-row").forEach((rowEl) => {
+                    if (!isListedHr05PickRow(rowEl)) return;
+                    const st = pickRowHrResultState(rowEl);
+                    if (st !== "win" && st !== "loss") return;
+                    const gi = parseInt(rowEl.getAttribute("data-gi") || "", 10);
+                    const ri = parseInt(rowEl.getAttribute("data-ri") || "", 10);
+                    const row = games[gi] && games[gi].rows[ri];
+                    if (row) allowed.add(cleanBatterDisplayName(row.name));
+                });
+                return (names || []).map(cleanBatterDisplayName).filter((n) => allowed.has(n));
+            }
+
             function updateBattersWonRecap() {
                 const section = document.getElementById("battersWonSection");
                 const listEl = document.getElementById("battersWonList");
@@ -4199,17 +4239,11 @@ const games = [
                 let pending = 0;
                 let settled = 0;
                 document.querySelectorAll(".game-card .pick-row").forEach((rowEl) => {
-                    const pill = rowEl.querySelector(".hr-row-result__pill");
-                    if (!pill) return;
-                    if (pill.classList.contains("hr-row-result__pill--pending")) pending++;
-                    else if (
-                        pill.classList.contains("hr-row-result__pill--win") ||
-                        pill.classList.contains("hr-row-result__pill--loss") ||
-                        pill.classList.contains("hr-row-result__pill--void")
-                    ) {
-                        settled++;
-                    }
-                    if (!pill.classList.contains("hr-row-result__pill--win")) return;
+                    if (!isListedHr05PickRow(rowEl)) return;
+                    const st = pickRowHrResultState(rowEl);
+                    if (st === "pending") pending++;
+                    else if (st === "win" || st === "loss" || st === "void") settled++;
+                    if (st !== "win") return;
                     const gi = parseInt(rowEl.getAttribute("data-gi") || "", 10);
                     const ri = parseInt(rowEl.getAttribute("data-ri") || "", 10);
                     const game = games[gi];
@@ -4223,14 +4257,14 @@ const games = [
                         fav: isWorstPickzFavoriteRow(row),
                     });
                 });
-                const totalProps = games.reduce((n, g) => n + (g.rows ? g.rows.length : 0), 0);
+                const activeBatters = countActiveSheetBatters();
                 wins.sort((a, b) => b.score - a.score);
                 if (wins.length) {
                     ledeEl.textContent =
                         wins.length +
                         " of " +
-                        totalProps +
-                        " listed batters homered (Over 0.5 HR cashed per MLB box score).";
+                        activeBatters +
+                        " active batters homered (Over 0.5 HR cashed — void/DNP excluded).";
                     listEl.innerHTML = wins
                         .map((w) => {
                             const favCls = w.fav ? " batters-won-item--fav" : "";
@@ -4256,14 +4290,16 @@ const games = [
                 listEl.innerHTML = "";
                 if (pending > 0) {
                     ledeEl.textContent =
-                        "No homers recorded yet for listed props — " +
+                        "No homers recorded yet for active props — " +
                         pending +
                         " still waiting on final box scores (" +
                         settled +
-                        " settled).";
-                } else {
+                        " settled, void/DNP excluded from totals).";
+                } else if (activeBatters > 0) {
                     ledeEl.textContent =
-                        "None of the " + totalProps + " listed batters hit Over 0.5 HR on this slate.";
+                        "None of the " + activeBatters + " active batters hit Over 0.5 HR on this slate.";
+                } else {
+                    ledeEl.textContent = "No active batters to score yet (all void/DNP or still loading).";
                 }
             }
 
@@ -4282,8 +4318,19 @@ const games = [
                     return [];
                 }
             }
-            function battersHitStatusText(names) {
-                return names.length ? `${names.length} cheat-sheet batter${names.length === 1 ? "" : "s"} recorded a hit.` : "No cheat-sheet batters with hits yet.";
+
+            function battersHitStatusText(names, activeCount) {
+                const hits = (names || []).length;
+                const active = typeof activeCount === "number" && activeCount > 0 ? activeCount : 0;
+                if (!hits) {
+                    return active
+                        ? "No cheat-sheet batters with hits yet (" + active + " active on slate)."
+                        : "No cheat-sheet batters with hits yet.";
+                }
+                if (active) {
+                    return hits + " of " + active + " active cheat-sheet batter" + (active === 1 ? "" : "s") + " recorded a hit.";
+                }
+                return hits + " cheat-sheet batter" + (hits === 1 ? "" : "s") + " recorded a hit.";
             }
             function renderBattersHitSummary(names, statusText) {
                 if (battersHitLede) battersHitLede.textContent = statusText || "";
@@ -4299,7 +4346,7 @@ const games = [
                 const nodes = Array.from(document.querySelectorAll(".game-card .pick-row .hr-row-result"));
                 if (!nodes.length) return;
                 const staticHitNames = staticBattersHitNames();
-                renderBattersHitSummary(staticHitNames, staticHitNames.length ? battersHitStatusText(staticHitNames) : (sd ? "Checking MLB box scores for hit names..." : "No sheet date found for MLB hit lookup."));
+                renderBattersHitSummary(staticHitNames, staticHitNames.length ? battersHitStatusText(staticHitNames, countActiveSheetBatters()) : (sd ? "Checking MLB box scores for hit names..." : "No sheet date found for MLB hit lookup."));
                 const scheduleByDate = Object.create(null);
                 const boxByPk = Object.create(null);
                 const hitNames = [];
@@ -4346,7 +4393,7 @@ const games = [
                             boxByPk
                         });
                         if (token !== hrResultsHydrateToken) return;
-                        if (typeof r.hits === "number" && r.hits >= 1) {
+                        if ((r.code === "win" || r.code === "loss") && typeof r.hits === "number" && r.hits >= 1) {
                             hitNames.push(row.name);
                         }
                         if (r.code === "win") setPill(host, "win", "Won");
@@ -4362,8 +4409,11 @@ const games = [
             
                 updateBattersWonRecap();
                 if (token !== hrResultsHydrateToken) return;
-                const finalHitNames = hitNames.length ? hitNames : staticHitNames;
-                renderBattersHitSummary(finalHitNames, battersHitStatusText(finalHitNames));
+                const activeBatters = countActiveSheetBatters();
+                const finalHitNames = hitNames.length
+                    ? hitNames
+                    : filterHitNamesToActivePlayers(staticHitNames);
+                renderBattersHitSummary(finalHitNames, battersHitStatusText(finalHitNames, activeBatters));
             }
             renderGames();
             decorateGameCardToggles();

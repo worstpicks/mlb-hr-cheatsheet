@@ -2,7 +2,9 @@
 """Rebuild 5/30 sheet from manifest hr-matchups CSVs (correct SPs)."""
 from __future__ import annotations
 
+import csv
 import importlib.util
+import re
 import sys
 from pathlib import Path
 
@@ -14,6 +16,7 @@ gen = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gen)
 
 from csv_slate_meta import derive_games_from_csv, opposing_sp_for_team
+from sheet_data import load_pitcher_risk, resolve_pitcher
 
 
 def score_from_stats(hr, near, ev, barrel, blast):
@@ -29,8 +32,69 @@ def score_from_stats(hr, near, ev, barrel, blast):
     return min(98, max(58, int(round(s))))
 
 
+TEAM_ALIAS = {
+    "CHW": "CWS",
+    "WAS": "WSH",
+}
+
+
+def canon_team(team: str) -> str:
+    return TEAM_ALIAS.get(team.strip().upper(), team.strip().upper())
+
+
+def canon_game_key(raw: str) -> str:
+    m = re.search(r"([A-Z]{2,3})\s*@\s*([A-Z]{2,3})", raw.upper())
+    if not m:
+        return " ".join(raw.upper().split())
+    away = canon_team(m.group(1))
+    home = canon_team(m.group(2))
+    return f"{away} @ {home}"
+
+
+def load_park_factors(sheet_date: str) -> dict[str, dict]:
+    path = ROOT / "data" / f"ParkFactors_{sheet_date}.csv"
+    if not path.exists():
+        return {}
+    out: dict[str, dict] = {}
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            game = row.get("Game", "").strip()
+            if not game:
+                continue
+            key = canon_game_key(game)
+            out[key] = {
+                "venue": row.get("Venue", "").strip(),
+                "hr_pct": row.get("HR %", "").strip(),
+                "hr_stadium": row.get("HR % Stadium", "").strip(),
+                "hr_weather": row.get("HR % Weather", "").strip(),
+            }
+    return out
+
+
+def fmt_pct(value: float) -> str:
+    sign = "+" if value >= 0 else ""
+    return f"{sign}{value:.2f}"
+
+
+def risk_note(label: str, risk_row: dict | None) -> str:
+    if not risk_row:
+        return f"{label}: no reliable HR-risk sample in today's export"
+    overall = risk_row["overall"]
+    lhb = risk_row["vs_lhb"]
+    rhb = risk_row["vs_rhb"]
+    split_lane = "RHB" if rhb >= lhb else "LHB"
+    split_val = rhb if rhb >= lhb else lhb
+    return (
+        f"{label}: {overall:.2f} HR risk "
+        f"(vs LHB {fmt_pct(lhb)}, vs RHB {fmt_pct(rhb)}; strongest {split_lane} lane {fmt_pct(split_val)})"
+    )
+
+
 def main() -> int:
     games_csv = {g["key"]: g for g in derive_games_from_csv(DATE)}
+    park_factors = load_park_factors(DATE)
+    pitcher_risk = load_pitcher_risk(ROOT / "data" / f"hr-targets-overall-{DATE}.csv")
     game_by_team = {}
     for g in games_csv.values():
         game_by_team[g["away"]] = g
@@ -71,18 +135,22 @@ def main() -> int:
     for g in sorted(games_csv.values(), key=lambda x: x["key"]):
         away_full = g["away_sp_full"]
         home_full = g["home_sp_full"]
-        away_r = g.get("away_risk")
-        home_r = g.get("home_risk")
-        risk_bits = []
-        if away_r is not None and away_r >= 1.0:
-            risk_bits.append(f"{away_full} ({away_r:.2f} HR risk)")
-        if home_r is not None and home_r >= 1.0:
-            risk_bits.append(f"{home_full} ({home_r:.2f} HR risk)")
-        desc = f"{g['key']} — PropFinder CSV slate. "
-        if risk_bits:
-            desc += "Attack lanes: " + "; ".join(risk_bits) + "."
-        else:
-            desc += f"{away_full} vs {home_full} per imported matchup files."
+        away_r = resolve_pitcher(pitcher_risk, away_full) or resolve_pitcher(pitcher_risk, g["away_sp"])
+        home_r = resolve_pitcher(pitcher_risk, home_full) or resolve_pitcher(pitcher_risk, g["home_sp"])
+        g["away_risk"] = away_r["overall"] if away_r else None
+        g["home_risk"] = home_r["overall"] if home_r else None
+
+        park = park_factors.get(g["key"], {})
+        venue = park.get("venue") or g["key"]
+        hr_pct = park.get("hr_pct") or "N/A"
+        hr_stadium = park.get("hr_stadium") or "N/A"
+        hr_weather = park.get("hr_weather") or "N/A"
+        desc = (
+            f"{venue} — HR environment {hr_pct} "
+            f"(stadium {hr_stadium}, weather {hr_weather}). "
+            f"{risk_note(away_full, away_r)}. "
+            f"{risk_note(home_full, home_r)}."
+        )
         gen.GAME_META.append(
             {
                 "key": g["key"],

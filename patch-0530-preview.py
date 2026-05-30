@@ -50,15 +50,15 @@ def data_attr(lines):
 
 
 THREE_LEG_HR = [
-    "Pete Alonso - Over 0.5 homerun",
+    "Willy Adames - Over 0.5 homerun",
+    "Kyle Schwarber - Over 0.5 homerun",
     "Brandon Lowe - Over 0.5 homerun",
-    "Byron Buxton - Over 0.5 homerun",
 ]
 
 FAV_THREE_LEG = [
-    "Kyle Schwarber - Over 0.5 homerun",
-    "Willy Adames - Over 0.5 homerun",
+    "Garrett Mitchell - Over 0.5 homerun",
     "Jordan Walker - Over 0.5 homerun",
+    "Jac Caglianone - Over 0.5 homerun",
 ]
 
 
@@ -76,12 +76,12 @@ def assert_goblin_hr_parlays_distinct() -> None:
 
 assert_goblin_hr_parlays_distinct()
 
-STRAIGHT_OF_DAY = "Pete Alonso - Over 0.5 homerun"
+STRAIGHT_OF_DAY = "Willy Adames - Over 0.5 homerun"
 STRAIGHT_O15_DAY = "Kyle Schwarber - Over 1.5 homeruns"
 
 TWO_LEG_HR = [
+    "Willy Adames - Over 0.5 homerun",
     "Kyle Schwarber - Over 0.5 homerun",
-    "Pete Alonso - Over 0.5 homerun",
 ]
 
 STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width straight-of-day-card">
@@ -91,13 +91,13 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                         <div class="straight-pick-hero">
                             <span class="straight-pick-tag">Over 0.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Pete Alonso &mdash; vs Trey Yesavage</strong>
-                                <span class="straight-pick-meta">Listed +410 &middot; Score 98 &middot; TOR @ BAL</span>
+                                <strong class="straight-pick-name">Willy Adames &mdash; vs Ryan Feltner</strong>
+                                <span class="straight-pick-meta">Listed +540 &middot; Score 98 &middot; SF @ COL</span>
                             </div>
                             <ul class="straight-pick-factors">
-                                <li><strong>Recent form</strong><small><strong>3 HR, 3 near-HR</strong>, 97.8 mph EV, 20.0% barrels on the slate.</small></li>
-                                <li><strong>Matchup</strong><small>Yesavage is a rookie righty with limited HR suppression in the CSV pool.</small></li>
-                                <li><strong>Park</strong><small>Camden Yards short right field supports Alonso&apos;s pull-side power lane.</small></li>
+                                <li><strong>Recent form</strong><small>Worst Pickz Favorite with <strong>4 HR, 4 near-HR</strong>, 92.3 mph EV, and 22.0% barrels.</small></li>
+                                <li><strong>Pitcher target</strong><small>Feltner carries 1.64 HR risk and a slate-best 1.79 lane vs RHB.</small></li>
+                                <li><strong>Park</strong><small>Coors Field adds the slate&apos;s top +29 altitude boost.</small></li>
                             </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add O0.5 Straight to Gambly</button>
@@ -128,34 +128,34 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Pete Alonso HR</strong><small>3 HR, 3 near-HR, and 97.8 mph EV versus Trey Yesavage at Camden Yards.</small></li>
-                                <li><strong>Brandon Lowe HR</strong><small>2 HR, 4 near-HR, and 30.8% barrels versus Bailey Ober.</small></li>
-                                <li><strong>Byron Buxton HR</strong><small>3 HR, 3 near-HR, and 91.5 mph EV versus Mitch Keller at PNC Park.</small></li>
+                                <li><strong>Willy Adames HR</strong><small>98 score, 4 HR, 4 near-HR, and Feltner&apos;s +1.79 RHB lane at Coors.</small></li>
+                                <li><strong>Kyle Schwarber HR</strong><small>98 score, 3 HR, 101.7 mph EV, and Sasaki&apos;s positive LHB split at Dodger Stadium.</small></li>
+                                <li><strong>Brandon Lowe HR</strong><small>98 score, 2 HR, 4 near-HR, and 30.8% barrels versus Bailey Ober&apos;s +0.84 LHB lane.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(THREE_LEG_HR)}'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Kyle Schwarber HR</strong><small>3 HR and 30.0% barrels versus Roki Sasaki at Dodger Stadium.</small></li>
-                                <li><strong>Pete Alonso HR</strong><small>3 HR versus Trey Yesavage with HR-friendly Camden right field.</small></li>
+                                <li><strong>Willy Adames HR</strong><small>Best O0.5 lane on the board: Feltner HR risk, Coors altitude, and 4 HR form.</small></li>
+                                <li><strong>Kyle Schwarber HR</strong><small>Best multi-HR profile: 3 HR, 30.0% barrels, and 101.7 mph EV versus Roki Sasaki.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(TWO_LEG_HR)}'>Add 2 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>Lowe, Adames, Schwarber, Devers, Mitchell, Olson</strong><small>Top attack lanes versus Ober, Feltner, Sasaki, Singer, Lambert, and Brown.</small></li>
-                                <li><strong>Alonso, Buxton, Freeman, Neto, Judge, Riley</strong><small>Hot hitters versus Yesavage, Keller, Griffin, Rasmussen, Ginn, and Perez.</small></li>
+                                <li><strong>Adames, Schwarber, Lowe, Devers, Turner, Dingler</strong><small>Top HR lanes versus Feltner, Sasaki, Ober, and Kay.</small></li>
+                                <li><strong>Alonso, Mitchell, Buxton, Neto, Judge, Riley</strong><small>Hot bats, but pitcher splits push Adames/Schwarber/Lowe higher for HR tickets.</small></li>
                             </ul>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Juan Soto - Over 0.5 hits", "Brandon Lowe - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Manny Machado - Over 0.5 hits", "Kyle Schwarber - Over 0.5 hits", "Rafael Devers - Over 0.5 hits", "Pete Alonso - Over 0.5 hits", "Byron Buxton - Over 0.5 hits", "Freddie Freeman - Over 0.5 hits", "Zach Neto - Over 0.5 hits", "Fernando Tatis - Over 0.5 hits", "Matt Olson - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>Kyle Schwarber HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 3 HR versus Roki Sasaki LHB split.</small></li>
-                                <li><strong>Willy Adames HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 4 HR versus Ryan Feltner at Coors Field.</small></li>
-                                <li><strong>Jordan Walker HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 95.3 mph EV versus Ben Brown.</small></li>
+                                <li><strong>Garrett Mitchell HR &#11088; &#127765;</strong><small>Worst Pickz Favorite longshot with 2 HR, 4 near-HR, and 27.3% barrels.</small></li>
+                                <li><strong>Jordan Walker HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 2 HR, 2 near-HR, and 25.0% barrels.</small></li>
+                                <li><strong>Jac Caglianone HR &#11088; &#127765;</strong><small>Worst Pickz Favorite with 102.9 mph EV and 29.9% barrels.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(FAV_THREE_LEG)}'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>
@@ -176,11 +176,11 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                     <h3>Top 5 HR Tickets (Holistic)</h3>
                     <p class="model-note summary-note">Ranks blend batter damage, opposing starter HR leakage, park/weather, and listed price.</p>
                     <div class="top-five-list">
-                        <div class="top-five-item"><span>Pete Alonso <small>3 HR, Yesavage RHB split, 97.8 mph EV</small></span><strong>98</strong></div>
-                        <div class="top-five-item"><span>Willy Adames <small>4 HR, Feltner at Coors, 22.0% barrels</small></span><strong>98</strong></div>
-                        <div class="top-five-item"><span>Kyle Schwarber <small>3 HR, Sasaki LHB split, 30.0% barrels</small></span><strong>98</strong></div>
-                        <div class="top-five-item"><span>Brandon Lowe <small>2 HR, Ober matchup, 30.8% barrels</small></span><strong>98</strong></div>
-                        <div class="top-five-item"><span>Byron Buxton <small>3 HR, 91.5 mph EV versus Keller</small></span><strong>95</strong></div>
+                        <div class="top-five-item"><span>Willy Adames <small>4 HR, Feltner +1.79 vs RHB, Coors +29</small></span><strong>98</strong></div>
+                        <div class="top-five-item"><span>Kyle Schwarber <small>3 HR, Sasaki +0.73 vs LHB, 101.7 mph EV</small></span><strong>98</strong></div>
+                        <div class="top-five-item"><span>Brandon Lowe <small>2 HR, Ober +0.84 vs LHB, 30.8% barrels</small></span><strong>98</strong></div>
+                        <div class="top-five-item"><span>Rafael Devers <small>Feltner +1.00 vs LHB, Coors, 28.0% barrels</small></span><strong>97</strong></div>
+                        <div class="top-five-item"><span>Trea Turner <small>Sasaki +0.91 vs RHB, 2 HR and 3 near-HR</small></span><strong>90</strong></div>
                     </div>
                 </div>"""
 
@@ -193,18 +193,18 @@ PARK_INNER = """
                     """
 
 WEATHER5_INNER = """
-                        <div class="summary-item"><span>#1 Pete Alonso <small>3 HR versus Yesavage at Camden</small></span><strong>98</strong></div>
-                        <div class="summary-item"><span>#2 Willy Adames <small>4 HR versus Feltner at Coors</small></span><strong>98</strong></div>
-                        <div class="summary-item"><span>#3 Kyle Schwarber <small>3 HR versus Sasaki at Dodger Stadium</small></span><strong>98</strong></div>
-                        <div class="summary-item"><span>#4 Brandon Lowe <small>2 HR versus Ober at PNC</small></span><strong>98</strong></div>
-                        <div class="summary-item"><span>#5 Byron Buxton <small>3 HR, 91.5 mph EV versus Keller</small></span><strong>95</strong></div>
+                        <div class="summary-item"><span>#1 Willy Adames <small>4 HR versus Feltner at Coors</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>#2 Kyle Schwarber <small>3 HR versus Sasaki at Dodger Stadium</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>#3 Brandon Lowe <small>2 HR versus Ober at PNC</small></span><strong>98</strong></div>
+                        <div class="summary-item"><span>#4 Rafael Devers <small>Feltner LHB lane plus Coors</small></span><strong>97</strong></div>
+                        <div class="summary-item"><span>#5 Trea Turner <small>Sasaki +0.91 vs RHB</small></span><strong>90</strong></div>
                     """
 
 LONGSHOT_INNER = """
-                        <div class="summary-item"><span>Garrett Mitchell <small>+790 with 2 HR versus Lambert</small></span><strong>98</strong></div>
-                        <div class="summary-item"><span>Spencer Horwitz <small>+730 with 3 HR versus Ober</small></span><strong>82</strong></div>
-                        <div class="summary-item"><span>Jackson Holliday <small>+850 versus Yesavage at Camden</small></span><strong>87</strong></div>
-                        <div class="summary-item"><span>Jesus Sanchez <small>+720 versus Brandon Young</small></span><strong>86</strong></div>
+                        <div class="summary-item"><span>Eric Haase <small>+950 versus Feltner&apos;s +1.79 RHB lane at Coors</small></span><strong>86</strong></div>
+                        <div class="summary-item"><span>Spencer Horwitz <small>+730 with 3 HR versus Ober&apos;s +0.84 LHB lane</small></span><strong>82</strong></div>
+                        <div class="summary-item"><span>Jesus Sanchez <small>+720 versus Brandon Young&apos;s positive LHB lane</small></span><strong>86</strong></div>
+                        <div class="summary-item"><span>Tj Rumfield <small>+880 at Coors versus Houser&apos;s +0.74 LHB lane</small></span><strong>78</strong></div>
                     """
 
 FADES_INNER = """
@@ -330,7 +330,7 @@ def patch_preview(manifest):
     if not start_m or not end_m or end_m.start() <= start_m.start():
         raise SystemExit("Could not locate summary block anchors")
     text = text[: start_m.start()] + SUMMARY_BLOCK + text[end_m.start() :]
-    if "Pete Alonso HR</strong>" not in text or "Munetaka Murakami" in text:
+    if "Willy Adames HR</strong>" not in text or "Munetaka Murakami" in text:
         raise SystemExit("Summary block patch failed — stale Goblin content detected")
     assert_goblin_hr_parlays_distinct()
     PREVIEW.write_text(text, encoding="utf-8")

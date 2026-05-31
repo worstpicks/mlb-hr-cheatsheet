@@ -148,6 +148,11 @@ straight_o15 = next(
     top_with_listed[1] if len(top_with_listed) > 1 else top_with_listed[0],
 )
 
+# User override for 5/31: force Willy Adames as O1.5 straight.
+adames_row = next((r for r in rows if r["name_plain"] == "Willy Adames"), None)
+if adames_row:
+    straight_o15 = adames_row
+
 top3 = []
 seen = set()
 for r in top_with_listed:

@@ -1,0 +1,31 @@
+Matchup,MIN @ PIT
+Pitcher,Zebby Matthews
+Pitcher Team,MIN
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,1.50,="3-9",.333,.333,0.000,0,0,0,0,0.0,0,.333,.666
+Batting Second,2.0,1.50,="3-9",.333,1.000,0.667,2,0,0,3,11.1,0,.333,1.333
+Batting Third,2.2,0.38,="1-9",.111,.111,0.000,0,0,0,0,22.2,0,.111,.222
+Batting Fourth,2.1,0.43,="0-7",.000,.000,0.000,0,0,0,0,22.2,1,.222,.222
+Batting Fifth,2.0,1.50,="3-9",.333,.556,0.223,0,2,0,0,11.1,0,.333,.889
+Batting Sixth,2.2,0.00,="0-8",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Seventh,2.0,1.00,="1-7",.143,.143,0.000,0,0,0,0,25.0,1,.250,.393
+Batting Eighth,1.1,1.50,="2-6",.333,.833,0.500,1,0,0,2,66.7,0,.333,1.166
+Batting Ninth,2.0,0.50,="1-6",.167,.167,0.000,0,0,0,0,16.7,0,.167,.334
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Oneil Cruz LHB,Batting First ​,="41-175",.234,.406,0.172,7,9,0,25,35.8,13,.295,.701
+Brandon Lowe LHB,Batting Second ​,="48-174",.276,.598,0.322,14,12,1,35,23.3,25,.371,.969
+Bryan Reynolds SHB,Batting Third ​,="58-203",.286,.453,0.167,6,12,2,37,20.9,41,.410,.863
+Marcell Ozuna RHB,Batting Fourth ​,="9-73",.123,.233,0.110,2,2,0,7,34.1,8,.220,.453
+Ryan O'Hearn LHB,Batting Fourth ​,="33-115",.287,.426,0.139,4,4,0,22,22.5,12,.357,.783
+Nick Gonzales RHB,Batting Sixth ​,="18-59",.305,.339,0.034,0,2,0,5,16.4,1,.328,.667
+Endy Rodriguez SHB,Batting Seventh ​,="5-14",.357,.357,0.000,0,0,0,0,27.8,3,.471,.828
+Tyler Callihan LHB,Batting Seventh ​,="1-2",.500,1.000,0.500,0,1,0,1,0.0,1,.667,1.667
+Spencer Horwitz LHB,Batting Seventh ​,="21-74",.284,.405,0.121,1,4,1,9,11.8,17,.419,.824
+Jared Triolo RHB,Batting Eighth ​,="8-23",.348,.348,0.000,0,0,0,1,34.8,0,.348,.696
+Jhostynxon Garcia RHB,Batting Eighth ​,="2-11",.182,.182,0.000,0,0,0,1,45.5,0,.182,.364
+Konnor Griffin RHB,Batting Eighth ​,="23-80",.288,.413,0.125,1,3,2,14,25.6,4,.326,.739
+Jake Mangum SHB,Batting Ninth ​,="6-28",.214,.250,0.036,0,1,0,2,12.5,2,.267,.517
+Henry Davis RHB,Batting Ninth ​,="13-104",.125,.269,0.144,4,3,0,9,20.5,9,.216,.485

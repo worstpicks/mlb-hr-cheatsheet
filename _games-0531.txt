@@ -1,0 +1,157 @@
+const games = [
+    {
+        title: "ARI @ SEA - Merrill Kelly (R, ARI) vs Bryce Miller (R, SEA)",
+        description: "T-Mobile Park — HR environment -13% (stadium +1%, weather -15%). Merrill Kelly: 0.13 HR risk (vs LHB +0.31, vs RHB -0.18; strongest LHB lane +0.31). Bryce Miller: -0.53 HR risk (vs LHB -1.10, vs RHB +0.72; strongest RHB lane +0.72).",
+        rows: [
+            { name: "Julio Rodriguez (R)", odds: "Listed prop - Over 0.5 HR", score: 87, emojis: "🌕 💣", note: "3 HR, 3 near-HR, 91.1 mph EV. Draws opposing starter Kelly; ARI @ SEA.", chips: ["vs Kelly"], blast: "high" },
+            { name: "Luke Raley (L)", odds: "Listed prop - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 2 near-HR, 85.1 mph EV. Draws opposing starter Kelly; ARI @ SEA.", chips: ["vs Kelly"], blast: "high" },
+            { name: "Mitch Garver (R)", odds: "Listed prop - Over 0.5 HR", score: 85, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 94.6 mph EV. Draws opposing starter Kelly; ARI @ SEA.", chips: ["vs Kelly"], blast: "high" },
+            { name: "Patrick Wisdom (R)", odds: "Listed prop - Over 0.5 HR", score: 75, emojis: "💎", note: "0 HR, 98.8 mph EV. Draws opposing starter Kelly; ARI @ SEA.", chips: ["vs Kelly"], blast: "good" },
+            { name: "Ketel Marte (S)", odds: "Listed prop - Over 0.5 HR", score: 80, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 3 near-HR, 83.2 mph EV. Draws opposing starter Miller; ARI @ SEA.", chips: ["vs Miller"], blast: "high" },
+            { name: "Corbin Carroll (L)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 1 near-HR, 90.1 mph EV. Draws opposing starter Miller; ARI @ SEA.", chips: ["vs Miller"], blast: "good" },
+        ],
+    },
+    {
+        title: "ATL @ CIN - Spencer Strider (R, ATL) vs Nick Lodolo 🧤 (R, CIN)",
+        description: "Great American BP — HR environment +0% (stadium +12%, weather -12%). Spencer Strider: 0.90 HR risk (vs LHB +1.12, vs RHB -0.47; strongest LHB lane +1.12). Nick Lodolo: 1.03 HR risk (vs LHB -0.55, vs RHB +1.25; strongest RHB lane +1.25).",
+        rows: [
+            { name: "JJ Bleday (L)", odds: "Listed prop - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 87.8 mph EV. Draws opposing starter Strider; ATL @ CIN.", chips: ["vs Strider"], blast: "high" },
+            { name: "Elly De La Cruz (S)", odds: "Listed prop - Over 0.5 HR", score: 88, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 3 near-HR, 96.5 mph EV. Draws opposing starter Strider; ATL @ CIN.", chips: ["vs Strider"], blast: "high" },
+            { name: "Matt McLain (R)", odds: "Listed prop - Over 0.5 HR", score: 73, emojis: "💎", note: "1 HR, 1 near-HR, 91.0 mph EV. Draws opposing starter Strider; ATL @ CIN.", chips: ["vs Strider"], blast: "good" },
+            { name: "Matt Olson (L)", odds: "Listed prop - Over 0.5 HR", score: 75, emojis: "💎 ⚾ 🕊️ 🧤", note: "1 HR, 1 near-HR, 93.4 mph EV. Draws opposing starter Lodolo; ATL @ CIN.", chips: ["vs Lodolo"], blast: "good" },
+        ],
+    },
+    {
+        title: "BOS @ CLE - Ranger Suarez (R, BOS) vs Tanner Bibee (R, CLE)",
+        description: "Progressive Field — HR environment -22% (stadium -5%, weather -18%). Ranger Suarez: -1.42 HR risk (vs LHB +0.13, vs RHB -1.15; strongest LHB lane +0.13). Tanner Bibee: 0.88 HR risk (vs LHB +0.69, vs RHB +0.54; strongest LHB lane +0.69).",
+        rows: [
+            { name: "Rhys Hoskins (R)", odds: "Listed +535 - Over 0.5 HR", score: 92, emojis: "🚀 ⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 3 near-HR, 101.6 mph EV. Draws opposing starter Suarez; BOS @ CLE.", chips: ["vs Suarez"], blast: "high" },
+            { name: "Kyle Manzardo (L)", odds: "Listed +810 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 83.7 mph EV. Draws opposing starter Suarez; BOS @ CLE.", chips: ["vs Suarez"], blast: "good" },
+            { name: "Jarren Duran (L)", odds: "Listed +571 - Over 0.5 HR", score: 98, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 4 HR, 5 near-HR, 95.1 mph EV. Draws opposing starter Bibee; BOS @ CLE.", chips: ["vs Bibee"], blast: "high" },
+            { name: "Willson Contreras (R)", odds: "Listed +413 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 87.5 mph EV. Draws opposing starter Bibee; BOS @ CLE.", chips: ["vs Bibee"], blast: "good" },
+            { name: "Mickey Gasper (S)", odds: "Listed +660 - Over 0.5 HR", score: 75, emojis: "💎", note: "0 HR, 2 near-HR, 94.7 mph EV. Draws opposing starter Bibee; BOS @ CLE.", chips: ["vs Bibee"], blast: "good" },
+        ],
+    },
+    {
+        title: "DET @ CWS - Keider Montero (R, DET) vs Sean Burke (R, CWS)",
+        description: "Rate Field — HR environment -8% (stadium +3%, weather -11%). Keider Montero: 0.31 HR risk (vs LHB +0.53, vs RHB -0.12; strongest LHB lane +0.53). Sean Burke: -0.67 HR risk (vs LHB -0.50, vs RHB -0.25; strongest RHB lane -0.25).",
+        rows: [
+            { name: "Colson Montgomery (L)", odds: "Listed +159 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 85.4 mph EV. Draws opposing starter Montero; DET @ CWS.", chips: ["vs Montero"], blast: "good" },
+            { name: "Colt Keith (L)", odds: "Listed prop - Over 0.5 HR", score: 62, emojis: "💎", note: "0 HR, 86.3 mph EV. Draws opposing starter Burke; DET @ CWS.", chips: ["vs Burke"] },
+            { name: "Spencer Torkelson (R)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 88.1 mph EV. Draws opposing starter Burke; DET @ CWS.", chips: ["vs Burke"], blast: "good" },
+        ],
+    },
+    {
+        title: "KC @ TEX - Michael Wacha (R, KC) vs Jack Leiter (R, TEX)",
+        description: "Globe Life Field — HR environment -10% (stadium -9%, weather -1%). Michael Wacha: -0.49 HR risk (vs LHB -0.60, vs RHB +0.23; strongest RHB lane +0.23). Jack Leiter: -0.23 HR risk (vs LHB -0.08, vs RHB -0.18; strongest LHB lane -0.08).",
+        rows: [
+            { name: "Brandon Nimmo (L)", odds: "Listed prop - Over 0.5 HR", score: 89, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 5 near-HR, 93.1 mph EV. Draws opposing starter Wacha; KC @ TEX.", chips: ["vs Wacha"], blast: "high" },
+            { name: "Josh Jung (R)", odds: "Listed prop - Over 0.5 HR", score: 85, emojis: "🌕 💣", note: "2 HR, 4 near-HR, 91.0 mph EV. Draws opposing starter Wacha; KC @ TEX.", chips: ["vs Wacha"], blast: "high" },
+            { name: "Jac Caglianone (L)", odds: "Listed prop - Over 0.5 HR", score: 84, emojis: "🚀 💎", note: "1 HR, 2 near-HR, 103.2 mph EV. Draws opposing starter Leiter; KC @ TEX.", chips: ["vs Leiter"], blast: "good" },
+            { name: "Salvador Perez (R)", odds: "Listed prop - Over 0.5 HR", score: 75, emojis: "💎", note: "1 HR, 1 near-HR, 92.6 mph EV. Draws opposing starter Leiter; KC @ TEX.", chips: ["vs Leiter"], blast: "good" },
+        ],
+    },
+    {
+        title: "LAA @ TB - Jack Kochanowicz (R, LAA) vs Shane McClanahan (R, TB)",
+        description: "Tropicana Field — HR environment -4% (stadium -4%, weather +1%). Jack Kochanowicz: -0.28 HR risk (vs LHB -0.57, vs RHB +0.20; strongest RHB lane +0.20). Shane McClanahan: -1.17 HR risk (vs LHB -1.46, vs RHB -0.40; strongest RHB lane -0.40).",
+        rows: [
+            { name: "Jonathan Aranda (L)", odds: "Listed +252 - Over 0.5 HR", score: 80, emojis: "⭐ 💎", note: "Worst Pickz favorite with 1 HR, 2 near-HR, 95.6 mph EV. Draws opposing starter Kochanowicz; LAA @ TB.", chips: ["vs Kochanowicz"], blast: "good" },
+            { name: "Yandy Diaz (R)", odds: "Listed +334 - Over 0.5 HR", score: 90, emojis: "🌕 💣", note: "3 HR, 4 near-HR, 91.7 mph EV. Draws opposing starter Kochanowicz; LAA @ TB.", chips: ["vs Kochanowicz"], blast: "high" },
+            { name: "Mike Trout (R)", odds: "Listed prop - Over 0.5 HR", score: 73, emojis: "⭐ 💎", note: "Worst Pickz favorite with 1 HR, 1 near-HR, 90.7 mph EV. Draws opposing starter McClanahan; LAA @ TB.", chips: ["vs McClanahan"], blast: "good" },
+            { name: "Oswald Peraza (R)", odds: "Listed prop - Over 0.5 HR", score: 76, emojis: "💎", note: "1 HR, 2 near-HR, 91.7 mph EV. Draws opposing starter McClanahan; LAA @ TB.", chips: ["vs McClanahan"], blast: "good" },
+            { name: "Jo Adell (R)", odds: "Listed prop - Over 0.5 HR", score: 91, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 98.7 mph EV. Draws opposing starter McClanahan; LAA @ TB.", chips: ["vs McClanahan"], blast: "high" },
+        ],
+    },
+    {
+        title: "MIA @ NYM - Janson Junk (R, MIA) vs Nolan McLean (R, NYM)",
+        description: "Citi Field — HR environment -8% (stadium -2%, weather -6%). Janson Junk: 0.09 HR risk (vs LHB +0.10, vs RHB +0.04; strongest LHB lane +0.10). Nolan McLean: 0.28 HR risk (vs LHB +0.14, vs RHB +0.35; strongest RHB lane +0.35).",
+        rows: [
+            { name: "Juan Soto (L)", odds: "Listed prop - Over 0.5 HR", score: 94, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 3 HR, 4 near-HR, 96.4 mph EV. Draws opposing starter Junk; MIA @ NYM.", chips: ["vs Junk"], blast: "high" },
+            { name: "Jared Young (L)", odds: "Listed prop - Over 0.5 HR", score: 79, emojis: "💎", note: "1 HR, 1 near-HR, 96.8 mph EV. Draws opposing starter Junk; MIA @ NYM.", chips: ["vs Junk"], blast: "good" },
+            { name: "MJ Melendez (L)", odds: "Listed prop - Over 0.5 HR", score: 74, emojis: "💎", note: "1 HR, 1 near-HR, 91.9 mph EV. Draws opposing starter Junk; MIA @ NYM.", chips: ["vs Junk"], blast: "good" },
+            { name: "Heriberto Hernandez (R)", odds: "Listed prop - Over 0.5 HR", score: 63, emojis: "⭐ 💎", note: "Worst Pickz favorite with 0 HR, 88.9 mph EV. Draws opposing starter McLean; MIA @ NYM.", chips: ["vs McLean"] },
+            { name: "Otto Lopez (R)", odds: "Listed prop - Over 0.5 HR", score: 66, emojis: "💎", note: "0 HR, 1 near-HR, 90.5 mph EV. Draws opposing starter McLean; MIA @ NYM.", chips: ["vs McLean"] },
+            { name: "Owen Caissie (L)", odds: "Listed prop - Over 0.5 HR", score: 79, emojis: "💎", note: "1 HR, 2 near-HR, 94.7 mph EV. Draws opposing starter McLean; MIA @ NYM.", chips: ["vs McLean"], blast: "good" },
+        ],
+    },
+    {
+        title: "MIL @ HOU - Jacob Misiorowski (R, MIL) vs Tatsuya Imai (R, HOU)",
+        description: "Daikin Park — HR environment +6% (stadium +7%, weather 0%). Jacob Misiorowski: -1.71 HR risk (vs LHB -0.86, vs RHB -1.33; strongest LHB lane -0.86). Tatsuya Imai: 0.79 HR risk (vs LHB +1.20, vs RHB -0.38; strongest LHB lane +1.20).",
+        rows: [
+            { name: "Yordan Alvarez (L)", odds: "Listed prop - Over 0.5 HR", score: 86, emojis: "🚀 ⭐ 💎", note: "Worst Pickz favorite with 1 HR, 3 near-HR, 102.0 mph EV. Draws opposing starter Misiorowski; MIL @ HOU.", chips: ["vs Misiorowski"], blast: "good" },
+            { name: "Christian Walker (R)", odds: "Listed prop - Over 0.5 HR", score: 75, emojis: "💎", note: "1 HR, 1 near-HR, 93.2 mph EV. Draws opposing starter Misiorowski; MIL @ HOU.", chips: ["vs Misiorowski"], blast: "good" },
+            { name: "Cam Smith (R)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "0 HR, 95.5 mph EV. Draws opposing starter Misiorowski; MIL @ HOU.", chips: ["vs Misiorowski"], blast: "good" },
+            { name: "Zach Dezenzo (R)", odds: "Listed prop - Over 0.5 HR", score: 68, emojis: "💎", note: "0 HR, 1 near-HR, 91.6 mph EV. Draws opposing starter Misiorowski; MIL @ HOU.", chips: ["vs Misiorowski"] },
+            { name: "Garrett Mitchell (L)", odds: "Listed prop - Over 0.5 HR", score: 94, emojis: "🚀 ⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 4 near-HR, 101.1 mph EV. Draws opposing starter Imai; MIL @ HOU.", chips: ["vs Imai"], blast: "high" },
+            { name: "Christian Yelich (L)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "0 HR, 93.7 mph EV. Draws opposing starter Imai; MIL @ HOU.", chips: ["vs Imai"], blast: "good" },
+            { name: "Jackson Chourio (R)", odds: "Listed prop - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 2 near-HR, 93.5 mph EV. Draws opposing starter Imai; MIL @ HOU.", chips: ["vs Imai"], blast: "good" },
+        ],
+    },
+    {
+        title: "MIN @ PIT - Zebby Matthews (R, MIN) vs Braxton Ashcraft (R, PIT)",
+        description: "PNC Park — HR environment -29% (stadium -14%, weather -15%). Zebby Matthews: 0.09 HR risk (vs LHB +0.31, vs RHB -0.12; strongest LHB lane +0.31). Braxton Ashcraft: -1.05 HR risk (vs LHB -0.44, vs RHB -0.91; strongest LHB lane -0.44).",
+        rows: [
+            { name: "Brandon Lowe (L)", odds: "Listed +247 - Over 0.5 HR", score: 89, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 4 near-HR, 94.9 mph EV. Draws opposing starter Matthews; MIN @ PIT.", chips: ["vs Matthews"], blast: "high" },
+            { name: "Oneil Cruz (L)", odds: "Listed +304 - Over 0.5 HR", score: 90, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 3 near-HR, 97.5 mph EV. Draws opposing starter Matthews; MIN @ PIT.", chips: ["vs Matthews"], blast: "high" },
+            { name: "Spencer Horwitz (L)", odds: "Listed +383 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "3 HR, 3 near-HR, 86.0 mph EV. Draws opposing starter Matthews; MIN @ PIT.", chips: ["vs Matthews"], blast: "high" },
+            { name: "Konnor Griffin (R)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 77.6 mph EV. Draws opposing starter Matthews; MIN @ PIT.", chips: ["vs Matthews"], blast: "good" },
+            { name: "Byron Buxton (R)", odds: "Listed +229 - Over 0.5 HR", score: 75, emojis: "💎", note: "1 HR, 1 near-HR, 93.1 mph EV. Draws opposing starter Ashcraft; MIN @ PIT.", chips: ["vs Ashcraft"], blast: "good" },
+            { name: "Trevor Larnach (L)", odds: "Listed +583 - Over 0.5 HR", score: 71, emojis: "💎", note: "1 HR, 1 near-HR, 89.1 mph EV. Draws opposing starter Ashcraft; MIN @ PIT.", chips: ["vs Ashcraft"], blast: "good" },
+        ],
+    },
+    {
+        title: "NYY @ ATH - Will Warren (R, NYY) vs Jacob Lopez (R, ATH)",
+        description: "Sutter Health Park — HR environment +23% (stadium +32%, weather -9%). Will Warren: -0.13 HR risk (vs LHB -0.11, vs RHB +0.22; strongest RHB lane +0.22). Jacob Lopez: no reliable HR-risk sample in today's export.",
+        rows: [
+            { name: "Carlos Cortes (L)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 84.7 mph EV. Draws opposing starter Warren; NYY @ ATH.", chips: ["vs Warren"], blast: "good" },
+            { name: "Tyler Soderstrom (L)", odds: "Listed prop - Over 0.5 HR", score: 65, emojis: "💎", note: "0 HR, 1 near-HR, 88.9 mph EV. Draws opposing starter Warren; NYY @ ATH.", chips: ["vs Warren"] },
+            { name: "Ben Rice (L)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "0 HR, 1 near-HR, 93.9 mph EV. Draws opposing starter Lopez; NYY @ ATH.", chips: ["vs Lopez"], blast: "good" },
+            { name: "Cody Bellinger (L)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 85.5 mph EV. Draws opposing starter Lopez; NYY @ ATH.", chips: ["vs Lopez"], blast: "good" },
+            { name: "Paul Goldschmidt (R)", odds: "Listed prop - Over 0.5 HR", score: 76, emojis: "💎", note: "1 HR, 1 near-HR, 93.6 mph EV. Draws opposing starter Lopez; NYY @ ATH.", chips: ["vs Lopez"], blast: "good" },
+        ],
+    },
+    {
+        title: "PHI @ LAD - Andrew Painter (R, PHI) vs Yoshinobu Yamamoto (R, LAD)",
+        description: "Dodger Stadium — HR environment +20% (stadium +18%, weather +3%). Andrew Painter: 0.23 HR risk (vs LHB -0.61, vs RHB +1.28; strongest RHB lane +1.28). Yoshinobu Yamamoto: -0.09 HR risk (vs LHB -0.21, vs RHB +0.18; strongest RHB lane +0.18).",
+        rows: [
+            { name: "Freddie Freeman (L)", odds: "Listed prop - Over 0.5 HR", score: 98, emojis: "🌕 💣", note: "4 HR, 4 near-HR, 96.4 mph EV. Draws opposing starter Painter; PHI @ LAD.", chips: ["vs Painter"], blast: "high" },
+            { name: "Shohei Ohtani (L)", odds: "Listed prop - Over 0.5 HR", score: 95, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 3 HR, 3 near-HR, 98.6 mph EV. Draws opposing starter Painter; PHI @ LAD.", chips: ["vs Painter"], blast: "high" },
+            { name: "Will Smith (R)", odds: "Listed prop - Over 0.5 HR", score: 86, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 2 HR, 4 near-HR, 91.6 mph EV. Draws opposing starter Painter; PHI @ LAD.", chips: ["vs Painter"], blast: "high" },
+            { name: "Max Muncy (L)", odds: "Listed prop - Over 0.5 HR", score: 82, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 89.6 mph EV. Draws opposing starter Painter; PHI @ LAD.", chips: ["vs Painter"], blast: "high" },
+            { name: "Trea Turner (R)", odds: "Listed prop - Over 0.5 HR", score: 91, emojis: "🌕 💣", note: "3 HR, 4 near-HR, 93.4 mph EV. Draws opposing starter Yamamoto; PHI @ LAD.", chips: ["vs Yamamoto"], blast: "high" },
+            { name: "Brandon Marsh (L)", odds: "Listed prop - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 98.5 mph EV. Draws opposing starter Yamamoto; PHI @ LAD.", chips: ["vs Yamamoto"], blast: "good" },
+            { name: "Kyle Schwarber (L)", odds: "Listed prop - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 2 near-HR, 94.4 mph EV. Draws opposing starter Yamamoto; PHI @ LAD.", chips: ["vs Yamamoto"], blast: "good" },
+        ],
+    },
+    {
+        title: "SD @ WSH - Griffin Canning (R, SD) vs Zack Littell (R, WSH)",
+        description: "Nationals Park — HR environment -6% (stadium +3%, weather -9%). Griffin Canning: 0.41 HR risk (vs LHB +1.10, vs RHB -1.10; strongest LHB lane +1.10). Zack Littell: 0.61 HR risk (vs LHB +0.77, vs RHB +0.06; strongest LHB lane +0.77).",
+        rows: [
+            { name: "CJ Abrams (L)", odds: "Listed prop - Over 0.5 HR", score: 74, emojis: "⭐ 💎", note: "Worst Pickz favorite with 1 HR, 1 near-HR, 92.1 mph EV. Draws opposing starter Canning; SD @ WSH.", chips: ["vs Canning"], blast: "good" },
+            { name: "James Wood (L)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "0 HR, 1 near-HR, 94.4 mph EV. Draws opposing starter Canning; SD @ WSH.", chips: ["vs Canning"], blast: "good" },
+            { name: "Gavin Sheets (L)", odds: "Listed prop - Over 0.5 HR", score: 71, emojis: "💎", note: "1 HR, 1 near-HR, 89.4 mph EV. Draws opposing starter Littell; SD @ WSH.", chips: ["vs Littell"], blast: "good" },
+            { name: "Ty France (R)", odds: "Listed prop - Over 0.5 HR", score: 76, emojis: "💎", note: "1 HR, 2 near-HR, 92.5 mph EV. Draws opposing starter Littell; SD @ WSH.", chips: ["vs Littell"], blast: "good" },
+        ],
+    },
+    {
+        title: "SF @ COL - Robbie Ray 🧤 (R, SF) vs Tanner Gordon (R, COL)",
+        description: "Coors Field — HR environment +32% (stadium +20%, weather +12%). Robbie Ray: 1.22 HR risk (vs LHB -1.09, vs RHB +1.54; strongest RHB lane +1.54). Tanner Gordon: 0.40 HR risk (vs LHB +1.28, vs RHB -0.53; strongest LHB lane +1.28).",
+        rows: [
+            { name: "Hunter Goodman (R)", odds: "Listed prop - Over 0.5 HR", score: 71, emojis: "💎 ⚾ 🕊️ 🧤", note: "1 HR, 1 near-HR, 89.0 mph EV. Draws opposing starter Ray; SF @ COL.", chips: ["vs Ray"], blast: "good" },
+            { name: "Willi Castro (S)", odds: "Listed prop - Over 0.5 HR", score: 67, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 90.7 mph EV. Draws opposing starter Ray; SF @ COL.", chips: ["vs Ray"] },
+            { name: "Willy Adames (R)", odds: "Listed prop - Over 0.5 HR", score: 95, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 4 HR, 4 near-HR, 93.1 mph EV. Draws opposing starter Gordon; SF @ COL.", chips: ["vs Gordon"], blast: "high" },
+            { name: "Rafael Devers (L)", odds: "Listed prop - Over 0.5 HR", score: 88, emojis: "⭐ 🌕 💣", note: "Worst Pickz favorite with 1 HR, 4 near-HR, 98.5 mph EV. Draws opposing starter Gordon; SF @ COL.", chips: ["vs Gordon"], blast: "high" },
+            { name: "Casey Schmitt (R)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 1 near-HR, 90.4 mph EV. Draws opposing starter Gordon; SF @ COL.", chips: ["vs Gordon"], blast: "good" },
+        ],
+    },
+    {
+        title: "TOR @ BAL - Spencer Miles (R, TOR) vs Kyle Bradish (R, BAL)",
+        description: "Oriole Park — HR environment -20% (stadium -1%, weather -19%). Spencer Miles: no reliable HR-risk sample in today's export. Kyle Bradish: -0.03 HR risk (vs LHB -0.08, vs RHB +0.20; strongest RHB lane +0.20).",
+        rows: [
+            { name: "Coby Mayo (R)", odds: "Listed +435 - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 1 near-HR, 96.2 mph EV. Draws opposing starter Miles; TOR @ BAL.", chips: ["vs Miles"], blast: "good" },
+            { name: "Pete Alonso (R)", odds: "Listed +246 - Over 0.5 HR", score: 96, emojis: "🌕 💣", note: "3 HR, 3 near-HR, 99.7 mph EV. Draws opposing starter Miles; TOR @ BAL.", chips: ["vs Miles"], blast: "high" },
+            { name: "Colton Cowser (L)", odds: "Listed +375 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 88.4 mph EV. Draws opposing starter Miles; TOR @ BAL.", chips: ["vs Miles"], blast: "high" },
+            { name: "Kazuma Okamoto (R)", odds: "Listed +296 - Over 0.5 HR", score: 64, emojis: "⭐ 💎", note: "Worst Pickz favorite with 0 HR, 1 near-HR, 83.2 mph EV. Draws opposing starter Bradish; TOR @ BAL.", chips: ["vs Bradish"] },
+        ],
+    },
+];

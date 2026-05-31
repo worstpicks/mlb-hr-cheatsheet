@@ -1,0 +1,30 @@
+Matchup,ATL @ CIN
+Pitcher,Nick Lodolo
+Pitcher Team,CIN
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,1.50,="2-8",.250,.375,0.125,0,1,0,0,25.0,1,.500,.875
+Batting Second,1.2,3.60,="5-10",.500,.800,0.300,1,0,0,2,25.0,1,.583,1.383
+Batting Third,3.0,1.33,="2-10",.200,.600,0.400,1,1,0,1,25.0,2,.333,.933
+Batting Fourth,2.0,2.50,="4-8",.500,1.125,0.625,1,2,0,2,9.1,1,.545,1.670
+Batting Fifth,2.2,1.13,="2-8",.250,.250,0.000,0,0,0,1,0.0,1,.300,.550
+Batting Sixth,3.0,0.67,="1-7",.143,.429,0.286,0,0,1,1,20.0,1,.222,.651
+Batting Seventh,1.2,2.40,="2-7",.286,.857,0.571,1,1,0,4,22.2,2,.444,1.301
+Batting Eighth,2.2,0.38,="1-8",.125,.125,0.000,0,0,0,0,12.5,0,.125,.250
+Batting Ninth,2.1,0.43,="1-8",.125,.500,0.375,1,0,0,2,37.5,0,.125,.625
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ronald Acuna Jr. RHB,Batting First ​,="39-163",.239,.380,0.141,4,9,1,17,21.2,30,.364,.744
+Matt Olson LHB,Batting Third ​,="42-160",.263,.500,0.237,9,11,0,32,22.0,19,.341,.841
+Ozzie Albies SHB,Batting Third ​,="23-65",.354,.600,0.246,4,4,0,10,8.1,6,.405,1.005
+Mike Yastrzemski LHB,Batting Fifth ​,="9-40",.225,.275,0.050,0,2,0,4,23.9,6,.326,.601
+Austin Riley RHB,Batting Fifth ​,="19-87",.218,.333,0.115,2,2,1,9,33.0,8,.299,.632
+Eli White RHB,Batting Sixth ​,="4-18",.222,.333,0.111,0,0,1,1,14.3,3,.333,.666
+Mauricio Dubon RHB,Batting Sixth ​,="9-37",.243,.324,0.081,0,3,0,5,12.5,2,.300,.624
+Michael Harris II LHB,Batting Sixth ​,="14-48",.292,.646,0.354,5,2,0,11,16.0,1,.320,.966
+Dominic Smith LHB,Batting Seventh ​,="20-58",.345,.483,0.138,2,2,0,12,18.0,0,.350,.833
+Ha-Seong Kim RHB,Batting Eighth ​,="2-27",.074,.074,0.000,0,0,0,1,32.3,4,.194,.268
+Sandy León SHB,Batting Ninth ​,="0-11",.000,.000,0.000,0,0,0,0,36.4,0,.000,.000
+Jorge Mateo RHB,Batting Ninth ​,="14-43",.326,.372,0.046,0,2,0,2,31.1,2,.356,.728
+Chadwick Tromp RHB,Batting Ninth ​,="4-19",.211,.263,0.052,0,1,0,3,28.6,0,.200,.463

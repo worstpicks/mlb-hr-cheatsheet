@@ -9,6 +9,8 @@ import re
 import shutil
 from pathlib import Path
 
+from sheet_data import load_pitcher_risk, resolve_pitcher
+
 ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview" / "index.html"
 MANIFEST_PATH = ROOT / "preview" / "sheets-manifest.json"
@@ -45,7 +47,28 @@ def collect_rows():
     rows = []
     for g in build.games:
         game_key = g["title"].split(" - ")[0]
+        park_m = re.search(r"HR environment\s*([+-]?\d+)%", g["description"])
+        park_pct = int(park_m.group(1)) if park_m else 0
         for r in g["rows"]:
+            chip = r["chips"][0].replace("vs ", "")
+            hand = r["name"].split("(")[-1].rstrip(")")
+            risk_row = resolve_pitcher(PITCHER_RISK, chip)
+            if risk_row:
+                split = risk_row["vs_lhb"] if hand == "L" else risk_row["vs_rhb"]
+                risk = risk_row["overall"]
+                pitcher_name = risk_row["pitcher"]
+            else:
+                split = 0.0
+                risk = 0.0
+                pitcher_name = chip
+
+            # Hybrid rank: batter score + opposing split/risk + park context.
+            weighted = (
+                r["score"]
+                + (split * 8.0)
+                + (risk * 4.0)
+                + (park_pct * 0.20)
+            )
             rows.append(
                 {
                     "game_key": game_key,
@@ -55,35 +78,30 @@ def collect_rows():
                     "odds": r["odds"],
                     "odds_value": parse_odds_value(r["odds"]),
                     "score": r["score"],
-                    "chip": r["chips"][0].replace("vs ", ""),
+                    "chip": chip,
                     "note": r["note"],
                     "hr": note_hr_count(r["note"]),
+                    "split": split,
+                    "risk": risk,
+                    "pitcher_name": pitcher_name,
+                    "park_pct": park_pct,
+                    "rank": weighted,
                 }
             )
-    rows.sort(key=lambda x: (x["score"], x["odds_value"] or -9999), reverse=True)
+    rows.sort(key=lambda x: (x["rank"], x["score"], x["odds_value"] or -9999), reverse=True)
     return rows
 
 
 def load_pitchers_to_attack():
-    path = ROOT / "data" / f"hr-targets-overall-{SHEET_DATE}.csv"
-    out = []
-    with path.open(encoding="utf-8-sig", newline="") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if not row.get("#", "").isdigit():
-                continue
-            try:
-                risk = float(row["HR RISK"])
-            except ValueError:
-                continue
-            out.append(
-                {
-                    "pitcher": row["PITCHER"],
-                    "risk": risk,
-                    "vs_lhb": row["VS LHB"],
-                    "vs_rhb": row["VS RHB"],
-                }
-            )
+    out = [
+        {
+            "pitcher": row["pitcher"],
+            "risk": row["overall"],
+            "vs_lhb": f"{row['vs_lhb']:+.2f}",
+            "vs_rhb": f"{row['vs_rhb']:+.2f}",
+        }
+        for row in PITCHER_RISK.values()
+    ]
     out.sort(key=lambda x: x["risk"], reverse=True)
     return out[:5]
 
@@ -112,6 +130,7 @@ def load_weather_rows():
     return rows
 
 
+PITCHER_RISK = load_pitcher_risk(ROOT / "data" / f"hr-targets-overall-{SHEET_DATE}.csv")
 rows = collect_rows()
 top_with_listed = [r for r in rows if r["odds_value"] is not None]
 if not top_with_listed:
@@ -119,7 +138,13 @@ if not top_with_listed:
 
 straight_o05 = top_with_listed[0]
 straight_o15 = next(
-    (r for r in top_with_listed if r["name"] != straight_o05["name"] and (r["hr"] >= 2 or r["score"] >= straight_o05["score"] - 4)),
+    (
+        r
+        for r in top_with_listed
+        if r["name"] != straight_o05["name"]
+        and (r["hr"] >= 2 or r["score"] >= 90)
+        and r["split"] >= -0.05
+    ),
     top_with_listed[1] if len(top_with_listed) > 1 else top_with_listed[0],
 )
 
@@ -133,7 +158,7 @@ for r in top_with_listed:
     if len(top3) == 3:
         break
 
-fav_rows = [r for r in rows if r["name"] in FAVS]
+fav_rows = [r for r in rows if r["name"] in FAVS and r["name"] not in {x["name"] for x in top3}]
 fav3 = []
 seen = set()
 for r in fav_rows:
@@ -220,17 +245,17 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>{top3[0]['name_plain']} HR</strong><small>{top3[0]['note']}</small></li>
-                                <li><strong>{top3[1]['name_plain']} HR</strong><small>{top3[1]['note']}</small></li>
-                                <li><strong>{top3[2]['name_plain']} HR</strong><small>{top3[2]['note']}</small></li>
+                                <li><strong>{top3[0]['name_plain']} HR</strong><small>{top3[0]['note']} Opposing split {top3[0]['split']:+.2f}, park {top3[0]['park_pct']}%.</small></li>
+                                <li><strong>{top3[1]['name_plain']} HR</strong><small>{top3[1]['note']} Opposing split {top3[1]['split']:+.2f}, park {top3[1]['park_pct']}%.</small></li>
+                                <li><strong>{top3[2]['name_plain']} HR</strong><small>{top3[2]['note']} Opposing split {top3[2]['split']:+.2f}, park {top3[2]['park_pct']}%.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(THREE_LEG_HR)}'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>{straight_o05['name_plain']} HR</strong><small>{straight_o05['note']}</small></li>
-                                <li><strong>{straight_o15['name_plain']} HR</strong><small>{straight_o15['note']}</small></li>
+                                <li><strong>{straight_o05['name_plain']} HR</strong><small>{straight_o05['note']} Opposing split {straight_o05['split']:+.2f}, park {straight_o05['park_pct']}%.</small></li>
+                                <li><strong>{straight_o15['name_plain']} HR</strong><small>{straight_o15['note']} Opposing split {straight_o15['split']:+.2f}, park {straight_o15['park_pct']}%.</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(TWO_LEG_HR)}'>Add 2 Leg HR to Gambly</button></div>
                         </div>

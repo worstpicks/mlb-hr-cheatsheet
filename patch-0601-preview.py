@@ -187,6 +187,39 @@ for r in rows:
     if len(top5) == 5:
         break
 
+# Weather-heavy HR list: prioritize park/weather boost, then matchup and form.
+weather_ranked = sorted(
+    rows,
+    key=lambda r: (
+        r["park_pct"],
+        r["split"],
+        r["hr"],
+        r["near"],
+        r["score"],
+    ),
+    reverse=True,
+)
+weather5 = []
+seen = set()
+for r in weather_ranked:
+    if r["name"] in seen:
+        continue
+    seen.add(r["name"])
+    weather5.append(r)
+    if len(weather5) == 5:
+        break
+# Force non-duplicate section if weather list matches holistic list exactly.
+if [r["name"] for r in weather5] == [r["name"] for r in top5]:
+    weather5 = []
+    seen = set()
+    for r in weather_ranked:
+        if r["name"] in seen or r["name"] == top5[0]["name"]:
+            continue
+        seen.add(r["name"])
+        weather5.append(r)
+        if len(weather5) == 5:
+            break
+
 longshots = [r for r in listed_rows if (r["odds_value"] or 0) >= 700][:4]
 if len(longshots) < 4:
     extra = [r for r in listed_rows if r not in longshots]
@@ -338,7 +371,7 @@ PARK_INNER = "\n".join(
 )
 WEATHER5_INNER = "\n".join(
     f'                        <div class="summary-item"><span>#{i+1} {r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]}</small></span><strong>{r["score"]}</strong></div>'
-    for i, r in enumerate(top5)
+    for i, r in enumerate(weather5)
 )
 LONGSHOT_INNER = "\n".join(
     f'                        <div class="summary-item"><span>{r["name_plain"]} <small>{r["odds"]} vs {r["chip"]}</small></span><strong>{r["score"]}</strong></div>'

@@ -126,11 +126,20 @@ listed_rows = [r for r in rows if r["odds_value"] is not None]
 if not listed_rows:
     listed_rows = rows
 
-straight_o05 = listed_rows[0]
-straight_o15 = next(
-    (r for r in listed_rows if r["name"] != straight_o05["name"] and (r["hr"] >= 2 or r["score"] >= 90) and r["split"] >= -0.05),
-    listed_rows[1] if len(listed_rows) > 1 else listed_rows[0],
-)
+# Guard rails for "best pick" quality: avoid low-score outliers.
+straight_pool = [r for r in listed_rows if r["score"] >= 88 and r["hr"] >= 1 and r["split"] >= -0.10]
+if not straight_pool:
+    straight_pool = listed_rows
+
+straight_o05 = straight_pool[0]
+o15_pool = [
+    r
+    for r in straight_pool
+    if r["name"] != straight_o05["name"] and r["hr"] >= 2 and r["score"] >= 85 and r["split"] >= -0.05
+]
+if not o15_pool:
+    o15_pool = [r for r in straight_pool if r["name"] != straight_o05["name"] and r["score"] >= 90]
+straight_o15 = o15_pool[0] if o15_pool else (straight_pool[1] if len(straight_pool) > 1 else straight_pool[0])
 
 top3, seen = [], set()
 for r in listed_rows:

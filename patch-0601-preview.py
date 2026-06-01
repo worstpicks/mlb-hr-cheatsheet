@@ -171,7 +171,9 @@ for r in listed_rows:
     if len(top3) == 3:
         break
 
-fav_rows = [r for r in rows if r["name"] in FAVS and r["name"] not in {x["name"] for x in top3}]
+fav_rows = [r for r in rows if r["name"] in FAVS and r["name"] not in {x["name"] for x in top3} and r["score"] >= 85]
+if len(fav_rows) < 3:
+    fav_rows = [r for r in rows if r["name"] in FAVS and r["name"] not in {x["name"] for x in top3}]
 fav3, seen = [], set()
 for r in fav_rows:
     if r["name"] in seen:

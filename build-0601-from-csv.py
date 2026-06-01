@@ -391,7 +391,10 @@ def main() -> int:
                 ev,
                 park_context.get(_game),
             )
+            fav_note = "Worst Pickz Favorite. " if is_fav else ""
             note = (
+                fav_note
+                + 
                 f"Tail: {core_reason(hr, near, ev, barrel)}. "
                 f"Matchup: {matchup}. "
                 f"Fade: {fade}. "

@@ -45,6 +45,21 @@ def note_hr_count(note: str) -> int:
     return int(m.group(1)) if m else 0
 
 
+def note_near_count(note: str) -> int:
+    m = re.search(r"(\d+)\s+near-HR", note)
+    return int(m.group(1)) if m else 0
+
+
+def note_ev(note: str) -> float:
+    m = re.search(r"(\d+(?:\.\d+)?)\s+mph EV", note)
+    return float(m.group(1)) if m else 0.0
+
+
+def note_barrel(note: str) -> float:
+    m = re.search(r"(\d+(?:\.\d+)?)% barrels", note)
+    return float(m.group(1)) if m else 0.0
+
+
 def collect_rows():
     rows = []
     for g in build.games:
@@ -73,6 +88,9 @@ def collect_rows():
                     "chip": chip,
                     "note": r["note"],
                     "hr": note_hr_count(r["note"]),
+                    "near": note_near_count(r["note"]),
+                    "ev": note_ev(r["note"]),
+                    "barrel": note_barrel(r["note"]),
                     "split": split,
                     "risk": risk,
                     "park_pct": park_pct,
@@ -174,6 +192,32 @@ if len(longshots) < 4:
     extra = [r for r in listed_rows if r not in longshots]
     longshots.extend(extra[: 4 - len(longshots)])
 
+# Hits parlay selector (max 11 legs): recent hit indicators + matchup edge.
+for r in rows:
+    recent_hit_form = (r["hr"] * 2.5) + (r["near"] * 1.5) + max(r["ev"] - 88.0, 0) * 0.6 + (r["barrel"] / 6.0)
+    matchup_edge = (r["split"] * 10.0) + (r["park_pct"] * 0.10)
+    r["hits_rank"] = recent_hit_form + matchup_edge + (r["score"] * 0.10)
+
+hits_pool = [
+    r for r in rows
+    if (r["hr"] >= 1 or r["near"] >= 1 or r["ev"] >= 90)
+    and r["split"] >= -0.20
+]
+if not hits_pool:
+    hits_pool = rows
+hits_pool = sorted(hits_pool, key=lambda x: x["hits_rank"], reverse=True)
+hits_parlay_legs = []
+seen = set()
+for r in hits_pool:
+    if r["name"] in seen:
+        continue
+    seen.add(r["name"])
+    hits_parlay_legs.append(r)
+    if len(hits_parlay_legs) == 11:
+        break
+hits_line_a = ", ".join(r["name_plain"] for r in hits_parlay_legs[:6])
+hits_line_b = ", ".join(r["name_plain"] for r in hits_parlay_legs[6:11])
+
 weather_rows = load_weather_rows()
 weather_top = sorted(weather_rows, key=lambda x: x["hr_pct"], reverse=True)[:5]
 weather_fades = sorted(weather_rows, key=lambda x: x["hr_pct"])[:4]
@@ -254,10 +298,10 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>{", ".join(r['name_plain'] for r in top5[:3])}</strong><small>Highest combined rank from score/split/park.</small></li>
-                                <li><strong>{", ".join(r['name_plain'] for r in top5[3:5])}</strong><small>Next best balance of form and matchup.</small></li>
+                                <li><strong>{hits_line_a}</strong><small>Best recent hit form plus favorable opposing split/park context.</small></li>
+                                <li><strong>{hits_line_b}</strong><small>Secondary hit legs with stable contact profile and non-negative matchup lane.</small></li>
                             </ul>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([f"{r['name_plain']} - Over 0.5 hits" for r in top5])}'>Add Hits Parlay to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([f"{r['name_plain']} - Over 0.5 hits" for r in hits_parlay_legs])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>

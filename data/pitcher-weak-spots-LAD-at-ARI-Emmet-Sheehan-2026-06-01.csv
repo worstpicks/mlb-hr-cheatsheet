@@ -1,0 +1,30 @@
+Matchup,LAD @ ARI
+Pitcher,Emmet Sheehan
+Pitcher Team,LAD
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.0,1.50,="7-25",.280,.840,0.560,4,2,0,6,32.1,2,.357,1.197
+Batting Second,7.1,0.82,="6-28",.214,.393,0.179,1,2,0,2,32.1,0,.214,.607
+Batting Third,6.2,1.05,="5-24",.208,.375,0.167,1,1,0,2,29.6,2,.296,.671
+Batting Fourth,5.0,2.20,="10-25",.400,.600,0.200,1,2,0,2,15.4,1,.423,1.023
+Batting Fifth,6.0,1.00,="4-22",.182,.455,0.273,2,0,0,6,20.8,2,.250,.705
+Batting Sixth,4.2,1.93,="7-21",.333,.429,0.096,0,2,0,1,21.7,2,.391,.820
+Batting Seventh,5.1,1.13,="4-18",.222,.333,0.111,0,2,0,2,38.1,2,.286,.619
+Batting Eighth,5.2,0.88,="3-17",.176,.353,0.177,0,3,0,2,30.0,2,.250,.603
+Batting Ninth,4.2,1.07,="4-18",.222,.222,0.000,0,0,0,0,25.0,1,.300,.522
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="50-183",.273,.475,0.202,8,11,1,29,15.4,16,.328,.803
+Corbin Carroll LHB,Batting Second ​,="49-155",.316,.587,0.271,5,11,8,25,22.0,26,.412,.999
+Geraldo Perdomo SHB,Batting Third ​,="37-153",.242,.366,0.124,2,7,3,16,11.8,25,.342,.708
+Nolan Arenado RHB,Batting Fourth ​,="12-50",.240,.440,0.200,1,7,0,10,19.0,9,.381,.821
+Gabriel Moreno RHB,Batting Fourth ​,="12-46",.261,.348,0.087,0,4,0,5,17.6,3,.314,.662
+Adrian Del Castillo LHB,Batting Fourth ​,="13-72",.181,.306,0.125,2,3,0,11,33.3,2,.200,.506
+Ildemaro Vargas SHB,Batting Fifth ​,="20-81",.247,.309,0.062,1,2,0,9,8.2,3,.282,.591
+Aramis Garcia RHB,Batting Eighth ​,="1-10",.100,.100,0.000,0,0,0,1,30.0,0,.100,.200
+Tim Tawa RHB,Batting Eighth ​,="6-29",.207,.276,0.069,0,2,0,4,22.9,4,.294,.570
+Jose Fernandez RHB,Batting Eighth ​,="10-39",.256,.385,0.129,0,5,0,5,23.8,0,.275,.660
+Jorge Barrosa SHB,Batting Ninth ​,="13-64",.203,.375,0.172,0,9,1,5,27.4,6,.282,.657
+Tommy Troy RHB,Batting Ninth ​,="5-19",.263,.368,0.105,0,2,0,0,18.2,3,.364,.732
+Ryan Waldschmidt RHB,Batting Ninth ​,="15-46",.326,.413,0.087,0,4,0,6,28.8,5,.392,.805

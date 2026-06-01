@@ -1,0 +1,30 @@
+Matchup,DET @ TB
+Pitcher,Ty Madden
+Pitcher Team,DET
+Opposing Team,TB
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,1.50,="1-5",.200,.200,0.000,0,0,0,0,16.7,1,.333,.533
+Batting Second,1.1,0.75,="1-6",.167,.167,0.000,0,0,0,0,33.3,0,.167,.334
+Batting Third,1.1,0.75,="1-5",.200,.200,0.000,0,0,0,0,20.0,0,.200,.400
+Batting Fourth,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Batting Fifth,1.0,1.00,="0-3",.000,.000,0.000,0,0,0,0,25.0,1,.250,.250
+Batting Sixth,1.0,2.00,="2-5",.400,.400,0.000,0,0,0,0,20.0,0,.400,.800
+Batting Seventh,1.1,0.75,="1-5",.200,.200,0.000,0,0,0,0,40.0,0,.200,.400
+Batting Eighth,1.0,1.00,="1-4",.250,1.000,0.750,1,0,0,3,0.0,0,.250,1.250
+Batting Ninth,1.0,0.00,="0-4",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Chandler Simpson LHB,Batting First ​,="36-133",.271,.323,0.052,0,3,2,6,13.4,7,.305,.628
+Junior Caminero RHB,Batting Second ​,="32-113",.283,.522,0.239,8,3,0,16,14.8,14,.359,.881
+Jonathan Aranda LHB,Batting Third ​,="30-104",.288,.519,0.231,6,6,0,27,23.6,18,.386,.905
+Yandy Diaz RHB,Batting Fourth ​,="27-102",.265,.480,0.215,6,4,0,15,10.4,11,.348,.828
+Ryan Vilade RHB,Batting Fourth ​,="14-33",.424,.636,0.212,1,2,1,10,17.1,6,.500,1.136
+Richie Palacios LHB,Batting Fifth ​,="8-34",.235,.265,0.030,0,1,0,5,18.9,3,.297,.562
+Ben Williamson RHB,Batting Sixth ​,="13-53",.245,.321,0.076,0,2,1,5,23.7,5,.322,.643
+Cedric Mullins LHB,Batting Seventh ​,="12-62",.194,.306,0.112,2,1,0,6,16.4,3,.242,.548
+Victor Mesa Jr. LHB,Batting Seventh ​,="2-8",.250,.625,0.375,1,0,0,2,20.0,1,.333,.958
+Nick Fortes RHB,Batting Eighth ​,="19-73",.260,.288,0.028,0,2,0,6,15.4,1,.286,.574
+Hunter Feduccia LHB,Batting Eighth ​,="11-48",.229,.333,0.104,1,2,0,6,29.1,4,.296,.629
+Taylor Walls SHB,Batting Ninth ​,="21-115",.183,.243,0.060,0,3,2,13,25.2,17,.288,.531
+Oliver Dunn LHB,Batting Ninth ​,="0-4",.000,.000,0.000,0,0,0,0,25.0,0,.000,.000

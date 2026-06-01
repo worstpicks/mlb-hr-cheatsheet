@@ -80,6 +80,16 @@ Rules when picking straights:
 
 Primary HR-risk file: `data/hr-targets-overall-YYYY-MM-DD.csv`.
 
+## Output quality rule (required)
+
+In game descriptions, Straights, and Goblin notes, include only decision-useful items:
+
+- strongest matchup edge first (opposing split + HR risk),
+- batter power form (HR / near-HR / EV / barrels),
+- park + weather HR effect.
+
+Avoid internal/build-process wording and hype language. Keep notes neutral, factual, and tail/fade ready.
+
 ## Step 1 — Worst Pickz Straights of the Day (required every slate)
 
 **Never copy yesterday's straights.** The `Worst Pickz Straights of the Day` block must be rebuilt for the **current slate only** — not left stale from the prior day or archive.

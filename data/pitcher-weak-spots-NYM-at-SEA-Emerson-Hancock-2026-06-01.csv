@@ -1,0 +1,30 @@
+Matchup,NYM @ SEA
+Pitcher,Emerson Hancock
+Pitcher Team,SEA
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.0,1.13,="8-32",.250,.563,0.313,3,1,0,5,21.2,1,.273,.836
+Batting Second,7.2,1.04,="6-29",.207,.448,0.241,2,1,0,3,22.6,2,.258,.706
+Batting Third,6.2,1.50,="8-27",.296,.556,0.260,2,1,0,4,16.7,2,.367,.923
+Batting Fourth,6.2,1.65,="6-25",.240,.280,0.040,0,1,0,3,36.7,5,.367,.647
+Batting Fifth,6.2,1.20,="6-25",.240,.320,0.080,0,2,0,0,37.0,2,.296,.616
+Batting Sixth,7.1,0.68,="4-25",.160,.200,0.040,0,1,0,1,23.1,1,.192,.392
+Batting Seventh,7.0,0.57,="4-25",.160,.280,0.120,1,0,0,1,20.0,0,.160,.440
+Batting Eighth,6.0,1.17,="5-21",.238,.238,0.000,0,0,0,0,28.0,2,.360,.598
+Batting Ninth,8.1,0.36,="3-24",.125,.208,0.083,0,2,0,3,20.8,0,.125,.333
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carson Benge LHB,Batting First ​,="27-92",.293,.370,0.077,1,4,0,10,19.8,6,.356,.726
+Juan Soto LHB,Batting Second ​,="22-70",.314,.500,0.186,3,4,0,8,15.9,12,.415,.915
+Bo Bichette RHB,Batting Second ​,="27-135",.200,.274,0.074,3,1,0,14,14.2,13,.270,.544
+Mark Vientos RHB,Batting Fourth ​,="17-89",.191,.326,0.135,2,6,0,11,20.9,1,.209,.535
+Jared Young LHB,Batting Fourth ​,="2-10",.200,.500,0.300,1,0,0,1,30.8,3,.385,.885
+MJ Melendez LHB,Batting Fifth ​,="3-25",.120,.280,0.160,1,1,0,1,39.3,3,.214,.494
+Brett Baty LHB,Batting Fifth ​,="15-58",.259,.414,0.155,2,3,0,9,26.6,5,.313,.727
+A.J. Ewing LHB,Batting Sixth ​,="1-20",.050,.050,0.000,0,0,0,0,47.6,1,.095,.145
+Marcus Semien RHB,Batting Seventh ​,="23-91",.253,.396,0.143,2,7,0,12,18.8,8,.317,.713
+Eric Wagaman RHB,Batting Seventh ​,="1-2",.500,2.000,1.500,1,0,0,1,0.0,0,.500,2.500
+Luis Torrens RHB,Batting Ninth ​,="18-79",.228,.304,0.076,0,6,0,11,20.5,5,.299,.603
+Vidal Brujan SHB,Batting Ninth ​,="0-3",.000,.000,0.000,0,0,0,0,0.0,1,.250,.250
+Hayden Senger RHB,Batting Ninth ​,="2-13",.154,.385,0.231,1,0,0,2,20.0,0,.154,.539

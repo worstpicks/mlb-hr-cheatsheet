@@ -6,6 +6,7 @@ import importlib.util
 import json
 import re
 import sys
+import csv
 from pathlib import Path
 
 from csv_slate_meta import derive_games_from_csv
@@ -144,9 +145,73 @@ def core_reason(hr: int, near: int, ev: float, barrel: float) -> str:
     return ", ".join(parts)
 
 
+def _pct_value(text: str | None) -> int:
+    if not text:
+        return 0
+    m = re.search(r"([+-]?\d+)", text)
+    return int(m.group(1)) if m else 0
+
+
+def load_park_context(date: str) -> dict[str, dict]:
+    path = ROOT / "data" / f"ParkFactors_{date}.csv"
+    out: dict[str, dict] = {}
+    if not path.exists():
+        return out
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            key = " ".join((row.get("Game") or "").replace("  ", " ").split())
+            if not key:
+                continue
+            out[key] = {
+                "hr_pct": _pct_value(row.get("HR %")),
+                "hr_weather": _pct_value(row.get("HR % Weather")),
+                "hr_stadium": _pct_value(row.get("HR % Stadium")),
+            }
+    return out
+
+
+def fade_reason(
+    split: float | None,
+    risk_overall: float | None,
+    hr: int,
+    near: int,
+    ev: float,
+    park_ctx: dict | None,
+) -> str:
+    parts: list[str] = []
+    if split is None or risk_overall is None:
+        parts.append("limited split/risk sample")
+    else:
+        if split <= -0.40:
+            parts.append(f"tough split lane ({split:+.2f})")
+        elif split < 0:
+            parts.append(f"slight split headwind ({split:+.2f})")
+        if risk_overall <= -0.40:
+            parts.append(f"pitcher suppresses HR ({risk_overall:+.2f})")
+        elif risk_overall < 0:
+            parts.append(f"pitcher risk below avg ({risk_overall:+.2f})")
+
+    if park_ctx:
+        if park_ctx["hr_pct"] <= -5:
+            parts.append(f"park/weather net drag ({park_ctx['hr_pct']:+d}%)")
+        elif park_ctx["hr_weather"] <= -4:
+            parts.append(f"weather carry headwind ({park_ctx['hr_weather']:+d}%)")
+        elif park_ctx["hr_stadium"] <= -6:
+            parts.append(f"park suppresses carry ({park_ctx['hr_stadium']:+d}%)")
+
+    if hr == 0 and near <= 1:
+        parts.append("limited recent HR events")
+    if ev < 88:
+        parts.append(f"lighter EV form ({ev:.1f} mph)")
+
+    return "; ".join(parts[:2]) if parts else "HR outcomes are still high-variance"
+
+
 def main() -> int:
     games_csv = {g["key"]: g for g in derive_games_from_csv(DATE)}
     pitcher_risk = load_pitcher_risk(ROOT / "data" / f"hr-targets-overall-{DATE}.csv")
+    park_context = load_park_context(DATE)
 
     batter_ctx: dict[str, dict] = {}
     for g in games_csv.values():
@@ -318,9 +383,18 @@ def main() -> int:
                 matchup = f"{chip} {split_side} split {split:+.2f}, HR risk {risk['overall']:.2f}"
             else:
                 matchup = f"{chip} split/risk data unavailable"
+            fade = fade_reason(
+                split if risk else None,
+                risk["overall"] if risk else None,
+                hr,
+                near,
+                ev,
+                park_context.get(_game),
+            )
             note = (
                 f"Tail: {core_reason(hr, near, ev, barrel)}. "
                 f"Matchup: {matchup}. "
+                f"Fade: {fade}. "
                 f"Model score {score}; odds {odds_text(odds)}."
             )
             if blast:

@@ -62,10 +62,12 @@ def note_barrel(note: str) -> float:
 
 def collect_rows():
     rows = []
+    weather_lookup = {w["game"]: w for w in load_weather_rows()}
     for g in build.games:
         game_key = g["title"].split(" - ")[0]
         park_m = re.search(r"HR environment\s*([+-]?\d+)%", g["description"])
-        park_pct = int(park_m.group(1)) if park_m else 0
+        park_from_desc = int(park_m.group(1)) if park_m else 0
+        park_pct = weather_lookup.get(game_key, {}).get("hr_pct", park_from_desc)
         for r in g["rows"]:
             chip = r["chips"][0].replace("vs ", "")
             hand = r["name"].split("(")[-1].rstrip(")")
@@ -187,39 +189,6 @@ for r in rows:
     if len(top5) == 5:
         break
 
-# Weather-heavy HR list: prioritize park/weather boost, then matchup and form.
-weather_ranked = sorted(
-    rows,
-    key=lambda r: (
-        r["park_pct"],
-        r["split"],
-        r["hr"],
-        r["near"],
-        r["score"],
-    ),
-    reverse=True,
-)
-weather5 = []
-seen = set()
-for r in weather_ranked:
-    if r["name"] in seen:
-        continue
-    seen.add(r["name"])
-    weather5.append(r)
-    if len(weather5) == 5:
-        break
-# Force non-duplicate section if weather list matches holistic list exactly.
-if [r["name"] for r in weather5] == [r["name"] for r in top5]:
-    weather5 = []
-    seen = set()
-    for r in weather_ranked:
-        if r["name"] in seen or r["name"] == top5[0]["name"]:
-            continue
-        seen.add(r["name"])
-        weather5.append(r)
-        if len(weather5) == 5:
-            break
-
 longshots = [r for r in listed_rows if (r["odds_value"] or 0) >= 700][:4]
 if len(longshots) < 4:
     extra = [r for r in listed_rows if r not in longshots]
@@ -254,6 +223,81 @@ hits_line_b = ", ".join(r["name_plain"] for r in hits_parlay_legs[6:11])
 weather_rows = load_weather_rows()
 weather_top = sorted(weather_rows, key=lambda x: x["hr_pct"], reverse=True)[:5]
 weather_fades = sorted(weather_rows, key=lambda x: x["hr_pct"])[:4]
+weather_by_game = {w["game"]: w for w in weather_rows}
+pitchers_attack = load_pitchers_to_attack()
+
+# Top 4 HR tickets: combine attackability, weather/park, and HR risk into one rank.
+attack_bonus_by_pitcher = {
+    p["pitcher"]: max(0.0, 5.0 - idx) * 2.0
+    for idx, p in enumerate(pitchers_attack)
+}
+combined_ranked = []
+for r in rows:
+    risk_row = resolve_pitcher(PITCHER_RISK, r["chip"])
+    pitcher_name = risk_row["pitcher"] if risk_row else r["chip"]
+    attack_bonus = attack_bonus_by_pitcher.get(pitcher_name, 0.0)
+    combined_rank = (
+        (r["risk"] * 12.0)
+        + (r["split"] * 10.0)
+        + (r["park_pct"] * 0.60)
+        + (r["hr"] * 2.8)
+        + (r["near"] * 1.6)
+        + (max(r["ev"] - 90.0, 0.0) * 0.35)
+        + (r["score"] * 0.18)
+        + attack_bonus
+    )
+    combined_ranked.append({**r, "combined_rank": combined_rank})
+
+combined_ranked.sort(key=lambda r: (r["combined_rank"], r["score"]), reverse=True)
+top4, seen = [], set()
+for r in combined_ranked:
+    if r["name"] in seen:
+        continue
+    seen.add(r["name"])
+    top4.append(r)
+    if len(top4) == 4:
+        break
+
+# Weather-heavy HR list: prioritize park/weather and keep distinct from Top 4.
+top4_names = {r["name"] for r in top4}
+weather_ranked = sorted(
+    rows,
+    key=lambda r: (
+        r["park_pct"],
+        r["split"],
+        r["hr"],
+        r["near"],
+        r["score"],
+    ),
+    reverse=True,
+)
+weather5, seen = [], set()
+for r in weather_ranked:
+    if r["name"] in seen or r["name"] in top4_names:
+        continue
+    seen.add(r["name"])
+    weather5.append(r)
+    if len(weather5) == 5:
+        break
+if len(weather5) < 5:
+    for r in weather_ranked:
+        if r["name"] in seen:
+            continue
+        seen.add(r["name"])
+        weather5.append(r)
+        if len(weather5) == 5:
+            break
+
+
+def weather_micro_note(row):
+    w = weather_by_game.get(row["game_key"])
+    weather = w["hr_weather"] if w else "n/a"
+    stadium = w["hr_stadium"] if w else "n/a"
+    net = w["hr_pct_text"] if w else f"{row['park_pct']:+d}%"
+    return (
+        f'{row["game_key"]} vs {row["chip"]} • carry: weather {weather}, '
+        f"park {stadium}, net {net}; split {row['split']:+.2f}"
+    )
 
 THREE_LEG_HR = [f"{r['name_plain']} - Over 0.5 homerun" for r in top3]
 FAV_THREE_LEG = [f"{r['name_plain']} - Over 0.5 homerun" for r in fav3]
@@ -263,8 +307,6 @@ TWO_LEG_HR = [
     f"{straight_o05['name_plain']} - Over 0.5 homerun",
     f"{straight_o15['name_plain']} - Over 0.5 homerun",
 ]
-
-pitchers_attack = load_pitchers_to_attack()
 
 FAV_SET = (
     "            const WORST_PICKZ_FAVORITE_NAMES = new Set([\n"
@@ -355,12 +397,12 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                 </div>"""
 
 TOP_CARD = """                <div class="summary-card full-width top-five-card">
-                    <h3>Top 5 HR Tickets (Holistic)</h3>
-                    <p class="model-note summary-note">Ranked by model score, opposing split leakage, and park context.</p>
+                    <h3>Top 4 HR Tickets (Attack + Weather + HR Risk)</h3>
+                    <p class="model-note summary-note">Ranks combine top pitchers to attack, weather/park carry, opposing split risk, and batter damage form.</p>
                     <div class="top-five-list">
 """ + "\n".join(
-    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>vs {r["chip"]} • split {r["split"]:+.2f} • park {r["park_pct"]}%</small></span><strong>{r["score"]}</strong></div>'
-    for r in top5
+    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {r["park_pct"]}%</small></span><strong>{r["score"]}</strong></div>'
+    for r in top4
 ) + """
                     </div>
                 </div>"""
@@ -370,7 +412,7 @@ PARK_INNER = "\n".join(
     for w in weather_top
 )
 WEATHER5_INNER = "\n".join(
-    f'                        <div class="summary-item"><span>#{i+1} {r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]}</small></span><strong>{r["score"]}</strong></div>'
+    f'                        <div class="summary-item"><span>#{i+1} {r["name_plain"]} <small>{weather_micro_note(r)}</small></span><strong>{r["score"]}</strong></div>'
     for i, r in enumerate(weather5)
 )
 LONGSHOT_INNER = "\n".join(

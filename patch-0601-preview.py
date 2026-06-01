@@ -84,6 +84,7 @@ def collect_rows():
                     "game_key": game_key,
                     "name": r["name"],
                     "name_plain": r["name"].rsplit(" (", 1)[0],
+                    "team": build.PLAYER_TEAMS.get(r["name"], ""),
                     "odds": r["odds"],
                     "odds_value": parse_odds_value(r["odds"]),
                     "score": r["score"],
@@ -250,13 +251,30 @@ for r in rows:
 
 combined_ranked.sort(key=lambda r: (r["combined_rank"], r["score"]), reverse=True)
 top5, seen = [], set()
+game_counts = {}
+team_counts = {}
 for r in combined_ranked:
     if r["name"] in seen:
         continue
+    game_count = game_counts.get(r["game_key"], 0)
+    team_count = team_counts.get(r["team"], 0) if r["team"] else 0
+    if game_count >= 2 or team_count >= 2:
+        continue
     seen.add(r["name"])
     top5.append(r)
+    game_counts[r["game_key"]] = game_count + 1
+    if r["team"]:
+        team_counts[r["team"]] = team_count + 1
     if len(top5) == 5:
         break
+if len(top5) < 5:
+    for r in combined_ranked:
+        if r["name"] in seen:
+            continue
+        seen.add(r["name"])
+        top5.append(r)
+        if len(top5) == 5:
+            break
 
 # Weather-heavy HR list: prioritize park/weather and keep distinct from Top 5.
 top5_names = {r["name"] for r in top5}

@@ -226,7 +226,7 @@ weather_fades = sorted(weather_rows, key=lambda x: x["hr_pct"])[:4]
 weather_by_game = {w["game"]: w for w in weather_rows}
 pitchers_attack = load_pitchers_to_attack()
 
-# Top 4 HR tickets: combine attackability, weather/park, and HR risk into one rank.
+# Top 5 HR tickets: combine attackability, weather/park, and HR risk into one rank.
 attack_bonus_by_pitcher = {
     p["pitcher"]: max(0.0, 5.0 - idx) * 2.0
     for idx, p in enumerate(pitchers_attack)
@@ -249,17 +249,17 @@ for r in rows:
     combined_ranked.append({**r, "combined_rank": combined_rank})
 
 combined_ranked.sort(key=lambda r: (r["combined_rank"], r["score"]), reverse=True)
-top4, seen = [], set()
+top5, seen = [], set()
 for r in combined_ranked:
     if r["name"] in seen:
         continue
     seen.add(r["name"])
-    top4.append(r)
-    if len(top4) == 4:
+    top5.append(r)
+    if len(top5) == 5:
         break
 
-# Weather-heavy HR list: prioritize park/weather and keep distinct from Top 4.
-top4_names = {r["name"] for r in top4}
+# Weather-heavy HR list: prioritize park/weather and keep distinct from Top 5.
+top5_names = {r["name"] for r in top5}
 weather_ranked = sorted(
     rows,
     key=lambda r: (
@@ -273,7 +273,7 @@ weather_ranked = sorted(
 )
 weather5, seen = [], set()
 for r in weather_ranked:
-    if r["name"] in seen or r["name"] in top4_names:
+    if r["name"] in seen or r["name"] in top5_names:
         continue
     seen.add(r["name"])
     weather5.append(r)
@@ -397,12 +397,12 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                 </div>"""
 
 TOP_CARD = """                <div class="summary-card full-width top-five-card">
-                    <h3>Top 4 HR Tickets (Attack + Weather + HR Risk)</h3>
+                    <h3>Top 5 HR Tickets (Attack + Weather + HR Risk)</h3>
                     <p class="model-note summary-note">Ranks combine top pitchers to attack, weather/park carry, opposing split risk, and batter damage form.</p>
                     <div class="top-five-list">
 """ + "\n".join(
     f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {r["park_pct"]}%</small></span><strong>{r["score"]}</strong></div>'
-    for r in top4
+    for r in top5
 ) + """
                     </div>
                 </div>"""

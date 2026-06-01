@@ -8,7 +8,7 @@ checks = [
     ("June 1 header", "Monday, June 1, 2026 — Worst Pickz HR cheat sheet" in t),
     ("Straights section", "Worst Pickz Straights of the Day" in t),
     ("Goblin section", "Goblin's Insight" in t),
-    ("Top tickets section", "Top 4 HR Tickets (Attack + Weather + HR Risk)" in t),
+    ("Top tickets section", "Top 5 HR Tickets (Attack + Weather + HR Risk)" in t),
     ("Top weather section", "Top 5 Weather Games" in t),
     ("No stale Adames/Gordon straight", "Willy Adames &mdash; vs Gordon" not in t),
     ("No stale Duran/Bibee straight", "Jarren Duran &mdash; vs Bibee" not in t),

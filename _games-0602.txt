@@ -1,0 +1,164 @@
+const games = [
+    {
+        title: "ATH @ CHC - Gage Jump (R, ATH) vs Jameson Taillon 🧤 (R, CHC)",
+        description: "Tail key data: Park boost -32% (stadium -1%, weather -31%). Away starter risk unavailable. Jameson Taillon 🧤 (HR risk 1.80, vs LHB +1.80, vs RHB +1.10).",
+        rows: [
+            { name: "Pete Crow-Armstrong (L)", odds: "Listed +675 - Over 0.5 HR", score: 80, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 98.2 mph EV. Matchup: Jump split/risk data unavailable. Fade: limited split/risk sample; park/weather net drag (-32%). Model score 80; odds Listed +675 - Over 0.5 HR.", chips: ["vs Jump"], blast: "good" },
+            { name: "Seiya Suzuki (R)", odds: "Listed +550 - Over 0.5 HR", score: 62, emojis: "💎", note: "Tail: 0 HR, 87.0 mph EV. Matchup: Jump split/risk data unavailable. Fade: limited split/risk sample; park/weather net drag (-32%). Model score 62; odds Listed +550 - Over 0.5 HR.", chips: ["vs Jump"] },
+            { name: "Carlos Cortes (L)", odds: "Listed +900 - Over 0.5 HR", score: 72, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 1 HR, 2 near-HR, 88.3 mph EV. Matchup: Taillon LHB split +1.80, HR risk 1.80. Fade: park/weather net drag (-32%). Model score 72; odds Listed +900 - Over 0.5 HR.", chips: ["vs Taillon"], blast: "good" },
+            { name: "Nick Kurtz (L)", odds: "Listed +360 - Over 0.5 HR", score: 64, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 0 HR, 1 near-HR, 84.6 mph EV. Matchup: Taillon LHB split +1.80, HR risk 1.80. Fade: park/weather net drag (-32%); limited recent HR events. Model score 64; odds Listed +360 - Over 0.5 HR.", chips: ["vs Taillon"] },
+        ],
+    },
+    {
+        title: "BAL @ BOS - Shane Baz (R, BAL) vs Connelly Early (R, BOS)",
+        description: "Tail key data: Park boost -15% (stadium -8%, weather -8%). Shane Baz (HR risk 0.13, vs LHB -0.23, vs RHB +0.61). Connelly Early (HR risk 0.19, vs LHB +0.72, vs RHB +0.00).",
+        rows: [
+            { name: "Coby Mayo (R)", odds: "Listed +540 - Over 0.5 HR", score: 78, emojis: "⭐ 💎", note: "Worst Pickz Favorite. Tail: 1 HR, 1 near-HR, 95.8 mph EV. Matchup: Early RHB split +0.00, HR risk 0.19. Fade: park/weather net drag (-15%). Model score 78; odds Listed +540 - Over 0.5 HR.", chips: ["vs Early"], blast: "good" },
+            { name: "Pete Alonso (R)", odds: "Listed +420 - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 95.4 mph EV. Matchup: Early RHB split +0.00, HR risk 0.19. Fade: park/weather net drag (-15%); limited recent HR events. Model score 73; odds Listed +420 - Over 0.5 HR.", chips: ["vs Early"], blast: "good" },
+        ],
+    },
+    {
+        title: "CLE @ NYY - Joey Cantillo (R, CLE) vs Cam Schlittler (R, NYY)",
+        description: "Tail key data: Park boost -8% (stadium +8%, weather -16%). Joey Cantillo (HR risk -0.42, vs LHB -0.01, vs RHB -0.41). Cam Schlittler (HR risk -0.76, vs LHB -0.64, vs RHB -0.60).",
+        rows: [
+            { name: "Trent Grisham (L)", odds: "Listed +474 - Over 0.5 HR", score: 78, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 96.2 mph EV. Matchup: Cantillo LHB split -0.01, HR risk -0.42. Fade: slight split headwind (-0.01); pitcher suppresses HR (-0.42). Model score 78; odds Listed +474 - Over 0.5 HR.", chips: ["vs Cantillo"], blast: "good" },
+            { name: "Ben Rice (L)", odds: "Listed +370 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 96.4 mph EV. Matchup: Cantillo LHB split -0.01, HR risk -0.42. Fade: slight split headwind (-0.01); pitcher suppresses HR (-0.42). Model score 74; odds Listed +370 - Over 0.5 HR.", chips: ["vs Cantillo"], blast: "good" },
+            { name: "Anthony Volpe (R)", odds: "Listed +920 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 84.5 mph EV. Matchup: Cantillo RHB split -0.41, HR risk -0.42. Fade: tough split lane (-0.41); pitcher suppresses HR (-0.42). Model score 70; odds Listed +920 - Over 0.5 HR.", chips: ["vs Cantillo"], blast: "good" },
+            { name: "Travis Bazzana (L)", odds: "Listed +900 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 91.6 mph EV. Matchup: Schlittler LHB split -0.64, HR risk -0.76. Fade: tough split lane (-0.64); pitcher suppresses HR (-0.76). Model score 74; odds Listed +900 - Over 0.5 HR.", chips: ["vs Schlittler"], blast: "good" },
+            { name: "Kyle Manzardo (L)", odds: "Listed +587 - Over 0.5 HR", score: 76, emojis: "💎", note: "Tail: 0 HR, 99.8 mph EV. Matchup: Schlittler LHB split -0.64, HR risk -0.76. Fade: tough split lane (-0.64); pitcher suppresses HR (-0.76). Model score 76; odds Listed +587 - Over 0.5 HR.", chips: ["vs Schlittler"], blast: "good" },
+        ],
+    },
+    {
+        title: "COL @ LAA - Tomoyuki Sugano 🧤 (R, COL) vs Grayson Rodriguez (R, LAA)",
+        description: "Tail key data: Park boost +11% (stadium +8%, weather +2%). Tomoyuki Sugano 🧤 (HR risk 1.19, vs LHB +1.81, vs RHB -0.04). Grayson Rodriguez (HR risk 0.28, vs LHB +1.07, vs RHB -1.03).",
+        rows: [
+            { name: "Zach Neto (R)", odds: "Listed +357 - Over 0.5 HR", score: 80, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "Tail: 2 HR, 3 near-HR, 87.7 mph EV. Matchup: Sugano RHB split -0.04, HR risk 1.19. Fade: slight split headwind (-0.04); lighter EV form (87.7 mph). Model score 80; odds Listed +357 - Over 0.5 HR.", chips: ["vs Sugano"], blast: "high" },
+            { name: "Jo Adell (R)", odds: "Listed +390 - Over 0.5 HR", score: 83, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "Tail: 2 HR, 3 near-HR, 90.6 mph EV. Matchup: Sugano RHB split -0.04, HR risk 1.19. Fade: slight split headwind (-0.04). Model score 83; odds Listed +390 - Over 0.5 HR.", chips: ["vs Sugano"], blast: "high" },
+            { name: "Mike Trout (R)", odds: "Listed +290 - Over 0.5 HR", score: 84, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "Tail: 2 HR, 4 near-HR, 90.4 mph EV. Matchup: Sugano RHB split -0.04, HR risk 1.19. Fade: slight split headwind (-0.04). Model score 84; odds Listed +290 - Over 0.5 HR.", chips: ["vs Sugano"], blast: "high" },
+            { name: "Wade Meckler (L)", odds: "Listed +710 - Over 0.5 HR", score: 82, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "Tail: 2 HR, 4 near-HR, 87.7 mph EV. Matchup: Sugano LHB split +1.81, HR risk 1.19. Fade: lighter EV form (87.7 mph). Model score 82; odds Listed +710 - Over 0.5 HR.", chips: ["vs Sugano"], blast: "high" },
+            { name: "Hunter Goodman (R)", odds: "Listed +390 - Over 0.5 HR", score: 80, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 90.3 mph EV. Matchup: Rodriguez RHB split -1.03, HR risk 0.28. Fade: tough split lane (-1.03). Model score 80; odds Listed +390 - Over 0.5 HR.", chips: ["vs Rodriguez"], blast: "high" },
+            { name: "Ezequiel Tovar (R)", odds: "Listed +790 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 82.0 mph EV. Matchup: Rodriguez RHB split -1.03, HR risk 0.28. Fade: tough split lane (-1.03); lighter EV form (82.0 mph). Model score 70; odds Listed +790 - Over 0.5 HR.", chips: ["vs Rodriguez"], blast: "good" },
+            { name: "Jake McCarthy (L)", odds: "Listed +820 - Over 0.5 HR", score: 72, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 85.6 mph EV. Matchup: Rodriguez LHB split +1.07, HR risk 0.28. Fade: lighter EV form (85.6 mph). Model score 72; odds Listed +820 - Over 0.5 HR.", chips: ["vs Rodriguez"], blast: "good" },
+        ],
+    },
+    {
+        title: "CWS @ MIN - Davis Martin (R, CWS) vs Connor Prielipp (R, MIN)",
+        description: "Tail key data: Park boost data unavailable. Davis Martin (HR risk -0.73, vs LHB -0.59, vs RHB -0.56). Connor Prielipp (HR risk 0.11, vs LHB +0.27, vs RHB +0.13).",
+        rows: [
+            { name: "Byron Buxton (R)", odds: "Listed +335 - Over 0.5 HR", score: 75, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 92.7 mph EV. Matchup: Martin RHB split -0.56, HR risk -0.73. Fade: tough split lane (-0.56); pitcher suppresses HR (-0.73). Model score 75; odds Listed +335 - Over 0.5 HR.", chips: ["vs Martin"], blast: "good" },
+            { name: "Josh Bell (S)", odds: "Listed +650 - Over 0.5 HR", score: 71, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 92.7 mph EV. Matchup: Martin RHB split -0.56, HR risk -0.73. Fade: tough split lane (-0.56); pitcher suppresses HR (-0.73). Model score 71; odds Listed +650 - Over 0.5 HR.", chips: ["vs Martin"], blast: "good" },
+            { name: "Tristan Gray (L)", odds: "Listed +850 - Over 0.5 HR", score: 76, emojis: "💎", note: "Tail: 1 HR, 3 near-HR, 90.2 mph EV. Matchup: Martin LHB split -0.59, HR risk -0.73. Fade: tough split lane (-0.59); pitcher suppresses HR (-0.73). Model score 76; odds Listed +850 - Over 0.5 HR.", chips: ["vs Martin"], blast: "good" },
+            { name: "Miguel Vargas (R)", odds: "Listed +500 - Over 0.5 HR", score: 86, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 96.0 mph EV. Matchup: Prielipp RHB split +0.13, HR risk 0.11. Fade: HR outcomes are still high-variance. Model score 86; odds Listed +500 - Over 0.5 HR.", chips: ["vs Prielipp"], blast: "high" },
+            { name: "Colson Montgomery (L)", odds: "Listed +390 - Over 0.5 HR", score: 69, emojis: "💎", note: "Tail: 0 HR, 2 near-HR, 89.2 mph EV. Matchup: Prielipp LHB split +0.27, HR risk 0.11. Fade: HR outcomes are still high-variance. Model score 69; odds Listed +390 - Over 0.5 HR.", chips: ["vs Prielipp"], blast: "good" },
+            { name: "Randal Grichuk (R)", odds: "Listed +522 - Over 0.5 HR", score: 65, emojis: "💎", note: "Tail: 0 HR, 91.0 mph EV. Matchup: Prielipp RHB split +0.13, HR risk 0.11. Fade: limited recent HR events. Model score 65; odds Listed +522 - Over 0.5 HR.", chips: ["vs Prielipp"] },
+        ],
+    },
+    {
+        title: "DET @ TB - Jack Flaherty (R, DET) vs Steven Matz (R, TB)",
+        description: "Tail key data: Park boost -4% (stadium -4%, weather +0%). Jack Flaherty (HR risk 0.13, vs LHB +0.01, vs RHB +0.16). Steven Matz (HR risk 0.29, vs LHB +0.18, vs RHB +0.37).",
+        rows: [
+            { name: "Yandy Diaz (R)", odds: "Listed +540 - Over 0.5 HR", score: 78, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 95.7 mph EV. Matchup: Flaherty RHB split +0.16, HR risk 0.13. Fade: HR outcomes are still high-variance. Model score 78; odds Listed +540 - Over 0.5 HR.", chips: ["vs Flaherty"], blast: "good" },
+            { name: "Jonathan Aranda (L)", odds: "Listed +410 - Over 0.5 HR", score: 83, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 90.6 mph EV. Matchup: Flaherty LHB split +0.01, HR risk 0.13. Fade: HR outcomes are still high-variance. Model score 83; odds Listed +410 - Over 0.5 HR.", chips: ["vs Flaherty"], blast: "high" },
+            { name: "Junior Caminero (R)", odds: "Listed +330 - Over 0.5 HR", score: 66, emojis: "💎", note: "Tail: 0 HR, 91.6 mph EV. Matchup: Flaherty RHB split +0.16, HR risk 0.13. Fade: limited recent HR events. Model score 66; odds Listed +330 - Over 0.5 HR.", chips: ["vs Flaherty"] },
+            { name: "Ryan Vilade (R)", odds: "Listed prop - Over 0.5 HR", score: 82, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 91.7 mph EV. Matchup: Flaherty RHB split +0.16, HR risk 0.13. Fade: HR outcomes are still high-variance. Model score 82; odds Listed prop - Over 0.5 HR.", chips: ["vs Flaherty"], blast: "high" },
+            { name: "Wenceel Perez (S)", odds: "Listed +700 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 87.9 mph EV. Matchup: Matz RHB split +0.37, HR risk 0.29. Fade: lighter EV form (87.9 mph). Model score 70; odds Listed +700 - Over 0.5 HR.", chips: ["vs Matz"], blast: "good" },
+            { name: "Spencer Torkelson (R)", odds: "Listed +490 - Over 0.5 HR", score: 64, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 87.9 mph EV. Matchup: Matz RHB split +0.37, HR risk 0.29. Fade: limited recent HR events; lighter EV form (87.9 mph). Model score 64; odds Listed +490 - Over 0.5 HR.", chips: ["vs Matz"] },
+        ],
+    },
+    {
+        title: "KC @ CIN - Noah Cameron (R, KC) vs Andrew Abbott (R, CIN)",
+        description: "Tail key data: Park boost +6% (stadium +14%, weather -9%). Noah Cameron (HR risk -0.70, vs LHB +0.00, vs RHB -0.75). Andrew Abbott (HR risk -0.17, vs LHB -0.22, vs RHB -0.02).",
+        rows: [
+        ],
+    },
+    {
+        title: "LAD @ ARI - Eric Lauer 🧤 (R, LAD) vs Michael Soroka (R, ARI)",
+        description: "Tail key data: Park boost -8% (stadium -7%, weather +0%). Eric Lauer 🧤 (HR risk 1.47, vs LHB +0.69, vs RHB +1.48). Michael Soroka (HR risk -0.85, vs LHB -0.50, vs RHB -1.01).",
+        rows: [
+            { name: "Ketel Marte (S)", odds: "Listed +350 - Over 0.5 HR", score: 74, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 0 HR, 2 near-HR, 93.7 mph EV. Matchup: Lauer RHB split +1.48, HR risk 1.47. Fade: park/weather net drag (-8%). Model score 74; odds Listed +350 - Over 0.5 HR.", chips: ["vs Lauer"], blast: "good" },
+            { name: "Nolan Arenado (R)", odds: "Listed +550 - Over 0.5 HR", score: 80, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 1 HR, 2 near-HR, 96.2 mph EV. Matchup: Lauer RHB split +1.48, HR risk 1.47. Fade: park/weather net drag (-8%). Model score 80; odds Listed +550 - Over 0.5 HR.", chips: ["vs Lauer"], blast: "good" },
+            { name: "Gabriel Moreno (R)", odds: "Listed +775 - Over 0.5 HR", score: 73, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 1 HR, 2 near-HR, 89.1 mph EV. Matchup: Lauer RHB split +1.48, HR risk 1.47. Fade: park/weather net drag (-8%). Model score 73; odds Listed +775 - Over 0.5 HR.", chips: ["vs Lauer"], blast: "good" },
+            { name: "Ildemaro Vargas (S)", odds: "Listed +790 - Over 0.5 HR", score: 72, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 1 HR, 1 near-HR, 90.2 mph EV. Matchup: Lauer RHB split +1.48, HR risk 1.47. Fade: park/weather net drag (-8%). Model score 72; odds Listed +790 - Over 0.5 HR.", chips: ["vs Lauer"], blast: "good" },
+            { name: "Will Smith (R)", odds: "Listed +675 - Over 0.5 HR", score: 88, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 96.1 mph EV. Matchup: Soroka RHB split -1.01, HR risk -0.85. Fade: tough split lane (-1.01); pitcher suppresses HR (-0.85). Model score 88; odds Listed +675 - Over 0.5 HR.", chips: ["vs Soroka"], blast: "high" },
+            { name: "Shohei Ohtani (L)", odds: "Listed +310 - Over 0.5 HR", score: 87, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 97.4 mph EV. Matchup: Soroka LHB split -0.50, HR risk -0.85. Fade: tough split lane (-0.50); pitcher suppresses HR (-0.85). Model score 87; odds Listed +310 - Over 0.5 HR.", chips: ["vs Soroka"], blast: "high" },
+            { name: "Freddie Freeman (L)", odds: "Listed +600 - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 91.4 mph EV. Matchup: Soroka LHB split -0.50, HR risk -0.85. Fade: tough split lane (-0.50); pitcher suppresses HR (-0.85). Model score 73; odds Listed +600 - Over 0.5 HR.", chips: ["vs Soroka"], blast: "good" },
+            { name: "Max Muncy (L)", odds: "Listed +440 - Over 0.5 HR", score: 84, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 92.5 mph EV. Matchup: Soroka LHB split -0.50, HR risk -0.85. Fade: tough split lane (-0.50); pitcher suppresses HR (-0.85). Model score 84; odds Listed +440 - Over 0.5 HR.", chips: ["vs Soroka"], blast: "high" },
+        ],
+    },
+    {
+        title: "MIA @ WSH - Lake Bachar 🧤 (R, MIA) vs Richard Lovelady (R, WSH)",
+        description: "Tail key data: Park boost data unavailable. Lake Bachar 🧤 (HR risk 1.47, vs LHB +0.37, vs RHB +1.30). Richard Lovelady (HR risk 0.20, vs LHB -0.89, vs RHB +1.04).",
+        rows: [
+            { name: "Heriberto Hernandez (R)", odds: "Listed prop - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 95.0 mph EV. Matchup: Lovelady RHB split +1.04, HR risk 0.20. Fade: limited recent HR events. Model score 73; odds Listed prop - Over 0.5 HR.", chips: ["vs Lovelady"], blast: "good" },
+            { name: "Otto Lopez (R)", odds: "Listed +760 - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 95.1 mph EV. Matchup: Lovelady RHB split +1.04, HR risk 0.20. Fade: limited recent HR events. Model score 73; odds Listed +760 - Over 0.5 HR.", chips: ["vs Lovelady"], blast: "good" },
+            { name: "Xavier Edwards (S)", odds: "Listed +1300 - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 90.9 mph EV. Matchup: Lovelady RHB split +1.04, HR risk 0.20. Fade: HR outcomes are still high-variance. Model score 73; odds Listed +1300 - Over 0.5 HR.", chips: ["vs Lovelady"], blast: "good" },
+        ],
+    },
+    {
+        title: "NYM @ SEA - Jonah Tong (R, NYM) vs Logan Gilbert (R, SEA)",
+        description: "Tail key data: Park boost +4% (stadium +0%, weather +3%). Away starter risk unavailable. Logan Gilbert (HR risk 0.85, vs LHB +0.61, vs RHB +0.77).",
+        rows: [
+            { name: "Dominic Canzone (L)", odds: "Listed +650 - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 90.9 mph EV. Matchup: Tong split/risk data unavailable. Fade: limited split/risk sample. Model score 73; odds Listed +650 - Over 0.5 HR.", chips: ["vs Tong"], blast: "good" },
+            { name: "Luke Raley (L)", odds: "Listed +475 - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 83.9 mph EV. Matchup: Tong split/risk data unavailable. Fade: limited split/risk sample; lighter EV form (83.9 mph). Model score 78; odds Listed +475 - Over 0.5 HR.", chips: ["vs Tong"], blast: "high" },
+            { name: "Colt Emerson (L)", odds: "Listed +760 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 92.2 mph EV. Matchup: Tong split/risk data unavailable. Fade: limited split/risk sample. Model score 74; odds Listed +760 - Over 0.5 HR.", chips: ["vs Tong"], blast: "good" },
+            { name: "Juan Soto (L)", odds: "Listed +310 - Over 0.5 HR", score: 98, emojis: "🌕 💣", note: "Tail: 4 HR, 5 near-HR, 97.6 mph EV. Matchup: Gilbert LHB split +0.61, HR risk 0.85. Fade: HR outcomes are still high-variance. Model score 98; odds Listed +310 - Over 0.5 HR.", chips: ["vs Gilbert"], blast: "high" },
+            { name: "Jared Young (L)", odds: "Listed +680 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 93.6 mph EV. Matchup: Gilbert LHB split +0.61, HR risk 0.85. Fade: HR outcomes are still high-variance. Model score 84; odds Listed +680 - Over 0.5 HR.", chips: ["vs Gilbert"], blast: "high" },
+            { name: "Marcus Semien (R)", odds: "Listed +725 - Over 0.5 HR", score: 72, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 88.1 mph EV. Matchup: Gilbert RHB split +0.77, HR risk 0.85. Fade: HR outcomes are still high-variance. Model score 72; odds Listed +725 - Over 0.5 HR.", chips: ["vs Gilbert"], blast: "good" },
+        ],
+    },
+    {
+        title: "PIT @ HOU - Bubba Chandler (R, PIT) vs Mike Burrows (R, HOU)",
+        description: "Tail key data: Park boost +6% (stadium +7%, weather -1%). Bubba Chandler (HR risk -0.13, vs LHB +0.13, vs RHB -0.46). Mike Burrows (HR risk 0.43, vs LHB +0.56, vs RHB -0.02).",
+        rows: [
+            { name: "Spencer Horwitz (L)", odds: "Listed +540 - Over 0.5 HR", score: 84, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 3 HR, 3 near-HR, 86.7 mph EV. Matchup: Burrows LHB split +0.56, HR risk 0.43. Fade: lighter EV form (86.7 mph). Model score 84; odds Listed +540 - Over 0.5 HR.", chips: ["vs Burrows"], blast: "high" },
+            { name: "Brandon Lowe (L)", odds: "Listed +320 - Over 0.5 HR", score: 90, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 5 near-HR, 94.3 mph EV. Matchup: Burrows LHB split +0.56, HR risk 0.43. Fade: HR outcomes are still high-variance. Model score 90; odds Listed +320 - Over 0.5 HR.", chips: ["vs Burrows"], blast: "high" },
+            { name: "Oneil Cruz (L)", odds: "Listed +410 - Over 0.5 HR", score: 91, emojis: "🌕 💣", note: "Tail: 2 HR, 3 near-HR, 99.2 mph EV. Matchup: Burrows LHB split +0.56, HR risk 0.43. Fade: HR outcomes are still high-variance. Model score 91; odds Listed +410 - Over 0.5 HR.", chips: ["vs Burrows"], blast: "high" },
+            { name: "Bryan Reynolds (S)", odds: "Listed +570 - Over 0.5 HR", score: 72, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 89.9 mph EV. Matchup: Burrows RHB split -0.02, HR risk 0.43. Fade: slight split headwind (-0.02). Model score 72; odds Listed +570 - Over 0.5 HR.", chips: ["vs Burrows"], blast: "good" },
+            { name: "Ryan O'Hearn (L)", odds: "Listed +590 - Over 0.5 HR", score: 86, emojis: "🌕 💣", note: "Tail: 3 HR, 3 near-HR, 90.1 mph EV. Matchup: Burrows LHB split +0.56, HR risk 0.43. Fade: HR outcomes are still high-variance. Model score 86; odds Listed +590 - Over 0.5 HR.", chips: ["vs Burrows"], blast: "high" },
+        ],
+    },
+    {
+        title: "SD @ PHI - Randy Vasquez (R, SD) vs Aaron Nola (R, PHI)",
+        description: "Tail key data: Park boost -7% (stadium +14%, weather -21%). Randy Vasquez (HR risk 0.46, vs LHB -0.13, vs RHB +1.03). Aaron Nola (HR risk 0.16, vs LHB +0.09, vs RHB +0.22).",
+        rows: [
+            { name: "Trea Turner (R)", odds: "Listed +630 - Over 0.5 HR", score: 86, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 93.5 mph EV. Matchup: Vasquez RHB split +1.03, HR risk 0.46. Fade: park/weather net drag (-7%). Model score 86; odds Listed +630 - Over 0.5 HR.", chips: ["vs Vasquez"], blast: "high" },
+            { name: "Bryson Stott (L)", odds: "Listed +650 - Over 0.5 HR", score: 77, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 92.6 mph EV. Matchup: Vasquez LHB split -0.13, HR risk 0.46. Fade: slight split headwind (-0.13); park/weather net drag (-7%). Model score 77; odds Listed +650 - Over 0.5 HR.", chips: ["vs Vasquez"], blast: "good" },
+            { name: "J.T. Realmuto (R)", odds: "Listed +820 - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 90.6 mph EV. Matchup: Vasquez RHB split +1.03, HR risk 0.46. Fade: park/weather net drag (-7%). Model score 73; odds Listed +820 - Over 0.5 HR.", chips: ["vs Vasquez"], blast: "good" },
+            { name: "Kyle Schwarber (L)", odds: "Listed +250 - Over 0.5 HR", score: 91, emojis: "🌕 💣", note: "Tail: 2 HR, 3 near-HR, 99.2 mph EV. Matchup: Vasquez LHB split -0.13, HR risk 0.46. Fade: slight split headwind (-0.13); park/weather net drag (-7%). Model score 91; odds Listed +250 - Over 0.5 HR.", chips: ["vs Vasquez"], blast: "high" },
+            { name: "Manny Machado (R)", odds: "Listed +543 - Over 0.5 HR", score: 90, emojis: "🌕 💣", note: "Tail: 2 HR, 3 near-HR, 97.6 mph EV. Matchup: Nola RHB split +0.22, HR risk 0.16. Fade: park/weather net drag (-7%). Model score 90; odds Listed +543 - Over 0.5 HR.", chips: ["vs Nola"], blast: "high" },
+            { name: "Gavin Sheets (L)", odds: "Listed +490 - Over 0.5 HR", score: 62, emojis: "💎", note: "Tail: 0 HR, 87.3 mph EV. Matchup: Nola LHB split +0.09, HR risk 0.16. Fade: park/weather net drag (-7%); limited recent HR events. Model score 62; odds Listed +490 - Over 0.5 HR.", chips: ["vs Nola"] },
+            { name: "Ty France (R)", odds: "Listed +600 - Over 0.5 HR", score: 67, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 90.6 mph EV. Matchup: Nola RHB split +0.22, HR risk 0.16. Fade: park/weather net drag (-7%); limited recent HR events. Model score 67; odds Listed +600 - Over 0.5 HR.", chips: ["vs Nola"] },
+        ],
+    },
+    {
+        title: "SF @ MIL - Trevor McDonald (R, SF) vs Kyle Harrison (R, MIL)",
+        description: "Tail key data: Park boost -10% (stadium +10%, weather -20%). Trevor McDonald (HR risk -0.69, vs LHB -0.10, vs RHB -1.22). Kyle Harrison (HR risk -1.05, vs LHB -1.31, vs RHB -0.56).",
+        rows: [
+            { name: "William Contreras (R)", odds: "Listed +630 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 0 HR, 93.9 mph EV. Matchup: McDonald RHB split -1.22, HR risk -0.69. Fade: tough split lane (-1.22); pitcher suppresses HR (-0.69). Model score 70; odds Listed +630 - Over 0.5 HR.", chips: ["vs McDonald"], blast: "good" },
+            { name: "Jackson Chourio (R)", odds: "Listed +590 - Over 0.5 HR", score: 72, emojis: "⭐ 💎", note: "Worst Pickz Favorite. Tail: 0 HR, 1 near-HR, 94.5 mph EV. Matchup: McDonald RHB split -1.22, HR risk -0.69. Fade: tough split lane (-1.22); pitcher suppresses HR (-0.69). Model score 72; odds Listed +590 - Over 0.5 HR.", chips: ["vs McDonald"], blast: "good" },
+            { name: "William Contreras (R)", odds: "Listed +630 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 0 HR, 93.9 mph EV. Matchup: McDonald RHB split -1.22, HR risk -0.69. Fade: tough split lane (-1.22); pitcher suppresses HR (-0.69). Model score 70; odds Listed +630 - Over 0.5 HR.", chips: ["vs McDonald"], blast: "good" },
+            { name: "Garrett Mitchell (L)", odds: "Listed +760 - Over 0.5 HR", score: 72, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 90.3 mph EV. Matchup: McDonald LHB split -0.10, HR risk -0.69. Fade: slight split headwind (-0.10); pitcher suppresses HR (-0.69). Model score 72; odds Listed +760 - Over 0.5 HR.", chips: ["vs McDonald"], blast: "good" },
+            { name: "Matt Chapman (R)", odds: "Listed +610 - Over 0.5 HR", score: 72, emojis: "💎", note: "Tail: 0 HR, 96.3 mph EV. Matchup: Harrison RHB split -0.56, HR risk -1.05. Fade: tough split lane (-0.56); pitcher suppresses HR (-1.05). Model score 72; odds Listed +610 - Over 0.5 HR.", chips: ["vs Harrison"], blast: "good" },
+            { name: "Bryce Eldridge (L)", odds: "Listed +700 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "Tail: 0 HR, 1 near-HR, 105.9 mph EV. Matchup: Harrison LHB split -1.31, HR risk -1.05. Fade: tough split lane (-1.31); pitcher suppresses HR (-1.05). Model score 78; odds Listed +700 - Over 0.5 HR.", chips: ["vs Harrison"], blast: "good" },
+            { name: "Willy Adames (R)", odds: "Listed +527 - Over 0.5 HR", score: 62, emojis: "⭐ 💎", note: "Worst Pickz Favorite. Tail: 0 HR, 87.0 mph EV. Matchup: Harrison RHB split -0.56, HR risk -1.05. Fade: tough split lane (-0.56); pitcher suppresses HR (-1.05). Model score 62; odds Listed +527 - Over 0.5 HR.", chips: ["vs Harrison"] },
+            { name: "Casey Schmitt (R)", odds: "Listed +520 - Over 0.5 HR", score: 70, emojis: "⭐ 💎", note: "Worst Pickz Favorite. Tail: 1 HR, 1 near-HR, 81.7 mph EV. Matchup: Harrison RHB split -0.56, HR risk -1.05. Fade: tough split lane (-0.56); pitcher suppresses HR (-1.05). Model score 70; odds Listed +520 - Over 0.5 HR.", chips: ["vs Harrison"], blast: "good" },
+        ],
+    },
+    {
+        title: "TEX @ STL - Nathan Eovaldi (R, TEX) vs Dustin May (R, STL)",
+        description: "Tail key data: Park boost -27% (stadium -9%, weather -18%). Nathan Eovaldi (HR risk -0.04, vs LHB -0.47, vs RHB +0.45). Dustin May (HR risk -0.32, vs LHB -0.29, vs RHB -0.28).",
+        rows: [
+            { name: "Jordan Walker (R)", odds: "Listed +550 - Over 0.5 HR", score: 83, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 92.8 mph EV. Matchup: Eovaldi RHB split +0.45, HR risk -0.04. Fade: pitcher risk below avg (-0.04); park/weather net drag (-27%). Model score 83; odds Listed +550 - Over 0.5 HR.", chips: ["vs Eovaldi"], blast: "high" },
+            { name: "Brandon Nimmo (L)", odds: "Listed +780 - Over 0.5 HR", score: 84, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 1 HR, 4 near-HR, 93.9 mph EV. Matchup: May LHB split -0.29, HR risk -0.32. Fade: slight split headwind (-0.29); pitcher risk below avg (-0.32). Model score 84; odds Listed +780 - Over 0.5 HR.", chips: ["vs May"], blast: "high" },
+            { name: "Josh Jung (R)", odds: "Listed +1100 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 89.9 mph EV. Matchup: May RHB split -0.28, HR risk -0.32. Fade: slight split headwind (-0.28); pitcher risk below avg (-0.32). Model score 80; odds Listed +1100 - Over 0.5 HR.", chips: ["vs May"], blast: "high" },
+        ],
+    },
+    {
+        title: "TOR @ ATL - Kevin Gausman (R, TOR) vs Bryce Elder (R, ATL)",
+        description: "Tail key data: Park boost -15% (stadium -3%, weather -13%). Kevin Gausman (HR risk -0.76, vs LHB -0.69, vs RHB -0.46). Bryce Elder (HR risk -0.62, vs LHB -0.79, vs RHB +0.27).",
+        rows: [
+            { name: "Jesus Sanchez (L)", odds: "Listed +625 - Over 0.5 HR", score: 79, emojis: "⭐ 💎", note: "Worst Pickz Favorite. Tail: 1 HR, 2 near-HR, 94.7 mph EV. Matchup: Elder LHB split -0.79, HR risk -0.62. Fade: tough split lane (-0.79); pitcher suppresses HR (-0.62). Model score 79; odds Listed +625 - Over 0.5 HR.", chips: ["vs Elder"], blast: "good" },
+            { name: "Daulton Varsho (L)", odds: "Listed +520 - Over 0.5 HR", score: 67, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 91.0 mph EV. Matchup: Elder LHB split -0.79, HR risk -0.62. Fade: tough split lane (-0.79); pitcher suppresses HR (-0.62). Model score 67; odds Listed +520 - Over 0.5 HR.", chips: ["vs Elder"] },
+        ],
+    },
+];

@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location("b", ROOT / "build-sheet-2026-06-01.py")
+spec = importlib.util.spec_from_file_location("b", ROOT / "build-sheet-2026-06-02.py")
 b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 

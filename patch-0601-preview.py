@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Patch preview sheet to 2026-06-01. Does not commit or push."""
+"""Patch preview sheet to 2026-06-02. Does not commit or push."""
 from __future__ import annotations
 
 import csv
@@ -14,12 +14,12 @@ from sheet_data import load_pitcher_risk, resolve_pitcher
 ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview" / "index.html"
 MANIFEST_PATH = ROOT / "preview" / "sheets-manifest.json"
-ARCHIVE_0531 = ROOT / "preview" / "archive" / "2026-05-31.html"
-GAMES_BLOCK = (ROOT / "_games-0601.txt").read_text(encoding="utf-8-sig").strip()
+ARCHIVE_0601 = ROOT / "preview" / "archive" / "2026-06-01.html"
+GAMES_BLOCK = (ROOT / "_games-0602.txt").read_text(encoding="utf-8-sig").strip()
 
-SHEET_DATE = "2026-06-01"
+SHEET_DATE = "2026-06-02"
 
-spec = importlib.util.spec_from_file_location("build0601", ROOT / "build-sheet-2026-06-01.py")
+spec = importlib.util.spec_from_file_location("build0602", ROOT / "build-sheet-2026-06-02.py")
 build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
@@ -119,7 +119,12 @@ def load_pitchers_to_attack():
 
 
 def load_weather_rows():
-    path = ROOT / "data" / f"ParkFactors_{SHEET_DATE}.csv"
+    data_dir = ROOT / "data"
+    path = data_dir / f"ParkFactors_{SHEET_DATE}.csv"
+    if not path.exists():
+        matches = sorted(data_dir.glob(f"ParkFactors_{SHEET_DATE}*.csv"))
+        if matches:
+            path = matches[0]
     rows = []
     with path.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
@@ -162,8 +167,19 @@ if not o15_pool:
     o15_pool = [r for r in straight_pool if r["name"] != straight_o05["name"] and r["score"] >= 90]
 straight_o15 = o15_pool[0] if o15_pool else (straight_pool[1] if len(straight_pool) > 1 else straight_pool[0])
 
+quality_top3_pool = [
+    r
+    for r in listed_rows
+    if r["score"] >= 85
+    and r["hr"] >= 1
+    and r["split"] >= 0.0
+    and (r["ev"] >= 90 or r["near"] >= 2)
+]
+if len(quality_top3_pool) < 3:
+    quality_top3_pool = straight_pool if len(straight_pool) >= 3 else listed_rows
+
 top3, seen = [], set()
-for r in listed_rows:
+for r in quality_top3_pool:
     if r["name"] in seen:
         continue
     seen.add(r["name"])
@@ -487,7 +503,8 @@ def update_manifest():
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     old = {sheet["date"]: sheet for sheet in manifest.get("sheets", [])}
     ordered = [
-        {"date": SHEET_DATE, "label": "June 1, 2026 — current slate", "href": "index.html"},
+        {"date": SHEET_DATE, "label": "June 2, 2026 — current slate", "href": "index.html"},
+        {"date": "2026-06-01", "label": "June 1, 2026", "href": "archive/2026-06-01.html"},
         {"date": "2026-05-31", "label": "May 31, 2026", "href": "archive/2026-05-31.html"},
         {"date": "2026-05-30", "label": "May 30, 2026", "href": "archive/2026-05-30.html"},
         {"date": "2026-05-29", "label": "May 29, 2026", "href": "archive/2026-05-29.html"},
@@ -535,7 +552,7 @@ def patch_preview(manifest):
     )
     text = re.sub(
         r"<p>(?:Friday|Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday), \w+ \d+, 2026 — Worst Pickz HR cheat sheet",
-        "<p>Monday, June 1, 2026 — Worst Pickz HR cheat sheet",
+        "<p>Tuesday, June 2, 2026 — Worst Pickz HR cheat sheet",
         text,
         count=1,
     )
@@ -573,9 +590,9 @@ def sync_root_index():
 
 
 def main():
-    ARCHIVE_0531.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(PREVIEW, ARCHIVE_0531)
-    print("archived current preview to", ARCHIVE_0531.relative_to(ROOT))
+    ARCHIVE_0601.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(PREVIEW, ARCHIVE_0601)
+    print("archived current preview to", ARCHIVE_0601.relative_to(ROOT))
     manifest = update_manifest()
     patch_preview(manifest)
     sync_root_index()

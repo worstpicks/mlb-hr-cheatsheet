@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build 2026-06-01 sheet from imported CSVs and user prop list."""
+"""Build 2026-06-02 sheet from imported CSVs and user prop list."""
 from __future__ import annotations
 
 import importlib.util
@@ -13,74 +13,111 @@ from csv_slate_meta import derive_games_from_csv
 from sheet_data import load_pitcher_risk, resolve_pitcher
 
 ROOT = Path(__file__).resolve().parent
-DATE = "2026-06-01"
-OUT = ROOT / "build-sheet-2026-06-01.py"
+DATE = "2026-06-02"
+OUT = ROOT / "build-sheet-2026-06-02.py"
 
 RAW_PROPS = [
-    "Jonathan Aranda⭐",
     "Yandy Diaz",
+    "Jonathan Aranda⭐",
     "Junior Caminero",
+    "Ryan Vilade",
+    "Wenceel Perez",
     "Spencer Torkelson",
-    "Riley Greene",
-    "Curtis Mead",
-    "James Wood",
-    "Keibert Ruiz",
-    "Jose Tena",
-    "Luis Garcia JR.",
+    "Trea Turner⭐",
+    "Bryson Stott",
+    "JT Realmuto",
+    "Kyle Schwarber",
+    "Manny Machado",
+    "Gavin Sheets",
+    "Ty France",
+    "Curtis Mead⭐",
+    "Jacob Young",
+    "CJ Abrams",
+    "James Wood⭐",
+    "Luis Garcia Jr.",
     "Heriberto Hernandez",
-    "Owen Caissie",
-    "Kyle Stowers",
-    "JJ Bleday",
-    "Nathaniel Lowe",
-    "Elly De La Cruz",
-    "Jac Caglianone⭐",
-    "Michael Massey",
+    "Otto Lopez",
+    "Xavier Edwards",
+    "Jarren Duran⭐",
+    "Masataka Toshida",
+    "Willson Contreras",
+    "Mickey Gasper",
+    "Coby Mayo⭐",
+    "Pete Alonso",
+    "Trent Grisham",
+    "Ben Rice",
+    "Anthony Volpe",
+    "Travis Bazzana",
+    "Kyle Manzardo",
+    "JJ Bleday⭐",
+    "Eugenio Suarez",
+    "Michael Massey⭐",
     "Salvador Perez",
-    "Byron Buxton⭐",
-    "Brooks Lee",
-    "Andrew Benintendi",
-    "Chase Meidroth",
+    "Bobby Witt Jr.⭐",
+    "Michael Harris II",
+    "Mike Yastrzemski",
+    "Matt Olson",
+    "Ronald Acuna Jr.",
+    "Jesus Sanchez⭐",
+    "Daulton Varsho",
+    "Byron Buxton",
+    "Josh Bell",
+    "Tristan Gray",
+    "Miguel Vargas⭐",
     "Colson Montgomery",
-    "Christian Yelich",
+    "Randal Grichuk",
+    "Jackson Chourio⭐",
     "William Contreras",
-    "Brice Turang",
-    "Jackson Chourio",
+    "Garrett Mitchell",
+    "Matt Chapman",
+    "Bryce Eldridge",
     "Willy Adames⭐",
     "Casey Schmitt⭐",
     "Jordan Walker",
-    "Alec Burleson",
-    "Ivan Herrera",
-    "JJ Wetherholt",
-    "Joc Pederson",
     "Brandon Nimmo⭐",
     "Josh Jung",
-    "Jose Siri",
-    "Mike Trout⭐",
-    "Jorge Soler",
-    "Oswald Peraza",
+    "Pete Crow Armstrong",
+    "Seiya Suzuki",
+    "Carlos Cortes",
+    "Nick Kurtz",
+    "Yordan Alvarez⭐",
+    "Christian Walker",
+    "Spencer Horwitz⭐",
+    "Brandon Lowe⭐",
+    "Oneil Cruz",
+    "Bryan Reynolds",
+    "Ryan O'Hearn",
+    "Zach Neto",
+    "Jo Adell",
+    "Mike Trout",
+    "Wade Meckler",
+    "Hunter Goodman⭐",
     "Ezequiel Tovar",
-    "Hunter Goodman",
-    "Tj Rumfield",
-    "Julio Rodriguez⭐",
+    "Jake McCarthy",
+    "Dominic Canzone",
+    "Luke Raley⭐",
+    "J.P Crawford",
     "Colt Emerson",
-    "Rob Refsnyder",
-    "Mitch Garver",
-    "Randy Arozarena",
     "Juan Soto",
-    "Mark Vientos",
-    "MJ Melendez",
-    "Bo Bichette",
-    "Ketel Marte",
+    "Jared Young",
+    "Marcus Semien",
+    "KEtel Marte",
     "Nolan Arenado",
-    "Corbin Carroll",
-    "Andy Pages⭐",
-    "Mookie Betts",
-    "Will Smith",
+    "Gabriel Moreno",
+    "Ildemaro Vargas",
+    "Will Smith⭐",
+    "Shohei Ohtani",
     "Freddie Freeman",
+    "Max Muncy⭐",
 ]
 
 ALIASES = {
-    "Luis Garcia JR.": "Luis Garcia Jr.",
+    "Masataka Toshida": "Masataka Yoshida",
+    "KEtel Marte": "Ketel Marte",
+    "JT Realmuto": "J.T. Realmuto",
+    "Willson Contreras": "William Contreras",
+    "Pete Crow Armstrong": "Pete Crow-Armstrong",
+    "J.P Crawford": "J.P. Crawford",
     "Tj Rumfield": "TJ Rumfield",
 }
 
@@ -153,7 +190,12 @@ def _pct_value(text: str | None) -> int:
 
 
 def load_park_context(date: str) -> dict[str, dict]:
-    path = ROOT / "data" / f"ParkFactors_{date}.csv"
+    data_dir = ROOT / "data"
+    path = data_dir / f"ParkFactors_{date}.csv"
+    if not path.exists():
+        matches = sorted(data_dir.glob(f"ParkFactors_{date}*.csv"))
+        if matches:
+            path = matches[0]
     out: dict[str, dict] = {}
     if not path.exists():
         return out
@@ -296,7 +338,7 @@ def main() -> int:
 
     lines = [
         "#!/usr/bin/env python3",
-        '"""Generate games[] block for 2026-06-01 MLB HR cheat sheet."""',
+        '"""Generate games[] block for 2026-06-02 MLB HR cheat sheet."""',
         "import json",
         "from pathlib import Path",
         "",
@@ -355,6 +397,14 @@ def main() -> int:
     for gm in game_meta:
         away_r = gm["away_risk"]
         home_r = gm["home_risk"]
+        park = park_context.get(gm["key"])
+        if park:
+            park_line = (
+                f"Park boost {park['hr_pct']:+d}% "
+                f"(stadium {park['hr_stadium']:+d}%, weather {park['hr_weather']:+d}%)."
+            )
+        else:
+            park_line = "Park boost data unavailable."
         away_line = (
             f"{gm['title'].split(' - ')[-1].split(' vs ')[0].split(' (')[0]} "
             f"(HR risk {away_r['overall']:.2f}, vs LHB {away_r['vs_lhb']:+.2f}, vs RHB {away_r['vs_rhb']:+.2f})"
@@ -367,7 +417,7 @@ def main() -> int:
             if home_r
             else "Home starter risk unavailable"
         )
-        desc = f"Tail key data: {away_line}. {home_line}."
+        desc = f"Tail key data: {park_line} {away_line}. {home_line}."
         lines.append("    {")
         lines.append(f'        "title": {json.dumps(gm["title"], ensure_ascii=False)},')
         lines.append(f'        "description": {json.dumps(desc, ensure_ascii=False)},')
@@ -449,7 +499,7 @@ def main() -> int:
             "        out.append('];')",
             "        return '\\n'.join(out)",
             "",
-            "    out = ROOT / '_games-0601.txt'",
+            "    out = ROOT / '_games-0602.txt'",
             "    out.write_text(emit_games_js(games) + '\\n', encoding='utf-8')",
             "    print('wrote', out.name)",
         ]

@@ -96,9 +96,27 @@ def validate_two_leg_parlay(html_text: str) -> list[str]:
     return errors
 
 
+def validate_gambly_data_attrs(html_text: str) -> list[str]:
+    """Every Goblin Gambly button must have parseable JSON in its data attribute."""
+    errors: list[str] = []
+    for m in re.finditer(r"data-goblin-gambly-lines='([^']+)'", html_text):
+        raw = html.unescape(m.group(1))
+        try:
+            parsed = json.loads(raw)
+        except json.JSONDecodeError as exc:
+            errors.append(f"Invalid data-goblin-gambly-lines JSON: {exc}")
+            continue
+        if not isinstance(parsed, list) or not parsed:
+            errors.append("data-goblin-gambly-lines must be a non-empty JSON array")
+    if not errors and "data-goblin-gambly-lines=" not in html_text:
+        errors.append("missing any data-goblin-gambly-lines buttons")
+    return errors
+
+
 def validate_goblin_parlays(html_text: str, fav_names: set[str] | None = None) -> list[str]:
     errors = validate_three_leg_parlays(html_text, fav_names)
     errors.extend(validate_two_leg_parlay(html_text))
+    errors.extend(validate_gambly_data_attrs(html_text))
     return errors
 
 
@@ -124,6 +142,7 @@ def main() -> int:
         return 1
     print("OK   3 Leg HR and Favorite 3 Leg are distinct ⭐🌕 favorites")
     print("OK   2 Leg HR and 3 Leg HR are distinct")
+    print("OK   All Goblin Gambly data attributes parse as JSON")
     return 0
 
 

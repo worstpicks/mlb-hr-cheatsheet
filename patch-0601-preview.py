@@ -32,7 +32,8 @@ PITCHER_RISK = load_pitcher_risk(ROOT / "data" / f"hr-targets-overall-{SHEET_DAT
 
 
 def data_attr(lines):
-    return json.dumps(lines).replace('"', "&quot;")
+    """JSON for data-goblin-gambly-lines (attribute delimited with single quotes)."""
+    return json.dumps(lines).replace('"', "&quot;").replace("'", "&#39;")
 
 
 def parse_odds_value(odds_text: str) -> int | None:

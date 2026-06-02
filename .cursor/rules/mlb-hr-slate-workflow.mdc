@@ -64,7 +64,18 @@ python validate-index-matchups.py               # zero errors vs manifest SPs
 
 If a batter row shows the wrong SP in the title or `chips: ["vs …"]`, re-run import + rebuild — do not hand-edit individual matchups.
 
-## Step 0b — Use CSV data for straights & HR risk
+## Step 0a-b — Batter name normalization (required)
+
+PropFinder `hr-matchups` CSVs sometimes prefix lineup slots in the BATTER column (e.g. `"3 Matt Olson"` instead of `"Matt Olson"`) or drop periods in initials (`"JP Crawford"` vs `"J.P. Crawford"`).
+
+**Always** normalize batter names in `csv_slate_meta.py` before prop matching:
+
+- strip leading lineup numbers (`^\d+\s+`)
+- strip trailing `LHB` / `RHB` / `SHB`
+- match via `name_lookup_key()` (lowercase, remove periods, collapse spaces)
+
+After `python build-*-from-csv.py`, **zero props should be missing** from the user list. If any are missing, fix normalization/aliases — do not ship the sheet with dropped props.
+
 
 After import, validate Straight of the Day and platoon lanes against PropFinder splits:
 

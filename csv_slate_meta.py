@@ -13,6 +13,23 @@ MATCHUP_RE = re.compile(
     r"hr-matchups-([A-Z]{2,3})-at-([A-Z]{2,3})-(.+)-(\d{4}-\d{2}-\d{2})\.csv$",
     re.I,
 )
+LINEUP_PREFIX_RE = re.compile(r"^\d+\s+")
+
+
+def normalize_batter_name(raw: str) -> str:
+    """Strip PropFinder lineup slot prefixes and handedness suffixes from batter labels."""
+    name = raw.strip()
+    name = re.sub(r"\s+(LHB|RHB|SHB)\s*$", "", name, flags=re.I).strip()
+    name = LINEUP_PREFIX_RE.sub("", name).strip()
+    return name
+
+
+def name_lookup_key(name: str) -> str:
+    """Canonical lookup key for prop-list ↔ CSV batter matching."""
+    key = normalize_batter_name(name).lower()
+    key = key.replace(".", "")
+    key = re.sub(r"\s+", " ", key).strip()
+    return key
 
 
 def manifest_matchup_files(sheet_date: str, data_dir: Path | None = None) -> list[Path]:
@@ -72,7 +89,7 @@ def read_batter_rows(path: Path) -> list[dict]:
             name_raw = row[0].strip()
             hand_m = re.search(r"\b(LHB|RHB|SHB)\b", name_raw)
             hand = {"LHB": "L", "RHB": "R", "SHB": "S"}.get(hand_m.group(1) if hand_m else "", "?")
-            name = re.sub(r"\s+(LHB|RHB|SHB)\s*$", "", name_raw).strip()
+            name = normalize_batter_name(name_raw)
             odds_raw = data.get("ODDS", "").strip()
             odds = odds_raw if odds_raw and odds_raw.upper() != "N/A" else "N/A"
             if odds_raw.startswith("+") or odds_raw.startswith("-"):
@@ -128,7 +145,7 @@ def derive_games_from_csv(sheet_date: str, data_dir: Path | None = None) -> list
             gm["home_sp"] = sp_last
             gm["home_sp_full"] = hdr["pitcher"]
         for b in read_batter_rows(path):
-            gm["batters"][b["name"].lower()] = {**b, "vs": sp_last, "file": path.name}
+            gm["batters"][name_lookup_key(b["name"])] = {**b, "vs": sp_last, "file": path.name}
 
     risk = load_pitcher_risk(hr_targets_csv(sheet_date) or Path("__missing__"))
     games = []

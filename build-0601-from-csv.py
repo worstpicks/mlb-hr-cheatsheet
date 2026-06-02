@@ -9,7 +9,7 @@ import sys
 import csv
 from pathlib import Path
 
-from csv_slate_meta import derive_games_from_csv
+from csv_slate_meta import derive_games_from_csv, name_lookup_key
 from sheet_data import load_pitcher_risk, resolve_pitcher
 
 ROOT = Path(__file__).resolve().parent
@@ -265,7 +265,7 @@ def main() -> int:
                 team = g["away"]
             else:
                 continue
-            batter_ctx[row["name"].lower()] = {
+            batter_ctx[name_lookup_key(row["name"])] = {
                 "game": g["key"],
                 "team": team,
                 "opp_sp": vs,
@@ -286,7 +286,7 @@ def main() -> int:
     props: list[tuple] = []
     team_map: dict[str, str] = {}
     for name in selected:
-        ctx = batter_ctx.get(name.lower())
+        ctx = batter_ctx.get(name_lookup_key(name))
         if not ctx:
             missing.append(name)
             continue
@@ -511,6 +511,7 @@ def main() -> int:
         print(f"WARN missing {len(missing)} props from CSV:")
         for n in missing:
             print(" ", n)
+        return 1
     return 0
 
 

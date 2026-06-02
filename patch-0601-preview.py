@@ -249,6 +249,52 @@ weather_fades = sorted(weather_rows, key=lambda x: x["hr_pct"])[:4]
 weather_by_game = {w["game"]: w for w in weather_rows}
 pitchers_attack = load_pitchers_to_attack()
 
+
+def pick_top_n(
+    ranked: list[dict],
+    n: int,
+    *,
+    exclude_names: set[str] | None = None,
+    max_per_game: int = 2,
+    max_per_team: int | None = 2,
+) -> list[dict]:
+    """Pick top rows with at most max_per_game from the same game (and team when set)."""
+    exclude_names = exclude_names or set()
+    picked: list[dict] = []
+    seen: set[str] = set()
+    game_counts: dict[str, int] = {}
+    team_counts: dict[str, int] = {}
+
+    for r in ranked:
+        if r["name"] in seen or r["name"] in exclude_names:
+            continue
+        game_count = game_counts.get(r["game_key"], 0)
+        if game_count >= max_per_game:
+            continue
+        if max_per_team is not None and r.get("team"):
+            team_count = team_counts.get(r["team"], 0)
+            if team_count >= max_per_team:
+                continue
+        seen.add(r["name"])
+        picked.append(r)
+        game_counts[r["game_key"]] = game_count + 1
+        if max_per_team is not None and r.get("team"):
+            team_counts[r["team"]] = team_counts.get(r["team"], 0) + 1
+        if len(picked) == n:
+            break
+
+    return picked
+
+
+def assert_game_cap(label: str, picked: list[dict], max_per_game: int = 2) -> None:
+    from collections import Counter
+
+    counts = Counter(r["game_key"] for r in picked)
+    bad = {game: count for game, count in counts.items() if count > max_per_game}
+    if bad:
+        raise SystemExit(f"{label}: more than {max_per_game} players from same game: {bad}")
+
+
 # Top 5 HR tickets: combine attackability, weather/park, and HR risk into one rank.
 attack_bonus_by_pitcher = {
     p["pitcher"]: max(0.0, 5.0 - idx) * 2.0
@@ -272,33 +318,9 @@ for r in rows:
     combined_ranked.append({**r, "combined_rank": combined_rank})
 
 combined_ranked.sort(key=lambda r: (r["combined_rank"], r["score"]), reverse=True)
-top5, seen = [], set()
-game_counts = {}
-team_counts = {}
-for r in combined_ranked:
-    if r["name"] in seen:
-        continue
-    game_count = game_counts.get(r["game_key"], 0)
-    team_count = team_counts.get(r["team"], 0) if r["team"] else 0
-    if game_count >= 2 or team_count >= 2:
-        continue
-    seen.add(r["name"])
-    top5.append(r)
-    game_counts[r["game_key"]] = game_count + 1
-    if r["team"]:
-        team_counts[r["team"]] = team_count + 1
-    if len(top5) == 5:
-        break
-if len(top5) < 5:
-    for r in combined_ranked:
-        if r["name"] in seen:
-            continue
-        seen.add(r["name"])
-        top5.append(r)
-        if len(top5) == 5:
-            break
+top5 = pick_top_n(combined_ranked, 5, max_per_game=2, max_per_team=2)
 
-# Weather-heavy HR list: prioritize park/weather and keep distinct from Top 5.
+# Weather-heavy HR list: prioritize park/weather, distinct from Top 5, max 2 per game.
 top5_names = {r["name"] for r in top5}
 weather_ranked = sorted(
     rows,
@@ -311,22 +333,15 @@ weather_ranked = sorted(
     ),
     reverse=True,
 )
-weather5, seen = [], set()
-for r in weather_ranked:
-    if r["name"] in seen or r["name"] in top5_names:
-        continue
-    seen.add(r["name"])
-    weather5.append(r)
-    if len(weather5) == 5:
-        break
-if len(weather5) < 5:
-    for r in weather_ranked:
-        if r["name"] in seen:
-            continue
-        seen.add(r["name"])
-        weather5.append(r)
-        if len(weather5) == 5:
-            break
+weather5 = pick_top_n(
+    weather_ranked,
+    5,
+    exclude_names=top5_names,
+    max_per_game=2,
+    max_per_team=None,
+)
+assert_game_cap("Top 5 HR Tickets", top5)
+assert_game_cap("Top 5 Weather Heavy HR Plays", weather5)
 
 
 def weather_micro_note(row):
@@ -438,7 +453,7 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                     <p class="model-note summary-note">Ranks combine top pitchers to attack, weather/park carry, opposing split risk, and batter damage form.</p>
                     <div class="top-five-list">
 """ + "\n".join(
-    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {r["park_pct"]}%</small></span><strong>{r["score"]}</strong></div>'
+    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {r["park_pct"]}%</small></span><strong>{r["score"]}</strong></div>'
     for r in top5
 ) + """
                     </div>

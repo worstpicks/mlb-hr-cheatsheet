@@ -148,4 +148,5 @@ Confirm in `preview/index.html`:
 2. `python validate-index-matchups.py` — zero matchup errors
 3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)
 4. Goblin parlays distinct — 3 Leg vs 2 Leg vs Favorite 3 Leg share no batters (`python goblin_parlay_rules.py`)
-5. `python verify-deploy.py` before push — **only push when user asks**
+5. **Top 5 diversification** — **Top 5 HR Tickets** and **Top 5 Weather Heavy HR Plays** must each have **at most 2 players from the same game** (skip lower-ranked same-game rows rather than stacking one matchup). Lists must stay **distinct** from each other (no duplicate names across the two charts).
+6. `python verify-deploy.py` before push — **only push when user asks**

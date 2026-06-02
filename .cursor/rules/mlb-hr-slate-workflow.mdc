@@ -147,5 +147,5 @@ Confirm in `preview/index.html`:
 1. `python build-sheet-YYYY-MM-DD.py` → `python patch-XXXX-preview.py`
 2. `python validate-index-matchups.py` — zero matchup errors
 3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)
-4. Goblin 3-leg vs Favorite 3-leg distinct (`python goblin_parlay_rules.py`)
+4. Goblin parlays distinct — 3 Leg vs 2 Leg vs Favorite 3 Leg share no batters (`python goblin_parlay_rules.py`)
 5. `python verify-deploy.py` before push — **only push when user asks**

@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 THREE_LEG_LABEL = "Add 3 Leg HR to Gambly"
+TWO_LEG_LABEL = "Add 2 Leg HR to Gambly"
 FAV_THREE_LABEL = "Add Favorite 3 Leg to Gambly"
 
 FAV_THREE_REQUIRED_EMOJIS = ("⭐", "🌕")  # sheet rows should carry both for fav legs
@@ -72,6 +73,35 @@ def validate_three_leg_parlays(html_text: str, fav_names: set[str] | None = None
     return errors
 
 
+def validate_two_leg_parlay(html_text: str) -> list[str]:
+    """Return list of error strings; empty means OK."""
+    errors: list[str] = []
+    try:
+        three = extract_goblin_gambly_lines(html_text, THREE_LEG_LABEL)
+        two = extract_goblin_gambly_lines(html_text, TWO_LEG_LABEL)
+    except (ValueError, json.JSONDecodeError) as e:
+        return [str(e)]
+
+    if len(two) != 2:
+        errors.append(f"2 Leg HR must have 2 legs, found {len(two)}")
+    if len(three) != 3:
+        return errors
+
+    two_b = [gambly_batter(x) for x in two]
+    three_b = [gambly_batter(x) for x in three]
+    overlap = set(two_b) & set(three_b)
+    if overlap:
+        errors.append(f"2 Leg HR and 3 Leg HR share batters: {sorted(overlap)}")
+
+    return errors
+
+
+def validate_goblin_parlays(html_text: str, fav_names: set[str] | None = None) -> list[str]:
+    errors = validate_three_leg_parlays(html_text, fav_names)
+    errors.extend(validate_two_leg_parlay(html_text))
+    return errors
+
+
 def main() -> int:
     root = Path(__file__).resolve().parent
     html_text = (root / "preview" / "index.html").read_text(encoding="utf-8")
@@ -87,12 +117,13 @@ def main() -> int:
         spec.loader.exec_module(mod)
         fav_names = {x.split(" (")[0] for x in mod.FAVS}
 
-    errors = validate_three_leg_parlays(html_text, fav_names)
+    errors = validate_goblin_parlays(html_text, fav_names)
     for e in errors:
         print("FAIL", e)
     if errors:
         return 1
     print("OK   3 Leg HR and Favorite 3 Leg are distinct ⭐🌕 favorites")
+    print("OK   2 Leg HR and 3 Leg HR are distinct")
     return 0
 
 

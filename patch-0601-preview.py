@@ -167,25 +167,29 @@ if not o15_pool:
     o15_pool = [r for r in straight_pool if r["name"] != straight_o05["name"] and r["score"] >= 90]
 straight_o15 = o15_pool[0] if o15_pool else (straight_pool[1] if len(straight_pool) > 1 else straight_pool[0])
 
-quality_top3_pool = [
-    r
-    for r in listed_rows
-    if r["score"] >= 85
-    and r["hr"] >= 1
-    and r["split"] >= 0.0
-    and (r["ev"] >= 90 or r["near"] >= 2)
-]
-if len(quality_top3_pool) < 3:
-    quality_top3_pool = straight_pool if len(straight_pool) >= 3 else listed_rows
+straight_names = {straight_o05["name"], straight_o15["name"]}
 
+# 3-leg HR parlay: attack/split rank — never reuse Straight of the Day legs (see May 31 sheet).
+top3_pool = [r for r in listed_rows if r["name"] not in straight_names]
+top3_pool.sort(key=lambda x: (x["rank"], x["score"]), reverse=True)
 top3, seen = [], set()
-for r in quality_top3_pool:
+for r in top3_pool:
     if r["name"] in seen:
         continue
     seen.add(r["name"])
     top3.append(r)
     if len(top3) == 3:
         break
+if len(top3) < 3:
+    for r in listed_rows:
+        if r["name"] in seen or r["name"] in straight_names:
+            continue
+        seen.add(r["name"])
+        top3.append(r)
+        if len(top3) == 3:
+            break
+
+two_leg = [straight_o05, straight_o15]
 
 fav_rows = [r for r in rows if r["name"] in FAVS and r["name"] not in {x["name"] for x in top3} and r["score"] >= 85]
 if len(fav_rows) < 3:
@@ -339,10 +343,7 @@ THREE_LEG_HR = [f"{r['name_plain']} - Over 0.5 homerun" for r in top3]
 FAV_THREE_LEG = [f"{r['name_plain']} - Over 0.5 homerun" for r in fav3]
 STRAIGHT_OF_DAY = f"{straight_o05['name_plain']} - Over 0.5 homerun"
 STRAIGHT_O15_DAY = f"{straight_o15['name_plain']} - Over 1.5 homeruns"
-TWO_LEG_HR = [
-    f"{straight_o05['name_plain']} - Over 0.5 homerun",
-    f"{straight_o15['name_plain']} - Over 0.5 homerun",
-]
+TWO_LEG_HR = [f"{r['name_plain']} - Over 0.5 homerun" for r in two_leg]
 
 FAV_SET = (
     "            const WORST_PICKZ_FAVORITE_NAMES = new Set([\n"
@@ -401,8 +402,8 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>{straight_o05['name_plain']} HR</strong><small>{straight_o05['note']}</small></li>
-                                <li><strong>{straight_o15['name_plain']} HR</strong><small>{straight_o15['note']}</small></li>
+                                <li><strong>{two_leg[0]['name_plain']} HR</strong><small>{two_leg[0]['note']}</small></li>
+                                <li><strong>{two_leg[1]['name_plain']} HR</strong><small>{two_leg[1]['note']}</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(TWO_LEG_HR)}'>Add 2 Leg HR to Gambly</button></div>
                         </div>

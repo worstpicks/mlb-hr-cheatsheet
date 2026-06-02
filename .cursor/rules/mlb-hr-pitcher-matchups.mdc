@@ -9,6 +9,7 @@ alwaysApply: false
 Before shipping or patching any sheet:
 
 0. **Import slate CSVs from Downloads (required)** — See always-on rule `mlb-hr-slate-workflow.mdc`. Run `python import-sheet-csvs.py --date YYYY-MM-DD` before building or picking straights. Then `python recheck-straight.py --import` for HR-risk validation.
+1. **Straights of the Day** — must be updated for the current slate in `patch-YYYY-MM-DD-preview.py` (`STRAIGHT_OF_DAY_CARD`); never carry over yesterday's O0.5/O1.5 pair. Resync + `verify-summary-YYYY-MM-DD.py`.
 
 1. **Opposing SP only** — Away batters face the **home** starter; home batters face the **away** starter. Never assign `vs` chips or notes to a batter's **own** team's pitcher. Parse game titles by team code in `(hand, TEAM)`, not by name order in the title.
 
@@ -20,4 +21,4 @@ Before shipping or patching any sheet:
 
 5. **Archives** — Do not bulk-patch archive HTML with a different date's `games` block unless intentionally updating that archive date.
 
-6. **Goblin 3-leg vs Favorite 3-leg** — The **3 Leg Homerun Bet** and **Worst Pickz Favorite 3 Leg** must **never share the same batters** (redundant on the sheet). The Favorite 3 Leg must use only **⭐ Worst Pickz Favorite** rows that also carry **🌕 moonshot** on the board. Prefer **attack-pitcher** matchups (Top 5 Pitchers To Attack / 🧤 bums) and **park boost** (🏟️ / plus HR or runs rows) when building the Favorite leg. Run `python goblin_parlay_rules.py` after patching Goblin's Insight.
+6. **Goblin parlay separation** — The **3 Leg Homerun Bet**, **2 Leg Homerun Bet**, and **Worst Pickz Favorite 3 Leg** must **never share the same batters**. **3 Leg** = attack/split rank (exclude Straight of the Day legs). **2 Leg** = O0.5 + O1.5 straight picks. The Favorite 3 Leg must use only **⭐ Worst Pickz Favorite** rows that also carry **🌕 moonshot** on the board. Prefer **attack-pitcher** matchups (Top 5 Pitchers To Attack / 🧤 bums) and **park boost** (🏟️ / plus HR or runs rows) when building the Favorite leg. Run `python goblin_parlay_rules.py` after patching Goblin's Insight.

@@ -250,7 +250,7 @@ def fade_reason(
     if ev < 88:
         parts.append(f"lighter EV form ({ev:.1f} mph)")
 
-    return "; ".join(parts[:2]) if parts else "HR outcomes are still high-variance"
+    return "; ".join(parts[:2]) if parts else ""
 
 
 def main() -> int:
@@ -308,6 +308,8 @@ def main() -> int:
     favs_display = sorted(
         [display(name, next(p[1] for p in props if p[0] == name)) for name in fav_names if any(p[0] == name for p in props)]
     )
+
+    from game_start_times import annotate_and_sort_games
 
     game_meta: list[dict] = []
     bum_pitchers: set[str] = set()
@@ -445,14 +447,9 @@ def main() -> int:
                 park_context.get(_game),
             )
             fav_note = "Worst Pickz Favorite. " if is_fav else ""
-            note = (
-                fav_note
-                + 
-                f"Tail: {core_reason(hr, near, ev, barrel)}. "
-                f"Matchup: {matchup}. "
-                f"Fade: {fade}. "
-                f"Model score {score}; odds {odds_text(odds)}."
-            )
+            note = fav_note + f"{core_reason(hr, near, ev, barrel)}. {matchup}."
+            if fade:
+                note += f" {fade}."
             if blast:
                 lines.append(
                     f'            row("{name}", "{hand}", "{odds}", {score}, "{em}", ["vs {chip}"], '
@@ -474,6 +471,9 @@ def main() -> int:
             "        add_bum_row_emojis(entry)",
             "        apply_inferred_due(entry, game)",
             "",
+            "from game_start_times import annotate_and_sort_games",
+            f'games = annotate_and_sort_games(games, "{DATE}")',
+            "",
             "if __name__ == '__main__':",
             "    def js_string(value):",
             "        return json.dumps(value, ensure_ascii=False)",
@@ -484,6 +484,8 @@ def main() -> int:
             "            out.append('    {')",
             "            out.append(f\"        title: {js_string(game['title'])},\")",
             "            out.append(f\"        description: {js_string(game['description'])},\")",
+            '            if game.get("startTime"):',
+            '                out.append(f"        startTime: {js_string(game[\'startTime\'])},")',
             "            out.append('        rows: [')",
             "            for entry in game['rows']:",
             "                parts = [",

@@ -67,8 +67,6 @@ def validate_three_leg_parlays(html_text: str, fav_names: set[str] | None = None
             errors.append(f"Favorite 3 Leg batter missing ⭐ on sheet: {name}")
         if "🌕" not in emojis:
             errors.append(f"Favorite 3 Leg batter missing 🌕 moonshot on sheet: {name}")
-        if "Worst Pickz favorite" not in note and "Worst Pickz Favorite" not in note:
-            errors.append(f"Favorite 3 Leg batter not marked Worst Pickz Favorite in note: {name}")
 
     return errors
 

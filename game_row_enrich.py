@@ -1,0 +1,575 @@
+#!/usr/bin/env python3
+"""Enrich game rows with form/air/contact fields and emit JS for the cheat sheet."""
+from __future__ import annotations
+
+import csv
+import json
+import re
+from pathlib import Path
+
+from csv_slate_meta import derive_games_from_csv, name_lookup_key, read_batter_rows
+from note_compact import compact_note
+from csv_slate_meta import manifest_matchup_files, parse_matchup_filename
+from sheet_data import load_pitcher_risk, resolve_pitcher
+
+ROOT = Path(__file__).resolve().parent
+
+# Sheet title keys that differ from ParkFactors CSV Game column.
+TITLE_WEATHER_KEY_ALIASES = {
+    "MIA @ WSH": "MIA @ WAS",
+    "CWS @ MIN": "CHW @ MIN",
+}
+
+
+def _num(val: str | None) -> float | None:
+    if val is None:
+        return None
+    v = str(val).strip().replace("%", "")
+    if not v or v in ("-", "N/A"):
+        return None
+    try:
+        return float(v)
+    except ValueError:
+        return None
+
+
+def load_batter_stat_lookup(sheet_date: str) -> dict[str, dict]:
+    """name_lookup_key -> stat dict from hr-matchups CSVs."""
+    lookup: dict[str, dict] = {}
+    for path in manifest_matchup_files(sheet_date, ROOT / "data"):
+        meta = parse_matchup_filename(path)
+        if not meta or meta["date"] != sheet_date:
+            continue
+        for b in read_batter_rows(path):
+            key = name_lookup_key(b["name"])
+            prev = lookup.get(key)
+            if prev and (prev.get("hr") or 0) >= (b.get("hr") or 0):
+                continue
+            lookup[key] = {
+                "hr": b.get("hr") or 0,
+                "near": b.get("near") or 0,
+                "ev": b.get("ev") or 0.0,
+                "barrel": b.get("barrel"),
+            }
+            lookup[key].update(_read_extra_statcast(path, b["name"]))
+            if lookup[key].get("barrel") is None and b.get("barrel") is not None:
+                lookup[key]["barrel"] = b.get("barrel")
+    return lookup
+
+
+def _read_extra_statcast(path: Path, batter_name: str) -> dict:
+    out: dict = {"fb_pct": None, "pull_air": None, "whiff_pct": None, "k_pct": None, "hh_pct": None}
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        reader = csv.reader(f)
+        header = None
+        for row in reader:
+            if row and row[0] == "BATTER":
+                header = [c.strip() for c in row]
+                continue
+            if not header or not row or not row[0]:
+                continue
+            raw = row[0].strip()
+            if name_lookup_key(raw) != name_lookup_key(batter_name):
+                continue
+            data = dict(zip(header, row))
+            out["fb_pct"] = _num(data.get("FB%"))
+            out["pull_air"] = _num(data.get("PULLAIR%"))
+            out["whiff_pct"] = _num(data.get("WHIFF%"))
+            out["k_pct"] = _num(data.get("K%"))
+            out["hh_pct"] = _num(data.get("HH%"))
+            out["barrel_pct"] = _num(data.get("BARREL%"))
+            break
+    return out
+
+
+def load_pitcher_hr9_lookup(sheet_date: str) -> dict[str, float]:
+    path = ROOT / "data" / f"pitcher-summary-season-l10-{sheet_date}.csv"
+    if not path.is_file():
+        return {}
+    lookup: dict[str, float] = {}
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        for row in csv.reader(f):
+            if len(row) < 14 or row[0] in ("", "Split", "Range", "Dates", "Games", ",STATS"):
+                continue
+            if row[1] == "PITCHER":
+                continue
+            pitcher = (row[1] or "").strip()
+            hr9 = _num(row[12] if len(row) > 12 else None)
+            if pitcher and hr9 is not None:
+                lookup[pitcher.lower()] = hr9
+                lookup[pitcher.split()[-1].lower()] = hr9
+    return lookup
+
+
+def form_trend(hr: int, near: int, ev: float) -> str:
+    if hr >= 2 or (near >= 3 and ev >= 88) or (hr >= 1 and near >= 2 and ev >= 92):
+        return "heating"
+    if hr == 0 and near <= 1 and ev < 86:
+        return "cooling"
+    return "flat"
+
+
+def form_power_score(stats: dict) -> float:
+    hr = stats.get("hr") or 0
+    near = stats.get("near") or 0
+    ev = stats.get("ev") or 0.0
+    barrel = stats.get("barrel") or stats.get("barrel_pct") or 0.0
+    hh = stats.get("hh_pct") or 0.0
+    return hr * 5.0 + near * 2.0 + max(ev - 90.0, 0.0) * 0.8 + barrel * 1.5 + hh * 0.25
+
+
+def contact_risk(whiff: float | None, k_pct: float | None) -> bool:
+    if whiff is not None and whiff >= 28.0:
+        return True
+    if k_pct is not None and k_pct >= 28.0:
+        return True
+    return False
+
+
+def air_clause(fb: float | None, pull: float | None) -> str:
+    parts: list[str] = []
+    if fb is not None:
+        parts.append(f"FB {fb:.0f}%")
+    if pull is not None:
+        parts.append(f"pull-air {pull:.0f}%")
+    if not parts:
+        return ""
+    return "Air: " + ", ".join(parts) + ". "
+
+
+def inject_air_into_note(note: str, clause: str) -> str:
+    if not clause or "Air:" in note:
+        return note
+    if "Matchup:" in note:
+        return note.replace("Matchup:", f"{clause}Matchup:", 1)
+    return f"{note} {clause}".strip()
+
+
+def normalize_game_key(key: str) -> str:
+    return " ".join((key or "").upper().split())
+
+
+def game_key_from_title(title: str) -> str:
+    return normalize_game_key(title.split(" - ")[0].strip())
+
+
+def _pct_from_field(val: str | None) -> int | None:
+    if not val:
+        return None
+    m = re.search(r"([+-]?\d+)", str(val).replace("%", ""))
+    return int(m.group(1)) if m else None
+
+
+def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
+    data_dir = ROOT / "data"
+    path = data_dir / f"ParkFactors_{sheet_date}.csv"
+    if not path.is_file():
+        matches = sorted(data_dir.glob(f"ParkFactors_{sheet_date}*.csv"))
+        if matches:
+            path = matches[0]
+    lookup: dict[str, dict] = {}
+    if not path.is_file():
+        return lookup
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            game = normalize_game_key(row.get("Game", ""))
+            if not game:
+                continue
+            try:
+                hr_pct = int(str(row["HR %"]).replace("%", "").strip())
+            except (ValueError, KeyError):
+                continue
+            lookup[game] = {
+                "game": game,
+                "venue": (row.get("Venue") or "").strip(),
+                "hr_pct": hr_pct,
+                "hr_pct_text": row.get("HR %", ""),
+                "hr_stadium": row.get("HR % Stadium", ""),
+                "hr_weather": row.get("HR % Weather", ""),
+                "stadium_pct": _pct_from_field(row.get("HR % Stadium")),
+                "weather_pct": _pct_from_field(row.get("HR % Weather")),
+            }
+    return lookup
+
+
+def lookup_weather_for_game(title: str, weather_lookup: dict[str, dict]) -> dict | None:
+    key = game_key_from_title(title)
+    key = TITLE_WEATHER_KEY_ALIASES.get(key, key)
+    return weather_lookup.get(key)
+
+
+def parse_game_description(desc: str) -> dict:
+    park_m = re.search(r"Park boost\s*([+-]?\d+)%", desc or "")
+    if not park_m:
+        park_m = re.search(r"HR environment\s*([+-]?\d+)%", desc or "")
+    st_m = re.search(r"stadium\s*([+-]?\d+)%", desc or "", re.I)
+    wx_m = re.search(r"weather\s*([+-]?\d+)%", desc or "", re.I)
+    risks = re.findall(
+        r"([^(]+?)\s*\(HR risk\s*([+-]?\d+\.?\d*)",
+        desc or "",
+    )
+    away_risk = home_risk = None
+    if len(risks) >= 2:
+        away_risk = float(risks[0][1])
+        home_risk = float(risks[1][1])
+    elif len(risks) == 1:
+        away_risk = float(risks[0][1])
+    return {
+        "park_pct": int(park_m.group(1)) if park_m else None,
+        "stadium_pct": int(st_m.group(1)) if st_m else None,
+        "weather_pct": int(wx_m.group(1)) if wx_m else None,
+        "away_risk": away_risk,
+        "home_risk": home_risk,
+    }
+
+
+def resolve_park_context(game: dict, weather: dict | None) -> dict:
+    """Net park % plus optional stadium/weather split for headers."""
+    desc_meta = parse_game_description(game.get("description", ""))
+    park_pct = desc_meta["park_pct"]
+    stadium_pct = desc_meta["stadium_pct"]
+    weather_pct = desc_meta["weather_pct"]
+    if park_pct is None and weather:
+        park_pct = weather.get("hr_pct")
+    if stadium_pct is None and weather:
+        stadium_pct = weather.get("stadium_pct")
+    if weather_pct is None and weather:
+        weather_pct = weather.get("weather_pct")
+    return {
+        "park_pct": park_pct,
+        "stadium_pct": stadium_pct,
+        "weather_pct": weather_pct,
+    }
+
+
+def pitcher_name_from_title_segment(seg: str) -> str:
+    seg = seg.strip()
+    seg = re.sub(r"\s*🧤\s*", " ", seg)
+    m = re.match(r"^(.+?)\s*\([LR],\s*[A-Z]{2,4}\)", seg)
+    return m.group(1).strip() if m else seg.strip()
+
+
+def pitcher_last_from_title_segment(seg: str) -> str:
+    return pitcher_name_from_title_segment(seg).split()[-1]
+
+
+def parse_pitcher_blocks_from_description(desc: str) -> dict[str, dict]:
+    """Last-name key -> overall / vs_lhb / vs_rhb from Tail key data lines."""
+    out: dict[str, dict] = {}
+    for m in re.finditer(
+        r"([A-Za-z][A-Za-z\s.'-]+?)\s*"
+        r"\(HR risk\s*([+-]?\d+\.?\d*),\s*vs LHB\s*([+-]?\d+\.?\d*),\s*vs RHB\s*([+-]?\d+\.?\d*)\)",
+        desc or "",
+    ):
+        name = re.sub(r"\s*🧤\s*", " ", m.group(1)).strip()
+        key = name.split()[-1].lower()
+        out[key] = {
+            "pitcher": name,
+            "overall": float(m.group(2)),
+            "vs_lhb": float(m.group(3)),
+            "vs_rhb": float(m.group(4)),
+        }
+    return out
+
+
+def resolve_pitcher_risk_row(
+    label: str,
+    pitcher_risk: dict | None,
+    desc_blocks: dict[str, dict],
+) -> dict | None:
+    if pitcher_risk:
+        row = resolve_pitcher(pitcher_risk, label)
+        if row:
+            return row
+    return desc_blocks.get(label.split()[-1].lower())
+
+
+def _pitcher_meta_segment(name: str, row: dict, hr9_lookup: dict[str, float]) -> str:
+    last = name.split()[-1]
+    hr9 = hr9_lookup.get(name.lower()) or hr9_lookup.get(last.lower())
+    seg = (
+        f"{name} {row['overall']:+.2f} overall · "
+        f"LHB {row['vs_lhb']:+.2f} · RHB {row['vs_rhb']:+.2f}"
+    )
+    if hr9 is not None:
+        seg += f" ({hr9:.2f} HR/9)"
+    return seg
+
+
+def format_park_segment(park_ctx: dict) -> str | None:
+    park_pct = park_ctx.get("park_pct")
+    if park_pct is None:
+        return None
+    stadium_pct = park_ctx.get("stadium_pct")
+    weather_pct = park_ctx.get("weather_pct")
+    if stadium_pct is not None and weather_pct is not None:
+        return f"Park {park_pct:+d}% (stadium {stadium_pct:+d}%, wx {weather_pct:+d}%)"
+    return f"Park {park_pct:+d}%"
+
+
+def build_game_meta_line(
+    game: dict,
+    hr9_lookup: dict[str, float],
+    weather: dict | None = None,
+    pitcher_risk: dict | None = None,
+) -> str:
+    parts: list[str] = []
+    if game.get("startTime"):
+        try:
+            from datetime import datetime
+            from zoneinfo import ZoneInfo
+
+            dt = datetime.fromisoformat(game["startTime"].replace("Z", "+00:00")).astimezone(
+                ZoneInfo("America/New_York")
+            )
+            h = dt.hour % 12 or 12
+            parts.append(f"{h}:{dt.minute:02d} {'AM' if dt.hour < 12 else 'PM'} ET")
+        except (ValueError, OSError):
+            pass
+    park_seg = format_park_segment(resolve_park_context(game, weather))
+    if park_seg:
+        parts.append(park_seg)
+    desc = game.get("description", "")
+    desc_blocks = parse_pitcher_blocks_from_description(desc)
+    title = game.get("title", "")
+    if " - " in title and " vs " in title:
+        _, matchup = title.split(" - ", 1)
+        away_seg, home_seg = matchup.split(" vs ", 1)
+        away_label = pitcher_name_from_title_segment(away_seg)
+        home_label = pitcher_name_from_title_segment(home_seg)
+        away_row = resolve_pitcher_risk_row(away_label, pitcher_risk, desc_blocks)
+        home_row = resolve_pitcher_risk_row(home_label, pitcher_risk, desc_blocks)
+        if away_row:
+            parts.append(_pitcher_meta_segment(away_label, away_row, hr9_lookup))
+        if home_row:
+            parts.append(_pitcher_meta_segment(home_label, home_row, hr9_lookup))
+    return " · ".join(parts)
+
+
+def plain_name(entry: dict) -> str:
+    return entry["name"].rsplit(" (", 1)[0]
+
+
+def chip_label(entry: dict) -> str:
+    chips = entry.get("chips") or []
+    if not chips:
+        return ""
+    return chips[0].replace("vs ", "").strip()
+
+
+def listed_odds_short(odds: str) -> str:
+    m = re.search(r"Listed ([+-]\d+)", odds or "")
+    return m.group(1) if m else ""
+
+
+def top3_why(row: dict, rank: int) -> str:
+    bits = [f"#{rank} model score in this game"]
+    hr = int(row.get("hr") or 0)
+    near = int(row.get("near") or 0)
+    ev = float(row.get("ev") or 0)
+    bits.append(f"{hr} HR, {near} near-HR, {ev:.0f} mph EV")
+    chip = chip_label(row)
+    if chip:
+        bits.append(f"vs {chip}")
+    if row.get("formTrend") == "heating":
+        bits.append("heating L5")
+    if row.get("blast") == "high":
+        bits.append("high blast rate")
+    em = row.get("emojis", "")
+    if "🚀" in em:
+        bits.append("elite EV")
+    if "⭐" in em:
+        bits.append("WPZ Favorite")
+    return " · ".join(bits)
+
+
+def sleeper_why(sleeper: dict, top3_rows: list[dict]) -> str:
+    bits = [f"Score {sleeper['score']} — outside top 3 on the sheet"]
+    third = top3_rows[2] if len(top3_rows) >= 3 else None
+    sfs = sleeper.get("_formScore") or form_power_score(sleeper)
+    if third:
+        tfs = third.get("_formScore") or form_power_score(third)
+        tname = plain_name(third)
+        if sfs >= tfs + 0.5:
+            bits.append(f"hotter L5 power than #{3} {tname}")
+        elif sfs > tfs:
+            bits.append(f"edging {tname} on recent power")
+    hr = int(sleeper.get("hr") or 0)
+    near = int(sleeper.get("near") or 0)
+    ev = float(sleeper.get("ev") or 0)
+    bits.append(f"{hr} HR, {near} near-HR, {ev:.0f} mph EV")
+    chip = chip_label(sleeper)
+    if chip:
+        bits.append(f"vs {chip}")
+    if sleeper.get("formTrend") == "heating":
+        bits.append("form heating up")
+    return " · ".join(bits[:5])
+
+
+def pick_card(entry: dict, rank: int | None, why: str) -> dict:
+    return {
+        "name": plain_name(entry),
+        "score": entry["score"],
+        "why": why,
+        "chip": chip_label(entry),
+        "rank": rank,
+        "oddsShort": listed_odds_short(entry.get("odds", "")),
+    }
+
+
+def pick_top3_and_sleeper(rows: list[dict]) -> tuple[list[dict], dict | None]:
+    indexed = list(enumerate(rows))
+    by_score = sorted(indexed, key=lambda x: x[1]["score"], reverse=True)
+    top3_idx = {i for i, _ in by_score[:3]}
+    top3 = [rows[i] for i, _ in by_score[:3]]
+    if len(by_score) < 4:
+        return top3, None
+    third_form = form_power_score(by_score[2][1])
+    by_form = sorted(indexed, key=lambda x: form_power_score(x[1]), reverse=True)
+    best_outside = None
+    best_fs = -1.0
+    for i, row in by_form:
+        if i in top3_idx:
+            continue
+        fs = form_power_score(row)
+        score_rank = next(r for r, (idx, _) in enumerate(by_score) if idx == i)
+        form_rank = next(r for r, (idx, _) in enumerate(by_form) if idx == i)
+        if score_rank < 3:
+            continue
+        if fs >= third_form + 0.5 or (score_rank >= 3 and form_rank == 0):
+            if fs > best_fs:
+                best_fs = fs
+                best_outside = row
+        elif score_rank >= 4 and form_rank <= 1 and fs > best_fs:
+            best_fs = fs
+            best_outside = row
+    return top3, best_outside
+
+
+def enrich_row(entry: dict, stats: dict | None) -> dict:
+    out = dict(entry)
+    st = stats or {}
+    hr = st.get("hr")
+    if hr is None:
+        m = re.search(r"(\d+)\s+HR", entry.get("note", ""))
+        hr = int(m.group(1)) if m else 0
+    near = st.get("near")
+    if near is None:
+        m = re.search(r"(\d+)\s+near-HR", entry.get("note", ""))
+        near = int(m.group(1)) if m else 0
+    ev = st.get("ev")
+    if ev is None:
+        m = re.search(r"(\d+(?:\.\d+)?)\s+mph EV", entry.get("note", ""))
+        ev = float(m.group(1)) if m else 0.0
+    fb = st.get("fb_pct")
+    pull = st.get("pull_air")
+    whiff = st.get("whiff_pct")
+    k_pct = st.get("k_pct")
+    out["hr"] = hr
+    out["near"] = near
+    out["ev"] = ev
+    if st.get("barrel") is not None:
+        out["barrel"] = st["barrel"]
+    if fb is not None:
+        out["fbPct"] = round(fb, 1)
+    if pull is not None:
+        out["pullAir"] = round(pull, 1)
+    if whiff is not None:
+        out["whiffPct"] = round(whiff, 1)
+    if k_pct is not None:
+        out["kPct"] = round(k_pct, 1)
+    trend = form_trend(int(hr), int(near), float(ev))
+    out["formTrend"] = trend
+    if contact_risk(whiff, k_pct):
+        out["contactRisk"] = True
+    clause = air_clause(fb, pull)
+    if clause:
+        out["note"] = inject_air_into_note(out.get("note", ""), clause)
+    out["note"] = compact_note(out.get("note", ""))
+    out["_formScore"] = form_power_score({**st, "hr": hr, "near": near, "ev": ev})
+    return out
+
+
+def enrich_games_list(games: list[dict], sheet_date: str) -> list[dict]:
+    batter_lookup = load_batter_stat_lookup(sheet_date)
+    hr9_lookup = load_pitcher_hr9_lookup(sheet_date)
+    weather_lookup = load_weather_lookup(sheet_date)
+    risk_path = ROOT / "data" / f"hr-targets-overall-{sheet_date}.csv"
+    pitcher_risk = load_pitcher_risk(risk_path) if risk_path.is_file() else {}
+    enriched: list[dict] = []
+    for game in games:
+        g = dict(game)
+        weather = lookup_weather_for_game(g.get("title", ""), weather_lookup)
+        rows = []
+        for entry in game.get("rows", []):
+            key = name_lookup_key(entry["name"].rsplit(" (", 1)[0])
+            rows.append(enrich_row(entry, batter_lookup.get(key)))
+        top3, sleeper = pick_top3_and_sleeper(rows)
+        g["rows"] = rows
+        g["top3"] = [plain_name(r) for r in top3]
+        g["top3Detail"] = [
+            pick_card(r, i + 1, top3_why(r, i + 1)) for i, r in enumerate(top3)
+        ]
+        if sleeper:
+            g["sleeper"] = plain_name(sleeper)
+            g["sleeperDetail"] = pick_card(sleeper, None, sleeper_why(sleeper, top3))
+        park_ctx = resolve_park_context(g, weather)
+        g["gameMeta"] = build_game_meta_line(g, hr9_lookup, weather, pitcher_risk)
+        if park_ctx["park_pct"] is not None:
+            g["parkPct"] = park_ctx["park_pct"]
+        # Full description duplicates gameMeta — keep data for park stars only.
+        g["description"] = ""
+        enriched.append(g)
+    return enriched
+
+
+def emit_games_js(games_data: list[dict]) -> str:
+    def js_string(value):
+        return json.dumps(value, ensure_ascii=False)
+
+    out = ["const games = ["]
+    for game in games_data:
+        out.append("    {")
+        out.append(f"        title: {js_string(game['title'])},")
+        if game.get("description"):
+            out.append(f"        description: {js_string(game['description'])},")
+        if game.get("startTime"):
+            out.append(f"        startTime: {js_string(game['startTime'])},")
+        if game.get("gameMeta"):
+            out.append(f"        gameMeta: {js_string(game['gameMeta'])},")
+        if game.get("parkPct") is not None:
+            out.append(f"        parkPct: {game['parkPct']},")
+        if game.get("top3"):
+            out.append(f"        top3: {js_string(game['top3'])},")
+        if game.get("top3Detail"):
+            out.append(f"        top3Detail: {json.dumps(game['top3Detail'], ensure_ascii=False)},")
+        if game.get("sleeper"):
+            out.append(f"        sleeper: {js_string(game['sleeper'])},")
+        if game.get("sleeperDetail"):
+            out.append(f"        sleeperDetail: {json.dumps(game['sleeperDetail'], ensure_ascii=False)},")
+        out.append("        rows: [")
+        for entry in game["rows"]:
+            parts = [
+                f"name: {js_string(entry['name'])}",
+                f"odds: {js_string(entry['odds'])}",
+                f"score: {entry['score']}",
+                f"emojis: {js_string(entry['emojis'])}",
+                f"note: {js_string(entry['note'])}",
+                f"chips: {js_string(entry['chips'])}",
+            ]
+            if entry.get("blast"):
+                parts.append(f"blast: {js_string(entry['blast'])}")
+            if entry.get("formTrend"):
+                parts.append(f"formTrend: {js_string(entry['formTrend'])}")
+            if entry.get("contactRisk"):
+                parts.append("contactRisk: true")
+            if entry.get("fbPct") is not None:
+                parts.append(f"fbPct: {entry['fbPct']}")
+            if entry.get("pullAir") is not None:
+                parts.append(f"pullAir: {entry['pullAir']}")
+            out.append("            { " + ", ".join(parts) + " },")
+        out.append("        ],")
+        out.append("    },")
+    out.append("];")
+    return "\n".join(out)

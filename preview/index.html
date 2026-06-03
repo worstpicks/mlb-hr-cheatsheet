@@ -358,6 +358,217 @@
             filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.75));
         }
         .game-header p { overflow-wrap: anywhere; hyphens: auto; }
+        .game-meta-line { margin: 0 0 4px; color: #93c5fd; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; line-height: 1.35; }
+        .game-picks-panel {
+            padding: 10px 12px 12px;
+            background: linear-gradient(180deg, rgba(12, 24, 48, 0.92) 0%, rgba(8, 18, 36, 0.88) 100%);
+            border-bottom: 1px solid rgba(251, 146, 60, 0.2);
+        }
+        .game-picks-panel__label {
+            display: block;
+            margin: 0 0 8px;
+            font-size: 0.68rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #fdba74;
+        }
+        .game-picks-panel__label--sleeper { color: #7dd3fc; margin-top: 10px; }
+        .game-pick-cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+        .game-pick-card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px;
+            align-items: start;
+            padding: 9px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(251, 146, 60, 0.28);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.65) 0%, rgba(15, 23, 42, 0.9) 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            min-width: 0;
+        }
+        .game-pick-card--top { border-color: rgba(251, 191, 36, 0.38); }
+        .game-pick-card--top:nth-child(1) {
+            border-color: rgba(250, 204, 21, 0.55);
+            background: linear-gradient(145deg, rgba(66, 32, 6, 0.55) 0%, rgba(15, 23, 42, 0.92) 100%);
+            box-shadow: 0 0 16px rgba(251, 191, 36, 0.12), 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+        .game-pick-card--sleeper {
+            margin-top: 0;
+            border-color: rgba(56, 189, 248, 0.42);
+            background: linear-gradient(145deg, rgba(12, 74, 110, 0.45) 0%, rgba(15, 23, 42, 0.92) 100%);
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.1), 0 2px 10px rgba(0, 0, 0, 0.22);
+        }
+        .game-pick-card__rank {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 900;
+            color: #1e293b;
+            background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+            flex-shrink: 0;
+        }
+        .game-pick-card--sleeper .game-pick-card__rank {
+            width: auto;
+            min-width: 22px;
+            padding: 0 5px;
+            font-size: 0.58rem;
+            letter-spacing: 0.04em;
+            color: #e0f2fe;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+        }
+        .game-pick-card__main { min-width: 0; }
+        .game-pick-card__head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 6px;
+            margin-bottom: 3px;
+        }
+        .game-pick-card__name {
+            margin: 0;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #fff7ed;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+        }
+        .game-pick-card__score {
+            flex-shrink: 0;
+            font-size: 0.78rem;
+            font-weight: 900;
+            color: #86efac;
+        }
+        .game-pick-card__chip {
+            display: inline-block;
+            margin-bottom: 4px;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #cbd5e1;
+            background: rgba(51, 65, 85, 0.55);
+            border: 1px solid rgba(100, 116, 139, 0.35);
+        }
+        .game-pick-card__why {
+            margin: 0;
+            font-size: 0.66rem;
+            line-height: 1.4;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .game-pick-card__odds {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 0.62rem;
+            font-weight: 800;
+            color: #6ee7b7;
+        }
+        .game-top-pick {
+            color: #fbbf24;
+            font-weight: 800;
+        }
+        @media (max-width: 720px) {
+            .game-pick-cards { grid-template-columns: 1fr; }
+        }
+        .pick-col-name { display: grid; gap: 2px; min-width: 0; }
+        .pick-signals {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 5px;
+            margin: 1px 0 5px;
+        }
+        .signal-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 9px 3px 7px;
+            border-radius: 999px;
+            font-size: 0.62rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            line-height: 1.2;
+            border: 1px solid transparent;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .signal-pill__dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px currentColor;
+        }
+        .signal-pill--hot {
+            color: #bbf7d0;
+            background: linear-gradient(135deg, rgba(20, 83, 45, 0.55) 0%, rgba(34, 197, 94, 0.16) 100%);
+            border-color: rgba(74, 222, 128, 0.42);
+        }
+        .signal-pill--hot .signal-pill__dot {
+            background: #4ade80;
+            color: #4ade80;
+            animation: signal-pulse-hot 2.2s ease-in-out infinite;
+        }
+        .signal-pill--cold {
+            color: #fecdd3;
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.48) 0%, rgba(248, 113, 113, 0.12) 100%);
+            border-color: rgba(251, 113, 133, 0.38);
+        }
+        .signal-pill--cold .signal-pill__dot {
+            background: #fb7185;
+            color: #fb7185;
+        }
+        .signal-pill--whiff {
+            color: #e9d5ff;
+            background: linear-gradient(135deg, rgba(76, 29, 149, 0.48) 0%, rgba(139, 92, 246, 0.14) 100%);
+            border-color: rgba(167, 139, 250, 0.4);
+        }
+        .signal-pill--whiff .signal-pill__dot {
+            background: #a78bfa;
+            color: #a78bfa;
+        }
+        .signal-pill--flat {
+            color: #cbd5e1;
+            background: linear-gradient(135deg, rgba(71, 85, 105, 0.48) 0%, rgba(51, 65, 85, 0.18) 100%);
+            border-color: rgba(148, 163, 184, 0.38);
+        }
+        .signal-pill--flat .signal-pill__dot {
+            background: #94a3b8;
+            color: #94a3b8;
+        }
+        .emoji-key-item--signal {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .emoji-key-item .signal-pill.legend-sample {
+            pointer-events: none;
+            flex-shrink: 0;
+        }
+        @keyframes signal-pulse-hot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.55; transform: scale(0.82); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .signal-pill--hot .signal-pill__dot { animation: none; }
+        }
+        .pick-row.pick-row--heat-elite { background: linear-gradient(90deg, rgba(22, 101, 52, 0.28) 0%, rgba(8, 15, 28, 0.9) 72%); border-color: rgba(74, 222, 128, 0.32); }
+        .pick-row.pick-row--heat-strong { background: linear-gradient(90deg, rgba(30, 64, 175, 0.22) 0%, rgba(8, 15, 28, 0.9) 68%); border-color: rgba(96, 165, 250, 0.28); }
+        .pick-row.pick-row--heat-mid { background: rgba(8, 15, 28, 0.86); }
+        .pick-row.pick-row--heat-low { background: rgba(8, 15, 28, 0.72); opacity: 0.92; }
         .pick-list { display: grid; gap: 10px; padding: 12px; }
         .pick-row { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, auto) minmax(0, 1.5fr); gap: 12px; align-items: start; padding: 12px 56px 12px 12px; border-radius: 12px; background: rgba(8,15,28,0.86); border: 1px solid rgba(71,85,105,0.36); min-width: 0; position: relative; }
         .gambly-pick-wrap {
@@ -2303,6 +2514,38 @@
             border-bottom-color: rgba(251, 146, 60, 0.28);
         }
         html.theme-light .game-header h3 { color: #0f172a; }
+        html.theme-light .game-meta-line { color: #1d4ed8; }
+        html.theme-light .game-picks-panel {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            border-bottom-color: #e2e8f0;
+        }
+        html.theme-light .game-picks-panel__label { color: #c2410c; }
+        html.theme-light .game-picks-panel__label--sleeper { color: #0369a1; }
+        html.theme-light .game-pick-card {
+            background: #fff;
+            border-color: #fcd34d;
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+        }
+        html.theme-light .game-pick-card--top:nth-child(1) {
+            background: linear-gradient(145deg, #fffbeb 0%, #fff 100%);
+            border-color: #f59e0b;
+        }
+        html.theme-light .game-pick-card--sleeper {
+            background: linear-gradient(145deg, #f0f9ff 0%, #fff 100%);
+            border-color: #38bdf8;
+        }
+        html.theme-light .game-pick-card__name { color: #0f172a; }
+        html.theme-light .game-pick-card__score { color: #15803d; }
+        html.theme-light .game-pick-card__why { color: #64748b; }
+        html.theme-light .game-pick-card__chip {
+            color: #475569;
+            background: #f1f5f9;
+            border-color: #e2e8f0;
+        }
+        html.theme-light .game-pick-card__odds { color: #047857; }
+        html.theme-light .game-top-pick { color: #b45309; }
+        html.theme-light .pick-row.pick-row--heat-elite { background: linear-gradient(90deg, #dcfce7 0%, #f8fafc 70%); border-color: #86efac; }
+        html.theme-light .pick-row.pick-row--heat-strong { background: linear-gradient(90deg, #dbeafe 0%, #f8fafc 70%); border-color: #93c5fd; }
         html.theme-light .pick-row {
             background: #f8fafc;
             border-color: #cbd5e1;
@@ -2361,6 +2604,30 @@
         }
         html.theme-light .pick-name,
         html.theme-light .pick-name-open { color: #0f172a; }
+        html.theme-light .signal-pill--hot {
+            color: #14532d;
+            background: linear-gradient(135deg, rgba(187, 247, 208, 0.95) 0%, rgba(134, 239, 172, 0.4) 100%);
+            border-color: rgba(34, 197, 94, 0.45);
+        }
+        html.theme-light .signal-pill--hot .signal-pill__dot { background: #16a34a; color: #16a34a; }
+        html.theme-light .signal-pill--cold {
+            color: #9f1239;
+            background: linear-gradient(135deg, rgba(254, 205, 211, 0.95) 0%, rgba(251, 113, 133, 0.25) 100%);
+            border-color: rgba(244, 63, 94, 0.35);
+        }
+        html.theme-light .signal-pill--cold .signal-pill__dot { background: #e11d48; color: #e11d48; }
+        html.theme-light .signal-pill--whiff {
+            color: #5b21b6;
+            background: linear-gradient(135deg, rgba(233, 213, 255, 0.95) 0%, rgba(167, 139, 250, 0.35) 100%);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+        html.theme-light .signal-pill--whiff .signal-pill__dot { background: #7c3aed; color: #7c3aed; }
+        html.theme-light .signal-pill--flat {
+            color: #475569;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-color: #cbd5e1;
+        }
+        html.theme-light .signal-pill--flat .signal-pill__dot { background: #64748b; color: #64748b; }
         html.theme-light .pick-odds { color: #047857; }
         html.theme-light .emoji-row { color: #854d0e; }
         html.theme-light .hr-row-result__pill--win .hr-row-result__pill-label,
@@ -2715,20 +2982,16 @@
         <section class="summary-section">
             <div class="summary-grid">                <div class="summary-card full-width straight-of-day-card">
                     <h3>Worst Pickz Straights of the Day</h3>
-                    <p class="model-note summary-note">Best tail/fade edges from current CSVs: power form + pitcher split + run environment.</p>
                     <div class="straight-picks-grid">
                         <div class="straight-pick-hero">
                             <span class="straight-pick-tag">Over 0.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Andrew Benintendi &mdash; vs Bradley</strong>
-                                <span class="straight-pick-meta">Listed +600 - Over 0.5 HR &middot; Score 82 &middot; CWS @ MIN</span>
+                                <strong class="straight-pick-name">Shohei Ohtani &mdash; vs Gallen</strong>
+                                <span class="straight-pick-meta">Listed +311 - Over 0.5 HR &middot; Score 87 &middot; LAD @ ARI</span>
                             </div>
-                            <ul class="straight-pick-factors">
-                                <li><strong>Primary edge</strong><small>Opposing split +1.16 with park impact 0%.</small></li>
-                                <li><strong>Form check</strong><small>Tail: 2 HR, 2 near-HR, 92.2 mph EV. Matchup: Bradley LHB split +1.16, HR risk 0.86. Fade: HR outcomes are still high-variance. Model score 82; odds Listed +600 - Over 0.5 HR.</small></li>
-                            </ul>
+                            <p class="straight-pick-line"><small>2 HR, 2 near-HR · 96.8 mph EV · split +0.90 · risk +1.18 · park -8%</small></p>
                             <div class="straight-pick-actions">
-                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Andrew Benintendi - Over 0.5 homerun&quot;]'>Add O0.5 Straight to Gambly</button>
+                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Shohei Ohtani - Over 0.5 homerun&quot;]'>Add O0.5 Straight to Gambly</button>
                             </div>
                         </div>
                         <div class="straight-pick-hero straight-pick-hero--o15">
@@ -2737,10 +3000,7 @@
                                 <strong class="straight-pick-name">Wade Meckler &mdash; vs Lorenzen</strong>
                                 <span class="straight-pick-meta">Listed +760 - Over 0.5 HR &middot; Score 81 &middot; COL @ LAA</span>
                             </div>
-                            <ul class="straight-pick-factors">
-                                <li><strong>Primary edge</strong><small>Needs multi-HR upside: split +1.78, park 7%.</small></li>
-                                <li><strong>Form check</strong><small>Tail: 2 HR, 3 near-HR, 88.9 mph EV. Matchup: Lorenzen LHB split +1.78, HR risk 0.69. Fade: HR outcomes are still high-variance. Model score 81; odds Listed +760 - Over 0.5 HR.</small></li>
-                            </ul>
+                            <p class="straight-pick-line"><small>2 HR, 3 near-HR · 88.9 mph EV · split +1.78 · risk +0.69 · park +7%</small></p>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Wade Meckler - Over 1.5 homeruns&quot;]'>Add O1.5 Straight to Gambly</button>
                             </div>
@@ -2753,36 +3013,36 @@
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Curtis Mead HR</strong><small>Tail: 3 HR, 4 near-HR, 95.1 mph EV. Matchup: Meyer RHB split +0.84, HR risk 0.24. Fade: HR outcomes are still high-variance. Model score 93; odds Listed +650 - Over 0.5 HR. Split +0.84; park 0%.</small></li>
-                                <li><strong>Shohei Ohtani HR</strong><small>Tail: 2 HR, 2 near-HR, 96.8 mph EV. Matchup: Gallen LHB split +0.90, HR risk 1.18. Fade: park/weather net drag (-8%). Model score 87; odds Listed +311 - Over 0.5 HR. Split +0.90; park -8%.</small></li>
-                                <li><strong>Juan Soto HR</strong><small>Tail: 3 HR, 4 near-HR, 96.5 mph EV. Matchup: Kirby LHB split +0.34, HR risk -0.05. Fade: pitcher risk below avg (-0.05). Model score 94; odds Listed +390 - Over 0.5 HR. Split +0.34; park -2%.</small></li>
+                                <li><strong>Curtis Mead HR</strong><small>3 HR, 4 near-HR, 95.1 mph EV. · Meyer RHB split +0.84, HR risk 0.24.</small></li>
+                                <li><strong>Juan Soto HR</strong><small>3 HR, 4 near-HR, 96.5 mph EV. · Kirby LHB split +0.34, HR risk -0.05.</small></li>
+                                <li><strong>Max Muncy HR</strong><small>2 HR, 3 near-HR, 92.5 mph EV. · Gallen LHB split +0.90, HR risk 1.18.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Curtis Mead - Over 0.5 homerun&quot;, &quot;Shohei Ohtani - Over 0.5 homerun&quot;, &quot;Juan Soto - Over 0.5 homerun&quot;]'>Add 3 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Curtis Mead - Over 0.5 homerun&quot;, &quot;Juan Soto - Over 0.5 homerun&quot;, &quot;Max Muncy - Over 0.5 homerun&quot;]'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Andrew Benintendi HR</strong><small>Tail: 2 HR, 2 near-HR, 92.2 mph EV. Matchup: Bradley LHB split +1.16, HR risk 0.86. Fade: HR outcomes are still high-variance. Model score 82; odds Listed +600 - Over 0.5 HR.</small></li>
-                                <li><strong>Wade Meckler HR</strong><small>Tail: 2 HR, 3 near-HR, 88.9 mph EV. Matchup: Lorenzen LHB split +1.78, HR risk 0.69. Fade: HR outcomes are still high-variance. Model score 81; odds Listed +760 - Over 0.5 HR.</small></li>
+                                <li><strong>Shohei Ohtani HR</strong><small>2 HR, 2 near-HR, 96.8 mph EV. · Gallen LHB split +0.90, HR risk 1.18.</small></li>
+                                <li><strong>Wade Meckler HR</strong><small>2 HR, 3 near-HR, 88.9 mph EV. · Lorenzen LHB split +1.78, HR risk 0.69.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Andrew Benintendi - Over 0.5 homerun&quot;, &quot;Wade Meckler - Over 0.5 homerun&quot;]'>Add 2 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Shohei Ohtani - Over 0.5 homerun&quot;, &quot;Wade Meckler - Over 0.5 homerun&quot;]'>Add 2 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>Wade Meckler, Curtis Mead, Juan Soto, Josh Bell, Andrew Benintendi, Shohei Ohtani</strong><small>Best recent hit form plus favorable opposing split/park context.</small></li>
-                                <li><strong>Jesus Sanchez, Max Muncy, Freddie Freeman, Ryan McMahon, Yandy Diaz</strong><small>Secondary hit legs with stable contact profile and non-negative matchup lane.</small></li>
+                                <li><strong>Wade Meckler, Curtis Mead, Juan Soto, Shohei Ohtani, Jesus Sanchez, Josh Bell</strong></li>
+                                <li><strong>Andrew Benintendi, Max Muncy, Freddie Freeman, Ryan McMahon, Yandy Diaz</strong></li>
                             </ul>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Wade Meckler - Over 0.5 hits&quot;, &quot;Curtis Mead - Over 0.5 hits&quot;, &quot;Juan Soto - Over 0.5 hits&quot;, &quot;Josh Bell - Over 0.5 hits&quot;, &quot;Andrew Benintendi - Over 0.5 hits&quot;, &quot;Shohei Ohtani - Over 0.5 hits&quot;, &quot;Jesus Sanchez - Over 0.5 hits&quot;, &quot;Max Muncy - Over 0.5 hits&quot;, &quot;Freddie Freeman - Over 0.5 hits&quot;, &quot;Ryan McMahon - Over 0.5 hits&quot;, &quot;Yandy Diaz - Over 0.5 hits&quot;]'>Add Hits Parlay to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Wade Meckler - Over 0.5 hits&quot;, &quot;Curtis Mead - Over 0.5 hits&quot;, &quot;Juan Soto - Over 0.5 hits&quot;, &quot;Shohei Ohtani - Over 0.5 hits&quot;, &quot;Jesus Sanchez - Over 0.5 hits&quot;, &quot;Josh Bell - Over 0.5 hits&quot;, &quot;Andrew Benintendi - Over 0.5 hits&quot;, &quot;Max Muncy - Over 0.5 hits&quot;, &quot;Freddie Freeman - Over 0.5 hits&quot;, &quot;Ryan McMahon - Over 0.5 hits&quot;, &quot;Yandy Diaz - Over 0.5 hits&quot;]'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>Heriberto Hernandez HR &#11088; &#127765;</strong><small>Worst Pickz Favorite. Tail: 3 HR, 4 near-HR, 97.2 mph EV. Matchup: Alvarez RHB split -0.72, HR risk -0.24. Fade: tough split lane (-0.72); pitcher risk below avg (-0.24). Model score 95; odds Listed +590 - Over 0.5 HR.</small></li>
-                                <li><strong>Coby Mayo HR &#11088; &#127765;</strong><small>Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 101.2 mph EV. Matchup: Tolle RHB split -0.21, HR risk -0.11. Fade: slight split headwind (-0.21); pitcher risk below avg (-0.11). Model score 90; odds Listed +568 - Over 0.5 HR.</small></li>
-                                <li><strong>Yandy Diaz HR &#11088; &#127765;</strong><small>Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 96.0 mph EV. Matchup: Melton RHB split -0.01, HR risk -0.83. Fade: slight split headwind (-0.01); pitcher suppresses HR (-0.83). Model score 88; odds Listed +475 - Over 0.5 HR.</small></li>
+                                <li><strong>Coby Mayo HR &#11088; &#127765;</strong><small>2 HR, 2 near-HR, 101.2 mph EV. · Tolle RHB split -0.21, HR risk -0.11.</small></li>
+                                <li><strong>Heriberto Hernandez HR &#11088; &#127765;</strong><small>3 HR, 4 near-HR, 97.2 mph EV. · Alvarez RHB split -0.72, HR risk -0.24.</small></li>
+                                <li><strong>Yandy Diaz HR &#11088; &#127765;</strong><small>2 HR, 3 near-HR, 96.0 mph EV. · Melton RHB split -0.01, HR risk -0.83.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Heriberto Hernandez - Over 0.5 homerun&quot;, &quot;Coby Mayo - Over 0.5 homerun&quot;, &quot;Yandy Diaz - Over 0.5 homerun&quot;]'>Add Favorite 3 Leg to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Coby Mayo - Over 0.5 homerun&quot;, &quot;Heriberto Hernandez - Over 0.5 homerun&quot;, &quot;Yandy Diaz - Over 0.5 homerun&quot;]'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Top 5 Pitchers To Attack</h4>
@@ -2794,13 +3054,12 @@
                 </div>
                 <div class="summary-card full-width top-five-card">
                     <h3>Top 5 HR Tickets (Attack + Weather + HR Risk)</h3>
-                    <p class="model-note summary-note">Ranks combine top pitchers to attack, weather/park carry, opposing split risk, and batter damage form.</p>
                     <div class="top-five-list">
-                        <div class="top-five-item"><span>Josh Bell <small>CWS @ MIN vs Fedde • risk +1.64 • split +2.11 • park 0%</small></span><strong>66</strong></div>
+                        <div class="top-five-item"><span>Josh Bell <small>CWS @ MIN vs Fedde • risk +1.64 • split +2.11 • park -11%</small></span><strong>66</strong></div>
                         <div class="top-five-item"><span>Wade Meckler <small>COL @ LAA vs Lorenzen • risk +0.69 • split +1.78 • park 7%</small></span><strong>81</strong></div>
                         <div class="top-five-item"><span>Shohei Ohtani <small>LAD @ ARI vs Gallen • risk +1.18 • split +0.90 • park -8%</small></span><strong>87</strong></div>
                         <div class="top-five-item"><span>Max Muncy <small>LAD @ ARI vs Gallen • risk +1.18 • split +0.90 • park -8%</small></span><strong>84</strong></div>
-                        <div class="top-five-item"><span>Andrew Benintendi <small>CWS @ MIN vs Bradley • risk +0.86 • split +1.16 • park 0%</small></span><strong>82</strong></div>
+                        <div class="top-five-item"><span>Jesus Sanchez <small>TOR @ ATL vs Holmes • risk +1.34 • split +1.39 • park -20%</small></span><strong>79</strong></div>
                     </div>
                 </div>
                 <div class="summary-card">
@@ -2814,11 +3073,11 @@
                 </div>
                 <div class="summary-card">
                     <h3>Top 5 Weather Heavy HR Plays</h3>
-                    <div class="summary-list">                        <div class="summary-item"><span>#1 Mike Trout <small>COL @ LAA vs Lorenzen • carry: weather -2%, park +9%, net +7%; split -0.30</small></span><strong>84</strong></div>
-                        <div class="summary-item"><span>#2 Zach Neto <small>COL @ LAA vs Lorenzen • carry: weather -2%, park +9%, net +7%; split -0.30</small></span><strong>80</strong></div>
-                        <div class="summary-item"><span>#3 Bryan Reynolds <small>PIT @ HOU vs Arrighetti • carry: weather -1%, park +6%, net +6%; split -0.27</small></span><strong>74</strong></div>
-                        <div class="summary-item"><span>#4 Christian Walker <small>PIT @ HOU vs Skenes • carry: weather -1%, park +6%, net +6%; split -0.34</small></span><strong>79</strong></div>
-                        <div class="summary-item"><span>#5 Kyle Schwarber <small>SD @ PHI vs Buehler • carry: weather -11%, park +14%, net +3%; split -0.38</small></span><strong>77</strong></div>
+                    <div class="summary-list">                        <div class="summary-item"><span>#1 Mike Trout <small>vs Lorenzen · net +7% · split -0.30</small></span><strong>84</strong></div>
+                        <div class="summary-item"><span>#2 Zach Neto <small>vs Lorenzen · net +7% · split -0.30</small></span><strong>80</strong></div>
+                        <div class="summary-item"><span>#3 Bryan Reynolds <small>vs Arrighetti · net +6% · split -0.27</small></span><strong>74</strong></div>
+                        <div class="summary-item"><span>#4 Christian Walker <small>vs Skenes · net +6% · split -0.34</small></span><strong>79</strong></div>
+                        <div class="summary-item"><span>#5 Kyle Schwarber <small>vs Buehler · net +3% · split -0.38</small></span><strong>77</strong></div>
                     </div>
                 </div>
                 <div class="summary-card">
@@ -2831,10 +3090,10 @@
                 </div>
                 <div class="summary-card">
                     <h3>Harsh Environment Fades</h3>
-                    <div class="summary-list">                        <div class="summary-item"><span>MIA @ WAS <small>Nationals Park lower HR carry</small></span><strong>-21%</strong></div>
-                        <div class="summary-item"><span>TEX @ STL <small>Busch Stadium lower HR carry</small></span><strong>-20%</strong></div>
-                        <div class="summary-item"><span>TOR @ ATL <small>Truist Park lower HR carry</small></span><strong>-20%</strong></div>
-                        <div class="summary-item"><span>CHW @ MIN <small>Target Field lower HR carry</small></span><strong>-11%</strong></div>
+                    <div class="summary-list">                        <div class="summary-item"><span>MIA @ WAS <small>Nationals Park</small></span><strong>-21%</strong></div>
+                        <div class="summary-item"><span>TEX @ STL <small>Busch Stadium</small></span><strong>-20%</strong></div>
+                        <div class="summary-item"><span>TOR @ ATL <small>Truist Park</small></span><strong>-20%</strong></div>
+                        <div class="summary-item"><span>CHW @ MIN <small>Target Field</small></span><strong>-11%</strong></div>
                     </div>
                 </div>
 <div class="summary-card emoji-key-card">
@@ -2855,6 +3114,10 @@
                         <div class="emoji-key-item"><strong>🕊️</strong> Pitcher HR-risk advantage</div>
                         <div class="emoji-key-item"><strong>🧤</strong> Bum onna Mound / HR-leaky SP in game title</div>
                         <div class="emoji-key-item"><strong>💤</strong> Overdue</div>
+                        <div class="emoji-key-item emoji-key-item--signal"><span class="signal-pill signal-pill--hot legend-sample" aria-hidden="true"><span class="signal-pill__dot"></span><span class="signal-pill__text">Hot</span></span> L5 power trending up</div>
+                        <div class="emoji-key-item emoji-key-item--signal"><span class="signal-pill signal-pill--cold legend-sample" aria-hidden="true"><span class="signal-pill__dot"></span><span class="signal-pill__text">Cool</span></span> L5 power cooling off</div>
+                        <div class="emoji-key-item emoji-key-item--signal"><span class="signal-pill signal-pill--flat legend-sample" aria-hidden="true"><span class="signal-pill__dot"></span><span class="signal-pill__text">Flat</span></span> Neutral recent power (no badge shown)</div>
+                        <div class="emoji-key-item emoji-key-item--signal"><span class="signal-pill signal-pill--whiff legend-sample" aria-hidden="true"><span class="signal-pill__dot"></span><span class="signal-pill__text">Whiff</span></span> High whiff / K% — swing-and-miss risk</div>
                     </div>
                         </div>
                     </details>
@@ -2913,6 +3176,10 @@
                 <span class="quick-legend-item" title="Pitcher HR-risk advantage">🕊️ HR-risk edge</span>
                 <span class="quick-legend-item" title="Leaky starter called out in game line">🧤 HR-leaky SP</span>
                 <span class="quick-legend-item" title="Overdue">💤 Overdue</span>
+                <span class="quick-legend-item" title="L5 power trending up">Hot — L5 up</span>
+                <span class="quick-legend-item" title="L5 power cooling off">Cool — L5 down</span>
+                <span class="quick-legend-item" title="Neutral recent power; badge hidden on rows">Flat — neutral L5</span>
+                <span class="quick-legend-item" title="High whiff or K%">Whiff — K/whiff risk</span>
             </div>
         </aside>
     </div>
@@ -2938,186 +3205,250 @@
         (() => {
 const games = [
     {
-        title: "ATH @ CHC - Jeffrey Springs (R, ATH) vs Colin Rea 🧤 (R, CHC)",
-        description: "Tail key data: Park boost -5% (stadium -1%, weather -4%). Jeffrey Springs (HR risk 0.71, vs LHB +0.21, vs RHB +0.61). Colin Rea 🧤 (HR risk 1.02, vs LHB +0.36, vs RHB +1.29).",
+        title: "MIA @ WSH - Max Meyer (R, MIA) vs Andrew Alvarez (R, WSH)",
+        startTime: "2026-06-03T17:05:00Z",
+        gameMeta: "1:05 PM ET · Park -21% (stadium +2%, wx -23%) · Max Meyer +0.24 overall · LHB -0.52 · RHB +0.84 (0.63 HR/9) · Andrew Alvarez -0.24 overall · LHB +0.82 · RHB -0.72 (0.59 HR/9)",
+        parkPct: -21,
+        top3: ["Heriberto Hernandez", "Curtis Mead", "Xavier Edwards"],
+        top3Detail: [{"name": "Heriberto Hernandez", "score": 95, "why": "#1 model score in this game · 3 HR, 4 near-HR, 97 mph EV · vs Alvarez · heating L5 · high blast rate · WPZ Favorite", "chip": "Alvarez", "rank": 1, "oddsShort": "+590"}, {"name": "Curtis Mead", "score": 93, "why": "#2 model score in this game · 3 HR, 4 near-HR, 95 mph EV · vs Meyer · heating L5 · high blast rate", "chip": "Meyer", "rank": 2, "oddsShort": "+650"}, {"name": "Xavier Edwards", "score": 84, "why": "#3 model score in this game · 2 HR, 2 near-HR, 94 mph EV · vs Alvarez · heating L5 · high blast rate", "chip": "Alvarez", "rank": 3, "oddsShort": "+1220"}],
         rows: [
-            { name: "Pete Crow-Armstrong (L)", odds: "Listed +490 - Over 0.5 HR", score: 77, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 94.9 mph EV. Matchup: Springs LHB split +0.21, HR risk 0.71. Fade: park/weather net drag (-5%). Model score 77; odds Listed +490 - Over 0.5 HR.", chips: ["vs Springs"], blast: "good" },
-            { name: "Michael Busch (L)", odds: "Listed +630 - Over 0.5 HR", score: 62, emojis: "💎", note: "Tail: 0 HR, 84.1 mph EV. Matchup: Springs LHB split +0.21, HR risk 0.71. Fade: park/weather net drag (-5%); limited recent HR events. Model score 62; odds Listed +630 - Over 0.5 HR.", chips: ["vs Springs"] },
-            { name: "Nick Kurtz (L)", odds: "Listed +340 - Over 0.5 HR", score: 78, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "Worst Pickz Favorite. Tail: 0 HR, 1 near-HR, 99.7 mph EV. Matchup: Rea LHB split +0.36, HR risk 1.02. Fade: park/weather net drag (-5%); limited recent HR events. Model score 78; odds Listed +340 - Over 0.5 HR.", chips: ["vs Rea"], blast: "good" },
-            { name: "Carlos Cortes (L)", odds: "Listed +750 - Over 0.5 HR", score: 64, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 0 HR, 1 near-HR, 81.8 mph EV. Matchup: Rea LHB split +0.36, HR risk 1.02. Fade: park/weather net drag (-5%); limited recent HR events. Model score 64; odds Listed +750 - Over 0.5 HR.", chips: ["vs Rea"] },
-        ],
-    },
-    {
-        title: "BAL @ BOS - Chris Bassitt (R, BAL) vs Payton Tolle (R, BOS)",
-        description: "Tail key data: Park boost -10% (stadium -7%, weather -3%). Chris Bassitt (HR risk -0.45, vs LHB +0.13, vs RHB -1.06). Payton Tolle (HR risk -0.11, vs LHB +0.41, vs RHB -0.21).",
-        rows: [
-            { name: "Jarren Duran (L)", odds: "Listed +509 - Over 0.5 HR", score: 76, emojis: "⭐ 💎", note: "Worst Pickz Favorite. Tail: 1 HR, 1 near-HR, 93.7 mph EV. Matchup: Bassitt LHB split +0.13, HR risk -0.45. Fade: pitcher suppresses HR (-0.45); park/weather net drag (-10%). Model score 76; odds Listed +509 - Over 0.5 HR.", chips: ["vs Bassitt"], blast: "good" },
-            { name: "Willson Contreras (R)", odds: "Listed +680 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 86.4 mph EV. Matchup: Bassitt RHB split -1.06, HR risk -0.45. Fade: tough split lane (-1.06); pitcher suppresses HR (-0.45). Model score 78; odds Listed +680 - Over 0.5 HR.", chips: ["vs Bassitt"], blast: "high" },
-            { name: "Masataka Yoshida (L)", odds: "Listed +1120 - Over 0.5 HR", score: 64, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 87.8 mph EV. Matchup: Bassitt LHB split +0.13, HR risk -0.45. Fade: pitcher suppresses HR (-0.45); park/weather net drag (-10%). Model score 64; odds Listed +1120 - Over 0.5 HR.", chips: ["vs Bassitt"] },
-            { name: "Coby Mayo (R)", odds: "Listed +568 - Over 0.5 HR", score: 90, emojis: "🚀 ⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 101.2 mph EV. Matchup: Tolle RHB split -0.21, HR risk -0.11. Fade: slight split headwind (-0.21); pitcher risk below avg (-0.11). Model score 90; odds Listed +568 - Over 0.5 HR.", chips: ["vs Tolle"], blast: "high" },
-            { name: "Pete Alonso (R)", odds: "Listed +433 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "Tail: 0 HR, 1 near-HR, 100.7 mph EV. Matchup: Tolle RHB split -0.21, HR risk -0.11. Fade: slight split headwind (-0.21); pitcher risk below avg (-0.11). Model score 78; odds Listed +433 - Over 0.5 HR.", chips: ["vs Tolle"], blast: "good" },
-            { name: "Adley Rutschman (S)", odds: "Listed +630 - Over 0.5 HR", score: 69, emojis: "💎", note: "Tail: 0 HR, 92.9 mph EV. Matchup: Tolle RHB split -0.21, HR risk -0.11. Fade: slight split headwind (-0.21); pitcher risk below avg (-0.11). Model score 69; odds Listed +630 - Over 0.5 HR.", chips: ["vs Tolle"], blast: "good" },
-        ],
-    },
-    {
-        title: "CLE @ NYY - Gavin Williams (R, CLE) vs Gerrit Cole (R, NYY)",
-        description: "Tail key data: Park boost -2% (stadium +8%, weather -10%). Gavin Williams (HR risk 0.46, vs LHB +0.82, vs RHB -0.26). Gerrit Cole (HR risk -2.00, vs LHB -1.95, vs RHB -1.24).",
-        rows: [
-            { name: "Ben Rice (L)", odds: "Listed +375 - Over 0.5 HR", score: 64, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 85.4 mph EV. Matchup: Williams LHB split +0.82, HR risk 0.46. Fade: weather carry headwind (-10%); limited recent HR events. Model score 64; odds Listed +375 - Over 0.5 HR.", chips: ["vs Williams"] },
-            { name: "Ryan McMahon (L)", odds: "Listed +590 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 86.9 mph EV. Matchup: Williams LHB split +0.82, HR risk 0.46. Fade: weather carry headwind (-10%); lighter EV form (86.9 mph). Model score 78; odds Listed +590 - Over 0.5 HR.", chips: ["vs Williams"], blast: "high" },
-            { name: "Aaron Judge (R)", odds: "Listed prop - Over 0.5 HR", score: 83, emojis: "💎", note: "Tail: 1 HR, 3 near-HR, 97.2 mph EV. Matchup: Williams RHB split -0.26, HR risk 0.46. Fade: slight split headwind (-0.26); weather carry headwind (-10%). Model score 83; odds Listed prop - Over 0.5 HR.", chips: ["vs Williams"], blast: "good" },
-            { name: "Patrick Bailey (S)", odds: "Listed +1000 - Over 0.5 HR", score: 77, emojis: "💎", note: "Tail: 1 HR, 3 near-HR, 91.3 mph EV. Matchup: Cole RHB split -1.24, HR risk -2.00. Fade: tough split lane (-1.24); pitcher suppresses HR (-2.00). Model score 77; odds Listed +1000 - Over 0.5 HR.", chips: ["vs Cole"], blast: "good" },
-            { name: "Travis Bazzana (L)", odds: "Listed +890 - Over 0.5 HR", score: 75, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 93.0 mph EV. Matchup: Cole LHB split -1.95, HR risk -2.00. Fade: tough split lane (-1.95); pitcher suppresses HR (-2.00). Model score 75; odds Listed +890 - Over 0.5 HR.", chips: ["vs Cole"], blast: "good" },
-        ],
-    },
-    {
-        title: "COL @ LAA - Michael Lorenzen (R, COL) vs Walbert Urena (R, LAA)",
-        description: "Tail key data: Park boost +7% (stadium +9%, weather -2%). Michael Lorenzen (HR risk 0.69, vs LHB +1.78, vs RHB -0.30). Walbert Urena (HR risk -0.66, vs LHB -0.71, vs RHB -0.30).",
-        rows: [
-            { name: "Wade Meckler (L)", odds: "Listed +760 - Over 0.5 HR", score: 81, emojis: "🌕 💣", note: "Tail: 2 HR, 3 near-HR, 88.9 mph EV. Matchup: Lorenzen LHB split +1.78, HR risk 0.69. Fade: HR outcomes are still high-variance. Model score 81; odds Listed +760 - Over 0.5 HR.", chips: ["vs Lorenzen"], blast: "high" },
-            { name: "Zach Neto (R)", odds: "Listed +420 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "Tail: 2 HR, 3 near-HR, 87.7 mph EV. Matchup: Lorenzen RHB split -0.30, HR risk 0.69. Fade: slight split headwind (-0.30); lighter EV form (87.7 mph). Model score 80; odds Listed +420 - Over 0.5 HR.", chips: ["vs Lorenzen"], blast: "high" },
-            { name: "Jo Adell (R)", odds: "Listed +410 - Over 0.5 HR", score: 79, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 88.7 mph EV. Matchup: Lorenzen RHB split -0.30, HR risk 0.69. Fade: slight split headwind (-0.30). Model score 79; odds Listed +410 - Over 0.5 HR.", chips: ["vs Lorenzen"], blast: "high" },
-            { name: "Mike Trout (R)", odds: "Listed +310 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "Tail: 2 HR, 4 near-HR, 89.6 mph EV. Matchup: Lorenzen RHB split -0.30, HR risk 0.69. Fade: slight split headwind (-0.30). Model score 84; odds Listed +310 - Over 0.5 HR.", chips: ["vs Lorenzen"], blast: "high" },
-            { name: "Vaughn Grissom (R)", odds: "Listed +740 - Over 0.5 HR", score: 78, emojis: "💎", note: "Tail: 1 HR, 3 near-HR, 92.5 mph EV. Matchup: Lorenzen RHB split -0.30, HR risk 0.69. Fade: slight split headwind (-0.30). Model score 78; odds Listed +740 - Over 0.5 HR.", chips: ["vs Lorenzen"], blast: "good" },
-            { name: "Ezequiel Tovar (R)", odds: "Listed +820 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 86.6 mph EV. Matchup: Urena RHB split -0.30, HR risk -0.66. Fade: slight split headwind (-0.30); pitcher suppresses HR (-0.66). Model score 78; odds Listed +820 - Over 0.5 HR.", chips: ["vs Urena"], blast: "high" },
-            { name: "Willi Castro (S)", odds: "Listed +820 - Over 0.5 HR", score: 79, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 94.7 mph EV. Matchup: Urena RHB split -0.30, HR risk -0.66. Fade: slight split headwind (-0.30); pitcher suppresses HR (-0.66). Model score 79; odds Listed +820 - Over 0.5 HR.", chips: ["vs Urena"], blast: "good" },
-            { name: "Jake McCarthy (L)", odds: "Listed +1040 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "Tail: 2 HR, 3 near-HR, 87.3 mph EV. Matchup: Urena LHB split -0.71, HR risk -0.66. Fade: tough split lane (-0.71); pitcher suppresses HR (-0.66). Model score 80; odds Listed +1040 - Over 0.5 HR.", chips: ["vs Urena"], blast: "high" },
-            { name: "Hunter Goodman (R)", odds: "Listed +390 - Over 0.5 HR", score: 62, emojis: "💎", note: "Tail: 0 HR, 85.7 mph EV. Matchup: Urena RHB split -0.30, HR risk -0.66. Fade: slight split headwind (-0.30); pitcher suppresses HR (-0.66). Model score 62; odds Listed +390 - Over 0.5 HR.", chips: ["vs Urena"] },
-        ],
-    },
-    {
-        title: "CWS @ MIN - Erick Fedde 🧤 (R, CWS) vs Taj Bradley (R, MIN)",
-        description: "Tail key data: Park boost data unavailable. Erick Fedde 🧤 (HR risk 1.64, vs LHB +0.01, vs RHB +2.11). Taj Bradley (HR risk 0.86, vs LHB +1.16, vs RHB +0.10).",
-        rows: [
-            { name: "Josh Bell (S)", odds: "Listed +525 - Over 0.5 HR", score: 66, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 0 HR, 1 near-HR, 89.9 mph EV. Matchup: Fedde RHB split +2.11, HR risk 1.64. Fade: limited recent HR events. Model score 66; odds Listed +525 - Over 0.5 HR.", chips: ["vs Fedde"] },
-            { name: "Kody Clemens (L)", odds: "Listed +443 - Over 0.5 HR", score: 72, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 0 HR, 1 near-HR, 94.4 mph EV. Matchup: Fedde LHB split +0.01, HR risk 1.64. Fade: limited recent HR events. Model score 72; odds Listed +443 - Over 0.5 HR.", chips: ["vs Fedde"], blast: "good" },
-            { name: "Andrew Benintendi (L)", odds: "Listed +600 - Over 0.5 HR", score: 82, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 92.2 mph EV. Matchup: Bradley LHB split +1.16, HR risk 0.86. Fade: HR outcomes are still high-variance. Model score 82; odds Listed +600 - Over 0.5 HR.", chips: ["vs Bradley"], blast: "high" },
-            { name: "Miguel Vargas (R)", odds: "Listed +425 - Over 0.5 HR", score: 83, emojis: "💎", note: "Tail: 1 HR, 3 near-HR, 96.9 mph EV. Matchup: Bradley RHB split +0.10, HR risk 0.86. Fade: HR outcomes are still high-variance. Model score 83; odds Listed +425 - Over 0.5 HR.", chips: ["vs Bradley"], blast: "good" },
-            { name: "Chase Meidroth (R)", odds: "Listed +1040 - Over 0.5 HR", score: 65, emojis: "💎", note: "Tail: 0 HR, 90.9 mph EV. Matchup: Bradley RHB split +0.10, HR risk 0.86. Fade: limited recent HR events. Model score 65; odds Listed +1040 - Over 0.5 HR.", chips: ["vs Bradley"] },
+            { name: "James Wood (L)", odds: "Listed +431 - Over 0.5 HR", score: 69, emojis: "💎", note: "0 HR, 92.8 mph EV. Air: FB 38%. · Meyer LHB split -0.52, HR risk 0.24.", chips: ["vs Meyer"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 37.5 },
+            { name: "Curtis Mead (R)", odds: "Listed +650 - Over 0.5 HR", score: 93, emojis: "🌕 💣", note: "3 HR, 4 near-HR, 95.1 mph EV. Air: FB 60%, pull-air 27%. · Meyer RHB split +0.84, HR risk 0.24.", chips: ["vs Meyer"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 60.0, pullAir: 26.7 },
+            { name: "Jacob Young (R)", odds: "Listed +1400 - Over 0.5 HR", score: 65, emojis: "💎", note: "0 HR, 90.8 mph EV. Air: FB 42%, pull-air 8%. · Meyer RHB split +0.84, HR risk 0.24.", chips: ["vs Meyer"], formTrend: "flat", fbPct: 41.7, pullAir: 8.3 },
+            { name: "Heriberto Hernandez (R)", odds: "Listed +590 - Over 0.5 HR", score: 95, emojis: "⭐ 🌕 💣", note: "3 HR, 4 near-HR, 97.2 mph EV. Air: FB 43%, pull-air 36%. · Alvarez RHB split -0.72, HR risk -0.24.", chips: ["vs Alvarez"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 42.9, pullAir: 35.7 },
+            { name: "Xavier Edwards (S)", odds: "Listed +1220 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 93.6 mph EV. Air: FB 80%, pull-air 40%. · Alvarez RHB split -0.72, HR risk -0.24.", chips: ["vs Alvarez"], blast: "high", formTrend: "heating", fbPct: 80.0, pullAir: 40.0 },
+            { name: "Connor Norby (R)", odds: "Listed +940 - Over 0.5 HR", score: 75, emojis: "💎", note: "1 HR, 1 near-HR, 92.7 mph EV. Air: FB 75%, pull-air 50%. · Alvarez RHB split -0.72, HR risk -0.24.", chips: ["vs Alvarez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 75.0, pullAir: 50.0 },
         ],
     },
     {
         title: "DET @ TB - Troy Melton (R, DET) vs Nick Martinez (R, TB)",
-        description: "Tail key data: Park boost -3% (stadium -4%, weather +1%). Troy Melton (HR risk -0.83, vs LHB -0.77, vs RHB -0.01). Nick Martinez (HR risk -0.72, vs LHB -0.32, vs RHB -0.78).",
+        startTime: "2026-06-03T17:10:00Z",
+        gameMeta: "1:10 PM ET · Park -3% (stadium -4%, wx +1%) · Troy Melton -0.83 overall · LHB -0.77 · RHB -0.01 · Nick Martinez -0.72 overall · LHB -0.32 · RHB -0.78 (0.46 HR/9)",
+        parkPct: -3,
+        top3: ["Yandy Diaz", "Jonathan Aranda", "Junior Caminero"],
+        top3Detail: [{"name": "Yandy Diaz", "score": 88, "why": "#1 model score in this game · 2 HR, 3 near-HR, 96 mph EV · vs Melton · heating L5 · high blast rate · WPZ Favorite", "chip": "Melton", "rank": 1, "oddsShort": "+475"}, {"name": "Jonathan Aranda", "score": 85, "why": "#2 model score in this game · 2 HR, 3 near-HR, 93 mph EV · vs Melton · heating L5 · high blast rate · WPZ Favorite", "chip": "Melton", "rank": 2, "oddsShort": "+495"}, {"name": "Junior Caminero", "score": 79, "why": "#3 model score in this game · 1 HR, 2 near-HR, 95 mph EV · vs Melton · heating L5", "chip": "Melton", "rank": 3, "oddsShort": "+350"}],
+        sleeper: "Dillon Dingler",
+        sleeperDetail: {"name": "Dillon Dingler", "score": 78, "why": "Score 78 — outside top 3 on the sheet · hotter L5 power than #3 Junior Caminero · 2 HR, 2 near-HR, 86 mph EV · vs Martinez · form heating up", "chip": "Martinez", "rank": null, "oddsShort": "+525"},
         rows: [
-            { name: "Jonathan Aranda (L)", odds: "Listed +495 - Over 0.5 HR", score: 85, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 92.9 mph EV. Matchup: Melton LHB split -0.77, HR risk -0.83. Fade: tough split lane (-0.77); pitcher suppresses HR (-0.83). Model score 85; odds Listed +495 - Over 0.5 HR.", chips: ["vs Melton"], blast: "high" },
-            { name: "Yandy Diaz (R)", odds: "Listed +475 - Over 0.5 HR", score: 88, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 96.0 mph EV. Matchup: Melton RHB split -0.01, HR risk -0.83. Fade: slight split headwind (-0.01); pitcher suppresses HR (-0.83). Model score 88; odds Listed +475 - Over 0.5 HR.", chips: ["vs Melton"], blast: "high" },
-            { name: "Junior Caminero (R)", odds: "Listed +350 - Over 0.5 HR", score: 79, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 94.9 mph EV. Matchup: Melton RHB split -0.01, HR risk -0.83. Fade: slight split headwind (-0.01); pitcher suppresses HR (-0.83). Model score 79; odds Listed +350 - Over 0.5 HR.", chips: ["vs Melton"], blast: "good" },
-            { name: "Dillon Dingler (R)", odds: "Listed +525 - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 86.4 mph EV. Matchup: Martinez RHB split -0.78, HR risk -0.72. Fade: tough split lane (-0.78); pitcher suppresses HR (-0.72). Model score 78; odds Listed +525 - Over 0.5 HR.", chips: ["vs Martinez"], blast: "high" },
-            { name: "Spencer Torkelson (R)", odds: "Listed +475 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 0 HR, 2 near-HR, 93.9 mph EV. Matchup: Martinez RHB split -0.78, HR risk -0.72. Fade: tough split lane (-0.78); pitcher suppresses HR (-0.72). Model score 74; odds Listed +475 - Over 0.5 HR.", chips: ["vs Martinez"], blast: "good" },
-            { name: "Riley Greene (L)", odds: "Listed +520 - Over 0.5 HR", score: 75, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 92.6 mph EV. Matchup: Martinez LHB split -0.32, HR risk -0.72. Fade: slight split headwind (-0.32); pitcher suppresses HR (-0.72). Model score 75; odds Listed +520 - Over 0.5 HR.", chips: ["vs Martinez"], blast: "good" },
+            { name: "Jonathan Aranda (L)", odds: "Listed +495 - Over 0.5 HR", score: 85, emojis: "⭐ 🌕 💣", note: "2 HR, 3 near-HR, 92.9 mph EV. Air: FB 50%, pull-air 20%. · Melton LHB split -0.77, HR risk -0.83.", chips: ["vs Melton"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 50.0, pullAir: 20.0 },
+            { name: "Yandy Diaz (R)", odds: "Listed +475 - Over 0.5 HR", score: 88, emojis: "⭐ 🌕 💣", note: "2 HR, 3 near-HR, 96.0 mph EV. Air: FB 50%. · Melton RHB split -0.01, HR risk -0.83.", chips: ["vs Melton"], blast: "high", formTrend: "heating", fbPct: 50.0 },
+            { name: "Junior Caminero (R)", odds: "Listed +350 - Over 0.5 HR", score: 79, emojis: "💎", note: "1 HR, 2 near-HR, 94.9 mph EV. Air: FB 24%, pull-air 10%. · Melton RHB split -0.01, HR risk -0.83.", chips: ["vs Melton"], blast: "good", formTrend: "heating", fbPct: 23.8, pullAir: 9.5 },
+            { name: "Dillon Dingler (R)", odds: "Listed +525 - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "2 HR, 2 near-HR, 86.4 mph EV. Air: FB 40%, pull-air 20%. · Martinez RHB split -0.78, HR risk -0.72.", chips: ["vs Martinez"], blast: "high", formTrend: "heating", fbPct: 40.0, pullAir: 20.0 },
+            { name: "Spencer Torkelson (R)", odds: "Listed +475 - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 2 near-HR, 93.9 mph EV. Air: FB 50%, pull-air 25%. · Martinez RHB split -0.78, HR risk -0.72.", chips: ["vs Martinez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 50.0, pullAir: 25.0 },
+            { name: "Riley Greene (L)", odds: "Listed +520 - Over 0.5 HR", score: 75, emojis: "💎", note: "1 HR, 1 near-HR, 92.6 mph EV. Air: FB 20%, pull-air 10%. · Martinez LHB split -0.32, HR risk -0.72.", chips: ["vs Martinez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 20.0, pullAir: 10.0 },
         ],
     },
     {
-        title: "KC @ CIN - Stephen Kolek (R, KC) vs Chase Burns (R, CIN)",
-        description: "Tail key data: Park boost +0% (stadium +15%, weather -14%). Stephen Kolek (HR risk -0.16, vs LHB -0.27, vs RHB +0.18). Chase Burns (HR risk 0.08, vs LHB +0.40, vs RHB -0.23).",
+        title: "CWS @ MIN - Erick Fedde 🧤 (R, CWS) vs Taj Bradley (R, MIN)",
+        startTime: "2026-06-03T17:40:00Z",
+        gameMeta: "1:40 PM ET · Park -11% (stadium -7%, wx -5%) · Erick Fedde +1.64 overall · LHB +0.01 · RHB +2.11 (2.45 HR/9) · Taj Bradley +0.86 overall · LHB +1.16 · RHB +0.10 (0.96 HR/9)",
+        parkPct: -11,
+        top3: ["Miguel Vargas", "Andrew Benintendi", "Kody Clemens"],
+        top3Detail: [{"name": "Miguel Vargas", "score": 83, "why": "#1 model score in this game · 1 HR, 3 near-HR, 97 mph EV · vs Bradley · heating L5", "chip": "Bradley", "rank": 1, "oddsShort": "+425"}, {"name": "Andrew Benintendi", "score": 82, "why": "#2 model score in this game · 2 HR, 2 near-HR, 92 mph EV · vs Bradley · heating L5 · high blast rate", "chip": "Bradley", "rank": 2, "oddsShort": "+600"}, {"name": "Kody Clemens", "score": 72, "why": "#3 model score in this game · 0 HR, 1 near-HR, 94 mph EV · vs Fedde", "chip": "Fedde", "rank": 3, "oddsShort": "+443"}],
         rows: [
-            { name: "JJ Bleday (L)", odds: "Listed +325 - Over 0.5 HR", score: 85, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 3 HR, 3 near-HR, 89.0 mph EV. Matchup: Kolek LHB split -0.27, HR risk -0.16. Fade: slight split headwind (-0.27); pitcher risk below avg (-0.16). Model score 85; odds Listed +325 - Over 0.5 HR.", chips: ["vs Kolek"], blast: "high" },
-            { name: "Will Benson (L)", odds: "Listed prop - Over 0.5 HR", score: 76, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 93.7 mph EV. Matchup: Kolek LHB split -0.27, HR risk -0.16. Fade: slight split headwind (-0.27); pitcher risk below avg (-0.16). Model score 76; odds Listed prop - Over 0.5 HR.", chips: ["vs Kolek"], blast: "good" },
-            { name: "Blake Dunn (R)", odds: "Listed +710 - Over 0.5 HR", score: 64, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 83.9 mph EV. Matchup: Kolek RHB split +0.18, HR risk -0.16. Fade: pitcher risk below avg (-0.16); weather carry headwind (-14%). Model score 64; odds Listed +710 - Over 0.5 HR.", chips: ["vs Kolek"] },
-            { name: "Lane Thomas (R)", odds: "Listed prop - Over 0.5 HR", score: 73, emojis: "⭐ 💎", note: "Worst Pickz Favorite. Tail: 1 HR, 2 near-HR, 89.0 mph EV. Matchup: Burns RHB split -0.23, HR risk 0.08. Fade: slight split headwind (-0.23); weather carry headwind (-14%). Model score 73; odds Listed prop - Over 0.5 HR.", chips: ["vs Burns"], blast: "good" },
-            { name: "Bobby Witt Jr. (R)", odds: "Listed +399 - Over 0.5 HR", score: 71, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 93.3 mph EV. Matchup: Burns RHB split -0.23, HR risk 0.08. Fade: slight split headwind (-0.23); weather carry headwind (-14%). Model score 71; odds Listed +399 - Over 0.5 HR.", chips: ["vs Burns"], blast: "good" },
-            { name: "Jac Caglianone (L)", odds: "Listed +500 - Over 0.5 HR", score: 78, emojis: "🚀 ⭐ 💎", note: "Worst Pickz Favorite. Tail: 0 HR, 1 near-HR, 102.8 mph EV. Matchup: Burns LHB split +0.40, HR risk 0.08. Fade: weather carry headwind (-14%); limited recent HR events. Model score 78; odds Listed +500 - Over 0.5 HR.", chips: ["vs Burns"], blast: "good" },
-            { name: "Michael Massey (L)", odds: "Listed +680 - Over 0.5 HR", score: 71, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 89.3 mph EV. Matchup: Burns LHB split +0.40, HR risk 0.08. Fade: weather carry headwind (-14%). Model score 71; odds Listed +680 - Over 0.5 HR.", chips: ["vs Burns"], blast: "good" },
-            { name: "Salvador Perez (R)", odds: "Listed +466 - Over 0.5 HR", score: 64, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 87.9 mph EV. Matchup: Burns RHB split -0.23, HR risk 0.08. Fade: slight split headwind (-0.23); weather carry headwind (-14%). Model score 64; odds Listed +466 - Over 0.5 HR.", chips: ["vs Burns"] },
-        ],
-    },
-    {
-        title: "LAD @ ARI - Shohei Ohtani (R, LAD) vs Zac Gallen 🧤 (R, ARI)",
-        description: "Tail key data: Park boost -8% (stadium -8%, weather +0%). Shohei Ohtani (HR risk -0.81, vs LHB -0.85, vs RHB -0.43). Zac Gallen 🧤 (HR risk 1.18, vs LHB +0.90, vs RHB +0.88).",
-        rows: [
-            { name: "Ketel Marte (S)", odds: "Listed +506 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 87.4 mph EV. Matchup: Ohtani RHB split -0.43, HR risk -0.81. Fade: tough split lane (-0.43); pitcher suppresses HR (-0.81). Model score 70; odds Listed +506 - Over 0.5 HR.", chips: ["vs Ohtani"], blast: "good" },
-            { name: "Adrian Del Castillo (L)", odds: "Listed prop - Over 0.5 HR", score: 71, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 89.1 mph EV. Matchup: Ohtani LHB split -0.85, HR risk -0.81. Fade: tough split lane (-0.85); pitcher suppresses HR (-0.81). Model score 71; odds Listed prop - Over 0.5 HR.", chips: ["vs Ohtani"], blast: "good" },
-            { name: "Corbin Carroll (L)", odds: "Listed +570 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 0 HR, 2 near-HR, 94.5 mph EV. Matchup: Ohtani LHB split -0.85, HR risk -0.81. Fade: tough split lane (-0.85); pitcher suppresses HR (-0.81). Model score 74; odds Listed +570 - Over 0.5 HR.", chips: ["vs Ohtani"], blast: "good" },
-            { name: "Nolan Arenado (R)", odds: "Listed +810 - Over 0.5 HR", score: 64, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 83.6 mph EV. Matchup: Ohtani RHB split -0.43, HR risk -0.81. Fade: tough split lane (-0.43); pitcher suppresses HR (-0.81). Model score 64; odds Listed +810 - Over 0.5 HR.", chips: ["vs Ohtani"] },
-            { name: "Will Smith (R)", odds: "Listed +575 - Over 0.5 HR", score: 74, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "Worst Pickz Favorite. Tail: 1 HR, 2 near-HR, 89.7 mph EV. Matchup: Gallen RHB split +0.88, HR risk 1.18. Fade: park/weather net drag (-8%). Model score 74; odds Listed +575 - Over 0.5 HR.", chips: ["vs Gallen"], blast: "good" },
-            { name: "Freddie Freeman (L)", odds: "Listed +571 - Over 0.5 HR", score: 81, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "Tail: 2 HR, 2 near-HR, 90.6 mph EV. Matchup: Gallen LHB split +0.90, HR risk 1.18. Fade: park/weather net drag (-8%). Model score 81; odds Listed +571 - Over 0.5 HR.", chips: ["vs Gallen"], blast: "high" },
-            { name: "Shohei Ohtani (L)", odds: "Listed +311 - Over 0.5 HR", score: 87, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "Tail: 2 HR, 2 near-HR, 96.8 mph EV. Matchup: Gallen LHB split +0.90, HR risk 1.18. Fade: park/weather net drag (-8%). Model score 87; odds Listed +311 - Over 0.5 HR.", chips: ["vs Gallen"], blast: "high" },
-            { name: "Max Muncy (L)", odds: "Listed +375 - Over 0.5 HR", score: 84, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "Tail: 2 HR, 3 near-HR, 92.5 mph EV. Matchup: Gallen LHB split +0.90, HR risk 1.18. Fade: park/weather net drag (-8%). Model score 84; odds Listed +375 - Over 0.5 HR.", chips: ["vs Gallen"], blast: "high" },
-            { name: "Andy Pages (R)", odds: "Listed +544 - Over 0.5 HR", score: 71, emojis: "💎 ⚾ 🕊️ 🧤", note: "Tail: 0 HR, 1 near-HR, 92.7 mph EV. Matchup: Gallen RHB split +0.88, HR risk 1.18. Fade: park/weather net drag (-8%); limited recent HR events. Model score 71; odds Listed +544 - Over 0.5 HR.", chips: ["vs Gallen"], blast: "good" },
-        ],
-    },
-    {
-        title: "MIA @ WSH - Max Meyer (R, MIA) vs Andrew Alvarez (R, WSH)",
-        description: "Tail key data: Park boost data unavailable. Max Meyer (HR risk 0.24, vs LHB -0.52, vs RHB +0.84). Andrew Alvarez (HR risk -0.24, vs LHB +0.82, vs RHB -0.72).",
-        rows: [
-            { name: "James Wood (L)", odds: "Listed +431 - Over 0.5 HR", score: 69, emojis: "💎", note: "Tail: 0 HR, 92.8 mph EV. Matchup: Meyer LHB split -0.52, HR risk 0.24. Fade: tough split lane (-0.52); limited recent HR events. Model score 69; odds Listed +431 - Over 0.5 HR.", chips: ["vs Meyer"], blast: "good" },
-            { name: "Curtis Mead (R)", odds: "Listed +650 - Over 0.5 HR", score: 93, emojis: "🌕 💣", note: "Tail: 3 HR, 4 near-HR, 95.1 mph EV. Matchup: Meyer RHB split +0.84, HR risk 0.24. Fade: HR outcomes are still high-variance. Model score 93; odds Listed +650 - Over 0.5 HR.", chips: ["vs Meyer"], blast: "high" },
-            { name: "Jacob Young (R)", odds: "Listed +1400 - Over 0.5 HR", score: 65, emojis: "💎", note: "Tail: 0 HR, 90.8 mph EV. Matchup: Meyer RHB split +0.84, HR risk 0.24. Fade: limited recent HR events. Model score 65; odds Listed +1400 - Over 0.5 HR.", chips: ["vs Meyer"] },
-            { name: "Heriberto Hernandez (R)", odds: "Listed +590 - Over 0.5 HR", score: 95, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 3 HR, 4 near-HR, 97.2 mph EV. Matchup: Alvarez RHB split -0.72, HR risk -0.24. Fade: tough split lane (-0.72); pitcher risk below avg (-0.24). Model score 95; odds Listed +590 - Over 0.5 HR.", chips: ["vs Alvarez"], blast: "high" },
-            { name: "Xavier Edwards (S)", odds: "Listed +1220 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 93.6 mph EV. Matchup: Alvarez RHB split -0.72, HR risk -0.24. Fade: tough split lane (-0.72); pitcher risk below avg (-0.24). Model score 84; odds Listed +1220 - Over 0.5 HR.", chips: ["vs Alvarez"], blast: "high" },
-            { name: "Connor Norby (R)", odds: "Listed +940 - Over 0.5 HR", score: 75, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 92.7 mph EV. Matchup: Alvarez RHB split -0.72, HR risk -0.24. Fade: tough split lane (-0.72); pitcher risk below avg (-0.24). Model score 75; odds Listed +940 - Over 0.5 HR.", chips: ["vs Alvarez"], blast: "good" },
+            { name: "Josh Bell (S)", odds: "Listed +525 - Over 0.5 HR", score: 66, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 89.9 mph EV. Air: FB 25%. · Fedde RHB split +2.11, HR risk 1.64.", chips: ["vs Fedde"], formTrend: "flat", contactRisk: true, fbPct: 25.0 },
+            { name: "Kody Clemens (L)", odds: "Listed +443 - Over 0.5 HR", score: 72, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 94.4 mph EV. Air: FB 27%, pull-air 27%. · Fedde LHB split +0.01, HR risk 1.64.", chips: ["vs Fedde"], blast: "good", formTrend: "flat", fbPct: 27.3, pullAir: 27.3 },
+            { name: "Andrew Benintendi (L)", odds: "Listed +600 - Over 0.5 HR", score: 82, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 92.2 mph EV. Air: FB 27%, pull-air 27%. · Bradley LHB split +1.16, HR risk 0.86.", chips: ["vs Bradley"], blast: "high", formTrend: "heating", fbPct: 26.7, pullAir: 26.7 },
+            { name: "Miguel Vargas (R)", odds: "Listed +425 - Over 0.5 HR", score: 83, emojis: "💎", note: "1 HR, 3 near-HR, 96.9 mph EV. Air: FB 33%, pull-air 11%. · Bradley RHB split +0.10, HR risk 0.86.", chips: ["vs Bradley"], blast: "good", formTrend: "heating", fbPct: 33.3, pullAir: 11.1 },
+            { name: "Chase Meidroth (R)", odds: "Listed +1040 - Over 0.5 HR", score: 65, emojis: "💎", note: "0 HR, 90.9 mph EV. Air: FB 17%, pull-air 25%. · Bradley RHB split +0.10, HR risk 0.86.", chips: ["vs Bradley"], formTrend: "flat", fbPct: 16.7, pullAir: 25.0 },
         ],
     },
     {
         title: "NYM @ SEA - Freddy Peralta (R, NYM) vs George Kirby (R, SEA)",
-        description: "Tail key data: Park boost -2% (stadium +0%, weather -2%). Freddy Peralta (HR risk 0.16, vs LHB +0.32, vs RHB -0.20). George Kirby (HR risk -0.05, vs LHB +0.34, vs RHB -0.39).",
+        startTime: "2026-06-03T19:40:00Z",
+        gameMeta: "3:40 PM ET · Park -2% (stadium +0%, wx -2%) · Freddy Peralta +0.16 overall · LHB +0.32 · RHB -0.20 (0.97 HR/9) · George Kirby -0.05 overall · LHB +0.34 · RHB -0.39 (0.73 HR/9)",
+        parkPct: -2,
+        top3: ["Juan Soto", "Patrick Wisdom", "J.P. Crawford"],
+        top3Detail: [{"name": "Juan Soto", "score": 94, "why": "#1 model score in this game · 3 HR, 4 near-HR, 96 mph EV · vs Kirby · heating L5 · high blast rate", "chip": "Kirby", "rank": 1, "oddsShort": "+390"}, {"name": "Patrick Wisdom", "score": 82, "why": "#2 model score in this game · 1 HR, 1 near-HR, 101 mph EV · vs Peralta · elite EV", "chip": "Peralta", "rank": 2, "oddsShort": ""}, {"name": "J.P. Crawford", "score": 80, "why": "#3 model score in this game · 2 HR, 2 near-HR, 90 mph EV · vs Peralta · heating L5 · high blast rate", "chip": "Peralta", "rank": 3, "oddsShort": "+710"}],
         rows: [
-            { name: "Colt Emerson (L)", odds: "Listed +960 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 86.7 mph EV. Matchup: Peralta LHB split +0.32, HR risk 0.16. Fade: lighter EV form (86.7 mph). Model score 70; odds Listed +960 - Over 0.5 HR.", chips: ["vs Peralta"], blast: "good" },
-            { name: "J.P. Crawford (L)", odds: "Listed +710 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 90.0 mph EV. Matchup: Peralta LHB split +0.32, HR risk 0.16. Fade: HR outcomes are still high-variance. Model score 80; odds Listed +710 - Over 0.5 HR.", chips: ["vs Peralta"], blast: "high" },
-            { name: "Luke Raley (L)", odds: "Listed +440 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 83.8 mph EV. Matchup: Peralta LHB split +0.32, HR risk 0.16. Fade: lighter EV form (83.8 mph). Model score 78; odds Listed +440 - Over 0.5 HR.", chips: ["vs Peralta"], blast: "high" },
-            { name: "Patrick Wisdom (R)", odds: "Listed prop - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "Tail: 1 HR, 1 near-HR, 100.6 mph EV. Matchup: Peralta RHB split -0.20, HR risk 0.16. Fade: slight split headwind (-0.20). Model score 82; odds Listed prop - Over 0.5 HR.", chips: ["vs Peralta"], blast: "good" },
-            { name: "Juan Soto (L)", odds: "Listed +390 - Over 0.5 HR", score: 94, emojis: "🌕 💣", note: "Tail: 3 HR, 4 near-HR, 96.5 mph EV. Matchup: Kirby LHB split +0.34, HR risk -0.05. Fade: pitcher risk below avg (-0.05). Model score 94; odds Listed +390 - Over 0.5 HR.", chips: ["vs Kirby"], blast: "high" },
-            { name: "Jared Young (L)", odds: "Listed +830 - Over 0.5 HR", score: 80, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 95.5 mph EV. Matchup: Kirby LHB split +0.34, HR risk -0.05. Fade: pitcher risk below avg (-0.05). Model score 80; odds Listed +830 - Over 0.5 HR.", chips: ["vs Kirby"], blast: "good" },
-            { name: "Marcus Semien (R)", odds: "Listed +880 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 84.2 mph EV. Matchup: Kirby RHB split -0.39, HR risk -0.05. Fade: slight split headwind (-0.39); pitcher risk below avg (-0.05). Model score 78; odds Listed +880 - Over 0.5 HR.", chips: ["vs Kirby"], blast: "high" },
-        ],
-    },
-    {
-        title: "PIT @ HOU - Paul Skenes (R, PIT) vs Spencer Arrighetti (R, HOU)",
-        description: "Tail key data: Park boost +6% (stadium +6%, weather -1%). Paul Skenes (HR risk -0.70, vs LHB -0.66, vs RHB -0.34). Spencer Arrighetti (HR risk -0.64, vs LHB -0.74, vs RHB -0.27).",
-        rows: [
-            { name: "Yordan Alvarez (L)", odds: "Listed +290 - Over 0.5 HR", score: 87, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 3 near-HR, 94.8 mph EV. Matchup: Skenes LHB split -0.66, HR risk -0.70. Fade: tough split lane (-0.66); pitcher suppresses HR (-0.70). Model score 87; odds Listed +290 - Over 0.5 HR.", chips: ["vs Skenes"], blast: "high" },
-            { name: "Christian Walker (R)", odds: "Listed +490 - Over 0.5 HR", score: 79, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 88.9 mph EV. Matchup: Skenes RHB split -0.34, HR risk -0.70. Fade: slight split headwind (-0.34); pitcher suppresses HR (-0.70). Model score 79; odds Listed +490 - Over 0.5 HR.", chips: ["vs Skenes"], blast: "high" },
-            { name: "Spencer Horwitz (L)", odds: "Listed +630 - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 87.5 mph EV. Matchup: Arrighetti LHB split -0.74, HR risk -0.64. Fade: tough split lane (-0.74); pitcher suppresses HR (-0.64). Model score 78; odds Listed +630 - Over 0.5 HR.", chips: ["vs Arrighetti"], blast: "high" },
-            { name: "Brandon Lowe (L)", odds: "Listed +390 - Over 0.5 HR", score: 83, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 1 HR, 4 near-HR, 93.2 mph EV. Matchup: Arrighetti LHB split -0.74, HR risk -0.64. Fade: tough split lane (-0.74); pitcher suppresses HR (-0.64). Model score 83; odds Listed +390 - Over 0.5 HR.", chips: ["vs Arrighetti"], blast: "high" },
-            { name: "Oneil Cruz (L)", odds: "Listed +320 - Over 0.5 HR", score: 81, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 97.2 mph EV. Matchup: Arrighetti LHB split -0.74, HR risk -0.64. Fade: tough split lane (-0.74); pitcher suppresses HR (-0.64). Model score 81; odds Listed +320 - Over 0.5 HR.", chips: ["vs Arrighetti"], blast: "good" },
-            { name: "Bryan Reynolds (S)", odds: "Listed +710 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 91.6 mph EV. Matchup: Arrighetti RHB split -0.27, HR risk -0.64. Fade: slight split headwind (-0.27); pitcher suppresses HR (-0.64). Model score 74; odds Listed +710 - Over 0.5 HR.", chips: ["vs Arrighetti"], blast: "good" },
+            { name: "Colt Emerson (L)", odds: "Listed +960 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 86.7 mph EV. Air: FB 12%, pull-air 38%. · Peralta LHB split +0.32, HR risk 0.16.", chips: ["vs Peralta"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 12.5, pullAir: 37.5 },
+            { name: "J.P. Crawford (L)", odds: "Listed +710 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 90.0 mph EV. Air: FB 36%, pull-air 14%. · Peralta LHB split +0.32, HR risk 0.16.", chips: ["vs Peralta"], blast: "high", formTrend: "heating", fbPct: 35.7, pullAir: 14.3 },
+            { name: "Luke Raley (L)", odds: "Listed +440 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 83.8 mph EV. Air: FB 36%, pull-air 29%. · Peralta LHB split +0.32, HR risk 0.16.", chips: ["vs Peralta"], blast: "high", formTrend: "heating", fbPct: 35.7, pullAir: 28.6 },
+            { name: "Patrick Wisdom (R)", odds: "Listed prop - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "1 HR, 1 near-HR, 100.6 mph EV. Air: FB 50%, pull-air 50%. · Peralta RHB split -0.20, HR risk 0.16.", chips: ["vs Peralta"], blast: "good", formTrend: "flat", fbPct: 50.0, pullAir: 50.0 },
+            { name: "Juan Soto (L)", odds: "Listed +390 - Over 0.5 HR", score: 94, emojis: "🌕 💣", note: "3 HR, 4 near-HR, 96.5 mph EV. Air: FB 46%, pull-air 31%. · Kirby LHB split +0.34, HR risk -0.05.", chips: ["vs Kirby"], blast: "high", formTrend: "heating", fbPct: 46.2, pullAir: 30.8 },
+            { name: "Jared Young (L)", odds: "Listed +830 - Over 0.5 HR", score: 80, emojis: "💎", note: "1 HR, 2 near-HR, 95.5 mph EV. Air: FB 43%, pull-air 43%. · Kirby LHB split +0.34, HR risk -0.05.", chips: ["vs Kirby"], blast: "good", formTrend: "heating", fbPct: 42.9, pullAir: 42.9 },
+            { name: "Marcus Semien (R)", odds: "Listed +880 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 84.2 mph EV. Air: FB 24%, pull-air 29%. · Kirby RHB split -0.39, HR risk -0.05.", chips: ["vs Kirby"], blast: "high", formTrend: "heating", fbPct: 23.5, pullAir: 29.4 },
         ],
     },
     {
         title: "SD @ PHI - Walker Buehler (R, SD) vs Cristopher Sanchez (R, PHI)",
-        description: "Tail key data: Park boost +3% (stadium +14%, weather -11%). Walker Buehler (HR risk 0.19, vs LHB -0.38, vs RHB +0.62). Cristopher Sanchez (HR risk -0.92, vs LHB -1.00, vs RHB -0.53).",
+        startTime: "2026-06-03T22:40:00Z",
+        gameMeta: "6:40 PM ET · Park +3% (stadium +14%, wx -11%) · Walker Buehler +0.19 overall · LHB -0.38 · RHB +0.62 (0.57 HR/9) · Cristopher Sanchez -0.92 overall · LHB -1.00 · RHB -0.53 (0.40 HR/9)",
+        parkPct: 3,
+        top3: ["Ty France", "Kyle Schwarber", "Bryce Harper"],
+        top3Detail: [{"name": "Ty France", "score": 78, "why": "#1 model score in this game · 1 HR, 1 near-HR, 96 mph EV · vs Sanchez", "chip": "Sanchez", "rank": 1, "oddsShort": "+1020"}, {"name": "Kyle Schwarber", "score": 77, "why": "#2 model score in this game · 1 HR, 2 near-HR, 93 mph EV · vs Buehler · heating L5", "chip": "Buehler", "rank": 2, "oddsShort": "+281"}, {"name": "Bryce Harper", "score": 77, "why": "#3 model score in this game · 1 HR, 1 near-HR, 95 mph EV · vs Buehler", "chip": "Buehler", "rank": 3, "oddsShort": "+432"}],
         rows: [
-            { name: "Kyle Schwarber (L)", odds: "Listed +281 - Over 0.5 HR", score: 77, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 93.4 mph EV. Matchup: Buehler LHB split -0.38, HR risk 0.19. Fade: slight split headwind (-0.38); weather carry headwind (-11%). Model score 77; odds Listed +281 - Over 0.5 HR.", chips: ["vs Buehler"], blast: "good" },
-            { name: "Brandon Marsh (L)", odds: "Listed +890 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 0 HR, 94.4 mph EV. Matchup: Buehler LHB split -0.38, HR risk 0.19. Fade: slight split headwind (-0.38); weather carry headwind (-11%). Model score 70; odds Listed +890 - Over 0.5 HR.", chips: ["vs Buehler"], blast: "good" },
-            { name: "Bryce Harper (L)", odds: "Listed +432 - Over 0.5 HR", score: 77, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 95.1 mph EV. Matchup: Buehler LHB split -0.38, HR risk 0.19. Fade: slight split headwind (-0.38); weather carry headwind (-11%). Model score 77; odds Listed +432 - Over 0.5 HR.", chips: ["vs Buehler"], blast: "good" },
-            { name: "Jackson Merrill (L)", odds: "Listed +1120 - Over 0.5 HR", score: 71, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 89.0 mph EV. Matchup: Sanchez LHB split -1.00, HR risk -0.92. Fade: tough split lane (-1.00); pitcher suppresses HR (-0.92). Model score 71; odds Listed +1120 - Over 0.5 HR.", chips: ["vs Sanchez"], blast: "good" },
-            { name: "Ty France (R)", odds: "Listed +1020 - Over 0.5 HR", score: 78, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 96.5 mph EV. Matchup: Sanchez RHB split -0.53, HR risk -0.92. Fade: tough split lane (-0.53); pitcher suppresses HR (-0.92). Model score 78; odds Listed +1020 - Over 0.5 HR.", chips: ["vs Sanchez"], blast: "good" },
+            { name: "Kyle Schwarber (L)", odds: "Listed +281 - Over 0.5 HR", score: 77, emojis: "💎", note: "1 HR, 2 near-HR, 93.4 mph EV. Air: FB 56%, pull-air 33%. · Buehler LHB split -0.38, HR risk 0.19.", chips: ["vs Buehler"], blast: "good", formTrend: "heating", contactRisk: true, fbPct: 55.6, pullAir: 33.3 },
+            { name: "Brandon Marsh (L)", odds: "Listed +890 - Over 0.5 HR", score: 70, emojis: "💎", note: "0 HR, 94.4 mph EV. Air: pull-air 18%. · Buehler LHB split -0.38, HR risk 0.19.", chips: ["vs Buehler"], blast: "good", formTrend: "flat", pullAir: 18.2 },
+            { name: "Bryce Harper (L)", odds: "Listed +432 - Over 0.5 HR", score: 77, emojis: "💎", note: "1 HR, 1 near-HR, 95.1 mph EV. Air: FB 14%, pull-air 7%. · Buehler LHB split -0.38, HR risk 0.19.", chips: ["vs Buehler"], blast: "good", formTrend: "flat", fbPct: 14.3, pullAir: 7.1 },
+            { name: "Jackson Merrill (L)", odds: "Listed +1120 - Over 0.5 HR", score: 71, emojis: "💎", note: "1 HR, 1 near-HR, 89.0 mph EV. Air: FB 38%, pull-air 25%. · Sanchez LHB split -1.00, HR risk -0.92.", chips: ["vs Sanchez"], blast: "good", formTrend: "flat", fbPct: 37.5, pullAir: 25.0 },
+            { name: "Ty France (R)", odds: "Listed +1020 - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 1 near-HR, 96.5 mph EV. Air: FB 20%, pull-air 20%. · Sanchez RHB split -0.53, HR risk -0.92.", chips: ["vs Sanchez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 20.0, pullAir: 20.0 },
         ],
     },
     {
-        title: "SF @ MIL - Logan Webb (R, SF) vs Coleman Crow (R, MIL)",
-        description: "Tail key data: Park boost -3% (stadium +11%, weather -14%). Logan Webb (HR risk -0.16, vs LHB -0.10, vs RHB +0.19). Home starter risk unavailable.",
+        title: "BAL @ BOS - Chris Bassitt (R, BAL) vs Payton Tolle (R, BOS)",
+        startTime: "2026-06-03T22:45:00Z",
+        gameMeta: "6:45 PM ET · Park -10% (stadium -7%, wx -3%) · Chris Bassitt -0.45 overall · LHB +0.13 · RHB -1.06 (0.94 HR/9) · Payton Tolle -0.11 overall · LHB +0.41 · RHB -0.21 (0.66 HR/9)",
+        parkPct: -10,
+        top3: ["Coby Mayo", "Willson Contreras", "Pete Alonso"],
+        top3Detail: [{"name": "Coby Mayo", "score": 90, "why": "#1 model score in this game · 2 HR, 2 near-HR, 101 mph EV · vs Tolle · heating L5 · high blast rate · elite EV · WPZ Favorite", "chip": "Tolle", "rank": 1, "oddsShort": "+568"}, {"name": "Willson Contreras", "score": 78, "why": "#2 model score in this game · 2 HR, 2 near-HR, 86 mph EV · vs Bassitt · heating L5 · high blast rate", "chip": "Bassitt", "rank": 2, "oddsShort": "+680"}, {"name": "Pete Alonso", "score": 78, "why": "#3 model score in this game · 0 HR, 1 near-HR, 101 mph EV · vs Tolle · elite EV", "chip": "Tolle", "rank": 3, "oddsShort": "+433"}],
         rows: [
-            { name: "Garrett Mitchell (L)", odds: "Listed +840 - Over 0.5 HR", score: 80, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 98.5 mph EV. Matchup: Webb LHB split -0.10, HR risk -0.16. Fade: slight split headwind (-0.10); pitcher risk below avg (-0.16). Model score 80; odds Listed +840 - Over 0.5 HR.", chips: ["vs Webb"], blast: "good" },
-            { name: "Jake Bauers (L)", odds: "Listed +600 - Over 0.5 HR", score: 85, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 95.4 mph EV. Matchup: Webb LHB split -0.10, HR risk -0.16. Fade: slight split headwind (-0.10); pitcher risk below avg (-0.16). Model score 85; odds Listed +600 - Over 0.5 HR.", chips: ["vs Webb"], blast: "high" },
-            { name: "Jackson Chourio (R)", odds: "Listed +570 - Over 0.5 HR", score: 78, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 96.1 mph EV. Matchup: Webb RHB split +0.19, HR risk -0.16. Fade: pitcher risk below avg (-0.16); weather carry headwind (-14%). Model score 78; odds Listed +570 - Over 0.5 HR.", chips: ["vs Webb"], blast: "good" },
-            { name: "Eric Haase (R)", odds: "Listed +620 - Over 0.5 HR", score: 73, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 89.2 mph EV. Matchup: Crow split/risk data unavailable. Fade: limited split/risk sample; weather carry headwind (-14%). Model score 73; odds Listed +620 - Over 0.5 HR.", chips: ["vs Crow"], blast: "good" },
-            { name: "Willy Adames (R)", odds: "Listed +472 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 0 HR, 2 near-HR, 94.1 mph EV. Matchup: Crow split/risk data unavailable. Fade: limited split/risk sample; weather carry headwind (-14%). Model score 74; odds Listed +472 - Over 0.5 HR.", chips: ["vs Crow"], blast: "good" },
-            { name: "Rafael Devers (L)", odds: "Listed +421 - Over 0.5 HR", score: 78, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 96.2 mph EV. Matchup: Crow split/risk data unavailable. Fade: limited split/risk sample; weather carry headwind (-14%). Model score 78; odds Listed +421 - Over 0.5 HR.", chips: ["vs Crow"], blast: "good" },
+            { name: "Jarren Duran (L)", odds: "Listed +509 - Over 0.5 HR", score: 76, emojis: "⭐ 💎", note: "1 HR, 1 near-HR, 93.7 mph EV. Air: FB 22%, pull-air 22%. · Bassitt LHB split +0.13, HR risk -0.45.", chips: ["vs Bassitt"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 22.2, pullAir: 22.2 },
+            { name: "Willson Contreras (R)", odds: "Listed +680 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 86.4 mph EV. Air: FB 21%, pull-air 14%. · Bassitt RHB split -1.06, HR risk -0.45.", chips: ["vs Bassitt"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 21.4, pullAir: 14.3 },
+            { name: "Masataka Yoshida (L)", odds: "Listed +1120 - Over 0.5 HR", score: 64, emojis: "💎", note: "0 HR, 1 near-HR, 87.8 mph EV. Air: FB 50%, pull-air 8%. · Bassitt LHB split +0.13, HR risk -0.45.", chips: ["vs Bassitt"], formTrend: "flat", fbPct: 50.0, pullAir: 8.3 },
+            { name: "Coby Mayo (R)", odds: "Listed +568 - Over 0.5 HR", score: 90, emojis: "🚀 ⭐ 🌕 💣", note: "2 HR, 2 near-HR, 101.2 mph EV. Air: FB 29%, pull-air 43%. · Tolle RHB split -0.21, HR risk -0.11.", chips: ["vs Tolle"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 28.6, pullAir: 42.9 },
+            { name: "Pete Alonso (R)", odds: "Listed +433 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "0 HR, 1 near-HR, 100.7 mph EV. Air: FB 25%, pull-air 25%. · Tolle RHB split -0.21, HR risk -0.11.", chips: ["vs Tolle"], blast: "good", formTrend: "flat", fbPct: 25.0, pullAir: 25.0 },
+            { name: "Adley Rutschman (S)", odds: "Listed +630 - Over 0.5 HR", score: 69, emojis: "💎", note: "0 HR, 92.9 mph EV. Air: FB 38%, pull-air 25%. · Tolle RHB split -0.21, HR risk -0.11.", chips: ["vs Tolle"], blast: "good", formTrend: "flat", fbPct: 37.5, pullAir: 25.0 },
         ],
     },
     {
-        title: "TEX @ STL - MacKenzie Gore (R, TEX) vs Andre Pallante (R, STL)",
-        description: "Tail key data: Park boost -20% (stadium -9%, weather -11%). MacKenzie Gore (HR risk -0.13, vs LHB -0.10, vs RHB -0.04). Andre Pallante (HR risk 0.18, vs LHB +0.41, vs RHB -0.13).",
+        title: "CLE @ NYY - Gavin Williams (R, CLE) vs Gerrit Cole (R, NYY)",
+        startTime: "2026-06-03T23:05:00Z",
+        gameMeta: "7:05 PM ET · Park -2% (stadium +8%, wx -10%) · Gavin Williams +0.46 overall · LHB +0.82 · RHB -0.26 (1.14 HR/9) · Gerrit Cole -2.00 overall · LHB -1.95 · RHB -1.24",
+        parkPct: -2,
+        top3: ["Aaron Judge", "Ryan McMahon", "Patrick Bailey"],
+        top3Detail: [{"name": "Aaron Judge", "score": 83, "why": "#1 model score in this game · 1 HR, 3 near-HR, 97 mph EV · vs Williams · heating L5", "chip": "Williams", "rank": 1, "oddsShort": ""}, {"name": "Ryan McMahon", "score": 78, "why": "#2 model score in this game · 2 HR, 2 near-HR, 87 mph EV · vs Williams · heating L5 · high blast rate", "chip": "Williams", "rank": 2, "oddsShort": "+590"}, {"name": "Patrick Bailey", "score": 77, "why": "#3 model score in this game · 1 HR, 3 near-HR, 91 mph EV · vs Cole · heating L5", "chip": "Cole", "rank": 3, "oddsShort": "+1000"}],
         rows: [
-            { name: "Nolan Gorman (L)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "Tail: 1 HR, 2 near-HR, 87.0 mph EV. Matchup: Gore LHB split -0.10, HR risk -0.13. Fade: slight split headwind (-0.10); pitcher risk below avg (-0.13). Model score 72; odds Listed prop - Over 0.5 HR.", chips: ["vs Gore"], blast: "good" },
-            { name: "JJ Wetherholt (L)", odds: "Listed +710 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 95.6 mph EV. Matchup: Gore LHB split -0.10, HR risk -0.13. Fade: slight split headwind (-0.10); pitcher risk below avg (-0.13). Model score 74; odds Listed +710 - Over 0.5 HR.", chips: ["vs Gore"], blast: "good" },
-            { name: "Ivan Herrera (R)", odds: "Listed +650 - Over 0.5 HR", score: 74, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 91.5 mph EV. Matchup: Gore RHB split -0.04, HR risk -0.13. Fade: slight split headwind (-0.04); pitcher risk below avg (-0.13). Model score 74; odds Listed +650 - Over 0.5 HR.", chips: ["vs Gore"], blast: "good" },
-            { name: "Joc Pederson (L)", odds: "Listed +650 - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. Tail: 2 HR, 2 near-HR, 88.3 mph EV. Matchup: Pallante LHB split +0.41, HR risk 0.18. Fade: park/weather net drag (-20%). Model score 78; odds Listed +650 - Over 0.5 HR.", chips: ["vs Pallante"], blast: "high" },
-            { name: "Brandon Nimmo (L)", odds: "Listed +750 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 92.0 mph EV. Matchup: Pallante LHB split +0.41, HR risk 0.18. Fade: park/weather net drag (-20%); limited recent HR events. Model score 70; odds Listed +750 - Over 0.5 HR.", chips: ["vs Pallante"], blast: "good" },
-            { name: "Kyle Higashioka (R)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 86.1 mph EV. Matchup: Pallante RHB split -0.13, HR risk 0.18. Fade: slight split headwind (-0.13); park/weather net drag (-20%). Model score 70; odds Listed prop - Over 0.5 HR.", chips: ["vs Pallante"], blast: "good" },
+            { name: "Ben Rice (L)", odds: "Listed +375 - Over 0.5 HR", score: 64, emojis: "💎", note: "0 HR, 1 near-HR, 85.4 mph EV. Air: FB 25%, pull-air 17%. · Williams LHB split +0.82, HR risk 0.46.", chips: ["vs Williams"], formTrend: "cooling", fbPct: 25.0, pullAir: 16.7 },
+            { name: "Ryan McMahon (L)", odds: "Listed +590 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 86.9 mph EV. Air: FB 50%. · Williams LHB split +0.82, HR risk 0.46.", chips: ["vs Williams"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 50.0 },
+            { name: "Aaron Judge (R)", odds: "Listed prop - Over 0.5 HR", score: 83, emojis: "💎", note: "1 HR, 3 near-HR, 97.2 mph EV. Air: FB 36%. · Williams RHB split -0.26, HR risk 0.46.", chips: ["vs Williams"], blast: "good", formTrend: "heating", fbPct: 35.7 },
+            { name: "Patrick Bailey (S)", odds: "Listed +1000 - Over 0.5 HR", score: 77, emojis: "💎", note: "1 HR, 3 near-HR, 91.3 mph EV. Air: FB 50%, pull-air 10%. · Cole RHB split -1.24, HR risk -2.00.", chips: ["vs Cole"], blast: "good", formTrend: "heating", contactRisk: true, fbPct: 50.0, pullAir: 10.0 },
+            { name: "Travis Bazzana (L)", odds: "Listed +890 - Over 0.5 HR", score: 75, emojis: "💎", note: "1 HR, 1 near-HR, 93.0 mph EV. Air: FB 31%, pull-air 31%. · Cole LHB split -1.95, HR risk -2.00.", chips: ["vs Cole"], blast: "good", formTrend: "flat", fbPct: 30.8, pullAir: 30.8 },
+        ],
+    },
+    {
+        title: "KC @ CIN - Stephen Kolek (R, KC) vs Chase Burns (R, CIN)",
+        startTime: "2026-06-03T23:10:00Z",
+        gameMeta: "7:10 PM ET · Park +0% (stadium +15%, wx -14%) · Stephen Kolek -0.16 overall · LHB -0.27 · RHB +0.18 (1.16 HR/9) · Chase Burns +0.08 overall · LHB +0.40 · RHB -0.23 (1.23 HR/9)",
+        parkPct: 0,
+        top3: ["JJ Bleday", "Jac Caglianone", "Will Benson"],
+        top3Detail: [{"name": "JJ Bleday", "score": 85, "why": "#1 model score in this game · 3 HR, 3 near-HR, 89 mph EV · vs Kolek · heating L5 · high blast rate · WPZ Favorite", "chip": "Kolek", "rank": 1, "oddsShort": "+325"}, {"name": "Jac Caglianone", "score": 78, "why": "#2 model score in this game · 0 HR, 1 near-HR, 103 mph EV · vs Burns · elite EV · WPZ Favorite", "chip": "Burns", "rank": 2, "oddsShort": "+500"}, {"name": "Will Benson", "score": 76, "why": "#3 model score in this game · 1 HR, 1 near-HR, 94 mph EV · vs Kolek", "chip": "Kolek", "rank": 3, "oddsShort": ""}],
+        rows: [
+            { name: "JJ Bleday (L)", odds: "Listed +325 - Over 0.5 HR", score: 85, emojis: "⭐ 🌕 💣", note: "3 HR, 3 near-HR, 89.0 mph EV. Air: FB 31%, pull-air 25%. · Kolek LHB split -0.27, HR risk -0.16.", chips: ["vs Kolek"], blast: "high", formTrend: "heating", fbPct: 31.2, pullAir: 25.0 },
+            { name: "Will Benson (L)", odds: "Listed prop - Over 0.5 HR", score: 76, emojis: "💎", note: "1 HR, 1 near-HR, 93.7 mph EV. Air: FB 56%, pull-air 44%. · Kolek LHB split -0.27, HR risk -0.16.", chips: ["vs Kolek"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 55.6, pullAir: 44.4 },
+            { name: "Blake Dunn (R)", odds: "Listed +710 - Over 0.5 HR", score: 64, emojis: "💎", note: "0 HR, 1 near-HR, 83.9 mph EV. Air: FB 23%, pull-air 9%. · Kolek RHB split +0.18, HR risk -0.16.", chips: ["vs Kolek"], formTrend: "cooling", contactRisk: true, fbPct: 22.7, pullAir: 9.1 },
+            { name: "Lane Thomas (R)", odds: "Listed prop - Over 0.5 HR", score: 73, emojis: "⭐ 💎", note: "1 HR, 2 near-HR, 89.0 mph EV. Air: FB 50%, pull-air 50%. · Burns RHB split -0.23, HR risk 0.08.", chips: ["vs Burns"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 50.0, pullAir: 50.0 },
+            { name: "Bobby Witt Jr. (R)", odds: "Listed +399 - Over 0.5 HR", score: 71, emojis: "💎", note: "0 HR, 1 near-HR, 93.3 mph EV. Air: FB 58%, pull-air 33%. · Burns RHB split -0.23, HR risk 0.08.", chips: ["vs Burns"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 58.3, pullAir: 33.3 },
+            { name: "Jac Caglianone (L)", odds: "Listed +500 - Over 0.5 HR", score: 78, emojis: "🚀 ⭐ 💎", note: "0 HR, 1 near-HR, 102.8 mph EV. Air: FB 29%, pull-air 14%. · Burns LHB split +0.40, HR risk 0.08.", chips: ["vs Burns"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 28.6, pullAir: 14.3 },
+            { name: "Michael Massey (L)", odds: "Listed +680 - Over 0.5 HR", score: 71, emojis: "💎", note: "1 HR, 1 near-HR, 89.3 mph EV. Air: FB 58%, pull-air 33%. · Burns LHB split +0.40, HR risk 0.08.", chips: ["vs Burns"], blast: "good", formTrend: "flat", fbPct: 58.3, pullAir: 33.3 },
+            { name: "Salvador Perez (R)", odds: "Listed +466 - Over 0.5 HR", score: 64, emojis: "💎", note: "0 HR, 1 near-HR, 87.9 mph EV. Air: FB 38%, pull-air 31%. · Burns RHB split -0.23, HR risk 0.08.", chips: ["vs Burns"], formTrend: "flat", fbPct: 38.5, pullAir: 30.8 },
         ],
     },
     {
         title: "TOR @ ATL - Patrick Corbin (R, TOR) vs Grant Holmes 🧤 (R, ATL)",
-        description: "Tail key data: Park boost -20% (stadium -5%, weather -15%). Patrick Corbin (HR risk -0.16, vs LHB -1.09, vs RHB +0.13). Grant Holmes 🧤 (HR risk 1.34, vs LHB +1.39, vs RHB +0.52).",
+        startTime: "2026-06-03T23:15:00Z",
+        gameMeta: "7:15 PM ET · Park -20% (stadium -5%, wx -15%) · Patrick Corbin -0.16 overall · LHB -1.09 · RHB +0.13 (0.94 HR/9) · Grant Holmes +1.34 overall · LHB +1.39 · RHB +0.52 (1.74 HR/9)",
+        parkPct: -20,
+        top3: ["Jesus Sanchez", "Matt Olson", "Jorge Mateo"],
+        top3Detail: [{"name": "Jesus Sanchez", "score": 79, "why": "#1 model score in this game · 1 HR, 2 near-HR, 95 mph EV · vs Holmes · heating L5 · WPZ Favorite", "chip": "Holmes", "rank": 1, "oddsShort": "+650"}, {"name": "Matt Olson", "score": 78, "why": "#2 model score in this game · 2 HR, 2 near-HR, 86 mph EV · vs Corbin · heating L5 · high blast rate", "chip": "Corbin", "rank": 2, "oddsShort": "+490"}, {"name": "Jorge Mateo", "score": 78, "why": "#3 model score in this game · 1 HR, 1 near-HR, 96 mph EV · vs Corbin", "chip": "Corbin", "rank": 3, "oddsShort": "+800"}],
         rows: [
-            { name: "Matt Olson (L)", odds: "Listed +490 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "Tail: 2 HR, 2 near-HR, 86.0 mph EV. Matchup: Corbin LHB split -1.09, HR risk -0.16. Fade: tough split lane (-1.09); pitcher risk below avg (-0.16). Model score 78; odds Listed +490 - Over 0.5 HR.", chips: ["vs Corbin"], blast: "high" },
-            { name: "Austin Riley (R)", odds: "Listed +620 - Over 0.5 HR", score: 75, emojis: "💎", note: "Tail: 0 HR, 1 near-HR, 97.3 mph EV. Matchup: Corbin RHB split +0.13, HR risk -0.16. Fade: pitcher risk below avg (-0.16); park/weather net drag (-20%). Model score 75; odds Listed +620 - Over 0.5 HR.", chips: ["vs Corbin"], blast: "good" },
-            { name: "Jorge Mateo (R)", odds: "Listed +800 - Over 0.5 HR", score: 78, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 96.2 mph EV. Matchup: Corbin RHB split +0.13, HR risk -0.16. Fade: pitcher risk below avg (-0.16); park/weather net drag (-20%). Model score 78; odds Listed +800 - Over 0.5 HR.", chips: ["vs Corbin"], blast: "good" },
-            { name: "Michael Harris II (L)", odds: "Listed +590 - Over 0.5 HR", score: 70, emojis: "💎", note: "Tail: 1 HR, 1 near-HR, 87.0 mph EV. Matchup: Corbin LHB split -1.09, HR risk -0.16. Fade: tough split lane (-1.09); pitcher risk below avg (-0.16). Model score 70; odds Listed +590 - Over 0.5 HR.", chips: ["vs Corbin"], blast: "good" },
-            { name: "Jesus Sanchez (L)", odds: "Listed +650 - Over 0.5 HR", score: 79, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "Worst Pickz Favorite. Tail: 1 HR, 2 near-HR, 95.2 mph EV. Matchup: Holmes LHB split +1.39, HR risk 1.34. Fade: park/weather net drag (-20%). Model score 79; odds Listed +650 - Over 0.5 HR.", chips: ["vs Holmes"], blast: "good" },
+            { name: "Matt Olson (L)", odds: "Listed +490 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 86.0 mph EV. Air: FB 38%, pull-air 12%. · Corbin LHB split -1.09, HR risk -0.16.", chips: ["vs Corbin"], blast: "high", formTrend: "heating", fbPct: 37.5, pullAir: 12.5 },
+            { name: "Austin Riley (R)", odds: "Listed +620 - Over 0.5 HR", score: 75, emojis: "💎", note: "0 HR, 1 near-HR, 97.3 mph EV. Air: FB 17%. · Corbin RHB split +0.13, HR risk -0.16.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 16.7 },
+            { name: "Jorge Mateo (R)", odds: "Listed +800 - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 1 near-HR, 96.2 mph EV. Air: FB 40%, pull-air 20%. · Corbin RHB split +0.13, HR risk -0.16.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", fbPct: 40.0, pullAir: 20.0 },
+            { name: "Michael Harris II (L)", odds: "Listed +590 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 87.0 mph EV. Air: FB 20%, pull-air 10%. · Corbin LHB split -1.09, HR risk -0.16.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", fbPct: 20.0, pullAir: 10.0 },
+            { name: "Jesus Sanchez (L)", odds: "Listed +650 - Over 0.5 HR", score: 79, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "1 HR, 2 near-HR, 95.2 mph EV. Air: FB 43%, pull-air 14%. · Holmes LHB split +1.39, HR risk 1.34.", chips: ["vs Holmes"], blast: "good", formTrend: "heating", contactRisk: true, fbPct: 42.9, pullAir: 14.3 },
+        ],
+    },
+    {
+        title: "SF @ MIL - Logan Webb (R, SF) vs Coleman Crow (R, MIL)",
+        startTime: "2026-06-03T23:40:00Z",
+        gameMeta: "7:40 PM ET · Park -3% (stadium +11%, wx -14%) · Logan Webb -0.16 overall · LHB -0.10 · RHB +0.19 (0.70 HR/9)",
+        parkPct: -3,
+        top3: ["Jake Bauers", "Garrett Mitchell", "Jackson Chourio"],
+        top3Detail: [{"name": "Jake Bauers", "score": 85, "why": "#1 model score in this game · 2 HR, 2 near-HR, 95 mph EV · vs Webb · heating L5 · high blast rate · WPZ Favorite", "chip": "Webb", "rank": 1, "oddsShort": "+600"}, {"name": "Garrett Mitchell", "score": 80, "why": "#2 model score in this game · 1 HR, 1 near-HR, 98 mph EV · vs Webb", "chip": "Webb", "rank": 2, "oddsShort": "+840"}, {"name": "Jackson Chourio", "score": 78, "why": "#3 model score in this game · 1 HR, 1 near-HR, 96 mph EV · vs Webb", "chip": "Webb", "rank": 3, "oddsShort": "+570"}],
+        rows: [
+            { name: "Garrett Mitchell (L)", odds: "Listed +840 - Over 0.5 HR", score: 80, emojis: "💎", note: "1 HR, 1 near-HR, 98.5 mph EV. Air: FB 22%, pull-air 11%. · Webb LHB split -0.10, HR risk -0.16.", chips: ["vs Webb"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 22.2, pullAir: 11.1 },
+            { name: "Jake Bauers (L)", odds: "Listed +600 - Over 0.5 HR", score: 85, emojis: "⭐ 🌕 💣", note: "2 HR, 2 near-HR, 95.4 mph EV. Air: FB 25%, pull-air 17%. · Webb LHB split -0.10, HR risk -0.16.", chips: ["vs Webb"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 25.0, pullAir: 16.7 },
+            { name: "Jackson Chourio (R)", odds: "Listed +570 - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 1 near-HR, 96.1 mph EV. Air: FB 46%, pull-air 9%. · Webb RHB split +0.19, HR risk -0.16.", chips: ["vs Webb"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 45.5, pullAir: 9.1 },
+            { name: "Eric Haase (R)", odds: "Listed +620 - Over 0.5 HR", score: 73, emojis: "💎", note: "1 HR, 2 near-HR, 89.2 mph EV. Air: FB 29%, pull-air 14%. · Crow split/risk data unavailable.", chips: ["vs Crow"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 28.6, pullAir: 14.3 },
+            { name: "Willy Adames (R)", odds: "Listed +472 - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 2 near-HR, 94.1 mph EV. Air: FB 27%, pull-air 18%. · Crow split/risk data unavailable.", chips: ["vs Crow"], blast: "good", formTrend: "flat", fbPct: 27.3, pullAir: 18.2 },
+            { name: "Rafael Devers (L)", odds: "Listed +421 - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 1 near-HR, 96.2 mph EV. Air: FB 27%, pull-air 13%. · Crow split/risk data unavailable.", chips: ["vs Crow"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 26.7, pullAir: 13.3 },
+        ],
+    },
+    {
+        title: "TEX @ STL - MacKenzie Gore (R, TEX) vs Andre Pallante (R, STL)",
+        startTime: "2026-06-03T23:45:00Z",
+        gameMeta: "7:45 PM ET · Park -20% (stadium -9%, wx -11%) · MacKenzie Gore -0.13 overall · LHB -0.10 · RHB -0.04 (0.72 HR/9) · Andre Pallante +0.18 overall · LHB +0.41 · RHB -0.13 (1.35 HR/9)",
+        parkPct: -20,
+        top3: ["Joc Pederson", "JJ Wetherholt", "Ivan Herrera"],
+        top3Detail: [{"name": "Joc Pederson", "score": 78, "why": "#1 model score in this game · 2 HR, 2 near-HR, 88 mph EV · vs Pallante · heating L5 · high blast rate · WPZ Favorite", "chip": "Pallante", "rank": 1, "oddsShort": "+650"}, {"name": "JJ Wetherholt", "score": 74, "why": "#2 model score in this game · 0 HR, 1 near-HR, 96 mph EV · vs Gore", "chip": "Gore", "rank": 2, "oddsShort": "+710"}, {"name": "Ivan Herrera", "score": 74, "why": "#3 model score in this game · 1 HR, 1 near-HR, 92 mph EV · vs Gore", "chip": "Gore", "rank": 3, "oddsShort": "+650"}],
+        sleeper: "Nolan Gorman",
+        sleeperDetail: {"name": "Nolan Gorman", "score": 72, "why": "Score 72 — outside top 3 on the sheet · hotter L5 power than #3 Ivan Herrera · 1 HR, 2 near-HR, 87 mph EV · vs Gore", "chip": "Gore", "rank": null, "oddsShort": ""},
+        rows: [
+            { name: "Nolan Gorman (L)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 87.0 mph EV. Air: FB 38%, pull-air 12%. · Gore LHB split -0.10, HR risk -0.13.", chips: ["vs Gore"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 37.5, pullAir: 12.5 },
+            { name: "JJ Wetherholt (L)", odds: "Listed +710 - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 1 near-HR, 95.6 mph EV. Air: FB 42%, pull-air 8%. · Gore LHB split -0.10, HR risk -0.13.", chips: ["vs Gore"], blast: "good", formTrend: "flat", fbPct: 41.7, pullAir: 8.3 },
+            { name: "Ivan Herrera (R)", odds: "Listed +650 - Over 0.5 HR", score: 74, emojis: "💎", note: "1 HR, 1 near-HR, 91.5 mph EV. Air: FB 23%, pull-air 15%. · Gore RHB split -0.04, HR risk -0.13.", chips: ["vs Gore"], blast: "good", formTrend: "flat", fbPct: 23.1, pullAir: 15.4 },
+            { name: "Joc Pederson (L)", odds: "Listed +650 - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "2 HR, 2 near-HR, 88.3 mph EV. Air: FB 20%, pull-air 40%. · Pallante LHB split +0.41, HR risk 0.18.", chips: ["vs Pallante"], blast: "high", formTrend: "heating", fbPct: 20.0, pullAir: 40.0 },
+            { name: "Brandon Nimmo (L)", odds: "Listed +750 - Over 0.5 HR", score: 70, emojis: "💎", note: "0 HR, 1 near-HR, 92.0 mph EV. Air: FB 50%, pull-air 12%. · Pallante LHB split +0.41, HR risk 0.18.", chips: ["vs Pallante"], blast: "good", formTrend: "flat", fbPct: 50.0, pullAir: 12.5 },
+            { name: "Kyle Higashioka (R)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 86.1 mph EV. Air: FB 25%, pull-air 12%. · Pallante RHB split -0.13, HR risk 0.18.", chips: ["vs Pallante"], blast: "good", formTrend: "flat", fbPct: 25.0, pullAir: 12.5 },
+        ],
+    },
+    {
+        title: "ATH @ CHC - Jeffrey Springs (R, ATH) vs Colin Rea 🧤 (R, CHC)",
+        startTime: "2026-06-04T00:05:00Z",
+        gameMeta: "8:05 PM ET · Park -5% (stadium -1%, wx -4%) · Jeffrey Springs +0.71 overall · LHB +0.21 · RHB +0.61 (1.94 HR/9) · Colin Rea +1.02 overall · LHB +0.36 · RHB +1.29 (1.39 HR/9)",
+        parkPct: -5,
+        top3: ["Nick Kurtz", "Pete Crow-Armstrong", "Carlos Cortes"],
+        top3Detail: [{"name": "Nick Kurtz", "score": 78, "why": "#1 model score in this game · 0 HR, 1 near-HR, 100 mph EV · vs Rea · WPZ Favorite", "chip": "Rea", "rank": 1, "oddsShort": "+340"}, {"name": "Pete Crow-Armstrong", "score": 77, "why": "#2 model score in this game · 1 HR, 1 near-HR, 95 mph EV · vs Springs", "chip": "Springs", "rank": 2, "oddsShort": "+490"}, {"name": "Carlos Cortes", "score": 64, "why": "#3 model score in this game · 0 HR, 1 near-HR, 82 mph EV · vs Rea", "chip": "Rea", "rank": 3, "oddsShort": "+750"}],
+        rows: [
+            { name: "Pete Crow-Armstrong (L)", odds: "Listed +490 - Over 0.5 HR", score: 77, emojis: "💎", note: "1 HR, 1 near-HR, 94.9 mph EV. Air: FB 44%, pull-air 22%. · Springs LHB split +0.21, HR risk 0.71.", chips: ["vs Springs"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 44.4, pullAir: 22.2 },
+            { name: "Michael Busch (L)", odds: "Listed +630 - Over 0.5 HR", score: 62, emojis: "💎", note: "0 HR, 84.1 mph EV. Air: FB 50%. · Springs LHB split +0.21, HR risk 0.71.", chips: ["vs Springs"], formTrend: "cooling", contactRisk: true, fbPct: 50.0 },
+            { name: "Nick Kurtz (L)", odds: "Listed +340 - Over 0.5 HR", score: 78, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 99.7 mph EV. Air: FB 33%, pull-air 17%. · Rea LHB split +0.36, HR risk 1.02.", chips: ["vs Rea"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 16.7 },
+            { name: "Carlos Cortes (L)", odds: "Listed +750 - Over 0.5 HR", score: 64, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 81.8 mph EV. Air: FB 33%. · Rea LHB split +0.36, HR risk 1.02.", chips: ["vs Rea"], formTrend: "cooling", fbPct: 33.3 },
+        ],
+    },
+    {
+        title: "PIT @ HOU - Paul Skenes (R, PIT) vs Spencer Arrighetti (R, HOU)",
+        startTime: "2026-06-04T00:10:00Z",
+        gameMeta: "8:10 PM ET · Park +6% (stadium +6%, wx -1%) · Paul Skenes -0.70 overall · LHB -0.66 · RHB -0.34 (0.91 HR/9) · Spencer Arrighetti -0.64 overall · LHB -0.74 · RHB -0.27 (0.38 HR/9)",
+        parkPct: 6,
+        top3: ["Yordan Alvarez", "Brandon Lowe", "Oneil Cruz"],
+        top3Detail: [{"name": "Yordan Alvarez", "score": 87, "why": "#1 model score in this game · 2 HR, 3 near-HR, 95 mph EV · vs Skenes · heating L5 · high blast rate · WPZ Favorite", "chip": "Skenes", "rank": 1, "oddsShort": "+290"}, {"name": "Brandon Lowe", "score": 83, "why": "#2 model score in this game · 1 HR, 4 near-HR, 93 mph EV · vs Arrighetti · heating L5 · high blast rate · WPZ Favorite", "chip": "Arrighetti", "rank": 2, "oddsShort": "+390"}, {"name": "Oneil Cruz", "score": 81, "why": "#3 model score in this game · 1 HR, 2 near-HR, 97 mph EV · vs Arrighetti · heating L5", "chip": "Arrighetti", "rank": 3, "oddsShort": "+320"}],
+        rows: [
+            { name: "Yordan Alvarez (L)", odds: "Listed +290 - Over 0.5 HR", score: 87, emojis: "⭐ 🌕 💣", note: "2 HR, 3 near-HR, 94.8 mph EV. Air: FB 64%, pull-air 18%. · Skenes LHB split -0.66, HR risk -0.70.", chips: ["vs Skenes"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 63.6, pullAir: 18.2 },
+            { name: "Christian Walker (R)", odds: "Listed +490 - Over 0.5 HR", score: 79, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 88.9 mph EV. Air: FB 40%, pull-air 13%. · Skenes RHB split -0.34, HR risk -0.70.", chips: ["vs Skenes"], blast: "high", formTrend: "heating", fbPct: 40.0, pullAir: 13.3 },
+            { name: "Spencer Horwitz (L)", odds: "Listed +630 - Over 0.5 HR", score: 78, emojis: "⭐ 🌕 💣", note: "2 HR, 2 near-HR, 87.5 mph EV. Air: FB 42%, pull-air 21%. · Arrighetti LHB split -0.74, HR risk -0.64.", chips: ["vs Arrighetti"], blast: "high", formTrend: "heating", fbPct: 41.7, pullAir: 20.8 },
+            { name: "Brandon Lowe (L)", odds: "Listed +390 - Over 0.5 HR", score: 83, emojis: "⭐ 🌕 💣", note: "1 HR, 4 near-HR, 93.2 mph EV. Air: FB 50%, pull-air 43%. · Arrighetti LHB split -0.74, HR risk -0.64.", chips: ["vs Arrighetti"], blast: "high", formTrend: "heating", fbPct: 50.0, pullAir: 42.9 },
+            { name: "Oneil Cruz (L)", odds: "Listed +320 - Over 0.5 HR", score: 81, emojis: "💎", note: "1 HR, 2 near-HR, 97.2 mph EV. Air: FB 30%, pull-air 30%. · Arrighetti LHB split -0.74, HR risk -0.64.", chips: ["vs Arrighetti"], blast: "good", formTrend: "heating", contactRisk: true, fbPct: 30.0, pullAir: 30.0 },
+            { name: "Bryan Reynolds (S)", odds: "Listed +710 - Over 0.5 HR", score: 74, emojis: "💎", note: "1 HR, 1 near-HR, 91.6 mph EV. Air: FB 33%, pull-air 20%. · Arrighetti RHB split -0.27, HR risk -0.64.", chips: ["vs Arrighetti"], blast: "good", formTrend: "flat", fbPct: 33.3, pullAir: 20.0 },
+        ],
+    },
+    {
+        title: "COL @ LAA - Michael Lorenzen (R, COL) vs Walbert Urena (R, LAA)",
+        startTime: "2026-06-04T01:38:00Z",
+        gameMeta: "9:38 PM ET · Park +7% (stadium +9%, wx -2%) · Michael Lorenzen +0.69 overall · LHB +1.78 · RHB -0.30 (1.41 HR/9) · Walbert Urena -0.66 overall · LHB -0.71 · RHB -0.30 (0.60 HR/9)",
+        parkPct: 7,
+        top3: ["Mike Trout", "Wade Meckler", "Zach Neto"],
+        top3Detail: [{"name": "Mike Trout", "score": 84, "why": "#1 model score in this game · 2 HR, 4 near-HR, 90 mph EV · vs Lorenzen · heating L5 · high blast rate", "chip": "Lorenzen", "rank": 1, "oddsShort": "+310"}, {"name": "Wade Meckler", "score": 81, "why": "#2 model score in this game · 2 HR, 3 near-HR, 89 mph EV · vs Lorenzen · heating L5 · high blast rate", "chip": "Lorenzen", "rank": 2, "oddsShort": "+760"}, {"name": "Zach Neto", "score": 80, "why": "#3 model score in this game · 2 HR, 3 near-HR, 88 mph EV · vs Lorenzen · heating L5 · high blast rate", "chip": "Lorenzen", "rank": 3, "oddsShort": "+420"}],
+        rows: [
+            { name: "Wade Meckler (L)", odds: "Listed +760 - Over 0.5 HR", score: 81, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 88.9 mph EV. Air: FB 47%, pull-air 21%. · Lorenzen LHB split +1.78, HR risk 0.69.", chips: ["vs Lorenzen"], blast: "high", formTrend: "heating", fbPct: 47.4, pullAir: 21.1 },
+            { name: "Zach Neto (R)", odds: "Listed +420 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 87.7 mph EV. Air: FB 33%, pull-air 21%. · Lorenzen RHB split -0.30, HR risk 0.69.", chips: ["vs Lorenzen"], blast: "high", formTrend: "heating", fbPct: 33.3, pullAir: 20.8 },
+            { name: "Jo Adell (R)", odds: "Listed +410 - Over 0.5 HR", score: 79, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 88.7 mph EV. Air: FB 26%, pull-air 10%. · Lorenzen RHB split -0.30, HR risk 0.69.", chips: ["vs Lorenzen"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 26.3, pullAir: 10.5 },
+            { name: "Mike Trout (R)", odds: "Listed +310 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "2 HR, 4 near-HR, 89.6 mph EV. Air: FB 47%, pull-air 13%. · Lorenzen RHB split -0.30, HR risk 0.69.", chips: ["vs Lorenzen"], blast: "high", formTrend: "heating", fbPct: 46.7, pullAir: 13.3 },
+            { name: "Vaughn Grissom (R)", odds: "Listed +740 - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 3 near-HR, 92.5 mph EV. Air: FB 33%, pull-air 10%. · Lorenzen RHB split -0.30, HR risk 0.69.", chips: ["vs Lorenzen"], blast: "good", formTrend: "heating", fbPct: 33.3, pullAir: 9.5 },
+            { name: "Ezequiel Tovar (R)", odds: "Listed +820 - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 86.6 mph EV. Air: FB 42%, pull-air 8%. · Urena RHB split -0.30, HR risk -0.66.", chips: ["vs Urena"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 41.7, pullAir: 8.3 },
+            { name: "Willi Castro (S)", odds: "Listed +820 - Over 0.5 HR", score: 79, emojis: "💎", note: "1 HR, 2 near-HR, 94.7 mph EV. Air: FB 50%, pull-air 8%. · Urena RHB split -0.30, HR risk -0.66.", chips: ["vs Urena"], blast: "good", formTrend: "heating", contactRisk: true, fbPct: 50.0, pullAir: 8.3 },
+            { name: "Jake McCarthy (L)", odds: "Listed +1040 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 87.3 mph EV. Air: FB 50%, pull-air 29%. · Urena LHB split -0.71, HR risk -0.66.", chips: ["vs Urena"], blast: "high", formTrend: "heating", fbPct: 50.0, pullAir: 28.6 },
+            { name: "Hunter Goodman (R)", odds: "Listed +390 - Over 0.5 HR", score: 62, emojis: "💎", note: "0 HR, 85.7 mph EV. Air: FB 22%, pull-air 22%. · Urena RHB split -0.30, HR risk -0.66.", chips: ["vs Urena"], formTrend: "cooling", contactRisk: true, fbPct: 22.2, pullAir: 22.2 },
+        ],
+    },
+    {
+        title: "LAD @ ARI - Shohei Ohtani (R, LAD) vs Zac Gallen 🧤 (R, ARI)",
+        startTime: "2026-06-04T01:40:00Z",
+        gameMeta: "9:40 PM ET · Park -8% (stadium -8%, wx +0%) · Shohei Ohtani -0.81 overall · LHB -0.85 · RHB -0.43 (0.33 HR/9) · Zac Gallen +1.18 overall · LHB +0.90 · RHB +0.88 (1.64 HR/9)",
+        parkPct: -8,
+        top3: ["Shohei Ohtani", "Max Muncy", "Freddie Freeman"],
+        top3Detail: [{"name": "Shohei Ohtani", "score": 87, "why": "#1 model score in this game · 2 HR, 2 near-HR, 97 mph EV · vs Gallen · heating L5 · high blast rate", "chip": "Gallen", "rank": 1, "oddsShort": "+311"}, {"name": "Max Muncy", "score": 84, "why": "#2 model score in this game · 2 HR, 3 near-HR, 92 mph EV · vs Gallen · heating L5 · high blast rate", "chip": "Gallen", "rank": 2, "oddsShort": "+375"}, {"name": "Freddie Freeman", "score": 81, "why": "#3 model score in this game · 2 HR, 2 near-HR, 91 mph EV · vs Gallen · heating L5 · high blast rate", "chip": "Gallen", "rank": 3, "oddsShort": "+571"}],
+        rows: [
+            { name: "Ketel Marte (S)", odds: "Listed +506 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 87.4 mph EV. Air: FB 38%, pull-air 38%. · Ohtani RHB split -0.43, HR risk -0.81.", chips: ["vs Ohtani"], blast: "good", formTrend: "flat", fbPct: 37.5, pullAir: 37.5 },
+            { name: "Adrian Del Castillo (L)", odds: "Listed prop - Over 0.5 HR", score: 71, emojis: "💎", note: "1 HR, 1 near-HR, 89.1 mph EV. Air: FB 36%, pull-air 36%. · Ohtani LHB split -0.85, HR risk -0.81.", chips: ["vs Ohtani"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 36.4, pullAir: 36.4 },
+            { name: "Corbin Carroll (L)", odds: "Listed +570 - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 2 near-HR, 94.5 mph EV. Air: FB 44%. · Ohtani LHB split -0.85, HR risk -0.81.", chips: ["vs Ohtani"], blast: "good", formTrend: "flat", fbPct: 43.8 },
+            { name: "Nolan Arenado (R)", odds: "Listed +810 - Over 0.5 HR", score: 64, emojis: "💎", note: "0 HR, 1 near-HR, 83.6 mph EV. Air: FB 38%, pull-air 38%. · Ohtani RHB split -0.43, HR risk -0.81.", chips: ["vs Ohtani"], formTrend: "cooling", fbPct: 37.5, pullAir: 37.5 },
+            { name: "Will Smith (R)", odds: "Listed +575 - Over 0.5 HR", score: 74, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "1 HR, 2 near-HR, 89.7 mph EV. Air: FB 69%. · Gallen RHB split +0.88, HR risk 1.18.", chips: ["vs Gallen"], blast: "good", formTrend: "flat", fbPct: 69.2 },
+            { name: "Freddie Freeman (L)", odds: "Listed +571 - Over 0.5 HR", score: 81, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 2 near-HR, 90.6 mph EV. Air: FB 38%, pull-air 15%. · Gallen LHB split +0.90, HR risk 1.18.", chips: ["vs Gallen"], blast: "high", formTrend: "heating", fbPct: 38.5, pullAir: 15.4 },
+            { name: "Shohei Ohtani (L)", odds: "Listed +311 - Over 0.5 HR", score: 87, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 2 near-HR, 96.8 mph EV. Air: FB 46%, pull-air 27%. · Gallen LHB split +0.90, HR risk 1.18.", chips: ["vs Gallen"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 45.5, pullAir: 27.3 },
+            { name: "Max Muncy (L)", odds: "Listed +375 - Over 0.5 HR", score: 84, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 3 near-HR, 92.5 mph EV. Air: FB 30%, pull-air 40%. · Gallen LHB split +0.90, HR risk 1.18.", chips: ["vs Gallen"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 30.0, pullAir: 40.0 },
+            { name: "Andy Pages (R)", odds: "Listed +544 - Over 0.5 HR", score: 71, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 92.7 mph EV. Air: FB 27%, pull-air 18%. · Gallen RHB split +0.88, HR risk 1.18.", chips: ["vs Gallen"], blast: "good", formTrend: "flat", fbPct: 27.3, pullAir: 18.2 },
         ],
     },
 ];
@@ -3535,7 +3866,7 @@ const games = [
             updateBetTrackerBtnLabel();
 
             /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                const WORST_PICKZ_FAVORITE_NAMES = new Set([
                 "Brandon Lowe (L)",
                 "Coby Mayo (R)",
                 "Dillon Dingler (R)",
@@ -3857,6 +4188,37 @@ const games = [
                 pool.sort((a, b) => (a.gameNumber || 1) - (b.gameNumber || 1));
                 return pool[0];
             }
+            function firstPitchSortKeyForGame(game, scheduleGames) {
+                if (game && game.startTime) return game.startTime;
+                const abbrs = parseGameTeamAbbrs(game.title);
+                if (!abbrs) return "9999-12-31T99:99:99Z";
+                const matches = statsApiGamesMatchingAbbrs(scheduleGames, abbrs.awayAbbr, abbrs.homeAbbr);
+                if (!matches.length) return "9999-12-31T99:99:99Z";
+                matches.sort((a, b) => String(a.gameDate || "").localeCompare(String(b.gameDate || "")));
+                return matches[0].gameDate || "9999-12-31T99:99:99Z";
+            }
+            async function sortGamesByFirstPitch() {
+                if (!Array.isArray(games) || !games.length) return;
+                if (games.every((g) => g.startTime)) {
+                    games.sort((a, b) => String(a.startTime).localeCompare(String(b.startTime)));
+                    return;
+                }
+                const ymd = (getSheetDateMeta() || "").trim();
+                if (!ymd) return;
+                let scheduleGames = [];
+                try {
+                    scheduleGames = await mlbStatsScheduleGamesForDate(ymd);
+                } catch (err) {
+                    console.warn("Could not load MLB schedule for game sort", err);
+                    return;
+                }
+                games.sort(
+                    (a, b) =>
+                        firstPitchSortKeyForGame(a, scheduleGames).localeCompare(
+                            firstPitchSortKeyForGame(b, scheduleGames)
+                        )
+                );
+            }
             function sheetMatchupLineForTrackerEntry(e) {
                 const stored = (e.matchup || "").trim();
                 if (stored) return stored;
@@ -4072,8 +4434,136 @@ const games = [
                 }
                 return emojiBase;
             }
+            function pickSignalsHtml(row) {
+                const pills = [];
+                if (row.formTrend === "heating") {
+                    pills.push(
+                        '<span class="signal-pill signal-pill--hot" title="L5 power trending up">' +
+                            '<span class="signal-pill__dot" aria-hidden="true"></span><span class="signal-pill__text">Hot</span></span>'
+                    );
+                } else if (row.formTrend === "cooling") {
+                    pills.push(
+                        '<span class="signal-pill signal-pill--cold" title="L5 power cooling off">' +
+                            '<span class="signal-pill__dot" aria-hidden="true"></span><span class="signal-pill__text">Cool</span></span>'
+                    );
+                }
+                if (row.contactRisk) {
+                    pills.push(
+                        '<span class="signal-pill signal-pill--whiff" title="High whiff or K% — swing-and-miss risk">' +
+                            '<span class="signal-pill__dot" aria-hidden="true"></span><span class="signal-pill__text">Whiff</span></span>'
+                    );
+                }
+                if (!pills.length) return "";
+                return `<div class="pick-signals">${pills.join("")}</div>`;
+            }
+            function scoreHeatClass(score, gameRows) {
+                const scores = gameRows.map((r) => Number(r.score) || 0);
+                const max = Math.max(...scores);
+                const min = Math.min(...scores);
+                if (max === min) return "pick-row--heat-strong";
+                const t = (Number(score) - min) / (max - min);
+                if (t >= 0.66) return "pick-row--heat-elite";
+                if (t >= 0.33) return "pick-row--heat-strong";
+                if (t >= 0.15) return "pick-row--heat-mid";
+                return "pick-row--heat-low";
+            }
+            function escHtml(s) {
+                return String(s ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;");
+            }
+            function plainRowName(name) {
+                return String(name || "").replace(/\s*\([LRS]\)\s*$/i, "").trim();
+            }
+            function resolveTop3Cards(game) {
+                if (Array.isArray(game.top3Detail) && game.top3Detail.length) return game.top3Detail;
+                const names = Array.isArray(game.top3) ? game.top3 : [];
+                return names.map((name, i) => {
+                    const row = (game.rows || []).find((r) => plainRowName(r.name) === name);
+                    return {
+                        name,
+                        rank: i + 1,
+                        score: row ? row.score : "—",
+                        why: row ? (row.note || "Top model score in this game") : "Top model score in this game",
+                        chip: row && row.chips && row.chips[0] ? row.chips[0].replace(/^vs /, "") : "",
+                        oddsShort: "",
+                    };
+                });
+            }
+            function resolveSleeperCard(game) {
+                if (game.sleeperDetail) return game.sleeperDetail;
+                if (!game.sleeper) return null;
+                const row = (game.rows || []).find((r) => plainRowName(r.name) === game.sleeper);
+                return {
+                    name: game.sleeper,
+                    score: row ? row.score : "—",
+                    why: row ? row.note || "Strong L5 power vs top-3 ranks on the sheet" : "Strong L5 power vs top-3 ranks on the sheet",
+                    chip: row && row.chips && row.chips[0] ? row.chips[0].replace(/^vs /, "") : "",
+                    oddsShort: "",
+                };
+            }
+            function gamePickCardHtml(card, variant) {
+                const rank =
+                    card.rank != null
+                        ? `<span class="game-pick-card__rank">${card.rank}</span>`
+                        : '<span class="game-pick-card__rank" title="Sleeper pick">SL</span>';
+                const chip = card.chip ? `<span class="game-pick-card__chip">vs ${escHtml(card.chip)}</span>` : "";
+                const odds = card.oddsShort
+                    ? `<span class="game-pick-card__odds">Listed ${escHtml(card.oddsShort)}</span>`
+                    : "";
+                return `<article class="game-pick-card game-pick-card--${variant}">${rank}<div class="game-pick-card__main"><div class="game-pick-card__head"><h4 class="game-pick-card__name">${escHtml(card.name)}</h4><span class="game-pick-card__score">${escHtml(card.score)}</span></div>${chip}<p class="game-pick-card__why">${escHtml(card.why)}</p>${odds}</div></article>`;
+            }
+            function gameTopStripHtml(game) {
+                const topCards = resolveTop3Cards(game);
+                if (!topCards.length) return "";
+                let html =
+                    '<div class="game-picks-panel"><span class="game-picks-panel__label">Top 3 this game</span><div class="game-pick-cards">' +
+                    topCards.map((c) => gamePickCardHtml(c, "top")).join("") +
+                    "</div>";
+                const sleeper = resolveSleeperCard(game);
+                if (sleeper) {
+                    html +=
+                        '<span class="game-picks-panel__label game-picks-panel__label--sleeper">Sleeper</span>' +
+                        gamePickCardHtml(sleeper, "sleeper");
+                }
+                return html + "</div>";
+            }
+            function renderPickRow(game, gi, row, ri) {
+                const parkPct = game.parkPct != null ? game.parkPct : parkHrPctFromDescription(game.description);
+                const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0";
+                const band = bandClass(row.score);
+                const heat = scoreHeatClass(row.score, game.rows);
+                const confidenceTier = confidenceTierText(row.score);
+                const blastTier = (row.blast || "").toLowerCase();
+                const tracked = isTrackedSheetRow(gi, ri);
+                const savedClass = tracked ? " is-saved" : "";
+                const te = tracked ? trackerRowForPicker(gi, ri) : null;
+                const betRes = te && te.result ? te.result : null;
+                const betOutcomeClass = betRes ? " bet-" + betRes : "";
+                const fav = isWorstPickzFavoriteRow(row);
+                const favClass = fav ? " pick-row--worst-pickz-fav" : "";
+                const emojiRowFinal = effectiveEmojiTagsForRow(row, game);
+                const enc = encodeURIComponent(row.name);
+                const plainName = row.name.replace(/\s*\([LRS]\)\s*$/i, "").trim();
+                const inTop3 = Array.isArray(game.top3) && game.top3.includes(plainName);
+                const top3Mark = inTop3 ? '<span class="game-top-pick" title="Top 3 in this game">★</span> ' : "";
+                return `<div class="pick-row ${band} ${heat}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ""}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div class="pick-col-name"><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${top3Mark}${row.name}</button></div>${pickSignalsHtml(row)}<div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Confidence</span><strong>${confidenceTier}</strong><small>Score ${row.score}</small></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`;
+            }
             function renderGames() {
-                grid.innerHTML = games.map((game, gi) => `<details class="game-card" open id="game-${gi}"><summary class="game-header"><h3>${formatGameTitleHtml(game.title)}</h3><p>${game.description}</p></summary><div class="pick-list">${game.rows.map((row, ri) => { const parkPct = parkHrPctFromDescription(game.description); const dataLongshot = isLongshotListedHrOdds(row.odds) ? "1" : "0"; const band = bandClass(row.score); const confidenceTier = confidenceTierText(row.score); const blastTier = (row.blast || "").toLowerCase(); const tracked = isTrackedSheetRow(gi, ri); const savedClass = tracked ? " is-saved" : ""; const te = tracked ? trackerRowForPicker(gi, ri) : null; const betRes = te && te.result ? te.result : null; const betOutcomeClass = betRes ? " bet-" + betRes : ""; const fav = isWorstPickzFavoriteRow(row); const favClass = fav ? " pick-row--worst-pickz-fav" : ""; const emojiRowFinal = effectiveEmojiTagsForRow(row, game); const enc = encodeURIComponent(row.name); return `<div class="pick-row ${band}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ''}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${row.name}</button></div><div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Confidence</span><strong>${confidenceTier}</strong><small>Score ${row.score}</small></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`; }).join("")}</div></details>`).join("");
+                grid.innerHTML = games
+                    .map((game, gi) => {
+                        const metaLine = game.gameMeta
+                            ? `<p class="game-meta-line">${game.gameMeta}</p>`
+                            : "";
+                        const strip = gameTopStripHtml(game);
+                        const picks = game.rows.map((row, ri) => renderPickRow(game, gi, row, ri)).join("");
+                        const descLine = game.description ? `<p>${game.description}</p>` : "";
+                        const parkAttr = game.parkPct != null ? ` data-park-pct="${game.parkPct}"` : "";
+                        return `<details class="game-card" open id="game-${gi}"${parkAttr}><summary class="game-header"><h3>${formatGameTitleHtml(game.title)}</h3>${metaLine}${descLine}</summary>${strip}<div class="pick-list">${picks}</div></details>`;
+                    })
+                    .join("");
             }
             function setGameCardCollapsed(card, collapsed, markUser) {
                 if (!card) return;
@@ -4124,7 +4614,23 @@ const games = [
                 });
             }
             const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-            function parkStars(card) { if (!card) return 1; const t = card.querySelector(".game-header p")?.textContent || ""; const m = t.match(/([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i); let p = 0; if (m) p = parseInt(m[1] || m[2], 10); if (Number.isNaN(p)) p = 0; if (p >= 15) return 5; if (p >= 5) return 4; if (p >= -3) return 3; if (p >= -12) return 2; return 1; }
+            function parkStars(card) {
+                if (!card) return 1;
+                let p = 0;
+                if (card.dataset.parkPct !== undefined && card.dataset.parkPct !== "") {
+                    p = parseInt(card.dataset.parkPct, 10);
+                } else {
+                    const t = card.querySelector(".game-header p")?.textContent || "";
+                    const m = t.match(/Park\s*([+-]?\d+)%|([+-]?\d+)% HR row|HR row[^+]*?([+-]?\d+)%/i);
+                    if (m) p = parseInt(m[1] || m[2] || m[3], 10);
+                }
+                if (Number.isNaN(p)) p = 0;
+                if (p >= 15) return 5;
+                if (p >= 5) return 4;
+                if (p >= -3) return 3;
+                if (p >= -12) return 2;
+                return 1;
+            }
             function powerStars(score, emojiText, noteText) { let stars = 1; if (score >= 84) stars += 2; else if (score >= 76) stars += 1; if (emojiText.includes("🚀")) stars += 1; if (emojiText.includes("🌕")) stars += 1; if (emojiText.includes("💣")) stars += 1; if (/(longshot|price-based)/i.test(noteText) && !/[🚀🌕💣]/.test(emojiText)) stars -= 1; return clamp(stars, 1, 5); }
             function attackStars(score, emojiText, noteText) { let stars = 1; if (emojiText.includes("⚾")) stars += 1; if (/(best|elite|strong|clean|leak|lane|fit|ceiling)/i.test(noteText)) stars += 1; if (score >= 82) stars += 1; if (/(suppressive|cold|drag)/i.test(noteText)) stars -= 1; return clamp(stars, 1, 5); }
             function metricRow(label, metricClass, value) { return `<div class="player-rpg-row"><span class="player-rpg-label">${label}</span><span class="star-meter ${metricClass}" style="--rating:${value}"><span class="star-base">★★★★★</span><span class="star-fill">★★★★★</span></span></div>`; }
@@ -4413,11 +4919,14 @@ const games = [
                     : filterHitNamesToActivePlayers(staticHitNames);
                 renderBattersHitSummary(finalHitNames, battersHitStatusText(finalHitNames, activeBatters));
             }
-            renderGames();
-            decorateGameCardToggles();
-            enhanceRows();
-            updateBattersWonRecap();
-            void hydratePickRowHrResultsFromMlb();
+            void (async () => {
+                await sortGamesByFirstPitch();
+                renderGames();
+                decorateGameCardToggles();
+                enhanceRows();
+                updateBattersWonRecap();
+                void hydratePickRowHrResultsFromMlb();
+            })();
 
             function buildFlatProps() {
                 const flat = [];

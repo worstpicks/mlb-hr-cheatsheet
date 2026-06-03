@@ -15,13 +15,23 @@ ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview" / "index.html"
 MANIFEST_PATH = ROOT / "preview" / "sheets-manifest.json"
 ARCHIVE_PREVIOUS = ROOT / "preview" / "archive" / "2026-06-02.html"
-GAMES_BLOCK = (ROOT / "_games-0603.txt").read_text(encoding="utf-8-sig").strip()
-
 SHEET_DATE = "2026-06-03"
 
 spec = importlib.util.spec_from_file_location("build0603", ROOT / "build-sheet-2026-06-03.py")
 build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
+
+from game_row_enrich import (
+    enrich_games_list,
+    emit_games_js,
+    game_key_from_title,
+    load_weather_lookup,
+    lookup_weather_for_game,
+    resolve_park_context,
+)
+from note_compact import compact_goblin_leg, compact_note, compact_row_line
+
+GAMES_BLOCK = emit_games_js(enrich_games_list(build.games, SHEET_DATE))
 
 TOTAL_GAMES = len(build.games)
 TOTAL_ROWS = sum(len(g["rows"]) for g in build.games)
@@ -63,12 +73,12 @@ def note_barrel(note: str) -> float:
 
 def collect_rows():
     rows = []
-    weather_lookup = {w["game"]: w for w in load_weather_rows()}
+    weather_lookup = load_weather_lookup(SHEET_DATE)
     for g in build.games:
-        game_key = g["title"].split(" - ")[0]
-        park_m = re.search(r"HR environment\s*([+-]?\d+)%", g["description"])
-        park_from_desc = int(park_m.group(1)) if park_m else 0
-        park_pct = weather_lookup.get(game_key, {}).get("hr_pct", park_from_desc)
+        game_key = game_key_from_title(g["title"])
+        weather = lookup_weather_for_game(g["title"], weather_lookup)
+        park_ctx = resolve_park_context(g, weather)
+        park_pct = park_ctx["park_pct"] if park_ctx["park_pct"] is not None else 0
         for r in g["rows"]:
             chip = r["chips"][0].replace("vs ", "")
             hand = r["name"].split("(")[-1].rstrip(")")
@@ -90,7 +100,7 @@ def collect_rows():
                     "odds_value": parse_odds_value(r["odds"]),
                     "score": r["score"],
                     "chip": chip,
-                    "note": r["note"],
+                    "note": compact_note(r["note"]),
                     "hr": note_hr_count(r["note"]),
                     "near": note_near_count(r["note"]),
                     "ev": note_ev(r["note"]),
@@ -391,13 +401,8 @@ assert_game_cap("Top 5 Weather Heavy HR Plays", weather5)
 
 def weather_micro_note(row):
     w = weather_by_game.get(row["game_key"])
-    weather = w["hr_weather"] if w else "n/a"
-    stadium = w["hr_stadium"] if w else "n/a"
     net = w["hr_pct_text"] if w else f"{row['park_pct']:+d}%"
-    return (
-        f'{row["game_key"]} vs {row["chip"]} • carry: weather {weather}, '
-        f"park {stadium}, net {net}; split {row['split']:+.2f}"
-    )
+    return f'vs {row["chip"]} · net {net} · split {row["split"]:+.2f}'
 
 THREE_LEG_HR = [f"{r['name_plain']} - Over 0.5 homerun" for r in top3]
 FAV_THREE_LEG = [f"{r['name_plain']} - Over 0.5 homerun" for r in fav3]
@@ -413,7 +418,6 @@ FAV_SET = (
 
 STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width straight-of-day-card">
                     <h3>Worst Pickz Straights of the Day</h3>
-                    <p class="model-note summary-note">Best tail/fade edges from current CSVs: power form + pitcher split + run environment.</p>
                     <div class="straight-picks-grid">
                         <div class="straight-pick-hero">
                             <span class="straight-pick-tag">Over 0.5 HR Straight</span>
@@ -421,10 +425,7 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                                 <strong class="straight-pick-name">{straight_o05['name_plain']} &mdash; vs {straight_o05['chip']}</strong>
                                 <span class="straight-pick-meta">{straight_o05['odds']} &middot; Score {straight_o05['score']} &middot; {straight_o05['game_key']}</span>
                             </div>
-                            <ul class="straight-pick-factors">
-                                <li><strong>Primary edge</strong><small>Opposing split {straight_o05['split']:+.2f} with park impact {straight_o05['park_pct']}%.</small></li>
-                                <li><strong>Form check</strong><small>{straight_o05['note']}</small></li>
-                            </ul>
+                            <p class="straight-pick-line"><small>{compact_row_line(straight_o05)}</small></p>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add O0.5 Straight to Gambly</button>
                             </div>
@@ -435,10 +436,7 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                                 <strong class="straight-pick-name">{straight_o15['name_plain']} &mdash; vs {straight_o15['chip']}</strong>
                                 <span class="straight-pick-meta">{straight_o15['odds']} &middot; Score {straight_o15['score']} &middot; {straight_o15['game_key']}</span>
                             </div>
-                            <ul class="straight-pick-factors">
-                                <li><strong>Primary edge</strong><small>Needs multi-HR upside: split {straight_o15['split']:+.2f}, park {straight_o15['park_pct']}%.</small></li>
-                                <li><strong>Form check</strong><small>{straight_o15['note']}</small></li>
-                            </ul>
+                            <p class="straight-pick-line"><small>{compact_row_line(straight_o15)}</small></p>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_O15_DAY])}'>Add O1.5 Straight to Gambly</button>
                             </div>
@@ -452,9 +450,9 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>{top3[0]['name_plain']} HR</strong><small>{top3[0]['note']} Split {top3[0]['split']:+.2f}; park {top3[0]['park_pct']}%.</small></li>
-                                <li><strong>{top3[1]['name_plain']} HR</strong><small>{top3[1]['note']} Split {top3[1]['split']:+.2f}; park {top3[1]['park_pct']}%.</small></li>
-                                <li><strong>{top3[2]['name_plain']} HR</strong><small>{top3[2]['note']} Split {top3[2]['split']:+.2f}; park {top3[2]['park_pct']}%.</small></li>
+                                <li><strong>{top3[0]['name_plain']} HR</strong><small>{compact_goblin_leg(top3[0])}</small></li>
+                                <li><strong>{top3[1]['name_plain']} HR</strong><small>{compact_goblin_leg(top3[1])}</small></li>
+                                <li><strong>{top3[2]['name_plain']} HR</strong><small>{compact_goblin_leg(top3[2])}</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(THREE_LEG_HR)}'>Add 3 Leg HR to Gambly</button></div>
                         </div>
@@ -469,17 +467,17 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>{hits_line_a}</strong><small>Best recent hit form plus favorable opposing split/park context.</small></li>
-                                <li><strong>{hits_line_b}</strong><small>Secondary hit legs with stable contact profile and non-negative matchup lane.</small></li>
+                                <li><strong>{hits_line_a}</strong></li>
+                                <li><strong>{hits_line_b}</strong></li>
                             </ul>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([f"{r['name_plain']} - Over 0.5 hits" for r in hits_parlay_legs])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>{fav3[0]['name_plain']} HR &#11088; &#127765;</strong><small>{fav3[0]['note']}</small></li>
-                                <li><strong>{fav3[1]['name_plain']} HR &#11088; &#127765;</strong><small>{fav3[1]['note']}</small></li>
-                                <li><strong>{fav3[2]['name_plain']} HR &#11088; &#127765;</strong><small>{fav3[2]['note']}</small></li>
+                                <li><strong>{fav3[0]['name_plain']} HR &#11088; &#127765;</strong><small>{compact_goblin_leg(fav3[0])}</small></li>
+                                <li><strong>{fav3[1]['name_plain']} HR &#11088; &#127765;</strong><small>{compact_goblin_leg(fav3[1])}</small></li>
+                                <li><strong>{fav3[2]['name_plain']} HR &#11088; &#127765;</strong><small>{compact_goblin_leg(fav3[2])}</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(FAV_THREE_LEG)}'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>
@@ -494,7 +492,6 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
 
 TOP_CARD = """                <div class="summary-card full-width top-five-card">
                     <h3>Top 5 HR Tickets (Attack + Weather + HR Risk)</h3>
-                    <p class="model-note summary-note">Ranks combine top pitchers to attack, weather/park carry, opposing split risk, and batter damage form.</p>
                     <div class="top-five-list">
 """ + "\n".join(
     f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {r["park_pct"]}%</small></span><strong>{r["score"]}</strong></div>'
@@ -516,7 +513,7 @@ LONGSHOT_INNER = "\n".join(
     for r in longshots
 )
 FADES_INNER = "\n".join(
-    f'                        <div class="summary-item"><span>{w["game"]} <small>{w["venue"]} lower HR carry</small></span><strong>{w["hr_pct_text"]}</strong></div>'
+    f'                        <div class="summary-item"><span>{w["game"]} <small>{w["venue"]}</small></span><strong>{w["hr_pct_text"]}</strong></div>'
     for w in weather_fades
 )
 
@@ -650,12 +647,17 @@ def sync_root_index():
 
 
 def main():
+    import sys
+
     ARCHIVE_PREVIOUS.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(PREVIEW, ARCHIVE_PREVIOUS)
     print("archived current preview to", ARCHIVE_PREVIOUS.relative_to(ROOT))
     manifest = update_manifest()
     patch_preview(manifest)
-    sync_root_index()
+    if "--sync-root" in sys.argv:
+        sync_root_index()
+    else:
+        print("preview only (pass --sync-root to copy to index.html)")
 
 
 if __name__ == "__main__":

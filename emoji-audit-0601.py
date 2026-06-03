@@ -1,11 +1,21 @@
 #!/usr/bin/env python3
-"""Strict emoji audit for June 1 sheet."""
+"""Strict emoji audit for the active preview sheet date."""
 import importlib.util
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location("b", ROOT / "build-sheet-2026-06-02.py")
+preview = (ROOT / "preview" / "index.html").read_text(encoding="utf-8")
+date_m = re.search(r'<meta name="sheet-date" content="([^"]+)">', preview)
+if not date_m:
+    raise SystemExit("Could not find preview sheet-date meta")
+
+sheet_date = date_m.group(1)
+build_path = ROOT / f"build-sheet-{sheet_date}.py"
+if not build_path.exists():
+    raise SystemExit(f"Missing build file for active sheet date: {build_path.name}")
+
+spec = importlib.util.spec_from_file_location("b", build_path)
 b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 

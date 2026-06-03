@@ -31,8 +31,8 @@ top_tickets_html = top_tickets_m.group(1) if top_tickets_m else ""
 weather_heavy_html = weather_heavy_m.group(1) if weather_heavy_m else ""
 
 checks = [
-    ("Sheet date meta", 'content="2026-06-02"' in t),
-    ("June 2 header", "Tuesday, June 2, 2026 — Worst Pickz HR cheat sheet" in t),
+    ("Sheet date meta", 'content="2026-06-03"' in t),
+    ("June 3 header", "Wednesday, June 3, 2026 — Worst Pickz HR cheat sheet" in t),
     ("Straights section", "Worst Pickz Straights of the Day" in t),
     ("Goblin section", "Goblin's Insight" in t),
     ("Top tickets section", "Top 5 HR Tickets (Attack + Weather + HR Risk)" in t),

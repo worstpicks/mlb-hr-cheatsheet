@@ -7,6 +7,8 @@ alwaysApply: true
 
 **Golden rule:** Always use the **newest, freshest PropFinder CSV exports** from Downloads for the **current slate date**. Never copy yesterday's probables, `GAME_META`, straights, summary copy, or `data/` matchup files onto today's sheet.
 
+For every new slate request, the first build action must be `python import-sheet-csvs.py --date YYYY-MM-DD` using the requested slate date. If the importer finds matching Downloads files, use those imported files as source of truth even if older same-date files already exist in `data/`.
+
 When building, patching, auditing, or double-checking **any** daily MLB HR cheat sheet in this repo, **start by importing that slate's CSV exports** from Downloads. Do not skip this step.
 
 ## Step 0 — Import slate CSVs (required)

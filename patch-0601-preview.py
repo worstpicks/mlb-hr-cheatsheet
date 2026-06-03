@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Patch preview sheet to 2026-06-02. Does not commit or push."""
+"""Patch preview sheet to 2026-06-03. Does not commit or push."""
 from __future__ import annotations
 
 import csv
@@ -14,12 +14,12 @@ from sheet_data import load_pitcher_risk, resolve_pitcher
 ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview" / "index.html"
 MANIFEST_PATH = ROOT / "preview" / "sheets-manifest.json"
-ARCHIVE_0601 = ROOT / "preview" / "archive" / "2026-06-01.html"
-GAMES_BLOCK = (ROOT / "_games-0602.txt").read_text(encoding="utf-8-sig").strip()
+ARCHIVE_PREVIOUS = ROOT / "preview" / "archive" / "2026-06-02.html"
+GAMES_BLOCK = (ROOT / "_games-0603.txt").read_text(encoding="utf-8-sig").strip()
 
-SHEET_DATE = "2026-06-02"
+SHEET_DATE = "2026-06-03"
 
-spec = importlib.util.spec_from_file_location("build0602", ROOT / "build-sheet-2026-06-02.py")
+spec = importlib.util.spec_from_file_location("build0603", ROOT / "build-sheet-2026-06-03.py")
 build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
@@ -404,7 +404,7 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
 
 GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-card">
                     <h3>Goblin's Insight</h3>
-                    <p class="model-note summary-note">Neutral slate view: strongest tail reasons first; fade risk is the opposing split/park profile shown in each bullet.</p>
+                    <p class="model-note summary-note">Criteria: 3 Leg = attack/split rank excluding straight legs; 2 Leg = today's O0.5 + O1.5 straight picks; Favorite 3 Leg = ⭐ rows with 🌕 upside; Hits = hit-form rank plus non-negative matchup lane.</p>
                     <div class="best-bets-grid">
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
@@ -569,7 +569,7 @@ def patch_preview(manifest):
     )
     text = re.sub(
         r"<p>(?:Friday|Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday), \w+ \d+, 2026 — Worst Pickz HR cheat sheet",
-        "<p>Tuesday, June 2, 2026 — Worst Pickz HR cheat sheet",
+        "<p>Wednesday, June 3, 2026 — Worst Pickz HR cheat sheet",
         text,
         count=1,
     )
@@ -607,9 +607,9 @@ def sync_root_index():
 
 
 def main():
-    ARCHIVE_0601.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(PREVIEW, ARCHIVE_0601)
-    print("archived current preview to", ARCHIVE_0601.relative_to(ROOT))
+    ARCHIVE_PREVIOUS.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(PREVIEW, ARCHIVE_PREVIOUS)
+    print("archived current preview to", ARCHIVE_PREVIOUS.relative_to(ROOT))
     manifest = update_manifest()
     patch_preview(manifest)
     sync_root_index()

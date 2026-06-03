@@ -153,20 +153,64 @@ listed_rows = [r for r in rows if r["odds_value"] is not None]
 if not listed_rows:
     listed_rows = rows
 
-# Guard rails for "best pick" quality: avoid low-score outliers.
-straight_pool = [r for r in listed_rows if r["score"] >= 88 and r["hr"] >= 1 and r["split"] >= -0.10]
-if not straight_pool:
-    straight_pool = listed_rows
+# O0.5 straight: prioritize attackable pitcher lanes plus park/weather support,
+# not just the highest raw batter-form score.
+def straight_attack_rank(row: dict) -> float:
+    return (
+        row["score"] * 0.25
+        + max(row["risk"], 0.0) * 12.0
+        + max(row["split"], 0.0) * 10.0
+        + row["park_pct"] * 0.65
+        + row["hr"] * 3.0
+        + row["near"] * 1.4
+        + max(row["ev"] - 90.0, 0.0) * 0.45
+    )
 
-straight_o05 = straight_pool[0]
-o15_pool = [
+
+# June 3 slate: Wade on O1.5 (multi-HR + attack lane); Curtis Mead off straight card.
+STRAIGHT_O15_BLOCKLIST = {"Curtis Mead (R)"}
+STRAIGHT_O05_BLOCKLIST = {"Curtis Mead (R)"}
+
+def multi_hr_rank(row: dict) -> float:
+    """O1.5 straight rank: true multi-HR profile, not just highest raw HR score."""
+    return (
+        row["hr"] * 5.0
+        + row["near"] * 2.0
+        + max(row["ev"] - 90.0, 0.0) * 0.8
+        + row["score"] * 0.25
+        + row["split"] * 8.0
+        + row["risk"] * 5.0
+        + row["park_pct"] * 0.40
+    )
+
+o15_candidates = [
     r
-    for r in straight_pool
-    if r["name"] != straight_o05["name"] and r["hr"] >= 2 and r["score"] >= 85 and r["split"] >= -0.05
+    for r in listed_rows
+    if r["name"] not in STRAIGHT_O15_BLOCKLIST
+    and r["hr"] >= 2
+    and r["near"] >= 2
+    and r["score"] >= 78
+    and r["split"] >= 0.0
+    and (r["risk"] >= 0.25 or r["park_pct"] >= 3 or r["split"] >= 0.75)
 ]
-if not o15_pool:
-    o15_pool = [r for r in straight_pool if r["name"] != straight_o05["name"] and r["score"] >= 90]
-straight_o15 = o15_pool[0] if o15_pool else (straight_pool[1] if len(straight_pool) > 1 else straight_pool[0])
+o15_candidates.sort(key=multi_hr_rank, reverse=True)
+wade_o15 = next((r for r in o15_candidates if r["name_plain"] == "Wade Meckler"), None)
+straight_o15 = wade_o15 or (o15_candidates[0] if o15_candidates else listed_rows[0])
+
+straight_pool = [
+    r
+    for r in listed_rows
+    if r["name"] not in STRAIGHT_O05_BLOCKLIST
+    and r["name"] != straight_o15["name"]
+    and r["score"] >= 72
+    and r["split"] >= 0.0
+    and (r["risk"] >= 0.50 or r["park_pct"] >= 3 or r["split"] >= 0.75)
+    and (r["hr"] >= 1 or r["near"] >= 2 or r["ev"] >= 94)
+]
+straight_pool.sort(key=straight_attack_rank, reverse=True)
+if not straight_pool:
+    straight_pool = [r for r in listed_rows if r["name"] != straight_o15["name"]]
+straight_o05 = straight_pool[0] if straight_pool else straight_o15
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 

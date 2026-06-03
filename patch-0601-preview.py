@@ -448,7 +448,6 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
 
 GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-card">
                     <h3>Goblin's Insight</h3>
-                    <p class="model-note summary-note">Criteria: 3 Leg = attack/split rank excluding straight legs; 2 Leg = today's O0.5 + O1.5 straight picks; Favorite 3 Leg = ⭐ rows with 🌕 upside; Hits = hit-form rank plus non-negative matchup lane.</p>
                     <div class="best-bets-grid">
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>

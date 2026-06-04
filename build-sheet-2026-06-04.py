@@ -35,6 +35,7 @@ PLAYER_TEAMS = {
     "Bryce Eldridge (L)": "SF",
     "Bryson Stott (L)": "PHI",
     "Charles McAdoo (R)": "TOR",
+    "Christian Yelich (L)": "MIL",
     "Coby Mayo (R)": "BAL",
     "Colby Thomas (R)": "ATH",
     "Colton Cowser (L)": "BAL",
@@ -210,6 +211,7 @@ games = [
         "rows": [
             row("Jake Bauers", "L", "+470", 79, "💎", ["vs Houser"], """1 HR, 1 near-HR, 97.3 mph EV. Houser LHB split +0.11, HR risk -0.11. pitcher risk below avg (-0.11).""", blast="good"),
             row("Jackson Chourio", "R", "+570", 77, "💎", ["vs Houser"], """0 HR, 3 near-HR, 94.6 mph EV. Houser RHB split -0.48, HR risk -0.11. tough split lane (-0.48); pitcher risk below avg (-0.11).""", blast="good"),
+            row("Christian Yelich", "L", "+526", 74, "💎", ["vs Houser"], """0 HR, 98.4 mph EV. Houser LHB split +0.11, HR risk -0.11. pitcher risk below avg (-0.11); limited recent HR events.""", blast="good"),
             row("Garrett Mitchell", "L", "+590", 72, "💎", ["vs Houser"], """0 HR, 96.1 mph EV. Houser LHB split +0.11, HR risk -0.11. pitcher risk below avg (-0.11); limited recent HR events.""", blast="good"),
             row("Drew Gilbert", "L", "+920", 78, "💎", ["vs Crow"], """1 HR, 1 near-HR, 95.7 mph EV. Crow LHB split -0.38, HR risk -0.17. slight split headwind (-0.38); pitcher risk below avg (-0.17).""", blast="good"),
             row("Bryce Eldridge", "L", "+500", 72, "💎", ["vs Crow"], """0 HR, 1 near-HR, 93.6 mph EV. Crow LHB split -0.38, HR risk -0.17. slight split headwind (-0.38); pitcher risk below avg (-0.17).""", blast="good"),

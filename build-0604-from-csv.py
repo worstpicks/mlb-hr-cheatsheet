@@ -37,6 +37,7 @@ RAW_PROPS = [
     "Coby Mayo",
     "Jake Bauers",
     "Jackson Chourio",
+    "Christian Yelich",
     "Garrett Mitchell",
     "Drew Gilbert",
     "Bryce Eldridge",

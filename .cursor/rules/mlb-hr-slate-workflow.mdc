@@ -5,7 +5,7 @@ alwaysApply: true
 
 # MLB HR cheat sheet — slate workflow (always do this)
 
-**Golden rule:** Always use the **newest, freshest PropFinder CSV exports** from Downloads for the **current slate date**. Never copy yesterday's probables, `GAME_META`, straights, summary copy, or `data/` matchup files onto today's sheet.
+**Golden rule:** Always use the **newest, freshest PropFinder CSV exports** from Downloads for the **current slate date**. Re-run `import-sheet-csvs.py` before every build/patch/push — never ship a slate from stale `data/` files or yesterday's sheet. Never copy prior-day probables, `GAME_META`, straights, summary copy, or matchup CSVs onto today's sheet.
 
 For every new slate request, the first build action must be `python import-sheet-csvs.py --date YYYY-MM-DD` using the requested slate date. If the importer finds matching Downloads files, use those imported files as source of truth even if older same-date files already exist in `data/`.
 
@@ -119,8 +119,8 @@ In `patch-YYYY-MM-DD-preview.py`:
 
 | Leg | Pick from |
 |-----|-----------|
-| **O0.5 HR** | Top current-slate prop: highest score + form + platoon-positive split vs **that day's** opposing SP |
-| **O1.5 HR** | Best multi-HR bat (3+ HR in note) with positive split; **different player/game than O0.5 when possible** |
+| **O0.5 HR** | Best attack/weather straight: strong batter form **plus** positive split, attackable opposing pitcher, and park/weather support when available; do not default to highest raw score if pitcher/weather lane is weaker |
+| **O1.5 HR** | Best true multi-HR profile, not just the next-highest HR score: 2+ recent HR, multiple near-HR, loud EV, positive split, no harsh park/weather drag, and at least one of pitcher HR risk / strong split / park support; **different player/game than O0.5 when possible** |
 
 Both picks must:
 

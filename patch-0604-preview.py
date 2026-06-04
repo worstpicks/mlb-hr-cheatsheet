@@ -228,6 +228,33 @@ def multi_hr_rank(row: dict) -> float:
         + row["park_pct"] * 0.40
     )
 
+def straight_o05_pool(
+    candidates: list[dict],
+    *,
+    exclude_name: str | None = None,
+    exclude_game: str | None = None,
+    strict: bool = True,
+) -> list[dict]:
+    pool = [
+        r
+        for r in candidates
+        if r["name"] not in STRAIGHT_O05_BLOCKLIST
+        and (exclude_name is None or r["name"] != exclude_name)
+        and (exclude_game is None or r["game_key"] != exclude_game)
+    ]
+    if strict:
+        pool = [
+            r
+            for r in pool
+            if r["score"] >= 72
+            and r["split"] >= 0.0
+            and (r["risk"] >= 0.50 or r["park_pct"] >= 3 or r["split"] >= 0.75)
+            and (r["hr"] >= 1 or r["near"] >= 2 or r["ev"] >= 94)
+        ]
+    pool.sort(key=straight_attack_rank, reverse=True)
+    return pool
+
+
 o15_candidates = [
     r
     for r in listed_rows
@@ -239,22 +266,39 @@ o15_candidates = [
     and (r["risk"] >= 0.25 or r["park_pct"] >= 3 or r["split"] >= 0.75)
 ]
 o15_candidates.sort(key=multi_hr_rank, reverse=True)
-straight_o15 = o15_candidates[0] if o15_candidates else listed_rows[0]
 
-straight_pool = [
-    r
-    for r in listed_rows
-    if r["name"] not in STRAIGHT_O05_BLOCKLIST
-    and r["name"] != straight_o15["name"]
-    and r["score"] >= 72
-    and r["split"] >= 0.0
-    and (r["risk"] >= 0.50 or r["park_pct"] >= 3 or r["split"] >= 0.75)
-    and (r["hr"] >= 1 or r["near"] >= 2 or r["ev"] >= 94)
-]
-straight_pool.sort(key=straight_attack_rank, reverse=True)
-if not straight_pool:
-    straight_pool = [r for r in listed_rows if r["name"] != straight_o15["name"]]
-straight_o05 = straight_pool[0] if straight_pool else straight_o15
+straight_o15 = None
+straight_o05 = None
+for o15 in o15_candidates:
+    o05_pool = straight_o05_pool(listed_rows, exclude_name=o15["name"], exclude_game=o15["game_key"])
+    if o05_pool:
+        straight_o15 = o15
+        straight_o05 = o05_pool[0]
+        break
+
+if straight_o15 is None:
+    straight_o15 = o15_candidates[0] if o15_candidates else listed_rows[0]
+    o05_pool = straight_o05_pool(
+        listed_rows,
+        exclude_name=straight_o15["name"],
+        exclude_game=straight_o15["game_key"],
+    )
+    if not o05_pool:
+        o05_pool = straight_o05_pool(
+            listed_rows,
+            exclude_name=straight_o15["name"],
+            exclude_game=straight_o15["game_key"],
+            strict=False,
+        )
+    straight_o05 = o05_pool[0] if o05_pool else straight_o15
+
+if straight_o05["game_key"] == straight_o15["game_key"]:
+    alt_o15 = next(
+        (r for r in o15_candidates if r["game_key"] != straight_o05["game_key"]),
+        None,
+    )
+    if alt_o15:
+        straight_o15 = alt_o15
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 

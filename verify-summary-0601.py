@@ -30,9 +30,26 @@ weather_heavy_m = re.search(
 top_tickets_html = top_tickets_m.group(1) if top_tickets_m else ""
 weather_heavy_html = weather_heavy_m.group(1) if weather_heavy_m else ""
 
+def straight_game_keys(html: str) -> tuple[str, str]:
+    names = re.findall(
+        r'straight-pick-name">([^<]+)</strong>.*?straight-pick-meta">[^<]*&middot; Score \d+ &middot; ([A-Z]{2,3} @ [A-Z]{2,3})',
+        html,
+        flags=re.DOTALL,
+    )
+    if len(names) >= 2:
+        return names[0][1].strip(), names[1][1].strip()
+    return "", ""
+
+
+o05_game, o15_game = straight_game_keys(t)
+
 checks = [
     ("Sheet date meta", 'content="2026-06-04"' in t),
     ("June 4 header", "Thursday, June 4, 2026 — Worst Pickz HR cheat sheet" in t),
+    (
+        "Straights different games",
+        bool(o05_game and o15_game and o05_game != o15_game),
+    ),
     ("Straights section", "Worst Pickz Straights of the Day" in t),
     ("Goblin section", "Goblin's Insight" in t),
     ("Top tickets section", "Top 5 HR Tickets (Attack + Weather + HR Risk)" in t),

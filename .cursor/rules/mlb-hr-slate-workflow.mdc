@@ -120,7 +120,7 @@ In `patch-YYYY-MM-DD-preview.py`:
 | Leg | Pick from |
 |-----|-----------|
 | **O0.5 HR** | Best attack/weather straight: strong batter form **plus** positive split, attackable opposing pitcher, and park/weather support when available; do not default to highest raw score if pitcher/weather lane is weaker |
-| **O1.5 HR** | Best true multi-HR profile, not just the next-highest HR score: 2+ recent HR, multiple near-HR, loud EV, positive split, no harsh park/weather drag, and at least one of pitcher HR risk / strong split / park support; **different player/game than O0.5 when possible** |
+| **O1.5 HR** | Best true multi-HR profile, not just the next-highest HR score: 2+ recent HR, multiple near-HR, loud EV, positive split, no harsh park/weather drag, and at least one of pitcher HR risk / strong split / park support; **must be a different game than O0.5** (never both legs from the same matchup) |
 
 Both picks must:
 

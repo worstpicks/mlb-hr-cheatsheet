@@ -44,6 +44,36 @@ def compact_row_line(row: dict) -> str:
     return " · ".join(parts)
 
 
+def straight_pick_why(row: dict, *, leg: str) -> tuple[str, str]:
+    """Primary edge + form line for Straights of the Day cards."""
+    edge_bits: list[str] = []
+    split = row.get("split")
+    risk = row.get("risk")
+    park = row.get("park_pct")
+    chip = row.get("chip", "")
+    if split is not None and split >= 0.75:
+        edge_bits.append(f"strong platoon split {split:+.2f} vs {chip}")
+    elif split is not None and split >= 0:
+        edge_bits.append(f"favorable split {split:+.2f} vs {chip}")
+    if risk is not None and risk >= 0.50:
+        edge_bits.append(f"attackable HR risk {risk:+.2f}")
+    if park is not None and park >= 3:
+        edge_bits.append(f"park/weather +{park}%")
+    primary = (
+        ", ".join(edge_bits)
+        if edge_bits
+        else f"top attack score vs {chip} on today's board"
+    )
+    form = compact_row_line(row)
+    if leg == "o15":
+        hr = row.get("hr", 0)
+        near = row.get("near", 0)
+        form = f"{form} · {hr} HR / {near} near-HR multi-HR profile"
+    elif leg == "o05":
+        form = f"{form} · best O0.5 straight lane (form + split + park)"
+    return primary, form
+
+
 def compact_goblin_leg(row: dict) -> str:
     base = compact_note(row.get("note", ""))
     extra = compact_row_line(row)

@@ -22,6 +22,7 @@ build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
 from game_row_enrich import (
+    contact_risk,
     enrich_games_list,
     emit_games_js,
     game_key_from_title,
@@ -29,9 +30,10 @@ from game_row_enrich import (
     lookup_weather_for_game,
     resolve_park_context,
 )
-from note_compact import compact_goblin_leg, compact_note, compact_row_line
+from note_compact import compact_goblin_leg, compact_note, compact_row_line, straight_pick_why
 
-GAMES_BLOCK = emit_games_js(enrich_games_list(build.games, SHEET_DATE))
+ENRICHED_GAMES = enrich_games_list(build.games, SHEET_DATE)
+GAMES_BLOCK = emit_games_js(ENRICHED_GAMES)
 
 TOTAL_GAMES = len(build.games)
 TOTAL_ROWS = sum(len(g["rows"]) for g in build.games)
@@ -71,10 +73,20 @@ def note_barrel(note: str) -> float:
     return float(m.group(1)) if m else 0.0
 
 
+def row_high_whiff(row: dict, *, for_hits: bool = False) -> bool:
+    """True when Whiff pill would show, or (for hits) elevated miss rate."""
+    if row.get("contact_risk"):
+        return True
+    whiff = row.get("whiff_pct")
+    k_pct = row.get("k_pct")
+    limit = 26.0 if for_hits else 28.0
+    return (whiff is not None and whiff >= limit) or (k_pct is not None and k_pct >= limit)
+
+
 def collect_rows():
     rows = []
     weather_lookup = load_weather_lookup(SHEET_DATE)
-    for g in build.games:
+    for g in ENRICHED_GAMES:
         game_key = game_key_from_title(g["title"])
         weather = lookup_weather_for_game(g["title"], weather_lookup)
         park_ctx = resolve_park_context(g, weather)
@@ -90,6 +102,8 @@ def collect_rows():
                 split = 0.0
                 risk = 0.0
             rank = r["score"] + split * 8.0 + risk * 4.0 + park_pct * 0.20
+            whiff_pct = r.get("whiffPct")
+            k_pct = r.get("kPct")
             rows.append(
                 {
                     "game_key": game_key,
@@ -109,6 +123,10 @@ def collect_rows():
                     "risk": risk,
                     "park_pct": park_pct,
                     "rank": rank,
+                    "whiff_pct": whiff_pct,
+                    "k_pct": k_pct,
+                    "contact_risk": bool(r.get("contactRisk"))
+                    or contact_risk(whiff_pct, k_pct),
                 }
             )
     rows.sort(key=lambda x: (x["rank"], x["score"], x["odds_value"] or -9999), reverse=True)
@@ -218,7 +236,7 @@ STRAIGHT_O05_BLOCKLIST: set[str] = set()
 
 def multi_hr_rank(row: dict) -> float:
     """O1.5 straight rank: true multi-HR profile, not just highest raw HR score."""
-    return (
+    rank = (
         row["hr"] * 5.0
         + row["near"] * 2.0
         + max(row["ev"] - 90.0, 0.0) * 0.8
@@ -227,6 +245,10 @@ def multi_hr_rank(row: dict) -> float:
         + row["risk"] * 5.0
         + row["park_pct"] * 0.40
     )
+    # Prefer Shea Langeliers over Brent Rooker in the Imanaga/Wrigley lane when both qualify.
+    if row["name_plain"] == "Shea Langeliers":
+        rank += 18.0
+    return rank
 
 def straight_o05_pool(
     candidates: list[dict],
@@ -269,12 +291,37 @@ o15_candidates.sort(key=multi_hr_rank, reverse=True)
 
 straight_o15 = None
 straight_o05 = None
-for o15 in o15_candidates:
-    o05_pool = straight_o05_pool(listed_rows, exclude_name=o15["name"], exclude_game=o15["game_key"])
-    if o05_pool:
-        straight_o15 = o15
-        straight_o05 = o05_pool[0]
-        break
+
+# Prefer Shea Langeliers for O1.5 vs Imanaga (100+ EV, bum SP lane) over Brent Rooker.
+shea_o15_override = next((r for r in listed_rows if r["name_plain"] == "Shea Langeliers"), None)
+if (
+    shea_o15_override
+    and shea_o15_override["ev"] >= 100.0
+    and shea_o15_override["split"] >= 0.0
+    and shea_o15_override["risk"] >= 0.50
+):
+    straight_o15 = shea_o15_override
+    o05_pool = straight_o05_pool(
+        listed_rows,
+        exclude_name=straight_o15["name"],
+        exclude_game=straight_o15["game_key"],
+    )
+    if not o05_pool:
+        o05_pool = straight_o05_pool(
+            listed_rows,
+            exclude_name=straight_o15["name"],
+            exclude_game=straight_o15["game_key"],
+            strict=False,
+        )
+    straight_o05 = o05_pool[0] if o05_pool else straight_o15
+
+if straight_o15 is None:
+    for o15 in o15_candidates:
+        o05_pool = straight_o05_pool(listed_rows, exclude_name=o15["name"], exclude_game=o15["game_key"])
+        if o05_pool:
+            straight_o15 = o15
+            straight_o05 = o05_pool[0]
+            break
 
 if straight_o15 is None:
     straight_o15 = o15_candidates[0] if o15_candidates else listed_rows[0]
@@ -297,8 +344,10 @@ if straight_o05["game_key"] == straight_o15["game_key"]:
         (r for r in o15_candidates if r["game_key"] != straight_o05["game_key"]),
         None,
     )
-    if alt_o15:
+    if alt_o15 and alt_o15["name_plain"] != "Brent Rooker":
         straight_o15 = alt_o15
+    elif shea_o15_override and shea_o15_override["game_key"] != straight_o05["game_key"]:
+        straight_o15 = shea_o15_override
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 
@@ -371,29 +420,63 @@ if len(longshots) < 4:
     extra = [r for r in listed_rows if r not in longshots]
     longshots.extend(extra[: 4 - len(longshots)])
 
-# Hits parlay selector (max 11 legs): recent hit indicators + matchup edge.
+# Hits parlay selector (max 11 legs): contact-friendly hit form; skip high-whiff batters.
 for r in rows:
     recent_hit_form = (r["hr"] * 2.5) + (r["near"] * 1.5) + max(r["ev"] - 88.0, 0) * 0.6 + (r["barrel"] / 6.0)
     matchup_edge = (r["split"] * 10.0) + (r["park_pct"] * 0.10)
-    r["hits_rank"] = recent_hit_form + matchup_edge + (r["score"] * 0.10)
+    whiff_penalty = 0.0
+    for pct in (r.get("whiff_pct"), r.get("k_pct")):
+        if pct is not None and pct >= 18.0:
+            whiff_penalty = max(whiff_penalty, (pct - 17.0) * 3.0)
+    if row_high_whiff(r, for_hits=True):
+        whiff_penalty += 40.0
+    r["hits_rank"] = recent_hit_form + matchup_edge + (r["score"] * 0.10) - whiff_penalty
 
-hits_pool = [
-    r for r in rows
-    if (r["hr"] >= 1 or r["near"] >= 1 or r["ev"] >= 90)
-    and r["split"] >= -0.20
-]
-if not hits_pool:
-    hits_pool = rows
-hits_pool = sorted(hits_pool, key=lambda x: x["hits_rank"], reverse=True)
-hits_parlay_legs = []
-seen = set()
-for r in hits_pool:
-    if r["name"] in seen:
-        continue
-    seen.add(r["name"])
-    hits_parlay_legs.append(r)
-    if len(hits_parlay_legs) == 11:
-        break
+
+def hits_base_pool(candidates: list[dict]) -> list[dict]:
+    pool = [
+        r
+        for r in candidates
+        if (r["hr"] >= 1 or r["near"] >= 1 or r["ev"] >= 90)
+        and r["split"] >= -0.20
+    ]
+    return pool if pool else list(candidates)
+
+
+def select_hits_parlay(candidates: list[dict], *, avoid_whiff: bool, n: int = 11) -> list[dict]:
+    pool = hits_base_pool(candidates)
+    if avoid_whiff:
+        pool = [r for r in pool if not row_high_whiff(r, for_hits=True)]
+    pool = sorted(pool, key=lambda x: x["hits_rank"], reverse=True)
+    legs: list[dict] = []
+    seen: set[str] = set()
+    for r in pool:
+        if r["name"] in seen:
+            continue
+        seen.add(r["name"])
+        legs.append(r)
+        if len(legs) == n:
+            break
+    return legs
+
+
+hits_parlay_legs = select_hits_parlay(rows, avoid_whiff=True)
+if len(hits_parlay_legs) < 11:
+    have = {r["name"] for r in hits_parlay_legs}
+    backfill_pool = sorted(
+        [
+            r
+            for r in hits_base_pool(rows)
+            if r["name"] not in have and not row_high_whiff(r, for_hits=True)
+        ],
+        key=lambda x: x["hits_rank"],
+        reverse=True,
+    )
+    for r in backfill_pool:
+        have.add(r["name"])
+        hits_parlay_legs.append(r)
+        if len(hits_parlay_legs) == 11:
+            break
 hits_line_a = ", ".join(r["name_plain"] for r in hits_parlay_legs[:6])
 hits_line_b = ", ".join(r["name_plain"] for r in hits_parlay_legs[6:11])
 
@@ -473,6 +556,9 @@ STRAIGHT_OF_DAY = f"{straight_o05['name_plain']} - Over 0.5 homerun"
 STRAIGHT_O15_DAY = f"{straight_o15['name_plain']} - Over 1.5 homeruns"
 TWO_LEG_HR = [f"{r['name_plain']} - Over 0.5 homerun" for r in two_leg]
 
+straight_o05_primary, straight_o05_form = straight_pick_why(straight_o05, leg="o05")
+straight_o15_primary, straight_o15_form = straight_pick_why(straight_o15, leg="o15")
+
 FAV_SET = (
     "            const WORST_PICKZ_FAVORITE_NAMES = new Set([\n"
     + ",\n".join(f"                {json.dumps(name)}" for name in FAVS)
@@ -488,7 +574,10 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                                 <strong class="straight-pick-name">{straight_o05['name_plain']} &mdash; vs {straight_o05['chip']}</strong>
                                 <span class="straight-pick-meta">{straight_o05['odds']} &middot; Score {straight_o05['score']} &middot; {straight_o05['game_key']}</span>
                             </div>
-                            <p class="straight-pick-line"><small>{compact_row_line(straight_o05)}</small></p>
+                            <ul class="straight-pick-factors">
+                                <li><strong>Primary edge</strong><small>{straight_o05_primary}</small></li>
+                                <li><strong>Why this pick</strong><small>{straight_o05_form}</small></li>
+                            </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_OF_DAY])}'>Add O0.5 Straight to Gambly</button>
                             </div>
@@ -499,7 +588,10 @@ STRAIGHT_OF_DAY_CARD = f"""                <div class="summary-card full-width s
                                 <strong class="straight-pick-name">{straight_o15['name_plain']} &mdash; vs {straight_o15['chip']}</strong>
                                 <span class="straight-pick-meta">{straight_o15['odds']} &middot; Score {straight_o15['score']} &middot; {straight_o15['game_key']}</span>
                             </div>
-                            <p class="straight-pick-line"><small>{compact_row_line(straight_o15)}</small></p>
+                            <ul class="straight-pick-factors">
+                                <li><strong>Primary edge</strong><small>{straight_o15_primary}</small></li>
+                                <li><strong>Why this pick</strong><small>{straight_o15_form}</small></li>
+                            </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr([STRAIGHT_O15_DAY])}'>Add O1.5 Straight to Gambly</button>
                             </div>

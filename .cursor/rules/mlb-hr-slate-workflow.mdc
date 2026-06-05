@@ -5,7 +5,7 @@ alwaysApply: true
 
 # MLB HR cheat sheet — slate workflow (always do this)
 
-**Golden rule:** Always use the **newest, freshest PropFinder CSV exports** from Downloads for the **current slate date**. Re-run `import-sheet-csvs.py` before every build/patch/push — never ship a slate from stale `data/` files or yesterday's sheet. Never copy prior-day probables, `GAME_META`, straights, summary copy, or matchup CSVs onto today's sheet.
+**Golden rule:** Always use the **newest, freshest PropFinder CSV exports** from Downloads for the **current slate date**. Re-run `import-sheet-csvs.py` before every build/patch/push — never ship a slate from stale `data/` files or yesterday's sheet. Never copy prior-day probables, `GAME_META`, straights, Goblin's Insight, summary copy, or matchup CSVs onto today's sheet. After import, rebuild summary/Goblin/straights from today's CSVs — never leave prior-day Benintendi/Meckler-style blocks on disk.
 
 For every new slate request, the first build action must be `python import-sheet-csvs.py --date YYYY-MM-DD` using the requested slate date. If the importer finds matching Downloads files, use those imported files as source of truth even if older same-date files already exist in `data/`.
 
@@ -65,6 +65,10 @@ python validate-index-matchups.py               # zero errors vs manifest SPs
 ```
 
 If a batter row shows the wrong SP in the title or `chips: ["vs …"]`, re-run import + rebuild — do not hand-edit individual matchups.
+
+**Robbie Ray SF @ CHC synthetic CSV:** PropFinder may not export `hr-matchups-SF-at-CHC-Robbie-Ray-YYYY-MM-DD.csv`. After every `import-sheet-csvs.py`, confirm that file is still listed in `data/manifest-YYYY-MM-DD.json`; restore from git or regenerate if the importer dropped it.
+
+**Goblin / Favorite 3-leg guards:** Reserve the top three ⭐🌕 favorites (positive split) for **Worst Pickz Favorite 3 Leg** — do not place them in 3 Leg HR. If straights would consume two moonshot favorites and leave fewer than three for Favorite 3 Leg, swap O0.5 to the next-best non-moonshot attack lane (e.g. Jordan Walker vs Singer bum) instead of using a third moonshot favorite straight.
 
 ## Step 0a-b — Batter name normalization (required)
 
@@ -151,4 +155,17 @@ Confirm in `preview/index.html`:
 3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)
 4. Goblin parlays distinct — 3 Leg vs 2 Leg vs Favorite 3 Leg share no batters (`python goblin_parlay_rules.py`)
 5. **Top 5 diversification** — **Top 5 HR Tickets** and **Top 5 Weather Heavy HR Plays** must each have **at most 2 players from the same game** (skip lower-ranked same-game rows rather than stacking one matchup). Lists must stay **distinct** from each other (no duplicate names across the two charts).
-6. `python verify-deploy.py` before push — **only push when user asks**
+6. **Hits parlay** — Prefer contact-friendly legs; exclude batters with high whiff/K% (Whiff pill / `contactRisk` / WHIFF% or K% ≥ 26). Do not fill with high-whiff names unless fewer than 11 qualify.
+7. `python verify-deploy.py` before push — **only push when user asks**
+
+## Damage Window — Homerun Form (ship with next slate push)
+
+**Homerun Form** is in `preview/index.html` only (`enhanceRows()` → fourth star row in Damage Window Stats). It was **not** pushed live with the June 4 sheet.
+
+**On the next MLB cheat sheet update** (when the user asks to push live):
+
+1. Keep Homerun Form in `preview/index.html` — do not strip `hrFormStars` / `Homerun Form` when patching summary, games, or straights.
+2. After `patch-YYYY-MM-DD-preview.py`, confirm the damage window still has 4 metrics: Power, **Homerun Form**, Park/Weather, Attackability (grep `Homerun Form` in preview).
+3. Run patch with **`--sync-root`** so `preview/index.html` → root `index.html` — that ships Homerun Form to production together with the new slate.
+
+Homerun Form stars use recent HR/near-HR from the pick note plus `formTrend` and `blast` from `games[gi].rows[ri]`.

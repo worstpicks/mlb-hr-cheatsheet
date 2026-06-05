@@ -180,6 +180,8 @@ rows = collect_rows()
 listed_rows = [r for r in rows if r["odds_value"] is not None]
 if not listed_rows:
     listed_rows = rows
+# Straights/Goblin HR legs: include N/A odds props (user list); listed-only for longshots display.
+straight_rows = rows
 
 # O0.5 straight: prioritize attackable pitcher lanes plus park/weather support,
 # not just the highest raw batter-form score.
@@ -268,7 +270,7 @@ def straight_o05_pool(
             if r["score"] >= 72
             and r["split"] >= 0.0
             and (r["risk"] >= 0.50 or r["park_pct"] >= 3 or r["split"] >= 0.75)
-            and (r["hr"] >= 1 or r["near"] >= 2 or r["ev"] >= 94)
+            and (r["hr"] >= 1 or r["near"] >= 3)
         ]
     pool.sort(key=straight_attack_rank, reverse=True)
     return pool
@@ -276,7 +278,7 @@ def straight_o05_pool(
 
 o15_candidates = [
     r
-    for r in listed_rows
+    for r in straight_rows
     if r["name"] not in STRAIGHT_O15_BLOCKLIST
     and r["hr"] >= 2
     and r["near"] >= 2
@@ -291,22 +293,22 @@ straight_o05 = None
 
 if straight_o15 is None:
     for o15 in o15_candidates:
-        o05_pool = straight_o05_pool(listed_rows, exclude_name=o15["name"], exclude_game=o15["game_key"])
+        o05_pool = straight_o05_pool(straight_rows, exclude_name=o15["name"], exclude_game=o15["game_key"])
         if o05_pool:
             straight_o15 = o15
             straight_o05 = o05_pool[0]
             break
 
 if straight_o15 is None:
-    straight_o15 = o15_candidates[0] if o15_candidates else listed_rows[0]
+    straight_o15 = o15_candidates[0] if o15_candidates else straight_rows[0]
     o05_pool = straight_o05_pool(
-        listed_rows,
+        straight_rows,
         exclude_name=straight_o15["name"],
         exclude_game=straight_o15["game_key"],
     )
     if not o05_pool:
         o05_pool = straight_o05_pool(
-            listed_rows,
+            straight_rows,
             exclude_name=straight_o15["name"],
             exclude_game=straight_o15["game_key"],
             strict=False,
@@ -323,19 +325,6 @@ if straight_o05["game_key"] == straight_o15["game_key"]:
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 
-# 3-leg HR parlay: attack/split rank — never reuse Straight of the Day legs (see May 31 sheet).
-top3_pool = [r for r in listed_rows if r["name"] not in straight_names]
-top3_pool.sort(key=lambda x: (straight_attack_rank(x), x["rank"], x["score"]), reverse=True)
-top3 = pick_top_n(top3_pool, 3, exclude_names=straight_names, max_per_game=2, max_per_team=2)
-if len(top3) < 3:
-    extra = sorted(
-        [r for r in listed_rows if r["name"] not in straight_names],
-        key=lambda x: (straight_attack_rank(x), x["rank"], x["score"]),
-        reverse=True,
-    )
-    top3 = pick_top_n(extra, 3, exclude_names=straight_names, max_per_game=2, max_per_team=2)
-
-two_leg = [straight_o05, straight_o15]
 
 def fav_row_has_moonshot(row: dict) -> bool:
     for game in build.games:
@@ -344,6 +333,72 @@ def fav_row_has_moonshot(row: dict) -> bool:
                 return "🌕" in entry.get("emojis", "")
     return False
 
+
+def moonshot_fav_pool_size(exclude_names: set[str]) -> int:
+    return len(
+        [
+            r
+            for r in rows
+            if r["name"] in FAVS
+            and r["name"] not in exclude_names
+            and fav_row_has_moonshot(r)
+            and r["split"] >= 0.0
+        ]
+    )
+
+
+# If both straights consume moonshot favorites, swap O0.5 to next attack lane so Favorite 3-leg can fill.
+if moonshot_fav_pool_size(straight_names) < 3 and fav_row_has_moonshot(straight_o05):
+    for alt_o05 in straight_o05_pool(
+        straight_rows,
+        exclude_name=straight_o15["name"],
+        exclude_game=straight_o15["game_key"],
+    )[1:]:
+        if fav_row_has_moonshot(alt_o05):
+            continue
+        trial = {alt_o05["name"], straight_o15["name"]}
+        if moonshot_fav_pool_size(trial) >= 3:
+            straight_o05 = alt_o05
+            straight_names = trial
+            break
+
+# 3-leg HR parlay: attack/split rank — never reuse Straight of the Day legs; positive split + real HR form.
+def goblin_hr_leg_ok(row: dict) -> bool:
+    return row["split"] >= 0.0 and (row["hr"] >= 1 or row["near"] >= 2)
+
+
+top3_pool = [
+    r for r in straight_rows if r["name"] not in straight_names and goblin_hr_leg_ok(r)
+]
+top3_pool.sort(key=lambda x: (straight_attack_rank(x), x["rank"], x["score"]), reverse=True)
+
+moonshot_fav_reserve = sorted(
+    [
+        r
+        for r in rows
+        if r["name"] in FAVS
+        and r["name"] not in straight_names
+        and fav_row_has_moonshot(r)
+        and r["split"] >= 0.0
+    ],
+    key=lambda x: (straight_attack_rank(x), x["score"]),
+    reverse=True,
+)[:3]
+reserved_fav_names = {r["name"] for r in moonshot_fav_reserve}
+
+top3_pool_reserved = [r for r in top3_pool if r["name"] not in reserved_fav_names]
+top3 = pick_top_n(top3_pool_reserved, 3, exclude_names=straight_names, max_per_game=2, max_per_team=2)
+if len(top3) < 3:
+    top3 = pick_top_n(top3_pool, 3, exclude_names=straight_names, max_per_game=2, max_per_team=2)
+if len(top3) < 3:
+    extra = sorted(
+        [r for r in straight_rows if r["name"] not in straight_names and goblin_hr_leg_ok(r)],
+        key=lambda x: (straight_attack_rank(x), x["rank"], x["score"]),
+        reverse=True,
+    )
+    top3 = pick_top_n(extra, 3, exclude_names=straight_names, max_per_game=2, max_per_team=2)
+
+two_leg = [straight_o05, straight_o15]
 
 fav_pool = [
     r
@@ -365,6 +420,7 @@ if len(fav3) < 3:
         and r["name"] not in {x["name"] for x in top3}
         and r["name"] not in straight_names
         and fav_row_has_moonshot(r)
+        and r["split"] >= 0.0
     ]
     fav_fallback.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
     fav3 = pick_top_n(
@@ -374,6 +430,33 @@ if len(fav3) < 3:
         max_per_game=2,
         max_per_team=2,
     )
+if len(fav3) < 3:
+    fav_moonshot_fill = [
+        r
+        for r in rows
+        if r["name"] in FAVS
+        and r["name"] not in {x["name"] for x in top3}
+        and r["name"] not in straight_names
+        and r["name"] not in {x["name"] for x in fav3}
+        and fav_row_has_moonshot(r)
+        and r["split"] >= 0.0
+    ]
+    fav_moonshot_fill.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
+    fav3.extend(
+        pick_top_n(
+            fav_moonshot_fill,
+            3 - len(fav3),
+            exclude_names={x["name"] for x in top3} | straight_names | {x["name"] for x in fav3},
+            max_per_game=2,
+            max_per_team=2,
+        )
+    )
+
+
+def fav_leg_label(row: dict) -> str:
+    moon = " &#127765;" if fav_row_has_moonshot(row) else ""
+    return f"{row['name_plain']} HR &#11088;{moon}"
+
 
 assert len(top3) == 3, "Goblin 3-leg needs 3 picks"
 assert len(fav3) == 3, "Favorite 3-leg needs 3 picks"
@@ -602,9 +685,9 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>{fav3[0]['name_plain']} HR &#11088; &#127765;</strong><small>{compact_goblin_leg(fav3[0])}</small></li>
-                                <li><strong>{fav3[1]['name_plain']} HR &#11088; &#127765;</strong><small>{compact_goblin_leg(fav3[1])}</small></li>
-                                <li><strong>{fav3[2]['name_plain']} HR &#11088; &#127765;</strong><small>{compact_goblin_leg(fav3[2])}</small></li>
+                                <li><strong>{fav_leg_label(fav3[0])}</strong><small>{compact_goblin_leg(fav3[0])}</small></li>
+                                <li><strong>{fav_leg_label(fav3[1])}</strong><small>{compact_goblin_leg(fav3[1])}</small></li>
+                                <li><strong>{fav_leg_label(fav3[2])}</strong><small>{compact_goblin_leg(fav3[2])}</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(FAV_THREE_LEG)}'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>

@@ -1,0 +1,30 @@
+Matchup,TB @ MIA
+Pitcher,Ryan Gusto
+Pitcher Team,MIA
+Opposing Team,TB
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Second,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,1,0.0,0,.000,.000
+Batting Third,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Batting Fourth,0.0,-.--,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,0,1.000,2.000
+Batting Fifth,0.0,-.--,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,0,1.000,2.000
+Batting Sixth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,50.0,0,.500,1.000
+Batting Seventh,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Eighth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,0,.500,1.000
+Batting Ninth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,50.0,0,.500,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Chandler Simpson LHB,Batting First ​,="36-141",.255,.305,0.050,0,3,2,6,14.0,7,.289,.594
+Junior Caminero RHB,Batting Second ​,="34-121",.281,.504,0.223,8,3,0,16,14.7,14,.353,.857
+Jonathan Aranda LHB,Batting Third ​,="30-110",.273,.491,0.218,6,6,0,27,23.7,20,.378,.869
+Yandy Diaz RHB,Batting Fourth ​,="28-108",.259,.463,0.204,6,4,0,16,11.5,12,.344,.807
+Ryan Vilade RHB,Batting Fourth ​,="14-33",.424,.636,0.212,1,2,1,10,17.1,6,.500,1.136
+Richie Palacios LHB,Batting Fifth ​,="10-42",.238,.286,0.048,0,2,0,5,17.8,3,.289,.575
+Ben Williamson RHB,Batting Sixth ​,="13-56",.232,.304,0.072,0,2,1,5,24.2,5,.306,.610
+Cedric Mullins LHB,Batting Seventh ​,="13-67",.194,.343,0.149,3,1,0,7,17.6,5,.260,.603
+Victor Mesa Jr. LHB,Batting Seventh ​,="2-11",.182,.455,0.273,1,0,0,2,23.1,1,.250,.705
+Nick Fortes RHB,Batting Eighth ​,="21-79",.266,.304,0.038,0,3,0,8,14.3,1,.289,.593
+Hunter Feduccia LHB,Batting Eighth ​,="11-51",.216,.314,0.098,1,2,0,6,30.5,5,.293,.607
+Taylor Walls SHB,Batting Ninth ​,="21-115",.183,.243,0.060,0,3,2,13,25.2,17,.288,.531
+Oliver Dunn LHB,Batting Ninth ​,="0-6",.000,.000,0.000,0,0,0,0,16.7,0,.000,.000

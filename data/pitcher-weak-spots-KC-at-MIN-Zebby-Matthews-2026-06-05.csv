@@ -1,0 +1,30 @@
+Matchup,KC @ MIN
+Pitcher,Zebby Matthews
+Pitcher Team,MIN
+Opposing Team,KC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.2,1.50,="4-12",.333,.417,0.084,0,1,0,0,0.0,0,.333,.750
+Batting Second,2.2,1.50,="4-12",.333,.833,0.500,2,0,0,4,16.7,0,.333,1.166
+Batting Third,3.0,0.67,="1-10",.100,.100,0.000,0,0,0,0,25.0,1,.250,.350
+Batting Fourth,3.0,0.67,="1-10",.100,.400,0.300,1,0,0,1,25.0,1,.250,.650
+Batting Fifth,2.1,1.71,="4-11",.364,.818,0.454,1,2,0,2,18.2,0,.364,1.182
+Batting Sixth,3.0,0.33,="0-9",.000,.000,0.000,0,0,0,0,50.0,1,.100,.100
+Batting Seventh,2.1,1.29,="2-9",.222,.222,0.000,0,0,0,0,20.0,1,.300,.522
+Batting Eighth,1.2,1.80,="3-8",.375,.750,0.375,1,0,0,3,62.5,0,.375,1.125
+Batting Ninth,2.2,0.38,="1-8",.125,.125,0.000,0,0,0,0,25.0,0,.125,.250
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Maikel Garcia RHB,Batting First ​,="57-216",.264,.384,0.120,3,15,1,20,14.4,18,.318,.702
+Bobby Witt Jr. RHB,Batting Second ​,="69-244",.283,.467,0.184,9,16,1,26,17.5,28,.356,.823
+Tyler Tolbert RHB,Batting Second ​,="1-3",.333,.333,0.000,0,0,0,0,0.0,0,.333,.666
+Vinnie Pasquantino LHB,Batting Third ​,="41-186",.220,.371,0.151,6,6,2,24,17.7,25,.307,.678
+Salvador Perez RHB,Batting Fourth ​,="43-208",.207,.351,0.144,8,6,0,24,20.0,9,.253,.604
+Carter Jensen LHB,Batting Fifth ​,="27-125",.216,.400,0.184,6,5,0,18,29.7,16,.303,.703
+Starling Marte RHB,Batting Sixth ​,="8-24",.333,.375,0.042,0,1,0,1,15.4,1,.385,.760
+Lane Thomas RHB,Batting Sixth ​,="8-28",.286,.464,0.178,1,2,0,5,23.5,6,.412,.876
+Isaac Collins SHB,Batting Seventh ​,="20-72",.278,.403,0.125,1,6,0,10,25.3,13,.379,.782
+Jac Caglianone LHB,Batting Seventh ​,="18-74",.243,.419,0.176,2,5,1,4,29.3,6,.317,.736
+Nick Loftin RHB,Batting Eighth ​,="10-37",.270,.486,0.216,1,5,0,10,13.0,5,.356,.842
+Michael Massey LHB,Batting Eighth ​,="15-65",.231,.385,0.154,2,4,0,6,17.6,1,.239,.624
+Kyle Isbel LHB,Batting Ninth ​,="36-149",.242,.362,0.120,3,7,1,11,21.8,8,.292,.654

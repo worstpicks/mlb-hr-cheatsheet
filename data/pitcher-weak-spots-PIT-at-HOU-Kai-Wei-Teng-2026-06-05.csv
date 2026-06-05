@@ -1,0 +1,26 @@
+Matchup,PIT @ HOU
+Pitcher,Kai-Wei Teng
+Pitcher Team,HOU
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.2,0.71,="2-19",.105,.158,0.053,0,1,0,0,22.7,2,.227,.385
+Batting Second,6.0,0.67,="4-21",.190,.476,0.286,2,0,0,4,23.8,0,.190,.666
+Batting Third,4.0,1.50,="4-16",.250,.250,0.000,0,0,0,1,44.4,2,.333,.583
+Batting Fourth,4.1,1.15,="1-13",.077,.154,0.077,0,1,0,0,29.4,4,.294,.448
+Batting Fifth,3.1,2.10,="4-14",.286,.714,0.428,1,1,1,4,5.9,3,.412,1.126
+Batting Sixth,4.1,1.62,="4-15",.267,.267,0.000,0,0,0,1,22.2,3,.389,.656
+Batting Seventh,5.1,0.56,="1-17",.059,.235,0.176,1,0,0,1,31.6,2,.158,.393
+Batting Eighth,4.2,0.86,="1-14",.071,.071,0.000,0,0,0,0,27.8,3,.278,.349
+Batting Ninth,4.0,1.50,="6-17",.353,.529,0.176,1,0,0,1,23.5,0,.353,.882
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Spencer Horwitz LHB,Batting First ​,="13-45",.289,.444,0.155,2,1,0,2,7.7,7,.385,.829
+Brandon Lowe LHB,Batting Second ​,="52-193",.269,.585,0.316,15,14,1,39,23.4,26,.360,.945
+Bryan Reynolds SHB,Batting Third ​,="60-218",.275,.431,0.156,6,12,2,38,21.6,44,.403,.834
+Ryan O'Hearn LHB,Batting Fourth ​,="38-127",.299,.472,0.173,6,4,0,26,23.2,13,.366,.838
+Nick Gonzales RHB,Batting Fifth ​,="23-56",.411,.500,0.089,1,2,0,9,20.6,5,.476,.976
+Oneil Cruz LHB,Batting Sixth ​,="5-11",.455,.727,0.272,1,0,0,4,25.0,5,.625,1.352
+Endy Rodriguez SHB,Batting Seventh ​,="7-22",.318,.500,0.182,1,1,0,3,18.5,4,.423,.923
+Jake Mangum SHB,Batting Eighth ​,="14-32",.438,.563,0.125,1,1,0,3,16.7,3,.500,1.063
+Jared Triolo RHB,Batting Ninth ​,="5-28",.179,.214,0.035,0,1,0,2,25.0,3,.258,.472

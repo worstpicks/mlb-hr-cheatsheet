@@ -1,0 +1,30 @@
+Matchup,BOS @ NYY
+Pitcher,Sonny Gray
+Pitcher Team,BOS
+Opposing Team,NYY
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.2,1.35,="8-28",.286,.464,0.178,1,2,0,1,17.2,1,.310,.774
+Batting Second,7.1,1.36,="6-24",.250,.375,0.125,0,3,0,4,21.4,4,.357,.732
+Batting Third,6.2,0.75,="5-23",.217,.217,0.000,0,0,0,2,16.7,0,.250,.467
+Batting Fourth,5.2,1.06,="5-22",.227,.409,0.182,1,1,0,2,20.8,1,.292,.701
+Batting Fifth,5.0,1.20,="3-19",.158,.158,0.000,0,0,0,2,22.7,3,.273,.431
+Batting Sixth,6.1,0.47,="3-21",.143,.333,0.190,0,2,1,1,22.7,0,.182,.515
+Batting Seventh,3.1,2.70,="8-18",.444,.556,0.112,0,2,0,1,21.1,1,.474,1.030
+Batting Eighth,4.1,1.38,="3-16",.188,.625,0.437,2,1,0,2,21.1,3,.316,.941
+Batting Ninth,4.1,1.38,="5-18",.278,.333,0.055,0,1,0,2,15.8,1,.316,.649
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Paul Goldschmidt RHB,Batting First ​,="13-45",.289,.600,0.311,3,3,1,7,18.5,8,.407,1.007
+Trent Grisham LHB,Batting First ​,="27-151",.179,.298,0.119,3,7,1,14,15.3,30,.311,.609
+Aaron Judge RHB,Batting Second ​,="34-132",.258,.538,0.280,10,7,0,23,27.5,26,.384,.922
+Ben Rice LHB,Batting Second ​,="32-100",.320,.680,0.360,8,8,2,23,21.8,9,.373,1.053
+Cody Bellinger LHB,Batting Third ​,="32-113",.283,.487,0.204,4,5,3,21,11.9,18,.373,.860
+Jazz Chisholm Jr. LHB,Batting Fifth ​,="20-92",.217,.370,0.153,3,5,0,10,25.2,9,.282,.652
+Amed Rosario RHB,Batting Sixth ​,="8-28",.286,.571,0.285,2,2,0,4,24.1,1,.310,.881
+J.C. Escarra LHB,Batting Seventh ​,="4-26",.154,.231,0.077,0,2,0,2,22.2,1,.185,.416
+Ryan McMahon LHB,Batting Eighth ​,="15-60",.250,.383,0.133,2,2,0,9,29.5,1,.262,.645
+Jose Caballero RHB,Batting Eighth ​,="16-68",.235,.338,0.103,1,4,0,7,24.7,4,.288,.626
+Max Schuemann RHB,Batting Eighth ​,="5-15",.333,.533,0.200,0,3,0,3,21.1,4,.474,1.007
+Anthony Volpe RHB,Batting Eighth ​,="5-21",.238,.476,0.238,1,2,0,5,25.0,7,.429,.905
+Austin Wells LHB,Batting Ninth ​,="10-77",.130,.169,0.039,1,0,0,2,28.2,8,.212,.381

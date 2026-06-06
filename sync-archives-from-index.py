@@ -29,7 +29,9 @@ HIT_SECTION_PAT = re.compile(
     re.DOTALL,
 )
 HEADER_P_PAT = re.compile(
-    r"<p>(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), May \d+, 2026 — Worst Pickz HR cheat sheet[\s\S]*?</p>",
+    r"<p>(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), "
+    r"(?:January|February|March|April|May|June|July|August|September|October|November|December) "
+    r"\d+, 2026 — Worst Pickz HR cheat sheet[\s\S]*?</p>",
     re.DOTALL,
 )
 def must_match(pat: re.Pattern[str], text: str, label: str, path: Path) -> str:

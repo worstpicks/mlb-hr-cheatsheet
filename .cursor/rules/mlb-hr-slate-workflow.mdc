@@ -72,7 +72,9 @@ If a batter row shows the wrong SP in the title or `chips: ["vs …"]`, re-run i
 
 **Always use freshest data:** Before any build, patch, audit, or push — re-run `python import-sheet-csvs.py --date YYYY-MM-DD` from Downloads. Never ship Goblin's Insight, Straights, Top 5, or summary blocks from a prior slate or stale `preview/index.html` cache; verify on disk with PowerShell/grep after patch.
 
-**Goblin / Favorite 3-leg guards:** Reserve the top three ⭐🌕 favorites (positive split) for **Worst Pickz Favorite 3 Leg** — do not place them in 3 Leg HR. If straights would consume two moonshot favorites and leave fewer than three for Favorite 3 Leg, swap O0.5 to the next-best non-moonshot attack lane (e.g. Jordan Walker vs Singer bum) instead of using a third moonshot favorite straight.
+**Archive integrity:** After publishing a new slate, confirm `preview/sheets-manifest.json` lists every archive date (including the day being replaced, e.g. June 5 when shipping June 6). If `preview/archive/YYYY-MM-DD.html` has the wrong `sheet-date` or is missing from the manifest, run `python restore-june-archives.py` (restores May 31 + June 1/4/5 from git snapshots into the current UX shell) then `python verify-archives.py`. Patch scripts must **not** overwrite an archive unless `preview/index.html` `sheet-date` matches the archive filename date.
+
+**Goblin / Favorite 3-leg guards:** Reserve the top three ⭐ favorites for **Worst Pickz Favorite 3 Leg** — do not place them in 3 Leg HR. Favorite 3 Leg labels show **⭐ only** (never 🌕 on the parlay card). Pick from the ⭐ Worst Pickz Favorite list ranked by attack/split data — moonshot is not required for Favorite 3 Leg. If straights would consume favorites and leave fewer than three for Favorite 3 Leg, swap O0.5 to the next-best non-favorite attack lane instead.
 
 ## Step 0a-b — Batter name normalization (required)
 

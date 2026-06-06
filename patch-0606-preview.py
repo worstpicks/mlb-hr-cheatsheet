@@ -326,38 +326,25 @@ if straight_o05["game_key"] == straight_o15["game_key"]:
 straight_names = {straight_o05["name"], straight_o15["name"]}
 
 
-def fav_row_has_moonshot(row: dict) -> bool:
-    for game in build.games:
-        for entry in game["rows"]:
-            if entry["name"] == row["name"]:
-                return "🌕" in entry.get("emojis", "")
-    return False
+def row_is_favorite(row: dict) -> bool:
+    return row["name"] in FAVS
 
 
-def moonshot_fav_pool_size(exclude_names: set[str]) -> int:
-    return len(
-        [
-            r
-            for r in rows
-            if r["name"] in FAVS
-            and r["name"] not in exclude_names
-            and fav_row_has_moonshot(r)
-            and r["split"] >= 0.0
-        ]
-    )
+def available_fav_count(exclude_names: set[str]) -> int:
+    return sum(1 for r in rows if r["name"] in FAVS and r["name"] not in exclude_names)
 
 
-# If both straights consume moonshot favorites, swap O0.5 to next attack lane so Favorite 3-leg can fill.
-if moonshot_fav_pool_size(straight_names) < 3 and fav_row_has_moonshot(straight_o05):
+# If straights consume too many favorites, swap O0.5 to next attack lane so Favorite 3-leg can fill.
+if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
     for alt_o05 in straight_o05_pool(
         straight_rows,
         exclude_name=straight_o15["name"],
         exclude_game=straight_o15["game_key"],
     )[1:]:
-        if fav_row_has_moonshot(alt_o05):
+        if row_is_favorite(alt_o05):
             continue
         trial = {alt_o05["name"], straight_o15["name"]}
-        if moonshot_fav_pool_size(trial) >= 3:
+        if available_fav_count(trial) >= 3:
             straight_o05 = alt_o05
             straight_names = trial
             break
@@ -372,19 +359,18 @@ top3_pool = [
 ]
 top3_pool.sort(key=lambda x: (straight_attack_rank(x), x["rank"], x["score"]), reverse=True)
 
-moonshot_fav_reserve = sorted(
+fav_reserve = sorted(
     [
         r
         for r in rows
         if r["name"] in FAVS
         and r["name"] not in straight_names
-        and fav_row_has_moonshot(r)
         and r["split"] >= 0.0
     ],
     key=lambda x: (straight_attack_rank(x), x["score"]),
     reverse=True,
 )[:3]
-reserved_fav_names = {r["name"] for r in moonshot_fav_reserve}
+reserved_fav_names = {r["name"] for r in fav_reserve}
 
 top3_pool_reserved = [r for r in top3_pool if r["name"] not in reserved_fav_names]
 top3 = pick_top_n(top3_pool_reserved, 3, exclude_names=straight_names, max_per_game=2, max_per_team=2)
@@ -406,9 +392,7 @@ fav_pool = [
     if r["name"] in FAVS
     and r["name"] not in {x["name"] for x in top3}
     and r["name"] not in straight_names
-    and fav_row_has_moonshot(r)
     and r["split"] >= 0.0
-    and (r["risk"] >= 0.25 or r["park_pct"] >= 3 or r["split"] >= 0.50)
 ]
 fav_pool.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
 fav3 = pick_top_n(fav_pool, 3, exclude_names={x["name"] for x in top3} | straight_names, max_per_game=2, max_per_team=2)
@@ -419,8 +403,6 @@ if len(fav3) < 3:
         if r["name"] in FAVS
         and r["name"] not in {x["name"] for x in top3}
         and r["name"] not in straight_names
-        and fav_row_has_moonshot(r)
-        and r["split"] >= 0.0
     ]
     fav_fallback.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
     fav3 = pick_top_n(
@@ -431,20 +413,18 @@ if len(fav3) < 3:
         max_per_team=2,
     )
 if len(fav3) < 3:
-    fav_moonshot_fill = [
+    fav_fill = [
         r
         for r in rows
         if r["name"] in FAVS
         and r["name"] not in {x["name"] for x in top3}
         and r["name"] not in straight_names
         and r["name"] not in {x["name"] for x in fav3}
-        and fav_row_has_moonshot(r)
-        and r["split"] >= 0.0
     ]
-    fav_moonshot_fill.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
+    fav_fill.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
     fav3.extend(
         pick_top_n(
-            fav_moonshot_fill,
+            fav_fill,
             3 - len(fav3),
             exclude_names={x["name"] for x in top3} | straight_names | {x["name"] for x in fav3},
             max_per_game=2,
@@ -454,8 +434,7 @@ if len(fav3) < 3:
 
 
 def fav_leg_label(row: dict) -> str:
-    moon = " &#127765;" if fav_row_has_moonshot(row) else ""
-    return f"{row['name_plain']} HR &#11088;{moon}"
+    return f"{row['name_plain']} HR &#11088;"
 
 
 assert len(top3) == 3, "Goblin 3-leg needs 3 picks"
@@ -771,6 +750,7 @@ def update_manifest():
     old = {sheet["date"]: sheet for sheet in manifest.get("sheets", [])}
     ordered = [
         {"date": SHEET_DATE, "label": "June 6, 2026 — current slate", "href": "index.html"},
+        {"date": "2026-06-05", "label": "June 5, 2026", "href": "archive/2026-06-05.html"},
         {"date": "2026-06-04", "label": "June 4, 2026", "href": "archive/2026-06-04.html"},
         {"date": "2026-06-01", "label": "June 1, 2026", "href": "archive/2026-06-01.html"},
         {"date": "2026-05-31", "label": "May 31, 2026", "href": "archive/2026-05-31.html"},
@@ -860,9 +840,21 @@ def sync_root_index():
 def main():
     import sys
 
-    ARCHIVE_PREVIOUS.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(PREVIEW, ARCHIVE_PREVIOUS)
-    print("archived current preview to", ARCHIVE_PREVIOUS.relative_to(ROOT))
+    preview_date_m = re.search(
+        r'<meta name="sheet-date" content="([^"]+)">',
+        PREVIEW.read_text(encoding="utf-8"),
+    )
+    preview_date = preview_date_m.group(1) if preview_date_m else ""
+    archive_date = ARCHIVE_PREVIOUS.stem
+    if preview_date == archive_date:
+        ARCHIVE_PREVIOUS.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(PREVIEW, ARCHIVE_PREVIOUS)
+        print("archived current preview to", ARCHIVE_PREVIOUS.relative_to(ROOT))
+    else:
+        print(
+            f"skip archive copy: preview is {preview_date or 'unknown'}, "
+            f"expected {archive_date} (run restore-june-archives.py if archive is stale)"
+        )
     manifest = update_manifest()
     patch_preview(manifest)
     if "--sync-root" in sys.argv:

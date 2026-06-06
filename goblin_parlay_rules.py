@@ -9,7 +9,7 @@ THREE_LEG_LABEL = "Add 3 Leg HR to Gambly"
 TWO_LEG_LABEL = "Add 2 Leg HR to Gambly"
 FAV_THREE_LABEL = "Add Favorite 3 Leg to Gambly"
 
-FAV_THREE_REQUIRED_EMOJIS = ("⭐", "🌕")  # sheet rows should carry both for fav legs
+FAV_THREE_REQUIRED_EMOJIS = ("⭐",)  # Favorite 3 Leg: ⭐ only (no moonshot required on label)
 
 
 def extract_goblin_gambly_lines(html_text: str, button_label: str) -> list[str]:
@@ -65,8 +65,6 @@ def validate_three_leg_parlays(html_text: str, fav_names: set[str] | None = None
         emojis, note = rows[sheet_name]
         if "⭐" not in emojis:
             errors.append(f"Favorite 3 Leg batter missing ⭐ on sheet: {name}")
-        if "🌕" not in emojis:
-            errors.append(f"Favorite 3 Leg batter missing 🌕 moonshot on sheet: {name}")
 
     return errors
 
@@ -138,7 +136,7 @@ def main() -> int:
         print("FAIL", e)
     if errors:
         return 1
-    print("OK   3 Leg HR and Favorite 3 Leg are distinct ⭐🌕 favorites")
+    print("OK   3 Leg HR and Favorite 3 Leg are distinct ⭐ favorites")
     print("OK   2 Leg HR and 3 Leg HR are distinct")
     print("OK   All Goblin Gambly data attributes parse as JSON")
     return 0

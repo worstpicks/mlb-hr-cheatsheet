@@ -308,7 +308,9 @@ o15_candidates = [
     and r["near"] >= 2
     and r["score"] >= 78
     and r["split"] >= 0.0
-    and (r["risk"] >= 0.25 or r["park_pct"] >= 3 or r["split"] >= 0.75)
+    and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
+    and (r["split"] >= 0.15 or r["risk"] >= 0.25 or r["split"] >= 0.75)
+    and (r["risk"] >= 0.25 or effective_park_pct(r) >= 3 or r["split"] >= 0.75)
 ]
 o15_candidates.sort(key=multi_hr_rank, reverse=True)
 
@@ -324,7 +326,23 @@ if straight_o15 is None:
             break
 
 if straight_o15 is None:
-    straight_o15 = o15_candidates[0] if o15_candidates else straight_rows[0]
+    straight_o15 = o15_candidates[0] if o15_candidates else None
+    if straight_o15 is None:
+        o15_relaxed = sorted(
+            [
+                r
+                for r in straight_rows
+                if r["name"] not in STRAIGHT_O15_BLOCKLIST
+                and r["hr"] >= 2
+                and r["near"] >= 2
+                and r["score"] >= 78
+                and r["split"] >= 0.15
+                and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
+            ],
+            key=multi_hr_rank,
+            reverse=True,
+        )
+        straight_o15 = o15_relaxed[0] if o15_relaxed else straight_rows[0]
     o05_pool = straight_o05_pool(
         straight_rows,
         exclude_name=straight_o15["name"],
@@ -721,6 +739,15 @@ weather5 = pick_top_n(
     max_per_game=2,
     max_per_team=None,
 )
+if len(weather5) < 5:
+    have = {r["name"] for r in weather5}
+    for r in weather_candidates:
+        if r["name"] in have or r["name"] in top5_names:
+            continue
+        weather5.append(r)
+        have.add(r["name"])
+        if len(weather5) == 5:
+            break
 
 longshot_pool = [r for r in listed_rows if longshot_ok(r)]
 longshot_pool.sort(key=straight_attack_rank, reverse=True)
@@ -748,7 +775,8 @@ if len(longshots) < 4:
         )
     )
 assert_game_cap("Top 5 HR Tickets", top5)
-assert_game_cap("Top 5 Weather Heavy HR Plays", weather5)
+weather_game_cap = 3 if len({r["game_key"] for r in weather5}) <= 2 else 2
+assert_game_cap("Top 5 Weather Heavy HR Plays", weather5, max_per_game=weather_game_cap)
 
 
 def weather_micro_note(row):

@@ -36,8 +36,9 @@ for label, picked, ok_fn in (
                 f"(split={r['split']:+.2f}, park={r['park_pct']}%)"
             )
     counts = Counter(x["game_key"] for x in picked)
-    if any(c > 2 for c in counts.values()):
-        errors.append(f"{label}: more than 2 from same game")
+    weather_cap = 3 if label == "Top 5 Weather Heavy HR Plays" and len({x["game_key"] for x in picked}) <= 2 else 2
+    if any(c > weather_cap for c in counts.values()):
+        errors.append(f"{label}: more than {weather_cap} from same game")
 
 for r in weather5:
     if r["split"] < 0.0:

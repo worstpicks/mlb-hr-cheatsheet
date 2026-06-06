@@ -121,7 +121,6 @@ PLAYER_TEAMS = {
 
 BUM_PITCHERS = {
     "Bachar",
-    "Bellozo",
     "Bibee",
     "Imai",
     "Lodolo",
@@ -249,16 +248,16 @@ games = [
         ],
     },
     {
-        "title": "MIL @ COL - Jacob Misiorowski (R, MIL) vs Valente Bellozo 🧤 (R, COL)",
-        "description": "Tail key data: Park boost +19% (stadium +20%, weather -1%). Misiorowski (HR risk -1.35, vs LHB -0.85, vs RHB -0.97). Bellozo 🧤 (HR risk 1.09, vs LHB +0.68, vs RHB +1.15).",
+        "title": "MIL @ COL - Jacob Misiorowski (R, MIL) vs Zach Agnos (R, COL)",
+        "description": "Tail key data: Park boost +19% (stadium +20%, weather -1%). Misiorowski (HR risk -1.35, vs LHB -0.85, vs RHB -0.97). Home starter risk unavailable.",
         "rows": [
             row("Hunter Goodman", "R", "N/A", 94, "⭐ 🌕 💣", ["vs Misiorowski"], """Worst Pickz Favorite. 3 HR, 3 near-HR, 98.3 mph EV. Misiorowski RHB split -0.97, HR risk -1.35. tough split lane (-0.97); pitcher suppresses HR (-1.35).""", blast="high"),
             row("Ezequiel Tovar", "R", "N/A", 70, "💎", ["vs Misiorowski"], """1 HR, 1 near-HR, 82.9 mph EV. Misiorowski RHB split -0.97, HR risk -1.35. tough split lane (-0.97); pitcher suppresses HR (-1.35).""", blast="good"),
             row("Willi Castro", "S", "N/A", 83, "💎", ["vs Misiorowski"], """1 HR, 2 near-HR, 98.7 mph EV. Misiorowski RHB split -0.97, HR risk -1.35. tough split lane (-0.97); pitcher suppresses HR (-1.35).""", blast="good"),
-            row("Jackson Chourio", "R", "+399", 96, "⭐ 🌕 💣", ["vs Bellozo"], """Worst Pickz Favorite. 3 HR, 5 near-HR, 96.4 mph EV. Bellozo RHB split +1.15, HR risk 1.09.""", blast="high"),
-            row("Jake Bauers", "L", "+375", 73, "💎", ["vs Bellozo"], """1 HR, 1 near-HR, 91.4 mph EV. Bellozo LHB split +0.68, HR risk 1.09.""", blast="good"),
-            row("Garrett Mitchell", "L", "+505", 78, "💎", ["vs Bellozo"], """1 HR, 1 near-HR, 96.0 mph EV. Bellozo LHB split +0.68, HR risk 1.09.""", blast="good"),
-            row("Brice Turang", "L", "+469", 64, "💎", ["vs Bellozo"], """0 HR, 89.8 mph EV. Bellozo LHB split +0.68, HR risk 1.09. limited recent HR events."""),
+            row("Jackson Chourio", "R", "+333", 93, "⭐ 🌕 💣", ["vs Agnos"], """Worst Pickz Favorite. 3 HR, 5 near-HR, 93.1 mph EV. Agnos split/risk data unavailable. limited split/risk sample.""", blast="high"),
+            row("Jake Bauers", "L", "+360", 84, "🌕 💣", ["vs Agnos"], """2 HR, 2 near-HR, 93.8 mph EV. Agnos split/risk data unavailable. limited split/risk sample.""", blast="high"),
+            row("Garrett Mitchell", "L", "+475", 78, "💎", ["vs Agnos"], """1 HR, 1 near-HR, 95.7 mph EV. Agnos split/risk data unavailable. limited split/risk sample.""", blast="good"),
+            row("Brice Turang", "L", "+550", 72, "💎", ["vs Agnos"], """0 HR, 2 near-HR, 91.8 mph EV. Agnos split/risk data unavailable. limited split/risk sample.""", blast="good"),
         ],
     },
     {

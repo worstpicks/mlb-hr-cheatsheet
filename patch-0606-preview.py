@@ -820,7 +820,7 @@ def patch_preview(manifest):
     )
     text = re.sub(
         r"<p>(?:Friday|Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday), \w+ \d+, 2026 — Worst Pickz HR cheat sheet",
-        "<p>Friday, June 6, 2026 — Worst Pickz HR cheat sheet",
+        "<p>Saturday, June 6, 2026 — Worst Pickz HR cheat sheet",
         text,
         count=1,
     )

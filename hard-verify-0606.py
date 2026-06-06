@@ -16,6 +16,10 @@ date_m = re.search(r'<meta name="sheet-date" content="([^"]+)">', text)
 sheet_date = date_m.group(1) if date_m else ""
 if sheet_date != "2026-06-06":
     errors.append(f"sheet-date wrong: {sheet_date}")
+if "Saturday, June 6, 2026" not in text:
+    errors.append("header weekday wrong: expected Saturday, June 6, 2026")
+if "Friday, June 6, 2026" in text:
+    errors.append("header still says Friday, June 6, 2026")
 
 bs = importlib.util.spec_from_file_location("build", ROOT / f"build-sheet-{sheet_date}.py")
 build = importlib.util.module_from_spec(bs)

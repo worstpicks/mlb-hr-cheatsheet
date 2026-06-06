@@ -349,9 +349,15 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
             straight_names = trial
             break
 
-# 3-leg HR parlay: attack/split rank — never reuse Straight of the Day legs; positive split + real HR form.
+# Goblin HR legs: real form plus a usable opposing split/risk lane (reject 0/0 pitcher data).
 def goblin_hr_leg_ok(row: dict) -> bool:
-    return row["split"] >= 0.0 and (row["hr"] >= 1 or row["near"] >= 2)
+    if row["hr"] < 1 and row["near"] < 2:
+        return False
+    if row["split"] <= 0.0 and row["risk"] <= 0.0:
+        return False
+    if row["split"] > 0.0:
+        return True
+    return row["risk"] >= 0.25 or row["park_pct"] >= 3
 
 
 top3_pool = [
@@ -420,24 +426,35 @@ fav_pool = [
     for r in rows
     if r["name"] in FAVS
     and r["name"] not in {x["name"] for x in top3}
+    and r["name"] not in {x["name"] for x in two_leg}
     and r["name"] not in straight_names
     and r["split"] >= 0.0
+    and r["risk"] >= 0.0
+    and (r["risk"] >= 0.25 or r["split"] >= 0.50 or r["park_pct"] >= 3)
 ]
 fav_pool.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
-fav3 = pick_top_n(fav_pool, 3, exclude_names={x["name"] for x in top3} | straight_names, max_per_game=2, max_per_team=2)
+fav3 = pick_top_n(
+    fav_pool,
+    3,
+    exclude_names={x["name"] for x in top3} | {x["name"] for x in two_leg} | straight_names,
+    max_per_game=2,
+    max_per_team=2,
+)
 if len(fav3) < 3:
     fav_fallback = [
         r
         for r in rows
         if r["name"] in FAVS
         and r["name"] not in {x["name"] for x in top3}
+        and r["name"] not in {x["name"] for x in two_leg}
         and r["name"] not in straight_names
+        and r["split"] >= 0.0
     ]
     fav_fallback.sort(key=lambda x: (straight_attack_rank(x), x["score"]), reverse=True)
     fav3 = pick_top_n(
         fav_fallback,
         3,
-        exclude_names={x["name"] for x in top3} | straight_names,
+        exclude_names={x["name"] for x in top3} | {x["name"] for x in two_leg} | straight_names,
         max_per_game=2,
         max_per_team=2,
     )
@@ -447,6 +464,7 @@ if len(fav3) < 3:
         for r in rows
         if r["name"] in FAVS
         and r["name"] not in {x["name"] for x in top3}
+        and r["name"] not in {x["name"] for x in two_leg}
         and r["name"] not in straight_names
         and r["name"] not in {x["name"] for x in fav3}
     ]
@@ -455,7 +473,7 @@ if len(fav3) < 3:
         pick_top_n(
             fav_fill,
             3 - len(fav3),
-            exclude_names={x["name"] for x in top3} | straight_names | {x["name"] for x in fav3},
+            exclude_names={x["name"] for x in top3} | {x["name"] for x in two_leg} | straight_names | {x["name"] for x in fav3},
             max_per_game=2,
             max_per_team=2,
         )

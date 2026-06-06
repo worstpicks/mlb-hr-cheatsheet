@@ -12,6 +12,7 @@ exec(compile(cut + "\n", "patch-0606-preview.py", "exec"), patch_globals)
 print("Straights:", patch_globals["straight_o05"]["name_plain"], patch_globals["straight_o15"]["name_plain"])
 print("Games:", patch_globals["straight_o05"]["game_key"], patch_globals["straight_o15"]["game_key"])
 print("Top3:", [r["name_plain"] for r in patch_globals["top3"]])
+print("TwoLeg:", [r["name_plain"] for r in patch_globals["two_leg"]])
 print("Fav3:", [r["name_plain"] for r in patch_globals["fav3"]])
 
 rows = patch_globals["rows"]

@@ -74,7 +74,7 @@ If a batter row shows the wrong SP in the title or `chips: ["vs …"]`, re-run i
 
 **Archive integrity:** After publishing a new slate, confirm `preview/sheets-manifest.json` lists every archive date (including the day being replaced, e.g. June 5 when shipping June 6). If `preview/archive/YYYY-MM-DD.html` has the wrong `sheet-date` or is missing from the manifest, run `python restore-june-archives.py` (restores May 31 + June 1/4/5 from git snapshots into the current UX shell) then `python verify-archives.py`. Patch scripts must **not** overwrite an archive unless `preview/index.html` `sheet-date` matches the archive filename date.
 
-**Goblin / Favorite 3-leg guards:** Reserve the top three ⭐ favorites for **Worst Pickz Favorite 3 Leg** — do not place them in 3 Leg HR. Favorite 3 Leg labels show **⭐ only** (never 🌕 on the parlay card). Pick from the ⭐ Worst Pickz Favorite list ranked by attack/split data — moonshot is not required for Favorite 3 Leg. If straights would consume favorites and leave fewer than three for Favorite 3 Leg, swap O0.5 to the next-best non-favorite attack lane instead.
+**Goblin / Favorite 3-leg guards:** Reserve the top three ⭐ favorites for **Worst Pickz Favorite 3 Leg** — do not place them in 3 Leg HR. Favorite 3 Leg labels show **⭐ only** (never 🌕 on the parlay card). Pick from the ⭐ Worst Pickz Favorite list ranked by attack/split data — moonshot is not required for Favorite 3 Leg. **2 Leg HR must not reuse Straights of the Day**; pick the next-best attack rows after 3-leg, with positive split or usable pitcher risk (reject 0/0 matchup lanes). Straights and all Goblin parlays should reflect the best data-backed judgment for that slate, not just highest raw score.
 
 ## Step 0a-b — Batter name normalization (required)
 

@@ -183,6 +183,30 @@ if not listed_rows:
 # Straights/Goblin HR legs: include N/A odds props (user list); listed-only for longshots display.
 straight_rows = rows
 
+weather_rows = load_weather_rows()
+
+
+def alias_game_keys(game: str) -> list[str]:
+    normalized = " ".join(game.split())
+    keys = {normalized}
+    for old, new in (("CHW @", "CWS @"), ("CWS @", "CHW @"), ("WAS @", "WSH @"), ("WSH @", "WAS @")):
+        if old in normalized:
+            keys.add(normalized.replace(old, new, 1))
+    return list(keys)
+
+
+weather_by_game: dict[str, dict] = {}
+for w in weather_rows:
+    game = " ".join(w["game"].split())
+    w = {**w, "game": game}
+    for key in alias_game_keys(game):
+        weather_by_game[key] = w
+
+
+def effective_park_pct(row: dict) -> int:
+    w = weather_by_game.get(row["game_key"])
+    return w["hr_pct"] if w else row["park_pct"]
+
 # O0.5 straight: prioritize attackable pitcher lanes plus park/weather support,
 # not just the highest raw batter-form score.
 def straight_attack_rank(row: dict) -> float:
@@ -357,7 +381,57 @@ def goblin_hr_leg_ok(row: dict) -> bool:
         return False
     if row["split"] > 0.0:
         return True
-    return row["risk"] >= 0.25 or row["park_pct"] >= 3
+    return row["risk"] >= 0.25 or effective_park_pct(row) >= 3
+
+
+def summary_ticket_ok(row: dict) -> bool:
+    """Top 5 HR tickets: loud form plus a usable opposing lane."""
+    if row["split"] < -0.10:
+        return False
+    if row["split"] <= 0.0 and row["risk"] <= 0.0:
+        return False
+    park = effective_park_pct(row)
+    if park < -5 and row["split"] < 0.50:
+        return False
+    return goblin_hr_leg_ok(row) or (row["score"] >= 80 and row["split"] >= 0.0)
+
+
+def weather_play_ok(row: dict) -> bool:
+    """Weather-heavy plays: real park/weather boost + non-negative platoon."""
+    park = effective_park_pct(row)
+    if park < 5:
+        return False
+    if row["split"] < 0.0:
+        return False
+    if row["split"] <= 0.0 and row["risk"] <= 0.0:
+        return False
+    has_form = row["hr"] >= 1 or row["near"] >= 2 or row["score"] >= 75
+    has_platoon = row["split"] >= 0.15 or row["risk"] >= 0.35
+    return has_form and has_platoon
+
+
+def weather_play_rank(row: dict) -> float:
+    park = effective_park_pct(row)
+    return (
+        park * 2.0
+        + max(row["split"], 0.0) * 22.0
+        + max(row["risk"], 0.0) * 10.0
+        + row["hr"] * 2.5
+        + row["near"] * 1.8
+        + row["score"] * 0.40
+    )
+
+
+def longshot_ok(row: dict) -> bool:
+    if (row["odds_value"] or 0) < 700:
+        return False
+    if row["split"] < 0.0:
+        return False
+    return goblin_hr_leg_ok(row) or (
+        row["split"] >= 0.50
+        and row["risk"] >= 0.50
+        and (row["hr"] >= 1 or row["near"] >= 2)
+    )
 
 
 top3_pool = [
@@ -489,20 +563,6 @@ assert len(two_leg) == 2, "Goblin 2-leg needs 2 picks"
 assert len(fav3) == 3, "Favorite 3-leg needs 3 picks"
 assert not ({x["name"] for x in two_leg} & straight_names), "2 Leg HR must not reuse Straights of the Day"
 
-top5, seen = [], set()
-for r in rows:
-    if r["name"] in seen:
-        continue
-    seen.add(r["name"])
-    top5.append(r)
-    if len(top5) == 5:
-        break
-
-longshots = [r for r in listed_rows if (r["odds_value"] or 0) >= 700][:4]
-if len(longshots) < 4:
-    extra = [r for r in listed_rows if r not in longshots]
-    longshots.extend(extra[: 4 - len(longshots)])
-
 # Hits parlay selector (max 11 legs): contact-friendly hit form; skip high-whiff batters.
 for r in rows:
     recent_hit_form = (r["hr"] * 2.5) + (r["near"] * 1.5) + max(r["ev"] - 88.0, 0) * 0.6 + (r["barrel"] / 6.0)
@@ -521,9 +581,9 @@ def hits_base_pool(candidates: list[dict]) -> list[dict]:
         r
         for r in candidates
         if (r["hr"] >= 1 or r["near"] >= 1 or r["ev"] >= 90)
-        and r["split"] >= -0.20
+        and r["split"] >= 0.0
     ]
-    return pool if pool else list(candidates)
+    return pool if pool else [r for r in candidates if r["split"] >= -0.10]
 
 
 def select_hits_parlay(candidates: list[dict], *, avoid_whiff: bool, n: int = 11) -> list[dict]:
@@ -563,11 +623,10 @@ if len(hits_parlay_legs) < 11:
 hits_line_a = ", ".join(r["name_plain"] for r in hits_parlay_legs[:6])
 hits_line_b = ", ".join(r["name_plain"] for r in hits_parlay_legs[6:11])
 
-weather_rows = load_weather_rows()
+pitchers_attack = load_pitchers_to_attack()
+
 weather_top = sorted(weather_rows, key=lambda x: x["hr_pct"], reverse=True)[:5]
 weather_fades = sorted(weather_rows, key=lambda x: x["hr_pct"])[:4]
-weather_by_game = {w["game"]: w for w in weather_rows}
-pitchers_attack = load_pitchers_to_attack()
 
 
 def assert_game_cap(label: str, picked: list[dict], max_per_game: int = 2) -> None:
@@ -586,13 +645,15 @@ attack_bonus_by_pitcher = {
 }
 combined_ranked = []
 for r in rows:
+    if not summary_ticket_ok(r):
+        continue
     risk_row = resolve_pitcher(PITCHER_RISK, r["chip"])
     pitcher_name = risk_row["pitcher"] if risk_row else r["chip"]
     attack_bonus = attack_bonus_by_pitcher.get(pitcher_name, 0.0)
     combined_rank = (
         (r["risk"] * 12.0)
         + (r["split"] * 10.0)
-        + (r["park_pct"] * 0.60)
+        + (effective_park_pct(r) * 0.60)
         + (r["hr"] * 2.8)
         + (r["near"] * 1.6)
         + (max(r["ev"] - 90.0, 0.0) * 0.35)
@@ -601,29 +662,91 @@ for r in rows:
     )
     combined_ranked.append({**r, "combined_rank": combined_rank})
 
+if len(combined_ranked) < 5:
+    for r in rows:
+        if r["split"] < -0.10 or (r["split"] <= 0.0 and r["risk"] <= 0.0):
+            continue
+        if any(x["name"] == r["name"] for x in combined_ranked):
+            continue
+        risk_row = resolve_pitcher(PITCHER_RISK, r["chip"])
+        pitcher_name = risk_row["pitcher"] if risk_row else r["chip"]
+        attack_bonus = attack_bonus_by_pitcher.get(pitcher_name, 0.0)
+        combined_rank = (
+            (max(r["risk"], 0.0) * 12.0)
+            + (max(r["split"], 0.0) * 10.0)
+            + (effective_park_pct(r) * 0.60)
+            + (r["hr"] * 2.8)
+            + (r["near"] * 1.6)
+            + (r["score"] * 0.18)
+            + attack_bonus
+        )
+        combined_ranked.append({**r, "combined_rank": combined_rank})
+
 combined_ranked.sort(key=lambda r: (r["combined_rank"], r["score"]), reverse=True)
 top5 = pick_top_n(combined_ranked, 5, max_per_game=2, max_per_team=2)
 
-# Weather-heavy HR list: prioritize park/weather, distinct from Top 5, max 2 per game.
+# Weather-heavy HR list: park boost + positive split + form; distinct from Top 5.
 top5_names = {r["name"] for r in top5}
-weather_ranked = sorted(
-    rows,
-    key=lambda r: (
-        r["park_pct"],
-        r["split"],
-        r["hr"],
-        r["near"],
-        r["score"],
-    ),
+weather_primary = [r for r in rows if r["name"] not in top5_names and weather_play_ok(r)]
+weather_relaxed = [
+    r
+    for r in rows
+    if r["name"] not in top5_names
+    and effective_park_pct(r) >= 5
+    and r["split"] >= 0.15
+    and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
+    and (r["hr"] >= 1 or r["near"] >= 1)
+]
+weather_fill = [
+    r
+    for r in rows
+    if r["name"] not in top5_names
+    and effective_park_pct(r) >= 10
+    and r["split"] >= 0.0
+    and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
+    and r["score"] >= 75
+]
+weather_merged: dict[str, dict] = {}
+for r in weather_primary + weather_relaxed + weather_fill:
+    weather_merged.setdefault(r["name"], r)
+weather_candidates = sorted(
+    weather_merged.values(),
+    key=lambda r: (weather_play_rank(r), r["score"], r["risk"]),
     reverse=True,
 )
 weather5 = pick_top_n(
-    weather_ranked,
+    weather_candidates,
     5,
     exclude_names=top5_names,
     max_per_game=2,
     max_per_team=None,
 )
+
+longshot_pool = [r for r in listed_rows if longshot_ok(r)]
+longshot_pool.sort(key=straight_attack_rank, reverse=True)
+longshots = pick_top_n(longshot_pool, 4, max_per_game=2, max_per_team=2)
+if len(longshots) < 4:
+    have = {x["name"] for x in longshots}
+    longshot_fallback = sorted(
+        [
+            r
+            for r in listed_rows
+            if (r["odds_value"] or 0) >= 700
+            and r["split"] >= 0.0
+            and r["name"] not in have
+        ],
+        key=straight_attack_rank,
+        reverse=True,
+    )
+    longshots.extend(
+        pick_top_n(
+            longshot_fallback,
+            4 - len(longshots),
+            exclude_names=have,
+            max_per_game=2,
+            max_per_team=2,
+        )
+    )
 assert_game_cap("Top 5 HR Tickets", top5)
 assert_game_cap("Top 5 Weather Heavy HR Plays", weather5)
 
@@ -732,7 +855,7 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                     <h3>Top 5 HR Tickets (Attack + Weather + HR Risk)</h3>
                     <div class="top-five-list">
 """ + "\n".join(
-    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {r["park_pct"]}%</small></span><strong>{r["score"]}</strong></div>'
+    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {effective_park_pct(r)}%</small></span><strong>{r["score"]}</strong></div>'
     for r in top5
 ) + """
                     </div>

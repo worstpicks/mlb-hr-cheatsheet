@@ -384,7 +384,36 @@ if len(top3) < 3:
     )
     top3 = pick_top_n(extra, 3, exclude_names=straight_names, max_per_game=2, max_per_team=2)
 
-two_leg = [straight_o05, straight_o15]
+two_leg_pool = [
+    r
+    for r in straight_rows
+    if r["name"] not in straight_names
+    and r["name"] not in {x["name"] for x in top3}
+    and goblin_hr_leg_ok(r)
+]
+two_leg_pool.sort(key=lambda x: (straight_attack_rank(x), x["rank"], x["score"]), reverse=True)
+two_leg = pick_top_n(
+    two_leg_pool,
+    2,
+    exclude_names=straight_names | {x["name"] for x in top3},
+    max_per_game=1,
+    max_per_team=2,
+)
+if len(two_leg) < 2:
+    two_leg_fallback = [
+        r
+        for r in straight_rows
+        if r["name"] not in straight_names
+        and r["name"] not in {x["name"] for x in top3}
+    ]
+    two_leg_fallback.sort(key=lambda x: (straight_attack_rank(x), x["rank"], x["score"]), reverse=True)
+    two_leg = pick_top_n(
+        two_leg_fallback,
+        2,
+        exclude_names=straight_names | {x["name"] for x in top3},
+        max_per_game=1,
+        max_per_team=2,
+    )
 
 fav_pool = [
     r
@@ -438,7 +467,9 @@ def fav_leg_label(row: dict) -> str:
 
 
 assert len(top3) == 3, "Goblin 3-leg needs 3 picks"
+assert len(two_leg) == 2, "Goblin 2-leg needs 2 picks"
 assert len(fav3) == 3, "Favorite 3-leg needs 3 picks"
+assert not ({x["name"] for x in two_leg} & straight_names), "2 Leg HR must not reuse Straights of the Day"
 
 top5, seen = [], set()
 for r in rows:

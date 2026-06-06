@@ -8,6 +8,8 @@ from pathlib import Path
 THREE_LEG_LABEL = "Add 3 Leg HR to Gambly"
 TWO_LEG_LABEL = "Add 2 Leg HR to Gambly"
 FAV_THREE_LABEL = "Add Favorite 3 Leg to Gambly"
+STRAIGHT_O05_LABEL = "Add O0.5 Straight to Gambly"
+STRAIGHT_O15_LABEL = "Add O1.5 Straight to Gambly"
 
 FAV_THREE_REQUIRED_EMOJIS = ("⭐",)  # Favorite 3 Leg: ⭐ only (no moonshot required on label)
 
@@ -69,6 +71,17 @@ def validate_three_leg_parlays(html_text: str, fav_names: set[str] | None = None
     return errors
 
 
+def straight_batters(html_text: str) -> set[str]:
+    names: set[str] = set()
+    for label in (STRAIGHT_O05_LABEL, STRAIGHT_O15_LABEL):
+        try:
+            lines = extract_goblin_gambly_lines(html_text, label)
+        except (ValueError, json.JSONDecodeError):
+            continue
+        names.update(gambly_batter(x) for x in lines)
+    return names
+
+
 def validate_two_leg_parlay(html_text: str) -> list[str]:
     """Return list of error strings; empty means OK."""
     errors: list[str] = []
@@ -88,6 +101,10 @@ def validate_two_leg_parlay(html_text: str) -> list[str]:
     overlap = set(two_b) & set(three_b)
     if overlap:
         errors.append(f"2 Leg HR and 3 Leg HR share batters: {sorted(overlap)}")
+
+    straight_overlap = set(two_b) & straight_batters(html_text)
+    if straight_overlap:
+        errors.append(f"2 Leg HR and Straights of the Day share batters: {sorted(straight_overlap)}")
 
     return errors
 
@@ -137,7 +154,7 @@ def main() -> int:
     if errors:
         return 1
     print("OK   3 Leg HR and Favorite 3 Leg are distinct ⭐ favorites")
-    print("OK   2 Leg HR and 3 Leg HR are distinct")
+    print("OK   2 Leg HR is distinct from 3 Leg HR and Straights of the Day")
     print("OK   All Goblin Gambly data attributes parse as JSON")
     return 0
 

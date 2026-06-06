@@ -68,6 +68,10 @@ If a batter row shows the wrong SP in the title or `chips: ["vs …"]`, re-run i
 
 **Robbie Ray SF @ CHC synthetic CSV:** PropFinder may not export `hr-matchups-SF-at-CHC-Robbie-Ray-YYYY-MM-DD.csv`. After every `import-sheet-csvs.py`, confirm that file is still listed in `data/manifest-YYYY-MM-DD.json`; restore from git or regenerate if the importer dropped it.
 
+**June 6+ synthetic matchups (Bellozo / Canning / McLean):** After every import for slates where PropFinder gaps exist, run `python build-synthetic-0606-matchups.py` (or the slate's equivalent) and confirm `hr-matchups-MIL-at-COL-Valente-Bellozo-*`, `hr-matchups-NYM-at-SD-Griffin-Canning-*`, and `hr-matchups-NYM-at-SD-Nolan-McLean-*` remain in the manifest. **Re-append Valente Bellozo** to `hr-targets-overall-YYYY-MM-DD.csv` if import drops him (risk 1.09; LHB +0.68, RHB +1.15).
+
+**Always use freshest data:** Before any build, patch, audit, or push — re-run `python import-sheet-csvs.py --date YYYY-MM-DD` from Downloads. Never ship Goblin's Insight, Straights, Top 5, or summary blocks from a prior slate or stale `preview/index.html` cache; verify on disk with PowerShell/grep after patch.
+
 **Goblin / Favorite 3-leg guards:** Reserve the top three ⭐🌕 favorites (positive split) for **Worst Pickz Favorite 3 Leg** — do not place them in 3 Leg HR. If straights would consume two moonshot favorites and leave fewer than three for Favorite 3 Leg, swap O0.5 to the next-best non-moonshot attack lane (e.g. Jordan Walker vs Singer bum) instead of using a third moonshot favorite straight.
 
 ## Step 0a-b — Batter name normalization (required)

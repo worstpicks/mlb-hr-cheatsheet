@@ -41,6 +41,9 @@ def compact_row_line(row: dict) -> str:
     park = row.get("park_pct")
     if park is not None:
         parts.append(f"park {park:+d}%")
+    zone = row.get("zone_score")
+    if zone is not None:
+        parts.append(f"zone {zone:.1f}")
     return " · ".join(parts)
 
 
@@ -59,6 +62,11 @@ def straight_pick_why(row: dict, *, leg: str) -> tuple[str, str]:
         edge_bits.append(f"attackable HR risk {risk:+.2f}")
     if park is not None and park >= 3:
         edge_bits.append(f"park/weather +{park}%")
+    zone = row.get("zone_score")
+    if zone is not None and zone >= 28:
+        edge_bits.append(f"elite zone fit {zone:.1f}")
+    elif zone is not None and zone >= 22:
+        edge_bits.append(f"zone fit {zone:.1f}")
     primary = (
         ", ".join(edge_bits)
         if edge_bits
@@ -70,15 +78,14 @@ def straight_pick_why(row: dict, *, leg: str) -> tuple[str, str]:
         near = row.get("near", 0)
         form = f"{form} · {hr} HR / {near} near-HR multi-HR profile"
     elif leg == "o05":
-        form = f"{form} · best O0.5 straight lane (form + split + park)"
+        form = f"{form} · best O0.5 straight lane (form + split + park + zone)"
     return primary, form
 
 
 def compact_goblin_leg(row: dict) -> str:
     base = compact_note(row.get("note", ""))
-    extra = compact_row_line(row)
-    if base and extra:
-        # Avoid duplicating stats already in compact_note
-        if base in extra or extra in base:
-            return base
-    return base or extra
+    zone = row.get("zone_score")
+    if zone is not None and "zone" not in base.lower():
+        zone_tail = f"zone {zone:.1f}"
+        return f"{base} · {zone_tail}" if base else zone_tail
+    return base

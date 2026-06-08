@@ -101,7 +101,14 @@ def collect_rows():
             else:
                 split = 0.0
                 risk = 0.0
-            rank = r["score"] + split * 8.0 + risk * 4.0 + park_pct * 0.20
+            zone_score = r.get("zoneScore")
+            rank = (
+                r["score"]
+                + split * 8.0
+                + risk * 4.0
+                + park_pct * 0.20
+                + (zone_score or 0) * 0.18
+            )
             whiff_pct = r.get("whiffPct")
             k_pct = r.get("kPct")
             rows.append(
@@ -122,6 +129,11 @@ def collect_rows():
                     "split": split,
                     "risk": risk,
                     "park_pct": park_pct,
+                    "zone_score": zone_score,
+                    "zone_contact": r.get("zoneContact"),
+                    "zone_barrel": r.get("zoneBarrel"),
+                    "zone_hr": r.get("zoneHr"),
+                    "zone_hard_hit": r.get("zoneHardHit"),
                     "rank": rank,
                     "whiff_pct": whiff_pct,
                     "k_pct": k_pct,
@@ -218,6 +230,7 @@ def straight_attack_rank(row: dict) -> float:
         + row["hr"] * 3.0
         + row["near"] * 1.4
         + max(row["ev"] - 90.0, 0.0) * 0.45
+        + (row.get("zone_score") or 0) * 0.40
     )
 
 
@@ -270,6 +283,7 @@ def multi_hr_rank(row: dict) -> float:
         + row["split"] * 8.0
         + row["risk"] * 5.0
         + row["park_pct"] * 0.40
+        + (row.get("zone_score") or 0) * 0.45
     )
     return rank
 

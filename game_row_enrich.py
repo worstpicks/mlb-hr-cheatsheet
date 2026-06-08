@@ -11,6 +11,7 @@ from csv_slate_meta import derive_games_from_csv, name_lookup_key, read_batter_r
 from note_compact import compact_note
 from csv_slate_meta import manifest_matchup_files, parse_matchup_filename
 from sheet_data import load_pitcher_risk, resolve_pitcher
+from zone_matchups import load_zone_lookup, lookup_zone_row
 
 ROOT = Path(__file__).resolve().parent
 
@@ -447,7 +448,7 @@ def pick_top3_and_sleeper(rows: list[dict]) -> tuple[list[dict], dict | None]:
     return top3, best_outside
 
 
-def enrich_row(entry: dict, stats: dict | None) -> dict:
+def enrich_row(entry: dict, stats: dict | None, zone: dict | None = None) -> dict:
     out = dict(entry)
     st = stats or {}
     hr = st.get("hr")
@@ -488,11 +489,22 @@ def enrich_row(entry: dict, stats: dict | None) -> dict:
         out["note"] = inject_air_into_note(out.get("note", ""), clause)
     out["note"] = compact_note(out.get("note", ""))
     out["_formScore"] = form_power_score({**st, "hr": hr, "near": near, "ev": ev})
+    if zone and zone.get("zone_score") is not None:
+        out["zoneScore"] = round(zone["zone_score"], 1)
+        if zone.get("contact") is not None:
+            out["zoneContact"] = round(zone["contact"], 1)
+        if zone.get("barrel") is not None:
+            out["zoneBarrel"] = round(zone["barrel"], 1)
+        if zone.get("hr") is not None:
+            out["zoneHr"] = round(zone["hr"], 1)
+        if zone.get("hard_hit") is not None:
+            out["zoneHardHit"] = round(zone["hard_hit"], 1)
     return out
 
 
 def enrich_games_list(games: list[dict], sheet_date: str) -> list[dict]:
     batter_lookup = load_batter_stat_lookup(sheet_date)
+    zone_lookup = load_zone_lookup(sheet_date)
     hr9_lookup = load_pitcher_hr9_lookup(sheet_date)
     weather_lookup = load_weather_lookup(sheet_date)
     risk_path = ROOT / "data" / f"hr-targets-overall-{sheet_date}.csv"
@@ -503,8 +515,11 @@ def enrich_games_list(games: list[dict], sheet_date: str) -> list[dict]:
         weather = lookup_weather_for_game(g.get("title", ""), weather_lookup)
         rows = []
         for entry in game.get("rows", []):
-            key = name_lookup_key(entry["name"].rsplit(" (", 1)[0])
-            rows.append(enrich_row(entry, batter_lookup.get(key)))
+            plain = entry["name"].rsplit(" (", 1)[0]
+            key = name_lookup_key(plain)
+            chip = (entry.get("chips") or [""])[0]
+            zone = lookup_zone_row(plain, chip, zone_lookup)
+            rows.append(enrich_row(entry, batter_lookup.get(key), zone))
         top3, sleeper = pick_top3_and_sleeper(rows)
         g["rows"] = rows
         g["top3"] = [plain_name(r) for r in top3]
@@ -568,6 +583,16 @@ def emit_games_js(games_data: list[dict]) -> str:
                 parts.append(f"fbPct: {entry['fbPct']}")
             if entry.get("pullAir") is not None:
                 parts.append(f"pullAir: {entry['pullAir']}")
+            if entry.get("zoneScore") is not None:
+                parts.append(f"zoneScore: {entry['zoneScore']}")
+            if entry.get("zoneContact") is not None:
+                parts.append(f"zoneContact: {entry['zoneContact']}")
+            if entry.get("zoneBarrel") is not None:
+                parts.append(f"zoneBarrel: {entry['zoneBarrel']}")
+            if entry.get("zoneHr") is not None:
+                parts.append(f"zoneHr: {entry['zoneHr']}")
+            if entry.get("zoneHardHit") is not None:
+                parts.append(f"zoneHardHit: {entry['zoneHardHit']}")
             out.append("            { " + ", ".join(parts) + " },")
         out.append("        ],")
         out.append("    },")

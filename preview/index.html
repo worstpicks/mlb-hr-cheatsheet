@@ -863,7 +863,7 @@
             font-weight: 800;
         }
         .player-rpg { padding: 10px 14px; border-radius: 12px; background: rgba(7,12,22,0.92); border: 1px solid rgba(96,165,250,0.16); display: grid; gap: 10px; }
-        .player-rpg-wide { grid-column: 1 / -1; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; }
+        .player-rpg-wide { grid-column: 1 / -1; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; }
         .player-rpg-title { grid-column: 1 / -1; color: #93c5fd; font-size: 0.64rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.9px; text-align: center; }
         .player-rpg-row { display: grid; gap: 5px; justify-items: center; text-align: center; padding: 0 8px; }
         .player-rpg-label { color: #dbeafe; font-size: 0.68rem; line-height: 1.2; }
@@ -874,6 +874,59 @@
         .star-meter.form .star-fill { color: #c084fc; }
         .star-meter.park .star-fill { color: #facc15; }
         .star-meter.attack .star-fill { color: #60a5fa; }
+        .star-meter.zone .star-fill { color: #34d399; }
+        .zone-fit-box {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(6, 78, 59, 0.18);
+            border: 1px solid rgba(52, 211, 153, 0.28);
+        }
+        .zone-fit-box__title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #6ee7b7;
+            font-size: 0.64rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.85px;
+        }
+        .zone-fit-box__score {
+            color: #ecfdf5;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+        }
+        .zone-fit-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+        }
+        .zone-fit-stat {
+            display: grid;
+            gap: 3px;
+            justify-items: center;
+            text-align: center;
+            padding: 6px 4px;
+            border-radius: 8px;
+            background: rgba(8, 15, 28, 0.55);
+            border: 1px solid rgba(52, 211, 153, 0.14);
+        }
+        .zone-fit-stat__label {
+            color: #a7f3d0;
+            font-size: 0.58rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            line-height: 1.2;
+        }
+        .zone-fit-stat strong {
+            color: #ecfdf5;
+            font-size: 0.88rem;
+            font-weight: 800;
+        }
         .pick-note { font-size: 0.88rem; margin-bottom: 7px; }
         .chips { display: flex; flex-wrap: wrap; gap: 7px; }
         .chip { padding: 4px 8px; border-radius: 999px; background: rgba(30,41,59,0.92); border: 1px solid rgba(96,165,250,0.14); color: #dbeafe; font-size: 0.76rem; }
@@ -2992,7 +3045,7 @@
                             </div>
                             <ul class="straight-pick-factors">
                                 <li><strong>Primary edge</strong><small>strong platoon split +0.88 vs Springs, attackable HR risk +0.93, park/weather +44%</small></li>
-                                <li><strong>Why this pick</strong><small>1 HR, 2 near-HR · 94.6 mph EV · split +0.88 · risk +0.93 · park +44% · best O0.5 straight lane (form + split + park)</small></li>
+                                <li><strong>Why this pick</strong><small>1 HR, 2 near-HR · 94.6 mph EV · split +0.88 · risk +0.93 · park +44% · zone 21.1 · best O0.5 straight lane (form + split + park + zone)</small></li>
                             </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Jackson Chourio - Over 0.5 homerun&quot;]'>Add O0.5 Straight to Gambly</button>
@@ -3005,8 +3058,8 @@
                                 <span class="straight-pick-meta">Listed +225 - Over 0.5 HR &middot; Score 93 &middot; HOU @ LAA</span>
                             </div>
                             <ul class="straight-pick-factors">
-                                <li><strong>Primary edge</strong><small>strong platoon split +1.59 vs Rodriguez, attackable HR risk +1.35, park/weather +8%</small></li>
-                                <li><strong>Why this pick</strong><small>2 HR, 4 near-HR · 99.4 mph EV · split +1.59 · risk +1.35 · park +8% · 2 HR / 4 near-HR multi-HR profile</small></li>
+                                <li><strong>Primary edge</strong><small>strong platoon split +1.59 vs Rodriguez, attackable HR risk +1.35, park/weather +8%, elite zone fit 41.1</small></li>
+                                <li><strong>Why this pick</strong><small>2 HR, 4 near-HR · 99.4 mph EV · split +1.59 · risk +1.35 · park +8% · zone 41.1 · 2 HR / 4 near-HR multi-HR profile</small></li>
                             </ul>
                             <div class="straight-pick-actions">
                                 <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Yordan Alvarez - Over 1.5 homeruns&quot;]'>Add O1.5 Straight to Gambly</button>
@@ -3020,17 +3073,17 @@
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Willy Adames HR</strong><small>2 HR, 4 near-HR, 93.2 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 53%, pull-air 41%.</small></li>
-                                <li><strong>Eric Haase HR</strong><small>2 HR, 3 near-HR, 92.9 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 36%, pull-air 21%.</small></li>
-                                <li><strong>Isaac Paredes HR</strong><small>2 HR, 2 near-HR, 86.3 mph EV. Rodriguez RHB split +0.02, HR risk 1.35. lighter EV form (86.3 mph). Air: FB 26%, pull-air 42%.</small></li>
+                                <li><strong>Willy Adames HR</strong><small>2 HR, 4 near-HR, 93.2 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 53%, pull-air 41%. · zone 25.2</small></li>
+                                <li><strong>Eric Haase HR</strong><small>2 HR, 3 near-HR, 92.9 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 36%, pull-air 21%. · zone 27.7</small></li>
+                                <li><strong>Isaac Paredes HR</strong><small>2 HR, 2 near-HR, 86.3 mph EV. Rodriguez RHB split +0.02, HR risk 1.35. lighter EV form (86.3 mph). Air: FB 26%, pull-air 42%. · zone 32.9</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Willy Adames - Over 0.5 homerun&quot;, &quot;Eric Haase - Over 0.5 homerun&quot;, &quot;Isaac Paredes - Over 0.5 homerun&quot;]'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>LaMonte Wade Jr. HR</strong><small>1 HR, 1 near-HR, 98.0 mph EV. Rodriguez LHB split +1.59, HR risk 1.35. Air: FB 100%.</small></li>
-                                <li><strong>Junior Caminero HR</strong><small>1 HR, 1 near-HR, 98.2 mph EV. Early RHB split +0.25, HR risk 0.55. Air: FB 26%, pull-air 16%.</small></li>
+                                <li><strong>LaMonte Wade Jr. HR</strong><small>1 HR, 1 near-HR, 98.0 mph EV. Rodriguez LHB split +1.59, HR risk 1.35. Air: FB 100%. · zone 1.6</small></li>
+                                <li><strong>Junior Caminero HR</strong><small>1 HR, 1 near-HR, 98.2 mph EV. Early RHB split +0.25, HR risk 0.55. Air: FB 26%, pull-air 16%. · zone 30.1</small></li>
                             </ol>
                             <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;LaMonte Wade Jr. - Over 0.5 homerun&quot;, &quot;Junior Caminero - Over 0.5 homerun&quot;]'>Add 2 Leg HR to Gambly</button></div>
                         </div>
@@ -3045,11 +3098,11 @@
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>Jonathan Aranda HR &#11088;</strong><small>0 HR, 1 near-HR, 96.5 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events. Air: FB 38%, pull-air 15%.</small></li>
-                                <li><strong>Samuel Basallo HR &#11088;</strong><small>1 HR, 1 near-HR, 100.8 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%). Air: FB 60%, pull-air 40%.</small></li>
-                                <li><strong>Ben Rice HR &#11088;</strong><small>1 HR, 2 near-HR, 91.1 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 30%, pull-air 30%.</small></li>
+                                <li><strong>Jonathan Aranda HR &#11088;</strong><small>0 HR, 1 near-HR, 96.5 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events. Air: FB 38%, pull-air 15%. · zone 26.0</small></li>
+                                <li><strong>Ben Rice HR &#11088;</strong><small>1 HR, 2 near-HR, 91.1 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 30%, pull-air 30%. · zone 31.8</small></li>
+                                <li><strong>Samuel Basallo HR &#11088;</strong><small>1 HR, 1 near-HR, 100.8 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%). Air: FB 60%, pull-air 40%. · zone 17.5</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Jonathan Aranda - Over 0.5 homerun&quot;, &quot;Samuel Basallo - Over 0.5 homerun&quot;, &quot;Ben Rice - Over 0.5 homerun&quot;]'>Add Favorite 3 Leg to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Jonathan Aranda - Over 0.5 homerun&quot;, &quot;Ben Rice - Over 0.5 homerun&quot;, &quot;Samuel Basallo - Over 0.5 homerun&quot;]'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Top 5 Pitchers To Attack</h4>
@@ -3219,10 +3272,10 @@ const games = [
         top3: ["Pete Alonso", "Dominic Canzone", "Samuel Basallo"],
         top3Detail: [{"name": "Pete Alonso", "score": 86, "why": "#1 model score in this game · 2 HR, 2 near-HR, 96 mph EV · vs Hancock · heating L5 · high blast rate", "chip": "Hancock", "rank": 1, "oddsShort": "+378"}, {"name": "Dominic Canzone", "score": 84, "why": "#2 model score in this game · 2 HR, 2 near-HR, 94 mph EV · vs Gibson · heating L5 · high blast rate", "chip": "Gibson", "rank": 2, "oddsShort": "+479"}, {"name": "Samuel Basallo", "score": 82, "why": "#3 model score in this game · 1 HR, 1 near-HR, 101 mph EV · vs Hancock · elite EV · WPZ Favorite", "chip": "Hancock", "rank": 3, "oddsShort": "+428"}],
         rows: [
-            { name: "Pete Alonso (R)", odds: "Listed +378 - Over 0.5 HR", score: 86, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 95.5 mph EV. Hancock RHB split -0.24, HR risk 0.34. slight split headwind (-0.24); park/weather net drag (-6%). Air: FB 32%.", chips: ["vs Hancock"], blast: "high", formTrend: "heating", fbPct: 31.6 },
-            { name: "Adley Rutschman (S)", odds: "Listed +540 - Over 0.5 HR", score: 79, emojis: "💎", note: "1 HR, 1 near-HR, 96.8 mph EV. Hancock RHB split -0.24, HR risk 0.34. slight split headwind (-0.24); park/weather net drag (-6%). Air: FB 38%, pull-air 15%.", chips: ["vs Hancock"], blast: "good", formTrend: "flat", fbPct: 38.5, pullAir: 15.4 },
-            { name: "Samuel Basallo (L)", odds: "Listed +428 - Over 0.5 HR", score: 82, emojis: "🚀 ⭐ 💎", note: "1 HR, 1 near-HR, 100.8 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%). Air: FB 60%, pull-air 40%.", chips: ["vs Hancock"], blast: "good", formTrend: "flat", fbPct: 60.0, pullAir: 40.0 },
-            { name: "Jackson Holliday (L)", odds: "Listed +870 - Over 0.5 HR", score: 71, emojis: "💎", note: "0 HR, 94.7 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%); limited recent HR events. Air: FB 50%.", chips: ["vs Hancock"], blast: "good", formTrend: "flat", fbPct: 50.0 },
+            { name: "Pete Alonso (R)", odds: "Listed +378 - Over 0.5 HR", score: 86, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 95.5 mph EV. Hancock RHB split -0.24, HR risk 0.34. slight split headwind (-0.24); park/weather net drag (-6%). Air: FB 32%.", chips: ["vs Hancock"], blast: "high", formTrend: "heating", fbPct: 31.6, zoneScore: 21.0, zoneContact: 47.6, zoneHr: 17.3, zoneHardHit: 44.2 },
+            { name: "Adley Rutschman (S)", odds: "Listed +540 - Over 0.5 HR", score: 79, emojis: "💎", note: "1 HR, 1 near-HR, 96.8 mph EV. Hancock RHB split -0.24, HR risk 0.34. slight split headwind (-0.24); park/weather net drag (-6%). Air: FB 38%, pull-air 15%.", chips: ["vs Hancock"], blast: "good", formTrend: "flat", fbPct: 38.5, pullAir: 15.4, zoneScore: 19.9, zoneContact: 24.5, zoneBarrel: 21.9, zoneHr: 9.4, zoneHardHit: 27.8 },
+            { name: "Samuel Basallo (L)", odds: "Listed +428 - Over 0.5 HR", score: 82, emojis: "🚀 ⭐ 💎", note: "1 HR, 1 near-HR, 100.8 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%). Air: FB 60%, pull-air 40%.", chips: ["vs Hancock"], blast: "good", formTrend: "flat", fbPct: 60.0, pullAir: 40.0, zoneScore: 17.5, zoneContact: 14.4, zoneBarrel: 15.0, zoneHr: 6.6, zoneHardHit: 35.4 },
+            { name: "Jackson Holliday (L)", odds: "Listed +870 - Over 0.5 HR", score: 71, emojis: "💎", note: "0 HR, 94.7 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%); limited recent HR events. Air: FB 50%.", chips: ["vs Hancock"], blast: "good", formTrend: "flat", fbPct: 50.0, zoneScore: 13.2, zoneContact: 36.0, zoneHr: 9.0, zoneHardHit: 27.6 },
             { name: "Luke Raley (L)", odds: "Listed +395 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 73.6 mph EV. Gibson split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%). Air: FB 60%, pull-air 20%.", chips: ["vs Gibson"], blast: "good", formTrend: "flat", fbPct: 60.0, pullAir: 20.0 },
             { name: "Dominic Canzone (L)", odds: "Listed +479 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 94.2 mph EV. Gibson split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%). Air: FB 40%, pull-air 40%.", chips: ["vs Gibson"], blast: "high", formTrend: "heating", fbPct: 40.0, pullAir: 40.0 },
             { name: "Julio Rodriguez (R)", odds: "Listed +441 - Over 0.5 HR", score: 82, emojis: "⭐ 💎", note: "1 HR, 1 near-HR, 99.6 mph EV. Gibson split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%). Air: FB 44%, pull-air 11%.", chips: ["vs Gibson"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 44.4, pullAir: 11.1 },
@@ -3237,11 +3290,11 @@ const games = [
         top3: ["Junior Caminero", "Willson Contreras", "Yandy Diaz"],
         top3Detail: [{"name": "Junior Caminero", "score": 80, "why": "#1 model score in this game · 1 HR, 1 near-HR, 98 mph EV · vs Early", "chip": "Early", "rank": 1, "oddsShort": "+340"}, {"name": "Willson Contreras", "score": 77, "why": "#2 model score in this game · 1 HR, 2 near-HR, 93 mph EV · vs Englert · heating L5", "chip": "Englert", "rank": 2, "oddsShort": "+350"}, {"name": "Yandy Diaz", "score": 74, "why": "#3 model score in this game · 0 HR, 2 near-HR, 94 mph EV · vs Early", "chip": "Early", "rank": 3, "oddsShort": "+450"}],
         rows: [
-            { name: "Junior Caminero (R)", odds: "Listed +340 - Over 0.5 HR", score: 80, emojis: "💎", note: "1 HR, 1 near-HR, 98.2 mph EV. Early RHB split +0.25, HR risk 0.55. Air: FB 26%, pull-air 16%.", chips: ["vs Early"], blast: "good", formTrend: "flat", fbPct: 26.3, pullAir: 15.8 },
-            { name: "Yandy Diaz (R)", odds: "Listed +450 - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 2 near-HR, 93.8 mph EV. Early RHB split +0.25, HR risk 0.55. Air: FB 23%, pull-air 8%.", chips: ["vs Early"], blast: "good", formTrend: "flat", fbPct: 23.1, pullAir: 7.7 },
-            { name: "Jonathan Aranda (L)", odds: "Listed +690 - Over 0.5 HR", score: 74, emojis: "⭐ 💎", note: "0 HR, 1 near-HR, 96.5 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events. Air: FB 38%, pull-air 15%.", chips: ["vs Early"], blast: "good", formTrend: "flat", fbPct: 38.5, pullAir: 15.4 },
+            { name: "Junior Caminero (R)", odds: "Listed +340 - Over 0.5 HR", score: 80, emojis: "💎", note: "1 HR, 1 near-HR, 98.2 mph EV. Early RHB split +0.25, HR risk 0.55. Air: FB 26%, pull-air 16%.", chips: ["vs Early"], blast: "good", formTrend: "flat", fbPct: 26.3, pullAir: 15.8, zoneScore: 30.1, zoneContact: 8.4, zoneBarrel: 33.0, zoneHr: 32.1, zoneHardHit: 32.2 },
+            { name: "Yandy Diaz (R)", odds: "Listed +450 - Over 0.5 HR", score: 74, emojis: "💎", note: "0 HR, 2 near-HR, 93.8 mph EV. Early RHB split +0.25, HR risk 0.55. Air: FB 23%, pull-air 8%.", chips: ["vs Early"], blast: "good", formTrend: "flat", fbPct: 23.1, pullAir: 7.7, zoneScore: 36.2, zoneContact: 37.2, zoneBarrel: 31.7, zoneHr: 33.4, zoneHardHit: 45.4 },
+            { name: "Jonathan Aranda (L)", odds: "Listed +690 - Over 0.5 HR", score: 74, emojis: "⭐ 💎", note: "0 HR, 1 near-HR, 96.5 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events. Air: FB 38%, pull-air 15%.", chips: ["vs Early"], blast: "good", formTrend: "flat", fbPct: 38.5, pullAir: 15.4, zoneScore: 26.0, zoneContact: 34.6, zoneBarrel: 24.7, zoneHr: 8.2, zoneHardHit: 45.8 },
             { name: "Hunter Feduccia (L)", odds: "Listed prop - Over 0.5 HR", score: 64, emojis: "💎", note: "0 HR, 89.7 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events. Air: FB 67%, pull-air 50%.", chips: ["vs Early"], formTrend: "flat", fbPct: 66.7, pullAir: 50.0 },
-            { name: "Willson Contreras (R)", odds: "Listed +350 - Over 0.5 HR", score: 77, emojis: "💎", note: "1 HR, 2 near-HR, 93.1 mph EV. Englert split/risk data unavailable. limited split/risk sample. Air: FB 15%, pull-air 46%.", chips: ["vs Englert"], blast: "good", formTrend: "heating", fbPct: 15.4, pullAir: 46.2 },
+            { name: "Willson Contreras (R)", odds: "Listed +350 - Over 0.5 HR", score: 77, emojis: "💎", note: "1 HR, 2 near-HR, 93.1 mph EV. Englert split/risk data unavailable. limited split/risk sample. Air: FB 15%, pull-air 46%.", chips: ["vs Englert"], blast: "good", formTrend: "heating", fbPct: 15.4, pullAir: 46.2, zoneScore: 32.3, zoneContact: 54.8, zoneBarrel: 32.9, zoneHr: 18.2, zoneHardHit: 39.3 },
         ],
     },
     {
@@ -3252,14 +3305,14 @@ const games = [
         top3: ["Jose Ramirez", "Ben Rice", "Travis Bazzana"],
         top3Detail: [{"name": "Jose Ramirez", "score": 84, "why": "#1 model score in this game · 2 HR, 2 near-HR, 94 mph EV · vs Warren · heating L5 · high blast rate · WPZ Favorite", "chip": "Warren", "rank": 1, "oddsShort": "+450"}, {"name": "Ben Rice", "score": 75, "why": "#2 model score in this game · 1 HR, 2 near-HR, 91 mph EV · vs Williams · WPZ Favorite", "chip": "Williams", "rank": 2, "oddsShort": "+310"}, {"name": "Travis Bazzana", "score": 73, "why": "#3 model score in this game · 1 HR, 1 near-HR, 91 mph EV · vs Warren", "chip": "Warren", "rank": 3, "oddsShort": "+710"}],
         rows: [
-            { name: "Jose Ramirez (S)", odds: "Listed +450 - Over 0.5 HR", score: 84, emojis: "⭐ 🌕 💣", note: "2 HR, 2 near-HR, 94.1 mph EV. Warren RHB split -0.29, HR risk -0.16. slight split headwind (-0.29); pitcher risk below avg (-0.16). Air: FB 40%, pull-air 50%.", chips: ["vs Warren"], blast: "high", formTrend: "heating", fbPct: 40.0, pullAir: 50.0 },
-            { name: "Travis Bazzana (L)", odds: "Listed +710 - Over 0.5 HR", score: 73, emojis: "💎", note: "1 HR, 1 near-HR, 91.2 mph EV. Warren LHB split +0.16, HR risk -0.16. pitcher risk below avg (-0.16); park/weather net drag (-7%). Air: FB 40%, pull-air 15%.", chips: ["vs Warren"], blast: "good", formTrend: "flat", fbPct: 40.0, pullAir: 15.0 },
-            { name: "Chase DeLauter (L)", odds: "Listed +599 - Over 0.5 HR", score: 65, emojis: "💎", note: "0 HR, 90.9 mph EV. Warren LHB split +0.16, HR risk -0.16. pitcher risk below avg (-0.16); park/weather net drag (-7%). Air: FB 17%, pull-air 17%.", chips: ["vs Warren"], formTrend: "flat", fbPct: 16.7, pullAir: 16.7 },
-            { name: "David Fry (R)", odds: "Listed prop - Over 0.5 HR", score: 66, emojis: "💎", note: "0 HR, 1 near-HR, 90.1 mph EV. Warren RHB split -0.29, HR risk -0.16. slight split headwind (-0.29); pitcher risk below avg (-0.16). Air: FB 29%, pull-air 57%.", chips: ["vs Warren"], formTrend: "flat", fbPct: 28.6, pullAir: 57.1 },
-            { name: "Ben Rice (L)", odds: "Listed +310 - Over 0.5 HR", score: 75, emojis: "⭐ 💎", note: "1 HR, 2 near-HR, 91.1 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 30%, pull-air 30%.", chips: ["vs Williams"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 30.0, pullAir: 30.0 },
-            { name: "Trent Grisham (L)", odds: "Listed +428 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 88.4 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 25%, pull-air 12%.", chips: ["vs Williams"], blast: "good", formTrend: "flat", fbPct: 25.0, pullAir: 12.5 },
-            { name: "Cody Bellinger (L)", odds: "Listed +525 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 1 near-HR, 89.6 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 58%, pull-air 17%.", chips: ["vs Williams"], blast: "good", formTrend: "flat", fbPct: 58.3, pullAir: 16.7 },
-            { name: "Spencer Jones (L)", odds: "Listed +710 - Over 0.5 HR", score: 73, emojis: "💎", note: "0 HR, 96.6 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%); limited recent HR events.", chips: ["vs Williams"], blast: "good", formTrend: "flat", contactRisk: true },
+            { name: "Jose Ramirez (S)", odds: "Listed +450 - Over 0.5 HR", score: 84, emojis: "⭐ 🌕 💣", note: "2 HR, 2 near-HR, 94.1 mph EV. Warren RHB split -0.29, HR risk -0.16. slight split headwind (-0.29); pitcher risk below avg (-0.16). Air: FB 40%, pull-air 50%.", chips: ["vs Warren"], blast: "high", formTrend: "heating", fbPct: 40.0, pullAir: 50.0, zoneScore: 25.6, zoneContact: 29.4, zoneBarrel: 27.0, zoneHr: 16.2, zoneHardHit: 33.6 },
+            { name: "Travis Bazzana (L)", odds: "Listed +710 - Over 0.5 HR", score: 73, emojis: "💎", note: "1 HR, 1 near-HR, 91.2 mph EV. Warren LHB split +0.16, HR risk -0.16. pitcher risk below avg (-0.16); park/weather net drag (-7%). Air: FB 40%, pull-air 15%.", chips: ["vs Warren"], blast: "good", formTrend: "flat", fbPct: 40.0, pullAir: 15.0, zoneScore: 19.4, zoneContact: 39.8, zoneBarrel: 9.4, zoneHr: 11.3, zoneHardHit: 35.0 },
+            { name: "Chase DeLauter (L)", odds: "Listed +599 - Over 0.5 HR", score: 65, emojis: "💎", note: "0 HR, 90.9 mph EV. Warren LHB split +0.16, HR risk -0.16. pitcher risk below avg (-0.16); park/weather net drag (-7%). Air: FB 17%, pull-air 17%.", chips: ["vs Warren"], formTrend: "flat", fbPct: 16.7, pullAir: 16.7, zoneScore: 18.1, zoneContact: 29.3, zoneBarrel: 20.9, zoneHr: 17.5, zoneHardHit: 10.3 },
+            { name: "David Fry (R)", odds: "Listed prop - Over 0.5 HR", score: 66, emojis: "💎", note: "0 HR, 1 near-HR, 90.1 mph EV. Warren RHB split -0.29, HR risk -0.16. slight split headwind (-0.29); pitcher risk below avg (-0.16). Air: FB 29%, pull-air 57%.", chips: ["vs Warren"], formTrend: "flat", fbPct: 28.6, pullAir: 57.1, zoneScore: 16.1, zoneContact: 23.7, zoneBarrel: 12.0, zoneHr: 12.0, zoneHardHit: 23.9 },
+            { name: "Ben Rice (L)", odds: "Listed +310 - Over 0.5 HR", score: 75, emojis: "⭐ 💎", note: "1 HR, 2 near-HR, 91.1 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 30%, pull-air 30%.", chips: ["vs Williams"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 30.0, pullAir: 30.0, zoneScore: 31.8, zoneContact: 52.5, zoneBarrel: 16.3, zoneHr: 29.6, zoneHardHit: 48.0 },
+            { name: "Trent Grisham (L)", odds: "Listed +428 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 88.4 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 25%, pull-air 12%.", chips: ["vs Williams"], blast: "good", formTrend: "flat", fbPct: 25.0, pullAir: 12.5, zoneScore: 17.9, zoneContact: 33.0, zoneBarrel: 12.3, zoneHr: 13.7, zoneHardHit: 24.6 },
+            { name: "Cody Bellinger (L)", odds: "Listed +525 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 1 near-HR, 89.6 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%). Air: FB 58%, pull-air 17%.", chips: ["vs Williams"], blast: "good", formTrend: "flat", fbPct: 58.3, pullAir: 16.7, zoneScore: 21.2, zoneContact: 20.0, zoneBarrel: 19.4, zoneHr: 22.3, zoneHardHit: 22.8 },
+            { name: "Spencer Jones (L)", odds: "Listed +710 - Over 0.5 HR", score: 73, emojis: "💎", note: "0 HR, 96.6 mph EV. Williams LHB split +0.59, HR risk 0.38. park/weather net drag (-7%); limited recent HR events.", chips: ["vs Williams"], blast: "good", formTrend: "flat", contactRisk: true, zoneScore: 12.9, zoneContact: 28.9, zoneHardHit: 40.1 },
         ],
     },
     {
@@ -3272,11 +3325,11 @@ const games = [
         sleeper: "Kazuma Okamoto",
         sleeperDetail: {"name": "Kazuma Okamoto", "score": 72, "why": "Score 72 — outside top 3 on the sheet · hotter L5 power than #3 Bryce Harper · 1 HR, 2 near-HR, 87 mph EV · vs Sanchez", "chip": "Sanchez", "rank": null, "oddsShort": "+720"},
         rows: [
-            { name: "Kazuma Okamoto (R)", odds: "Listed +720 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 87.4 mph EV. Sanchez RHB split -1.04, HR risk -1.27. tough split lane (-1.04); pitcher suppresses HR (-1.27). Air: FB 33%, pull-air 22%.", chips: ["vs Sanchez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 22.2 },
-            { name: "Brandon Valenzuela (S)", odds: "Listed +800 - Over 0.5 HR", score: 76, emojis: "🚀 💎", note: "0 HR, 101.5 mph EV. Sanchez RHB split -1.04, HR risk -1.27. tough split lane (-1.04); pitcher suppresses HR (-1.27). Air: FB 25%.", chips: ["vs Sanchez"], blast: "good", formTrend: "flat", fbPct: 25.0 },
-            { name: "Adolis Garcia (R)", odds: "Listed +559 - Over 0.5 HR", score: 71, emojis: "💎", note: "1 HR, 1 near-HR, 89.2 mph EV. Corbin RHB split +0.33, HR risk -0.17. pitcher risk below avg (-0.17); weather carry headwind (-4%). Air: FB 33%, pull-air 25%.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", fbPct: 33.3, pullAir: 25.0 },
-            { name: "Brandon Marsh (L)", odds: "Listed +920 - Over 0.5 HR", score: 73, emojis: "💎", note: "1 HR, 1 near-HR, 91.4 mph EV. Corbin LHB split -1.10, HR risk -0.17. tough split lane (-1.10); pitcher risk below avg (-0.17). Air: FB 33%, pull-air 17%.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 16.7 },
-            { name: "Bryce Harper (L)", odds: "Listed +544 - Over 0.5 HR", score: 73, emojis: "⭐ 💎", note: "0 HR, 1 near-HR, 95.2 mph EV. Corbin LHB split -1.10, HR risk -0.17. tough split lane (-1.10); pitcher risk below avg (-0.17). Air: FB 25%, pull-air 12%.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 25.0, pullAir: 12.5 },
+            { name: "Kazuma Okamoto (R)", odds: "Listed +720 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 87.4 mph EV. Sanchez RHB split -1.04, HR risk -1.27. tough split lane (-1.04); pitcher suppresses HR (-1.27). Air: FB 33%, pull-air 22%.", chips: ["vs Sanchez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 22.2, zoneScore: 20.9, zoneContact: 55.1, zoneBarrel: 16.6, zoneHr: 8.1, zoneHardHit: 28.7 },
+            { name: "Brandon Valenzuela (S)", odds: "Listed +800 - Over 0.5 HR", score: 76, emojis: "🚀 💎", note: "0 HR, 101.5 mph EV. Sanchez RHB split -1.04, HR risk -1.27. tough split lane (-1.04); pitcher suppresses HR (-1.27). Air: FB 25%.", chips: ["vs Sanchez"], blast: "good", formTrend: "flat", fbPct: 25.0, zoneScore: 29.3, zoneContact: 24.7, zoneBarrel: 30.9, zoneHr: 30.9, zoneHardHit: 26.8 },
+            { name: "Adolis Garcia (R)", odds: "Listed +559 - Over 0.5 HR", score: 71, emojis: "💎", note: "1 HR, 1 near-HR, 89.2 mph EV. Corbin RHB split +0.33, HR risk -0.17. pitcher risk below avg (-0.17); weather carry headwind (-4%). Air: FB 33%, pull-air 25%.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", fbPct: 33.3, pullAir: 25.0, zoneScore: 19.9, zoneContact: 22.9, zoneBarrel: 7.8, zoneHr: 15.9, zoneHardHit: 40.6 },
+            { name: "Brandon Marsh (L)", odds: "Listed +920 - Over 0.5 HR", score: 73, emojis: "💎", note: "1 HR, 1 near-HR, 91.4 mph EV. Corbin LHB split -1.10, HR risk -0.17. tough split lane (-1.10); pitcher risk below avg (-0.17). Air: FB 33%, pull-air 17%.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 16.7, zoneScore: 13.0, zoneContact: 36.6, zoneBarrel: 6.0, zoneHardHit: 28.9 },
+            { name: "Bryce Harper (L)", odds: "Listed +544 - Over 0.5 HR", score: 73, emojis: "⭐ 💎", note: "0 HR, 1 near-HR, 95.2 mph EV. Corbin LHB split -1.10, HR risk -0.17. tough split lane (-1.10); pitcher risk below avg (-0.17). Air: FB 25%, pull-air 12%.", chips: ["vs Corbin"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 25.0, pullAir: 12.5, zoneScore: 27.5, zoneContact: 39.3, zoneBarrel: 27.1, zoneHr: 19.2, zoneHardHit: 33.2 },
         ],
     },
     {
@@ -3287,12 +3340,12 @@ const games = [
         top3: ["Yordan Alvarez", "Vaughn Grissom", "Mike Trout"],
         top3Detail: [{"name": "Yordan Alvarez", "score": 93, "why": "#1 model score in this game · 2 HR, 4 near-HR, 99 mph EV · vs Rodriguez · heating L5 · high blast rate · WPZ Favorite", "chip": "Rodriguez", "rank": 1, "oddsShort": "+225"}, {"name": "Vaughn Grissom", "score": 88, "why": "#2 model score in this game · 2 HR, 4 near-HR, 94 mph EV · vs Arrighetti · heating L5 · high blast rate", "chip": "Arrighetti", "rank": 2, "oddsShort": ""}, {"name": "Mike Trout", "score": 86, "why": "#3 model score in this game · 1 HR, 4 near-HR, 96 mph EV · vs Arrighetti · heating L5 · high blast rate", "chip": "Arrighetti", "rank": 3, "oddsShort": "+320"}],
         rows: [
-            { name: "Vaughn Grissom (R)", odds: "Listed prop - Over 0.5 HR", score: 88, emojis: "🌕 💣", note: "2 HR, 4 near-HR, 93.7 mph EV. Arrighetti RHB split -0.04, HR risk -0.86. slight split headwind (-0.04); pitcher suppresses HR (-0.86). Air: FB 39%, pull-air 11%.", chips: ["vs Arrighetti"], blast: "high", formTrend: "heating", fbPct: 38.9, pullAir: 11.1 },
-            { name: "Mike Trout (R)", odds: "Listed +320 - Over 0.5 HR", score: 86, emojis: "🌕 💣", note: "1 HR, 4 near-HR, 96.1 mph EV. Arrighetti RHB split -0.04, HR risk -0.86. slight split headwind (-0.04); pitcher suppresses HR (-0.86). Air: FB 38%, pull-air 23%.", chips: ["vs Arrighetti"], blast: "high", formTrend: "heating", fbPct: 38.5, pullAir: 23.1 },
-            { name: "Zach Neto (R)", odds: "Listed +410 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 85.6 mph EV. Arrighetti RHB split -0.04, HR risk -0.86. slight split headwind (-0.04); pitcher suppresses HR (-0.86). Air: FB 27%, pull-air 9%.", chips: ["vs Arrighetti"], blast: "good", formTrend: "flat", fbPct: 27.3, pullAir: 9.1 },
-            { name: "Yordan Alvarez (L)", odds: "Listed +225 - Over 0.5 HR", score: 93, emojis: "⭐ 🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 4 near-HR, 99.4 mph EV. Rodriguez LHB split +1.59, HR risk 1.35. Air: FB 33%, pull-air 33%.", chips: ["vs Rodriguez"], blast: "high", formTrend: "heating", fbPct: 33.3, pullAir: 33.3 },
-            { name: "Isaac Paredes (R)", odds: "Listed +525 - Over 0.5 HR", score: 78, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 2 near-HR, 86.3 mph EV. Rodriguez RHB split +0.02, HR risk 1.35. lighter EV form (86.3 mph). Air: FB 26%, pull-air 42%.", chips: ["vs Rodriguez"], blast: "high", formTrend: "heating", fbPct: 26.3, pullAir: 42.1 },
-            { name: "LaMonte Wade Jr. (L)", odds: "Listed prop - Over 0.5 HR", score: 80, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "1 HR, 1 near-HR, 98.0 mph EV. Rodriguez LHB split +1.59, HR risk 1.35. Air: FB 100%.", chips: ["vs Rodriguez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 100.0 },
+            { name: "Vaughn Grissom (R)", odds: "Listed prop - Over 0.5 HR", score: 88, emojis: "🌕 💣", note: "2 HR, 4 near-HR, 93.7 mph EV. Arrighetti RHB split -0.04, HR risk -0.86. slight split headwind (-0.04); pitcher suppresses HR (-0.86). Air: FB 39%, pull-air 11%.", chips: ["vs Arrighetti"], blast: "high", formTrend: "heating", fbPct: 38.9, pullAir: 11.1, zoneScore: 23.6, zoneContact: 36.4, zoneBarrel: 14.6, zoneHr: 14.6, zoneHardHit: 42.0 },
+            { name: "Mike Trout (R)", odds: "Listed +320 - Over 0.5 HR", score: 86, emojis: "🌕 💣", note: "1 HR, 4 near-HR, 96.1 mph EV. Arrighetti RHB split -0.04, HR risk -0.86. slight split headwind (-0.04); pitcher suppresses HR (-0.86). Air: FB 38%, pull-air 23%.", chips: ["vs Arrighetti"], blast: "high", formTrend: "heating", fbPct: 38.5, pullAir: 23.1, zoneScore: 20.1, zoneContact: 29.3, zoneBarrel: 19.2, zoneHr: 18.9, zoneHardHit: 19.2 },
+            { name: "Zach Neto (R)", odds: "Listed +410 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 85.6 mph EV. Arrighetti RHB split -0.04, HR risk -0.86. slight split headwind (-0.04); pitcher suppresses HR (-0.86). Air: FB 27%, pull-air 9%.", chips: ["vs Arrighetti"], blast: "good", formTrend: "flat", fbPct: 27.3, pullAir: 9.1, zoneScore: 16.3, zoneContact: 36.1, zoneBarrel: 10.5, zoneHr: 18.4, zoneHardHit: 13.8 },
+            { name: "Yordan Alvarez (L)", odds: "Listed +225 - Over 0.5 HR", score: 93, emojis: "⭐ 🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 4 near-HR, 99.4 mph EV. Rodriguez LHB split +1.59, HR risk 1.35. Air: FB 33%, pull-air 33%.", chips: ["vs Rodriguez"], blast: "high", formTrend: "heating", fbPct: 33.3, pullAir: 33.3, zoneScore: 41.1, zoneContact: 39.4, zoneBarrel: 51.4, zoneHr: 36.2, zoneHardHit: 33.3 },
+            { name: "Isaac Paredes (R)", odds: "Listed +525 - Over 0.5 HR", score: 78, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 2 near-HR, 86.3 mph EV. Rodriguez RHB split +0.02, HR risk 1.35. lighter EV form (86.3 mph). Air: FB 26%, pull-air 42%.", chips: ["vs Rodriguez"], blast: "high", formTrend: "heating", fbPct: 26.3, pullAir: 42.1, zoneScore: 32.9, zoneContact: 37.7, zoneBarrel: 26.8, zoneHr: 30.5, zoneHardHit: 42.3 },
+            { name: "LaMonte Wade Jr. (L)", odds: "Listed prop - Over 0.5 HR", score: 80, emojis: "⭐ 💎 ⚾ 🕊️ 🧤", note: "1 HR, 1 near-HR, 98.0 mph EV. Rodriguez LHB split +1.59, HR risk 1.35. Air: FB 100%.", chips: ["vs Rodriguez"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 100.0, zoneScore: 1.6, zoneContact: 16.0 },
         ],
     },
     {
@@ -3303,13 +3356,13 @@ const games = [
         top3: ["JJ Bleday", "Matt McLain", "Nathaniel Lowe"],
         top3Detail: [{"name": "JJ Bleday", "score": 82, "why": "#1 model score in this game · 2 HR, 2 near-HR, 92 mph EV · vs Buehler · heating L5 · high blast rate", "chip": "Buehler", "rank": 1, "oddsShort": "+492"}, {"name": "Matt McLain", "score": 80, "why": "#2 model score in this game · 2 HR, 2 near-HR, 90 mph EV · vs Buehler · heating L5 · high blast rate", "chip": "Buehler", "rank": 2, "oddsShort": "+960"}, {"name": "Nathaniel Lowe", "score": 72, "why": "#3 model score in this game · 1 HR, 2 near-HR, 85 mph EV · vs Buehler", "chip": "Buehler", "rank": 3, "oddsShort": "+880"}],
         rows: [
-            { name: "Fernando Tatis Jr. (R)", odds: "Listed +520 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 82.0 mph EV. Abbott RHB split +0.04, HR risk -0.13. pitcher risk below avg (-0.13); park/weather net drag (-6%). Air: FB 20%, pull-air 10%.", chips: ["vs Abbott"], blast: "good", formTrend: "flat", fbPct: 20.0, pullAir: 10.0 },
-            { name: "Jackson Merrill (L)", odds: "Listed +720 - Over 0.5 HR", score: 70, emojis: "💎", note: "0 HR, 93.6 mph EV. Abbott LHB split -0.15, HR risk -0.13. slight split headwind (-0.15); pitcher risk below avg (-0.13). Air: FB 33%, pull-air 33%.", chips: ["vs Abbott"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 33.3 },
-            { name: "Nathaniel Lowe (L)", odds: "Listed +880 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 84.8 mph EV. Buehler LHB split -0.40, HR risk -0.17. tough split lane (-0.40); pitcher risk below avg (-0.17). Air: FB 28%, pull-air 17%.", chips: ["vs Buehler"], blast: "good", formTrend: "flat", fbPct: 27.8, pullAir: 16.7 },
-            { name: "Will Benson (L)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 84.3 mph EV. Buehler LHB split -0.40, HR risk -0.17. tough split lane (-0.40); pitcher risk below avg (-0.17). Air: FB 22%, pull-air 22%.", chips: ["vs Buehler"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 22.2, pullAir: 22.2 },
-            { name: "JJ Bleday (L)", odds: "Listed +492 - Over 0.5 HR", score: 82, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 91.9 mph EV. Buehler LHB split -0.40, HR risk -0.17. tough split lane (-0.40); pitcher risk below avg (-0.17). Air: FB 19%, pull-air 31%.", chips: ["vs Buehler"], blast: "high", formTrend: "heating", fbPct: 18.8, pullAir: 31.2 },
-            { name: "Sal Stewart (R)", odds: "Listed +574 - Over 0.5 HR", score: 66, emojis: "💎", note: "0 HR, 1 near-HR, 90.5 mph EV. Buehler RHB split +0.26, HR risk -0.17. pitcher risk below avg (-0.17); park/weather net drag (-6%). Air: FB 17%, pull-air 11%.", chips: ["vs Buehler"], formTrend: "flat", fbPct: 16.7, pullAir: 11.1 },
-            { name: "Matt McLain (R)", odds: "Listed +960 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 90.3 mph EV. Buehler RHB split +0.26, HR risk -0.17. pitcher risk below avg (-0.17); park/weather net drag (-6%). Air: FB 38%, pull-air 12%.", chips: ["vs Buehler"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 37.5, pullAir: 12.5 },
+            { name: "Fernando Tatis Jr. (R)", odds: "Listed +520 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 82.0 mph EV. Abbott RHB split +0.04, HR risk -0.13. pitcher risk below avg (-0.13); park/weather net drag (-6%). Air: FB 20%, pull-air 10%.", chips: ["vs Abbott"], blast: "good", formTrend: "flat", fbPct: 20.0, pullAir: 10.0, zoneScore: 15.2, zoneContact: 25.0, zoneBarrel: 9.9, zoneHardHit: 37.0 },
+            { name: "Jackson Merrill (L)", odds: "Listed +720 - Over 0.5 HR", score: 70, emojis: "💎", note: "0 HR, 93.6 mph EV. Abbott LHB split -0.15, HR risk -0.13. slight split headwind (-0.15); pitcher risk below avg (-0.13). Air: FB 33%, pull-air 33%.", chips: ["vs Abbott"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 33.3, zoneScore: 25.3, zoneContact: 51.3, zoneBarrel: 23.3, zoneHr: 12.8, zoneHardHit: 32.6 },
+            { name: "Nathaniel Lowe (L)", odds: "Listed +880 - Over 0.5 HR", score: 72, emojis: "💎", note: "1 HR, 2 near-HR, 84.8 mph EV. Buehler LHB split -0.40, HR risk -0.17. tough split lane (-0.40); pitcher risk below avg (-0.17). Air: FB 28%, pull-air 17%.", chips: ["vs Buehler"], blast: "good", formTrend: "flat", fbPct: 27.8, pullAir: 16.7, zoneScore: 32.6, zoneContact: 14.0, zoneBarrel: 25.3, zoneHr: 42.4, zoneHardHit: 38.5 },
+            { name: "Will Benson (L)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 84.3 mph EV. Buehler LHB split -0.40, HR risk -0.17. tough split lane (-0.40); pitcher risk below avg (-0.17). Air: FB 22%, pull-air 22%.", chips: ["vs Buehler"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 22.2, pullAir: 22.2, zoneScore: 22.7, zoneContact: 61.2, zoneBarrel: 14.8, zoneHr: 16.7, zoneHardHit: 25.6 },
+            { name: "JJ Bleday (L)", odds: "Listed +492 - Over 0.5 HR", score: 82, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 91.9 mph EV. Buehler LHB split -0.40, HR risk -0.17. tough split lane (-0.40); pitcher risk below avg (-0.17). Air: FB 19%, pull-air 31%.", chips: ["vs Buehler"], blast: "high", formTrend: "heating", fbPct: 18.8, pullAir: 31.2, zoneScore: 23.3, zoneContact: 42.7, zoneBarrel: 21.1, zoneHr: 21.1, zoneHardHit: 21.1 },
+            { name: "Sal Stewart (R)", odds: "Listed +574 - Over 0.5 HR", score: 66, emojis: "💎", note: "0 HR, 1 near-HR, 90.5 mph EV. Buehler RHB split +0.26, HR risk -0.17. pitcher risk below avg (-0.17); park/weather net drag (-6%). Air: FB 17%, pull-air 11%.", chips: ["vs Buehler"], formTrend: "flat", fbPct: 16.7, pullAir: 11.1, zoneScore: 26.3, zoneContact: 21.4, zoneBarrel: 19.7, zoneHr: 29.2, zoneHardHit: 34.0 },
+            { name: "Matt McLain (R)", odds: "Listed +960 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 90.3 mph EV. Buehler RHB split +0.26, HR risk -0.17. pitcher risk below avg (-0.17); park/weather net drag (-6%). Air: FB 38%, pull-air 12%.", chips: ["vs Buehler"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 37.5, pullAir: 12.5, zoneScore: 26.3, zoneContact: 31.4, zoneBarrel: 25.8, zoneHr: 9.9, zoneHardHit: 44.8 },
         ],
     },
     {
@@ -3319,11 +3372,11 @@ const games = [
         top3: ["Willy Adames", "James Wood", "Eric Haase"],
         top3Detail: [{"name": "Willy Adames", "score": 87, "why": "#1 model score in this game · 2 HR, 4 near-HR, 93 mph EV · vs Mikolas · heating L5 · high blast rate", "chip": "Mikolas", "rank": 1, "oddsShort": "+490"}, {"name": "James Wood", "score": 86, "why": "#2 model score in this game · 2 HR, 4 near-HR, 92 mph EV · vs Webb · heating L5 · high blast rate · WPZ Favorite", "chip": "Webb", "rank": 2, "oddsShort": "+650"}, {"name": "Eric Haase", "score": 85, "why": "#3 model score in this game · 2 HR, 3 near-HR, 93 mph EV · vs Mikolas · heating L5 · high blast rate", "chip": "Mikolas", "rank": 3, "oddsShort": "+473"}],
         rows: [
-            { name: "Eric Haase (R)", odds: "Listed +473 - Over 0.5 HR", score: 85, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 3 near-HR, 92.9 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 36%, pull-air 21%.", chips: ["vs Mikolas"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 35.7, pullAir: 21.4 },
-            { name: "Willy Adames (R)", odds: "Listed +490 - Over 0.5 HR", score: 87, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 4 near-HR, 93.2 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 53%, pull-air 41%.", chips: ["vs Mikolas"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 52.9, pullAir: 41.2 },
-            { name: "James Wood (L)", odds: "Listed +650 - Over 0.5 HR", score: 86, emojis: "⭐ 🌕 💣", note: "2 HR, 4 near-HR, 92.4 mph EV. Webb LHB split -0.56, HR risk -0.91. tough split lane (-0.56); pitcher suppresses HR (-0.91). Air: FB 58%.", chips: ["vs Webb"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 58.3 },
-            { name: "CJ Abrams (L)", odds: "Listed +850 - Over 0.5 HR", score: 74, emojis: "💎", note: "1 HR, 1 near-HR, 92.2 mph EV. Webb LHB split -0.56, HR risk -0.91. tough split lane (-0.56); pitcher suppresses HR (-0.91). Air: FB 24%, pull-air 35%.", chips: ["vs Webb"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 23.5, pullAir: 35.3 },
-            { name: "Daylen Lile (L)", odds: "Listed +1200 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 84.0 mph EV. Webb LHB split -0.56, HR risk -0.91. tough split lane (-0.56); pitcher suppresses HR (-0.91). Air: FB 55%, pull-air 10%.", chips: ["vs Webb"], blast: "good", formTrend: "flat", fbPct: 55.0, pullAir: 10.0 },
+            { name: "Eric Haase (R)", odds: "Listed +473 - Over 0.5 HR", score: 85, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 3 near-HR, 92.9 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 36%, pull-air 21%.", chips: ["vs Mikolas"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 35.7, pullAir: 21.4, zoneScore: 27.7, zoneContact: 39.9, zoneBarrel: 21.8, zoneHr: 24.8, zoneHardHit: 34.6 },
+            { name: "Willy Adames (R)", odds: "Listed +490 - Over 0.5 HR", score: 87, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 4 near-HR, 93.2 mph EV. Mikolas RHB split +1.72, HR risk 1.28. Air: FB 53%, pull-air 41%.", chips: ["vs Mikolas"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 52.9, pullAir: 41.2, zoneScore: 25.2, zoneContact: 34.6, zoneBarrel: 18.9, zoneHr: 18.9, zoneHardHit: 37.8 },
+            { name: "James Wood (L)", odds: "Listed +650 - Over 0.5 HR", score: 86, emojis: "⭐ 🌕 💣", note: "2 HR, 4 near-HR, 92.4 mph EV. Webb LHB split -0.56, HR risk -0.91. tough split lane (-0.56); pitcher suppresses HR (-0.91). Air: FB 58%.", chips: ["vs Webb"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 58.3, zoneScore: 31.5, zoneContact: 17.5, zoneBarrel: 40.4, zoneHr: 22.7, zoneHardHit: 35.2 },
+            { name: "CJ Abrams (L)", odds: "Listed +850 - Over 0.5 HR", score: 74, emojis: "💎", note: "1 HR, 1 near-HR, 92.2 mph EV. Webb LHB split -0.56, HR risk -0.91. tough split lane (-0.56); pitcher suppresses HR (-0.91). Air: FB 24%, pull-air 35%.", chips: ["vs Webb"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 23.5, pullAir: 35.3, zoneScore: 11.5, zoneContact: 24.1, zoneHr: 7.5, zoneHardHit: 27.4 },
+            { name: "Daylen Lile (L)", odds: "Listed +1200 - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 84.0 mph EV. Webb LHB split -0.56, HR risk -0.91. tough split lane (-0.56); pitcher suppresses HR (-0.91). Air: FB 55%, pull-air 10%.", chips: ["vs Webb"], blast: "good", formTrend: "flat", fbPct: 55.0, pullAir: 10.0, zoneScore: 26.4, zoneContact: 35.2, zoneBarrel: 28.3, zoneHr: 23.0, zoneHardHit: 24.4 },
         ],
     },
     {
@@ -3334,11 +3387,11 @@ const games = [
         top3: ["Nick Kurtz", "Colby Thomas", "Jackson Chourio"],
         top3Detail: [{"name": "Nick Kurtz", "score": 90, "why": "#1 model score in this game · 2 HR, 2 near-HR, 101 mph EV · vs Harrison · heating L5 · high blast rate · elite EV · WPZ Favorite", "chip": "Harrison", "rank": 1, "oddsShort": "+300"}, {"name": "Colby Thomas", "score": 79, "why": "#2 model score in this game · 1 HR, 2 near-HR, 95 mph EV · vs Harrison · heating L5 · WPZ Favorite", "chip": "Harrison", "rank": 2, "oddsShort": "+380"}, {"name": "Jackson Chourio", "score": 79, "why": "#3 model score in this game · 1 HR, 2 near-HR, 95 mph EV · vs Springs · heating L5 · WPZ Favorite", "chip": "Springs", "rank": 3, "oddsShort": "+300"}],
         rows: [
-            { name: "Nick Kurtz (L)", odds: "Listed +300 - Over 0.5 HR", score: 90, emojis: "🚀 ⭐ 🌕 💣", note: "2 HR, 2 near-HR, 100.7 mph EV. Harrison LHB split -1.22, HR risk -0.93. tough split lane (-1.22); pitcher suppresses HR (-0.93). Air: FB 75%.", chips: ["vs Harrison"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 75.0 },
-            { name: "Shea Langeliers (R)", odds: "Listed +250 - Over 0.5 HR", score: 75, emojis: "⭐ 💎", note: "1 HR, 1 near-HR, 92.6 mph EV. Harrison RHB split -0.43, HR risk -0.93. tough split lane (-0.43); pitcher suppresses HR (-0.93). Air: FB 33%, pull-air 33%.", chips: ["vs Harrison"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 33.3 },
-            { name: "Colby Thomas (R)", odds: "Listed +380 - Over 0.5 HR", score: 79, emojis: "⭐ 💎", note: "1 HR, 2 near-HR, 94.8 mph EV. Harrison RHB split -0.43, HR risk -0.93. tough split lane (-0.43); pitcher suppresses HR (-0.93). Air: FB 75%, pull-air 12%.", chips: ["vs Harrison"], blast: "good", formTrend: "heating", fbPct: 75.0, pullAir: 12.5 },
-            { name: "Jackson Chourio (R)", odds: "Listed +300 - Over 0.5 HR", score: 79, emojis: "⭐ 💎", note: "1 HR, 2 near-HR, 94.6 mph EV. Springs RHB split +0.88, HR risk 0.93. Air: FB 25%, pull-air 12%.", chips: ["vs Springs"], blast: "good", formTrend: "heating", contactRisk: true, fbPct: 25.0, pullAir: 12.5 },
-            { name: "Andrew Vaughn (R)", odds: "Listed +340 - Over 0.5 HR", score: 68, emojis: "💎", note: "0 HR, 92.2 mph EV. Springs RHB split +0.88, HR risk 0.93. limited recent HR events. Air: FB 7%, pull-air 7%.", chips: ["vs Springs"], blast: "good", formTrend: "flat", fbPct: 7.1, pullAir: 7.1 },
+            { name: "Nick Kurtz (L)", odds: "Listed +300 - Over 0.5 HR", score: 90, emojis: "🚀 ⭐ 🌕 💣", note: "2 HR, 2 near-HR, 100.7 mph EV. Harrison LHB split -1.22, HR risk -0.93. tough split lane (-1.22); pitcher suppresses HR (-0.93). Air: FB 75%.", chips: ["vs Harrison"], blast: "high", formTrend: "heating", contactRisk: true, fbPct: 75.0, zoneScore: 17.8, zoneContact: 51.1, zoneBarrel: 13.9, zoneHr: 8.9, zoneHardHit: 20.5 },
+            { name: "Shea Langeliers (R)", odds: "Listed +250 - Over 0.5 HR", score: 75, emojis: "⭐ 💎", note: "1 HR, 1 near-HR, 92.6 mph EV. Harrison RHB split -0.43, HR risk -0.93. tough split lane (-0.43); pitcher suppresses HR (-0.93). Air: FB 33%, pull-air 33%.", chips: ["vs Harrison"], blast: "good", formTrend: "flat", contactRisk: true, fbPct: 33.3, pullAir: 33.3, zoneScore: 31.4, zoneContact: 19.5, zoneBarrel: 36.2, zoneHr: 25.1, zoneHardHit: 37.0 },
+            { name: "Colby Thomas (R)", odds: "Listed +380 - Over 0.5 HR", score: 79, emojis: "⭐ 💎", note: "1 HR, 2 near-HR, 94.8 mph EV. Harrison RHB split -0.43, HR risk -0.93. tough split lane (-0.43); pitcher suppresses HR (-0.93). Air: FB 75%, pull-air 12%.", chips: ["vs Harrison"], blast: "good", formTrend: "heating", fbPct: 75.0, pullAir: 12.5, zoneScore: 14.9, zoneContact: 29.6, zoneBarrel: 19.7, zoneHardHit: 20.3 },
+            { name: "Jackson Chourio (R)", odds: "Listed +300 - Over 0.5 HR", score: 79, emojis: "⭐ 💎", note: "1 HR, 2 near-HR, 94.6 mph EV. Springs RHB split +0.88, HR risk 0.93. Air: FB 25%, pull-air 12%.", chips: ["vs Springs"], blast: "good", formTrend: "heating", contactRisk: true, fbPct: 25.0, pullAir: 12.5, zoneScore: 21.1, zoneContact: 15.2, zoneBarrel: 17.8, zoneHr: 8.6, zoneHardHit: 43.2 },
+            { name: "Andrew Vaughn (R)", odds: "Listed +340 - Over 0.5 HR", score: 68, emojis: "💎", note: "0 HR, 92.2 mph EV. Springs RHB split +0.88, HR risk 0.93. limited recent HR events. Air: FB 7%, pull-air 7%.", chips: ["vs Springs"], blast: "good", formTrend: "flat", fbPct: 7.1, pullAir: 7.1, zoneScore: 15.8, zoneContact: 52.0, zoneBarrel: 8.6, zoneHardHit: 30.2 },
         ],
     },
 ];
@@ -3756,7 +3809,7 @@ const games = [
             updateBetTrackerBtnLabel();
 
             /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                const WORST_PICKZ_FAVORITE_NAMES = new Set([
                 "Ben Rice (L)",
                 "Bryce Harper (L)",
                 "Colby Thomas (R)",
@@ -4435,7 +4488,7 @@ const games = [
                 const plainName = row.name.replace(/\s*\([LRS]\)\s*$/i, "").trim();
                 const inTop3 = Array.isArray(game.top3) && game.top3.includes(plainName);
                 const top3Mark = inTop3 ? '<span class="game-top-pick" title="Top 3 in this game">★</span> ' : "";
-                return `<div class="pick-row ${band} ${heat}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ""}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div class="pick-col-name"><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${top3Mark}${row.name}</button></div>${pickSignalsHtml(row)}<div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Confidence</span><strong>${confidenceTier}</strong><small>Score ${row.score}</small></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div></div>`;
+                return `<div class="pick-row ${band} ${heat}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ""}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div class="pick-col-name"><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${top3Mark}${row.name}</button></div>${pickSignalsHtml(row)}<div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Confidence</span><strong>${confidenceTier}</strong><small>Score ${row.score}</small></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div>${zoneFitBoxHtml(row)}</div></div>`;
             }
             function renderGames() {
                 grid.innerHTML = games
@@ -4543,6 +4596,23 @@ const games = [
                 return clamp(stars, 1, 5);
             }
             function attackStars(score, emojiText, noteText) { let stars = 1; if (emojiText.includes("⚾")) stars += 1; if (/(best|elite|strong|clean|leak|lane|fit|ceiling)/i.test(noteText)) stars += 1; if (score >= 82) stars += 1; if (/(suppressive|cold|drag)/i.test(noteText)) stars -= 1; return clamp(stars, 1, 5); }
+            function zoneStars(zoneScore) {
+                const z = Number(zoneScore);
+                if (!Number.isFinite(z)) return 0;
+                if (z >= 35) return 5;
+                if (z >= 30) return 4;
+                if (z >= 25) return 3;
+                if (z >= 20) return 2;
+                return 1;
+            }
+            function zoneFitStat(value) {
+                const n = Number(value);
+                return Number.isFinite(n) ? n.toFixed(1) : "—";
+            }
+            function zoneFitBoxHtml(row) {
+                if (row == null || row.zoneScore == null) return "";
+                return `<div class="zone-fit-box"><div class="zone-fit-box__title"><span>Zone Fit</span><span class="zone-fit-box__score">Score ${zoneFitStat(row.zoneScore)}</span></div><div class="zone-fit-grid"><div class="zone-fit-stat"><span class="zone-fit-stat__label">Contact</span><strong>${zoneFitStat(row.zoneContact)}</strong></div><div class="zone-fit-stat"><span class="zone-fit-stat__label">Barrel</span><strong>${zoneFitStat(row.zoneBarrel)}</strong></div><div class="zone-fit-stat"><span class="zone-fit-stat__label">HR Rate</span><strong>${zoneFitStat(row.zoneHr)}</strong></div><div class="zone-fit-stat"><span class="zone-fit-stat__label">Hard Hit</span><strong>${zoneFitStat(row.zoneHardHit)}</strong></div></div></div>`;
+            }
             function metricRow(label, metricClass, value) { return `<div class="player-rpg-row"><span class="player-rpg-label">${label}</span><span class="star-meter ${metricClass}" style="--rating:${value}"><span class="star-base">★★★★★</span><span class="star-fill">★★★★★</span></span></div>`; }
 
             function gradeForGiRi(gi, ri) {
@@ -4589,9 +4659,10 @@ const games = [
                     const hrForm = hrFormStars(gameRow, noteText);
                     const park = parkStars(card);
                     const attack = attackStars(score, emojiText, noteText);
+                    const zone = gameRow && gameRow.zoneScore != null ? zoneStars(gameRow.zoneScore) : 0;
                     const grade = letterGrade(score, power, park, attack, blastBonus);
                     row.setAttribute("data-grade", grade);
-                    row.insertAdjacentHTML("beforeend", `<div class="player-rpg player-rpg-wide"><div class="player-rpg-title">Damage Window Stats</div>${metricRow("Power / HH / FlyBall", "power", power)}${metricRow("Homerun Form", "form", hrForm)}${metricRow("Park / Weather", "park", park)}${metricRow("Pitcher / Pitch Mix Attackability", "attack", attack)}</div>`);
+                    row.insertAdjacentHTML("beforeend", `<div class="player-rpg player-rpg-wide"><div class="player-rpg-title">Damage Window Stats</div>${metricRow("Power / HH / FlyBall", "power", power)}${metricRow("Homerun Form", "form", hrForm)}${metricRow("Park / Weather", "park", park)}${metricRow("Pitcher / Pitch Mix Attackability", "attack", attack)}${metricRow("Zone Fit Score", "zone", zone)}</div>`);
                     const stack = document.createElement("div");
                     stack.className = "rating-stack";
                     ratingBox.parentNode.insertBefore(stack, ratingBox);

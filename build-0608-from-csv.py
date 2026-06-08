@@ -77,6 +77,48 @@ ALIASES = {
     "Jackson CHourio": "Jackson Chourio",
 }
 
+# Confirmed projected probables from MLB lineup page (override stale PropFinder exports).
+PROBABLE_OVERRIDES = {
+    "SEA @ BAL": {"side": "home", "from": "Bassitt", "to": "Gibson", "full": "Trey Gibson"},
+    "BOS @ TB": {"side": "home", "from": "Seymour", "to": "Englert", "full": "Mason Englert"},
+}
+
+PITCHER_HAND = {
+    "Connelly Early": "L",
+    "Cristopher Sanchez": "L",
+    "Andrew Abbott": "L",
+    "Jeffrey Springs": "L",
+    "Kyle Harrison": "L",
+}
+
+
+def pitcher_hand_label(full_name: str) -> str:
+    return PITCHER_HAND.get(full_name, "R")
+
+
+def apply_probable_overrides(games: dict[str, dict]) -> None:
+    for key, ov in PROBABLE_OVERRIDES.items():
+        gm = games[key]
+        sp_key = f"{ov['side']}_sp"
+        full_key = f"{ov['side']}_sp_full"
+        old = ov["from"]
+        if gm[sp_key] != old:
+            print(f"WARN {key}: expected {old} as {ov['side']} SP, got {gm[sp_key]}")
+        gm[sp_key] = ov["to"]
+        gm[full_key] = ov["full"]
+        for row in gm["batters"].values():
+            if row["vs"] == old:
+                row["vs"] = ov["to"]
+
+
+def build_game_title(gm: dict) -> str:
+    away_full = gm["away_sp_full"]
+    home_full = gm["home_sp_full"]
+    return (
+        f"{gm['key']} - {away_full} ({pitcher_hand_label(away_full)}, {gm['away']}) "
+        f"vs {home_full} ({pitcher_hand_label(home_full)}, {gm['home']})"
+    )
+
 
 def score_from_stats(hr, near, ev, barrel, blast):
     s = 62 + hr * 4 + near * 2
@@ -204,6 +246,7 @@ def fade_reason(
 
 def main() -> int:
     games_csv = {g["key"]: g for g in derive_games_from_csv(DATE)}
+    apply_probable_overrides(games_csv)
     pitcher_risk = load_pitcher_risk(ROOT / "data" / f"hr-targets-overall-{DATE}.csv")
     park_context = load_park_context(DATE)
 
@@ -270,7 +313,7 @@ def main() -> int:
         game_meta.append(
             {
                 "key": g["key"],
-                "title": g["title"],
+                "title": build_game_title(g),
                 "away": g["away"],
                 "home": g["home"],
                 "away_sp": g["away_sp"],

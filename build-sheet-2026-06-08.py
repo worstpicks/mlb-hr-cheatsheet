@@ -111,18 +111,18 @@ def add_bum_row_emojis(entry):
 
 games = [
     {
-        "title": "BOS @ TB - Connelly Early (R, BOS) vs Ian Seymour (R, TB)",
-        "description": "Tail key data: Park boost -2% (stadium -2%, weather +1%). Early (HR risk 0.55, vs LHB +0.99, vs RHB +0.25). Seymour (HR risk -0.23, vs LHB +0.36, vs RHB -0.48).",
+        "title": "BOS @ TB - Connelly Early (L, BOS) vs Mason Englert (R, TB)",
+        "description": "Tail key data: Park boost -2% (stadium -2%, weather +1%). Early (HR risk 0.55, vs LHB +0.99, vs RHB +0.25). Home starter risk unavailable.",
         "rows": [
             row("Junior Caminero", "R", "+340", 80, "💎", ["vs Early"], """1 HR, 1 near-HR, 98.2 mph EV. Early RHB split +0.25, HR risk 0.55.""", blast="good"),
             row("Yandy Diaz", "R", "+450", 74, "💎", ["vs Early"], """0 HR, 2 near-HR, 93.8 mph EV. Early RHB split +0.25, HR risk 0.55.""", blast="good"),
             row("Jonathan Aranda", "L", "+690", 74, "⭐ 💎", ["vs Early"], """Worst Pickz Favorite. 0 HR, 1 near-HR, 96.5 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events.""", blast="good"),
             row("Hunter Feduccia", "L", "N/A", 64, "💎", ["vs Early"], """0 HR, 89.7 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events."""),
-            row("Willson Contreras", "R", "+350", 77, "💎", ["vs Seymour"], """1 HR, 2 near-HR, 93.1 mph EV. Seymour RHB split -0.48, HR risk -0.23. tough split lane (-0.48); pitcher risk below avg (-0.23).""", blast="good"),
+            row("Willson Contreras", "R", "+350", 77, "💎", ["vs Englert"], """1 HR, 2 near-HR, 93.1 mph EV. Englert split/risk data unavailable. limited split/risk sample.""", blast="good"),
         ],
     },
     {
-        "title": "CIN @ SD - Andrew Abbott (R, CIN) vs Walker Buehler (R, SD)",
+        "title": "CIN @ SD - Andrew Abbott (L, CIN) vs Walker Buehler (R, SD)",
         "description": "Tail key data: Park boost -6% (stadium -4%, weather -3%). Abbott (HR risk -0.13, vs LHB -0.15, vs RHB +0.04). Buehler (HR risk -0.17, vs LHB -0.40, vs RHB +0.26).",
         "rows": [
             row("Fernando Tatis Jr.", "R", "+520", 70, "💎", ["vs Abbott"], """1 HR, 1 near-HR, 82.0 mph EV. Abbott RHB split +0.04, HR risk -0.13. pitcher risk below avg (-0.13); park/weather net drag (-6%).""", blast="good"),
@@ -147,7 +147,7 @@ games = [
         ],
     },
     {
-        "title": "MIL @ ATH - Kyle Harrison (R, MIL) vs Jeffrey Springs (R, ATH)",
+        "title": "MIL @ ATH - Kyle Harrison (L, MIL) vs Jeffrey Springs (L, ATH)",
         "description": "Tail key data: Park boost +44% (stadium +35%, weather +9%). Harrison (HR risk -0.93, vs LHB -1.22, vs RHB -0.43). Springs (HR risk 0.93, vs LHB +0.61, vs RHB +0.88).",
         "rows": [
             row("Nick Kurtz", "L", "+300", 90, "🚀 ⭐ 🌕 💣", ["vs Harrison"], """Worst Pickz Favorite. 2 HR, 2 near-HR, 100.7 mph EV. Harrison LHB split -1.22, HR risk -0.93. tough split lane (-1.22); pitcher suppresses HR (-0.93).""", blast="high"),
@@ -172,7 +172,7 @@ games = [
         ],
     },
     {
-        "title": "PHI @ TOR - Cristopher Sanchez (R, PHI) vs Patrick Corbin (R, TOR)",
+        "title": "PHI @ TOR - Cristopher Sanchez (L, PHI) vs Patrick Corbin (R, TOR)",
         "description": "Tail key data: Park boost +2% (stadium +6%, weather -4%). Sanchez (HR risk -1.27, vs LHB -1.06, vs RHB -1.04). Corbin (HR risk -0.17, vs LHB -1.10, vs RHB +0.33).",
         "rows": [
             row("Kazuma Okamoto", "R", "+720", 72, "💎", ["vs Sanchez"], """1 HR, 2 near-HR, 87.4 mph EV. Sanchez RHB split -1.04, HR risk -1.27. tough split lane (-1.04); pitcher suppresses HR (-1.27).""", blast="good"),
@@ -183,17 +183,17 @@ games = [
         ],
     },
     {
-        "title": "SEA @ BAL - Emerson Hancock (R, SEA) vs Chris Bassitt (R, BAL)",
+        "title": "SEA @ BAL - Emerson Hancock (R, SEA) vs Trey Gibson (R, BAL)",
         "description": "Tail key data: Park boost -6% (stadium +0%, weather -6%). Hancock (HR risk 0.34, vs LHB +0.56, vs RHB -0.24). Home starter risk unavailable.",
         "rows": [
             row("Pete Alonso", "R", "+378", 86, "🌕 💣", ["vs Hancock"], """2 HR, 2 near-HR, 95.5 mph EV. Hancock RHB split -0.24, HR risk 0.34. slight split headwind (-0.24); park/weather net drag (-6%).""", blast="high"),
             row("Adley Rutschman", "S", "+540", 79, "💎", ["vs Hancock"], """1 HR, 1 near-HR, 96.8 mph EV. Hancock RHB split -0.24, HR risk 0.34. slight split headwind (-0.24); park/weather net drag (-6%).""", blast="good"),
             row("Samuel Basallo", "L", "+428", 82, "🚀 ⭐ 💎", ["vs Hancock"], """Worst Pickz Favorite. 1 HR, 1 near-HR, 100.8 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%).""", blast="good"),
             row("Jackson Holliday", "L", "+870", 71, "💎", ["vs Hancock"], """0 HR, 94.7 mph EV. Hancock LHB split +0.56, HR risk 0.34. park/weather net drag (-6%); limited recent HR events.""", blast="good"),
-            row("Luke Raley", "L", "+395", 72, "💎", ["vs Bassitt"], """1 HR, 2 near-HR, 73.6 mph EV. Bassitt split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
-            row("Dominic Canzone", "L", "+479", 84, "🌕 💣", ["vs Bassitt"], """2 HR, 2 near-HR, 94.2 mph EV. Bassitt split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="high"),
-            row("Julio Rodriguez", "R", "+441", 82, "⭐ 💎", ["vs Bassitt"], """Worst Pickz Favorite. 1 HR, 1 near-HR, 99.6 mph EV. Bassitt split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
-            row("J.P. Crawford", "L", "N/A", 74, "💎", ["vs Bassitt"], """1 HR, 1 near-HR, 91.7 mph EV. Bassitt split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
+            row("Luke Raley", "L", "+395", 72, "💎", ["vs Gibson"], """1 HR, 2 near-HR, 73.6 mph EV. Gibson split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
+            row("Dominic Canzone", "L", "+479", 84, "🌕 💣", ["vs Gibson"], """2 HR, 2 near-HR, 94.2 mph EV. Gibson split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="high"),
+            row("Julio Rodriguez", "R", "+441", 82, "⭐ 💎", ["vs Gibson"], """Worst Pickz Favorite. 1 HR, 1 near-HR, 99.6 mph EV. Gibson split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
+            row("J.P. Crawford", "L", "N/A", 74, "💎", ["vs Gibson"], """1 HR, 1 near-HR, 91.7 mph EV. Gibson split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
         ],
     },
     {

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hard verify June 6 sheet: duplicates, counts, summary, straights, bums."""
+"""Hard verify June 8 sheet: duplicates, counts, summary, straights, bums."""
 from __future__ import annotations
 
 import importlib.util
@@ -108,12 +108,12 @@ for name in build.FAVS:
             errors.append(f"favorite missing star: {name}")
 
 if errors:
-    print("FAIL hard-verify-0606:")
+    print("FAIL hard-verify-0608:")
     for e in errors:
         print(f"  {e}")
     raise SystemExit(1)
 
-    print("OK hard-verify-0608")
+print("OK hard-verify-0608")
 print(f"  {expected_rows} rows, {expected_games} games, {expected_favs} favorites")
 print(f"  bum games: {len(bum_titles)}")
 if o05_m and o15_m:

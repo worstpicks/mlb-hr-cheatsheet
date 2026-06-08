@@ -161,7 +161,7 @@ Confirm in `preview/index.html`:
 3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)
 4. Goblin parlays distinct — 3 Leg vs 2 Leg vs Favorite 3 Leg share no batters; **2 Leg HR must not reuse Straights of the Day** (`python goblin_parlay_rules.py`)
 5. **Top 5 diversification** — **Top 5 HR Tickets** and **Top 5 Weather Heavy HR Plays** must each have **at most 2 players from the same game** (skip lower-ranked same-game rows rather than stacking one matchup). Lists must stay **distinct** from each other (no duplicate names across the two charts). Weather-heavy rows require **park ≥ +5%**, **non-negative split**, and real HR form — never stack negative-platoon names just for weather rank.
-6. **Summary quality gates** — Top 5 HR Tickets, Weather Heavy, longshots (+700), and hits parlay must pass `summary_ticket_ok` / `weather_play_ok` / `longshot_ok` filters in the patch script (reject 0/0 split-risk lanes and negative platoon weather plays). Run `python verify-summary-0606.py` before push.
+6. **Summary quality gates** — Top 5 HR Tickets, Weather Heavy, longshots (+700), and hits parlay must pass `summary_ticket_ok` / `weather_play_ok` / `longshot_ok` filters in the patch script (reject 0/0 split-risk lanes and negative platoon weather plays). Run `python verify-summary-YYYY-MM-DD.py` before push (e.g. `verify-summary-0608.py` for June 8).
 7. **Hits parlay** — Prefer contact-friendly legs; exclude batters with high whiff/K% (Whiff pill / `contactRisk` / WHIFF% or K% ≥ 26). Do not fill with high-whiff names unless fewer than 11 qualify.
 8. `python verify-deploy.py` before push — **only push when user asks**
 

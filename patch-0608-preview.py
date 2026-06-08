@@ -34,6 +34,12 @@ from note_compact import compact_goblin_leg, compact_note, compact_row_line, str
 
 ENRICHED_GAMES = enrich_games_list(build.games, SHEET_DATE)
 GAMES_BLOCK = emit_games_js(ENRICHED_GAMES)
+ZONE_ROW_MIN = 40
+ZONE_ROW_COUNT = GAMES_BLOCK.count("zoneScore:")
+if ZONE_ROW_COUNT < ZONE_ROW_MIN:
+    raise SystemExit(
+        f"GAMES_BLOCK missing zone data ({ZONE_ROW_COUNT} zoneScore fields; need {ZONE_ROW_MIN}+)"
+    )
 
 TOTAL_GAMES = len(build.games)
 TOTAL_ROWS = sum(len(g["rows"]) for g in build.games)
@@ -1067,8 +1073,13 @@ def patch_preview(manifest):
         raise SystemExit("Could not locate summary block anchors")
     text = text[: start_m.start()] + SUMMARY_BLOCK + text[end_m.start() :]
 
+    zone_written = len(re.findall(r"zoneScore:\s*[\d.]+", text))
+    if zone_written < ZONE_ROW_MIN:
+        raise SystemExit(
+            f"patch would write preview without zone data ({zone_written} zoneScore fields)"
+        )
     PREVIEW.write_text(text, encoding="utf-8")
-    print("patched", PREVIEW.relative_to(ROOT))
+    print("patched", PREVIEW.relative_to(ROOT), f"({zone_written} zone rows)")
 
 
 def sync_root_index():

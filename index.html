@@ -482,6 +482,13 @@
             .game-pick-cards { grid-template-columns: 1fr; }
         }
         .pick-col-name { display: grid; gap: 2px; min-width: 0; }
+        .pick-col-note { min-width: 0; }
+        .pick-row-zone {
+            grid-column: 1 / -1;
+            min-width: 0;
+            width: fit-content;
+            max-width: 100%;
+        }
         .pick-signals {
             display: flex;
             flex-wrap: wrap;
@@ -876,56 +883,60 @@
         .star-meter.attack .star-fill { color: #60a5fa; }
         .star-meter.zone .star-fill { color: #34d399; }
         .zone-fit-box {
-            margin-top: 10px;
-            padding: 10px 12px;
-            border-radius: 10px;
-            background: rgba(6, 78, 59, 0.18);
-            border: 1px solid rgba(52, 211, 153, 0.28);
-        }
-        .zone-fit-box__title {
-            display: flex;
+            display: inline-flex;
+            flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 4px 7px;
+            min-width: 0;
+            box-sizing: border-box;
+            margin-top: 0;
+            padding: 3px 7px;
+            border-radius: 7px;
+            background: rgba(6, 78, 59, 0.2);
+            border: 1px solid rgba(52, 211, 153, 0.28);
+            line-height: 1.15;
+        }
+        .zone-fit-box__brand {
             color: #6ee7b7;
-            font-size: 0.64rem;
+            font-size: 0.52rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.85px;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
         }
-        .zone-fit-box__score {
+        .zone-fit-box__brand strong {
             color: #ecfdf5;
-            font-size: 0.82rem;
-            letter-spacing: 0.04em;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0;
+            text-transform: none;
+            margin-left: 3px;
         }
-        .zone-fit-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 8px;
+        .zone-fit-strip {
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3px 5px;
         }
-        .zone-fit-stat {
-            display: grid;
+        .zone-fit-item {
+            display: inline-flex;
+            align-items: baseline;
             gap: 3px;
-            justify-items: center;
-            text-align: center;
-            padding: 6px 4px;
-            border-radius: 8px;
-            background: rgba(8, 15, 28, 0.55);
-            border: 1px solid rgba(52, 211, 153, 0.14);
+            padding: 1px 5px;
+            border-radius: 5px;
+            background: rgba(8, 15, 28, 0.5);
+            border: 1px solid rgba(52, 211, 153, 0.12);
+            color: #ecfdf5;
+            font-size: 0.64rem;
+            font-weight: 800;
+            white-space: nowrap;
         }
-        .zone-fit-stat__label {
+        .zone-fit-item__label {
             color: #a7f3d0;
-            font-size: 0.58rem;
+            font-size: 0.5rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            line-height: 1.2;
-        }
-        .zone-fit-stat strong {
-            color: #ecfdf5;
-            font-size: 0.88rem;
-            font-weight: 800;
+            letter-spacing: 0.03em;
         }
         .pick-note { font-size: 0.88rem; margin-bottom: 7px; }
         .chips { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -1088,6 +1099,9 @@
             .emoji-row { font-size: 0.85rem; letter-spacing: 0.5px; }
             .player-rpg-label { font-size: 0.6rem; }
             .star-meter { font-size: 0.72rem; letter-spacing: 1px; }
+            .zone-fit-box { padding: 3px 6px; gap: 3px 5px; }
+            .zone-fit-item { font-size: 0.6rem; padding: 1px 4px; }
+            .zone-fit-item__label { font-size: 0.48rem; }
         }
         @media (max-width: 380px) {
             .pick-row .rating-stack {
@@ -3809,7 +3823,7 @@ const games = [
             updateBetTrackerBtnLabel();
 
             /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            const WORST_PICKZ_FAVORITE_NAMES = new Set([
                 "Ben Rice (L)",
                 "Bryce Harper (L)",
                 "Colby Thomas (R)",
@@ -4488,7 +4502,7 @@ const games = [
                 const plainName = row.name.replace(/\s*\([LRS]\)\s*$/i, "").trim();
                 const inTop3 = Array.isArray(game.top3) && game.top3.includes(plainName);
                 const top3Mark = inTop3 ? '<span class="game-top-pick" title="Top 3 in this game">★</span> ' : "";
-                return `<div class="pick-row ${band} ${heat}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ""}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div class="pick-col-name"><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${top3Mark}${row.name}</button></div>${pickSignalsHtml(row)}<div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Confidence</span><strong>${confidenceTier}</strong><small>Score ${row.score}</small></div><div><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div>${zoneFitBoxHtml(row)}</div></div>`;
+                return `<div class="pick-row ${band} ${heat}${savedClass}${betOutcomeClass}${favClass}" data-emoji-tags="${encodeURIComponent(emojiRowFinal)}" data-gi="${gi}" data-ri="${ri}" data-player="${enc}" data-score="${row.score}" data-longshot="${dataLongshot}" data-park="${parkPct == null ? "" : parkPct}" data-blast="${blastTier}" data-gambly-batter="${encodeURIComponent(row.name)}" data-gambly-odds="${encodeURIComponent(row.odds)}">${fav ? '<span class="favorite-badge" aria-label="Worst Pickz Favorite">★ Worst Pickz Favorite</span>' : ""}<div class="bet-save-corner"><button type="button" class="bet-save-corner__btn bet-tracker-save-btn${tracked ? " is-on" : ""}" data-gi="${gi}" data-ri="${ri}" aria-pressed="${tracked}" title="${tracked ? "In bet tracker — tap to remove" : "Add to bet tracker"}">${tracked ? "✓" : "Save"}</button></div><div class="gambly-pick-wrap"><input type="checkbox" class="pick-cb pick-cb--gambly" tabindex="-1" aria-hidden="true"><button type="button" class="gambly-pick-btn" aria-pressed="false" aria-label="Add this row to Gambly export" title="Add to Gambly export list">Add to Gambly</button></div><div class="pick-col-name"><div class="pick-head"><button type="button" class="pick-name pick-name-open" data-gi="${gi}" data-ri="${ri}">${top3Mark}${row.name}</button></div>${pickSignalsHtml(row)}<div class="pick-odds">${row.odds}</div><div class="emoji-row">${emojiRowFinal}</div></div><div class="rating-box ${band}"><span>Confidence</span><strong>${confidenceTier}</strong><small>Score ${row.score}</small></div><div class="pick-col-note"><p class="pick-note">${row.note}</p><div class="chips">${row.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div>${zoneFitBoxHtml(row)}</div>`;
             }
             function renderGames() {
                 grid.innerHTML = games
@@ -4611,7 +4625,7 @@ const games = [
             }
             function zoneFitBoxHtml(row) {
                 if (row == null || row.zoneScore == null) return "";
-                return `<div class="zone-fit-box"><div class="zone-fit-box__title"><span>Zone Fit</span><span class="zone-fit-box__score">Score ${zoneFitStat(row.zoneScore)}</span></div><div class="zone-fit-grid"><div class="zone-fit-stat"><span class="zone-fit-stat__label">Contact</span><strong>${zoneFitStat(row.zoneContact)}</strong></div><div class="zone-fit-stat"><span class="zone-fit-stat__label">Barrel</span><strong>${zoneFitStat(row.zoneBarrel)}</strong></div><div class="zone-fit-stat"><span class="zone-fit-stat__label">HR Rate</span><strong>${zoneFitStat(row.zoneHr)}</strong></div><div class="zone-fit-stat"><span class="zone-fit-stat__label">Hard Hit</span><strong>${zoneFitStat(row.zoneHardHit)}</strong></div></div></div>`;
+                return `<div class="pick-row-zone"><div class="zone-fit-box"><span class="zone-fit-box__brand">Zone Fit<strong>${zoneFitStat(row.zoneScore)}</strong></span><div class="zone-fit-strip"><span class="zone-fit-item"><span class="zone-fit-item__label">Ctc</span>${zoneFitStat(row.zoneContact)}</span><span class="zone-fit-item"><span class="zone-fit-item__label">Brl</span>${zoneFitStat(row.zoneBarrel)}</span><span class="zone-fit-item"><span class="zone-fit-item__label">HR</span>${zoneFitStat(row.zoneHr)}</span><span class="zone-fit-item"><span class="zone-fit-item__label">HH</span>${zoneFitStat(row.zoneHardHit)}</span></div></div></div>`;
             }
             function metricRow(label, metricClass, value) { return `<div class="player-rpg-row"><span class="player-rpg-label">${label}</span><span class="star-meter ${metricClass}" style="--rating:${value}"><span class="star-base">★★★★★</span><span class="star-fill">★★★★★</span></span></div>`; }
 

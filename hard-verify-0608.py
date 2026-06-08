@@ -91,6 +91,14 @@ if o05_m and o15_m:
 if "Homerun Form" not in text:
     errors.append("missing Homerun Form in damage window")
 
+zone_row_count = len(re.findall(r"zoneScore:\s*[\d.]+", text))
+if zone_row_count < 40:
+    errors.append(f"zone data missing from games block ({zone_row_count} zoneScore fields)")
+if "function zoneFitBoxHtml" not in text or "pick-row-zone" not in text:
+    errors.append("zone fit UI helpers/CSS missing from preview")
+if "Zone Fit Score" not in text:
+    errors.append("missing Zone Fit Score in damage window")
+
 bum_titles = [g["title"] for g in build.games if "🧤" in g["title"]]
 if not bum_titles:
     errors.append("no bum gloves in game titles")

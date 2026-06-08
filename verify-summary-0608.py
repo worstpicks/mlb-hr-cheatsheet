@@ -30,7 +30,7 @@ weather_pool = [
     and weather_play_ok(r)
     and r["split"] >= 0.0
 ]
-weather_expected = min(5, len(weather_pool))
+weather_expected = 5
 
 for label, picked, ok_fn in (
     ("Top 5 HR Tickets", top5, summary_ticket_ok),
@@ -51,9 +51,14 @@ for label, picked, ok_fn in (
         errors.append(f"{label}: more than {weather_cap} from same game")
 
 for r in weather5:
+    park = patch_globals["effective_park_pct"](r)
     if r["split"] < 0.0:
-        errors.append(f"Weather Heavy negative split: {r['name_plain']}")
-    if r["split"] <= 0.0 and r["risk"] <= 0.0:
+        allowed = (park >= 35 and r["score"] >= 75 and (r["hr"] >= 1 or r["near"] >= 2)) or (
+            park >= 8 and r["split"] >= -0.10 and r["score"] >= 82
+        )
+        if not allowed:
+            errors.append(f"Weather Heavy negative split: {r['name_plain']}")
+    if r["split"] == 0.0 and r["risk"] == 0.0:
         errors.append(f"Weather Heavy 0/0 lane: {r['name_plain']}")
 
 overlap = {r["name"] for r in top5} & {r["name"] for r in weather5}

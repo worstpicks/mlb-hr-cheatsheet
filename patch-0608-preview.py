@@ -415,21 +415,34 @@ def summary_ticket_ok(row: dict) -> bool:
 
 
 def weather_play_ok(row: dict) -> bool:
-    """Weather-heavy plays: real park/weather boost + non-negative platoon."""
+    """Weather-heavy plays: park/weather boost is a primary edge."""
     park = effective_park_pct(row)
     if park < 5:
         return False
-    if row["split"] < 0.0:
-        return False
     if row["split"] == 0.0 and row["risk"] == 0.0:
         return False
+
     has_form = row["hr"] >= 1 or row["near"] >= 2 or row["score"] >= 75
-    if park >= 25 and row["split"] >= 0.50:
-        has_form = True
-    if park >= 20 and row["split"] >= 0.50 and row["score"] >= 65:
-        has_form = True
-    has_platoon = row["split"] >= 0.15 or row["risk"] >= 0.35
-    return has_form and has_platoon
+
+    # Positive split + usable platoon at a boosted park.
+    if row["split"] >= 0.0:
+        if park >= 20 and row["split"] >= 0.50:
+            return has_form or row["score"] >= 65
+        has_platoon = row["split"] >= 0.15 or row["risk"] >= 0.35
+        if has_form and has_platoon:
+            return True
+        if park >= 8 and row["risk"] >= 1.0 and has_form:
+            return True
+
+    # Wind-out spots: near-neutral split with loud form.
+    if park >= 8 and row["split"] >= -0.10 and row["score"] >= 82 and has_form:
+        return True
+
+    # Extreme park carry (+35%+): environment leads even when SP split fights it.
+    if park >= 35 and row["score"] >= 75 and has_form:
+        return True
+
+    return False
 
 
 def weather_play_rank(row: dict) -> float:
@@ -736,11 +749,13 @@ weather_candidates = sorted(
     key=lambda r: (weather_play_rank(r), r["score"], r["risk"]),
     reverse=True,
 )
+boosted_weather_games = {r["game_key"] for r in weather_candidates if effective_park_pct(r) >= 5}
+weather_max_per_game = 3 if len(boosted_weather_games) <= 2 else 2
 weather5 = pick_top_n(
     weather_candidates,
     5,
     exclude_names=top5_names,
-    max_per_game=2,
+    max_per_game=weather_max_per_game,
     max_per_team=None,
 )
 if len(weather5) < 5:
@@ -786,6 +801,11 @@ assert_game_cap("Top 5 Weather Heavy HR Plays", weather5, max_per_game=weather_g
 def weather_micro_note(row):
     w = weather_by_game.get(row["game_key"])
     net = w["hr_pct_text"] if w else f"{row['park_pct']:+d}%"
+    park = effective_park_pct(row)
+    if park >= 35 and row["split"] < 0.15:
+        return f'vs {row["chip"]} · net {net} · park-first carry'
+    if park >= 8 and -0.10 <= row["split"] < 0.15:
+        return f'vs {row["chip"]} · net {net} · wind-out form'
     return f'vs {row["chip"]} · net {net} · split {row["split"]:+.2f}'
 
 THREE_LEG_HR = [f"{r['name_plain']} - Over 0.5 homerun" for r in top3]

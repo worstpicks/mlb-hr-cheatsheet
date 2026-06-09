@@ -1,0 +1,29 @@
+Matchup,LAD @ PIT
+Pitcher,Eric Lauer
+Pitcher Team,LAD
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.0,1.50,="9-26",.346,.462,0.116,0,3,0,1,11.1,0,.333,.795
+Batting Second,5.0,2.20,="6-20",.300,.750,0.450,3,0,0,4,20.0,5,.440,1.190
+Batting Third,6.1,0.95,="3-19",.158,.368,0.210,1,1,0,6,17.4,3,.261,.629
+Batting Fourth,5.0,1.20,="3-19",.158,.421,0.263,1,0,1,4,27.3,3,.273,.694
+Batting Fifth,4.1,2.08,="8-21",.381,.857,0.476,3,1,0,5,9.1,1,.409,1.266
+Batting Sixth,5.1,1.31,="5-20",.250,.550,0.300,2,0,0,3,8.7,2,.318,.868
+Batting Seventh,5.2,0.88,="4-21",.190,.476,0.286,2,0,0,5,9.1,1,.227,.703
+Batting Eighth,4.2,1.50,="6-20",.300,.450,0.150,1,0,0,1,9.5,1,.333,.783
+Batting Ninth,4.2,1.07,="3-17",.176,.176,0.000,0,0,0,0,26.3,2,.263,.439
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Oneil Cruz LHB,Batting First ​,="41-175",.234,.406,0.172,7,9,0,25,35.8,13,.295,.701
+Brandon Lowe LHB,Batting Second ​,="52-200",.260,.565,0.305,15,14,1,40,24.2,27,.351,.916
+Bryan Reynolds SHB,Batting Third ​,="61-228",.268,.421,0.153,6,13,2,38,21.1,46,.396,.817
+Marcell Ozuna RHB,Batting Fourth ​,="11-77",.143,.247,0.104,2,2,0,8,32.6,8,.233,.480
+Ryan O'Hearn LHB,Batting Fourth ​,="39-135",.289,.452,0.163,6,4,0,26,23.3,13,.353,.805
+Nick Gonzales RHB,Batting Fifth ​,="25-60",.417,.517,0.100,1,3,0,10,20.9,5,.478,.995
+Tyler Callihan LHB,Batting Sixth ​,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Endy Rodriguez SHB,Batting Seventh ​,="7-26",.269,.423,0.154,1,1,0,3,25.8,4,.367,.790
+Spencer Horwitz LHB,Batting Seventh ​,="21-76",.276,.395,0.119,1,4,1,9,12.5,18,.417,.812
+Jake Mangum SHB,Batting Eighth ​,="13-31",.419,.548,0.129,1,1,0,3,16.7,3,.486,1.034
+Jared Triolo RHB,Batting Eighth ​,="11-35",.314,.343,0.029,0,1,0,3,30.8,3,.368,.711
+Henry Davis RHB,Batting Ninth ​,="15-113",.133,.292,0.159,5,3,0,16,21.7,11,.227,.519

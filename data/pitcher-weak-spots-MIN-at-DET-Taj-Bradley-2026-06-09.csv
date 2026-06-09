@@ -1,0 +1,26 @@
+Matchup,MIN @ DET
+Pitcher,Taj Bradley
+Pitcher Team,MIN
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.08,="5-29",.172,.310,0.138,1,1,0,2,21.2,4,.273,.583
+Batting Second,5.2,2.47,="8-25",.320,.640,0.320,2,2,0,4,25.8,6,.452,1.092
+Batting Third,5.1,2.44,="9-26",.346,.615,0.269,2,1,0,3,20.0,4,.433,1.048
+Batting Fourth,7.1,1.09,="5-27",.185,.185,0.000,0,0,0,1,26.7,3,.267,.452
+Batting Fifth,7.0,1.29,="6-26",.231,.462,0.231,1,3,0,4,26.7,3,.333,.795
+Batting Sixth,7.1,1.09,="6-27",.222,.296,0.074,0,2,0,3,27.6,2,.276,.572
+Batting Seventh,6.0,1.67,="7-24",.292,.375,0.083,0,2,0,3,32.1,3,.357,.732
+Batting Eighth,7.0,0.71,="5-25",.200,.320,0.120,0,3,0,1,36.0,0,.200,.520
+Batting Ninth,6.2,0.60,="3-22",.136,.136,0.000,0,0,0,1,28.0,1,.208,.344
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Gleyber Torres RHB,Batting First ​,="9-32",.281,.469,0.188,1,3,0,4,16.7,4,.361,.830
+Kevin McGonigle LHB,Batting Second ​,="24-95",.253,.358,0.105,1,3,2,8,11.6,17,.366,.724
+Dillon Dingler RHB,Batting Third ​,="9-44",.205,.477,0.272,3,3,0,12,13.2,7,.321,.798
+Kerry Carpenter LHB,Batting Fourth ​,="6-23",.261,.652,0.391,3,0,0,9,32.1,3,.321,.973
+Riley Greene LHB,Batting Fifth ​,="23-58",.397,.517,0.120,1,4,0,8,20.3,10,.493,1.010
+Spencer Torkelson RHB,Batting Sixth ​,="11-36",.306,.639,0.333,3,3,0,7,28.2,2,.333,.972
+Colt Keith LHB,Batting Seventh ​,="2-10",.200,.400,0.200,0,0,1,0,40.0,0,.200,.600
+Matt Vierling RHB,Batting Eighth ​,="2-13",.154,.154,0.000,0,0,0,0,15.4,0,.154,.308
+Zach McKinstry LHB,Batting Ninth ​,="3-11",.273,.364,0.091,0,1,0,0,16.7,0,.273,.637

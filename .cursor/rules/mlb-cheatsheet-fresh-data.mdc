@@ -1,0 +1,20 @@
+---
+description: Always use freshest PropFinder CSV data when building MLB HR cheat sheets
+alwaysApply: true
+---
+
+# MLB HR Cheat Sheet — Fresh Data First
+
+When building or updating a daily MLB HR cheat sheet:
+
+1. **Re-import CSVs** from Downloads before every build:
+   `python import-sheet-csvs.py --date YYYY-MM-DD`
+2. Use **PropFinder Weather** (`ParkFactors_YYYY-MM-DD.csv`) for park/weather columns.
+3. Run the full pipeline in order:
+   - `python build-MMDD-from-csv.py`
+   - `python patch-MMDD-preview.py --sync-root`
+   - `python hard-verify-MMDD.py`
+   - `python verify-summary-MMDD.py`
+   - `python verify-deploy.py`
+4. Never ship stale summary picks (straights, Goblin legs, Top 5 tables) from a prior slate date.
+5. Verify: no duplicate batter–pitcher matchups, correct ⭐/💎 emojis, bum gloves (🧤) on HR risk ≥ 1.0 arms, zone data present in games block.

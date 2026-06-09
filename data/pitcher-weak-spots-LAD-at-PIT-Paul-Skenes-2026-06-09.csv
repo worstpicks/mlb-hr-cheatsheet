@@ -1,0 +1,26 @@
+Matchup,LAD @ PIT
+Pitcher,Paul Skenes
+Pitcher Team,PIT
+Opposing Team,LAD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.0,1.63,="8-31",.258,.516,0.258,2,2,0,3,30.6,5,.361,.877
+Batting Second,9.1,0.75,="6-35",.171,.171,0.000,0,0,0,1,30.6,1,.194,.365
+Batting Third,9.0,1.00,="7-31",.226,.419,0.193,2,0,0,4,29.4,2,.265,.684
+Batting Fourth,8.1,0.96,="7-33",.212,.364,0.152,1,2,0,3,26.5,1,.235,.599
+Batting Fifth,7.1,1.50,="10-32",.313,.531,0.218,1,4,0,5,24.2,1,.333,.864
+Batting Sixth,6.1,0.95,="5-24",.208,.333,0.125,0,1,1,5,32.1,1,.296,.629
+Batting Seventh,7.1,0.55,="4-26",.154,.192,0.038,0,1,0,1,22.2,0,.185,.377
+Batting Eighth,7.1,0.41,="3-26",.115,.115,0.000,0,0,0,0,38.5,0,.115,.230
+Batting Ninth,7.0,0.29,="0-20",.000,.000,0.000,0,0,0,1,33.3,2,.130,.130
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Shohei Ohtani LHB,Batting First ​,="70-232",.302,.522,0.220,11,14,2,35,22.5,43,.417,.939
+Andy Pages RHB,Batting Second ​,="13-44",.295,.659,0.364,3,5,1,7,14.9,2,.319,.978
+Freddie Freeman LHB,Batting Third ​,="28-82",.341,.707,0.366,8,6,0,19,21.2,19,.452,1.159
+Mookie Betts RHB,Batting Fourth ​,="9-37",.243,.432,0.189,2,1,0,7,14.3,5,.333,.765
+Max Muncy LHB,Batting Fifth ​,="13-57",.228,.474,0.246,4,2,0,5,23.1,8,.323,.797
+Kyle Tucker LHB,Batting Sixth ​,="2-7",.286,.714,0.428,0,1,1,1,12.5,1,.375,1.089
+Ryan Ward LHB,Batting Seventh ​,="5-18",.278,.667,0.389,2,1,0,4,21.1,1,.316,.983
+Dalton Rushing LHB,Batting Eighth ​,="10-30",.333,.667,0.334,3,1,0,5,21.2,2,.394,1.061
+Alex Freeland SHB,Batting Ninth ​,="26-95",.274,.421,0.147,3,5,0,13,24.3,11,.352,.773

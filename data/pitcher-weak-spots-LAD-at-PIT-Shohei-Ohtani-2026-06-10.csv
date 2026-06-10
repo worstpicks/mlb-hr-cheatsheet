@@ -1,0 +1,30 @@
+Matchup,LAD @ PIT
+Pitcher,Shohei Ohtani
+Pitcher Team,LAD
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="2-27",.074,.074,0.000,0,0,0,0,40.0,.138,.212
+Batting Second,="3-27",.111,.111,0.000,0,0,0,1,27.6,.172,.283
+Batting Third,="7-24",.292,.417,0.125,0,3,0,0,17.9,.393,.810
+Batting Fourth,="6-25",.240,.440,0.200,1,2,0,2,17.9,.321,.761
+Batting Fifth,="1-24",.042,.083,0.041,0,1,0,0,40.7,.148,.231
+Batting Sixth,="2-24",.083,.083,0.000,0,0,0,1,45.8,.083,.166
+Batting Seventh,="4-20",.200,.200,0.000,0,0,0,1,21.7,.261,.461
+Batting Eighth,="3-20",.150,.250,0.100,0,2,0,1,17.4,.261,.511
+Batting Ninth,="2-18",.111,.278,0.167,1,0,0,1,28.6,.238,.516
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Oneil Cruz LHB,Batting First ​,="41-175",.234,.406,0.172,7,9,0,25,35.8,13,.295,.701
+Brandon Lowe LHB,Batting Second ​,="52-203",.256,.557,0.301,15,14,1,40,23.9,27,.346,.903
+Bryan Reynolds SHB,Batting Third ​,="63-232",.272,.440,0.168,7,14,2,39,21.5,46,.398,.838
+Marcell Ozuna RHB,Batting Fourth ​,="11-77",.143,.247,0.104,2,2,0,8,32.6,8,.233,.480
+Ryan O'Hearn LHB,Batting Fourth ​,="40-139",.288,.468,0.180,7,4,0,27,24.7,13,.351,.819
+Nick Gonzales RHB,Batting Fifth ​,="25-60",.417,.517,0.100,1,3,0,10,20.9,5,.478,.995
+Davis Wendzel RHB,Batting Sixth ​,="0-4",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Tyler Callihan LHB,Batting Sixth ​,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Endy Rodriguez SHB,Batting Seventh ​,="7-26",.269,.423,0.154,1,1,0,3,25.8,4,.367,.790
+Spencer Horwitz LHB,Batting Seventh ​,="21-76",.276,.395,0.119,1,4,1,9,12.5,18,.417,.812
+Jake Mangum SHB,Batting Eighth ​,="13-31",.419,.548,0.129,1,1,0,3,16.7,3,.486,1.034
+Jared Triolo RHB,Batting Eighth ​,="12-37",.324,.351,0.027,0,1,0,3,28.6,4,.390,.741
+Henry Davis RHB,Batting Ninth ​,="15-115",.130,.287,0.157,5,3,0,16,22.7,12,.229,.516

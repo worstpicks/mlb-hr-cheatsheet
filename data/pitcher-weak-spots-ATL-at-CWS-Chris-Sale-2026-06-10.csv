@@ -1,0 +1,30 @@
+Matchup,ATL @ CWS
+Pitcher,Chris Sale
+Pitcher Team,ATL
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.44,="9-34",.265,.412,0.147,1,2,0,4,13.5,3,.324,.736
+Batting Second,7.2,1.70,="11-33",.333,.394,0.061,0,2,0,0,22.2,2,.389,.783
+Batting Third,8.0,1.38,="9-31",.290,.645,0.355,3,2,0,5,34.3,2,.324,.969
+Batting Fourth,8.0,1.00,="4-29",.138,.138,0.000,0,0,0,0,26.5,4,.265,.403
+Batting Fifth,9.0,0.44,="3-30",.100,.200,0.100,1,0,0,4,48.5,1,.182,.382
+Batting Sixth,7.2,1.04,="7-30",.233,.267,0.034,0,1,0,1,31.3,1,.281,.548
+Batting Seventh,8.0,0.88,="3-26",.115,.231,0.116,1,0,0,4,32.3,4,.258,.489
+Batting Eighth,7.2,1.04,="6-27",.222,.259,0.037,0,1,0,1,31.0,2,.276,.535
+Batting Ninth,8.0,0.50,="4-26",.154,.192,0.038,0,1,0,1,25.9,0,.185,.377
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="29-98",.296,.347,0.051,0,5,0,5,18.1,7,.395,.742
+Chase Meidroth RHB,Batting First ​,="27-103",.262,.437,0.175,4,6,0,10,22.1,10,.327,.764
+Miguel Vargas RHB,Batting Third ​,="36-150",.240,.473,0.233,9,8,0,24,18.6,28,.368,.841
+Colson Montgomery LHB,Batting Fourth ​,="39-179",.218,.447,0.229,11,8,0,27,33.0,17,.310,.757
+Edgar Quero SHB,Batting Fifth ​,="4-39",.103,.205,0.102,1,1,0,6,26.5,7,.224,.429
+Randal Grichuk RHB,Batting Sixth ​,="7-26",.269,.385,0.116,0,3,0,4,29.6,0,.259,.644
+Andrew Benintendi LHB,Batting Sixth ​,="21-70",.300,.443,0.143,2,4,0,9,19.0,7,.359,.802
+Jacob Gonzalez LHB,Batting Sixth ​,="5-17",.294,.471,0.177,1,0,0,4,26.3,2,.368,.839
+Braden Montgomery SHB,Batting Sixth ​,="2-5",.400,1.000,0.600,1,0,0,3,40.0,0,.400,1.400
+Tristan Peters LHB,Batting Seventh ​,="21-68",.309,.500,0.191,1,10,0,6,20.0,4,.365,.865
+Derek Hill RHB,Batting Ninth ​,="4-25",.160,.160,0.000,0,0,0,1,51.9,1,.222,.382
+Luisangel Acuna RHB,Batting Ninth ​,="9-55",.164,.182,0.018,0,1,0,3,17.7,4,.230,.412
+Drew Romo SHB,Batting Ninth ​,="7-42",.167,.381,0.214,2,3,0,5,19.6,9,.314,.695

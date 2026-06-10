@@ -1,0 +1,30 @@
+Matchup,CHC @ COL
+Pitcher,Michael Lorenzen
+Pitcher Team,COL
+Opposing Team,CHC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.68,="12-35",.343,.714,0.371,3,4,0,9,26.3,2,.368,1.082
+Batting Second,7.1,2.05,="11-33",.333,.485,0.152,1,2,0,5,13.5,4,.405,.890
+Batting Third,6.2,2.70,="13-32",.406,.594,0.188,1,1,1,2,13.5,5,.486,1.080
+Batting Fourth,7.1,1.77,="10-31",.323,.581,0.258,2,2,0,12,5.6,3,.389,.970
+Batting Fifth,6.0,2.50,="13-31",.419,.774,0.355,3,2,0,8,12.1,2,.455,1.229
+Batting Sixth,7.2,1.17,="8-30",.267,.333,0.066,0,2,0,1,25.8,1,.290,.623
+Batting Seventh,5.0,3.20,="14-28",.500,.679,0.179,1,2,0,8,12.9,2,.516,1.195
+Batting Eighth,5.2,2.29,="10-25",.400,.560,0.160,0,4,0,4,19.4,3,.500,1.060
+Batting Ninth,6.1,1.26,="8-27",.296,.333,0.037,0,1,0,5,14.8,0,.296,.629
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nico Hoerner RHB,Batting First ​,="51-196",.260,.383,0.123,4,12,0,28,6.3,23,.341,.724
+Michael Busch LHB,Batting Second ​,="14-73",.192,.288,0.096,1,4,0,5,25.0,9,.298,.586
+Alex Bregman RHB,Batting Third ​,="34-137",.248,.358,0.110,3,6,0,13,18.2,15,.325,.683
+Ian Happ SHB,Batting Fourth ​,="25-114",.219,.386,0.167,4,5,1,9,32.4,26,.373,.759
+Seiya Suzuki RHB,Batting Fifth ​,="23-96",.240,.406,0.166,4,4,0,11,26.1,13,.333,.739
+Michael Conforto LHB,Batting Sixth ​,="8-23",.348,.783,0.435,2,4,0,7,17.9,4,.429,1.212
+Carson Kelly RHB,Batting Seventh ​,="16-55",.291,.382,0.091,1,2,0,11,18.5,9,.400,.782
+Moisés Ballesteros LHB,Batting Seventh ​,="9-47",.191,.213,0.022,0,1,0,4,25.9,7,.296,.509
+Pete Crow-Armstrong LHB,Batting Eighth ​,="24-106",.226,.443,0.217,5,4,2,17,24.8,10,.322,.765
+Pedro Ramirez SHB,Batting Eighth ​,="1-14",.071,.071,0.000,0,0,0,0,6.3,2,.188,.259
+Dansby Swanson RHB,Batting Ninth ​,="18-105",.171,.314,0.143,3,4,1,13,21.3,14,.273,.587
+Miguel Amaya RHB,Batting Ninth ​,="13-35",.371,.686,0.315,3,2,0,9,13.6,7,.500,1.186
+Matt Shaw RHB,Batting Ninth ​,="7-31",.226,.355,0.129,0,4,0,3,18.2,2,.273,.628

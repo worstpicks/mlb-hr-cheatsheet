@@ -1,0 +1,30 @@
+Matchup,LAD @ PIT
+Pitcher,Jared Jones
+Pitcher Team,PIT
+Opposing Team,LAD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,0.50,="1-6",.167,.167,0.000,0,0,0,0,33.3,0,.167,.334
+Batting Second,1.0,3.00,="2-5",.400,.600,0.200,0,1,0,0,16.7,1,.500,1.100
+Batting Third,1.1,1.50,="2-6",.333,.833,0.500,1,0,0,1,33.3,0,.333,1.166
+Batting Fourth,1.0,1.00,="1-4",.250,.250,0.000,0,0,0,0,25.0,0,.250,.500
+Batting Fifth,0.2,3.00,="2-4",.500,1.250,0.750,1,0,0,2,25.0,0,.500,1.750
+Batting Sixth,1.0,1.00,="0-3",.000,.000,0.000,0,0,0,0,0.0,1,.250,.250
+Batting Seventh,0.1,9.00,="2-3",.667,1.000,0.333,0,1,0,0,25.0,1,.750,1.750
+Batting Eighth,1.0,1.00,="0-3",.000,.000,0.000,0,0,0,0,25.0,1,.250,.250
+Batting Ninth,1.0,1.00,="1-4",.250,.250,0.000,0,0,0,2,25.0,0,.250,.500
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Shohei Ohtani LHB,Batting First ​,="71-236",.301,.521,0.220,11,15,2,37,22.5,44,.417,.938
+Mookie Betts RHB,Batting Second ​,="7-47",.149,.234,0.085,1,1,0,2,11.8,3,.196,.430
+Kyle Tucker LHB,Batting Second ​,="20-84",.238,.333,0.095,2,2,0,11,24.7,12,.330,.663
+Freddie Freeman LHB,Batting Third ​,="30-86",.349,.709,0.360,8,7,0,20,21.1,20,.459,1.168
+Will Smith RHB,Batting Third ​,="21-79",.266,.342,0.076,1,3,0,11,14.6,9,.337,.679
+Max Muncy LHB,Batting Sixth ​,="31-107",.290,.579,0.289,9,4,0,14,23.6,15,.382,.961
+Ryan Ward LHB,Batting Seventh ​,="6-23",.261,.565,0.304,2,1,0,5,25.0,1,.292,.857
+Andy Pages RHB,Batting Seventh ​,="19-70",.271,.414,0.143,2,4,0,15,21.5,6,.329,.743
+Dalton Rushing LHB,Batting Seventh ​,="9-35",.257,.486,0.229,2,2,0,7,24.4,5,.366,.852
+Alex Call RHB,Batting Eighth ​,="9-32",.281,.313,0.032,0,1,0,8,12.5,5,.400,.713
+Miguel Rojas RHB,Batting Ninth ​,="9-40",.225,.250,0.025,0,1,0,1,15.9,2,.295,.545
+Santiago Espinal RHB,Batting Ninth ​,="4-18",.222,.500,0.278,1,2,0,3,14.3,1,.250,.750
+Alex Freeland SHB,Batting Ninth ​,="28-98",.286,.429,0.143,3,5,0,14,23.3,13,.372,.801

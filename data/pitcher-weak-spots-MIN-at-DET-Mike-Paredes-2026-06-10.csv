@@ -1,0 +1,30 @@
+Matchup,MIN @ DET
+Pitcher,Mike Paredes
+Pitcher Team,MIN
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="0-3",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Second,="0-3",.000,.000,0.000,0,0,0,0,33.3,.000,.000
+Batting Third,="0-3",.000,.000,0.000,0,0,0,0,33.3,.000,.000
+Batting Fourth,="1-3",.333,.333,0.000,0,0,0,0,0.0,.333,.666
+Batting Fifth,="0-3",.000,.000,0.000,0,0,0,0,25.0,.250,.250
+Batting Sixth,="0-2",.000,.000,0.000,0,0,0,1,0.0,.500,.500
+Batting Seventh,="1-3",.333,1.333,1.000,1,0,0,2,0.0,.250,1.583
+Batting Eighth,="0-3",.000,.000,0.000,0,0,0,0,25.0,.000,.000
+Batting Ninth,="2-3",.667,.667,0.000,0,0,0,2,0.0,.750,1.417
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="36-113",.319,.487,0.168,3,8,1,11,14.0,15,.403,.890
+Gleyber Torres RHB,Batting Second ​,="22-75",.293,.333,0.040,1,0,0,7,15.3,20,.439,.772
+Jahmai Jones RHB,Batting Third ​,="7-28",.250,.429,0.179,1,2,0,3,32.3,3,.323,.752
+Colt Keith LHB,Batting Third ​,="25-98",.255,.316,0.061,0,6,0,5,23.3,5,.291,.607
+Riley Greene LHB,Batting Fourth ​,="44-157",.280,.427,0.147,4,11,0,20,31.1,19,.362,.789
+Dillon Dingler RHB,Batting Fifth ​,="10-65",.154,.354,0.200,4,1,0,10,18.1,5,.225,.579
+Wenceel Perez SHB,Batting Sixth ​,="6-50",.120,.160,0.040,0,2,0,3,25.0,2,.154,.314
+Kerry Carpenter LHB,Batting Sixth ​,="11-48",.229,.479,0.250,2,2,2,6,32.1,3,.302,.781
+Matt Vierling RHB,Batting Seventh ​,="8-33",.242,.424,0.182,1,3,0,4,21.6,3,.297,.721
+Spencer Torkelson RHB,Batting Seventh ​,="17-80",.213,.375,0.162,3,4,0,7,32.6,14,.337,.712
+Zach McKinstry LHB,Batting Eighth ​,="5-46",.109,.130,0.021,0,1,0,0,23.1,5,.196,.326
+Jake Rogers RHB,Batting Ninth ​,="9-51",.176,.314,0.138,1,2,1,5,32.2,4,.241,.555
+Zack Short RHB,Batting Ninth ​,="6-30",.200,.267,0.067,0,2,0,2,22.5,7,.350,.617

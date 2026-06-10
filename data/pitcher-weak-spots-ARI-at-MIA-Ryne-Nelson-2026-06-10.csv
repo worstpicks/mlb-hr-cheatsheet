@@ -1,0 +1,30 @@
+Matchup,ARI @ MIA
+Pitcher,Ryne Nelson
+Pitcher Team,ARI
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,1.00,="7-37",.189,.297,0.108,0,2,1,5,25.0,3,.250,.547
+Batting Second,10.2,0.75,="6-36",.167,.306,0.139,1,2,0,2,18.4,2,.211,.517
+Batting Third,10.0,0.80,="7-36",.194,.417,0.223,2,2,0,8,13.2,1,.211,.628
+Batting Fourth,7.0,2.14,="12-34",.353,.882,0.529,5,3,0,8,18.9,3,.405,1.287
+Batting Fifth,7.1,1.50,="9-31",.290,.484,0.194,2,0,0,4,11.8,2,.353,.837
+Batting Sixth,8.0,1.13,="6-28",.214,.214,0.000,0,0,0,1,25.0,3,.281,.495
+Batting Seventh,7.1,0.82,="5-27",.185,.407,0.222,1,3,0,4,13.8,1,.241,.648
+Batting Eighth,5.1,2.44,="9-25",.360,.680,0.320,2,2,0,7,20.7,4,.448,1.128
+Batting Ninth,6.2,0.75,="3-24",.125,.375,0.250,2,0,0,2,14.8,2,.192,.567
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Xavier Edwards SHB,Batting First ​,="25-94",.266,.468,0.202,4,3,2,9,14.4,10,.337,.805
+Jakob Marsee LHB,Batting First ​,="18-101",.178,.248,0.070,1,2,1,7,25.4,17,.306,.554
+Liam Hicks LHB,Batting Second ​,="19-75",.253,.400,0.147,3,2,0,14,9.5,7,.333,.733
+Otto Lopez RHB,Batting Third ​,="37-127",.291,.409,0.118,2,7,1,16,18.2,4,.321,.730
+Kyle Stowers LHB,Batting Fourth ​,="19-76",.250,.461,0.211,3,7,0,8,30.2,8,.337,.798
+Heriberto Hernandez RHB,Batting Fifth ​,="3-26",.115,.192,0.077,0,0,1,4,21.4,2,.179,.371
+Connor Norby RHB,Batting Seventh ​,="9-48",.188,.333,0.145,1,4,0,5,32.1,6,.286,.619
+Owen Caissie LHB,Batting Seventh ​,="13-59",.220,.373,0.153,2,3,0,13,41.5,4,.262,.635
+Christopher Morel RHB,Batting Eighth ​,="3-17",.176,.235,0.059,0,1,0,0,45.0,2,.300,.535
+Leo Jimenez RHB,Batting Eighth ​,="5-21",.238,.238,0.000,0,0,0,1,7.4,4,.370,.608
+Esteury Ruiz RHB,Batting Ninth ​,="4-22",.182,.364,0.182,1,1,0,1,41.7,2,.250,.614
+Javier Sanoja RHB,Batting Ninth ​,="22-82",.268,.378,0.110,1,6,0,11,12.5,5,.310,.688
+Joe Mack LHB,Batting Ninth ​,="11-41",.268,.415,0.147,1,3,0,7,38.6,2,.302,.717

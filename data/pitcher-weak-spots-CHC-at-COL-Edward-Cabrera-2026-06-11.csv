@@ -1,0 +1,30 @@
+Matchup,CHC @ COL
+Pitcher,Edward Cabrera
+Pitcher Team,CHC
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.2,0.81,="6-31",.194,.290,0.096,1,0,0,2,24.2,1,.219,.509
+Batting Second,7.1,1.09,="5-27",.185,.296,0.111,1,0,0,1,33.3,3,.267,.563
+Batting Third,6.0,2.00,="10-27",.370,.444,0.074,0,2,0,1,17.2,2,.414,.858
+Batting Fourth,7.0,1.29,="6-24",.250,.750,0.500,4,0,0,6,14.3,3,.321,1.071
+Batting Fifth,5.0,2.40,="6-21",.286,.571,0.285,2,0,0,4,14.8,6,.444,1.015
+Batting Sixth,4.1,3.00,="11-24",.458,.542,0.084,0,2,0,2,11.1,2,.519,1.061
+Batting Seventh,6.2,1.20,="7-25",.280,.480,0.200,1,2,0,8,29.6,1,.308,.788
+Batting Eighth,6.0,0.83,="3-21",.143,.143,0.000,0,0,0,1,21.7,2,.217,.360
+Batting Ninth,5.2,1.41,="7-21",.333,.714,0.381,2,2,0,8,26.1,1,.348,1.062
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="19-80",.238,.400,0.162,2,5,1,9,20.9,4,.279,.679
+Edouard Julien LHB,Batting First ​,="26-103",.252,.350,0.098,2,2,1,12,26.5,14,.342,.692
+TJ Rumfield LHB,Batting Third ​,="18-92",.196,.315,0.119,2,5,0,11,15.1,11,.302,.617
+Hunter Goodman RHB,Batting Third ​,="17-100",.170,.370,0.200,5,5,0,10,35.5,5,.224,.594
+Troy Johnston LHB,Batting Fifth ​,="23-88",.261,.307,0.046,0,4,0,9,17.7,8,.323,.630
+Willi Castro SHB,Batting Sixth ​,="22-64",.344,.500,0.156,2,4,0,11,27.8,6,.403,.903
+Ezequiel Tovar RHB,Batting Sixth ​,="9-64",.141,.250,0.109,1,4,0,4,31.9,2,.188,.438
+Cole Carrigg SHB,Batting Sixth ​,="0-4",.000,.000,0.000,0,0,0,0,25.0,0,.000,.000
+Braxton Fulford RHB,Batting Eighth ​,="1-7",.143,.143,0.000,0,0,0,2,55.6,1,.222,.365
+Kyle Karros RHB,Batting Eighth ​,="17-67",.254,.388,0.134,1,6,0,6,17.1,14,.378,.766
+Sterlin Thompson LHB,Batting Eighth ​,="7-23",.304,.391,0.087,0,2,0,3,19.2,2,.385,.776
+Brett Sullivan LHB,Batting Ninth ​,="6-39",.154,.154,0.000,0,0,0,2,28.6,1,.190,.344
+Chad Stevens RHB,Batting Ninth ​,="1-18",.056,.056,0.000,0,0,0,1,40.9,4,.227,.283

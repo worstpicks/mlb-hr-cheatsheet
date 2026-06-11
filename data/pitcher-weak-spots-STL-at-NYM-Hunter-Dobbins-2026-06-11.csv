@@ -1,0 +1,26 @@
+Matchup,STL @ NYM
+Pitcher,Hunter Dobbins
+Pitcher Team,STL
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,1.50,="1-5",.200,.200,0.000,0,0,0,0,33.3,1,.333,.533
+Batting Second,1.2,0.60,="1-6",.167,.167,0.000,0,0,0,0,33.3,0,.167,.334
+Batting Third,1.2,1.20,="2-6",.333,1.000,0.667,1,1,0,1,16.7,0,.333,1.333
+Batting Fourth,1.1,1.50,="0-4",.000,.000,0.000,0,0,0,0,50.0,2,.333,.333
+Batting Fifth,2.0,0.50,="0-5",.000,.000,0.000,0,0,0,0,33.3,1,.167,.167
+Batting Sixth,1.2,0.60,="0-5",.000,.000,0.000,0,0,0,1,16.7,1,.167,.167
+Batting Seventh,1.0,3.00,="3-6",.500,.500,0.000,0,0,0,0,16.7,0,.500,1.000
+Batting Eighth,0.2,6.00,="3-5",.600,.800,0.200,0,1,0,0,0.0,1,.667,1.467
+Batting Ninth,1.2,0.60,="0-4",.000,.000,0.000,0,0,0,0,40.0,1,.200,.200
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carson Benge LHB,Batting First ​,="37-125",.296,.440,0.144,4,4,1,15,20.7,7,.348,.788
+Bo Bichette RHB,Batting Second ​,="36-167",.216,.299,0.083,3,3,1,18,17.0,13,.275,.574
+Juan Soto LHB,Batting Third ​,="26-93",.280,.570,0.290,9,0,0,20,13.1,13,.368,.938
+Jared Young LHB,Batting Fourth ​,="9-39",.231,.513,0.282,3,2,0,5,26.7,5,.333,.846
+A.J. Ewing LHB,Batting Fifth ​,="7-24",.292,.333,0.041,0,1,0,3,28.0,0,.280,.613
+Marcus Semien RHB,Batting Sixth ​,="12-71",.169,.268,0.099,2,1,0,7,16.7,0,.167,.435
+Brett Baty LHB,Batting Seventh ​,="9-33",.273,.333,0.060,0,2,0,4,32.4,1,.294,.627
+Francisco Alvarez RHB,Batting Eighth ​,="7-23",.304,.391,0.087,0,2,0,1,23.1,2,.360,.751
+MJ Melendez LHB,Batting Ninth ​,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000

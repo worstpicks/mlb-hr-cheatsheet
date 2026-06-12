@@ -148,7 +148,7 @@ PITCHER_HAND = {
     "Luinder Avila": "R",
     "Javier Assad": "R",
     "Landen Roupp": "R",
-    "Kyle Freeland": "L",
+    "Sean Sullivan": "L",
     "Gage Jump": "L",
 }
 

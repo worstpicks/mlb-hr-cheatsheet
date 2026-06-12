@@ -1,0 +1,26 @@
+Matchup,SD @ BAL
+Pitcher,Griffin Canning
+Pitcher Team,SD
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.2,1.29,="3-17",.176,.412,0.236,1,1,0,5,30.0,3,.300,.712
+Batting Second,3.1,2.70,="7-16",.438,.875,0.437,2,1,0,3,5.6,2,.500,1.375
+Batting Third,4.2,0.86,="2-15",.133,.400,0.267,1,1,0,2,29.4,2,.235,.635
+Batting Fourth,3.2,1.64,="2-12",.167,.333,0.166,0,2,0,1,18.8,4,.375,.708
+Batting Fifth,3.1,1.80,="4-13",.308,.538,0.230,1,0,0,4,20.0,2,.400,.938
+Batting Sixth,2.0,4.00,="5-11",.455,.455,0.000,0,0,0,2,14.3,3,.571,1.026
+Batting Seventh,3.2,0.55,="2-13",.154,.154,0.000,0,0,0,0,30.8,0,.154,.308
+Batting Eighth,3.2,0.55,="2-13",.154,.231,0.077,0,1,0,1,46.2,0,.154,.385
+Batting Ninth,2.2,1.88,="4-12",.333,.583,0.250,1,0,0,1,23.1,1,.385,.968
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="44-172",.256,.355,0.099,3,8,0,17,20.0,34,.381,.736
+Gunnar Henderson LHB,Batting Second ​,="41-182",.225,.418,0.193,9,8,0,22,22.7,17,.300,.718
+Adley Rutschman SHB,Batting Third ​,="41-149",.275,.523,0.248,8,11,1,36,14.8,17,.349,.872
+Pete Alonso RHB,Batting Fourth ​,="44-170",.259,.512,0.253,12,7,0,33,19.7,17,.324,.836
+Samuel Basallo LHB,Batting Fifth ​,="29-124",.234,.355,0.121,2,7,1,14,25.4,12,.297,.652
+Coby Mayo RHB,Batting Sixth ​,="7-31",.226,.613,0.387,4,0,0,7,29.4,2,.294,.907
+Colton Cowser LHB,Batting Seventh ​,="19-84",.226,.333,0.107,3,0,0,13,26.5,11,.309,.642
+Tyler O'Neill RHB,Batting Eighth ​,="1-6",.167,.333,0.166,0,1,0,0,14.3,1,.286,.619
+Jackson Holliday LHB,Batting Ninth ​,="8-28",.286,.536,0.250,2,1,0,4,18.8,4,.375,.911

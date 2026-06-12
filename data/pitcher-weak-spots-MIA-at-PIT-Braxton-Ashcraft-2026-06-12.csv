@@ -1,0 +1,26 @@
+Matchup,MIA @ PIT
+Pitcher,Braxton Ashcraft
+Pitcher Team,PIT
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.14,="9-38",.237,.316,0.079,0,3,0,1,22.0,2,.293,.609
+Batting Second,9.0,1.33,="9-37",.243,.486,0.243,3,0,0,6,30.0,3,.300,.786
+Batting Third,7.2,1.96,="12-35",.343,.429,0.086,0,3,0,2,34.2,3,.395,.824
+Batting Fourth,9.2,1.14,="7-29",.241,.276,0.035,0,1,0,4,24.3,4,.324,.600
+Batting Fifth,8.0,1.50,="11-34",.324,.706,0.382,4,1,0,7,25.7,1,.343,1.049
+Batting Sixth,10.0,0.70,="5-30",.167,.200,0.033,0,1,0,3,31.4,2,.229,.429
+Batting Seventh,9.1,0.75,="7-34",.206,.294,0.088,0,1,1,1,28.6,0,.229,.523
+Batting Eighth,8.0,0.88,="6-30",.200,.267,0.067,0,2,0,0,19.4,1,.226,.493
+Batting Ninth,7.2,0.52,="3-26",.115,.231,0.116,1,0,0,1,23.3,1,.207,.438
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Liam Hicks LHB,Batting First ​,="5-26",.192,.423,0.231,1,1,1,2,9.4,5,.344,.767
+Otto Lopez RHB,Batting Second ​,="28-61",.459,.639,0.180,1,6,1,5,9.5,2,.476,1.115
+Kyle Stowers LHB,Batting Third ​,="7-42",.167,.381,0.214,2,1,1,9,32.0,5,.265,.646
+Xavier Edwards SHB,Batting Fourth ​,="18-60",.300,.400,0.100,1,3,0,7,6.6,14,.421,.821
+Heriberto Hernandez RHB,Batting Fifth ​,="5-30",.167,.233,0.066,0,0,1,4,18.8,2,.219,.452
+Owen Caissie LHB,Batting Sixth ​,="11-59",.186,.288,0.102,1,3,0,11,40.9,4,.242,.530
+Jakob Marsee LHB,Batting Seventh ​,="7-24",.292,.417,0.125,1,0,0,2,13.3,4,.433,.850
+Joe Mack LHB,Batting Eighth ​,="9-39",.231,.256,0.025,0,1,0,5,20.9,3,.286,.542
+Javier Sanoja RHB,Batting Ninth ​,="23-86",.267,.372,0.105,1,6,0,11,12.0,5,.308,.680

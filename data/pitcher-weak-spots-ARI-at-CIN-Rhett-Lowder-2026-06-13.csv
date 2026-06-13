@@ -1,0 +1,26 @@
+Matchup,ARI @ CIN
+Pitcher,Rhett Lowder
+Pitcher Team,CIN
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.1,0.95,="4-22",.182,.182,0.000,0,0,0,0,33.3,2,.250,.432
+Batting Second,5.0,1.60,="6-21",.286,.381,0.095,0,0,1,1,16.7,2,.375,.756
+Batting Third,5.2,1.24,="2-18",.111,.111,0.000,0,0,0,0,8.7,5,.304,.415
+Batting Fourth,4.1,2.54,="7-19",.368,.421,0.053,0,1,0,2,17.4,4,.478,.899
+Batting Fifth,4.2,1.29,="4-18",.222,.500,0.278,1,2,0,3,15.0,2,.300,.800
+Batting Sixth,4.0,1.75,="5-17",.294,.706,0.412,1,4,0,6,21.1,2,.368,1.074
+Batting Seventh,4.2,0.86,="2-16",.125,.188,0.063,0,1,0,2,11.1,2,.222,.410
+Batting Eighth,3.0,2.33,="5-14",.357,.429,0.072,0,1,0,3,6.3,2,.438,.867
+Batting Ninth,3.2,1.09,="2-13",.154,.154,0.000,0,0,0,0,20.0,2,.267,.421
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="57-225",.253,.458,0.205,10,14,1,36,16.3,17,.302,.760
+Corbin Carroll LHB,Batting Second ​,="59-193",.306,.596,0.290,9,13,8,30,20.4,29,.400,.996
+Gabriel Moreno RHB,Batting Third ​,="8-30",.267,.533,0.266,2,2,0,3,12.8,8,.436,.969
+Nolan Arenado RHB,Batting Fourth ​,="18-89",.202,.360,0.158,2,8,0,14,22.4,12,.318,.678
+Pavin Smith LHB,Batting Fifth ​,="2-18",.111,.111,0.000,0,0,0,1,29.2,5,.292,.403
+Geraldo Perdomo SHB,Batting Sixth ​,="6-15",.400,.400,0.000,0,0,0,0,11.1,3,.500,.900
+Tommy Troy RHB,Batting Seventh ​,="2-7",.286,.286,0.000,0,0,0,0,14.3,0,.286,.572
+Adrian Del Castillo LHB,Batting Eighth ​,="3-13",.231,.462,0.231,1,0,0,2,12.5,3,.375,.837
+Ryan Waldschmidt RHB,Batting Ninth ​,="15-49",.306,.388,0.082,0,4,0,6,28.6,6,.382,.770

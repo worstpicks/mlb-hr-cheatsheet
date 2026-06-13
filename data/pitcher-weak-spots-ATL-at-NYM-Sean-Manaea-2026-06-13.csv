@@ -1,0 +1,26 @@
+Matchup,ATL @ NYM
+Pitcher,Sean Manaea
+Pitcher Team,NYM
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="5-22",.227,.318,0.091,0,2,0,2,39.1,.261,.579
+Batting Second,="7-22",.318,.591,0.273,1,1,1,2,26.1,.348,.939
+Batting Third,="3-18",.167,.333,0.166,1,0,0,5,28.6,.286,.619
+Batting Fourth,="5-18",.278,.500,0.222,1,1,0,3,25.0,.316,.816
+Batting Fifth,="5-19",.263,.316,0.053,0,1,0,3,19.0,.333,.649
+Batting Sixth,="5-18",.278,.444,0.166,0,1,1,1,22.7,.381,.825
+Batting Seventh,="4-19",.211,.263,0.052,0,1,0,2,19.0,.286,.549
+Batting Eighth,="5-13",.385,.385,0.000,0,0,0,3,25.0,.600,.985
+Batting Ninth,="6-18",.333,.778,0.445,2,2,0,8,4.8,.333,1.111
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Mauricio Dubon RHB,Batting First ​,="5-25",.200,.360,0.160,1,1,0,5,14.3,3,.286,.646
+Michael Harris II LHB,Batting Second ​,="17-49",.347,.490,0.143,2,1,0,7,19.2,3,.385,.875
+Ozzie Albies SHB,Batting Third ​,="23-65",.354,.600,0.246,4,4,0,10,8.1,6,.405,1.005
+Matt Olson LHB,Batting Fourth ​,="18-66",.273,.652,0.379,6,7,0,12,27.0,8,.351,1.003
+Austin Riley RHB,Batting Fifth ​,="19-87",.218,.333,0.115,2,2,1,9,33.0,8,.299,.632
+Eli White RHB,Batting Sixth ​,="4-18",.222,.333,0.111,0,0,1,1,14.3,3,.333,.666
+Jorge Mateo RHB,Batting Seventh ​,="6-14",.429,.786,0.357,1,2,0,2,12.5,2,.500,1.286
+Ha-Seong Kim RHB,Batting Eighth ​,="3-36",.083,.083,0.000,0,0,0,2,26.8,5,.195,.278
+Sandy León SHB,Batting Ninth ​,="1-25",.040,.040,0.000,0,0,0,0,40.0,0,.040,.080

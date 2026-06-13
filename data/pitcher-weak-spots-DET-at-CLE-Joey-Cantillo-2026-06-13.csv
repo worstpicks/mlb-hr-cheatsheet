@@ -1,0 +1,31 @@
+Matchup,DET @ CLE
+Pitcher,Joey Cantillo
+Pitcher Team,CLE
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.0,2.00,="11-35",.314,.771,0.457,5,1,0,8,20.0,5,.400,1.171
+Batting Second,6.2,3.00,="14-33",.424,.788,0.364,3,3,0,7,17.9,6,.513,1.301
+Batting Third,9.2,1.14,="6-33",.182,.242,0.060,0,2,0,1,23.7,5,.289,.531
+Batting Fourth,8.1,1.32,="7-28",.250,.607,0.357,3,1,0,8,24.2,4,.333,.940
+Batting Fifth,7.2,1.30,="5-25",.200,.280,0.080,0,2,0,2,13.3,5,.333,.613
+Batting Sixth,7.0,1.29,="6-25",.240,.320,0.080,0,2,0,0,24.1,3,.345,.665
+Batting Seventh,6.1,1.58,="6-23",.261,.304,0.043,0,1,0,2,21.4,4,.370,.674
+Batting Eighth,6.1,1.11,="4-23",.174,.261,0.087,0,2,0,2,29.6,3,.269,.530
+Batting Ninth,7.0,1.00,="6-26",.231,.269,0.038,0,1,0,3,22.2,1,.259,.528
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="37-123",.301,.463,0.162,3,9,1,11,14.1,18,.394,.857
+Gleyber Torres RHB,Batting Second ​,="26-86",.302,.384,0.082,2,1,0,9,14.4,22,.441,.825
+Jahmai Jones RHB,Batting Third ​,="7-28",.250,.429,0.179,1,2,0,3,32.3,3,.323,.752
+Colt Keith LHB,Batting Third ​,="25-98",.255,.316,0.061,0,6,0,5,23.3,5,.291,.607
+Riley Greene LHB,Batting Fourth ​,="44-157",.280,.427,0.147,4,11,0,20,31.1,19,.362,.789
+Dillon Dingler RHB,Batting Fifth ​,="10-65",.154,.354,0.200,4,1,0,10,18.1,5,.225,.579
+Wenceel Perez SHB,Batting Sixth ​,="6-50",.120,.160,0.040,0,2,0,3,25.0,2,.154,.314
+Kerry Carpenter LHB,Batting Sixth ​,="11-48",.229,.479,0.250,2,2,2,6,32.1,3,.302,.781
+Matt Vierling RHB,Batting Seventh ​,="8-33",.242,.424,0.182,1,3,0,4,21.6,3,.297,.721
+Spencer Torkelson RHB,Batting Seventh ​,="19-87",.218,.437,0.219,5,4,0,10,34.3,14,.333,.770
+Zach McKinstry LHB,Batting Eighth ​,="7-56",.125,.196,0.071,1,1,0,1,20.6,6,.210,.406
+Hao-Yu Lee RHB,Batting Eighth ​,="11-49",.224,.367,0.143,1,2,1,4,26.9,3,.269,.636
+Jake Rogers RHB,Batting Ninth ​,="9-54",.167,.296,0.129,1,2,1,5,30.2,5,.242,.538
+James Outman LHB,Batting Ninth ​,="11-51",.216,.392,0.176,1,4,1,4,38.5,1,.231,.623

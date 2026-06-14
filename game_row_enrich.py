@@ -58,8 +58,41 @@ def load_batter_stat_lookup(sheet_date: str) -> dict[str, dict]:
     return lookup
 
 
+HIGH_GB_PCT = 52.0
+LOW_GB_PCT = 29.0
+HIGH_HH_PCT = 50.0
+LOW_HH_PCT = 30.0
+
+
+def gb_signal(gb_pct: float | None) -> str | None:
+    if gb_pct is None:
+        return None
+    if gb_pct >= HIGH_GB_PCT:
+        return "high"
+    if gb_pct <= LOW_GB_PCT:
+        return "low"
+    return None
+
+
+def hh_signal(hh_pct: float | None) -> str | None:
+    if hh_pct is None:
+        return None
+    if hh_pct >= HIGH_HH_PCT:
+        return "high"
+    if hh_pct <= LOW_HH_PCT:
+        return "low"
+    return None
+
+
 def _read_extra_statcast(path: Path, batter_name: str) -> dict:
-    out: dict = {"fb_pct": None, "pull_air": None, "whiff_pct": None, "k_pct": None, "hh_pct": None}
+    out: dict = {
+        "fb_pct": None,
+        "pull_air": None,
+        "whiff_pct": None,
+        "k_pct": None,
+        "hh_pct": None,
+        "gb_pct": None,
+    }
     with path.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.reader(f)
         header = None
@@ -78,6 +111,7 @@ def _read_extra_statcast(path: Path, batter_name: str) -> dict:
             out["whiff_pct"] = _num(data.get("WHIFF%"))
             out["k_pct"] = _num(data.get("K%"))
             out["hh_pct"] = _num(data.get("HH%"))
+            out["gb_pct"] = _num(data.get("GB%"))
             out["barrel_pct"] = _num(data.get("BARREL%"))
             break
     return out
@@ -467,6 +501,8 @@ def enrich_row(entry: dict, stats: dict | None, zone: dict | None = None) -> dic
     pull = st.get("pull_air")
     whiff = st.get("whiff_pct")
     k_pct = st.get("k_pct")
+    gb = st.get("gb_pct")
+    hh = st.get("hh_pct")
     out["hr"] = hr
     out["near"] = near
     out["ev"] = ev
@@ -480,6 +516,16 @@ def enrich_row(entry: dict, stats: dict | None, zone: dict | None = None) -> dic
         out["whiffPct"] = round(whiff, 1)
     if k_pct is not None:
         out["kPct"] = round(k_pct, 1)
+    if gb is not None:
+        out["gbPct"] = round(gb, 1)
+        sig = gb_signal(gb)
+        if sig:
+            out["gbSignal"] = sig
+    if hh is not None:
+        out["hhPct"] = round(hh, 1)
+        sig = hh_signal(hh)
+        if sig:
+            out["hhSignal"] = sig
     trend = form_trend(int(hr), int(near), float(ev))
     out["formTrend"] = trend
     if contact_risk(whiff, k_pct):
@@ -579,6 +625,14 @@ def emit_games_js(games_data: list[dict]) -> str:
                 parts.append(f"formTrend: {js_string(entry['formTrend'])}")
             if entry.get("contactRisk"):
                 parts.append("contactRisk: true")
+            if entry.get("gbPct") is not None:
+                parts.append(f"gbPct: {entry['gbPct']}")
+            if entry.get("gbSignal"):
+                parts.append(f"gbSignal: {js_string(entry['gbSignal'])}")
+            if entry.get("hhPct") is not None:
+                parts.append(f"hhPct: {entry['hhPct']}")
+            if entry.get("hhSignal"):
+                parts.append(f"hhSignal: {js_string(entry['hhSignal'])}")
             if entry.get("fbPct") is not None:
                 parts.append(f"fbPct: {entry['fbPct']}")
             if entry.get("pullAir") is not None:

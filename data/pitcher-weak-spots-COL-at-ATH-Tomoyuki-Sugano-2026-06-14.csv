@@ -1,0 +1,30 @@
+Matchup,COL @ ATH
+Pitcher,Tomoyuki Sugano
+Pitcher Team,COL
+Opposing Team,ATH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.56,="10-34",.294,.618,0.324,2,5,0,3,15.8,3,.342,.960
+Batting Second,7.2,1.96,="12-35",.343,.571,0.228,2,2,0,3,10.5,3,.395,.966
+Batting Third,8.0,1.75,="9-30",.300,.667,0.367,3,2,0,8,13.9,5,.389,1.056
+Batting Fourth,9.1,0.75,="6-32",.188,.250,0.062,0,2,0,1,16.7,1,.250,.500
+Batting Fifth,8.1,0.72,="4-29",.138,.138,0.000,0,0,0,0,22.6,2,.194,.332
+Batting Sixth,5.2,1.76,="9-25",.360,.840,0.480,3,3,0,6,14.8,1,.370,1.210
+Batting Seventh,5.2,1.76,="7-23",.304,.565,0.261,1,3,0,2,11.1,3,.370,.935
+Batting Eighth,7.2,0.91,="5-25",.200,.440,0.240,1,3,0,2,3.7,2,.259,.699
+Batting Ninth,7.0,0.86,="6-27",.222,.296,0.074,0,2,0,1,11.1,0,.222,.518
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carlos Cortes LHB,Batting First ​,="12-46",.261,.348,0.087,1,1,0,1,8.6,11,.414,.762
+Nick Kurtz LHB,Batting First ​,="30-104",.288,.529,0.241,6,5,1,18,28.8,26,.439,.968
+Shea Langeliers RHB,Batting Second ​,="49-153",.320,.601,0.281,11,10,0,24,18.6,15,.390,.991
+Colby Thomas RHB,Batting Third ​,="5-15",.333,.467,0.134,0,2,0,3,37.5,1,.375,.842
+Tyler Soderstrom LHB,Batting Fourth ​,="20-94",.213,.415,0.202,4,7,0,15,12.0,13,.306,.721
+Jacob Wilson RHB,Batting Fifth ​,="28-99",.283,.394,0.111,2,5,0,10,10.8,2,.294,.688
+Henry Bolte RHB,Batting Sixth ​,="11-34",.324,.353,0.029,0,1,0,0,33.3,1,.361,.714
+Zack Gelof RHB,Batting Seventh ​,="18-55",.327,.473,0.146,2,2,0,5,19.7,4,.373,.846
+Max Muncy RHB,Batting Seventh ​,="18-66",.273,.394,0.121,1,3,1,5,35.1,2,.324,.718
+Jonah Heim SHB,Batting Eighth ​,="7-33",.212,.303,0.091,0,3,0,3,16.2,4,.297,.600
+Jeff McNeil LHB,Batting Eighth ​,="13-68",.191,.206,0.015,0,1,0,2,18.2,9,.286,.492
+Lawrence Butler LHB,Batting Eighth ​,="7-48",.146,.229,0.083,1,1,0,6,21.1,9,.281,.510
+Alika Williams RHB,Batting Ninth ​,="7-31",.226,.387,0.161,1,2,0,4,27.3,1,.250,.637

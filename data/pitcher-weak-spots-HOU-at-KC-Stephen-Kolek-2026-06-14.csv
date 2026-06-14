@@ -1,0 +1,29 @@
+Matchup,HOU @ KC
+Pitcher,Stephen Kolek
+Pitcher Team,KC
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.1,1.13,="4-21",.190,.381,0.191,1,1,0,2,8.7,2,.261,.642
+Batting Second,5.1,1.13,="4-20",.200,.250,0.050,0,1,0,0,27.3,2,.273,.523
+Batting Third,5.0,1.40,="6-20",.300,.500,0.200,1,1,0,3,14.3,1,.333,.833
+Batting Fourth,5.1,0.94,="4-20",.200,.250,0.050,0,1,0,0,19.0,1,.238,.488
+Batting Fifth,4.0,2.00,="7-19",.368,.737,0.369,2,1,0,8,20.0,1,.400,1.137
+Batting Sixth,3.1,1.80,="5-15",.333,.467,0.134,0,2,0,0,0.0,1,.412,.879
+Batting Seventh,4.1,0.69,="3-16",.188,.188,0.000,0,0,0,1,25.0,0,.188,.376
+Batting Eighth,5.0,0.60,="2-15",.133,.133,0.000,0,0,0,0,18.8,1,.188,.321
+Batting Ninth,5.1,0.38,="2-16",.125,.313,0.188,1,0,0,1,25.0,0,.125,.438
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="22-79",.278,.481,0.203,4,4,0,7,22.2,9,.356,.837
+Jeremy Pena RHB,Batting First ​,="34-119",.286,.420,0.134,3,7,0,10,12.6,12,.363,.783
+Yordan Alvarez LHB,Batting Second ​,="71-215",.330,.651,0.321,19,12,0,46,17.1,37,.438,1.089
+Isaac Paredes RHB,Batting Third ​,="30-114",.263,.377,0.114,2,7,0,15,15.4,13,.354,.731
+Christian Walker RHB,Batting Fourth ​,="29-133",.218,.466,0.248,10,3,0,23,21.8,12,.286,.752
+Joey Loperfido LHB,Batting Sixth ​,="8-27",.296,.407,0.111,0,3,0,4,24.2,5,.424,.831
+Cam Smith RHB,Batting Sixth ​,="16-96",.167,.260,0.093,2,3,0,5,28.6,13,.270,.530
+Taylor Trammell LHB,Batting Seventh ​,="6-16",.375,.438,0.063,0,1,0,1,29.4,1,.412,.850
+Jake Meyers RHB,Batting Seventh ​,="9-36",.250,.389,0.139,1,2,0,3,14.6,4,.317,.706
+Brice Matthews RHB,Batting Eighth ​,="8-42",.190,.214,0.024,0,1,0,2,30.4,3,.244,.458
+Christian Vazquez RHB,Batting Ninth ​,="25-98",.255,.378,0.123,2,6,0,17,15.7,8,.311,.689
+Collin Price RHB,Batting Ninth ​,="1-4",.250,.500,0.250,0,1,0,0,50.0,0,.250,.750

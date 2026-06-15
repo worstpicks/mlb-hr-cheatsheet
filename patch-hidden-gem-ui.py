@@ -277,11 +277,21 @@ def patch(text: str, sheet_date: str | None = None) -> str:
         1,
     )
 
-    text = text.replace(
-        "                        fav: isWorstPickzFavoriteRow(row),",
-        "                        fav: isWorstPickzFavoriteRow(row),\n                        gem: isWorstPickzHiddenGemRow(row),",
-        1,
+    gem_row_line = "                        gem: isWorstPickzHiddenGemRow(row),\n"
+    while text.count(gem_row_line) > 1:
+        text = text.replace(gem_row_line, "", 1)
+    if gem_row_line.strip() not in text:
+        text = text.replace(
+            "                        fav: isWorstPickzFavoriteRow(row),",
+            "                        fav: isWorstPickzFavoriteRow(row),\n                        gem: isWorstPickzHiddenGemRow(row),",
+            1,
+        )
+
+    hidden_gems_filter = (
+        '                if (activeQuickFilter === "hidden-gems" && !el.classList.contains("pick-row--worst-pickz-gem")) return false;\n'
     )
+    while text.count(hidden_gems_filter) > 1:
+        text = text.replace(hidden_gems_filter, "", 1)
 
     if 'data-filter="hidden-gems"' not in text:
         text = text.replace(
@@ -291,12 +301,13 @@ def patch(text: str, sheet_date: str | None = None) -> str:
             1,
         )
 
-    text = text.replace(
-        "                if (activeQuickFilter === \"favorites\" && !el.classList.contains(\"pick-row--worst-pickz-fav\")) return false;",
-        "                if (activeQuickFilter === \"favorites\" && !el.classList.contains(\"pick-row--worst-pickz-fav\")) return false;\n"
-        "                if (activeQuickFilter === \"hidden-gems\" && !el.classList.contains(\"pick-row--worst-pickz-gem\")) return false;",
-        1,
-    )
+    if hidden_gems_filter.strip() not in text:
+        text = text.replace(
+            "                if (activeQuickFilter === \"favorites\" && !el.classList.contains(\"pick-row--worst-pickz-fav\")) return false;",
+            "                if (activeQuickFilter === \"favorites\" && !el.classList.contains(\"pick-row--worst-pickz-fav\")) return false;\n"
+            + hidden_gems_filter.strip(),
+            1,
+        )
 
     text = re.sub(
         r"<strong>\d+ Worst Pickz Favorite</strong> rows \(.*?Designated <strong>Worst Pickz Favorites</strong> get the rose border(?:; designated <strong>Hidden Gemz</strong> get the blue border)?",

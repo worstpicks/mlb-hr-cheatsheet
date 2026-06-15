@@ -131,8 +131,8 @@ In `patch-YYYY-MM-DD-preview.py`:
 
 | Leg | Pick from |
 |-----|-----------|
-| **O0.5 HR** | Best attack/weather straight: strong batter form **plus** positive split, attackable opposing pitcher, and park/weather support when available; do not default to highest raw score if pitcher/weather lane is weaker |
-| **O1.5 HR** | Best true multi-HR profile, not just the next-highest HR score: 2+ recent HR, multiple near-HR, loud EV, positive split, no harsh park/weather drag, and at least one of pitcher HR risk / strong split / park support; **must be a different game than O0.5** (never both legs from the same matchup) |
+| **O0.5 HR** | Best attack/weather straight: **zone fit first** (`goblin_hr_zone_fit.py`), then HR form, positive split, attackable opposing pitcher, and park/weather support |
+| **O1.5 HR** | Best true multi-HR profile with **zone-fit lead**: 2+ recent HR, multiple near-HR, loud EV, positive split, no harsh park/weather drag, and at least one of pitcher HR risk / strong split / park support; **must be a different game than O0.5** |
 
 Both picks must:
 
@@ -155,6 +155,78 @@ Confirm in `preview/index.html`:
 
 **Common failure:** `SUMMARY_BLOCK` is correct in the patch file but `preview/index.html` still shows yesterday — re-run `resync` and verify straight-of-day-card content on disk before push.
 
+## Hits parlay rubric (required every slate)
+
+**Do not inline the old contact-first hits formula** when creating `patch-YYYY-MM-DD-preview.py`. Use the shared module **`goblin_hits_parlay.py`** — same rubric as June 14 onward.
+
+### Where it lives
+
+- **`goblin_hits_parlay.py`** — canonical ranking, pool, and backfill logic (edit here if the rubric changes; do not fork per-day copies).
+- **`patch-YYYY-MM-DD-preview.py`** — import and call (copy pattern from `patch-0614-preview.py`):
+
+```python
+from goblin_hits_parlay import annotate_hits_ranks, fill_hits_parlay, select_hits_parlay
+
+annotate_hits_ranks(rows, row_high_whiff=row_high_whiff)
+hits_parlay_legs = select_hits_parlay(rows, row_high_whiff=row_high_whiff, avoid_whiff=True)
+hits_parlay_legs = fill_hits_parlay(rows, hits_parlay_legs, row_high_whiff=row_high_whiff)
+```
+
+### Pick rules (current rubric)
+
+| Priority | Signal |
+|----------|--------|
+| **1 — Zone fit** | `zone_score` (main), plus `zone_contact`, `zone_hard_hit`, `zone_barrel` |
+| **2 — Contact** | Recent HR/near-HR, EV, barrel; bonus for low K%/whiff |
+| **3 — Matchup** | Split + park (light weight) |
+| **Exclude** | High-whiff batters (`row_high_whiff(..., for_hits=True)` / Whiff pill / WHIFF% or K% ≥ 26) |
+
+**Pool:** prefer strong zone fit (`zone_score` ≥ 18, or zone + zone-contact combo). Relax thresholds only if fewer than 11 legs qualify. **Backfill to 11** with zone-fit names before contact-only fallbacks.
+
+When bootstrapping a new daily patch, copy the hits block from **`patch-0614-preview.py`**, not older archives that still inline the contact-first formula.
+
+## HR zone-fit rubric — Straights + Goblin insight (required every slate)
+
+**Do not inline `straight_attack_rank` / `multi_hr_rank` / weather rank formulas** in new patch files. Use **`goblin_hr_zone_fit.py`** — same HR-tailored zone rubric as June 14 onward.
+
+### Where it lives
+
+- **`goblin_hr_zone_fit.py`** — canonical HR zone ranking (edit here if the rubric changes).
+- **`patch-YYYY-MM-DD-preview.py`** — import and annotate after `effective_park_pct` is defined (copy from `patch-0614-preview.py`):
+
+```python
+from goblin_hr_zone_fit import (
+    annotate_hr_zone_ranks,
+    hr_rank_sort_key,
+    o05_zone_lane_ok,
+    summary_combined_rank,
+    weather_play_rank,
+)
+
+annotate_hr_zone_ranks(rows, park_pct_fn=effective_park_pct)
+```
+
+### Applies to
+
+| Board section | Sort / rank |
+|---------------|-------------|
+| **Straights O0.5** | `hr_rank_sort_key` + `o05_zone_lane_ok` strict pool |
+| **Straights O1.5** | `multi_hr_rank` + `hr_zone_fit` |
+| **3 Leg HR / 2 Leg HR / Favorite 3 Leg** | `hr_rank_sort_key` |
+| **Top 5 HR Tickets** | `summary_combined_rank` |
+| **Top 5 Weather Heavy** | `weather_play_rank` (park-led, zone tiebreak) |
+| **Longshots** | `straight_attack_rank` + `hr_zone_fit` |
+
+### Pick rules (HR-tailored zone fit)
+
+| Priority | Signal |
+|----------|--------|
+| **1 — Zone fit** | `zone_score`, `zone_hr`, `zone_barrel`, `zone_hard_hit` |
+| **2 — HR power** | Recent HR/near-HR, EV, barrels |
+| **3 — Matchup** | Split, pitcher HR risk, park/weather |
+
+Hits parlay uses **`goblin_hits_parlay.py`** (contact-weighted zone fit). HR boards use **`goblin_hr_zone_fit.py`** (HR-weighted zone fit). Do not mix the two modules' formulas.
+
 ## Rest of slate checklist (after CSV import)
 
 0. **Straights of the Day** — update `STRAIGHT_OF_DAY_CARD` in `patch-YYYY-MM-DD-preview.py`, resync, verify (Step 1 above)
@@ -164,7 +236,7 @@ Confirm in `preview/index.html`:
 4. Goblin parlays distinct — 3 Leg vs 2 Leg vs Favorite 3 Leg share no batters; **2 Leg HR must not reuse Straights of the Day** (`python goblin_parlay_rules.py`)
 5. **Top 5 diversification** — **Top 5 HR Tickets** and **Top 5 Weather Heavy HR Plays** must each have **at most 2 players from the same game** (skip lower-ranked same-game rows rather than stacking one matchup). Lists must stay **distinct** from each other (no duplicate names across the two charts). Weather-heavy rows require **park ≥ +5%**, **non-negative split**, and real HR form — never stack negative-platoon names just for weather rank.
 6. **Summary quality gates** — Top 5 HR Tickets, Weather Heavy, longshots (+700), and hits parlay must pass `summary_ticket_ok` / `weather_play_ok` / `longshot_ok` filters in the patch script (reject 0/0 split-risk lanes and negative platoon weather plays). Run `python verify-summary-YYYY-MM-DD.py` before push (e.g. `verify-summary-0608.py` for June 8).
-7. **Hits parlay** — Prefer contact-friendly legs; exclude batters with high whiff/K% (Whiff pill / `contactRisk` / WHIFF% or K% ≥ 26). Do not fill with high-whiff names unless fewer than 11 qualify.
+7. **Hits parlay** — `goblin_hits_parlay.py`. **Straights + Goblin HR boards** — `goblin_hr_zone_fit.py`. Do **not** copy old inline rank formulas from pre–June 14 patch files.
 8. `python verify-deploy.py` after audits — **stop here unless user explicitly requests push live**
 9. **Push live (user must ask)** — only then: `git add` relevant files → `git commit` → `git push origin main`. Do not push as part of audit, fix, or “task complete” unless the user said to.
 

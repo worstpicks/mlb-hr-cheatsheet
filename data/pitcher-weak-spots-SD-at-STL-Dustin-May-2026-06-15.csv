@@ -1,0 +1,29 @@
+Matchup,SD @ STL
+Pitcher,Dustin May
+Pitcher Team,STL
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,1.20,="11-37",.297,.486,0.189,1,4,0,4,15.8,1,.316,.802
+Batting Second,10.0,0.90,="5-34",.147,.265,0.118,1,1,0,5,28.9,4,.237,.502
+Batting Third,9.1,0.86,="5-34",.147,.176,0.029,0,1,0,1,28.9,3,.237,.413
+Batting Fourth,8.1,1.44,="9-33",.273,.394,0.121,1,1,0,5,16.2,3,.324,.718
+Batting Fifth,7.1,1.64,="9-30",.300,.433,0.133,0,4,0,1,14.7,3,.382,.815
+Batting Sixth,6.1,1.89,="10-29",.345,.448,0.103,0,3,0,5,33.3,2,.424,.872
+Batting Seventh,8.1,1.08,="8-28",.286,.536,0.250,2,1,0,7,26.7,1,.300,.836
+Batting Eighth,6.0,1.33,="7-25",.280,.320,0.040,0,1,0,2,22.2,1,.308,.628
+Batting Ninth,6.1,1.42,="7-23",.304,.391,0.087,0,0,1,1,7.7,2,.385,.776
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting Second ​,="32-128",.250,.289,0.039,0,3,1,13,26.0,17,.336,.625
+Jackson Merrill LHB,Batting Third ​,="22-101",.218,.347,0.129,3,4,0,10,25.2,7,.275,.622
+Manny Machado RHB,Batting Fourth ​,="29-149",.195,.409,0.214,9,5,0,28,22.2,19,.281,.690
+Xander Bogaerts RHB,Batting Fifth ​,="37-153",.242,.314,0.072,3,2,0,16,19.4,15,.312,.626
+Will Wagner LHB,Batting Fifth ​,="3-4",.750,1.000,0.250,0,1,0,0,0.0,2,.833,1.833
+Gavin Sheets LHB,Batting Sixth ​,="13-75",.173,.347,0.174,3,4,0,10,27.2,5,.235,.582
+Samad Taylor RHB,Batting Sixth ​,="8-21",.381,.571,0.190,1,1,0,5,27.3,1,.409,.980
+Ty France RHB,Batting Seventh ​,="14-59",.237,.508,0.271,4,2,1,9,31.3,3,.297,.805
+Nick Solak RHB,Batting Seventh ​,="1-4",.250,.250,0.000,0,0,0,1,0.0,0,.200,.450
+Jase Bowen RHB,Batting Seventh ​,="3-13",.231,.231,0.000,0,0,0,0,35.7,1,.286,.517
+Rodolfo Durán RHB,Batting Ninth ​,="5-30",.167,.500,0.333,3,1,0,6,23.7,7,.342,.842
+Sung-Mun Song LHB,Batting Ninth ​,="4-20",.200,.250,0.050,0,1,0,2,38.1,1,.238,.488

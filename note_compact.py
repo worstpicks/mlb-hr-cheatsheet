@@ -63,10 +63,13 @@ def straight_pick_why(row: dict, *, leg: str) -> tuple[str, str]:
     if park is not None and park >= 3:
         edge_bits.append(f"park/weather +{park}%")
     zone = row.get("zone_score")
+    zone_hr = row.get("zone_hr")
     if zone is not None and zone >= 28:
         edge_bits.append(f"elite zone fit {zone:.1f}")
     elif zone is not None and zone >= 22:
         edge_bits.append(f"zone fit {zone:.1f}")
+    if zone_hr is not None and zone_hr >= 14.0:
+        edge_bits.append(f"zone HR rate {zone_hr:.1f}%")
     primary = (
         ", ".join(edge_bits)
         if edge_bits
@@ -78,14 +81,20 @@ def straight_pick_why(row: dict, *, leg: str) -> tuple[str, str]:
         near = row.get("near", 0)
         form = f"{form} · {hr} HR / {near} near-HR multi-HR profile"
     elif leg == "o05":
-        form = f"{form} · best O0.5 straight lane (form + split + park + zone)"
+        form = f"{form} · best O0.5 straight lane (zone fit + form + split + park)"
     return primary, form
 
 
 def compact_goblin_leg(row: dict) -> str:
     base = compact_note(row.get("note", ""))
     zone = row.get("zone_score")
+    zone_hr = row.get("zone_hr")
+    tails: list[str] = []
     if zone is not None and "zone" not in base.lower():
-        zone_tail = f"zone {zone:.1f}"
-        return f"{base} · {zone_tail}" if base else zone_tail
+        tails.append(f"zone {zone:.1f}")
+    if zone_hr is not None and zone_hr >= 10.0 and "zone hr" not in base.lower():
+        tails.append(f"zone HR {zone_hr:.1f}%")
+    if tails:
+        tail = " · ".join(tails)
+        return f"{base} · {tail}" if base else tail
     return base

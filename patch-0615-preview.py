@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Patch preview sheet to 2026-06-14. Does not commit or push."""
+"""Patch preview sheet to 2026-06-15. Does not commit or push."""
 from __future__ import annotations
 
 import csv
@@ -14,10 +14,10 @@ from sheet_data import load_pitcher_risk, resolve_pitcher
 ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview" / "index.html"
 MANIFEST_PATH = ROOT / "preview" / "sheets-manifest.json"
-ARCHIVE_PREVIOUS = ROOT / "preview" / "archive" / "2026-06-13.html"
-SHEET_DATE = "2026-06-14"
+ARCHIVE_PREVIOUS = ROOT / "preview" / "archive" / "2026-06-14.html"
+SHEET_DATE = "2026-06-15"
 
-spec = importlib.util.spec_from_file_location("build0614", ROOT / "build-sheet-2026-06-14.py")
+spec = importlib.util.spec_from_file_location("build0615", ROOT / "build-sheet-2026-06-15.py")
 build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
@@ -664,7 +664,7 @@ if len(fav3) < 3:
         )
     )
 
-# 2026-06-14 review: Mullins (+1.48 vs Rodriguez) over Pederson in 3-leg; refresh fav3.
+# Favorite 3-leg backfill when reserved favorites consumed by straights/parlays.
 rows_by_plain = {r["name_plain"]: r for r in rows}
 _mullins = rows_by_plain.get("Cedric Mullins")
 if _mullins and len(top3) == 3 and top3[2]["name_plain"] == "Joc Pederson":
@@ -1034,7 +1034,8 @@ def update_manifest():
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     old = {sheet["date"]: sheet for sheet in manifest.get("sheets", [])}
     ordered = [
-        {"date": SHEET_DATE, "label": "June 14, 2026 — current slate", "href": "index.html"},
+        {"date": SHEET_DATE, "label": "June 15, 2026 — current slate", "href": "index.html"},
+        {"date": "2026-06-14", "label": "June 14, 2026", "href": "archive/2026-06-14.html"},
         {"date": "2026-06-13", "label": "June 13, 2026", "href": "archive/2026-06-13.html"},
         {"date": "2026-06-12", "label": "June 12, 2026", "href": "archive/2026-06-12.html"},
         {"date": "2026-06-09", "label": "June 9, 2026", "href": "archive/2026-06-09.html"},
@@ -1090,7 +1091,7 @@ def patch_preview(manifest):
     )
     text = re.sub(
         r"<p>(?:Friday|Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday), \w+ \d+, 2026 — Worst Pickz HR cheat sheet",
-        "<p>Sunday, June 14, 2026 — Worst Pickz HR cheat sheet",
+        "<p>Monday, June 15, 2026 — Worst Pickz HR cheat sheet",
         text,
         count=1,
     )

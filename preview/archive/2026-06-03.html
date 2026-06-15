@@ -2010,6 +2010,28 @@
         .parlay-leg:active { cursor: grabbing; }
         .parlay-leg .parlay-drag-hint { font-size: 0.62rem; color: #64748b; flex-shrink: 0; }
         .parlay-leg .parlay-leg-odds { margin-left: auto; font-weight: 900; color: #a7f3d0; font-variant-numeric: tabular-nums; }
+        .parlay-leg .parlay-leg-label { flex: 1; min-width: 0; }
+        .parlay-leg-remove {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            border: none;
+            border-radius: 6px;
+            background: rgba(248, 113, 113, 0.15);
+            color: #fca5a5;
+            font-size: 1.05rem;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .parlay-leg-remove:hover { background: rgba(248, 113, 113, 0.32); color: #fff; }
+        .parlay-leg-remove:focus-visible { outline: 2px solid #fb923c; outline-offset: 1px; }
+        html.theme-light .parlay-leg-remove { background: rgba(220, 38, 38, 0.12); color: #b91c1c; }
+        html.theme-light .parlay-leg-remove:hover { background: rgba(220, 38, 38, 0.22); color: #7f1d1d; }
+
         .parlay-combined {
             font-size: 0.88rem;
             font-weight: 900;
@@ -2986,23 +3008,29 @@
                         <div class="straight-pick-hero">
                             <span class="straight-pick-tag">Over 0.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Shea Langeliers &mdash; vs Imanaga</strong>
-                                <span class="straight-pick-meta">Listed +248 - Over 0.5 HR &middot; Score 82 &middot; ATH @ CHC</span>
+                                <strong class="straight-pick-name">Yordan Alvarez &mdash; vs Jones</strong>
+                                <span class="straight-pick-meta">Listed +310 - Over 0.5 HR &middot; Score 98 &middot; PIT @ HOU</span>
                             </div>
-                            <p class="straight-pick-line"><small>1 HR, 1 near-HR · 100.2 mph EV · split +1.33 · risk +1.07 · park +34%</small></p>
+                            <ul class="straight-pick-factors">
+                                <li><strong>Primary edge</strong><small>favorable split +0.00 vs Jones, park/weather +6%</small></li>
+                                <li><strong>Why this pick</strong><small>3 HR, 5 near-HR · 100.4 mph EV · split +0.00 · risk +0.00 · park +6% · best O0.5 straight lane (form + split + park)</small></li>
+                            </ul>
                             <div class="straight-pick-actions">
-                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Shea Langeliers - Over 0.5 homerun&quot;]'>Add O0.5 Straight to Gambly</button>
+                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Yordan Alvarez - Over 0.5 homerun&quot;]'>Add O0.5 Straight to Gambly</button>
                             </div>
                         </div>
                         <div class="straight-pick-hero straight-pick-hero--o15">
                             <span class="straight-pick-tag">Over 1.5 HR Straight</span>
                             <div class="straight-pick-header">
-                                <strong class="straight-pick-name">Brent Rooker &mdash; vs Imanaga</strong>
-                                <span class="straight-pick-meta">Listed +277 - Over 0.5 HR &middot; Score 81 &middot; ATH @ CHC</span>
+                                <strong class="straight-pick-name">Shea Langeliers &mdash; vs Imanaga</strong>
+                                <span class="straight-pick-meta">Listed +248 - Over 0.5 HR &middot; Score 82 &middot; ATH @ CHC</span>
                             </div>
-                            <p class="straight-pick-line"><small>2 HR, 2 near-HR · 91.0 mph EV · split +1.33 · risk +1.07 · park +34%</small></p>
+                            <ul class="straight-pick-factors">
+                                <li><strong>Primary edge</strong><small>strong platoon split +1.33 vs Imanaga, attackable HR risk +1.07, park/weather +34%</small></li>
+                                <li><strong>Why this pick</strong><small>1 HR, 1 near-HR · 100.2 mph EV · split +1.33 · risk +1.07 · park +34% · 1 HR / 1 near-HR multi-HR profile</small></li>
+                            </ul>
                             <div class="straight-pick-actions">
-                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Brent Rooker - Over 1.5 homeruns&quot;]'>Add O1.5 Straight to Gambly</button>
+                                <button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Shea Langeliers - Over 1.5 homeruns&quot;]'>Add O1.5 Straight to Gambly</button>
                             </div>
                         </div>
                     </div>
@@ -3013,36 +3041,36 @@
                         <div class="best-bets-group">
                             <h4>3 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Colby Thomas HR</strong><small>1 HR, 2 near-HR, 97.1 mph EV. Imanaga RHB split +1.33, HR risk 1.07.</small></li>
-                                <li><strong>Nick Kurtz HR</strong><small>2 HR, 2 near-HR, 90.9 mph EV. Imanaga LHB split +0.76, HR risk 1.07.</small></li>
-                                <li><strong>Yordan Alvarez HR</strong><small>3 HR, 5 near-HR, 100.4 mph EV. Jones split/risk data unavailable. limited split/risk sample.</small></li>
+                                <li><strong>Brent Rooker HR</strong><small>2 HR, 2 near-HR, 91.0 mph EV. Imanaga RHB split +1.33, HR risk 1.07. Air: FB 43%, pull-air 43%.</small></li>
+                                <li><strong>Colby Thomas HR</strong><small>1 HR, 2 near-HR, 97.1 mph EV. Imanaga RHB split +1.33, HR risk 1.07. Air: FB 71%, pull-air 14%.</small></li>
+                                <li><strong>Brooks Lee HR</strong><small>2 HR, 3 near-HR, 88.3 mph EV. Lugo RHB split +1.07, HR risk 0.31. park suppresses carry (-7%). Air: FB 35%, pull-air 20%.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Colby Thomas - Over 0.5 homerun&quot;, &quot;Nick Kurtz - Over 0.5 homerun&quot;, &quot;Yordan Alvarez - Over 0.5 homerun&quot;]'>Add 3 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Brent Rooker - Over 0.5 homerun&quot;, &quot;Colby Thomas - Over 0.5 homerun&quot;, &quot;Brooks Lee - Over 0.5 homerun&quot;]'>Add 3 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>2 Leg Homerun Bet</h4>
                             <ol>
-                                <li><strong>Shea Langeliers HR</strong><small>1 HR, 1 near-HR, 100.2 mph EV. Imanaga RHB split +1.33, HR risk 1.07.</small></li>
-                                <li><strong>Brent Rooker HR</strong><small>2 HR, 2 near-HR, 91.0 mph EV. Imanaga RHB split +1.33, HR risk 1.07.</small></li>
+                                <li><strong>Yordan Alvarez HR</strong><small>3 HR, 5 near-HR, 100.4 mph EV. Jones split/risk data unavailable. limited split/risk sample. Air: FB 57%, pull-air 21%.</small></li>
+                                <li><strong>Shea Langeliers HR</strong><small>1 HR, 1 near-HR, 100.2 mph EV. Imanaga RHB split +1.33, HR risk 1.07. Air: FB 50%, pull-air 25%.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Shea Langeliers - Over 0.5 homerun&quot;, &quot;Brent Rooker - Over 0.5 homerun&quot;]'>Add 2 Leg HR to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Yordan Alvarez - Over 0.5 homerun&quot;, &quot;Shea Langeliers - Over 0.5 homerun&quot;]'>Add 2 Leg HR to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>Shea Langeliers, Colby Thomas, Brent Rooker, Yordan Alvarez, Nick Kurtz, Brooks Lee</strong></li>
-                                <li><strong>Will Smith, Josh Bell, Freddie Freeman, Max Muncy, Ian Happ</strong></li>
+                                <li><strong>Colby Thomas, Will Smith, Max Muncy, Samuel Basallo, Freddie Freeman, Yordan Alvarez</strong></li>
+                                <li><strong>Alex Bregman, J.T. Realmuto, Colton Cowser</strong></li>
                             </ul>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Shea Langeliers - Over 0.5 hits&quot;, &quot;Colby Thomas - Over 0.5 hits&quot;, &quot;Brent Rooker - Over 0.5 hits&quot;, &quot;Yordan Alvarez - Over 0.5 hits&quot;, &quot;Nick Kurtz - Over 0.5 hits&quot;, &quot;Brooks Lee - Over 0.5 hits&quot;, &quot;Will Smith - Over 0.5 hits&quot;, &quot;Josh Bell - Over 0.5 hits&quot;, &quot;Freddie Freeman - Over 0.5 hits&quot;, &quot;Max Muncy - Over 0.5 hits&quot;, &quot;Ian Happ - Over 0.5 hits&quot;]'>Add Hits Parlay to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Colby Thomas - Over 0.5 hits&quot;, &quot;Will Smith - Over 0.5 hits&quot;, &quot;Max Muncy - Over 0.5 hits&quot;, &quot;Samuel Basallo - Over 0.5 hits&quot;, &quot;Freddie Freeman - Over 0.5 hits&quot;, &quot;Yordan Alvarez - Over 0.5 hits&quot;, &quot;Alex Bregman - Over 0.5 hits&quot;, &quot;J.T. Realmuto - Over 0.5 hits&quot;, &quot;Colton Cowser - Over 0.5 hits&quot;]'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
                             <ol>
-                                <li><strong>Max Muncy HR &#11088; &#127765;</strong><small>2 HR, 3 near-HR, 94.2 mph EV. Nelson LHB split +0.13, HR risk 0.79. park/weather net drag (-8%).</small></li>
-                                <li><strong>Trea Turner HR &#11088; &#127765;</strong><small>1 HR, 2 near-HR, 93.0 mph EV. Giolito RHB split +0.37, HR risk -0.22. pitcher risk below avg (-0.22); weather carry headwind (-5%).</small></li>
-                                <li><strong>Dalton Rushing HR &#11088; &#127765;</strong><small>0 HR, 2 near-HR, 85.8 mph EV. Nelson LHB split +0.13, HR risk 0.79. park/weather net drag (-8%); lighter EV form (85.8 mph).</small></li>
+                                <li><strong>Rhys Hoskins HR &#11088; &#127765;</strong><small>2 HR, 3 near-HR, 101.4 mph EV. Rodon RHB split -0.97, HR risk -0.53. tough split lane (-0.97); pitcher suppresses HR (-0.53). Air: FB 50%, pull-air 83%.</small></li>
+                                <li><strong>Kyle Schwarber HR &#11088; &#127765;</strong><small>2 HR, 2 near-HR, 97.8 mph EV. Giolito LHB split -0.44, HR risk -0.22. tough split lane (-0.44); pitcher risk below avg (-0.22). Air: FB 83%, pull-air 50%.</small></li>
+                                <li><strong>Max Muncy HR &#11088; &#127765;</strong><small>2 HR, 3 near-HR, 94.2 mph EV. Nelson LHB split +0.13, HR risk 0.79. park/weather net drag (-8%). Air: FB 36%, pull-air 36%.</small></li>
                             </ol>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Max Muncy - Over 0.5 homerun&quot;, &quot;Trea Turner - Over 0.5 homerun&quot;, &quot;Dalton Rushing - Over 0.5 homerun&quot;]'>Add Favorite 3 Leg to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='[&quot;Rhys Hoskins - Over 0.5 homerun&quot;, &quot;Kyle Schwarber - Over 0.5 homerun&quot;, &quot;Max Muncy - Over 0.5 homerun&quot;]'>Add Favorite 3 Leg to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Top 5 Pitchers To Attack</h4>
@@ -3766,7 +3794,7 @@ const games = [
             updateBetTrackerBtnLabel();
 
             /** Sheet-curated Worst Pickz Favorites — edit this list when the board changes; not read from or written to localStorage. */
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    const WORST_PICKZ_FAVORITE_NAMES = new Set([
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                const WORST_PICKZ_FAVORITE_NAMES = new Set([
                 "Ben Rice (L)",
                 "Colby Thomas (R)",
                 "Dalton Rushing (L)",
@@ -5499,6 +5527,7 @@ const games = [
                     d.addEventListener("toggle", () => d.classList.add("user-opened"));
                 });
                 wireMySlipControls();
+                wireMySlipLegRemove();
                 document.getElementById("mySlipClose")?.addEventListener("click", closeMySlip);
                 document.getElementById("mySlipBackdrop")?.addEventListener("click", closeMySlip);
                 document.getElementById("exportGamblySlip")?.addEventListener("click", () => document.getElementById("exportGambly")?.click());
@@ -5612,6 +5641,29 @@ const games = [
                 const comb = parlayAmericanFromLegs(ams);
                 sumEl.textContent = ams.length ? `Rough combined: ${comb == null ? "—" : formatAmerican(comb)} · ${ams.length}-leg (naive / uncorrelated)` : "";
             }
+            function removeParlayLeg(gi, ri) {
+                document.querySelectorAll(`.pick-row[data-gi="${gi}"][data-ri="${ri}"] .pick-cb.pick-cb--gambly`).forEach((cb) => {
+                    cb.checked = false;
+                });
+                updatePickCount();
+            }
+            function wireMySlipLegRemove() {
+                const ul = mySlipParlayLegsEl();
+                if (!ul || ul.dataset.removeWired === "1") return;
+                ul.dataset.removeWired = "1";
+                ul.addEventListener("click", (e) => {
+                    const btn = e.target.closest(".parlay-leg-remove");
+                    if (!btn) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const li = btn.closest("li.parlay-leg");
+                    if (!li || li.classList.contains("parlay-leg--empty")) return;
+                    const gi = li.getAttribute("data-gi");
+                    const ri = li.getAttribute("data-ri");
+                    if (gi == null || ri == null) return;
+                    removeParlayLeg(gi, ri);
+                });
+            }
             function rebuildParlayPanel() {
                 const ul = mySlipParlayLegsEl();
                 const sumEl = mySlipParlayCombinedEl();
@@ -5649,11 +5701,15 @@ const games = [
                     const am = getAmericanFromGiRi(gi, ri);
                     const amAttr = am == null ? "" : String(Math.round(am));
                     const amTxt = am == null ? "no listed price" : formatAmerican(am);
-                    return `<li class="parlay-leg" draggable="true" data-gi="${gi}" data-ri="${ri}" data-american="${amAttr}"><span class="parlay-drag-hint" aria-hidden="true">↕</span><span>${escapeHtml(nm)}</span><span class="parlay-leg-odds">${escapeHtml(amTxt)}</span></li>`;
+                    return `<li class="parlay-leg" draggable="true" data-gi="${gi}" data-ri="${ri}" data-american="${amAttr}"><span class="parlay-drag-hint" aria-hidden="true">↕</span><span class="parlay-leg-label">${escapeHtml(nm)}</span><span class="parlay-leg-odds">${escapeHtml(amTxt)}</span><button type="button" class="parlay-leg-remove" aria-label="Remove ${escapeHtml(nm)} from slip">×</button></li>`;
                 }).join("");
                 let dragEl = null;
                 ul.querySelectorAll("li.parlay-leg").forEach((li) => {
                     li.addEventListener("dragstart", (e) => {
+                        if (e.target.closest(".parlay-leg-remove")) {
+                            e.preventDefault();
+                            return;
+                        }
                         dragEl = li;
                         try {
                             e.dataTransfer.setData("text/plain", "parlay");

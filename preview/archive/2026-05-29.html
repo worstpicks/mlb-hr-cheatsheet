@@ -1799,6 +1799,28 @@
         .parlay-leg:active { cursor: grabbing; }
         .parlay-leg .parlay-drag-hint { font-size: 0.62rem; color: #64748b; flex-shrink: 0; }
         .parlay-leg .parlay-leg-odds { margin-left: auto; font-weight: 900; color: #a7f3d0; font-variant-numeric: tabular-nums; }
+        .parlay-leg .parlay-leg-label { flex: 1; min-width: 0; }
+        .parlay-leg-remove {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            border: none;
+            border-radius: 6px;
+            background: rgba(248, 113, 113, 0.15);
+            color: #fca5a5;
+            font-size: 1.05rem;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .parlay-leg-remove:hover { background: rgba(248, 113, 113, 0.32); color: #fff; }
+        .parlay-leg-remove:focus-visible { outline: 2px solid #fb923c; outline-offset: 1px; }
+        html.theme-light .parlay-leg-remove { background: rgba(220, 38, 38, 0.12); color: #b91c1c; }
+        html.theme-light .parlay-leg-remove:hover { background: rgba(220, 38, 38, 0.22); color: #7f1d1d; }
+
         .parlay-combined {
             font-size: 0.88rem;
             font-weight: 900;
@@ -5123,6 +5145,7 @@ const games = [
                     d.addEventListener("toggle", () => d.classList.add("user-opened"));
                 });
                 wireMySlipControls();
+                wireMySlipLegRemove();
                 document.getElementById("mySlipClose")?.addEventListener("click", closeMySlip);
                 document.getElementById("mySlipBackdrop")?.addEventListener("click", closeMySlip);
                 document.getElementById("exportGamblySlip")?.addEventListener("click", () => document.getElementById("exportGambly")?.click());
@@ -5236,6 +5259,29 @@ const games = [
                 const comb = parlayAmericanFromLegs(ams);
                 sumEl.textContent = ams.length ? `Rough combined: ${comb == null ? "—" : formatAmerican(comb)} · ${ams.length}-leg (naive / uncorrelated)` : "";
             }
+            function removeParlayLeg(gi, ri) {
+                document.querySelectorAll(`.pick-row[data-gi="${gi}"][data-ri="${ri}"] .pick-cb.pick-cb--gambly`).forEach((cb) => {
+                    cb.checked = false;
+                });
+                updatePickCount();
+            }
+            function wireMySlipLegRemove() {
+                const ul = mySlipParlayLegsEl();
+                if (!ul || ul.dataset.removeWired === "1") return;
+                ul.dataset.removeWired = "1";
+                ul.addEventListener("click", (e) => {
+                    const btn = e.target.closest(".parlay-leg-remove");
+                    if (!btn) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const li = btn.closest("li.parlay-leg");
+                    if (!li || li.classList.contains("parlay-leg--empty")) return;
+                    const gi = li.getAttribute("data-gi");
+                    const ri = li.getAttribute("data-ri");
+                    if (gi == null || ri == null) return;
+                    removeParlayLeg(gi, ri);
+                });
+            }
             function rebuildParlayPanel() {
                 const ul = mySlipParlayLegsEl();
                 const sumEl = mySlipParlayCombinedEl();
@@ -5273,11 +5319,15 @@ const games = [
                     const am = getAmericanFromGiRi(gi, ri);
                     const amAttr = am == null ? "" : String(Math.round(am));
                     const amTxt = am == null ? "no listed price" : formatAmerican(am);
-                    return `<li class="parlay-leg" draggable="true" data-gi="${gi}" data-ri="${ri}" data-american="${amAttr}"><span class="parlay-drag-hint" aria-hidden="true">↕</span><span>${escapeHtml(nm)}</span><span class="parlay-leg-odds">${escapeHtml(amTxt)}</span></li>`;
+                    return `<li class="parlay-leg" draggable="true" data-gi="${gi}" data-ri="${ri}" data-american="${amAttr}"><span class="parlay-drag-hint" aria-hidden="true">↕</span><span class="parlay-leg-label">${escapeHtml(nm)}</span><span class="parlay-leg-odds">${escapeHtml(amTxt)}</span><button type="button" class="parlay-leg-remove" aria-label="Remove ${escapeHtml(nm)} from slip">×</button></li>`;
                 }).join("");
                 let dragEl = null;
                 ul.querySelectorAll("li.parlay-leg").forEach((li) => {
                     li.addEventListener("dragstart", (e) => {
+                        if (e.target.closest(".parlay-leg-remove")) {
+                            e.preventDefault();
+                            return;
+                        }
                         dragEl = li;
                         try {
                             e.dataTransfer.setData("text/plain", "parlay");

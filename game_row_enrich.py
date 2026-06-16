@@ -18,7 +18,9 @@ ROOT = Path(__file__).resolve().parent
 # Sheet title keys that differ from ParkFactors CSV Game column.
 TITLE_WEATHER_KEY_ALIASES = {
     "MIA @ WSH": "MIA @ WAS",
+    "KC @ WSH": "KC @ WAS",
     "CWS @ MIN": "CHW @ MIN",
+    "CWS @ NYY": "CHW @ NYY",
 }
 
 
@@ -332,15 +334,34 @@ def _pitcher_meta_segment(name: str, row: dict, hr9_lookup: dict[str, float]) ->
     return seg
 
 
+def hand_park_pcts(park_ctx: dict) -> tuple[int | None, int | None]:
+    """LHB/RHB net HR park boost from PropFinder weather row (symmetric when no hand split)."""
+    park_pct = park_ctx.get("park_pct")
+    if park_pct is None:
+        return None, None
+    lhb = park_ctx.get("park_lhb_pct")
+    rhb = park_ctx.get("park_rhb_pct")
+    if lhb is None:
+        lhb = park_pct
+    if rhb is None:
+        rhb = park_pct
+    return int(lhb), int(rhb)
+
+
 def format_park_segment(park_ctx: dict) -> str | None:
     park_pct = park_ctx.get("park_pct")
     if park_pct is None:
         return None
+    lhb_pct, rhb_pct = hand_park_pcts(park_ctx)
     stadium_pct = park_ctx.get("stadium_pct")
     weather_pct = park_ctx.get("weather_pct")
+    hand_seg = f"LHB {lhb_pct:+d}% · RHB {rhb_pct:+d}%"
     if stadium_pct is not None and weather_pct is not None:
-        return f"Park {park_pct:+d}% (stadium {stadium_pct:+d}%, wx {weather_pct:+d}%)"
-    return f"Park {park_pct:+d}%"
+        return (
+            f"Park {park_pct:+d}% · {hand_seg} "
+            f"(stadium {stadium_pct:+d}%, wx {weather_pct:+d}%)"
+        )
+    return f"Park {park_pct:+d}% · {hand_seg}"
 
 
 def build_game_meta_line(
@@ -579,6 +600,9 @@ def enrich_games_list(games: list[dict], sheet_date: str) -> list[dict]:
         g["gameMeta"] = build_game_meta_line(g, hr9_lookup, weather, pitcher_risk)
         if park_ctx["park_pct"] is not None:
             g["parkPct"] = park_ctx["park_pct"]
+            lhb_pct, rhb_pct = hand_park_pcts(park_ctx)
+            g["parkLhbPct"] = lhb_pct
+            g["parkRhbPct"] = rhb_pct
         # Full description duplicates gameMeta — keep data for park stars only.
         g["description"] = ""
         enriched.append(g)
@@ -601,6 +625,10 @@ def emit_games_js(games_data: list[dict]) -> str:
             out.append(f"        gameMeta: {js_string(game['gameMeta'])},")
         if game.get("parkPct") is not None:
             out.append(f"        parkPct: {game['parkPct']},")
+        if game.get("parkLhbPct") is not None:
+            out.append(f"        parkLhbPct: {game['parkLhbPct']},")
+        if game.get("parkRhbPct") is not None:
+            out.append(f"        parkRhbPct: {game['parkRhbPct']},")
         if game.get("top3"):
             out.append(f"        top3: {js_string(game['top3'])},")
         if game.get("top3Detail"):

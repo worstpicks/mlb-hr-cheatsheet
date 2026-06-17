@@ -1,0 +1,26 @@
+Matchup,NYM @ CIN
+Pitcher,Nolan McLean
+Pitcher Team,NYM
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,1.10,="9-39",.231,.436,0.205,2,2,0,8,28.6,2,.286,.722
+Batting Second,9.1,1.18,="5-33",.152,.273,0.121,1,1,0,1,38.5,6,.282,.555
+Batting Third,8.2,1.27,="7-33",.212,.455,0.243,2,2,0,2,15.4,4,.333,.788
+Batting Fourth,9.1,0.86,="5-33",.152,.152,0.000,0,0,0,3,34.2,3,.263,.415
+Batting Fifth,7.2,1.70,="11-32",.344,.625,0.281,2,3,0,6,22.9,2,.400,1.025
+Batting Sixth,8.0,1.25,="5-27",.185,.222,0.037,0,1,0,1,25.0,5,.313,.535
+Batting Seventh,8.1,0.84,="5-28",.179,.214,0.035,0,1,0,7,28.1,2,.250,.464
+Batting Eighth,5.1,2.44,="8-24",.333,.500,0.167,1,1,0,3,13.3,5,.467,.967
+Batting Ninth,9.0,0.33,="1-27",.037,.037,0.000,0,0,0,0,43.3,2,.103,.140
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Edwin Arroyo SHB,Batting First ​,="1-2",.500,.500,0.000,0,0,0,1,33.3,0,.667,1.167
+JJ Bleday LHB,Batting Second ​,="18-82",.220,.512,0.292,7,3,0,13,19.1,11,.319,.831
+Sal Stewart RHB,Batting Third ​,="11-71",.155,.254,0.099,2,1,0,10,25.0,13,.286,.540
+Nathaniel Lowe LHB,Batting Fourth ​,="6-21",.286,.429,0.143,1,0,0,1,24.0,4,.400,.829
+Eugenio Suarez RHB,Batting Fifth ​,="31-140",.221,.393,0.172,6,6,0,22,32.5,13,.286,.679
+Spencer Steer RHB,Batting Sixth ​,="21-100",.210,.360,0.150,4,3,0,7,27.6,12,.310,.670
+Noelvi Marte RHB,Batting Seventh ​,="4-18",.222,.556,0.334,2,0,0,2,23.8,3,.333,.889
+Jose Trevino RHB,Batting Eighth ​,="5-28",.179,.214,0.035,0,1,0,2,16.1,1,.207,.421
+Matt McLain RHB,Batting Ninth ​,="9-39",.231,.410,0.179,1,4,0,4,16.7,2,.268,.678

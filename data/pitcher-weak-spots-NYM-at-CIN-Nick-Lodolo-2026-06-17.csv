@@ -1,0 +1,26 @@
+Matchup,NYM @ CIN
+Pitcher,Nick Lodolo
+Pitcher Team,CIN
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.1,2.70,="6-16",.375,.688,0.313,1,2,0,3,27.3,3,.545,1.233
+Batting Second,3.2,2.73,="8-17",.471,.647,0.176,1,0,0,2,14.3,2,.571,1.218
+Batting Third,4.2,1.50,="5-19",.263,.684,0.421,2,2,0,2,28.6,2,.333,1.017
+Batting Fourth,4.2,1.29,="5-16",.313,.625,0.312,1,2,0,3,5.0,1,.350,.975
+Batting Fifth,4.1,1.62,="3-14",.214,.214,0.000,0,0,0,1,0.0,4,.368,.582
+Batting Sixth,5.0,1.00,="4-15",.267,.400,0.133,0,0,1,2,15.8,1,.278,.678
+Batting Seventh,3.1,2.10,="5-15",.333,.800,0.467,2,1,0,5,16.7,2,.444,1.244
+Batting Eighth,4.2,0.43,="2-15",.133,.133,0.000,0,0,0,1,18.8,0,.188,.321
+Batting Ninth,4.1,0.46,="2-15",.133,.333,0.200,1,0,0,3,33.3,0,.133,.466
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carson Benge LHB,Batting First ​,="41-149",.275,.396,0.121,4,4,1,15,21.6,9,.333,.729
+Bo Bichette RHB,Batting Second ​,="48-193",.249,.383,0.134,6,6,1,27,16.7,13,.297,.680
+Juan Soto LHB,Batting Third ​,="35-113",.310,.619,0.309,11,2,0,24,12.8,19,.409,1.028
+Marcus Semien RHB,Batting Fourth ​,="2-4",.500,1.250,0.750,1,0,0,1,0.0,0,.500,1.750
+Mark Vientos RHB,Batting Fifth ​,="9-33",.273,.333,0.060,0,2,0,4,19.4,2,.333,.666
+Francisco Alvarez RHB,Batting Sixth ​,="3-23",.130,.261,0.131,1,0,0,1,17.4,0,.130,.391
+A.J. Ewing LHB,Batting Seventh ​,="6-16",.375,.375,0.000,0,0,0,1,33.3,1,.412,.787
+Luis Torrens RHB,Batting Eighth ​,="1-10",.100,.100,0.000,0,0,0,0,9.1,0,.100,.200
+Zack Short RHB,Batting Ninth ​,="6-32",.188,.250,0.062,0,2,0,2,26.2,7,.333,.583

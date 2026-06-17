@@ -39,7 +39,12 @@ def compact_row_line(row: dict) -> str:
     if row.get("risk") is not None:
         parts.append(f"risk {row['risk']:+.2f}")
     park = row.get("park_pct")
-    if park is not None:
+    hand_park = row.get("hand_park_pct")
+    hand = (row.get("hand") or "").upper()
+    if hand_park is not None and park is not None and abs(hand_park - park) >= 3:
+        tag = "LHB" if hand == "L" else "RHB"
+        parts.append(f"{tag} park {hand_park:+d}%")
+    elif park is not None:
         parts.append(f"park {park:+d}%")
     zone = row.get("zone_score")
     if zone is not None:
@@ -60,7 +65,19 @@ def straight_pick_why(row: dict, *, leg: str) -> tuple[str, str]:
         edge_bits.append(f"favorable split {split:+.2f} vs {chip}")
     if risk is not None and risk >= 0.50:
         edge_bits.append(f"attackable HR risk {risk:+.2f}")
-    if park is not None and park >= 3:
+    park = row.get("park_pct")
+    hand_park = row.get("hand_park_pct")
+    hand = (row.get("hand") or "").upper()
+    if hand_park is not None and park is not None and abs(hand_park - park) >= 3:
+        tag = "LHB" if hand == "L" else "RHB"
+        if hand_park >= 3:
+            edge_bits.append(f"{tag} park +{hand_park}%")
+        elif hand_park <= -3:
+            edge_bits.append(f"{tag} park {hand_park}%")
+    elif hand_park is not None and hand_park >= 6 and (park is None or park < 3):
+        tag = "LHB" if hand == "L" else "RHB"
+        edge_bits.append(f"{tag} park +{hand_park}%")
+    elif park is not None and park >= 3:
         edge_bits.append(f"park/weather +{park}%")
     zone = row.get("zone_score")
     zone_hr = row.get("zone_hr")

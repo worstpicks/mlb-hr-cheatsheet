@@ -29,13 +29,16 @@ from game_row_enrich import (
     load_weather_lookup,
     lookup_weather_for_game,
     resolve_park_context,
+    row_hand_park_fields,
 )
 from note_compact import compact_goblin_leg, compact_note, compact_row_line, straight_pick_why
 from goblin_hits_parlay import annotate_hits_ranks, fill_hits_parlay, select_hits_parlay
 from goblin_hr_zone_fit import (
     annotate_hr_zone_ranks,
+    hand_park_pct,
     hr_rank_sort_key,
     o05_zone_lane_ok,
+    park_gate_pct,
     summary_combined_rank,
     weather_play_rank,
 )
@@ -108,6 +111,8 @@ def collect_rows():
         for r in g["rows"]:
             chip = r["chips"][0].replace("vs ", "")
             hand = r["name"].split("(")[-1].rstrip(")")
+            park_fields = row_hand_park_fields(hand, park_ctx)
+            hand_park = park_fields.get("hand_park_pct", park_pct)
             risk_row = resolve_pitcher(PITCHER_RISK, chip)
             if risk_row:
                 split = risk_row["vs_lhb"] if hand == "L" else risk_row["vs_rhb"]
@@ -120,7 +125,8 @@ def collect_rows():
                 r["score"]
                 + split * 8.0
                 + risk * 4.0
-                + park_pct * 0.20
+                + park_pct * 0.18
+                + max(hand_park - park_pct, 0) * 0.07
                 + (zone_score or 0) * 0.18
             )
             whiff_pct = r.get("whiffPct")
@@ -142,7 +148,9 @@ def collect_rows():
                     "barrel": note_barrel(r["note"]),
                     "split": split,
                     "risk": risk,
+                    "hand": hand,
                     "park_pct": park_pct,
+                    **park_fields,
                     "zone_score": zone_score,
                     "zone_contact": r.get("zoneContact"),
                     "zone_barrel": r.get("zoneBarrel"),
@@ -234,6 +242,10 @@ def effective_park_pct(row: dict) -> int:
     return w["hr_pct"] if w else row["park_pct"]
 
 
+def effective_hand_park_pct(row: dict) -> int:
+    return hand_park_pct(row, park_pct_fn=effective_park_pct)
+
+
 annotate_hr_zone_ranks(rows, park_pct_fn=effective_park_pct)
 
 # O0.5 straight: zone fit + attackable pitcher lane + park/weather support.
@@ -297,7 +309,12 @@ def straight_o05_pool(
             for r in pool
             if r["score"] >= 72
             and r["split"] >= 0.0
-            and (r["risk"] >= 0.50 or r["park_pct"] >= 3 or r["split"] >= 0.75)
+            and (
+                r["risk"] >= 0.50
+                or r["park_pct"] >= 3
+                or r.get("hand_park_pct", 0) >= 6
+                or r["split"] >= 0.75
+            )
             and (r["hr"] >= 1 or r["near"] >= 3)
             and o05_zone_lane_ok(r)
         ]
@@ -315,7 +332,12 @@ o15_candidates = [
     and r["split"] >= 0.0
     and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
     and (r["split"] >= 0.15 or r["risk"] >= 0.25 or r["split"] >= 0.75)
-    and (r["risk"] >= 0.25 or effective_park_pct(r) >= 3 or r["split"] >= 0.75)
+    and (
+        r["risk"] >= 0.25
+        or park_gate_pct(r, park_pct_fn=effective_park_pct) >= 3
+        or r.get("hand_park_pct", 0) >= 6
+        or r["split"] >= 0.75
+    )
 ]
 o15_candidates.sort(key=lambda r: (r["multi_hr_rank"], r["hr_zone_fit"], r["score"]), reverse=True)
 
@@ -404,7 +426,11 @@ def goblin_hr_leg_ok(row: dict) -> bool:
         return False
     if row["split"] > 0.0:
         return True
-    return row["risk"] >= 0.25 or effective_park_pct(row) >= 3
+    return (
+        row["risk"] >= 0.25
+        or park_gate_pct(row, park_pct_fn=effective_park_pct) >= 3
+        or row.get("hand_park_pct", 0) >= 6
+    )
 
 
 def goblin_top3_ok(row: dict) -> bool:
@@ -424,16 +450,18 @@ def summary_ticket_ok(row: dict) -> bool:
         return False
     if row["split"] <= 0.0 and row["risk"] <= 0.0:
         return False
-    park = effective_park_pct(row)
-    if park < -5 and row["split"] < 0.50:
+    park = park_gate_pct(row, park_pct_fn=effective_park_pct)
+    hand_park = effective_hand_park_pct(row)
+    if park < -5 and hand_park < -3 and row["split"] < 0.50:
         return False
     return goblin_hr_leg_ok(row) or (row["score"] >= 80 and row["split"] >= 0.0)
 
 
 def weather_play_ok(row: dict) -> bool:
     """Weather-heavy plays: park/weather boost is a primary edge."""
-    park = effective_park_pct(row)
-    if park < 5:
+    park = park_gate_pct(row, park_pct_fn=effective_park_pct)
+    hand_park = effective_hand_park_pct(row)
+    if park < 5 and hand_park < 6:
         return False
     if row["split"] == 0.0 and row["risk"] == 0.0:
         return False
@@ -572,10 +600,11 @@ def fav_lane_ok(row: dict) -> bool:
 
 def fav_secondary_lane_ok(row: dict) -> bool:
     """Favorites with loud HR form can qualify even without a huge platoon edge."""
-    park = effective_park_pct(row)
+    park = park_gate_pct(row, park_pct_fn=effective_park_pct)
+    hand_park = effective_hand_park_pct(row)
     if row["score"] >= 88 and row["hr"] >= 2 and row["split"] >= -0.20:
         return True
-    if row["risk"] >= 0.25 or row["split"] >= 0.50 or park >= 3:
+    if row["risk"] >= 0.25 or row["split"] >= 0.50 or park >= 3 or hand_park >= 6:
         return True
     return False
 
@@ -863,6 +892,11 @@ def weather_micro_note(row):
     w = weather_by_game.get(row["game_key"])
     net = w["hr_pct_text"] if w else f"{row['park_pct']:+d}%"
     park = effective_park_pct(row)
+    hand_park = effective_hand_park_pct(row)
+    hand = row.get("hand", "R")
+    hand_tag = "LHB" if hand == "L" else "RHB"
+    if hand_park != park and abs(hand_park - park) >= 3:
+        net = f"{net} · {hand_tag} {hand_park:+d}%"
     if park >= 35 and row["split"] < 0.15:
         return f'vs {row["chip"]} · net {net} · park-first carry'
     if park >= 8 and -0.10 <= row["split"] < 0.15:
@@ -968,7 +1002,7 @@ TOP_CARD = """                <div class="summary-card full-width top-five-card"
                     <h3>Top 5 HR Tickets (Attack + Weather + HR Risk)</h3>
                     <div class="top-five-list">
 """ + "\n".join(
-    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {effective_park_pct(r)}%</small></span><strong>{r["score"]}</strong></div>'
+    f'                        <div class="top-five-item"><span>{r["name_plain"]} <small>{r["game_key"]} vs {r["chip"]} • risk {r["risk"]:+.2f} • split {r["split"]:+.2f} • park {effective_hand_park_pct(r)}%</small></span><strong>{r["score"]}</strong></div>'
     for r in top5
 ) + """
                     </div>

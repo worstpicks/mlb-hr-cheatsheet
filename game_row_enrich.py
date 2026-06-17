@@ -430,6 +430,28 @@ def hand_park_pcts(park_ctx: dict) -> tuple[int | None, int | None]:
     return (int(lhb) if lhb is not None else None, int(rhb) if rhb is not None else None)
 
 
+def row_hand_park_fields(hand: str, park_ctx: dict) -> dict:
+    """Per-batter hand park fields for Goblin / straight ranking rows."""
+    overall = park_ctx.get("park_pct")
+    lhb = park_ctx.get("park_lhb_pct")
+    rhb = park_ctx.get("park_rhb_pct")
+    hand_key = (hand or "").strip().upper()
+    if hand_key == "L" and lhb is not None:
+        hand_pct = lhb
+    elif hand_key in ("R", "S") and rhb is not None:
+        hand_pct = rhb
+    else:
+        hand_pct = overall
+    out: dict = {}
+    if lhb is not None:
+        out["park_lhb_pct"] = lhb
+    if rhb is not None:
+        out["park_rhb_pct"] = rhb
+    if hand_pct is not None:
+        out["hand_park_pct"] = hand_pct
+    return out
+
+
 def format_park_segment(park_ctx: dict) -> str | None:
     park_pct = park_ctx.get("park_pct")
     if park_pct is None:

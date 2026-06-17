@@ -7,6 +7,7 @@ Top 5 HR Tickets, Weather Heavy, and longshots. Patch scripts import from here
 """
 from __future__ import annotations
 
+import re
 from typing import Callable
 
 
@@ -41,15 +42,64 @@ def _park(row: dict, park_pct_fn: Callable[[dict], int] | None) -> int:
     return int(row.get("park_pct") or 0)
 
 
+def _batter_hand(row: dict) -> str:
+    hand = (row.get("hand") or "").strip().upper()
+    if hand in ("L", "R", "S"):
+        return hand
+    m = re.search(r"\(([LRS])\)", row.get("name", ""))
+    return m.group(1) if m else "R"
+
+
+def has_hand_park_data(row: dict) -> bool:
+    return row.get("park_lhb_pct") is not None or row.get("park_rhb_pct") is not None
+
+
+def hand_park_pct(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None) -> int:
+    """Net HR park % for this batter's hand (Ballpark Pal stadium + PropFinder wx)."""
+    if row.get("hand_park_pct") is not None:
+        return int(row["hand_park_pct"])
+    hand = _batter_hand(row)
+    if hand == "L" and row.get("park_lhb_pct") is not None:
+        return int(row["park_lhb_pct"])
+    if hand in ("R", "S") and row.get("park_rhb_pct") is not None:
+        return int(row["park_rhb_pct"])
+    return _park(row, park_pct_fn)
+
+
+def hand_park_nudge(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None) -> float:
+    """Small tiebreaker when per-hand park differs from game net park."""
+    if not has_hand_park_data(row):
+        return 0.0
+    overall = float(_park(row, park_pct_fn))
+    hand = float(hand_park_pct(row, park_pct_fn=park_pct_fn))
+    delta = hand - overall
+    if delta > 0:
+        return min(delta * 0.38, 2.2)
+    return max(delta * 0.22, -1.2)
+
+
+def park_gate_pct(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None) -> int:
+    """Eligibility gates: lean on hand park only when it helps the batter."""
+    overall = _park(row, park_pct_fn)
+    if not has_hand_park_data(row):
+        return overall
+    hand = hand_park_pct(row, park_pct_fn=park_pct_fn)
+    if hand > overall:
+        return int(round(overall * 0.74 + hand * 0.26))
+    return overall
+
+
 def straight_attack_rank(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None) -> float:
     """O0.5 straight, Goblin HR legs, longshots — zone fit leads."""
     park = _park(row, park_pct_fn)
+    nudge = hand_park_nudge(row, park_pct_fn=park_pct_fn)
     zone_fit = zone_hr_fit(row)
     power = hr_power_form(row)
     matchup = (
         max(row.get("risk") or 0.0, 0.0) * 10.0
         + max(row.get("split") or 0.0, 0.0) * 8.0
         + park * 0.55
+        + nudge * 1.05
     )
     return zone_fit + power * 0.62 + matchup + (row.get("score") or 0) * 0.14
 
@@ -57,6 +107,7 @@ def straight_attack_rank(row: dict, *, park_pct_fn: Callable[[dict], int] | None
 def multi_hr_rank(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None) -> float:
     """O1.5 straight — multi-HR profile with zone-fit lead."""
     park = _park(row, park_pct_fn)
+    nudge = hand_park_nudge(row, park_pct_fn=park_pct_fn)
     zone_fit = zone_hr_fit(row)
     power = hr_power_form(row)
     return (
@@ -65,6 +116,7 @@ def multi_hr_rank(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None
         + max(row.get("split") or 0.0, 0.0) * 6.5
         + max(row.get("risk") or 0.0, 0.0) * 5.0
         + park * 0.38
+        + nudge * 0.72
         + (row.get("score") or 0) * 0.12
     )
 
@@ -77,23 +129,31 @@ def summary_combined_rank(
 ) -> float:
     """Top 5 HR Tickets combined rank."""
     park = _park(row, park_pct_fn)
+    nudge = hand_park_nudge(row, park_pct_fn=park_pct_fn)
     zone_fit = zone_hr_fit(row)
     power = hr_power_form(row)
     matchup = (
         max(row.get("risk") or 0.0, 0.0) * 9.0
         + max(row.get("split") or 0.0, 0.0) * 7.5
         + park * 0.52
+        + nudge * 0.85
     )
     return zone_fit * 1.05 + power * 0.58 + matchup + attack_bonus + (row.get("score") or 0) * 0.12
 
 
 def weather_play_rank(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None) -> float:
     """Weather-heavy HR plays — park-led with zone fit as tiebreaker."""
-    park = _park(row, park_pct_fn)
+    overall = _park(row, park_pct_fn)
+    hand = float(hand_park_pct(row, park_pct_fn=park_pct_fn))
+    if has_hand_park_data(row):
+        park_signal = overall * 0.58 + hand * 0.42
+    else:
+        park_signal = float(overall)
+    park_signal += hand_park_nudge(row, park_pct_fn=park_pct_fn) * 0.55
     zone_fit = zone_hr_fit(row)
     power = hr_power_form(row)
     return (
-        park * 1.85
+        park_signal * 1.85
         + zone_fit * 0.55
         + max(row.get("split") or 0.0, 0.0) * 16.0
         + max(row.get("risk") or 0.0, 0.0) * 8.0

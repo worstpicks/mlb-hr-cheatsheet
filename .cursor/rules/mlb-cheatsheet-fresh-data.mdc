@@ -9,7 +9,7 @@ When building or updating a daily MLB HR cheat sheet:
 
 1. **Always re-import CSVs first** — run before every build, even if you imported earlier the same day:
    `python import-sheet-csvs.py --date YYYY-MM-DD`
-   Pull fresh exports from PropFinder (matchups, weather/ParkFactors, zone, pitcher risk). Never reuse stale Downloads/data from a prior slate without re-importing.
+   Pull fresh exports from PropFinder (matchups, weather/ParkFactors, zone, pitcher risk) and Ballpark Pal hand park files (`park-factors-L-all-YYYY-MM-DD.csv`, `park-factors-R-all-YYYY-MM-DD.csv`). Never reuse stale Downloads/data from a prior slate without re-importing.
 2. Use **PropFinder Weather** (`ParkFactors_YYYY-MM-DD.csv`) for park/weather columns.
 3. Run the full pipeline in order:
    - `python build-MMDD-from-csv.py`

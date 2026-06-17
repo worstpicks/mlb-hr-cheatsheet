@@ -23,6 +23,12 @@ TITLE_WEATHER_KEY_ALIASES = {
     "CWS @ NYY": "CHW @ NYY",
 }
 
+# PropFinder / sheet venue labels -> Ballpark Pal BALLPARK column.
+VENUE_BALLPARK_ALIASES = {
+    "american family fld": "american family field",
+    "great american bp": "great american ball park",
+}
+
 
 def _num(val: str | None) -> float | None:
     if val is None:
@@ -186,6 +192,61 @@ def normalize_game_key(key: str) -> str:
     return " ".join((key or "").upper().split())
 
 
+def normalize_venue_key(name: str) -> str:
+    key = " ".join((name or "").lower().split())
+    return VENUE_BALLPARK_ALIASES.get(key, key)
+
+
+def _hr_mult_to_stadium_pct(mult: str | float | None) -> int | None:
+    if mult is None:
+        return None
+    try:
+        return int(round((float(str(mult).strip()) - 1.0) * 100))
+    except ValueError:
+        return None
+
+
+def _parse_ballpark_pal_hand_file(path: Path) -> dict[str, int]:
+    """Ballpark Pal park-factors-L/R export -> venue_key -> HR stadium %."""
+    if not path.is_file():
+        return {}
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    header_idx = next(
+        (i for i, ln in enumerate(lines) if "BALLPARK" in ln and "HR" in ln),
+        None,
+    )
+    if header_idx is None:
+        return {}
+    reader = csv.reader(lines[header_idx:])
+    header = next(reader, None)
+    if not header:
+        return {}
+    try:
+        ballpark_idx = header.index("BALLPARK")
+        hr_idx = header.index("HR")
+    except ValueError:
+        return {}
+    out: dict[str, int] = {}
+    for row in reader:
+        if len(row) <= max(ballpark_idx, hr_idx):
+            continue
+        venue = normalize_venue_key(row[ballpark_idx])
+        pct = _hr_mult_to_stadium_pct(row[hr_idx])
+        if venue and pct is not None:
+            out[venue] = pct
+    return out
+
+
+def load_venue_hand_stadium_pcts(sheet_date: str) -> tuple[dict[str, int], dict[str, int]]:
+    """LHB/RHB stadium HR % from park-factors-L-all / park-factors-R-all CSVs."""
+    data_dir = ROOT / "data"
+    lhb_paths = sorted(data_dir.glob(f"park-factors-L-all-{sheet_date}*.csv"))
+    rhb_paths = sorted(data_dir.glob(f"park-factors-R-all-{sheet_date}*.csv"))
+    lhb = _parse_ballpark_pal_hand_file(lhb_paths[-1]) if lhb_paths else {}
+    rhb = _parse_ballpark_pal_hand_file(rhb_paths[-1]) if rhb_paths else {}
+    return lhb, rhb
+
+
 def game_key_from_title(title: str) -> str:
     return normalize_game_key(title.split(" - ")[0].strip())
 
@@ -204,6 +265,7 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
         matches = sorted(data_dir.glob(f"ParkFactors_{sheet_date}*.csv"))
         if matches:
             path = matches[0]
+    lhb_stadium, rhb_stadium = load_venue_hand_stadium_pcts(sheet_date)
     lookup: dict[str, dict] = {}
     if not path.is_file():
         return lookup
@@ -217,16 +279,28 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
                 hr_pct = int(str(row["HR %"]).replace("%", "").strip())
             except (ValueError, KeyError):
                 continue
-            lookup[game] = {
+            venue = (row.get("Venue") or "").strip()
+            venue_key = normalize_venue_key(venue)
+            wx_pct = _pct_from_field(row.get("HR % Weather"))
+            lhb_st = lhb_stadium.get(venue_key)
+            rhb_st = rhb_stadium.get(venue_key)
+            entry = {
                 "game": game,
-                "venue": (row.get("Venue") or "").strip(),
+                "venue": venue,
                 "hr_pct": hr_pct,
                 "hr_pct_text": row.get("HR %", ""),
                 "hr_stadium": row.get("HR % Stadium", ""),
                 "hr_weather": row.get("HR % Weather", ""),
                 "stadium_pct": _pct_from_field(row.get("HR % Stadium")),
-                "weather_pct": _pct_from_field(row.get("HR % Weather")),
+                "weather_pct": wx_pct,
             }
+            if lhb_st is not None:
+                entry["lhb_stadium_pct"] = lhb_st
+                entry["park_lhb_pct"] = lhb_st + (wx_pct or 0)
+            if rhb_st is not None:
+                entry["rhb_stadium_pct"] = rhb_st
+                entry["park_rhb_pct"] = rhb_st + (wx_pct or 0)
+            lookup[game] = entry
     return lookup
 
 
@@ -262,7 +336,7 @@ def parse_game_description(desc: str) -> dict:
 
 
 def resolve_park_context(game: dict, weather: dict | None) -> dict:
-    """Net park % plus optional stadium/weather split for headers."""
+    """Net park % plus stadium/weather and per-hand HR park from PropFinder + Ballpark Pal."""
     desc_meta = parse_game_description(game.get("description", ""))
     park_pct = desc_meta["park_pct"]
     stadium_pct = desc_meta["stadium_pct"]
@@ -273,10 +347,18 @@ def resolve_park_context(game: dict, weather: dict | None) -> dict:
         stadium_pct = weather.get("stadium_pct")
     if weather_pct is None and weather:
         weather_pct = weather.get("weather_pct")
+    park_lhb_stadium = weather.get("lhb_stadium_pct") if weather else None
+    park_rhb_stadium = weather.get("rhb_stadium_pct") if weather else None
+    park_lhb_pct = weather.get("park_lhb_pct") if weather else None
+    park_rhb_pct = weather.get("park_rhb_pct") if weather else None
     return {
         "park_pct": park_pct,
         "stadium_pct": stadium_pct,
         "weather_pct": weather_pct,
+        "park_lhb_stadium_pct": park_lhb_stadium,
+        "park_rhb_stadium_pct": park_rhb_stadium,
+        "park_lhb_pct": park_lhb_pct,
+        "park_rhb_pct": park_rhb_pct,
     }
 
 
@@ -335,17 +417,17 @@ def _pitcher_meta_segment(name: str, row: dict, hr9_lookup: dict[str, float]) ->
 
 
 def hand_park_pcts(park_ctx: dict) -> tuple[int | None, int | None]:
-    """LHB/RHB net HR park boost from PropFinder weather row (symmetric when no hand split)."""
+    """LHB/RHB net HR park boost (Ballpark Pal stadium hand + PropFinder weather)."""
     park_pct = park_ctx.get("park_pct")
-    if park_pct is None:
-        return None, None
     lhb = park_ctx.get("park_lhb_pct")
     rhb = park_ctx.get("park_rhb_pct")
-    if lhb is None:
+    if lhb is None and park_pct is not None:
         lhb = park_pct
-    if rhb is None:
+    if rhb is None and park_pct is not None:
         rhb = park_pct
-    return int(lhb), int(rhb)
+    if lhb is None and rhb is None:
+        return None, None
+    return (int(lhb) if lhb is not None else None, int(rhb) if rhb is not None else None)
 
 
 def format_park_segment(park_ctx: dict) -> str | None:
@@ -355,7 +437,20 @@ def format_park_segment(park_ctx: dict) -> str | None:
     lhb_pct, rhb_pct = hand_park_pcts(park_ctx)
     stadium_pct = park_ctx.get("stadium_pct")
     weather_pct = park_ctx.get("weather_pct")
+    lhb_stadium = park_ctx.get("park_lhb_stadium_pct")
+    rhb_stadium = park_ctx.get("park_rhb_stadium_pct")
+    if lhb_pct is None or rhb_pct is None:
+        return None
     hand_seg = f"LHB {lhb_pct:+d}% · RHB {rhb_pct:+d}%"
+    if (
+        lhb_stadium is not None
+        and rhb_stadium is not None
+        and weather_pct is not None
+    ):
+        return (
+            f"Park {park_pct:+d}% · {hand_seg} "
+            f"(stadium LHB {lhb_stadium:+d}%, RHB {rhb_stadium:+d}%, wx {weather_pct:+d}%)"
+        )
     if stadium_pct is not None and weather_pct is not None:
         return (
             f"Park {park_pct:+d}% · {hand_seg} "

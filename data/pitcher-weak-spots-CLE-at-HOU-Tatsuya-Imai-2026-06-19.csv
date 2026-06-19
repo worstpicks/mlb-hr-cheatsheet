@@ -1,0 +1,26 @@
+Matchup,CLE @ HOU
+Pitcher,Tatsuya Imai
+Pitcher Team,HOU
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.2,3.00,="5-15",.333,.333,0.000,0,0,0,0,9.5,6,.524,.857
+Batting Second,5.2,0.88,="2-18",.111,.111,0.000,0,0,0,0,38.1,3,.238,.349
+Batting Third,4.2,1.71,="3-15",.200,.200,0.000,0,0,0,1,15.0,5,.400,.600
+Batting Fourth,4.1,1.62,="3-15",.200,.267,0.067,0,1,0,4,36.8,4,.368,.635
+Batting Fifth,3.1,1.80,="5-15",.333,1.133,0.800,4,0,0,9,11.1,1,.444,1.577
+Batting Sixth,4.0,0.75,="3-15",.200,.200,0.000,0,0,0,2,41.2,0,.294,.494
+Batting Seventh,2.2,2.63,="4-12",.333,.417,0.084,0,1,0,2,13.3,3,.467,.884
+Batting Eighth,3.0,1.33,="3-12",.250,.500,0.250,1,0,0,4,38.5,1,.308,.808
+Batting Ninth,3.2,0.55,="1-11",.091,.091,0.000,0,0,0,0,7.7,1,.167,.258
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Travis Bazzana LHB,Batting First ​,="17-73",.233,.507,0.274,3,9,1,9,18.1,9,.313,.820
+Kyle Manzardo LHB,Batting Second ​,="2-5",.400,.400,0.000,0,0,0,0,40.0,0,.400,.800
+Brayan Rocchio SHB,Batting Third ​,="2-7",.286,.429,0.143,0,1,0,0,22.2,2,.444,.873
+Rhys Hoskins RHB,Batting Fourth ​,="8-80",.100,.213,0.113,2,3,0,9,30.0,16,.250,.463
+Daniel Schneemann LHB,Batting Fifth ​,="11-53",.208,.283,0.075,1,1,0,8,29.3,5,.276,.559
+Gabriel Arias RHB,Batting Sixth ​,="1-5",.200,.200,0.000,0,0,0,0,40.0,0,.200,.400
+Kahlil Watson LHB,Batting Eighth ​,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Patrick Bailey SHB,Batting Eighth ​,="14-86",.163,.256,0.093,1,3,1,6,20.4,6,.215,.471
+Steven Kwan LHB,Batting First ​,="32-162",.198,.253,0.055,1,6,0,10,11.1,23,.303,.556

@@ -1,0 +1,26 @@
+Matchup,SF @ MIA
+Pitcher,Lake Bachar
+Pitcher Team,MIA
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.0,0.75,="1-12",.083,.167,0.084,0,1,0,1,29.4,2,.294,.461
+Batting Second,3.2,1.64,="4-14",.286,.571,0.285,1,1,0,3,18.8,2,.375,.946
+Batting Third,3.1,2.10,="4-14",.286,.357,0.071,0,1,0,2,29.4,3,.412,.769
+Batting Fourth,5.2,0.88,="5-22",.227,.409,0.182,1,1,0,4,31.8,0,.227,.636
+Batting Fifth,5.1,0.38,="0-16",.000,.000,0.000,0,0,0,0,20.0,2,.158,.158
+Batting Sixth,4.2,0.86,="3-17",.176,.529,0.353,2,0,0,2,22.2,1,.222,.751
+Batting Seventh,4.2,0.21,="1-15",.067,.067,0.000,0,0,0,0,46.7,0,.067,.134
+Batting Eighth,4.0,0.75,="2-14",.143,.143,0.000,0,0,0,0,26.7,1,.200,.343
+Batting Ninth,4.0,1.00,="2-14",.143,.357,0.214,1,0,0,2,37.5,2,.250,.607
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Luis Arraez LHB,Batting First ​,="8-29",.276,.483,0.207,1,1,1,5,0.0,2,.323,.806
+Bryce Eldridge LHB,Batting Second ​,="7-16",.438,.813,0.375,2,0,0,3,11.1,2,.500,1.313
+Matt Chapman RHB,Batting Third ​,="22-78",.282,.423,0.141,2,3,1,12,18.2,9,.352,.775
+Rafael Devers LHB,Batting Fourth ​,="47-174",.270,.494,0.224,7,16,1,26,28.5,11,.317,.811
+Jung Hoo Lee LHB,Batting Fifth ​,="30-86",.349,.453,0.104,1,4,1,9,6.7,1,.360,.813
+Willy Adames RHB,Batting Sixth ​,="20-86",.233,.337,0.104,2,3,0,7,26.1,2,.250,.587
+Casey Schmitt RHB,Batting Seventh ​,="5-18",.278,.278,0.000,0,0,0,1,10.5,0,.316,.594
+Drew Gilbert LHB,Batting Eighth ​,="12-75",.160,.213,0.053,1,1,0,7,19.1,10,.284,.497
+Daniel Susac RHB,Batting Ninth ​,="0-9",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000

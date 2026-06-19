@@ -1,0 +1,26 @@
+Matchup,CLE @ HOU
+Pitcher,Tanner Bibee
+Pitcher Team,CLE
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.1,1.45,="11-41",.268,.683,0.415,4,5,0,5,11.1,4,.333,1.016
+Batting Second,8.1,2.04,="13-37",.351,.649,0.298,3,2,0,7,11.9,4,.405,1.054
+Batting Third,10.0,1.10,="9-37",.243,.351,0.108,1,1,0,4,15.0,2,.300,.651
+Batting Fourth,10.1,1.06,="8-37",.216,.324,0.108,1,1,0,2,30.0,3,.275,.599
+Batting Fifth,10.0,0.80,="4-33",.121,.121,0.000,0,0,0,1,23.7,4,.211,.332
+Batting Sixth,9.2,0.93,="7-36",.194,.278,0.084,1,0,0,3,26.3,2,.237,.515
+Batting Seventh,9.0,1.11,="8-33",.242,.606,0.364,4,0,0,6,20.0,2,.286,.892
+Batting Eighth,8.1,0.72,="5-30",.167,.233,0.066,0,2,0,3,34.4,1,.188,.421
+Batting Ninth,7.0,1.71,="8-28",.286,.393,0.107,1,0,0,4,18.8,4,.375,.768
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jeremy Pena RHB,Batting First ​,="40-142",.282,.423,0.141,4,8,0,13,13.3,12,.348,.771
+Yordan Alvarez LHB,Batting Second ​,="79-237",.333,.633,0.300,19,14,0,47,16.4,37,.432,1.065
+Christian Walker RHB,Batting Third ​,="16-78",.205,.436,0.231,4,4,1,15,25.9,5,.271,.707
+Isaac Paredes RHB,Batting Fourth ​,="14-62",.226,.484,0.258,4,4,0,12,20.7,12,.390,.874
+Jose Altuve RHB,Batting Fifth ​,="11-53",.208,.415,0.207,3,2,0,5,25.9,4,.263,.678
+Yainer Diaz RHB,Batting Sixth ​,="9-39",.231,.282,0.051,0,2,0,2,12.5,1,.250,.532
+Cam Smith RHB,Batting Seventh ​,="17-63",.270,.444,0.174,2,5,0,9,26.5,5,.324,.768
+Joey Loperfido LHB,Batting Eighth ​,="1-6",.167,.167,0.000,0,0,0,0,30.0,4,.500,.667
+Jake Meyers RHB,Batting Ninth ​,="3-12",.250,.333,0.083,0,1,0,0,23.1,1,.308,.641

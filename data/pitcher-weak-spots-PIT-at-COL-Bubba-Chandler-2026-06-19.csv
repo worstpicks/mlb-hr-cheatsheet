@@ -1,0 +1,26 @@
+Matchup,PIT @ COL
+Pitcher,Bubba Chandler
+Pitcher Team,PIT
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.92,="11-34",.324,.441,0.117,0,4,0,4,22.5,5,.410,.851
+Batting Second,6.0,3.50,="13-31",.419,.742,0.323,2,2,1,8,20.5,8,.538,1.280
+Batting Third,8.2,1.38,="6-32",.188,.500,0.312,3,1,0,11,15.4,6,.308,.808
+Batting Fourth,11.0,0.27,="1-33",.030,.030,0.000,0,0,0,1,32.4,2,.108,.138
+Batting Fifth,7.2,1.04,="6-30",.200,.367,0.167,1,2,0,6,18.2,2,.273,.640
+Batting Sixth,7.1,0.95,="3-25",.120,.320,0.200,1,2,0,2,27.6,4,.241,.561
+Batting Seventh,7.0,1.14,="3-24",.125,.208,0.083,0,2,0,1,20.7,5,.276,.484
+Batting Eighth,6.0,1.67,="4-22",.182,.318,0.136,1,0,0,1,21.4,6,.357,.675
+Batting Ninth,6.0,1.50,="6-24",.250,.292,0.042,0,1,0,0,25.9,3,.333,.625
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="23-89",.258,.404,0.146,2,5,1,9,19.8,5,.302,.706
+Willi Castro SHB,Batting Second ​,="7-20",.350,.600,0.250,1,2,0,5,8.7,3,.435,1.035
+Hunter Goodman RHB,Batting Third ​,="17-100",.170,.370,0.200,5,5,0,10,35.5,5,.224,.594
+TJ Rumfield LHB,Batting Fourth ​,="19-55",.345,.618,0.273,4,3,0,7,14.5,5,.419,1.037
+Tyler Freeman RHB,Batting Fifth ​,="4-13",.308,.385,0.077,0,1,0,2,6.3,1,.438,.823
+Cole Carrigg SHB,Batting Sixth ​,="6-27",.222,.556,0.334,3,0,0,8,26.7,3,.300,.856
+Sterlin Thompson LHB,Batting Seventh ​,="1-22",.045,.045,0.000,0,0,0,2,34.6,3,.192,.237
+Ezequiel Tovar RHB,Batting Eighth ​,="9-54",.167,.185,0.018,0,1,0,5,27.9,6,.246,.431
+Kyle Karros RHB,Batting Ninth ​,="12-50",.240,.340,0.100,1,2,0,3,17.9,5,.321,.661

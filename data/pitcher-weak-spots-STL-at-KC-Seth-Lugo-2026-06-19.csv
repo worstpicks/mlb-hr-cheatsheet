@@ -1,0 +1,26 @@
+Matchup,STL @ KC
+Pitcher,Seth Lugo
+Pitcher Team,KC
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.34,="10-39",.256,.462,0.206,1,3,1,4,26.2,3,.310,.772
+Batting Second,9.0,1.89,="12-37",.324,.649,0.325,3,3,0,5,4.8,5,.405,1.054
+Batting Third,11.0,0.91,="6-38",.158,.316,0.158,2,0,0,3,19.0,4,.238,.554
+Batting Fourth,10.1,1.06,="10-40",.250,.400,0.150,1,3,0,6,29.3,1,.268,.668
+Batting Fifth,9.2,1.03,="6-32",.188,.281,0.093,0,1,1,2,15.8,4,.270,.551
+Batting Sixth,9.0,1.33,="9-33",.273,.273,0.000,0,0,0,1,21.6,3,.333,.606
+Batting Seventh,7.1,1.64,="11-31",.355,.452,0.097,0,3,0,4,21.2,1,.394,.846
+Batting Eighth,7.0,1.57,="9-28",.321,.464,0.143,0,2,1,3,13.3,2,.367,.831
+Batting Ninth,5.2,1.94,="9-26",.346,.538,0.192,0,5,0,5,27.6,2,.379,.917
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="71-265",.268,.411,0.143,10,8,0,31,15.7,35,.372,.783
+Ivan Herrera RHB,Batting Second ​,="69-268",.257,.414,0.157,9,13,1,31,15.6,43,.396,.810
+Alec Burleson LHB,Batting Third ​,="71-244",.291,.520,0.229,13,17,0,45,16.3,23,.356,.876
+Jordan Walker RHB,Batting Fourth ​,="59-211",.280,.507,0.227,12,12,0,41,27.6,14,.329,.836
+Lars Nootbaar LHB,Batting Fifth ​,="7-33",.212,.333,0.121,1,1,0,3,30.8,5,.308,.641
+Masyn Winn RHB,Batting Sixth ​,="48-188",.255,.346,0.091,2,7,2,21,20.8,20,.338,.684
+Jimmy Crooks LHB,Batting Seventh ​,="3-21",.143,.333,0.190,1,1,0,4,20.8,3,.250,.583
+Blaze Jordan RHB,Batting Eighth ​,="3-13",.231,.308,0.077,0,1,0,2,14.3,1,.286,.594
+Nathan Church LHB,Batting Ninth ​,="11-30",.367,.533,0.166,1,2,0,4,32.4,3,.412,.945

@@ -1,0 +1,26 @@
+Matchup,CIN @ NYY
+Pitcher,Rhett Lowder
+Pitcher Team,CIN
+Opposing Team,NYY
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.2,1.20,="6-25",.240,.240,0.000,0,0,0,0,29.6,2,.296,.536
+Batting Second,5.2,1.59,="7-24",.292,.500,0.208,1,0,1,2,18.5,2,.370,.870
+Batting Third,6.0,1.50,="4-21",.190,.238,0.048,0,1,0,0,7.7,5,.346,.584
+Batting Fourth,5.0,2.40,="7-21",.333,.381,0.048,0,1,0,2,19.2,5,.462,.843
+Batting Fifth,5.2,1.06,="4-21",.190,.429,0.239,1,2,0,3,13.0,2,.261,.690
+Batting Sixth,4.1,1.85,="5-18",.278,.667,0.389,1,4,0,6,18.2,3,.409,1.076
+Batting Seventh,5.2,0.71,="2-19",.105,.158,0.053,0,1,0,2,14.3,2,.190,.348
+Batting Eighth,3.2,1.91,="5-16",.313,.375,0.062,0,1,0,3,16.7,2,.389,.764
+Batting Ninth,4.1,0.92,="2-15",.133,.133,0.000,0,0,0,0,23.5,2,.235,.368
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ben Rice LHB,Batting First ​,="7-32",.219,.500,0.281,3,0,0,4,21.1,5,.342,.842
+Jasson Dominguez SHB,Batting Second ​,="1-4",.250,1.000,0.750,1,0,0,1,25.0,0,.250,1.250
+Cody Bellinger LHB,Batting Third ​,="36-129",.279,.488,0.209,5,6,3,22,12.6,19,.364,.852
+Paul Goldschmidt RHB,Batting Fourth ​,="5-18",.278,.500,0.222,1,1,0,3,10.0,1,.350,.850
+Jazz Chisholm Jr. LHB,Batting Fifth ​,="22-111",.198,.351,0.153,4,5,0,11,24.0,16,.295,.646
+Spencer Jones LHB,Batting Sixth ​,="8-26",.308,.500,0.192,1,2,0,3,37.9,3,.379,.879
+Anthony Volpe RHB,Batting Seventh ​,="7-23",.304,.348,0.044,0,1,0,3,25.0,1,.333,.681
+Ryan McMahon LHB,Batting Eighth ​,="20-76",.263,.447,0.184,4,2,0,11,26.3,4,.300,.747
+J.C. Escarra LHB,Batting Ninth ​,="6-38",.158,.263,0.105,0,2,1,5,21.4,3,.214,.477

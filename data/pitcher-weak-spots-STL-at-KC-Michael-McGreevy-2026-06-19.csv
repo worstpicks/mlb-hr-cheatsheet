@@ -1,0 +1,26 @@
+Matchup,STL @ KC
+Pitcher,Michael McGreevy
+Pitcher Team,STL
+Opposing Team,KC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,1.20,="10-40",.250,.375,0.125,1,2,0,2,9.5,2,.286,.661
+Batting Second,9.2,1.55,="11-38",.289,.421,0.132,1,2,0,2,16.7,4,.357,.778
+Batting Third,12.0,0.67,="6-37",.162,.270,0.108,1,1,0,2,12.8,2,.205,.475
+Batting Fourth,8.2,1.15,="7-33",.212,.364,0.152,0,5,0,3,16.7,3,.278,.642
+Batting Fifth,8.1,1.32,="9-32",.281,.594,0.313,3,1,0,6,11.8,2,.324,.918
+Batting Sixth,7.0,1.29,="8-29",.276,.483,0.207,2,0,0,3,26.7,1,.300,.783
+Batting Seventh,8.0,0.88,="4-27",.148,.370,0.222,2,0,0,2,26.7,3,.233,.603
+Batting Eighth,7.2,1.04,="6-27",.222,.370,0.148,1,1,0,2,10.3,2,.276,.646
+Batting Ninth,7.0,1.00,="7-28",.250,.250,0.000,0,0,0,0,21.4,0,.250,.500
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carter Jensen LHB,Batting First ​,="16-61",.262,.508,0.246,3,6,0,14,24.2,4,.303,.811
+Lane Thomas RHB,Batting First ​,="10-36",.278,.472,0.194,2,1,0,7,17.5,3,.350,.822
+Jac Caglianone LHB,Batting Third ​,="6-26",.231,.385,0.154,1,1,0,3,33.3,0,.259,.644
+Salvador Perez RHB,Batting Fourth ​,="44-221",.199,.335,0.136,8,6,0,25,19.7,9,.243,.578
+Michael Massey LHB,Batting Fifth ​,="1-12",.083,.333,0.250,1,0,0,2,26.7,1,.143,.476
+Nick Loftin RHB,Batting Sixth ​,="5-11",.455,.636,0.181,0,2,0,4,20.0,4,.600,1.236
+John Rave LHB,Batting Seventh ​,="2-4",.500,1.750,1.250,1,0,1,1,25.0,0,.500,2.250
+Isaac Collins SHB,Batting Eighth ​,="13-66",.197,.318,0.121,2,2,0,7,24.7,8,.312,.630
+Tyler Tolbert RHB,Batting Ninth ​,="1-6",.167,.167,0.000,0,0,0,0,50.0,0,.167,.334

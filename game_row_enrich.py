@@ -237,11 +237,24 @@ def _parse_ballpark_pal_hand_file(path: Path) -> dict[str, int]:
     return out
 
 
+def _park_hand_paths(data_dir: Path, sheet_date: str, hand: str) -> list[Path]:
+    """Ballpark Pal L/R exports: prefer *-all-*, fall back to *-night-* for night slates."""
+    patterns = (
+        f"park-factors-{hand}-all-{sheet_date}*.csv",
+        f"park-factors-{hand}-night-{sheet_date}*.csv",
+    )
+    for pattern in patterns:
+        matches = sorted(data_dir.glob(pattern))
+        if matches:
+            return matches
+    return []
+
+
 def load_venue_hand_stadium_pcts(sheet_date: str) -> tuple[dict[str, int], dict[str, int]]:
-    """LHB/RHB stadium HR % from park-factors-L-all / park-factors-R-all CSVs."""
+    """LHB/RHB stadium HR % from park-factors-L/R Ballpark Pal CSVs (all or night)."""
     data_dir = ROOT / "data"
-    lhb_paths = sorted(data_dir.glob(f"park-factors-L-all-{sheet_date}*.csv"))
-    rhb_paths = sorted(data_dir.glob(f"park-factors-R-all-{sheet_date}*.csv"))
+    lhb_paths = _park_hand_paths(data_dir, sheet_date, "L")
+    rhb_paths = _park_hand_paths(data_dir, sheet_date, "R")
     lhb = _parse_ballpark_pal_hand_file(lhb_paths[-1]) if lhb_paths else {}
     rhb = _parse_ballpark_pal_hand_file(rhb_paths[-1]) if rhb_paths else {}
     return lhb, rhb

@@ -68,9 +68,9 @@ ALIASES = {
     "Geraldo Perdomo": "Geraldo Perdomo",
 }
 
-# PropFinder exports two Max Muncy rows (LAD vs ATH); pin the Dodgers ⭐ to BAL @ LAD.
+# PropFinder exports two Max Muncy rows (LAD vs ATH); user ⭐ is the Athletics bat.
 BATTER_GAME_OVERRIDES: dict[str, str] = {
-    "Max Muncy": "BAL @ LAD",
+    "Max Muncy": "LAA @ ATH",
 }
 
 PROBABLE_OVERRIDES: dict[str, dict] = {}

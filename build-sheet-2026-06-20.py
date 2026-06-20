@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent
 FAVS = {
     "Bryan Reynolds (S)",
     "Kyle Schwarber (L)",
-    "Max Muncy (L)",
+    "Max Muncy (R)",
     "Shohei Ohtani (L)",
 }
 
@@ -44,7 +44,7 @@ PLAYER_TEAMS = {
     "Kyle Schwarber (L)": "PHI",
     "Lawrence Butler (L)": "ATH",
     "Mark Vientos (R)": "NYM",
-    "Max Muncy (L)": "LAD",
+    "Max Muncy (R)": "ATH",
     "Mitch Garver (R)": "SEA",
     "Mookie Betts (R)": "LAD",
     "Nick Kurtz (L)": "ATH",
@@ -103,7 +103,6 @@ games = [
         "title": "BAL @ LAD - Trevor Rogers (L, BAL) vs Yoshinobu Yamamoto (R, LAD)",
         "description": "Tail key data: Park boost +6% (stadium +18%, weather -12%). Rogers (HR risk 0.11, vs LHB -0.81, vs RHB +0.47). Yamamoto (HR risk -0.86, vs LHB -0.51, vs RHB -0.55).",
         "rows": [
-            row("Max Muncy", "L", "+197", 62, "⭐", ["vs Rogers"], """Worst Pickz Favorite. 0 HR, 82.8 mph EV. Rogers LHB split -0.81, HR risk 0.11. tough split lane (-0.81); weather carry headwind (-12%)."""),
             row("Shohei Ohtani", "L", "+250", 89, "⭐ 🌕 💣", ["vs Rogers"], """Worst Pickz Favorite. 2 HR, 3 near-HR, 96.6 mph EV. Rogers LHB split -0.81, HR risk 0.11. tough split lane (-0.81); weather carry headwind (-12%).""", blast="high"),
             row("Mookie Betts", "R", "+420", 66, "", ["vs Rogers"], """0 HR, 91.5 mph EV. Rogers RHB split +0.47, HR risk 0.11. weather carry headwind (-12%); limited recent HR events."""),
             row("Freddie Freeman", "L", "+549", 72, "", ["vs Rogers"], """1 HR, 1 near-HR, 90.3 mph EV. Rogers LHB split -0.81, HR risk 0.11. tough split lane (-0.81); weather carry headwind (-12%).""", blast="good"),
@@ -137,6 +136,7 @@ games = [
         "title": "LAA @ ATH - Walbert Urena (R, LAA) vs J.T. Ginn (R, ATH)",
         "description": "Tail key data: Park boost +34% (stadium +31%, weather +4%). Urena (HR risk -0.66, vs LHB -0.30, vs RHB -0.48). Ginn (HR risk -0.26, vs LHB +0.05, vs RHB -0.23).",
         "rows": [
+            row("Max Muncy", "R", "N/A", 72, "⭐", ["vs Urena"], """Worst Pickz Favorite. 1 HR, 2 near-HR, 87.0 mph EV. Urena RHB split -0.48, HR risk -0.66. tough split lane (-0.48); pitcher suppresses HR (-0.66).""", blast="good"),
             row("Lawrence Butler", "L", "+630", 78, "", ["vs Urena"], """1 HR, 3 near-HR, 91.7 mph EV. Urena LHB split -0.30, HR risk -0.66. slight split headwind (-0.30); pitcher suppresses HR (-0.66).""", blast="good"),
             row("Nick Kurtz", "L", "+270", 73, "", ["vs Urena"], """1 HR, 1 near-HR, 91.4 mph EV. Urena LHB split -0.30, HR risk -0.66. slight split headwind (-0.30); pitcher suppresses HR (-0.66).""", blast="good"),
             row("Tyler Soderstrom", "L", "+465", 80, "🌕 💣", ["vs Urena"], """2 HR, 2 near-HR, 89.7 mph EV. Urena LHB split -0.30, HR risk -0.66. slight split headwind (-0.30); pitcher suppresses HR (-0.66).""", blast="high"),

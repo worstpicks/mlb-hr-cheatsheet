@@ -110,14 +110,7 @@ ALIASES = {
 
 BATTER_GAME_OVERRIDES: dict[str, str] = {}
 
-PROBABLE_OVERRIDES: dict[str, dict] = {
-    "PHI @ WSH": {
-        "side": "away",
-        "from": "TBD",
-        "to": "Rangel",
-        "full": "Alan Rangel",
-    },
-}
+PROBABLE_OVERRIDES: dict[str, dict] = {}
 
 PITCHER_HAND = {
     "Andre Pallante": "R",
@@ -142,6 +135,7 @@ PITCHER_HAND = {
     "Gerrit Cole": "R",
     "Foster Griffin": "L",
     "Alan Rangel": "R",
+    "Aaron Nola": "R",
     "Kumar Rocker": "R",
     "Tyler Phillips": "R",
     "Brady Singer": "R",

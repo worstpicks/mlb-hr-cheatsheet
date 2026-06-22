@@ -267,9 +267,9 @@ games = [
         "title": "MIL @ CIN - Brandon Woodruff (R, MIL) vs Brady Singer (R, CIN)",
         "description": "Tail key data: Park boost +18% (stadium +14%, weather +4%). Away starter risk unavailable. Singer (HR risk 0.75, vs LHB +0.56, vs RHB +0.77).",
         "rows": [
-            row("Eugenio Suarez", "R", "+390", 70, "", ["vs Woodruff"], """1 HR, 1 near-HR, 88.0 mph EV. Woodruff split/risk data unavailable. limited split/risk sample.""", blast="good"),
-            row("Sal Stewart", "R", "+440", 76, "", ["vs Woodruff"], """1 HR, 2 near-HR, 91.8 mph EV. Woodruff split/risk data unavailable. limited split/risk sample.""", blast="good"),
-            row("Spencer Steer", "R", "+450", 78, "🌕 💣", ["vs Woodruff"], """2 HR, 2 near-HR, 88.5 mph EV. Woodruff split/risk data unavailable. limited split/risk sample.""", blast="high"),
+            row("Eugenio Suarez", "R", "+361", 88, "🌕 💣", ["vs Woodruff"], """3 HR, 3 near-HR, 91.5 mph EV. Woodruff split/risk data unavailable. limited split/risk sample.""", blast="high"),
+            row("Sal Stewart", "R", "+333", 74, "", ["vs Woodruff"], """1 HR, 3 near-HR, 87.9 mph EV. Woodruff split/risk data unavailable. limited split/risk sample; lighter EV form (87.9 mph).""", blast="good"),
+            row("Spencer Steer", "R", "+440", 92, "🌕 💣", ["vs Woodruff"], """3 HR, 4 near-HR, 94.2 mph EV. Woodruff split/risk data unavailable. limited split/risk sample.""", blast="high"),
             row("Jake Bauers", "L", "N/A", 62, "", ["vs Singer"], """0 HR, 73.6 mph EV. Singer LHB split +0.56, HR risk 0.75. limited recent HR events; lighter EV form (73.6 mph)."""),
             row("Gary Sanchez", "R", "+490", 62, "", ["vs Singer"], """0 HR, 81.0 mph EV. Singer RHB split +0.77, HR risk 0.75. limited recent HR events; lighter EV form (81.0 mph)."""),
             row("Garrett Mitchell", "L", "+920", 62, "", ["vs Singer"], """0 HR, 87.7 mph EV. Singer LHB split +0.56, HR risk 0.75. limited recent HR events; lighter EV form (87.7 mph)."""),
@@ -289,11 +289,11 @@ games = [
         ],
     },
     {
-        "title": "PHI @ WSH - Alan Rangel (R, PHI) vs Foster Griffin (L, WSH)",
+        "title": "PHI @ WSH - Aaron Nola (R, PHI) vs Foster Griffin (L, WSH)",
         "description": "Tail key data: Park boost data unavailable. Away starter risk unavailable. Griffin (HR risk 0.27, vs LHB -0.94, vs RHB +0.78).",
         "rows": [
-            row("James Wood", "L", "+320", 77, "💎", ["vs Rangel"], """Worst Pickz Hidden Gem. 1 HR, 2 near-HR, 93.1 mph EV. Rangel split/risk data unavailable. limited split/risk sample.""", blast="good"),
-            row("Dylan Crews", "R", "+630", 78, "", ["vs Rangel"], """1 HR, 1 near-HR, 96.2 mph EV. Rangel split/risk data unavailable. limited split/risk sample.""", blast="good"),
+            row("James Wood", "L", "+340", 68, "💎", ["vs Nola"], """Worst Pickz Hidden Gem. 0 HR, 92.3 mph EV. Nola split/risk data unavailable. limited split/risk sample; limited recent HR events.""", blast="good"),
+            row("Dylan Crews", "R", "+451", 81, "🌕 💣", ["vs Nola"], """2 HR, 3 near-HR, 88.9 mph EV. Nola split/risk data unavailable. limited split/risk sample.""", blast="high"),
             row("Kyle Schwarber", "L", "+245", 87, "⭐ 🌕 💣", ["vs Griffin"], """Worst Pickz Favorite. 3 HR, 4 near-HR, 88.7 mph EV. Griffin LHB split -0.94, HR risk 0.27. tough split lane (-0.94).""", blast="high"),
         ],
     },

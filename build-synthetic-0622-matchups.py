@@ -32,7 +32,6 @@ def split_matchup(text: str) -> tuple[str, str]:
 
 
 def filter_batters(batter_block: str, names: set[str]) -> str:
-    """Keep only batter rows whose normalized name is in names."""
     lines = batter_block.strip().splitlines()
     header = lines[0]
     kept = [header]
@@ -60,67 +59,26 @@ def add_manifest(name: str) -> None:
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
 
-# MIL @ CIN — Brady Singer (CIN) vs MIL batters (from 6/18 CLE @ MIL export)
-singer_src = (DATA / "hr-matchups-NYM-at-CIN-Brady-Singer-2026-06-16.csv").read_text(encoding="utf-8-sig")
-messick = (DATA / "hr-matchups-CLE-at-MIL-Parker-Messick-2026-06-18.csv").read_text(encoding="utf-8-sig")
-singer_h, _ = split_matchup(singer_src)
-_, mil_b = split_matchup(messick)
-mil_names = {
-    "Jackson Chourio",
-    "Jake Bauers",
-    "Garrett Mitchell",
-    "Gary Sanchez",
-    "Christian Yelich",
-    "William Contreras",
-    "Brice Turang",
-    "Sal Frelick",
-}
-singer_h = clone_pitcher_block(singer_h, "Brady Singer", "CIN", "MIL", "MIL @ CIN")
 singer_path = DATA / f"hr-matchups-MIL-at-CIN-Brady-Singer-{DATE}.csv"
-write(singer_path, singer_h + "\n,,,STATS,STRIKES,STATCAST\n" + filter_batters(mil_b, mil_names))
-add_manifest(singer_path.name)
+if not singer_path.exists():
+    singer_src = (DATA / "hr-matchups-NYM-at-CIN-Brady-Singer-2026-06-16.csv").read_text(encoding="utf-8-sig")
+    messick = (DATA / "hr-matchups-CLE-at-MIL-Parker-Messick-2026-06-18.csv").read_text(encoding="utf-8-sig")
+    singer_h, _ = split_matchup(singer_src)
+    _, mil_b = split_matchup(messick)
+    mil_names = {
+        "Jackson Chourio",
+        "Jake Bauers",
+        "Garrett Mitchell",
+        "Gary Sanchez",
+        "Christian Yelich",
+        "William Contreras",
+        "Brice Turang",
+        "Sal Frelick",
+    }
+    singer_h = clone_pitcher_block(singer_h, "Brady Singer", "CIN", "MIL", "MIL @ CIN")
+    write(singer_path, singer_h + "\n,,,STATS,STRIKES,STATCAST\n" + filter_batters(mil_b, mil_names))
+    add_manifest(singer_path.name)
+else:
+    print("skip", singer_path.name, "(already exists)")
 
-# MIL @ CIN — Brandon Woodruff (MIL) vs CIN batters (from 6/17 NYM @ CIN McLean)
-wacha = (DATA / "hr-matchups-KC-at-TB-Michael-Wacha-2026-06-22.csv").read_text(encoding="utf-8-sig")
-mclean = (DATA / "hr-matchups-NYM-at-CIN-Nolan-McLean-2026-06-17.csv").read_text(encoding="utf-8-sig")
-wood_h, _ = split_matchup(wacha)
-_, cin_b = split_matchup(mclean)
-cin_names = {
-    "Eugenio Suarez",
-    "Sal Stewart",
-    "Spencer Steer",
-    "JJ Bleday",
-    "Nathaniel Lowe",
-    "Matt McLain",
-    "Edwin Arroyo",
-    "Tyler Stephenson",
-}
-wood_h = clone_pitcher_block(wood_h, "Brandon Woodruff", "MIL", "CIN", "MIL @ CIN")
-wood_h = wood_h.replace("Michael Wacha", "Brandon Woodruff")
-wood_path = DATA / f"hr-matchups-MIL-at-CIN-Brandon-Woodruff-{DATE}.csv"
-write(wood_path, wood_h + "\n,,,STATS,STRIKES,STATCAST\n" + filter_batters(cin_b, cin_names))
-add_manifest(wood_path.name)
-
-# PHI @ WSH — Alan Rangel (PHI) vs WSH batters (James Wood, Dylan Crews from 6/19 WSH @ TB)
-cole = (DATA / "hr-matchups-NYY-at-DET-Gerrit-Cole-2026-06-22.csv").read_text(encoding="utf-8-sig")
-wsh_src = (DATA / "hr-matchups-WSH-at-TB-Griffin-Jax-2026-06-19.csv").read_text(encoding="utf-8-sig")
-rangel_h, _ = split_matchup(cole)
-_, wsh_b = split_matchup(wsh_src)
-wsh_names = {
-    "James Wood",
-    "Dylan Crews",
-    "CJ Abrams",
-    "Curtis Mead",
-    "Andres Chaparro",
-    "Daylen Lile",
-    "Jacob Young",
-    "Nasim Nuñez",
-    "Keibert Ruiz",
-}
-rangel_h = clone_pitcher_block(rangel_h, "Alan Rangel", "PHI", "WSH", "PHI @ WSH")
-rangel_h = rangel_h.replace("Gerrit Cole", "Alan Rangel")
-rangel_path = DATA / f"hr-matchups-PHI-at-WSH-Alan-Rangel-{DATE}.csv"
-write(rangel_path, rangel_h + "\n,,,STATS,STRIKES,STATCAST\n" + filter_batters(wsh_b, wsh_names))
-add_manifest(rangel_path.name)
-
-print("OK synthetic 6/22 matchups added")
+print("OK synthetic 6/22 matchups")

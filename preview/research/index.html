@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("worstpickz-theme") === "light") {
+                    document.documentElement.classList.add("theme-light");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>MLB Research — Worst Pickz</title>
+    <meta name="research-date" content="2026-06-22">
+    <link rel="stylesheet" href="research.css">
+    <style>
+        .rs-file-block {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(3, 2, 1, 0.97);
+            color: #f5efe9;
+            padding: 24px;
+            overflow: auto;
+        }
+        .rs-file-block.is-visible { display: flex; align-items: center; justify-content: center; }
+        .rs-file-block__card {
+            max-width: 560px;
+            background: linear-gradient(135deg, rgba(12, 28, 18, 0.97) 0%, rgba(22, 10, 14, 0.96) 100%);
+            border: 2px solid rgba(234, 179, 8, 0.42);
+            border-radius: 16px;
+            padding: 24px 28px;
+        }
+        .rs-file-block__card h2 { color: #fca5a5; margin-bottom: 12px; font-size: 1.25rem; }
+        .rs-file-block__card p { margin-bottom: 12px; color: #94a3b8; line-height: 1.55; }
+        .rs-file-block__card code, .rs-file-block__card pre {
+            display: block;
+            background: rgba(8, 15, 28, 0.88);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin: 10px 0 14px;
+            font-size: 0.85rem;
+            color: #fde68a;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .rs-file-block__link {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.85) 0%, rgba(234, 88, 12, 0.75) 100%);
+            color: #fff !important;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
+    <script>
+        (function () {
+            if (location.protocol !== "file:") return;
+            document.addEventListener("DOMContentLoaded", function () {
+                var block = document.getElementById("rsFileBlock");
+                var shell = document.querySelector(".rs-container");
+                if (block) block.classList.add("is-visible");
+                if (shell) shell.style.display = "none";
+            });
+        })();
+    </script>
+</head>
+<body>
+    <div id="rsFileBlock" class="rs-file-block" role="alert">
+        <div class="rs-file-block__card">
+            <h2>Cannot open this page as a file</h2>
+            <p>You opened the HTML file directly (<code>file://</code>). Browsers block loading Savant and research data that way.</p>
+            <p><strong>Use the local server instead:</strong></p>
+            <pre>cd C:\Users\allmi\mlb-hr-cheatsheet-web
+python fetch-research-slate.py --date 2026-06-22
+python serve-research.py</pre>
+            <p>Then open in your browser:</p>
+            <a class="rs-file-block__link" href="http://localhost:8080/research/index.html?date=2026-06-22">http://localhost:8080/research/index.html?date=2026-06-22</a>
+        </div>
+    </div>
+
+    <div class="rs-container">
+        <header class="rs-header">
+            <div class="rs-header-actions">
+                <a class="rs-back" id="rsBackLink" href="../index.html">← HR Cheat Sheet</a>
+                <div class="rs-header-actions-right">
+                    <button type="button" class="rs-theme-toggle" id="rsThemeToggle" aria-pressed="false" title="Switch theme" aria-label="Switch theme">☀️</button>
+                </div>
+            </div>
+            <div class="rs-header-brand">
+                <div class="rs-hero-wrap">
+                    <img src="../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot" decoding="async" onerror="this.onerror=null;this.src='https://worstpickz.win/assets/worst-pickz-hero.png'">
+                </div>
+                <div class="rs-header-intro">
+                    <span class="rs-brand-tag">Worst Pickz Research</span>
+                    <h1>MLB Hitter Research</h1>
+                    <p>2026 season Savant stats, pitch-mix matchup scores, and batted-ball profile for today's lineups.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="rs-toolbar">
+            <div class="rs-controls">
+                <label>Slate date
+                    <input type="date" id="rsDate" autocomplete="off">
+                </label>
+                <button type="button" class="rs-btn rs-btn--primary" id="rsRefresh">Refresh API</button>
+            </div>
+            <span class="rs-badge rs-badge--api" id="rsSourceBadge" hidden></span>
+        </div>
+
+        <div class="rs-main">
+            <p class="rs-status" id="rsStatus" role="status">Loading research slate…</p>
+
+            <section class="rs-section">
+                <h2 class="rs-section-title">Today's slate</h2>
+                <div class="rs-games-wrap">
+                    <div class="rs-games" id="rsGames"></div>
+                </div>
+            </section>
+
+            <section class="rs-section">
+                <div class="rs-matchup-bar">
+                    <div>
+                        <h2 id="rsMatchupTitle">— hitters</h2>
+                        <span class="rs-sp" id="rsMatchupSp">vs —</span>
+                    </div>
+                    <div class="rs-side-toggle" role="group" aria-label="Offense team">
+                        <button type="button" id="rsSideAway">AWY</button>
+                        <button type="button" id="rsSideHome">HOM</button>
+                    </div>
+                </div>
+
+                <div class="rs-table-wrap">
+                    <table class="rs-table">
+                        <thead id="rsTableHead"></thead>
+                        <tbody id="rsTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="research.js?v=24" defer></script>
+</body>
+</html>

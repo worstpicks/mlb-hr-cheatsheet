@@ -1,4 +1,16 @@
-# Netlify: publish the preview sheet (static).
+# Netlify: publish the preview sheet (static) + Savant CSV proxy function.
 
 [build]
   publish = "preview"
+  functions = "netlify/functions"
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+[[redirects]]
+  from = "/api/savant-batter"
+  to = "/.netlify/functions/savant-batter"
+  status = 200
+  force = true

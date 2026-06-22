@@ -1,0 +1,624 @@
+#!/usr/bin/env python3
+"""MLB Stats API helpers for the research slate (schedule, probables, lineups)."""
+from __future__ import annotations
+
+import json
+import re
+import urllib.parse
+import urllib.request
+from pathlib import Path
+from typing import Any
+
+from csv_slate_meta import name_lookup_key
+
+from research.pitch_mix import (
+    attach_pitcher_arsenal,
+    enrich_lineup_pitch_mix,
+    fetch_batter_pitch_type_lookup,
+    fetch_pitcher_arsenal_lookup,
+    league_pitch_averages,
+    write_pitch_mix_cache,
+)
+from research.propfinder_stats import load_propfinder_lookup
+from research.savant_api import (
+    fetch_batter_statcast_lookup,
+    merge_into_hitter_stats,
+    write_savant_cache,
+)
+from research.window_savant import (
+    fetch_season_statcast_lookup,
+    merge_season_savant,
+)
+from research.window_stats import fetch_window_stats_batch, window_bounds
+
+MLB_API = "https://statsapi.mlb.com/api/v1"
+
+SHEET_ABBR_FROM_API = {"AZ": "ARI", "WAS": "WSH", "WSN": "WSH", "OAK": "ATH", "TB": "TB", "SF": "SF"}
+
+
+def normalize_abbr(abbr: str) -> str:
+    return SHEET_ABBR_FROM_API.get((abbr or "").upper(), (abbr or "").upper())
+
+
+def game_key(away: str, home: str) -> str:
+    return f"{normalize_abbr(away)} @ {normalize_abbr(home)}"
+
+
+def _get(path_query: str, timeout: int = 30) -> dict:
+    url = f"{MLB_API}{path_query}"
+    req = urllib.request.Request(url, headers={"User-Agent": "WorstPickz-Research/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read())
+
+
+def fetch_schedule(sheet_date: str) -> list[dict]:
+    """Return normalized game dicts for a calendar date."""
+    query = urllib.parse.urlencode(
+        {
+            "sportId": 1,
+            "date": sheet_date,
+            "hydrate": "probablePitcher,team,venue,linescore,weather,flags",
+        }
+    )
+    data = _get(f"/schedule?{query}")
+    games: list[dict] = []
+    for day in data.get("dates") or []:
+        for g in day.get("games") or []:
+            away_team = (g.get("teams") or {}).get("away", {}).get("team") or {}
+            home_team = (g.get("teams") or {}).get("home", {}).get("team") or {}
+            away_abbr = normalize_abbr(away_team.get("abbreviation") or "")
+            home_abbr = normalize_abbr(home_team.get("abbreviation") or "")
+            if not away_abbr or not home_abbr:
+                continue
+            away_prob = (g.get("teams") or {}).get("away", {}).get("probablePitcher") or {}
+            home_prob = (g.get("teams") or {}).get("home", {}).get("probablePitcher") or {}
+            venue = g.get("venue") or {}
+            status = (g.get("status") or {}).get("detailedState") or ""
+            games.append(
+                {
+                    "gamePk": g.get("gamePk"),
+                    "matchup": game_key(away_abbr, home_abbr),
+                    "away": away_abbr,
+                    "home": home_abbr,
+                    "awayTeamId": away_team.get("id"),
+                    "homeTeamId": home_team.get("id"),
+                    "startTime": g.get("gameDate") or "",
+                    "venue": venue.get("name") or "",
+                    "status": status,
+                    "awayPitcher": _pitcher_dict(away_prob),
+                    "homePitcher": _pitcher_dict(home_prob),
+                }
+            )
+    games.sort(key=lambda x: x.get("startTime") or "")
+    return games
+
+
+def _pitcher_dict(raw: dict) -> dict | None:
+    if not raw or not raw.get("id"):
+        return None
+    return {
+        "id": raw.get("id"),
+        "name": raw.get("fullName") or "",
+        "throws": (raw.get("pitchHand") or {}).get("code") or "",
+    }
+
+
+def fetch_lineup(game_pk: int) -> tuple[list[dict], list[dict]]:
+    """Return (away_lineup, home_lineup) from boxscore batting order."""
+    try:
+        data = _get(f"/game/{game_pk}/boxscore")
+    except Exception:
+        return [], []
+    out_away: list[dict] = []
+    out_home: list[dict] = []
+    for side, bucket in (("away", out_away), ("home", out_home)):
+        team = (data.get("teams") or {}).get(side) or {}
+        order = team.get("battingOrder") or []
+        players = team.get("players") or {}
+        for slot, pid in enumerate(order, start=1):
+            key = f"ID{pid}"
+            entry = players.get(key) or {}
+            person = entry.get("person") or {}
+            if not person.get("fullName"):
+                continue
+            bat_side = (entry.get("batSide") or {}).get("code") or ""
+            pos = (entry.get("position") or {}).get("abbreviation") or ""
+            bucket.append(
+                {
+                    "id": person.get("id"),
+                    "name": person.get("fullName"),
+                    "order": slot,
+                    "position": pos,
+                    "hand": bat_side,
+                    "projected": False,
+                }
+            )
+    return out_away, out_home
+
+
+def _roster_season_for_api(sheet_season: int) -> int:
+    """MLB roster endpoint may lag for future/simulated seasons — fall back one year."""
+    for year in (sheet_season, sheet_season - 1):
+        try:
+            data = _get(
+                f"/teams/147/roster?rosterType=active&season={year}",
+                timeout=10,
+            )
+            entries = data.get("roster") or data.get("rosters") or []
+            if entries:
+                return year
+        except Exception:
+            continue
+    return sheet_season - 1
+
+
+def fetch_team_hitters(team_id: int, roster_season: int) -> list[dict]:
+    if not team_id:
+        return []
+    for year in (roster_season, roster_season - 1, None):
+        query = f"/teams/{team_id}/roster?rosterType=active"
+        if year is not None:
+            query += f"&season={year}"
+        try:
+            data = _get(query)
+        except Exception:
+            continue
+        entries = data.get("roster") or data.get("rosters") or []
+        hitters: list[dict] = []
+        for entry in entries:
+            person = entry.get("person") or {}
+            pos = entry.get("position") or {}
+            abbr = (pos.get("abbreviation") or "").upper()
+            if abbr in ("P",) or (pos.get("type") or "").lower() == "pitcher":
+                continue
+            hitters.append(
+                {
+                    "id": person.get("id"),
+                    "name": person.get("fullName") or "",
+                    "hand": (person.get("batSide") or {}).get("code") or "",
+                    "position": abbr,
+                    "projected": True,
+                }
+            )
+        if hitters:
+            return hitters
+    return []
+
+
+def fetch_batter_hands_batch(
+    player_ids: list[int],
+    *,
+    chunk_size: int = 50,
+) -> dict[int, str]:
+    """player_id -> L/R/S from MLB /people batSide."""
+    lookup: dict[int, str] = {}
+    unique = sorted({int(x) for x in player_ids if x})
+    for i in range(0, len(unique), chunk_size):
+        chunk = unique[i : i + chunk_size]
+        ids_str = ",".join(str(x) for x in chunk)
+        try:
+            data = _get(f"/people?personIds={ids_str}", timeout=45)
+        except Exception:
+            continue
+        for person in data.get("people") or []:
+            pid = _int(person.get("id"))
+            if not pid:
+                continue
+            hand = (person.get("batSide") or {}).get("code") or ""
+            if hand:
+                lookup[pid] = hand
+    return lookup
+
+
+def _attach_hands_to_lineup(lineup: list[dict], hands: dict[int, str]) -> list[dict]:
+    out: list[dict] = []
+    for row in lineup:
+        enriched = dict(row)
+        pid = int(enriched.get("id") or 0)
+        if pid and not enriched.get("hand"):
+            enriched["hand"] = hands.get(pid) or ""
+        out.append(enriched)
+    return out
+
+
+def fetch_hitter_season_stats(player_id: int, season: int | None = None) -> dict:
+    if not player_id:
+        return {}
+    season = season or _season_from_date(None)
+    for yr in (season, season - 1):
+        hydrate = urllib.parse.quote(f"stats(group=[hitting],type=[season],season={yr})")
+        try:
+            data = _get(f"/people/{player_id}?hydrate={hydrate}")
+        except Exception:
+            continue
+        people = data.get("people") or []
+        if not people:
+            continue
+        for group in people[0].get("stats") or []:
+            splits = group.get("splits") or []
+            if not splits:
+                continue
+            stat = splits[0].get("stat") or {}
+            return {
+                "avg": _float(stat.get("avg")),
+                "obp": _float(stat.get("obp")),
+                "slg": _float(stat.get("slg")),
+                "iso": _iso(stat),
+                "hr": _int(stat.get("homeRuns")),
+                "pa": _int(stat.get("plateAppearances")),
+                "ab": _int(stat.get("atBats")),
+                "kPct": _pct(stat.get("strikeOuts"), stat.get("plateAppearances")),
+                "bbPct": _pct(stat.get("baseOnBalls"), stat.get("plateAppearances")),
+                "source": "mlb",
+            }
+    return {}
+
+
+def _build_stats_by_window(
+    pid: int,
+    savant_lookup: dict[int, dict],
+    window_lookups: dict[str, dict[int, dict]],
+) -> dict[str, dict]:
+    savant = savant_lookup.get(pid) or {}
+    win_stats = (window_lookups.get("season") or {}).get(pid) or {}
+    return {"season": merge_season_savant(win_stats, savant)}
+
+
+def _attach_season_stats(
+    row: dict,
+    savant_lookup: dict[int, dict],
+    window_lookups: dict[str, dict[int, dict]],
+) -> dict:
+    enriched = dict(row)
+    pid = int(enriched.get("id") or 0)
+    if not pid:
+        return enriched
+    season_stats = dict(_build_stats_by_window(pid, savant_lookup, window_lookups).get("season") or {})
+    preserve_keys = ("mixPlus", "mixEdge", "mixXwoba", "mixBest", "mixWorst", "mixPitches", "nearHr")
+    existing = enriched.get("stats") or {}
+    for key in preserve_keys:
+        if existing.get(key) is not None:
+            season_stats[key] = existing[key]
+    if existing.get("nearHr") is not None and "propfinder" not in str(season_stats.get("source") or ""):
+        src = season_stats.get("source") or "savant"
+        season_stats["source"] = f"{src}+propfinder" if src else "propfinder"
+    enriched["stats"] = season_stats
+    return enriched
+
+
+def _attach_lineup_season_stats(
+    lineup: list[dict],
+    savant_lookup: dict[int, dict],
+    window_lookups: dict[str, dict[int, dict]],
+) -> list[dict]:
+    return [
+        _attach_season_stats(row, savant_lookup, window_lookups)
+        for row in lineup
+    ]
+
+
+def enrich_hitter_row(
+    row: dict,
+    *,
+    window_lookup: dict[int, dict],
+    savant_lookup: dict[int, dict],
+    propfinder_lookup: dict[str, dict],
+    savant_only: bool = True,
+) -> dict:
+    enriched = dict(row)
+    pid = int(enriched.get("id") or 0)
+    savant = savant_lookup.get(pid) if pid else None
+    window = None if savant_only else (window_lookup.get(pid) if pid else None)
+    propfinder = propfinder_lookup.get(name_lookup_key(enriched.get("name") or "")) if propfinder_lookup else None
+    enriched["stats"] = merge_into_hitter_stats(
+        window, savant, propfinder, savant_only=savant_only
+    )
+    return enriched
+
+
+def enrich_lineup(
+    lineup: list[dict],
+    *,
+    window_lookup: dict[int, dict],
+    savant_lookup: dict[int, dict],
+    propfinder_lookup: dict[str, dict],
+    savant_only: bool = True,
+) -> list[dict]:
+    return [
+        enrich_hitter_row(
+            row,
+            window_lookup=window_lookup,
+            savant_lookup=savant_lookup,
+            propfinder_lookup=propfinder_lookup,
+            savant_only=savant_only,
+        )
+        for row in lineup
+    ]
+
+
+def build_projected_lineup(
+    team_id: int,
+    roster_season: int,
+    *,
+    window_lookup: dict[int, dict],
+    savant_lookup: dict[int, dict],
+    propfinder_lookup: dict[str, dict],
+    savant_only: bool = True,
+    limit: int = 13,
+) -> list[dict]:
+    hitters = fetch_team_hitters(team_id, roster_season)
+
+    def sort_key(h: dict) -> tuple:
+        pid = int(h.get("id") or 0)
+        sav = savant_lookup.get(pid) or {}
+        win = window_lookup.get(pid) or {}
+        return (sav.get("pa") or win.get("pa") or 0, sav.get("hr") or win.get("hr") or 0)
+
+    hitters.sort(key=sort_key, reverse=True)
+    lineup = [{**h, "order": i} for i, h in enumerate(hitters[:limit], start=1)]
+    return enrich_lineup(
+        lineup,
+        window_lookup=window_lookup,
+        savant_lookup=savant_lookup,
+        propfinder_lookup=propfinder_lookup,
+        savant_only=savant_only,
+    )
+
+
+def resolve_side_lineup(
+    box_lineup: list[dict],
+    team_id: int | None,
+    roster_season: int,
+    *,
+    window_lookup: dict[int, dict],
+    savant_lookup: dict[int, dict],
+    propfinder_lookup: dict[str, dict],
+    savant_only: bool = True,
+) -> list[dict]:
+    if box_lineup:
+        return enrich_lineup(
+            box_lineup,
+            window_lookup=window_lookup,
+            savant_lookup=savant_lookup,
+            propfinder_lookup=propfinder_lookup,
+            savant_only=savant_only,
+        )
+    if team_id:
+        return build_projected_lineup(
+            team_id,
+            roster_season,
+            window_lookup=window_lookup,
+            savant_lookup=savant_lookup,
+            propfinder_lookup=propfinder_lookup,
+            savant_only=savant_only,
+        )
+    return []
+
+
+def _collect_player_ids(games: list[dict]) -> list[int]:
+    ids: set[int] = set()
+    for game in games:
+        for side in ("awayLineup", "homeLineup"):
+            for row in game.get(side) or []:
+                pid = row.get("id")
+                if pid:
+                    ids.add(int(pid))
+    return sorted(ids)
+
+
+def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool = True) -> dict:
+    season = _season_from_date(sheet_date)
+    roster_season = _roster_season_for_api(season)
+    window_start, window_end = window_bounds(sheet_date, days=30)
+    savant_lookup: dict[int, dict] = fetch_batter_statcast_lookup(season) if with_stats else {}
+    pitcher_arsenal_lookup: dict[int, dict[str, float]] = {}
+    batter_pitch_lookup: dict[int, dict[str, dict]] = {}
+    league_pitch_avgs: dict[str, dict] = {}
+    season_statcast: dict[int, dict] = {}
+    window_lookups: dict[str, dict[int, dict]] = {}
+    if with_stats:
+        if savant_lookup:
+            write_savant_cache(
+                savant_lookup,
+                Path(__file__).resolve().parent.parent / "preview" / "data",
+                season,
+            )
+        try:
+            pitcher_arsenal_lookup = fetch_pitcher_arsenal_lookup(season)
+            batter_pitch_lookup = fetch_batter_pitch_type_lookup(season)
+            league_pitch_avgs = league_pitch_averages(batter_pitch_lookup)
+            write_pitch_mix_cache(
+                pitcher_arsenal_lookup,
+                batter_pitch_lookup,
+                league_pitch_avgs,
+                Path(__file__).resolve().parent.parent / "preview" / "data",
+                season,
+            )
+        except Exception:
+            pitcher_arsenal_lookup = {}
+            batter_pitch_lookup = {}
+            league_pitch_avgs = {}
+        try:
+            season_statcast = fetch_season_statcast_lookup(season)
+            window_lookups["season"] = season_statcast
+            for pid, pull_stats in season_statcast.items():
+                sav = savant_lookup.setdefault(pid, {})
+                for key in ("pullPct", "pullAirPct", "pullBarrelPct"):
+                    if sav.get(key) is None and pull_stats.get(key) is not None:
+                        sav[key] = pull_stats[key]
+        except Exception:
+            season_statcast = {}
+            window_lookups = {}
+    propfinder_lookup: dict[str, dict] = (
+        load_propfinder_lookup(sheet_date) if with_stats else {}
+    )
+
+    games: list[dict] = []
+    for g in fetch_schedule(sheet_date):
+        game = dict(g)
+        pk = game.get("gamePk")
+        away_lu: list[dict] = []
+        home_lu: list[dict] = []
+        if pk:
+            away_lu, home_lu = fetch_lineup(pk)
+        game["awayLineup"] = away_lu
+        game["homeLineup"] = home_lu
+        games.append(game)
+
+    window_lookup: dict[int, dict] = {}
+    if with_stats and not savant_only:
+        id_set: set[int] = set(_collect_player_ids(games))
+        for game in games:
+            for team_id_key in ("awayTeamId", "homeTeamId"):
+                tid = game.get(team_id_key)
+                if tid:
+                    for h in fetch_team_hitters(tid, roster_season):
+                        if h.get("id"):
+                            id_set.add(int(h["id"]))
+        window_lookup = fetch_window_stats_batch(
+            sorted(id_set), window_start, window_end, season
+        )
+
+    for game in games:
+        if with_stats:
+            game["awayPitcher"] = attach_pitcher_arsenal(
+                game.get("awayPitcher"), pitcher_arsenal_lookup
+            )
+            game["homePitcher"] = attach_pitcher_arsenal(
+                game.get("homePitcher"), pitcher_arsenal_lookup
+            )
+            game["awayLineup"] = resolve_side_lineup(
+                game.get("awayLineup") or [],
+                game.get("awayTeamId"),
+                roster_season,
+                window_lookup=window_lookup,
+                savant_lookup=savant_lookup,
+                propfinder_lookup=propfinder_lookup,
+                savant_only=savant_only,
+            )
+            game["homeLineup"] = resolve_side_lineup(
+                game.get("homeLineup") or [],
+                game.get("homeTeamId"),
+                roster_season,
+                window_lookup=window_lookup,
+                savant_lookup=savant_lookup,
+                propfinder_lookup=propfinder_lookup,
+                savant_only=savant_only,
+            )
+            game["awayLineup"] = enrich_lineup_pitch_mix(
+                game["awayLineup"],
+                game.get("homePitcher"),
+                batter_pitch_lookup=batter_pitch_lookup,
+                league_avgs=league_pitch_avgs,
+                savant_lookup=savant_lookup,
+            )
+            game["homeLineup"] = enrich_lineup_pitch_mix(
+                game["homeLineup"],
+                game.get("awayPitcher"),
+                batter_pitch_lookup=batter_pitch_lookup,
+                league_avgs=league_pitch_avgs,
+                savant_lookup=savant_lookup,
+            )
+            if window_lookups:
+                game["awayLineup"] = _attach_lineup_season_stats(
+                    game["awayLineup"], savant_lookup, window_lookups
+                )
+                game["homeLineup"] = _attach_lineup_season_stats(
+                    game["homeLineup"], savant_lookup, window_lookups
+                )
+        game["lineupStatus"] = _lineup_status(
+            game.get("awayLineup") or [], game.get("homeLineup") or []
+        )
+
+    if with_stats:
+        hand_ids = _collect_player_ids(games)
+        hands = fetch_batter_hands_batch(hand_ids) if hand_ids else {}
+        if hands:
+            for game in games:
+                game["awayLineup"] = _attach_hands_to_lineup(game.get("awayLineup") or [], hands)
+                game["homeLineup"] = _attach_hands_to_lineup(game.get("homeLineup") or [], hands)
+
+    return {
+        "sheet_date": sheet_date,
+        "season": season,
+        "roster_season": roster_season,
+        "stat_window": "savant-season" if savant_only else "last30d",
+        "stat_windows": {
+            "season": {
+                "label": str(season),
+                "games": None,
+            }
+        },
+        "window_start": window_start if not savant_only else None,
+        "window_end": window_end if not savant_only else None,
+        "source": (
+            "savant+propfinder"
+            if propfinder_lookup and savant_only
+            else ("mlb+savant+propfinder" if propfinder_lookup else ("savant" if savant_only else "mlb+savant"))
+        ),
+        "savant_only": savant_only,
+        "enriched": bool(propfinder_lookup),
+        "propfinder_lookup": propfinder_lookup,
+        "savant_batters": len(savant_lookup),
+        "pitch_mix_pitchers": len(pitcher_arsenal_lookup),
+        "pitch_mix_batters": len(batter_pitch_lookup),
+        "propfinder_batters": len(propfinder_lookup),
+        "window_batters": len(window_lookup),
+        "savant_lookup": {str(k): v for k, v in savant_lookup.items()},
+        "pitcher_arsenal_lookup": {str(k): v for k, v in pitcher_arsenal_lookup.items()},
+        "batter_pitch_lookup": {str(k): v for k, v in batter_pitch_lookup.items()},
+        "league_pitch_avgs": league_pitch_avgs,
+        "games": games,
+    }
+
+def _lineup_status(away: list, home: list) -> str:
+    away_confirmed = any(not h.get("projected") for h in away)
+    home_confirmed = any(not h.get("projected") for h in home)
+    if away_confirmed and home_confirmed:
+        return "confirmed"
+    if away_confirmed or home_confirmed:
+        return "partial"
+    if away or home:
+        return "projected"
+    return "empty"
+
+
+def _season_from_date(sheet_date: str | None) -> int:
+    if sheet_date and re.fullmatch(r"\d{4}-\d{2}-\d{2}", sheet_date):
+        return int(sheet_date[:4])
+    from datetime import date
+
+    return date.today().year
+
+
+def _float(val: Any) -> float | None:
+    if val is None or val == "":
+        return None
+    try:
+        return float(val)
+    except (TypeError, ValueError):
+        return None
+
+
+def _int(val: Any) -> int | None:
+    if val is None or val == "":
+        return None
+    try:
+        return int(val)
+    except (TypeError, ValueError):
+        return None
+
+
+def _iso(stat: dict) -> float | None:
+    slg = _float(stat.get("slg"))
+    avg = _float(stat.get("avg"))
+    if slg is not None and avg is not None:
+        return round(slg - avg, 3)
+    return None
+
+
+def _pct(num: Any, den: Any) -> float | None:
+    n, d = _int(num), _int(den)
+    if n is None or d is None or d == 0:
+        return None
+    return round(100.0 * n / d, 1)

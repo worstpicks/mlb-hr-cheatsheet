@@ -19,6 +19,8 @@ ROOT = Path(__file__).resolve().parent
 TITLE_WEATHER_KEY_ALIASES = {
     "MIA @ WSH": "MIA @ WAS",
     "KC @ WSH": "KC @ WAS",
+    "PHI @ WSH": "PHI @ WAS",
+    "CLE @ CWS": "CLE @ CHW",
     "CWS @ MIN": "CHW @ MIN",
     "CWS @ NYY": "CHW @ NYY",
 }

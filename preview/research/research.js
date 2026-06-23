@@ -214,8 +214,15 @@
 
     function setStatus(msg, isError) {
         if (!els.status) return;
-        els.status.textContent = msg;
+        const text = msg || "";
+        els.status.textContent = text;
         els.status.classList.toggle("is-error", !!isError);
+        // Only surface the status bar for errors — keep the UI clean when data loads OK.
+        els.status.hidden = !(isError && text);
+    }
+
+    function clearStatus() {
+        setStatus("", false);
     }
 
     function num(val) {
@@ -934,7 +941,6 @@
     }
 
     async function fetchLiveSlate(date) {
-        setStatus("Pulling slate from MLB Stats API…");
         const data = await mlbGet(
             `/schedule?sportId=1&date=${encodeURIComponent(date)}&hydrate=probablePitcher,team,venue`
         );
@@ -1263,12 +1269,7 @@
         renderMobileCards();
         syncMobileSortSelect();
         renderSourceBadge();
-        const game = activeGame();
-        const n = (game?.awayLineup?.length || 0) + (game?.homeLineup?.length || 0);
-        const src = slate?.fetched_at ? `Cached ${slate.fetched_at}` : "Live MLB";
-        setStatus(
-            `${slate?.games?.length || 0} games · ${src} · ${game?.venue || ""} · ${game?.status || ""} · ${game?.lineupStatus || ""} · ${n} hitters`
-        );
+        clearStatus();
     }
 
     async function loadSlate(date, forceLive) {
@@ -1281,11 +1282,10 @@
         if (els.dateInput) els.dateInput.value = date;
         if (els.backLink) els.backLink.href = `../index.html`;
 
-        setStatus("Loading research data…");
+        clearStatus();
         const cacheResult = await fetchDataJson(`research-${date}.json`);
 
         if (forceLive) {
-            setStatus("Refreshing lineups from MLB API…");
             const cached = cacheResult.data;
             slate = await fetchLiveSlate(date);
             if (cached) applyCachedEnrichment(slate, cached);
@@ -1335,11 +1335,7 @@
             return;
         }
 
-        const sample = activeRows().find((r) => hasSavantStats(r.stats))?.stats;
-        const game = activeGame();
-        setStatus(
-            `${slate.games.length} games · Savant OK (${savantMerge.source || "cache"}) · pitch mix (${pitchMixMerge.source || "cache"}) · ${game?.matchup || ""} · Mix ${sample?.mixPlus ?? "—"} · EV ${sample?.avgEV} · xwOBA ${sample?.xwoba}`
-        );
+        clearStatus();
     }
 
     function wireUi() {

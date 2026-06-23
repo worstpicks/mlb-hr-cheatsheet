@@ -260,6 +260,11 @@ a:hover { color: #bae6fd; }
     color: var(--rs-muted);
     margin-bottom: 16px;
 }
+.rs-status[hidden] {
+    display: none !important;
+    margin: 0;
+    padding: 0;
+}
 .rs-status strong { color: var(--wpz-accent-gold); }
 .rs-status.is-error {
     border-color: rgba(248, 113, 113, 0.45);

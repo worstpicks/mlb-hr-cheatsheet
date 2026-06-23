@@ -61,6 +61,7 @@ def _row_to_stats(data: dict) -> dict:
     ev = _float(data.get("EV"))
     barrel = _float(data.get("BARREL%"))
     whiff = _float(data.get("WHIFF%"))
+    k_pct = _float(data.get("K%"))
     fb = _float(data.get("FB%"))
     gb = _float(data.get("GB%"))
     ld = _float(data.get("LD%"))
@@ -76,6 +77,7 @@ def _row_to_stats(data: dict) -> dict:
         "avgEV": ev,
         "barrelPct": barrel,
         "whiffPct": whiff,
+        "kPct": k_pct,
         "fbPct": fb,
         "gbPct": gb,
         "ldPct": ld,

@@ -52,6 +52,7 @@
         { key: "nearHr", label: "Near HR", group: "power", stat: "nearHr", fmt: (r) => fmtNum(hitterStats(r).nearHr), tip: "Near home runs — batted balls with homer distance and trajectory from PropFinder matchup CSVs." },
         { key: "avg", label: "AVG", group: "plate", stat: "avg", fmt: (r) => fmtRate(hitterStats(r).avg), tip: "Batting average — hits divided by at-bats. Overall hitting for average." },
         { key: "iso", label: "ISO", group: "plate", stat: "iso", fmt: (r) => fmtRate(hitterStats(r).iso), tip: "Isolated power — slugging minus average. Extra-base hit power per at-bat." },
+        { key: "slg", label: "SLG", group: "plate", stat: "slg", fmt: (r) => fmtRate(hitterStats(r).slg), tip: "Slugging percentage — total bases per at-bat. Measures overall power production." },
         { key: "xwoba", label: "xwOBA", group: "plate", stat: "xwoba", fmt: (r) => fmtRate(hitterStats(r).xwoba), tip: "Expected weighted on-base average — overall offensive value from contact quality, independent of luck." },
         { key: "barrelPct", label: "Barrel%", group: "plate", stat: "barrelPct", fmt: (r) => fmtPct(hitterStats(r).barrelPct), tip: "Barrel rate — batted balls with ideal launch angle and exit velocity to produce homers and extra-base hits." },
         { key: "hardHitPct", label: "Hard Hit%", group: "plate", stat: "hardHitPct", fmt: (r) => fmtPct(hitterStats(r).hardHitPct), tip: "Hard hit rate — share of batted balls at 95+ mph. Measures how often a hitter squares the ball up." },
@@ -60,6 +61,7 @@
         { key: "hrFbPct", label: "HR/FB%", group: "plate", stat: "hrFbPct", fmt: (r) => fmtPct(hitterStats(r).hrFbPct), tip: "Home runs per fly ball — how often fly balls leave the yard. Power efficiency on balls in the air." },
         { key: "recentForm", label: "Form%", group: "plate", stat: "recentForm", fmt: (r) => fmtFormPct(hitterStats(r).recentForm), tip: "Recent form — wOBA vs expected wOBA gap. Positive means outperforming expected contact quality; negative means underperforming." },
         { key: "whiffPct", label: "Whiff%", group: "plate", stat: "whiffPct", fmt: (r) => fmtPct(hitterStats(r).whiffPct), tip: "Whiff rate — swings and misses as a share of swings. Lower is better for contact hitters." },
+        { key: "kPct", label: "K%", group: "plate", stat: "kPct", fmt: (r) => fmtPct(hitterStats(r).kPct), tip: "Strikeout rate — strikeouts as a share of plate appearances. Lower is better for contact." },
         { key: "gbPct", label: "GB%", group: "batted", stat: "gbPct", fmt: (r) => fmtPct(hitterStats(r).gbPct), tip: "Ground ball rate — share of batted balls on the ground. Lower rates often correlate with more power and fly balls." },
         { key: "ldPct", label: "LD%", group: "batted", stat: "ldPct", fmt: (r) => fmtPct(hitterStats(r).ldPct), tip: "Line drive rate — share of batted balls hit on a line. A sign of solid, hard contact." },
         { key: "pullPct", label: "Pull%", group: "batted", stat: "pullPct", fmt: (r) => fmtPct(hitterStats(r).pullPct), tip: "Pull rate — share of batted balls hit to the pull side. Higher pull rates often mean more power, especially for same-side matchups." },
@@ -555,23 +557,20 @@
     }
 
     async function mergeSavantIntoAllLineups(season) {
-        if (lineupsHavePitchMix(slate?.games)) {
-            if (slate?.savant_lookup && Object.keys(slate.savant_lookup).length) {
-                savantLookup = lookupFromSavantPayload({ lookup: slate.savant_lookup });
-            }
-            return { n: 0, source: "preserve-enriched" };
-        }
-        if (slate?.savant_lookup && Object.keys(slate.savant_lookup).length) {
-            const n = applySavantFromSlate();
-            if (n > 0) return { n, source: "embedded" };
-        }
-
         const cached = await fetchDataJson(`savant-batter-${season}.json`);
         if (cached.data?.lookup) {
-            slate.savant_lookup = cached.data.lookup;
-            savantLookup = lookupFromSavantPayload(cached);
-            const n = applySavantFromSlate();
-            if (n > 0) return { n, source: cached.url };
+            slate.savant_lookup = { ...(slate?.savant_lookup || {}), ...cached.data.lookup };
+            savantLookup = lookupFromSavantPayload({ lookup: slate.savant_lookup });
+        } else if (slate?.savant_lookup && Object.keys(slate.savant_lookup).length) {
+            savantLookup = lookupFromSavantPayload({ lookup: slate.savant_lookup });
+        }
+
+        if (slate?.savant_lookup && Object.keys(slate.savant_lookup).length) {
+            const patched = applySavantFromSlate();
+            if (lineupsHavePitchMix(slate?.games)) {
+                return { n: patched, source: patched ? "patch-savant-gaps" : "preserve-enriched" };
+            }
+            if (patched > 0) return { n: patched, source: cached.url || "embedded" };
         }
 
         savantLookup = null;
@@ -631,6 +630,7 @@
         const sav = savant || {};
         const savantKeys = [
             "avg",
+            "slg",
             "iso",
             "xwoba",
             "barrelPct",
@@ -641,6 +641,7 @@
             "ldPct",
             "hrFbPct",
             "whiffPct",
+            "kPct",
             "hr",
             "recentForm",
             "pullPct",
@@ -653,8 +654,9 @@
         if (SAVANT_ONLY) {
             const pf = propfinder || {};
             if (pf.nearHr != null) out.nearHr = pf.nearHr;
+            if (out.kPct == null && pf.kPct != null) out.kPct = pf.kPct;
             const sources = [out.source || sav.source || "savant"];
-            if (pf.nearHr != null) sources.push("propfinder");
+            if (pf.nearHr != null || pf.kPct != null) sources.push("propfinder");
             out.source = [...new Set(sources.filter(Boolean))].join("+");
             return out;
         }
@@ -814,7 +816,6 @@
         for (const game of slate.games || []) {
             for (const key of ["awayLineup", "homeLineup"]) {
                 game[key] = (game[key] || []).map((row) => {
-                    if (row.stats?.mixPlus != null && hasSavantStats(row.stats)) return row;
                     const sav = slate.savant_lookup[String(row.id)] || slate.savant_lookup[row.id];
                     if (!sav) return row;
                     n += 1;
@@ -1068,6 +1069,7 @@
             nearHr: true,
             avg: true,
             iso: true,
+            slg: true,
             xwoba: true,
             barrelPct: true,
             hardHitPct: true,
@@ -1079,6 +1081,7 @@
             ldPct: true,
             pullPct: true,
             whiffPct: false,
+            kPct: false,
         };
         return {
             colValues: Object.fromEntries(

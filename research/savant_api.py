@@ -12,7 +12,7 @@ from typing import Any
 SAVANT_CUSTOM_CSV = (
     "https://baseballsavant.mlb.com/leaderboard/custom"
     "?year={season}&type=batter&filter=&min=10"
-    "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,whiff_percent,"
+    "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,k_percent,whiff_percent,"
     "barrel_batted_rate,hard_hit_percent,exit_velocity_avg,flyballs_percent,"
     "groundballs_percent,linedrives_percent,flyballs,hr_flyball_percent,pull_percent"
     "&chart=false&csv=true"
@@ -73,6 +73,7 @@ def _parse_custom_row(row: dict) -> dict:
         "iso": _float(row.get("xiso")),
         "pa": _int(row.get("pa")),
         "hr": _int(row.get("home_run")),
+        "kPct": _float(row.get("k_percent")),
         "whiffPct": _float(row.get("whiff_percent")),
         "barrelPct": _float(row.get("barrel_batted_rate")),
         "hardHitPct": _float(row.get("hard_hit_percent")),
@@ -176,6 +177,7 @@ def merge_into_hitter_stats(
         "ldPct",
         "hrFbPct",
         "whiffPct",
+        "kPct",
         "pa",
         "recentForm",
         "hr",
@@ -192,10 +194,12 @@ def merge_into_hitter_stats(
     propfinder = propfinder or {}
     if propfinder.get("nearHr") is not None:
         out["nearHr"] = propfinder["nearHr"]
+    if out.get("kPct") is None and propfinder.get("kPct") is not None:
+        out["kPct"] = propfinder["kPct"]
 
     if savant_only:
         if propfinder:
-            out["source"] = "savant+propfinder" if out.get("nearHr") is not None else "savant"
+            out["source"] = "savant+propfinder" if out.get("nearHr") is not None or out.get("kPct") is not None else "savant"
         return out
 
     window = window or {}

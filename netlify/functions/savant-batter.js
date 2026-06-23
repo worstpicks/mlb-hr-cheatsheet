@@ -2,7 +2,7 @@
 const CUSTOM_CSV =
     "https://baseballsavant.mlb.com/leaderboard/custom" +
     "?year={season}&type=batter&filter=&min=10" +
-    "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,whiff_percent," +
+    "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,k_percent,whiff_percent," +
     "barrel_batted_rate,hard_hit_percent,exit_velocity_avg,flyballs_percent," +
     "groundballs_percent,linedrives_percent,flyballs,hr_flyball_percent" +
     "&chart=false&csv=true";
@@ -72,6 +72,7 @@ function parseSavantRow(custom, expected) {
         gbPct: num(custom?.groundballs_percent),
         ldPct: num(custom?.linedrives_percent),
         hrFbPct,
+        kPct: num(custom?.k_percent),
         whiffPct: num(custom?.whiff_percent),
         pa: num(custom?.pa) ?? num(expected?.pa),
         hr,

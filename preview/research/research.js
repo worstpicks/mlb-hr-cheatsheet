@@ -67,6 +67,7 @@
 
     let slate = null;
     let savantLookup = null;
+    let pitchMixCache = null;
     let activeGameIdx = 0;
     let activeSide = "away";
     let sortKey = "order";
@@ -86,7 +87,13 @@
         sourceBadge: document.getElementById("rsSourceBadge"),
         backLink: document.getElementById("rsBackLink"),
         themeToggle: document.getElementById("rsThemeToggle"),
+        mobileSort: document.getElementById("rsMobileSort"),
+        cardList: document.getElementById("rsCardList"),
     };
+
+    function isMobileView() {
+        return window.matchMedia("(max-width: 640px)").matches;
+    }
 
     function syncThemeToggle() {
         const light = document.documentElement.classList.contains("theme-light");
@@ -302,6 +309,159 @@
             }
         }
         return false;
+    }
+
+    function normalizeArsenal(raw, minUsage = 5) {
+        if (!raw) return {};
+        const out = {};
+        for (const [pt, usage] of Object.entries(raw)) {
+            const u = Number(usage);
+            if (!Number.isNaN(u) && u >= minUsage) out[pt] = u;
+        }
+        return out;
+    }
+
+    function scoreBatterVsArsenal(batterId, arsenal, batterPitch, batterOverallXwoba, leagueAvgs) {
+        const mix = normalizeArsenal(arsenal);
+        if (!mix || !Object.keys(mix).length || !batterId) return null;
+
+        batterPitch = batterPitch || {};
+        const baseline = batterOverallXwoba != null ? batterOverallXwoba : 0.32;
+        let totalW = 0;
+        let weightedXwoba = 0;
+        let weightedLeague = 0;
+        const edges = [];
+
+        for (const [pt, usagePct] of Object.entries(mix)) {
+            const w = usagePct / 100;
+            const bStats = batterPitch[pt] || {};
+            const pitchesSeen = bStats.pitches || 0;
+            let xw = bStats.xwoba;
+            if (xw == null || pitchesSeen < 15) xw = baseline;
+            const lgXw = leagueAvgs?.[pt]?.xwoba ?? baseline;
+
+            weightedXwoba += w * xw;
+            weightedLeague += w * lgXw;
+            totalW += w;
+            edges.push([pt, xw - lgXw, usagePct]);
+        }
+        if (totalW <= 0) return null;
+
+        weightedXwoba /= totalW;
+        weightedLeague /= totalW;
+        const mixPlus = Math.round((weightedXwoba - weightedLeague) * 1000) / 10;
+        const mixEdge = Math.round((weightedXwoba - baseline) * 1000) / 10;
+        edges.sort((a, b) => b[1] * b[2] - a[1] * a[2]);
+        const bestPt = edges[0]?.[0] || null;
+        const worstPt = edges.length
+            ? edges.reduce((min, cur) => (cur[1] * cur[2] < min[1] * min[2] ? cur : min))[0]
+            : null;
+
+        return {
+            mixPlus,
+            mixEdge,
+            mixXwoba: Math.round(weightedXwoba * 1000) / 1000,
+            mixBest: bestPt,
+            mixWorst: worstPt,
+            mixPitches: Object.keys(mix).length,
+        };
+    }
+
+    function attachPitcherArsenal(pitcher, pitcherArsenalLookup) {
+        if (!pitcher) return pitcher;
+        const out = { ...pitcher };
+        const pid = out.id;
+        const arsenal = normalizeArsenal(pitcherArsenalLookup?.[pid] || pitcherArsenalLookup?.[String(pid)]);
+        if (Object.keys(arsenal).length) {
+            out.arsenal = arsenal;
+            out.arsenalLabel = formatArsenal(arsenal);
+        }
+        return out;
+    }
+
+    function enrichHitterPitchMix(row, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap) {
+        const enriched = { ...row };
+        const stats = { ...(enriched.stats || {}) };
+        if (stats.mixPlus != null) {
+            enriched.stats = stats;
+            return enriched;
+        }
+        const pid = enriched.id;
+        const pitcher = opposingPitcher || {};
+        const batterPitch = batterPitchLookup?.[pid] || batterPitchLookup?.[String(pid)] || null;
+        const overallXwoba = stats.xwoba ?? savantLookupMap?.[pid]?.xwoba ?? savantLookupMap?.[String(pid)]?.xwoba;
+        const mix = scoreBatterVsArsenal(pid, pitcher.arsenal, batterPitch, overallXwoba, leagueAvgs);
+        if (mix) Object.assign(stats, mix);
+        enriched.stats = stats;
+        return enriched;
+    }
+
+    function enrichLineupPitchMix(lineup, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap) {
+        return (lineup || []).map((row) =>
+            enrichHitterPitchMix(row, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap)
+        );
+    }
+
+    async function ensurePitchMixCaches(season) {
+        if (pitchMixCache) return pitchMixCache;
+        if (slate?.pitcher_arsenal_lookup && Object.keys(slate.pitcher_arsenal_lookup).length) {
+            pitchMixCache = {
+                pitcherArsenal: slate.pitcher_arsenal_lookup,
+                batterPitch: slate.batter_pitch_lookup || {},
+                leagueAvgs: slate.league_pitch_avgs || {},
+            };
+            return pitchMixCache;
+        }
+        const [arsenalRes, batterRes] = await Promise.all([
+            fetchDataJson(`savant-pitcher-arsenal-${season}.json`),
+            fetchDataJson(`savant-batter-pitch-type-${season}.json`),
+        ]);
+        pitchMixCache = {
+            pitcherArsenal: arsenalRes.data?.lookup || {},
+            batterPitch: batterRes.data?.lookup || {},
+            leagueAvgs: batterRes.data?.leagueAvgs || {},
+            lastStatus: `${arsenalRes.lastStatus}; ${batterRes.lastStatus}`,
+        };
+        return pitchMixCache;
+    }
+
+    function savantLookupMapFromSlate() {
+        const map = {};
+        const src = slate?.savant_lookup || savantLookup || {};
+        for (const [k, v] of Object.entries(src)) map[k] = v;
+        return map;
+    }
+
+    async function applyPitchMixEnrichment(season) {
+        if (lineupsHavePitchMix(slate?.games)) return { n: 0, source: "preserve" };
+        const caches = await ensurePitchMixCaches(season);
+        if (!Object.keys(caches.pitcherArsenal || {}).length) {
+            return { n: 0, source: null, lastStatus: caches.lastStatus };
+        }
+        const savMap = savantLookupMapFromSlate();
+        let n = 0;
+        for (const game of slate.games || []) {
+            game.awayPitcher = attachPitcherArsenal(game.awayPitcher, caches.pitcherArsenal);
+            game.homePitcher = attachPitcherArsenal(game.homePitcher, caches.pitcherArsenal);
+            game.awayLineup = enrichLineupPitchMix(
+                game.awayLineup,
+                game.homePitcher,
+                caches.batterPitch,
+                caches.leagueAvgs,
+                savMap
+            );
+            game.homeLineup = enrichLineupPitchMix(
+                game.homeLineup,
+                game.awayPitcher,
+                caches.batterPitch,
+                caches.leagueAvgs,
+                savMap
+            );
+            for (const h of [...(game.awayLineup || []), ...(game.homeLineup || [])]) {
+                if (h.stats?.mixPlus != null) n += 1;
+            }
+        }
+        return { n, source: "pitch-mix-cache" };
     }
 
     function mergePitcher(live, cached) {
@@ -887,45 +1047,20 @@
         }
     }
 
-    function renderTable() {
-        if (!els.tableHead || !els.tableBody) return;
+    function sortedActiveRows() {
         let rows = activeRows();
         const col = COLS.find((c) => c.key === sortKey);
-        if (col) {
-            rows = [...rows].sort((a, b) => {
-                if (col.text) return sortDir * String(col.fmt(a)).localeCompare(String(col.fmt(b)));
-                const av = col.stat ? hitterStats(a)[col.stat] : a[sortKey];
-                const bv = col.stat ? hitterStats(b)[col.stat] : b[sortKey];
-                return sortDir * ((av == null ? -Infinity : Number(av)) - (bv == null ? -Infinity : Number(bv)));
-            });
-        }
-
-        els.tableHead.innerHTML = buildTableHeadHtml();
-
-        els.tableHead.querySelectorAll("tr.rs-col-row th").forEach((th) => {
-            th.addEventListener("click", () => {
-                const key = th.getAttribute("data-key");
-                if (sortKey === key) sortDir *= -1;
-                else {
-                    sortKey = key;
-                    sortDir = key === "name" ? 1 : -1;
-                }
-                renderTable();
-            });
+        if (!col) return rows;
+        return [...rows].sort((a, b) => {
+            if (col.text) return sortDir * String(col.fmt(a)).localeCompare(String(col.fmt(b)));
+            const av = col.stat ? hitterStats(a)[col.stat] : a[sortKey];
+            const bv = col.stat ? hitterStats(b)[col.stat] : b[sortKey];
+            return sortDir * ((av == null ? -Infinity : Number(av)) - (bv == null ? -Infinity : Number(bv)));
         });
+    }
 
-        if (!rows.length) {
-            els.tableBody.innerHTML = `<tr><td colspan="${COLS.length}" class="rs-empty">Loading hitters… try Refresh API or pick the other team.</td></tr>`;
-            return;
-        }
-
+    function statHeatMap(rows) {
         const statCols = COLS.filter((c) => c.stat);
-        const colValues = Object.fromEntries(
-            statCols.map((c) => [
-                c.key,
-                rows.map((r) => Number(hitterStats(r)[c.stat])).filter((n) => !Number.isNaN(n)),
-            ])
-        );
         const higherBetter = {
             mixPlus: true,
             mixEdge: true,
@@ -945,6 +1080,107 @@
             pullPct: true,
             whiffPct: false,
         };
+        return {
+            colValues: Object.fromEntries(
+                statCols.map((c) => [
+                    c.key,
+                    rows.map((r) => Number(hitterStats(r)[c.stat])).filter((n) => !Number.isNaN(n)),
+                ])
+            ),
+            higherBetter,
+        };
+    }
+
+    function syncMobileSortSelect() {
+        if (!els.mobileSort) return;
+        const options = COLS.filter((c) => c.key !== "order").map((c) => {
+            const selected = c.key === sortKey ? " selected" : "";
+            return `<option value="${c.key}"${selected}>${c.label}</option>`;
+        });
+        els.mobileSort.innerHTML = options.join("");
+    }
+
+    function renderMobileCards() {
+        if (!els.cardList) return;
+        const rows = sortedActiveRows();
+        if (!rows.length) {
+            els.cardList.innerHTML = `<p class="rs-empty">Loading hitters… try Refresh API or pick the other team.</p>`;
+            return;
+        }
+        const { colValues, higherBetter } = statHeatMap(rows);
+        const cardGroups = GROUPS.filter((g) => g.id !== "identity");
+        els.cardList.innerHTML = rows
+            .map((row) => {
+                const projected = row.projected ? '<span class="rs-hand rs-hand--proj">proj</span>' : "";
+                const sections = cardGroups
+                    .map((group) => {
+                        const cols = COLS.filter((c) => c.group === group.id && c.stat);
+                        if (!cols.length) return "";
+                        const stats = cols
+                            .map((c) => {
+                                const val = hitterStats(row)[c.stat];
+                                const heat =
+                                    val != null
+                                        ? heatClass(colValues[c.key], Number(val), higherBetter[c.key] !== false)
+                                        : "";
+                                return `<div class="rs-card-stat"><dt>${c.label}</dt><dd><span class="${heat}">${c.fmt(row)}</span></dd></div>`;
+                            })
+                            .join("");
+                        return `<section class="rs-card__section rs-card__section--${group.id}"><h3 class="rs-card__section-title">${group.label}</h3><dl class="rs-card__stats">${stats}</dl></section>`;
+                    })
+                    .join("");
+                return `<article class="rs-card">
+                    <header class="rs-card__head">
+                        <span class="rs-card__order">${row.order ?? "—"}</span>
+                        <div class="rs-card__identity">
+                            <div class="rs-card__name">${row.name || "—"} <span class="rs-hand">${row.position || ""}</span>${projected}</div>
+                            <div class="rs-card__meta">Bats ${row.hand || "—"}</div>
+                        </div>
+                    </header>
+                    ${sections}
+                </article>`;
+            })
+            .join("");
+        els.cardList.querySelectorAll(".rs-cell-heat--good").forEach((el) => {
+            el.style.background = "var(--rs-good-bg)";
+            el.style.boxShadow = "inset 0 0 0 1px rgba(134, 239, 172, 0.35)";
+        });
+        els.cardList.querySelectorAll(".rs-cell-heat--mid").forEach((el) => {
+            el.style.background = "var(--rs-mid-bg)";
+            el.style.boxShadow = "inset 0 0 0 1px rgba(253, 224, 71, 0.25)";
+        });
+        els.cardList.querySelectorAll(".rs-cell-heat--bad").forEach((el) => {
+            el.style.background = "var(--rs-bad-bg)";
+            el.style.boxShadow = "inset 0 0 0 1px rgba(252, 165, 165, 0.25)";
+        });
+    }
+
+    function renderTable() {
+        if (!els.tableHead || !els.tableBody) return;
+        const rows = sortedActiveRows();
+
+        els.tableHead.innerHTML = buildTableHeadHtml();
+
+        els.tableHead.querySelectorAll("tr.rs-col-row th").forEach((th) => {
+            th.addEventListener("click", () => {
+                const key = th.getAttribute("data-key");
+                if (sortKey === key) sortDir *= -1;
+                else {
+                    sortKey = key;
+                    sortDir = key === "name" ? 1 : -1;
+                }
+                renderTable();
+                renderMobileCards();
+                syncMobileSortSelect();
+            });
+        });
+
+        if (!rows.length) {
+            els.tableBody.innerHTML = `<tr><td colspan="${COLS.length}" class="rs-empty">Loading hitters… try Refresh API or pick the other team.</td></tr>`;
+            return;
+        }
+
+        const { colValues, higherBetter } = statHeatMap(rows);
 
         els.tableBody.innerHTML = rows
             .map((r) => {
@@ -1021,6 +1257,8 @@
         renderGames();
         renderMatchupBar();
         renderTable();
+        renderMobileCards();
+        syncMobileSortSelect();
         renderSourceBadge();
         const game = activeGame();
         const n = (game?.awayLineup?.length || 0) + (game?.homeLineup?.length || 0);
@@ -1036,6 +1274,7 @@
             return;
         }
         savantLookup = null;
+        pitchMixCache = null;
         if (els.dateInput) els.dateInput.value = date;
         if (els.backLink) els.backLink.href = `../index.html`;
 
@@ -1067,6 +1306,7 @@
         }
 
         const savantMerge = await mergeSavantIntoAllLineups(season);
+        const pitchMixMerge = await applyPitchMixEnrichment(season);
         const pfLookup = await ensurePropfinderLookup(date);
         applyPropfinderToAllLineups(pfLookup);
         await ensureBatterHands();
@@ -1084,10 +1324,18 @@
             return;
         }
 
+        if (!lineupsHavePitchMix(slate.games)) {
+            setStatus(
+                `Pitch mix unavailable for ${date} — starter arsenal or batter pitch-type cache missing. Run: python fetch-research-slate.py --date ${date}`,
+                true
+            );
+            return;
+        }
+
         const sample = activeRows().find((r) => hasSavantStats(r.stats))?.stats;
         const game = activeGame();
         setStatus(
-            `${slate.games.length} games · Savant OK (${savantMerge.source || "cache"}) · ${game?.matchup || ""} · EV ${sample?.avgEV} · xwOBA ${sample?.xwoba}`
+            `${slate.games.length} games · Savant OK (${savantMerge.source || "cache"}) · pitch mix (${pitchMixMerge.source || "cache"}) · ${game?.matchup || ""} · Mix ${sample?.mixPlus ?? "—"} · EV ${sample?.avgEV} · xwOBA ${sample?.xwoba}`
         );
     }
 
@@ -1111,6 +1359,15 @@
         els.sideHome?.addEventListener("click", () => {
             activeSide = "home";
             renderAll();
+        });
+        els.mobileSort?.addEventListener("change", () => {
+            sortKey = els.mobileSort.value || "order";
+            sortDir = sortKey === "name" ? 1 : -1;
+            renderTable();
+            renderMobileCards();
+        });
+        window.matchMedia("(max-width: 640px)").addEventListener("change", () => {
+            syncMobileSortSelect();
         });
         els.themeToggle?.addEventListener("click", toggleTheme);
         syncThemeToggle();

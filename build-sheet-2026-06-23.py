@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate games[] block for 2026-06-23 MLB HR cheat sheet."""
+"""Generate games[] block for 2026-06-22 MLB HR cheat sheet."""
 import json
 from pathlib import Path
 

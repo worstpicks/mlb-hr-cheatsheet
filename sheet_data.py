@@ -15,6 +15,18 @@ PREVIEW_INDEX = ROOT / "preview" / "index.html"
 DEFAULT_DOWNLOADS = Path.home() / "Downloads"
 
 
+def _run_synthetic_matchups(sheet_date: str, dest_dir: Path) -> None:
+    """Re-apply slate-specific synthetic matchup CSVs after import stale cleanup."""
+    import subprocess
+    import sys
+
+    mmdd = sheet_date[5:7] + sheet_date[8:10]
+    script = ROOT / f"build-synthetic-{mmdd}-matchups.py"
+    if not script.is_file():
+        return
+    subprocess.run([sys.executable, str(script)], cwd=str(ROOT), check=False)
+
+
 def normalize_sheet_date(value: str, default_year: int | None = None) -> str:
     """Return ISO date YYYY-MM-DD from common inputs."""
     value = value.strip()
@@ -104,6 +116,7 @@ def import_sheet_csvs(
             for stale in dest.glob(pattern):
                 if stale.name not in keep:
                     stale.unlink()
+        _run_synthetic_matchups(sheet_date, dest)
 
     manifest = {
         "sheet_date": sheet_date,
@@ -181,3 +194,16 @@ def load_pitcher_risk(csv_path: Path) -> dict:
                 "vs_rhb": vs_rhb,
             }
     return rows
+
+
+def pitcher_risk_pct(score: float) -> int:
+    """Map PropFinder HR risk / split score to cheat-sheet % (same sign as park factors).
+
+    Scores are roughly z-scores in [-2, +2]. One point ≈ 50% relative HR vulnerability
+    vs league-average for that split (0.49 → +25%, 1.46 → +73%, -0.86 → -43%).
+    """
+    return round(score * 50)
+
+
+def format_pitcher_risk_pct(score: float) -> str:
+    return f"{pitcher_risk_pct(score):+d}%"

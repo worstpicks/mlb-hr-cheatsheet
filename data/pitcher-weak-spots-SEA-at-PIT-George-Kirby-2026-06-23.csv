@@ -1,0 +1,30 @@
+Matchup,SEA @ PIT
+Pitcher,George Kirby
+Pitcher Team,SEA
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,13.0,0.77,="7-44",.159,.182,0.023,0,1,0,0,12.8,3,.213,.395
+Batting Second,9.2,1.86,="16-43",.372,.535,0.163,2,1,0,5,13.0,2,.413,.948
+Batting Third,9.1,2.04,="15-41",.366,.707,0.341,4,2,0,7,15.6,4,.422,1.129
+Batting Fourth,12.1,0.73,="7-43",.163,.256,0.093,0,4,0,4,31.1,2,.200,.456
+Batting Fifth,8.2,2.08,="15-39",.385,.564,0.179,1,4,0,8,27.9,3,.419,.983
+Batting Sixth,10.0,1.40,="11-38",.289,.447,0.158,1,1,1,7,22.0,3,.341,.788
+Batting Seventh,9.1,1.07,="7-35",.200,.314,0.114,1,1,0,3,34.2,3,.263,.577
+Batting Eighth,8.1,1.44,="11-35",.314,.371,0.057,0,2,0,5,13.9,1,.333,.704
+Batting Ninth,9.0,0.89,="8-33",.242,.242,0.000,0,0,0,0,20.6,0,.265,.507
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Spencer Horwitz LHB,Batting First ​,="26-92",.283,.489,0.206,5,4,0,8,11.0,14,.394,.883
+Brandon Lowe LHB,Batting Second ​,="61-245",.249,.543,0.294,18,16,1,48,24.5,32,.337,.880
+Bryan Reynolds SHB,Batting Third ​,="79-274",.288,.489,0.201,11,18,2,49,21.2,49,.403,.892
+Marcell Ozuna RHB,Batting Fourth ​,="12-83",.145,.241,0.096,2,2,0,8,31.5,8,.228,.469
+Ryan O'Hearn LHB,Batting Fourth ​,="51-182",.280,.445,0.165,8,6,0,34,26.4,13,.330,.775
+Nick Gonzales RHB,Batting Fifth ​,="32-94",.340,.436,0.096,2,3,0,13,21.2,6,.404,.840
+Endy Rodriguez SHB,Batting Seventh ​,="9-30",.300,.567,0.267,2,2,0,4,25.7,4,.382,.949
+Tyler Callihan LHB,Batting Seventh ​,="8-21",.381,.714,0.333,2,1,0,6,16.7,3,.458,1.172
+Esmerlyn Valdez RHB,Batting Seventh ​,="3-10",.300,1.000,0.700,2,1,0,5,45.5,1,.364,1.364
+Jake Mangum SHB,Batting Eighth ​,="23-53",.434,.547,0.113,1,3,0,5,11.9,4,.483,1.030
+Jared Triolo RHB,Batting Eighth ​,="17-52",.327,.365,0.038,0,2,0,4,25.9,4,.386,.751
+Henry Davis RHB,Batting Ninth ​,="16-124",.129,.282,0.153,5,4,0,16,22.5,12,.227,.509
+Billy Cook RHB,Batting Ninth ​,="2-15",.133,.133,0.000,0,0,0,0,53.3,0,.133,.266

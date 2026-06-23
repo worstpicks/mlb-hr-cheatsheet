@@ -1,0 +1,31 @@
+Matchup,MIL @ CIN
+Pitcher,Brandon Sproat
+Pitcher Team,MIL
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.0,1.75,="6-28",.214,.393,0.179,1,2,0,2,13.9,8,.389,.782
+Batting Second,8.0,1.63,="8-30",.267,.467,0.200,1,3,0,3,19.4,5,.389,.856
+Batting Third,9.1,0.75,="3-30",.100,.100,0.000,0,0,0,0,31.4,4,.229,.329
+Batting Fourth,5.2,2.29,="9-26",.346,1.077,0.731,6,1,0,11,22.6,4,.452,1.529
+Batting Fifth,7.2,1.04,="6-29",.207,.345,0.138,1,1,0,4,32.3,2,.258,.603
+Batting Sixth,6.2,1.35,="6-26",.231,.269,0.038,0,1,0,0,27.6,3,.310,.579
+Batting Seventh,5.1,2.06,="10-25",.400,.720,0.320,2,2,0,6,18.5,1,.444,1.164
+Batting Eighth,5.1,1.88,="7-23",.304,.304,0.000,0,0,0,2,23.1,3,.385,.689
+Batting Ninth,5.2,1.41,="6-20",.300,.650,0.350,2,1,0,6,16.0,2,.391,1.041
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dane Myers RHB,Batting First ​,="10-44",.227,.455,0.228,3,1,0,6,29.1,10,.382,.837
+Blake Dunn RHB,Batting First ​,="22-90",.244,.311,0.067,1,3,0,3,20.4,6,.306,.617
+JJ Bleday LHB,Batting Second ​,="19-99",.192,.444,0.252,7,4,0,14,22.6,13,.289,.733
+Matt McLain RHB,Batting Second ​,="23-118",.195,.297,0.102,2,6,0,9,27.3,19,.317,.614
+Elly De La Cruz SHB,Batting Third ​,="49-168",.292,.518,0.226,10,8,0,29,28.0,17,.355,.873
+Sal Stewart RHB,Batting Fourth ​,="53-192",.276,.510,0.234,11,12,0,36,19.4,27,.365,.875
+Eugenio Suarez RHB,Batting Fifth ​,="31-144",.215,.382,0.167,6,6,0,22,32.3,13,.278,.660
+Nathaniel Lowe LHB,Batting Sixth ​,="18-65",.277,.508,0.231,3,6,0,13,18.7,10,.373,.881
+Spencer Steer RHB,Batting Sixth ​,="21-104",.202,.346,0.144,4,3,0,7,28.3,12,.300,.646
+Will Benson LHB,Batting Seventh ​,="9-35",.257,.429,0.172,1,1,1,2,27.9,7,.381,.810
+Noelvi Marte RHB,Batting Seventh ​,="7-29",.241,.517,0.276,2,2,0,3,25.0,3,.313,.830
+Jose Trevino RHB,Batting Eighth ​,="6-37",.162,.189,0.027,0,1,0,2,12.5,1,.184,.373
+Tyler Stephenson RHB,Batting Eighth ​,="25-91",.275,.451,0.176,4,4,0,11,19.2,12,.356,.807
+Edwin Arroyo SHB,Batting Ninth ​,="10-36",.278,.333,0.055,0,2,0,1,12.5,3,.325,.658

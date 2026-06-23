@@ -1,0 +1,30 @@
+Matchup,NYY @ DET
+Pitcher,Carlos Rodon
+Pitcher Team,NYY
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.2,1.29,="4-18",.222,.500,0.278,1,2,0,1,35.0,2,.300,.800
+Batting Second,3.2,2.45,="6-16",.375,.563,0.188,1,0,0,1,15.0,3,.474,1.037
+Batting Third,4.1,1.85,="3-15",.200,.333,0.133,0,2,0,1,20.0,5,.400,.733
+Batting Fourth,5.0,0.60,="1-16",.063,.250,0.187,1,0,0,3,38.9,2,.167,.417
+Batting Fifth,2.2,2.63,="3-11",.273,.364,0.091,0,1,0,0,31.3,4,.500,.864
+Batting Sixth,2.2,2.63,="5-13",.385,.385,0.000,0,0,0,1,26.7,2,.467,.852
+Batting Seventh,5.1,0.19,="0-13",.000,.000,0.000,0,0,0,1,40.0,1,.067,.067
+Batting Eighth,3.2,0.82,="3-14",.214,.357,0.143,0,2,0,4,21.4,0,.214,.571
+Batting Ninth,4.0,0.25,="0-11",.000,.000,0.000,0,0,0,1,15.4,1,.077,.077
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="46-148",.311,.500,0.189,5,11,1,15,12.7,24,.410,.910
+Jahmai Jones RHB,Batting Third ​,="7-32",.219,.375,0.156,1,2,0,3,34.3,3,.286,.661
+Colt Keith LHB,Batting Third ​,="25-98",.255,.316,0.061,0,6,0,5,23.3,5,.291,.607
+Riley Greene LHB,Batting Fourth ​,="50-178",.281,.427,0.146,5,11,0,21,29.1,24,.369,.796
+Dillon Dingler RHB,Batting Fifth ​,="12-69",.174,.391,0.217,4,1,1,10,18.2,5,.250,.641
+Kerry Carpenter LHB,Batting Sixth ​,="13-53",.245,.491,0.246,2,3,2,8,28.8,3,.322,.813
+Matt Vierling RHB,Batting Seventh ​,="9-39",.231,.385,0.154,1,3,0,5,20.9,3,.279,.664
+Spencer Torkelson RHB,Batting Seventh ​,="20-95",.211,.442,0.231,6,4,0,11,36.9,15,.324,.766
+Zach McKinstry LHB,Batting Eighth ​,="7-61",.115,.180,0.065,1,1,0,1,22.1,6,.194,.374
+Hao-Yu Lee RHB,Batting Eighth ​,="15-60",.250,.400,0.150,1,4,1,5,28.1,3,.286,.686
+Jake Rogers RHB,Batting Ninth ​,="9-57",.158,.281,0.123,1,2,1,5,30.3,5,.231,.512
+Trei Cruz SHB,Batting Ninth ​,="0-3",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+James Outman LHB,Batting Ninth ​,="11-57",.193,.351,0.158,1,4,1,4,43.1,1,.207,.558

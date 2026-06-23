@@ -195,16 +195,16 @@ games = [
         ],
     },
     {
-        "title": "ATL @ SD - JR Ritchie (R, ATL) vs German Marquez (R, SD)",
-        "description": "Tail key data: Park boost -6% (stadium -4%, weather -2%). Ritchie (HR risk 0.20, vs LHB +0.72, vs RHB -0.82). Home starter risk unavailable.",
+        "title": "ATL @ SD - JR Ritchie (R, ATL) vs Griffin Canning (R, SD)",
+        "description": "Tail key data: Park boost -6% (stadium -4%, weather -2%). Ritchie (HR risk 0.20, vs LHB +0.72, vs RHB -0.82). Canning (HR risk 0.73, vs LHB +1.28, vs RHB -1.00).",
         "rows": [
             row("Ty France", "R", "N/A", 81, "🌕 💣", ["vs Ritchie"], """2 HR, 2 near-HR, 90.6 mph EV. Ritchie RHB split -0.82, HR risk 0.20. tough split lane (-0.82); park/weather net drag (-6%).""", blast="high"),
             row("Will Wagner", "L", "N/A", 62, "", ["vs Ritchie"], """0 HR, 83.9 mph EV. Ritchie LHB split +0.72, HR risk 0.20. park/weather net drag (-6%); limited recent HR events."""),
             row("Fernando Tatis Jr.", "R", "N/A", 85, "💎", ["vs Ritchie"], """Worst Pickz Hidden Gem. 1 HR, 3 near-HR, 98.7 mph EV. Ritchie RHB split -0.82, HR risk 0.20. tough split lane (-0.82); park/weather net drag (-6%).""", blast="good"),
             row("Samad Taylor", "R", "N/A", 62, "", ["vs Ritchie"], """0 HR, 79.6 mph EV. Ritchie RHB split -0.82, HR risk 0.20. tough split lane (-0.82); park/weather net drag (-6%)."""),
-            row("Matt Olson", "L", "+340", 81, "", ["vs Marquez"], """1 HR, 2 near-HR, 97.2 mph EV. Marquez split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
-            row("Mike Yastrzemski", "L", "+650", 75, "", ["vs Marquez"], """1 HR, 1 near-HR, 92.9 mph EV. Marquez split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
-            row("Dominic Smith", "L", "+630", 68, "", ["vs Marquez"], """0 HR, 2 near-HR, 84.9 mph EV. Marquez split/risk data unavailable. limited split/risk sample; park/weather net drag (-6%).""", blast="good"),
+            row("Matt Olson", "L", "+340", 78, "", ["vs Canning"], """1 HR, 1 near-HR, 96.5 mph EV. Canning LHB split +1.28, HR risk 0.73. park/weather net drag (-6%).""", blast="good"),
+            row("Mike Yastrzemski", "L", "+650", 69, "", ["vs Canning"], """0 HR, 92.9 mph EV. Canning LHB split +1.28, HR risk 0.73. park/weather net drag (-6%); limited recent HR events.""", blast="good"),
+            row("Dominic Smith", "L", "+700", 78, "🌕 💣", ["vs Canning"], """1 HR, 4 near-HR, 81.8 mph EV. Canning LHB split +1.28, HR risk 0.73. park/weather net drag (-6%); lighter EV form (81.8 mph).""", blast="high"),
         ],
     },
     {

@@ -14,8 +14,9 @@ ZONE_PITCHER_ALIASES: dict[str, list[str]] = {
     "englert": ["seymour"],
     "ryan": ["rojas"],
     "rojas": ["ryan"],
-    "marquez": ["ritchie"],
+    "marquez": ["ritchie", "canning"],
     "ritchie": ["marquez"],
+    "canning": ["marquez"],
     "quantrill": ["corniell"],
     "corniell": ["quantrill"],
 }

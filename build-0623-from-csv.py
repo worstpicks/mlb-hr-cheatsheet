@@ -129,12 +129,6 @@ PROBABLE_OVERRIDES: dict[str, dict] = {
         "to": "Quantrill",
         "full": "Cal Quantrill",
     },
-    "ATL @ SD": {
-        "side": "home",
-        "from": "TBD",
-        "to": "Marquez",
-        "full": "German Marquez",
-    },
 }
 
 PITCHER_HAND = {
@@ -165,6 +159,7 @@ PITCHER_HAND = {
     "Shane Baz": "R",
     "Ryan Johnson": "R",
     "JR Ritchie": "R",
+    "Griffin Canning": "R",
     "German Marquez": "R",
     "Aaron Civale": "R",
     "Robbie Ray": "L",

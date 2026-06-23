@@ -146,6 +146,16 @@ if summary_start != -1 and summary_end != -1 and summary_end > summary_start:
             errors.append(f"stale prior-slate name in Goblin/summary block: {stale}")
     if "Carson Benge" not in summary_block and "Bryce Eldridge" not in summary_block:
         errors.append("summary missing expected straight picks in Goblin block")
+    fav3_m = re.findall(
+        r'Worst Pickz Favorite 3 Leg[\s\S]*?<ol>([\s\S]*?)</ol>',
+        summary_block,
+    )
+    if fav3_m:
+        fav3_names = re.findall(r"<strong>([^<]+) HR", fav3_m[0])
+        for fn in fav3_names:
+            plain = fn.strip()
+            if not any(f.startswith(plain) for f in build.FAVS):
+                errors.append(f"favorite 3-leg pick not in FAVS: {plain}")
 else:
     errors.append("could not locate summary block for stale check")
 

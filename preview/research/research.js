@@ -7,7 +7,7 @@
 
     function showFileProtocolError() {
         setStatus(
-            "Opened as file:// — use python serve-research.py then http://localhost:8080/research/index.html?date=2026-06-22",
+            "Opened as file:// — use python serve-research.py then http://localhost:8080/research/index.html?date=2026-06-23",
             true
         );
     }

@@ -720,30 +720,32 @@ if len(fav3) < 3:
 
 rows_by_plain = {r["name_plain"]: r for r in rows}
 
-# 6/22 Favorite 3-leg: user ⭐ favorites on this slate.
+# 6/23 Favorite 3-leg: user ⭐ only — ranked by attack lane on today's slate.
 _fav3_pick_order = [
-    "Dillon Dingler",
-    "Jazz Chisholm Jr.",
-    "Jac Caglianone",
-    "Kyle Stowers",
-    "Kyle Schwarber",
-    "Kazuma Okamoto",
-    "Eric Wagaman",
     "Pete Crow-Armstrong",
+    "Matt Shaw",
+    "Kazuma Okamoto",
     "Byron Buxton",
-    "Shohei Ohtani",
-    "Dalton Rushing",
-    "Pete Alonso",
-    "Ty France",
+    "Bryan Reynolds",
+    "Jordan Walker",
+    "Ben Rice",
+    "Randal Grichuk",
+    "Colson Montgomery",
+    "James Wood",
+    "Nick Kurtz",
+    "Dominic Canzone",
+    "Max Muncy",
 ]
 _fav3_manual: list[dict] = []
 for _nm in _fav3_pick_order:
     _r = rows_by_plain.get(_nm)
-    if not _r or _r["name"] in straight_names:
+    if not _r or _r["name"] not in FAVS or _r["name"] in straight_names:
         continue
     if _r["name"] in {x["name"] for x in top3} or _r["name"] in {x["name"] for x in two_leg}:
         continue
     if _r["name"] in {x["name"] for x in _fav3_manual}:
+        continue
+    if not fav3_lane_ok(_r):
         continue
     _fav3_manual.append(_r)
     if len(_fav3_manual) == 3:

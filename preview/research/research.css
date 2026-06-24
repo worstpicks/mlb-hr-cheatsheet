@@ -1352,11 +1352,19 @@ a:hover { color: #bae6fd; }
     .rs-card__head { padding: 12px; }
     .rs-card__name { font-size: 0.95rem; }
     .rs-card__highlights {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
         padding: 8px 10px;
     }
+    .rs-card-highlight {
+        padding: 7px 3px;
+    }
+    .rs-card-highlight__label {
+        font-size: 0.54rem;
+        letter-spacing: 0.04em;
+    }
     .rs-card-highlight__val {
-        font-size: 0.92rem;
+        font-size: 0.86rem;
     }
     .rs-card-stat {
         padding: 9px 10px;

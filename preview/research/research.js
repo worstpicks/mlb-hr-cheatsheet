@@ -116,7 +116,16 @@
     }
 
     const MOBILE_CARD_OPEN_GROUPS = new Set(["matchup", "power"]);
-    const MOBILE_HIGHLIGHT_KEYS = ["mixPlus", "expectedHr", "barrelPct", "hardHitPct"];
+    const MOBILE_HIGHLIGHT_KEYS = [
+        "hardHitPct",
+        "blastPct",
+        "recentForm",
+        "hrFbPct",
+        "fbPct",
+        "barrelPct",
+        "pullPct",
+        "mixPlus",
+    ];
 
     function syncThemeToggle() {
         const light = document.documentElement.classList.contains("theme-light");

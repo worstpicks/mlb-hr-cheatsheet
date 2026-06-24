@@ -82,8 +82,9 @@
     let stadiumCoords = null;
     let activeGameIdx = 0;
     let activeSide = "away";
-    let sortKey = "order";
-    let sortDir = 1;
+    let sortKey = "mixPlus";
+    let sortDir = -1;
+    let sortUserOverride = false;
 
     const els = {
         status: document.getElementById("rsStatus"),
@@ -2313,6 +2314,24 @@
         const game = activeGame();
         if (!game) return [];
         return activeSide === "away" ? game.awayLineup || [] : game.homeLineup || [];
+    }
+
+    function lineupHasMixPct(rows) {
+        return (rows || []).some((r) => {
+            const v = hitterStats(r).mixPlus;
+            return v != null && !Number.isNaN(Number(v));
+        });
+    }
+
+    function applyDefaultSort() {
+        const rows = activeRows();
+        sortKey = lineupHasMixPct(rows) ? "mixPlus" : "hardHitPct";
+        sortDir = -1;
+    }
+
+    function resetSortToDefault() {
+        sortUserOverride = false;
+        applyDefaultSort();
     }
 
     function heatClass(values, val, higherBetter) {

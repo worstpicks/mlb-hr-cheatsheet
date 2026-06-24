@@ -17,6 +17,10 @@ const BAT_CSV =
     "&selections=player_id,avg_swing_speed,squared_up_contact,blasts_contact,solidcontact_percent" +
     "&chart=false&csv=true";
 
+const HR_RAW_URL =
+    "https://baseballsavant.mlb.com/leaderboard/home-runs" +
+    "?player_type=Batter&year={season}&min=0&cat=adj_xhr&encode=raw";
+
 const HEADERS = {
     "Content-Type": "application/json; charset=utf-8",
     "Access-Control-Allow-Origin": "*",
@@ -63,6 +67,65 @@ function parseBatRow(row) {
         solidContactPct: num(row?.solidcontact_percent),
         blastPct: num(row?.blasts_contact),
     };
+}
+
+function extractDataArray(html) {
+    const match = html.match(/var\s+data\s*=\s*(\[)/);
+    if (!match) return [];
+    const start = match.index + match[0].length - 1;
+    let depth = 0;
+    for (let i = start; i < html.length; i++) {
+        const ch = html[i];
+        if (ch === "[") depth += 1;
+        else if (ch === "]") {
+            depth -= 1;
+            if (depth === 0) return JSON.parse(html.slice(start, i + 1));
+        }
+    }
+    return [];
+}
+
+function hrLuckFlag(hrLuckDiff, mostlyGone, hrTotal) {
+    if (hrLuckDiff != null && hrLuckDiff >= 2) return "due";
+    const mg = mostlyGone || 0;
+    const hr = hrTotal || 0;
+    if (mg >= 6 && hrLuckDiff != null && hrLuckDiff >= 1) return "park";
+    if (mg >= 8 && hr <= 15) return "park";
+    return null;
+}
+
+function parseHrTrackerRow(row) {
+    const xhr = num(row?.xhr);
+    const hrTotal = num(row?.hr_total);
+    const mostlyGone = num(row?.mostly_gone);
+    const hrLuckDiff =
+        xhr != null && hrTotal != null ? Math.round((xhr - hrTotal) * 10) / 10 : null;
+    return {
+        expectedHr: xhr,
+        hrLuckDiff,
+        mostlyGone: mostlyGone != null ? Math.trunc(mostlyGone) : null,
+        noDoubters: num(row?.no_doubters) != null ? Math.trunc(num(row.no_doubters)) : null,
+        doublers: num(row?.doubters) != null ? Math.trunc(num(row.doubters)) : null,
+        nearHr: num(row?.non_hr_would_have_left) != null ? Math.trunc(num(row.non_hr_would_have_left)) : null,
+        hrLuckFlag: hrLuckFlag(hrLuckDiff, mostlyGone, hrTotal),
+        hrTrackerSource: "savant-hr",
+    };
+}
+
+async function fetchHrTrackerLookup(season, ua) {
+    const res = await fetch(HR_RAW_URL.replace("{season}", String(season)), { headers: ua });
+    if (!res.ok) return {};
+    const html = await res.text();
+    const lookup = {};
+    for (const row of extractDataArray(html)) {
+        const pid = parseInt(row.player_id, 10);
+        if (!pid) continue;
+        const parsed = parseHrTrackerRow(row);
+        if (parsed.expectedHr != null || parsed.nearHr != null || parsed.mostlyGone != null) {
+            lookup[String(pid)] = parsed;
+        }
+    }
+    return lookup;
 }
 
 function parseSavantRow(custom, expected, bat) {
@@ -142,6 +205,12 @@ async function fetchSavantLookup(season) {
         if (!pid || lookup[String(pid)]) continue;
         lookup[String(pid)] = parseSavantRow(null, row, batById[pid]);
     }
+    try {
+        const hrLookup = await fetchHrTrackerLookup(season, ua);
+        for (const [pid, hrStats] of Object.entries(hrLookup)) {
+            lookup[pid] = { ...(lookup[pid] || { source: "savant" }), ...hrStats };
+        }
+    } catch (_) {}
     return lookup;
 }
 

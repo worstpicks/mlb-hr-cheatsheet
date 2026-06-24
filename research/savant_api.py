@@ -9,6 +9,8 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+from research.savant_hr import fetch_hr_tracker_lookup
+
 SAVANT_CUSTOM_CSV = (
     "https://baseballsavant.mlb.com/leaderboard/custom"
     "?year={season}&type=batter&filter=&min=10"
@@ -183,6 +185,16 @@ def fetch_batter_statcast_lookup(season: int) -> dict[int, dict]:
                     merged[key] = val
             lookup[pid] = merged
 
+    try:
+        hr_lookup = fetch_hr_tracker_lookup(season)
+        for pid, hr_stats in hr_lookup.items():
+            target = lookup.setdefault(pid, {"source": "savant"})
+            for key, val in hr_stats.items():
+                if val is not None:
+                    target[key] = val
+    except Exception:
+        pass
+
     return lookup
 
 
@@ -238,14 +250,26 @@ def merge_into_hitter_stats(
         "pullPct",
         "pullAirPct",
         "pullBarrelPct",
+        "expectedHr",
+        "hrLuckDiff",
+        "mostlyGone",
+        "noDoubters",
+        "doubters",
+        "hrLuckFlag",
+        "hrTrackerSource",
     )
     for key in savant_keys:
         if savant.get(key) is not None:
             out[key] = savant[key]
 
     propfinder = propfinder or {}
-    if propfinder.get("nearHr") is not None:
+    if out.get("nearHr") is None and propfinder.get("nearHr") is not None:
         out["nearHr"] = propfinder["nearHr"]
+        out["nearHrSource"] = "propfinder"
+    elif out.get("nearHr") is not None:
+        out["nearHrSource"] = savant.get("hrTrackerSource") or "savant-hr"
+    if propfinder.get("nearHr") is not None:
+        out["propfinderNearHr"] = propfinder["nearHr"]
     if out.get("kPct") is None and propfinder.get("kPct") is not None:
         out["kPct"] = propfinder["kPct"]
 

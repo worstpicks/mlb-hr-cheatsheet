@@ -49,7 +49,10 @@
         { key: "mixPlus", label: "Mix%", group: "matchup", stat: "mixPlus", fmt: (r) => fmtFormPct(hitterStats(r).mixPlus), tip: "Pitch-mix fit — weighted xwOBA vs this starter's pitch usage compared to league average on those pitches. Positive % = favorable matchup." },
         { key: "mixEdge", label: "Edge%", group: "matchup", stat: "mixEdge", fmt: (r) => fmtFormPct(hitterStats(r).mixEdge), tip: "Personal edge — how the hitter performs vs this pitch mix compared to their own season xwOBA. Positive % = better than their baseline." },
         { key: "hr", label: "HR", group: "power", stat: "hr", fmt: (r) => fmtNum(hitterStats(r).hr), tip: "Home runs — balls hit over the fence. Core measure of raw power." },
-        { key: "nearHr", label: "Near HR", group: "power", stat: "nearHr", fmt: (r) => fmtNum(hitterStats(r).nearHr), tip: "Near home runs — batted balls with homer distance and trajectory from PropFinder matchup CSVs." },
+        { key: "expectedHr", label: "xHR", group: "power", stat: "expectedHr", fmt: (r) => fmtRate(hitterStats(r).expectedHr), tip: "Expected home runs — Savant xHR from contact quality and trajectory (park-adjusted)." },
+        { key: "hrLuckDiff", label: "Luck", group: "power", stat: "hrLuckDiff", fmt: (r) => fmtLuck(hitterStats(r).hrLuckDiff), tip: "xHR minus actual HR. Positive = underperforming expected power (due for positive regression). Negative = overperforming." },
+        { key: "mostlyGone", label: "1-7P", group: "power", stat: "mostlyGone", fmt: (r) => fmtNum(hitterStats(r).mostlyGone), tip: "HR in 1–7 parks — homers that would only clear the fence in a handful of stadiums. High counts suggest park-restricted power." },
+        { key: "nearHr", label: "Near HR", group: "power", stat: "nearHr", fmt: (r) => fmtNearHr(r), tip: "Near misses — Savant non-HR batted balls that would have left in some parks; PropFinder NEAR HR used as fallback when Savant is unavailable." },
         { key: "avg", label: "AVG", group: "plate", stat: "avg", fmt: (r) => fmtRate(hitterStats(r).avg), tip: "Batting average — hits divided by at-bats. Overall hitting for average." },
         { key: "iso", label: "ISO", group: "plate", stat: "iso", fmt: (r) => fmtRate(hitterStats(r).iso), tip: "Isolated power — slugging minus average. Extra-base hit power per at-bat." },
         { key: "slg", label: "SLG", group: "plate", stat: "slg", fmt: (r) => fmtRate(hitterStats(r).slg), tip: "Slugging percentage — total bases per at-bat. Measures overall power production." },
@@ -191,6 +194,31 @@
     function fmtAngle(v) {
         if (v == null || Number.isNaN(Number(v))) return "—";
         return `${Number(v).toFixed(1)}°`;
+    }
+
+    function fmtLuck(v) {
+        if (v == null || Number.isNaN(Number(v))) return "—";
+        const n = Number(v);
+        return `${n > 0 ? "+" : ""}${n.toFixed(1)}`;
+    }
+
+    function fmtNearHr(row) {
+        const stats = hitterStats(row);
+        const val = stats.nearHr;
+        if (val == null || Number.isNaN(Number(val))) return "—";
+        const src = stats.nearHrSource === "propfinder" ? "*" : "";
+        return `${fmtNum(val)}${src}`;
+    }
+
+    function hrLuckFlagHtml(stats) {
+        const flag = stats?.hrLuckFlag;
+        if (flag === "due") {
+            return '<span class="rs-flag rs-flag--due" title="Due for positive regression — xHR above actual HR">Due</span>';
+        }
+        if (flag === "park") {
+            return '<span class="rs-flag rs-flag--park" title="Stadium-restricted power — high HR-in-1-7-parks count">Park</span>';
+        }
+        return "";
     }
 
     function escAttr(s) {
@@ -670,6 +698,12 @@
             "whiffPct",
             "kPct",
             "hr",
+            "expectedHr",
+            "hrLuckDiff",
+            "mostlyGone",
+            "noDoubters",
+            "hrLuckFlag",
+            "nearHr",
             "recentForm",
             "pullPct",
             "pullAirPct",
@@ -678,22 +712,28 @@
         for (const k of savantKeys) {
             if (sav[k] != null) out[k] = sav[k];
         }
+        const pf = propfinder || {};
+        if (out.nearHr == null && pf.nearHr != null) {
+            out.nearHr = pf.nearHr;
+            out.nearHrSource = "propfinder";
+        } else if (out.nearHr != null && !out.nearHrSource) {
+            out.nearHrSource = sav.hrTrackerSource || "savant-hr";
+        }
         if (SAVANT_ONLY) {
-            const pf = propfinder || {};
-            if (pf.nearHr != null) out.nearHr = pf.nearHr;
             if (out.kPct == null && pf.kPct != null) out.kPct = pf.kPct;
+            if (pf.nearHr != null) out.propfinderNearHr = pf.nearHr;
             const sources = [out.source || sav.source || "savant"];
             if (pf.nearHr != null || pf.kPct != null) sources.push("propfinder");
             out.source = [...new Set(sources.filter(Boolean))].join("+");
             return out;
         }
         const win = windowStats || {};
-        const pf = propfinder || {};
+        if (out.nearHr == null && pf.nearHr != null) out.nearHr = pf.nearHr;
         for (const k of ["hr", "hits", "ab"]) {
             if (win[k] != null) out[k] = win[k];
         }
         if (out.hr == null && sav.hr != null) out.hr = sav.hr;
-        if (pf.nearHr != null) out.nearHr = pf.nearHr;
+        if (out.nearHr == null && pf.nearHr != null) out.nearHr = pf.nearHr;
         for (const k of ["obp", "slg", "kPct", "bbPct"]) {
             if (win[k] != null) out[k] = win[k];
         }
@@ -786,7 +826,7 @@
             for (const key of ["awayLineup", "homeLineup"]) {
                 game[key] = (game[key] || []).map((row) => {
                     const pf = lookup[nameLookupKey(row.name)];
-                    if (pf?.nearHr == null) return row;
+                    if (!pf) return row;
                     n += 1;
                     return {
                         ...row,
@@ -1092,6 +1132,9 @@
             mixPlus: true,
             mixEdge: true,
             hr: true,
+            expectedHr: true,
+            hrLuckDiff: true,
+            mostlyGone: true,
             nearHr: true,
             avg: true,
             iso: true,
@@ -1169,7 +1212,7 @@
                     <header class="rs-card__head">
                         <span class="rs-card__order">${row.order ?? "—"}</span>
                         <div class="rs-card__identity">
-                            <div class="rs-card__name">${row.name || "—"} <span class="rs-hand">${row.position || ""}</span>${projected}</div>
+                            <div class="rs-card__name">${row.name || "—"} <span class="rs-hand">${row.position || ""}</span>${hrLuckFlagHtml(hitterStats(row))}${projected}</div>
                             <div class="rs-card__meta">Bats ${row.hand || "—"}</div>
                         </div>
                     </header>
@@ -1223,8 +1266,9 @@
                 const cells = COLS.map((c) => {
                     if (c.key === "name") {
                         const tag = r.projected ? ' <span class="rs-hand">proj</span>' : "";
+                        const flag = hrLuckFlagHtml(hitterStats(r));
                         const tip = c.tip ? tipAttr(c.tip) : "";
-                        return `<td${tip}><span class="rs-hitter">${r.name || "—"}</span> <span class="rs-hand">${r.position || ""}</span>${tag}</td>`;
+                        return `<td${tip}><span class="rs-hitter">${r.name || "—"}</span> <span class="rs-hand">${r.position || ""}</span>${flag ? ` ${flag}` : ""}${tag}</td>`;
                     }
                     const val = c.stat ? hitterStats(r)[c.stat] : r[c.key];
                     const heat =

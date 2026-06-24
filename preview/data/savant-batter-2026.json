@@ -29,7 +29,15 @@
       "batSpeed": 70.1,
       "swingStrength": 34.6,
       "solidContactPct": 4.7,
-      "blastPct": 9.0
+      "blastPct": 9.0,
+      "expectedHr": 9.6,
+      "hrLuckDiff": -2.4,
+      "mostlyGone": 8,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 10,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "680574": {
       "source": "savant",
@@ -57,7 +65,14 @@
       "batSpeed": 71.7,
       "swingStrength": 35.2,
       "solidContactPct": 5.7,
-      "blastPct": 14.6
+      "blastPct": 14.6,
+      "expectedHr": 7.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 7,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "669720": {
       "source": "savant",
@@ -85,7 +100,13 @@
       "batSpeed": 72.4,
       "swingStrength": 35.3,
       "solidContactPct": 3.3,
-      "blastPct": 15.7
+      "blastPct": 15.7,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "643396": {
       "source": "savant",
@@ -113,7 +134,14 @@
       "batSpeed": 68.8,
       "swingStrength": 31.0,
       "solidContactPct": 2.9,
-      "blastPct": 9.4
+      "blastPct": 9.4,
+      "expectedHr": 1.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "630105": {
       "source": "savant",
@@ -141,7 +169,14 @@
       "batSpeed": 72.2,
       "swingStrength": 25.0,
       "solidContactPct": 4.1,
-      "blastPct": 13.7
+      "blastPct": 13.7,
+      "expectedHr": 1.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 16,
+      "hrTrackerSource": "savant-hr"
     },
     "543807": {
       "source": "savant",
@@ -169,7 +204,14 @@
       "batSpeed": 72.6,
       "swingStrength": 29.0,
       "solidContactPct": 8.2,
-      "blastPct": 11.9
+      "blastPct": 11.9,
+      "expectedHr": 8.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 4,
+      "noDoubters": 5,
+      "doubters": 4,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "663967": {
       "source": "savant",
@@ -225,7 +267,15 @@
       "batSpeed": 72.9,
       "swingStrength": 29.1,
       "solidContactPct": 5.0,
-      "blastPct": 15.2
+      "blastPct": 15.2,
+      "expectedHr": 10.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 9,
+      "noDoubters": 4,
+      "doubters": 2,
+      "nearHr": 11,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "575929": {
       "source": "savant",
@@ -253,7 +303,14 @@
       "batSpeed": 76.7,
       "swingStrength": 25.3,
       "solidContactPct": 5.9,
-      "blastPct": 16.4
+      "blastPct": 16.4,
+      "expectedHr": 13.0,
+      "hrLuckDiff": -3.0,
+      "mostlyGone": 6,
+      "noDoubters": 8,
+      "doubters": 6,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "691011": {
       "source": "savant",
@@ -281,7 +338,13 @@
       "batSpeed": 69.9,
       "swingStrength": 30.4,
       "solidContactPct": 7.6,
-      "blastPct": 10.7
+      "blastPct": 10.7,
+      "expectedHr": 4.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "624428": {
       "source": "savant",
@@ -309,7 +372,14 @@
       "batSpeed": 65.3,
       "swingStrength": 24.4,
       "solidContactPct": 7.3,
-      "blastPct": 1.6
+      "blastPct": 1.6,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "664238": {
       "source": "savant",
@@ -365,7 +435,14 @@
       "batSpeed": 72.1,
       "swingStrength": 38.1,
       "solidContactPct": 7.3,
-      "blastPct": 13.1
+      "blastPct": 13.1,
+      "expectedHr": 7.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 4,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "668901": {
       "source": "savant",
@@ -393,7 +470,14 @@
       "batSpeed": 73.2,
       "swingStrength": 34.2,
       "solidContactPct": 5.6,
-      "blastPct": 19.8
+      "blastPct": 19.8,
+      "expectedHr": 9.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 5,
+      "noDoubters": 7,
+      "doubters": 3,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "670770": {
       "source": "savant",
@@ -421,7 +505,14 @@
       "batSpeed": 70.9,
       "swingStrength": 38.4,
       "solidContactPct": 5.0,
-      "blastPct": 10.2
+      "blastPct": 10.2,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "686217": {
       "source": "savant",
@@ -449,7 +540,13 @@
       "batSpeed": 68.3,
       "swingStrength": 38.7,
       "solidContactPct": 1.5,
-      "blastPct": 11.3
+      "blastPct": 11.3,
+      "expectedHr": 2.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "669364": {
       "source": "savant",
@@ -477,7 +574,14 @@
       "batSpeed": 68.5,
       "swingStrength": 41.1,
       "solidContactPct": 4.0,
-      "blastPct": 8.9
+      "blastPct": 8.9,
+      "expectedHr": 6.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 5,
+      "noDoubters": 3,
+      "doubters": 3,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "666160": {
       "source": "savant",
@@ -505,7 +609,14 @@
       "batSpeed": 74.1,
       "swingStrength": 31.4,
       "solidContactPct": 5.4,
-      "blastPct": 12.8
+      "blastPct": 12.8,
+      "expectedHr": 10.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 3,
+      "noDoubters": 8,
+      "doubters": 4,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "650490": {
       "source": "savant",
@@ -533,7 +644,15 @@
       "batSpeed": 73.8,
       "swingStrength": 32.8,
       "solidContactPct": 5.9,
-      "blastPct": 19.9
+      "blastPct": 19.9,
+      "expectedHr": 12.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 10,
+      "noDoubters": 5,
+      "doubters": 10,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "685133": {
       "source": "savant",
@@ -561,7 +680,14 @@
       "batSpeed": 69.3,
       "swingStrength": 39.0,
       "solidContactPct": 4.6,
-      "blastPct": 10.0
+      "blastPct": 10.0,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "679822": {
       "source": "savant",
@@ -589,7 +715,14 @@
       "batSpeed": 70.8,
       "swingStrength": 42.2,
       "solidContactPct": 8.8,
-      "blastPct": 18.9
+      "blastPct": 18.9,
+      "expectedHr": 3.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "700250": {
       "source": "savant",
@@ -617,7 +750,14 @@
       "batSpeed": 72.3,
       "swingStrength": 35.9,
       "solidContactPct": 9.2,
-      "blastPct": 18.8
+      "blastPct": 18.8,
+      "expectedHr": 21.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 20,
+      "noDoubters": 5,
+      "doubters": 5,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "666152": {
       "source": "savant",
@@ -645,7 +785,14 @@
       "batSpeed": 69.8,
       "swingStrength": 29.0,
       "solidContactPct": 4.9,
-      "blastPct": 10.0
+      "blastPct": 10.0,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -2.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 5,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "647304": {
       "source": "savant",
@@ -673,7 +820,14 @@
       "batSpeed": 70.3,
       "swingStrength": 37.8,
       "solidContactPct": 6.6,
-      "blastPct": 15.4
+      "blastPct": 15.4,
+      "expectedHr": 8.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 7,
+      "noDoubters": 3,
+      "doubters": 5,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "695506": {
       "source": "savant",
@@ -701,7 +855,14 @@
       "batSpeed": 77.0,
       "swingStrength": 29.7,
       "solidContactPct": 7.2,
-      "blastPct": 23.0
+      "blastPct": 23.0,
+      "expectedHr": 12.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 4,
+      "noDoubters": 10,
+      "doubters": 2,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "700337": {
       "source": "savant",
@@ -729,7 +890,14 @@
       "batSpeed": 68.8,
       "swingStrength": 38.6,
       "solidContactPct": 5.2,
-      "blastPct": 11.6
+      "blastPct": 11.6,
+      "expectedHr": 2.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "663968": {
       "source": "savant",
@@ -757,7 +925,14 @@
       "batSpeed": 66.4,
       "swingStrength": 26.3,
       "solidContactPct": 2.2,
-      "blastPct": 5.7
+      "blastPct": 5.7,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "694377": {
       "source": "savant",
@@ -785,7 +960,13 @@
       "batSpeed": 72.4,
       "swingStrength": 32.5,
       "solidContactPct": 8.3,
-      "blastPct": 17.9
+      "blastPct": 17.9,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "677588": {
       "source": "savant",
@@ -813,7 +994,14 @@
       "batSpeed": 74.1,
       "swingStrength": 32.4,
       "solidContactPct": 12.5,
-      "blastPct": 21.8
+      "blastPct": 21.8,
+      "expectedHr": 2.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "672386": {
       "source": "savant",
@@ -841,7 +1029,13 @@
       "batSpeed": 70.5,
       "swingStrength": 30.6,
       "solidContactPct": 5.4,
-      "blastPct": 9.7
+      "blastPct": 9.7,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "683083": {
       "source": "savant",
@@ -869,7 +1063,14 @@
       "batSpeed": 68.2,
       "swingStrength": 26.0,
       "solidContactPct": 3.5,
-      "blastPct": 6.0
+      "blastPct": 6.0,
+      "expectedHr": 0.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "686894": {
       "source": "savant",
@@ -897,7 +1098,13 @@
       "batSpeed": 71.5,
       "swingStrength": 26.8,
       "solidContactPct": 2.4,
-      "blastPct": 17.1
+      "blastPct": 17.1,
+      "expectedHr": 2.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "663538": {
       "source": "savant",
@@ -925,7 +1132,14 @@
       "batSpeed": 68.3,
       "swingStrength": 39.3,
       "solidContactPct": 3.2,
-      "blastPct": 8.4
+      "blastPct": 8.4,
+      "expectedHr": 2.7,
+      "hrLuckDiff": -1.3,
+      "mostlyGone": 3,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "668670": {
       "source": "savant",
@@ -953,7 +1167,13 @@
       "batSpeed": 70.7,
       "swingStrength": 30.1,
       "solidContactPct": 0.0,
-      "blastPct": 9.6
+      "blastPct": 9.6,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "664056": {
       "source": "savant",
@@ -981,7 +1201,14 @@
       "batSpeed": 72.9,
       "swingStrength": 31.9,
       "solidContactPct": 5.5,
-      "blastPct": 11.3
+      "blastPct": 11.3,
+      "expectedHr": 5.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 6,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "664770": {
       "source": "savant",
@@ -1009,7 +1236,14 @@
       "batSpeed": 67.2,
       "swingStrength": 33.3,
       "solidContactPct": 6.0,
-      "blastPct": 8.3
+      "blastPct": 8.3,
+      "expectedHr": 1.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "671732": {
       "source": "savant",
@@ -1037,7 +1271,14 @@
       "batSpeed": 73.7,
       "swingStrength": 26.1,
       "solidContactPct": 6.0,
-      "blastPct": 13.5
+      "blastPct": 13.5,
+      "expectedHr": 4.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "657757": {
       "source": "savant",
@@ -1065,7 +1306,14 @@
       "batSpeed": 74.4,
       "swingStrength": 27.0,
       "solidContactPct": 6.1,
-      "blastPct": 12.6
+      "blastPct": 12.6,
+      "expectedHr": 10.4,
+      "hrLuckDiff": -1.6,
+      "mostlyGone": 4,
+      "noDoubters": 7,
+      "doubters": 4,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "677950": {
       "source": "savant",
@@ -1093,7 +1341,14 @@
       "batSpeed": 69.5,
       "swingStrength": 35.5,
       "solidContactPct": 11.1,
-      "blastPct": 14.9
+      "blastPct": 14.9,
+      "expectedHr": 1.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "645277": {
       "source": "savant",
@@ -1121,7 +1376,15 @@
       "batSpeed": 68.9,
       "swingStrength": 37.9,
       "solidContactPct": 6.0,
-      "blastPct": 8.7
+      "blastPct": 8.7,
+      "expectedHr": 10.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 9,
+      "noDoubters": 5,
+      "doubters": 2,
+      "nearHr": 5,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "663647": {
       "source": "savant",
@@ -1149,7 +1412,14 @@
       "batSpeed": 70.5,
       "swingStrength": 49.2,
       "solidContactPct": 6.0,
-      "blastPct": 18.5
+      "blastPct": 18.5,
+      "expectedHr": 0.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "571970": {
       "source": "savant",
@@ -1177,7 +1447,15 @@
       "batSpeed": 71.5,
       "swingStrength": 36.1,
       "solidContactPct": 4.1,
-      "blastPct": 17.9
+      "blastPct": 17.9,
+      "expectedHr": 17.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 11,
+      "noDoubters": 8,
+      "doubters": 3,
+      "nearHr": 11,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "664059": {
       "source": "savant",
@@ -1205,7 +1483,14 @@
       "batSpeed": 70.2,
       "swingStrength": 24.5,
       "solidContactPct": 0.0,
-      "blastPct": 3.8
+      "blastPct": 3.8,
+      "expectedHr": 0.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "667670": {
       "source": "savant",
@@ -1233,7 +1518,14 @@
       "batSpeed": 74.1,
       "swingStrength": 29.1,
       "solidContactPct": 9.4,
-      "blastPct": 18.9
+      "blastPct": 18.9,
+      "expectedHr": 9.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 4,
+      "noDoubters": 6,
+      "doubters": 3,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "663624": {
       "source": "savant",
@@ -1289,7 +1581,15 @@
       "batSpeed": 72.5,
       "swingStrength": 31.5,
       "solidContactPct": 6.7,
-      "blastPct": 15.0
+      "blastPct": 15.0,
+      "expectedHr": 11.9,
+      "hrLuckDiff": -2.1,
+      "mostlyGone": 14,
+      "noDoubters": 3,
+      "doubters": 4,
+      "nearHr": 10,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "624413": {
       "source": "savant",
@@ -1317,7 +1617,14 @@
       "batSpeed": 74.8,
       "swingStrength": 34.1,
       "solidContactPct": 9.8,
-      "blastPct": 21.8
+      "blastPct": 21.8,
+      "expectedHr": 17.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 13,
+      "noDoubters": 7,
+      "doubters": 4,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "666176": {
       "source": "savant",
@@ -1345,7 +1652,15 @@
       "batSpeed": 77.3,
       "swingStrength": 23.5,
       "solidContactPct": 8.0,
-      "blastPct": 14.8
+      "blastPct": 14.8,
+      "expectedHr": 12.0,
+      "hrLuckDiff": 2.0,
+      "mostlyGone": 7,
+      "noDoubters": 7,
+      "doubters": 2,
+      "nearHr": 12,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "805779": {
       "source": "savant",
@@ -1373,7 +1688,14 @@
       "batSpeed": 64.1,
       "swingStrength": 36.5,
       "solidContactPct": 3.4,
-      "blastPct": 6.0
+      "blastPct": 6.0,
+      "expectedHr": 3.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 0,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "669127": {
       "source": "savant",
@@ -1401,7 +1723,14 @@
       "batSpeed": 75.3,
       "swingStrength": 33.1,
       "solidContactPct": 3.9,
-      "blastPct": 18.1
+      "blastPct": 18.1,
+      "expectedHr": 15.1,
+      "hrLuckDiff": -3.9,
+      "mostlyGone": 12,
+      "noDoubters": 6,
+      "doubters": 1,
+      "nearHr": 18,
+      "hrTrackerSource": "savant-hr"
     },
     "623168": {
       "source": "savant",
@@ -1429,7 +1758,13 @@
       "batSpeed": 65.4,
       "swingStrength": 26.2,
       "solidContactPct": 1.5,
-      "blastPct": 2.5
+      "blastPct": 2.5,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "687093": {
       "source": "savant",
@@ -1457,7 +1792,14 @@
       "batSpeed": 71.6,
       "swingStrength": 38.0,
       "solidContactPct": 9.2,
-      "blastPct": 17.4
+      "blastPct": 17.4,
+      "expectedHr": 4.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "672356": {
       "source": "savant",
@@ -1485,7 +1827,13 @@
       "batSpeed": 75.0,
       "swingStrength": 29.8,
       "solidContactPct": 3.7,
-      "blastPct": 19.1
+      "blastPct": 19.1,
+      "expectedHr": 1.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "678011": {
       "source": "savant",
@@ -1541,7 +1889,14 @@
       "batSpeed": 72.6,
       "swingStrength": 31.1,
       "solidContactPct": 8.5,
-      "blastPct": 15.1
+      "blastPct": 15.1,
+      "expectedHr": 3.8,
+      "hrLuckDiff": 0.8,
+      "mostlyGone": 2,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 24,
+      "hrTrackerSource": "savant-hr"
     },
     "686527": {
       "source": "savant",
@@ -1569,7 +1924,14 @@
       "batSpeed": 74.7,
       "swingStrength": 40.1,
       "solidContactPct": 5.7,
-      "blastPct": 24.6
+      "blastPct": 24.6,
+      "expectedHr": 10.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 7,
+      "noDoubters": 6,
+      "doubters": 4,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "642715": {
       "source": "savant",
@@ -1597,7 +1959,15 @@
       "batSpeed": 72.2,
       "swingStrength": 32.0,
       "solidContactPct": 10.3,
-      "blastPct": 12.6
+      "blastPct": 12.6,
+      "expectedHr": 13.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 12,
+      "noDoubters": 4,
+      "doubters": 8,
+      "nearHr": 7,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "596142": {
       "source": "savant",
@@ -1625,7 +1995,14 @@
       "batSpeed": 71.7,
       "swingStrength": 36.8,
       "solidContactPct": 6.7,
-      "blastPct": 19.1
+      "blastPct": 19.1,
+      "expectedHr": 7.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 3,
+      "noDoubters": 5,
+      "doubters": 0,
+      "nearHr": 18,
+      "hrTrackerSource": "savant-hr"
     },
     "695578": {
       "source": "savant",
@@ -1653,7 +2030,15 @@
       "batSpeed": 76.5,
       "swingStrength": 34.4,
       "solidContactPct": 10.3,
-      "blastPct": 24.7
+      "blastPct": 24.7,
+      "expectedHr": 23.1,
+      "hrLuckDiff": 3.1,
+      "mostlyGone": 15,
+      "noDoubters": 11,
+      "doubters": 15,
+      "nearHr": 9,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "656941": {
       "source": "savant",
@@ -1681,7 +2066,14 @@
       "batSpeed": 77.1,
       "swingStrength": 24.2,
       "solidContactPct": 8.8,
-      "blastPct": 17.5
+      "blastPct": 17.5,
+      "expectedHr": 25.1,
+      "hrLuckDiff": -3.9,
+      "mostlyGone": 16,
+      "noDoubters": 13,
+      "doubters": 4,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "678554": {
       "source": "savant",
@@ -1709,7 +2101,14 @@
       "batSpeed": 72.7,
       "swingStrength": 30.5,
       "solidContactPct": 5.8,
-      "blastPct": 14.6
+      "blastPct": 14.6,
+      "expectedHr": 11.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 5,
+      "noDoubters": 7,
+      "doubters": 5,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "672820": {
       "source": "savant",
@@ -1737,7 +2136,14 @@
       "batSpeed": 72.4,
       "swingStrength": 30.2,
       "solidContactPct": 6.7,
-      "blastPct": 13.6
+      "blastPct": 13.6,
+      "expectedHr": 1.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "545341": {
       "source": "savant",
@@ -1765,7 +2171,14 @@
       "batSpeed": 73.9,
       "swingStrength": 35.8,
       "solidContactPct": 6.3,
-      "blastPct": 19.0
+      "blastPct": 19.0,
+      "expectedHr": 6.0,
+      "hrLuckDiff": -2.0,
+      "mostlyGone": 6,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "805367": {
       "source": "savant",
@@ -1793,7 +2206,14 @@
       "batSpeed": 67.0,
       "swingStrength": 36.7,
       "solidContactPct": 4.8,
-      "blastPct": 8.5
+      "blastPct": 8.5,
+      "expectedHr": 4.7,
+      "hrLuckDiff": -1.3,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "669236": {
       "source": "savant",
@@ -1821,7 +2241,14 @@
       "batSpeed": 73.1,
       "swingStrength": 37.0,
       "solidContactPct": 5.2,
-      "blastPct": 17.1
+      "blastPct": 17.1,
+      "expectedHr": 6.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "657656": {
       "source": "savant",
@@ -1849,7 +2276,15 @@
       "batSpeed": 72.4,
       "swingStrength": 26.4,
       "solidContactPct": 2.5,
-      "blastPct": 12.0
+      "blastPct": 12.0,
+      "expectedHr": 9.5,
+      "hrLuckDiff": 2.5,
+      "mostlyGone": 5,
+      "noDoubters": 5,
+      "doubters": 4,
+      "nearHr": 11,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "679529": {
       "source": "savant",
@@ -1877,7 +2312,14 @@
       "batSpeed": 72.9,
       "swingStrength": 28.9,
       "solidContactPct": 8.5,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 10.1,
+      "hrLuckDiff": -1.9,
+      "mostlyGone": 7,
+      "noDoubters": 4,
+      "doubters": 8,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "682877": {
       "source": "savant",
@@ -1933,7 +2375,14 @@
       "batSpeed": 71.2,
       "swingStrength": 32.1,
       "solidContactPct": 4.3,
-      "blastPct": 13.7
+      "blastPct": 13.7,
+      "expectedHr": 1.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "671218": {
       "source": "savant",
@@ -1961,7 +2410,14 @@
       "batSpeed": 72.0,
       "swingStrength": 30.0,
       "solidContactPct": 6.7,
-      "blastPct": 14.4
+      "blastPct": 14.4,
+      "expectedHr": 5.9,
+      "hrLuckDiff": 1.9,
+      "mostlyGone": 5,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 16,
+      "hrTrackerSource": "savant-hr"
     },
     "671056": {
       "source": "savant",
@@ -1989,7 +2445,14 @@
       "batSpeed": 74.1,
       "swingStrength": 31.5,
       "solidContactPct": 6.6,
-      "blastPct": 16.0
+      "blastPct": 16.0,
+      "expectedHr": 10.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 4,
+      "noDoubters": 8,
+      "doubters": 3,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "671976": {
       "source": "savant",
@@ -2017,7 +2480,14 @@
       "batSpeed": 69.6,
       "swingStrength": 30.6,
       "solidContactPct": 6.9,
-      "blastPct": 10.1
+      "blastPct": 10.1,
+      "expectedHr": 2.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "660644": {
       "source": "savant",
@@ -2073,7 +2543,14 @@
       "batSpeed": 73.5,
       "swingStrength": 27.8,
       "solidContactPct": 4.3,
-      "blastPct": 13.9
+      "blastPct": 13.9,
+      "expectedHr": 1.2,
+      "hrLuckDiff": 1.2,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "571657": {
       "source": "savant",
@@ -2101,7 +2578,14 @@
       "batSpeed": 66.5,
       "swingStrength": 33.3,
       "solidContactPct": 0.0,
-      "blastPct": 5.6
+      "blastPct": 5.6,
+      "expectedHr": 0.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "701678": {
       "source": "savant",
@@ -2129,7 +2613,14 @@
       "batSpeed": 70.4,
       "swingStrength": 36.9,
       "solidContactPct": 7.7,
-      "blastPct": 9.0
+      "blastPct": 9.0,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 4,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "663697": {
       "source": "savant",
@@ -2157,7 +2648,13 @@
       "batSpeed": 71.0,
       "swingStrength": 29.9,
       "solidContactPct": 5.7,
-      "blastPct": 9.0
+      "blastPct": 9.0,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "682985": {
       "source": "savant",
@@ -2185,7 +2682,14 @@
       "batSpeed": 75.5,
       "swingStrength": 28.2,
       "solidContactPct": 7.8,
-      "blastPct": 17.6
+      "blastPct": 17.6,
+      "expectedHr": 7.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 7,
+      "noDoubters": 3,
+      "doubters": 6,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "695020": {
       "source": "savant",
@@ -2213,7 +2717,14 @@
       "batSpeed": 73.8,
       "swingStrength": 43.3,
       "solidContactPct": 13.0,
-      "blastPct": 20.0
+      "blastPct": 20.0,
+      "expectedHr": 0.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "670242": {
       "source": "savant",
@@ -2241,7 +2752,14 @@
       "batSpeed": 75.3,
       "swingStrength": 21.9,
       "solidContactPct": 1.5,
-      "blastPct": 12.9
+      "blastPct": 12.9,
+      "expectedHr": 4.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 2,
+      "noDoubters": 3,
+      "doubters": 0,
+      "nearHr": 18,
+      "hrTrackerSource": "savant-hr"
     },
     "650402": {
       "source": "savant",
@@ -2269,7 +2787,14 @@
       "batSpeed": 67.8,
       "swingStrength": 37.0,
       "solidContactPct": 1.6,
-      "blastPct": 7.8
+      "blastPct": 7.8,
+      "expectedHr": 2.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "607043": {
       "source": "savant",
@@ -2297,7 +2822,14 @@
       "batSpeed": 72.5,
       "swingStrength": 37.3,
       "solidContactPct": 9.6,
-      "blastPct": 19.4
+      "blastPct": 19.4,
+      "expectedHr": 7.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 7,
+      "noDoubters": 2,
+      "doubters": 7,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "644433": {
       "source": "savant",
@@ -2353,7 +2885,14 @@
       "batSpeed": 70.7,
       "swingStrength": 39.6,
       "solidContactPct": 7.6,
-      "blastPct": 12.9
+      "blastPct": 12.9,
+      "expectedHr": 5.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 4,
+      "noDoubters": 3,
+      "doubters": 0,
+      "nearHr": 17,
+      "hrTrackerSource": "savant-hr"
     },
     "670541": {
       "source": "savant",
@@ -2381,7 +2920,15 @@
       "batSpeed": 75.9,
       "swingStrength": 30.7,
       "solidContactPct": 14.4,
-      "blastPct": 21.6
+      "blastPct": 21.6,
+      "expectedHr": 28.4,
+      "hrLuckDiff": 3.4,
+      "mostlyGone": 18,
+      "noDoubters": 16,
+      "doubters": 3,
+      "nearHr": 14,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "693307": {
       "source": "savant",
@@ -2409,7 +2956,14 @@
       "batSpeed": 72.0,
       "swingStrength": 34.7,
       "solidContactPct": 9.8,
-      "blastPct": 18.8
+      "blastPct": 18.8,
+      "expectedHr": 15.3,
+      "hrLuckDiff": -2.7,
+      "mostlyGone": 11,
+      "noDoubters": 8,
+      "doubters": 5,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "669003": {
       "source": "savant",
@@ -2437,7 +2991,14 @@
       "batSpeed": 77.0,
       "swingStrength": 27.6,
       "solidContactPct": 4.8,
-      "blastPct": 19.8
+      "blastPct": 19.8,
+      "expectedHr": 5.8,
+      "hrLuckDiff": 0.8,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 5,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "670623": {
       "source": "savant",
@@ -2465,7 +3026,15 @@
       "batSpeed": 67.6,
       "swingStrength": 32.8,
       "solidContactPct": 4.7,
-      "blastPct": 7.2
+      "blastPct": 7.2,
+      "expectedHr": 8.7,
+      "hrLuckDiff": -1.3,
+      "mostlyGone": 8,
+      "noDoubters": 4,
+      "doubters": 4,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "680776": {
       "source": "savant",
@@ -2493,7 +3062,14 @@
       "batSpeed": 75.4,
       "swingStrength": 28.9,
       "solidContactPct": 4.6,
-      "blastPct": 17.9
+      "blastPct": 17.9,
+      "expectedHr": 12.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 3,
+      "noDoubters": 10,
+      "doubters": 5,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "695657": {
       "source": "savant",
@@ -2521,7 +3097,14 @@
       "batSpeed": 76.2,
       "swingStrength": 26.2,
       "solidContactPct": 9.8,
-      "blastPct": 17.7
+      "blastPct": 17.7,
+      "expectedHr": 19.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 13,
+      "noDoubters": 8,
+      "doubters": 6,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "641933": {
       "source": "savant",
@@ -2549,7 +3132,15 @@
       "batSpeed": 72.0,
       "swingStrength": 31.9,
       "solidContactPct": 7.8,
-      "blastPct": 13.3
+      "blastPct": 13.3,
+      "expectedHr": 4.6,
+      "hrLuckDiff": 2.6,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 19,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "642086": {
       "source": "savant",
@@ -2577,7 +3168,14 @@
       "batSpeed": 68.8,
       "swingStrength": 36.5,
       "solidContactPct": 6.8,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 4.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "691026": {
       "source": "savant",
@@ -2605,7 +3203,14 @@
       "batSpeed": 70.5,
       "swingStrength": 34.2,
       "solidContactPct": 4.4,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 3.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 2,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 20,
+      "hrTrackerSource": "savant-hr"
     },
     "663611": {
       "source": "savant",
@@ -2661,7 +3266,14 @@
       "batSpeed": 71.3,
       "swingStrength": 26.8,
       "solidContactPct": 5.3,
-      "blastPct": 9.9
+      "blastPct": 9.9,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "686611": {
       "source": "savant",
@@ -2689,7 +3301,14 @@
       "batSpeed": 73.9,
       "swingStrength": 36.1,
       "solidContactPct": 9.2,
-      "blastPct": 18.4
+      "blastPct": 18.4,
+      "expectedHr": 4.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 1,
+      "noDoubters": 4,
+      "doubters": 1,
+      "nearHr": 14,
+      "hrTrackerSource": "savant-hr"
     },
     "687401": {
       "source": "savant",
@@ -2717,7 +3336,14 @@
       "batSpeed": 72.2,
       "swingStrength": 31.6,
       "solidContactPct": 5.3,
-      "blastPct": 11.8
+      "blastPct": 11.8,
+      "expectedHr": 1.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "605244": {
       "source": "savant",
@@ -2745,7 +3371,13 @@
       "batSpeed": 72.2,
       "swingStrength": 40.0,
       "solidContactPct": 15.4,
-      "blastPct": 15.0
+      "blastPct": 15.0,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "686555": {
       "source": "savant",
@@ -2773,7 +3405,14 @@
       "batSpeed": 73.6,
       "swingStrength": 33.7,
       "solidContactPct": 5.6,
-      "blastPct": 16.5
+      "blastPct": 16.5,
+      "expectedHr": 2.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 6,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "660688": {
       "source": "savant",
@@ -2801,7 +3440,15 @@
       "batSpeed": 67.5,
       "swingStrength": 47.5,
       "solidContactPct": 7.8,
-      "blastPct": 17.1
+      "blastPct": 17.1,
+      "expectedHr": 7.4,
+      "hrLuckDiff": 1.4,
+      "mostlyGone": 7,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 15,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "669224": {
       "source": "savant",
@@ -2829,7 +3476,14 @@
       "batSpeed": 72.7,
       "swingStrength": 28.1,
       "solidContactPct": 9.7,
-      "blastPct": 12.4
+      "blastPct": 12.4,
+      "expectedHr": 4.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "694728": {
       "source": "savant",
@@ -2857,7 +3511,14 @@
       "batSpeed": 72.7,
       "swingStrength": 32.6,
       "solidContactPct": 6.8,
-      "blastPct": 16.8
+      "blastPct": 16.8,
+      "expectedHr": 5.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "696030": {
       "source": "savant",
@@ -2885,7 +3546,14 @@
       "batSpeed": 72.2,
       "swingStrength": 29.4,
       "solidContactPct": 3.2,
-      "blastPct": 9.8
+      "blastPct": 9.8,
+      "expectedHr": 0.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "669289": {
       "source": "savant",
@@ -2913,7 +3581,13 @@
       "batSpeed": 68.3,
       "swingStrength": 37.8,
       "solidContactPct": 3.9,
-      "blastPct": 9.8
+      "blastPct": 9.8,
+      "expectedHr": 0.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "805249": {
       "source": "savant",
@@ -2969,7 +3643,13 @@
       "batSpeed": 74.6,
       "swingStrength": 27.5,
       "solidContactPct": 8.5,
-      "blastPct": 17.6
+      "blastPct": 17.6,
+      "expectedHr": 2.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "807712": {
       "source": "savant",
@@ -2997,7 +3677,14 @@
       "batSpeed": 69.3,
       "swingStrength": 32.1,
       "solidContactPct": 5.5,
-      "blastPct": 8.2
+      "blastPct": 8.2,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "700932": {
       "source": "savant",
@@ -3025,7 +3712,15 @@
       "batSpeed": 70.0,
       "swingStrength": 30.6,
       "solidContactPct": 2.9,
-      "blastPct": 12.6
+      "blastPct": 12.6,
+      "expectedHr": 9.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 9,
+      "noDoubters": 3,
+      "doubters": 2,
+      "nearHr": 13,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "607208": {
       "source": "savant",
@@ -3053,7 +3748,14 @@
       "batSpeed": 71.5,
       "swingStrength": 33.3,
       "solidContactPct": 6.0,
-      "blastPct": 9.7
+      "blastPct": 9.7,
+      "expectedHr": 5.0,
+      "hrLuckDiff": -2.0,
+      "mostlyGone": 2,
+      "noDoubters": 3,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "621566": {
       "source": "savant",
@@ -3081,7 +3783,14 @@
       "batSpeed": 75.0,
       "swingStrength": 30.6,
       "solidContactPct": 11.5,
-      "blastPct": 19.6
+      "blastPct": 19.6,
+      "expectedHr": 19.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 13,
+      "noDoubters": 11,
+      "doubters": 6,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "664034": {
       "source": "savant",
@@ -3109,7 +3818,14 @@
       "batSpeed": 71.8,
       "swingStrength": 28.0,
       "solidContactPct": 4.3,
-      "blastPct": 17.3
+      "blastPct": 17.3,
+      "expectedHr": 5.9,
+      "hrLuckDiff": -2.1,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 7,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "677870": {
       "source": "savant",
@@ -3137,7 +3853,14 @@
       "batSpeed": 71.9,
       "swingStrength": 29.6,
       "solidContactPct": 5.2,
-      "blastPct": 13.0
+      "blastPct": 13.0,
+      "expectedHr": 0.8,
+      "hrLuckDiff": 0.8,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 25,
+      "hrTrackerSource": "savant-hr"
     },
     "703607": {
       "source": "savant",
@@ -3165,7 +3888,14 @@
       "batSpeed": 76.9,
       "swingStrength": 33.9,
       "solidContactPct": 6.6,
-      "blastPct": 23.2
+      "blastPct": 23.2,
+      "expectedHr": 1.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "663757": {
       "source": "savant",
@@ -3193,7 +3923,14 @@
       "batSpeed": 69.8,
       "swingStrength": 44.4,
       "solidContactPct": 10.3,
-      "blastPct": 20.6
+      "blastPct": 20.6,
+      "expectedHr": 6.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 5,
+      "noDoubters": 3,
+      "doubters": 3,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "664761": {
       "source": "savant",
@@ -3221,7 +3958,14 @@
       "batSpeed": 70.7,
       "swingStrength": 40.8,
       "solidContactPct": 7.7,
-      "blastPct": 14.8
+      "blastPct": 14.8,
+      "expectedHr": 4.7,
+      "hrLuckDiff": -4.3,
+      "mostlyGone": 7,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "682928": {
       "source": "savant",
@@ -3249,7 +3993,14 @@
       "batSpeed": 72.9,
       "swingStrength": 33.9,
       "solidContactPct": 6.7,
-      "blastPct": 16.2
+      "blastPct": 16.2,
+      "expectedHr": 15.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 15,
+      "noDoubters": 4,
+      "doubters": 1,
+      "nearHr": 19,
+      "hrTrackerSource": "savant-hr"
     },
     "656484": {
       "source": "savant",
@@ -3277,7 +4028,14 @@
       "batSpeed": 72.5,
       "swingStrength": 25.6,
       "solidContactPct": 7.5,
-      "blastPct": 10.8
+      "blastPct": 10.8,
+      "expectedHr": 5.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "805808": {
       "source": "savant",
@@ -3305,7 +4063,14 @@
       "batSpeed": 71.5,
       "swingStrength": 34.6,
       "solidContactPct": 5.9,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 7.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 5,
+      "noDoubters": 4,
+      "doubters": 5,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "694362": {
       "source": "savant",
@@ -3333,7 +4098,14 @@
       "batSpeed": 71.9,
       "swingStrength": 37.6,
       "solidContactPct": 3.9,
-      "blastPct": 12.7
+      "blastPct": 12.7,
+      "expectedHr": 1.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "663886": {
       "source": "savant",
@@ -3361,7 +4133,14 @@
       "batSpeed": 71.2,
       "swingStrength": 34.4,
       "solidContactPct": 9.8,
-      "blastPct": 14.8
+      "blastPct": 14.8,
+      "expectedHr": 5.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 2,
+      "noDoubters": 3,
+      "doubters": 6,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "686948": {
       "source": "savant",
@@ -3389,7 +4168,15 @@
       "batSpeed": 74.9,
       "swingStrength": 32.6,
       "solidContactPct": 10.9,
-      "blastPct": 19.7
+      "blastPct": 19.7,
+      "expectedHr": 10.8,
+      "hrLuckDiff": -3.2,
+      "mostlyGone": 10,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 10,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "666018": {
       "source": "savant",
@@ -3417,7 +4204,15 @@
       "batSpeed": 70.1,
       "swingStrength": 35.4,
       "solidContactPct": 7.0,
-      "blastPct": 14.4
+      "blastPct": 14.4,
+      "expectedHr": 10.2,
+      "hrLuckDiff": -1.8,
+      "mostlyGone": 8,
+      "noDoubters": 4,
+      "doubters": 5,
+      "nearHr": 8,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "807727": {
       "source": "savant",
@@ -3445,7 +4240,13 @@
       "batSpeed": 73.7,
       "swingStrength": 31.4,
       "solidContactPct": 5.3,
-      "blastPct": 5.7
+      "blastPct": 5.7,
+      "expectedHr": 0.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "572233": {
       "source": "savant",
@@ -3473,7 +4274,14 @@
       "batSpeed": 74.2,
       "swingStrength": 32.2,
       "solidContactPct": 7.1,
-      "blastPct": 19.0
+      "blastPct": 19.0,
+      "expectedHr": 17.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 13,
+      "noDoubters": 7,
+      "doubters": 4,
+      "nearHr": 14,
+      "hrTrackerSource": "savant-hr"
     },
     "665953": {
       "source": "savant",
@@ -3501,7 +4309,14 @@
       "batSpeed": 74.6,
       "swingStrength": 26.0,
       "solidContactPct": 12.5,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 0.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "687749": {
       "source": "savant",
@@ -3529,7 +4344,14 @@
       "batSpeed": 73.4,
       "swingStrength": 36.4,
       "solidContactPct": 6.7,
-      "blastPct": 4.5
+      "blastPct": 4.5,
+      "expectedHr": 0.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "682177": {
       "source": "savant",
@@ -3557,7 +4379,14 @@
       "batSpeed": 71.2,
       "swingStrength": 28.5,
       "solidContactPct": 6.0,
-      "blastPct": 10.4
+      "blastPct": 10.4,
+      "expectedHr": 5.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 4,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "687957": {
       "source": "savant",
@@ -3585,7 +4414,14 @@
       "batSpeed": 66.7,
       "swingStrength": 42.6,
       "solidContactPct": 7.9,
-      "blastPct": 8.2
+      "blastPct": 8.2,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "643376": {
       "source": "savant",
@@ -3613,7 +4449,14 @@
       "batSpeed": 70.5,
       "swingStrength": 31.6,
       "solidContactPct": 3.6,
-      "blastPct": 9.2
+      "blastPct": 9.2,
+      "expectedHr": 3.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "676369": {
       "source": "savant",
@@ -3641,7 +4484,14 @@
       "batSpeed": 74.8,
       "swingStrength": 41.7,
       "solidContactPct": 18.2,
-      "blastPct": 27.8
+      "blastPct": 27.8,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "665561": {
       "source": "savant",
@@ -3669,7 +4519,13 @@
       "batSpeed": 66.0,
       "swingStrength": 36.4,
       "solidContactPct": 1.6,
-      "blastPct": 3.6
+      "blastPct": 3.6,
+      "expectedHr": 1.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "663698": {
       "source": "savant",
@@ -3697,7 +4553,14 @@
       "batSpeed": 75.4,
       "swingStrength": 21.7,
       "solidContactPct": 8.9,
-      "blastPct": 14.5
+      "blastPct": 14.5,
+      "expectedHr": 1.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "665861": {
       "source": "savant",
@@ -3753,7 +4616,14 @@
       "batSpeed": 74.3,
       "swingStrength": 24.3,
       "solidContactPct": 18.8,
-      "blastPct": 13.5
+      "blastPct": 13.5,
+      "expectedHr": 0.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "608701": {
       "source": "savant",
@@ -3781,7 +4651,14 @@
       "batSpeed": 72.2,
       "swingStrength": 27.6,
       "solidContactPct": 4.1,
-      "blastPct": 13.4
+      "blastPct": 13.4,
+      "expectedHr": 2.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "609280": {
       "source": "savant",
@@ -3809,7 +4686,14 @@
       "batSpeed": 70.9,
       "swingStrength": 29.0,
       "solidContactPct": 7.6,
-      "blastPct": 10.1
+      "blastPct": 10.1,
+      "expectedHr": 5.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 2,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "683766": {
       "source": "savant",
@@ -3865,7 +4749,14 @@
       "batSpeed": 74.0,
       "swingStrength": 23.9,
       "solidContactPct": 5.7,
-      "blastPct": 8.1
+      "blastPct": 8.1,
+      "expectedHr": 4.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 5,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "682987": {
       "source": "savant",
@@ -3893,7 +4784,14 @@
       "batSpeed": 77.8,
       "swingStrength": 23.8,
       "solidContactPct": 13.8,
-      "blastPct": 14.3
+      "blastPct": 14.3,
+      "expectedHr": 1.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "686823": {
       "source": "savant",
@@ -3949,7 +4847,14 @@
       "batSpeed": 68.8,
       "swingStrength": 37.5,
       "solidContactPct": 5.8,
-      "blastPct": 10.7
+      "blastPct": 10.7,
+      "expectedHr": 2.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "641555": {
       "source": "savant",
@@ -3977,7 +4882,14 @@
       "batSpeed": 69.7,
       "swingStrength": 45.4,
       "solidContactPct": 10.3,
-      "blastPct": 12.4
+      "blastPct": 12.4,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "681987": {
       "source": "savant",
@@ -4005,7 +4917,13 @@
       "batSpeed": 73.2,
       "swingStrength": 33.3,
       "solidContactPct": 20.0,
-      "blastPct": 8.3
+      "blastPct": 8.3,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "691723": {
       "source": "savant",
@@ -4033,7 +4951,14 @@
       "batSpeed": 75.6,
       "swingStrength": 26.8,
       "solidContactPct": 7.1,
-      "blastPct": 15.4
+      "blastPct": 15.4,
+      "expectedHr": 8.0,
+      "hrLuckDiff": -2.0,
+      "mostlyGone": 3,
+      "noDoubters": 6,
+      "doubters": 2,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "670156": {
       "source": "savant",
@@ -4089,7 +5014,13 @@
       "batSpeed": 67.9,
       "swingStrength": 34.1,
       "solidContactPct": 4.1,
-      "blastPct": 5.8
+      "blastPct": 5.8,
+      "expectedHr": 6.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 3,
+      "noDoubters": 4,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "608369": {
       "source": "savant",
@@ -4117,7 +5048,15 @@
       "batSpeed": 72.0,
       "swingStrength": 35.6,
       "solidContactPct": 7.2,
-      "blastPct": 17.2
+      "blastPct": 17.2,
+      "expectedHr": 9.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 8,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 8,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "642350": {
       "source": "savant",
@@ -4145,7 +5084,14 @@
       "batSpeed": 72.9,
       "swingStrength": 25.8,
       "solidContactPct": 7.8,
-      "blastPct": 18.0
+      "blastPct": 18.0,
+      "expectedHr": 4.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 4,
+      "doubters": 0,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "542303": {
       "source": "savant",
@@ -4173,7 +5119,14 @@
       "batSpeed": 73.4,
       "swingStrength": 30.9,
       "solidContactPct": 8.3,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 7.0,
+      "hrLuckDiff": 1.0,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "642020": {
       "source": "savant",
@@ -4229,7 +5182,14 @@
       "batSpeed": 73.1,
       "swingStrength": 29.1,
       "solidContactPct": 6.2,
-      "blastPct": 15.5
+      "blastPct": 15.5,
+      "expectedHr": 7.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "592626": {
       "source": "savant",
@@ -4257,7 +5217,14 @@
       "batSpeed": 72.0,
       "swingStrength": 37.5,
       "solidContactPct": 9.7,
-      "blastPct": 16.5
+      "blastPct": 16.5,
+      "expectedHr": 6.4,
+      "hrLuckDiff": -2.6,
+      "mostlyGone": 4,
+      "noDoubters": 3,
+      "doubters": 5,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "621020": {
       "source": "savant",
@@ -4285,7 +5252,13 @@
       "batSpeed": 71.3,
       "swingStrength": 35.2,
       "solidContactPct": 6.7,
-      "blastPct": 11.8
+      "blastPct": 11.8,
+      "expectedHr": 5.8,
+      "hrLuckDiff": -2.2,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "660162": {
       "source": "savant",
@@ -4313,7 +5286,14 @@
       "batSpeed": 72.4,
       "swingStrength": 29.2,
       "solidContactPct": 7.6,
-      "blastPct": 13.9
+      "blastPct": 13.9,
+      "expectedHr": 3.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 17,
+      "hrTrackerSource": "savant-hr"
     },
     "624431": {
       "source": "savant",
@@ -4369,7 +5349,14 @@
       "batSpeed": 73.7,
       "swingStrength": 31.4,
       "solidContactPct": 4.2,
-      "blastPct": 19.1
+      "blastPct": 19.1,
+      "expectedHr": 5.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 8,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "694025": {
       "source": "savant",
@@ -4397,7 +5384,13 @@
       "batSpeed": 75.5,
       "swingStrength": 29.2,
       "solidContactPct": 10.3,
-      "blastPct": 12.5
+      "blastPct": 12.5,
+      "expectedHr": 0.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "672640": {
       "source": "savant",
@@ -4425,7 +5418,14 @@
       "batSpeed": 72.2,
       "swingStrength": 38.8,
       "solidContactPct": 5.7,
-      "blastPct": 19.4
+      "blastPct": 19.4,
+      "expectedHr": 4.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 2,
+      "noDoubters": 2,
+      "doubters": 8,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "682641": {
       "source": "savant",
@@ -4481,7 +5481,14 @@
       "batSpeed": 69.0,
       "swingStrength": 31.5,
       "solidContactPct": 7.0,
-      "blastPct": 7.9
+      "blastPct": 7.9,
+      "expectedHr": 7.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 7,
+      "noDoubters": 3,
+      "doubters": 0,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "683679": {
       "source": "savant",
@@ -4509,7 +5516,13 @@
       "batSpeed": 68.6,
       "swingStrength": 36.5,
       "solidContactPct": 2.9,
-      "blastPct": 7.7
+      "blastPct": 7.7,
+      "expectedHr": 0.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "669134": {
       "source": "savant",
@@ -4537,7 +5550,14 @@
       "batSpeed": 72.7,
       "swingStrength": 25.0,
       "solidContactPct": 10.8,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 2.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "592663": {
       "source": "savant",
@@ -4565,7 +5585,14 @@
       "batSpeed": 73.1,
       "swingStrength": 35.3,
       "solidContactPct": 8.0,
-      "blastPct": 13.3
+      "blastPct": 13.3,
+      "expectedHr": 5.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 2,
+      "noDoubters": 4,
+      "doubters": 0,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "662139": {
       "source": "savant",
@@ -4593,7 +5620,14 @@
       "batSpeed": 72.9,
       "swingStrength": 23.9,
       "solidContactPct": 2.9,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 5.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "683357": {
       "source": "savant",
@@ -4621,7 +5655,14 @@
       "batSpeed": 74.9,
       "swingStrength": 26.8,
       "solidContactPct": 9.9,
-      "blastPct": 15.0
+      "blastPct": 15.0,
+      "expectedHr": 6.3,
+      "hrLuckDiff": -1.7,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "695490": {
       "source": "savant",
@@ -4677,7 +5718,14 @@
       "batSpeed": 69.5,
       "swingStrength": 37.2,
       "solidContactPct": 11.1,
-      "blastPct": 12.8
+      "blastPct": 12.8,
+      "expectedHr": 1.8,
+      "hrLuckDiff": 0.8,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "642201": {
       "source": "savant",
@@ -4705,7 +5753,14 @@
       "batSpeed": 73.2,
       "swingStrength": 30.0,
       "solidContactPct": 5.3,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 2.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "701305": {
       "source": "savant",
@@ -4733,7 +5788,14 @@
       "batSpeed": 74.4,
       "swingStrength": 18.9,
       "solidContactPct": 0.0,
-      "blastPct": 11.3
+      "blastPct": 11.3,
+      "expectedHr": 0.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "668709": {
       "source": "savant",
@@ -4761,7 +5823,14 @@
       "batSpeed": 74.1,
       "swingStrength": 31.9,
       "solidContactPct": 11.3,
-      "blastPct": 17.1
+      "blastPct": 17.1,
+      "expectedHr": 9.4,
+      "hrLuckDiff": -3.6,
+      "mostlyGone": 7,
+      "noDoubters": 5,
+      "doubters": 2,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "665161": {
       "source": "savant",
@@ -4789,7 +5858,13 @@
       "batSpeed": 72.1,
       "swingStrength": 32.5,
       "solidContactPct": 6.7,
-      "blastPct": 13.0
+      "blastPct": 13.0,
+      "expectedHr": 4.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "695600": {
       "source": "savant",
@@ -4817,7 +5892,15 @@
       "batSpeed": 74.1,
       "swingStrength": 32.5,
       "solidContactPct": 6.9,
-      "blastPct": 16.3
+      "blastPct": 16.3,
+      "expectedHr": 9.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 8,
+      "noDoubters": 4,
+      "doubters": 2,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "573262": {
       "source": "savant",
@@ -4845,7 +5928,13 @@
       "batSpeed": 71.1,
       "swingStrength": 37.4,
       "solidContactPct": 9.4,
-      "blastPct": 13.4
+      "blastPct": 13.4,
+      "expectedHr": 3.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 4,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "518595": {
       "source": "savant",
@@ -4873,7 +5962,14 @@
       "batSpeed": 70.8,
       "swingStrength": 39.1,
       "solidContactPct": 0.0,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 1.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "545361": {
       "source": "savant",
@@ -4901,7 +5997,15 @@
       "batSpeed": 75.1,
       "swingStrength": 28.7,
       "solidContactPct": 8.2,
-      "blastPct": 18.3
+      "blastPct": 18.3,
+      "expectedHr": 19.7,
+      "hrLuckDiff": 2.7,
+      "mostlyGone": 13,
+      "noDoubters": 10,
+      "doubters": 9,
+      "nearHr": 9,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "680777": {
       "source": "savant",
@@ -4929,7 +6033,14 @@
       "batSpeed": 73.4,
       "swingStrength": 32.8,
       "solidContactPct": 5.9,
-      "blastPct": 16.4
+      "blastPct": 16.4,
+      "expectedHr": 6.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 5,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "641343": {
       "source": "savant",
@@ -4957,7 +6068,15 @@
       "batSpeed": 76.9,
       "swingStrength": 36.5,
       "solidContactPct": 8.6,
-      "blastPct": 22.9
+      "blastPct": 22.9,
+      "expectedHr": 10.3,
+      "hrLuckDiff": -2.7,
+      "mostlyGone": 10,
+      "noDoubters": 3,
+      "doubters": 2,
+      "nearHr": 16,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "806198": {
       "source": "savant",
@@ -5013,7 +6132,14 @@
       "batSpeed": 71.6,
       "swingStrength": 23.6,
       "solidContactPct": 5.3,
-      "blastPct": 5.5
+      "blastPct": 5.5,
+      "expectedHr": 2.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "681198": {
       "source": "savant",
@@ -5041,7 +6167,14 @@
       "batSpeed": 69.1,
       "swingStrength": 30.8,
       "solidContactPct": 7.1,
-      "blastPct": 9.9
+      "blastPct": 9.9,
+      "expectedHr": 10.0,
+      "hrLuckDiff": -2.0,
+      "mostlyGone": 6,
+      "noDoubters": 5,
+      "doubters": 3,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "700246": {
       "source": "savant",
@@ -5069,7 +6202,14 @@
       "batSpeed": 74.8,
       "swingStrength": 18.6,
       "solidContactPct": 10.0,
-      "blastPct": 4.7
+      "blastPct": 4.7,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "596103": {
       "source": "savant",
@@ -5097,7 +6237,14 @@
       "batSpeed": 71.1,
       "swingStrength": 29.8,
       "solidContactPct": 4.4,
-      "blastPct": 6.0
+      "blastPct": 6.0,
+      "expectedHr": 0.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "804606": {
       "source": "savant",
@@ -5125,7 +6272,14 @@
       "batSpeed": 75.5,
       "swingStrength": 25.4,
       "solidContactPct": 6.7,
-      "blastPct": 13.5
+      "blastPct": 13.5,
+      "expectedHr": 4.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 6,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "643217": {
       "source": "savant",
@@ -5153,7 +6307,14 @@
       "batSpeed": 69.7,
       "swingStrength": 37.0,
       "solidContactPct": 7.6,
-      "blastPct": 14.5
+      "blastPct": 14.5,
+      "expectedHr": 8.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 8,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "650333": {
       "source": "savant",
@@ -5181,7 +6342,15 @@
       "batSpeed": 63.1,
       "swingStrength": 44.7,
       "solidContactPct": 5.7,
-      "blastPct": 1.5
+      "blastPct": 1.5,
+      "expectedHr": 5.0,
+      "hrLuckDiff": 2.0,
+      "mostlyGone": 7,
+      "noDoubters": 0,
+      "doubters": 4,
+      "nearHr": 11,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "671655": {
       "source": "savant",
@@ -5209,7 +6378,14 @@
       "batSpeed": 72.3,
       "swingStrength": 37.0,
       "solidContactPct": 3.4,
-      "blastPct": 13.0
+      "blastPct": 13.0,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "669016": {
       "source": "savant",
@@ -5237,7 +6413,14 @@
       "batSpeed": 71.5,
       "swingStrength": 33.7,
       "solidContactPct": 8.7,
-      "blastPct": 15.2
+      "blastPct": 15.2,
+      "expectedHr": 6.9,
+      "hrLuckDiff": -3.1,
+      "mostlyGone": 5,
+      "noDoubters": 3,
+      "doubters": 5,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "678391": {
       "source": "savant",
@@ -5265,7 +6448,14 @@
       "batSpeed": 69.4,
       "swingStrength": 29.3,
       "solidContactPct": 1.7,
-      "blastPct": 9.1
+      "blastPct": 9.1,
+      "expectedHr": 1.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 27,
+      "hrTrackerSource": "savant-hr"
     },
     "687282": {
       "source": "savant",
@@ -5293,7 +6483,13 @@
       "batSpeed": 76.4,
       "swingStrength": 14.7,
       "solidContactPct": 7.1,
-      "blastPct": 8.8
+      "blastPct": 8.8,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "666971": {
       "source": "savant",
@@ -5321,7 +6517,14 @@
       "batSpeed": 70.8,
       "swingStrength": 33.3,
       "solidContactPct": 5.5,
-      "blastPct": 8.3
+      "blastPct": 8.3,
+      "expectedHr": 1.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "672695": {
       "source": "savant",
@@ -5349,7 +6552,14 @@
       "batSpeed": 66.8,
       "swingStrength": 38.2,
       "solidContactPct": 3.5,
-      "blastPct": 8.7
+      "blastPct": 8.7,
+      "expectedHr": 4.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 3,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 23,
+      "hrTrackerSource": "savant-hr"
     },
     "669384": {
       "source": "savant",
@@ -5405,7 +6615,14 @@
       "batSpeed": 73.3,
       "swingStrength": 35.3,
       "solidContactPct": 6.6,
-      "blastPct": 18.3
+      "blastPct": 18.3,
+      "expectedHr": 5.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "657041": {
       "source": "savant",
@@ -5433,7 +6650,14 @@
       "batSpeed": 72.1,
       "swingStrength": 28.3,
       "solidContactPct": 4.8,
-      "blastPct": 10.1
+      "blastPct": 10.1,
+      "expectedHr": 4.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 2,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "683734": {
       "source": "savant",
@@ -5461,7 +6685,14 @@
       "batSpeed": 69.8,
       "swingStrength": 50.8,
       "solidContactPct": 6.3,
-      "blastPct": 17.2
+      "blastPct": 17.2,
+      "expectedHr": 1.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "663584": {
       "source": "savant",
@@ -5489,7 +6720,13 @@
       "batSpeed": 71.6,
       "swingStrength": 23.5,
       "solidContactPct": 23.1,
-      "blastPct": 17.6
+      "blastPct": 17.6,
+      "expectedHr": 0.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "675961": {
       "source": "savant",
@@ -5517,7 +6754,13 @@
       "batSpeed": 68.3,
       "swingStrength": 30.0,
       "solidContactPct": 3.0,
-      "blastPct": 3.3
+      "blastPct": 3.3,
+      "expectedHr": 0.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "543510": {
       "source": "savant",
@@ -5545,7 +6788,14 @@
       "batSpeed": 72.7,
       "swingStrength": 41.4,
       "solidContactPct": 4.5,
-      "blastPct": 15.7
+      "blastPct": 15.7,
+      "expectedHr": 0.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "694497": {
       "source": "savant",
@@ -5573,7 +6823,14 @@
       "batSpeed": 71.3,
       "swingStrength": 30.2,
       "solidContactPct": 9.1,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 4.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "665742": {
       "source": "savant",
@@ -5601,7 +6858,14 @@
       "batSpeed": 72.2,
       "swingStrength": 45.7,
       "solidContactPct": 6.5,
-      "blastPct": 24.3
+      "blastPct": 24.3,
+      "expectedHr": 17.8,
+      "hrLuckDiff": 0.8,
+      "mostlyGone": 14,
+      "noDoubters": 7,
+      "doubters": 4,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "669394": {
       "source": "savant",
@@ -5629,7 +6893,14 @@
       "batSpeed": 75.1,
       "swingStrength": 34.0,
       "solidContactPct": 9.0,
-      "blastPct": 20.4
+      "blastPct": 20.4,
+      "expectedHr": 10.7,
+      "hrLuckDiff": -2.3,
+      "mostlyGone": 7,
+      "noDoubters": 4,
+      "doubters": 6,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "665923": {
       "source": "savant",
@@ -5657,7 +6928,13 @@
       "batSpeed": 71.8,
       "swingStrength": 27.1,
       "solidContactPct": 8.2,
-      "blastPct": 7.5
+      "blastPct": 7.5,
+      "expectedHr": 2.0,
+      "hrLuckDiff": -2.0,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "694388": {
       "source": "savant",
@@ -5685,7 +6962,14 @@
       "batSpeed": 72.2,
       "swingStrength": 35.8,
       "solidContactPct": 1.6,
-      "blastPct": 9.4
+      "blastPct": 9.4,
+      "expectedHr": 0.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 14,
+      "hrTrackerSource": "savant-hr"
     },
     "553993": {
       "source": "savant",
@@ -5713,7 +6997,14 @@
       "batSpeed": 71.4,
       "swingStrength": 28.1,
       "solidContactPct": 4.3,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 5.5,
+      "hrLuckDiff": -1.5,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "677956": {
       "source": "savant",
@@ -5769,7 +7060,15 @@
       "batSpeed": 71.7,
       "swingStrength": 39.2,
       "solidContactPct": 8.2,
-      "blastPct": 18.4
+      "blastPct": 18.4,
+      "expectedHr": 10.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 8,
+      "noDoubters": 4,
+      "doubters": 5,
+      "nearHr": 7,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "669392": {
       "source": "savant",
@@ -5797,7 +7096,13 @@
       "batSpeed": 68.9,
       "swingStrength": 35.8,
       "solidContactPct": 0.0,
-      "blastPct": 1.9
+      "blastPct": 1.9,
+      "expectedHr": 0.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "699393": {
       "source": "savant",
@@ -5825,7 +7130,14 @@
       "batSpeed": 73.4,
       "swingStrength": 42.6,
       "solidContactPct": 0.0,
-      "blastPct": 25.5
+      "blastPct": 25.5,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "676914": {
       "source": "savant",
@@ -5853,7 +7165,14 @@
       "batSpeed": 71.1,
       "swingStrength": 33.9,
       "solidContactPct": 3.5,
-      "blastPct": 15.6
+      "blastPct": 15.6,
+      "expectedHr": 2.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "678882": {
       "source": "savant",
@@ -5881,7 +7200,14 @@
       "batSpeed": 69.7,
       "swingStrength": 33.1,
       "solidContactPct": 6.8,
-      "blastPct": 9.3
+      "blastPct": 9.3,
+      "expectedHr": 5.5,
+      "hrLuckDiff": -1.5,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 6,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "691016": {
       "source": "savant",
@@ -5909,7 +7235,15 @@
       "batSpeed": 74.4,
       "swingStrength": 30.2,
       "solidContactPct": 5.1,
-      "blastPct": 16.9
+      "blastPct": 16.9,
+      "expectedHr": 8.2,
+      "hrLuckDiff": -4.8,
+      "mostlyGone": 9,
+      "noDoubters": 2,
+      "doubters": 8,
+      "nearHr": 5,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "687363": {
       "source": "savant",
@@ -5937,7 +7271,14 @@
       "batSpeed": 68.4,
       "swingStrength": 31.7,
       "solidContactPct": 5.7,
-      "blastPct": 6.1
+      "blastPct": 6.1,
+      "expectedHr": 2.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "665833": {
       "source": "savant",
@@ -5965,7 +7306,15 @@
       "batSpeed": 78.5,
       "swingStrength": 34.2,
       "solidContactPct": 6.6,
-      "blastPct": 24.6
+      "blastPct": 24.6,
+      "expectedHr": 13.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 10,
+      "noDoubters": 7,
+      "doubters": 4,
+      "nearHr": 10,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "605137": {
       "source": "savant",
@@ -5993,7 +7342,15 @@
       "batSpeed": 72.0,
       "swingStrength": 30.6,
       "solidContactPct": 6.1,
-      "blastPct": 14.2
+      "blastPct": 14.2,
+      "expectedHr": 10.8,
+      "hrLuckDiff": 1.8,
+      "mostlyGone": 7,
+      "noDoubters": 5,
+      "doubters": 7,
+      "nearHr": 8,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "678662": {
       "source": "savant",
@@ -6021,7 +7378,14 @@
       "batSpeed": 71.9,
       "swingStrength": 24.3,
       "solidContactPct": 6.1,
-      "blastPct": 9.6
+      "blastPct": 9.6,
+      "expectedHr": 5.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 2,
+      "noDoubters": 3,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "678009": {
       "source": "savant",
@@ -6077,7 +7441,14 @@
       "batSpeed": 65.5,
       "swingStrength": 38.4,
       "solidContactPct": 3.9,
-      "blastPct": 7.4
+      "blastPct": 7.4,
+      "expectedHr": 2.7,
+      "hrLuckDiff": -1.3,
+      "mostlyGone": 4,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "672016": {
       "source": "savant",
@@ -6133,7 +7504,14 @@
       "batSpeed": 71.9,
       "swingStrength": 20.9,
       "solidContactPct": 2.3,
-      "blastPct": 5.8
+      "blastPct": 5.8,
+      "expectedHr": 0.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "606192": {
       "source": "savant",
@@ -6161,7 +7539,13 @@
       "batSpeed": 72.2,
       "swingStrength": 32.2,
       "solidContactPct": 5.5,
-      "blastPct": 18.2
+      "blastPct": 18.2,
+      "expectedHr": 5.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 4,
+      "noDoubters": 3,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "703492": {
       "source": "savant",
@@ -6216,7 +7600,15 @@
       "batSpeed": 70.1,
       "swingStrength": 34.1,
       "solidContactPct": 8.3,
-      "blastPct": 15.6
+      "blastPct": 15.6,
+      "expectedHr": 7.4,
+      "hrLuckDiff": -3.6,
+      "mostlyGone": 8,
+      "noDoubters": 2,
+      "doubters": 8,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "687637": {
       "source": "savant",
@@ -6244,7 +7636,14 @@
       "batSpeed": 71.5,
       "swingStrength": 30.1,
       "solidContactPct": 6.5,
-      "blastPct": 13.7
+      "blastPct": 13.7,
+      "expectedHr": 2.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "677587": {
       "source": "savant",
@@ -6272,7 +7671,14 @@
       "batSpeed": 70.0,
       "swingStrength": 32.6,
       "solidContactPct": 5.0,
-      "blastPct": 10.2
+      "blastPct": 10.2,
+      "expectedHr": 4.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "663330": {
       "source": "savant",
@@ -6300,7 +7706,14 @@
       "batSpeed": 72.8,
       "swingStrength": 34.5,
       "solidContactPct": 8.6,
-      "blastPct": 18.2
+      "blastPct": 18.2,
+      "expectedHr": 2.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "681715": {
       "source": "savant",
@@ -6328,7 +7741,14 @@
       "batSpeed": 74.6,
       "swingStrength": 43.1,
       "solidContactPct": 9.2,
-      "blastPct": 21.3
+      "blastPct": 21.3,
+      "expectedHr": 7.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 4,
+      "noDoubters": 5,
+      "doubters": 1,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "624424": {
       "source": "savant",
@@ -6356,7 +7776,15 @@
       "batSpeed": 72.8,
       "swingStrength": 33.1,
       "solidContactPct": 4.7,
-      "blastPct": 17.8
+      "blastPct": 17.8,
+      "expectedHr": 5.7,
+      "hrLuckDiff": 1.7,
+      "mostlyGone": 7,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 13,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "676475": {
       "source": "savant",
@@ -6384,7 +7812,15 @@
       "batSpeed": 72.9,
       "swingStrength": 36.8,
       "solidContactPct": 6.8,
-      "blastPct": 19.2
+      "blastPct": 19.2,
+      "expectedHr": 16.6,
+      "hrLuckDiff": 3.6,
+      "mostlyGone": 9,
+      "noDoubters": 10,
+      "doubters": 4,
+      "nearHr": 12,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "642851": {
       "source": "savant",
@@ -6412,7 +7848,14 @@
       "batSpeed": 71.3,
       "swingStrength": 24.3,
       "solidContactPct": 2.5,
-      "blastPct": 7.1
+      "blastPct": 7.1,
+      "expectedHr": 0.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 26,
+      "hrTrackerSource": "savant-hr"
     },
     "683737": {
       "source": "savant",
@@ -6440,7 +7883,15 @@
       "batSpeed": 68.2,
       "swingStrength": 38.8,
       "solidContactPct": 6.4,
-      "blastPct": 14.6
+      "blastPct": 14.6,
+      "expectedHr": 8.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 8,
+      "noDoubters": 3,
+      "doubters": 4,
+      "nearHr": 11,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "665862": {
       "source": "savant",
@@ -6468,7 +7919,14 @@
       "batSpeed": 72.9,
       "swingStrength": 32.5,
       "solidContactPct": 6.6,
-      "blastPct": 14.2
+      "blastPct": 14.2,
+      "expectedHr": 11.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 7,
+      "noDoubters": 5,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "701675": {
       "source": "savant",
@@ -6496,7 +7954,14 @@
       "batSpeed": 70.3,
       "swingStrength": 26.1,
       "solidContactPct": 3.5,
-      "blastPct": 9.6
+      "blastPct": 9.6,
+      "expectedHr": 5.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "668227": {
       "source": "savant",
@@ -6524,7 +7989,14 @@
       "batSpeed": 70.9,
       "swingStrength": 36.1,
       "solidContactPct": 8.1,
-      "blastPct": 15.1
+      "blastPct": 15.1,
+      "expectedHr": 6.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 5,
+      "noDoubters": 3,
+      "doubters": 5,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "672284": {
       "source": "savant",
@@ -6552,7 +8024,14 @@
       "batSpeed": 73.5,
       "swingStrength": 34.3,
       "solidContactPct": 2.9,
-      "blastPct": 23.9
+      "blastPct": 23.9,
+      "expectedHr": 1.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "687263": {
       "source": "savant",
@@ -6580,7 +8059,14 @@
       "batSpeed": 70.7,
       "swingStrength": 30.0,
       "solidContactPct": 6.3,
-      "blastPct": 9.4
+      "blastPct": 9.4,
+      "expectedHr": 16.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 8,
+      "noDoubters": 9,
+      "doubters": 7,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "676439": {
       "source": "savant",
@@ -6608,7 +8094,14 @@
       "batSpeed": 70.5,
       "swingStrength": 32.8,
       "solidContactPct": 10.3,
-      "blastPct": 9.4
+      "blastPct": 9.4,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "682997": {
       "source": "savant",
@@ -6636,7 +8129,14 @@
       "batSpeed": 69.9,
       "swingStrength": 18.6,
       "solidContactPct": 7.1,
-      "blastPct": 10.0
+      "blastPct": 10.0,
+      "expectedHr": 2.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "669398": {
       "source": "savant",
@@ -6664,7 +8164,14 @@
       "batSpeed": 70.8,
       "swingStrength": 36.5,
       "solidContactPct": 9.1,
-      "blastPct": 15.4
+      "blastPct": 15.4,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 0,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "676609": {
       "source": "savant",
@@ -6692,7 +8199,14 @@
       "batSpeed": 68.7,
       "swingStrength": 32.2,
       "solidContactPct": 5.4,
-      "blastPct": 7.1
+      "blastPct": 7.1,
+      "expectedHr": 4.6,
+      "hrLuckDiff": -2.4,
+      "mostlyGone": 3,
+      "noDoubters": 2,
+      "doubters": 6,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "669257": {
       "source": "savant",
@@ -6720,7 +8234,14 @@
       "batSpeed": 70.1,
       "swingStrength": 34.7,
       "solidContactPct": 7.0,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 5.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 6,
+      "noDoubters": 1,
+      "doubters": 4,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "663743": {
       "source": "savant",
@@ -6748,7 +8269,14 @@
       "batSpeed": 72.4,
       "swingStrength": 29.3,
       "solidContactPct": 5.8,
-      "blastPct": 15.6
+      "blastPct": 15.6,
+      "expectedHr": 1.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "669256": {
       "source": "savant",
@@ -6804,7 +8332,14 @@
       "batSpeed": 74.1,
       "swingStrength": 30.1,
       "solidContactPct": 6.5,
-      "blastPct": 14.7
+      "blastPct": 14.7,
+      "expectedHr": 4.9,
+      "hrLuckDiff": -2.1,
+      "mostlyGone": 1,
+      "noDoubters": 4,
+      "doubters": 4,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "668715": {
       "source": "savant",
@@ -6832,7 +8367,15 @@
       "batSpeed": 70.8,
       "swingStrength": 34.9,
       "solidContactPct": 7.1,
-      "blastPct": 15.4
+      "blastPct": 15.4,
+      "expectedHr": 10.4,
+      "hrLuckDiff": -1.6,
+      "mostlyGone": 8,
+      "noDoubters": 5,
+      "doubters": 8,
+      "nearHr": 4,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "656537": {
       "source": "savant",
@@ -6860,7 +8403,14 @@
       "batSpeed": 71.9,
       "swingStrength": 33.9,
       "solidContactPct": 0.0,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 4.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 3,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "682657": {
       "source": "savant",
@@ -6888,7 +8438,15 @@
       "batSpeed": 71.0,
       "swingStrength": 28.2,
       "solidContactPct": 6.2,
-      "blastPct": 11.9
+      "blastPct": 11.9,
+      "expectedHr": 11.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 8,
+      "noDoubters": 5,
+      "doubters": 1,
+      "nearHr": 12,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "545121": {
       "source": "savant",
@@ -6916,7 +8474,14 @@
       "batSpeed": 70.8,
       "swingStrength": 37.0,
       "solidContactPct": 4.1,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 5.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 2,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "602104": {
       "source": "savant",
@@ -6944,7 +8509,14 @@
       "batSpeed": 70.2,
       "swingStrength": 36.3,
       "solidContactPct": 4.3,
-      "blastPct": 11.3
+      "blastPct": 11.3,
+      "expectedHr": 1.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "805999": {
       "source": "savant",
@@ -6972,7 +8544,14 @@
       "batSpeed": 70.4,
       "swingStrength": 27.9,
       "solidContactPct": 4.6,
-      "blastPct": 11.7
+      "blastPct": 11.7,
+      "expectedHr": 1.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "683002": {
       "source": "savant",
@@ -7000,7 +8579,14 @@
       "batSpeed": 74.5,
       "swingStrength": 28.8,
       "solidContactPct": 6.2,
-      "blastPct": 14.7
+      "blastPct": 14.7,
+      "expectedHr": 14.3,
+      "hrLuckDiff": -1.7,
+      "mostlyGone": 11,
+      "noDoubters": 5,
+      "doubters": 5,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "655316": {
       "source": "savant",
@@ -7028,7 +8614,13 @@
       "batSpeed": 69.1,
       "swingStrength": 32.8,
       "solidContactPct": 7.0,
-      "blastPct": 12.0
+      "blastPct": 12.0,
+      "expectedHr": 1.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "670224": {
       "source": "savant",
@@ -7084,7 +8676,14 @@
       "batSpeed": 73.9,
       "swingStrength": 22.5,
       "solidContactPct": 6.9,
-      "blastPct": 16.2
+      "blastPct": 16.2,
+      "expectedHr": 3.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 1,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "663616": {
       "source": "savant",
@@ -7112,7 +8711,14 @@
       "batSpeed": 71.5,
       "swingStrength": 32.5,
       "solidContactPct": 5.1,
-      "blastPct": 12.3
+      "blastPct": 12.3,
+      "expectedHr": 6.2,
+      "hrLuckDiff": 1.2,
+      "mostlyGone": 5,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "702332": {
       "source": "savant",
@@ -7140,7 +8746,14 @@
       "batSpeed": 68.5,
       "swingStrength": 37.2,
       "solidContactPct": 5.2,
-      "blastPct": 10.0
+      "blastPct": 10.0,
+      "expectedHr": 4.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 4,
+      "doubters": 2,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "701350": {
       "source": "savant",
@@ -7168,7 +8781,14 @@
       "batSpeed": 75.6,
       "swingStrength": 35.9,
       "solidContactPct": 5.3,
-      "blastPct": 20.3
+      "blastPct": 20.3,
+      "expectedHr": 1.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "678489": {
       "source": "savant",
@@ -7196,7 +8816,14 @@
       "batSpeed": 69.2,
       "swingStrength": 30.4,
       "solidContactPct": 5.4,
-      "blastPct": 5.2
+      "blastPct": 5.2,
+      "expectedHr": 1.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "686475": {
       "source": "savant",
@@ -7252,7 +8879,14 @@
       "batSpeed": 70.1,
       "swingStrength": 31.3,
       "solidContactPct": 0.0,
-      "blastPct": 10.4
+      "blastPct": 10.4,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "677649": {
       "source": "savant",
@@ -7280,7 +8914,14 @@
       "batSpeed": 72.7,
       "swingStrength": 29.9,
       "solidContactPct": 6.4,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 4.1,
+      "hrLuckDiff": -1.9,
+      "mostlyGone": 5,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "663494": {
       "source": "savant",
@@ -7308,7 +8949,13 @@
       "batSpeed": 66.4,
       "swingStrength": 36.4,
       "solidContactPct": 8.3,
-      "blastPct": 3.6
+      "blastPct": 3.6,
+      "expectedHr": 1.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "657136": {
       "source": "savant",
@@ -7336,7 +8983,14 @@
       "batSpeed": 72.4,
       "swingStrength": 29.4,
       "solidContactPct": 9.5,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 1.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "681624": {
       "source": "savant",
@@ -7364,7 +9018,14 @@
       "batSpeed": 72.9,
       "swingStrength": 32.1,
       "solidContactPct": 9.9,
-      "blastPct": 16.7
+      "blastPct": 16.7,
+      "expectedHr": 12.4,
+      "hrLuckDiff": -2.6,
+      "mostlyGone": 7,
+      "noDoubters": 6,
+      "doubters": 5,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "543760": {
       "source": "savant",
@@ -7392,7 +9053,14 @@
       "batSpeed": 68.7,
       "swingStrength": 33.3,
       "solidContactPct": 6.0,
-      "blastPct": 9.1
+      "blastPct": 9.1,
+      "expectedHr": 8.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 7,
+      "noDoubters": 2,
+      "doubters": 10,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "592885": {
       "source": "savant",
@@ -7420,7 +9088,14 @@
       "batSpeed": 72.9,
       "swingStrength": 26.4,
       "solidContactPct": 8.1,
-      "blastPct": 11.8
+      "blastPct": 11.8,
+      "expectedHr": 4.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 3,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "670231": {
       "source": "savant",
@@ -7448,7 +9123,14 @@
       "batSpeed": 75.5,
       "swingStrength": 50.0,
       "solidContactPct": 14.3,
-      "blastPct": 41.7
+      "blastPct": 41.7,
+      "expectedHr": 1.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "694671": {
       "source": "savant",
@@ -7476,7 +9158,14 @@
       "batSpeed": 72.8,
       "swingStrength": 35.0,
       "solidContactPct": 3.6,
-      "blastPct": 14.3
+      "blastPct": 14.3,
+      "expectedHr": 5.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "664774": {
       "source": "savant",
@@ -7504,7 +9193,13 @@
       "batSpeed": 73.2,
       "swingStrength": 33.3,
       "solidContactPct": 22.2,
-      "blastPct": 16.7
+      "blastPct": 16.7,
+      "expectedHr": 0.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "606115": {
       "source": "savant",
@@ -7532,7 +9227,14 @@
       "batSpeed": 70.6,
       "swingStrength": 41.0,
       "solidContactPct": 5.0,
-      "blastPct": 4.9
+      "blastPct": 4.9,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "691740": {
       "source": "savant",
@@ -7560,7 +9262,14 @@
       "batSpeed": 69.0,
       "swingStrength": 29.1,
       "solidContactPct": 3.8,
-      "blastPct": 10.6
+      "blastPct": 10.6,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 1.0,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "800050": {
       "source": "savant",
@@ -7588,7 +9297,14 @@
       "batSpeed": 71.2,
       "swingStrength": 38.8,
       "solidContactPct": 5.8,
-      "blastPct": 17.0
+      "blastPct": 17.0,
+      "expectedHr": 5.4,
+      "hrLuckDiff": -1.6,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "693409": {
       "source": "savant",
@@ -7616,7 +9332,14 @@
       "batSpeed": 69.7,
       "swingStrength": 61.1,
       "solidContactPct": 6.7,
-      "blastPct": 33.3
+      "blastPct": 33.3,
+      "expectedHr": 0.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "600869": {
       "source": "savant",
@@ -7672,7 +9395,13 @@
       "batSpeed": 66.6,
       "swingStrength": 39.8,
       "solidContactPct": 3.5,
-      "blastPct": 8.0
+      "blastPct": 8.0,
+      "expectedHr": 0.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "666182": {
       "source": "savant",
@@ -7700,7 +9429,15 @@
       "batSpeed": 70.0,
       "swingStrength": 33.8,
       "solidContactPct": 5.1,
-      "blastPct": 14.4
+      "blastPct": 14.4,
+      "expectedHr": 8.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 8,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "666624": {
       "source": "savant",
@@ -7728,7 +9465,14 @@
       "batSpeed": 75.9,
       "swingStrength": 31.2,
       "solidContactPct": 5.0,
-      "blastPct": 15.6
+      "blastPct": 15.6,
+      "expectedHr": 0.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 16,
+      "hrTrackerSource": "savant-hr"
     },
     "680779": {
       "source": "savant",
@@ -7756,7 +9500,14 @@
       "batSpeed": 75.1,
       "swingStrength": 28.6,
       "solidContactPct": 4.9,
-      "blastPct": 15.8
+      "blastPct": 15.8,
+      "expectedHr": 4.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 2,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "693304": {
       "source": "savant",
@@ -7784,7 +9535,15 @@
       "batSpeed": 70.5,
       "swingStrength": 31.7,
       "solidContactPct": 6.4,
-      "blastPct": 10.6
+      "blastPct": 10.6,
+      "expectedHr": 4.5,
+      "hrLuckDiff": 1.5,
+      "mostlyGone": 6,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 11,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "806068": {
       "source": "savant",
@@ -7812,7 +9571,13 @@
       "batSpeed": 72.7,
       "swingStrength": 20.5,
       "solidContactPct": 6.7,
-      "blastPct": 8.3
+      "blastPct": 8.3,
+      "expectedHr": 4.3,
+      "hrLuckDiff": -1.7,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "457705": {
       "source": "savant",
@@ -7840,7 +9605,14 @@
       "batSpeed": 70.5,
       "swingStrength": 28.3,
       "solidContactPct": 7.7,
-      "blastPct": 8.1
+      "blastPct": 8.1,
+      "expectedHr": 0.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "687551": {
       "source": "savant",
@@ -7868,7 +9640,14 @@
       "batSpeed": 69.9,
       "swingStrength": 33.9,
       "solidContactPct": 5.6,
-      "blastPct": 13.5
+      "blastPct": 13.5,
+      "expectedHr": 3.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 3,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "677942": {
       "source": "savant",
@@ -7896,7 +9675,14 @@
       "batSpeed": 72.5,
       "swingStrength": 35.2,
       "solidContactPct": 6.1,
-      "blastPct": 13.0
+      "blastPct": 13.0,
+      "expectedHr": 2.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "680757": {
       "source": "savant",
@@ -7924,7 +9710,14 @@
       "batSpeed": 63.0,
       "swingStrength": 45.7,
       "solidContactPct": 1.4,
-      "blastPct": 2.2
+      "blastPct": 2.2,
+      "expectedHr": 0.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "688363": {
       "source": "savant",
@@ -7952,7 +9745,14 @@
       "batSpeed": 71.8,
       "swingStrength": 25.4,
       "solidContactPct": 3.1,
-      "blastPct": 6.8
+      "blastPct": 6.8,
+      "expectedHr": 1.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 18,
+      "hrTrackerSource": "savant-hr"
     },
     "808959": {
       "source": "savant",
@@ -7980,7 +9780,14 @@
       "batSpeed": 75.2,
       "swingStrength": 33.6,
       "solidContactPct": 5.8,
-      "blastPct": 23.2
+      "blastPct": 23.2,
+      "expectedHr": 17.3,
+      "hrLuckDiff": -2.7,
+      "mostlyGone": 7,
+      "noDoubters": 11,
+      "doubters": 6,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "694376": {
       "source": "savant",
@@ -8008,7 +9815,13 @@
       "batSpeed": 71.9,
       "swingStrength": 31.6,
       "solidContactPct": 8.3,
-      "blastPct": 15.8
+      "blastPct": 15.8,
+      "expectedHr": 1.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "666310": {
       "source": "savant",
@@ -8036,7 +9849,14 @@
       "batSpeed": 71.8,
       "swingStrength": 27.2,
       "solidContactPct": 9.5,
-      "blastPct": 13.2
+      "blastPct": 13.2,
+      "expectedHr": 2.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 4,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "695731": {
       "source": "savant",
@@ -8064,7 +9884,14 @@
       "batSpeed": 70.6,
       "swingStrength": 39.6,
       "solidContactPct": 9.7,
-      "blastPct": 10.4
+      "blastPct": 10.4,
+      "expectedHr": 0.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "699625": {
       "source": "savant",
@@ -8092,7 +9919,14 @@
       "batSpeed": 71.3,
       "swingStrength": 27.3,
       "solidContactPct": 16.1,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 1.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "814439": {
       "source": "savant",
@@ -8120,7 +9954,14 @@
       "batSpeed": 72.4,
       "swingStrength": 31.0,
       "solidContactPct": 6.9,
-      "blastPct": 12.9
+      "blastPct": 12.9,
+      "expectedHr": 0.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "621439": {
       "source": "savant",
@@ -8148,7 +9989,14 @@
       "batSpeed": 74.1,
       "swingStrength": 30.4,
       "solidContactPct": 4.9,
-      "blastPct": 17.3
+      "blastPct": 17.3,
+      "expectedHr": 25.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 14,
+      "noDoubters": 13,
+      "doubters": 3,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "669477": {
       "source": "savant",
@@ -8176,7 +10024,14 @@
       "batSpeed": 72.4,
       "swingStrength": 32.9,
       "solidContactPct": 4.5,
-      "blastPct": 16.5
+      "blastPct": 16.5,
+      "expectedHr": 14.1,
+      "hrLuckDiff": -1.9,
+      "mostlyGone": 6,
+      "noDoubters": 10,
+      "doubters": 7,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "682626": {
       "source": "savant",
@@ -8204,7 +10059,14 @@
       "batSpeed": 74.4,
       "swingStrength": 32.2,
       "solidContactPct": 4.5,
-      "blastPct": 19.0
+      "blastPct": 19.0,
+      "expectedHr": 5.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "640902": {
       "source": "savant",
@@ -8232,7 +10094,13 @@
       "batSpeed": 70.6,
       "swingStrength": 35.2,
       "solidContactPct": 5.8,
-      "blastPct": 13.3
+      "blastPct": 13.3,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "691788": {
       "source": "savant",
@@ -8260,7 +10128,14 @@
       "batSpeed": 74.6,
       "swingStrength": 25.6,
       "solidContactPct": 4.9,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 4.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "701358": {
       "source": "savant",
@@ -8288,7 +10163,15 @@
       "batSpeed": 77.1,
       "swingStrength": 28.5,
       "solidContactPct": 3.2,
-      "blastPct": 17.7
+      "blastPct": 17.7,
+      "expectedHr": 8.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 7,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 14,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "677800": {
       "source": "savant",
@@ -8316,7 +10199,14 @@
       "batSpeed": 73.6,
       "swingStrength": 31.0,
       "solidContactPct": 7.0,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 9.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 6,
+      "noDoubters": 4,
+      "doubters": 6,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "669397": {
       "source": "savant",
@@ -8344,7 +10234,14 @@
       "batSpeed": 69.0,
       "swingStrength": 32.4,
       "solidContactPct": 3.8,
-      "blastPct": 8.8
+      "blastPct": 8.8,
+      "expectedHr": 1.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "691176": {
       "source": "savant",
@@ -8372,7 +10269,14 @@
       "batSpeed": 73.9,
       "swingStrength": 32.1,
       "solidContactPct": 2.0,
-      "blastPct": 12.8
+      "blastPct": 12.8,
+      "expectedHr": 1.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 17,
+      "hrTrackerSource": "savant-hr"
     },
     "668885": {
       "source": "savant",
@@ -8400,7 +10304,14 @@
       "batSpeed": 69.0,
       "swingStrength": 40.4,
       "solidContactPct": 4.9,
-      "blastPct": 8.5
+      "blastPct": 8.5,
+      "expectedHr": 2.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "808975": {
       "source": "savant",
@@ -8428,7 +10339,13 @@
       "batSpeed": 66.7,
       "swingStrength": 34.5,
       "solidContactPct": 2.3,
-      "blastPct": 6.7
+      "blastPct": 6.7,
+      "expectedHr": 0.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "645305": {
       "source": "savant",
@@ -8484,7 +10401,15 @@
       "batSpeed": 75.4,
       "swingStrength": 30.3,
       "solidContactPct": 4.0,
-      "blastPct": 19.9
+      "blastPct": 19.9,
+      "expectedHr": 12.3,
+      "hrLuckDiff": -1.7,
+      "mostlyGone": 12,
+      "noDoubters": 4,
+      "doubters": 1,
+      "nearHr": 12,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "670764": {
       "source": "savant",
@@ -8540,7 +10465,14 @@
       "batSpeed": 70.7,
       "swingStrength": 47.2,
       "solidContactPct": 0.0,
-      "blastPct": 17.0
+      "blastPct": 17.0,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "672275": {
       "source": "savant",
@@ -8568,7 +10500,14 @@
       "batSpeed": 73.1,
       "swingStrength": 30.4,
       "solidContactPct": 5.7,
-      "blastPct": 11.6
+      "blastPct": 11.6,
+      "expectedHr": 2.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "680700": {
       "source": "savant",
@@ -8596,7 +10535,14 @@
       "batSpeed": 68.9,
       "swingStrength": 32.6,
       "solidContactPct": 2.6,
-      "blastPct": 10.4
+      "blastPct": 10.4,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 1.0,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 16,
+      "hrTrackerSource": "savant-hr"
     },
     "682818": {
       "source": "savant",
@@ -8624,7 +10570,14 @@
       "batSpeed": 75.6,
       "swingStrength": 27.3,
       "solidContactPct": 7.2,
-      "blastPct": 16.9
+      "blastPct": 16.9,
+      "expectedHr": 2.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "702222": {
       "source": "savant",
@@ -8652,7 +10605,14 @@
       "batSpeed": 68.7,
       "swingStrength": 30.2,
       "solidContactPct": 4.8,
-      "blastPct": 10.0
+      "blastPct": 10.0,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 4,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "683227": {
       "source": "savant",
@@ -8708,7 +10668,14 @@
       "batSpeed": 71.7,
       "swingStrength": 35.2,
       "solidContactPct": 9.3,
-      "blastPct": 15.0
+      "blastPct": 15.0,
+      "expectedHr": 6.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 5,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "691594": {
       "source": "savant",
@@ -8736,7 +10703,14 @@
       "batSpeed": 69.6,
       "swingStrength": 34.6,
       "solidContactPct": 3.9,
-      "blastPct": 10.2
+      "blastPct": 10.2,
+      "expectedHr": 2.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 4,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "622761": {
       "source": "savant",
@@ -8764,7 +10738,14 @@
       "batSpeed": 73.7,
       "swingStrength": 26.6,
       "solidContactPct": 2.8,
-      "blastPct": 15.6
+      "blastPct": 15.6,
+      "expectedHr": 2.5,
+      "hrLuckDiff": -1.5,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "696135": {
       "source": "savant",
@@ -8820,7 +10801,14 @@
       "batSpeed": 70.5,
       "swingStrength": 31.3,
       "solidContactPct": 9.0,
-      "blastPct": 9.4
+      "blastPct": 9.4,
+      "expectedHr": 6.8,
+      "hrLuckDiff": 0.8,
+      "mostlyGone": 7,
+      "noDoubters": 1,
+      "doubters": 0,
+      "nearHr": 18,
+      "hrTrackerSource": "savant-hr"
     },
     "807713": {
       "source": "savant",
@@ -8848,7 +10836,14 @@
       "batSpeed": 68.7,
       "swingStrength": 34.6,
       "solidContactPct": 8.2,
-      "blastPct": 10.1
+      "blastPct": 10.1,
+      "expectedHr": 3.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 3,
+      "noDoubters": 1,
+      "doubters": 5,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "691785": {
       "source": "savant",
@@ -8876,7 +10871,14 @@
       "batSpeed": 74.7,
       "swingStrength": 27.6,
       "solidContactPct": 5.0,
-      "blastPct": 11.9
+      "blastPct": 11.9,
+      "expectedHr": 2.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "665052": {
       "source": "savant",
@@ -8904,7 +10906,13 @@
       "batSpeed": 74.1,
       "swingStrength": 44.4,
       "solidContactPct": 0.0,
-      "blastPct": 29.6
+      "blastPct": 29.6,
+      "expectedHr": 2.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "690924": {
       "source": "savant",
@@ -8932,7 +10940,14 @@
       "batSpeed": 71.9,
       "swingStrength": 23.7,
       "solidContactPct": 0.0,
-      "blastPct": 10.5
+      "blastPct": 10.5,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "664728": {
       "source": "savant",
@@ -8960,7 +10975,13 @@
       "batSpeed": 71.7,
       "swingStrength": 34.0,
       "solidContactPct": 3.9,
-      "blastPct": 11.7
+      "blastPct": 11.7,
+      "expectedHr": 2.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "656582": {
       "source": "savant",
@@ -8988,7 +11009,13 @@
       "batSpeed": 72.9,
       "swingStrength": 27.1,
       "solidContactPct": 16.7,
-      "blastPct": 13.6
+      "blastPct": 13.6,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "553869": {
       "source": "savant",
@@ -9016,7 +11043,13 @@
       "batSpeed": 75.5,
       "swingStrength": 26.2,
       "solidContactPct": 2.6,
-      "blastPct": 21.3
+      "blastPct": 21.3,
+      "expectedHr": 1.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "543309": {
       "source": "savant",
@@ -9044,7 +11077,14 @@
       "batSpeed": 70.9,
       "swingStrength": 35.2,
       "solidContactPct": 2.3,
-      "blastPct": 10.1
+      "blastPct": 10.1,
+      "expectedHr": 4.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "681082": {
       "source": "savant",
@@ -9072,7 +11112,14 @@
       "batSpeed": 70.0,
       "swingStrength": 38.1,
       "solidContactPct": 8.3,
-      "blastPct": 14.5
+      "blastPct": 14.5,
+      "expectedHr": 6.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 5,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "547180": {
       "source": "savant",
@@ -9100,7 +11147,14 @@
       "batSpeed": 74.3,
       "swingStrength": 31.4,
       "solidContactPct": 6.9,
-      "blastPct": 17.7
+      "blastPct": 17.7,
+      "expectedHr": 15.4,
+      "hrLuckDiff": -1.6,
+      "mostlyGone": 14,
+      "noDoubters": 5,
+      "doubters": 8,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "621550": {
       "source": "savant",
@@ -9128,7 +11182,14 @@
       "batSpeed": 76.3,
       "swingStrength": 30.8,
       "solidContactPct": 4.3,
-      "blastPct": 17.3
+      "blastPct": 17.3,
+      "expectedHr": 1.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "686668": {
       "source": "savant",
@@ -9156,7 +11217,14 @@
       "batSpeed": 71.9,
       "swingStrength": 24.1,
       "solidContactPct": 5.6,
-      "blastPct": 13.5
+      "blastPct": 13.5,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "663604": {
       "source": "savant",
@@ -9212,7 +11280,15 @@
       "batSpeed": 71.3,
       "swingStrength": 33.1,
       "solidContactPct": 6.8,
-      "blastPct": 14.4
+      "blastPct": 14.4,
+      "expectedHr": 8.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 8,
+      "noDoubters": 2,
+      "doubters": 6,
+      "nearHr": 5,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "676572": {
       "source": "savant",
@@ -9240,7 +11316,13 @@
       "batSpeed": 72.4,
       "swingStrength": 31.6,
       "solidContactPct": 0.0,
-      "blastPct": 21.1
+      "blastPct": 21.1,
+      "expectedHr": 0.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "663993": {
       "source": "savant",
@@ -9268,7 +11350,14 @@
       "batSpeed": 74.4,
       "swingStrength": 23.6,
       "solidContactPct": 5.7,
-      "blastPct": 14.2
+      "blastPct": 14.2,
+      "expectedHr": 8.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 5,
+      "noDoubters": 5,
+      "doubters": 4,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "592518": {
       "source": "savant",
@@ -9296,7 +11385,15 @@
       "batSpeed": 74.5,
       "swingStrength": 27.8,
       "solidContactPct": 6.6,
-      "blastPct": 15.3
+      "blastPct": 15.3,
+      "expectedHr": 11.4,
+      "hrLuckDiff": -2.6,
+      "mostlyGone": 12,
+      "noDoubters": 3,
+      "doubters": 4,
+      "nearHr": 12,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "628451": {
       "source": "savant",
@@ -9324,7 +11421,14 @@
       "batSpeed": 70.7,
       "swingStrength": 37.8,
       "solidContactPct": 4.5,
-      "blastPct": 5.4
+      "blastPct": 5.4,
+      "expectedHr": 0.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "813841": {
       "source": "savant",
@@ -9352,7 +11456,13 @@
       "batSpeed": 70.0,
       "swingStrength": 36.4,
       "solidContactPct": 11.1,
-      "blastPct": 9.1
+      "blastPct": 9.1,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "650968": {
       "source": "savant",
@@ -9408,7 +11518,14 @@
       "batSpeed": 72.8,
       "swingStrength": 36.3,
       "solidContactPct": 1.7,
-      "blastPct": 19.6
+      "blastPct": 19.6,
+      "expectedHr": 1.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "671286": {
       "source": "savant",
@@ -9464,7 +11581,15 @@
       "batSpeed": 74.5,
       "swingStrength": 35.3,
       "solidContactPct": 5.1,
-      "blastPct": 22.9
+      "blastPct": 22.9,
+      "expectedHr": 10.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 10,
+      "noDoubters": 3,
+      "doubters": 3,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "682998": {
       "source": "savant",
@@ -9492,7 +11617,15 @@
       "batSpeed": 75.6,
       "swingStrength": 34.3,
       "solidContactPct": 3.3,
-      "blastPct": 18.3
+      "blastPct": 18.3,
+      "expectedHr": 14.0,
+      "hrLuckDiff": 1.0,
+      "mostlyGone": 11,
+      "noDoubters": 5,
+      "doubters": 3,
+      "nearHr": 14,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "666464": {
       "source": "savant",
@@ -9520,7 +11653,14 @@
       "batSpeed": 74.7,
       "swingStrength": 21.3,
       "solidContactPct": 3.8,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 0.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "672515": {
       "source": "savant",
@@ -9548,7 +11688,14 @@
       "batSpeed": 71.3,
       "swingStrength": 34.3,
       "solidContactPct": 5.6,
-      "blastPct": 14.6
+      "blastPct": 14.6,
+      "expectedHr": 6.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 5,
+      "noDoubters": 3,
+      "doubters": 4,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "664023": {
       "source": "savant",
@@ -9576,7 +11723,15 @@
       "batSpeed": 72.0,
       "swingStrength": 29.2,
       "solidContactPct": 9.7,
-      "blastPct": 15.6
+      "blastPct": 15.6,
+      "expectedHr": 17.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 9,
+      "noDoubters": 10,
+      "doubters": 4,
+      "nearHr": 9,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "691373": {
       "source": "savant",
@@ -9604,7 +11759,14 @@
       "batSpeed": 74.2,
       "swingStrength": 27.1,
       "solidContactPct": 12.0,
-      "blastPct": 10.4
+      "blastPct": 10.4,
+      "expectedHr": 0.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "640492": {
       "source": "savant",
@@ -9660,7 +11822,14 @@
       "batSpeed": 71.9,
       "swingStrength": 30.3,
       "solidContactPct": 10.7,
-      "blastPct": 14.4
+      "blastPct": 14.4,
+      "expectedHr": 3.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 5,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "672580": {
       "source": "savant",
@@ -9688,7 +11857,14 @@
       "batSpeed": 72.0,
       "swingStrength": 37.9,
       "solidContactPct": 4.0,
-      "blastPct": 16.5
+      "blastPct": 16.5,
+      "expectedHr": 4.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "694192": {
       "source": "savant",
@@ -9716,7 +11892,15 @@
       "batSpeed": 74.9,
       "swingStrength": 33.0,
       "solidContactPct": 4.5,
-      "blastPct": 20.0
+      "blastPct": 20.0,
+      "expectedHr": 6.3,
+      "hrLuckDiff": -3.7,
+      "mostlyGone": 8,
+      "noDoubters": 2,
+      "doubters": 8,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "656811": {
       "source": "savant",
@@ -9744,7 +11928,15 @@
       "batSpeed": 70.7,
       "swingStrength": 35.1,
       "solidContactPct": 8.5,
-      "blastPct": 12.0
+      "blastPct": 12.0,
+      "expectedHr": 9.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 14,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 14,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "805904": {
       "source": "savant",
@@ -9772,7 +11964,14 @@
       "batSpeed": 76.3,
       "swingStrength": 34.0,
       "solidContactPct": 10.0,
-      "blastPct": 22.0
+      "blastPct": 22.0,
+      "expectedHr": 2.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "687231": {
       "source": "savant",
@@ -9800,7 +11999,13 @@
       "batSpeed": 69.1,
       "swingStrength": 28.3,
       "solidContactPct": 4.1,
-      "blastPct": 7.1
+      "blastPct": 7.1,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "622268": {
       "source": "savant",
@@ -9828,7 +12033,14 @@
       "batSpeed": 67.3,
       "swingStrength": 45.9,
       "solidContactPct": 12.7,
-      "blastPct": 16.3
+      "blastPct": 16.3,
+      "expectedHr": 3.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 4,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "660710": {
       "source": "savant",
@@ -9856,7 +12068,14 @@
       "batSpeed": 73.6,
       "swingStrength": 23.5,
       "solidContactPct": 2.6,
-      "blastPct": 11.8
+      "blastPct": 11.8,
+      "expectedHr": 3.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 2,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 19,
+      "hrTrackerSource": "savant-hr"
     },
     "680869": {
       "source": "savant",
@@ -9884,7 +12103,15 @@
       "batSpeed": 73.8,
       "swingStrength": 33.3,
       "solidContactPct": 9.0,
-      "blastPct": 15.1
+      "blastPct": 15.1,
+      "expectedHr": 6.8,
+      "hrLuckDiff": -4.2,
+      "mostlyGone": 9,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "672724": {
       "source": "savant",
@@ -9912,7 +12139,14 @@
       "batSpeed": 72.2,
       "swingStrength": 29.3,
       "solidContactPct": 4.4,
-      "blastPct": 15.0
+      "blastPct": 15.0,
+      "expectedHr": 8.5,
+      "hrLuckDiff": 1.5,
+      "mostlyGone": 4,
+      "noDoubters": 5,
+      "doubters": 5,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "696285": {
       "source": "savant",
@@ -9940,7 +12174,15 @@
       "batSpeed": 69.5,
       "swingStrength": 44.3,
       "solidContactPct": 5.3,
-      "blastPct": 15.7
+      "blastPct": 15.7,
+      "expectedHr": 10.2,
+      "hrLuckDiff": 2.2,
+      "mostlyGone": 7,
+      "noDoubters": 5,
+      "doubters": 1,
+      "nearHr": 15,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "660844": {
       "source": "savant",
@@ -9996,7 +12238,14 @@
       "batSpeed": 74.6,
       "swingStrength": 28.1,
       "solidContactPct": 3.1,
-      "blastPct": 14.9
+      "blastPct": 14.9,
+      "expectedHr": 4.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 0,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "677595": {
       "source": "savant",
@@ -10024,7 +12273,13 @@
       "batSpeed": 75.3,
       "swingStrength": 22.0,
       "solidContactPct": 5.0,
-      "blastPct": 10.0
+      "blastPct": 10.0,
+      "expectedHr": 0.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "802139": {
       "source": "savant",
@@ -10052,7 +12307,15 @@
       "batSpeed": 72.6,
       "swingStrength": 35.1,
       "solidContactPct": 10.0,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 10.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 10,
+      "noDoubters": 3,
+      "doubters": 4,
+      "nearHr": 7,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "691406": {
       "source": "savant",
@@ -10080,7 +12343,14 @@
       "batSpeed": 80.0,
       "swingStrength": 31.3,
       "solidContactPct": 5.7,
-      "blastPct": 26.4
+      "blastPct": 26.4,
+      "expectedHr": 13.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 7,
+      "noDoubters": 9,
+      "doubters": 2,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "661388": {
       "source": "savant",
@@ -10108,7 +12378,14 @@
       "batSpeed": 73.3,
       "swingStrength": 41.3,
       "solidContactPct": 10.6,
-      "blastPct": 19.3
+      "blastPct": 19.3,
+      "expectedHr": 6.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 5,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "669288": {
       "source": "savant",
@@ -10164,7 +12441,14 @@
       "batSpeed": 72.3,
       "swingStrength": 33.3,
       "solidContactPct": 9.6,
-      "blastPct": 10.8
+      "blastPct": 10.8,
+      "expectedHr": 3.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 4,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "514888": {
       "source": "savant",
@@ -10192,7 +12476,14 @@
       "batSpeed": 68.9,
       "swingStrength": 37.1,
       "solidContactPct": 3.1,
-      "blastPct": 11.3
+      "blastPct": 11.3,
+      "expectedHr": 6.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "665487": {
       "source": "savant",
@@ -10220,7 +12511,15 @@
       "batSpeed": 75.5,
       "swingStrength": 36.8,
       "solidContactPct": 7.3,
-      "blastPct": 23.6
+      "blastPct": 23.6,
+      "expectedHr": 4.6,
+      "hrLuckDiff": 2.6,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 6,
+      "nearHr": 9,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "518692": {
       "source": "savant",
@@ -10248,7 +12547,15 @@
       "batSpeed": 70.4,
       "swingStrength": 33.4,
       "solidContactPct": 8.1,
-      "blastPct": 15.1
+      "blastPct": 15.1,
+      "expectedHr": 11.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 13,
+      "noDoubters": 3,
+      "doubters": 4,
+      "nearHr": 9,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "641680": {
       "source": "savant",
@@ -10276,7 +12583,14 @@
       "batSpeed": 69.9,
       "swingStrength": 32.5,
       "solidContactPct": 5.7,
-      "blastPct": 10.3
+      "blastPct": 10.3,
+      "expectedHr": 5.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "672761": {
       "source": "savant",
@@ -10304,7 +12618,14 @@
       "batSpeed": 71.4,
       "swingStrength": 36.6,
       "solidContactPct": 4.5,
-      "blastPct": 13.7
+      "blastPct": 13.7,
+      "expectedHr": 5.1,
+      "hrLuckDiff": -1.9,
+      "mostlyGone": 4,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "686765": {
       "source": "savant",
@@ -10332,7 +12653,14 @@
       "batSpeed": 68.6,
       "swingStrength": 25.6,
       "solidContactPct": 0.0,
-      "blastPct": 7.7
+      "blastPct": 7.7,
+      "expectedHr": 0.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "677951": {
       "source": "savant",
@@ -10360,7 +12688,14 @@
       "batSpeed": 73.6,
       "swingStrength": 37.0,
       "solidContactPct": 7.8,
-      "blastPct": 20.5
+      "blastPct": 20.5,
+      "expectedHr": 8.1,
+      "hrLuckDiff": -1.9,
+      "mostlyGone": 6,
+      "noDoubters": 4,
+      "doubters": 5,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "665804": {
       "source": "savant",
@@ -10388,7 +12723,14 @@
       "batSpeed": 70.0,
       "swingStrength": 31.3,
       "solidContactPct": 5.1,
-      "blastPct": 9.5
+      "blastPct": 9.5,
+      "expectedHr": 2.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 4,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "683748": {
       "source": "savant",
@@ -10416,7 +12758,14 @@
       "batSpeed": 73.8,
       "swingStrength": 24.6,
       "solidContactPct": 0.0,
-      "blastPct": 11.6
+      "blastPct": 11.6,
+      "expectedHr": 2.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "621493": {
       "source": "savant",
@@ -10444,7 +12793,14 @@
       "batSpeed": 68.0,
       "swingStrength": 42.3,
       "solidContactPct": 7.7,
-      "blastPct": 12.5
+      "blastPct": 12.5,
+      "expectedHr": 5.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 4,
+      "doubters": 6,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "595879": {
       "source": "savant",
@@ -10472,7 +12828,14 @@
       "batSpeed": 72.5,
       "swingStrength": 28.2,
       "solidContactPct": 3.2,
-      "blastPct": 11.8
+      "blastPct": 11.8,
+      "expectedHr": 0.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "695257": {
       "source": "savant",
@@ -10528,7 +12891,14 @@
       "batSpeed": 70.4,
       "swingStrength": 34.9,
       "solidContactPct": 12.1,
-      "blastPct": 15.1
+      "blastPct": 15.1,
+      "expectedHr": 2.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "689414": {
       "source": "savant",
@@ -10556,7 +12926,15 @@
       "batSpeed": 68.2,
       "swingStrength": 41.2,
       "solidContactPct": 3.1,
-      "blastPct": 12.8
+      "blastPct": 12.8,
+      "expectedHr": 11.3,
+      "hrLuckDiff": -1.7,
+      "mostlyGone": 11,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 16,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "808982": {
       "source": "savant",
@@ -10584,7 +12962,14 @@
       "batSpeed": 68.5,
       "swingStrength": 42.3,
       "solidContactPct": 5.4,
-      "blastPct": 9.6
+      "blastPct": 9.6,
+      "expectedHr": 4.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 4,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "608324": {
       "source": "savant",
@@ -10612,7 +12997,14 @@
       "batSpeed": 69.8,
       "swingStrength": 37.0,
       "solidContactPct": 6.0,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 5.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 4,
+      "noDoubters": 3,
+      "doubters": 3,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "666397": {
       "source": "savant",
@@ -10640,7 +13032,14 @@
       "batSpeed": 71.5,
       "swingStrength": 35.9,
       "solidContactPct": 10.2,
-      "blastPct": 15.1
+      "blastPct": 15.1,
+      "expectedHr": 1.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "656716": {
       "source": "savant",
@@ -10668,7 +13067,14 @@
       "batSpeed": 68.9,
       "swingStrength": 26.9,
       "solidContactPct": 4.1,
-      "blastPct": 6.3
+      "blastPct": 6.3,
+      "expectedHr": 2.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "643446": {
       "source": "savant",
@@ -10696,7 +13102,13 @@
       "batSpeed": 68.1,
       "swingStrength": 32.4,
       "solidContactPct": 2.1,
-      "blastPct": 5.4
+      "blastPct": 5.4,
+      "expectedHr": 2.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "664702": {
       "source": "savant",
@@ -10724,7 +13136,14 @@
       "batSpeed": 69.1,
       "swingStrength": 41.0,
       "solidContactPct": 0.0,
-      "blastPct": 9.0
+      "blastPct": 9.0,
+      "expectedHr": 2.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 19,
+      "hrTrackerSource": "savant-hr"
     },
     "810938": {
       "source": "savant",
@@ -10752,7 +13171,14 @@
       "batSpeed": 69.6,
       "swingStrength": 36.7,
       "solidContactPct": 6.1,
-      "blastPct": 12.4
+      "blastPct": 12.4,
+      "expectedHr": 1.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "682674": {
       "source": "savant",
@@ -10780,7 +13206,13 @@
       "batSpeed": 75.3,
       "swingStrength": 26.9,
       "solidContactPct": 0.0,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 0.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "656305": {
       "source": "savant",
@@ -10808,7 +13240,14 @@
       "batSpeed": 76.0,
       "swingStrength": 23.0,
       "solidContactPct": 5.2,
-      "blastPct": 13.6
+      "blastPct": 13.6,
+      "expectedHr": 5.7,
+      "hrLuckDiff": -1.3,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "595978": {
       "source": "savant",
@@ -10836,7 +13275,14 @@
       "batSpeed": 69.2,
       "swingStrength": 35.1,
       "solidContactPct": 2.3,
-      "blastPct": 12.7
+      "blastPct": 12.7,
+      "expectedHr": 2.3,
+      "hrLuckDiff": 1.3,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 16,
+      "hrTrackerSource": "savant-hr"
     },
     "641355": {
       "source": "savant",
@@ -10864,7 +13310,15 @@
       "batSpeed": 69.5,
       "swingStrength": 40.5,
       "solidContactPct": 5.4,
-      "blastPct": 12.8
+      "blastPct": 12.8,
+      "expectedHr": 8.4,
+      "hrLuckDiff": -2.6,
+      "mostlyGone": 9,
+      "noDoubters": 3,
+      "doubters": 6,
+      "nearHr": 5,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "608070": {
       "source": "savant",
@@ -10892,7 +13346,14 @@
       "batSpeed": 70.1,
       "swingStrength": 31.4,
       "solidContactPct": 9.3,
-      "blastPct": 13.7
+      "blastPct": 13.7,
+      "expectedHr": 8.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 4,
+      "noDoubters": 6,
+      "doubters": 3,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "682663": {
       "source": "savant",
@@ -10920,7 +13381,14 @@
       "batSpeed": 75.9,
       "swingStrength": 27.0,
       "solidContactPct": 8.1,
-      "blastPct": 14.5
+      "blastPct": 14.5,
+      "expectedHr": 2.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 3,
+      "noDoubters": 1,
+      "doubters": 0,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "666023": {
       "source": "savant",
@@ -10948,7 +13416,14 @@
       "batSpeed": 69.8,
       "swingStrength": 28.7,
       "solidContactPct": 5.2,
-      "blastPct": 6.6
+      "blastPct": 6.6,
+      "expectedHr": 3.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 0,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "682634": {
       "source": "savant",
@@ -11004,7 +13479,14 @@
       "batSpeed": 73.5,
       "swingStrength": 28.6,
       "solidContactPct": 2.6,
-      "blastPct": 14.6
+      "blastPct": 14.6,
+      "expectedHr": 5.2,
+      "hrLuckDiff": -1.8,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "805672": {
       "source": "savant",
@@ -11060,7 +13542,14 @@
       "batSpeed": 71.9,
       "swingStrength": 29.3,
       "solidContactPct": 10.2,
-      "blastPct": 12.5
+      "blastPct": 12.5,
+      "expectedHr": 6.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 1,
+      "noDoubters": 5,
+      "doubters": 4,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "665750": {
       "source": "savant",
@@ -11088,7 +13577,14 @@
       "batSpeed": 72.8,
       "swingStrength": 27.4,
       "solidContactPct": 4.9,
-      "blastPct": 10.0
+      "blastPct": 10.0,
+      "expectedHr": 1.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "650489": {
       "source": "savant",
@@ -11116,7 +13612,14 @@
       "batSpeed": 72.8,
       "swingStrength": 26.1,
       "solidContactPct": 7.8,
-      "blastPct": 11.4
+      "blastPct": 11.4,
+      "expectedHr": 5.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 5,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "690984": {
       "source": "savant",
@@ -11144,7 +13647,14 @@
       "batSpeed": 69.7,
       "swingStrength": 27.1,
       "solidContactPct": 6.5,
-      "blastPct": 11.9
+      "blastPct": 11.9,
+      "expectedHr": 1.3,
+      "hrLuckDiff": 1.3,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 19,
+      "hrTrackerSource": "savant-hr"
     },
     "694374": {
       "source": "savant",
@@ -11172,7 +13682,13 @@
       "batSpeed": 74.3,
       "swingStrength": 19.8,
       "solidContactPct": 6.1,
-      "blastPct": 8.8
+      "blastPct": 8.8,
+      "expectedHr": 0.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "519317": {
       "source": "savant",
@@ -11200,7 +13716,14 @@
       "batSpeed": 79.3,
       "swingStrength": 30.3,
       "solidContactPct": 4.9,
-      "blastPct": 22.2
+      "blastPct": 22.2,
+      "expectedHr": 4.9,
+      "hrLuckDiff": 1.9,
+      "mostlyGone": 3,
+      "noDoubters": 3,
+      "doubters": 2,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "663837": {
       "source": "savant",
@@ -11228,7 +13751,14 @@
       "batSpeed": 70.8,
       "swingStrength": 33.2,
       "solidContactPct": 5.0,
-      "blastPct": 11.6
+      "blastPct": 11.6,
+      "expectedHr": 3.6,
+      "hrLuckDiff": -1.4,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "592206": {
       "source": "savant",
@@ -11256,7 +13786,14 @@
       "batSpeed": 69.7,
       "swingStrength": 32.9,
       "solidContactPct": 8.4,
-      "blastPct": 12.4
+      "blastPct": 12.4,
+      "expectedHr": 5.3,
+      "hrLuckDiff": 1.3,
+      "mostlyGone": 4,
+      "noDoubters": 3,
+      "doubters": 2,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "606466": {
       "source": "savant",
@@ -11284,7 +13821,14 @@
       "batSpeed": 74.6,
       "swingStrength": 34.7,
       "solidContactPct": 4.7,
-      "blastPct": 21.8
+      "blastPct": 21.8,
+      "expectedHr": 13.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 4,
+      "noDoubters": 9,
+      "doubters": 5,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "668804": {
       "source": "savant",
@@ -11312,7 +13856,14 @@
       "batSpeed": 73.0,
       "swingStrength": 32.7,
       "solidContactPct": 5.7,
-      "blastPct": 17.1
+      "blastPct": 17.1,
+      "expectedHr": 11.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 5,
+      "noDoubters": 8,
+      "doubters": 6,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "672012": {
       "source": "savant",
@@ -11340,7 +13891,14 @@
       "batSpeed": 71.6,
       "swingStrength": 27.8,
       "solidContactPct": 10.0,
-      "blastPct": 2.8
+      "blastPct": 2.8,
+      "expectedHr": 0.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "664040": {
       "source": "savant",
@@ -11368,7 +13926,14 @@
       "batSpeed": 73.5,
       "swingStrength": 34.1,
       "solidContactPct": 9.0,
-      "blastPct": 17.0
+      "blastPct": 17.0,
+      "expectedHr": 18.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 14,
+      "noDoubters": 8,
+      "doubters": 4,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "694203": {
       "source": "savant",
@@ -11396,7 +13961,14 @@
       "batSpeed": 74.1,
       "swingStrength": 31.1,
       "solidContactPct": 7.3,
-      "blastPct": 14.9
+      "blastPct": 14.9,
+      "expectedHr": 2.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "596115": {
       "source": "savant",
@@ -11424,7 +13996,13 @@
       "batSpeed": 71.1,
       "swingStrength": 29.5,
       "solidContactPct": 8.2,
-      "blastPct": 13.2
+      "blastPct": 13.2,
+      "expectedHr": 3.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "673237": {
       "source": "savant",
@@ -11452,7 +14030,13 @@
       "batSpeed": 72.3,
       "swingStrength": 40.1,
       "solidContactPct": 4.1,
-      "blastPct": 11.2
+      "blastPct": 11.2,
+      "expectedHr": 1.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "673357": {
       "source": "savant",
@@ -11480,7 +14064,14 @@
       "batSpeed": 76.0,
       "swingStrength": 29.3,
       "solidContactPct": 10.3,
-      "blastPct": 17.9
+      "blastPct": 17.9,
+      "expectedHr": 1.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "680474": {
       "source": "savant",
@@ -11508,7 +14099,14 @@
       "batSpeed": 70.6,
       "swingStrength": 17.6,
       "solidContactPct": 5.0,
-      "blastPct": 14.7
+      "blastPct": 14.7,
+      "expectedHr": 0.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "676391": {
       "source": "savant",
@@ -11536,7 +14134,15 @@
       "batSpeed": 67.7,
       "swingStrength": 39.1,
       "solidContactPct": 6.8,
-      "blastPct": 6.7
+      "blastPct": 6.7,
+      "expectedHr": 6.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 8,
+      "noDoubters": 0,
+      "doubters": 7,
+      "nearHr": 5,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "686452": {
       "source": "savant",
@@ -11564,7 +14170,14 @@
       "batSpeed": 67.9,
       "swingStrength": 30.9,
       "solidContactPct": 3.6,
-      "blastPct": 5.9
+      "blastPct": 5.9,
+      "expectedHr": 2.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "641820": {
       "source": "savant",
@@ -11592,7 +14205,14 @@
       "batSpeed": 74.5,
       "swingStrength": 24.0,
       "solidContactPct": 0.0,
-      "blastPct": 16.0
+      "blastPct": 16.0,
+      "expectedHr": 0.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "682622": {
       "source": "savant",
@@ -11620,7 +14240,14 @@
       "batSpeed": 72.2,
       "swingStrength": 31.3,
       "solidContactPct": 0.0,
-      "blastPct": 11.1
+      "blastPct": 11.1,
+      "expectedHr": 3.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 1,
+      "noDoubters": 3,
+      "doubters": 0,
+      "nearHr": 20,
+      "hrTrackerSource": "savant-hr"
     },
     "571448": {
       "source": "savant",
@@ -11648,7 +14275,14 @@
       "batSpeed": 71.4,
       "swingStrength": 28.4,
       "solidContactPct": 3.6,
-      "blastPct": 7.2
+      "blastPct": 7.2,
+      "expectedHr": 6.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 2,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "691720": {
       "source": "savant",
@@ -11676,7 +14310,14 @@
       "batSpeed": 70.1,
       "swingStrength": 32.9,
       "solidContactPct": 4.8,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 3.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 4,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "663656": {
       "source": "savant",
@@ -11704,7 +14345,14 @@
       "batSpeed": 71.2,
       "swingStrength": 32.5,
       "solidContactPct": 5.2,
-      "blastPct": 10.4
+      "blastPct": 10.4,
+      "expectedHr": 6.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 5,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "675659": {
       "source": "savant",
@@ -11788,7 +14436,14 @@
       "batSpeed": 73.6,
       "swingStrength": 25.0,
       "solidContactPct": 16.7,
-      "blastPct": 17.9
+      "blastPct": 17.9,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 1.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "677060": {
       "source": "savant",
@@ -11844,7 +14499,15 @@
       "batSpeed": 74.7,
       "swingStrength": 31.8,
       "solidContactPct": 7.2,
-      "blastPct": 19.4
+      "blastPct": 19.4,
+      "expectedHr": 7.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 9,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 15,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "500743": {
       "source": "savant",
@@ -11872,7 +14535,13 @@
       "batSpeed": 69.1,
       "swingStrength": 39.4,
       "solidContactPct": 1.9,
-      "blastPct": 11.9
+      "blastPct": 11.9,
+      "expectedHr": 1.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "702284": {
       "source": "savant",
@@ -11900,7 +14569,14 @@
       "batSpeed": 71.8,
       "swingStrength": 33.7,
       "solidContactPct": 7.8,
-      "blastPct": 12.0
+      "blastPct": 12.0,
+      "expectedHr": 6.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 15,
+      "hrTrackerSource": "savant-hr"
     },
     "669004": {
       "source": "savant",
@@ -11928,7 +14604,14 @@
       "batSpeed": 74.2,
       "swingStrength": 30.3,
       "solidContactPct": 10.6,
-      "blastPct": 18.7
+      "blastPct": 18.7,
+      "expectedHr": 4.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 5,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 14,
+      "hrTrackerSource": "savant-hr"
     },
     "694371": {
       "source": "savant",
@@ -11956,7 +14639,13 @@
       "batSpeed": 72.0,
       "swingStrength": 32.2,
       "solidContactPct": 3.4,
-      "blastPct": 16.1
+      "blastPct": 16.1,
+      "expectedHr": 2.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "672960": {
       "source": "savant",
@@ -11984,7 +14673,14 @@
       "batSpeed": 73.4,
       "swingStrength": 34.8,
       "solidContactPct": 5.7,
-      "blastPct": 17.5
+      "blastPct": 17.5,
+      "expectedHr": 16.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 13,
+      "noDoubters": 6,
+      "doubters": 7,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "691783": {
       "source": "savant",
@@ -12012,7 +14708,13 @@
       "batSpeed": 69.6,
       "swingStrength": 34.5,
       "solidContactPct": 3.6,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "669699": {
       "source": "savant",
@@ -12040,7 +14742,14 @@
       "batSpeed": 69.5,
       "swingStrength": 40.7,
       "solidContactPct": 3.1,
-      "blastPct": 9.3
+      "blastPct": 9.3,
+      "expectedHr": 2.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "671277": {
       "source": "savant",
@@ -12068,7 +14777,15 @@
       "batSpeed": 73.5,
       "swingStrength": 33.5,
       "solidContactPct": 3.9,
-      "blastPct": 19.9
+      "blastPct": 19.9,
+      "expectedHr": 9.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 10,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 5,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "663457": {
       "source": "savant",
@@ -12096,7 +14813,14 @@
       "batSpeed": 73.9,
       "swingStrength": 42.9,
       "solidContactPct": 10.3,
-      "blastPct": 17.5
+      "blastPct": 17.5,
+      "expectedHr": 2.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "624641": {
       "source": "savant",
@@ -12124,7 +14848,14 @@
       "batSpeed": 72.1,
       "swingStrength": 26.6,
       "solidContactPct": 7.4,
-      "blastPct": 13.1
+      "blastPct": 13.1,
+      "expectedHr": 3.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 3,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "691023": {
       "source": "savant",
@@ -12152,7 +14883,14 @@
       "batSpeed": 79.0,
       "swingStrength": 30.8,
       "solidContactPct": 7.4,
-      "blastPct": 23.3
+      "blastPct": 23.3,
+      "expectedHr": 16.2,
+      "hrLuckDiff": -1.8,
+      "mostlyGone": 11,
+      "noDoubters": 7,
+      "doubters": 6,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "660670": {
       "source": "savant",
@@ -12180,7 +14918,14 @@
       "batSpeed": 76.0,
       "swingStrength": 28.7,
       "solidContactPct": 8.3,
-      "blastPct": 17.1
+      "blastPct": 17.1,
+      "expectedHr": 8.5,
+      "hrLuckDiff": 1.5,
+      "mostlyGone": 5,
+      "noDoubters": 5,
+      "doubters": 6,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "660821": {
       "source": "savant",
@@ -12208,7 +14953,14 @@
       "batSpeed": 73.8,
       "swingStrength": 29.9,
       "solidContactPct": 7.4,
-      "blastPct": 16.7
+      "blastPct": 16.7,
+      "expectedHr": 6.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 5,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "645302": {
       "source": "savant",
@@ -12236,7 +14988,14 @@
       "batSpeed": 69.1,
       "swingStrength": 34.7,
       "solidContactPct": 2.0,
-      "blastPct": 8.0
+      "blastPct": 8.0,
+      "expectedHr": 0.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 13,
+      "hrTrackerSource": "savant-hr"
     },
     "596019": {
       "source": "savant",
@@ -12264,7 +15023,14 @@
       "batSpeed": 73.0,
       "swingStrength": 29.0,
       "solidContactPct": 5.4,
-      "blastPct": 14.5
+      "blastPct": 14.5,
+      "expectedHr": 2.6,
+      "hrLuckDiff": 0.6,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "669208": {
       "source": "savant",
@@ -12320,7 +15086,14 @@
       "batSpeed": 74.9,
       "swingStrength": 32.6,
       "solidContactPct": 6.4,
-      "blastPct": 19.6
+      "blastPct": 19.6,
+      "expectedHr": 9.2,
+      "hrLuckDiff": -0.8,
+      "mostlyGone": 7,
+      "noDoubters": 4,
+      "doubters": 2,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "686469": {
       "source": "savant",
@@ -12348,7 +15121,14 @@
       "batSpeed": 70.2,
       "swingStrength": 31.7,
       "solidContactPct": 6.8,
-      "blastPct": 11.8
+      "blastPct": 11.8,
+      "expectedHr": 6.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "701538": {
       "source": "savant",
@@ -12376,7 +15156,14 @@
       "batSpeed": 73.6,
       "swingStrength": 27.9,
       "solidContactPct": 8.1,
-      "blastPct": 13.7
+      "blastPct": 13.7,
+      "expectedHr": 7.3,
+      "hrLuckDiff": -0.7,
+      "mostlyGone": 4,
+      "noDoubters": 5,
+      "doubters": 8,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "690993": {
       "source": "savant",
@@ -12404,7 +15191,14 @@
       "batSpeed": 72.1,
       "swingStrength": 41.9,
       "solidContactPct": 5.5,
-      "blastPct": 18.7
+      "blastPct": 18.7,
+      "expectedHr": 4.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 5,
+      "noDoubters": 1,
+      "doubters": 4,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "608348": {
       "source": "savant",
@@ -12432,7 +15226,14 @@
       "batSpeed": 71.1,
       "swingStrength": 36.8,
       "solidContactPct": 4.2,
-      "blastPct": 15.4
+      "blastPct": 15.4,
+      "expectedHr": 4.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 1,
+      "noDoubters": 3,
+      "doubters": 2,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "681481": {
       "source": "savant",
@@ -12460,7 +15261,14 @@
       "batSpeed": 72.0,
       "swingStrength": 30.0,
       "solidContactPct": 12.7,
-      "blastPct": 10.6
+      "blastPct": 10.6,
+      "expectedHr": 6.4,
+      "hrLuckDiff": -3.6,
+      "mostlyGone": 7,
+      "noDoubters": 1,
+      "doubters": 4,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "660271": {
       "source": "savant",
@@ -12488,7 +15296,14 @@
       "batSpeed": 74.7,
       "swingStrength": 36.8,
       "solidContactPct": 6.1,
-      "blastPct": 21.0
+      "blastPct": 21.0,
+      "expectedHr": 15.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 14,
+      "noDoubters": 5,
+      "doubters": 4,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "624512": {
       "source": "savant",
@@ -12544,7 +15359,14 @@
       "batSpeed": 75.2,
       "swingStrength": 27.0,
       "solidContactPct": 5.6,
-      "blastPct": 15.7
+      "blastPct": 15.7,
+      "expectedHr": 15.8,
+      "hrLuckDiff": -5.2,
+      "mostlyGone": 8,
+      "noDoubters": 10,
+      "doubters": 5,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "691777": {
       "source": "savant",
@@ -12572,7 +15394,14 @@
       "batSpeed": 74.6,
       "swingStrength": 29.1,
       "solidContactPct": 8.8,
-      "blastPct": 19.1
+      "blastPct": 19.1,
+      "expectedHr": 3.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 3,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "656413": {
       "source": "savant",
@@ -12628,7 +15457,14 @@
       "batSpeed": 70.4,
       "swingStrength": 32.5,
       "solidContactPct": 9.3,
-      "blastPct": 13.2
+      "blastPct": 13.2,
+      "expectedHr": 1.4,
+      "hrLuckDiff": -1.6,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 5,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "687859": {
       "source": "savant",
@@ -12656,7 +15492,14 @@
       "batSpeed": 69.9,
       "swingStrength": 38.0,
       "solidContactPct": 6.7,
-      "blastPct": 14.1
+      "blastPct": 14.1,
+      "expectedHr": 2.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 6,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "669065": {
       "source": "savant",
@@ -12684,7 +15527,14 @@
       "batSpeed": 74.9,
       "swingStrength": 29.1,
       "solidContactPct": 6.8,
-      "blastPct": 18.9
+      "blastPct": 18.9,
+      "expectedHr": 8.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 5,
+      "noDoubters": 4,
+      "doubters": 6,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "670097": {
       "source": "savant",
@@ -12712,7 +15562,14 @@
       "batSpeed": 70.5,
       "swingStrength": 33.8,
       "solidContactPct": 6.7,
-      "blastPct": 6.2
+      "blastPct": 6.2,
+      "expectedHr": 0.4,
+      "hrLuckDiff": 0.4,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "663586": {
       "source": "savant",
@@ -12740,7 +15597,14 @@
       "batSpeed": 75.6,
       "swingStrength": 30.4,
       "solidContactPct": 8.4,
-      "blastPct": 16.8
+      "blastPct": 16.8,
+      "expectedHr": 7.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 5,
+      "noDoubters": 4,
+      "doubters": 7,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "671739": {
       "source": "savant",
@@ -12768,7 +15632,15 @@
       "batSpeed": 74.9,
       "swingStrength": 32.4,
       "solidContactPct": 6.9,
-      "blastPct": 22.8
+      "blastPct": 22.8,
+      "expectedHr": 12.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 8,
+      "noDoubters": 6,
+      "doubters": 7,
+      "nearHr": 7,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "681297": {
       "source": "savant",
@@ -12796,7 +15668,14 @@
       "batSpeed": 74.9,
       "swingStrength": 24.8,
       "solidContactPct": 7.8,
-      "blastPct": 12.6
+      "blastPct": 12.6,
+      "expectedHr": 7.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 1,
+      "noDoubters": 7,
+      "doubters": 1,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "663368": {
       "source": "savant",
@@ -12824,7 +15703,14 @@
       "batSpeed": 70.5,
       "swingStrength": 30.8,
       "solidContactPct": 4.8,
-      "blastPct": 10.3
+      "blastPct": 10.3,
+      "expectedHr": 1.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "677594": {
       "source": "savant",
@@ -12852,7 +15738,15 @@
       "batSpeed": 76.6,
       "swingStrength": 26.3,
       "solidContactPct": 8.7,
-      "blastPct": 17.9
+      "blastPct": 17.9,
+      "expectedHr": 14.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 8,
+      "noDoubters": 8,
+      "doubters": 1,
+      "nearHr": 15,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "681508": {
       "source": "savant",
@@ -12880,7 +15774,14 @@
       "batSpeed": 71.9,
       "swingStrength": 41.7,
       "solidContactPct": 7.1,
-      "blastPct": 13.6
+      "blastPct": 13.6,
+      "expectedHr": 1.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "669221": {
       "source": "savant",
@@ -12964,7 +15865,14 @@
       "batSpeed": 74.7,
       "swingStrength": 25.4,
       "solidContactPct": 5.6,
-      "blastPct": 15.4
+      "blastPct": 15.4,
+      "expectedHr": 9.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 3,
+      "noDoubters": 7,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "691718": {
       "source": "savant",
@@ -12992,7 +15900,14 @@
       "batSpeed": 74.9,
       "swingStrength": 29.8,
       "solidContactPct": 8.5,
-      "blastPct": 18.2
+      "blastPct": 18.2,
+      "expectedHr": 15.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 13,
+      "noDoubters": 6,
+      "doubters": 5,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "606992": {
       "source": "savant",
@@ -13020,7 +15935,13 @@
       "batSpeed": 71.9,
       "swingStrength": 29.2,
       "solidContactPct": 2.4,
-      "blastPct": 13.8
+      "blastPct": 13.8,
+      "expectedHr": 2.2,
+      "hrLuckDiff": -1.8,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "646240": {
       "source": "savant",
@@ -13048,7 +15969,15 @@
       "batSpeed": 71.7,
       "swingStrength": 33.2,
       "solidContactPct": 12.3,
-      "blastPct": 17.4
+      "blastPct": 17.4,
+      "expectedHr": 13.1,
+      "hrLuckDiff": 2.1,
+      "mostlyGone": 13,
+      "noDoubters": 3,
+      "doubters": 6,
+      "nearHr": 12,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "802415": {
       "source": "savant",
@@ -13104,7 +16033,15 @@
       "batSpeed": 71.6,
       "swingStrength": 30.9,
       "solidContactPct": 6.0,
-      "blastPct": 13.6
+      "blastPct": 13.6,
+      "expectedHr": 10.9,
+      "hrLuckDiff": 0.9,
+      "mostlyGone": 8,
+      "noDoubters": 4,
+      "doubters": 7,
+      "nearHr": 6,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "641487": {
       "source": "savant",
@@ -13132,7 +16069,15 @@
       "batSpeed": 71.5,
       "swingStrength": 34.4,
       "solidContactPct": 6.1,
-      "blastPct": 11.6
+      "blastPct": 11.6,
+      "expectedHr": 8.8,
+      "hrLuckDiff": -1.2,
+      "mostlyGone": 8,
+      "noDoubters": 2,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "669369": {
       "source": "savant",
@@ -13188,7 +16133,13 @@
       "batSpeed": 74.4,
       "swingStrength": 29.2,
       "solidContactPct": 3.9,
-      "blastPct": 13.9
+      "blastPct": 13.9,
+      "expectedHr": 1.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "467793": {
       "source": "savant",
@@ -13244,7 +16195,14 @@
       "batSpeed": 72.2,
       "swingStrength": 29.6,
       "solidContactPct": 5.6,
-      "blastPct": 15.2
+      "blastPct": 15.2,
+      "expectedHr": 3.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 8,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "694514": {
       "source": "savant",
@@ -13272,7 +16230,14 @@
       "batSpeed": 75.4,
       "swingStrength": 24.4,
       "solidContactPct": 14.6,
-      "blastPct": 12.2
+      "blastPct": 12.2,
+      "expectedHr": 2.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "656976": {
       "source": "savant",
@@ -13300,7 +16265,13 @@
       "batSpeed": 70.9,
       "swingStrength": 31.8,
       "solidContactPct": 0.0,
-      "blastPct": 7.6
+      "blastPct": 7.6,
+      "expectedHr": 0.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "695681": {
       "source": "savant",
@@ -13356,7 +16327,14 @@
       "batSpeed": 72.3,
       "swingStrength": 36.5,
       "solidContactPct": 6.3,
-      "blastPct": 14.6
+      "blastPct": 14.6,
+      "expectedHr": 2.5,
+      "hrLuckDiff": -0.5,
+      "mostlyGone": 4,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "664954": {
       "source": "savant",
@@ -13384,7 +16362,14 @@
       "batSpeed": 67.2,
       "swingStrength": 35.9,
       "solidContactPct": 8.2,
-      "blastPct": 8.3
+      "blastPct": 8.3,
+      "expectedHr": 2.7,
+      "hrLuckDiff": -1.3,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "683953": {
       "source": "savant",
@@ -13412,7 +16397,14 @@
       "batSpeed": 69.6,
       "swingStrength": 35.4,
       "solidContactPct": 8.0,
-      "blastPct": 9.2
+      "blastPct": 9.2,
+      "expectedHr": 7.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 6,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "694378": {
       "source": "savant",
@@ -13440,7 +16432,13 @@
       "batSpeed": 71.7,
       "swingStrength": 23.8,
       "solidContactPct": 6.1,
-      "blastPct": 8.8
+      "blastPct": 8.8,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "665966": {
       "source": "savant",
@@ -13468,7 +16466,14 @@
       "batSpeed": 71.5,
       "swingStrength": 29.6,
       "solidContactPct": 7.1,
-      "blastPct": 10.2
+      "blastPct": 10.2,
+      "expectedHr": 1.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "694249": {
       "source": "savant",
@@ -13496,7 +16501,13 @@
       "batSpeed": 74.4,
       "swingStrength": 15.7,
       "solidContactPct": 11.8,
-      "blastPct": 9.8
+      "blastPct": 9.8,
+      "expectedHr": 2.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "686554": {
       "source": "savant",
@@ -13551,7 +16562,14 @@
       "batSpeed": 67.6,
       "swingStrength": 27.2,
       "solidContactPct": 0.0,
-      "blastPct": 3.2
+      "blastPct": 3.2,
+      "expectedHr": 0.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "681807": {
       "source": "savant",
@@ -13579,7 +16597,13 @@
       "batSpeed": 70.5,
       "swingStrength": 22.8,
       "solidContactPct": 1.5,
-      "blastPct": 8.7
+      "blastPct": 8.7,
+      "expectedHr": 2.1,
+      "hrLuckDiff": -1.9,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "681393": {
       "source": "savant",
@@ -13607,7 +16631,14 @@
       "batSpeed": 70.5,
       "swingStrength": 28.2,
       "solidContactPct": 6.2,
-      "blastPct": 7.2
+      "blastPct": 7.2,
+      "expectedHr": 5.8,
+      "hrLuckDiff": 1.8,
+      "mostlyGone": 5,
+      "noDoubters": 2,
+      "doubters": 5,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "673962": {
       "source": "savant",
@@ -13635,7 +16666,14 @@
       "batSpeed": 70.7,
       "swingStrength": 39.1,
       "solidContactPct": 9.4,
-      "blastPct": 15.9
+      "blastPct": 15.9,
+      "expectedHr": 4.8,
+      "hrLuckDiff": -3.2,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "676724": {
       "source": "savant",
@@ -13663,7 +16701,14 @@
       "batSpeed": 73.4,
       "swingStrength": 28.7,
       "solidContactPct": 5.9,
-      "blastPct": 17.2
+      "blastPct": 17.2,
+      "expectedHr": 3.6,
+      "hrLuckDiff": -0.4,
+      "mostlyGone": 2,
+      "noDoubters": 2,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "691458": {
       "source": "savant",
@@ -13691,7 +16736,13 @@
       "batSpeed": 73.2,
       "swingStrength": 35.1,
       "solidContactPct": 0.0,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "668723": {
       "source": "savant",
@@ -13719,7 +16770,14 @@
       "batSpeed": 76.1,
       "swingStrength": 22.5,
       "solidContactPct": 5.2,
-      "blastPct": 13.9
+      "blastPct": 13.9,
+      "expectedHr": 5.7,
+      "hrLuckDiff": 0.7,
+      "mostlyGone": 1,
+      "noDoubters": 5,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "701762": {
       "source": "savant",
@@ -13747,7 +16805,14 @@
       "batSpeed": 78.3,
       "swingStrength": 27.6,
       "solidContactPct": 9.1,
-      "blastPct": 22.6
+      "blastPct": 22.6,
+      "expectedHr": 15.1,
+      "hrLuckDiff": -3.9,
+      "mostlyGone": 10,
+      "noDoubters": 8,
+      "doubters": 3,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "666181": {
       "source": "savant",
@@ -13775,7 +16840,13 @@
       "batSpeed": 73.6,
       "swingStrength": 30.5,
       "solidContactPct": 6.9,
-      "blastPct": 13.6
+      "blastPct": 13.6,
+      "expectedHr": 2.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "664731": {
       "source": "savant",
@@ -13831,7 +16902,14 @@
       "batSpeed": 76.2,
       "swingStrength": 31.2,
       "solidContactPct": 3.7,
-      "blastPct": 19.1
+      "blastPct": 19.1,
+      "expectedHr": 4.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 3,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "807799": {
       "source": "savant",
@@ -13859,7 +16937,14 @@
       "batSpeed": 71.0,
       "swingStrength": 43.9,
       "solidContactPct": 3.8,
-      "blastPct": 14.8
+      "blastPct": 14.8,
+      "expectedHr": 1.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 0,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "666126": {
       "source": "savant",
@@ -13887,7 +16972,14 @@
       "batSpeed": 70.6,
       "swingStrength": 37.4,
       "solidContactPct": 2.5,
-      "blastPct": 17.7
+      "blastPct": 17.7,
+      "expectedHr": 5.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 5,
+      "noDoubters": 2,
+      "doubters": 0,
+      "nearHr": 8,
+      "hrTrackerSource": "savant-hr"
     },
     "686780": {
       "source": "savant",
@@ -13915,7 +17007,14 @@
       "batSpeed": 72.4,
       "swingStrength": 25.3,
       "solidContactPct": 8.0,
-      "blastPct": 11.5
+      "blastPct": 11.5,
+      "expectedHr": 3.0,
+      "hrLuckDiff": -1.0,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "676694": {
       "source": "savant",
@@ -13943,7 +17042,14 @@
       "batSpeed": 67.3,
       "swingStrength": 33.3,
       "solidContactPct": 3.2,
-      "blastPct": 6.0
+      "blastPct": 6.0,
+      "expectedHr": 3.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "663728": {
       "source": "savant",
@@ -13971,7 +17077,15 @@
       "batSpeed": 74.7,
       "swingStrength": 18.9,
       "solidContactPct": 3.4,
-      "blastPct": 8.8
+      "blastPct": 8.8,
+      "expectedHr": 8.6,
+      "hrLuckDiff": 1.6,
+      "mostlyGone": 8,
+      "noDoubters": 3,
+      "doubters": 2,
+      "nearHr": 11,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "678218": {
       "source": "savant",
@@ -13999,7 +17113,14 @@
       "batSpeed": 72.8,
       "swingStrength": 28.1,
       "solidContactPct": 6.8,
-      "blastPct": 12.9
+      "blastPct": 12.9,
+      "expectedHr": 6.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 4,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "665877": {
       "source": "savant",
@@ -14027,7 +17148,14 @@
       "batSpeed": 67.7,
       "swingStrength": 40.0,
       "solidContactPct": 4.5,
-      "blastPct": 9.0
+      "blastPct": 9.0,
+      "expectedHr": 1.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "650859": {
       "source": "savant",
@@ -14055,7 +17183,14 @@
       "batSpeed": 71.0,
       "swingStrength": 36.9,
       "solidContactPct": 3.0,
-      "blastPct": 11.6
+      "blastPct": 11.6,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "664983": {
       "source": "savant",
@@ -14083,7 +17218,14 @@
       "batSpeed": 71.1,
       "swingStrength": 30.2,
       "solidContactPct": 3.0,
-      "blastPct": 8.9
+      "blastPct": 8.9,
+      "expectedHr": 3.1,
+      "hrLuckDiff": -1.9,
+      "mostlyGone": 3,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "805300": {
       "source": "savant",
@@ -14111,7 +17253,14 @@
       "batSpeed": 70.4,
       "swingStrength": 30.0,
       "solidContactPct": 4.6,
-      "blastPct": 9.6
+      "blastPct": 9.6,
+      "expectedHr": 3.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 2,
+      "noDoubters": 2,
+      "doubters": 5,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "669701": {
       "source": "savant",
@@ -14167,7 +17316,14 @@
       "batSpeed": 70.2,
       "swingStrength": 35.6,
       "solidContactPct": 4.8,
-      "blastPct": 11.4
+      "blastPct": 11.4,
+      "expectedHr": 3.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 3,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "642215": {
       "source": "savant",
@@ -14195,7 +17351,14 @@
       "batSpeed": 72.7,
       "swingStrength": 25.0,
       "solidContactPct": 11.8,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 1.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 0,
+      "nearHr": 21,
+      "hrTrackerSource": "savant-hr"
     },
     "506702": {
       "source": "savant",
@@ -14251,7 +17414,14 @@
       "batSpeed": 72.2,
       "swingStrength": 26.6,
       "solidContactPct": 12.0,
-      "blastPct": 12.8
+      "blastPct": 12.8,
+      "expectedHr": 1.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "807747": {
       "source": "savant",
@@ -14335,7 +17505,14 @@
       "batSpeed": 75.8,
       "swingStrength": 29.2,
       "solidContactPct": 13.3,
-      "blastPct": 18.1
+      "blastPct": 18.1,
+      "expectedHr": 2.3,
+      "hrLuckDiff": 0.3,
+      "mostlyGone": 0,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "695734": {
       "source": "savant",
@@ -14363,7 +17540,15 @@
       "batSpeed": 70.8,
       "swingStrength": 33.9,
       "solidContactPct": 5.5,
-      "blastPct": 13.0
+      "blastPct": 13.0,
+      "expectedHr": 10.1,
+      "hrLuckDiff": 2.1,
+      "mostlyGone": 5,
+      "noDoubters": 5,
+      "doubters": 8,
+      "nearHr": 7,
+      "hrLuckFlag": "due",
+      "hrTrackerSource": "savant-hr"
     },
     "605141": {
       "source": "savant",
@@ -14391,7 +17576,14 @@
       "batSpeed": 69.5,
       "swingStrength": 46.8,
       "solidContactPct": 6.0,
-      "blastPct": 13.4
+      "blastPct": 13.4,
+      "expectedHr": 5.7,
+      "hrLuckDiff": -2.3,
+      "mostlyGone": 6,
+      "noDoubters": 1,
+      "doubters": 5,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "669899": {
       "source": "savant",
@@ -14419,7 +17611,14 @@
       "batSpeed": 71.3,
       "swingStrength": 27.6,
       "solidContactPct": 3.0,
-      "blastPct": 11.8
+      "blastPct": 11.8,
+      "expectedHr": 3.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 0,
+      "noDoubters": 3,
+      "doubters": 1,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "669707": {
       "source": "savant",
@@ -14447,7 +17646,14 @@
       "batSpeed": 70.8,
       "swingStrength": 35.1,
       "solidContactPct": 3.0,
-      "blastPct": 13.1
+      "blastPct": 13.1,
+      "expectedHr": 0.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "nearHr": 7,
+      "hrTrackerSource": "savant-hr"
     },
     "668939": {
       "source": "savant",
@@ -14475,7 +17681,15 @@
       "batSpeed": 71.0,
       "swingStrength": 36.4,
       "solidContactPct": 7.0,
-      "blastPct": 16.3
+      "blastPct": 16.3,
+      "expectedHr": 6.7,
+      "hrLuckDiff": -1.3,
+      "mostlyGone": 8,
+      "noDoubters": 1,
+      "doubters": 5,
+      "nearHr": 8,
+      "hrLuckFlag": "park",
+      "hrTrackerSource": "savant-hr"
     },
     "593428": {
       "source": "savant",
@@ -14503,7 +17717,14 @@
       "batSpeed": 72.0,
       "swingStrength": 34.3,
       "solidContactPct": 4.4,
-      "blastPct": 12.8
+      "blastPct": 12.8,
+      "expectedHr": 7.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 3,
+      "noDoubters": 5,
+      "doubters": 4,
+      "nearHr": 2,
+      "hrTrackerSource": "savant-hr"
     },
     "596117": {
       "source": "savant",
@@ -14559,7 +17780,14 @@
       "batSpeed": 74.7,
       "swingStrength": 28.9,
       "solidContactPct": 8.4,
-      "blastPct": 14.0
+      "blastPct": 14.0,
+      "expectedHr": 2.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 2,
+      "doubters": 2,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "682668": {
       "source": "savant",
@@ -14587,7 +17815,14 @@
       "batSpeed": 72.2,
       "swingStrength": 38.2,
       "solidContactPct": 2.8,
-      "blastPct": 17.6
+      "blastPct": 17.6,
+      "expectedHr": 1.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 4,
+      "hrTrackerSource": "savant-hr"
     },
     "502671": {
       "source": "savant",
@@ -14615,7 +17850,14 @@
       "batSpeed": 71.5,
       "swingStrength": 32.6,
       "solidContactPct": 4.8,
-      "blastPct": 15.3
+      "blastPct": 15.3,
+      "expectedHr": 10.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 4,
+      "noDoubters": 7,
+      "doubters": 4,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "650391": {
       "source": "savant",
@@ -14671,7 +17913,14 @@
       "batSpeed": 70.6,
       "swingStrength": 36.8,
       "solidContactPct": 4.6,
-      "blastPct": 13.0
+      "blastPct": 13.0,
+      "expectedHr": 2.4,
+      "hrLuckDiff": -0.6,
+      "mostlyGone": 3,
+      "noDoubters": 1,
+      "doubters": 0,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "678246": {
       "source": "savant",
@@ -14699,7 +17948,14 @@
       "batSpeed": 74.2,
       "swingStrength": 32.1,
       "solidContactPct": 7.7,
-      "blastPct": 17.1
+      "blastPct": 17.1,
+      "expectedHr": 16.2,
+      "hrLuckDiff": 0.2,
+      "mostlyGone": 12,
+      "noDoubters": 8,
+      "doubters": 6,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "592450": {
       "source": "savant",
@@ -14727,7 +17983,14 @@
       "batSpeed": 76.1,
       "swingStrength": 31.5,
       "solidContactPct": 5.6,
-      "blastPct": 20.5
+      "blastPct": 20.5,
+      "expectedHr": 16.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 8,
+      "noDoubters": 12,
+      "doubters": 1,
+      "nearHr": 12,
+      "hrTrackerSource": "savant-hr"
     },
     "687462": {
       "source": "savant",
@@ -14755,7 +18018,14 @@
       "batSpeed": 69.1,
       "swingStrength": 34.7,
       "solidContactPct": 4.4,
-      "blastPct": 10.9
+      "blastPct": 10.9,
+      "expectedHr": 9.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 7,
+      "noDoubters": 4,
+      "doubters": 3,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "695238": {
       "source": "savant",
@@ -14811,7 +18081,14 @@
       "batSpeed": 70.7,
       "swingStrength": 32.4,
       "solidContactPct": 4.9,
-      "blastPct": 10.8
+      "blastPct": 10.8,
+      "expectedHr": 2.1,
+      "hrLuckDiff": 1.1,
+      "mostlyGone": 3,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "687221": {
       "source": "savant",
@@ -14839,7 +18116,14 @@
       "batSpeed": 72.4,
       "swingStrength": 32.9,
       "solidContactPct": 5.3,
-      "blastPct": 17.9
+      "blastPct": 17.9,
+      "expectedHr": 6.4,
+      "hrLuckDiff": -1.6,
+      "mostlyGone": 7,
+      "noDoubters": 1,
+      "doubters": 2,
+      "nearHr": 9,
+      "hrTrackerSource": "savant-hr"
     },
     "694384": {
       "source": "savant",
@@ -14867,7 +18151,14 @@
       "batSpeed": 68.0,
       "swingStrength": 37.2,
       "solidContactPct": 4.2,
-      "blastPct": 9.5
+      "blastPct": 9.5,
+      "expectedHr": 5.1,
+      "hrLuckDiff": 0.1,
+      "mostlyGone": 4,
+      "noDoubters": 2,
+      "doubters": 4,
+      "nearHr": 6,
+      "hrTrackerSource": "savant-hr"
     },
     "699013": {
       "source": "savant",
@@ -14895,7 +18186,14 @@
       "batSpeed": 74.2,
       "swingStrength": 31.0,
       "solidContactPct": 7.1,
-      "blastPct": 24.1
+      "blastPct": 24.1,
+      "expectedHr": 1.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 1,
+      "nearHr": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "680737": {
       "source": "savant",
@@ -14923,7 +18221,13 @@
       "batSpeed": 70.1,
       "swingStrength": 31.0,
       "solidContactPct": 3.8,
-      "blastPct": 0.0
+      "blastPct": 0.0,
+      "expectedHr": 0.7,
+      "hrLuckDiff": -0.3,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "681546": {
       "source": "savant",
@@ -14951,7 +18255,13 @@
       "batSpeed": 72.0,
       "swingStrength": 24.0,
       "solidContactPct": 9.8,
-      "blastPct": 8.0
+      "blastPct": 8.0,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "621438": {
       "source": "savant",
@@ -14979,7 +18289,14 @@
       "batSpeed": 71.3,
       "swingStrength": 35.0,
       "solidContactPct": 9.8,
-      "blastPct": 10.2
+      "blastPct": 10.2,
+      "expectedHr": 1.9,
+      "hrLuckDiff": -1.1,
+      "mostlyGone": 1,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 10,
+      "hrTrackerSource": "savant-hr"
     },
     "687597": {
       "source": "savant",
@@ -15007,7 +18324,13 @@
       "batSpeed": 73.5,
       "swingStrength": 24.3,
       "solidContactPct": 3.3,
-      "blastPct": 11.2
+      "blastPct": 11.2,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "692216": {
       "source": "savant",
@@ -15035,7 +18358,13 @@
       "batSpeed": 70.4,
       "swingStrength": 25.0,
       "solidContactPct": 7.1,
-      "blastPct": 12.5
+      "blastPct": 12.5,
+      "expectedHr": 0.9,
+      "hrLuckDiff": -0.1,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "621043": {
       "source": "savant",
@@ -15063,7 +18392,14 @@
       "batSpeed": 73.4,
       "swingStrength": 28.3,
       "solidContactPct": 5.2,
-      "blastPct": 16.7
+      "blastPct": 16.7,
+      "expectedHr": 2.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 2,
+      "noDoubters": 1,
+      "doubters": 3,
+      "nearHr": 3,
+      "hrTrackerSource": "savant-hr"
     },
     "680977": {
       "source": "savant",
@@ -15091,7 +18427,14 @@
       "batSpeed": 68.5,
       "swingStrength": 36.7,
       "solidContactPct": 8.6,
-      "blastPct": 10.1
+      "blastPct": 10.1,
+      "expectedHr": 1.0,
+      "hrLuckDiff": -2.0,
+      "mostlyGone": 2,
+      "noDoubters": 0,
+      "doubters": 2,
+      "nearHr": 11,
+      "hrTrackerSource": "savant-hr"
     },
     "668904": {
       "source": "savant",
@@ -15119,7 +18462,14 @@
       "batSpeed": 74.4,
       "swingStrength": 28.6,
       "solidContactPct": 4.4,
-      "blastPct": 15.2
+      "blastPct": 15.2,
+      "expectedHr": 7.5,
+      "hrLuckDiff": 0.5,
+      "mostlyGone": 4,
+      "noDoubters": 4,
+      "doubters": 4,
+      "nearHr": 5,
+      "hrTrackerSource": "savant-hr"
     },
     "693459": {
       "source": "savant",
@@ -15196,7 +18546,13 @@
       "pa": 7,
       "bip": 4,
       "bipPct": 57.1,
-      "recentForm": 11.7
+      "recentForm": 11.7,
+      "expectedHr": 0.1,
+      "hrLuckDiff": -0.9,
+      "mostlyGone": 0,
+      "noDoubters": 0,
+      "doubters": 1,
+      "hrTrackerSource": "savant-hr"
     },
     "666931": {
       "source": "savant",
@@ -15229,7 +18585,13 @@
       "pa": 6,
       "bip": 4,
       "bipPct": 66.7,
-      "recentForm": 0.7
+      "recentForm": 0.7,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "682515": {
       "source": "savant",
@@ -15262,7 +18624,13 @@
       "pa": 5,
       "bip": 3,
       "bipPct": 60.0,
-      "recentForm": -6.7
+      "recentForm": -6.7,
+      "expectedHr": 0.8,
+      "hrLuckDiff": -0.2,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "804668": {
       "source": "savant",
@@ -15273,7 +18641,13 @@
       "pa": 5,
       "bip": 3,
       "bipPct": 60.0,
-      "recentForm": 18.4
+      "recentForm": 18.4,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 0,
+      "noDoubters": 1,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "668942": {
       "source": "savant",
@@ -15361,7 +18735,13 @@
       "pa": 4,
       "bip": 4,
       "bipPct": 100.0,
-      "recentForm": 58.9
+      "recentForm": 58.9,
+      "expectedHr": 1.0,
+      "hrLuckDiff": 0.0,
+      "mostlyGone": 1,
+      "noDoubters": 0,
+      "doubters": 0,
+      "hrTrackerSource": "savant-hr"
     },
     "694224": {
       "source": "savant",

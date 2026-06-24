@@ -587,6 +587,27 @@ a:hover { color: #bae6fd; }
     font-weight: 800;
     text-transform: uppercase;
 }
+.rs-flag {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+.rs-flag--due {
+    background: rgba(74, 222, 128, 0.22);
+    color: #86efac;
+    border: 1px solid rgba(74, 222, 128, 0.45);
+}
+.rs-flag--park {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fcd34d;
+    border: 1px solid rgba(251, 191, 36, 0.4);
+}
 .rs-card__section {
     padding: 10px 14px 12px;
     border-bottom: 1px solid rgba(148, 163, 184, 0.08);

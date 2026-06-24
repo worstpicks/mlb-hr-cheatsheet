@@ -154,11 +154,28 @@
         return new URLSearchParams(window.location.search).get(name);
     }
 
+    function todayLocalIso() {
+        const d = new Date();
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${y}-${m}-${day}`;
+    }
+
     function sheetDateFromQuery() {
         const d = qs("date");
         if (d && /^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
-        const meta = document.querySelector('meta[name="research-date"]');
-        return meta?.content || new Date().toISOString().slice(0, 10);
+        return todayLocalIso();
+    }
+
+    function initResearchDate() {
+        const date = sheetDateFromQuery();
+        if (!qs("date")) {
+            const url = new URL(window.location.href);
+            url.searchParams.set("date", date);
+            window.history.replaceState({}, "", url);
+        }
+        return date;
     }
 
     function seasonFromDate(date) {
@@ -2366,6 +2383,7 @@
             btn.addEventListener("click", async () => {
                 activeGameIdx = parseInt(btn.getAttribute("data-idx"), 10);
                 pickDefaultSide();
+                resetSortToDefault();
                 renderAll();
                 const game = activeGame();
                 if (game && !weatherIsComplete(game.parkWeather)) {
@@ -2555,6 +2573,7 @@
         els.tableHead.querySelectorAll("tr.rs-col-row th").forEach((th) => {
             th.addEventListener("click", () => {
                 const key = th.getAttribute("data-key");
+                sortUserOverride = true;
                 if (sortKey === key) sortDir *= -1;
                 else {
                     sortKey = key;
@@ -2700,6 +2719,7 @@
         activeGameIdx = Math.min(activeGameIdx, slate.games.length - 1);
         pickDefaultSide();
         refreshAllHrProps();
+        resetSortToDefault();
         renderAll();
         prefetchSlateWeather().catch((err) => console.warn("weather prefetch", err));
 
@@ -2744,13 +2764,16 @@
         });
         els.sideAway?.addEventListener("click", () => {
             activeSide = "away";
+            resetSortToDefault();
             renderAll();
         });
         els.sideHome?.addEventListener("click", () => {
             activeSide = "home";
+            resetSortToDefault();
             renderAll();
         });
         els.mobileSort?.addEventListener("change", () => {
+            sortUserOverride = true;
             sortKey = els.mobileSort.value || "order";
             sortDir = sortKey === "name" ? 1 : -1;
             syncMobileSortDir();
@@ -2758,6 +2781,7 @@
             renderMobileCards();
         });
         els.mobileSortDir?.addEventListener("click", () => {
+            sortUserOverride = true;
             sortDir *= -1;
             syncMobileSortDir();
             renderTable();
@@ -2780,5 +2804,5 @@
     }
 
     wireUi();
-    loadSlate(sheetDateFromQuery(), false).catch((e) => setStatus(String(e.message || e), true));
+    loadSlate(initResearchDate(), false).catch((e) => setStatus(String(e.message || e), true));
 })();

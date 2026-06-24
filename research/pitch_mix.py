@@ -203,16 +203,32 @@ def score_batter_vs_arsenal(
     }
 
 
-def attach_pitcher_arsenal(pitcher: dict | None, arsenal_lookup: dict[int, dict[str, float]]) -> dict | None:
+def attach_pitcher_arsenal(
+    pitcher: dict | None,
+    arsenal_lookup: dict[int, dict[str, float]],
+    *,
+    prior_lookup: dict[int, dict[str, float]] | None = None,
+    season: int | None = None,
+) -> dict | None:
     if not pitcher:
         return pitcher
     out = dict(pitcher)
     pid = int(out.get("id") or 0)
     arsenal = normalize_arsenal(arsenal_lookup.get(pid))
+    arsenal_season = season
+    if not arsenal and prior_lookup:
+        arsenal = normalize_arsenal(prior_lookup.get(pid))
+        if arsenal and season:
+            arsenal_season = season - 1
     if arsenal:
         out["arsenal"] = arsenal
         top = sorted(arsenal.items(), key=lambda x: -x[1])[:4]
-        out["arsenalLabel"] = " · ".join(f"{pt} {usage:.0f}%" for pt, usage in top)
+        label = " · ".join(f"{pt} {usage:.0f}%" for pt, usage in top)
+        if arsenal_season and season and arsenal_season < season:
+            label += f" ({arsenal_season} mix)"
+        out["arsenalLabel"] = label
+        if arsenal_season is not None:
+            out["arsenalSeason"] = arsenal_season
     return out
 
 

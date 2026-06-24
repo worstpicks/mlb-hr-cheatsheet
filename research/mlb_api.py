@@ -510,6 +510,7 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
     window_start, window_end = window_bounds(sheet_date, days=30)
     savant_lookup: dict[int, dict] = fetch_batter_statcast_lookup(season) if with_stats else {}
     pitcher_arsenal_lookup: dict[int, dict[str, float]] = {}
+    pitcher_arsenal_prior_lookup: dict[int, dict[str, float]] = {}
     batter_pitch_lookup: dict[int, dict[str, dict]] = {}
     league_pitch_avgs: dict[str, dict] = {}
     season_statcast: dict[int, dict] = {}
@@ -532,8 +533,30 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                 Path(__file__).resolve().parent.parent / "preview" / "data",
                 season,
             )
+            if season > 2024:
+                pitcher_arsenal_prior_lookup = fetch_pitcher_arsenal_lookup(season - 1)
+                prior_path = (
+                    Path(__file__).resolve().parent.parent
+                    / "preview"
+                    / "data"
+                    / f"savant-pitcher-arsenal-{season - 1}.json"
+                )
+                prior_path.write_text(
+                    json.dumps(
+                        {
+                            "season": season - 1,
+                            "source": "savant-pitch-arsenal-stats",
+                            "pitchers": len(pitcher_arsenal_prior_lookup),
+                            "lookup": {str(k): v for k, v in pitcher_arsenal_prior_lookup.items()},
+                        },
+                        indent=2,
+                    )
+                    + "\n",
+                    encoding="utf-8",
+                )
         except Exception:
             pitcher_arsenal_lookup = {}
+            pitcher_arsenal_prior_lookup = {}
             batter_pitch_lookup = {}
             league_pitch_avgs = {}
         try:
@@ -585,10 +608,16 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
     for game in games:
         if with_stats:
             game["awayPitcher"] = attach_pitcher_arsenal(
-                game.get("awayPitcher"), pitcher_arsenal_lookup
+                game.get("awayPitcher"),
+                pitcher_arsenal_lookup,
+                prior_lookup=pitcher_arsenal_prior_lookup,
+                season=season,
             )
             game["homePitcher"] = attach_pitcher_arsenal(
-                game.get("homePitcher"), pitcher_arsenal_lookup
+                game.get("homePitcher"),
+                pitcher_arsenal_lookup,
+                prior_lookup=pitcher_arsenal_prior_lookup,
+                season=season,
             )
             game["awayLineup"] = resolve_side_lineup(
                 game.get("awayLineup") or [],
@@ -670,6 +699,7 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         "window_batters": len(window_lookup),
         "savant_lookup": {str(k): v for k, v in savant_lookup.items()},
         "pitcher_arsenal_lookup": {str(k): v for k, v in pitcher_arsenal_lookup.items()},
+        "pitcher_arsenal_prior_lookup": {str(k): v for k, v in pitcher_arsenal_prior_lookup.items()},
         "batter_pitch_lookup": {str(k): v for k, v in batter_pitch_lookup.items()},
         "league_pitch_avgs": league_pitch_avgs,
         "games": games,

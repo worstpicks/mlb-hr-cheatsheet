@@ -1549,12 +1549,36 @@
     }
 
     function lineupsHavePitchMix(games) {
+        let total = 0;
+        let withMix = 0;
         for (const g of games || []) {
             for (const h of [...(g.awayLineup || []), ...(g.homeLineup || [])]) {
-                if (h.stats?.mixPlus != null) return true;
+                if (!h?.id) continue;
+                total += 1;
+                if (h.stats?.mixPlus != null) withMix += 1;
             }
         }
-        return false;
+        return { total, withMix, any: withMix > 0, full: total > 0 && withMix === total };
+    }
+
+    function opposingPitcher(game, offenseSide) {
+        if (!game) return null;
+        return offenseSide === "away" ? game.homePitcher : game.awayPitcher;
+    }
+
+    function pitchMixStatusForSide(game, offenseSide, season) {
+        const pitcher = opposingPitcher(game, offenseSide);
+        if (!pitcher?.id) {
+            return { available: false, reason: "probable starter not announced yet" };
+        }
+        if (!pitcher.arsenal || !Object.keys(pitcher.arsenal).length) {
+            return {
+                available: false,
+                reason: `${pitcher.name} has no Savant pitch-mix data yet (rookie or too few 2026 pitches)`,
+            };
+        }
+        const priorSeason = pitcher.arsenalSeason != null && season && pitcher.arsenalSeason < season;
+        return { available: true, priorSeason };
     }
 
     function normalizeArsenal(raw, minUsage = 5) {
@@ -1613,14 +1637,22 @@
         };
     }
 
-    function attachPitcherArsenal(pitcher, pitcherArsenalLookup) {
+    function attachPitcherArsenal(pitcher, pitcherArsenalLookup, priorLookup, season) {
         if (!pitcher) return pitcher;
         const out = { ...pitcher };
         const pid = out.id;
-        const arsenal = normalizeArsenal(pitcherArsenalLookup?.[pid] || pitcherArsenalLookup?.[String(pid)]);
+        let arsenal = normalizeArsenal(pitcherArsenalLookup?.[pid] || pitcherArsenalLookup?.[String(pid)]);
+        let arsenalSeason = season;
+        if (!Object.keys(arsenal).length && priorLookup) {
+            arsenal = normalizeArsenal(priorLookup?.[pid] || priorLookup?.[String(pid)]);
+            if (Object.keys(arsenal).length && season) arsenalSeason = season - 1;
+        }
         if (Object.keys(arsenal).length) {
             out.arsenal = arsenal;
-            out.arsenalLabel = formatArsenal(arsenal);
+            let label = formatArsenal(arsenal);
+            if (arsenalSeason && season && arsenalSeason < season) label += ` (${arsenalSeason} mix)`;
+            out.arsenalLabel = label;
+            out.arsenalSeason = arsenalSeason;
         }
         return out;
     }
@@ -1653,20 +1685,26 @@
         if (slate?.pitcher_arsenal_lookup && Object.keys(slate.pitcher_arsenal_lookup).length) {
             pitchMixCache = {
                 pitcherArsenal: slate.pitcher_arsenal_lookup,
+                pitcherArsenalPrior: slate.pitcher_arsenal_prior_lookup || {},
                 batterPitch: slate.batter_pitch_lookup || {},
                 leagueAvgs: slate.league_pitch_avgs || {},
             };
             return pitchMixCache;
         }
-        const [arsenalRes, batterRes] = await Promise.all([
+        const priorSeason = season > 2024 ? season - 1 : null;
+        const fetches = [
             fetchDataJson(`savant-pitcher-arsenal-${season}.json`),
             fetchDataJson(`savant-batter-pitch-type-${season}.json`),
-        ]);
+        ];
+        if (priorSeason) fetches.push(fetchDataJson(`savant-pitcher-arsenal-${priorSeason}.json`));
+        const results = await Promise.all(fetches);
+        const [arsenalRes, batterRes, priorRes] = results;
         pitchMixCache = {
             pitcherArsenal: arsenalRes.data?.lookup || {},
+            pitcherArsenalPrior: priorRes?.data?.lookup || {},
             batterPitch: batterRes.data?.lookup || {},
             leagueAvgs: batterRes.data?.leagueAvgs || {},
-            lastStatus: `${arsenalRes.lastStatus}; ${batterRes.lastStatus}`,
+            lastStatus: `${arsenalRes.lastStatus}; ${batterRes.lastStatus}${priorRes ? `; ${priorRes.lastStatus}` : ""}`,
         };
         return pitchMixCache;
     }
@@ -1679,16 +1717,25 @@
     }
 
     async function applyPitchMixEnrichment(season) {
-        if (lineupsHavePitchMix(slate?.games)) return { n: 0, source: "preserve" };
         const caches = await ensurePitchMixCaches(season);
-        if (!Object.keys(caches.pitcherArsenal || {}).length) {
+        if (!Object.keys(caches.pitcherArsenal || {}).length && !Object.keys(caches.pitcherArsenalPrior || {}).length) {
             return { n: 0, source: null, lastStatus: caches.lastStatus };
         }
         const savMap = savantLookupMapFromSlate();
         let n = 0;
         for (const game of slate.games || []) {
-            game.awayPitcher = attachPitcherArsenal(game.awayPitcher, caches.pitcherArsenal);
-            game.homePitcher = attachPitcherArsenal(game.homePitcher, caches.pitcherArsenal);
+            game.awayPitcher = attachPitcherArsenal(
+                game.awayPitcher,
+                caches.pitcherArsenal,
+                caches.pitcherArsenalPrior,
+                season
+            );
+            game.homePitcher = attachPitcherArsenal(
+                game.homePitcher,
+                caches.pitcherArsenal,
+                caches.pitcherArsenalPrior,
+                season
+            );
             game.awayLineup = enrichLineupPitchMix(
                 game.awayLineup,
                 game.homePitcher,
@@ -1727,6 +1774,7 @@
             "savant_lookup",
             "propfinder_lookup",
             "pitcher_arsenal_lookup",
+            "pitcher_arsenal_prior_lookup",
             "batter_pitch_lookup",
             "league_pitch_avgs",
             "season",
@@ -1820,7 +1868,7 @@
 
         if (slate?.savant_lookup && Object.keys(slate.savant_lookup).length) {
             const patched = applySavantFromSlate();
-            if (lineupsHavePitchMix(slate?.games)) {
+            if (lineupsHavePitchMix(slate?.games).any) {
                 return { n: patched, source: patched ? "patch-savant-gaps" : "preserve-enriched" };
             }
             if (patched > 0) return { n: patched, source: cached.url || "embedded" };
@@ -2319,11 +2367,17 @@
         const projected = rows.length && rows.every((r) => r.projected);
         els.matchupTitle.textContent = `${offense} hitters${projected ? " (proj)" : ""}`;
         if (els.matchupSp) {
+            const season = seasonFromDate(slate?.sheet_date || els.dateInput?.value || "");
+            const mixStatus = pitchMixStatusForSide(game, activeSide, season);
             const mix = pitcher?.arsenalLabel || formatArsenal(pitcher?.arsenal);
             const risk = fmtPitcherRisk(pitcher?.stats);
-            els.matchupSp.textContent = pitcher?.name
+            let sp = pitcher?.name
                 ? `vs ${pitcher.name}${mix ? ` · ${mix}` : ""}${risk ? ` · ${risk}` : ""}`
                 : "vs TBD";
+            if (!mixStatus.available && rows.length) {
+                sp += ` · Mix% / Edge% unavailable — ${mixStatus.reason}`;
+            }
+            els.matchupSp.textContent = sp;
         }
         if (els.sideAway) {
             els.sideAway.textContent = game.away;
@@ -2639,12 +2693,18 @@
             return;
         }
 
-        if (!lineupsHavePitchMix(slate.games)) {
+        const mixCoverage = lineupsHavePitchMix(slate.games);
+        if (!mixCoverage.any) {
             setStatus(
                 `Pitch mix unavailable for ${date} — starter arsenal or batter pitch-type cache missing. Run: python fetch-research-slate.py --date ${date}`,
                 true
             );
             return;
+        }
+        if (!mixCoverage.full) {
+            console.info(
+                `Pitch mix partial for ${date}: ${mixCoverage.withMix}/${mixCoverage.total} hitters (TBD starters or pitchers missing Savant arsenal).`
+            );
         }
 
         clearStatus();

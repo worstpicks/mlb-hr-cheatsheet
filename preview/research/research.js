@@ -79,6 +79,7 @@
     let slate = null;
     let savantLookup = null;
     let pitchMixCache = null;
+    let parkFactorsLookup = null;
     let stadiumCoords = null;
     let activeGameIdx = 0;
     let activeSide = "away";
@@ -272,6 +273,15 @@
     const WX_DISTANCE_BOOST_PER_1000FT = 2.75;
     let wxBaselineDaFt = null;
 
+    const PARK_GAME_KEY_ALIASES = {
+        "MIA @ WSH": "MIA @ WAS",
+        "KC @ WSH": "KC @ WAS",
+        "PHI @ WSH": "PHI @ WAS",
+        "CLE @ CWS": "CLE @ CHW",
+        "CWS @ MIN": "CHW @ MIN",
+        "CWS @ NYY": "CHW @ NYY",
+    };
+
     function normVenueKey(name) {
         return String(name || "")
             .toLowerCase()
@@ -462,6 +472,54 @@
             stadiumCoords = {};
         }
         return stadiumCoords;
+    }
+
+    function attachParkFactorToGame(game, lookup) {
+        if (!game || !lookup) return false;
+        const byGame = lookup.by_game || {};
+        const byVenue = lookup.by_venue || {};
+        let key = String(game.matchup || "")
+            .toUpperCase()
+            .replace(/\s+/g, " ")
+            .trim();
+        key = PARK_GAME_KEY_ALIASES[key] || key;
+        let ctx = byGame[key];
+        if (!ctx) {
+            const vk = normVenueKey(game.venue);
+            ctx = byVenue[vk];
+            if (!ctx && vk) {
+                for (const [venueKey, entry] of Object.entries(byVenue)) {
+                    if (vk.includes(venueKey) || venueKey.includes(vk)) {
+                        ctx = entry;
+                        break;
+                    }
+                }
+            }
+        }
+        if (!ctx) return false;
+        if (ctx.hr_pct != null) game.parkHrPct = ctx.hr_pct;
+        if (ctx.park_lhb_pct != null) game.parkLhbPct = ctx.park_lhb_pct;
+        if (ctx.park_rhb_pct != null) game.parkRhbPct = ctx.park_rhb_pct;
+        if (ctx.venue) game.venue = game.venue || ctx.venue;
+        if (lookup.source_file) game.parkFactorSource = lookup.source_file;
+        return true;
+    }
+
+    async function ensureParkFactorsLookup() {
+        if (parkFactorsLookup) return parkFactorsLookup;
+        const res = await fetchDataJson("park-factors.json");
+        parkFactorsLookup = res.data || null;
+        return parkFactorsLookup;
+    }
+
+    async function applyLatestParkFactors() {
+        const lookup = await ensureParkFactorsLookup();
+        if (!lookup) return 0;
+        let n = 0;
+        for (const game of slate?.games || []) {
+            if (attachParkFactorToGame(game, lookup)) n += 1;
+        }
+        return n;
     }
 
     function lookupStadium(venueName) {
@@ -2681,6 +2739,7 @@
         }
         savantLookup = null;
         pitchMixCache = null;
+        parkFactorsLookup = null;
         if (els.dateInput) els.dateInput.value = date;
         if (els.backLink) els.backLink.href = `../index.html`;
 
@@ -2715,6 +2774,7 @@
         const pfLookup = await ensurePropfinderLookup(date);
         applyPropfinderToAllLineups(pfLookup);
         await ensureBatterHands();
+        await applyLatestParkFactors();
 
         activeGameIdx = Math.min(activeGameIdx, slate.games.length - 1);
         pickDefaultSide();

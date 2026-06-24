@@ -31,6 +31,12 @@ def main() -> None:
     out_path = OUT_DIR / f"research-{sheet_date}.json"
     out_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
+    from research.park_factors import write_park_factors_json
+
+    pf_path = write_park_factors_json(OUT_DIR)
+    if pf_path:
+        print(f"Wrote {pf_path} — latest park factors from CSV scan")
+
     n_games = len(payload.get("games") or [])
     n_hitters = sum(
         len(g.get("awayLineup") or []) + len(g.get("homeLineup") or [])

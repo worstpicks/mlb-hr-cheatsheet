@@ -11,6 +11,7 @@ from typing import Any
 
 from csv_slate_meta import name_lookup_key
 
+from game_row_enrich import TITLE_WEATHER_KEY_ALIASES, load_weather_lookup
 from research.pitch_mix import (
     attach_pitcher_arsenal,
     enrich_lineup_pitch_mix,
@@ -406,6 +407,22 @@ def _collect_player_ids(games: list[dict]) -> list[int]:
     return sorted(ids)
 
 
+def _attach_park_to_games(games: list[dict], sheet_date: str) -> None:
+    weather = load_weather_lookup(sheet_date)
+    for game in games:
+        key = " ".join((game.get("matchup") or "").upper().split())
+        key = TITLE_WEATHER_KEY_ALIASES.get(key, key)
+        ctx = weather.get(key)
+        if not ctx:
+            continue
+        if ctx.get("hr_pct") is not None:
+            game["parkHrPct"] = ctx["hr_pct"]
+        if ctx.get("park_lhb_pct") is not None:
+            game["parkLhbPct"] = ctx["park_lhb_pct"]
+        if ctx.get("park_rhb_pct") is not None:
+            game["parkRhbPct"] = ctx["park_rhb_pct"]
+
+
 def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool = True) -> dict:
     season = _season_from_date(sheet_date)
     roster_season = _roster_season_for_api(season)
@@ -464,6 +481,8 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         game["awayLineup"] = away_lu
         game["homeLineup"] = home_lu
         games.append(game)
+
+    _attach_park_to_games(games, sheet_date)
 
     window_lookup: dict[int, dict] = {}
     if with_stats and not savant_only:

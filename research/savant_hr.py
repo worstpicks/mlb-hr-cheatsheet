@@ -48,19 +48,6 @@ def _extract_data_array(html: str) -> list[dict]:
     return []
 
 
-def _hr_luck_flag(hr_luck_diff: float | None, mostly_gone: int | None, hr_total: int | None) -> str | None:
-    """Actionable regression / park-context tiers for prop research."""
-    if hr_luck_diff is not None and hr_luck_diff >= 2.0:
-        return "due"
-    mg = mostly_gone or 0
-    hr = hr_total or 0
-    if mg >= 6 and hr_luck_diff is not None and hr_luck_diff >= 1.0:
-        return "park"
-    if mg >= 8 and hr <= 15:
-        return "park"
-    return None
-
-
 def _parse_hr_row(row: dict) -> dict:
     xhr = _float(row.get("xhr"))
     hr_total = _int(row.get("hr_total"))
@@ -76,7 +63,6 @@ def _parse_hr_row(row: dict) -> dict:
         "noDoubters": no_doubters,
         "doubters": doublers,
         "nearHr": near_hr,
-        "hrLuckFlag": _hr_luck_flag(hr_luck_diff, mostly_gone, hr_total),
         "hrTrackerSource": "savant-hr",
     }
 

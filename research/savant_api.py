@@ -255,7 +255,6 @@ def merge_into_hitter_stats(
         "mostlyGone",
         "noDoubters",
         "doubters",
-        "hrLuckFlag",
         "hrTrackerSource",
     )
     for key in savant_keys:

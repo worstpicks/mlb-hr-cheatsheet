@@ -49,10 +49,10 @@
         { key: "mixPlus", label: "Mix%", group: "matchup", stat: "mixPlus", fmt: (r) => fmtFormPct(hitterStats(r).mixPlus), tip: "Pitch-mix fit — weighted xwOBA vs this starter's pitch usage compared to league average on those pitches. Positive % = favorable matchup." },
         { key: "mixEdge", label: "Edge%", group: "matchup", stat: "mixEdge", fmt: (r) => fmtFormPct(hitterStats(r).mixEdge), tip: "Personal edge — how the hitter performs vs this pitch mix compared to their own season xwOBA. Positive % = better than their baseline." },
         { key: "hr", label: "HR", group: "power", stat: "hr", fmt: (r) => fmtNum(hitterStats(r).hr), tip: "Home runs — balls hit over the fence. Core measure of raw power." },
-        { key: "expectedHr", label: "xHR", group: "power", stat: "expectedHr", fmt: (r) => fmtRate(hitterStats(r).expectedHr), tip: "Expected home runs — Savant xHR from contact quality and trajectory (park-adjusted)." },
-        { key: "hrLuckDiff", label: "Luck", group: "power", stat: "hrLuckDiff", fmt: (r) => fmtLuck(hitterStats(r).hrLuckDiff), tip: "xHR minus actual HR. Positive = underperforming expected power (due for positive regression). Negative = overperforming." },
-        { key: "mostlyGone", label: "1-7P", group: "power", stat: "mostlyGone", fmt: (r) => fmtNum(hitterStats(r).mostlyGone), tip: "HR in 1–7 parks — homers that would only clear the fence in a handful of stadiums. High counts suggest park-restricted power." },
-        { key: "nearHr", label: "Near HR", group: "power", stat: "nearHr", fmt: (r) => fmtNearHr(r), tip: "Near misses — Savant non-HR batted balls that would have left in some parks; PropFinder NEAR HR used as fallback when Savant is unavailable." },
+        { key: "expectedHr", label: "xHR", group: "power", stat: "expectedHr", fmt: (r) => fmtRate(hitterStats(r).expectedHr), tip: "Expected homers from contact quality — how many HRs Savant thinks this swing profile deserves." },
+        { key: "hrLuckDiff", label: "Due+", group: "power", stat: "hrLuckDiff", fmt: (r) => fmtLuck(hitterStats(r).hrLuckDiff), tip: "Homers owed (xHR minus actual HR). +1 or higher means the hitter is due for a jack." },
+        { key: "mostlyGone", label: "1-7P", group: "power", stat: "mostlyGone", fmt: (r) => fmtNum(hitterStats(r).mostlyGone), tip: "HRs that only play in 1–7 stadiums — used with today's park to flag park-dependent props." },
+        { key: "nearHr", label: "Near HR", group: "power", stat: "nearHr", fmt: (r) => fmtNearHr(r), tip: "Near misses — balls that almost left. 2+ near HRs also triggers the Due badge. PropFinder * fallback when Savant is missing." },
         { key: "avg", label: "AVG", group: "plate", stat: "avg", fmt: (r) => fmtRate(hitterStats(r).avg), tip: "Batting average — hits divided by at-bats. Overall hitting for average." },
         { key: "iso", label: "ISO", group: "plate", stat: "iso", fmt: (r) => fmtRate(hitterStats(r).iso), tip: "Isolated power — slugging minus average. Extra-base hit power per at-bat." },
         { key: "slg", label: "SLG", group: "plate", stat: "slg", fmt: (r) => fmtRate(hitterStats(r).slg), tip: "Slugging percentage — total bases per at-bat. Measures overall power production." },
@@ -210,15 +210,58 @@
         return `${fmtNum(val)}${src}`;
     }
 
-    function hrLuckFlagHtml(stats) {
-        const flag = stats?.hrLuckFlag;
-        if (flag === "due") {
-            return '<span class="rs-flag rs-flag--due" title="Due for positive regression — xHR above actual HR">Due</span>';
+    function parkHrPctForHitter(game, hand) {
+        if (!game) return null;
+        const h = String(hand || "").toUpperCase();
+        if (h === "L" && game.parkLhbPct != null) return Number(game.parkLhbPct);
+        if (game.parkRhbPct != null) return Number(game.parkRhbPct);
+        if (game.parkLhbPct != null) return Number(game.parkLhbPct);
+        return game.parkHrPct != null ? Number(game.parkHrPct) : null;
+    }
+
+    function isParkDependentPower(stats) {
+        const mg = stats?.mostlyGone;
+        const hr = stats?.hr;
+        if (mg == null) return false;
+        if (mg >= 5) return true;
+        if (hr && hr > 0 && mg / hr >= 0.3) return true;
+        return false;
+    }
+
+    function isDueForHomer(stats) {
+        const luck = stats?.hrLuckDiff;
+        const near = stats?.nearHr;
+        const pfNear = stats?.propfinderNearHr;
+        if (luck != null && luck >= 1) return true;
+        if (near != null && near >= 2) return true;
+        if (near == null && pfNear != null && pfNear >= 2) return true;
+        return false;
+    }
+
+    function needsParkHelp(stats, game, hand) {
+        if (!isParkDependentPower(stats)) return false;
+        const park = parkHrPctForHitter(game, hand);
+        if (park == null) return false;
+        return park <= 0;
+    }
+
+    function hrPropFlagHtml(row) {
+        const stats = hitterStats(row);
+        const game = activeGame();
+        const parts = [];
+        if (isDueForHomer(stats)) {
+            parts.push(
+                '<span class="rs-flag rs-flag--due" title="Due for a homer — owed HRs or multiple near misses suggest one is coming">Due</span>'
+            );
         }
-        if (flag === "park") {
-            return '<span class="rs-flag rs-flag--park" title="Stadium-restricted power — high HR-in-1-7-parks count">Park</span>';
+        if (needsParkHelp(stats, game, row?.hand)) {
+            const park = parkHrPctForHitter(game, row?.hand);
+            const parkTxt = park != null ? `${park > 0 ? "+" : ""}${park}% HR park` : "unfriendly park";
+            parts.push(
+                `<span class="rs-flag rs-flag--park" title="Needs park help — power depends on stadium, and today is ${escAttr(parkTxt)}">Park</span>`
+            );
         }
-        return "";
+        return parts.join(" ");
     }
 
     function escAttr(s) {
@@ -702,7 +745,6 @@
             "hrLuckDiff",
             "mostlyGone",
             "noDoubters",
-            "hrLuckFlag",
             "nearHr",
             "recentForm",
             "pullPct",
@@ -1212,7 +1254,7 @@
                     <header class="rs-card__head">
                         <span class="rs-card__order">${row.order ?? "—"}</span>
                         <div class="rs-card__identity">
-                            <div class="rs-card__name">${row.name || "—"} <span class="rs-hand">${row.position || ""}</span>${hrLuckFlagHtml(hitterStats(row))}${projected}</div>
+                            <div class="rs-card__name">${row.name || "—"} <span class="rs-hand">${row.position || ""}</span>${hrPropFlagHtml(row)}${projected}</div>
                             <div class="rs-card__meta">Bats ${row.hand || "—"}</div>
                         </div>
                     </header>
@@ -1266,7 +1308,7 @@
                 const cells = COLS.map((c) => {
                     if (c.key === "name") {
                         const tag = r.projected ? ' <span class="rs-hand">proj</span>' : "";
-                        const flag = hrLuckFlagHtml(hitterStats(r));
+                        const flag = hrPropFlagHtml(r);
                         const tip = c.tip ? tipAttr(c.tip) : "";
                         return `<td${tip}><span class="rs-hitter">${r.name || "—"}</span> <span class="rs-hand">${r.position || ""}</span>${flag ? ` ${flag}` : ""}${tag}</td>`;
                     }

@@ -85,15 +85,6 @@ function extractDataArray(html) {
     return [];
 }
 
-function hrLuckFlag(hrLuckDiff, mostlyGone, hrTotal) {
-    if (hrLuckDiff != null && hrLuckDiff >= 2) return "due";
-    const mg = mostlyGone || 0;
-    const hr = hrTotal || 0;
-    if (mg >= 6 && hrLuckDiff != null && hrLuckDiff >= 1) return "park";
-    if (mg >= 8 && hr <= 15) return "park";
-    return null;
-}
-
 function parseHrTrackerRow(row) {
     const xhr = num(row?.xhr);
     const hrTotal = num(row?.hr_total);
@@ -107,7 +98,6 @@ function parseHrTrackerRow(row) {
         noDoubters: num(row?.no_doubters) != null ? Math.trunc(num(row.no_doubters)) : null,
         doublers: num(row?.doubters) != null ? Math.trunc(num(row.doubters)) : null,
         nearHr: num(row?.non_hr_would_have_left) != null ? Math.trunc(num(row.non_hr_would_have_left)) : null,
-        hrLuckFlag: hrLuckFlag(hrLuckDiff, mostlyGone, hrTotal),
         hrTrackerSource: "savant-hr",
     };
 }

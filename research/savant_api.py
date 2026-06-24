@@ -13,7 +13,7 @@ SAVANT_CUSTOM_CSV = (
     "https://baseballsavant.mlb.com/leaderboard/custom"
     "?year={season}&type=batter&filter=&min=10"
     "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,k_percent,whiff_percent,"
-    "barrel_batted_rate,hard_hit_percent,exit_velocity_avg,flyballs_percent,"
+    "barrel_batted_rate,hard_hit_percent,exit_velocity_avg,launch_angle_avg,sweet_spot_percent,flyballs_percent,"
     "groundballs_percent,linedrives_percent,flyballs,hr_flyball_percent,pull_percent"
     "&chart=false&csv=true"
 )
@@ -67,6 +67,12 @@ def _iso_from_ba_slg(ba: float | None, slg: float | None) -> float | None:
     return None
 
 
+def _bip_pct(bip: int | None, pa: int | None) -> float | None:
+    if bip is None or not pa or pa <= 0:
+        return None
+    return round(100.0 * bip / pa, 1)
+
+
 def _parse_custom_row(row: dict) -> dict:
     return {
         "xwoba": _float(row.get("xwoba")),
@@ -78,6 +84,8 @@ def _parse_custom_row(row: dict) -> dict:
         "barrelPct": _float(row.get("barrel_batted_rate")),
         "hardHitPct": _float(row.get("hard_hit_percent")),
         "avgEV": _float(row.get("exit_velocity_avg")),
+        "launchAngle": _float(row.get("launch_angle_avg")),
+        "sweetSpotPct": _float(row.get("sweet_spot_percent")),
         "fbPct": _float(row.get("flyballs_percent")),
         "gbPct": _float(row.get("groundballs_percent")),
         "ldPct": _float(row.get("linedrives_percent")),
@@ -89,6 +97,8 @@ def _parse_custom_row(row: dict) -> dict:
 def _parse_expected_row(row: dict) -> dict:
     ba = _float(row.get("ba"))
     slg = _float(row.get("slg"))
+    pa = _int(row.get("pa"))
+    bip = _int(row.get("bip"))
     form_diff = _float(row.get("est_woba_minus_woba_diff"))
     recent_form = round(form_diff * 100, 1) if form_diff is not None else None
     return {
@@ -96,7 +106,9 @@ def _parse_expected_row(row: dict) -> dict:
         "slg": slg,
         "iso": _iso_from_ba_slg(ba, slg),
         "xwoba": _float(row.get("est_woba")),
-        "pa": _int(row.get("pa")),
+        "pa": pa,
+        "bip": bip,
+        "bipPct": _bip_pct(bip, pa),
         "recentForm": recent_form,
     }
 
@@ -167,11 +179,16 @@ def merge_into_hitter_stats(
 
     savant_keys = (
         "avg",
+        "slg",
         "iso",
         "xwoba",
         "barrelPct",
         "hardHitPct",
         "avgEV",
+        "launchAngle",
+        "sweetSpotPct",
+        "bip",
+        "bipPct",
         "fbPct",
         "gbPct",
         "ldPct",
@@ -181,8 +198,6 @@ def merge_into_hitter_stats(
         "pa",
         "recentForm",
         "hr",
-        "pullPct",
-        "pullAirPct",
         "pullPct",
         "pullAirPct",
         "pullBarrelPct",

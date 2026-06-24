@@ -57,6 +57,9 @@
         { key: "barrelPct", label: "Barrel%", group: "plate", stat: "barrelPct", fmt: (r) => fmtPct(hitterStats(r).barrelPct), tip: "Barrel rate — batted balls with ideal launch angle and exit velocity to produce homers and extra-base hits." },
         { key: "hardHitPct", label: "Hard Hit%", group: "plate", stat: "hardHitPct", fmt: (r) => fmtPct(hitterStats(r).hardHitPct), tip: "Hard hit rate — share of batted balls at 95+ mph. Measures how often a hitter squares the ball up." },
         { key: "avgEV", label: "EV", group: "plate", stat: "avgEV", fmt: (r) => fmtEv(hitterStats(r).avgEV), tip: "Average exit velocity — how hard the ball is hit on average. Higher EV usually means more power potential." },
+        { key: "launchAngle", label: "LA", group: "batted", stat: "launchAngle", fmt: (r) => fmtAngle(hitterStats(r).launchAngle), tip: "Average launch angle — typical vertical angle of batted balls. Higher LA often means more fly balls and HR upside." },
+        { key: "sweetSpotPct", label: "Sweet%", group: "batted", stat: "sweetSpotPct", fmt: (r) => fmtPct(hitterStats(r).sweetSpotPct), tip: "Sweet spot rate — share of batted balls with launch angle 8–32°. Optimal range for power and hard contact." },
+        { key: "bipPct", label: "BIP%", group: "batted", stat: "bipPct", fmt: (r) => fmtPct(hitterStats(r).bipPct), tip: "Balls in play rate — batted balls as a share of plate appearances. Higher BIP% means more contact opportunities." },
         { key: "fbPct", label: "FB%", group: "plate", stat: "fbPct", fmt: (r) => fmtPct(hitterStats(r).fbPct), tip: "Fly ball rate — share of batted balls in the air. Fly-ball hitters tend to have more home run upside." },
         { key: "hrFbPct", label: "HR/FB%", group: "plate", stat: "hrFbPct", fmt: (r) => fmtPct(hitterStats(r).hrFbPct), tip: "Home runs per fly ball — how often fly balls leave the yard. Power efficiency on balls in the air." },
         { key: "recentForm", label: "Form%", group: "plate", stat: "recentForm", fmt: (r) => fmtFormPct(hitterStats(r).recentForm), tip: "Recent form — wOBA vs expected wOBA gap. Positive means outperforming expected contact quality; negative means underperforming." },
@@ -179,6 +182,11 @@
     function fmtEv(v) {
         if (v == null || Number.isNaN(Number(v))) return "—";
         return Number(v).toFixed(1);
+    }
+
+    function fmtAngle(v) {
+        if (v == null || Number.isNaN(Number(v))) return "—";
+        return `${Number(v).toFixed(1)}°`;
     }
 
     function escAttr(s) {
@@ -643,6 +651,10 @@
             "barrelPct",
             "hardHitPct",
             "avgEV",
+            "launchAngle",
+            "sweetSpotPct",
+            "bip",
+            "bipPct",
             "fbPct",
             "gbPct",
             "ldPct",
@@ -1080,6 +1092,9 @@
             barrelPct: true,
             hardHitPct: true,
             avgEV: true,
+            launchAngle: true,
+            sweetSpotPct: true,
+            bipPct: true,
             fbPct: true,
             hrFbPct: true,
             recentForm: true,

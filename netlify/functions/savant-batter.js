@@ -3,7 +3,7 @@ const CUSTOM_CSV =
     "https://baseballsavant.mlb.com/leaderboard/custom" +
     "?year={season}&type=batter&filter=&min=10" +
     "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,k_percent,whiff_percent," +
-    "barrel_batted_rate,hard_hit_percent,exit_velocity_avg,flyballs_percent," +
+    "barrel_batted_rate,hard_hit_percent,exit_velocity_avg,launch_angle_avg,sweet_spot_percent,flyballs_percent," +
     "groundballs_percent,linedrives_percent,flyballs,hr_flyball_percent" +
     "&chart=false&csv=true";
 
@@ -61,20 +61,28 @@ function parseSavantRow(custom, expected) {
     const slg = num(expected?.slg);
     const iso = ba != null && slg != null ? +(slg - ba).toFixed(3) : num(custom?.xiso);
     const formDiff = num(expected?.est_woba_minus_woba_diff);
+    const pa = num(custom?.pa) ?? num(expected?.pa);
+    const bip = num(expected?.bip);
+    const bipPct = bip != null && pa > 0 ? Math.round((100 * bip) / pa * 10) / 10 : null;
     return {
         avg: ba,
+        slg,
         iso,
         xwoba: num(custom?.xwoba) ?? num(expected?.est_woba),
         barrelPct: num(custom?.barrel_batted_rate),
         hardHitPct: num(custom?.hard_hit_percent),
         avgEV: num(custom?.exit_velocity_avg),
+        launchAngle: num(custom?.launch_angle_avg),
+        sweetSpotPct: num(custom?.sweet_spot_percent),
+        bip,
+        bipPct,
         fbPct: num(custom?.flyballs_percent),
         gbPct: num(custom?.groundballs_percent),
         ldPct: num(custom?.linedrives_percent),
         hrFbPct,
         kPct: num(custom?.k_percent),
         whiffPct: num(custom?.whiff_percent),
-        pa: num(custom?.pa) ?? num(expected?.pa),
+        pa,
         hr,
         recentForm: formDiff != null ? Math.round(formDiff * 1000) / 10 : null,
         source: "savant",

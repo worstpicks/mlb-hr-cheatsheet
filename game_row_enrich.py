@@ -10,7 +10,7 @@ from pathlib import Path
 from csv_slate_meta import derive_games_from_csv, name_lookup_key, read_batter_rows
 from note_compact import compact_note
 from csv_slate_meta import manifest_matchup_files, parse_matchup_filename
-from sheet_data import load_pitcher_risk, resolve_pitcher
+from sheet_data import format_pitcher_risk_pct, load_pitcher_risk, resolve_pitcher
 from zone_matchups import load_zone_lookup, lookup_zone_row
 
 ROOT = Path(__file__).resolve().parent
@@ -322,6 +322,9 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
 def lookup_weather_for_game(title: str, weather_lookup: dict[str, dict]) -> dict | None:
     key = game_key_from_title(title)
     key = TITLE_WEATHER_KEY_ALIASES.get(key, key)
+    if key not in weather_lookup:
+        base = re.sub(r"\s*\(G\d+\)$", "", key)
+        key = TITLE_WEATHER_KEY_ALIASES.get(base, base)
     return weather_lookup.get(key)
 
 
@@ -423,12 +426,13 @@ def _pitcher_meta_segment(name: str, row: dict, hr9_lookup: dict[str, float]) ->
     last = name.split()[-1]
     hr9 = hr9_lookup.get(name.lower()) or hr9_lookup.get(last.lower())
     seg = (
-        f"{name} {row['overall']:+.2f} overall · "
-        f"LHB {row['vs_lhb']:+.2f} · RHB {row['vs_rhb']:+.2f}"
+        f"{name} {format_pitcher_risk_pct(row['overall'])} overall · "
+        f"LHB {format_pitcher_risk_pct(row['vs_lhb'])} · "
+        f"RHB {format_pitcher_risk_pct(row['vs_rhb'])}"
     )
     if hr9 is not None:
         seg += f" ({hr9:.2f} HR/9)"
-    return seg
+    return f'<strong class="pitcher-meta">{seg}</strong>'
 
 
 def hand_park_pcts(park_ctx: dict) -> tuple[int | None, int | None]:

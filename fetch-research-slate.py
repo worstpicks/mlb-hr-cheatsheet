@@ -33,9 +33,9 @@ def main() -> None:
 
     from research.park_factors import write_park_factors_json
 
-    pf_path = write_park_factors_json(OUT_DIR)
+    pf_path = write_park_factors_json(OUT_DIR, sheet_date)
     if pf_path:
-        print(f"Wrote {pf_path} — latest park factors from CSV scan")
+        print(f"Wrote {pf_path} — Ballpark Pal park factors for {sheet_date}")
 
     n_games = len(payload.get("games") or [])
     n_hitters = sum(

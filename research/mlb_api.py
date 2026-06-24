@@ -11,8 +11,8 @@ from typing import Any
 
 from csv_slate_meta import name_lookup_key
 
-from game_row_enrich import TITLE_WEATHER_KEY_ALIASES, load_pitcher_hr9_lookup, load_weather_lookup
-from research.park_factors import attach_park_factors_to_games, load_latest_park_lookup
+from game_row_enrich import load_pitcher_hr9_lookup
+from research.park_factors import attach_park_factors_to_games, load_park_lookup
 from research.pitch_mix import (
     attach_pitcher_arsenal,
     enrich_lineup_pitch_mix,
@@ -418,25 +418,9 @@ def _collect_player_ids(games: list[dict]) -> list[int]:
 
 
 def _attach_park_to_games(games: list[dict], sheet_date: str) -> None:
-    lookup = load_latest_park_lookup()
+    lookup = load_park_lookup(sheet_date)
     if lookup.get("by_game") or lookup.get("by_venue"):
         attach_park_factors_to_games(games, lookup)
-        return
-    weather = load_weather_lookup(sheet_date)
-    for game in games:
-        key = " ".join((game.get("matchup") or "").upper().split())
-        key = TITLE_WEATHER_KEY_ALIASES.get(key, key)
-        ctx = weather.get(key)
-        if not ctx:
-            continue
-        if ctx.get("hr_pct") is not None:
-            game["parkHrPct"] = ctx["hr_pct"]
-        if ctx.get("park_lhb_pct") is not None:
-            game["parkLhbPct"] = ctx["park_lhb_pct"]
-        if ctx.get("park_rhb_pct") is not None:
-            game["parkRhbPct"] = ctx["park_rhb_pct"]
-        if ctx.get("venue"):
-            game["venue"] = game.get("venue") or ctx["venue"]
 
 
 def _attach_pitcher_stats_to_games(games: list[dict], sheet_date: str) -> None:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Scan data/ for the latest ParkFactors CSV and export lookup for Research."""
+"""Load date-matched ParkFactors CSV and export per-slate lookup for Research."""
 from __future__ import annotations
 
 import csv
@@ -16,7 +16,6 @@ from game_row_enrich import (
 )
 
 _PARK_FACTORS_RE = re.compile(r"ParkFactors_(\d{4}-\d{2}-\d{2})")
-_HAND_DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 
 
 def park_factors_date_from_path(path: Path) -> str | None:
@@ -24,28 +23,15 @@ def park_factors_date_from_path(path: Path) -> str | None:
     return m.group(1) if m else None
 
 
-def find_latest_park_factors_csv(data_dir: Path | None = None) -> Path | None:
+def find_park_factors_csv(sheet_date: str, data_dir: Path | None = None) -> Path | None:
+    """ParkFactors CSV for this slate date only (never a different day's file)."""
     data_dir = data_dir or ROOT / "data"
-    candidates = list(data_dir.glob("ParkFactors_*.csv"))
-    if not candidates:
-        return None
-
-    def sort_key(p: Path) -> tuple[str, float]:
-        date_key = park_factors_date_from_path(p) or "0000-00-00"
-        return date_key, p.stat().st_mtime
-
-    return max(candidates, key=sort_key)
-
-
-def find_latest_park_hand_date(data_dir: Path | None = None) -> str | None:
-    data_dir = data_dir or ROOT / "data"
-    dates: list[str] = []
-    for pattern in ("park-factors-L-all-*.csv", "park-factors-R-all-*.csv"):
-        for path in data_dir.glob(pattern):
-            m = _HAND_DATE_RE.search(path.name)
-            if m:
-                dates.append(m.group(1))
-    return max(dates) if dates else None
+    path = data_dir / f"ParkFactors_{sheet_date}.csv"
+    if not path.is_file():
+        matches = sorted(data_dir.glob(f"ParkFactors_{sheet_date}*.csv"))
+        if matches:
+            path = matches[0]
+    return path if path.is_file() else None
 
 
 def _pct_from_field(val: str | None) -> int | None:
@@ -89,17 +75,18 @@ def _entry_from_row(
     return entry
 
 
-def load_latest_park_lookup(data_dir: Path | None = None) -> dict:
+def load_park_lookup(sheet_date: str, data_dir: Path | None = None) -> dict:
+    """Ballpark Pal park factors for one slate date. Empty dict if no matching CSV."""
     data_dir = data_dir or ROOT / "data"
-    path = find_latest_park_factors_csv(data_dir)
-    if not path or not path.is_file():
+    path = find_park_factors_csv(sheet_date, data_dir)
+    if not path:
         return {}
 
-    pf_date = park_factors_date_from_path(path) or ""
-    hand_date = find_latest_park_hand_date(data_dir) or pf_date
-    lhb_stadium, rhb_stadium = (
-        load_venue_hand_stadium_pcts(hand_date) if hand_date else ({}, {})
-    )
+    pf_date = park_factors_date_from_path(path) or sheet_date
+    if pf_date != sheet_date:
+        return {}
+
+    lhb_stadium, rhb_stadium = load_venue_hand_stadium_pcts(sheet_date)
 
     by_game: dict[str, dict] = {}
     by_venue: dict[str, dict] = {}
@@ -114,9 +101,11 @@ def load_latest_park_lookup(data_dir: Path | None = None) -> dict:
                 by_venue[entry["venue_key"]] = entry
 
     return {
+        "source": "ballpark-pal",
+        "source_label": "Ballpark Pal",
         "source_file": path.name,
-        "source_date": pf_date,
-        "hand_date": hand_date or None,
+        "source_date": sheet_date,
+        "hand_date": sheet_date,
         "by_game": by_game,
         "by_venue": by_venue,
     }
@@ -127,7 +116,7 @@ def attach_park_factors_to_games(games: list[dict], lookup: dict) -> None:
         return
     by_game = lookup.get("by_game") or {}
     by_venue = lookup.get("by_venue") or {}
-    source = lookup.get("source_file")
+    source_label = lookup.get("source_label") or "Ballpark Pal"
     for game in games:
         key = normalize_game_key(game.get("matchup") or "")
         key = TITLE_WEATHER_KEY_ALIASES.get(key, key)
@@ -150,15 +139,15 @@ def attach_park_factors_to_games(games: list[dict], lookup: dict) -> None:
             game["parkRhbPct"] = ctx["park_rhb_pct"]
         if ctx.get("venue"):
             game["venue"] = game.get("venue") or ctx["venue"]
-        if source:
-            game["parkFactorSource"] = source
+        if source_label:
+            game["parkFactorSource"] = source_label
 
 
-def write_park_factors_json(out_dir: Path) -> Path | None:
-    lookup = load_latest_park_lookup()
+def write_park_factors_json(out_dir: Path, sheet_date: str) -> Path | None:
+    lookup = load_park_lookup(sheet_date)
     if not lookup.get("by_game") and not lookup.get("by_venue"):
         return None
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / "park-factors.json"
+    out_path = out_dir / f"park-factors-{sheet_date}.json"
     out_path.write_text(json.dumps(lookup, indent=2) + "\n", encoding="utf-8")
     return out_path

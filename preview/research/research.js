@@ -80,6 +80,7 @@
     let savantLookup = null;
     let pitchMixCache = null;
     let parkFactorsLookup = null;
+    let parkFactorsLookupDate = null;
     let stadiumCoords = null;
     let activeGameIdx = 0;
     let activeSide = "away";
@@ -501,20 +502,21 @@
         if (ctx.park_lhb_pct != null) game.parkLhbPct = ctx.park_lhb_pct;
         if (ctx.park_rhb_pct != null) game.parkRhbPct = ctx.park_rhb_pct;
         if (ctx.venue) game.venue = game.venue || ctx.venue;
-        if (lookup.source_file) game.parkFactorSource = lookup.source_file;
+        if (lookup.source_label) game.parkFactorSource = lookup.source_label;
         return true;
     }
 
-    async function ensureParkFactorsLookup() {
-        if (parkFactorsLookup) return parkFactorsLookup;
-        const res = await fetchDataJson("park-factors.json");
+    async function ensureParkFactorsLookup(date) {
+        if (parkFactorsLookup && parkFactorsLookupDate === date) return parkFactorsLookup;
+        const res = await fetchDataJson(`park-factors-${date}.json`);
         parkFactorsLookup = res.data || null;
+        parkFactorsLookupDate = date;
         return parkFactorsLookup;
     }
 
-    async function applyLatestParkFactors() {
-        const lookup = await ensureParkFactorsLookup();
-        if (!lookup) return 0;
+    async function applyParkFactors(date) {
+        const lookup = await ensureParkFactorsLookup(date);
+        if (!lookup || (lookup.source_date && lookup.source_date !== date)) return 0;
         let n = 0;
         for (const game of slate?.games || []) {
             if (attachParkFactorToGame(game, lookup)) n += 1;
@@ -950,7 +952,7 @@
         windPullR:
             "Wind along the right-handed pull side (toward left field). RHB sluggers get the boost here. Check this before betting RH batter HR props at parks like Yankee Stadium or Oracle Park.",
         parkFactor:
-            "Historical HR boost from this stadium vs league average (PropFinder import). Positive = bandbox; negative = graveyard.",
+            "Net HR boost from Ballpark Pal (stadium shape plus game-day weather). Positive = bandbox; negative = graveyard.",
         fenceBoost:
             "Pull-side wall vs league-average distance (377 ft). Short porch = positive; deep alley = negative. Park shape only — not today's wind or air.",
         conditions:
@@ -1414,7 +1416,7 @@
             cells.push(
                 wxCell("Park Factor", fmtSignedPct(game.parkHrPct), WX_TIPS.parkFactor, {
                     tone: edgeTone(game.parkHrPct),
-                    sub: "vs league-average HR rate",
+                    sub: "Ballpark Pal",
                 })
             );
         }
@@ -1439,7 +1441,7 @@
                     "Park L / R",
                     `L ${fmtSignedPct(game.parkLhbPct)} · R ${fmtSignedPct(game.parkRhbPct)}`,
                     WX_TIPS.parkFactor,
-                    { wide: true }
+                    { wide: true, sub: "Ballpark Pal" }
                 )
             );
         }
@@ -2740,6 +2742,7 @@
         savantLookup = null;
         pitchMixCache = null;
         parkFactorsLookup = null;
+        parkFactorsLookupDate = null;
         if (els.dateInput) els.dateInput.value = date;
         if (els.backLink) els.backLink.href = `../index.html`;
 
@@ -2774,7 +2777,7 @@
         const pfLookup = await ensurePropfinderLookup(date);
         applyPropfinderToAllLineups(pfLookup);
         await ensureBatterHands();
-        await applyLatestParkFactors();
+        await applyParkFactors(date);
 
         activeGameIdx = Math.min(activeGameIdx, slate.games.length - 1);
         pickDefaultSide();

@@ -11,6 +11,12 @@ const EXPECTED_CSV =
     "https://baseballsavant.mlb.com/leaderboard/expected_statistics" +
     "?type=batter&year={season}&position=&team=&min=10&csv=true";
 
+const BAT_CSV =
+    "https://baseballsavant.mlb.com/leaderboard/custom" +
+    "?year={season}&type=batter&filter=&min=10" +
+    "&selections=player_id,avg_swing_speed,squared_up_contact,blasts_contact,solidcontact_percent" +
+    "&chart=false&csv=true";
+
 const HEADERS = {
     "Content-Type": "application/json; charset=utf-8",
     "Access-Control-Allow-Origin": "*",
@@ -50,7 +56,16 @@ function parseCsv(text) {
     });
 }
 
-function parseSavantRow(custom, expected) {
+function parseBatRow(row) {
+    return {
+        batSpeed: num(row?.avg_swing_speed),
+        swingStrength: num(row?.squared_up_contact),
+        solidContactPct: num(row?.solidcontact_percent),
+        blastPct: num(row?.blasts_contact),
+    };
+}
+
+function parseSavantRow(custom, expected, bat) {
     const hr = num(custom?.home_run);
     const flyballs = num(custom?.flyballs);
     let hrFbPct = num(custom?.hr_flyball_percent);
@@ -74,6 +89,10 @@ function parseSavantRow(custom, expected) {
         avgEV: num(custom?.exit_velocity_avg),
         launchAngle: num(custom?.launch_angle_avg),
         sweetSpotPct: num(custom?.sweet_spot_percent),
+        batSpeed: bat?.batSpeed ?? null,
+        swingStrength: bat?.swingStrength ?? null,
+        solidContactPct: bat?.solidContactPct ?? null,
+        blastPct: bat?.blastPct ?? null,
         bip,
         bipPct,
         fbPct: num(custom?.flyballs_percent),
@@ -91,30 +110,37 @@ function parseSavantRow(custom, expected) {
 
 async function fetchSavantLookup(season) {
     const ua = { "User-Agent": "WorstPickz-Research/1.0" };
-    const [customRes, expectedRes] = await Promise.all([
+    const [customRes, expectedRes, batRes] = await Promise.all([
         fetch(CUSTOM_CSV.replace("{season}", String(season)), { headers: ua }),
         fetch(EXPECTED_CSV.replace("{season}", String(season)), { headers: ua }),
+        fetch(BAT_CSV.replace("{season}", String(season)), { headers: ua }),
     ]);
-    if (!customRes.ok || !expectedRes.ok) {
-        throw new Error(`Savant CSV ${customRes.status}/${expectedRes.status}`);
+    if (!customRes.ok || !expectedRes.ok || !batRes.ok) {
+        throw new Error(`Savant CSV ${customRes.status}/${expectedRes.status}/${batRes.status}`);
     }
     const customRows = parseCsv(await customRes.text());
     const expectedRows = parseCsv(await expectedRes.text());
+    const batRows = parseCsv(await batRes.text());
     const expectedById = {};
     for (const row of expectedRows) {
         const pid = parseInt(row.player_id, 10);
         if (pid) expectedById[pid] = row;
     }
+    const batById = {};
+    for (const row of batRows) {
+        const pid = parseInt(row.player_id, 10);
+        if (pid) batById[pid] = parseBatRow(row);
+    }
     const lookup = {};
     for (const row of customRows) {
         const pid = parseInt(row.player_id, 10);
         if (!pid) continue;
-        lookup[String(pid)] = parseSavantRow(row, expectedById[pid]);
+        lookup[String(pid)] = parseSavantRow(row, expectedById[pid], batById[pid]);
     }
     for (const row of expectedRows) {
         const pid = parseInt(row.player_id, 10);
         if (!pid || lookup[String(pid)]) continue;
-        lookup[String(pid)] = parseSavantRow(null, row);
+        lookup[String(pid)] = parseSavantRow(null, row, batById[pid]);
     }
     return lookup;
 }

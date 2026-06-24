@@ -23,6 +23,13 @@ SAVANT_EXPECTED_CSV = (
     "?type=batter&year={season}&position=&team=&min=10&csv=true"
 )
 
+SAVANT_BAT_CSV = (
+    "https://baseballsavant.mlb.com/leaderboard/custom"
+    "?year={season}&type=batter&filter=&min=10"
+    "&selections=player_id,avg_swing_speed,squared_up_contact,blasts_contact,solidcontact_percent"
+    "&chart=false&csv=true"
+)
+
 
 def _float(val: Any) -> float | None:
     if val is None:
@@ -94,6 +101,15 @@ def _parse_custom_row(row: dict) -> dict:
     }
 
 
+def _parse_bat_row(row: dict) -> dict:
+    return {
+        "batSpeed": _float(row.get("avg_swing_speed")),
+        "swingStrength": _float(row.get("squared_up_contact")),
+        "solidContactPct": _float(row.get("solidcontact_percent")),
+        "blastPct": _float(row.get("blasts_contact")),
+    }
+
+
 def _parse_expected_row(row: dict) -> dict:
     ba = _float(row.get("ba"))
     slg = _float(row.get("slg"))
@@ -127,15 +143,22 @@ def _merge_savant_rows(custom: dict, expected: dict) -> dict:
 
 
 def fetch_batter_statcast_lookup(season: int) -> dict[int, dict]:
-    """player_id -> Savant season profile (custom + expected statistics CSVs)."""
+    """player_id -> Savant season profile (custom + expected + bat-tracking CSVs)."""
     custom_rows = _fetch_csv(SAVANT_CUSTOM_CSV.format(season=season))
     expected_rows = _fetch_csv(SAVANT_EXPECTED_CSV.format(season=season))
+    bat_rows = _fetch_csv(SAVANT_BAT_CSV.format(season=season))
 
     expected_by_id: dict[int, dict] = {}
     for row in expected_rows:
         pid = _int(row.get("player_id"))
         if pid:
             expected_by_id[pid] = _parse_expected_row(row)
+
+    bat_by_id: dict[int, dict] = {}
+    for row in bat_rows:
+        pid = _int(row.get("player_id"))
+        if pid:
+            bat_by_id[pid] = _parse_bat_row(row)
 
     lookup: dict[int, dict] = {}
     seen: set[int] = set()
@@ -144,11 +167,21 @@ def fetch_batter_statcast_lookup(season: int) -> dict[int, dict]:
         if not pid:
             continue
         seen.add(pid)
-        lookup[pid] = _merge_savant_rows(_parse_custom_row(row), expected_by_id.get(pid, {}))
+        merged = _merge_savant_rows(_parse_custom_row(row), expected_by_id.get(pid, {}))
+        bat = bat_by_id.get(pid, {})
+        for key, val in bat.items():
+            if val is not None:
+                merged[key] = val
+        lookup[pid] = merged
 
     for pid, expected in expected_by_id.items():
         if pid not in seen:
-            lookup[pid] = _merge_savant_rows({}, expected)
+            merged = _merge_savant_rows({}, expected)
+            bat = bat_by_id.get(pid, {})
+            for key, val in bat.items():
+                if val is not None:
+                    merged[key] = val
+            lookup[pid] = merged
 
     return lookup
 
@@ -187,6 +220,10 @@ def merge_into_hitter_stats(
         "avgEV",
         "launchAngle",
         "sweetSpotPct",
+        "batSpeed",
+        "swingStrength",
+        "solidContactPct",
+        "blastPct",
         "bip",
         "bipPct",
         "fbPct",

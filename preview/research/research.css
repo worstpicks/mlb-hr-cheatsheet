@@ -375,10 +375,15 @@ a:hover { color: #bae6fd; }
     border: 1px solid rgba(251, 146, 60, 0.22);
     margin-bottom: 14px;
 }
-.rs-matchup-bar h2 {
+.rs-matchup-bar h2,
+.rs-matchup-bar h3 {
     font-size: 1.05rem;
     color: var(--wpz-color-heading);
     letter-spacing: 0.02em;
+}
+.rs-section-title--hitters {
+    margin-top: 4px;
+    margin-bottom: 10px;
 }
 .rs-matchup-bar .rs-sp {
     display: block;
@@ -1266,9 +1271,14 @@ a:hover { color: #bae6fd; }
         position: static;
         margin-bottom: 10px;
     }
-    .rs-matchup-bar h2 {
+    .rs-matchup-bar h2,
+    .rs-matchup-bar h3 {
         font-size: 0.95rem;
         line-height: 1.3;
+    }
+    .rs-section-title--hitters {
+        margin-top: 2px;
+        margin-bottom: 8px;
     }
     .rs-matchup-bar .rs-sp {
         font-size: 0.76rem;

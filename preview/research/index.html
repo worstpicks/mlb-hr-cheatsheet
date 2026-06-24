@@ -15,7 +15,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="2026-06-23">
-    <link rel="stylesheet" href="research.css?v=51">
+    <link rel="stylesheet" href="research.css?v=52">
     <style>
         .rs-file-block {
             display: none;
@@ -126,17 +126,6 @@ python serve-research.py</pre>
             </section>
 
             <section class="rs-section">
-                <div class="rs-matchup-bar">
-                    <div>
-                        <h2 id="rsMatchupTitle">— hitters</h2>
-                        <span class="rs-sp" id="rsMatchupSp">vs —</span>
-                    </div>
-                    <div class="rs-side-toggle" role="group" aria-label="Offense team">
-                        <button type="button" id="rsSideAway">AWY</button>
-                        <button type="button" id="rsSideHome">HOM</button>
-                    </div>
-                </div>
-
                 <details class="rs-weather" id="rsWeatherPanel" open hidden aria-live="polite">
                     <summary class="rs-weather__head">
                         <span class="rs-weather__title">Park &amp; weather</span>
@@ -160,6 +149,18 @@ python serve-research.py</pre>
                     </div>
                 </details>
 
+                <h2 class="rs-section-title rs-section-title--hitters">Hitters</h2>
+                <div class="rs-matchup-bar">
+                    <div>
+                        <h3 id="rsMatchupTitle">— hitters</h3>
+                        <span class="rs-sp" id="rsMatchupSp">vs —</span>
+                    </div>
+                    <div class="rs-side-toggle" role="group" aria-label="Offense team">
+                        <button type="button" id="rsSideAway">AWY</button>
+                        <button type="button" id="rsSideHome">HOM</button>
+                    </div>
+                </div>
+
                 <div class="rs-mobile-bar" id="rsMobileBar">
                     <div class="rs-mobile-bar__row">
                         <label class="rs-mobile-sort-label" for="rsMobileSort">Sort by
@@ -180,6 +181,6 @@ python serve-research.py</pre>
         </div>
     </div>
 
-    <script src="research.js?v=51" defer></script>
+    <script src="research.js?v=52" defer></script>
 </body>
 </html>

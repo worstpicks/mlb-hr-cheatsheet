@@ -100,6 +100,7 @@
         backLink: document.getElementById("rsBackLink"),
         themeToggle: document.getElementById("rsThemeToggle"),
         mobileSort: document.getElementById("rsMobileSort"),
+        mobileSortDir: document.getElementById("rsMobileSortDir"),
         cardList: document.getElementById("rsCardList"),
         weatherPanel: document.getElementById("rsWeatherPanel"),
         weatherGrid: document.getElementById("rsWeatherGrid"),
@@ -111,8 +112,11 @@
     };
 
     function isMobileView() {
-        return window.matchMedia("(max-width: 640px)").matches;
+        return window.matchMedia("(max-width: 768px)").matches;
     }
+
+    const MOBILE_CARD_OPEN_GROUPS = new Set(["matchup", "power"]);
+    const MOBILE_HIGHLIGHT_KEYS = ["mixPlus", "expectedHr", "barrelPct", "hardHitPct"];
 
     function syncThemeToggle() {
         const light = document.documentElement.classList.contains("theme-light");
@@ -2373,6 +2377,13 @@
         };
     }
 
+    function syncMobileSortDir() {
+        if (!els.mobileSortDir) return;
+        els.mobileSortDir.textContent = sortDir > 0 ? "↓" : "↑";
+        els.mobileSortDir.title = sortDir > 0 ? "High to low (tap to reverse)" : "Low to high (tap to reverse)";
+        els.mobileSortDir.setAttribute("aria-label", sortDir > 0 ? "Sort high to low" : "Sort low to high");
+    }
+
     function syncMobileSortSelect() {
         if (!els.mobileSort) return;
         const options = COLS.filter((c) => c.key !== "order").map((c) => {
@@ -2380,6 +2391,14 @@
             return `<option value="${c.key}"${selected}>${c.label}</option>`;
         });
         els.mobileSort.innerHTML = options.join("");
+        syncMobileSortDir();
+    }
+
+    function mobileCardStatHtml(c, row, colValues, higherBetter) {
+        const val = hitterStats(row)[c.stat];
+        const heat =
+            val != null ? heatClass(colValues[c.key], Number(val), higherBetter[c.key] !== false) : "";
+        return `<div class="rs-card-stat"><dt>${c.label}</dt><dd><span class="${heat}">${c.fmt(row)}</span></dd></div>`;
     }
 
     function renderMobileCards() {
@@ -2391,24 +2410,27 @@
         }
         const { colValues, higherBetter } = statHeatMap(rows);
         const cardGroups = GROUPS.filter((g) => g.id !== "identity");
+        const highlightCols = MOBILE_HIGHLIGHT_KEYS.map((k) => COLS.find((c) => c.key === k)).filter(Boolean);
         els.cardList.innerHTML = rows
             .map((row) => {
                 const projected = row.projected ? '<span class="rs-hand rs-hand--proj">proj</span>' : "";
+                const highlights = highlightCols
+                    .map((c) => {
+                        const val = hitterStats(row)[c.stat];
+                        const heat =
+                            val != null
+                                ? heatClass(colValues[c.key], Number(val), higherBetter[c.key] !== false)
+                                : "";
+                        return `<div class="rs-card-highlight"><span class="rs-card-highlight__label">${c.label}</span><span class="rs-card-highlight__val ${heat}">${c.fmt(row)}</span></div>`;
+                    })
+                    .join("");
                 const sections = cardGroups
                     .map((group) => {
                         const cols = COLS.filter((c) => c.group === group.id && c.stat);
                         if (!cols.length) return "";
-                        const stats = cols
-                            .map((c) => {
-                                const val = hitterStats(row)[c.stat];
-                                const heat =
-                                    val != null
-                                        ? heatClass(colValues[c.key], Number(val), higherBetter[c.key] !== false)
-                                        : "";
-                                return `<div class="rs-card-stat"><dt>${c.label}</dt><dd><span class="${heat}">${c.fmt(row)}</span></dd></div>`;
-                            })
-                            .join("");
-                        return `<section class="rs-card__section rs-card__section--${group.id}"><h3 class="rs-card__section-title">${group.label}</h3><dl class="rs-card__stats">${stats}</dl></section>`;
+                        const stats = cols.map((c) => mobileCardStatHtml(c, row, colValues, higherBetter)).join("");
+                        const openAttr = MOBILE_CARD_OPEN_GROUPS.has(group.id) ? " open" : "";
+                        return `<details class="rs-card__section rs-card__section--${group.id}"${openAttr}><summary class="rs-card__section-title">${group.label}<span class="rs-card__section-chev" aria-hidden="true"></span></summary><dl class="rs-card__stats">${stats}</dl></details>`;
                     })
                     .join("");
                 return `<article class="rs-card">
@@ -2419,19 +2441,20 @@
                             <div class="rs-card__meta">Bats ${row.hand || "—"}</div>
                         </div>
                     </header>
+                    <div class="rs-card__highlights">${highlights}</div>
                     ${sections}
                 </article>`;
             })
             .join("");
-        els.cardList.querySelectorAll(".rs-cell-heat--good").forEach((el) => {
+        els.cardList.querySelectorAll(".rs-cell-heat--good, .rs-card-highlight__val.rs-cell-heat--good").forEach((el) => {
             el.style.background = "var(--rs-good-bg)";
             el.style.boxShadow = "inset 0 0 0 1px rgba(134, 239, 172, 0.35)";
         });
-        els.cardList.querySelectorAll(".rs-cell-heat--mid").forEach((el) => {
+        els.cardList.querySelectorAll(".rs-cell-heat--mid, .rs-card-highlight__val.rs-cell-heat--mid").forEach((el) => {
             el.style.background = "var(--rs-mid-bg)";
             el.style.boxShadow = "inset 0 0 0 1px rgba(253, 224, 71, 0.25)";
         });
-        els.cardList.querySelectorAll(".rs-cell-heat--bad").forEach((el) => {
+        els.cardList.querySelectorAll(".rs-cell-heat--bad, .rs-card-highlight__val.rs-cell-heat--bad").forEach((el) => {
             el.style.background = "var(--rs-bad-bg)";
             el.style.boxShadow = "inset 0 0 0 1px rgba(252, 165, 165, 0.25)";
         });
@@ -2638,11 +2661,27 @@
         els.mobileSort?.addEventListener("change", () => {
             sortKey = els.mobileSort.value || "order";
             sortDir = sortKey === "name" ? 1 : -1;
+            syncMobileSortDir();
             renderTable();
             renderMobileCards();
         });
-        window.matchMedia("(max-width: 640px)").addEventListener("change", () => {
+        els.mobileSortDir?.addEventListener("click", () => {
+            sortDir *= -1;
+            syncMobileSortDir();
+            renderTable();
+            renderMobileCards();
+        });
+        if (els.weatherPanel && isMobileView()) {
+            els.weatherPanel.removeAttribute("open");
+        } else if (els.weatherPanel) {
+            els.weatherPanel.setAttribute("open", "");
+        }
+        window.matchMedia("(max-width: 768px)").addEventListener("change", (e) => {
             syncMobileSortSelect();
+            if (els.weatherPanel && !els.weatherPanel.hidden) {
+                if (e.matches) els.weatherPanel.removeAttribute("open");
+                else els.weatherPanel.setAttribute("open", "");
+            }
         });
         els.themeToggle?.addEventListener("click", toggleTheme);
         syncThemeToggle();

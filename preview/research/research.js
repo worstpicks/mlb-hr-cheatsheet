@@ -49,10 +49,9 @@
         { key: "mixPlus", label: "Mix%", group: "matchup", stat: "mixPlus", fmt: (r) => fmtFormPct(hitterStats(r).mixPlus), tip: "Pitch-mix fit — weighted xwOBA vs this starter's pitch usage compared to league average on those pitches. Positive % = favorable matchup." },
         { key: "mixEdge", label: "Edge%", group: "matchup", stat: "mixEdge", fmt: (r) => fmtFormPct(hitterStats(r).mixEdge), tip: "Personal edge — how the hitter performs vs this pitch mix compared to their own season xwOBA. Positive % = better than their baseline." },
         { key: "hr", label: "HR", group: "power", stat: "hr", fmt: (r) => fmtNum(hitterStats(r).hr), tip: "Home runs — balls hit over the fence. Core measure of raw power." },
-        { key: "expectedHr", label: "xHR", group: "power", stat: "expectedHr", fmt: (r) => fmtRate(hitterStats(r).expectedHr), tip: "Expected homers from contact quality — how many HRs Savant thinks this swing profile deserves." },
+        { key: "expectedHr", label: "xHR", group: "power", stat: "expectedHr", fmt: (r) => fmtXhr(hitterStats(r).expectedHr), tip: "Expected homers from contact quality — how many HRs Savant thinks this swing profile deserves (rounded)." },
         { key: "hrLuckDiff", label: "Due+", group: "power", stat: "hrLuckDiff", fmt: (r) => fmtLuck(hitterStats(r).hrLuckDiff), tip: "Homers owed (xHR minus actual HR). +1 or higher means the hitter is due for a jack." },
-        { key: "mostlyGone", label: "1-7P", group: "power", stat: "mostlyGone", fmt: (r) => fmtNum(hitterStats(r).mostlyGone), tip: "HRs that only play in 1–7 stadiums — used with today's park to flag park-dependent props." },
-        { key: "nearHr", label: "Near HR", group: "power", stat: "nearHr", fmt: (r) => fmtNearHr(r), tip: "Near misses — balls that almost left. 2+ near HRs also triggers the Due badge. PropFinder * fallback when Savant is missing." },
+        { key: "nearHr", label: "Near HR", group: "power", stat: "nearHr", fmt: (r) => fmtNearHr(r), tip: "Near misses — balls that almost left the yard. PropFinder * fallback when Savant is missing." },
         { key: "avg", label: "AVG", group: "plate", stat: "avg", fmt: (r) => fmtRate(hitterStats(r).avg), tip: "Batting average — hits divided by at-bats. Overall hitting for average." },
         { key: "iso", label: "ISO", group: "plate", stat: "iso", fmt: (r) => fmtRate(hitterStats(r).iso), tip: "Isolated power — slugging minus average. Extra-base hit power per at-bat." },
         { key: "slg", label: "SLG", group: "plate", stat: "slg", fmt: (r) => fmtRate(hitterStats(r).slg), tip: "Slugging percentage — total bases per at-bat. Measures overall power production." },
@@ -80,6 +79,7 @@
     let slate = null;
     let savantLookup = null;
     let pitchMixCache = null;
+    let stadiumCoords = null;
     let activeGameIdx = 0;
     let activeSide = "away";
     let sortKey = "order";
@@ -101,6 +101,13 @@
         themeToggle: document.getElementById("rsThemeToggle"),
         mobileSort: document.getElementById("rsMobileSort"),
         cardList: document.getElementById("rsCardList"),
+        weatherPanel: document.getElementById("rsWeatherPanel"),
+        weatherGrid: document.getElementById("rsWeatherGrid"),
+        weatherMeta: document.getElementById("rsWeatherMeta"),
+        windField: document.getElementById("rsWindField"),
+        parkOutline: document.getElementById("rsParkOutline"),
+        windArrow: document.getElementById("rsWindArrow"),
+        windInfo: document.getElementById("rsWindInfo"),
     };
 
     function isMobileView() {
@@ -147,6 +154,11 @@
     function fmtRate(v) {
         if (v == null || Number.isNaN(Number(v))) return "—";
         return Number(v).toFixed(3);
+    }
+
+    function fmtXhr(v) {
+        if (v == null || Number.isNaN(Number(v))) return "—";
+        return String(Math.round(Number(v)));
     }
 
     function fmtPct(v) {
@@ -219,49 +231,1174 @@
         return game.parkHrPct != null ? Number(game.parkHrPct) : null;
     }
 
-    function isParkDependentPower(stats) {
-        const mg = stats?.mostlyGone;
-        const hr = stats?.hr;
-        if (mg == null) return false;
-        if (mg >= 5) return true;
-        if (hr && hr > 0 && mg / hr >= 0.3) return true;
-        return false;
+    const WX_COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    const WX_RHO_ZERO = 1.225;
+    const WX_DA_EXPONENT = 1 / (9.80665 / (287.053 * 0.0065) - 1);
+    const WX_DISTANCE_BOOST_PER_1000FT = 2.75;
+    let wxBaselineDaFt = null;
+
+    function normVenueKey(name) {
+        return String(name || "")
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
     }
 
-    function isDueForHomer(stats) {
-        const luck = stats?.hrLuckDiff;
-        const near = stats?.nearHr;
-        const pfNear = stats?.propfinderNearHr;
-        if (luck != null && luck >= 1) return true;
-        if (near != null && near >= 2) return true;
-        if (near == null && pfNear != null && pfNear >= 2) return true;
-        return false;
+    function normalizeRoof(roof) {
+        const value = String(roof || "open").trim().toLowerCase();
+        if (value === "dome" || value === "closed") return "dome";
+        if (value === "retractable" || value === "ret") return "retractable";
+        return "open";
     }
 
-    function needsParkHelp(stats, game, hand) {
-        if (!isParkDependentPower(stats)) return false;
-        const park = parkHrPctForHitter(game, hand);
-        if (park == null) return false;
-        return park <= 0;
+    const ROOF_CLIMATE_RULES = {
+        "loandepot park": { closeTempF: 92, openMin: 58, openMax: 88, closePrecip: 45, highVariance: false },
+        "minute maid park": { closeTempF: 92, openMin: 55, openMax: 90, closePrecip: 45, highVariance: false },
+        "globe life field": { closeTempF: 92, openMin: 55, openMax: 90, closePrecip: 40, highVariance: false },
+        "chase field": { closeTempF: 95, closeTempFLow: 58, openMin: 62, openMax: 92, closePrecip: 35, highVariance: false },
+        "american family field": { closeTempFLow: 50, openMin: 58, openMax: 78, closePrecip: 40, highVariance: true },
+        "rogers centre": { closeTempFLow: 45, openMin: 55, openMax: 82, closePrecip: 35, highVariance: true },
+        "t mobile park": { closeTempFLow: 50, openMin: 55, openMax: 80, closePrecip: 40, highVariance: true },
+    };
+    const OUTDOOR_WIND_VARIANCE = new Set(["wrigley field", "fenway park"]);
+    const ROOF_CLOSED_RE = /roof\s*closed|closed\s*roof|\bdome\b|\bindoor|retracted/i;
+    const ROOF_OPEN_RE = /roof\s*open|open\s*air|\boutdoor\b/i;
+
+    function climateRuleKey(venue) {
+        const k = normVenueKey(venue);
+        if (ROOF_CLIMATE_RULES[k]) return k;
+        for (const key of Object.keys(ROOF_CLIMATE_RULES)) {
+            if (k.includes(key) || key.includes(k)) return key;
+        }
+        return k;
     }
 
-    function hrPropFlagHtml(row) {
-        const stats = hitterStats(row);
-        const game = activeGame();
+    function parseMlbWeatherRoof(...texts) {
+        const blob = texts.filter(Boolean).join(" ");
+        if (!blob) return null;
+        if (ROOF_CLOSED_RE.test(blob)) return "closed";
+        if (ROOF_OPEN_RE.test(blob)) return "open";
+        return null;
+    }
+
+    function predictRoofByClimate(venue, { tempF, precipPct, condition }) {
+        const stadium = lookupStadium(venue);
+        if (!stadium || normalizeRoof(stadium.roof) === "open") return { state: null, reason: "outdoor_skip" };
+        if (normalizeRoof(stadium.roof) === "dome") return { state: "closed", reason: "permanent_dome" };
+        const rules = ROOF_CLIMATE_RULES[climateRuleKey(venue)];
+        if (!rules || tempF == null) return { state: "unknown", reason: "missing_rules_or_temp" };
+        if (rules.closeTempF != null && tempF >= rules.closeTempF) return { state: "closed", reason: `hot_${tempF}F` };
+        if (rules.closeTempFLow != null && tempF <= rules.closeTempFLow) return { state: "closed", reason: `cold_${tempF}F` };
+        if (precipPct != null && precipPct >= rules.closePrecip) return { state: "closed", reason: `rain_${precipPct}%` };
+        if (tempF >= rules.openMin && tempF <= rules.openMax && (precipPct == null || precipPct < 25)) {
+            if (rules.highVariance && (precipPct == null || precipPct >= 15)) {
+                return { state: "unknown", reason: `borderline_${tempF}F` };
+            }
+            return { state: "open", reason: `comfort_${tempF}F` };
+        }
+        if (rules.highVariance) return { state: "unknown", reason: `borderline_${tempF}F` };
+        return { state: "open", reason: `default_${tempF}F` };
+    }
+
+    async function fetchBoxscoreWeatherStrings(gamePk) {
+        if (!gamePk) return {};
+        try {
+            const data = await mlbGet(`/game/${gamePk}/boxscore`);
+            const out = {};
+            for (const item of data.info || []) {
+                const label = String(item.label || "").toLowerCase();
+                if (label === "weather") out.weather = item.value;
+                if (label === "wind") out.wind = item.value;
+            }
+            return out;
+        } catch (_) {
+            return {};
+        }
+    }
+
+    function resolveRoofStatus(game, wx) {
+        const venue = game?.venue || "";
+        const stadium = lookupStadium(venue);
+        const roofType = normalizeRoof(stadium?.roof);
+        const mlb = game?.mlbWeather || {};
+        if (roofType === "open") {
+            const windComp = wx?.windComponentMph;
+            const windMph = wx?.windMph;
+            const key = normVenueKey(venue);
+            let propPass = false;
+            if (OUTDOOR_WIND_VARIANCE.has(key)) {
+                if (windComp == null || Math.abs(Number(windComp)) <= 4) propPass = !(windMph >= 18);
+            }
+            return {
+                state: "skip",
+                effective: "open",
+                source: "outdoor",
+                propPass,
+                reason: propPass ? "outdoor_wind_borderline_pass" : "outdoor_skip",
+            };
+        }
+        if (roofType === "dome") {
+            return { state: "dome", effective: "closed", source: "permanent_dome", propPass: false, reason: "permanent_dome" };
+        }
+        const parsed =
+            parseMlbWeatherRoof(mlb.condition, mlb.wind) ||
+            parseMlbWeatherRoof(wx?.roofStatus?.reason);
+        if (parsed) {
+            return {
+                state: parsed,
+                effective: parsed,
+                source: "mlb_schedule",
+                propPass: false,
+                reason: `mlb_string_${parsed}`,
+            };
+        }
+        const climate = predictRoofByClimate(venue, {
+            tempF: wx?.tempF,
+            precipPct: wx?.precipPct,
+            condition: mlb.condition,
+        });
+        const rules = ROOF_CLIMATE_RULES[climateRuleKey(venue)];
+        const highVariance = rules?.highVariance;
+        if (climate.state === "open" || climate.state === "closed") {
+            return {
+                state: climate.state,
+                effective: climate.state,
+                source: "climate",
+                propPass: false,
+                reason: climate.reason,
+                highVariance,
+            };
+        }
+        return {
+            state: "unknown",
+            effective: "open",
+            source: "climate",
+            propPass: !!highVariance,
+            reason: climate.reason || "roof_unknown",
+            highVariance,
+        };
+    }
+
+    async function applyRoofStatusToGame(game) {
+        if (!game?.parkWeather || game.parkWeather.error) return;
+        const wx = game.parkWeather;
+        const stadium = lookupStadium(game.venue || "");
+        if (!stadium) return;
+        const box = await fetchBoxscoreWeatherStrings(game.gamePk);
+        const boxParsed = parseMlbWeatherRoof(box.weather, box.wind);
+        let roofStatus = resolveRoofStatus(game, wx);
+        if (boxParsed) {
+            roofStatus = {
+                state: boxParsed,
+                effective: boxParsed,
+                source: "mlb_boxscore",
+                propPass: false,
+                reason: "mlb_boxscore_weather_string",
+            };
+        }
+        game.roofStatus = roofStatus;
+        game.propPass = !!roofStatus.propPass;
+        wx.roofStatus = roofStatus;
+        wx.propPass = game.propPass;
+        if (roofStatus.effective === "closed" || roofStatus.state === "dome") {
+            const closed = buildWeatherMetrics({
+                tempF: null,
+                humidityPct: null,
+                pressureHpa: null,
+                windMph: null,
+                windFromDeg: null,
+                stadium,
+                roof: "dome",
+                venue: game.venue,
+                gameHourLocal: wx.gameHourLocal,
+            });
+            Object.assign(wx, closed, { roofStatus, propPass: false, roof: "closed" });
+            game.propPass = false;
+        }
+    }
+
+    async function loadStadiumCoords() {
+        if (stadiumCoords) return stadiumCoords;
+        try {
+            const res = await fetchDataJson("stadium-coords.json");
+            stadiumCoords = res.data?.venues || {};
+        } catch (_) {
+            stadiumCoords = {};
+        }
+        return stadiumCoords;
+    }
+
+    function lookupStadium(venueName) {
+        const venues = stadiumCoords || {};
+        const key = normVenueKey(venueName);
+        if (venues[key]) return venues[key];
+        for (const [alias, data] of Object.entries(venues)) {
+            const ak = normVenueKey(alias);
+            if (key.includes(ak) || ak.includes(key)) return data;
+        }
+        return null;
+    }
+
+    function compassFromDeg(deg) {
+        if (deg == null || Number.isNaN(Number(deg))) return "—";
+        const idx = Math.round((((Number(deg) % 360) + 360) % 360) / 22.5) % 16;
+        return WX_COMPASS[idx];
+    }
+
+    function calculateDensityAltitude(tempF, relativeHumidity, stationPressureHpa) {
+        if (tempF == null || relativeHumidity == null || stationPressureHpa == null) return null;
+        const tempC = ((tempF - 32) * 5) / 9;
+        const tempK = tempC + 273.15;
+        const es = 6.11 * Math.pow(10, (7.5 * tempC) / (237.3 + tempC));
+        const e = (relativeHumidity / 100) * es;
+        const rDry = 287.058;
+        const rVapor = 461.495;
+        const pPa = stationPressureHpa * 100;
+        const pVaporPa = e * 100;
+        const pDryPa = pPa - pVaporPa;
+        const rho = pDryPa / (rDry * tempK) + pVaporPa / (rVapor * tempK);
+        const altMeters = (288.15 / 0.0065) * (1 - Math.pow(rho / WX_RHO_ZERO, WX_DA_EXPONENT));
+        return Math.round(altMeters * 3.28084);
+    }
+
+    function baselineDaFt() {
+        if (wxBaselineDaFt == null) {
+            wxBaselineDaFt = calculateDensityAltitude(75, 55, 1013.25) ?? 0;
+        }
+        return wxBaselineDaFt;
+    }
+
+    function typicalGameDaFt() {
+        return baselineDaFt();
+    }
+
+    function clampDisplayPct(n, lo = -22, hi = 22) {
+        if (n == null || Number.isNaN(Number(n))) return null;
+        return Math.max(lo, Math.min(hi, Math.round(Number(n))));
+    }
+
+    /** Symmetric carry % vs a typical 75°F MLB game — not sea-level ideal air. */
+    function displayHrCarryPct(wx) {
+        const da = wx?.densityAltFt;
+        if (da == null) return null;
+        const daDelta = da - typicalGameDaFt();
+        return clampDisplayPct(daDelta / 250);
+    }
+
+    /** Linear wind impact — 10 mph out ≈ +10%, 10 mph in ≈ −10%. */
+    function displayWindPct(windComponentMph) {
+        if (windComponentMph == null || Number.isNaN(Number(windComponentMph))) return null;
+        return clampDisplayPct(Number(windComponentMph) * 1.0);
+    }
+
+    /** Fence boost vs league-average pull alley distance (377 ft). */
+    function displayFencePct(wallFt, refFt = 377) {
+        if (wallFt == null) return null;
+        return clampDisplayPct(((refFt - Number(wallFt)) / 3) * 3.7);
+    }
+
+    function displayHumidityCarryPct(humidityPct) {
+        if (humidityPct == null) return null;
+        return clampDisplayPct((55 - Number(humidityPct)) * 0.15);
+    }
+
+    function displayPressureCarryPct(pressureHpa) {
+        if (pressureHpa == null) return null;
+        return clampDisplayPct((1013 - Number(pressureHpa)) * 0.12);
+    }
+
+    function displayDistanceBoostFt(wx) {
+        const da = wx?.densityAltFt;
+        if (da == null) return null;
+        const delta = da - typicalGameDaFt();
+        return Math.round((delta / 1000) * WX_DISTANCE_BOOST_PER_1000FT * 10) / 10;
+    }
+
+    function windComponentTowardCf(windFromDeg, windMph, cfBearingDeg) {
+        if (windFromDeg == null || windMph == null || cfBearingDeg == null) return null;
+        const windTo = (Number(windFromDeg) + 180) % 360;
+        const angleRad = ((windTo - Number(cfBearingDeg)) * Math.PI) / 180;
+        return Math.round(Number(windMph) * Math.cos(angleRad) * 10) / 10;
+    }
+
+    function distanceBoostFt(densityAltFt) {
+        if (densityAltFt == null) return null;
+        const delta = densityAltFt - baselineDaFt();
+        return Math.round((delta / 1000) * WX_DISTANCE_BOOST_PER_1000FT * 10) / 10;
+    }
+
+    function hrCarryScoreFromWx({ densityAltFt, windComponentMph, roof }) {
+        if (normalizeRoof(roof) === "dome") return { score: 0, label: "Dome — weather neutral" };
+        let score = 0;
+        const baseline = baselineDaFt();
+        if (densityAltFt != null) {
+            const daDelta = densityAltFt - baseline;
+            if (daDelta >= 1500) score += 3;
+            else if (daDelta >= 800) score += 2;
+            else if (daDelta >= 300) score += 1;
+            else if (daDelta <= -800) score -= 2;
+            else if (daDelta <= -300) score -= 1;
+        }
+        if (windComponentMph != null) {
+            if (windComponentMph >= 10) score += 2;
+            else if (windComponentMph >= 5) score += 1;
+            else if (windComponentMph <= -10) score -= 2;
+            else if (windComponentMph <= -5) score -= 1;
+        }
+        if (score >= 2) return { score, label: "Helps HR carry" };
+        if (score <= -2) return { score, label: "Suppresses carry" };
+        return { score, label: "Neutral carry" };
+    }
+
+    function buildWeatherMetrics({
+        tempF,
+        humidityPct,
+        pressureHpa,
+        windMph,
+        windFromDeg,
+        stadium,
+        roof,
+        precipPct,
+        gameHourLocal,
+        venue,
+    }) {
+        const roofType = normalizeRoof(roof || stadium?.roof);
+        const bearing = stadium?.bearing;
+
+        if (roofType === "dome") {
+            const carry = hrCarryScoreFromWx({ roof: roofType });
+            return {
+                source: "dome-neutral",
+                venue,
+                gameHourLocal,
+                tempF: 72,
+                humidityPct: 40,
+                windMph: 0,
+                windDirDeg: null,
+                windDir: "—",
+                windComponentMph: 0,
+                pressureHpa: 1013.3,
+                precipPct,
+                roof: roofType,
+                cfBearing: bearing,
+                densityAltFt: 0,
+                baselineDaFt: baselineDaFt(),
+                distanceBoostFt: 0,
+                hrCarryScore: carry.score,
+                hrCarryLabel: carry.label,
+            };
+        }
+
+        const densityAltFt = calculateDensityAltitude(tempF, humidityPct, pressureHpa);
+        const windComponentMph = windComponentTowardCf(windFromDeg, windMph, bearing);
+        const distBoost = distanceBoostFt(densityAltFt);
+        const carry = hrCarryScoreFromWx({
+            densityAltFt,
+            windComponentMph,
+            roof: roofType,
+        });
+
+        return {
+            source: "open-meteo",
+            venue,
+            gameHourLocal,
+            tempF,
+            humidityPct,
+            windMph: windMph == null ? null : Math.round(Number(windMph) * 10) / 10,
+            windDirDeg: windFromDeg == null ? null : Math.round(Number(windFromDeg)),
+            windDir: compassFromDeg(windFromDeg),
+            windComponentMph,
+            pressureHpa: pressureHpa == null ? null : Math.round(Number(pressureHpa) * 10) / 10,
+            precipPct,
+            roof: roofType,
+            cfBearing: bearing,
+            densityAltFt,
+            baselineDaFt: baselineDaFt(),
+            distanceBoostFt: distBoost,
+            hrCarryScore: carry.score,
+            hrCarryLabel: carry.label,
+        };
+    }
+
+    function fmtHrPropPct(row) {
+        if (row?.hrProp?.propPass || activeGame()?.propPass) return "PASS";
+        const pct = row?.hrProp?.combinedPct;
+        if (pct == null || Number.isNaN(Number(pct))) return "—";
+        const sign = pct > 0 ? "+" : "";
+        return `${sign}${pct}%`;
+    }
+
+    function fmtPitcherRisk(stats) {
+        if (!stats) return "";
         const parts = [];
-        if (isDueForHomer(stats)) {
-            parts.push(
-                '<span class="rs-flag rs-flag--due" title="Due for a homer — owed HRs or multiple near misses suggest one is coming">Due</span>'
+        if (stats.hrRiskPct != null) parts.push(`HR risk ${stats.hrRiskPct > 0 ? "+" : ""}${stats.hrRiskPct}%`);
+        if (stats.hr9 != null) parts.push(`${Number(stats.hr9).toFixed(2)} HR/9`);
+        if (stats.vsLhbPct != null && stats.vsRhbPct != null) {
+            parts.push(`L ${stats.vsLhbPct > 0 ? "+" : ""}${stats.vsLhbPct}% · R ${stats.vsRhbPct > 0 ? "+" : ""}${stats.vsRhbPct}%`);
+        }
+        return parts.join(" · ");
+    }
+
+    const HR_REF_ALLEY_FT = 380;
+    const HR_CARRY_PCT_PER_3FT = 0.11;
+    const HR_DA_MULT_PER_1000 = 0.1;
+    const HR_WIND_MULT_AT_15 = 0.25;
+
+    function hrCarryFeetToPct(carryFt) {
+        return (carryFt / 3) * HR_CARRY_PCT_PER_3FT;
+    }
+
+    function hrDaCompoundMult(daDelta) {
+        if (daDelta == null) return 1;
+        if (daDelta <= 0) return Math.max(0.82, 1 + (daDelta / 1000) * 0.04);
+        return Math.pow(1 + HR_DA_MULT_PER_1000, daDelta / 1000);
+    }
+
+    function hrWindCompoundMult(windOutMph) {
+        if (windOutMph == null) return 1;
+        return Math.max(0.72, 1 + (windOutMph / 15) * HR_WIND_MULT_AT_15);
+    }
+
+    function hrWallDistMult(wallFt) {
+        if (wallFt == null) return 1;
+        return Math.max(0.88, 1 + hrCarryFeetToPct(HR_REF_ALLEY_FT - wallFt));
+    }
+
+    function hrWallHeightMult(heightFt) {
+        if (heightFt == null) return 1;
+        if (heightFt >= 20) return 0.94;
+        if (heightFt >= 10) return 0.97;
+        if (heightFt <= 5) return 1.03;
+        return 1;
+    }
+
+    function effectiveBatterHand(batterHand, pitcherThrows) {
+        const hand = String(batterHand || "R").trim().toUpperCase();
+        if (hand === "L" || hand === "R") return hand;
+        const throws = String(pitcherThrows || "R").trim().toUpperCase();
+        return throws === "L" ? "R" : "L";
+    }
+
+    function pullAlley(stadium, hand) {
+        const walls = stadium?.walls || {};
+        const heights = stadium?.heights || {};
+        const cfBearing = stadium?.bearing;
+        if (hand === "L") {
+            const override = stadium?.pullL || {};
+            const dist = override.dist ?? walls.rcf;
+            let bearing = override.bearing;
+            if (bearing == null && cfBearing != null) bearing = (cfBearing + 22) % 360;
+            return { dist, bearing, height: heights.rf ?? heights.cf };
+        }
+        const override = stadium?.pullR || {};
+        const dist = override.dist ?? walls.lcf;
+        let bearing = override.bearing;
+        if (bearing == null && cfBearing != null) bearing = (cfBearing - 22 + 360) % 360;
+        return { dist, bearing, height: heights.lf ?? heights.cf };
+    }
+
+    function computeGameHrModel(game) {
+        const stadium = lookupStadium(game?.venue || "");
+        const wx = game?.parkWeather || {};
+        if (!stadium) return game?.hrModel || null;
+        const baseline = wx.baselineDaFt ?? baselineDaFt();
+        const da = wx.densityAltFt;
+        const daDelta = da == null ? null : da - baseline;
+        const daMult = hrDaCompoundMult(daDelta);
+        const carryMult = Math.max(0.85, 1 + hrCarryFeetToPct(Number(wx.distanceBoostFt) || 0));
+        const weatherMult = daMult * carryMult;
+        const windFrom = wx.windDirDeg;
+        const windMph = wx.windMph;
+        let windOutL = null;
+        let windOutR = null;
+        if (windFrom != null && windMph != null) {
+            windOutL = windComponentTowardCf(windFrom, windMph, pullAlley(stadium, "L").bearing);
+            windOutR = windComponentTowardCf(windFrom, windMph, pullAlley(stadium, "R").bearing);
+        } else {
+            windOutR = wx.windComponentMph;
+        }
+        const pullL = pullAlley(stadium, "L");
+        const pullR = pullAlley(stadium, "R");
+        const walls = stadium.walls || {};
+        return {
+            daDeltaFt: daDelta,
+            daMult: Math.round(daMult * 1000) / 1000,
+            carryMult: Math.round(carryMult * 1000) / 1000,
+            weatherMult: Math.round(weatherMult * 1000) / 1000,
+            windOutLhbMph: windOutL,
+            windOutRhbMph: windOutR,
+            windMultLhb: Math.round(hrWindCompoundMult(windOutL) * 1000) / 1000,
+            windMultRhb: Math.round(hrWindCompoundMult(windOutR ?? wx.windComponentMph) * 1000) / 1000,
+            dimMultLhb: Math.round(hrWallDistMult(pullL.dist) * hrWallHeightMult(pullL.height) * 1000) / 1000,
+            dimMultRhb: Math.round(hrWallDistMult(pullR.dist) * hrWallHeightMult(pullR.height) * 1000) / 1000,
+            wallLfFt: walls.lf,
+            wallCfFt: walls.cf,
+            wallRfFt: walls.rf,
+        };
+    }
+
+    function pitcherHrMult(pitcher, batterHand) {
+        const stats = pitcher?.stats || {};
+        const hand = effectiveBatterHand(batterHand, pitcher?.throws);
+        let score = hand === "L" ? stats.vsLhb : stats.vsRhb;
+        if (score == null) score = stats.hrRisk;
+        if (score == null) return 1;
+        return Math.max(0.65, 1 + Number(score) * 0.5);
+    }
+
+    function computeHitterHrProp(row, game, pitcher) {
+        const stadium = lookupStadium(game?.venue || "");
+        if (!stadium) return row?.hrProp || null;
+        const hand = effectiveBatterHand(row?.hand, pitcher?.throws);
+        const hrModel = game.hrModel || computeGameHrModel(game);
+        const parkPct = parkHrPctForHitter(game, hand);
+        const stadiumMult = parkPct == null ? 1 : Math.max(0.7, 1 + parkPct / 100);
+        const windMult = hand === "L" ? hrModel?.windMultLhb ?? 1 : hrModel?.windMultRhb ?? 1;
+        const dimMult = hand === "L" ? hrModel?.dimMultLhb ?? 1 : hrModel?.dimMultRhb ?? 1;
+        const weatherMult = hrModel?.weatherMult ?? 1;
+        const pitcherMult = pitcherHrMult(pitcher, hand);
+        const propPass = !!(game.propPass || game.parkWeather?.propPass);
+        if (propPass) {
+            return {
+                hand,
+                combinedMult: null,
+                combinedPct: null,
+                propPass: true,
+                stadiumMult: null,
+                weatherMult: null,
+                windMult: null,
+                dimMult: null,
+                pitcherMult: null,
+                parkPct: parkHrPctForHitter(game, hand),
+                windOutMph: null,
+                pullWallFt: pullAlley(stadium, hand).dist,
+                pullBearing: pullAlley(stadium, hand).bearing,
+            };
+        }
+        const combined = stadiumMult * weatherMult * windMult * dimMult * pitcherMult;
+        const pull = pullAlley(stadium, hand);
+        return {
+            hand,
+            combinedMult: Math.round(combined * 1000) / 1000,
+            combinedPct: Math.round((combined - 1) * 1000) / 10,
+            stadiumMult: Math.round(stadiumMult * 1000) / 1000,
+            weatherMult: Math.round(weatherMult * 1000) / 1000,
+            windMult: Math.round(windMult * 1000) / 1000,
+            dimMult: Math.round(dimMult * 1000) / 1000,
+            pitcherMult: Math.round(pitcherMult * 1000) / 1000,
+            parkPct,
+            windOutMph: hand === "L" ? hrModel?.windOutLhbMph : hrModel?.windOutRhbMph,
+            pullWallFt: pull.dist,
+            pullBearing: pull.bearing,
+        };
+    }
+
+    function refreshGameHrProps(game) {
+        if (!game) return;
+        game.hrModel = game.hrModel || computeGameHrModel(game);
+        const awayP = game.homePitcher;
+        const homeP = game.awayPitcher;
+        for (const row of game.awayLineup || []) row.hrProp = computeHitterHrProp(row, game, awayP);
+        for (const row of game.homeLineup || []) row.hrProp = computeHitterHrProp(row, game, homeP);
+    }
+
+    function refreshAllHrProps() {
+        for (const game of slate?.games || []) refreshGameHrProps(game);
+    }
+
+    function carryTone(score) {
+        if (score == null || Number.isNaN(Number(score))) return "mid";
+        if (score >= 2) return "good";
+        if (score <= -2) return "bad";
+        return "mid";
+    }
+
+    function multToPct(mult) {
+        if (mult == null || Number.isNaN(Number(mult))) return null;
+        return Math.round((Number(mult) - 1) * 1000) / 10;
+    }
+
+    function fmtSignedPct(pct) {
+        if (pct == null || Number.isNaN(Number(pct))) return "—";
+        const n = Math.round(Number(pct));
+        const sign = n > 0 ? "+" : "";
+        return `${sign}${n}%`;
+    }
+
+    function edgeTone(pct) {
+        if (pct == null || Number.isNaN(Number(pct))) return "mid";
+        if (pct >= 6) return "good";
+        if (pct <= -6) return "bad";
+        return "mid";
+    }
+
+    function computeHrCarryPct(wx) {
+        return displayHrCarryPct(wx);
+    }
+
+    function computeWindOutPct(windComponentMph) {
+        return displayWindPct(windComponentMph);
+    }
+
+    function computeEnvHrPct(wx) {
+        const carry = displayHrCarryPct(wx) ?? 0;
+        const wind = displayWindPct(wx?.windComponentMph) ?? 0;
+        return Math.round(carry + wind);
+    }
+
+    const WX_TIPS = {
+        hrCarry:
+            "Thin air vs a typical 75°F game — not perfect sea-level air. Hot, dry, low-pressure days push positive; cold, humid, high-pressure days go negative.",
+        windOut:
+            "Wind blowing toward center field. Tailwind (+) pushes deep flies over the fence; headwind (−) turns would-be HRs into outs. Look for 10+ mph tailwind before hammering HR Overs.",
+        windPullL:
+            "Wind along the left-handed pull side (toward right field). LHB power hitters benefit most when this is positive. Same park can help LHB and hurt RHB depending on wind angle.",
+        windPullR:
+            "Wind along the right-handed pull side (toward left field). RHB sluggers get the boost here. Check this before betting RH batter HR props at parks like Yankee Stadium or Oracle Park.",
+        parkFactor:
+            "Historical HR boost from this stadium vs league average (PropFinder import). Positive = bandbox; negative = graveyard.",
+        fenceBoost:
+            "Pull-side wall vs league-average distance (377 ft). Short porch = positive; deep alley = negative. Park shape only — not today's wind or air.",
+        conditions:
+            "Forecast at first-pitch hour. Hot and humid = slightly thinner air. Rain or a last-minute roof closure can flip your edge — recheck 60–90 minutes before first pitch.",
+        humidity:
+            "Relative humidity at game time. Shown with carry impact vs a 55% baseline — sticky air hurts carry, drier air helps a touch.",
+        pressure:
+            "Barometric pressure with carry impact vs ~1013 hPa. Lower pressure = thinner air (+); high pressure = denser air (−).",
+        roof:
+            "Dome or closed roof = no outdoor wind and controlled climate. If roof status is unknown on a retractable park, we flag PASS — skip HR props until confirmed open.",
+        pass:
+            "Roof or wind data is unreliable for this game. Books still post HR lines, but the edge is unknown. Wait for confirmation or pass on HR props here.",
+    };
+
+    function wxCell(label, value, tip, opts = {}) {
+        const { tone, sub, hero, wide, pass } = opts;
+        const mods = ["rs-weather__cell"];
+        if (tone) mods.push(`rs-weather__cell--${tone}`);
+        if (hero) mods.push("rs-weather__cell--hero");
+        if (wide) mods.push("rs-weather__cell--wide");
+        if (pass) mods.push("rs-weather__cell--pass");
+        const tipAttr = tip ? ` data-tip="${escAttr(tip)}" tabindex="0"` : "";
+        const tipCls = tip ? " rs-has-tip" : "";
+        const subHtml = sub ? `<span class="rs-weather__sub">${sub}</span>` : "";
+        return `<div class="${mods.join(" ")}${tipCls}"${tipAttr}><dt>${label}</dt><dd>${value}${subHtml}</dd></div>`;
+    }
+
+    function fmtWindPullSub(mph) {
+        if (mph == null || Number.isNaN(Number(mph))) return "";
+        const n = Math.round(Number(mph) * 10) / 10;
+        if (Math.abs(n) < 1) return "Crosswind / calm";
+        if (n > 0) return `${n} mph out to pull side`;
+        return `${Math.abs(n)} mph in from pull side`;
+    }
+
+    function fmtRoofLabel(game, wx) {
+        const rs = game?.roofStatus || wx?.roofStatus || {};
+        const state = String(rs.state || wx?.roof || "unknown").toLowerCase();
+        if (state === "dome") return "Dome — no outdoor wind";
+        if (state === "closed") return "Roof closed";
+        if (state === "open") return "Roof open";
+        if (state === "unknown") return "Roof unknown";
+        return state.charAt(0).toUpperCase() + state.slice(1);
+    }
+
+    async function fetchOpenMeteoWeather(game) {
+        const venue = game?.venue || "";
+        const startTime = game?.startTime || "";
+        const stadium = lookupStadium(venue);
+        if (!stadium || !startTime) return { error: "missing_coords", venue };
+
+        const roofType = normalizeRoof(stadium.roof);
+        if (roofType === "dome") {
+            return buildWeatherMetrics({
+                tempF: null,
+                humidityPct: null,
+                pressureHpa: null,
+                windMph: null,
+                windFromDeg: null,
+                stadium,
+                roof: roofType,
+                venue,
+            });
+        }
+
+        const start = new Date(startTime);
+        if (Number.isNaN(start.getTime())) return { error: "bad_start", venue };
+
+        const tz = stadium.tz || "America/New_York";
+        const localParts = new Intl.DateTimeFormat("en-CA", {
+            timeZone: tz,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            hour12: false,
+        }).formatToParts(start);
+        const part = (t) => localParts.find((p) => p.type === t)?.value || "";
+        const targetDate = `${part("year")}-${part("month")}-${part("day")}`;
+        const targetHour = parseInt(part("hour"), 10);
+
+        const params = new URLSearchParams({
+            latitude: String(stadium.lat),
+            longitude: String(stadium.lon),
+            hourly: "temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,surface_pressure,precipitation_probability",
+            timezone: tz,
+            temperature_unit: "fahrenheit",
+            wind_speed_unit: "mph",
+            forecast_days: "3",
+        });
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params.toString()}`);
+        if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);
+        const data = await res.json();
+        const hourly = data.hourly || {};
+        const times = hourly.time || [];
+        let idx = times.findIndex((t) => t.startsWith(targetDate) && parseInt(t.slice(11, 13), 10) === targetHour);
+        if (idx < 0) {
+            let best = -1;
+            let bestDiff = 999;
+            times.forEach((t, i) => {
+                if (!t.startsWith(targetDate)) return;
+                const diff = Math.abs(parseInt(t.slice(11, 13), 10) - targetHour);
+                if (diff < bestDiff) {
+                    bestDiff = diff;
+                    best = i;
+                }
+            });
+            idx = best;
+        }
+        if (idx < 0) return { error: "no_hour", venue };
+
+        return buildWeatherMetrics({
+            tempF: hourly.temperature_2m?.[idx],
+            humidityPct: hourly.relative_humidity_2m?.[idx],
+            pressureHpa: hourly.surface_pressure?.[idx],
+            windMph: hourly.wind_speed_10m?.[idx],
+            windFromDeg: hourly.wind_direction_10m?.[idx],
+            precipPct: hourly.precipitation_probability?.[idx],
+            stadium,
+            gameHourLocal: times[idx],
+            venue,
+        });
+    }
+
+    function weatherIsComplete(wx) {
+        if (!wx || wx.error) return false;
+        if (wx.source === "dome-neutral" || wx.roof === "dome") return true;
+        return wx.source != null && wx.densityAltFt != null;
+    }
+
+    async function ensureGameWeather(game) {
+        if (!game || game._weatherLoading) return game?.parkWeather || null;
+        if (weatherIsComplete(game.parkWeather)) {
+            if (!game.roofStatus) await applyRoofStatusToGame(game);
+            return game.parkWeather;
+        }
+        game._weatherLoading = true;
+        try {
+            await loadStadiumCoords();
+            const wx = await fetchOpenMeteoWeather(game);
+            game.parkWeather = wx;
+            game._weatherFetched = true;
+            await applyRoofStatusToGame(game);
+            refreshGameHrProps(game);
+            return wx;
+        } catch (err) {
+            game.parkWeather = { error: String(err.message || err), venue: game.venue };
+            game._weatherFetched = true;
+            return null;
+        } finally {
+            game._weatherLoading = false;
+        }
+    }
+
+    async function prefetchSlateWeather() {
+        if (!slate?.games?.length) return;
+        await loadStadiumCoords();
+        await Promise.all(
+            slate.games.map(async (game) => {
+                if (weatherIsComplete(game.parkWeather)) {
+                    if (!game.roofStatus) await applyRoofStatusToGame(game);
+                    return;
+                }
+                await ensureGameWeather(game);
+            })
+        );
+        renderGames();
+        renderWeatherPanel();
+        refreshAllHrProps();
+    }
+
+    function rsReason(game) {
+        return game?.roofStatus?.reason || game?.parkWeather?.roofStatus?.reason || "";
+    }
+
+    function weatherBadgeHtml(game) {
+        if (game?.propPass) {
+            return `<span class="rs-game-pill__wx rs-game-pill__wx--pass" data-tip="PASS — roof or wind unknown, skip HR props">PASS</span>`;
+        }
+        const wx = game?.parkWeather || {};
+        const hm = game?.hrModel || computeGameHrModel(game);
+        const pct = computeEnvHrPct(wx);
+        if (pct == null || Number.isNaN(Number(pct))) return "";
+        const tone = edgeTone(pct);
+        const tip = `Today's air + CF wind HR boost vs average: ${fmtSignedPct(pct)}`;
+        return `<span class="rs-game-pill__wx rs-game-pill__wx--${tone} rs-has-tip" data-tip="${escAttr(tip)}">${fmtSignedPct(pct)}</span>`;
+    }
+
+    const PARK_WALL_ANGLES = { lf: -45, lcf: -22, cf: 0, rcf: 22, rf: 45 };
+    const DEFAULT_PARK_WALLS = { lf: 330, lcf: 375, cf: 400, rcf: 375, rf: 330 };
+
+    function buildParkGeometry(stadium) {
+        const walls = { ...DEFAULT_PARK_WALLS, ...(stadium?.walls || {}) };
+        const cx = 84;
+        const cy = 152;
+        const maxDist = Math.max(walls.lf, walls.lcf, walls.cf, walls.rcf, walls.rf);
+        const scale = 96 / maxDist;
+        const keys = ["lf", "lcf", "cf", "rcf", "rf"];
+        const pts = keys.map((key) => {
+            const dist = walls[key];
+            const deg = PARK_WALL_ANGLES[key];
+            const rad = (deg * Math.PI) / 180;
+            return {
+                key,
+                dist,
+                x: cx + Math.sin(rad) * dist * scale,
+                y: cy - Math.cos(rad) * dist * scale,
+            };
+        });
+        const fmt = (n) => n.toFixed(1);
+        const fillPath = `M ${fmt(cx)} ${fmt(cy)} ${pts.map((p) => `L ${fmt(p.x)} ${fmt(p.y)}`).join(" ")} Z`;
+        const fencePath = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${fmt(p.x)} ${fmt(p.y)}`).join(" ");
+        const foulPath = `M ${fmt(cx)} ${fmt(cy)} L ${fmt(pts[0].x)} ${fmt(pts[0].y)} M ${fmt(cx)} ${fmt(cy)} L ${fmt(pts[4].x)} ${fmt(pts[4].y)}`;
+        const d = 13;
+        const infieldPath = `M ${fmt(cx)} ${fmt(cy)} L ${fmt(cx + d)} ${fmt(cy - d * 0.72)} L ${fmt(cx)} ${fmt(cy - d * 1.28)} L ${fmt(cx - d)} ${fmt(cy - d * 0.72)} Z`;
+        const labels = pts.map((p) => {
+            const deg = PARK_WALL_ANGLES[p.key];
+            const rad = (deg * Math.PI) / 180;
+            return {
+                x: p.x + Math.sin(rad) * 9,
+                y: p.y - Math.cos(rad) * 9,
+                text: String(Math.round(p.dist)),
+            };
+        });
+        const hubX = cx;
+        const hubY = cy - walls.cf * scale * 0.52;
+        return { fillPath, fencePath, foulPath, infieldPath, labels, hubX, hubY, cx, cy };
+    }
+
+    function renderParkOutline(stadium) {
+        const geo = buildParkGeometry(stadium);
+        if (els.parkOutline) {
+            const labelHtml = geo.labels
+                .map(
+                    (l) =>
+                        `<text class="rs-wind-field__dim" x="${l.x.toFixed(1)}" y="${l.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${l.text}</text>`
+                )
+                .join("");
+            els.parkOutline.innerHTML = `
+                <path class="rs-wind-field__fill" d="${geo.fillPath}" />
+                <path class="rs-wind-field__fence" d="${geo.fencePath}" />
+                <path class="rs-wind-field__foul" d="${geo.foulPath}" />
+                <path class="rs-wind-field__infield" d="${geo.infieldPath}" />
+                ${labelHtml}
+            `;
+        }
+        return geo;
+    }
+
+    function setWindArrowHub(geo) {
+        if (!els.windArrow || !geo) return;
+        const line = els.windArrow.querySelector(".rs-wind-field__arrow-line");
+        const tip = els.windArrow.querySelector(".rs-wind-field__arrow-tip");
+        const len = 10;
+        const tipY = geo.hubY - len;
+        const headY = tipY - 2;
+        const baseY = tipY + 3;
+        if (line) {
+            line.setAttribute("x1", geo.hubX.toFixed(1));
+            line.setAttribute("y1", geo.hubY.toFixed(1));
+            line.setAttribute("x2", geo.hubX.toFixed(1));
+            line.setAttribute("y2", tipY.toFixed(1));
+        }
+        if (tip) {
+            tip.setAttribute(
+                "points",
+                `${geo.hubX.toFixed(1)},${headY.toFixed(1)} ${(geo.hubX - 2.5).toFixed(1)},${baseY.toFixed(1)} ${(geo.hubX + 2.5).toFixed(1)},${baseY.toFixed(1)}`
             );
         }
-        if (needsParkHelp(stats, game, row?.hand)) {
-            const park = parkHrPctForHitter(game, row?.hand);
-            const parkTxt = park != null ? `${park > 0 ? "+" : ""}${park}% HR park` : "unfriendly park";
-            parts.push(
-                `<span class="rs-flag rs-flag--park" title="Needs park help — power depends on stadium, and today is ${escAttr(parkTxt)}">Park</span>`
+    }
+
+    function windFieldInfoHtml(wx, component, roofClosed) {
+        if (roofClosed) {
+            return `<div class="rs-wind-field__row"><span>Wind</span><span>Roof closed</span></div>`;
+        }
+        const rows = [];
+        if (wx.windMph != null) {
+            const dir = wx.windDir ? ` ${wx.windDir}` : "";
+            rows.push(`<div class="rs-wind-field__row"><span>Wind</span><span>${Math.round(Number(wx.windMph))} mph${dir}</span></div>`);
+        }
+        if (component != null && !Number.isNaN(Number(component))) {
+            let effect = "Crosswind";
+            if (component >= 5) effect = "Blowing out to CF";
+            else if (component <= -5) effect = "Blowing in from CF";
+            else if (component > 1) effect = "Slight tailwind out";
+            else if (component < -1) effect = "Slight headwind in";
+            const comp =
+                component > 0 ? `+${component} mph out` : component < 0 ? `${component} mph out` : "minimal impact";
+            rows.push(`<div class="rs-wind-field__row"><span>Ball carry</span><span>${effect} · ${comp}</span></div>`);
+        }
+        if (wx.tempF != null) {
+            rows.push(`<div class="rs-wind-field__row"><span>Temp</span><span>${Math.round(wx.tempF)}°F</span></div>`);
+        }
+        if (wx.humidityPct != null) {
+            rows.push(`<div class="rs-wind-field__row"><span>Humidity</span><span>${Math.round(wx.humidityPct)}%</span></div>`);
+        }
+        if (wx.pressureHpa != null) {
+            rows.push(`<div class="rs-wind-field__row"><span>Air pressure</span><span>${wx.pressureHpa} hPa</span></div>`);
+        }
+        if (!rows.length) return `<div class="rs-wind-field__row"><span>Wind</span><span>—</span></div>`;
+        return rows.join("");
+    }
+
+    function windFieldRotation(windFrom, bearing) {
+        const windToDeg = (Number(windFrom) + 180) % 360;
+        const relativeAngle = (windToDeg - Number(bearing) + 360) % 360;
+        return relativeAngle - 90;
+    }
+
+    function setWindFieldTone(tone) {
+        if (!els.windField) return;
+        els.windField.classList.remove("rs-wind-field--good", "rs-wind-field--bad", "rs-wind-field--mid", "rs-wind-field--idle");
+        if (tone) els.windField.classList.add(`rs-wind-field--${tone}`);
+    }
+
+    function renderWindFieldVisual(game) {
+        if (!els.windField) return;
+        const wx = game?.parkWeather || {};
+        const stadium = lookupStadium(game?.venue || "");
+        const geo = renderParkOutline(stadium);
+        setWindArrowHub(geo);
+
+        const roofClosed =
+            wx.roof === "dome" ||
+            wx.roof === "closed" ||
+            game?.roofStatus?.effective === "closed" ||
+            game?.roofStatus?.state === "dome";
+
+        els.windField.hidden = false;
+
+        if (game?._weatherLoading) {
+            setWindFieldTone("idle");
+            if (els.windInfo) els.windInfo.innerHTML = `<div class="rs-wind-field__row"><span>Wind</span><span>Loading…</span></div>`;
+            if (els.windArrow) els.windArrow.setAttribute("opacity", "0");
+            return;
+        }
+
+        if (roofClosed) {
+            setWindFieldTone("mid");
+            if (els.windInfo) els.windInfo.innerHTML = windFieldInfoHtml(wx, 0, true);
+            if (els.windArrow) els.windArrow.setAttribute("opacity", "0");
+            return;
+        }
+
+        const bearing = wx.cfBearing ?? stadium?.bearing ?? 0;
+        const windFrom = wx.windDirDeg;
+        const windMph = wx.windMph ?? 0;
+
+        if (windFrom == null || windMph == null) {
+            setWindFieldTone("idle");
+            if (els.windInfo) {
+                els.windInfo.innerHTML = `<div class="rs-wind-field__row"><span>Wind</span><span>${wx.error ? "Unavailable" : "Pending"}</span></div>`;
+            }
+            if (els.windArrow) els.windArrow.setAttribute("opacity", "0");
+            return;
+        }
+
+        const component =
+            wx.windComponentMph != null ? wx.windComponentMph : windComponentTowardCf(windFrom, windMph, bearing);
+        const tone = component >= 5 ? "good" : component <= -5 ? "bad" : "mid";
+        const rot = windFieldRotation(windFrom, bearing);
+        const transform = `rotate(${rot} ${geo.hubX.toFixed(1)} ${geo.hubY.toFixed(1)})`;
+
+        setWindFieldTone(tone);
+        if (els.windArrow) {
+            els.windArrow.setAttribute("transform", transform);
+            els.windArrow.setAttribute("opacity", windMph < 2 ? "0.35" : "1");
+        }
+        if (els.windInfo) els.windInfo.innerHTML = windFieldInfoHtml(wx, component, false);
+    }
+
+    function renderWeatherPanel() {
+        if (!els.weatherPanel || !els.weatherGrid) return;
+        const game = activeGame();
+        if (!game) {
+            els.weatherPanel.hidden = true;
+            return;
+        }
+        els.weatherPanel.hidden = false;
+        const wx = game.parkWeather || {};
+        const mlb = game.mlbWeather || {};
+        const hm = game.hrModel || computeGameHrModel(game);
+        const stadium = lookupStadium(game?.venue || "");
+        const time = fmtTime(game.startTime);
+        const status = game.status ? ` · ${game.status}` : "";
+        els.weatherMeta.textContent = `${game.venue || "—"} · ${time}${status}`;
+
+        if (game._weatherLoading) {
+            els.weatherGrid.innerHTML = wxCell("Loading", "Fetching forecast…", WX_TIPS.conditions);
+            renderWindFieldVisual(game);
+            return;
+        }
+
+        const cells = [];
+
+        if (game.propPass) {
+            cells.push(
+                wxCell("⚠️ HR Props", "PASS — wait for roof/wind", WX_TIPS.pass, { pass: true, wide: true, hero: true })
             );
         }
-        return parts.join(" ");
+
+        const hrCarryPct = displayHrCarryPct(wx);
+        if (hrCarryPct != null) {
+            const boostFt = displayDistanceBoostFt(wx);
+            const sub =
+                boostFt != null
+                    ? `${boostFt > 0 ? "+" : ""}${boostFt} ft vs typical game`
+                    : wx.hrCarryLabel || "";
+            cells.push(
+                wxCell("HR Carry", fmtSignedPct(hrCarryPct), WX_TIPS.hrCarry, {
+                    tone: edgeTone(hrCarryPct),
+                    sub,
+                    hero: !game.propPass,
+                })
+            );
+        }
+
+        const roofClosed =
+            wx.roof === "dome" ||
+            wx.roof === "closed" ||
+            game?.roofStatus?.effective === "closed" ||
+            game?.roofStatus?.state === "dome";
+
+        const windOutPct = roofClosed ? null : displayWindPct(wx.windComponentMph);
+        if (windOutPct != null && wx.windMph != null) {
+            const comp = wx.windComponentMph;
+            let sub = `${wx.windMph} mph ${wx.windDir || ""}`;
+            if (comp != null) {
+                sub += comp > 0 ? ` · ${comp} mph out to CF` : comp < 0 ? ` · ${Math.abs(comp)} mph in from CF` : " · crosswind";
+            }
+            cells.push(
+                wxCell("Wind Out", fmtSignedPct(windOutPct), WX_TIPS.windOut, {
+                    tone: edgeTone(windOutPct),
+                    sub,
+                })
+            );
+        }
+
+        const pullL = stadium ? pullAlley(stadium, "L") : null;
+        const pullR = stadium ? pullAlley(stadium, "R") : null;
+        const windLPct = roofClosed ? null : displayWindPct(hm?.windOutLhbMph);
+        const windRPct = roofClosed ? null : displayWindPct(hm?.windOutRhbMph);
+        if (windLPct != null) {
+            cells.push(
+                wxCell("Wind Pull L", fmtSignedPct(windLPct), WX_TIPS.windPullL, {
+                    tone: edgeTone(windLPct),
+                    sub: fmtWindPullSub(hm?.windOutLhbMph),
+                })
+            );
+        }
+        if (windRPct != null) {
+            cells.push(
+                wxCell("Wind Pull R", fmtSignedPct(windRPct), WX_TIPS.windPullR, {
+                    tone: edgeTone(windRPct),
+                    sub: fmtWindPullSub(hm?.windOutRhbMph),
+                })
+            );
+        }
+
+        if (game.parkHrPct != null) {
+            cells.push(
+                wxCell("Park Factor", fmtSignedPct(game.parkHrPct), WX_TIPS.parkFactor, {
+                    tone: edgeTone(game.parkHrPct),
+                    sub: "vs league-average HR rate",
+                })
+            );
+        }
+
+        const fenceLPct = pullL?.dist != null ? displayFencePct(pullL.dist, 377) : null;
+        const fenceRPct = pullR?.dist != null ? displayFencePct(pullR.dist, 377) : null;
+        if (fenceLPct != null || fenceRPct != null) {
+            const lf = hm?.wallLfFt;
+            const rf = hm?.wallRfFt;
+            const sub = lf != null && rf != null ? `LF ${lf} ft · RF ${rf} ft · vs 377 ft avg` : "vs league-average pull alley";
+            cells.push(
+                wxCell(
+                    "Short Porch",
+                    `L ${fmtSignedPct(fenceLPct)} · R ${fmtSignedPct(fenceRPct)}`,
+                    WX_TIPS.fenceBoost,
+                    { tone: edgeTone(Math.max(fenceLPct ?? 0, fenceRPct ?? 0)), sub, wide: true }
+                )
+            );
+        } else if (game.parkLhbPct != null || game.parkRhbPct != null) {
+            cells.push(
+                wxCell(
+                    "Park L / R",
+                    `L ${fmtSignedPct(game.parkLhbPct)} · R ${fmtSignedPct(game.parkRhbPct)}`,
+                    WX_TIPS.parkFactor,
+                    { wide: true }
+                )
+            );
+        }
+
+        const condParts = [];
+        if (wx.tempF != null) condParts.push(`${Math.round(wx.tempF)}°F`);
+        else if (mlb.temp) condParts.push(String(mlb.temp));
+        if (wx.precipPct != null && wx.precipPct >= 15) condParts.push(`${Math.round(wx.precipPct)}% rain`);
+        if (mlb.condition && !condParts.length) condParts.push(String(mlb.condition));
+        if (condParts.length) {
+            cells.push(wxCell("Conditions", condParts.join(" · "), WX_TIPS.conditions, { wide: true }));
+        }
+
+        if (wx.humidityPct != null) {
+            const hImpact = displayHumidityCarryPct(wx.humidityPct);
+            cells.push(
+                wxCell("Humidity", `${Math.round(wx.humidityPct)}%`, WX_TIPS.humidity, {
+                    tone: hImpact != null ? edgeTone(hImpact) : undefined,
+                    sub: hImpact != null ? `${fmtSignedPct(hImpact)} carry vs avg` : undefined,
+                })
+            );
+        }
+
+        if (wx.pressureHpa != null) {
+            const pImpact = displayPressureCarryPct(wx.pressureHpa);
+            cells.push(
+                wxCell("Air Pressure", `${wx.pressureHpa} hPa`, WX_TIPS.pressure, {
+                    tone: pImpact != null ? edgeTone(pImpact) : undefined,
+                    sub: pImpact != null ? `${fmtSignedPct(pImpact)} carry vs avg` : undefined,
+                })
+            );
+        }
+
+        if (wx.roof || game.roofStatus) {
+            const roofLabel = fmtRoofLabel(game, wx);
+            const passNote = game.propPass ? " · PASS HR props" : "";
+            const reason = rsReason(game);
+            const tip = reason ? `${WX_TIPS.roof} ${reason}` : WX_TIPS.roof;
+            cells.push(
+                wxCell("Roof", `${roofLabel}${passNote}`, tip, {
+                    pass: !!game.propPass,
+                    sub: reason || undefined,
+                })
+            );
+        }
+
+        if (!cells.length) {
+            cells.push(wxCell("Weather", wx.error || "Unavailable", WX_TIPS.conditions));
+        }
+
+        els.weatherGrid.innerHTML = cells.join("");
+        renderWindFieldVisual(game);
     }
 
     function escAttr(s) {
@@ -609,6 +1746,15 @@
                         hand: row.hand || prev.hand,
                     };
                 });
+            }
+            for (const field of ["parkHrPct", "parkLhbPct", "parkRhbPct", "parkWeather", "mlbWeather", "venue", "hrModel", "roofStatus", "propPass"]) {
+                if (cg[field] != null && game[field] == null) game[field] = cg[field];
+            }
+            if (cg.awayPitcher?.stats && game.awayPitcher) {
+                game.awayPitcher.stats = { ...(cg.awayPitcher.stats || {}), ...(game.awayPitcher.stats || {}) };
+            }
+            if (cg.homePitcher?.stats && game.homePitcher) {
+                game.homePitcher.stats = { ...(cg.homePitcher.stats || {}), ...(game.homePitcher.stats || {}) };
             }
         }
     }
@@ -1044,7 +2190,7 @@
 
     async function fetchLiveSlate(date) {
         const data = await mlbGet(
-            `/schedule?sportId=1&date=${encodeURIComponent(date)}&hydrate=probablePitcher,team,venue`
+            `/schedule?sportId=1&date=${encodeURIComponent(date)}&hydrate=probablePitcher,team,venue,weather`
         );
         const games = [];
         for (const day of data.dates || []) {
@@ -1053,6 +2199,7 @@
                 const homeT = g.teams?.home?.team || {};
                 const awayP = g.teams?.away?.probablePitcher;
                 const homeP = g.teams?.home?.probablePitcher;
+                const mlbWx = g.weather || null;
                 games.push({
                     gamePk: g.gamePk,
                     matchup: `${awayT.abbreviation} @ ${homeT.abbreviation}`,
@@ -1062,7 +2209,15 @@
                     homeTeamId: homeT.id,
                     startTime: g.gameDate,
                     venue: g.venue?.name || "",
+                    venueId: g.venue?.id,
                     status: g.status?.detailedState || "",
+                    mlbWeather: mlbWx
+                        ? {
+                              condition: mlbWx.condition || "",
+                              temp: mlbWx.temp || "",
+                              wind: mlbWx.wind || "",
+                          }
+                        : null,
                     awayPitcher: awayP ? { id: awayP.id, name: awayP.fullName, throws: awayP.pitchHand?.code } : null,
                     homePitcher: homeP ? { id: homeP.id, name: homeP.fullName, throws: homeP.pitchHand?.code } : null,
                     awayLineup: [],
@@ -1117,17 +2272,23 @@
                 const nAway = (g.awayLineup || []).length;
                 const nHome = (g.homeLineup || []).length;
                 return `<button type="button" class="rs-game-pill${i === activeGameIdx ? " is-active" : ""}" data-idx="${i}">
-                    <span class="rs-game-pill__matchup">${g.matchup}</span>
+                    <span class="rs-game-pill__matchup">${g.matchup}${weatherBadgeHtml(g)}</span>
                     <span class="rs-game-pill__meta">${time}${time ? " · " : ""}${g.lineupStatus || ""} · ${nAway}/${nHome} hitters</span>
                     <span class="rs-game-pill__meta">${sp}</span>
                 </button>`;
             })
             .join("");
         els.games.querySelectorAll(".rs-game-pill").forEach((btn) => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", async () => {
                 activeGameIdx = parseInt(btn.getAttribute("data-idx"), 10);
                 pickDefaultSide();
                 renderAll();
+                const game = activeGame();
+                if (game && !weatherIsComplete(game.parkWeather)) {
+                    await ensureGameWeather(game);
+                    renderWeatherPanel();
+                    renderGames();
+                }
             });
         });
     }
@@ -1142,8 +2303,9 @@
         els.matchupTitle.textContent = `${offense} hitters${projected ? " (proj)" : ""}`;
         if (els.matchupSp) {
             const mix = pitcher?.arsenalLabel || formatArsenal(pitcher?.arsenal);
+            const risk = fmtPitcherRisk(pitcher?.stats);
             els.matchupSp.textContent = pitcher?.name
-                ? `vs ${pitcher.name}${mix ? ` · ${mix}` : ""}`
+                ? `vs ${pitcher.name}${mix ? ` · ${mix}` : ""}${risk ? ` · ${risk}` : ""}`
                 : "vs TBD";
         }
         if (els.sideAway) {
@@ -1176,7 +2338,6 @@
             hr: true,
             expectedHr: true,
             hrLuckDiff: true,
-            mostlyGone: true,
             nearHr: true,
             avg: true,
             iso: true,
@@ -1254,7 +2415,7 @@
                     <header class="rs-card__head">
                         <span class="rs-card__order">${row.order ?? "—"}</span>
                         <div class="rs-card__identity">
-                            <div class="rs-card__name">${row.name || "—"} <span class="rs-hand">${row.position || ""}</span>${hrPropFlagHtml(row)}${projected}</div>
+                            <div class="rs-card__name">${row.name || "—"} <span class="rs-hand">${row.position || ""}</span>${projected}</div>
                             <div class="rs-card__meta">Bats ${row.hand || "—"}</div>
                         </div>
                     </header>
@@ -1308,9 +2469,8 @@
                 const cells = COLS.map((c) => {
                     if (c.key === "name") {
                         const tag = r.projected ? ' <span class="rs-hand">proj</span>' : "";
-                        const flag = hrPropFlagHtml(r);
                         const tip = c.tip ? tipAttr(c.tip) : "";
-                        return `<td${tip}><span class="rs-hitter">${r.name || "—"}</span> <span class="rs-hand">${r.position || ""}</span>${flag ? ` ${flag}` : ""}${tag}</td>`;
+                        return `<td${tip}><span class="rs-hitter" title="${escAttr(r.name || "")}">${r.name || "—"}</span> <span class="rs-hand">${r.position || ""}</span>${tag}</td>`;
                     }
                     const val = c.stat ? hitterStats(r)[c.stat] : r[c.key];
                     const heat =
@@ -1378,6 +2538,7 @@
         pickDefaultSide();
         renderGames();
         renderMatchupBar();
+        renderWeatherPanel();
         renderTable();
         renderMobileCards();
         syncMobileSortSelect();
@@ -1429,7 +2590,9 @@
 
         activeGameIdx = Math.min(activeGameIdx, slate.games.length - 1);
         pickDefaultSide();
+        refreshAllHrProps();
         renderAll();
+        prefetchSlateWeather().catch((err) => console.warn("weather prefetch", err));
 
         if (!lineupsHaveSavant(slate.games)) {
             const hint = cacheResult.lastStatus || savantMerge.lastStatus || "unknown";

@@ -11,7 +11,7 @@ from typing import Any
 
 from csv_slate_meta import name_lookup_key
 
-from game_row_enrich import TITLE_WEATHER_KEY_ALIASES, load_weather_lookup
+from game_row_enrich import TITLE_WEATHER_KEY_ALIASES, load_pitcher_hr9_lookup, load_weather_lookup
 from research.pitch_mix import (
     attach_pitcher_arsenal,
     enrich_lineup_pitch_mix,
@@ -75,6 +75,7 @@ def fetch_schedule(sheet_date: str) -> list[dict]:
             home_prob = (g.get("teams") or {}).get("home", {}).get("probablePitcher") or {}
             venue = g.get("venue") or {}
             status = (g.get("status") or {}).get("detailedState") or ""
+            mlb_weather = g.get("weather") or {}
             games.append(
                 {
                     "gamePk": g.get("gamePk"),
@@ -85,7 +86,15 @@ def fetch_schedule(sheet_date: str) -> list[dict]:
                     "homeTeamId": home_team.get("id"),
                     "startTime": g.get("gameDate") or "",
                     "venue": venue.get("name") or "",
+                    "venueId": venue.get("id"),
                     "status": status,
+                    "mlbWeather": {
+                        "condition": mlb_weather.get("condition") or "",
+                        "temp": mlb_weather.get("temp") or "",
+                        "wind": mlb_weather.get("wind") or "",
+                    }
+                    if mlb_weather
+                    else None,
                     "awayPitcher": _pitcher_dict(away_prob),
                     "homePitcher": _pitcher_dict(home_prob),
                 }
@@ -421,6 +430,78 @@ def _attach_park_to_games(games: list[dict], sheet_date: str) -> None:
             game["parkLhbPct"] = ctx["park_lhb_pct"]
         if ctx.get("park_rhb_pct") is not None:
             game["parkRhbPct"] = ctx["park_rhb_pct"]
+        if ctx.get("venue"):
+            game["venue"] = game.get("venue") or ctx["venue"]
+
+
+def _attach_pitcher_stats_to_games(games: list[dict], sheet_date: str) -> None:
+    from sheet_data import hr_targets_csv, load_pitcher_risk, pitcher_risk_pct, resolve_pitcher
+
+    risk_path = hr_targets_csv(sheet_date)
+    pitcher_risk = load_pitcher_risk(risk_path) if risk_path and risk_path.is_file() else {}
+    hr9_lookup = load_pitcher_hr9_lookup(sheet_date)
+
+    for game in games:
+        for key in ("awayPitcher", "homePitcher"):
+            pitcher = game.get(key)
+            if not pitcher or not pitcher.get("name"):
+                continue
+            name = pitcher["name"]
+            row = resolve_pitcher(pitcher_risk, name)
+            stats: dict[str, Any] = dict(pitcher.get("stats") or {})
+            if row:
+                stats.update(
+                    {
+                        "hrRisk": row["overall"],
+                        "hrRiskPct": pitcher_risk_pct(row["overall"]),
+                        "vsLhb": row["vs_lhb"],
+                        "vsLhbPct": pitcher_risk_pct(row["vs_lhb"]),
+                        "vsRhb": row["vs_rhb"],
+                        "vsRhbPct": pitcher_risk_pct(row["vs_rhb"]),
+                    }
+                )
+            last = name.split()[-1].lower()
+            hr9 = hr9_lookup.get(name.lower()) or hr9_lookup.get(last)
+            if hr9 is not None:
+                stats["hr9"] = hr9
+            if stats:
+                pitcher["stats"] = stats
+
+
+def _attach_hr_model_to_games(games: list[dict]) -> None:
+    try:
+        from research.hr_park_model import attach_hr_model_to_games
+
+        attach_hr_model_to_games(games)
+    except Exception:
+        return
+
+
+def _attach_open_meteo_to_games(games: list[dict]) -> None:
+    try:
+        from research.park_weather import fetch_game_hour_weather
+    except Exception:
+        return
+    for game in games:
+        venue = game.get("venue") or ""
+        start = game.get("startTime") or ""
+        if not venue or not start:
+            continue
+        try:
+            wx = fetch_game_hour_weather(
+                venue,
+                start,
+                game_pk=game.get("gamePk"),
+                mlb_weather=game.get("mlbWeather"),
+            )
+            if wx and not wx.get("error"):
+                game["parkWeather"] = wx
+                if wx.get("roofStatus"):
+                    game["roofStatus"] = wx["roofStatus"]
+                if wx.get("propPass"):
+                    game["propPass"] = True
+        except Exception:
+            continue
 
 
 def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool = True) -> dict:
@@ -483,6 +564,9 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         games.append(game)
 
     _attach_park_to_games(games, sheet_date)
+    if with_stats:
+        _attach_open_meteo_to_games(games)
+        _attach_pitcher_stats_to_games(games, sheet_date)
 
     window_lookup: dict[int, dict] = {}
     if with_stats and not savant_only:
@@ -556,6 +640,7 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
             for game in games:
                 game["awayLineup"] = _attach_hands_to_lineup(game.get("awayLineup") or [], hands)
                 game["homeLineup"] = _attach_hands_to_lineup(game.get("homeLineup") or [], hands)
+        _attach_hr_model_to_games(games)
 
     return {
         "sheet_date": sheet_date,

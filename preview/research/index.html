@@ -15,7 +15,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="2026-06-23">
-    <link rel="stylesheet" href="research.css?v=32">
+    <link rel="stylesheet" href="research.css?v=50">
     <style>
         .rs-file-block {
             display: none;
@@ -137,6 +137,28 @@ python serve-research.py</pre>
                     </div>
                 </div>
 
+                <section class="rs-weather" id="rsWeatherPanel" hidden aria-live="polite">
+                    <div class="rs-weather__head">
+                        <h3 class="rs-weather__title">Park &amp; weather</h3>
+                        <span class="rs-weather__meta" id="rsWeatherMeta"></span>
+                    </div>
+                    <div class="rs-weather__body">
+                        <div class="rs-wind-field" id="rsWindField" hidden>
+                            <div class="rs-wind-field__map">
+                                <svg class="rs-wind-field__svg" viewBox="0 0 168 168" aria-hidden="true">
+                                    <g id="rsParkOutline"></g>
+                                    <g id="rsWindArrow" class="rs-wind-field__arrow">
+                                        <line class="rs-wind-field__arrow-line" x1="84" y1="72" x2="84" y2="58" />
+                                        <polygon class="rs-wind-field__arrow-tip" points="84,55 81,61 87,61" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="rs-wind-field__info" id="rsWindInfo"></div>
+                        </div>
+                        <div class="rs-weather__grid" id="rsWeatherGrid"></div>
+                    </div>
+                </section>
+
                 <div class="rs-mobile-bar" id="rsMobileBar">
                     <label class="rs-mobile-sort-label" for="rsMobileSort">Sort by
                         <select id="rsMobileSort" class="rs-mobile-sort" aria-label="Sort hitters"></select>
@@ -154,6 +176,6 @@ python serve-research.py</pre>
         </div>
     </div>
 
-    <script src="research.js?v=32" defer></script>
+    <script src="research.js?v=50" defer></script>
 </body>
 </html>

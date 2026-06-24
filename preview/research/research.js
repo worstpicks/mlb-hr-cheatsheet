@@ -125,6 +125,10 @@
         "barrelPct",
         "pullPct",
         "mixPlus",
+        "avgEV",
+        "gbPct",
+        "whiffPct",
+        "sweetSpotPct",
     ];
 
     function syncThemeToggle() {

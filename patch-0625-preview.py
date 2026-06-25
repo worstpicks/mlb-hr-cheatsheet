@@ -423,6 +423,14 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
             straight_names = trial
             break
 
+# 6/25 user override: lock the featured straights to the requested bats.
+forced_o05 = rows_by_plain_early.get("Junior Caminero")
+forced_o15 = rows_by_plain_early.get("Kyle Schwarber")
+if forced_o05 and forced_o15 and forced_o05["game_key"] != forced_o15["game_key"]:
+    straight_o05 = forced_o05
+    straight_o15 = forced_o15
+    straight_names = {straight_o05["name"], straight_o15["name"]}
+
 # Goblin HR legs: real form plus a usable opposing split/risk lane (reject 0/0 pitcher data).
 def goblin_hr_leg_ok(row: dict) -> bool:
     if row["hr"] < 1 and row["near"] < 2:

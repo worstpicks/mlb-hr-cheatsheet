@@ -1,0 +1,201 @@
+---
+description: MLB Research tab — architecture, data sources, and do-not-break rules (Worst Pickz)
+alwaysApply: true
+---
+
+# MLB Research Tab — Agent Memory (do not break)
+
+Standalone hitter research tool at **`preview/research/`**, linked from the HR cheat sheet toolbar as **"MLB Research (BETA) →"**. Live URL: `https://worstpickz.win/research/index.html?date=YYYY-MM-DD`.
+
+This is **separate from the cheat sheet** (`preview/index.html`) but shares theme (`worstpickz-theme` in localStorage), park-factor source (Ballpark Pal), and PropFinder CSVs in `data/`.
+
+---
+
+## File map (edit the right layer)
+
+| Layer | Path | Role |
+|-------|------|------|
+| UI shell | `preview/research/index.html` | Layout, file:// guard, cache-bust `research.css?v=59` |
+| UI logic | `preview/research/research.js` | **~2.8k lines** — games, table, mobile cards, weather, park attach, Savant merge, pitch mix. **Bump `?v=` on deploy** (currently `v=62`). |
+| Styles | `preview/research/research.css` | Dark/light theme, table groups, mobile cards |
+| Slate fetch | `fetch-research-slate.py` | CLI entry → `research-YYYY-MM-DD.json` + `park-factors-YYYY-MM-DD.json` |
+| API builder | `research/mlb_api.py` | `build_slate()` — schedule, lineups, Savant, pitch mix, park, weather |
+| Park factors | `research/park_factors.py` | **Date-matched** Ballpark Pal CSV → JSON |
+| Pitch mix | `research/pitch_mix.py` | Savant arsenal + batter vs pitch-type → Mix% / Edge% |
+| Savant (py) | `research/savant_api.py` | Python Savant CSV fetch + cache write |
+| PropFinder | `research/propfinder_stats.py` | Near HR + recent-window stats from `hr-matchups-*` CSVs |
+| Weather | `research/park_weather.py`, `research/stadium_db.py`, `research/roof_status.py` | Open-Meteo, wind field, roof rules |
+| HR model | `research/hr_park_model.py` | Per-hitter HR prop % in game cards |
+| Local server | `serve-research.py` | Serves `preview/` on `:8080` + `/api/savant-batter` + `/api/propfinder` proxies |
+| Netlify fn | `netlify/functions/savant-batter.js` | Production Savant CORS proxy (`/.netlify/functions/savant-batter`) |
+| Cached data | `preview/data/research-YYYY-MM-DD.json` | Pre-built slate (games, lineups, lookups) |
+| Park JSON | `preview/data/park-factors-YYYY-MM-DD.json` | **Per-date** park lookup (never a single `park-factors.json`) |
+| Savant cache | `preview/data/savant-batter-2026.json`, `savant-batter-pitch-type-2026.json`, `savant-pitcher-arsenal-2026.json` (+ 2025 arsenal fallback) |
+| Stadium | `preview/data/stadium-coords.json` | Wind-field SVG outlines |
+| Cheat sheet link | `preview/index.html` → `syncResearchTabLink()` | `href="research/index.html"` (no date param — Research picks its own date) |
+
+---
+
+## Architecture (data flow)
+
+```
+PropFinder CSVs (data/)          Ballpark Pal ParkFactors_YYYY-MM-DD.csv
+        │                                      │
+        ▼                                      ▼
+fetch-research-slate.py ──► research/mlb_api.build_slate()
+        │                         │
+        │                    MLB Stats API (schedule, lineups, probables)
+        │                         │
+        ▼                         ▼
+preview/data/research-YYYY-MM-DD.json    Savant CSVs (via py cache or Netlify fn)
+preview/data/park-factors-YYYY-MM-DD.json
+        │
+        ▼
+research.js loadSlate(date) ──► table + mobile cards + weather panel
+```
+
+**Browser cannot open `file://`** — `index.html` shows a blocking overlay. Always use `python serve-research.py` locally or the live Netlify site.
+
+---
+
+## Critical rules — park factors (Ballpark Pal)
+
+1. **Source is Ballpark Pal, NOT PropFinder.** UI labels must say **"Ballpark Pal"** (`source_label`, weather panel subtext, tooltips).
+2. **Date-matched only.** For slate `2026-06-24`, use `data/ParkFactors_2026-06-24.csv` (or `ParkFactors_2026-06-24 00_00_00.csv`). Output: `preview/data/park-factors-2026-06-24.json`.
+3. **NEVER** load "latest ParkFactors CSV across days" or revive a generic `preview/data/park-factors.json`. `load_park_lookup(sheet_date)` in `park_factors.py` returns `{}` if the CSV date ≠ slate date.
+4. LHB/RHB park % come from `park-factors-L-all-YYYY-MM-DD.csv` + `park-factors-R-all-YYYY-MM-DD.csv` via `game_row_enrich.load_venue_hand_stadium_pcts()` — stadium % + weather % = `park_lhb_pct` / `park_rhb_pct`.
+5. **Game key aliases** must stay in sync between Python (`TITLE_WEATHER_KEY_ALIASES` in `game_row_enrich.py`) and JS (`PARK_GAME_KEY_ALIASES` in `research.js`): e.g. `CLE @ CWS` → `CLE @ CHW`, `PHI @ WSH` → `PHI @ WAS`, doubleheader `(G1)`/`(G2)` stripped for park lookup.
+
+---
+
+## Slate date behavior
+
+| Context | Default date |
+|---------|--------------|
+| **Research tab** (`research.js`) | **Today's local calendar date** (`todayLocalIso()`). URL `?date=` overrides. Commit: "Default MLB Research to today instead of cheat sheet slate date." |
+| **Cheat sheet** | `meta name="sheet-date"` on `preview/index.html` |
+| **Research link from sheet** | `research/index.html` with **no** `?date=` — user lands on today |
+
+When shipping a new cheat sheet slate, still run `fetch-research-slate.py --date YYYY-MM-DD` so that date's JSON exists on production.
+
+---
+
+## Build & deploy (Research)
+
+**Every slate push that includes Research data:**
+
+```powershell
+cd C:\Users\allmi\mlb-hr-cheatsheet-web
+python import-sheet-csvs.py --date YYYY-MM-DD    # ParkFactors + hr-matchups CSVs
+python fetch-research-slate.py --date YYYY-MM-DD  # writes research + park-factors JSON
+```
+
+**Git-add for deploy** (minimum):
+
+- `preview/data/research-YYYY-MM-DD.json`
+- `preview/data/park-factors-YYYY-MM-DD.json`
+- `preview/research/research.js` (if logic changed — **bump `?v=`**)
+- `preview/research/index.html` / `research.css` (if changed)
+- `research/*.py`, `fetch-research-slate.py` (if backend changed)
+- Savant cache JSONs if refreshed
+
+Netlify publishes **`preview/`** only (`netlify.toml`). Research is at `/research/index.html`.
+
+---
+
+## Local development
+
+```powershell
+python fetch-research-slate.py --date 2026-06-24
+python serve-research.py
+# → http://localhost:8080/research/index.html?date=2026-06-24
+```
+
+- **Refresh API** button → `loadSlate(date, forceLive=true)` re-fetches MLB API live, merges cached Savant/pitch-mix.
+- Savant proxy local: `/api/savant-batter?season=2026`
+- PropFinder proxy local: `/api/propfinder?date=YYYY-MM-DD` (reads `data/hr-matchups-*` via manifest)
+
+---
+
+## Stats model (`SAVANT_ONLY = true`)
+
+- **Primary stats:** 2026 Savant season (xwOBA, EV, barrels, xHR, Due+, etc.) via Netlify fn or cached `savant-batter-{season}.json`.
+- **PropFinder fallback:** `nearHr` and gaps when Savant missing — from embedded `propfinder_lookup` in research JSON or `/api/propfinder`.
+- **Pitch mix:** `Mix%` = weighted xwOBA vs starter arsenal vs league avg; `Edge%` = vs hitter's own baseline. Requires starter `arsenal` on probable pitcher + `batter_pitch_lookup` cache.
+- **Default sort:** `mixPlus` desc when any hitter has mix data; else `hardHitPct`.
+- **Do not re-enable** full MLB window stats path unless `SAVANT_ONLY` is deliberately flipped in both `research.js` and `mlb_api.py`.
+
+---
+
+## UI features (must remain working)
+
+1. **Game picker** — all MLB games for date; shows park HR %, LHB/RHB %, probable SPs.
+2. **AWY/HOM toggle** — hitters vs opposing starter.
+3. **Desktop table** — column groups: Lineup, Pitch mix, Power, Contact quality, Batted-ball, Plate. Sortable headers.
+4. **Mobile cards** — condensed with expandable stat groups; separate sort dropdown.
+5. **Park & weather panel** — wind compass SVG, density altitude, fence boost, humidity; Ballpark Pal net HR %.
+6. **Theme toggle** — shares `worstpickz-theme` localStorage with cheat sheet.
+7. **Tooltips** — `tip` on columns shows on hover/focus. **No help cursor or ? icons** (removed intentionally — do not add `cursor: help` or question-mark affordances).
+
+---
+
+## Savant CORS proxy
+
+Production: `/.netlify/functions/savant-batter?season=2026` (redirect alias `/api/savant-batter` in `netlify.toml`).
+
+`research.js` tries paths in order:
+
+1. `/.netlify/functions/savant-batter`
+2. `/api/savant-batter`
+3. `../api/savant-batter`
+4. Fallback: `preview/data/savant-batter-{season}.json`
+
+**Do not remove** the Netlify function or CORS headers — browser direct Savant fetch will fail.
+
+---
+
+## DO NOT regress (known fixed bugs)
+
+| Bug | Fix location | Rule |
+|-----|--------------|------|
+| Wrong park % (stale/latest CSV) | `research/park_factors.py` | Only `ParkFactors_{slate_date}*.csv` |
+| Attributed park to PropFinder | `research.js` weather UI | Label **Ballpark Pal** |
+| `file://` blank/broken page | `index.html` overlay + `research.js` guard | Keep server requirement |
+| `CLE @ CWS` vs `CLE @ CHW` park miss | `PARK_GAME_KEY_ALIASES` + `TITLE_WEATHER_KEY_ALIASES` | Keep aliases aligned |
+| Research defaulted to cheat sheet date | `initResearchDate()` | Default **today**, not sheet meta |
+| Auto-load latest ParkFactors | reverted in `park_factors.py` | **Never** reintroduce "pick newest CSV" |
+| Help cursor on tooltips | `research.css` | `cursor: default` on tips, not `help` |
+
+---
+
+## Cache busting
+
+When changing `research.js` or `research.css`, increment query string in `preview/research/index.html`:
+
+```html
+<link rel="stylesheet" href="research.css?v=59">
+<script src="research.js?v=62" defer></script>
+```
+
+Bump **both** if either changes. Stale CDN/browser cache is a common "it works locally" failure mode.
+
+---
+
+## Relationship to cheat sheet
+
+- Research does **not** replace the HR cheat sheet; no Gambly, no prop scores, no emoji rows.
+- Same PropFinder import pipeline feeds both (`import-sheet-csvs.py`).
+- Park % on cheat sheet game cards uses `game_row_enrich.py` + same Ballpark Pal CSVs — keep Python park logic consistent across sheet and Research.
+- Pushing cheat sheet **without** `fetch-research-slate.py` leaves Research missing that date's JSON (error banner with run instructions).
+
+---
+
+## Quick validation
+
+```powershell
+python fetch-research-slate.py --date YYYY-MM-DD
+python serve-research.py
+# Open research URL — confirm: games load, Savant columns populated, Mix% on most rows, park panel shows Ballpark Pal %
+Test file exists: preview/data/park-factors-YYYY-MM-DD.json with "source": "ballpark-pal"
+grep "Ballpark Pal" preview/research/research.js   # attribution present
+```

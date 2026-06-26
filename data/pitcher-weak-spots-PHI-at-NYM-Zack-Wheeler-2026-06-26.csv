@@ -1,0 +1,26 @@
+Matchup,PHI @ NYM
+Pitcher,Zack Wheeler
+Pitcher Team,PHI
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.0,0.78,="6-32",.188,.375,0.187,2,0,0,3,30.3,1,.212,.587
+Batting Second,8.2,0.81,="4-30",.133,.167,0.034,0,1,0,1,27.3,3,.212,.379
+Batting Third,7.2,1.30,="7-29",.241,.621,0.380,3,2,0,4,18.8,3,.313,.934
+Batting Fourth,6.2,1.50,="7-27",.259,.481,0.222,1,3,0,2,25.8,3,.355,.836
+Batting Fifth,8.0,1.00,="6-28",.214,.250,0.036,0,1,0,2,25.8,2,.258,.508
+Batting Sixth,8.0,0.63,="4-26",.154,.308,0.154,1,1,0,3,22.2,1,.185,.493
+Batting Seventh,7.1,0.55,="3-25",.120,.280,0.160,1,1,0,1,34.6,1,.154,.434
+Batting Eighth,5.1,1.13,="3-19",.158,.211,0.053,0,1,0,0,26.1,3,.304,.515
+Batting Ninth,7.1,0.41,="2-22",.091,.136,0.045,0,1,0,0,30.4,1,.130,.266
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carson Benge LHB,Batting First ​,="51-183",.279,.426,0.147,6,5,2,19,21.5,13,.340,.766
+Juan Soto LHB,Batting Second ​,="22-70",.314,.500,0.186,3,4,0,8,15.9,12,.415,.915
+Bo Bichette RHB,Batting Third ​,="10-44",.227,.364,0.137,1,3,0,6,26.1,1,.239,.603
+Francisco Lindor SHB,Batting Fourth ​,="2-2",1.000,1.000,0.000,0,0,0,1,0.0,0,1.000,2.000
+Jared Young LHB,Batting Fifth ​,="4-8",.500,.625,0.125,0,1,0,0,22.2,1,.556,1.181
+A.J. Ewing LHB,Batting Sixth ​,="3-29",.103,.103,0.000,0,0,0,0,32.4,5,.235,.338
+Ronny Mauricio SHB,Batting Seventh ​,="1-8",.125,.250,0.125,0,1,0,0,37.5,0,.125,.375
+Brett Baty LHB,Batting Eighth ​,="5-25",.200,.280,0.080,0,2,0,2,23.1,1,.231,.511
+Luis Torrens RHB,Batting Ninth ​,="25-111",.225,.324,0.099,1,8,0,13,23.0,6,.289,.613

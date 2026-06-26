@@ -1,0 +1,26 @@
+Matchup,TEX @ TOR
+Pitcher,Nathan Eovaldi
+Pitcher Team,TEX
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.1,1.84,="16-44",.364,.682,0.318,3,5,0,4,14.9,3,.404,1.086
+Batting Second,12.0,0.92,="8-43",.186,.419,0.233,3,1,0,6,19.1,3,.255,.674
+Batting Third,10.2,1.41,="13-43",.302,.605,0.303,3,2,1,10,26.1,2,.348,.953
+Batting Fourth,11.2,1.11,="12-45",.267,.644,0.377,5,2,0,11,30.4,1,.283,.927
+Batting Fifth,11.2,0.69,="6-41",.146,.146,0.000,0,0,0,1,29.5,2,.205,.351
+Batting Sixth,8.2,1.73,="11-37",.297,.486,0.189,2,1,0,3,19.0,4,.381,.867
+Batting Seventh,9.0,1.44,="9-37",.243,.351,0.108,1,1,0,3,31.0,4,.333,.684
+Batting Eighth,11.0,0.64,="6-38",.158,.211,0.053,0,2,0,5,25.6,1,.179,.390
+Batting Ninth,8.1,1.08,="7-30",.233,.233,0.000,0,0,0,1,17.1,2,.294,.527
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="49-224",.219,.375,0.156,8,11,0,20,19.4,27,.310,.685
+Nathan Lukes LHB,Batting Second ​,="15-59",.254,.322,0.068,1,1,0,3,16.4,4,.308,.630
+Vladimir Guerrero Jr. RHB,Batting Third ​,="63-229",.275,.354,0.079,2,12,0,25,12.2,28,.357,.711
+Kazuma Okamoto RHB,Batting Fourth ​,="29-130",.223,.377,0.154,6,2,0,25,30.4,15,.304,.681
+Daulton Varsho LHB,Batting Fifth ​,="13-51",.255,.451,0.196,2,2,1,6,19.0,6,.345,.796
+Ernie Clement RHB,Batting Sixth ​,="14-59",.237,.424,0.187,3,2,0,9,10.9,4,.281,.705
+Jesus Sanchez LHB,Batting Seventh ​,="5-16",.313,.500,0.187,0,3,0,2,20.0,2,.450,.950
+Brandon Valenzuela SHB,Batting Eighth ​,="9-31",.290,.323,0.033,0,1,0,1,17.6,2,.333,.656
+Andres Gimenez LHB,Batting Ninth ​,="18-61",.295,.459,0.164,2,2,1,11,20.6,3,.343,.802

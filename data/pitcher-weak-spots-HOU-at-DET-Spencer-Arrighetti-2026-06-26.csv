@@ -1,0 +1,26 @@
+Matchup,HOU @ DET
+Pitcher,Spencer Arrighetti
+Pitcher Team,HOU
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.56,="7-30",.233,.433,0.200,2,0,0,4,25.0,6,.361,.794
+Batting Second,8.2,0.92,="4-28",.143,.286,0.143,1,1,0,3,20.0,4,.286,.572
+Batting Third,8.1,1.32,="7-30",.233,.367,0.134,1,1,0,3,28.6,4,.343,.710
+Batting Fourth,7.1,1.50,="8-30",.267,.433,0.166,1,2,0,4,31.4,3,.371,.804
+Batting Fifth,10.2,0.38,="4-34",.118,.118,0.000,0,0,0,1,28.6,0,.143,.261
+Batting Sixth,7.2,1.17,="5-28",.179,.214,0.035,0,1,0,1,21.9,4,.281,.495
+Batting Seventh,5.2,1.76,="7-23",.304,.348,0.044,0,1,0,2,16.7,3,.467,.815
+Batting Eighth,6.2,1.20,="4-24",.167,.167,0.000,0,0,0,0,13.8,4,.286,.453
+Batting Ninth,5.1,1.69,="5-20",.250,.450,0.200,1,1,0,8,19.2,4,.400,.850
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="49-161",.304,.484,0.180,5,12,1,15,14.0,24,.398,.882
+Dillon Dingler RHB,Batting Second ​,="22-68",.324,.588,0.264,5,3,0,12,23.0,5,.365,.953
+Kerry Carpenter LHB,Batting Third ​,="8-28",.286,.429,0.143,1,1,0,5,33.3,3,.364,.793
+Riley Greene LHB,Batting Fourth ​,="53-188",.282,.420,0.138,5,11,0,21,28.4,26,.372,.792
+Spencer Torkelson RHB,Batting Fifth ​,="19-99",.192,.354,0.162,3,7,0,10,31.0,11,.286,.640
+Colt Keith LHB,Batting Sixth ​,="9-35",.257,.600,0.343,4,0,0,12,10.5,0,.289,.889
+Zach McKinstry LHB,Batting Seventh ​,="7-37",.189,.270,0.081,1,0,0,5,20.0,3,.250,.520
+Matt Vierling RHB,Batting Eighth ​,="2-16",.125,.125,0.000,0,0,0,0,12.5,0,.125,.250
+James Outman LHB,Batting Ninth ​,="11-57",.193,.351,0.158,1,4,1,4,43.1,1,.207,.558

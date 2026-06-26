@@ -1,0 +1,26 @@
+Matchup,TEX @ TOR
+Pitcher,Patrick Corbin
+Pitcher Team,TOR
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.24,="9-36",.250,.472,0.222,2,2,0,4,20.5,3,.308,.780
+Batting Second,8.2,1.50,="10-36",.278,.389,0.111,0,4,0,1,7.7,3,.333,.722
+Batting Third,7.1,1.77,="11-33",.333,.333,0.000,0,0,0,0,14.3,2,.371,.704
+Batting Fourth,8.0,1.13,="7-29",.241,.345,0.104,0,3,0,1,18.2,2,.333,.678
+Batting Fifth,6.1,1.89,="10-28",.357,.750,0.393,3,2,0,11,12.5,2,.406,1.156
+Batting Sixth,6.1,1.42,="5-23",.217,.261,0.044,0,1,0,1,25.0,4,.357,.618
+Batting Seventh,5.1,2.25,="9-24",.375,.625,0.250,1,3,0,8,17.9,3,.429,1.054
+Batting Eighth,5.2,1.94,="8-24",.333,.583,0.250,2,0,0,5,14.3,3,.429,1.012
+Batting Ninth,6.2,1.20,="7-25",.280,.400,0.120,0,3,0,3,17.9,1,.296,.696
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Wyatt Langford RHB,Batting First ​,="8-26",.308,.692,0.384,3,1,0,6,25.9,1,.333,1.025
+Josh Jung RHB,Batting Second ​,="25-76",.329,.447,0.118,2,3,0,11,14.9,8,.402,.849
+Brandon Nimmo LHB,Batting Third ​,="18-76",.237,.474,0.237,4,4,1,13,24.7,5,.306,.780
+Jake Burger RHB,Batting Fourth ​,="32-135",.237,.400,0.163,5,7,0,15,29.0,9,.290,.690
+Justin Foscue RHB,Batting Fifth ​,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Ezequiel Duran RHB,Batting Sixth ​,="8-41",.195,.390,0.195,2,2,0,6,20.9,1,.233,.623
+Kyle Higashioka RHB,Batting Seventh ​,="7-25",.280,.480,0.200,1,2,0,3,34.6,1,.308,.788
+Alejandro Osuna LHB,Batting Eighth ​,="3-15",.200,.200,0.000,0,0,0,2,21.1,3,.368,.568
+Nicky Lopez LHB,Batting Ninth ​,="14-47",.298,.383,0.085,1,1,0,5,13.2,3,.353,.736

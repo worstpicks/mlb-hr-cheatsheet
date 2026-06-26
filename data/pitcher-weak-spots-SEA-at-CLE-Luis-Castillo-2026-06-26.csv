@@ -1,0 +1,25 @@
+Matchup,SEA @ CLE
+Pitcher,Luis Castillo
+Pitcher Team,SEA
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.2,1.38,="7-33",.212,.333,0.121,1,1,0,5,10.0,5,.325,.658
+Batting Second,8.0,1.75,="8-33",.242,.606,0.364,3,3,0,6,20.5,6,.359,.965
+Batting Third,10.1,0.68,="6-37",.162,.378,0.216,2,0,1,4,25.6,1,.205,.583
+Batting Fourth,7.1,1.64,="10-32",.313,.438,0.125,1,1,0,6,25.7,2,.371,.809
+Batting Fifth,9.1,0.75,="5-32",.156,.219,0.063,0,0,1,3,23.5,2,.206,.425
+Batting Sixth,6.1,2.37,="12-31",.387,.742,0.355,2,5,0,8,14.7,3,.441,1.183
+Batting Seventh,6.0,2.33,="14-30",.467,.567,0.100,0,3,0,8,24.2,0,.469,1.036
+Batting Eighth,8.1,0.72,="3-27",.111,.111,0.000,0,0,0,2,42.4,3,.219,.330
+Batting Ninth,5.2,2.12,="9-25",.360,.440,0.080,0,2,0,3,10.0,3,.429,.869
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Travis Bazzana LHB,Batting First ​,="25-97",.258,.536,0.278,5,10,1,15,21.1,11,.330,.866
+Kyle Manzardo LHB,Batting Second ​,="5-20",.250,.400,0.150,1,0,0,3,23.8,1,.286,.686
+Brayan Rocchio SHB,Batting Third ​,="8-28",.286,.393,0.107,0,3,0,1,13.3,2,.333,.726
+Kahlil Watson LHB,Batting Sixth ​,="4-14",.286,.500,0.214,1,0,0,4,33.3,1,.333,.833
+Daniel Schneemann LHB,Batting Sixth ​,="11-58",.190,.259,0.069,1,1,0,6,34.8,8,.288,.547
+Steven Kwan LHB,Batting Seventh ​,="18-74",.243,.284,0.041,0,3,0,3,7.8,12,.352,.636
+Patrick Bailey SHB,Batting Eighth ​,="18-98",.184,.265,0.081,1,3,1,7,20.6,8,.243,.508
+Petey Halpin LHB,Batting Ninth ​,="5-26",.192,.269,0.077,0,0,1,1,27.6,1,.222,.491

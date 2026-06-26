@@ -1,0 +1,26 @@
+Matchup,PHI @ NYM
+Pitcher,Zach Thornton
+Pitcher Team,NYM
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="0-3",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Second,="1-2",.500,.500,0.000,0,0,0,0,50.0,.500,1.000
+Batting Third,="0-1",.000,.000,0.000,0,0,0,0,0.0,.500,.500
+Batting Fourth,="1-2",.500,2.000,1.500,1,0,0,3,0.0,.500,2.500
+Batting Fifth,="0-2",.000,.000,0.000,0,0,0,0,50.0,.000,.000
+Batting Sixth,="0-2",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Seventh,="0-2",.000,.000,0.000,0,0,0,0,50.0,.000,.000
+Batting Eighth,="0-1",.000,.000,0.000,0,0,0,0,0.0,.500,.500
+Batting Ninth,="2-2",1.000,1.500,0.500,0,1,0,1,0.0,1.000,2.500
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="59-246",.240,.341,0.101,5,10,0,18,22.3,17,.291,.632
+Kyle Schwarber LHB,Batting Second ​,="54-209",.258,.684,0.426,26,9,1,47,32.8,34,.372,1.056
+Bryce Harper LHB,Batting Third ​,="75-268",.280,.545,0.265,18,13,2,47,18.1,48,.383,.928
+Alec Bohm RHB,Batting Fourth ​,="27-126",.214,.349,0.135,4,5,0,18,12.6,8,.267,.616
+Brandon Marsh LHB,Batting Fifth ​,="36-105",.343,.514,0.171,4,6,0,15,19.6,6,.375,.889
+Derek Hill RHB,Batting Sixth ​,="4-13",.308,.769,0.461,2,0,0,4,28.6,1,.357,1.126
+J.T. Realmuto RHB,Batting Seventh ​,="10-59",.169,.322,0.153,2,3,0,5,28.4,5,.269,.591
+Bryson Stott LHB,Batting Eighth ​,="3-11",.273,.364,0.091,0,1,0,1,36.4,0,.273,.637
+Edmundo Sosa RHB,Batting Ninth ​,="5-29",.172,.207,0.035,0,1,0,0,30.0,0,.200,.407

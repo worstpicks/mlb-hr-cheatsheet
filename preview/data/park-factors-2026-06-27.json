@@ -11,7 +11,11 @@
       "venue_key": "fenway park",
       "hr_pct": -8,
       "stadium_pct": -8,
-      "weather_pct": 1
+      "weather_pct": 1,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -15,
+      "rhb_stadium_pct": -8,
+      "park_rhb_pct": -7
     },
     "KC @ CHW": {
       "game": "KC @ CHW",
@@ -19,15 +23,23 @@
       "venue_key": "rate field",
       "hr_pct": 9,
       "stadium_pct": 3,
-      "weather_pct": 6
+      "weather_pct": 6,
+      "lhb_stadium_pct": 6,
+      "park_lhb_pct": 12,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 1
     },
     "WAS @ BAL": {
       "game": "WAS @ BAL",
       "venue": "Oriole Park",
-      "venue_key": "oriole park",
+      "venue_key": "oriole park at camden yards",
       "hr_pct": 1,
       "stadium_pct": -3,
-      "weather_pct": 5
+      "weather_pct": 5,
+      "lhb_stadium_pct": 7,
+      "park_lhb_pct": 12,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 0
     },
     "MIA @ STL": {
       "game": "MIA @ STL",
@@ -35,7 +47,11 @@
       "venue_key": "busch stadium",
       "hr_pct": 8,
       "stadium_pct": -10,
-      "weather_pct": 17
+      "weather_pct": 17,
+      "lhb_stadium_pct": -15,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": -15,
+      "park_rhb_pct": 2
     },
     "SEA @ CLE": {
       "game": "SEA @ CLE",
@@ -43,7 +59,11 @@
       "venue_key": "progressive field",
       "hr_pct": 6,
       "stadium_pct": -2,
-      "weather_pct": 7
+      "weather_pct": 7,
+      "lhb_stadium_pct": 6,
+      "park_lhb_pct": 13,
+      "rhb_stadium_pct": -12,
+      "park_rhb_pct": -5
     },
     "ATL @ SF": {
       "game": "ATL @ SF",
@@ -51,7 +71,11 @@
       "venue_key": "oracle park",
       "hr_pct": -12,
       "stadium_pct": -17,
-      "weather_pct": 5
+      "weather_pct": 5,
+      "lhb_stadium_pct": -21,
+      "park_lhb_pct": -16,
+      "rhb_stadium_pct": -17,
+      "park_rhb_pct": -12
     },
     "ATH @ LAA": {
       "game": "ATH @ LAA",
@@ -59,7 +83,11 @@
       "venue_key": "angel stadium",
       "hr_pct": 8,
       "stadium_pct": 9,
-      "weather_pct": 0
+      "weather_pct": 0,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 3,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": 2
     },
     "CIN @ PIT": {
       "game": "CIN @ PIT",
@@ -67,7 +95,11 @@
       "venue_key": "pnc park",
       "hr_pct": -16,
       "stadium_pct": -15,
-      "weather_pct": -1
+      "weather_pct": -1,
+      "lhb_stadium_pct": -6,
+      "park_lhb_pct": -7,
+      "rhb_stadium_pct": -17,
+      "park_rhb_pct": -18
     },
     "HOU @ DET": {
       "game": "HOU @ DET",
@@ -75,7 +107,11 @@
       "venue_key": "comerica park",
       "hr_pct": -10,
       "stadium_pct": -10,
-      "weather_pct": 0
+      "weather_pct": 0,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": 2
     },
     "COL @ MIN": {
       "game": "COL @ MIN",
@@ -83,7 +119,11 @@
       "venue_key": "target field",
       "hr_pct": -13,
       "stadium_pct": -7,
-      "weather_pct": -6
+      "weather_pct": -6,
+      "lhb_stadium_pct": 0,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": -3,
+      "park_rhb_pct": -9
     },
     "TEX @ TOR": {
       "game": "TEX @ TOR",
@@ -91,7 +131,11 @@
       "venue_key": "rogers centre",
       "hr_pct": 6,
       "stadium_pct": 7,
-      "weather_pct": -1
+      "weather_pct": -1,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 8
     },
     "PHI @ NYM": {
       "game": "PHI @ NYM",
@@ -99,7 +143,11 @@
       "venue_key": "citi field",
       "hr_pct": 9,
       "stadium_pct": -2,
-      "weather_pct": 11
+      "weather_pct": 11,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 12
     },
     "ARI @ TB": {
       "game": "ARI @ TB",
@@ -107,7 +155,11 @@
       "venue_key": "tropicana field",
       "hr_pct": -3,
       "stadium_pct": -4,
-      "weather_pct": 1
+      "weather_pct": 1,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 9
     },
     "CHC @ MIL": {
       "game": "CHC @ MIL",
@@ -115,7 +167,11 @@
       "venue_key": "american family field",
       "hr_pct": 2,
       "stadium_pct": 9,
-      "weather_pct": -7
+      "weather_pct": -7,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": -1
     },
     "LAD @ SD": {
       "game": "LAD @ SD",
@@ -123,7 +179,11 @@
       "venue_key": "petco park",
       "hr_pct": -8,
       "stadium_pct": -5,
-      "weather_pct": -3
+      "weather_pct": -3,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": 10,
+      "park_rhb_pct": 7
     }
   },
   "by_venue": {
@@ -133,7 +193,11 @@
       "venue_key": "fenway park",
       "hr_pct": -8,
       "stadium_pct": -8,
-      "weather_pct": 1
+      "weather_pct": 1,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -15,
+      "rhb_stadium_pct": -8,
+      "park_rhb_pct": -7
     },
     "rate field": {
       "game": "KC @ CHW",
@@ -141,15 +205,23 @@
       "venue_key": "rate field",
       "hr_pct": 9,
       "stadium_pct": 3,
-      "weather_pct": 6
+      "weather_pct": 6,
+      "lhb_stadium_pct": 6,
+      "park_lhb_pct": 12,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 1
     },
-    "oriole park": {
+    "oriole park at camden yards": {
       "game": "WAS @ BAL",
       "venue": "Oriole Park",
-      "venue_key": "oriole park",
+      "venue_key": "oriole park at camden yards",
       "hr_pct": 1,
       "stadium_pct": -3,
-      "weather_pct": 5
+      "weather_pct": 5,
+      "lhb_stadium_pct": 7,
+      "park_lhb_pct": 12,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 0
     },
     "busch stadium": {
       "game": "MIA @ STL",
@@ -157,7 +229,11 @@
       "venue_key": "busch stadium",
       "hr_pct": 8,
       "stadium_pct": -10,
-      "weather_pct": 17
+      "weather_pct": 17,
+      "lhb_stadium_pct": -15,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": -15,
+      "park_rhb_pct": 2
     },
     "progressive field": {
       "game": "SEA @ CLE",
@@ -165,7 +241,11 @@
       "venue_key": "progressive field",
       "hr_pct": 6,
       "stadium_pct": -2,
-      "weather_pct": 7
+      "weather_pct": 7,
+      "lhb_stadium_pct": 6,
+      "park_lhb_pct": 13,
+      "rhb_stadium_pct": -12,
+      "park_rhb_pct": -5
     },
     "oracle park": {
       "game": "ATL @ SF",
@@ -173,7 +253,11 @@
       "venue_key": "oracle park",
       "hr_pct": -12,
       "stadium_pct": -17,
-      "weather_pct": 5
+      "weather_pct": 5,
+      "lhb_stadium_pct": -21,
+      "park_lhb_pct": -16,
+      "rhb_stadium_pct": -17,
+      "park_rhb_pct": -12
     },
     "angel stadium": {
       "game": "ATH @ LAA",
@@ -181,7 +265,11 @@
       "venue_key": "angel stadium",
       "hr_pct": 8,
       "stadium_pct": 9,
-      "weather_pct": 0
+      "weather_pct": 0,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 3,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": 2
     },
     "pnc park": {
       "game": "CIN @ PIT",
@@ -189,7 +277,11 @@
       "venue_key": "pnc park",
       "hr_pct": -16,
       "stadium_pct": -15,
-      "weather_pct": -1
+      "weather_pct": -1,
+      "lhb_stadium_pct": -6,
+      "park_lhb_pct": -7,
+      "rhb_stadium_pct": -17,
+      "park_rhb_pct": -18
     },
     "comerica park": {
       "game": "HOU @ DET",
@@ -197,7 +289,11 @@
       "venue_key": "comerica park",
       "hr_pct": -10,
       "stadium_pct": -10,
-      "weather_pct": 0
+      "weather_pct": 0,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": 2
     },
     "target field": {
       "game": "COL @ MIN",
@@ -205,7 +301,11 @@
       "venue_key": "target field",
       "hr_pct": -13,
       "stadium_pct": -7,
-      "weather_pct": -6
+      "weather_pct": -6,
+      "lhb_stadium_pct": 0,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": -3,
+      "park_rhb_pct": -9
     },
     "rogers centre": {
       "game": "TEX @ TOR",
@@ -213,7 +313,11 @@
       "venue_key": "rogers centre",
       "hr_pct": 6,
       "stadium_pct": 7,
-      "weather_pct": -1
+      "weather_pct": -1,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 8
     },
     "citi field": {
       "game": "PHI @ NYM",
@@ -221,7 +325,11 @@
       "venue_key": "citi field",
       "hr_pct": 9,
       "stadium_pct": -2,
-      "weather_pct": 11
+      "weather_pct": 11,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 12
     },
     "tropicana field": {
       "game": "ARI @ TB",
@@ -229,7 +337,11 @@
       "venue_key": "tropicana field",
       "hr_pct": -3,
       "stadium_pct": -4,
-      "weather_pct": 1
+      "weather_pct": 1,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 9
     },
     "american family field": {
       "game": "CHC @ MIL",
@@ -237,7 +349,11 @@
       "venue_key": "american family field",
       "hr_pct": 2,
       "stadium_pct": 9,
-      "weather_pct": -7
+      "weather_pct": -7,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": -1
     },
     "petco park": {
       "game": "LAD @ SD",
@@ -245,7 +361,11 @@
       "venue_key": "petco park",
       "hr_pct": -8,
       "stadium_pct": -5,
-      "weather_pct": -3
+      "weather_pct": -3,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": 10,
+      "park_rhb_pct": 7
     }
   }
 }

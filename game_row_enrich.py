@@ -31,6 +31,7 @@ TITLE_WEATHER_KEY_ALIASES = {
 VENUE_BALLPARK_ALIASES = {
     "american family fld": "american family field",
     "great american bp": "great american ball park",
+    "oriole park": "oriole park at camden yards",
 }
 
 

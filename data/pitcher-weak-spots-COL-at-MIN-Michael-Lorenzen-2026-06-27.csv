@@ -1,0 +1,26 @@
+Matchup,COL @ MIN
+Pitcher,Michael Lorenzen
+Pitcher Team,COL
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.97,="17-44",.386,.864,0.478,4,5,2,10,23.4,2,.404,1.268
+Batting Second,9.2,1.66,="12-41",.293,.415,0.122,1,2,0,6,13.3,4,.356,.771
+Batting Third,8.1,2.40,="14-38",.368,.553,0.185,1,2,1,2,17.8,6,.467,1.020
+Batting Fourth,9.2,1.45,="10-38",.263,.474,0.211,2,2,0,12,13.6,4,.341,.815
+Batting Fifth,7.2,2.22,="15-38",.395,.763,0.368,4,2,0,10,15.0,2,.425,1.188
+Batting Sixth,9.2,1.03,="9-37",.243,.297,0.054,0,2,0,1,28.9,1,.263,.560
+Batting Seventh,6.2,2.55,="15-34",.441,.618,0.177,1,3,0,8,10.8,2,.459,1.077
+Batting Eighth,7.0,2.14,="12-31",.387,.516,0.129,0,4,0,4,18.9,3,.472,.988
+Batting Ninth,7.1,1.50,="9-31",.290,.355,0.065,0,2,0,6,18.2,2,.333,.688
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trevor Larnach LHB,Batting First ​,="16-46",.348,.543,0.195,2,3,0,7,8.0,3,.388,.931
+Byron Buxton RHB,Batting Second ​,="26-93",.280,.559,0.279,6,6,1,15,22.0,5,.320,.879
+Kody Clemens LHB,Batting Third ​,="19-85",.224,.518,0.294,7,4,0,15,20.9,6,.275,.793
+Josh Bell SHB,Batting Fourth ​,="28-142",.197,.289,0.092,2,7,0,14,26.0,10,.253,.542
+Victor Caratini SHB,Batting Fifth ​,="9-38",.237,.263,0.026,0,1,0,4,18.6,2,.302,.565
+Royce Lewis RHB,Batting Sixth ​,="9-25",.360,.640,0.280,2,1,0,3,19.2,1,.385,1.025
+Brooks Lee SHB,Batting Seventh ​,="5-24",.208,.458,0.250,2,0,0,4,3.7,3,.296,.754
+Tristan Gray LHB,Batting Eighth ​,="14-62",.226,.258,0.032,0,2,0,5,20.0,2,.246,.504
+Luke Keaschall RHB,Batting Ninth ​,="4-16",.250,.313,0.063,0,1,0,0,18.2,5,.455,.768

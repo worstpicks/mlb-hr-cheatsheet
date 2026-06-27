@@ -121,24 +121,33 @@ def multi_hr_rank(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None
     )
 
 
+def top5_hr_ticket_rank(
+    row: dict,
+    *,
+    park_pct_fn: Callable[[dict], int] | None = None,
+) -> float:
+    """Top 5 HR Tickets — Split, Risk, Park, Form, Zone (no board score)."""
+    zone_fit = zone_hr_fit(row)
+    form = hr_power_form(row)
+    split = max(row.get("split") or 0.0, 0.0) * 12.0
+    risk = max(row.get("risk") or 0.0, 0.0) * 14.0
+    hand_park = float(hand_park_pct(row, park_pct_fn=park_pct_fn))
+    overall = float(_park(row, park_pct_fn))
+    park_signal = max(hand_park, overall, 0.0) * 0.65
+    if hand_park < 0 or overall < 0:
+        park_signal += min(hand_park, overall, 0.0) * 0.22
+    return zone_fit * 1.0 + form * 0.85 + split + risk + park_signal
+
+
 def summary_combined_rank(
     row: dict,
     *,
     park_pct_fn: Callable[[dict], int] | None = None,
     attack_bonus: float = 0.0,
 ) -> float:
-    """Top 5 HR Tickets combined rank."""
-    park = _park(row, park_pct_fn)
-    nudge = hand_park_nudge(row, park_pct_fn=park_pct_fn)
-    zone_fit = zone_hr_fit(row)
-    power = hr_power_form(row)
-    matchup = (
-        max(row.get("risk") or 0.0, 0.0) * 9.0
-        + max(row.get("split") or 0.0, 0.0) * 7.5
-        + park * 0.52
-        + nudge * 0.85
-    )
-    return zone_fit * 1.05 + power * 0.58 + matchup + attack_bonus + (row.get("score") or 0) * 0.12
+    """Top 5 HR Tickets — alias for top5_hr_ticket_rank (attack_bonus ignored)."""
+    _ = attack_bonus
+    return top5_hr_ticket_rank(row, park_pct_fn=park_pct_fn)
 
 
 def weather_play_rank(row: dict, *, park_pct_fn: Callable[[dict], int] | None = None) -> float:
@@ -181,6 +190,7 @@ def annotate_hr_zone_ranks(
         row["hr_zone_fit"] = zone_hr_fit(row)
         row["straight_attack_rank"] = straight_attack_rank(row, park_pct_fn=park_pct_fn)
         row["multi_hr_rank"] = multi_hr_rank(row, park_pct_fn=park_pct_fn)
+        row["top5_ticket_rank"] = top5_hr_ticket_rank(row, park_pct_fn=park_pct_fn)
 
 
 def o05_zone_lane_ok(row: dict) -> bool:

@@ -1,0 +1,26 @@
+Matchup,SEA @ CLE
+Pitcher,Slade Cecconi
+Pitcher Team,CLE
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.76,="15-42",.357,.595,0.238,2,4,0,9,21.3,2,.404,.999
+Batting Second,10.0,1.90,="9-36",.250,.500,0.250,3,0,0,4,17.4,10,.413,.913
+Batting Third,10.2,1.59,="15-43",.349,.512,0.163,2,1,0,4,17.8,2,.378,.890
+Batting Fourth,8.0,2.25,="14-38",.368,.579,0.211,2,2,0,7,11.6,4,.419,.998
+Batting Fifth,12.0,0.58,="5-37",.135,.243,0.108,1,1,0,3,24.4,2,.195,.438
+Batting Sixth,9.0,1.22,="10-37",.270,.405,0.135,1,2,0,5,15.8,1,.289,.694
+Batting Seventh,7.2,1.83,="12-32",.375,.500,0.125,1,1,0,4,8.3,2,.389,.889
+Batting Eighth,8.0,1.25,="8-32",.250,.281,0.031,0,1,0,2,11.8,2,.294,.575
+Batting Ninth,9.1,0.54,="3-30",.100,.167,0.067,0,2,0,3,36.4,2,.156,.323
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JP Crawford LHB,Batting First ​,="38-145",.262,.469,0.207,9,3,0,19,18.5,23,.376,.845
+Julio Rodriguez RHB,Batting Second ​,="35-152",.230,.421,0.191,7,8,0,17,18.2,12,.285,.706
+Dominic Canzone LHB,Batting Seventh ​,="23-75",.307,.640,0.333,6,7,0,13,22.9,7,.373,1.013
+Randy Arozarena RHB,Batting Fourth ​,="21-89",.236,.393,0.157,3,5,0,15,21.4,10,.330,.723
+Josh Naylor LHB,Batting Fifth ​,="0-4",.000,.000,0.000,0,0,0,0,25.0,0,.000,.000
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Luke Raley LHB,Batting Seventh ​,="5-15",.333,.933,0.600,3,0,0,9,50.0,1,.375,1.308
+Cole Young LHB,Batting Eighth ​,="23-88",.261,.375,0.114,2,4,0,13,21.9,5,.313,.688
+Colt Emerson LHB,Batting Ninth ​,="18-77",.234,.545,0.311,6,4,1,11,30.2,8,.314,.859

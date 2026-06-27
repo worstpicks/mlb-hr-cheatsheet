@@ -199,7 +199,7 @@ from goblin_hr_zone_fit import (
     annotate_hr_zone_ranks,
     hr_rank_sort_key,
     o05_zone_lane_ok,
-    summary_combined_rank,
+    top5_hr_ticket_rank,
     weather_play_rank,
 )
 
@@ -213,7 +213,7 @@ annotate_hr_zone_ranks(rows, park_pct_fn=effective_park_pct)
 | **Straights O0.5** | `hr_rank_sort_key` + `o05_zone_lane_ok` strict pool |
 | **Straights O1.5** | `multi_hr_rank` + `hr_zone_fit` |
 | **3 Leg HR / 2 Leg HR / Favorite 3 Leg** | `hr_rank_sort_key` |
-| **Top 5 HR Tickets** | `summary_combined_rank` |
+| **Top 5 HR Tickets** | `top5_hr_ticket_rank` (Split + Risk + Park + Form + Zone) |
 | **Top 5 Weather Heavy** | `weather_play_rank` (park-led, zone tiebreak) |
 | **Longshots** | `straight_attack_rank` + `hr_zone_fit` |
 

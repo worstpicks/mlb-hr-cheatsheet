@@ -1,0 +1,26 @@
+Matchup,ATL @ SF
+Pitcher,Chris Sale
+Pitcher Team,ATL
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.45,="11-40",.275,.400,0.125,1,2,0,4,14.0,3,.326,.726
+Batting Second,8.2,1.73,="12-38",.316,.368,0.052,0,2,0,0,23.8,3,.381,.749
+Batting Third,9.0,1.56,="12-37",.324,.622,0.298,3,2,0,5,29.3,2,.350,.972
+Batting Fourth,10.0,0.90,="4-33",.121,.121,0.000,0,0,0,1,30.0,5,.250,.371
+Batting Fifth,10.1,0.58,="5-36",.139,.250,0.111,1,1,0,5,43.6,1,.205,.455
+Batting Sixth,8.2,1.15,="9-35",.257,.286,0.029,0,1,0,2,29.7,1,.297,.583
+Batting Seventh,9.1,0.75,="3-30",.100,.200,0.100,1,0,0,4,36.1,4,.250,.450
+Batting Eighth,8.2,1.04,="7-31",.226,.258,0.032,0,1,0,2,27.3,2,.273,.531
+Batting Ninth,9.1,0.43,="4-30",.133,.167,0.034,0,1,0,1,29.0,0,.161,.328
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Matt Chapman RHB,Batting First ​,="2-8",.250,.625,0.375,1,0,0,2,7.7,5,.538,1.163
+Luis Arraez LHB,Batting Second ​,="54-151",.358,.464,0.106,2,6,2,12,1.8,12,.411,.875
+Casey Schmitt RHB,Batting Third ​,="28-114",.246,.412,0.166,5,4,0,13,20.3,2,.263,.675
+Rafael Devers LHB,Batting Fourth ​,="54-203",.266,.522,0.256,11,17,1,34,27.6,13,.313,.835
+Willy Adames RHB,Batting Fifth ​,="8-28",.286,.643,0.357,3,1,0,5,22.6,3,.355,.998
+Heliot Ramos RHB,Batting Sixth ​,="5-19",.263,.368,0.105,0,2,0,0,35.0,1,.300,.668
+Jung Hoo Lee LHB,Batting Seventh ​,="5-19",.263,.263,0.000,0,0,0,2,9.1,2,.318,.581
+Victor Bericoto RHB,Batting Eighth ​,="1-6",.167,.167,0.000,0,0,0,0,50.0,0,.167,.334
+Eric Haase RHB,Batting Ninth ​,="6-32",.188,.438,0.250,2,2,0,4,28.6,2,.235,.673

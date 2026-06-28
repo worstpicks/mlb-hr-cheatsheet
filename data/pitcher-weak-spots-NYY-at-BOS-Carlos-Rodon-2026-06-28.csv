@@ -1,0 +1,30 @@
+Matchup,NYY @ BOS
+Pitcher,Carlos Rodon
+Pitcher Team,NYY
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.2,1.06,="4-21",.190,.429,0.239,1,2,0,1,34.8,2,.261,.690
+Batting Second,4.0,2.75,="8-19",.421,.632,0.211,1,1,0,2,13.0,3,.500,1.132
+Batting Third,5.0,1.80,="4-18",.222,.389,0.167,0,3,0,2,17.4,5,.391,.780
+Batting Fourth,5.1,0.94,="1-17",.059,.235,0.176,1,0,0,3,38.1,4,.238,.473
+Batting Fifth,3.2,1.91,="3-13",.231,.308,0.077,0,1,0,0,33.3,4,.444,.752
+Batting Sixth,3.1,2.10,="5-15",.333,.333,0.000,0,0,0,1,29.4,2,.412,.745
+Batting Seventh,6.0,0.33,="1-15",.067,.067,0.000,0,0,0,1,41.2,1,.118,.185
+Batting Eighth,4.0,1.00,="4-16",.250,.375,0.125,0,2,0,4,18.8,0,.250,.625
+Batting Ninth,4.1,0.46,="1-13",.077,.077,0.000,0,0,0,1,13.3,1,.133,.210
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jarren Duran LHB,Batting First ​,="38-179",.212,.408,0.196,9,4,2,24,29.7,12,.267,.675
+Nate Eaton RHB,Batting First ​,="3-9",.333,.556,0.223,0,2,0,3,8.3,2,.500,1.056
+Ceddanne Rafaela RHB,Batting Second ​,="38-141",.270,.418,0.148,3,10,1,16,16.2,5,.299,.717
+Mickey Gasper SHB,Batting Second ​,="9-32",.281,.281,0.000,0,0,0,2,25.7,0,.294,.575
+Wilyer Abreu LHB,Batting Third ​,="49-198",.247,.409,0.162,6,10,2,24,19.2,16,.300,.709
+Willson Contreras RHB,Batting Fourth ​,="56-202",.277,.515,0.238,11,11,2,35,26.2,18,.362,.877
+Masataka Yoshida LHB,Batting Fifth ​,="10-51",.196,.333,0.137,1,2,1,2,14.3,3,.250,.583
+Andruw Monasterio RHB,Batting Sixth ​,="8-27",.296,.407,0.111,0,3,0,2,25.9,0,.296,.703
+Caleb Durbin RHB,Batting Sixth ​,="18-77",.234,.390,0.156,2,4,1,11,20.5,5,.277,.667
+Anthony Seigler SHB,Batting Seventh ​,="4-10",.400,.800,0.400,1,1,0,1,9.1,1,.455,1.255
+Connor Wong RHB,Batting Eighth ​,="16-68",.235,.353,0.118,1,5,0,14,25.0,7,.321,.674
+Carlos Narvaez RHB,Batting Eighth ​,="16-86",.186,.256,0.070,1,3,0,2,32.3,7,.268,.524
+Tsung-Che Cheng LHB,Batting Ninth ​,="1-6",.167,.333,0.166,0,1,0,1,14.3,1,.286,.619

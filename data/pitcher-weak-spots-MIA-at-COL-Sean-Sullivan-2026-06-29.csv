@@ -1,0 +1,30 @@
+Matchup,MIA @ COL
+Pitcher,Sean Sullivan
+Pitcher Team,COL
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="3-7",.429,1.000,0.571,1,1,0,2,0.0,.500,1.500
+Batting Second,="2-8",.250,.250,0.000,0,0,0,0,12.5,.250,.500
+Batting Third,="4-6",.667,1.667,1.000,1,1,1,3,12.5,.750,2.417
+Batting Fourth,="1-6",.167,.167,0.000,0,0,0,0,0.0,.286,.453
+Batting Fifth,="0-5",.000,.000,0.000,0,0,0,1,28.6,.143,.143
+Batting Sixth,="2-6",.333,.500,0.167,0,1,0,0,0.0,.333,.833
+Batting Seventh,="1-4",.250,.750,0.500,0,0,1,2,40.0,.400,1.150
+Batting Eighth,="1-4",.250,.500,0.250,0,1,0,1,20.0,.400,.900
+Batting Ninth,="2-4",.500,1.250,0.750,1,0,0,2,0.0,.600,1.850
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Xavier Edwards SHB,Batting First ​,="29-106",.274,.462,0.188,4,4,2,11,14.5,11,.342,.804
+Jakob Marsee LHB,Batting First ​,="21-119",.176,.244,0.068,1,3,1,10,22.8,20,.303,.547
+Otto Lopez RHB,Batting Third ​,="37-127",.291,.409,0.118,2,7,1,16,18.2,4,.321,.730
+Kyle Stowers LHB,Batting Fourth ​,="21-88",.239,.455,0.216,4,7,0,10,31.7,10,.337,.792
+Heriberto Hernandez RHB,Batting Fifth ​,="11-53",.208,.377,0.169,2,1,1,9,26.3,4,.263,.640
+Owen Caissie LHB,Batting Sixth ​,="16-82",.195,.317,0.122,2,4,0,15,38.5,6,.253,.570
+Griffin Conine LHB,Batting Seventh ​,="4-17",.235,.412,0.177,1,0,0,2,23.5,0,.235,.647
+Leo Jimenez RHB,Batting Eighth ​,="6-25",.240,.240,0.000,0,0,0,1,9.4,5,.375,.615
+Joe Mack LHB,Batting Eighth ​,="14-58",.241,.379,0.138,2,2,0,8,16.4,7,.333,.712
+Brian Navarreto RHB,Batting Ninth ​,="0-2",.000,.000,0.000,0,0,0,0,20.0,1,.333,.333
+Esteury Ruiz RHB,Batting Ninth ​,="7-32",.219,.406,0.187,1,3,0,1,33.3,2,.286,.692
+Graham Pauley LHB,Batting Ninth ​,="5-48",.104,.167,0.063,0,3,0,3,33.3,2,.140,.307
+Javier Sanoja RHB,Batting Ninth ​,="28-101",.277,.396,0.119,1,9,0,11,10.2,6,.318,.714

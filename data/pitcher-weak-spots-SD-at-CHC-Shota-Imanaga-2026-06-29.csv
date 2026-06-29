@@ -1,0 +1,30 @@
+Matchup,SD @ CHC
+Pitcher,Shota Imanaga
+Pitcher Team,CHC
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="10-44",.227,.386,0.159,1,4,0,3,28.6,.306,.692
+Batting Second,="6-43",.140,.349,0.209,3,0,0,5,33.3,.178,.527
+Batting Third,="7-42",.167,.381,0.214,3,0,0,6,13.6,.205,.586
+Batting Fourth,="16-38",.421,.789,0.368,4,2,0,7,9.1,.477,1.266
+Batting Fifth,="9-38",.237,.605,0.368,3,3,1,5,24.4,.293,.898
+Batting Sixth,="9-39",.231,.513,0.282,3,2,0,8,32.5,.250,.763
+Batting Seventh,="5-34",.147,.147,0.000,0,0,0,1,21.6,.216,.363
+Batting Eighth,="7-34",.206,.441,0.235,2,2,0,5,19.4,.250,.691
+Batting Ninth,="5-30",.167,.300,0.133,1,1,0,1,33.3,.242,.542
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="53-171",.310,.427,0.117,3,11,0,16,15.6,12,.360,.787
+Samad Taylor RHB,Batting Second ​,="10-30",.333,.333,0.000,0,0,0,3,28.9,7,.459,.792
+Jackson Merrill LHB,Batting Third ​,="29-128",.227,.359,0.132,4,5,0,12,28.1,7,.272,.631
+Manny Machado RHB,Batting Fourth ​,="34-172",.198,.419,0.221,10,8,0,31,22.2,22,.283,.702
+Xander Bogaerts RHB,Batting Fifth ​,="37-156",.237,.308,0.071,3,2,0,16,20.2,15,.306,.614
+Miguel Andujar RHB,Batting Sixth ​,="15-52",.288,.462,0.174,1,4,1,8,16.7,2,.315,.777
+Gavin Sheets LHB,Batting Sixth ​,="13-75",.173,.347,0.174,3,4,0,10,27.2,5,.235,.582
+Ty France RHB,Batting Seventh ​,="22-83",.265,.627,0.362,8,4,1,20,30.8,4,.319,.946
+Jase Bowen RHB,Batting Eighth ​,="0-14",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Will Wagner LHB,Batting Eighth ​,="4-16",.250,.250,0.000,0,0,0,0,14.3,5,.429,.679
+Sung-Mun Song LHB,Batting Eighth ​,="6-28",.214,.250,0.036,0,1,0,4,14.7,6,.353,.603
+Rodolfo Durán RHB,Batting Ninth ​,="7-53",.132,.358,0.226,3,3,0,7,25.8,7,.246,.604
+Freddy Fermin RHB,Batting Ninth ​,="10-64",.156,.313,0.157,3,1,0,9,23.0,7,.236,.549

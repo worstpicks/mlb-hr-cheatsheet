@@ -21,6 +21,8 @@ TITLE_WEATHER_KEY_ALIASES = {
     "KC @ WSH": "KC @ WAS",
     "PHI @ WSH": "PHI @ WAS",
     "WSH @ BAL": "WAS @ BAL",
+    "WSH @ BOS": "WAS @ BOS",
+    "CWS @ BAL": "CHW @ BAL",
     "KC @ CWS": "KC @ CHW",
     "CLE @ CWS": "CLE @ CHW",
     "CWS @ MIN": "CHW @ MIN",

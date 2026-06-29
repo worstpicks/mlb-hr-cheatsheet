@@ -1,0 +1,30 @@
+Matchup,MIN @ HOU
+Pitcher,Zebby Matthews
+Pitcher Team,MIN
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.1,1.11,="7-26",.269,.462,0.193,1,2,0,1,0.0,0,.269,.731
+Batting Second,6.1,0.95,="5-23",.217,.609,0.392,3,0,0,5,12.5,1,.250,.859
+Batting Third,6.0,0.83,="4-21",.190,.381,0.191,1,1,0,3,25.0,1,.250,.631
+Batting Fourth,5.1,1.31,="5-21",.238,.476,0.238,1,2,0,1,20.8,2,.333,.809
+Batting Fifth,5.1,1.31,="6-22",.273,.545,0.272,1,3,0,4,17.4,1,.304,.849
+Batting Sixth,4.1,2.08,="6-19",.316,.474,0.158,1,0,0,3,31.8,3,.409,.883
+Batting Seventh,5.0,1.60,="7-21",.333,.476,0.143,1,0,0,2,18.2,1,.364,.840
+Batting Eighth,4.1,1.62,="5-18",.278,.444,0.166,1,0,0,3,35.0,2,.350,.794
+Batting Ninth,6.1,0.47,="3-19",.158,.211,0.053,0,1,0,1,15.8,0,.158,.369
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="25-89",.281,.472,0.191,4,5,0,7,20.8,10,.356,.828
+Jeremy Pena RHB,Batting First ​,="52-174",.299,.454,0.155,6,9,0,18,16.3,12,.353,.807
+Yordan Alvarez LHB,Batting Second ​,="84-265",.317,.600,0.283,20,15,0,48,16.9,48,.429,1.029
+Isaac Paredes RHB,Batting Third ​,="34-125",.272,.400,0.128,3,7,0,18,14.1,13,.352,.752
+Christian Walker RHB,Batting Fourth ​,="35-150",.233,.487,0.254,11,5,0,27,20.6,13,.297,.784
+Yainer Diaz RHB,Batting Sixth ​,="14-63",.222,.270,0.048,0,3,0,3,18.5,2,.246,.516
+Joey Loperfido LHB,Batting Sixth ​,="8-36",.222,.306,0.084,0,3,0,4,26.2,5,.333,.639
+Cam Smith RHB,Batting Sixth ​,="20-109",.183,.303,0.120,3,4,0,7,27.8,13,.272,.575
+Taylor Trammell LHB,Batting Seventh ​,="7-20",.350,.550,0.200,1,1,0,2,22.7,2,.409,.959
+Jake Meyers RHB,Batting Seventh ​,="12-44",.273,.455,0.182,2,2,0,4,14.0,5,.340,.795
+Brice Matthews RHB,Batting Eighth ​,="10-64",.156,.219,0.063,1,1,0,4,31.4,4,.206,.425
+Christian Vazquez RHB,Batting Ninth ​,="27-117",.231,.333,0.102,2,6,0,17,15.5,9,.286,.619
+Raynel Delgado LHB,Batting Ninth ​,="5-18",.278,.444,0.166,1,0,0,4,10.5,0,.278,.722

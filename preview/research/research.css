@@ -531,7 +531,21 @@ a:hover { color: #bae6fd; }
 
 @media (max-width: 520px) {
     .rs-pitcher-risk-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 5px;
+    }
+    .rs-pitcher-risk-card {
+        padding: 8px 5px;
+    }
+    .rs-pitcher-risk-card__label {
+        font-size: 0.58rem;
+        letter-spacing: 0.03em;
+    }
+    .rs-pitcher-risk-card__score {
+        font-size: 1.05rem;
+    }
+    .rs-pitcher-risk-card__sub {
+        font-size: 0.58rem;
     }
 }
 
@@ -550,25 +564,40 @@ a:hover { color: #bae6fd; }
     box-shadow: 0 0 0 1px rgba(251, 146, 60, 0.2);
 }
 .rs-pitcher-card__tabs {
-    display: flex;
-    gap: 6px;
-    padding: 0 14px;
-    margin-top: -4px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(8, 15, 28, 0.5);
 }
 .rs-pitcher-card__tab {
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    background: rgba(15, 23, 42, 0.45);
+    border: none;
+    border-right: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 0;
+    background: transparent;
     color: var(--rs-muted);
-    border-radius: 999px;
-    padding: 4px 10px;
+    padding: 10px 4px;
+    min-height: 42px;
     font-size: 0.68rem;
     font-weight: 700;
     cursor: pointer;
+    text-align: center;
+    line-height: 1.2;
+    touch-action: manipulation;
+}
+.rs-pitcher-card__tab:last-child {
+    border-right: none;
 }
 .rs-pitcher-card__tab.is-active {
     color: #fde68a;
-    border-color: rgba(251, 146, 60, 0.45);
-    background: rgba(251, 146, 60, 0.12);
+    border-color: rgba(148, 163, 184, 0.12);
+    background: rgba(251, 146, 60, 0.14);
+    box-shadow: inset 0 -2px 0 #f97316;
+}
+.rs-pitcher-card__tab .rs-tab-short {
+    display: none;
 }
 .rs-pitcher-group__grid--overview {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1628,12 +1657,15 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
     .rs-section { margin-bottom: 14px; }
     .rs-section-title { font-size: 0.68rem; margin-bottom: 8px; }
     .rs-games-wrap {
-        margin: 0 -4px;
-        padding-bottom: 4px;
+        margin: 0;
+        padding-bottom: 6px;
+    }
+    .rs-games {
+        padding-inline: 6px;
     }
     .rs-game-pill {
-        min-width: 112px;
-        padding: 11px 13px;
+        min-width: 118px;
+        scroll-snap-align: center;
     }
     .rs-game-pill__matchup { font-size: 0.86rem; }
     .rs-game-pill__meta {
@@ -1781,9 +1813,58 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
     .rs-explore__head {
         padding: 12px 14px;
         min-height: 48px;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 10px;
+    }
+    .rs-explore__title {
+        flex: 1 1 auto;
+        min-width: 0;
+        font-size: 0.9rem;
+    }
+    .rs-explore__meta {
+        flex: 1 1 100%;
+        order: 3;
+        margin-left: 0;
+        font-size: 0.68rem;
+        line-height: 1.35;
+    }
+    .rs-explore__chev {
+        flex-shrink: 0;
+    }
+    .rs-explore__panel {
+        overflow: visible;
     }
     .rs-explore__body {
         padding: 0 10px 12px;
+    }
+    .rs-explore-lb-nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(251, 146, 60, 0.28);
+        background: rgba(8, 15, 28, 0.65);
+    }
+    .rs-explore-lb-nav__btn {
+        font-size: 0.72rem;
+        padding: 12px 8px;
+        line-height: 1.25;
+        white-space: normal;
+    }
+    .rs-leaderboard-wrap[data-lb-panel]:not(.is-active) {
+        display: none;
+    }
+    .rs-leaderboard-wrap .rs-explore__sub {
+        display: none;
+    }
+    .rs-leaderboard-wrap--pitchers .rs-explore__hint {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 0.68rem;
+        line-height: 1.35;
     }
     .rs-explore__filters {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1811,7 +1892,7 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
         margin: 6px 0 0;
     }
     .rs-leaderboard-scroll {
-        max-height: min(52vh, 320px);
+        max-height: min(58vh, 420px);
         -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
     }
@@ -1838,34 +1919,55 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
         font-size: 0.72rem;
     }
     .rs-leaderboard-link {
-        min-height: 44px;
-        padding: 4px 0;
-        display: inline-flex;
-        align-items: center;
+        padding: 2px 0;
+        display: inline;
+        min-height: 0;
+    }
+    .rs-leaderboard tbody tr {
+        cursor: pointer;
+    }
+    .rs-leaderboard tbody td {
+        padding: 10px 5px;
     }
     .rs-pitcher-panel {
+        margin-top: 8px;
+        margin-bottom: 12px;
+    }
+    .rs-pitcher-duo {
+        gap: 16px;
+    }
+    .rs-pitcher-card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .rs-pitcher-card__head {
+        padding: 12px 14px 10px;
+    }
+    .rs-pitcher-card__name {
+        font-size: 0.95rem;
+    }
+    .rs-pitcher-card__mix {
+        font-size: 0.68rem;
         margin-top: 4px;
-    }
-    .rs-pitcher-card__tabs {
-        display: flex;
-        gap: 6px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 2px;
-    }
-    .rs-pitcher-card__tabs::-webkit-scrollbar {
-        display: none;
+        line-height: 1.35;
     }
     .rs-pitcher-card__tab {
-        flex: 0 0 auto;
-        min-height: 40px;
-        padding: 8px 14px;
-        font-size: 0.72rem;
-        touch-action: manipulation;
+        min-height: 44px;
+        font-size: 0.66rem;
+        padding: 10px 2px;
+    }
+    .rs-pitcher-card__tab .rs-tab-long {
+        display: none;
+    }
+    .rs-pitcher-card__tab .rs-tab-short {
+        display: inline;
     }
     .rs-pitcher-card--clickable:active {
-        transform: scale(0.995);
+        transform: none;
+    }
+    .rs-pitcher-card__body {
+        padding: 10px 12px 12px;
+        gap: 10px;
     }
     .rs-pitcher-group__grid,
     .rs-pitcher-group__grid--overview {
@@ -2188,6 +2290,33 @@ html.theme-light .rs-card__order {
 }
 .rs-explore__panel[open] .rs-explore__chev { transform: rotate(-135deg); }
 .rs-explore__body { padding: 0 14px 14px; }
+.rs-explore-lb-nav {
+    display: none;
+}
+.rs-explore-lb-nav__btn {
+    border: none;
+    background: rgba(8, 15, 28, 0.55);
+    color: var(--rs-muted);
+    font-weight: 800;
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
+    padding: 12px 10px;
+    min-height: 48px;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background 0.15s, color 0.15s;
+}
+.rs-explore-lb-nav__btn:first-child {
+    border-radius: 12px 0 0 12px;
+}
+.rs-explore-lb-nav__btn:last-child {
+    border-radius: 0 12px 12px 0;
+}
+.rs-explore-lb-nav__btn.is-active {
+    color: #fde68a;
+    background: linear-gradient(180deg, rgba(251, 146, 60, 0.22) 0%, rgba(180, 83, 9, 0.18) 100%);
+    box-shadow: inset 0 -2px 0 #f97316;
+}
 .rs-explore__filters {
     display: flex;
     flex-wrap: wrap;
@@ -2652,6 +2781,30 @@ html.theme-light .rs-search-item:hover { background: #fff7ed; }
 html.theme-light .rs-explore__panel {
     background: linear-gradient(145deg, #fff7ed 0%, #fff 100%);
     border-color: rgba(180, 83, 9, 0.25);
+}
+html.theme-light .rs-explore-lb-nav {
+    border-color: rgba(180, 83, 9, 0.25);
+    background: #f8fafc;
+}
+html.theme-light .rs-explore-lb-nav__btn {
+    background: #fff;
+    color: #64748b;
+}
+html.theme-light .rs-explore-lb-nav__btn.is-active {
+    color: #92400e;
+    background: linear-gradient(180deg, #fef3c7 0%, #fff7ed 100%);
+}
+html.theme-light .rs-pitcher-card__tabs {
+    background: #f1f5f9;
+    border-top-color: rgba(180, 83, 9, 0.15);
+}
+html.theme-light .rs-pitcher-card__tab {
+    color: #64748b;
+    border-right-color: rgba(180, 83, 9, 0.12);
+}
+html.theme-light .rs-pitcher-card__tab.is-active {
+    color: #92400e;
+    background: rgba(254, 243, 199, 0.65);
 }
 html.theme-light .rs-leaderboard-wrap { background: #fff; border-color: rgba(180, 83, 9, 0.2); }
 html.theme-light .rs-leaderboard thead th { background: #f1f5f9; }

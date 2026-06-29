@@ -1432,7 +1432,7 @@
             <nav class="rs-pitcher-card__tabs" aria-label="Pitcher card views">
                 <button type="button" class="rs-pitcher-card__tab is-active" data-tab="overview">Overview</button>
                 <button type="button" class="rs-pitcher-card__tab" data-tab="splits">Splits</button>
-                <button type="button" class="rs-pitcher-card__tab" data-tab="leak">Contact leak</button>
+                <button type="button" class="rs-pitcher-card__tab" data-tab="leak"><span class="rs-tab-long">Contact leak</span><span class="rs-tab-short">Leak</span></button>
             </nav>
             <div class="rs-pitcher-card__body">
                 <div class="rs-pitcher-card__pane" data-pane="overview">${overview}</div>
@@ -2401,6 +2401,37 @@
             const tip = (sort && EXPLORE_PITCHER_LB_TIPS[sort]) || EXPLORE_PITCHER_LB_TIPS[label];
             applyHeaderTip(th, tip);
         });
+    }
+
+    function wireExploreLbNav() {
+        const nav = document.getElementById("rsExploreLbNav");
+        if (!nav) return;
+        const panels = document.querySelectorAll("[data-lb-panel]");
+        const btns = nav.querySelectorAll("[data-lb]");
+        const setActive = (key) => {
+            btns.forEach((b) => {
+                const on = b.getAttribute("data-lb") === key;
+                b.classList.toggle("is-active", on);
+                b.setAttribute("aria-selected", on ? "true" : "false");
+            });
+            panels.forEach((p) => {
+                p.classList.toggle("is-active", p.getAttribute("data-lb-panel") === key);
+            });
+        };
+        btns.forEach((b) => {
+            b.addEventListener("click", () => setActive(b.getAttribute("data-lb")));
+        });
+        const mq = window.matchMedia("(max-width: 768px)");
+        const sync = () => {
+            if (!mq.matches) {
+                panels.forEach((p) => p.classList.add("is-active"));
+                return;
+            }
+            const activeBtn = nav.querySelector(".rs-explore-lb-nav__btn.is-active");
+            setActive(activeBtn?.getAttribute("data-lb") || "hitters");
+        };
+        mq.addEventListener("change", sync);
+        sync();
     }
 
     function renderDataFreshness() {
@@ -4846,6 +4877,7 @@
         els.exploreReset?.addEventListener("click", resetExploreFilters);
         syncExploreSortSelect(exploreSortKey);
         wireExploreLeaderboardTips();
+        wireExploreLbNav();
         els.refreshBtn?.addEventListener("click", () => {
             const date = els.dateInput?.value || sheetDateFromQuery();
             loadSlate(date, true).catch((e) => setStatus(String(e.message || e), true));

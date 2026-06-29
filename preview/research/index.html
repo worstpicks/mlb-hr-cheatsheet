@@ -15,7 +15,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="">
-    <link rel="stylesheet" href="research.css?v=93">
+    <link rel="stylesheet" href="research.css?v=94">
     <style>
         .rs-file-block {
             display: none;
@@ -165,8 +165,12 @@ python serve-research.py</pre>
                             </label>
                             <button type="button" class="rs-btn rs-btn--ghost" id="rsExploreReset">Reset filters</button>
                         </div>
+                        <div class="rs-explore-lb-nav" id="rsExploreLbNav" role="tablist" aria-label="Leaderboard view">
+                            <button type="button" class="rs-explore-lb-nav__btn is-active" role="tab" aria-selected="true" data-lb="hitters">Top hitters</button>
+                            <button type="button" class="rs-explore-lb-nav__btn" role="tab" aria-selected="false" data-lb="pitchers">Pitchers to target</button>
+                        </div>
                         <div class="rs-explore-grid">
-                            <div class="rs-leaderboard-wrap">
+                            <div class="rs-leaderboard-wrap is-active" data-lb-panel="hitters">
                                 <h3 class="rs-explore__sub">Top hitters</h3>
                                 <div class="rs-leaderboard-scroll">
                                     <table class="rs-leaderboard" id="rsHrLeaderboard">
@@ -192,7 +196,7 @@ python serve-research.py</pre>
                                     </table>
                                 </div>
                             </div>
-                            <div class="rs-leaderboard-wrap rs-leaderboard-wrap--pitchers">
+                            <div class="rs-leaderboard-wrap rs-leaderboard-wrap--pitchers" data-lb-panel="pitchers">
                                 <h3 class="rs-explore__sub">Pitchers to target</h3>
                                 <p class="rs-explore__hint">SPs with ≥50% dinger risk (Savant)</p>
                                 <div class="rs-leaderboard-scroll">
@@ -317,6 +321,6 @@ python serve-research.py</pre>
         </div>
     </dialog>
 
-    <script src="research.js?v=93" defer></script>
+    <script src="research.js?v=94" defer></script>
 </body>
 </html>

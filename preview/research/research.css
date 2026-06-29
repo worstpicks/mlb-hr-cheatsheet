@@ -671,7 +671,7 @@ a:hover { color: #bae6fd; }
     align-self: center;
 }
 .rs-leaderboard--pitchers {
-    min-width: 520px;
+    min-width: 640px;
 }
 .rs-plb-sort.is-sorted {
     color: var(--wpz-accent-gold);
@@ -1893,25 +1893,25 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
     }
     .rs-leaderboard-scroll {
         max-height: min(58vh, 420px);
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
+        overflow-x: scroll;
+        overflow-y: auto;
     }
-    .rs-leaderboard-wrap .rs-leaderboard-scroll::after {
-        content: "Swipe → for more columns";
+    .rs-leaderboard-scroll-hint {
         display: block;
-        padding: 6px 4px 2px;
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--rs-muted);
-        text-align: center;
     }
-    .rs-leaderboard {
-        min-width: 560px;
+    .rs-leaderboard thead th {
+        position: static;
+        top: auto;
     }
-    .rs-leaderboard--pitchers {
-        min-width: 520px;
+    .rs-leaderboard th,
+    .rs-leaderboard td {
+        white-space: nowrap;
+    }
+    .rs-leaderboard-link {
+        touch-action: pan-x pan-y;
+    }
+    .rs-leaderboard tbody tr {
+        cursor: pointer;
     }
     .rs-leaderboard thead th,
     .rs-leaderboard tbody td {
@@ -1923,11 +1923,8 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
         display: inline;
         min-height: 0;
     }
-    .rs-leaderboard tbody tr {
-        cursor: pointer;
-    }
-    .rs-leaderboard tbody td {
-        padding: 10px 5px;
+    .rs-explore-grid {
+        min-width: 0;
     }
     .rs-pitcher-panel {
         margin-top: 8px;
@@ -2386,10 +2383,36 @@ html.theme-light .rs-card__order {
     border: 1px solid rgba(148, 163, 184, 0.16);
     background: rgba(8, 15, 28, 0.45);
     padding: 10px 12px;
+    min-width: 0;
 }
-.rs-leaderboard-scroll { overflow: auto; max-height: 360px; }
-.rs-leaderboard {
+.rs-leaderboard-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 360px;
     width: 100%;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    overscroll-behavior: contain;
+}
+.rs-leaderboard-scroll__track {
+    display: inline-block;
+    min-width: 100%;
+    vertical-align: top;
+}
+.rs-leaderboard-scroll-hint {
+    display: none;
+    margin: 8px 0 0;
+    padding: 0;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    text-align: center;
+}
+.rs-leaderboard {
+    width: auto;
     border-collapse: collapse;
     font-size: 0.78rem;
 }

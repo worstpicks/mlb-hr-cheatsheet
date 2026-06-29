@@ -34,6 +34,68 @@ def find_park_factors_csv(sheet_date: str, data_dir: Path | None = None) -> Path
     return path if path.is_file() else None
 
 
+def _latest_hand_park_date(sheet_date: str, data_dir: Path) -> str | None:
+    """Most recent Ballpark Pal L-hand export on or before sheet_date."""
+    dates: list[str] = []
+    for path in data_dir.glob("park-factors-L-all-*.csv"):
+        m = re.search(r"park-factors-L-all-(\d{4}-\d{2}-\d{2})", path.name)
+        if m:
+            dates.append(m.group(1))
+    if not dates:
+        return None
+    dates = sorted(set(dates))
+    eligible = [d for d in dates if d <= sheet_date]
+    return eligible[-1] if eligible else dates[-1]
+
+
+def load_stadium_only_lookup(sheet_date: str, data_dir: Path | None = None) -> dict:
+    """Stadium HR % by venue when the daily ParkFactors CSV is missing."""
+    data_dir = data_dir or ROOT / "data"
+    ref_date = _latest_hand_park_date(sheet_date, data_dir)
+    if not ref_date:
+        return {}
+    lhb_stadium, rhb_stadium = load_venue_hand_stadium_pcts(ref_date)
+    if not lhb_stadium and not rhb_stadium:
+        return {}
+    by_venue: dict[str, dict] = {}
+    for vk in set(lhb_stadium) | set(rhb_stadium):
+        lhb = lhb_stadium.get(vk)
+        rhb = rhb_stadium.get(vk)
+        if lhb is not None and rhb is not None:
+            hr_pct = int(round((lhb + rhb) / 2))
+        elif lhb is not None:
+            hr_pct = lhb
+        elif rhb is not None:
+            hr_pct = rhb
+        else:
+            continue
+        entry: dict = {
+            "venue_key": vk,
+            "hr_pct": hr_pct,
+            "stadium_pct": hr_pct,
+            "weather_pct": 0,
+        }
+        if lhb is not None:
+            entry["lhb_stadium_pct"] = lhb
+            entry["park_lhb_pct"] = lhb
+        if rhb is not None:
+            entry["rhb_stadium_pct"] = rhb
+            entry["park_rhb_pct"] = rhb
+        by_venue[vk] = entry
+    if not by_venue:
+        return {}
+    return {
+        "source": "ballpark-pal-stadium",
+        "source_label": f"Ballpark Pal stadium ({ref_date})",
+        "source_file": f"park-factors-L/R-all-{ref_date}.csv",
+        "source_date": sheet_date,
+        "hand_date": ref_date,
+        "stadium_only": True,
+        "by_game": {},
+        "by_venue": by_venue,
+    }
+
+
 def _pct_from_field(val: str | None) -> int | None:
     if not val:
         return None
@@ -80,7 +142,7 @@ def load_park_lookup(sheet_date: str, data_dir: Path | None = None) -> dict:
     data_dir = data_dir or ROOT / "data"
     path = find_park_factors_csv(sheet_date, data_dir)
     if not path:
-        return {}
+        return load_stadium_only_lookup(sheet_date, data_dir)
 
     pf_date = park_factors_date_from_path(path) or sheet_date
     if pf_date != sheet_date:

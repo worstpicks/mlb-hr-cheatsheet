@@ -9,6 +9,8 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+MLB_API = "https://statsapi.mlb.com/api/v1"
+
 from research.savant_hr import fetch_hr_tracker_lookup
 
 SAVANT_CUSTOM_CSV = (
@@ -293,4 +295,51 @@ def merge_into_hitter_stats(
     if propfinder:
         sources.append("propfinder")
     out["source"] = "+".join(sources)
+    return out
+
+
+
+def _parse_rate(val: Any) -> float | None:
+    if val is None:
+        return None
+    s = str(val).strip()
+    if not s or s in ("-", ".---"):
+        return None
+    if s.startswith("."):
+        s = "0" + s
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+
+def fetch_player_game_trends(player_id: int, season: int, limit: int = 30) -> list[dict]:
+    """Per-game HR, SLG, and PA from MLB Stats API game log."""
+    url = f"{MLB_API}/people/{player_id}/stats?stats=gameLog&group=hitting&season={season}"
+    req = urllib.request.Request(url, headers={"User-Agent": "WorstPickz-Research/1.0"})
+    with urllib.request.urlopen(req, timeout=45) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+    stats = (payload.get("stats") or [{}])[0]
+    splits = stats.get("splits") or []
+    if not splits:
+        return []
+    tail = splits[-limit:] if len(splits) > limit else splits
+    out: list[dict] = []
+    for split in tail:
+        date_raw = (split.get("date") or "").strip()
+        if not date_raw:
+            continue
+        st = split.get("stat") or {}
+        avg = _parse_rate(st.get("avg"))
+        slg = _parse_rate(st.get("slg"))
+        iso = round(slg - avg, 3) if avg is not None and slg is not None else None
+        out.append(
+            {
+                "date": date_raw[:10],
+                "pa": _int(st.get("plateAppearances")),
+                "hr": _int(st.get("homeRuns")),
+                "slg": slg,
+                "iso": iso,
+            }
+        )
     return out

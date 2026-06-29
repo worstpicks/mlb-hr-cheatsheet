@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview"
 sys.path.insert(0, str(ROOT))
 
-from research.savant_api import fetch_batter_statcast_lookup  # noqa: E402
+from research.savant_api import fetch_batter_statcast_lookup, fetch_player_game_trends  # noqa: E402
 
 
 class ResearchHandler(SimpleHTTPRequestHandler):
@@ -21,7 +21,14 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(PREVIEW), **kwargs)
 
     def do_OPTIONS(self) -> None:
-        if self._is_savant_api() or self._is_propfinder_api():
+        if (
+            self._is_savant_api()
+            or self._is_trends_api()
+            or self._is_propfinder_api()
+            or self._is_rotowire_api()
+            or self._is_zone_api()
+            or self._is_park_api()
+        ):
             self._send_json(204, {})
             return
         super().do_OPTIONS()
@@ -30,10 +37,40 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         if self._is_savant_api():
             self._handle_savant_api()
             return
+        if self._is_trends_api():
+            self._handle_trends_api()
+            return
         if self._is_propfinder_api():
             self._handle_propfinder_api()
             return
+        if self._is_rotowire_api():
+            self._handle_rotowire_api()
+            return
+        if self._is_zone_api():
+            self._handle_zone_api()
+            return
+        if self._is_park_api():
+            self._handle_park_api()
+            return
         super().do_GET()
+
+    def _is_rotowire_api(self) -> bool:
+        path = urlparse(self.path).path.rstrip("/")
+        return path == "/api/rotowire-lineups"
+
+    def _handle_rotowire_api(self) -> None:
+        from research.rotowire_lineups import build_rotowire_payload
+
+        qs = parse_qs(urlparse(self.path).query)
+        sheet_date = qs.get("date", [""])[0]
+        if not sheet_date or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", sheet_date):
+            self._send_json(400, {"error": "invalid date"})
+            return
+        try:
+            payload = build_rotowire_payload(sheet_date)
+            self._send_json(200, payload)
+        except Exception as exc:
+            self._send_json(502, {"error": str(exc)})
 
     def _is_propfinder_api(self) -> bool:
         path = urlparse(self.path).path.rstrip("/")
@@ -61,9 +98,93 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         except Exception as exc:
             self._send_json(502, {"error": str(exc)})
 
+    def _is_park_api(self) -> bool:
+        path = urlparse(self.path).path.rstrip("/")
+        return path == "/api/park-factors"
+
+    def _handle_park_api(self) -> None:
+        from research.park_factors import load_park_lookup
+
+        qs = parse_qs(urlparse(self.path).query)
+        sheet_date = qs.get("date", [""])[0]
+        if not sheet_date or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", sheet_date):
+            self._send_json(400, {"error": "invalid date"})
+            return
+        try:
+            lookup = load_park_lookup(sheet_date)
+            self._send_json(
+                200,
+                {
+                    "date": sheet_date,
+                    "venues": len(lookup.get("by_venue") or {}),
+                    "games": len(lookup.get("by_game") or {}),
+                    **lookup,
+                },
+            )
+        except Exception as exc:
+            self._send_json(502, {"error": str(exc)})
+
+    def _is_zone_api(self) -> bool:
+        path = urlparse(self.path).path.rstrip("/")
+        return path == "/api/zone-matchups"
+
+    def _handle_zone_api(self) -> None:
+        from zone_matchups import load_zone_lookup
+
+        from research.mlb_api import _serialize_zone_lookup
+
+        qs = parse_qs(urlparse(self.path).query)
+        sheet_date = qs.get("date", [""])[0]
+        if not sheet_date or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", sheet_date):
+            self._send_json(400, {"error": "invalid date"})
+            return
+        try:
+            lookup = _serialize_zone_lookup(load_zone_lookup(sheet_date))
+            self._send_json(
+                200,
+                {
+                    "date": sheet_date,
+                    "source": "zone-matchups-csv",
+                    "matchups": len(lookup),
+                    "lookup": lookup,
+                },
+            )
+        except Exception as exc:
+            self._send_json(502, {"error": str(exc)})
+
     def _is_savant_api(self) -> bool:
         path = urlparse(self.path).path.rstrip("/")
         return path == "/api/savant-batter"
+
+    def _is_trends_api(self) -> bool:
+        path = urlparse(self.path).path.rstrip("/")
+        return path == "/api/player-trends"
+
+    def _handle_trends_api(self) -> None:
+        qs = parse_qs(urlparse(self.path).query)
+        try:
+            player_id = int(qs.get("playerId", [""])[0])
+            season = int(qs.get("season", ["2026"])[0])
+            limit = int(qs.get("limit", ["30"])[0])
+        except ValueError:
+            self._send_json(400, {"error": "invalid playerId, season, or limit"})
+            return
+        if player_id <= 0 or limit <= 0 or limit > 60:
+            self._send_json(400, {"error": "invalid playerId or limit"})
+            return
+        try:
+            games = fetch_player_game_trends(player_id, season, limit=min(limit, 60))
+            self._send_json(
+                200,
+                {
+                    "playerId": player_id,
+                    "season": season,
+                    "source": "mlb-game-log",
+                    "games": games,
+                },
+            )
+        except Exception as exc:
+            self._send_json(502, {"error": str(exc)})
 
     def _handle_savant_api(self) -> None:
         qs = parse_qs(urlparse(self.path).query)
@@ -99,7 +220,15 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def log_message(self, fmt: str, *args) -> None:
-        if self._is_savant_api() or self._is_propfinder_api() or str(args[0]).startswith("2"):
+        if (
+            self._is_savant_api()
+            or self._is_trends_api()
+            or self._is_propfinder_api()
+            or self._is_rotowire_api()
+            or self._is_zone_api()
+            or self._is_park_api()
+            or str(args[0]).startswith("2")
+        ):
             super().log_message(fmt, *args)
 
 
@@ -109,6 +238,7 @@ def main() -> None:
     server = ThreadingHTTPServer((host, port), ResearchHandler)
     print(f"Serving preview at http://{host}:{port}/")
     print(f"Savant proxy  http://{host}:{port}/api/savant-batter?season=2026")
+    print(f"Player trends http://{host}:{port}/api/player-trends?playerId=592450&season=2026")
     print(f"Research      http://{host}:{port}/research/index.html?date=2026-06-22")
     try:
         server.serve_forever()

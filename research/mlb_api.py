@@ -21,11 +21,18 @@ from research.pitch_mix import (
     league_pitch_averages,
     write_pitch_mix_cache,
 )
+from research.pitcher_dinger_risk import attach_dinger_risk_to_games
 from research.propfinder_stats import load_propfinder_lookup
 from research.savant_api import (
     fetch_batter_statcast_lookup,
     merge_into_hitter_stats,
     write_savant_cache,
+)
+from research.savant_pitcher import (
+    fetch_pitcher_hand_split_lookup,
+    fetch_pitcher_statcast_lookup,
+    write_savant_pitcher_cache,
+    write_savant_pitcher_hand_cache,
 )
 from research.window_savant import (
     fetch_season_statcast_lookup,
@@ -417,6 +424,38 @@ def _collect_player_ids(games: list[dict]) -> list[int]:
     return sorted(ids)
 
 
+def _collect_pitcher_ids(games: list[dict]) -> list[int]:
+    ids: set[int] = set()
+    for game in games:
+        for key in ("awayPitcher", "homePitcher"):
+            pitcher = game.get(key)
+            pid = pitcher.get("id") if pitcher else None
+            if pid:
+                ids.add(int(pid))
+    return sorted(ids)
+
+
+def _attach_pitcher_savant_stats(games: list[dict], savant_pitcher_lookup: dict[int, dict]) -> None:
+    if not savant_pitcher_lookup:
+        return
+    for game in games:
+        for key in ("awayPitcher", "homePitcher"):
+            pitcher = game.get(key)
+            if not pitcher:
+                continue
+            pid = pitcher.get("id")
+            if not pid:
+                continue
+            sav = savant_pitcher_lookup.get(int(pid))
+            if not sav:
+                continue
+            stats: dict[str, Any] = dict(pitcher.get("stats") or {})
+            for stat_key, val in sav.items():
+                if val is not None and stats.get(stat_key) is None:
+                    stats[stat_key] = val
+            pitcher["stats"] = stats
+
+
 def _attach_park_to_games(games: list[dict], sheet_date: str) -> None:
     lookup = load_park_lookup(sheet_date)
     if lookup.get("by_game") or lookup.get("by_venue"):
@@ -493,11 +532,17 @@ def _attach_open_meteo_to_games(games: list[dict]) -> None:
             continue
 
 
+def _serialize_zone_lookup(lookup: dict) -> dict[str, dict]:
+    return {f"{batter}|{pitcher}": entry for (batter, pitcher), entry in lookup.items()}
+
+
 def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool = True) -> dict:
     season = _season_from_date(sheet_date)
     roster_season = _roster_season_for_api(season)
     window_start, window_end = window_bounds(sheet_date, days=30)
     savant_lookup: dict[int, dict] = fetch_batter_statcast_lookup(season) if with_stats else {}
+    savant_pitcher_lookup: dict[int, dict] = {}
+    pitcher_hand_lookup: dict[int, dict[str, dict]] = {}
     pitcher_arsenal_lookup: dict[int, dict[str, float]] = {}
     pitcher_arsenal_prior_lookup: dict[int, dict[str, float]] = {}
     batter_pitch_lookup: dict[int, dict[str, dict]] = {}
@@ -511,6 +556,24 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                 Path(__file__).resolve().parent.parent / "preview" / "data",
                 season,
             )
+        try:
+            savant_pitcher_lookup = fetch_pitcher_statcast_lookup(season)
+            write_savant_pitcher_cache(
+                savant_pitcher_lookup,
+                Path(__file__).resolve().parent.parent / "preview" / "data",
+                season,
+            )
+        except Exception:
+            savant_pitcher_lookup = {}
+        try:
+            pitcher_hand_lookup = fetch_pitcher_hand_split_lookup(season)
+            write_savant_pitcher_hand_cache(
+                pitcher_hand_lookup,
+                Path(__file__).resolve().parent.parent / "preview" / "data",
+                season,
+            )
+        except Exception:
+            pitcher_hand_lookup = {}
         try:
             pitcher_arsenal_lookup = fetch_pitcher_arsenal_lookup(season)
             batter_pitch_lookup = fetch_batter_pitch_type_lookup(season)
@@ -575,10 +638,22 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         game["homeLineup"] = home_lu
         games.append(game)
 
+    rotowire_meta: dict[str, Any] = {}
+    try:
+        from research.rotowire_lineups import apply_rotowire_fallback_to_games
+
+        rotowire_meta = apply_rotowire_fallback_to_games(
+            games, sheet_date, roster_season=roster_season
+        )
+    except Exception as exc:
+        rotowire_meta = {"source": "rotowire", "error": str(exc)}
+
     _attach_park_to_games(games, sheet_date)
     if with_stats:
         _attach_open_meteo_to_games(games)
+        _attach_pitcher_savant_stats(games, savant_pitcher_lookup)
         _attach_pitcher_stats_to_games(games, sheet_date)
+        attach_dinger_risk_to_games(games, hand_lookup=pitcher_hand_lookup)
 
     window_lookup: dict[int, dict] = {}
     if with_stats and not savant_only:
@@ -660,6 +735,15 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                 game["homeLineup"] = _attach_hands_to_lineup(game.get("homeLineup") or [], hands)
         _attach_hr_model_to_games(games)
 
+    zone_lookup: dict[str, dict] = {}
+    if with_stats:
+        try:
+            from zone_matchups import load_zone_lookup
+
+            zone_lookup = _serialize_zone_lookup(load_zone_lookup(sheet_date))
+        except Exception:
+            pass
+
     return {
         "sheet_date": sheet_date,
         "season": season,
@@ -682,15 +766,21 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         "enriched": bool(propfinder_lookup),
         "propfinder_lookup": propfinder_lookup,
         "savant_batters": len(savant_lookup),
+        "savant_pitchers": len(savant_pitcher_lookup),
         "pitch_mix_pitchers": len(pitcher_arsenal_lookup),
         "pitch_mix_batters": len(batter_pitch_lookup),
         "propfinder_batters": len(propfinder_lookup),
+        "zone_lookup": zone_lookup,
+        "zone_matchups": len(zone_lookup),
         "window_batters": len(window_lookup),
         "savant_lookup": {str(k): v for k, v in savant_lookup.items()},
+        "savant_pitcher_lookup": {str(k): v for k, v in savant_pitcher_lookup.items()},
+        "pitcher_hand_lookup": {str(k): v for k, v in pitcher_hand_lookup.items()},
         "pitcher_arsenal_lookup": {str(k): v for k, v in pitcher_arsenal_lookup.items()},
         "pitcher_arsenal_prior_lookup": {str(k): v for k, v in pitcher_arsenal_prior_lookup.items()},
         "batter_pitch_lookup": {str(k): v for k, v in batter_pitch_lookup.items()},
         "league_pitch_avgs": league_pitch_avgs,
+        "rotowire": rotowire_meta,
         "games": games,
     }
 

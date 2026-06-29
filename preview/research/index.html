@@ -15,7 +15,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="">
-    <link rel="stylesheet" href="research.css?v=59">
+    <link rel="stylesheet" href="research.css?v=90">
     <style>
         .rs-file-block {
             display: none;
@@ -111,12 +111,108 @@ python serve-research.py</pre>
                     <input type="date" id="rsDate" autocomplete="off">
                 </label>
                 <button type="button" class="rs-btn rs-btn--primary" id="rsRefresh">Refresh API</button>
+                <span class="rs-updated" id="rsLastUpdated" aria-live="polite"></span>
+            </div>
+            <div class="rs-search-wrap">
+                <label class="rs-search-label" for="rsPlayerSearch">Find player
+                    <input type="search" id="rsPlayerSearch" class="rs-search-input" placeholder="Search hitters on today's slate…" autocomplete="off" spellcheck="false">
+                </label>
+                <div class="rs-search-results" id="rsSearchResults" hidden></div>
             </div>
             <span class="rs-badge rs-badge--api" id="rsSourceBadge" hidden></span>
         </div>
 
         <div class="rs-main">
             <p class="rs-status" id="rsStatus" role="alert" hidden></p>
+
+            <section class="rs-section rs-explore" id="rsExplorePanel">
+                <details class="rs-explore__panel" open>
+                    <summary class="rs-explore__head">
+                        <span class="rs-explore__title">Today's HR targets</span>
+                        <span class="rs-explore__meta" id="rsExploreMeta">Slate-wide leaderboard</span>
+                        <span class="rs-explore__chev" aria-hidden="true"></span>
+                    </summary>
+                    <div class="rs-explore__body">
+                        <p class="rs-explore__lede" id="rsExploreLede">HR ticket ranks today's slate by pitcher leak, pitch-mix fit, park/weather, power contact, and recent form.</p>
+                        <div class="rs-explore__filters">
+                            <label>Hand
+                                <select id="rsExploreHand" class="rs-explore__select">
+                                    <option value="">All</option>
+                                    <option value="L">LHB</option>
+                                    <option value="R">RHB</option>
+                                    <option value="S">Switch</option>
+                                </select>
+                            </label>
+                            <label>Min score
+                                <input type="number" id="rsExploreMinScore" class="rs-explore__input" min="0" step="1" placeholder="Any">
+                            </label>
+                            <label>Min park%
+                                <input type="number" id="rsExploreMinPark" class="rs-explore__input" step="1" placeholder="Any">
+                            </label>
+                            <label>Sort
+                                <select id="rsExploreSort" class="rs-explore__select">
+                                    <option value="ticketRank" selected>HR ticket score</option>
+                                    <option value="hrEnv">HR environment</option>
+                                    <option value="mixPlus">Pitch mix</option>
+                                    <option value="barrelPct">Barrel%</option>
+                                    <option value="avgEV">Exit velo</option>
+                                    <option value="hrLuckDiff">Due+</option>
+                                    <option value="nearHr">Near HR</option>
+                                    <option value="airPct">Air%</option>
+                                    <option value="hardHitPct">Hard-hit%</option>
+                                </select>
+                            </label>
+                            <button type="button" class="rs-btn rs-btn--ghost" id="rsExploreReset">Reset filters</button>
+                        </div>
+                        <div class="rs-explore-grid">
+                            <div class="rs-leaderboard-wrap">
+                                <h3 class="rs-explore__sub">Top hitters</h3>
+                                <div class="rs-leaderboard-scroll">
+                                    <table class="rs-leaderboard" id="rsHrLeaderboard">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Hitter</th>
+                                                <th>Matchup</th>
+                                                <th>vs SP</th>
+                                                <th class="rs-lb-sort" data-sort="ticketRank">Score</th>
+                                                <th class="rs-lb-sort" data-sort="splitPct">Split</th>
+                                                <th class="rs-lb-sort" data-sort="riskPct">Risk</th>
+                                                <th class="rs-lb-sort" data-sort="parkPct">Park</th>
+                                                <th class="rs-lb-sort" data-sort="mixPlus">Mix</th>
+                                                <th class="rs-lb-sort" data-sort="formPct">Form%</th>
+                                                <th class="rs-lb-sort" data-sort="barrelPct">Barrel%</th>
+                                                <th class="rs-lb-sort" data-sort="airPct">Air%</th>
+                                                <th class="rs-lb-sort" data-sort="nearHr">Near</th>
+                                                <th class="rs-lb-sort" data-sort="avgEV">EV</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="rsHrLeaderboardBody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="rs-leaderboard-wrap rs-leaderboard-wrap--pitchers">
+                                <h3 class="rs-explore__sub">Pitchers to target</h3>
+                                <p class="rs-explore__hint">SPs with ≥50% dinger risk (Savant)</p>
+                                <div class="rs-leaderboard-scroll">
+                                    <table class="rs-leaderboard rs-leaderboard--pitchers">
+                                        <thead>
+                                            <tr>
+                                                <th>Pitcher</th>
+                                                <th>Game</th>
+                                                <th>Risk</th>
+                                                <th>LHB</th>
+                                                <th>RHB</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="rsPitcherLeaderboardBody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </section>
 
             <section class="rs-section">
                 <h2 class="rs-section-title">Today's slate</h2>
@@ -148,6 +244,14 @@ python serve-research.py</pre>
                         <div class="rs-weather__grid" id="rsWeatherGrid"></div>
                     </div>
                 </details>
+
+                <div class="rs-pitcher-panel" id="rsPitcherPanel" hidden>
+                    <div class="rs-pitcher-panel__head">
+                        <h2 class="rs-section-title rs-section-title--pitchers">Pitchers</h2>
+                        <p class="rs-pitcher-lead" id="rsPitcherLead"></p>
+                    </div>
+                    <div class="rs-pitcher-duo" id="rsPitcherCards"></div>
+                </div>
 
                 <h2 class="rs-section-title rs-section-title--hitters">Hitters</h2>
                 <div class="rs-matchup-bar">
@@ -181,6 +285,34 @@ python serve-research.py</pre>
         </div>
     </div>
 
-    <script src="research.js?v=62" defer></script>
+    <dialog class="rs-profile" id="rsPlayerProfile" aria-labelledby="rsProfileName">
+        <div class="rs-profile__inner">
+            <header class="rs-profile__head">
+                <div class="rs-profile__head-main">
+                    <img class="rs-profile__photo" id="rsProfilePhoto" alt="" width="56" height="56" hidden>
+                    <div class="rs-profile__head-text">
+                        <h2 class="rs-profile__name" id="rsProfileName">—</h2>
+                        <p class="rs-profile__sub" id="rsProfileSub"></p>
+                    </div>
+                </div>
+                <div class="rs-profile__head-right">
+                    <p class="rs-profile__game" id="rsProfileGame"></p>
+                    <button type="button" class="rs-profile__close" id="rsProfileClose" aria-label="Close profile">×</button>
+                </div>
+            </header>
+            <div class="rs-profile__body">
+                <div class="rs-profile__hero" id="rsProfileHero"></div>
+                <div class="rs-profile__trends" id="rsProfileTrends" hidden></div>
+                <div class="rs-profile__grid" id="rsProfileGrid"></div>
+            </div>
+            <footer class="rs-profile__foot">
+                <button type="button" class="rs-btn" id="rsProfileJump">Jump to game</button>
+                <button type="button" class="rs-btn rs-btn--ghost" id="rsProfileTracker">Add to tracker</button>
+                <a class="rs-btn rs-btn--link" id="rsProfileSavant" href="#" target="_blank" rel="noopener noreferrer">Baseball Savant ↗</a>
+            </footer>
+        </div>
+    </dialog>
+
+    <script src="research.js?v=90" defer></script>
 </body>
 </html>

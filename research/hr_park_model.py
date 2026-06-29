@@ -9,9 +9,59 @@ from research.park_weather import wind_component_toward_cf, _baseline_da_ft
 from research.stadium_db import lookup_stadium_spec
 
 REF_ALLEY_FT = 380.0
-CARRY_HR_PCT_PER_3FT = 0.11  # +3 ft at 380 ft ≈ +10–12% HR prob
-DA_MULT_PER_1000FT = 0.10  # +10% compounding per 1,000 ft DA above baseline
-WIND_MULT_AT_15MPH = 0.25  # +25% at 15 mph dead-out tailwind
+CARRY_HR_PCT_PER_3FT = 0.11
+DA_MULT_PER_1000FT = 0.10
+WIND_MULT_AT_15MPH = 0.25
+HR_ENV_WEIGHTS = {
+    "stadium": 0.30,
+    "weather": 0.15,
+    "wind": 0.25,
+    "dim": 0.15,
+    "pitcher": 0.15,
+}
+HR_ENV_FACTOR_CAP = 12.0
+HR_ENV_TOTAL_CAP = 18.0
+DISPLAY_PCT_CAP = 22.0
+
+
+def _clamp_display_pct(n: float | None, lo: float = -DISPLAY_PCT_CAP, hi: float = DISPLAY_PCT_CAP) -> float | None:
+    if n is None:
+        return None
+    return max(lo, min(hi, round(float(n))))
+
+
+def _clamp_hr_env_mult(mult: float | None, lo: float = 0.88, hi: float = 1.12) -> float:
+    if mult is None:
+        return 1.0
+    return max(lo, min(hi, float(mult)))
+
+
+def _display_fence_pct(wall_ft: float | None, ref_ft: float = 377.0) -> float | None:
+    if wall_ft is None:
+        return None
+    return _clamp_display_pct(((ref_ft - float(wall_ft)) / 3.0) * 3.7)
+
+
+def _display_wind_pct(wind_mph: float | None) -> float | None:
+    if wind_mph is None:
+        return None
+    return _clamp_display_pct(float(wind_mph))
+
+
+def _hr_env_factor_pct(mult: float | None) -> float:
+    if mult is None:
+        return 0.0
+    pct = (float(mult) - 1.0) * 100.0
+    return max(-HR_ENV_FACTOR_CAP, min(HR_ENV_FACTOR_CAP, pct))
+
+
+def _combine_hr_env_pct(factors: dict[str, float | None]) -> float:
+    total = 0.0
+    for key, mult in factors.items():
+        weight = HR_ENV_WEIGHTS.get(key, 0.0)
+        total += _hr_env_factor_pct(mult) * weight
+    clamped = _clamp_display_pct(total, -HR_ENV_TOTAL_CAP, HR_ENV_TOTAL_CAP)
+    return 0.0 if clamped is None else float(clamped)
 
 
 def carry_feet_to_hr_pct(carry_ft: float) -> float:
@@ -21,35 +71,31 @@ def carry_feet_to_hr_pct(carry_ft: float) -> float:
 def da_compound_multiplier(da_delta_ft: float | None) -> float:
     if da_delta_ft is None:
         return 1.0
-    if da_delta_ft <= 0:
-        return max(0.82, 1.0 + (da_delta_ft / 1000.0) * 0.04)
-    return (1.0 + DA_MULT_PER_1000FT) ** (da_delta_ft / 1000.0)
+    pct = _clamp_display_pct(da_delta_ft / 250.0, -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP)
+    return 1.0 if pct is None else 1.0 + pct / 100.0
 
 
 def wind_compound_multiplier(wind_out_mph: float | None) -> float:
-    if wind_out_mph is None:
-        return 1.0
-    return max(0.72, 1.0 + (wind_out_mph / 15.0) * WIND_MULT_AT_15MPH)
+    pct = _display_wind_pct(wind_out_mph)
+    return 1.0 if pct is None else 1.0 + pct / 100.0
 
 
 def wall_distance_multiplier(wall_ft: float | None, ref: float = REF_ALLEY_FT) -> float:
-    """Shorter fence vs 380 ft reference → higher HR multiplier."""
-    if wall_ft is None:
-        return 1.0
-    extra_carry = ref - wall_ft
-    return max(0.88, 1.0 + carry_feet_to_hr_pct(extra_carry))
+    pct = _display_fence_pct(wall_ft, ref)
+    return 1.0 if pct is None else 1.0 + pct / 100.0
 
 
 def wall_height_penalty(height_ft: float | None) -> float:
     if height_ft is None:
         return 1.0
+    pct = 0.0
     if height_ft >= 20:
-        return 0.94
-    if height_ft >= 10:
-        return 0.97
-    if height_ft <= 5:
-        return 1.03
-    return 1.0
+        pct = -3.0
+    elif height_ft >= 10:
+        pct = -1.0
+    elif height_ft <= 5:
+        pct = 2.0
+    return 1.0 + pct / 100.0
 
 
 def _hand_code(hand: str | None) -> str:
@@ -109,13 +155,22 @@ def pitcher_split_score(pitcher: dict | None, batter_hand: str) -> float | None:
 
 
 def pitcher_hr_multiplier(pitcher: dict | None, batter_hand: str) -> float:
+    stats = (pitcher or {}).get("stats") or {}
+    hand = _hand_code(batter_hand)
+    dinger_pct = None
+    if hand == "L":
+        dinger_pct = stats.get("dingerRiskLhbPct") or stats.get("dingerRiskPct") or stats.get("dingerRisk")
+    else:
+        dinger_pct = stats.get("dingerRiskRhbPct") or stats.get("dingerRiskPct") or stats.get("dingerRisk")
+    if dinger_pct is not None:
+        dev = (float(dinger_pct) - 50.0) / 400.0
+        return _clamp_hr_env_mult(1.0 + dev)
     score = pitcher_split_score(pitcher, batter_hand)
     if score is None:
-        stats = (pitcher or {}).get("stats") or {}
         score = stats.get("hrRisk") or stats.get("overall")
     if score is None:
         return 1.0
-    return max(0.65, 1.0 + float(score) * 0.5)
+    return _clamp_hr_env_mult(1.0 + float(score) * 0.12)
 
 
 def compute_game_weather_model(park_weather: dict | None, stadium: dict) -> dict[str, Any]:
@@ -125,7 +180,9 @@ def compute_game_weather_model(park_weather: dict | None, stadium: dict) -> dict
     da_delta = None if da is None else da - baseline
     da_mult = da_compound_multiplier(da_delta)
     carry_boost = wx.get("distanceBoostFt") or 0
-    carry_mult = max(0.85, 1.0 + carry_feet_to_hr_pct(float(carry_boost)))
+    carry_pct = _clamp_display_pct(carry_feet_to_hr_pct(float(carry_boost)), -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP)
+    carry_mult = 1.0 if carry_pct is None else 1.0 + carry_pct / 100.0
+    weather_mult = _clamp_hr_env_mult(da_mult * carry_mult)
 
     wind_from = wx.get("windDirDeg")
     wind_mph = wx.get("windMph")
@@ -145,7 +202,6 @@ def compute_game_weather_model(park_weather: dict | None, stadium: dict) -> dict
     dim_mult_l = wall_distance_multiplier(pull_alley(stadium, "L")[0]) * wall_height_penalty(pull_alley(stadium, "L")[2])
     dim_mult_r = wall_distance_multiplier(pull_alley(stadium, "R")[0]) * wall_height_penalty(pull_alley(stadium, "R")[2])
 
-    weather_mult = da_mult * carry_mult
     return {
         "refAlleyFt": REF_ALLEY_FT,
         "daDeltaFt": da_delta,
@@ -175,22 +231,30 @@ def compute_hitter_hr_prop(
     hr_model = game.get("hrModel") or compute_game_weather_model(game.get("parkWeather"), stadium)
 
     park_pct = park_pct_for_hand(game, hand)
-    stadium_mult = 1.0 if park_pct is None else max(0.7, 1.0 + park_pct / 100.0)
+    stadium_mult = 1.0 if park_pct is None else _clamp_hr_env_mult(1.0 + (float(park_pct) / 100.0) * 0.45)
 
     if hand == "L":
-        wind_mult = hr_model.get("windMultLhb") or 1.0
-        dim_mult = hr_model.get("dimMultLhb") or 1.0
+        wind_mult = _clamp_hr_env_mult(hr_model.get("windMultLhb") or 1.0)
+        dim_mult = _clamp_hr_env_mult(hr_model.get("dimMultLhb") or 1.0)
         wind_out = hr_model.get("windOutLhbMph")
     else:
-        wind_mult = hr_model.get("windMultRhb") or 1.0
-        dim_mult = hr_model.get("dimMultRhb") or 1.0
+        wind_mult = _clamp_hr_env_mult(hr_model.get("windMultRhb") or 1.0)
+        dim_mult = _clamp_hr_env_mult(hr_model.get("dimMultRhb") or 1.0)
         wind_out = hr_model.get("windOutRhbMph")
 
-    weather_mult = hr_model.get("weatherMult") or 1.0
+    weather_mult = _clamp_hr_env_mult(hr_model.get("weatherMult") or 1.0)
     pitcher_mult = pitcher_hr_multiplier(opposing_pitcher, hand)
 
-    combined = stadium_mult * weather_mult * wind_mult * dim_mult * pitcher_mult
-    combined_pct = round((combined - 1.0) * 100.0, 1)
+    combined_pct = _combine_hr_env_pct(
+        {
+            "stadium": stadium_mult,
+            "weather": weather_mult,
+            "wind": wind_mult,
+            "dim": dim_mult,
+            "pitcher": pitcher_mult,
+        }
+    )
+    combined = round(1.0 + combined_pct / 100.0, 3)
 
     prop_pass = bool(game.get("propPass") or game.get("parkWeather", {}).get("propPass"))
     if prop_pass:

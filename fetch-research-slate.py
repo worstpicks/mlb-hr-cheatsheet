@@ -3,15 +3,10 @@
 from __future__ import annotations
 
 import argparse
-import json
-from datetime import date, datetime
-from pathlib import Path
+from datetime import date
 
-from research.mlb_api import build_slate
+from research.sync_tab import print_refresh_summary, refresh_research_tab
 from sheet_data import normalize_sheet_date, sheet_date_from_preview
-
-ROOT = Path(__file__).resolve().parent
-OUT_DIR = ROOT / "preview" / "data"
 
 
 def main() -> None:
@@ -24,25 +19,8 @@ def main() -> None:
     sheet_date = normalize_sheet_date(sheet_date)
 
     print(f"Fetching research slate for {sheet_date}…")
-    payload = build_slate(sheet_date, with_stats=not args.no_stats)
-    payload["fetched_at"] = datetime.now().isoformat(timespec="seconds")
-
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = OUT_DIR / f"research-{sheet_date}.json"
-    out_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-
-    from research.park_factors import write_park_factors_json
-
-    pf_path = write_park_factors_json(OUT_DIR, sheet_date)
-    if pf_path:
-        print(f"Wrote {pf_path} — Ballpark Pal park factors for {sheet_date}")
-
-    n_games = len(payload.get("games") or [])
-    n_hitters = sum(
-        len(g.get("awayLineup") or []) + len(g.get("homeLineup") or [])
-        for g in payload.get("games") or []
-    )
-    print(f"Wrote {out_path} — {n_games} games, {n_hitters} lineup slots")
+    result = refresh_research_tab(sheet_date, with_stats=not args.no_stats, update_meta=True)
+    print_refresh_summary(result)
     print("Local only — not synced to production index.html")
 
 

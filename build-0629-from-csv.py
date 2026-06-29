@@ -66,6 +66,7 @@ RAW_PROPS = [
     "Pete Crow Armstrong⭐",
     "Michael Conforto",
     "Seiya Suzuki",
+    "Manny Machado",
     "Jackson Merrill",
     "Ty France",
     "Yordan Alvarez",

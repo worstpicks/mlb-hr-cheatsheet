@@ -10,7 +10,7 @@ html = (ROOT / "preview" / "index.html").read_text(encoding="utf-8")
 errors: list[str] = []
 
 EXPECTED_GAMES = 13
-EXPECTED_PROPS = 74
+EXPECTED_PROPS = 75
 
 if 'sheet-date" content="2026-06-29"' not in html:
     errors.append("wrong sheet-date meta")

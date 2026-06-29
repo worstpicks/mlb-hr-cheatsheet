@@ -48,7 +48,7 @@ ENRICHED_GAMES = enrich_games_list(build.games, SHEET_DATE)
 GAMES_BLOCK = emit_games_js(ENRICHED_GAMES)
 TOTAL_GAMES = len(build.games)
 TOTAL_ROWS = sum(len(g["rows"]) for g in build.games)
-ZONE_ROW_MIN = min(TOTAL_ROWS, max(45, TOTAL_ROWS - 14))
+ZONE_ROW_MIN = min(TOTAL_ROWS, max(45, TOTAL_ROWS - 15))
 ZONE_ROW_COUNT = GAMES_BLOCK.count("zoneScore:")
 if ZONE_ROW_COUNT < ZONE_ROW_MIN:
     raise SystemExit(

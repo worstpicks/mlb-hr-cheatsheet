@@ -15,7 +15,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="">
-    <link rel="stylesheet" href="research.css?v=95">
+    <link rel="stylesheet" href="research.css?v=96">
     <style>
         .rs-file-block {
             display: none;
@@ -145,14 +145,14 @@ python serve-research.py</pre>
                                 </select>
                             </label>
                             <label>Min score
-                                <input type="number" id="rsExploreMinScore" class="rs-explore__input" min="0" step="1" placeholder="Any">
+                                <input type="number" id="rsExploreMinScore" class="rs-explore__input" min="1" max="100" step="1" placeholder="1–100">
                             </label>
                             <label>Min park%
                                 <input type="number" id="rsExploreMinPark" class="rs-explore__input" step="1" placeholder="Any">
                             </label>
                             <label>Sort
                                 <select id="rsExploreSort" class="rs-explore__select">
-                                    <option value="ticketRank" selected>HR ticket score</option>
+                                    <option value="ticketRank" selected>HR ticket score (/100)</option>
                                     <option value="hrEnv">HR environment</option>
                                     <option value="mixPlus">Pitch mix</option>
                                     <option value="barrelPct">Barrel%</option>
@@ -181,7 +181,7 @@ python serve-research.py</pre>
                                                     <th>Hitter</th>
                                                     <th>Matchup</th>
                                                     <th>vs SP</th>
-                                                    <th class="rs-lb-sort" data-sort="ticketRank">Score</th>
+                                                    <th class="rs-lb-sort" data-sort="ticketRank">Score /100</th>
                                                     <th class="rs-lb-sort" data-sort="splitPct">Split</th>
                                                     <th class="rs-lb-sort" data-sort="riskPct">Risk</th>
                                                     <th class="rs-lb-sort" data-sort="parkPct">Park</th>
@@ -327,6 +327,6 @@ python serve-research.py</pre>
         </div>
     </dialog>
 
-    <script src="research.js?v=95" defer></script>
+    <script src="research.js?v=96" defer></script>
 </body>
 </html>

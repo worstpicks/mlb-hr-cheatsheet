@@ -103,7 +103,7 @@
         Matchup: "Today's game pairing for this hitter.",
         "vs SP": "Opposing starting pitcher — split and risk columns score how leakable they are for this bat path.",
         ticketRank:
-            "Composite HR ticket score. Combines pitch-mix fit, recent form, pitcher split/risk, and park/weather — higher = stronger overall HR case.",
+            "Composite HR ticket score on a 1–100 slate scale. 100 = best HR case on today's board; combines pitch-mix fit, form, pitcher split/risk, and park/weather.",
         splitPct:
             "Savant dinger-risk split for this hitter's handedness vs the starter. Higher % = pitcher is more vulnerable to this bat path; feeds ticket score.",
         riskPct:
@@ -177,6 +177,7 @@
     let stadiumCoords = null;
     let pitcherHandLookup = null;
     let hrTicketCache = new Map();
+    let hrTicketScale = { min: null, max: null, ready: false };
     let activeGameIdx = 0;
     let activeSide = "away";
     let sortKey = "mixPlus";
@@ -419,6 +420,37 @@
 
     function clearHrTicketCache() {
         hrTicketCache = new Map();
+        hrTicketScale = { min: null, max: null, ready: false };
+    }
+
+    function rebuildHrTicketScale() {
+        let min = Infinity;
+        let max = -Infinity;
+        for (const entry of collectSlateHitters()) {
+            const rank = computeHrTicket(entry)?.rank;
+            if (rank == null || Number.isNaN(Number(rank))) continue;
+            const n = Number(rank);
+            if (n < min) min = n;
+            if (n > max) max = n;
+        }
+        if (!Number.isFinite(min)) {
+            hrTicketScale = { min: 0, max: 1, ready: true };
+            return;
+        }
+        hrTicketScale = { min, max, ready: true };
+    }
+
+    function ticketScoreTo100(rawRank) {
+        if (rawRank == null || Number.isNaN(Number(rawRank))) return null;
+        if (!hrTicketScale.ready) rebuildHrTicketScale();
+        const { min, max } = hrTicketScale;
+        if (max <= min) return 100;
+        const t = (Number(rawRank) - min) / (max - min);
+        return Math.max(1, Math.min(100, Math.round(t * 99 + 1)));
+    }
+
+    function hrTicketScore100(entry) {
+        return ticketScoreTo100(computeHrTicket(entry)?.rank);
     }
 
     function savantPctToFactor(pct) {
@@ -467,7 +499,7 @@
 
     function fmtTicketScore(val) {
         if (val == null || Number.isNaN(Number(val))) return "—";
-        return String(Math.round(Number(val)));
+        return `${Math.round(Number(val))}/100`;
     }
 
     function handDingerSplitPct(ps, hand) {
@@ -3946,7 +3978,7 @@
         if (minScore !== "" && minScore != null) {
             const min = Number(minScore);
             if (!Number.isNaN(min)) {
-                rows = rows.filter((e) => (computeHrTicket(e)?.rank ?? -1) >= min);
+                rows = rows.filter((e) => (hrTicketScore100(e) ?? -1) >= min);
             }
         }
         const minPark = els.exploreMinPark?.value;
@@ -4417,7 +4449,7 @@
             name: `${row.name}${row.hand ? ` (${row.hand})` : ""}`,
             line: "Research — O0.5 HR",
             matchup: game?.matchup || "",
-            score: ticket?.rank != null ? Math.round(ticket.rank) : env != null ? Math.round(env) : null,
+            score: hrTicketScore100(profileEntry) ?? (env != null ? Math.round(env) : null),
             units: 1,
             americanOdds: null,
             result: null,
@@ -4617,16 +4649,17 @@
         if (!els.hrLeaderboardBody) return;
         computeDingerRiskForSlate();
         refreshAllHrProps();
+        rebuildHrTicketScale();
         const hitters = filteredExploreHitters().slice(0, HR_RESEARCH_CONFIG.explore.topHitters);
         const sortKey = exploreSortKey || els.exploreSort?.value || "ticketRank";
         syncExploreSortSelect(sortKey);
         if (els.exploreLede) {
-            els.exploreLede.innerHTML = `HR ticket score combines ${HR_RESEARCH_CONFIG.pillars.map((p) => p.label.toLowerCase()).join(", ")}. ${hrResearchPillarsHtml()}`;
+            els.exploreLede.innerHTML = `HR ticket score is a 1–100 slate scale (100 = best target today). It combines ${HR_RESEARCH_CONFIG.pillars.map((p) => p.label.toLowerCase()).join(", ")}. ${hrResearchPillarsHtml()}`;
         }
         if (els.exploreMeta) {
             const total = collectSlateHitters().length;
             const sortLabels = {
-                ticketRank: "HR ticket score",
+                ticketRank: "HR ticket score (/100)",
                 hrEnv: "HR environment",
                 mixPlus: "Pitch mix",
                 barrelPct: "Barrel%",
@@ -4652,7 +4685,7 @@
                         <td><button type="button" class="rs-leaderboard-link">${e.row.name || "—"}</button></td>
                         <td>${e.game.matchup}</td>
                         <td>${e.pitcher?.name || "TBD"}</td>
-                        <td><strong>${fmtTicketScore(ticket?.rank)}</strong></td>
+                        <td><strong>${fmtTicketScore(hrTicketScore100(e))}</strong></td>
                         <td>${fmtSavantPct(ticket?.splitPct)}</td>
                         <td>${fmtSavantPct(ticket?.riskPct)}</td>
                         <td>${fmtSignedPct(ticket?.parkPct)}</td>

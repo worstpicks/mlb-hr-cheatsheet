@@ -1,0 +1,251 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-05-31.csv",
+  "source_date": "2026-05-31",
+  "hand_date": "2026-05-31",
+  "by_game": {
+    "SF @ COL": {
+      "game": "SF @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 32,
+      "stadium_pct": 20,
+      "weather_pct": 12
+    },
+    "NYY @ ATH": {
+      "game": "NYY @ ATH",
+      "venue": "Sutter Health Park",
+      "venue_key": "sutter health park",
+      "hr_pct": 23,
+      "stadium_pct": 32,
+      "weather_pct": -9
+    },
+    "ATL @ CIN": {
+      "game": "ATL @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 0,
+      "stadium_pct": 12,
+      "weather_pct": -12
+    },
+    "PHI @ LAD": {
+      "game": "PHI @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 20,
+      "stadium_pct": 18,
+      "weather_pct": 3
+    },
+    "SD @ WAS": {
+      "game": "SD @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": -6,
+      "stadium_pct": 3,
+      "weather_pct": -9
+    },
+    "MIL @ HOU": {
+      "game": "MIL @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 6,
+      "stadium_pct": 7,
+      "weather_pct": 0
+    },
+    "TOR @ BAL": {
+      "game": "TOR @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": -20,
+      "stadium_pct": -1,
+      "weather_pct": -19
+    },
+    "LAA @ TB": {
+      "game": "LAA @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 1
+    },
+    "KC @ TEX": {
+      "game": "KC @ TEX",
+      "venue": "Globe Life Field",
+      "venue_key": "globe life field",
+      "hr_pct": -10,
+      "stadium_pct": -9,
+      "weather_pct": -1
+    },
+    "MIN @ PIT": {
+      "game": "MIN @ PIT",
+      "venue": "PNC Park",
+      "venue_key": "pnc park",
+      "hr_pct": -29,
+      "stadium_pct": -14,
+      "weather_pct": -15
+    },
+    "CHC @ STL": {
+      "game": "CHC @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -15,
+      "stadium_pct": -10,
+      "weather_pct": -5
+    },
+    "DET @ CHW": {
+      "game": "DET @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -8,
+      "stadium_pct": 3,
+      "weather_pct": -11
+    },
+    "BOS @ CLE": {
+      "game": "BOS @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -22,
+      "stadium_pct": -5,
+      "weather_pct": -18
+    },
+    "MIA @ NYM": {
+      "game": "MIA @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": -8,
+      "stadium_pct": -2,
+      "weather_pct": -6
+    },
+    "ARI @ SEA": {
+      "game": "ARI @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": -13,
+      "stadium_pct": 1,
+      "weather_pct": -15
+    }
+  },
+  "by_venue": {
+    "coors field": {
+      "game": "SF @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 32,
+      "stadium_pct": 20,
+      "weather_pct": 12
+    },
+    "sutter health park": {
+      "game": "NYY @ ATH",
+      "venue": "Sutter Health Park",
+      "venue_key": "sutter health park",
+      "hr_pct": 23,
+      "stadium_pct": 32,
+      "weather_pct": -9
+    },
+    "great american ball park": {
+      "game": "ATL @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 0,
+      "stadium_pct": 12,
+      "weather_pct": -12
+    },
+    "dodger stadium": {
+      "game": "PHI @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 20,
+      "stadium_pct": 18,
+      "weather_pct": 3
+    },
+    "nationals park": {
+      "game": "SD @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": -6,
+      "stadium_pct": 3,
+      "weather_pct": -9
+    },
+    "daikin park": {
+      "game": "MIL @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 6,
+      "stadium_pct": 7,
+      "weather_pct": 0
+    },
+    "oriole park at camden yards": {
+      "game": "TOR @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": -20,
+      "stadium_pct": -1,
+      "weather_pct": -19
+    },
+    "tropicana field": {
+      "game": "LAA @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 1
+    },
+    "globe life field": {
+      "game": "KC @ TEX",
+      "venue": "Globe Life Field",
+      "venue_key": "globe life field",
+      "hr_pct": -10,
+      "stadium_pct": -9,
+      "weather_pct": -1
+    },
+    "pnc park": {
+      "game": "MIN @ PIT",
+      "venue": "PNC Park",
+      "venue_key": "pnc park",
+      "hr_pct": -29,
+      "stadium_pct": -14,
+      "weather_pct": -15
+    },
+    "busch stadium": {
+      "game": "CHC @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -15,
+      "stadium_pct": -10,
+      "weather_pct": -5
+    },
+    "rate field": {
+      "game": "DET @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -8,
+      "stadium_pct": 3,
+      "weather_pct": -11
+    },
+    "progressive field": {
+      "game": "BOS @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -22,
+      "stadium_pct": -5,
+      "weather_pct": -18
+    },
+    "citi field": {
+      "game": "MIA @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": -8,
+      "stadium_pct": -2,
+      "weather_pct": -6
+    },
+    "t-mobile park": {
+      "game": "ARI @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": -13,
+      "stadium_pct": 1,
+      "weather_pct": -15
+    }
+  }
+}

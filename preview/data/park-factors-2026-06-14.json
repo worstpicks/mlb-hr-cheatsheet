@@ -1,0 +1,251 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-06-14.csv",
+  "source_date": "2026-06-14",
+  "hand_date": "2026-06-14",
+  "by_game": {
+    "COL @ ATH": {
+      "game": "COL @ ATH",
+      "venue": "Las Vegas Ballpark",
+      "venue_key": "las vegas ballpark",
+      "hr_pct": 88,
+      "stadium_pct": 73,
+      "weather_pct": 15
+    },
+    "TEX @ BOS": {
+      "game": "TEX @ BOS",
+      "venue": "Fenway Park",
+      "venue_key": "fenway park",
+      "hr_pct": 7,
+      "stadium_pct": -7,
+      "weather_pct": 15
+    },
+    "SEA @ WAS": {
+      "game": "SEA @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 15,
+      "stadium_pct": 2,
+      "weather_pct": 13
+    },
+    "SD @ BAL": {
+      "game": "SD @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": 3,
+      "stadium_pct": -4,
+      "weather_pct": 7
+    },
+    "ARI @ CIN": {
+      "game": "ARI @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 19,
+      "stadium_pct": 13,
+      "weather_pct": 6
+    },
+    "TB @ LAA": {
+      "game": "TB @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 4,
+      "stadium_pct": 7,
+      "weather_pct": -3
+    },
+    "CHC @ SF": {
+      "game": "CHC @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -11,
+      "stadium_pct": -15,
+      "weather_pct": 4
+    },
+    "MIA @ PIT": {
+      "game": "MIA @ PIT",
+      "venue": "PNC Park",
+      "venue_key": "pnc park",
+      "hr_pct": -5,
+      "stadium_pct": -15,
+      "weather_pct": 10
+    },
+    "NYY @ TOR": {
+      "game": "NYY @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": -3,
+      "stadium_pct": 6,
+      "weather_pct": -9
+    },
+    "LAD @ CHW": {
+      "game": "LAD @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": 7,
+      "stadium_pct": 3,
+      "weather_pct": 4
+    },
+    "DET @ CLE": {
+      "game": "DET @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -5,
+      "stadium_pct": -2,
+      "weather_pct": -3
+    },
+    "STL @ MIN": {
+      "game": "STL @ MIN",
+      "venue": "Target Field",
+      "venue_key": "target field",
+      "hr_pct": 0,
+      "stadium_pct": -7,
+      "weather_pct": 7
+    },
+    "ATL @ NYM": {
+      "game": "ATL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 5,
+      "stadium_pct": -2,
+      "weather_pct": 6
+    },
+    "PHI @ MIL": {
+      "game": "PHI @ MIL",
+      "venue": "American Family Fld",
+      "venue_key": "american family field",
+      "hr_pct": 3,
+      "stadium_pct": 9,
+      "weather_pct": -6
+    },
+    "HOU @ KC": {
+      "game": "HOU @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": -17,
+      "stadium_pct": 12,
+      "weather_pct": -29
+    }
+  },
+  "by_venue": {
+    "las vegas ballpark": {
+      "game": "COL @ ATH",
+      "venue": "Las Vegas Ballpark",
+      "venue_key": "las vegas ballpark",
+      "hr_pct": 88,
+      "stadium_pct": 73,
+      "weather_pct": 15
+    },
+    "fenway park": {
+      "game": "TEX @ BOS",
+      "venue": "Fenway Park",
+      "venue_key": "fenway park",
+      "hr_pct": 7,
+      "stadium_pct": -7,
+      "weather_pct": 15
+    },
+    "nationals park": {
+      "game": "SEA @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 15,
+      "stadium_pct": 2,
+      "weather_pct": 13
+    },
+    "oriole park at camden yards": {
+      "game": "SD @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": 3,
+      "stadium_pct": -4,
+      "weather_pct": 7
+    },
+    "great american ball park": {
+      "game": "ARI @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 19,
+      "stadium_pct": 13,
+      "weather_pct": 6
+    },
+    "angel stadium": {
+      "game": "TB @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 4,
+      "stadium_pct": 7,
+      "weather_pct": -3
+    },
+    "oracle park": {
+      "game": "CHC @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -11,
+      "stadium_pct": -15,
+      "weather_pct": 4
+    },
+    "pnc park": {
+      "game": "MIA @ PIT",
+      "venue": "PNC Park",
+      "venue_key": "pnc park",
+      "hr_pct": -5,
+      "stadium_pct": -15,
+      "weather_pct": 10
+    },
+    "rogers centre": {
+      "game": "NYY @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": -3,
+      "stadium_pct": 6,
+      "weather_pct": -9
+    },
+    "rate field": {
+      "game": "LAD @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": 7,
+      "stadium_pct": 3,
+      "weather_pct": 4
+    },
+    "progressive field": {
+      "game": "DET @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -5,
+      "stadium_pct": -2,
+      "weather_pct": -3
+    },
+    "target field": {
+      "game": "STL @ MIN",
+      "venue": "Target Field",
+      "venue_key": "target field",
+      "hr_pct": 0,
+      "stadium_pct": -7,
+      "weather_pct": 7
+    },
+    "citi field": {
+      "game": "ATL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 5,
+      "stadium_pct": -2,
+      "weather_pct": 6
+    },
+    "american family field": {
+      "game": "PHI @ MIL",
+      "venue": "American Family Fld",
+      "venue_key": "american family field",
+      "hr_pct": 3,
+      "stadium_pct": 9,
+      "weather_pct": -6
+    },
+    "kauffman stadium": {
+      "game": "HOU @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": -17,
+      "stadium_pct": 12,
+      "weather_pct": -29
+    }
+  }
+}

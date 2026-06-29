@@ -1381,7 +1381,7 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
 }
 .rs-has-tip {
     position: relative;
-    cursor: help;
+    cursor: default;
 }
 .rs-has-tip dt::after {
     display: none;

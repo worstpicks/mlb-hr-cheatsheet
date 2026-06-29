@@ -1,0 +1,251 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-06-10.csv",
+  "source_date": "2026-06-10",
+  "hand_date": "2026-06-10",
+  "by_game": {
+    "MIL @ ATH": {
+      "game": "MIL @ ATH",
+      "venue": "Las Vegas Ballpark",
+      "venue_key": "las vegas ballpark",
+      "hr_pct": 80,
+      "stadium_pct": 66,
+      "weather_pct": 14
+    },
+    "CHC @ COL": {
+      "game": "CHC @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 24,
+      "stadium_pct": 21,
+      "weather_pct": 3
+    },
+    "TEX @ KC": {
+      "game": "TEX @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": 39,
+      "stadium_pct": 12,
+      "weather_pct": 28
+    },
+    "MIN @ DET": {
+      "game": "MIN @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": 10,
+      "stadium_pct": -10,
+      "weather_pct": 19
+    },
+    "WAS @ SF": {
+      "game": "WAS @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -2,
+      "stadium_pct": -15,
+      "weather_pct": 13
+    },
+    "SEA @ BAL": {
+      "game": "SEA @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": 13,
+      "stadium_pct": -1,
+      "weather_pct": 14
+    },
+    "ATL @ CHW": {
+      "game": "ATL @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": 25,
+      "stadium_pct": 3,
+      "weather_pct": 21
+    },
+    "PHI @ TOR": {
+      "game": "PHI @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 18,
+      "stadium_pct": 7,
+      "weather_pct": 12
+    },
+    "NYY @ CLE": {
+      "game": "NYY @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": 18,
+      "stadium_pct": -5,
+      "weather_pct": 22
+    },
+    "LAD @ PIT": {
+      "game": "LAD @ PIT",
+      "venue": "PNC Park",
+      "venue_key": "pnc park",
+      "hr_pct": -8,
+      "stadium_pct": -15,
+      "weather_pct": 6
+    },
+    "HOU @ LAA": {
+      "game": "HOU @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 7,
+      "stadium_pct": 7,
+      "weather_pct": 0
+    },
+    "STL @ NYM": {
+      "game": "STL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 17,
+      "stadium_pct": -1,
+      "weather_pct": 18
+    },
+    "ARI @ MIA": {
+      "game": "ARI @ MIA",
+      "venue": "LoanDepot Park",
+      "venue_key": "loandepot park",
+      "hr_pct": -14,
+      "stadium_pct": -13,
+      "weather_pct": -1
+    },
+    "BOS @ TB": {
+      "game": "BOS @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -3,
+      "weather_pct": 1
+    },
+    "CIN @ SD": {
+      "game": "CIN @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": 1,
+      "stadium_pct": -5,
+      "weather_pct": 6
+    }
+  },
+  "by_venue": {
+    "las vegas ballpark": {
+      "game": "MIL @ ATH",
+      "venue": "Las Vegas Ballpark",
+      "venue_key": "las vegas ballpark",
+      "hr_pct": 80,
+      "stadium_pct": 66,
+      "weather_pct": 14
+    },
+    "coors field": {
+      "game": "CHC @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 24,
+      "stadium_pct": 21,
+      "weather_pct": 3
+    },
+    "kauffman stadium": {
+      "game": "TEX @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": 39,
+      "stadium_pct": 12,
+      "weather_pct": 28
+    },
+    "comerica park": {
+      "game": "MIN @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": 10,
+      "stadium_pct": -10,
+      "weather_pct": 19
+    },
+    "oracle park": {
+      "game": "WAS @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -2,
+      "stadium_pct": -15,
+      "weather_pct": 13
+    },
+    "oriole park at camden yards": {
+      "game": "SEA @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": 13,
+      "stadium_pct": -1,
+      "weather_pct": 14
+    },
+    "rate field": {
+      "game": "ATL @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": 25,
+      "stadium_pct": 3,
+      "weather_pct": 21
+    },
+    "rogers centre": {
+      "game": "PHI @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 18,
+      "stadium_pct": 7,
+      "weather_pct": 12
+    },
+    "progressive field": {
+      "game": "NYY @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": 18,
+      "stadium_pct": -5,
+      "weather_pct": 22
+    },
+    "pnc park": {
+      "game": "LAD @ PIT",
+      "venue": "PNC Park",
+      "venue_key": "pnc park",
+      "hr_pct": -8,
+      "stadium_pct": -15,
+      "weather_pct": 6
+    },
+    "angel stadium": {
+      "game": "HOU @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 7,
+      "stadium_pct": 7,
+      "weather_pct": 0
+    },
+    "citi field": {
+      "game": "STL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 17,
+      "stadium_pct": -1,
+      "weather_pct": 18
+    },
+    "loandepot park": {
+      "game": "ARI @ MIA",
+      "venue": "LoanDepot Park",
+      "venue_key": "loandepot park",
+      "hr_pct": -14,
+      "stadium_pct": -13,
+      "weather_pct": -1
+    },
+    "tropicana field": {
+      "game": "BOS @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -3,
+      "weather_pct": 1
+    },
+    "petco park": {
+      "game": "CIN @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": 1,
+      "stadium_pct": -5,
+      "weather_pct": 6
+    }
+  }
+}

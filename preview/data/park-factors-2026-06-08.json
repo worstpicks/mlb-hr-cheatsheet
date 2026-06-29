@@ -1,0 +1,139 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-06-08.csv",
+  "source_date": "2026-06-08",
+  "hand_date": "2026-06-08",
+  "by_game": {
+    "MIL @ ATH": {
+      "game": "MIL @ ATH",
+      "venue": "Las Vegas Ballpark",
+      "venue_key": "las vegas ballpark",
+      "hr_pct": 44,
+      "stadium_pct": 35,
+      "weather_pct": 9
+    },
+    "SEA @ BAL": {
+      "game": "SEA @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": -6,
+      "stadium_pct": 0,
+      "weather_pct": -6
+    },
+    "HOU @ LAA": {
+      "game": "HOU @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 8,
+      "stadium_pct": 6,
+      "weather_pct": 2
+    },
+    "NYY @ CLE": {
+      "game": "NYY @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -7,
+      "stadium_pct": -2,
+      "weather_pct": -5
+    },
+    "PHI @ TOR": {
+      "game": "PHI @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 2,
+      "stadium_pct": 6,
+      "weather_pct": -4
+    },
+    "BOS @ TB": {
+      "game": "BOS @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -2,
+      "stadium_pct": -2,
+      "weather_pct": 1
+    },
+    "WAS @ SF": {
+      "game": "WAS @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -22,
+      "stadium_pct": -16,
+      "weather_pct": -6
+    },
+    "CIN @ SD": {
+      "game": "CIN @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": -6,
+      "stadium_pct": -4,
+      "weather_pct": -3
+    }
+  },
+  "by_venue": {
+    "las vegas ballpark": {
+      "game": "MIL @ ATH",
+      "venue": "Las Vegas Ballpark",
+      "venue_key": "las vegas ballpark",
+      "hr_pct": 44,
+      "stadium_pct": 35,
+      "weather_pct": 9
+    },
+    "oriole park at camden yards": {
+      "game": "SEA @ BAL",
+      "venue": "Oriole Park",
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": -6,
+      "stadium_pct": 0,
+      "weather_pct": -6
+    },
+    "angel stadium": {
+      "game": "HOU @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 8,
+      "stadium_pct": 6,
+      "weather_pct": 2
+    },
+    "progressive field": {
+      "game": "NYY @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -7,
+      "stadium_pct": -2,
+      "weather_pct": -5
+    },
+    "rogers centre": {
+      "game": "PHI @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 2,
+      "stadium_pct": 6,
+      "weather_pct": -4
+    },
+    "tropicana field": {
+      "game": "BOS @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -2,
+      "stadium_pct": -2,
+      "weather_pct": 1
+    },
+    "oracle park": {
+      "game": "WAS @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -22,
+      "stadium_pct": -16,
+      "weather_pct": -6
+    },
+    "petco park": {
+      "game": "CIN @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": -6,
+      "stadium_pct": -4,
+      "weather_pct": -3
+    }
+  }
+}

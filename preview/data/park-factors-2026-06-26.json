@@ -20,10 +20,14 @@
     "WAS @ BAL": {
       "game": "WAS @ BAL",
       "venue": "Oriole Park",
-      "venue_key": "oriole park",
+      "venue_key": "oriole park at camden yards",
       "hr_pct": 5,
       "stadium_pct": -7,
-      "weather_pct": 12
+      "weather_pct": 12,
+      "lhb_stadium_pct": 8,
+      "park_lhb_pct": 20,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 7
     },
     "ATH @ LAA": {
       "game": "ATH @ LAA",
@@ -195,13 +199,17 @@
       "rhb_stadium_pct": -8,
       "park_rhb_pct": 8
     },
-    "oriole park": {
+    "oriole park at camden yards": {
       "game": "WAS @ BAL",
       "venue": "Oriole Park",
-      "venue_key": "oriole park",
+      "venue_key": "oriole park at camden yards",
       "hr_pct": 5,
       "stadium_pct": -7,
-      "weather_pct": 12
+      "weather_pct": 12,
+      "lhb_stadium_pct": 8,
+      "park_lhb_pct": 20,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 7
     },
     "angel stadium": {
       "game": "ATH @ LAA",

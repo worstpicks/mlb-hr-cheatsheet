@@ -2409,14 +2409,13 @@
     }
 
     function tipAttr(tip) {
-        return tip ? ` class="rs-has-tip" data-tip="${escAttr(tip)}" title="${escAttr(tip)}" tabindex="0"` : "";
+        return tip ? ` class="rs-has-tip" data-tip="${escAttr(tip)}" tabindex="0"` : "";
     }
 
     function applyHeaderTip(el, tip) {
         if (!el || !tip) return;
         el.classList.add("rs-has-tip");
         el.setAttribute("data-tip", tip);
-        el.setAttribute("title", tip);
         el.setAttribute("tabindex", "0");
     }
 
@@ -3858,7 +3857,7 @@
             while (i + span < columns.length && columns[i + span].group === gid) span += 1;
             const meta = GROUPS.find((g) => g.id === gid) || { label: gid, className: "" };
             const groupTip = GROUP_TIPS[gid];
-            const groupTipAttr = groupTip ? ` data-tip="${escAttr(groupTip)}" title="${escAttr(groupTip)}" tabindex="0"` : "";
+            const groupTipAttr = groupTip ? ` data-tip="${escAttr(groupTip)}" tabindex="0"` : "";
             const groupTipClass = groupTip ? " rs-has-tip" : "";
             groupCells.push(
                 `<th colspan="${span}" class="${meta.className}${groupTipClass}"${groupTipAttr}>${meta.label}</th>`
@@ -3877,7 +3876,7 @@
             const sort =
                 c.key === sortKey ? (sortDir > 0 ? "ascending" : "descending") : "none";
             const tipAttrParts = c.tip
-                ? ` data-tip="${escAttr(c.tip)}" title="${escAttr(c.tip)}" tabindex="0"`
+                ? ` data-tip="${escAttr(c.tip)}" tabindex="0"`
                 : "";
             const tipClass = c.tip ? " rs-has-tip" : "";
             const sortedClass = c.key === sortKey ? " rs-col--sorted" : "";

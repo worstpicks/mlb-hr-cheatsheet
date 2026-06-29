@@ -1,0 +1,295 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-06-19.csv",
+  "source_date": "2026-06-19",
+  "hand_date": "2026-06-19",
+  "by_game": {
+    "PIT @ COL": {
+      "game": "PIT @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 28,
+      "stadium_pct": 20,
+      "weather_pct": 8
+    },
+    "LAA @ ATH": {
+      "game": "LAA @ ATH",
+      "venue": "Sutter Health Park",
+      "venue_key": "sutter health park",
+      "hr_pct": 36,
+      "stadium_pct": 32,
+      "weather_pct": 4
+    },
+    "CHW @ DET": {
+      "game": "CHW @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": -1,
+      "stadium_pct": -10,
+      "weather_pct": 9,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": 7,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 18
+    },
+    "MIL @ ATL": {
+      "game": "MIL @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 3,
+      "stadium_pct": -4,
+      "weather_pct": 7,
+      "lhb_stadium_pct": -6,
+      "park_lhb_pct": 1,
+      "rhb_stadium_pct": -4,
+      "park_rhb_pct": 3
+    },
+    "MIN @ ARI": {
+      "game": "MIN @ ARI",
+      "venue": "Chase Field",
+      "venue_key": "chase field",
+      "hr_pct": -8,
+      "stadium_pct": -8,
+      "weather_pct": 0
+    },
+    "STL @ KC": {
+      "game": "STL @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": 8,
+      "stadium_pct": 12,
+      "weather_pct": -5,
+      "lhb_stadium_pct": -12,
+      "park_lhb_pct": -17,
+      "rhb_stadium_pct": -7,
+      "park_rhb_pct": -12
+    },
+    "CLE @ HOU": {
+      "game": "CLE @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 5,
+      "stadium_pct": 6,
+      "weather_pct": -1,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": 5
+    },
+    "SF @ MIA": {
+      "game": "SF @ MIA",
+      "venue": "LoanDepot Park",
+      "venue_key": "loandepot park",
+      "hr_pct": -13,
+      "stadium_pct": -12,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 2,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": -5
+    },
+    "WAS @ TB": {
+      "game": "WAS @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -11,
+      "park_lhb_pct": -10,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 2
+    },
+    "BOS @ SEA": {
+      "game": "BOS @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": 2,
+      "stadium_pct": 0,
+      "weather_pct": 1
+    },
+    "SD @ TEX": {
+      "game": "SD @ TEX",
+      "venue": "Globe Life Field",
+      "venue_key": "globe life field",
+      "hr_pct": -11,
+      "stadium_pct": -10,
+      "weather_pct": -1
+    },
+    "CIN @ NYY": {
+      "game": "CIN @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 8,
+      "stadium_pct": 4,
+      "weather_pct": 4,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": -1,
+      "park_rhb_pct": 3
+    },
+    "BAL @ LAD": {
+      "game": "BAL @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 5,
+      "stadium_pct": 18,
+      "weather_pct": -13
+    },
+    "TOR @ CHC": {
+      "game": "TOR @ CHC",
+      "venue": "Wrigley Field",
+      "venue_key": "wrigley field",
+      "hr_pct": -17,
+      "stadium_pct": -2,
+      "weather_pct": -15,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -18,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": -13
+    }
+  },
+  "by_venue": {
+    "coors field": {
+      "game": "PIT @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 28,
+      "stadium_pct": 20,
+      "weather_pct": 8
+    },
+    "sutter health park": {
+      "game": "LAA @ ATH",
+      "venue": "Sutter Health Park",
+      "venue_key": "sutter health park",
+      "hr_pct": 36,
+      "stadium_pct": 32,
+      "weather_pct": 4
+    },
+    "comerica park": {
+      "game": "CHW @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": -1,
+      "stadium_pct": -10,
+      "weather_pct": 9,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": 7,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 18
+    },
+    "truist park": {
+      "game": "MIL @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 3,
+      "stadium_pct": -4,
+      "weather_pct": 7,
+      "lhb_stadium_pct": -6,
+      "park_lhb_pct": 1,
+      "rhb_stadium_pct": -4,
+      "park_rhb_pct": 3
+    },
+    "chase field": {
+      "game": "MIN @ ARI",
+      "venue": "Chase Field",
+      "venue_key": "chase field",
+      "hr_pct": -8,
+      "stadium_pct": -8,
+      "weather_pct": 0
+    },
+    "kauffman stadium": {
+      "game": "STL @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": 8,
+      "stadium_pct": 12,
+      "weather_pct": -5,
+      "lhb_stadium_pct": -12,
+      "park_lhb_pct": -17,
+      "rhb_stadium_pct": -7,
+      "park_rhb_pct": -12
+    },
+    "daikin park": {
+      "game": "CLE @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 5,
+      "stadium_pct": 6,
+      "weather_pct": -1,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": 5
+    },
+    "loandepot park": {
+      "game": "SF @ MIA",
+      "venue": "LoanDepot Park",
+      "venue_key": "loandepot park",
+      "hr_pct": -13,
+      "stadium_pct": -12,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 2,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": -5
+    },
+    "tropicana field": {
+      "game": "WAS @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -11,
+      "park_lhb_pct": -10,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 2
+    },
+    "t-mobile park": {
+      "game": "BOS @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": 2,
+      "stadium_pct": 0,
+      "weather_pct": 1
+    },
+    "globe life field": {
+      "game": "SD @ TEX",
+      "venue": "Globe Life Field",
+      "venue_key": "globe life field",
+      "hr_pct": -11,
+      "stadium_pct": -10,
+      "weather_pct": -1
+    },
+    "yankee stadium": {
+      "game": "CIN @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 8,
+      "stadium_pct": 4,
+      "weather_pct": 4,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": -1,
+      "park_rhb_pct": 3
+    },
+    "dodger stadium": {
+      "game": "BAL @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 5,
+      "stadium_pct": 18,
+      "weather_pct": -13
+    },
+    "wrigley field": {
+      "game": "TOR @ CHC",
+      "venue": "Wrigley Field",
+      "venue_key": "wrigley field",
+      "hr_pct": -17,
+      "stadium_pct": -2,
+      "weather_pct": -15,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -18,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": -13
+    }
+  }
+}

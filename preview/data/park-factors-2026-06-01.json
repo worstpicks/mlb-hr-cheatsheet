@@ -1,0 +1,155 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-06-01.csv",
+  "source_date": "2026-06-01",
+  "hand_date": "2026-06-01",
+  "by_game": {
+    "KC @ CIN": {
+      "game": "KC @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 11,
+      "stadium_pct": 14,
+      "weather_pct": -3
+    },
+    "SF @ MIL": {
+      "game": "SF @ MIL",
+      "venue": "American Family Fld",
+      "venue_key": "american family field",
+      "hr_pct": 6,
+      "stadium_pct": 11,
+      "weather_pct": -4
+    },
+    "COL @ LAA": {
+      "game": "COL @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 5,
+      "stadium_pct": 8,
+      "weather_pct": -3
+    },
+    "DET @ TB": {
+      "game": "DET @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1
+    },
+    "LAD @ ARI": {
+      "game": "LAD @ ARI",
+      "venue": "Chase Field",
+      "venue_key": "chase field",
+      "hr_pct": -8,
+      "stadium_pct": -8,
+      "weather_pct": 0
+    },
+    "NYM @ SEA": {
+      "game": "NYM @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": -8,
+      "stadium_pct": 0,
+      "weather_pct": -8
+    },
+    "CHW @ MIN": {
+      "game": "CHW @ MIN",
+      "venue": "Target Field",
+      "venue_key": "target field",
+      "hr_pct": -11,
+      "stadium_pct": -7,
+      "weather_pct": -4
+    },
+    "TEX @ STL": {
+      "game": "TEX @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -12,
+      "stadium_pct": -9,
+      "weather_pct": -3
+    },
+    "MIA @ WAS": {
+      "game": "MIA @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": -19,
+      "stadium_pct": 1,
+      "weather_pct": -19
+    }
+  },
+  "by_venue": {
+    "great american ball park": {
+      "game": "KC @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 11,
+      "stadium_pct": 14,
+      "weather_pct": -3
+    },
+    "american family field": {
+      "game": "SF @ MIL",
+      "venue": "American Family Fld",
+      "venue_key": "american family field",
+      "hr_pct": 6,
+      "stadium_pct": 11,
+      "weather_pct": -4
+    },
+    "angel stadium": {
+      "game": "COL @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": 5,
+      "stadium_pct": 8,
+      "weather_pct": -3
+    },
+    "tropicana field": {
+      "game": "DET @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1
+    },
+    "chase field": {
+      "game": "LAD @ ARI",
+      "venue": "Chase Field",
+      "venue_key": "chase field",
+      "hr_pct": -8,
+      "stadium_pct": -8,
+      "weather_pct": 0
+    },
+    "t-mobile park": {
+      "game": "NYM @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": -8,
+      "stadium_pct": 0,
+      "weather_pct": -8
+    },
+    "target field": {
+      "game": "CHW @ MIN",
+      "venue": "Target Field",
+      "venue_key": "target field",
+      "hr_pct": -11,
+      "stadium_pct": -7,
+      "weather_pct": -4
+    },
+    "busch stadium": {
+      "game": "TEX @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -12,
+      "stadium_pct": -9,
+      "weather_pct": -3
+    },
+    "nationals park": {
+      "game": "MIA @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": -19,
+      "stadium_pct": 1,
+      "weather_pct": -19
+    }
+  }
+}

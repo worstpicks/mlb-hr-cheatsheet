@@ -121,12 +121,17 @@
     };
 
     const EXPLORE_PITCHER_LB_TIPS = {
-        Pitcher: "Starting pitcher on today's slate with elevated homer risk.",
+        Pitcher: "Starting pitcher — click for full HR vulnerability profile, splits, arsenal, and recent starts.",
         Game: "Today's matchup for this arm.",
-        Risk: "Overall dinger risk % (Savant) — HR allowed profile vs league. Only SPs at ≥50% appear here.",
-        LHB: "Dinger risk vs left-handed batters — use with LHB targets on the hitter board.",
-        RHB: "Dinger risk vs right-handed batters — use with RHB targets on the hitter board.",
+        risk: "Overall dinger risk % (Savant-weighted). Only SPs at ≥50% appear here. Click column to sort.",
+        barrelPct: "Season barrel% allowed — ideal EV/LA contact surrendered. Top HR predictor for targeting.",
+        hardHitPct: "Hard-hit% allowed at 95+ mph — balls driven with homer carry off this arm.",
+        hr9: "Homers allowed per nine innings — direct HR rate this season.",
+        lhb: "Dinger risk vs left-handed batters — pair with LHB targets on the hitter board.",
+        rhb: "Dinger risk vs right-handed batters — pair with RHB targets on the hitter board.",
     };
+
+    const PITCHER_OVERVIEW_KEYS = ["barrelPct", "hardHitPct", "hr9", "hrFbPct"];
 
     const COLS = [
         { key: "order", label: "#", group: "identity", fmt: (r) => r.order ?? "—", tip: "Batting order spot in today's lineup." },
@@ -178,6 +183,8 @@
     let sortDir = -1;
     let sortUserOverride = false;
     let exploreSortKey = "ticketRank";
+    let pitcherLbSortKey = "risk";
+    let pitcherLbSortDir = -1;
 
     function visibleCols() {
         return COLS;
@@ -223,6 +230,7 @@
         hrLeaderboard: document.getElementById("rsHrLeaderboard"),
         hrLeaderboardBody: document.getElementById("rsHrLeaderboardBody"),
         pitcherLeaderboardBody: document.getElementById("rsPitcherLeaderboardBody"),
+        pitcherLeaderboard: document.getElementById("rsPitcherLeaderboard"),
         playerProfile: document.getElementById("rsPlayerProfile"),
         profileName: document.getElementById("rsProfileName"),
         profileSub: document.getElementById("rsProfileSub"),
@@ -238,9 +246,12 @@
     };
 
     let profileEntry = null;
+    let profilePitcherEntry = null;
     let profileTrendsGen = 0;
+    let pitcherTrendsGen = 0;
     let profileToastTimer = null;
     const trendsCache = new Map();
+    const pitcherTrendsCache = new Map();
     const BET_TRACKER_LS = "worstpickz-bet-tracker-v1";
     let searchBlurTimer = null;
 
@@ -1028,8 +1039,51 @@
         return parts.join(" · ");
     }
 
-    function pitcherStats(pitcher) {
+    function rawPitcherStats(pitcher) {
         return pitcher?.stats || {};
+    }
+
+    function pitcherStats(pitcher) {
+        const stats = rawPitcherStats(pitcher);
+        if (stats.hr9 != null && !Number.isNaN(Number(stats.hr9))) return stats;
+        const hr9 = resolvePitcherHr9(pitcher, stats);
+        if (hr9 != null) return { ...stats, hr9 };
+        return stats;
+    }
+
+    function resolvePitcherHr9(pitcher, statsIn) {
+        const stats = statsIn || rawPitcherStats(pitcher);
+        if (stats.hr9 != null && !Number.isNaN(Number(stats.hr9))) return Number(stats.hr9);
+        const ip = stats.inningsPitched ?? stats.ip;
+        if (stats.hrAllowed != null && ip != null && Number(ip) > 0) {
+            return Math.round((Number(stats.hrAllowed) / Number(ip)) * 9 * 100) / 100;
+        }
+        const lhb = handSavantStatsForPitcher(pitcher, "lhb");
+        const rhb = handSavantStatsForPitcher(pitcher, "rhb");
+        const parts = [lhb, rhb].filter((h) => h && h.hr9 != null && h.pa);
+        if (parts.length) {
+            const pa = parts.reduce((sum, h) => sum + Number(h.pa), 0);
+            const weighted = parts.reduce((sum, h) => sum + Number(h.hr9) * Number(h.pa), 0);
+            if (pa > 0) return Math.round((weighted / pa) * 100) / 100;
+        }
+        let hr = 0;
+        let pa = 0;
+        for (const h of [lhb, rhb]) {
+            if (!h) continue;
+            if (h.hrAllowed != null) hr += Number(h.hrAllowed);
+            if (h.pa) pa += Number(h.pa);
+        }
+        if (pa > 0) return Math.round((hr / pa) * 27 * 100) / 100;
+        return null;
+    }
+
+    function patchPitcherHr9OnSlate() {
+        for (const entry of collectSlatePitcherEntries()) {
+            const stats = entry.pitcher?.stats || {};
+            if (stats.hr9 != null) continue;
+            const hr9 = resolvePitcherHr9(entry.pitcher, stats);
+            if (hr9 != null) entry.pitcher.stats = { ...stats, hr9, hr9Source: stats.hr9Source || "derived" };
+        }
     }
 
     const PITCHER_GROUPS = [
@@ -1109,6 +1163,7 @@
 
     function computeDingerRiskForSlate() {
         ensurePitcherHandLookupSync();
+        patchPitcherHr9OnSlate();
         const entries = collectSlatePitcherEntries();
         if (!entries.length) return;
         const metricPools = {};
@@ -1177,7 +1232,7 @@
         const bucket = lookup?.[pid] || lookup?.[String(pid)];
         const split = bucket?.[handKey];
         if (!split) return null;
-        const main = pitcherStats(pitcher);
+        const main = rawPitcherStats(pitcher);
         return { ...split, hr9: split.hr9 ?? main.hr9 };
     }
 
@@ -1290,6 +1345,65 @@
         </div>`;
     }
 
+    function pitcherMetricByKey(key) {
+        return PITCHER_METRICS.find((m) => m.key === key);
+    }
+
+    function renderPitcherHandSplitsTable(pitcher, stats) {
+        const lhb = handSavantStatsForPitcher(pitcher, "lhb");
+        const rhb = handSavantStatsForPitcher(pitcher, "rhb");
+        if (!lhb && !rhb) {
+            return `<p class="rs-pitcher-splits__empty">Hand splits unavailable — refresh slate or open via local server.</p>`;
+        }
+        const cell = (val, fmt) => (val != null && !Number.isNaN(Number(val)) ? fmt(val) : "—");
+        const rows = [
+            ["Dinger risk", stats.dingerRiskLhbPct != null ? `${stats.dingerRiskLhbPct}%` : "—", stats.dingerRiskRhbPct != null ? `${stats.dingerRiskRhbPct}%` : "—"],
+            ["Barrel%", cell(lhb?.barrelPct, fmtPct), cell(rhb?.barrelPct, fmtPct)],
+            ["Hard-hit%", cell(lhb?.hardHitPct, fmtPct), cell(rhb?.hardHitPct, fmtPct)],
+            ["EV allowed", cell(lhb?.avgEV, fmtEv), cell(rhb?.avgEV, fmtEv)],
+            ["HR/9", cell(lhb?.hr9, (v) => Number(v).toFixed(2)), cell(rhb?.hr9, (v) => Number(v).toFixed(2))],
+            ["HR/FB%", cell(lhb?.hrFbPct, fmtPct), cell(rhb?.hrFbPct, fmtPct)],
+        ];
+        return `<table class="rs-pitcher-splits"><thead><tr><th></th><th>vs LHB</th><th>vs RHB</th></tr></thead><tbody>${rows
+            .map(([label, l, r]) => `<tr><th>${label}</th><td>${l}</td><td>${r}</td></tr>`)
+            .join("")}</tbody></table>`;
+    }
+
+    function renderPitcherArsenalHtml(pitcher) {
+        const arsenal = pitcher?.arsenal;
+        if (!arsenal || !Object.keys(arsenal).length) {
+            return `<p class="rs-pitcher-arsenal__empty">Arsenal mix unavailable for this starter.</p>`;
+        }
+        const rows = Object.entries(arsenal)
+            .sort((a, b) => Number(b[1]) - Number(a[1]))
+            .slice(0, 6)
+            .map(([pt, pct]) => {
+                const n = Math.round(Number(pct));
+                return `<div class="rs-pitcher-arsenal__row"><span class="rs-pitcher-arsenal__label">${pt}</span><div class="rs-pitcher-arsenal__bar"><span style="width:${Math.min(n, 100)}%"></span></div><span class="rs-pitcher-arsenal__pct">${n}%</span></div>`;
+            })
+            .join("");
+        const top = Object.entries(arsenal).sort((a, b) => Number(b[1]) - Number(a[1]))[0];
+        const note = top
+            ? `Heaviest pitch: <strong>${top[0]}</strong> (${Math.round(Number(top[1]))}% usage) — match hitters with strong results vs this pitch type.`
+            : "";
+        return `<div class="rs-pitcher-arsenal">${rows}<p class="rs-pitcher-arsenal__note">${note}</p></div>`;
+    }
+
+    function renderPitcherOverviewGrid(stats, statsList) {
+        const cells = PITCHER_OVERVIEW_KEYS.map((key) => {
+            const metric = pitcherMetricByKey(key);
+            if (!metric) return "";
+            return pitcherStatCellHtml(metric, stats, statsList);
+        }).join("");
+        return `<div class="rs-pitcher-group__grid rs-pitcher-group__grid--overview">${cells}</div>`;
+    }
+
+    function renderPitcherLeakGrid(stats, statsList) {
+        const metrics = PITCHER_METRICS.filter((m) => m.group === "leak");
+        const cells = metrics.map((m) => pitcherStatCellHtml(m, stats, statsList)).join("");
+        return `<div class="rs-pitcher-group__grid">${cells}</div>`;
+    }
+
     function pitcherStatCellHtml(metric, stats, statsList) {
         const heat = pitcherMetricHeatClass(metric, statsList, stats);
         const tip = metric.tip ? ` data-tip="${escapeTip(metric.tip)}" tabindex="0"` : "";
@@ -1297,17 +1411,15 @@
         return `<div class="rs-pitcher-stat rs-has-tip${tone}"${tip}><dt>${metric.label}</dt><dd>${metric.fmt(stats)}</dd></div>`;
     }
 
-    function renderPitcherCardHtml(pitcher, team, sideLabel, stats, statsList) {
+    function renderPitcherCardHtml(pitcher, team, sideLabel, stats, statsList, gameIdx, side) {
         if (!pitcher?.name) return "";
         const hand = fmtPitcherHand(pitcher, team);
-        const groupsHtml = PITCHER_GROUPS.map((group) => {
-            const metrics = PITCHER_METRICS.filter((m) => m.group === group.id);
-            if (!metrics.length) return "";
-            const cells = metrics.map((m) => pitcherStatCellHtml(m, stats, statsList)).join("");
-            return `<div class="rs-pitcher-group"><div class="rs-pitcher-group__label">${group.label}</div><div class="rs-pitcher-group__grid">${cells}</div></div>`;
-        }).join("");
+        const pid = pitcher.id || "";
+        const overview = renderPitcherOverviewGrid(stats, statsList);
+        const splits = renderPitcherHandSplitsTable(pitcher, stats);
+        const leak = renderPitcherLeakGrid(stats, statsList);
         const arsenal = pitcher.arsenalLabel ? `<div class="rs-pitcher-card__mix">${pitcher.arsenalLabel}</div>` : "";
-        return `<article class="rs-pitcher-card rs-pitcher-card--${sideLabel.toLowerCase()}">
+        return `<article class="rs-pitcher-card rs-pitcher-card--${sideLabel.toLowerCase()} rs-pitcher-card--clickable" data-pitcher-id="${pid}" data-game="${gameIdx}" data-side="${side}" role="button" tabindex="0" title="Open pitcher profile">
             <header class="rs-pitcher-card__head">
                 <div class="rs-pitcher-card__top">
                     <span class="rs-pitcher-card__team">${sideLabel} · ${team}</span>
@@ -1317,8 +1429,52 @@
                 ${arsenal}
                 ${renderDingerRiskRowHtml(stats)}
             </header>
-            <div class="rs-pitcher-card__body">${groupsHtml}</div>
+            <nav class="rs-pitcher-card__tabs" aria-label="Pitcher card views">
+                <button type="button" class="rs-pitcher-card__tab is-active" data-tab="overview">Overview</button>
+                <button type="button" class="rs-pitcher-card__tab" data-tab="splits">Splits</button>
+                <button type="button" class="rs-pitcher-card__tab" data-tab="leak">Contact leak</button>
+            </nav>
+            <div class="rs-pitcher-card__body">
+                <div class="rs-pitcher-card__pane" data-pane="overview">${overview}</div>
+                <div class="rs-pitcher-card__pane" data-pane="splits" hidden>${splits}</div>
+                <div class="rs-pitcher-card__pane" data-pane="leak" hidden>${leak}</div>
+            </div>
         </article>`;
+    }
+
+    function wirePitcherCardTabs(card) {
+        const tabs = card.querySelectorAll(".rs-pitcher-card__tab");
+        const panes = card.querySelectorAll(".rs-pitcher-card__pane");
+        tabs.forEach((btn) => {
+            btn.addEventListener("click", (ev) => {
+                ev.stopPropagation();
+                const tab = btn.getAttribute("data-tab");
+                tabs.forEach((t) => t.classList.toggle("is-active", t === btn));
+                panes.forEach((p) => {
+                    p.hidden = p.getAttribute("data-pane") !== tab;
+                });
+            });
+        });
+    }
+
+    function wirePitcherCards() {
+        els.pitcherCards?.querySelectorAll(".rs-pitcher-card--clickable").forEach((card) => {
+            wirePitcherCardTabs(card);
+            const open = () => {
+                const id = Number(card.getAttribute("data-pitcher-id"));
+                const gi = Number(card.getAttribute("data-game"));
+                const side = card.getAttribute("data-side");
+                const entry = collectSlatePitchers().find((e) => e.pitcher?.id === id && e.gameIdx === gi && e.side === side);
+                if (entry) openPitcherProfile(entry);
+            };
+            card.addEventListener("click", open);
+            card.addEventListener("keydown", (ev) => {
+                if (ev.key === "Enter" || ev.key === " ") {
+                    ev.preventDefault();
+                    open();
+                }
+            });
+        });
     }
 
     function collectSlatePitcherStatsList() {
@@ -1349,10 +1505,12 @@
             els.pitcherLead.textContent = "Probable starters · 2026 Savant season";
         }
         if (els.pitcherCards) {
+            const gi = activeGameIdx;
             els.pitcherCards.innerHTML = [
-                renderPitcherCardHtml(away, game.away, "AWY", awayStats, statsList),
-                renderPitcherCardHtml(home, game.home, "HOM", homeStats, statsList),
+                renderPitcherCardHtml(away, game.away, "AWY", awayStats, statsList, gi, "away"),
+                renderPitcherCardHtml(home, game.home, "HOM", homeStats, statsList, gi, "home"),
             ].join("");
+            wirePitcherCards();
         }
     }
 
@@ -2237,13 +2395,12 @@
             const tip = (sort && EXPLORE_HITTER_LB_TIPS[sort]) || EXPLORE_HITTER_LB_TIPS[label];
             applyHeaderTip(th, tip);
         });
-        els.pitcherLeaderboardBody
-            ?.closest(".rs-leaderboard")
-            ?.querySelectorAll("thead th")
-            .forEach((th) => {
-                const label = th.textContent.trim();
-                applyHeaderTip(th, EXPLORE_PITCHER_LB_TIPS[label]);
-            });
+        els.pitcherLeaderboard?.querySelectorAll("thead th").forEach((th) => {
+            const sort = th.getAttribute("data-sort");
+            const label = th.textContent.replace(/[↑↓]/g, "").trim();
+            const tip = (sort && EXPLORE_PITCHER_LB_TIPS[sort]) || EXPLORE_PITCHER_LB_TIPS[label];
+            applyHeaderTip(th, tip);
+        });
     }
 
     function renderDataFreshness() {
@@ -3676,6 +3833,16 @@
         return `https://baseballsavant.mlb.com/savant-player/${slug}-${id}?season=${season || 2026}`;
     }
 
+    function savantPitcherUrl(pitcher, season) {
+        const id = pitcher?.id;
+        if (!id) return null;
+        const slug = String(pitcher.name || "pitcher")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+        return `https://baseballsavant.mlb.com/savant-player/${slug}-${id}?season=${season || 2026}`;
+    }
+
     function collectSlateHitters() {
         const out = [];
         for (let gi = 0; gi < (slate?.games || []).length; gi += 1) {
@@ -3920,6 +4087,95 @@
         els.profileTrends.innerHTML = renderProfileTrendsHtml(games, seasonStats);
     }
 
+    async function fetchPitcherTrends(playerId, season) {
+        const key = `${playerId}:${season}`;
+        if (pitcherTrendsCache.has(key)) return pitcherTrendsCache.get(key);
+        const base = isFileProtocol() ? null : `${window.location.origin}/api/pitcher-trends`;
+        if (base) {
+            try {
+                const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=30`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const games = Array.isArray(data.games) ? data.games : [];
+                    if (games.length) {
+                        pitcherTrendsCache.set(key, games);
+                        return games;
+                    }
+                }
+            } catch (err) {
+                console.warn("pitcher trends proxy", err);
+            }
+        }
+        try {
+            const res = await fetch(
+                `${MLB_API}/people/${encodeURIComponent(playerId)}/stats?stats=gameLog&group=pitching&season=${encodeURIComponent(season)}`
+            );
+            if (!res.ok) return [];
+            const data = await res.json();
+            const splits = data?.stats?.[0]?.splits || [];
+            const games = splits.slice(-30).map((split) => {
+                const st = split.stat || {};
+                const ipStr = String(st.inningsPitched || "").trim();
+                let ip = null;
+                if (ipStr && ipStr !== "-") {
+                    const parts = ipStr.split(".");
+                    const whole = parseInt(parts[0], 10) || 0;
+                    const frac = parseInt(parts[1], 10) || 0;
+                    ip = Math.round((whole + frac / 3) * 100) / 100;
+                }
+                return {
+                    date: (split.date || "").slice(0, 10),
+                    ip,
+                    hr: st.homeRuns != null ? Number(st.homeRuns) : null,
+                    bf: st.battersFaced != null ? Number(st.battersFaced) : null,
+                    er: st.earnedRuns != null ? Number(st.earnedRuns) : null,
+                };
+            });
+            pitcherTrendsCache.set(key, games);
+            return games;
+        } catch (err) {
+            console.warn("pitcher trends mlb", err);
+            return [];
+        }
+    }
+
+    function summarizePitcherStarts(games, n) {
+        const slice = (games || []).slice(-n);
+        let hr = 0;
+        let ip = 0;
+        let er = 0;
+        slice.forEach((g) => {
+            hr += Number(g.hr) || 0;
+            ip += Number(g.ip) || 0;
+            er += Number(g.er) || 0;
+        });
+        return { hr, ip: Math.round(ip * 10) / 10, er, starts: slice.length };
+    }
+
+    function renderPitcherTrendsHtml(games) {
+        if (!games.length) {
+            return `<div class="rs-profile-trends rs-profile-trends--loading">Start log unavailable — check connection or restart <code>serve-research.py</code>.</div>`;
+        }
+        const last7 = summarizePitcherStarts(games, 7);
+        const last14 = summarizePitcherStarts(games, 14);
+        const hrSeries = games.map((g) => g.hr).filter((v) => v != null);
+        const erSeries = games.map((g) => g.er).filter((v) => v != null);
+        const summary = `Last 7 starts: <strong>${last7.hr} HR</strong> allowed, <strong>${last7.er} ER</strong> in ${last7.ip} IP. Last 14: ${last14.hr} HR · ${last14.er} ER.`;
+        const lastHr = hrSeries.length ? hrSeries[hrSeries.length - 1] : null;
+        const lastEr = erSeries.length ? erSeries[erSeries.length - 1] : null;
+        return `<div class="rs-profile-trends"><h3 class="rs-profile-block__title">Recent starts</h3><p class="rs-profile-trends__summary">${summary}</p><div class="rs-profile-trends__charts"><div class="rs-profile-trend"><p class="rs-profile-trend__label">HR allowed · last ${hrSeries.length} starts</p><p class="rs-profile-trend__value">${lastHr != null ? `${lastHr} HR latest` : "—"}</p>${renderSparkline(hrSeries, { strokeClass: "rs-sparkline__line--barrel" })}</div><div class="rs-profile-trend"><p class="rs-profile-trend__label">ER by start · last ${erSeries.length}</p><p class="rs-profile-trend__value">${lastEr != null ? `${lastEr} ER latest` : "—"}</p>${renderSparkline(erSeries, { strokeClass: "rs-sparkline__line--ev" })}</div></div></div>`;
+    }
+
+    async function loadPitcherProfileTrends(playerId, season) {
+        if (!els.profileTrends || !playerId) return;
+        const gen = ++pitcherTrendsGen;
+        els.profileTrends.hidden = false;
+        els.profileTrends.innerHTML = `<div class="rs-profile-trends rs-profile-trends--loading">Loading recent starts…</div>`;
+        const games = await fetchPitcherTrends(playerId, season);
+        if (gen !== pitcherTrendsGen) return;
+        els.profileTrends.innerHTML = renderPitcherTrendsHtml(games);
+    }
+
     function renderProfileHeader(row, opts = {}) {
         const { team, game, player } = opts;
         const id = row?.id || player?.id;
@@ -4153,10 +4409,78 @@
         }
     }
 
+    function wirePitcherProfileSavant(pitcher, season) {
+        const savUrl = savantPitcherUrl(pitcher, season);
+        if (!els.profileSavant) return;
+        if (savUrl) {
+            els.profileSavant.href = savUrl;
+            els.profileSavant.hidden = false;
+        } else {
+            els.profileSavant.hidden = true;
+        }
+    }
+
+    function renderPitcherProfileHeader(pitcher, { team, game }) {
+        if (els.profileName) els.profileName.textContent = pitcher?.name || "—";
+        if (els.profileSub) {
+            const parts = [team, fmtPitcherHand(pitcher, team), pitcher?.arsenalLabel].filter(Boolean);
+            els.profileSub.textContent = parts.join(" · ");
+        }
+        if (els.profilePhoto) els.profilePhoto.hidden = true;
+        if (els.profileGame) {
+            const time = fmtTime(game?.startTime);
+            const date = slate?.sheet_date || sheetDateFromQuery() || "";
+            els.profileGame.textContent = [game?.matchup, time || date].filter(Boolean).join("\n");
+        }
+    }
+
+    function renderPitcherProfileHero(stats) {
+        if (!els.profileHero) return;
+        const pct = stats.dingerRiskPct ?? stats.dingerRisk;
+        const tone = dingerRiskTone(pct);
+        const sub = fmtPitcherRisk(stats) || "Savant season contact allowed profile.";
+        els.profileHero.innerHTML = `<div class="rs-profile-hero rs-profile-hero--${tone}"><span class="rs-profile-hero__label">Dinger risk</span><span class="rs-profile-hero__value">${pct != null ? `${Math.round(Number(pct))}%` : "—"}</span><span class="rs-profile-hero__sub">${sub}</span></div>`;
+    }
+
+    function buildPitcherProfileGridHtml(pitcher, stats, statsList) {
+        const blocks = [];
+        blocks.push(
+            profileBlockSection("HR contact leak (season)", renderPitcherLeakGrid(stats, statsList))
+        );
+        blocks.push(profileBlockSection("Handedness splits", renderPitcherHandSplitsTable(pitcher, stats)));
+        blocks.push(profileBlockSection("Pitch arsenal", renderPitcherArsenalHtml(pitcher)));
+        const command = PITCHER_METRICS.filter((m) => m.group === "command");
+        const cmdCells = command.map((m) => pitcherStatCellHtml(m, stats, statsList)).join("");
+        blocks.push(profileBlockSection("Command & outcomes", `<div class="rs-pitcher-group__grid">${cmdCells}</div>`));
+        return blocks.join("");
+    }
+
+    function openPitcherProfile(entry) {
+        if (!entry || !els.playerProfile) return;
+        profileEntry = null;
+        profilePitcherEntry = entry;
+        if (els.profileJump) els.profileJump.hidden = false;
+        if (els.profileTracker) els.profileTracker.hidden = true;
+        const { pitcher, game, team } = entry;
+        const stats = pitcherStats(pitcher);
+        const season = seasonFromDate(slate?.sheet_date || sheetDateFromQuery());
+        const statsList = collectSlatePitcherStatsList();
+        renderPitcherProfileHeader(pitcher, { team, game });
+        renderPitcherProfileHero(stats);
+        if (els.profileGrid) {
+            els.profileGrid.innerHTML = buildPitcherProfileGridHtml(pitcher, stats, statsList);
+        }
+        wirePitcherProfileSavant(pitcher, season);
+        loadPitcherProfileTrends(pitcher.id, season);
+        if (typeof els.playerProfile.showModal === "function") els.playerProfile.showModal();
+    }
+
     function openPlayerProfile(entry) {
         if (!entry || !els.playerProfile) return;
+        profilePitcherEntry = null;
         profileEntry = entry;
         if (els.profileJump) els.profileJump.hidden = false;
+        if (els.profileTracker) els.profileTracker.hidden = false;
         const { row, game, team, pitcher } = entry;
         const stats = hitterStats(row);
         const prop = row.hrProp || {};
@@ -4174,7 +4498,22 @@
 
     function closePlayerProfile() {
         profileEntry = null;
+        profilePitcherEntry = null;
+        if (els.profileTrends) {
+            els.profileTrends.hidden = true;
+            els.profileTrends.innerHTML = "";
+        }
         if (els.playerProfile && typeof els.playerProfile.close === "function") els.playerProfile.close();
+    }
+
+    async function jumpToPitcherProfileEntry(entry) {
+        if (!entry) return;
+        activeGameIdx = entry.gameIdx;
+        closePlayerProfile();
+        await renderAll();
+        els.pitcherPanel?.scrollIntoView({ behavior: "smooth", block: "start" });
+        els.pitcherPanel?.classList.add("rs-row--flash");
+        setTimeout(() => els.pitcherPanel?.classList.remove("rs-row--flash"), 1800);
     }
 
     async function jumpToProfileEntry(entry) {
@@ -4233,6 +4572,14 @@
                 }
             });
         });
+    }
+
+    function explorePitcherSortValue(entry, key) {
+        const ps = pitcherStats(entry.pitcher);
+        if (key === "risk") return ps.dingerRiskPct ?? ps.dingerRisk ?? null;
+        if (key === "lhb") return ps.dingerRiskLhbPct ?? null;
+        if (key === "rhb") return ps.dingerRiskRhbPct ?? null;
+        return ps[key] ?? null;
     }
 
     function renderExplorePanel() {
@@ -4312,23 +4659,59 @@
         });
 
         if (els.pitcherLeaderboardBody) {
-            const pitchers = collectSlatePitchers()
+            const sortKey = pitcherLbSortKey || "risk";
+            let pitchers = collectSlatePitchers()
                 .map((e) => ({
                     ...e,
                     risk: pitcherStats(e.pitcher).dingerRiskPct ?? pitcherStats(e.pitcher).dingerRisk,
                 }))
                 .filter((e) => e.risk != null && !Number.isNaN(Number(e.risk)))
-                .filter((e) => Number(e.risk) >= HR_RESEARCH_CONFIG.explore.minPitcherRisk)
-                .sort((a, b) => Number(b.risk) - Number(a.risk))
-                .slice(0, HR_RESEARCH_CONFIG.explore.topPitchers);
+                .filter((e) => Number(e.risk) >= HR_RESEARCH_CONFIG.explore.minPitcherRisk);
+            pitchers.sort((a, b) => {
+                const av = explorePitcherSortValue(a, sortKey);
+                const bv = explorePitcherSortValue(b, sortKey);
+                if (av == null && bv == null) return 0;
+                if (av == null) return 1;
+                if (bv == null) return -1;
+                const cmp = Number(av) - Number(bv);
+                return pitcherLbSortDir > 0 ? cmp : -cmp;
+            });
+            pitchers = pitchers.slice(0, HR_RESEARCH_CONFIG.explore.topPitchers);
             els.pitcherLeaderboardBody.innerHTML = pitchers.length
                 ? pitchers
                       .map((e) => {
                           const ps = pitcherStats(e.pitcher);
-                          return `<tr><td>${e.pitcher.name}</td><td>${e.game.matchup}</td><td>${Math.round(Number(e.risk))}%</td><td>${ps.dingerRiskLhbPct != null ? `${ps.dingerRiskLhbPct}%` : "—"}</td><td>${ps.dingerRiskRhbPct != null ? `${ps.dingerRiskRhbPct}%` : "—"}</td></tr>`;
+                          return `<tr class="rs-leaderboard-row rs-pitcher-lb-row" data-pitcher-id="${e.pitcher.id || ""}" data-game="${e.gameIdx}" data-side="${e.side}"><td><button type="button" class="rs-leaderboard-link">${e.pitcher.name}</button></td><td>${e.game.matchup}</td><td>${Math.round(Number(e.risk))}%</td><td>${fmtPct(ps.barrelPct)}</td><td>${fmtPct(ps.hardHitPct)}</td><td>${ps.hr9 != null ? Number(ps.hr9).toFixed(2) : "—"}</td><td>${ps.dingerRiskLhbPct != null ? `${ps.dingerRiskLhbPct}%` : "—"}</td><td>${ps.dingerRiskRhbPct != null ? `${ps.dingerRiskRhbPct}%` : "—"}</td></tr>`;
                       })
                       .join("")
-                : `<tr><td colspan="5" class="rs-empty">Pitcher dinger risk unavailable.</td></tr>`;
+                : `<tr><td colspan="8" class="rs-empty">Pitcher dinger risk unavailable.</td></tr>`;
+            els.pitcherLeaderboardBody.querySelectorAll(".rs-pitcher-lb-row").forEach((tr) => {
+                tr.querySelector(".rs-leaderboard-link")?.addEventListener("click", () => {
+                    const id = Number(tr.getAttribute("data-pitcher-id"));
+                    const gi = Number(tr.getAttribute("data-game"));
+                    const side = tr.getAttribute("data-side");
+                    const entry = collectSlatePitchers().find((e) => e.pitcher?.id === id && e.gameIdx === gi && e.side === side);
+                    if (entry) openPitcherProfile(entry);
+                });
+            });
+            els.pitcherLeaderboard?.querySelectorAll(".rs-plb-sort").forEach((th) => {
+                th.classList.toggle("is-sorted", th.getAttribute("data-sort") === sortKey);
+            });
+            els.pitcherLeaderboard?.querySelectorAll(".rs-plb-sort").forEach((th) => {
+                th.replaceWith(th.cloneNode(true));
+            });
+            els.pitcherLeaderboard?.querySelectorAll(".rs-plb-sort").forEach((th) => {
+                th.addEventListener("click", () => {
+                    const key = th.getAttribute("data-sort");
+                    if (!key) return;
+                    if (pitcherLbSortKey === key) pitcherLbSortDir *= -1;
+                    else {
+                        pitcherLbSortKey = key;
+                        pitcherLbSortDir = -1;
+                    }
+                    renderExplorePanel();
+                });
+            });
         }
     }
 
@@ -4439,7 +4822,10 @@
 
     function wireUi() {
         els.profileClose?.addEventListener("click", closePlayerProfile);
-        els.profileJump?.addEventListener("click", () => jumpToProfileEntry(profileEntry));
+        els.profileJump?.addEventListener("click", () => {
+            if (profileEntry) jumpToProfileEntry(profileEntry);
+            else if (profilePitcherEntry) jumpToPitcherProfileEntry(profilePitcherEntry);
+        });
         els.profileTracker?.addEventListener("click", toggleProfileTracker);
         els.playerProfile?.addEventListener("cancel", closePlayerProfile);
         els.playerSearch?.addEventListener("input", () => {

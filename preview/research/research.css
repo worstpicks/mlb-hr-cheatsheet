@@ -541,6 +541,112 @@ a:hover { color: #bae6fd; }
     flex-direction: column;
     gap: 12px;
 }
+.rs-pitcher-card--clickable {
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.rs-pitcher-card--clickable:hover {
+    border-color: rgba(251, 146, 60, 0.45);
+    box-shadow: 0 0 0 1px rgba(251, 146, 60, 0.2);
+}
+.rs-pitcher-card__tabs {
+    display: flex;
+    gap: 6px;
+    padding: 0 14px;
+    margin-top: -4px;
+}
+.rs-pitcher-card__tab {
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    background: rgba(15, 23, 42, 0.45);
+    color: var(--rs-muted);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+.rs-pitcher-card__tab.is-active {
+    color: #fde68a;
+    border-color: rgba(251, 146, 60, 0.45);
+    background: rgba(251, 146, 60, 0.12);
+}
+.rs-pitcher-group__grid--overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.rs-pitcher-splits {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+}
+.rs-pitcher-splits th,
+.rs-pitcher-splits td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    text-align: left;
+}
+.rs-pitcher-splits thead th {
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--rs-muted);
+}
+.rs-pitcher-splits tbody th {
+    color: var(--rs-muted);
+    font-weight: 600;
+}
+.rs-pitcher-splits__empty,
+.rs-pitcher-arsenal__empty {
+    font-size: 0.78rem;
+    color: var(--rs-muted);
+    margin: 0;
+}
+.rs-pitcher-arsenal__row {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr 2.5rem;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.rs-pitcher-arsenal__label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #bae6fd;
+}
+.rs-pitcher-arsenal__bar {
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.15);
+    overflow: hidden;
+}
+.rs-pitcher-arsenal__bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #f97316, #facc15);
+}
+.rs-pitcher-arsenal__pct {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-align: right;
+    color: #fde68a;
+}
+.rs-pitcher-arsenal__note {
+    margin: 10px 0 0;
+    font-size: 0.72rem;
+    color: var(--rs-muted);
+    line-height: 1.45;
+}
+.rs-date-hint {
+    font-size: 0.72rem;
+    color: var(--rs-muted);
+    align-self: center;
+}
+.rs-leaderboard--pitchers {
+    min-width: 520px;
+}
+.rs-plb-sort.is-sorted {
+    color: var(--wpz-accent-gold);
+}
 .rs-pitcher-group__label {
     font-size: 0.64rem;
     font-weight: 800;
@@ -1647,6 +1753,193 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
     .rs-card-stat dd {
         font-size: 0.95rem;
     }
+
+    /* ── Mobile: explore, leaderboards, pitchers, profile ── */
+    .rs-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .rs-search-wrap {
+        width: 100%;
+        max-width: none;
+    }
+    .rs-search-input {
+        width: 100%;
+        min-height: 48px;
+        font-size: 16px;
+    }
+    .rs-date-hint {
+        grid-column: 1 / -1;
+        font-size: 0.68rem;
+        line-height: 1.4;
+        padding: 0 2px 4px;
+    }
+    .rs-updated {
+        grid-column: 1 / -1;
+        font-size: 0.68rem;
+    }
+    .rs-explore__head {
+        padding: 12px 14px;
+        min-height: 48px;
+    }
+    .rs-explore__body {
+        padding: 0 10px 12px;
+    }
+    .rs-explore__filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+    .rs-explore__filters label {
+        min-width: 0;
+    }
+    .rs-explore__select,
+    .rs-explore__input {
+        width: 100%;
+        min-height: 44px;
+        font-size: 16px;
+    }
+    .rs-btn--ghost {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-height: 44px;
+    }
+    .rs-explore__lede {
+        font-size: 0.72rem;
+    }
+    .rs-explore__lede .rs-pillar {
+        display: block;
+        margin: 6px 0 0;
+    }
+    .rs-leaderboard-scroll {
+        max-height: min(52vh, 320px);
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+    .rs-leaderboard-wrap .rs-leaderboard-scroll::after {
+        content: "Swipe → for more columns";
+        display: block;
+        padding: 6px 4px 2px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--rs-muted);
+        text-align: center;
+    }
+    .rs-leaderboard {
+        min-width: 560px;
+    }
+    .rs-leaderboard--pitchers {
+        min-width: 520px;
+    }
+    .rs-leaderboard thead th,
+    .rs-leaderboard tbody td {
+        padding: 8px 5px;
+        font-size: 0.72rem;
+    }
+    .rs-leaderboard-link {
+        min-height: 44px;
+        padding: 4px 0;
+        display: inline-flex;
+        align-items: center;
+    }
+    .rs-pitcher-panel {
+        margin-top: 4px;
+    }
+    .rs-pitcher-card__tabs {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+    }
+    .rs-pitcher-card__tabs::-webkit-scrollbar {
+        display: none;
+    }
+    .rs-pitcher-card__tab {
+        flex: 0 0 auto;
+        min-height: 40px;
+        padding: 8px 14px;
+        font-size: 0.72rem;
+        touch-action: manipulation;
+    }
+    .rs-pitcher-card--clickable:active {
+        transform: scale(0.995);
+    }
+    .rs-pitcher-group__grid,
+    .rs-pitcher-group__grid--overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .rs-pitcher-splits {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .rs-pitcher-splits th,
+    .rs-pitcher-splits td {
+        padding: 8px 6px;
+        font-size: 0.72rem;
+    }
+    .rs-pitcher-arsenal__row {
+        grid-template-columns: 2.25rem 1fr 2.25rem;
+        gap: 6px;
+    }
+    .rs-profile {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100%;
+        max-height: 100%;
+        margin: 0;
+    }
+    .rs-profile__inner {
+        border-radius: 0;
+        max-height: 100dvh;
+        min-height: 100dvh;
+    }
+    .rs-profile__body {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+    .rs-profile__hero {
+        padding: 12px 14px 0;
+    }
+    .rs-profile-hero__value {
+        font-size: clamp(1.75rem, 8vw, 2.4rem);
+    }
+    .rs-profile__grid {
+        padding: 0 14px 14px;
+    }
+    .rs-profile-block__grid,
+    .rs-profile-block__grid--power-top,
+    .rs-profile-block__grid--power-bottom,
+    .rs-profile-block__grid--breakdown {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .rs-profile__foot {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+    }
+    .rs-profile__foot .rs-btn,
+    .rs-profile__foot .rs-btn--link {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+        text-align: center;
+    }
+    .rs-profile__close {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    .rs-pitcher-stat.rs-has-tip[data-tip]::before,
+    .rs-pitcher-risk-card.rs-has-tip[data-tip]::before,
+    .rs-leaderboard thead th.rs-has-tip[data-tip]::before {
+        display: none;
+    }
 }
 
 @media (max-width: 380px) {
@@ -1668,6 +1961,13 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
         padding: 2px 4px;
     }
     .rs-card__stats {
+        grid-template-columns: 1fr;
+    }
+    .rs-explore__filters {
+        grid-template-columns: 1fr;
+    }
+    .rs-pitcher-group__grid,
+    .rs-pitcher-group__grid--overview {
         grid-template-columns: 1fr;
     }
 }

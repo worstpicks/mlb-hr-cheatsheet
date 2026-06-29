@@ -343,3 +343,43 @@ def fetch_player_game_trends(player_id: int, season: int, limit: int = 30) -> li
             }
         )
     return out
+
+
+def fetch_pitcher_game_trends(player_id: int, season: int, limit: int = 30) -> list[dict]:
+    """Per-start HR allowed and innings from MLB Stats API pitching game log."""
+    url = f"{MLB_API}/people/{player_id}/stats?stats=gameLog&group=pitching&season={season}"
+    req = urllib.request.Request(url, headers={"User-Agent": "WorstPickz-Research/1.0"})
+    with urllib.request.urlopen(req, timeout=45) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+    stats = (payload.get("stats") or [{}])[0]
+    splits = stats.get("splits") or []
+    if not splits:
+        return []
+    tail = splits[-limit:] if len(splits) > limit else splits
+    out: list[dict] = []
+    for split in tail:
+        date_raw = (split.get("date") or "").strip()
+        if not date_raw:
+            continue
+        st = split.get("stat") or {}
+        ip_str = str(st.get("inningsPitched") or "").strip()
+        ip = None
+        if ip_str and ip_str not in ("-", "0.0"):
+            try:
+                parts = ip_str.split(".")
+                whole = int(parts[0]) if parts[0] else 0
+                frac = int(parts[1]) if len(parts) > 1 and parts[1] else 0
+                ip = round(whole + frac / 3.0, 2)
+            except ValueError:
+                ip = _float(ip_str)
+        out.append(
+            {
+                "date": date_raw[:10],
+                "ip": ip,
+                "hr": _int(st.get("homeRuns")),
+                "bf": _int(st.get("battersFaced")),
+                "h": _int(st.get("hits")),
+                "er": _int(st.get("earnedRuns")),
+            }
+        )
+    return out

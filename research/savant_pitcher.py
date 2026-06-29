@@ -14,7 +14,7 @@ SAVANT_PITCHER_CUSTOM_CSV = (
     "?year={season}&type=pitcher&filter=&min=10"
     "&selections=player_id,player_name,barrel_batted_rate,hard_hit_percent,exit_velocity_avg,"
     "flyballs_percent,hr_flyball_percent,pull_percent,in_zone_percent,edge_percent,whiff_percent,"
-    "k_percent,sweet_spot_percent,meatball_percent,home_run,flyballs"
+    "k_percent,sweet_spot_percent,meatball_percent,home_run,flyballs,innings_pitched"
     "&chart=false&csv=true"
 )
 
@@ -105,6 +105,9 @@ def _hr_fb_pct(row: dict) -> float | None:
 
 
 def _parse_custom_row(row: dict) -> dict:
+    hr = _int(row.get("home_run"))
+    ip = _float(row.get("innings_pitched"))
+    hr9 = round((hr / ip) * 9.0, 2) if hr is not None and ip and ip > 0 else None
     return {
         "barrelPct": _float(row.get("barrel_batted_rate")),
         "hardHitPct": _float(row.get("hard_hit_percent")),
@@ -118,8 +121,10 @@ def _parse_custom_row(row: dict) -> dict:
         "kPct": _float(row.get("k_percent")),
         "sweetSpotPct": _float(row.get("sweet_spot_percent")),
         "meatballPct": _float(row.get("meatball_percent")),
-        "hrAllowed": _int(row.get("home_run")),
+        "hrAllowed": hr,
+        "inningsPitched": ip,
         "flyballsAllowed": _int(row.get("flyballs")),
+        "hr9": hr9,
     }
 
 

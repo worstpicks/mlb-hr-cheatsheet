@@ -15,7 +15,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="">
-    <link rel="stylesheet" href="research.css?v=90">
+    <link rel="stylesheet" href="research.css?v=93">
     <style>
         .rs-file-block {
             display: none;
@@ -110,6 +110,7 @@ python serve-research.py</pre>
                 <label>Slate date
                     <input type="date" id="rsDate" autocomplete="off">
                 </label>
+                <span class="rs-date-hint">Pick any past or today’s slate — Research loads that day’s data.</span>
                 <button type="button" class="rs-btn rs-btn--primary" id="rsRefresh">Refresh API</button>
                 <span class="rs-updated" id="rsLastUpdated" aria-live="polite"></span>
             </div>
@@ -195,14 +196,17 @@ python serve-research.py</pre>
                                 <h3 class="rs-explore__sub">Pitchers to target</h3>
                                 <p class="rs-explore__hint">SPs with ≥50% dinger risk (Savant)</p>
                                 <div class="rs-leaderboard-scroll">
-                                    <table class="rs-leaderboard rs-leaderboard--pitchers">
+                                    <table class="rs-leaderboard rs-leaderboard--pitchers" id="rsPitcherLeaderboard">
                                         <thead>
                                             <tr>
                                                 <th>Pitcher</th>
                                                 <th>Game</th>
-                                                <th>Risk</th>
-                                                <th>LHB</th>
-                                                <th>RHB</th>
+                                                <th class="rs-lb-sort rs-plb-sort" data-sort="risk">Risk</th>
+                                                <th class="rs-lb-sort rs-plb-sort" data-sort="barrelPct">Barrel%</th>
+                                                <th class="rs-lb-sort rs-plb-sort" data-sort="hardHitPct">Hard%</th>
+                                                <th class="rs-lb-sort rs-plb-sort" data-sort="hr9">HR/9</th>
+                                                <th class="rs-lb-sort rs-plb-sort" data-sort="lhb">LHB</th>
+                                                <th class="rs-lb-sort rs-plb-sort" data-sort="rhb">RHB</th>
                                             </tr>
                                         </thead>
                                         <tbody id="rsPitcherLeaderboardBody"></tbody>
@@ -313,6 +317,6 @@ python serve-research.py</pre>
         </div>
     </dialog>
 
-    <script src="research.js?v=90" defer></script>
+    <script src="research.js?v=93" defer></script>
 </body>
 </html>

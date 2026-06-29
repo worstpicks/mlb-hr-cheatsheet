@@ -3369,7 +3369,7 @@
             .trim();
     }
 
-    async function buildProjectedLineup(teamId, season, lookup, windowRange, propfinderLookup, limit = 13) {
+    async function buildProjectedLineup(teamId, season, lookup, windowRange, propfinderLookup) {
         const rosterSeason = season;
         let hitters = await fetchTeamHitters(teamId, rosterSeason);
         hitters.sort((a, b) => {
@@ -3377,8 +3377,67 @@
             const sb = lookup?.[b.id] || {};
             return (sb.pa || 0) - (sa.pa || 0) || (sb.hr || 0) - (sa.hr || 0);
         });
-        const lineup = hitters.slice(0, limit).map((h, i) => ({ ...h, order: i + 1 }));
+        const lineup = hitters.map((h, i) => ({ ...h, order: i + 1 }));
         return enrichLineup(lineup, season, lookup, windowRange, propfinderLookup);
+    }
+
+    async function expandLineupWithRosterBench(lineup, teamId, season, lookup, windowRange, propfinderLookup) {
+        if (!teamId || !(lineup || []).length) return lineup || [];
+        const roster = await fetchTeamHitters(teamId, season);
+        if (!roster.length) return lineup;
+        const seenIds = new Set();
+        const seenNames = new Set();
+        for (const row of lineup) {
+            if (row.id) seenIds.add(row.id);
+            if (row.name) seenNames.add(nameLookupKey(row.name));
+        }
+        const benchSort = (h) => {
+            const sav = lookup?.[h.id] || lookup?.[String(h.id)] || {};
+            return (sav.pa || 0) * 1000 + (sav.hr || 0);
+        };
+        const bench = roster
+            .filter(
+                (h) =>
+                    h.id &&
+                    !seenIds.has(h.id) &&
+                    !seenNames.has(nameLookupKey(h.name))
+            )
+            .sort((a, b) => benchSort(b) - benchSort(a));
+        if (!bench.length) return lineup;
+        let maxOrder = Math.max(0, ...lineup.map((h) => h.order || 0));
+        const extra = bench.map((h) => {
+            maxOrder += 1;
+            return { ...h, order: maxOrder, projected: true };
+        });
+        return enrichLineup([...lineup, ...extra], season, lookup, windowRange, propfinderLookup);
+    }
+
+    async function expandAllLineupDepth(season, sheetDate) {
+        if (!slate?.games?.length) return;
+        const lookup = await loadSavantLookup(season);
+        const windowRange =
+            slate?.window_start && slate?.window_end
+                ? { start: slate.window_start, end: slate.window_end }
+                : windowBounds(sheetDate);
+        const propfinderLookup = propfinderLookupFromSlate();
+        for (const game of slate.games) {
+            game.awayLineup = await expandLineupWithRosterBench(
+                game.awayLineup || [],
+                game.awayTeamId,
+                season,
+                lookup,
+                windowRange,
+                propfinderLookup
+            );
+            game.homeLineup = await expandLineupWithRosterBench(
+                game.homeLineup || [],
+                game.homeTeamId,
+                season,
+                lookup,
+                windowRange,
+                propfinderLookup
+            );
+        }
     }
 
     async function hydrateGameSide(game, side, season, lookup, windowRange, propfinderLookup) {
@@ -3392,7 +3451,17 @@
         if (!lineup.length && teamId) {
             game[key] = await buildProjectedLineup(teamId, season, lookup, windowRange, propfinderLookup);
         } else {
-            game[key] = await enrichLineup(lineup, season, lookup, windowRange, propfinderLookup);
+            const enriched = await enrichLineup(lineup, season, lookup, windowRange, propfinderLookup);
+            game[key] = teamId
+                ? await expandLineupWithRosterBench(
+                      enriched,
+                      teamId,
+                      season,
+                      lookup,
+                      windowRange,
+                      propfinderLookup
+                  )
+                : enriched;
         }
     }
 
@@ -4839,6 +4908,7 @@
         }
 
         await applyRotowireFallback(date);
+        await expandAllLineupDepth(season, date);
 
         const savantMerge = await mergeSavantIntoAllLineups(season);
         const pitcherSavantMerge = await mergePitcherSavantIntoGames(season);

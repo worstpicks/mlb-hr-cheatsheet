@@ -362,7 +362,7 @@ def build_projected_lineup(
     savant_lookup: dict[int, dict],
     propfinder_lookup: dict[str, dict],
     savant_only: bool = True,
-    limit: int = 13,
+    limit: int | None = None,
 ) -> list[dict]:
     hitters = fetch_team_hitters(team_id, roster_season)
 
@@ -373,7 +373,8 @@ def build_projected_lineup(
         return (sav.get("pa") or win.get("pa") or 0, sav.get("hr") or win.get("hr") or 0)
 
     hitters.sort(key=sort_key, reverse=True)
-    lineup = [{**h, "order": i} for i, h in enumerate(hitters[:limit], start=1)]
+    chosen = hitters if limit is None else hitters[:limit]
+    lineup = [{**h, "order": i} for i, h in enumerate(chosen, start=1)]
     return enrich_lineup(
         lineup,
         window_lookup=window_lookup,
@@ -381,6 +382,44 @@ def build_projected_lineup(
         propfinder_lookup=propfinder_lookup,
         savant_only=savant_only,
     )
+
+
+def merge_roster_bench_into_lineup(
+    lineup: list[dict],
+    team_id: int | None,
+    roster_season: int,
+    savant_lookup: dict[int, dict],
+) -> list[dict]:
+    """Keep listed starters in order; append other active-roster hitters for bench depth."""
+    if not team_id or not lineup:
+        return lineup
+    roster = fetch_team_hitters(team_id, roster_season)
+    if not roster:
+        return lineup
+    existing_ids = {int(h["id"]) for h in lineup if h.get("id")}
+    existing_names = {name_lookup_key(h.get("name") or "") for h in lineup if h.get("name")}
+
+    def sort_key(h: dict) -> tuple:
+        pid = int(h.get("id") or 0)
+        sav = savant_lookup.get(pid) or {}
+        return (sav.get("pa") or 0, sav.get("hr") or 0)
+
+    bench = [
+        h
+        for h in roster
+        if h.get("id")
+        and int(h["id"]) not in existing_ids
+        and name_lookup_key(h.get("name") or "") not in existing_names
+    ]
+    if not bench:
+        return lineup
+    bench.sort(key=sort_key, reverse=True)
+    merged = list(lineup)
+    max_order = max((int(h.get("order") or 0) for h in merged), default=0)
+    for h in bench:
+        max_order += 1
+        merged.append({**h, "order": max_order, "projected": True})
+    return merged
 
 
 def resolve_side_lineup(
@@ -394,14 +433,14 @@ def resolve_side_lineup(
     savant_only: bool = True,
 ) -> list[dict]:
     if box_lineup:
-        return enrich_lineup(
+        lineup = enrich_lineup(
             box_lineup,
             window_lookup=window_lookup,
             savant_lookup=savant_lookup,
             propfinder_lookup=propfinder_lookup,
             savant_only=savant_only,
         )
-    if team_id:
+    elif team_id:
         return build_projected_lineup(
             team_id,
             roster_season,
@@ -410,7 +449,20 @@ def resolve_side_lineup(
             propfinder_lookup=propfinder_lookup,
             savant_only=savant_only,
         )
-    return []
+    else:
+        return []
+    if team_id:
+        lineup = merge_roster_bench_into_lineup(
+            lineup, team_id, roster_season, savant_lookup
+        )
+        lineup = enrich_lineup(
+            lineup,
+            window_lookup=window_lookup,
+            savant_lookup=savant_lookup,
+            propfinder_lookup=propfinder_lookup,
+            savant_only=savant_only,
+        )
+    return lineup
 
 
 def _collect_player_ids(games: list[dict]) -> list[int]:

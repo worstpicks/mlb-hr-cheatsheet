@@ -15,23 +15,40 @@ from game_row_enrich import (
     normalize_venue_key,
 )
 
-_PARK_FACTORS_RE = re.compile(r"ParkFactors_(\d{4}-\d{2}-\d{2})")
+_PARK_FACTORS_DATE_RE = re.compile(
+    r"ParkFactors_(?P<y>\d{4})-(?P<m>\d{2})[-.](?P<d>\d{2})"
+)
+
+
+def _date_from_park_csv_name(name: str) -> str | None:
+    m = _PARK_FACTORS_DATE_RE.search(name)
+    if not m:
+        return None
+    return f"{m['y']}-{m['m']}-{m['d']}"
 
 
 def park_factors_date_from_path(path: Path) -> str | None:
-    m = _PARK_FACTORS_RE.search(path.name)
-    return m.group(1) if m else None
+    return _date_from_park_csv_name(path.name)
 
 
 def find_park_factors_csv(sheet_date: str, data_dir: Path | None = None) -> Path | None:
     """ParkFactors CSV for this slate date only (never a different day's file)."""
     data_dir = data_dir or ROOT / "data"
-    path = data_dir / f"ParkFactors_{sheet_date}.csv"
-    if not path.is_file():
-        matches = sorted(data_dir.glob(f"ParkFactors_{sheet_date}*.csv"))
-        if matches:
-            path = matches[0]
-    return path if path.is_file() else None
+    y, m, d = sheet_date.split("-")
+    candidates = [
+        data_dir / f"ParkFactors_{sheet_date}.csv",
+        data_dir / f"ParkFactors_{y}-{m}.{d}.csv",
+    ]
+    for path in candidates:
+        if path.is_file():
+            return path
+    matches = sorted(data_dir.glob(f"ParkFactors_{sheet_date}*.csv"))
+    if matches:
+        return matches[0]
+    for path in sorted(data_dir.glob("ParkFactors_*.csv")):
+        if _date_from_park_csv_name(path.name) == sheet_date:
+            return path
+    return None
 
 
 def _latest_hand_park_date(sheet_date: str, data_dir: Path) -> str | None:
@@ -197,8 +214,12 @@ def attach_park_factors_to_games(games: list[dict], lookup: dict) -> None:
             game["parkHrPct"] = ctx["hr_pct"]
         if ctx.get("park_lhb_pct") is not None:
             game["parkLhbPct"] = ctx["park_lhb_pct"]
+        else:
+            game.pop("parkLhbPct", None)
         if ctx.get("park_rhb_pct") is not None:
             game["parkRhbPct"] = ctx["park_rhb_pct"]
+        else:
+            game.pop("parkRhbPct", None)
         if ctx.get("venue"):
             game["venue"] = game.get("venue") or ctx["venue"]
         if source_label:

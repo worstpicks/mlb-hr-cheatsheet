@@ -308,9 +308,9 @@
         return `${y}-${m}-${day}`;
     }
 
+    const RESEARCH_KEEP_DATE_KEY = "research-keep-date";
+
     function defaultResearchDate() {
-        const meta = document.querySelector('meta[name="research-date"]')?.getAttribute("content")?.trim();
-        if (meta && /^\d{4}-\d{2}-\d{2}$/.test(meta)) return meta;
         return todayLocalIso();
     }
 
@@ -321,9 +321,16 @@
     }
 
     function initResearchDate() {
-        const date = sheetDateFromQuery();
-        if (!qs("date")) {
-            const url = new URL(window.location.href);
+        const today = todayLocalIso();
+        const fromQuery = qs("date");
+        let date =
+            fromQuery && /^\d{4}-\d{2}-\d{2}$/.test(fromQuery) ? fromQuery : today;
+        const keepDate = sessionStorage.getItem(RESEARCH_KEEP_DATE_KEY);
+        if (date < today && date !== keepDate) {
+            date = today;
+        }
+        const url = new URL(window.location.href);
+        if (url.searchParams.get("date") !== date) {
             url.searchParams.set("date", date);
             window.history.replaceState({}, "", url);
         }
@@ -4987,6 +4994,7 @@
         els.dateInput?.addEventListener("change", () => {
             const date = els.dateInput.value;
             if (!date) return;
+            sessionStorage.setItem(RESEARCH_KEEP_DATE_KEY, date);
             const url = new URL(window.location.href);
             url.searchParams.set("date", date);
             window.history.replaceState({}, "", url);

@@ -16,14 +16,14 @@ OUT_DIR = ROOT / "preview" / "data"
 RESEARCH_INDEX = ROOT / "preview" / "research" / "index.html"
 
 
-def update_research_date_meta(sheet_date: str) -> bool:
-    """Set preview/research/index.html meta research-date to the slate date."""
+def update_research_date_meta(_sheet_date: str = "") -> bool:
+    """Clear preview/research/index.html meta research-date (UI defaults to today)."""
     if not RESEARCH_INDEX.is_file():
         return False
     text = RESEARCH_INDEX.read_text(encoding="utf-8")
     new_text = re.sub(
         r'(<meta name="research-date" content=")[^"]*(")',
-        rf"\g<1>{sheet_date}\2",
+        r'\g<1>\2',
         text,
         count=1,
     )

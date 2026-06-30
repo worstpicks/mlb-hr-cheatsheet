@@ -187,8 +187,81 @@
     let pitcherLbSortKey = "risk";
     let pitcherLbSortDir = -1;
 
+    const IDENTITY_COL_KEYS = new Set(["order", "name", "hand"]);
+    const COLUMN_ORDER_STORAGE_KEY = "research-hitter-column-order";
+
+    let columnReorderMode = false;
+    let columnOrderKeys = loadColumnOrderKeys();
+    let colDragKey = null;
+
+    function loadColumnOrderKeys() {
+        try {
+            const raw = localStorage.getItem(COLUMN_ORDER_STORAGE_KEY);
+            if (!raw) return null;
+            const parsed = JSON.parse(raw);
+            if (!Array.isArray(parsed)) return null;
+            const valid = new Set(COLS.map((c) => c.key));
+            const keys = parsed.filter((k) => valid.has(k) && !IDENTITY_COL_KEYS.has(k));
+            return keys.length ? keys : null;
+        } catch {
+            return null;
+        }
+    }
+
+    function saveColumnOrderKeys(keys) {
+        localStorage.setItem(COLUMN_ORDER_STORAGE_KEY, JSON.stringify(keys));
+    }
+
+    function defaultReorderableKeys() {
+        return COLS.filter((c) => !IDENTITY_COL_KEYS.has(c.key)).map((c) => c.key);
+    }
+
+    function reorderableColumnKeys() {
+        return columnOrderKeys || defaultReorderableKeys();
+    }
+
+    function moveColumnKey(dragKey, targetKey) {
+        if (IDENTITY_COL_KEYS.has(dragKey) || IDENTITY_COL_KEYS.has(targetKey)) return;
+        const keys = reorderableColumnKeys().slice();
+        const from = keys.indexOf(dragKey);
+        const to = keys.indexOf(targetKey);
+        if (from < 0 || to < 0 || from === to) return;
+        keys.splice(from, 1);
+        keys.splice(to, 0, dragKey);
+        columnOrderKeys = keys;
+        saveColumnOrderKeys(keys);
+    }
+
+    function resetColumnOrder() {
+        columnOrderKeys = null;
+        localStorage.removeItem(COLUMN_ORDER_STORAGE_KEY);
+    }
+
+    function setColumnReorderMode(on) {
+        columnReorderMode = Boolean(on);
+        if (els.colReorderBtn) {
+            els.colReorderBtn.textContent = columnReorderMode ? "Done" : "Sort columns";
+            els.colReorderBtn.classList.toggle("is-on", columnReorderMode);
+            els.colReorderBtn.setAttribute("aria-pressed", columnReorderMode ? "true" : "false");
+        }
+        if (els.colResetBtn) els.colResetBtn.hidden = !columnReorderMode;
+        if (els.colReorderHint) els.colReorderHint.hidden = !columnReorderMode;
+        if (els.tableWrap) els.tableWrap.classList.toggle("rs-table-wrap--reorder", columnReorderMode);
+        renderTable();
+    }
+
     function visibleCols() {
-        return COLS;
+        const base = defaultReorderableKeys();
+        const saved = reorderableColumnKeys();
+        const byKey = Object.fromEntries(COLS.map((c) => [c.key, c]));
+        const ordered = [];
+        for (const k of saved) {
+            if (byKey[k] && !IDENTITY_COL_KEYS.has(k)) ordered.push(byKey[k]);
+        }
+        for (const k of base) {
+            if (!saved.includes(k) && byKey[k]) ordered.push(byKey[k]);
+        }
+        return [...COLS.filter((c) => IDENTITY_COL_KEYS.has(c.key)), ...ordered];
     }
 
     const els = {
@@ -244,6 +317,10 @@
         profileJump: document.getElementById("rsProfileJump"),
         profileTracker: document.getElementById("rsProfileTracker"),
         profileSavant: document.getElementById("rsProfileSavant"),
+        colReorderBtn: document.getElementById("rsColReorderBtn"),
+        colResetBtn: document.getElementById("rsColResetBtn"),
+        colReorderHint: document.getElementById("rsColReorderHint"),
+        tableWrap: document.querySelector(".rs-table-wrap"),
     };
 
     let profileEntry = null;
@@ -3847,6 +3924,51 @@
         });
     }
 
+    function wireColumnReorderHeaders() {
+        if (!columnReorderMode || !els.tableHead) return;
+        const headers = els.tableHead.querySelectorAll("tr.rs-col-row th[data-key]");
+        headers.forEach((th) => {
+            const key = th.getAttribute("data-key");
+            if (!key || IDENTITY_COL_KEYS.has(key)) {
+                th.classList.add("rs-col--fixed");
+                return;
+            }
+            th.draggable = true;
+            th.classList.add("rs-col--draggable");
+            th.addEventListener("dragstart", (e) => {
+                colDragKey = key;
+                th.classList.add("rs-col--dragging");
+                e.dataTransfer.effectAllowed = "move";
+                e.dataTransfer.setData("text/plain", key);
+            });
+            th.addEventListener("dragend", () => {
+                colDragKey = null;
+                th.classList.remove("rs-col--dragging");
+                els.tableHead.querySelectorAll(".rs-col--drop-target").forEach((el) => {
+                    el.classList.remove("rs-col--drop-target");
+                });
+            });
+            th.addEventListener("dragover", (e) => {
+                if (!colDragKey || colDragKey === key || IDENTITY_COL_KEYS.has(key)) return;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = "move";
+                headers.forEach((h) => h.classList.remove("rs-col--drop-target"));
+                th.classList.add("rs-col--drop-target");
+            });
+            th.addEventListener("dragleave", () => {
+                th.classList.remove("rs-col--drop-target");
+            });
+            th.addEventListener("drop", (e) => {
+                e.preventDefault();
+                const dragKey = e.dataTransfer.getData("text/plain") || colDragKey;
+                th.classList.remove("rs-col--drop-target");
+                if (!dragKey || dragKey === key) return;
+                moveColumnKey(dragKey, key);
+                renderTable();
+            });
+        });
+    }
+
     function renderTable() {
         if (!els.tableHead || !els.tableBody) return;
         const cols = visibleCols();
@@ -3854,20 +3976,24 @@
 
         els.tableHead.innerHTML = buildTableHeadHtml(cols);
 
-        els.tableHead.querySelectorAll("tr.rs-col-row th").forEach((th) => {
-            th.addEventListener("click", () => {
-                const key = th.getAttribute("data-key");
-                sortUserOverride = true;
-                if (sortKey === key) sortDir *= -1;
-                else {
-                    sortKey = key;
-                    sortDir = key === "name" ? 1 : -1;
-                }
-                renderTable();
-                renderMobileCards();
-                syncMobileSortSelect();
+        if (columnReorderMode) {
+            wireColumnReorderHeaders();
+        } else {
+            els.tableHead.querySelectorAll("tr.rs-col-row th").forEach((th) => {
+                th.addEventListener("click", () => {
+                    const key = th.getAttribute("data-key");
+                    sortUserOverride = true;
+                    if (sortKey === key) sortDir *= -1;
+                    else {
+                        sortKey = key;
+                        sortDir = key === "name" ? 1 : -1;
+                    }
+                    renderTable();
+                    renderMobileCards();
+                    syncMobileSortSelect();
+                });
             });
-        });
+        }
 
         if (!rows.length) {
             els.tableBody.innerHTML = `<tr><td colspan="${cols.length}" class="rs-empty">Loading hitters… try Refresh API or pick the other team.</td></tr>`;
@@ -3879,21 +4005,22 @@
         els.tableBody.innerHTML = rows
             .map((r) => {
                 const cells = cols.map((c) => {
+                    const colAttr = ` data-col-key="${c.key}"`;
                     if (c.key === "name") {
                         const tag = r.projected ? ' <span class="rs-hand">proj</span>' : "";
                         const tip = c.tip ? tipAttr(c.tip) : "";
-                        return `<td${tip}><button type="button" class="rs-hitter rs-hitter-btn" data-hitter-id="${r.id || ""}">${r.name || "—"}</button> <span class="rs-hand">${r.position || ""}</span>${tag}</td>`;
+                        return `<td${colAttr}${tip}><button type="button" class="rs-hitter rs-hitter-btn" data-hitter-id="${r.id || ""}">${r.name || "—"}</button> <span class="rs-hand">${r.position || ""}</span>${tag}</td>`;
                     }
                     if (c.hrProp) {
                         const tip = c.tip ? tipAttr(c.tip) : "";
-                        return `<td${tip}><span class="${hrPropHeatClass(r)}">${c.fmt(r)}</span></td>`;
+                        return `<td${colAttr}${tip}><span class="${hrPropHeatClass(r)}">${c.fmt(r)}</span></td>`;
                     }
                     const val = c.stat ? hitterStats(r)[c.stat] : r[c.key];
                     const heat =
                         c.stat && val != null ? heatClass(colValues[c.key], Number(val), higherBetter[c.key] !== false) : "";
                     const mixTip = c.key.startsWith("mix") ? mixTipForRow(r) : null;
                     const tip = mixTip ? tipAttr(mixTip) : c.tip ? tipAttr(c.tip) : "";
-                    return `<td${tip}><span class="${heat}">${c.fmt(r)}</span></td>`;
+                    return `<td${colAttr}${tip}><span class="${heat}">${c.fmt(r)}</span></td>`;
                 }).join("");
                 return `<tr data-hitter-id="${r.id || ""}">${cells}</tr>`;
             })
@@ -3956,7 +4083,15 @@
                 : "";
             const tipClass = c.tip ? " rs-has-tip" : "";
             const sortedClass = c.key === sortKey ? " rs-col--sorted" : "";
-            return `<th class="${colClass.trim()}${tipClass}${sortedClass}" data-key="${c.key}" aria-sort="${sort}"${tipAttrParts}>${c.label}${sortIndicator(c.key)}</th>`;
+            const reorderClass =
+                columnReorderMode && !IDENTITY_COL_KEYS.has(c.key) ? " rs-col--draggable" : "";
+            const fixedClass = columnReorderMode && IDENTITY_COL_KEYS.has(c.key) ? " rs-col--fixed" : "";
+            const dragHandle =
+                columnReorderMode && !IDENTITY_COL_KEYS.has(c.key)
+                    ? '<span class="rs-col-drag" aria-hidden="true">⋮⋮</span>'
+                    : "";
+            const sortLabel = columnReorderMode ? "" : sortIndicator(c.key);
+            return `<th class="${colClass.trim()}${tipClass}${sortedClass}${reorderClass}${fixedClass}" data-key="${c.key}" data-col-key="${c.key}" aria-sort="${sort}"${tipAttrParts}>${dragHandle}${c.label}${sortLabel}</th>`;
         }).join("");
         return `<tr class="rs-group-row">${groupCells.join("")}</tr><tr class="rs-col-row">${colCells}</tr>`;
     }
@@ -5039,6 +5174,13 @@
         });
         els.themeToggle?.addEventListener("click", toggleTheme);
         syncThemeToggle();
+        els.colReorderBtn?.addEventListener("click", () => {
+            setColumnReorderMode(!columnReorderMode);
+        });
+        els.colResetBtn?.addEventListener("click", () => {
+            resetColumnOrder();
+            renderTable();
+        });
     }
 
     wireUi();

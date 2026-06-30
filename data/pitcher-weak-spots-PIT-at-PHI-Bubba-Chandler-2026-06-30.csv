@@ -1,0 +1,26 @@
+Matchup,PIT @ PHI
+Pitcher,Bubba Chandler
+Pitcher Team,PIT
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.86,="13-40",.325,.450,0.125,0,5,0,5,21.7,5,.400,.850
+Batting Second,7.0,3.43,="15-36",.417,.750,0.333,2,4,1,9,22.2,9,.533,1.283
+Batting Third,10.2,1.22,="7-38",.184,.447,0.263,3,1,0,11,15.6,6,.289,.736
+Batting Fourth,12.0,0.50,="4-39",.103,.179,0.076,1,0,0,2,27.9,2,.163,.342
+Batting Fifth,9.1,0.96,="7-35",.200,.343,0.143,1,2,0,6,15.4,2,.282,.625
+Batting Sixth,8.1,1.08,="3-28",.107,.286,0.179,1,2,0,2,23.5,6,.265,.551
+Batting Seventh,8.1,0.96,="3-28",.107,.179,0.072,0,2,0,1,20.6,5,.265,.444
+Batting Eighth,6.2,1.95,="6-26",.231,.346,0.115,1,0,0,1,18.2,7,.394,.740
+Batting Ninth,7.1,1.36,="6-27",.222,.259,0.037,0,1,0,0,22.6,4,.323,.582
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="64-263",.243,.354,0.111,6,11,0,20,22.3,18,.293,.647
+Kyle Schwarber LHB,Batting Second ​,="57-223",.256,.668,0.412,27,9,1,50,32.5,37,.370,1.038
+Bryce Harper LHB,Batting Third ​,="81-283",.286,.558,0.272,20,13,2,53,18.3,49,.385,.943
+Brandon Marsh LHB,Batting Fourth ​,="25-86",.291,.488,0.197,5,2,0,13,33.7,4,.337,.825
+Alec Bohm RHB,Batting Fifth ​,="17-67",.254,.358,0.104,2,1,0,11,16.9,3,.296,.654
+Bryson Stott LHB,Batting Sixth ​,="26-107",.243,.393,0.150,3,3,2,17,17.9,9,.299,.692
+J.T. Realmuto RHB,Batting Seventh ​,="12-66",.182,.333,0.151,2,4,0,6,25.3,5,.280,.613
+Gabriel Rincones Jr. LHB,Batting Eighth ​,="0-8",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Justin Crawford LHB,Batting Ninth ​,="35-142",.246,.345,0.099,1,9,1,7,24.4,13,.314,.659

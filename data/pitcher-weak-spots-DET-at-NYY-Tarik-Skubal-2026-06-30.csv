@@ -1,0 +1,26 @@
+Matchup,DET @ NYY
+Pitcher,Tarik Skubal
+Pitcher Team,DET
+Opposing Team,NYY
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.0,1.67,="7-27",.259,.481,0.222,2,0,0,2,30.0,3,.333,.814
+Batting Second,6.1,1.89,="10-28",.357,.643,0.286,2,2,0,3,16.7,2,.400,1.043
+Batting Third,8.1,0.96,="8-30",.267,.667,0.400,3,1,1,7,30.0,0,.267,.934
+Batting Fourth,8.0,0.50,="4-28",.143,.214,0.071,0,2,0,4,51.7,0,.138,.352
+Batting Fifth,7.2,0.65,="4-26",.154,.192,0.038,0,1,0,0,29.6,1,.185,.377
+Batting Sixth,5.2,1.59,="8-24",.333,.583,0.250,1,3,0,4,26.9,1,.385,.968
+Batting Seventh,5.2,1.06,="5-20",.250,.300,0.050,0,1,0,0,13.6,1,.318,.618
+Batting Eighth,6.0,0.33,="2-19",.105,.158,0.053,0,1,0,0,30.0,0,.105,.263
+Batting Ninth,6.0,0.50,="3-20",.150,.150,0.000,0,0,0,1,20.0,0,.150,.300
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Paul Goldschmidt RHB,Batting First ​,="26-78",.333,.641,0.308,6,4,1,15,16.7,11,.422,1.063
+Amed Rosario RHB,Batting Second ​,="0-6",.000,.000,0.000,0,0,0,0,14.3,1,.143,.143
+Ben Rice LHB,Batting Third ​,="3-23",.130,.130,0.000,0,0,0,0,26.9,2,.231,.361
+Jasson Dominguez SHB,Batting Fourth ​,="2-19",.105,.158,0.053,0,1,0,1,19.0,2,.190,.348
+Anthony Volpe RHB,Batting Fifth ​,="3-9",.333,.444,0.111,0,1,0,0,20.0,1,.400,.844
+Jose Caballero RHB,Batting Sixth ​,="8-29",.276,.586,0.310,3,0,0,9,21.2,2,.303,.889
+Spencer Jones LHB,Batting Seventh ​,="4-12",.333,.500,0.167,0,2,0,1,28.6,2,.429,.929
+Max Schuemann RHB,Batting Eighth ​,="5-15",.333,.533,0.200,0,3,0,3,21.1,4,.474,1.007
+Ali Sanchez RHB,Batting Ninth ​,="6-20",.300,.400,0.100,0,2,0,3,31.8,1,.364,.764

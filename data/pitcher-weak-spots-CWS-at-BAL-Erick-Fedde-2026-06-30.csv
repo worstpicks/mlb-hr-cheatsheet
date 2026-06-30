@@ -1,0 +1,26 @@
+Matchup,CWS @ BAL
+Pitcher,Erick Fedde
+Pitcher Team,CWS
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.03,="5-33",.152,.364,0.212,2,1,0,3,10.0,5,.275,.639
+Batting Second,6.2,2.85,="14-32",.438,1.063,0.625,6,0,1,9,10.8,5,.514,1.577
+Batting Third,8.1,1.20,="6-31",.194,.452,0.258,2,2,0,6,13.9,4,.278,.730
+Batting Fourth,6.2,2.10,="11-31",.355,.613,0.258,2,2,0,4,11.8,3,.412,1.025
+Batting Fifth,9.0,1.11,="8-35",.229,.343,0.114,1,1,0,2,23.7,2,.270,.613
+Batting Sixth,7.1,1.91,="9-31",.290,.323,0.033,0,1,0,7,16.2,5,.405,.728
+Batting Seventh,8.2,1.50,="11-36",.306,.444,0.138,1,2,0,2,21.1,2,.342,.786
+Batting Eighth,10.0,0.70,="5-32",.156,.156,0.000,0,0,0,1,17.1,2,.200,.356
+Batting Ninth,7.2,1.17,="7-29",.241,.276,0.035,0,1,0,0,12.1,2,.313,.589
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Gunnar Henderson LHB,Batting First ​,="24-110",.218,.400,0.182,4,6,1,10,28.0,8,.271,.671
+Taylor Ward RHB,Batting Second ​,="22-83",.265,.361,0.096,0,8,0,3,19.8,27,.450,.811
+Dylan Beavers LHB,Batting Third ​,="7-25",.280,.400,0.120,0,3,0,1,22.2,2,.333,.733
+Pete Alonso RHB,Batting Fourth ​,="51-196",.260,.500,0.240,13,8,0,39,21.3,23,.339,.839
+Samuel Basallo LHB,Batting Fifth ​,="37-155",.239,.394,0.155,5,7,1,21,25.9,13,.294,.688
+Leody Taveras SHB,Batting Sixth ​,="31-117",.265,.368,0.103,1,7,1,12,21.2,10,.328,.696
+Colton Cowser LHB,Batting Seventh ​,="21-103",.204,.291,0.087,3,0,0,13,30.3,15,.306,.597
+Blaze Alexander RHB,Batting Eighth ​,="15-41",.366,.732,0.366,3,4,1,13,13.0,3,.422,1.154
+Jackson Holliday LHB,Batting Ninth ​,="11-44",.250,.500,0.250,3,2,0,7,20.4,4,.306,.806

@@ -1,0 +1,26 @@
+Matchup,TEX @ CLE
+Pitcher,Tanner Bibee
+Pitcher Team,CLE
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.2,1.46,="13-47",.277,.702,0.425,5,5,0,6,11.8,4,.333,1.035
+Batting Second,9.1,2.14,="14-41",.341,.610,0.269,3,2,0,7,12.5,6,.417,1.027
+Batting Third,12.0,1.00,="9-42",.214,.310,0.096,1,1,0,4,17.4,3,.283,.593
+Batting Fourth,11.0,1.18,="10-41",.244,.341,0.097,1,1,0,2,26.7,3,.311,.652
+Batting Fifth,11.1,0.71,="4-37",.108,.108,0.000,0,0,0,1,26.2,4,.190,.298
+Batting Sixth,10.1,1.06,="9-40",.225,.325,0.100,1,1,0,3,28.6,2,.262,.587
+Batting Seventh,10.2,0.94,="8-37",.216,.541,0.325,4,0,0,6,23.1,2,.256,.797
+Batting Eighth,9.2,0.62,="5-34",.147,.206,0.059,0,2,0,3,30.6,1,.167,.373
+Batting Ninth,8.1,1.44,="8-32",.250,.344,0.094,1,0,0,4,16.7,4,.333,.677
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Joc Pederson LHB,Batting First ​,="34-121",.281,.620,0.339,11,4,2,21,21.2,13,.360,.980
+Josh Jung RHB,Batting Second ​,="30-94",.319,.447,0.128,2,6,0,11,18.7,9,.393,.840
+Corey Seager LHB,Batting Third ​,="25-140",.179,.357,0.178,7,4,0,19,28.3,23,.295,.652
+Jake Burger RHB,Batting Fourth ​,="33-141",.234,.390,0.156,5,7,0,17,29.4,11,.294,.684
+Ezequiel Duran RHB,Batting Fifth ​,="25-80",.313,.500,0.187,2,5,2,19,21.6,8,.375,.875
+Evan Carter LHB,Batting Sixth ​,="11-55",.200,.418,0.218,3,1,1,8,25.0,4,.267,.685
+Alejandro Osuna LHB,Batting Seventh ​,="12-46",.261,.304,0.043,0,2,0,8,16.4,5,.382,.686
+Elias Diaz RHB,Batting Eighth ​,="10-32",.313,.500,0.187,1,3,0,10,23.5,1,.324,.824
+Nicky Lopez LHB,Batting Ninth ​,="16-55",.291,.364,0.073,1,1,0,5,16.4,3,.339,.703

@@ -1,0 +1,26 @@
+Matchup,TEX @ CLE
+Pitcher,Jacob deGrom
+Pitcher Team,TEX
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.1,1.35,="10-41",.244,.561,0.317,4,1,0,6,8.9,4,.311,.872
+Batting Second,11.1,0.97,="8-42",.190,.381,0.191,2,2,0,4,35.6,3,.244,.625
+Batting Third,11.0,1.00,="10-43",.233,.419,0.186,2,2,0,4,31.8,1,.250,.669
+Batting Fourth,10.2,0.94,="8-41",.195,.317,0.122,1,2,0,2,39.5,2,.233,.550
+Batting Fifth,11.2,0.60,="6-41",.146,.244,0.098,1,1,0,3,45.2,1,.167,.411
+Batting Sixth,9.1,0.86,="5-32",.156,.250,0.094,1,0,0,4,27.8,3,.222,.472
+Batting Seventh,7.1,1.64,="10-32",.313,.625,0.312,3,1,0,6,23.5,2,.353,.978
+Batting Eighth,7.2,1.57,="9-31",.290,.387,0.097,1,0,0,4,32.4,3,.353,.740
+Batting Ninth,9.0,0.67,="5-30",.167,.200,0.033,0,1,0,0,21.9,1,.194,.394
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Travis Bazzana LHB,Batting First ​,="25-106",.236,.491,0.255,5,10,1,15,22.0,11,.305,.796
+Chase DeLauter LHB,Batting Second ​,="32-120",.267,.492,0.225,6,7,1,21,10.3,16,.353,.845
+Kyle Manzardo LHB,Batting Third ​,="1-1",1.000,4.000,3.000,1,0,0,1,0.0,0,1.000,5.000
+Kahlil Watson LHB,Batting Fourth ​,="1-4",.250,.500,0.250,0,1,0,1,25.0,0,.250,.750
+Cooper Ingle LHB,Batting Fifth ​,="0-2",.000,.000,0.000,0,0,0,0,0.0,1,.333,.333
+Daniel Schneemann LHB,Batting Sixth ​,="11-62",.177,.242,0.065,1,1,0,6,32.9,8,.271,.513
+Gabriel Arias RHB,Batting Seventh ​,="3-14",.214,.214,0.000,0,0,0,2,28.6,0,.214,.428
+Patrick Bailey SHB,Batting Eighth ​,="18-103",.175,.252,0.077,1,3,1,7,20.5,8,.232,.484
+Steven Kwan LHB,Batting Ninth ​,="2-7",.286,.286,0.000,0,0,0,0,28.6,0,.286,.572

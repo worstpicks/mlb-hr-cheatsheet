@@ -1,0 +1,26 @@
+Matchup,STL @ ATL
+Pitcher,Martin Perez
+Pitcher Team,ATL
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.1,1.29,="7-34",.206,.441,0.235,2,2,0,3,12.8,5,.308,.749
+Batting Second,8.2,1.62,="9-32",.281,.375,0.094,0,1,1,0,15.8,5,.395,.770
+Batting Third,8.0,1.13,="7-29",.241,.517,0.276,2,0,1,4,24.2,2,.281,.798
+Batting Fourth,8.2,0.81,="3-28",.107,.143,0.036,0,1,0,1,25.0,4,.219,.362
+Batting Fifth,7.2,1.04,="5-27",.185,.222,0.037,0,1,0,1,29.0,3,.258,.480
+Batting Sixth,8.0,1.13,="8-30",.267,.533,0.266,1,3,1,6,22.6,1,.290,.823
+Batting Seventh,8.1,0.72,="3-26",.115,.231,0.116,1,0,0,2,23.3,3,.200,.431
+Batting Eighth,5.2,1.94,="8-25",.320,.520,0.200,1,2,0,2,17.2,3,.414,.934
+Batting Ninth,7.2,0.65,="4-25",.160,.240,0.080,0,2,0,1,18.5,1,.185,.425
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="80-300",.267,.413,0.146,12,8,0,34,15.8,35,.362,.775
+Ivan Herrera RHB,Batting Second ​,="75-293",.256,.410,0.154,10,13,1,35,15.6,48,.397,.807
+Jordan Walker RHB,Batting Third ​,="19-54",.352,.611,0.259,4,2,0,8,18.6,5,.407,1.018
+Nelson Velazquez RHB,Batting Fourth ​,="7-23",.304,.522,0.218,1,2,0,4,15.4,2,.385,.907
+Jose Fermin RHB,Batting Fifth ​,="4-17",.235,.471,0.236,1,1,0,3,11.1,1,.278,.749
+Masyn Winn RHB,Batting Sixth ​,="54-212",.255,.354,0.099,3,8,2,27,20.0,20,.329,.683
+Lars Nootbaar LHB,Batting Seventh ​,="1-4",.250,.750,0.500,0,0,1,0,25.0,0,.250,1.000
+Blaze Jordan RHB,Batting Eighth ​,="7-32",.219,.281,0.062,0,2,0,9,13.5,2,.243,.524
+Nathan Church LHB,Batting Ninth ​,="15-42",.357,.548,0.191,1,3,1,5,27.1,5,.417,.965

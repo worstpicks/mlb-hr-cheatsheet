@@ -1,0 +1,26 @@
+Matchup,DET @ NYY
+Pitcher,Cam Schlittler
+Pitcher Team,NYY
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.0,1.17,="11-47",.234,.298,0.064,0,3,0,4,11.5,3,.288,.586
+Batting Second,13.1,0.98,="10-48",.208,.313,0.105,1,2,0,2,33.3,3,.255,.568
+Batting Third,13.0,0.69,="9-47",.191,.383,0.192,2,3,0,4,39.6,0,.191,.574
+Batting Fourth,12.2,0.47,="5-45",.111,.200,0.089,1,1,0,4,39.1,1,.130,.330
+Batting Fifth,13.0,0.38,="3-41",.073,.073,0.000,0,0,0,1,38.6,2,.114,.187
+Batting Sixth,9.0,1.56,="11-38",.289,.474,0.185,1,2,1,2,22.0,3,.341,.815
+Batting Seventh,8.0,2.00,="11-34",.324,.412,0.088,0,3,0,3,25.6,5,.410,.822
+Batting Eighth,8.1,1.20,="8-33",.242,.333,0.091,0,1,1,0,21.6,2,.306,.639
+Batting Ninth,10.1,0.48,="4-32",.125,.219,0.094,1,0,0,3,38.9,1,.171,.390
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="51-169",.302,.473,0.171,5,12,1,15,14.0,30,.410,.883
+Dillon Dingler RHB,Batting Second ​,="24-77",.312,.558,0.246,5,4,0,14,25.0,5,.345,.903
+Kerry Carpenter LHB,Batting Third ​,="9-32",.281,.500,0.219,2,1,0,7,37.8,3,.351,.851
+Riley Greene LHB,Batting Fourth ​,="53-192",.276,.411,0.135,5,11,0,21,28.3,26,.365,.776
+Colt Keith LHB,Batting Fifth ​,="1-6",.167,.167,0.000,0,0,0,0,16.7,0,.167,.334
+Spencer Torkelson RHB,Batting Sixth ​,="12-45",.267,.533,0.266,3,3,0,7,32.0,4,.320,.853
+Zach McKinstry LHB,Batting Seventh ​,="9-44",.205,.273,0.068,1,0,0,5,16.3,5,.286,.559
+James Outman LHB,Batting Eighth ​,="1-15",.067,.067,0.000,0,0,0,0,57.9,4,.263,.330
+Hao-Yu Lee RHB,Batting Ninth ​,="7-25",.280,.320,0.040,0,1,0,3,26.9,1,.308,.628

@@ -1,0 +1,26 @@
+Matchup,STL @ ATL
+Pitcher,Matthew Liberatore
+Pitcher Team,STL
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.2,1.31,="9-39",.231,.410,0.179,2,1,0,4,8.9,5,.311,.721
+Batting Second,9.2,1.55,="15-45",.333,.733,0.400,6,0,0,11,22.2,0,.333,1.066
+Batting Third,9.2,1.66,="11-38",.289,.500,0.211,2,2,0,7,20.5,5,.364,.864
+Batting Fourth,8.0,2.38,="11-34",.324,.559,0.235,2,2,0,5,28.6,8,.452,1.011
+Batting Fifth,8.1,1.80,="14-37",.378,.486,0.108,0,4,0,3,15.4,1,.385,.871
+Batting Sixth,8.0,1.63,="11-33",.333,.394,0.061,0,2,0,5,22.9,2,.371,.765
+Batting Seventh,8.2,1.04,="6-29",.207,.276,0.069,0,2,0,1,21.2,3,.281,.557
+Batting Eighth,6.0,2.33,="11-28",.393,.786,0.393,3,2,0,9,15.6,3,.438,1.224
+Batting Ninth,7.1,1.09,="6-29",.207,.483,0.276,2,0,1,4,29.0,2,.258,.741
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Drake Baldwin LHB,Batting First ​,="8-39",.205,.462,0.257,3,1,0,6,27.7,7,.319,.781
+Ozzie Albies SHB,Batting Second ​,="7-52",.135,.212,0.077,1,1,0,2,16.1,4,.196,.408
+Matt Olson LHB,Batting Third ​,="64-239",.268,.498,0.230,14,13,0,40,21.3,25,.336,.834
+Michael Harris II LHB,Batting Fourth ​,="6-24",.250,.250,0.000,0,0,0,0,16.7,0,.250,.500
+Mauricio Dubon RHB,Batting Fifth ​,="14-55",.255,.491,0.236,3,2,1,15,15.0,4,.305,.796
+Eli White RHB,Batting Sixth ​,="8-30",.267,.500,0.233,1,2,1,3,12.1,3,.333,.833
+Austin Riley RHB,Batting Seventh ​,="7-32",.219,.500,0.281,2,3,0,7,32.4,5,.324,.824
+Joey Bart RHB,Batting Eighth ​,="3-22",.136,.182,0.046,0,1,0,1,34.8,0,.174,.356
+Jorge Mateo RHB,Batting Ninth ​,="15-53",.283,.321,0.038,0,2,0,2,32.7,2,.309,.630

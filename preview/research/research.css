@@ -533,7 +533,7 @@ a:hover { color: #bae6fd; }
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
-    margin-top: 8px;
+    margin-bottom: 12px;
 }
 .rs-pitcher-k-card {
     display: flex;

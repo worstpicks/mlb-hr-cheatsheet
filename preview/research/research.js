@@ -1731,7 +1731,7 @@
             ? `<p class="rs-pitcher-k__hand">${handBits.join(" · ")}</p>`
             : "";
         return `<div class="rs-pitcher-k">
-            <p class="rs-pitcher-k__lede">Read K props: <strong>Whiff%</strong> is swing-and-miss skill, <strong>K%</strong> is the outcome, <strong>Edge%</strong> shows command on the borders (chase + called strikes). Pair with the opposing lineup's K% in the header cards.</p>
+            <p class="rs-pitcher-k__lede">Read K props: <strong>Whiff%</strong> is swing-and-miss skill, <strong>K%</strong> is the outcome, <strong>Edge%</strong> shows command on the borders (chase + called strikes). Pair with the opposing lineup's K% in the score cards below.</p>
             ${handLine}
             <div class="rs-pitcher-group__grid">${cells}</div>
         </div>`;
@@ -1750,9 +1750,6 @@
         const cell = (val, fmt) => (val != null && !Number.isNaN(Number(val)) ? fmt(val) : "—");
         const rows = [
             ["Dinger risk", stats.dingerRiskLhbPct != null ? `${stats.dingerRiskLhbPct}%` : "—", stats.dingerRiskRhbPct != null ? `${stats.dingerRiskRhbPct}%` : "—"],
-            ["K stuff", stats.kStuffLhbPct != null ? `${stats.kStuffLhbPct}%` : "—", stats.kStuffRhbPct != null ? `${stats.kStuffRhbPct}%` : "—"],
-            ["Whiff%", cell(lhb?.whiffPct, fmtPct), cell(rhb?.whiffPct, fmtPct)],
-            ["K%", cell(lhb?.kPct, fmtPct), cell(rhb?.kPct, fmtPct)],
             ["Barrel%", cell(lhb?.barrelPct, fmtPct), cell(rhb?.barrelPct, fmtPct)],
             ["Hard-hit%", cell(lhb?.hardHitPct, fmtPct), cell(rhb?.hardHitPct, fmtPct)],
             ["EV allowed", cell(lhb?.avgEV, fmtEv), cell(rhb?.avgEV, fmtEv)],
@@ -1806,6 +1803,10 @@
         return `<div class="rs-pitcher-stat rs-has-tip${tone}"${tip}><dt>${metric.label}</dt><dd>${metric.fmt(stats)}</dd></div>`;
     }
 
+    function renderPitcherKTabHtml(stats, statsList) {
+        return `${renderKPickRowHtml(stats)}${renderPitcherKGrid(stats, statsList)}`;
+    }
+
     function renderPitcherCardHtml(pitcher, team, sideLabel, stats, statsList, gameIdx, side) {
         if (!pitcher?.name) return "";
         const hand = fmtPitcherHand(pitcher, team);
@@ -1813,7 +1814,7 @@
         const overview = renderPitcherOverviewGrid(stats, statsList);
         const splits = renderPitcherHandSplitsTable(pitcher, stats);
         const leak = renderPitcherLeakGrid(stats, statsList);
-        const kpick = renderPitcherKGrid(stats, statsList);
+        const kstrikeout = renderPitcherKTabHtml(stats, statsList);
         const arsenal = pitcher.arsenalLabel ? `<div class="rs-pitcher-card__mix">${pitcher.arsenalLabel}</div>` : "";
         return `<article class="rs-pitcher-card rs-pitcher-card--${sideLabel.toLowerCase()} rs-pitcher-card--clickable" data-pitcher-id="${pid}" data-game="${gameIdx}" data-side="${side}" role="button" tabindex="0" title="Open pitcher profile">
             <header class="rs-pitcher-card__head">
@@ -1824,19 +1825,18 @@
                 <h3 class="rs-pitcher-card__name">${pitcher.name}</h3>
                 ${arsenal}
                 ${renderDingerRiskRowHtml(stats)}
-                ${renderKPickRowHtml(stats)}
             </header>
             <nav class="rs-pitcher-card__tabs" aria-label="Pitcher card views">
                 <button type="button" class="rs-pitcher-card__tab is-active" data-tab="overview">Overview</button>
-                <button type="button" class="rs-pitcher-card__tab" data-tab="kpick"><span class="rs-tab-long">K pick</span><span class="rs-tab-short">K</span></button>
                 <button type="button" class="rs-pitcher-card__tab" data-tab="splits">Splits</button>
                 <button type="button" class="rs-pitcher-card__tab" data-tab="leak"><span class="rs-tab-long">Contact leak</span><span class="rs-tab-short">Leak</span></button>
+                <button type="button" class="rs-pitcher-card__tab" data-tab="kstrikeout"><span class="rs-tab-long">K / Strikeout</span><span class="rs-tab-short">K</span></button>
             </nav>
             <div class="rs-pitcher-card__body">
                 <div class="rs-pitcher-card__pane" data-pane="overview">${overview}</div>
-                <div class="rs-pitcher-card__pane" data-pane="kpick" hidden>${kpick}</div>
                 <div class="rs-pitcher-card__pane" data-pane="splits" hidden>${splits}</div>
                 <div class="rs-pitcher-card__pane" data-pane="leak" hidden>${leak}</div>
+                <div class="rs-pitcher-card__pane" data-pane="kstrikeout" hidden>${kstrikeout}</div>
             </div>
         </article>`;
     }
@@ -5003,12 +5003,6 @@
     function buildPitcherProfileGridHtml(pitcher, stats, statsList) {
         const blocks = [];
         blocks.push(
-            profileBlockSection(
-                "K pick profile",
-                `${renderKPickRowHtml(stats)}${renderPitcherKGrid(stats, statsList)}`
-            )
-        );
-        blocks.push(
             profileBlockSection("HR contact leak (season)", renderPitcherLeakGrid(stats, statsList))
         );
         blocks.push(profileBlockSection("Handedness splits", renderPitcherHandSplitsTable(pitcher, stats)));
@@ -5016,6 +5010,9 @@
         const command = PITCHER_METRICS.filter((m) => m.group === "command");
         const cmdCells = command.map((m) => pitcherStatCellHtml(m, stats, statsList)).join("");
         blocks.push(profileBlockSection("Command & outcomes", `<div class="rs-pitcher-group__grid">${cmdCells}</div>`));
+        blocks.push(
+            profileBlockSection("K / Strikeout", renderPitcherKTabHtml(stats, statsList))
+        );
         return blocks.join("");
     }
 

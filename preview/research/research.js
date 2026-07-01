@@ -120,8 +120,30 @@
         avgEV: "Average exit velocity. Harder contact carries farther and raises HR probability on contact.",
     };
 
+    const K_STUFF_WEIGHTS = {
+        whiffPct: 40,
+        kPct: 40,
+        edgePct: 20,
+    };
+
+    const K_HAND_WEIGHTS = {
+        whiffPct: 50,
+        kPct: 50,
+    };
+
+    const K_SCORE_TIPS = {
+        Overall:
+            "K stuff — slate-relative score from Whiff%, K%, and Edge%. Higher % = more swing-and-miss and strikeout skill vs today's starters.",
+        LHB: "K stuff vs left-handed hitters (Whiff% + K% on Savant hand splits).",
+        RHB: "K stuff vs right-handed hitters (Whiff% + K% on Savant hand splits).",
+        Matchup: "Opposing lineup's average hitter K% — higher = lineup strikes out more often (easier K matchup).",
+        Pick: "K pick score — 70% pitcher K stuff + 30% opposing lineup K susceptibility. Higher = stronger lean for strikeout props.",
+    };
+
     const EXPLORE_PITCHER_LB_TIPS = {
         Pitcher: "Starting pitcher — click for full HR vulnerability profile, splits, arsenal, and recent starts.",
+        kPick:
+            "K pick score (1–100 slate scale). Combines Whiff%, K%, Edge% vs today's SPs plus how often the opposing lineup strikes out.",
         Game: "Today's matchup for this arm.",
         risk: "Overall dinger risk % (Savant-weighted). Only SPs at ≥50% appear here. Click column to sort.",
         barrelPct: "Season barrel% allowed — ideal EV/LA contact surrendered. Top HR predictor for targeting.",
@@ -1342,6 +1364,126 @@
         computeHandDingerFromSavant(entries, "rhb", "dingerRiskRhbPct");
     }
 
+    function computeWeightedKPercentile(stats, weights, metricPools) {
+        let weighted = 0;
+        let totalWeight = 0;
+        for (const [key, weight] of Object.entries(weights)) {
+            const val = stats[key];
+            if (val == null || Number.isNaN(Number(val))) continue;
+            const pool = metricPools[key];
+            if (!pool?.length) continue;
+            const pct = percentileRank(pool, Number(val), true);
+            weighted += pct * weight;
+            totalWeight += weight;
+        }
+        if (totalWeight <= 0) return null;
+        return Math.round((weighted / totalWeight) * 10) / 10;
+    }
+
+    function opposingLineupForPitcherEntry(entry) {
+        const game = entry.game;
+        return entry.side === "away" ? game.homeLineup || [] : game.awayLineup || [];
+    }
+
+    function avgLineupKPct(lineup) {
+        const vals = (lineup || [])
+            .map((r) => hitterStats(r).kPct)
+            .filter((v) => v != null && !Number.isNaN(Number(v)));
+        if (!vals.length) return null;
+        return Math.round((vals.reduce((a, b) => a + Number(b), 0) / vals.length) * 10) / 10;
+    }
+
+    function computeHandKFromSavant(entries, handKey, statKey) {
+        const pairs = [];
+        for (const entry of entries) {
+            const hstats = handSavantStatsForPitcher(entry.pitcher, handKey);
+            if (hstats) pairs.push({ entry, hstats });
+        }
+        if (!pairs.length) return;
+        const metricPools = {};
+        for (const key of Object.keys(K_HAND_WEIGHTS)) {
+            metricPools[key] = pairs
+                .map((p) => Number(p.hstats[key]))
+                .filter((n) => !Number.isNaN(n));
+        }
+        for (const { entry, hstats } of pairs) {
+            const stats = pitcherStats(entry.pitcher);
+            if (stats[statKey] != null) continue;
+            const score = computeWeightedKPercentile(hstats, K_HAND_WEIGHTS, metricPools);
+            if (score == null) continue;
+            entry.pitcher.stats = {
+                ...stats,
+                [statKey]: Math.round(score),
+                [`${statKey}Source`]: "savant-hand",
+            };
+        }
+    }
+
+    function computeKScoreForSlate() {
+        const entries = collectSlatePitcherEntries();
+        if (!entries.length) return;
+
+        const stuffPools = {};
+        for (const key of Object.keys(K_STUFF_WEIGHTS)) {
+            stuffPools[key] = entries
+                .map((e) => Number(pitcherStats(e.pitcher)[key]))
+                .filter((n) => !Number.isNaN(n));
+        }
+
+        const lineupKPools = entries
+            .map((e) => avgLineupKPct(opposingLineupForPitcherEntry(e)))
+            .filter((v) => v != null && !Number.isNaN(Number(v)));
+
+        const ranked = [];
+        for (const entry of entries) {
+            const stats = pitcherStats(entry.pitcher);
+            const kStuff = computeWeightedKPercentile(stats, K_STUFF_WEIGHTS, stuffPools);
+            const lineupK = avgLineupKPct(opposingLineupForPitcherEntry(entry));
+            let kMatch = null;
+            if (lineupK != null && lineupKPools.length) {
+                kMatch = Math.round(percentileRank(lineupKPools, lineupK, true) * 10) / 10;
+            }
+            let kPick = null;
+            if (kStuff != null && kMatch != null) {
+                kPick = Math.round((kStuff * 0.7 + kMatch * 0.3) * 10) / 10;
+            } else if (kStuff != null) {
+                kPick = kStuff;
+            }
+            const patch = {};
+            if (kStuff != null) {
+                patch.kStuffPct = Math.round(kStuff);
+                patch.kStuff = kStuff;
+            }
+            if (kMatch != null) {
+                patch.kMatchPct = Math.round(kMatch);
+                patch.lineupAvgKPct = lineupK;
+            }
+            if (kPick != null) {
+                patch.kPickPct = Math.round(kPick);
+                patch.kPick = kPick;
+            }
+            entry.pitcher.stats = { ...stats, ...patch };
+            if (kPick != null) ranked.push({ entry, score: kPick });
+        }
+
+        ranked.sort((a, b) => b.score - a.score);
+        ranked.forEach(({ entry }, idx) => {
+            entry.pitcher.stats = {
+                ...pitcherStats(entry.pitcher),
+                kPickRank: idx + 1,
+                kPickSlateSize: ranked.length,
+            };
+        });
+
+        computeHandKFromSavant(entries, "lhb", "kStuffLhbPct");
+        computeHandKFromSavant(entries, "rhb", "kStuffRhbPct");
+    }
+
+    function computePitcherScoresForSlate() {
+        computePitcherScoresForSlate();
+        computeKScoreForSlate();
+    }
+
     function handSavantStatsForPitcher(pitcher, handKey) {
         const lookup = ensurePitcherHandLookupSync() || {};
         const pid = pitcher?.id;
@@ -1461,6 +1603,64 @@
         </div>`;
     }
 
+    function kScoreTone(score) {
+        if (score == null || Number.isNaN(Number(score))) return "rs-pitcher-k-card--mid";
+        const n = Number(score);
+        if (n >= 66) return "rs-pitcher-k-card--prime";
+        if (n >= 33) return "rs-pitcher-k-card--mid";
+        return "rs-pitcher-k-card--fade";
+    }
+
+    function renderKScoreCardHtml(label, pct, sublabel, tipKey) {
+        const tone = kScoreTone(pct);
+        const tip = K_SCORE_TIPS[tipKey || label];
+        const tipAttr = tip
+            ? ` class="rs-pitcher-k-card rs-has-tip ${tone}" data-tip="${escapeTip(tip)}" tabindex="0"`
+            : ` class="rs-pitcher-k-card ${tone}"`;
+        return `<div${tipAttr}>
+            <span class="rs-pitcher-k-card__label">${label}</span>
+            <span class="rs-pitcher-k-card__score">${fmtDingerRiskValue(pct)}</span>
+            ${sublabel ? `<span class="rs-pitcher-k-card__sub">${sublabel}</span>` : ""}
+        </div>`;
+    }
+
+    function renderKPickRowHtml(stats) {
+        const rank =
+            stats.kPickRank != null
+                ? `#${stats.kPickRank}${stats.kPickSlateSize ? ` of ${stats.kPickSlateSize}` : ""}`
+                : "";
+        const matchupSub =
+            stats.lineupAvgKPct != null ? `opp ${fmtPct(stats.lineupAvgKPct)} K` : "Lineup K";
+        return `<div class="rs-pitcher-k-row">
+            ${renderKScoreCardHtml("K pick", stats.kPickPct ?? stats.kPick, rank || "Today's slate", "Pick")}
+            ${renderKScoreCardHtml("K stuff", stats.kStuffPct ?? stats.kStuff, "Whiff · K · Edge", "Overall")}
+            ${renderKScoreCardHtml("Matchup", stats.kMatchPct, matchupSub, "Matchup")}
+        </div>`;
+    }
+
+    function renderPitcherKGrid(stats, statsList) {
+        const keys = ["whiffPct", "kPct", "edgePct", "zonePct"];
+        const cells = keys
+            .map((key) => {
+                const metric = pitcherMetricByKey(key);
+                if (!metric) return "";
+                const kMetric = { ...metric, hrHigherIsGreen: key !== "zonePct" };
+                return pitcherStatCellHtml(kMetric, stats, statsList);
+            })
+            .join("");
+        const handBits = [];
+        if (stats.kStuffLhbPct != null) handBits.push(`vs L: ${stats.kStuffLhbPct}%`);
+        if (stats.kStuffRhbPct != null) handBits.push(`vs R: ${stats.kStuffRhbPct}%`);
+        const handLine = handBits.length
+            ? `<p class="rs-pitcher-k__hand">${handBits.join(" · ")}</p>`
+            : "";
+        return `<div class="rs-pitcher-k">
+            <p class="rs-pitcher-k__lede">Read K props: <strong>Whiff%</strong> is swing-and-miss skill, <strong>K%</strong> is the outcome, <strong>Edge%</strong> shows command on the borders (chase + called strikes). Pair with the opposing lineup's K% in the header cards.</p>
+            ${handLine}
+            <div class="rs-pitcher-group__grid">${cells}</div>
+        </div>`;
+    }
+
     function pitcherMetricByKey(key) {
         return PITCHER_METRICS.find((m) => m.key === key);
     }
@@ -1474,6 +1674,9 @@
         const cell = (val, fmt) => (val != null && !Number.isNaN(Number(val)) ? fmt(val) : "—");
         const rows = [
             ["Dinger risk", stats.dingerRiskLhbPct != null ? `${stats.dingerRiskLhbPct}%` : "—", stats.dingerRiskRhbPct != null ? `${stats.dingerRiskRhbPct}%` : "—"],
+            ["K stuff", stats.kStuffLhbPct != null ? `${stats.kStuffLhbPct}%` : "—", stats.kStuffRhbPct != null ? `${stats.kStuffRhbPct}%` : "—"],
+            ["Whiff%", cell(lhb?.whiffPct, fmtPct), cell(rhb?.whiffPct, fmtPct)],
+            ["K%", cell(lhb?.kPct, fmtPct), cell(rhb?.kPct, fmtPct)],
             ["Barrel%", cell(lhb?.barrelPct, fmtPct), cell(rhb?.barrelPct, fmtPct)],
             ["Hard-hit%", cell(lhb?.hardHitPct, fmtPct), cell(rhb?.hardHitPct, fmtPct)],
             ["EV allowed", cell(lhb?.avgEV, fmtEv), cell(rhb?.avgEV, fmtEv)],
@@ -1534,6 +1737,7 @@
         const overview = renderPitcherOverviewGrid(stats, statsList);
         const splits = renderPitcherHandSplitsTable(pitcher, stats);
         const leak = renderPitcherLeakGrid(stats, statsList);
+        const kpick = renderPitcherKGrid(stats, statsList);
         const arsenal = pitcher.arsenalLabel ? `<div class="rs-pitcher-card__mix">${pitcher.arsenalLabel}</div>` : "";
         return `<article class="rs-pitcher-card rs-pitcher-card--${sideLabel.toLowerCase()} rs-pitcher-card--clickable" data-pitcher-id="${pid}" data-game="${gameIdx}" data-side="${side}" role="button" tabindex="0" title="Open pitcher profile">
             <header class="rs-pitcher-card__head">
@@ -1544,14 +1748,17 @@
                 <h3 class="rs-pitcher-card__name">${pitcher.name}</h3>
                 ${arsenal}
                 ${renderDingerRiskRowHtml(stats)}
+                ${renderKPickRowHtml(stats)}
             </header>
             <nav class="rs-pitcher-card__tabs" aria-label="Pitcher card views">
                 <button type="button" class="rs-pitcher-card__tab is-active" data-tab="overview">Overview</button>
+                <button type="button" class="rs-pitcher-card__tab" data-tab="kpick"><span class="rs-tab-long">K pick</span><span class="rs-tab-short">K</span></button>
                 <button type="button" class="rs-pitcher-card__tab" data-tab="splits">Splits</button>
                 <button type="button" class="rs-pitcher-card__tab" data-tab="leak"><span class="rs-tab-long">Contact leak</span><span class="rs-tab-short">Leak</span></button>
             </nav>
             <div class="rs-pitcher-card__body">
                 <div class="rs-pitcher-card__pane" data-pane="overview">${overview}</div>
+                <div class="rs-pitcher-card__pane" data-pane="kpick" hidden>${kpick}</div>
                 <div class="rs-pitcher-card__pane" data-pane="splits" hidden>${splits}</div>
                 <div class="rs-pitcher-card__pane" data-pane="leak" hidden>${leak}</div>
             </div>
@@ -1606,7 +1813,7 @@
         }
         const date = slate?.sheet_date || els.dateInput?.value || sheetDateFromQuery();
         await ensurePitcherHandLookup(seasonFromDate(date));
-        computeDingerRiskForSlate();
+        computePitcherScoresForSlate();
         const away = game.awayPitcher;
         const home = game.homePitcher;
         if (!away?.name && !home?.name) {
@@ -1646,13 +1853,13 @@
                     pitcher.stats = stats;
                 }
             }
-            computeDingerRiskForSlate();
+            computePitcherScoresForSlate();
             return { n: Object.keys(slate.savant_pitcher_lookup).length, source: "embedded" };
         }
         const cached = await fetchDataJson(`savant-pitcher-${season}.json`);
         const lookup = cached.data?.lookup || {};
         if (!Object.keys(lookup).length) {
-            computeDingerRiskForSlate();
+            computePitcherScoresForSlate();
             return { n: 0, source: null, lastStatus: cached.lastStatus };
         }
         for (const game of slate.games || []) {
@@ -1668,7 +1875,7 @@
                 pitcher.stats = stats;
             }
         }
-        computeDingerRiskForSlate();
+        computePitcherScoresForSlate();
         return { n: Object.keys(lookup).length, source: cached.url || "cache" };
     }
 
@@ -4718,6 +4925,12 @@
     function buildPitcherProfileGridHtml(pitcher, stats, statsList) {
         const blocks = [];
         blocks.push(
+            profileBlockSection(
+                "K pick profile",
+                `${renderKPickRowHtml(stats)}${renderPitcherKGrid(stats, statsList)}`
+            )
+        );
+        blocks.push(
             profileBlockSection("HR contact leak (season)", renderPitcherLeakGrid(stats, statsList))
         );
         blocks.push(profileBlockSection("Handedness splits", renderPitcherHandSplitsTable(pitcher, stats)));
@@ -4735,8 +4948,9 @@
         if (els.profileJump) els.profileJump.hidden = false;
         if (els.profileTracker) els.profileTracker.hidden = true;
         const { pitcher, game, team } = entry;
-        const stats = pitcherStats(pitcher);
         const season = seasonFromDate(slate?.sheet_date || sheetDateFromQuery());
+        computePitcherScoresForSlate();
+        const stats = pitcherStats(pitcher);
         const statsList = collectSlatePitcherStatsList();
         renderPitcherProfileHeader(pitcher, { team, game });
         renderPitcherProfileHero(stats);
@@ -4849,6 +5063,7 @@
 
     function explorePitcherSortValue(entry, key) {
         const ps = pitcherStats(entry.pitcher);
+        if (key === "kPick") return ps.kPickPct ?? ps.kPick ?? null;
         if (key === "risk") return ps.dingerRiskPct ?? ps.dingerRisk ?? null;
         if (key === "lhb") return ps.dingerRiskLhbPct ?? null;
         if (key === "rhb") return ps.dingerRiskRhbPct ?? null;
@@ -4857,7 +5072,7 @@
 
     function renderExplorePanel() {
         if (!els.hrLeaderboardBody) return;
-        computeDingerRiskForSlate();
+        computePitcherScoresForSlate();
         refreshAllHrProps();
         rebuildHrTicketScale();
         const hitters = filteredExploreHitters().slice(0, HR_RESEARCH_CONFIG.explore.topHitters);
@@ -4955,10 +5170,10 @@
                 ? pitchers
                       .map((e) => {
                           const ps = pitcherStats(e.pitcher);
-                          return `<tr class="rs-leaderboard-row rs-pitcher-lb-row" data-pitcher-id="${e.pitcher.id || ""}" data-game="${e.gameIdx}" data-side="${e.side}"><td><button type="button" class="rs-leaderboard-link">${e.pitcher.name}</button></td><td>${e.game.matchup}</td><td>${Math.round(Number(e.risk))}%</td><td>${fmtPct(ps.barrelPct)}</td><td>${fmtPct(ps.hardHitPct)}</td><td>${ps.hr9 != null ? Number(ps.hr9).toFixed(2) : "—"}</td><td>${ps.dingerRiskLhbPct != null ? `${ps.dingerRiskLhbPct}%` : "—"}</td><td>${ps.dingerRiskRhbPct != null ? `${ps.dingerRiskRhbPct}%` : "—"}</td></tr>`;
+                          return `<tr class="rs-leaderboard-row rs-pitcher-lb-row" data-pitcher-id="${e.pitcher.id || ""}" data-game="${e.gameIdx}" data-side="${e.side}"><td><button type="button" class="rs-leaderboard-link">${e.pitcher.name}</button></td><td>${e.game.matchup}</td><td>${Math.round(Number(e.risk))}%</td><td>${ps.kPickPct != null ? `${ps.kPickPct}%` : "—"}</td><td>${fmtPct(ps.barrelPct)}</td><td>${fmtPct(ps.hardHitPct)}</td><td>${ps.hr9 != null ? Number(ps.hr9).toFixed(2) : "—"}</td><td>${ps.dingerRiskLhbPct != null ? `${ps.dingerRiskLhbPct}%` : "—"}</td><td>${ps.dingerRiskRhbPct != null ? `${ps.dingerRiskRhbPct}%` : "—"}</td></tr>`;
                       })
                       .join("")
-                : `<tr><td colspan="8" class="rs-empty">Pitcher dinger risk unavailable.</td></tr>`;
+                : `<tr><td colspan="9" class="rs-empty">Pitcher dinger risk unavailable.</td></tr>`;
             els.pitcherLeaderboardBody.querySelectorAll(".rs-pitcher-lb-row").forEach((tr) => {
                 tr.querySelector(".rs-leaderboard-link")?.addEventListener("click", () => {
                     const id = Number(tr.getAttribute("data-pitcher-id"));

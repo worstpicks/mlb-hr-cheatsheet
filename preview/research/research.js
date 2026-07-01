@@ -113,7 +113,7 @@
         mixPlus:
             "Pitch-mix fit — xwOBA vs starter's arsenal vs league average. Positive % = favorable matchup; largest single input to ticket score.",
         formPct:
-            "Recent form — wOBA vs xwOBA gap (Savant). Positive % = hitting above expected contact quality lately; nudges ticket score.",
+            "Recent form — wOBA vs xwOBA gap (Savant), shown as %. ↑ heating up, ↓ cooling off, ← flat (last 4 games vs prior 4 by SLG).",
         barrelPct: "Season barrel rate — ideal EV/LA contact. Core power signal; high barrels mean more true HR upside.",
         airPct: "Fly ball + line drive share. More balls in the air = more chances to leave the yard.",
         nearHr: "Near misses — balls that almost cleared the fence; hints at latent HR luck turning.",
@@ -178,7 +178,7 @@
         { key: "fbPct", label: "FB%", group: "plate", stat: "fbPct", fmt: (r) => fmtPct(hitterStats(r).fbPct), tip: "Fly ball rate — share of batted balls in the air. Fly-ball hitters tend to have more home run upside." },
         { key: "airPct", label: "Air%", group: "batted", stat: "airPct", fmt: (r) => fmtPct(hitterStats(r).airPct), tip: "Air rate (FB% + LD%) — share of batted balls in the air. Higher often means more HR upside." },
         { key: "hrFbPct", label: "HR/FB%", group: "plate", stat: "hrFbPct", fmt: (r) => fmtPct(hitterStats(r).hrFbPct), tip: "Home runs per fly ball — how often fly balls leave the yard. Power efficiency on balls in the air." },
-        { key: "recentForm", label: "Form%", group: "plate", stat: "recentForm", fmt: (r) => fmtFormPct(hitterStats(r).recentForm), tip: "Recent form — wOBA vs expected wOBA gap (Savant). Positive means outperforming expected contact quality; feeds HR ticket score." },
+        { key: "recentForm", label: "Form%", group: "plate", stat: "recentForm", fmt: (r) => fmtFormWithTrend(hitterStats(r).recentForm, formTrendForRow(r)), tip: "Recent form — wOBA vs expected wOBA gap (Savant), shown as %. Arrow: ↑ heating up, ↓ cooling off, ← flat (last 4 games vs prior 4 by SLG)." },
         { key: "whiffPct", label: "Whiff%", group: "plate", stat: "whiffPct", fmt: (r) => fmtPct(hitterStats(r).whiffPct), tip: "Whiff rate — swings and misses as a share of swings. Lower is better for contact hitters." },
         { key: "kPct", label: "K%", group: "plate", stat: "kPct", fmt: (r) => fmtPct(hitterStats(r).kPct), tip: "Strikeout rate — strikeouts as a share of plate appearances. Lower is better for contact." },
         { key: "gbPct", label: "GB%", group: "batted", stat: "gbPct", fmt: (r) => fmtPct(hitterStats(r).gbPct), tip: "Ground ball rate — share of batted balls on the ground. Lower rates often correlate with more power and fly balls." },
@@ -352,6 +352,7 @@
     let profileToastTimer = null;
     const trendsCache = new Map();
     const pitcherTrendsCache = new Map();
+    const formTrendCache = new Map();
     const BET_TRACKER_LS = "worstpickz-bet-tracker-v1";
     let searchBlurTimer = null;
 
@@ -463,6 +464,81 @@
         if (v == null || Number.isNaN(Number(v))) return "—";
         const n = Number(v);
         return (n > 0 ? "+" : "") + n.toFixed(1) + "%";
+    }
+
+    function fmtRecentFormPct(v) {
+        if (v == null || Number.isNaN(Number(v))) return "—";
+        const n = Number(v);
+        return (n > 0 ? "+" : "") + Math.round(n) + "%";
+    }
+
+    function formTrendForRow(row) {
+        const id = row?.id;
+        if (!id) return null;
+        return formTrendCache.get(id) ?? formTrendCache.get(String(id)) ?? null;
+    }
+
+    function computeFormTrendFromGames(games) {
+        const slg = (games || []).map((g) => g.slg).filter((v) => v != null && !Number.isNaN(Number(v)));
+        if (slg.length < 8) return "flat";
+        const recent = slg.slice(-4);
+        const prior = slg.slice(-8, -4);
+        const avg = (arr) => arr.reduce((a, b) => a + Number(b), 0) / arr.length;
+        const delta = avg(recent) - avg(prior);
+        if (delta > 0.02) return "up";
+        if (delta < -0.02) return "down";
+        return "flat";
+    }
+
+    function formTrendArrow(trend) {
+        if (trend === "up") return "↑";
+        if (trend === "down") return "↓";
+        if (trend === "flat") return "←";
+        return "";
+    }
+
+    function formTrendLabel(trend) {
+        if (trend === "up") return "Form trending up";
+        if (trend === "down") return "Form trending down";
+        if (trend === "flat") return "Form flat";
+        return "";
+    }
+
+    function fmtFormWithTrend(val, trend) {
+        const pct = fmtRecentFormPct(val);
+        if (pct === "—" || !trend) return pct;
+        const arrow = formTrendArrow(trend);
+        const label = formTrendLabel(trend);
+        return `${pct}<span class="rs-form-trend rs-form-trend--${trend}" title="${label}" aria-label="${label}">${arrow}</span>`;
+    }
+
+    let formTrendHydrateGen = 0;
+
+    function scheduleFormTrendHydrate(playerIds) {
+        const season = seasonFromDate(slate?.sheet_date || els.dateInput?.value || sheetDateFromQuery());
+        const todo = [...new Set((playerIds || []).filter((id) => id && !formTrendCache.has(id)))];
+        if (!todo.length) return;
+        const gen = ++formTrendHydrateGen;
+        (async () => {
+            for (let i = 0; i < todo.length; i += 8) {
+                if (gen !== formTrendHydrateGen) return;
+                const batch = todo.slice(i, i + 8);
+                await Promise.all(
+                    batch.map(async (id) => {
+                        try {
+                            const games = await fetchPlayerTrends(id, season);
+                            formTrendCache.set(id, computeFormTrendFromGames(games));
+                        } catch {
+                            formTrendCache.set(id, "flat");
+                        }
+                    })
+                );
+            }
+            if (gen !== formTrendHydrateGen) return;
+            renderTable();
+            renderMobileCards();
+            renderExplorePanel();
+        })();
     }
 
     function fmtPitchCode(code) {
@@ -4233,6 +4309,8 @@
             })
             .join("");
 
+        scheduleFormTrendHydrate(rows.map((r) => r.id).filter(Boolean));
+
         document.querySelectorAll(".rs-cell-heat--good").forEach((el) => {
             el.style.background = "var(--rs-good-bg)";
             el.style.boxShadow = "inset 0 0 0 1px rgba(134, 239, 172, 0.35)";
@@ -4716,7 +4794,7 @@
             profileStatCell("HR/FB%", fmtPct(stats.hrFbPct), powerMetricTone("hrFbPct", stats.hrFbPct)),
             profileStatCell("Pull%", fmtPct(stats.pullPct), powerMetricTone("pullPct", stats.pullPct)),
             profileStatCell("Sweet%", fmtPct(stats.sweetSpotPct), powerMetricTone("sweetSpotPct", stats.sweetSpotPct)),
-            profileStatCell("Form%", fmtFormPct(stats.recentForm), powerMetricTone("recentForm", stats.recentForm)),
+            profileStatCell("Form%", fmtFormWithTrend(stats.recentForm, formTrendForRow(row)), powerMetricTone("recentForm", stats.recentForm)),
         ];
         return profileBlockSection(
             title,
@@ -5115,7 +5193,7 @@
                         <td>${fmtSavantPct(ticket?.riskPct)}</td>
                         <td>${fmtSignedPct(ticket?.parkPct)}</td>
                         <td>${fmtFormPct(ticket?.mixPlus)}</td>
-                        <td>${fmtFormPct(stats.recentForm)}</td>
+                        <td>${fmtFormWithTrend(stats.recentForm, formTrendForRow(e.row))}</td>
                         <td>${fmtPct(stats.barrelPct)}</td>
                         <td>${fmtPct(stats.airPct)}</td>
                         <td>${fmtNearHr(e.row)}</td>
@@ -5124,6 +5202,8 @@
                   })
                   .join("")
             : `<tr><td colspan="14" class="rs-empty">No hitters match these filters.</td></tr>`;
+
+        scheduleFormTrendHydrate(hitters.map((e) => e.row?.id).filter(Boolean));
 
         els.hrLeaderboardBody.querySelectorAll(".rs-leaderboard-row").forEach((tr) => {
             tr.querySelector(".rs-leaderboard-link")?.addEventListener("click", () => {
@@ -5235,6 +5315,8 @@
         parkFactorsLookupDate = null;
         pitcherHandLookup = null;
         clearHrTicketCache();
+        formTrendCache.clear();
+        formTrendHydrateGen += 1;
         if (els.dateInput) els.dateInput.value = date;
         if (els.backLink) els.backLink.href = `../index.html`;
 

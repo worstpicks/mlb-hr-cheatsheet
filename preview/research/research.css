@@ -1108,6 +1108,17 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
 .rs-cell-heat--good { color: #ecfccb; }
 .rs-cell-heat--mid { color: #fef3c7; }
 .rs-cell-heat--bad { color: #fee2e2; }
+.rs-form-trend {
+    display: inline-block;
+    margin-left: 0.2em;
+    font-size: 0.95em;
+    font-weight: 800;
+    line-height: 1;
+    vertical-align: middle;
+}
+.rs-form-trend--up { color: #86efac; }
+.rs-form-trend--down { color: #fca5a5; }
+.rs-form-trend--flat { color: #94a3b8; }
 .rs-empty {
     padding: 48px 20px;
     text-align: center;

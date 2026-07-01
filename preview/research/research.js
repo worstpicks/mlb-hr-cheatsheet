@@ -1480,7 +1480,7 @@
     }
 
     function computePitcherScoresForSlate() {
-        computePitcherScoresForSlate();
+        computeDingerRiskForSlate();
         computeKScoreForSlate();
     }
 

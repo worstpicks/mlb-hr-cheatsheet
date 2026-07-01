@@ -75,7 +75,7 @@
             { id: "mix", label: "Pitch-mix fit", metrics: "Savant xwOBA vs starter arsenal" },
             { id: "environment", label: "HR environment", metrics: "Ballpark Pal park + weather + wind + dimensions" },
             { id: "power", label: "Power contact", metrics: "Barrel%, EV, HR/FB%, air rate (FB+LD%)" },
-            { id: "form", label: "Recent form", metrics: "wOBA vs xwOBA gap, HR, near-HR, game-log trends" },
+            { id: "form", label: "HR form", metrics: "Due+, near-HR, contact gap, rolling HR rate vs season" },
         ],
     };
 
@@ -113,7 +113,7 @@
         mixPlus:
             "Pitch-mix fit — xwOBA vs starter's arsenal vs league average. Positive % = favorable matchup; largest single input to ticket score.",
         formPct:
-            "Recent form — wOBA vs xwOBA gap (Savant), shown as %. ↑ heating up, ↓ cooling off, ← flat (last 4 games vs prior 4 by SLG).",
+            "HR form score (slate 0–100) — Due+, near-HR, contact quality gap, and last-7 HR rate vs season. ↑↓← = HR trend (last 4 games vs prior 4).",
         barrelPct: "Season barrel rate — ideal EV/LA contact. Core power signal; high barrels mean more true HR upside.",
         airPct: "Fly ball + line drive share. More balls in the air = more chances to leave the yard.",
         nearHr: "Near misses — balls that almost cleared the fence; hints at latent HR luck turning.",
@@ -178,7 +178,7 @@
         { key: "fbPct", label: "FB%", group: "plate", stat: "fbPct", fmt: (r) => fmtPct(hitterStats(r).fbPct), tip: "Fly ball rate — share of batted balls in the air. Fly-ball hitters tend to have more home run upside." },
         { key: "airPct", label: "Air%", group: "batted", stat: "airPct", fmt: (r) => fmtPct(hitterStats(r).airPct), tip: "Air rate (FB% + LD%) — share of batted balls in the air. Higher often means more HR upside." },
         { key: "hrFbPct", label: "HR/FB%", group: "plate", stat: "hrFbPct", fmt: (r) => fmtPct(hitterStats(r).hrFbPct), tip: "Home runs per fly ball — how often fly balls leave the yard. Power efficiency on balls in the air." },
-        { key: "recentForm", label: "Form%", group: "plate", stat: "recentForm", fmt: (r) => fmtFormWithTrend(hitterStats(r).recentForm, formTrendForRow(r)), tip: "Recent form — wOBA vs expected wOBA gap (Savant), shown as %. Arrow: ↑ heating up, ↓ cooling off, ← flat (last 4 games vs prior 4 by SLG)." },
+        { key: "hrFormPct", label: "HR Form%", group: "plate", stat: "hrFormPct", fmt: (r) => fmtHrFormWithTrend(hitterStats(r).hrFormPct, formTrendForRow(r)), tip: "HR form — slate-relative score from Due+ (xHR luck), near-HR/mostly-gone, wOBA vs xwOBA gap, and last-7 HR rate vs season. Higher = better HR momentum today. Arrow tracks HR in last 4 games vs prior 4." },
         { key: "whiffPct", label: "Whiff%", group: "plate", stat: "whiffPct", fmt: (r) => fmtPct(hitterStats(r).whiffPct), tip: "Whiff rate — swings and misses as a share of swings. Lower is better for contact hitters." },
         { key: "kPct", label: "K%", group: "plate", stat: "kPct", fmt: (r) => fmtPct(hitterStats(r).kPct), tip: "Strikeout rate — strikeouts as a share of plate appearances. Lower is better for contact." },
         { key: "gbPct", label: "GB%", group: "batted", stat: "gbPct", fmt: (r) => fmtPct(hitterStats(r).gbPct), tip: "Ground ball rate — share of batted balls on the ground. Lower rates often correlate with more power and fly balls." },
@@ -353,6 +353,14 @@
     const trendsCache = new Map();
     const pitcherTrendsCache = new Map();
     const formTrendCache = new Map();
+    const hrFormRollingCache = new Map();
+
+    const HR_FORM_WEIGHTS = {
+        hrLuckDiff: 35,
+        hrProximity: 25,
+        recentForm: 20,
+        rollingHrBoost: 20,
+    };
     const BET_TRACKER_LS = "worstpickz-bet-tracker-v1";
     let searchBlurTimer = null;
 
@@ -365,7 +373,7 @@
         "hrEnv",
         "hardHitPct",
         "blastPct",
-        "recentForm",
+        "hrFormPct",
         "hrFbPct",
         "fbPct",
         "barrelPct",
@@ -466,28 +474,110 @@
         return (n > 0 ? "+" : "") + n.toFixed(1) + "%";
     }
 
-    function fmtRecentFormPct(v) {
-        if (v == null || Number.isNaN(Number(v))) return "—";
-        const n = Number(v);
-        return (n > 0 ? "+" : "") + Math.round(n) + "%";
-    }
-
     function formTrendForRow(row) {
         const id = row?.id;
         if (!id) return null;
         return formTrendCache.get(id) ?? formTrendCache.get(String(id)) ?? null;
     }
 
-    function computeFormTrendFromGames(games) {
-        const slg = (games || []).map((g) => g.slg).filter((v) => v != null && !Number.isNaN(Number(v)));
-        if (slg.length < 8) return "flat";
-        const recent = slg.slice(-4);
-        const prior = slg.slice(-8, -4);
-        const avg = (arr) => arr.reduce((a, b) => a + Number(b), 0) / arr.length;
-        const delta = avg(recent) - avg(prior);
-        if (delta > 0.02) return "up";
-        if (delta < -0.02) return "down";
+    function hrProximitySignal(stats) {
+        const near = stats?.nearHr;
+        const mostly = stats?.mostlyGone;
+        if (near == null && mostly == null) return null;
+        return (Number(near) || 0) + (Number(mostly) || 0) * 0.75;
+    }
+
+    function rollingHrBoostFromGames(games, stats) {
+        const slice = (games || []).slice(-7);
+        let hr = 0;
+        let pa = 0;
+        for (const g of slice) {
+            hr += Number(g.hr) || 0;
+            pa += Number(g.pa) || 0;
+        }
+        if (pa < 8) return null;
+        const last7 = hr / pa;
+        const seasonPa = stats?.pa;
+        const seasonHr = stats?.hr;
+        if (!seasonPa || seasonPa < 20 || seasonHr == null) return null;
+        const seasonRate = seasonHr / seasonPa;
+        return Math.round((last7 - seasonRate) * 1000) / 10;
+    }
+
+    function computeHrFormTrendFromGames(games) {
+        const hrs = (games || []).map((g) => Number(g.hr) || 0);
+        if (hrs.length < 8) return "flat";
+        const recent = hrs.slice(-4).reduce((a, b) => a + b, 0);
+        const prior = hrs.slice(-8, -4).reduce((a, b) => a + b, 0);
+        if (recent > prior) return "up";
+        if (recent < prior) return "down";
         return "flat";
+    }
+
+    function scoreHrForm(stats, pools, rollingBoost) {
+        let weighted = 0;
+        let totalWeight = 0;
+        const parts = [
+            ["hrLuckDiff", stats.hrLuckDiff, HR_FORM_WEIGHTS.hrLuckDiff],
+            ["hrProximity", hrProximitySignal(stats), HR_FORM_WEIGHTS.hrProximity],
+            ["recentForm", stats.recentForm, HR_FORM_WEIGHTS.recentForm],
+            ["rollingHrBoost", rollingBoost, HR_FORM_WEIGHTS.rollingHrBoost],
+        ];
+        for (const [key, val, weight] of parts) {
+            if (val == null || Number.isNaN(Number(val)) || !weight) continue;
+            const pool = pools[key];
+            if (!pool?.length) continue;
+            const pct = percentileRank(pool, Number(val), true);
+            weighted += pct * weight;
+            totalWeight += weight;
+        }
+        if (totalWeight <= 0) return null;
+        return Math.round((weighted / totalWeight) * 10) / 10;
+    }
+
+    function buildHrFormPools(entries) {
+        const pools = {
+            hrLuckDiff: [],
+            hrProximity: [],
+            recentForm: [],
+            rollingHrBoost: [],
+        };
+        for (const entry of entries) {
+            const stats = hitterStats(entry.row);
+            if (stats.hrLuckDiff != null && !Number.isNaN(Number(stats.hrLuckDiff))) {
+                pools.hrLuckDiff.push(Number(stats.hrLuckDiff));
+            }
+            const prox = hrProximitySignal(stats);
+            if (prox != null) pools.hrProximity.push(prox);
+            if (stats.recentForm != null && !Number.isNaN(Number(stats.recentForm))) {
+                pools.recentForm.push(Number(stats.recentForm));
+            }
+            const id = entry.row?.id;
+            const rolling =
+                hrFormRollingCache.get(id) ?? hrFormRollingCache.get(String(id)) ?? null;
+            if (rolling != null && !Number.isNaN(Number(rolling))) {
+                pools.rollingHrBoost.push(Number(rolling));
+            }
+        }
+        return pools;
+    }
+
+    function computeHrFormForSlate() {
+        const entries = collectSlateHitters();
+        if (!entries.length) return;
+        const pools = buildHrFormPools(entries);
+        for (const entry of entries) {
+            const row = entry.row;
+            if (!row) continue;
+            const stats = hitterStats(row);
+            const id = row.id;
+            const rolling =
+                hrFormRollingCache.get(id) ?? hrFormRollingCache.get(String(id)) ?? null;
+            const score = scoreHrForm(stats, pools, rolling);
+            if (score == null) continue;
+            row.stats = { ...stats, hrFormPct: Math.round(score), hrForm: score };
+        }
+        clearHrTicketCache();
     }
 
     function formTrendArrow(trend) {
@@ -498,14 +588,14 @@
     }
 
     function formTrendLabel(trend) {
-        if (trend === "up") return "Form trending up";
-        if (trend === "down") return "Form trending down";
-        if (trend === "flat") return "Form flat";
+        if (trend === "up") return "HR form trending up";
+        if (trend === "down") return "HR form trending down";
+        if (trend === "flat") return "HR form flat";
         return "";
     }
 
-    function fmtFormWithTrend(val, trend) {
-        const pct = fmtRecentFormPct(val);
+    function fmtHrFormWithTrend(val, trend) {
+        const pct = fmtSavantPct(val);
         if (pct === "—" || !trend) return pct;
         const arrow = formTrendArrow(trend);
         const label = formTrendLabel(trend);
@@ -514,7 +604,7 @@
 
     let formTrendHydrateGen = 0;
 
-    function scheduleFormTrendHydrate(playerIds) {
+    function scheduleHrFormHydrate(playerIds) {
         const season = seasonFromDate(slate?.sheet_date || els.dateInput?.value || sheetDateFromQuery());
         const todo = [...new Set((playerIds || []).filter((id) => id && !formTrendCache.has(id)))];
         if (!todo.length) return;
@@ -527,7 +617,11 @@
                     batch.map(async (id) => {
                         try {
                             const games = await fetchPlayerTrends(id, season);
-                            formTrendCache.set(id, computeFormTrendFromGames(games));
+                            formTrendCache.set(id, computeHrFormTrendFromGames(games));
+                            const entry = collectSlateHitters().find((e) => e.row?.id === id);
+                            const stats = entry ? hitterStats(entry.row) : {};
+                            const boost = rollingHrBoostFromGames(games, stats);
+                            if (boost != null) hrFormRollingCache.set(id, boost);
                         } catch {
                             formTrendCache.set(id, "flat");
                         }
@@ -535,6 +629,7 @@
                 );
             }
             if (gen !== formTrendHydrateGen) return;
+            computeHrFormForSlate();
             renderTable();
             renderMobileCards();
             renderExplorePanel();
@@ -667,6 +762,10 @@
     }
 
     function ticketFormSignal(stats) {
+        const hf = stats.hrFormPct ?? stats.hrForm;
+        if (hf != null && !Number.isNaN(Number(hf))) {
+            return (Number(hf) / 100) * 14;
+        }
         const rf = stats.recentForm;
         if (rf != null && !Number.isNaN(Number(rf))) {
             return Math.max(Number(rf), 0) * 0.35;
@@ -2858,7 +2957,7 @@
         if (key === "riskPct") return ticket?.riskPct ?? null;
         if (key === "parkPct") return ticket?.parkPct ?? null;
         if (key === "mixPlus") return ticket?.mixPlus ?? null;
-        if (key === "formPct") return stats.recentForm ?? null;
+        if (key === "formPct") return stats.hrFormPct ?? stats.hrForm ?? null;
         if (key === "barrelPct") return stats.barrelPct ?? null;
         if (key === "airPct") return stats.airPct ?? null;
         if (key === "nearHr") return stats.nearHr ?? null;
@@ -4079,7 +4178,7 @@
             bipPct: true,
             fbPct: true,
             hrFbPct: true,
-            recentForm: true,
+            hrFormPct: true,
             gbPct: false,
             ldPct: true,
             pullPct: true,
@@ -4309,7 +4408,7 @@
             })
             .join("");
 
-        scheduleFormTrendHydrate(rows.map((r) => r.id).filter(Boolean));
+        scheduleHrFormHydrate(rows.map((r) => r.id).filter(Boolean));
 
         document.querySelectorAll(".rs-cell-heat--good").forEach((el) => {
             el.style.background = "var(--rs-good-bg)";
@@ -4511,6 +4610,7 @@
         if (val == null || Number.isNaN(Number(val))) return null;
         const n = Number(val);
         if (key === "hrLuckDiff") return n >= 1 ? "good" : n <= -1 ? "bad" : "mid";
+        if (key === "hrFormPct") return n >= 66 ? "good" : n <= 33 ? "bad" : "mid";
         if (key === "recentForm" || key === "mixPlus" || key === "mixEdge") {
             if (n >= 5) return "good";
             if (n <= -5) return "bad";
@@ -4794,7 +4894,7 @@
             profileStatCell("HR/FB%", fmtPct(stats.hrFbPct), powerMetricTone("hrFbPct", stats.hrFbPct)),
             profileStatCell("Pull%", fmtPct(stats.pullPct), powerMetricTone("pullPct", stats.pullPct)),
             profileStatCell("Sweet%", fmtPct(stats.sweetSpotPct), powerMetricTone("sweetSpotPct", stats.sweetSpotPct)),
-            profileStatCell("Form%", fmtFormWithTrend(stats.recentForm, formTrendForRow(row)), powerMetricTone("recentForm", stats.recentForm)),
+            profileStatCell("HR Form%", fmtHrFormWithTrend(stats.hrFormPct, formTrendForRow(row)), powerMetricTone("hrFormPct", stats.hrFormPct)),
         ];
         return profileBlockSection(
             title,
@@ -5147,6 +5247,7 @@
 
     function renderExplorePanel() {
         if (!els.hrLeaderboardBody) return;
+        computeHrFormForSlate();
         computePitcherScoresForSlate();
         refreshAllHrProps();
         rebuildHrTicketScale();
@@ -5171,7 +5272,7 @@
                 splitPct: "Split",
                 riskPct: "Risk",
                 parkPct: "Park",
-                formPct: "Form%",
+                formPct: "HR Form%",
             };
             els.exploreMeta.textContent = `${hitters.length} of ${total} hitters · sorted by ${sortLabels[sortKey] || sortKey}`;
         }
@@ -5190,7 +5291,7 @@
                         <td>${fmtSavantPct(ticket?.riskPct)}</td>
                         <td>${fmtSignedPct(ticket?.parkPct)}</td>
                         <td>${fmtFormPct(ticket?.mixPlus)}</td>
-                        <td>${fmtFormWithTrend(stats.recentForm, formTrendForRow(e.row))}</td>
+                        <td>${fmtHrFormWithTrend(stats.hrFormPct, formTrendForRow(e.row))}</td>
                         <td>${fmtPct(stats.barrelPct)}</td>
                         <td>${fmtPct(stats.airPct)}</td>
                         <td>${fmtNearHr(e.row)}</td>
@@ -5200,7 +5301,7 @@
                   .join("")
             : `<tr><td colspan="14" class="rs-empty">No hitters match these filters.</td></tr>`;
 
-        scheduleFormTrendHydrate(hitters.map((e) => e.row?.id).filter(Boolean));
+        scheduleHrFormHydrate(hitters.map((e) => e.row?.id).filter(Boolean));
 
         els.hrLeaderboardBody.querySelectorAll(".rs-leaderboard-row").forEach((tr) => {
             tr.querySelector(".rs-leaderboard-link")?.addEventListener("click", () => {
@@ -5292,6 +5393,7 @@
         renderMatchupBar();
         renderWeatherPanel();
         await renderPitcherPanel();
+        computeHrFormForSlate();
         renderExplorePanel();
         renderTable();
         renderMobileCards();
@@ -5313,6 +5415,7 @@
         pitcherHandLookup = null;
         clearHrTicketCache();
         formTrendCache.clear();
+        hrFormRollingCache.clear();
         formTrendHydrateGen += 1;
         if (els.dateInput) els.dateInput.value = date;
         if (els.backLink) els.backLink.href = `../index.html`;

@@ -38,6 +38,13 @@ from research.window_savant import (
     fetch_season_statcast_lookup,
     merge_season_savant,
 )
+from research.rolling_window import (
+    HITTER_ROLLING_GAMES,
+    PITCHER_ROLLING_STARTS,
+    fetch_rolling_batter_lookup,
+    fetch_rolling_pitcher_lookup,
+    merge_rolling_over_season,
+)
 from research.window_stats import fetch_window_stats_batch, window_bounds
 
 MLB_API = "https://statsapi.mlb.com/api/v1"
@@ -487,6 +494,38 @@ def _collect_pitcher_ids(games: list[dict]) -> list[int]:
     return sorted(ids)
 
 
+def _apply_rolling_stat_windows(games: list[dict], season: int) -> tuple[int, int]:
+    """Merge last-N-game / last-N-start Savant profiles onto lineup + pitcher stats."""
+    hitter_ids = _collect_player_ids(games)
+    pitcher_ids = _collect_pitcher_ids(games)
+    rolling_batter = fetch_rolling_batter_lookup(hitter_ids, season, HITTER_ROLLING_GAMES)
+    rolling_pitcher = fetch_rolling_pitcher_lookup(pitcher_ids, season, PITCHER_ROLLING_STARTS)
+    for game in games:
+        for side in ("awayLineup", "homeLineup"):
+            updated: list[dict] = []
+            for row in game.get(side) or []:
+                pid = int(row.get("id") or 0)
+                if not pid:
+                    updated.append(row)
+                    continue
+                stats = dict(row.get("stats") or {})
+                merged = merge_rolling_over_season(rolling_batter.get(pid), stats)
+                updated.append({**row, "stats": merged or stats})
+            game[side] = updated
+        for pkey in ("awayPitcher", "homePitcher"):
+            pitcher = game.get(pkey)
+            if not pitcher:
+                continue
+            pid = int(pitcher.get("id") or 0)
+            if not pid:
+                continue
+            stats = dict(pitcher.get("stats") or {})
+            merged = merge_rolling_over_season(rolling_pitcher.get(pid), stats)
+            if merged:
+                pitcher["stats"] = merged
+    return len(rolling_batter), len(rolling_pitcher)
+
+
 def _attach_pitcher_savant_stats(games: list[dict], savant_pitcher_lookup: dict[int, dict]) -> None:
     if not savant_pitcher_lookup:
         return
@@ -778,6 +817,11 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
             game.get("awayLineup") or [], game.get("homeLineup") or []
         )
 
+    rolling_batters = 0
+    rolling_pitchers = 0
+    if with_stats:
+        rolling_batters, rolling_pitchers = _apply_rolling_stat_windows(games, season)
+
     if with_stats:
         hand_ids = _collect_player_ids(games)
         hands = fetch_batter_hands_batch(hand_ids) if hand_ids else {}
@@ -800,13 +844,23 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         "sheet_date": sheet_date,
         "season": season,
         "roster_season": roster_season,
-        "stat_window": "savant-season" if savant_only else "last30d",
+        "stat_window": "rolling",
         "stat_windows": {
+            "hitters": {
+                "label": f"Last {HITTER_ROLLING_GAMES} games",
+                "games": HITTER_ROLLING_GAMES,
+            },
+            "pitchers": {
+                "label": f"Last {PITCHER_ROLLING_STARTS} starts",
+                "starts": PITCHER_ROLLING_STARTS,
+            },
             "season": {
                 "label": str(season),
                 "games": None,
-            }
+            },
         },
+        "rolling_batters": rolling_batters,
+        "rolling_pitchers": rolling_pitchers,
         "window_start": window_start if not savant_only else None,
         "window_end": window_end if not savant_only else None,
         "source": (

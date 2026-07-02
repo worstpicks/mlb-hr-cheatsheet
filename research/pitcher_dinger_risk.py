@@ -6,14 +6,14 @@ from typing import Any
 
 # Higher raw value = more HR-prone for most metrics. K% is inverted (contact = risk).
 DINGER_RISK_WEIGHTS: dict[str, float] = {
-    "hr9": 20.0,
-    "barrelPct": 18.0,
-    "hrFbPct": 15.0,
-    "hardHitPct": 12.0,
+    "hr9": 22.0,
+    "barrelPct": 20.0,
+    "hrFbPct": 16.0,
+    "hardHitPct": 14.0,
     "fbPct": 10.0,
     "meatballPct": 10.0,
-    "sweetSpotPct": 10.0,
-    "kPct": 5.0,
+    "sweetSpotPct": 5.0,
+    "kPct": 3.0,
 }
 
 INVERT_RISK_KEYS = frozenset({"kPct"})

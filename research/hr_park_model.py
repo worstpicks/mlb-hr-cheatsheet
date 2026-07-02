@@ -8,10 +8,14 @@ from typing import Any
 from research.park_weather import wind_component_toward_cf, _baseline_da_ft
 from research.stadium_db import lookup_stadium_spec
 
-REF_ALLEY_FT = 380.0
+REF_ALLEY_FT = 377.0
 CARRY_HR_PCT_PER_3FT = 0.11
-DA_MULT_PER_1000FT = 0.10
-WIND_MULT_AT_15MPH = 0.25
+WEATHER_DA_BLEND = 0.75
+WEATHER_CARRY_BLEND = 0.25
+CARRY_CHANNEL_SCALE = 0.45
+DIM_OVERLAP_SCALE = 0.50
+WIND_SOFT_CAP_MPH = 12.0
+WIND_SOFT_TAIL = 0.45
 HR_ENV_WEIGHTS = {
     "stadium": 0.30,
     "weather": 0.15,
@@ -76,8 +80,37 @@ def da_compound_multiplier(da_delta_ft: float | None) -> float:
 
 
 def wind_compound_multiplier(wind_out_mph: float | None) -> float:
-    pct = _display_wind_pct(wind_out_mph)
+    if wind_out_mph is None:
+        return 1.0
+    mph = float(wind_out_mph)
+    sign = 1.0 if mph >= 0 else -1.0
+    abs_mph = abs(mph)
+    if abs_mph <= WIND_SOFT_CAP_MPH:
+        effective = abs_mph
+    else:
+        effective = WIND_SOFT_CAP_MPH + (abs_mph - WIND_SOFT_CAP_MPH) * WIND_SOFT_TAIL
+    pct = _clamp_display_pct(sign * effective, -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP)
     return 1.0 if pct is None else 1.0 + pct / 100.0
+
+
+def weather_compound_multiplier(
+    da_delta_ft: float | None,
+    carry_boost_ft: float | None = None,
+) -> float:
+    """Blend DA and carry channels — avoids double-counting the same thin-air signal."""
+    da_mult = da_compound_multiplier(da_delta_ft)
+    da_pct = (da_mult - 1.0) * 100.0
+    carry_boost = float(carry_boost_ft or 0)
+    carry_pct_raw = carry_feet_to_hr_pct(carry_boost) if carry_boost else 0.0
+    carry_pct = _clamp_display_pct(
+        carry_pct_raw * CARRY_CHANNEL_SCALE,
+        -HR_ENV_FACTOR_CAP,
+        HR_ENV_FACTOR_CAP,
+    )
+    carry_pct = 0.0 if carry_pct is None else float(carry_pct)
+    blended = da_pct * WEATHER_DA_BLEND + carry_pct * WEATHER_CARRY_BLEND
+    blended = _clamp_display_pct(blended, -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP)
+    return 1.0 if blended is None else 1.0 + blended / 100.0
 
 
 def wall_distance_multiplier(wall_ft: float | None, ref: float = REF_ALLEY_FT) -> float:
@@ -144,6 +177,37 @@ def park_pct_for_hand(game: dict, hand: str) -> int | None:
     return None
 
 
+def stadium_pct_for_hand(game: dict, hand: str) -> int | None:
+    """Stadium structure only — live Open-Meteo weather/wind applied separately."""
+    h = _hand_code(hand)
+    if h == "L" and game.get("parkLhbStadiumPct") is not None:
+        return int(game["parkLhbStadiumPct"])
+    if h in ("R", "S") and game.get("parkRhbStadiumPct") is not None:
+        return int(game["parkRhbStadiumPct"])
+    combined = park_pct_for_hand(game, hand)
+    wx_pct = game.get("parkWeatherPct")
+    if combined is not None and wx_pct is not None:
+        return int(combined) - int(wx_pct)
+    if game.get("parkStadiumPct") is not None:
+        return int(game["parkStadiumPct"])
+    return combined
+
+
+def _has_decomposed_park(game: dict) -> bool:
+    return bool(
+        game.get("parkLhbStadiumPct") is not None
+        or game.get("parkRhbStadiumPct") is not None
+        or game.get("parkStadiumPct") is not None
+        or game.get("parkStadiumOnly")
+    )
+
+
+def _dim_mult_scaled(dim_mult: float, decomposed: bool) -> float:
+    if not decomposed:
+        return dim_mult
+    return 1.0 + (dim_mult - 1.0) * DIM_OVERLAP_SCALE
+
+
 def pitcher_split_score(pitcher: dict | None, batter_hand: str) -> float | None:
     if not pitcher:
         return None
@@ -178,11 +242,15 @@ def compute_game_weather_model(park_weather: dict | None, stadium: dict) -> dict
     baseline = wx.get("baselineDaFt") or _baseline_da_ft()
     da = wx.get("densityAltFt")
     da_delta = None if da is None else da - baseline
-    da_mult = da_compound_multiplier(da_delta)
     carry_boost = wx.get("distanceBoostFt") or 0
-    carry_pct = _clamp_display_pct(carry_feet_to_hr_pct(float(carry_boost)), -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP)
+    da_mult = da_compound_multiplier(da_delta)
+    carry_pct = _clamp_display_pct(
+        carry_feet_to_hr_pct(float(carry_boost)) * CARRY_CHANNEL_SCALE,
+        -HR_ENV_FACTOR_CAP,
+        HR_ENV_FACTOR_CAP,
+    )
     carry_mult = 1.0 if carry_pct is None else 1.0 + carry_pct / 100.0
-    weather_mult = _clamp_hr_env_mult(da_mult * carry_mult)
+    weather_mult = _clamp_hr_env_mult(weather_compound_multiplier(da_delta, carry_boost))
 
     wind_from = wx.get("windDirDeg")
     wind_mph = wx.get("windMph")
@@ -230,16 +298,21 @@ def compute_hitter_hr_prop(
     hand = _effective_hand(hitter.get("hand"), opposing_pitcher.get("throws") if opposing_pitcher else None)
     hr_model = game.get("hrModel") or compute_game_weather_model(game.get("parkWeather"), stadium)
 
-    park_pct = park_pct_for_hand(game, hand)
+    decomposed = _has_decomposed_park(game)
+    park_pct = stadium_pct_for_hand(game, hand)
     stadium_mult = 1.0 if park_pct is None else _clamp_hr_env_mult(1.0 + (float(park_pct) / 100.0) * 0.45)
 
     if hand == "L":
         wind_mult = _clamp_hr_env_mult(hr_model.get("windMultLhb") or 1.0)
-        dim_mult = _clamp_hr_env_mult(hr_model.get("dimMultLhb") or 1.0)
+        dim_mult = _clamp_hr_env_mult(
+            _dim_mult_scaled(hr_model.get("dimMultLhb") or 1.0, decomposed)
+        )
         wind_out = hr_model.get("windOutLhbMph")
     else:
         wind_mult = _clamp_hr_env_mult(hr_model.get("windMultRhb") or 1.0)
-        dim_mult = _clamp_hr_env_mult(hr_model.get("dimMultRhb") or 1.0)
+        dim_mult = _clamp_hr_env_mult(
+            _dim_mult_scaled(hr_model.get("dimMultRhb") or 1.0, decomposed)
+        )
         wind_out = hr_model.get("windOutRhbMph")
 
     weather_mult = _clamp_hr_env_mult(hr_model.get("weatherMult") or 1.0)

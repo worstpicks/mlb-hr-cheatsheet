@@ -220,6 +220,14 @@ def attach_park_factors_to_games(games: list[dict], lookup: dict) -> None:
             game["parkRhbPct"] = ctx["park_rhb_pct"]
         else:
             game.pop("parkRhbPct", None)
+        if ctx.get("stadium_pct") is not None:
+            game["parkStadiumPct"] = ctx["stadium_pct"]
+        if ctx.get("weather_pct") is not None:
+            game["parkWeatherPct"] = ctx["weather_pct"]
+        if ctx.get("lhb_stadium_pct") is not None:
+            game["parkLhbStadiumPct"] = ctx["lhb_stadium_pct"]
+        if ctx.get("rhb_stadium_pct") is not None:
+            game["parkRhbStadiumPct"] = ctx["rhb_stadium_pct"]
         if ctx.get("venue"):
             game["venue"] = game.get("venue") or ctx["venue"]
         if source_label:

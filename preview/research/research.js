@@ -41,25 +41,15 @@
      * Worst Pickz HR research scoring weights.
      */
     const HR_RESEARCH_CONFIG = {
+        ticketVersion: 2,
         ticket: {
-            mixWeight: 1.0,
-            formWeight: 0.4,
-            splitMultiplier: 10,
-            riskMultiplier: 10,
-            parkPositiveMultiplier: 0.65,
-            parkNegativeMultiplier: 0.22,
-            riskBaseline: 58,
-        },
-        powerForm: {
-            hr: 1.2,
-            nearHr: 0.9,
-            evAbove90: 0.35,
-            barrelDivisor: 8,
-        },
-        mixFit: {
-            baseScale: 2.05,
-            bonusThreshold: 5,
-            bonusScale: 0.75,
+            pillars: {
+                mix: 0.3,
+                pitcher: 0.25,
+                environment: 0.15,
+                form: 0.2,
+                power: 0.1,
+            },
         },
         explore: {
             sort: "ticketRank",
@@ -71,13 +61,27 @@
             minPitcherRisk: 50,
         },
         pillars: [
-            { id: "pitcher", label: "Pitcher leak", metrics: "Dinger risk + hand split vs SP" },
             { id: "mix", label: "Pitch-mix fit", metrics: "Savant xwOBA vs starter arsenal" },
-            { id: "environment", label: "HR environment", metrics: "Ballpark Pal park + weather + wind + dimensions" },
-            { id: "power", label: "Power contact", metrics: "Barrel%, EV, HR/FB%, air rate (FB+LD%)" },
-            { id: "form", label: "HR form", metrics: "Due+, near-HR, contact gap, rolling HR rate vs season" },
+            { id: "pitcher", label: "Pitcher leak", metrics: "Hand-specific dinger risk vs SP" },
+            { id: "environment", label: "HR environment", metrics: "Park + weather + wind + dimensions" },
+            { id: "form", label: "HR form", metrics: "Due+, near-HR, rolling HR rate, contact shape" },
+            { id: "power", label: "Power contact", metrics: "Barrel%, hard-hit%, air rate" },
         ],
     };
+
+    const ESSENTIAL_COL_KEYS = [
+        "order",
+        "name",
+        "hand",
+        "ticketScore",
+        "mixPlus",
+        "hrEnv",
+        "hrFormPct",
+        "boomPct",
+        "barrelPct",
+        "nearHr",
+    ];
+    const TABLE_VIEW_STORAGE_KEY = "research-hitter-table-view-v2";
 
     const GROUPS = [
         { id: "identity", label: "Lineup", className: "rs-group--identity" },
@@ -92,7 +96,7 @@
         identity: "Who's batting and where — order and handedness set platoon context for today's HR look.",
         matchup: "Starter matchup and HR environment — pitch-mix fit plus park, weather, wind, and pitcher leak combined.",
         power: "Season power output — homers, expected HR, luck, and near misses that signal HR upside.",
-        contact: "Contact quality — how hard and true the hitter squares the ball; drives carry and HR probability.",
+        contact: "Contact quality — how hard and true the hitter squares the ball; Boom% blends barrel, blast, hard-hit, air, FB, and solid contact for HR shape.",
         batted: "Batted-ball shape — launch angle, air rate, and pull profile tied to homer paths.",
         plate: "Overall plate profile — averages, whiff, and recent form that support or limit power.",
     };
@@ -121,9 +125,9 @@
     };
 
     const K_STUFF_WEIGHTS = {
-        whiffPct: 40,
-        kPct: 40,
-        edgePct: 20,
+        whiffPct: 38,
+        kPct: 38,
+        edgePct: 24,
     };
 
     const K_HAND_WEIGHTS = {
@@ -138,6 +142,9 @@
         RHB: "K stuff vs right-handed hitters (Whiff% + K% on Savant hand splits).",
         Matchup: "Opposing lineup's average hitter K% — higher = lineup strikes out more often (easier K matchup).",
         Pick: "K pick score — 70% pitcher K stuff + 30% opposing lineup K susceptibility. Higher = stronger lean for strikeout props.",
+        ExpK: "Expected strikeouts — projected IP × effective K/9, adjusted for opposing lineup K% and K pick score.",
+        CeilingK: "Ceiling K — realistic max if pitch count runs deep and recent form plays up.",
+        Line: "Nearest half-K prop line with Over (O) or Under (U) lean from expected K.",
     };
 
     const EXPLORE_PITCHER_LB_TIPS = {
@@ -159,6 +166,14 @@
         { key: "order", label: "#", group: "identity", fmt: (r) => r.order ?? "—", tip: "Batting order spot in today's lineup." },
         { key: "name", label: "Hitter", group: "identity", fmt: (r) => r.name, text: true, tip: "Player name and defensive position." },
         { key: "hand", label: "B", group: "identity", fmt: (r) => r.hand || "—", text: true, tip: "Batting hand — L (left), R (right), or S (switch)." },
+        {
+            key: "ticketScore",
+            label: "Score",
+            group: "matchup",
+            ticket: true,
+            fmt: (r) => fmtTicketBadgeForRow(r),
+            tip: "HR ticket score (1–100 slate scale). Combines mix fit, pitcher leak, HR environment, form, and power contact.",
+        },
         { key: "mixPlus", label: "Mix%", group: "matchup", stat: "mixPlus", fmt: (r) => fmtFormPct(hitterStats(r).mixPlus), tip: "Pitch-mix fit — weighted xwOBA vs this starter's pitch usage compared to league average on those pitches. Positive % = favorable matchup; heaviest input to HR ticket score." },
         { key: "mixEdge", label: "Edge%", group: "matchup", stat: "mixEdge", fmt: (r) => fmtFormPct(hitterStats(r).mixEdge), tip: "Personal edge — how the hitter performs vs this pitch mix compared to their own season xwOBA. Positive % = better than their baseline for this SP." },
         { key: "hrEnv", label: "HR env", group: "matchup", hrProp: true, fmt: (r) => fmtHrPropPct(r), tip: "HR environment — park, weather, wind, dimensions, and pitcher vulnerability combined. Positive = better homer conditions today; separate from ticket score but same slate context." },
@@ -179,6 +194,7 @@
         { key: "airPct", label: "Air%", group: "batted", stat: "airPct", fmt: (r) => fmtPct(hitterStats(r).airPct), tip: "Air rate (FB% + LD%) — share of batted balls in the air. Higher often means more HR upside." },
         { key: "hrFbPct", label: "HR/FB%", group: "plate", stat: "hrFbPct", fmt: (r) => fmtPct(hitterStats(r).hrFbPct), tip: "Home runs per fly ball — how often fly balls leave the yard. Power efficiency on balls in the air." },
         { key: "hrFormPct", label: "HR Form%", group: "plate", stat: "hrFormPct", fmt: (r) => fmtHrFormWithTrend(hitterStats(r).hrFormPct, formTrendForRow(r)), tip: "HR form — slate-relative score from Due+ (xHR luck), near-HR/mostly-gone, wOBA vs xwOBA gap, and last-7 HR rate vs season. Higher = better HR momentum today. Arrow tracks HR in last 4 games vs prior 4." },
+        { key: "boomPct", label: "Boom%", group: "contact", stat: "boomPct", fmt: (r) => fmtBoomWithTrend(hitterStats(r).boomPct, boomTrendForRow(r)), tip: "Boom% — slate-relative HR contact score from Barrel%, Blast%, Hard Hit%, Air%, FB%, and Solid Contact%. Higher = more homer-shaped contact today. Arrow tracks recent ISO + HR power vs prior 4 games." },
         { key: "whiffPct", label: "Whiff%", group: "plate", stat: "whiffPct", fmt: (r) => fmtPct(hitterStats(r).whiffPct), tip: "Whiff rate — swings and misses as a share of swings. Lower is better for contact hitters." },
         { key: "kPct", label: "K%", group: "plate", stat: "kPct", fmt: (r) => fmtPct(hitterStats(r).kPct), tip: "Strikeout rate — strikeouts as a share of plate appearances. Lower is better for contact." },
         { key: "gbPct", label: "GB%", group: "batted", stat: "gbPct", fmt: (r) => fmtPct(hitterStats(r).gbPct), tip: "Ground ball rate — share of batted balls on the ground. Lower rates often correlate with more power and fly balls." },
@@ -202,15 +218,74 @@
     let hrTicketScale = { min: null, max: null, ready: false };
     let activeGameIdx = 0;
     let activeSide = "away";
-    let sortKey = "mixPlus";
+    let sortKey = "ticketScore";
     let sortDir = -1;
     let sortUserOverride = false;
+    let tableViewMode = loadTableViewMode();
     let exploreSortKey = "ticketRank";
     let pitcherLbSortKey = "risk";
     let pitcherLbSortDir = -1;
 
     const IDENTITY_COL_KEYS = new Set(["order", "name", "hand"]);
     const COLUMN_ORDER_STORAGE_KEY = "research-hitter-column-order";
+
+    function loadTableViewMode() {
+        try {
+            const v = localStorage.getItem(TABLE_VIEW_STORAGE_KEY);
+            if (v === "essential") return "essential";
+            return "full";
+        } catch {
+            return "full";
+        }
+    }
+
+    const COL_SHORT_LABELS = {
+        ticketScore: "Scr",
+        mixPlus: "Mix",
+        mixEdge: "Edge",
+        hrEnv: "Env",
+        expectedHr: "xHR",
+        hrLuckDiff: "Due+",
+        nearHr: "Near",
+        hardHitPct: "Hard",
+        solidContactPct: "Solid",
+        blastPct: "Blast",
+        hrFormPct: "Form",
+        boomPct: "Boom",
+        swingStrength: "SqUp",
+        sweetSpotPct: "Sweet",
+        launchAngle: "LA",
+        batSpeed: "Bat",
+        hrFbPct: "HR/FB",
+    };
+
+    function colDisplayLabel(col) {
+        if (!col) return "";
+        if (tableViewMode === "essential") return col.label;
+        return COL_SHORT_LABELS[col.key] || col.label;
+    }
+
+    function saveTableViewMode(mode) {
+        try {
+            localStorage.setItem(TABLE_VIEW_STORAGE_KEY, mode);
+        } catch (e) {}
+    }
+
+    function setTableViewMode(mode) {
+        tableViewMode = mode === "full" ? "full" : "essential";
+        saveTableViewMode(tableViewMode);
+        if (els.tableViewEssential) els.tableViewEssential.classList.toggle("is-active", tableViewMode === "essential");
+        if (els.tableViewFull) els.tableViewFull.classList.toggle("is-active", tableViewMode === "full");
+        if (els.tableWrap) {
+            els.tableWrap.classList.toggle("rs-table-wrap--essential", tableViewMode === "essential");
+            els.tableWrap.classList.toggle("rs-table-wrap--full", tableViewMode === "full");
+        }
+        if (els.colReorderBtn) els.colReorderBtn.hidden = tableViewMode !== "full";
+        if (tableViewMode === "essential" && columnReorderMode) setColumnReorderMode(false);
+        renderTable();
+        renderMobileCards();
+        syncMobileSortSelect();
+    }
 
     let columnReorderMode = false;
     let columnOrderKeys = loadColumnOrderKeys();
@@ -223,8 +298,11 @@
             const parsed = JSON.parse(raw);
             if (!Array.isArray(parsed)) return null;
             const valid = new Set(COLS.map((c) => c.key));
-            const keys = parsed.filter((k) => valid.has(k) && !IDENTITY_COL_KEYS.has(k));
-            return keys.length ? keys : null;
+            const keys = parsed
+                .map((k) => (k === "recentForm" ? "hrFormPct" : k))
+                .filter((k) => valid.has(k) && !IDENTITY_COL_KEYS.has(k));
+            const deduped = [...new Set(keys)];
+            return deduped.length ? deduped : null;
         } catch {
             return null;
         }
@@ -238,13 +316,28 @@
         return COLS.filter((c) => !IDENTITY_COL_KEYS.has(c.key)).map((c) => c.key);
     }
 
+    /** Saved order merged with any new columns (e.g. hrFormPct) so drag-drop always has valid indices. */
+    function mergedReorderableColumnKeys() {
+        const base = defaultReorderableKeys();
+        const saved = columnOrderKeys;
+        if (!saved?.length) return base;
+        const keys = [];
+        for (const k of saved) {
+            if (base.includes(k) && !keys.includes(k)) keys.push(k);
+        }
+        for (const k of base) {
+            if (!keys.includes(k)) keys.push(k);
+        }
+        return keys;
+    }
+
     function reorderableColumnKeys() {
-        return columnOrderKeys || defaultReorderableKeys();
+        return mergedReorderableColumnKeys();
     }
 
     function moveColumnKey(dragKey, targetKey) {
         if (IDENTITY_COL_KEYS.has(dragKey) || IDENTITY_COL_KEYS.has(targetKey)) return;
-        const keys = reorderableColumnKeys().slice();
+        const keys = mergedReorderableColumnKeys().slice();
         const from = keys.indexOf(dragKey);
         const to = keys.indexOf(targetKey);
         if (from < 0 || to < 0 || from === to) return;
@@ -273,16 +366,13 @@
     }
 
     function visibleCols() {
-        const base = defaultReorderableKeys();
-        const saved = reorderableColumnKeys();
         const byKey = Object.fromEntries(COLS.map((c) => [c.key, c]));
-        const ordered = [];
-        for (const k of saved) {
-            if (byKey[k] && !IDENTITY_COL_KEYS.has(k)) ordered.push(byKey[k]);
+        if (tableViewMode === "essential") {
+            return ESSENTIAL_COL_KEYS.map((k) => byKey[k]).filter(Boolean);
         }
-        for (const k of base) {
-            if (!saved.includes(k) && byKey[k]) ordered.push(byKey[k]);
-        }
+        const ordered = mergedReorderableColumnKeys()
+            .map((k) => byKey[k])
+            .filter(Boolean);
         return [...COLS.filter((c) => IDENTITY_COL_KEYS.has(c.key)), ...ordered];
     }
 
@@ -343,6 +433,11 @@
         colResetBtn: document.getElementById("rsColResetBtn"),
         colReorderHint: document.getElementById("rsColReorderHint"),
         tableWrap: document.querySelector(".rs-table-wrap"),
+        matchupSummary: document.getElementById("rsMatchupSummary"),
+        tableViewEssential: document.getElementById("rsTableViewEssential"),
+        tableViewFull: document.getElementById("rsTableViewFull"),
+        header: document.querySelector(".rs-header"),
+        exploreLbCards: document.getElementById("rsExploreLbCards"),
     };
 
     let profileEntry = null;
@@ -353,13 +448,23 @@
     const trendsCache = new Map();
     const pitcherTrendsCache = new Map();
     const formTrendCache = new Map();
+    const boomTrendCache = new Map();
     const hrFormRollingCache = new Map();
 
     const HR_FORM_WEIGHTS = {
-        hrLuckDiff: 35,
-        hrProximity: 25,
-        recentForm: 20,
-        rollingHrBoost: 20,
+        hrLuckDiff: 30,
+        hrProximity: 30,
+        rollingHrBoost: 25,
+        hrContactShape: 15,
+    };
+
+    const BOOM_WEIGHTS = {
+        barrelPct: 26,
+        blastPct: 20,
+        hardHitPct: 18,
+        airPct: 16,
+        fbPct: 14,
+        solidContactPct: 6,
     };
     const BET_TRACKER_LS = "worstpickz-bet-tracker-v1";
     let searchBlurTimer = null;
@@ -370,16 +475,18 @@
 
     const MOBILE_CARD_OPEN_GROUPS = new Set(["matchup", "power"]);
     const MOBILE_HIGHLIGHT_KEYS = [
+        "ticketScore",
         "hrEnv",
+        "mixPlus",
+        "hrFormPct",
+        "boomPct",
+        "barrelPct",
         "hardHitPct",
         "blastPct",
-        "hrFormPct",
         "hrFbPct",
         "fbPct",
-        "barrelPct",
         "pullPct",
         "airPct",
-        "mixPlus",
         "avgEV",
         "gbPct",
         "whiffPct",
@@ -417,6 +524,7 @@
     }
 
     const RESEARCH_KEEP_DATE_KEY = "research-keep-date";
+    const SORT_PREF_KEY = "research-hitter-sort";
 
     function defaultResearchDate() {
         return todayLocalIso();
@@ -480,11 +588,28 @@
         return formTrendCache.get(id) ?? formTrendCache.get(String(id)) ?? null;
     }
 
+    function boomTrendForRow(row) {
+        const id = row?.id;
+        if (!id) return null;
+        return boomTrendCache.get(id) ?? boomTrendCache.get(String(id)) ?? null;
+    }
+
     function hrProximitySignal(stats) {
         const near = stats?.nearHr;
         const mostly = stats?.mostlyGone;
         if (near == null && mostly == null) return null;
         return (Number(near) || 0) + (Number(mostly) || 0) * 0.75;
+    }
+
+    function hrContactShapeSignal(stats) {
+        const air = stats?.airPct ?? (stats?.fbPct != null && stats?.ldPct != null ? stats.fbPct + stats.ldPct : null);
+        const pull = stats?.pullPct;
+        if (air == null && pull == null) return null;
+        const airPart = air != null ? Math.max(Number(air) - 38, 0) : 0;
+        const pullPart = pull != null ? Math.max(Number(pull) - 38, 0) : 0;
+        if (air == null) return pullPart;
+        if (pull == null) return airPart;
+        return airPart * 0.6 + pullPart * 0.4;
     }
 
     function rollingHrBoostFromGames(games, stats) {
@@ -495,13 +620,15 @@
             hr += Number(g.hr) || 0;
             pa += Number(g.pa) || 0;
         }
-        if (pa < 8) return null;
+        if (pa < 4) return null;
         const last7 = hr / pa;
         const seasonPa = stats?.pa;
         const seasonHr = stats?.hr;
-        if (!seasonPa || seasonPa < 20 || seasonHr == null) return null;
+        if (!seasonPa || seasonPa < 20 || seasonHr == null) return Math.round(last7 * 1000) / 10;
         const seasonRate = seasonHr / seasonPa;
-        return Math.round((last7 - seasonRate) * 1000) / 10;
+        const trust = Math.min(pa / 20, 1);
+        const blended = trust * last7 + (1 - trust) * seasonRate;
+        return Math.round((blended - seasonRate) * 1000) / 10;
     }
 
     function computeHrFormTrendFromGames(games) {
@@ -520,8 +647,8 @@
         const parts = [
             ["hrLuckDiff", stats.hrLuckDiff, HR_FORM_WEIGHTS.hrLuckDiff],
             ["hrProximity", hrProximitySignal(stats), HR_FORM_WEIGHTS.hrProximity],
-            ["recentForm", stats.recentForm, HR_FORM_WEIGHTS.recentForm],
             ["rollingHrBoost", rollingBoost, HR_FORM_WEIGHTS.rollingHrBoost],
+            ["hrContactShape", hrContactShapeSignal(stats), HR_FORM_WEIGHTS.hrContactShape],
         ];
         for (const [key, val, weight] of parts) {
             if (val == null || Number.isNaN(Number(val)) || !weight) continue;
@@ -539,8 +666,8 @@
         const pools = {
             hrLuckDiff: [],
             hrProximity: [],
-            recentForm: [],
             rollingHrBoost: [],
+            hrContactShape: [],
         };
         for (const entry of entries) {
             const stats = hitterStats(entry.row);
@@ -549,9 +676,8 @@
             }
             const prox = hrProximitySignal(stats);
             if (prox != null) pools.hrProximity.push(prox);
-            if (stats.recentForm != null && !Number.isNaN(Number(stats.recentForm))) {
-                pools.recentForm.push(Number(stats.recentForm));
-            }
+            const shape = hrContactShapeSignal(stats);
+            if (shape != null) pools.hrContactShape.push(shape);
             const id = entry.row?.id;
             const rolling =
                 hrFormRollingCache.get(id) ?? hrFormRollingCache.get(String(id)) ?? null;
@@ -580,6 +706,82 @@
         clearHrTicketCache();
     }
 
+    function boomComponentValue(stats, key) {
+        if (key === "airPct") {
+            return stats?.airPct ?? (stats?.fbPct != null && stats?.ldPct != null ? Number(stats.fbPct) + Number(stats.ldPct) : null);
+        }
+        return stats?.[key] ?? null;
+    }
+
+    function boomRawSignal(stats) {
+        let weighted = 0;
+        let totalW = 0;
+        for (const [key, weight] of Object.entries(BOOM_WEIGHTS)) {
+            const val = boomComponentValue(stats, key);
+            if (val == null || Number.isNaN(Number(val))) continue;
+            weighted += Number(val) * weight;
+            totalW += weight;
+        }
+        return totalW > 0 ? weighted / totalW : null;
+    }
+
+    function buildBoomPools(entries) {
+        const pools = { boomRaw: [] };
+        for (const entry of entries) {
+            const raw = boomRawSignal(hitterStats(entry.row));
+            if (raw != null && !Number.isNaN(Number(raw))) pools.boomRaw.push(Number(raw));
+        }
+        return pools;
+    }
+
+    function scoreBoom(stats, pools) {
+        const raw = boomRawSignal(stats);
+        if (raw == null || Number.isNaN(Number(raw))) return null;
+        const pool = pools.boomRaw;
+        if (!pool?.length) return null;
+        return Math.round(percentileRank(pool, raw, true) * 10) / 10;
+    }
+
+    function computeBoomForSlate() {
+        const entries = collectSlateHitters();
+        if (!entries.length) return;
+        const pools = buildBoomPools(entries);
+        for (const entry of entries) {
+            const row = entry.row;
+            if (!row) continue;
+            const stats = hitterStats(row);
+            const score = scoreBoom(stats, pools);
+            if (score == null) continue;
+            row.stats = { ...stats, boomPct: Math.round(score), boom: score };
+        }
+    }
+
+    function gamePowerProxy(g) {
+        const pa = Number(g.pa) || 0;
+        if (pa <= 0) return null;
+        const hrRate = (Number(g.hr) || 0) / pa;
+        const iso = g.iso != null ? Number(g.iso) : null;
+        if (iso != null) return iso * 0.65 + hrRate * 0.35;
+        if (g.slg != null) {
+            const estIso = Math.max(Number(g.slg) - 0.22, 0);
+            return estIso * 0.65 + hrRate * 0.35;
+        }
+        return hrRate;
+    }
+
+    function computeBoomTrendFromGames(games) {
+        const proxies = (games || []).map(gamePowerProxy).filter((v) => v != null && !Number.isNaN(Number(v)));
+        if (proxies.length < 8) return "flat";
+        const recent = proxies.slice(-4);
+        const prior = proxies.slice(-8, -4);
+        const recentAvg = recent.reduce((a, b) => a + b, 0) / recent.length;
+        const priorAvg = prior.reduce((a, b) => a + b, 0) / prior.length;
+        const thresh = 0.008;
+        if (recentAvg > priorAvg + thresh) return "up";
+        if (recentAvg < priorAvg - thresh) return "down";
+        return "flat";
+    }
+
     function formTrendArrow(trend) {
         if (trend === "up") return "↑";
         if (trend === "down") return "↓";
@@ -594,19 +796,34 @@
         return "";
     }
 
-    function fmtHrFormWithTrend(val, trend) {
+    function boomTrendLabel(trend) {
+        if (trend === "up") return "Boom% trending up";
+        if (trend === "down") return "Boom% trending down";
+        if (trend === "flat") return "Boom% flat";
+        return "";
+    }
+
+    function fmtMetricWithTrend(val, trend, labelFn) {
         const pct = fmtSavantPct(val);
         if (pct === "—" || !trend) return pct;
         const arrow = formTrendArrow(trend);
-        const label = formTrendLabel(trend);
+        const label = labelFn(trend);
         return `${pct}<span class="rs-form-trend rs-form-trend--${trend}" title="${label}" aria-label="${label}">${arrow}</span>`;
+    }
+
+    function fmtHrFormWithTrend(val, trend) {
+        return fmtMetricWithTrend(val, trend, formTrendLabel);
+    }
+
+    function fmtBoomWithTrend(val, trend) {
+        return fmtMetricWithTrend(val, trend, boomTrendLabel);
     }
 
     let formTrendHydrateGen = 0;
 
     function scheduleHrFormHydrate(playerIds) {
         const season = seasonFromDate(slate?.sheet_date || els.dateInput?.value || sheetDateFromQuery());
-        const todo = [...new Set((playerIds || []).filter((id) => id && !formTrendCache.has(id)))];
+        const todo = [...new Set((playerIds || []).filter((id) => id && (!formTrendCache.has(id) || !boomTrendCache.has(id))))];
         if (!todo.length) return;
         const gen = ++formTrendHydrateGen;
         (async () => {
@@ -618,18 +835,22 @@
                         try {
                             const games = await fetchPlayerTrends(id, season);
                             formTrendCache.set(id, computeHrFormTrendFromGames(games));
+                            boomTrendCache.set(id, computeBoomTrendFromGames(games));
                             const entry = collectSlateHitters().find((e) => e.row?.id === id);
                             const stats = entry ? hitterStats(entry.row) : {};
                             const boost = rollingHrBoostFromGames(games, stats);
                             if (boost != null) hrFormRollingCache.set(id, boost);
                         } catch {
                             formTrendCache.set(id, "flat");
+                            boomTrendCache.set(id, "flat");
                         }
                     })
                 );
             }
             if (gen !== formTrendHydrateGen) return;
             computeHrFormForSlate();
+            computeBoomForSlate();
+            if (columnReorderMode) return;
             renderTable();
             renderMobileCards();
             renderExplorePanel();
@@ -695,82 +916,56 @@
         return game.parkHrPct != null ? Number(game.parkHrPct) : null;
     }
 
+    /** Stadium structure only — live weather/wind applied in HR env model separately. */
+    function parkStadiumPctForHitter(game, hand) {
+        if (!game) return null;
+        const h = String(hand || "").toUpperCase();
+        if (h === "L" && game.parkLhbStadiumPct != null) return Number(game.parkLhbStadiumPct);
+        if (game.parkRhbStadiumPct != null) return Number(game.parkRhbStadiumPct);
+        const combined = parkHrPctForHitter(game, hand);
+        if (combined != null && game.parkWeatherPct != null) return Number(combined) - Number(game.parkWeatherPct);
+        if (game.parkStadiumPct != null) return Number(game.parkStadiumPct);
+        return combined;
+    }
+
+    function hasDecomposedPark(game) {
+        return !!(
+            game?.parkLhbStadiumPct != null ||
+            game?.parkRhbStadiumPct != null ||
+            game?.parkStadiumPct != null ||
+            game?.parkStadiumOnly
+        );
+    }
+
+    function dimMultScaled(dimMult, decomposed) {
+        const mult = Number(dimMult);
+        if (!decomposed || Number.isNaN(mult)) return mult || 1;
+        return 1 + (mult - 1) * 0.5;
+    }
+
     function clearHrTicketCache() {
         hrTicketCache = new Map();
         hrTicketScale = { min: null, max: null, ready: false };
+        ticketSlatePools = null;
     }
 
     function rebuildHrTicketScale() {
-        let min = Infinity;
-        let max = -Infinity;
-        for (const entry of collectSlateHitters()) {
-            const rank = computeHrTicket(entry)?.rank;
-            if (rank == null || Number.isNaN(Number(rank))) continue;
-            const n = Number(rank);
-            if (n < min) min = n;
-            if (n > max) max = n;
-        }
-        if (!Number.isFinite(min)) {
-            hrTicketScale = { min: 0, max: 1, ready: true };
-            return;
-        }
-        hrTicketScale = { min, max, ready: true };
+        rebuildTicketSlatePools();
     }
 
     function ticketScoreTo100(rawRank) {
         if (rawRank == null || Number.isNaN(Number(rawRank))) return null;
-        if (!hrTicketScale.ready) rebuildHrTicketScale();
-        const { min, max } = hrTicketScale;
-        if (max <= min) return 100;
-        const t = (Number(rawRank) - min) / (max - min);
-        return Math.max(1, Math.min(100, Math.round(t * 99 + 1)));
+        return Math.max(1, Math.min(100, Math.round(Number(rawRank))));
     }
 
     function hrTicketScore100(entry) {
-        return ticketScoreTo100(computeHrTicket(entry)?.rank);
+        return computeHrTicket(entry)?.score100 ?? null;
     }
 
-    function savantPctToFactor(pct) {
-        if (pct == null || Number.isNaN(Number(pct))) return 0;
-        const baseline = HR_RESEARCH_CONFIG.ticket.riskBaseline ?? 58;
-        const excess = Math.max(Number(pct) - baseline, 0) / (100 - baseline);
-        return Math.min(excess * 0.8, 0.72);
-    }
-
-    function propfinderSplitRisk(val) {
-        if (val == null || Number.isNaN(Number(val))) return 0;
-        return Math.max(Number(val), 0);
-    }
-
-    function savantMixFit(mixPlus) {
-        if (mixPlus == null || Number.isNaN(Number(mixPlus))) return 0;
-        const m = Number(mixPlus);
-        const cfg = HR_RESEARCH_CONFIG.mixFit;
-        let fit = Math.max(m, 0) * cfg.baseScale;
-        if (m >= cfg.bonusThreshold) fit += (m - cfg.bonusThreshold) * cfg.bonusScale;
-        return fit;
-    }
-
-    function hrPowerForm(stats) {
-        const cfg = HR_RESEARCH_CONFIG.powerForm;
-        let form = (stats.hr ?? 0) * cfg.hr + (stats.nearHr ?? 0) * cfg.nearHr;
-        form += Math.max((stats.avgEV ?? 0) - 90.0, 0) * cfg.evAbove90;
-        form += (stats.barrelPct ?? 0) / cfg.barrelDivisor;
-        const air = stats.airPct ?? (stats.fbPct != null && stats.ldPct != null ? stats.fbPct + stats.ldPct : null);
-        if (air != null) form += Math.max(air - 45, 0) * 0.05;
-        return form;
-    }
-
-    function ticketFormSignal(stats) {
-        const hf = stats.hrFormPct ?? stats.hrForm;
-        if (hf != null && !Number.isNaN(Number(hf))) {
-            return (Number(hf) / 100) * 14;
-        }
-        const rf = stats.recentForm;
-        if (rf != null && !Number.isNaN(Number(rf))) {
-            return Math.max(Number(rf), 0) * 0.35;
-        }
-        return hrPowerForm(stats) * 0.12;
+    function handDingerSplitPct(ps, hand) {
+        const h = (hand || "R").toUpperCase();
+        if (h === "L") return ps.dingerRiskLhbPct ?? ps.vsLhbPct ?? null;
+        return ps.dingerRiskRhbPct ?? ps.vsRhbPct ?? null;
     }
 
     function fmtSavantPct(val) {
@@ -783,16 +978,140 @@
         return `${Math.round(Number(val))}/100`;
     }
 
-    function handDingerSplitPct(ps, hand) {
-        const h = (hand || "R").toUpperCase();
-        if (h === "L") return ps.dingerRiskLhbPct ?? ps.vsLhbPct ?? null;
-        return ps.dingerRiskRhbPct ?? ps.vsRhbPct ?? null;
+    function ticketScoreTone(score) {
+        if (score == null || Number.isNaN(Number(score))) return "mid";
+        const n = Number(score);
+        if (n >= 75) return "prime";
+        if (n >= 55) return "mid";
+        return "fade";
+    }
+
+    function fmtTicketBadge(score, compact) {
+        if (score == null || Number.isNaN(Number(score))) return "—";
+        const n = Math.round(Number(score));
+        const tone = ticketScoreTone(n);
+        const cls = compact ? " rs-ticket-badge--compact" : "";
+        const suffix = compact ? "" : `<span class="rs-ticket-badge__suffix">/100</span>`;
+        return `<span class="rs-ticket-badge rs-ticket-badge--${tone}${cls}">${n}${suffix}</span>`;
+    }
+
+    function idsMatch(a, b) {
+        if (a == null || b == null || a === "" || b === "") return false;
+        return String(a) === String(b);
+    }
+
+    function hitterEntryFromDom(el) {
+        const tr = el?.closest?.("tr[data-hitter-id]");
+        if (!tr) return null;
+        const id = tr.getAttribute("data-hitter-id");
+        if (!id) return null;
+        const row = sortedActiveRows().find((r) => idsMatch(r.id, id));
+        return entryForActiveRow(row);
+    }
+
+    function openHitterProfileFromDom(el) {
+        const entry = hitterEntryFromDom(el);
+        if (entry) openPlayerProfile(entry);
+    }
+
+    function entryForActiveRow(row) {
+        if (!row) return null;
+        const game = activeGame();
+        if (!game) return null;
+        return {
+            row,
+            game,
+            gameIdx: activeGameIdx,
+            side: activeSide,
+            team: activeSide === "away" ? game.away : game.home,
+            pitcher: activeSide === "away" ? game.homePitcher : game.awayPitcher,
+        };
+    }
+
+    function fmtTicketBadgeForRow(row) {
+        const entry = entryForActiveRow(row);
+        if (!entry) return "—";
+        return fmtTicketBadge(hrTicketScore100(entry), tableViewMode === "full");
+    }
+
+    function ticketPillarLine(ticket) {
+        if (!ticket?.pillars) return "";
+        const p = ticket.pillars;
+        const parts = [];
+        if (p.mix != null) parts.push(`Mix ${Math.round(p.mix)}`);
+        if (p.environment != null) parts.push(`Env ${Math.round(p.environment)}`);
+        if (p.pitcher != null) parts.push(`SP ${Math.round(p.pitcher)}`);
+        if (p.form != null) parts.push(`Form ${Math.round(p.form)}`);
+        return parts.join(" · ");
+    }
+
+    function powerContactSignal(stats) {
+        const barrel = stats?.barrelPct;
+        const hard = stats?.hardHitPct;
+        const air = stats?.airPct ?? (stats?.fbPct != null && stats?.ldPct != null ? stats.fbPct + stats.ldPct : null);
+        if (barrel == null && hard == null && air == null) return null;
+        let sum = 0;
+        let n = 0;
+        if (barrel != null) {
+            sum += Number(barrel) * 0.5;
+            n += 0.5;
+        }
+        if (hard != null) {
+            sum += Number(hard) * 0.3;
+            n += 0.3;
+        }
+        if (air != null) {
+            sum += Number(air) * 0.2;
+            n += 0.2;
+        }
+        return n > 0 ? sum / n : null;
+    }
+
+    let ticketSlatePools = null;
+
+    function buildTicketSlatePools(entries) {
+        const pools = {
+            mixPlus: [],
+            pitcherSplit: [],
+            hrEnv: [],
+            hrFormPct: [],
+            powerContact: [],
+        };
+        for (const entry of entries) {
+            const stats = hitterStats(entry.row);
+            if (stats.mixPlus != null && !Number.isNaN(Number(stats.mixPlus))) {
+                pools.mixPlus.push(Number(stats.mixPlus));
+            }
+            const hand = (entry.row?.hand || "R").toUpperCase();
+            const ps = pitcherStats(entry.pitcher);
+            const split = hand === "L" ? ps.dingerRiskLhbPct : ps.dingerRiskRhbPct;
+            if (split != null && !Number.isNaN(Number(split))) pools.pitcherSplit.push(Number(split));
+            const env = hrEnvScore(entry);
+            if (env != null && !Number.isNaN(Number(env))) pools.hrEnv.push(Number(env));
+            const form = stats.hrFormPct ?? stats.hrForm;
+            if (form != null && !Number.isNaN(Number(form))) pools.hrFormPct.push(Number(form));
+            const power = powerContactSignal(stats);
+            if (power != null && !Number.isNaN(Number(power))) pools.powerContact.push(Number(power));
+        }
+        return pools;
+    }
+
+    function rebuildTicketSlatePools() {
+        ticketSlatePools = buildTicketSlatePools(collectSlateHitters());
+    }
+
+    function pillarPercentile(pools, key, value, higherBetter = true) {
+        if (value == null || Number.isNaN(Number(value))) return null;
+        const pool = pools?.[key];
+        if (!pool?.length) return null;
+        return percentileRank(pool, Number(value), higherBetter);
     }
 
     function computeHrTicket(entry) {
         if (!entry) return null;
         const key = `${entry.row?.id}-${entry.gameIdx}-${entry.side}`;
         if (hrTicketCache.has(key)) return hrTicketCache.get(key);
+
         const { row, game, pitcher } = entry;
         const stats = hitterStats(row);
         const hand = (row.hand || "R").toUpperCase();
@@ -810,33 +1129,45 @@
             );
             mixPlus = mix?.mixPlus ?? null;
         }
+
+        if (!ticketSlatePools) rebuildTicketSlatePools();
+        const pools = ticketSlatePools;
+        const weights = HR_RESEARCH_CONFIG.ticket.pillars;
+
         const splitPct = handDingerSplitPct(ps, hand);
-        const riskPct = ps.dingerRiskPct ?? ps.dingerRisk ?? null;
-        const pfSplit = hand === "L" ? ps.vsLhb : ps.vsRhb;
-        const pfRisk = ps.hrRisk;
-        const splitFactor = splitPct != null ? savantPctToFactor(splitPct) : propfinderSplitRisk(pfSplit);
-        const riskFactor = riskPct != null ? savantPctToFactor(riskPct) : propfinderSplitRisk(pfRisk);
-        const tw = HR_RESEARCH_CONFIG.ticket;
-        const splitPts = splitFactor * tw.splitMultiplier;
-        const riskPts = riskFactor * tw.riskMultiplier;
-        const handPark = parkHrPctForHitter(game, hand);
-        const handParkScore = handPark ?? 0;
-        const overall = game?.parkHrPct != null ? Number(game.parkHrPct) : handParkScore;
-        let parkSignal = Math.max(handParkScore, overall, 0) * tw.parkPositiveMultiplier;
-        if (handParkScore < 0 || overall < 0) {
-            parkSignal += Math.min(handParkScore, overall, 0) * tw.parkNegativeMultiplier;
+        const parkPct = parkHrPctForHitter(game, hand);
+        const envRaw = hrEnvScore(entry);
+
+        const pillars = {
+            mix: pillarPercentile(pools, "mixPlus", mixPlus, true),
+            pitcher: pillarPercentile(pools, "pitcherSplit", splitPct, true),
+            environment: pillarPercentile(pools, "hrEnv", envRaw, true),
+            form: stats.hrFormPct ?? stats.hrForm ?? pillarPercentile(pools, "hrFormPct", stats.hrFormPct, true),
+            power: pillarPercentile(pools, "powerContact", powerContactSignal(stats), true),
+        };
+
+        let weighted = 0;
+        let totalW = 0;
+        for (const [id, w] of Object.entries(weights)) {
+            const val = pillars[id];
+            if (val == null || Number.isNaN(Number(val))) continue;
+            weighted += Number(val) * w;
+            totalW += w;
         }
-        const mixFit = savantMixFit(mixPlus) * tw.mixWeight;
-        const form = ticketFormSignal(stats);
-        const rank = mixFit + form * tw.formWeight + splitPts + riskPts + parkSignal;
+
+        const score100 =
+            totalW > 0 ? Math.max(1, Math.min(100, Math.round(weighted / totalW))) : null;
+
         const metrics = {
-            rank,
-            mixFit,
+            score100,
+            rank: score100,
+            pillars,
             mixPlus,
-            form,
             splitPct,
-            riskPct,
-            parkPct: handPark,
+            riskPct: ps.dingerRiskPct ?? ps.dingerRisk ?? null,
+            parkPct,
+            envPct: envRaw,
+            pillarLine: ticketPillarLine({ pillars }),
         };
         hrTicketCache.set(key, metrics);
         return metrics;
@@ -1075,6 +1406,10 @@
         if (ctx.hr_pct != null) game.parkHrPct = ctx.hr_pct;
         if (ctx.park_lhb_pct != null) game.parkLhbPct = ctx.park_lhb_pct;
         if (ctx.park_rhb_pct != null) game.parkRhbPct = ctx.park_rhb_pct;
+        if (ctx.stadium_pct != null) game.parkStadiumPct = ctx.stadium_pct;
+        if (ctx.weather_pct != null) game.parkWeatherPct = ctx.weather_pct;
+        if (ctx.lhb_stadium_pct != null) game.parkLhbStadiumPct = ctx.lhb_stadium_pct;
+        if (ctx.rhb_stadium_pct != null) game.parkRhbStadiumPct = ctx.rhb_stadium_pct;
         if (ctx.venue) game.venue = game.venue || ctx.venue;
         if (lookup.stadium_only) game.parkStadiumOnly = true;
         if (lookup.source_label) game.parkFactorSource = lookup.source_label;
@@ -1429,14 +1764,14 @@
     };
 
     const DINGER_RISK_WEIGHTS = {
-        hr9: 20,
-        barrelPct: 18,
-        hrFbPct: 15,
-        hardHitPct: 12,
+        hr9: 22,
+        barrelPct: 20,
+        hrFbPct: 16,
+        hardHitPct: 14,
         fbPct: 10,
         meatballPct: 10,
-        sweetSpotPct: 10,
-        kPct: 5,
+        sweetSpotPct: 5,
+        kPct: 3,
     };
 
     function collectSlatePitcherEntries() {
@@ -1561,11 +1896,35 @@
     }
 
     function avgLineupKPct(lineup) {
-        const vals = (lineup || [])
-            .map((r) => hitterStats(r).kPct)
-            .filter((v) => v != null && !Number.isNaN(Number(v)));
-        if (!vals.length) return null;
-        return Math.round((vals.reduce((a, b) => a + Number(b), 0) / vals.length) * 10) / 10;
+        const rows = lineup || [];
+        if (!rows.length) return null;
+        let weighted = 0;
+        let totalW = 0;
+        for (const r of rows) {
+            const k = hitterStats(r).kPct;
+            if (k == null || Number.isNaN(Number(k))) continue;
+            const order = Number(r.order) || 9;
+            const w = order <= 4 ? 1.3 : 1.0;
+            weighted += Number(k) * w;
+            totalW += w;
+        }
+        if (totalW <= 0) return null;
+        return Math.round((weighted / totalW) * 10) / 10;
+    }
+
+    function lineupHandDominance(lineup) {
+        let l = 0;
+        let r = 0;
+        for (const row of lineup || []) {
+            const h = (row.hand || "R").toUpperCase();
+            if (h === "L" || h === "S") l += 1;
+            else r += 1;
+        }
+        const total = l + r;
+        if (!total) return null;
+        if (l / total >= 0.7) return "L";
+        if (r / total >= 0.7) return "R";
+        return null;
     }
 
     function computeHandKFromSavant(entries, handKey, statKey) {
@@ -1612,7 +1971,17 @@
         const ranked = [];
         for (const entry of entries) {
             const stats = pitcherStats(entry.pitcher);
-            const kStuff = computeWeightedKPercentile(stats, K_STUFF_WEIGHTS, stuffPools);
+            let kStuff = computeWeightedKPercentile(stats, K_STUFF_WEIGHTS, stuffPools);
+            const domHand = lineupHandDominance(opposingLineupForPitcherEntry(entry));
+            if (domHand) {
+                const handStat = domHand === "L" ? stats.kStuffLhbPct : stats.kStuffRhbPct;
+                if (handStat != null && !Number.isNaN(Number(handStat))) {
+                    kStuff =
+                        kStuff != null
+                            ? Math.round((kStuff * 0.55 + Number(handStat) * 0.45) * 10) / 10
+                            : Number(handStat);
+                }
+            }
             const lineupK = avgLineupKPct(opposingLineupForPitcherEntry(entry));
             let kMatch = null;
             if (lineupK != null && lineupKPools.length) {
@@ -1652,6 +2021,202 @@
 
         computeHandKFromSavant(entries, "lhb", "kStuffLhbPct");
         computeHandKFromSavant(entries, "rhb", "kStuffRhbPct");
+        computeKProjectionsForSlate();
+    }
+
+    const K_PROJ_LEAGUE_K_PCT = 22.5;
+    const K_PROJ_BF_PER_IP = 4.28;
+
+    function median(nums) {
+        const arr = nums.filter((n) => n != null && !Number.isNaN(Number(n))).sort((a, b) => a - b);
+        if (!arr.length) return null;
+        const mid = Math.floor(arr.length / 2);
+        return arr.length % 2 ? arr[mid] : (arr[mid - 1] + arr[mid]) / 2;
+    }
+
+    function pitcherRollingStarts() {
+        return slate?.stat_windows?.pitchers?.starts ?? 10;
+    }
+
+    function summarizePitcherStarts(games) {
+        const starts = (games || []).filter((g) => g.ip != null && Number(g.ip) > 0);
+        const n = pitcherRollingStarts();
+        const recent = starts.slice(-n);
+        if (!recent.length) return { k9Recent: null, medianIp: null, maxK: null, maxIp: null, avgK: null };
+        let kSum = 0;
+        let ipSum = 0;
+        const k9s = [];
+        const ks = [];
+        const ips = [];
+        for (const g of recent) {
+            if (g.k != null) {
+                kSum += Number(g.k);
+                ks.push(Number(g.k));
+            }
+            if (g.ip != null) {
+                ipSum += Number(g.ip);
+                ips.push(Number(g.ip));
+            }
+            if (g.k != null && g.ip > 0) k9s.push((Number(g.k) / Number(g.ip)) * 9);
+        }
+        return {
+            k9Recent: k9s.length ? k9s.reduce((a, b) => a + b, 0) / k9s.length : null,
+            medianIp: median(ips),
+            maxK: ks.length ? Math.max(...ks) : null,
+            maxIp: ips.length ? Math.max(...ips) : null,
+            avgK: ks.length ? kSum / ks.length : null,
+        };
+    }
+
+    function seasonPitcherK9(stats, games) {
+        const starts = (games || []).filter((g) => g.ip != null && Number(g.ip) > 0);
+        let k = 0;
+        let ip = 0;
+        for (const g of starts) {
+            if (g.k != null) k += Number(g.k);
+            if (g.ip != null) ip += Number(g.ip);
+        }
+        if (ip >= 8) return (k / ip) * 9;
+        if (stats.kPct != null && !Number.isNaN(Number(stats.kPct))) {
+            return (Number(stats.kPct) / 100) * K_PROJ_BF_PER_IP;
+        }
+        return null;
+    }
+
+    function suggestKLine(expK, kPick) {
+        if (expK == null || Number.isNaN(Number(expK))) return { line: null, lean: null };
+        const exp = Number(expK);
+        const line = Math.max(2.5, Math.round(exp * 2) / 2);
+        const buffer = exp - line;
+        const pick = kPick != null ? Number(kPick) : 50;
+        let lean = "O";
+        if (buffer < -0.3) lean = "U";
+        else if (buffer < 0.12 && pick < 50) lean = "U";
+        else if (buffer >= 0.32 || pick >= 65) lean = "O";
+        else lean = buffer >= 0 ? "O" : "U";
+        return { line, lean };
+    }
+
+    function opposingTeamLabel(entry) {
+        const game = entry.game;
+        return entry.side === "away" ? game.home : game.away;
+    }
+
+    function computeKProjection(entry, gameLog) {
+        const stats = pitcherStats(entry.pitcher);
+        const lineupK = avgLineupKPct(opposingLineupForPitcherEntry(entry));
+        const startSum = summarizePitcherStarts(gameLog);
+        const seasonIp = stats.inningsPitched ?? stats.ip;
+        const startCount = (gameLog || []).filter((g) => g.ip != null && Number(g.ip) > 0).length || 0;
+        const seasonIpPerStart =
+            seasonIp != null && startCount > 0
+                ? Number(seasonIp) / startCount
+                : startSum.medianIp ?? 5.3;
+
+        let expIp = startSum.medianIp != null ? startSum.medianIp * 0.62 + seasonIpPerStart * 0.38 : seasonIpPerStart;
+        expIp = Math.max(3.8, Math.min(7.1, expIp));
+
+        const seasonK9 = seasonPitcherK9(stats, gameLog);
+        const whiffBoost = stats.whiffPct != null ? (Number(stats.whiffPct) - 24) * 0.07 : 0;
+        let effK9 = seasonK9;
+        if (effK9 != null && startSum.k9Recent != null) {
+            effK9 = seasonK9 * 0.48 + startSum.k9Recent * 0.38 + (seasonK9 + whiffBoost) * 0.14;
+        } else if (effK9 != null) {
+            effK9 = effK9 + whiffBoost * 0.45;
+        }
+
+        const domHand = lineupHandDominance(opposingLineupForPitcherEntry(entry));
+        if (domHand && effK9 != null) {
+            const handKey = domHand === "L" ? "lhb" : "rhb";
+            const hstats = handSavantStatsForPitcher(entry.pitcher, handKey);
+            const handK9 = hstats ? seasonPitcherK9(hstats, null) : null;
+            if (handK9 != null) {
+                effK9 = effK9 * 0.64 + handK9 * 0.36;
+            }
+        }
+
+        let matchMult = 1;
+        if (lineupK != null) {
+            matchMult = 1 + ((Number(lineupK) - K_PROJ_LEAGUE_K_PCT) / K_PROJ_LEAGUE_K_PCT) * 0.5;
+            matchMult = Math.max(0.86, Math.min(1.2, matchMult));
+        }
+
+        const kPick = stats.kPick ?? stats.kPickPct;
+        const pickMult = kPick != null ? 0.9 + (Number(kPick) / 100) * 0.18 : 1;
+
+        const expK =
+            effK9 != null ? Math.round(((expIp / 9) * effK9 * matchMult * pickMult) * 10) / 10 : null;
+
+        const ceilIp = Math.min(7.8, Math.max(startSum.maxIp ?? expIp, expIp + 1.0));
+        const ceilK9 = effK9 != null ? effK9 * 1.12 : null;
+        let ceilingK =
+            ceilK9 != null
+                ? Math.round(((ceilIp / 9) * ceilK9 * Math.min(matchMult * 1.05, 1.18)) * 10) / 10
+                : null;
+        if (startSum.maxK != null && ceilingK != null) {
+            ceilingK = Math.round(Math.max(ceilingK, Number(startSum.maxK) + 0.5) * 10) / 10;
+        }
+
+        const { line, lean } = suggestKLine(expK, kPick);
+
+        return {
+            expK,
+            ceilingK,
+            expIp: Math.round(expIp * 10) / 10,
+            effK9: effK9 != null ? Math.round(effK9 * 10) / 10 : null,
+            suggestedLine: line,
+            lean,
+            lineupAvgKPct: lineupK,
+            kPick,
+        };
+    }
+
+    function pitcherGameLogFromCache(pitcher, season) {
+        const id = pitcher?.id;
+        if (!id) return [];
+        return pitcherTrendsCache.get(`${id}:${season}`) || [];
+    }
+
+    function applyKProjectionToEntry(entry, gameLog) {
+        const proj = computeKProjection(entry, gameLog);
+        if (proj.expK == null) return;
+        entry.pitcher.stats = {
+            ...pitcherStats(entry.pitcher),
+            kProjExp: proj.expK,
+            kProjCeiling: proj.ceilingK,
+            kProjIp: proj.expIp,
+            kProjK9: proj.effK9,
+            kProjLine: proj.suggestedLine,
+            kProjLean: proj.lean,
+            kProj: proj,
+        };
+    }
+
+    function computeKProjectionsForSlate() {
+        const season = seasonFromDate(slate?.sheet_date || els.dateInput?.value || sheetDateFromQuery());
+        for (const entry of collectSlatePitcherEntries()) {
+            const log = pitcherGameLogFromCache(entry.pitcher, season);
+            applyKProjectionToEntry(entry, log);
+        }
+    }
+
+    let kProjHydrateGen = 0;
+
+    async function hydrateKProjectionsFromTrends() {
+        const season = seasonFromDate(slate?.sheet_date || els.dateInput?.value || sheetDateFromQuery());
+        const entries = collectSlatePitcherEntries();
+        const gen = ++kProjHydrateGen;
+        await Promise.all(
+            entries.map(async (entry) => {
+                const id = entry.pitcher?.id;
+                if (!id) return;
+                const games = await fetchPitcherTrends(id, season);
+                if (gen !== kProjHydrateGen) return;
+                applyKProjectionToEntry(entry, games);
+            })
+        );
+        if (gen !== kProjHydrateGen) return;
+        renderPitcherPanel().catch(() => {});
     }
 
     function computePitcherScoresForSlate() {
@@ -1786,15 +2351,16 @@
         return "rs-pitcher-k-card--fade";
     }
 
-    function renderKScoreCardHtml(label, pct, sublabel, tipKey) {
-        const tone = kScoreTone(pct);
+    function renderKScoreCardHtml(label, pct, sublabel, tipKey, opts = {}) {
+        const tone = opts.neutral ? "rs-pitcher-k-card--mid" : kScoreTone(pct);
         const tip = K_SCORE_TIPS[tipKey || label];
         const tipAttr = tip
             ? ` class="rs-pitcher-k-card rs-has-tip ${tone}" data-tip="${escapeTip(tip)}" tabindex="0"`
             : ` class="rs-pitcher-k-card ${tone}"`;
+        const score = opts.raw ? String(pct ?? "—") : fmtDingerRiskValue(pct);
         return `<div${tipAttr}>
             <span class="rs-pitcher-k-card__label">${label}</span>
-            <span class="rs-pitcher-k-card__score">${fmtDingerRiskValue(pct)}</span>
+            <span class="rs-pitcher-k-card__score">${score}</span>
             ${sublabel ? `<span class="rs-pitcher-k-card__sub">${sublabel}</span>` : ""}
         </div>`;
     }
@@ -1810,6 +2376,23 @@
             ${renderKScoreCardHtml("K pick", stats.kPickPct ?? stats.kPick, rank || "Today's slate", "Pick")}
             ${renderKScoreCardHtml("K stuff", stats.kStuffPct ?? stats.kStuff, "Whiff · K · Edge", "Overall")}
             ${renderKScoreCardHtml("Matchup", stats.kMatchPct, matchupSub, "Matchup")}
+        </div>${renderKProjectionRowHtml(stats)}`;
+    }
+
+    function renderKProjectionRowHtml(stats) {
+        const p = stats.kProj || {};
+        const expK = stats.kProjExp ?? p.expK;
+        if (expK == null) return "";
+        const ceil = stats.kProjCeiling ?? p.ceilingK;
+        const ip = stats.kProjIp ?? p.expIp;
+        const k9 = stats.kProjK9 ?? p.effK9;
+        const line = stats.kProjLine ?? p.suggestedLine;
+        const lean = stats.kProjLean ?? p.lean;
+        const lineLabel = line != null && lean ? `${line} ${lean}` : "—";
+        return `<div class="rs-pitcher-k-row rs-pitcher-k-row--proj">
+            ${renderKScoreCardHtml("Exp K", expK, ip != null ? `${ip} IP · ${k9 ?? "—"} K/9` : "Projected", "ExpK", { raw: true, neutral: true })}
+            ${renderKScoreCardHtml("Ceiling", ceil, "Max reach today", "CeilingK", { raw: true, neutral: true })}
+            ${renderKScoreCardHtml("Line", lineLabel, "Suggested prop lean", "Line", { raw: true, neutral: true })}
         </div>`;
     }
 
@@ -1979,6 +2562,16 @@
         return collectSlatePitcherEntries().map((entry) => pitcherStats(entry.pitcher));
     }
 
+    function statWindowLeadText() {
+        const w = slate?.stat_windows || {};
+        const hitter = w.hitters?.label || (w.hitters?.games ? `Last ${w.hitters.games} games` : null);
+        const pitcher = w.pitchers?.label || (w.pitchers?.starts ? `Last ${w.pitchers.starts} starts` : null);
+        if (hitter && pitcher) return `Hitter stats: ${hitter} · Pitcher stats: ${pitcher}`;
+        if (hitter) return `Hitter stats: ${hitter}`;
+        if (pitcher) return `Pitcher stats: ${pitcher}`;
+        return null;
+    }
+
     async function renderPitcherPanel() {
         if (!els.pitcherPanel) return;
         const game = activeGame();
@@ -2000,7 +2593,10 @@
         const homeStats = pitcherStats(home);
         const statsList = collectSlatePitcherStatsList();
         if (els.pitcherLead) {
-            els.pitcherLead.textContent = "Probable starters · 2026 Savant season";
+            const windowLead = statWindowLeadText();
+            els.pitcherLead.textContent = windowLead
+                ? `Probable starters · ${windowLead}`
+                : "Probable starters · Savant rolling window";
         }
         if (els.pitcherCards) {
             const gi = activeGameIdx;
@@ -2054,8 +2650,13 @@
         return { n: Object.keys(lookup).length, source: cached.url || "cache" };
     }
 
-    const HR_REF_ALLEY_FT = 380;
+    const HR_REF_ALLEY_FT = 377;
     const HR_CARRY_PCT_PER_3FT = 0.11;
+    const HR_WEATHER_DA_BLEND = 0.75;
+    const HR_WEATHER_CARRY_BLEND = 0.25;
+    const HR_CARRY_CHANNEL_SCALE = 0.45;
+    const HR_WIND_SOFT_CAP_MPH = 12;
+    const HR_WIND_SOFT_TAIL = 0.45;
     const HR_ENV_WEIGHTS = {
         stadium: 0.3,
         weather: 0.15,
@@ -2097,9 +2698,27 @@
     }
 
     function hrWindCompoundMult(windOutMph) {
-        const pct = displayWindPct(windOutMph);
-        if (pct == null) return 1;
-        return 1 + pct / 100;
+        if (windOutMph == null || Number.isNaN(Number(windOutMph))) return 1;
+        const mph = Number(windOutMph);
+        const sign = mph >= 0 ? 1 : -1;
+        const absMph = Math.abs(mph);
+        const effective =
+            absMph <= HR_WIND_SOFT_CAP_MPH
+                ? absMph
+                : HR_WIND_SOFT_CAP_MPH + (absMph - HR_WIND_SOFT_CAP_MPH) * HR_WIND_SOFT_TAIL;
+        const pct = clampDisplayPct(sign * effective, -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP);
+        return 1 + (pct ?? 0) / 100;
+    }
+
+    function hrWeatherCompoundMult(daDelta, carryBoostFt) {
+        const daMult = hrDaCompoundMult(daDelta);
+        const daPct = (daMult - 1) * 100;
+        const boost = Number(carryBoostFt) || 0;
+        const carryRaw = boost ? hrCarryFeetToPct(boost) * HR_CARRY_CHANNEL_SCALE : 0;
+        const carryPct = clampDisplayPct(carryRaw, -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP) ?? 0;
+        const blended = daPct * HR_WEATHER_DA_BLEND + carryPct * HR_WEATHER_CARRY_BLEND;
+        const clamped = clampDisplayPct(blended, -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP) ?? 0;
+        return 1 + clamped / 100;
     }
 
     function hrWallDistMult(wallFt) {
@@ -2150,13 +2769,12 @@
         const da = wx.densityAltFt;
         const daDelta = da == null ? null : da - baseline;
         const daMult = hrDaCompoundMult(daDelta);
-        const carryMult = (() => {
-            const boost = Number(wx.distanceBoostFt) || 0;
-            if (!boost) return 1;
-            const pct = clampDisplayPct(hrCarryFeetToPct(boost), -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP);
-            return 1 + pct / 100;
-        })();
-        const weatherMult = clampHrEnvMult(daMult * carryMult);
+        const carryBoost = Number(wx.distanceBoostFt) || 0;
+        const carryPct = carryBoost
+            ? clampDisplayPct(hrCarryFeetToPct(carryBoost) * HR_CARRY_CHANNEL_SCALE, -HR_ENV_FACTOR_CAP, HR_ENV_FACTOR_CAP)
+            : null;
+        const carryMult = 1 + (carryPct ?? 0) / 100;
+        const weatherMult = clampHrEnvMult(hrWeatherCompoundMult(daDelta, carryBoost));
         const windFrom = wx.windDirDeg;
         const windMph = wx.windMph;
         let windOutL = null;
@@ -2209,11 +2827,13 @@
         if (!stadium) return row?.hrProp || null;
         const hand = effectiveBatterHand(row?.hand, pitcher?.throws);
         const hrModel = game.hrModel || computeGameHrModel(game);
-        const parkPct = parkHrPctForHitter(game, hand);
+        const decomposed = hasDecomposedPark(game);
+        const parkPct = parkStadiumPctForHitter(game, hand);
         const stadiumMult =
             parkPct == null ? 1 : clampHrEnvMult(1 + (Number(parkPct) / 100) * 0.45);
         const windMult = clampHrEnvMult(hand === "L" ? hrModel?.windMultLhb ?? 1 : hrModel?.windMultRhb ?? 1);
-        const dimMult = clampHrEnvMult(hand === "L" ? hrModel?.dimMultLhb ?? 1 : hrModel?.dimMultRhb ?? 1);
+        const dimRaw = hand === "L" ? hrModel?.dimMultLhb ?? 1 : hrModel?.dimMultRhb ?? 1;
+        const dimMult = clampHrEnvMult(dimMultScaled(dimRaw, decomposed));
         const weatherMult = clampHrEnvMult(hrModel?.weatherMult ?? 1);
         const pitcherMult = pitcherHrMult(pitcher, hand);
         const propPass = !!(game.propPass || game.parkWeather?.propPass);
@@ -2307,10 +2927,16 @@
         return displayWindPct(windComponentMph);
     }
 
-    function computeEnvHrPct(wx) {
+    function computeEnvHrPct(wx, game) {
+        const hm = game?.hrModel || (game ? computeGameHrModel(game) : null);
+        if (hm?.weatherMult != null) {
+            const airPct = multToPct(hm.weatherMult) ?? 0;
+            const windPct = displayWindPct(wx?.windComponentMph) ?? 0;
+            return Math.round(airPct * 0.6 + windPct * 0.4);
+        }
         const carry = displayHrCarryPct(wx) ?? 0;
         const wind = displayWindPct(wx?.windComponentMph) ?? 0;
-        return Math.round(carry + wind);
+        return Math.round(carry * 0.6 + wind * 0.4);
     }
 
     const WX_TIPS = {
@@ -2323,7 +2949,7 @@
         windPullR:
             "Wind along the right-handed pull side (toward left field). RHB sluggers get the boost here. Check this before betting RH batter HR props at parks like Yankee Stadium or Oracle Park.",
         parkFactor:
-            "Net HR boost from Ballpark Pal (stadium shape plus game-day weather). Positive = bandbox; negative = graveyard.",
+            "Ballpark Pal stadium structure (fence shape, dimensions). When decomposed, live Open-Meteo air + wind are applied separately — not double-counted.",
         fenceBoost:
             "Pull-side wall vs league-average distance (377 ft). Short porch = positive; deep alley = negative. Park shape only — not today's wind or air.",
         conditions:
@@ -2505,7 +3131,7 @@
         }
         const wx = game?.parkWeather || {};
         const hm = game?.hrModel || computeGameHrModel(game);
-        const pct = computeEnvHrPct(wx);
+        const pct = computeEnvHrPct(wx, game);
         if (pct == null || Number.isNaN(Number(pct))) return "";
         const tone = edgeTone(pct);
         const tip = `Today's air + CF wind HR boost vs average: ${fmtSignedPct(pct)}`;
@@ -2783,7 +3409,17 @@
             );
         }
 
-        if (game.parkHrPct != null) {
+        if (game.parkStadiumPct != null || game.parkLhbStadiumPct != null) {
+            const stadiumPct =
+                game.parkStadiumPct ??
+                Math.round(((Number(game.parkLhbStadiumPct) || 0) + (Number(game.parkRhbStadiumPct) || 0)) / 2);
+            cells.push(
+                wxCell("Park (stadium)", fmtSignedPct(stadiumPct), WX_TIPS.parkFactor, {
+                    tone: edgeTone(stadiumPct),
+                    sub: "Structure only — live weather separate",
+                })
+            );
+        } else if (game.parkHrPct != null) {
             cells.push(
                 wxCell("Park Factor", fmtSignedPct(game.parkHrPct), WX_TIPS.parkFactor, {
                     tone: edgeTone(game.parkHrPct),
@@ -2952,11 +3588,11 @@
     function exploreTicketField(entry, key) {
         const ticket = computeHrTicket(entry);
         const stats = hitterStats(entry.row);
-        if (key === "ticketRank") return ticket?.rank ?? null;
+        if (key === "ticketRank") return ticket?.score100 ?? ticket?.rank ?? null;
         if (key === "splitPct") return ticket?.splitPct ?? null;
         if (key === "riskPct") return ticket?.riskPct ?? null;
         if (key === "parkPct") return ticket?.parkPct ?? null;
-        if (key === "mixPlus") return ticket?.mixPlus ?? null;
+        if (key === "mixPlus") return ticket?.mixPlus ?? stats.mixPlus ?? null;
         if (key === "formPct") return stats.hrFormPct ?? stats.hrForm ?? null;
         if (key === "barrelPct") return stats.barrelPct ?? null;
         if (key === "airPct") return stats.airPct ?? null;
@@ -3467,7 +4103,21 @@
                     };
                 });
             }
-            for (const field of ["parkHrPct", "parkLhbPct", "parkRhbPct", "parkWeather", "mlbWeather", "venue", "hrModel", "roofStatus", "propPass"]) {
+            for (const field of [
+                "parkHrPct",
+                "parkLhbPct",
+                "parkRhbPct",
+                "parkStadiumPct",
+                "parkWeatherPct",
+                "parkLhbStadiumPct",
+                "parkRhbStadiumPct",
+                "parkWeather",
+                "mlbWeather",
+                "venue",
+                "hrModel",
+                "roofStatus",
+                "propPass",
+            ]) {
                 if (cg[field] != null && game[field] == null) game[field] = cg[field];
             }
             if (cg.awayPitcher?.stats && game.awayPitcher) {
@@ -3581,8 +4231,16 @@
         return savantLookup;
     }
 
+    function isRollingStatProfile(stats) {
+        if (!stats) return false;
+        if (stats.statWindow) return true;
+        const src = String(stats.source || "");
+        return src.includes("savant-last") && (src.includes("g") || src.includes("st"));
+    }
+
     function mergeStats(windowStats, savant, propfinder, existing) {
         const out = { ...(existing || {}) };
+        const rolling = isRollingStatProfile(out);
         const sav = savant || {};
         const savantKeys = [
             "avg",
@@ -3618,6 +4276,7 @@
             "pullBarrelPct",
         ];
         for (const k of savantKeys) {
+            if (rolling && out[k] != null) continue;
             if (sav[k] != null) out[k] = sav[k];
         }
         const pf = propfinder || {};
@@ -4052,9 +4711,53 @@
         sortDir = -1;
     }
 
+    function saveSortPreference() {
+        if (!sortUserOverride) return;
+        try {
+            sessionStorage.setItem(
+                SORT_PREF_KEY,
+                JSON.stringify({ sortKey, sortDir: sortDir > 0 ? 1 : -1 })
+            );
+        } catch {
+            /* ignore quota / private mode */
+        }
+    }
+
+    function restoreSortPreference() {
+        try {
+            const raw = sessionStorage.getItem(SORT_PREF_KEY);
+            if (!raw) return false;
+            const parsed = JSON.parse(raw);
+            const k = parsed?.sortKey;
+            if (!k || !COLS.some((c) => c.key === k)) return false;
+            sortKey = k;
+            sortDir = Number(parsed.sortDir) > 0 ? 1 : -1;
+            sortUserOverride = true;
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
     function resetSortToDefault() {
         sortUserOverride = false;
+        try {
+            sessionStorage.removeItem(SORT_PREF_KEY);
+        } catch {
+            /* ignore */
+        }
         applyDefaultSort();
+    }
+
+    function setSortColumn(key, { toggleDir = true } = {}) {
+        if (!key || !COLS.some((c) => c.key === key)) return;
+        sortUserOverride = true;
+        if (toggleDir && sortKey === key) sortDir *= -1;
+        else {
+            sortKey = key;
+            sortDir = key === "name" ? 1 : -1;
+        }
+        saveSortPreference();
     }
 
     function heatClass(values, val, higherBetter) {
@@ -4070,18 +4773,67 @@
         return "rs-cell-heat rs-cell-heat--bad";
     }
 
+    function topHittersForGame(gameIdx, limit = 3) {
+        return collectSlateHitters()
+            .filter((e) => e.gameIdx === gameIdx)
+            .map((e) => ({ entry: e, score: hrTicketScore100(e) }))
+            .filter((x) => x.score != null)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, limit);
+    }
+
+    function renderMatchupSummary() {
+        if (!els.matchupSummary) return;
+        const game = activeGame();
+        if (!game) {
+            els.matchupSummary.hidden = true;
+            return;
+        }
+        const awayP = game.awayPitcher;
+        const homeP = game.homePitcher;
+        const awayRisk = pitcherStats(awayP).dingerRiskPct ?? pitcherStats(awayP).dingerRisk;
+        const homeRisk = pitcherStats(homeP).dingerRiskPct ?? pitcherStats(homeP).dingerRisk;
+        const park = game.parkHrPct != null ? fmtSignedPct(game.parkHrPct) : "—";
+        const tops = topHittersForGame(activeGameIdx, 3);
+        const topLine = tops.length
+            ? tops.map((t) => `${t.entry.row.name} ${t.score}`).join(", ")
+            : "—";
+        els.matchupSummary.hidden = false;
+        els.matchupSummary.innerHTML = `
+            <div class="rs-matchup-summary__grid">
+                <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">${game.away} SP</span><span class="rs-matchup-summary__val">${awayP?.name || "TBD"}${awayRisk != null ? ` · Risk ${Math.round(awayRisk)}%` : ""}</span></div>
+                <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">${game.home} SP</span><span class="rs-matchup-summary__val">${homeP?.name || "TBD"}${homeRisk != null ? ` · Risk ${Math.round(homeRisk)}%` : ""}</span></div>
+                <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">Park</span><span class="rs-matchup-summary__val">${park}</span></div>
+                <div class="rs-matchup-summary__item rs-matchup-summary__item--wide"><span class="rs-matchup-summary__label">Top targets</span><span class="rs-matchup-summary__val">${topLine}</span></div>
+            </div>`;
+    }
+
     function renderGames() {
         if (!els.games || !slate?.games) return;
+        computePitcherScoresForSlate();
+        rebuildTicketSlatePools();
         els.games.innerHTML = slate.games
             .map((g, i) => {
                 const time = fmtTime(g.startTime);
                 const sp = `${g.awayPitcher?.name || "?"} vs ${g.homePitcher?.name || "?"}`;
                 const nAway = (g.awayLineup || []).length;
                 const nHome = (g.homeLineup || []).length;
+                const tops = topHittersForGame(i, 1);
+                const top = tops[0];
+                const topBadge = top
+                    ? `<span class="rs-game-pill__top">${top.entry.row.name} <strong>${top.score}</strong></span>`
+                    : "";
+                const awayRisk = pitcherStats(g.awayPitcher).dingerRiskPct;
+                const homeRisk = pitcherStats(g.homePitcher).dingerRiskPct;
+                const riskBadge =
+                    awayRisk != null || homeRisk != null
+                        ? `<span class="rs-game-pill__risk">${awayRisk != null ? `A ${Math.round(awayRisk)}%` : ""}${awayRisk != null && homeRisk != null ? " · " : ""}${homeRisk != null ? `H ${Math.round(homeRisk)}%` : ""}</span>`
+                        : "";
                 return `<button type="button" class="rs-game-pill${i === activeGameIdx ? " is-active" : ""}" data-idx="${i}">
                     <span class="rs-game-pill__matchup">${g.matchup}${weatherBadgeHtml(g)}</span>
                     <span class="rs-game-pill__meta">${time}${time ? " · " : ""}${g.lineupStatus || ""} · ${nAway}/${nHome} hitters</span>
                     <span class="rs-game-pill__meta">${sp}</span>
+                    ${topBadge}${riskBadge}
                 </button>`;
             })
             .join("");
@@ -4089,7 +4841,6 @@
             btn.addEventListener("click", async () => {
                 activeGameIdx = parseInt(btn.getAttribute("data-idx"), 10);
                 pickDefaultSide();
-                resetSortToDefault();
                 await renderAll();
                 const game = activeGame();
                 if (game && !weatherIsComplete(game.parkWeather)) {
@@ -4131,6 +4882,7 @@
             els.sideHome.textContent = game.home;
             els.sideHome.classList.toggle("is-active", activeSide === "home");
         }
+        renderMatchupSummary();
     }
 
     function sortedActiveRows() {
@@ -4144,6 +4896,15 @@
                 return sortDir * ((av == null ? -Infinity : Number(av)) - (bv == null ? -Infinity : Number(bv)));
             });
         }
+        if (sortKey === "ticketScore") {
+            return [...rows].sort((a, b) => {
+                const ea = entryForActiveRow(a);
+                const eb = entryForActiveRow(b);
+                const av = ea ? hrTicketScore100(ea) : null;
+                const bv = eb ? hrTicketScore100(eb) : null;
+                return sortDir * ((av == null ? -Infinity : Number(av)) - (bv == null ? -Infinity : Number(bv)));
+            });
+        }
         return [...rows].sort((a, b) => {
             if (col.text) return sortDir * String(col.fmt(a)).localeCompare(String(col.fmt(b)));
             const av = col.stat ? hitterStats(a)[col.stat] : a[sortKey];
@@ -4153,8 +4914,9 @@
     }
 
     function statHeatMap(rows, cols) {
-        const statCols = (cols || COLS).filter((c) => c.stat || c.hrProp);
+        const statCols = (cols || COLS).filter((c) => c.stat || c.hrProp || c.ticket);
         const higherBetter = {
+            ticketScore: true,
             hrEnv: true,
             mixPlus: true,
             mixEdge: true,
@@ -4179,6 +4941,7 @@
             fbPct: true,
             hrFbPct: true,
             hrFormPct: true,
+            boomPct: true,
             gbPct: false,
             ldPct: true,
             pullPct: true,
@@ -4190,13 +4953,17 @@
                 statCols.map((c) => [
                     c.key,
                     rows
-                        .map((r) =>
-                            c.hrProp
-                                ? r?.hrProp?.propPass
-                                    ? null
-                                    : Number(r?.hrProp?.combinedPct)
-                                : Number(hitterStats(r)[c.stat])
-                        )
+                        .map((r) => {
+                            if (c.ticket) {
+                                const entry = entryForActiveRow(r);
+                                const score = entry ? hrTicketScore100(entry) : null;
+                                return score == null ? null : Number(score);
+                            }
+                            if (c.hrProp) {
+                                return r?.hrProp?.propPass ? null : Number(r?.hrProp?.combinedPct);
+                            }
+                            return Number(hitterStats(r)[c.stat]);
+                        })
                         .filter((n) => n != null && !Number.isNaN(n)),
                 ])
             ),
@@ -4213,15 +4980,65 @@
 
     function syncMobileSortSelect() {
         if (!els.mobileSort) return;
-        const options = COLS.filter((c) => c.key !== "order").map((c) => {
-            const selected = c.key === sortKey ? " selected" : "";
-            return `<option value="${c.key}"${selected}>${c.label}</option>`;
-        });
+        const options = visibleCols()
+            .filter((c) => c.key !== "order")
+            .map((c) => {
+                const selected = c.key === sortKey ? " selected" : "";
+                return `<option value="${c.key}"${selected}>${c.label}</option>`;
+            });
         els.mobileSort.innerHTML = options.join("");
         syncMobileSortDir();
     }
 
+    function renderExploreLbCards(hitters) {
+        if (!els.exploreLbCards) return;
+        els.exploreLbCards.innerHTML = hitters.length
+            ? hitters
+                  .map((e, idx) => {
+                      const score = hrTicketScore100(e);
+                      const ticket = computeHrTicket(e);
+                      return `<article class="rs-lb-card" data-id="${e.row.id}" data-game="${e.gameIdx}" data-side="${e.side}">
+                        <div class="rs-lb-card__rank">${idx + 1}</div>
+                        <div class="rs-lb-card__main">
+                            <button type="button" class="rs-lb-card__name">${e.row.name || "—"}</button>
+                            <span class="rs-lb-card__meta">${e.game.matchup} · vs ${e.pitcher?.name || "TBD"}</span>
+                            <span class="rs-lb-card__pillars">${ticket?.pillarLine || ""}</span>
+                        </div>
+                        <div class="rs-lb-card__score">${fmtTicketBadge(score)}</div>
+                    </article>`;
+                  })
+                  .join("")
+            : `<p class="rs-empty">No hitters match these filters.</p>`;
+        els.exploreLbCards.querySelectorAll(".rs-lb-card").forEach((card) => {
+            card.querySelector(".rs-lb-card__name")?.addEventListener("click", () => {
+                jumpToLeaderboardEntry(card);
+            });
+        });
+    }
+
+    async function jumpToLeaderboardEntry(el) {
+        const id = Number(el.getAttribute("data-id"));
+        const gi = Number(el.getAttribute("data-game"));
+        const side = el.getAttribute("data-side");
+        activeGameIdx = gi;
+        activeSide = side;
+        await renderAll();
+        const entry = collectSlateHitters().find((e) => e.row.id === id && e.gameIdx === gi && e.side === side);
+        const rowEl =
+            els.tableBody?.querySelector(`tr[data-hitter-id="${id}"]`) ||
+            els.cardList?.querySelector(`.rs-card[data-hitter-id="${id}"]`);
+        rowEl?.scrollIntoView({ behavior: "smooth", block: "center" });
+        rowEl?.classList.add("rs-row--flash");
+        setTimeout(() => rowEl?.classList.remove("rs-row--flash"), 1800);
+        if (entry) {
+            document.querySelector(".rs-section-title--hitters")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
+
     function mobileCardStatHtml(c, row, colValues, higherBetter) {
+        if (c.ticket) {
+            return `<div class="rs-card-stat"><dt>${c.label}</dt><dd>${c.fmt(row)}</dd></div>`;
+        }
         if (c.hrProp) {
             const pct = row?.hrProp?.combinedPct;
             const heat = hrPropHeatClass(row);
@@ -4248,6 +5065,9 @@
                 const projected = row.projected ? '<span class="rs-hand rs-hand--proj">proj</span>' : "";
                 const highlights = highlightCols
                     .map((c) => {
+                        if (c.ticket) {
+                            return `<div class="rs-card-highlight rs-card-highlight--score">${c.fmt(row)}</div>`;
+                        }
                         if (c.hrProp) {
                             const heat = hrPropHeatClass(row);
                             return `<div class="rs-card-highlight"><span class="rs-card-highlight__label">${c.label}</span><span class="rs-card-highlight__val ${heat}">${c.fmt(row)}</span></div>`;
@@ -4274,7 +5094,12 @@
                         <span class="rs-card__order">${row.order ?? "—"}</span>
                         <div class="rs-card__identity">
                             <div class="rs-card__name"><button type="button" class="rs-hitter-btn rs-card__name-btn">${row.name || "—"}</button> <span class="rs-hand">${row.position || ""}</span>${projected}</div>
-                            <div class="rs-card__meta">Bats ${row.hand || "—"}</div>
+                            <div class="rs-card__meta">Bats ${row.hand || "—"}${(() => {
+                                const entry = entryForActiveRow(row);
+                                const ticket = entry ? computeHrTicket(entry) : null;
+                                const line = ticket?.pillarLine;
+                                return line ? ` · ${line}` : "";
+                            })()}</div>
                         </div>
                     </header>
                     <div class="rs-card__highlights">${highlights}</div>
@@ -4283,12 +5108,12 @@
             })
             .join("");
         els.cardList.querySelectorAll(".rs-card__name-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (ev) => {
+                ev.stopPropagation();
                 const card = btn.closest(".rs-card");
-                const id = Number(card?.getAttribute("data-hitter-id"));
-                const entry = collectSlateHitters().find(
-                    (e) => e.row.id === id && e.gameIdx === activeGameIdx && e.side === activeSide
-                );
+                const id = card?.getAttribute("data-hitter-id");
+                const row = sortedActiveRows().find((r) => idsMatch(r.id, id));
+                const entry = entryForActiveRow(row);
                 if (entry) openPlayerProfile(entry);
             });
         });
@@ -4322,6 +5147,9 @@
                 th.classList.add("rs-col--dragging");
                 e.dataTransfer.effectAllowed = "move";
                 e.dataTransfer.setData("text/plain", key);
+                if (e.dataTransfer.setDragImage) {
+                    e.dataTransfer.setDragImage(th, 12, 12);
+                }
             });
             th.addEventListener("dragend", () => {
                 colDragKey = null;
@@ -4355,6 +5183,11 @@
         if (!els.tableHead || !els.tableBody) return;
         const cols = visibleCols();
         const rows = sortedActiveRows();
+        const table = els.tableWrap?.querySelector(".rs-table");
+        if (table) {
+            table.classList.toggle("rs-table--essential", tableViewMode === "essential");
+            table.classList.toggle("rs-table--full", tableViewMode === "full");
+        }
 
         els.tableHead.innerHTML = buildTableHeadHtml(cols);
 
@@ -4364,12 +5197,7 @@
             els.tableHead.querySelectorAll("tr.rs-col-row th").forEach((th) => {
                 th.addEventListener("click", () => {
                     const key = th.getAttribute("data-key");
-                    sortUserOverride = true;
-                    if (sortKey === key) sortDir *= -1;
-                    else {
-                        sortKey = key;
-                        sortDir = key === "name" ? 1 : -1;
-                    }
+                    setSortColumn(key);
                     renderTable();
                     renderMobileCards();
                     syncMobileSortSelect();
@@ -4392,6 +5220,15 @@
                         const tag = r.projected ? ' <span class="rs-hand">proj</span>' : "";
                         const tip = c.tip ? tipAttr(c.tip) : "";
                         return `<td${colAttr}${tip}><button type="button" class="rs-hitter rs-hitter-btn" data-hitter-id="${r.id || ""}">${r.name || "—"}</button> <span class="rs-hand">${r.position || ""}</span>${tag}</td>`;
+                    }
+                    if (c.ticket) {
+                        const entry = entryForActiveRow(r);
+                        const ticket = entry ? computeHrTicket(entry) : null;
+                        const tipText = ticket?.pillars
+                            ? `Mix ${Math.round(ticket.pillars.mix ?? 0)} · SP ${Math.round(ticket.pillars.pitcher ?? 0)} · Env ${Math.round(ticket.pillars.environment ?? 0)} · Form ${Math.round(ticket.pillars.form ?? 0)} · Power ${Math.round(ticket.pillars.power ?? 0)}`
+                            : c.tip;
+                        const tip = tipAttr(tipText || c.tip || "");
+                        return `<td${colAttr}${tip}>${c.fmt(r)}</td>`;
                     }
                     if (c.hrProp) {
                         const tip = c.tip ? tipAttr(c.tip) : "";
@@ -4424,32 +5261,29 @@
         });
 
         els.tableBody.querySelectorAll(".rs-hitter-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const id = Number(btn.getAttribute("data-hitter-id"));
-                const entry = collectSlateHitters().find(
-                    (e) => e.row.id === id && e.gameIdx === activeGameIdx && e.side === activeSide
-                );
-                if (entry) openPlayerProfile(entry);
+            btn.addEventListener("click", (ev) => {
+                ev.stopPropagation();
+                openHitterProfileFromDom(btn);
             });
+        });
+        els.tableBody.querySelectorAll("tr[data-hitter-id]").forEach((tr) => {
+            tr.addEventListener("click", () => openHitterProfileFromDom(tr));
         });
     }
 
     function buildTableHeadHtml(cols) {
         const columns = cols || visibleCols();
-        const groupCells = [];
-        let i = 0;
-        while (i < columns.length) {
-            const gid = columns[i].group;
-            let span = 1;
-            while (i + span < columns.length && columns[i + span].group === gid) span += 1;
-            const meta = GROUPS.find((g) => g.id === gid) || { label: gid, className: "" };
-            const groupTip = GROUP_TIPS[gid];
-            const groupTipAttr = groupTip ? ` data-tip="${escAttr(groupTip)}" tabindex="0"` : "";
-            const groupTipClass = groupTip ? " rs-has-tip" : "";
-            groupCells.push(
-                `<th colspan="${span}" class="${meta.className}${groupTipClass}"${groupTipAttr}>${meta.label}</th>`
-            );
-            i += span;
+        if (tableViewMode === "essential") {
+            const colCells = columns.map((c) => {
+                const sort =
+                    c.key === sortKey ? (sortDir > 0 ? "ascending" : "descending") : "none";
+                const tipAttrParts = c.tip ? ` data-tip="${escAttr(c.tip)}" tabindex="0"` : "";
+                const tipClass = c.tip ? " rs-has-tip" : "";
+                const sortedClass = c.key === sortKey ? " rs-col--sorted" : "";
+                const sortLabel = sortIndicator(c.key);
+                return `<th class="${tipClass}${sortedClass}" data-key="${c.key}" data-col-key="${c.key}" aria-sort="${sort}"${tipAttrParts}>${c.label}${sortLabel}</th>`;
+            }).join("");
+            return `<tr class="rs-col-row rs-col-row--essential">${colCells}</tr>`;
         }
         const colCells = columns.map((c) => {
             const colClass =
@@ -4475,9 +5309,9 @@
                     ? '<span class="rs-col-drag" aria-hidden="true">⋮⋮</span>'
                     : "";
             const sortLabel = columnReorderMode ? "" : sortIndicator(c.key);
-            return `<th class="${colClass.trim()}${tipClass}${sortedClass}${reorderClass}${fixedClass}" data-key="${c.key}" data-col-key="${c.key}" aria-sort="${sort}"${tipAttrParts}>${dragHandle}${c.label}${sortLabel}</th>`;
+            return `<th class="${colClass.trim()}${tipClass}${sortedClass}${reorderClass}${fixedClass}" data-key="${c.key}" data-col-key="${c.key}" aria-sort="${sort}"${tipAttrParts}>${dragHandle}${colDisplayLabel(c)}${sortLabel}</th>`;
         }).join("");
-        return `<tr class="rs-group-row">${groupCells.join("")}</tr><tr class="rs-col-row">${colCells}</tr>`;
+        return `<tr class="rs-col-row">${colCells}</tr>`;
     }
 
     function savantPlayerUrl(row, season) {
@@ -4553,10 +5387,7 @@
     }
 
     function exploreSortValue(entry, key) {
-        if (key === "ticketRank") {
-            const ticket = computeHrTicket(entry);
-            return ticket?.rank ?? null;
-        }
+        if (key === "ticketRank") return hrTicketScore100(entry);
         if (key === "hrEnv") return hrEnvScore(entry);
         const stats = hitterStats(entry.row);
         const val = stats[key];
@@ -4611,6 +5442,7 @@
         const n = Number(val);
         if (key === "hrLuckDiff") return n >= 1 ? "good" : n <= -1 ? "bad" : "mid";
         if (key === "hrFormPct") return n >= 66 ? "good" : n <= 33 ? "bad" : "mid";
+        if (key === "boomPct") return n >= 66 ? "good" : n <= 33 ? "bad" : "mid";
         if (key === "recentForm" || key === "mixPlus" || key === "mixEdge") {
             if (n >= 5) return "good";
             if (n <= -5) return "bad";
@@ -4784,6 +5616,7 @@
                 return {
                     date: (split.date || "").slice(0, 10),
                     ip,
+                    k: st.strikeOuts != null ? Number(st.strikeOuts) : null,
                     hr: st.homeRuns != null ? Number(st.homeRuns) : null,
                     bf: st.battersFaced != null ? Number(st.battersFaced) : null,
                     er: st.earnedRuns != null ? Number(st.earnedRuns) : null,
@@ -4870,18 +5703,28 @@
         }
     }
 
-    function renderProfileHeroHrEnv(row, game, prop) {
+    function renderProfileHeroHrEnv(row, game, prop, entry) {
         if (!els.profileHero) return;
+        const ticket = entry ? computeHrTicket(entry) : null;
+        const score = entry ? hrTicketScore100(entry) : null;
+        const ticketBlock =
+            score != null
+                ? `<div class="rs-profile-hero rs-profile-hero--ticket rs-profile-hero--${ticketScoreTone(score)}"><span class="rs-profile-hero__label">HR ticket</span><span class="rs-profile-hero__value">${fmtTicketBadge(score)}</span><span class="rs-profile-hero__sub">${ticket?.pillarLine || "Slate-relative HR target score."}</span></div>`
+                : "";
         if (prop.propPass || game?.propPass) {
-            els.profileHero.innerHTML = `<div class="rs-profile-hero rs-profile-hero--pass"><span class="rs-profile-hero__label">HR environment</span><span class="rs-profile-hero__value rs-profile-hero__value--pass">PASS</span><span class="rs-profile-hero__sub">Roof or weather data unreliable — skip HR props here.</span></div>`;
+            els.profileHero.innerHTML =
+                ticketBlock +
+                `<div class="rs-profile-hero rs-profile-hero--pass"><span class="rs-profile-hero__label">HR environment</span><span class="rs-profile-hero__value rs-profile-hero__value--pass">PASS</span><span class="rs-profile-hero__sub">Roof or weather data unreliable — skip HR props here.</span></div>`;
             return;
         }
         const env = fmtHrPropPct(row, game);
         const tone = edgeTone(prop.combinedPct);
-        els.profileHero.innerHTML = `<div class="rs-profile-hero rs-profile-hero--${tone}"><span class="rs-profile-hero__label">HR environment</span><span class="rs-profile-hero__value">${env}</span><span class="rs-profile-hero__sub">Park + weather + wind + dimensions × pitcher vulnerability for ${prop.hand || row.hand || "—"} bat path.</span></div>`;
+        els.profileHero.innerHTML =
+            ticketBlock +
+            `<div class="rs-profile-hero rs-profile-hero--${tone}"><span class="rs-profile-hero__label">HR environment</span><span class="rs-profile-hero__value">${env}</span><span class="rs-profile-hero__sub">Park + weather + wind + dimensions × pitcher vulnerability for ${prop.hand || row.hand || "—"} bat path.</span></div>`;
     }
 
-    function buildProfilePowerBlock(stats, title = "Power profile") {
+    function buildProfilePowerBlock(stats, title = "Power profile", row = null) {
         const top = [
             profileStatCell("HR", fmtNum(stats.hr)),
             profileStatCell("xHR", fmtXhr(stats.expectedHr)),
@@ -4894,7 +5737,8 @@
             profileStatCell("HR/FB%", fmtPct(stats.hrFbPct), powerMetricTone("hrFbPct", stats.hrFbPct)),
             profileStatCell("Pull%", fmtPct(stats.pullPct), powerMetricTone("pullPct", stats.pullPct)),
             profileStatCell("Sweet%", fmtPct(stats.sweetSpotPct), powerMetricTone("sweetSpotPct", stats.sweetSpotPct)),
-            profileStatCell("HR Form%", fmtHrFormWithTrend(stats.hrFormPct, formTrendForRow(row)), powerMetricTone("hrFormPct", stats.hrFormPct)),
+            profileStatCell("HR Form%", fmtHrFormWithTrend(stats.hrFormPct, row ? formTrendForRow(row) : null), powerMetricTone("hrFormPct", stats.hrFormPct)),
+            profileStatCell("Boom%", fmtBoomWithTrend(stats.boomPct, row ? boomTrendForRow(row) : null), powerMetricTone("boomPct", stats.boomPct)),
         ];
         return profileBlockSection(
             title,
@@ -4915,7 +5759,7 @@
         return profileBlockSection("Batted-ball profile", `<div class="rs-profile-block__grid">${cells.join("")}</div>`);
     }
 
-    function buildProfileGridHtml(stats, pitcher, prop, game, { showHrEnv = true } = {}) {
+    function buildProfileGridHtml(stats, pitcher, prop, game, row, { showHrEnv = true } = {}) {
         const pstats = pitcherStats(pitcher);
         const blocks = [];
         if (showHrEnv && !(prop.propPass || game?.propPass)) {
@@ -4933,7 +5777,7 @@
                 )
             );
         }
-        blocks.push(buildProfilePowerBlock(stats, showHrEnv ? "Power profile" : "Power profile (2026)"));
+        blocks.push(buildProfilePowerBlock(stats, showHrEnv ? "Power profile" : "Power profile (2026)", row));
         blocks.push(buildProfileBattedBlock(stats));
         blocks.push(
             profileBlockSection(
@@ -5148,9 +5992,9 @@
         const prop = row.hrProp || {};
         const season = seasonFromDate(slate?.sheet_date || sheetDateFromQuery());
         renderProfileHeader(row, { team, game });
-        renderProfileHeroHrEnv(row, game, prop);
+        renderProfileHeroHrEnv(row, game, prop, entry);
         if (els.profileGrid) {
-            els.profileGrid.innerHTML = buildProfileGridHtml(stats, pitcher, prop, game, { showHrEnv: true });
+            els.profileGrid.innerHTML = buildProfileGridHtml(stats, pitcher, prop, game, row, { showHrEnv: true });
         }
         wireProfileSavant(row, season);
         syncProfileTrackerBtn(entry);
@@ -5183,7 +6027,6 @@
         activeGameIdx = entry.gameIdx;
         activeSide = entry.side;
         closePlayerProfile();
-        resetSortToDefault();
         await renderAll();
         const rowEl =
             els.tableBody?.querySelector(`tr[data-hitter-id="${entry.row.id}"]`) ||
@@ -5248,6 +6091,7 @@
     function renderExplorePanel() {
         if (!els.hrLeaderboardBody) return;
         computeHrFormForSlate();
+        computeBoomForSlate();
         computePitcherScoresForSlate();
         refreshAllHrProps();
         rebuildHrTicketScale();
@@ -5264,6 +6108,7 @@
                 hrEnv: "HR environment",
                 mixPlus: "Pitch mix",
                 barrelPct: "Barrel%",
+                boomPct: "Boom%",
                 avgEV: "Exit velo",
                 hrLuckDiff: "Due+",
                 hardHitPct: "Hard-hit%",
@@ -5281,36 +6126,31 @@
                   .map((e, idx) => {
                       const ticket = computeHrTicket(e);
                       const stats = hitterStats(e.row);
+                      const score = hrTicketScore100(e);
                       return `<tr class="rs-leaderboard-row" data-id="${e.row.id}" data-game="${e.gameIdx}" data-side="${e.side}">
                         <td>${idx + 1}</td>
                         <td><button type="button" class="rs-leaderboard-link">${e.row.name || "—"}</button></td>
                         <td>${e.game.matchup}</td>
                         <td>${e.pitcher?.name || "TBD"}</td>
-                        <td><strong>${fmtTicketScore(hrTicketScore100(e))}</strong></td>
-                        <td>${fmtSavantPct(ticket?.splitPct)}</td>
-                        <td>${fmtSavantPct(ticket?.riskPct)}</td>
-                        <td>${fmtSignedPct(ticket?.parkPct)}</td>
+                        <td>${fmtTicketBadge(score)}</td>
                         <td>${fmtFormPct(ticket?.mixPlus)}</td>
                         <td>${fmtHrFormWithTrend(stats.hrFormPct, formTrendForRow(e.row))}</td>
                         <td>${fmtPct(stats.barrelPct)}</td>
-                        <td>${fmtPct(stats.airPct)}</td>
-                        <td>${fmtNearHr(e.row)}</td>
-                        <td>${fmtEv(stats.avgEV)}</td>
                     </tr>`;
                   })
                   .join("")
-            : `<tr><td colspan="14" class="rs-empty">No hitters match these filters.</td></tr>`;
+            : `<tr><td colspan="8" class="rs-empty">No hitters match these filters.</td></tr>`;
+
+        renderExploreLbCards(hitters);
 
         scheduleHrFormHydrate(hitters.map((e) => e.row?.id).filter(Boolean));
 
         els.hrLeaderboardBody.querySelectorAll(".rs-leaderboard-row").forEach((tr) => {
-            tr.querySelector(".rs-leaderboard-link")?.addEventListener("click", () => {
-                const id = Number(tr.getAttribute("data-id"));
-                const gi = Number(tr.getAttribute("data-game"));
-                const side = tr.getAttribute("data-side");
-                const entry = collectSlateHitters().find((e) => e.row.id === id && e.gameIdx === gi && e.side === side);
-                if (entry) openPlayerProfile(entry);
+            tr.querySelector(".rs-leaderboard-link")?.addEventListener("click", (ev) => {
+                ev.stopPropagation();
+                jumpToLeaderboardEntry(tr);
             });
+            tr.addEventListener("click", () => jumpToLeaderboardEntry(tr));
         });
 
         els.hrLeaderboard?.querySelectorAll(".rs-lb-sort").forEach((th) => {
@@ -5348,10 +6188,10 @@
                 ? pitchers
                       .map((e) => {
                           const ps = pitcherStats(e.pitcher);
-                          return `<tr class="rs-leaderboard-row rs-pitcher-lb-row" data-pitcher-id="${e.pitcher.id || ""}" data-game="${e.gameIdx}" data-side="${e.side}"><td><button type="button" class="rs-leaderboard-link">${e.pitcher.name}</button></td><td>${e.game.matchup}</td><td>${Math.round(Number(e.risk))}%</td><td>${ps.kPickPct != null ? `${ps.kPickPct}%` : "—"}</td><td>${fmtPct(ps.barrelPct)}</td><td>${fmtPct(ps.hardHitPct)}</td><td>${ps.hr9 != null ? Number(ps.hr9).toFixed(2) : "—"}</td><td>${ps.dingerRiskLhbPct != null ? `${ps.dingerRiskLhbPct}%` : "—"}</td><td>${ps.dingerRiskRhbPct != null ? `${ps.dingerRiskRhbPct}%` : "—"}</td></tr>`;
+                          return `<tr class="rs-leaderboard-row rs-pitcher-lb-row" data-pitcher-id="${e.pitcher.id || ""}" data-game="${e.gameIdx}" data-side="${e.side}"><td><button type="button" class="rs-leaderboard-link">${e.pitcher.name}</button></td><td>${e.game.matchup}</td><td>${Math.round(Number(e.risk))}%</td><td>${ps.kPickPct != null ? `${ps.kPickPct}%` : "—"}</td><td>${fmtPct(ps.barrelPct)}</td><td>${ps.hr9 != null ? Number(ps.hr9).toFixed(2) : "—"}</td></tr>`;
                       })
                       .join("")
-                : `<tr><td colspan="9" class="rs-empty">Pitcher dinger risk unavailable.</td></tr>`;
+                : `<tr><td colspan="6" class="rs-empty">Pitcher dinger risk unavailable.</td></tr>`;
             els.pitcherLeaderboardBody.querySelectorAll(".rs-pitcher-lb-row").forEach((tr) => {
                 tr.querySelector(".rs-leaderboard-link")?.addEventListener("click", () => {
                     const id = Number(tr.getAttribute("data-pitcher-id"));
@@ -5380,6 +6220,8 @@
                 });
             });
         }
+        wireExploreLeaderboardTips();
+        hydrateKProjectionsFromTrends();
     }
 
     function renderSourceBadge() {
@@ -5389,11 +6231,15 @@
 
     async function renderAll() {
         pickDefaultSide();
+        computeHrFormForSlate();
+        computeBoomForSlate();
+        computePitcherScoresForSlate();
+        refreshAllHrProps();
+        rebuildTicketSlatePools();
         renderGames();
         renderMatchupBar();
         renderWeatherPanel();
         await renderPitcherPanel();
-        computeHrFormForSlate();
         renderExplorePanel();
         renderTable();
         renderMobileCards();
@@ -5415,6 +6261,7 @@
         pitcherHandLookup = null;
         clearHrTicketCache();
         formTrendCache.clear();
+        boomTrendCache.clear();
         hrFormRollingCache.clear();
         formTrendHydrateGen += 1;
         if (els.dateInput) els.dateInput.value = date;
@@ -5461,7 +6308,10 @@
         activeGameIdx = Math.min(activeGameIdx, slate.games.length - 1);
         pickDefaultSide();
         refreshAllHrProps();
-        resetSortToDefault();
+        if (!restoreSortPreference()) {
+            applyDefaultSort();
+            sortUserOverride = false;
+        }
         await renderAll();
         prefetchSlateWeather().catch((err) => console.warn("weather prefetch", err));
 
@@ -5534,18 +6384,14 @@
         });
         els.sideAway?.addEventListener("click", () => {
             activeSide = "away";
-            resetSortToDefault();
             renderAll().catch((e) => setStatus(String(e.message || e), true));
         });
         els.sideHome?.addEventListener("click", () => {
             activeSide = "home";
-            resetSortToDefault();
             renderAll().catch((e) => setStatus(String(e.message || e), true));
         });
         els.mobileSort?.addEventListener("change", () => {
-            sortUserOverride = true;
-            sortKey = els.mobileSort.value || "order";
-            sortDir = sortKey === "name" ? 1 : -1;
+            setSortColumn(els.mobileSort.value || "order", { toggleDir: false });
             syncMobileSortDir();
             renderTable();
             renderMobileCards();
@@ -5553,6 +6399,7 @@
         els.mobileSortDir?.addEventListener("click", () => {
             sortUserOverride = true;
             sortDir *= -1;
+            saveSortPreference();
             syncMobileSortDir();
             renderTable();
             renderMobileCards();
@@ -5578,6 +6425,22 @@
             resetColumnOrder();
             renderTable();
         });
+        els.tableViewEssential?.addEventListener("click", () => setTableViewMode("essential"));
+        els.tableViewFull?.addEventListener("click", () => setTableViewMode("full"));
+        setTableViewMode(tableViewMode);
+        let scrollTick = false;
+        window.addEventListener(
+            "scroll",
+            () => {
+                if (scrollTick) return;
+                scrollTick = true;
+                requestAnimationFrame(() => {
+                    scrollTick = false;
+                    els.header?.classList.toggle("rs-header--compact", window.scrollY > 72);
+                });
+            },
+            { passive: true }
+        );
     }
 
     wireUi();

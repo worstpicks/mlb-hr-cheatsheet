@@ -376,6 +376,7 @@ def fetch_pitcher_game_trends(player_id: int, season: int, limit: int = 30) -> l
             {
                 "date": date_raw[:10],
                 "ip": ip,
+                "k": _int(st.get("strikeOuts")),
                 "hr": _int(st.get("homeRuns")),
                 "bf": _int(st.get("battersFaced")),
                 "h": _int(st.get("hits")),

@@ -15,7 +15,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="">
-    <link rel="stylesheet" href="research.css?v=105">
+    <link rel="stylesheet" href="research.css?v=117">
     <style>
         .rs-file-block {
             display: none;
@@ -100,7 +100,7 @@ python serve-research.py</pre>
                 <div class="rs-header-intro">
                     <span class="rs-brand-tag">Worst Pickz Research</span>
                     <h1>MLB Hitter Research</h1>
-                    <p>2026 season Savant stats, pitch-mix matchup scores, and batted-ball profile for today's lineups.</p>
+                    <p>Savant stats from each hitter's last 20 games and each pitcher's last 10 starts, plus pitch-mix matchup scores for today's lineups.</p>
                 </div>
             </div>
         </header>
@@ -156,6 +156,7 @@ python serve-research.py</pre>
                                     <option value="hrEnv">HR environment</option>
                                     <option value="mixPlus">Pitch mix</option>
                                     <option value="barrelPct">Barrel%</option>
+                                    <option value="boomPct">Boom%</option>
                                     <option value="avgEV">Exit velo</option>
                                     <option value="hrLuckDiff">Due+</option>
                                     <option value="nearHr">Near HR</option>
@@ -172,57 +173,48 @@ python serve-research.py</pre>
                         <div class="rs-explore-grid">
                             <div class="rs-leaderboard-wrap is-active" data-lb-panel="hitters">
                                 <h3 class="rs-explore__sub">Top hitters</h3>
-                                <div class="rs-leaderboard-scroll" tabindex="0" aria-label="Top hitters — swipe sideways for more columns">
+                                <p class="rs-explore__hint rs-explore__hint--tap">Tap a row to jump to that matchup</p>
+                                <div class="rs-explore-lb-cards" id="rsExploreLbCards" aria-live="polite"></div>
+                                <div class="rs-leaderboard-scroll" tabindex="0" aria-label="Top hitters leaderboard">
                                     <div class="rs-leaderboard-scroll__track">
-                                        <table class="rs-leaderboard" id="rsHrLeaderboard">
+                                        <table class="rs-leaderboard rs-leaderboard--compact" id="rsHrLeaderboard">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Hitter</th>
-                                                    <th>Matchup</th>
+                                                    <th>Game</th>
                                                     <th>vs SP</th>
-                                                    <th class="rs-lb-sort" data-sort="ticketRank">Score /100</th>
-                                                    <th class="rs-lb-sort" data-sort="splitPct">Split</th>
-                                                    <th class="rs-lb-sort" data-sort="riskPct">Risk</th>
-                                                    <th class="rs-lb-sort" data-sort="parkPct">Park</th>
+                                                    <th class="rs-lb-sort" data-sort="ticketRank">Score</th>
                                                     <th class="rs-lb-sort" data-sort="mixPlus">Mix</th>
-                                                    <th class="rs-lb-sort" data-sort="formPct">HR Form%</th>
-                                                    <th class="rs-lb-sort" data-sort="barrelPct">Barrel%</th>
-                                                    <th class="rs-lb-sort" data-sort="airPct">Air%</th>
-                                                    <th class="rs-lb-sort" data-sort="nearHr">Near</th>
-                                                    <th class="rs-lb-sort" data-sort="avgEV">EV</th>
+                                                    <th class="rs-lb-sort" data-sort="formPct">Form</th>
+                                                    <th class="rs-lb-sort" data-sort="barrelPct">Barrel</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="rsHrLeaderboardBody"></tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <p class="rs-leaderboard-scroll-hint" aria-hidden="true">Swipe sideways → for more stats</p>
                             </div>
                             <div class="rs-leaderboard-wrap rs-leaderboard-wrap--pitchers" data-lb-panel="pitchers">
                                 <h3 class="rs-explore__sub">Pitchers to target</h3>
                                 <p class="rs-explore__hint">SPs with ≥50% dinger risk (Savant)</p>
-                                <div class="rs-leaderboard-scroll" tabindex="0" aria-label="Pitchers to target — swipe sideways for more columns">
+                                <div class="rs-leaderboard-scroll" tabindex="0" aria-label="Pitchers to target">
                                     <div class="rs-leaderboard-scroll__track">
-                                        <table class="rs-leaderboard rs-leaderboard--pitchers" id="rsPitcherLeaderboard">
+                                        <table class="rs-leaderboard rs-leaderboard--pitchers rs-leaderboard--compact" id="rsPitcherLeaderboard">
                                             <thead>
                                                 <tr>
                                                     <th>Pitcher</th>
                                                     <th>Game</th>
                                                     <th class="rs-lb-sort rs-plb-sort" data-sort="risk">Risk</th>
-                                                    <th class="rs-lb-sort rs-plb-sort rs-has-tip" data-sort="kPick" data-tip="K pick score — Whiff%, K%, Edge% plus opposing lineup K susceptibility. Higher = better K prop lean." tabindex="0">K pick</th>
-                                                    <th class="rs-lb-sort rs-plb-sort" data-sort="barrelPct">Barrel%</th>
-                                                    <th class="rs-lb-sort rs-plb-sort" data-sort="hardHitPct">Hard%</th>
+                                                    <th class="rs-lb-sort rs-plb-sort rs-has-tip" data-sort="kPick" data-tip="K pick score — Whiff%, K%, Edge% plus opposing lineup K susceptibility." tabindex="0">K</th>
+                                                    <th class="rs-lb-sort rs-plb-sort" data-sort="barrelPct">Barrel</th>
                                                     <th class="rs-lb-sort rs-plb-sort" data-sort="hr9">HR/9</th>
-                                                    <th class="rs-lb-sort rs-plb-sort" data-sort="lhb">LHB</th>
-                                                    <th class="rs-lb-sort rs-plb-sort" data-sort="rhb">RHB</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="rsPitcherLeaderboardBody"></tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <p class="rs-leaderboard-scroll-hint" aria-hidden="true">Swipe sideways → for more stats</p>
                             </div>
                         </div>
                     </div>
@@ -260,6 +252,8 @@ python serve-research.py</pre>
                     </div>
                 </details>
 
+                <div class="rs-matchup-summary" id="rsMatchupSummary" hidden></div>
+
                 <div class="rs-pitcher-panel" id="rsPitcherPanel" hidden>
                     <div class="rs-pitcher-panel__head">
                         <h2 class="rs-section-title rs-section-title--pitchers">Pitchers</h2>
@@ -275,6 +269,10 @@ python serve-research.py</pre>
                         <span class="rs-sp" id="rsMatchupSp">vs —</span>
                     </div>
                     <div class="rs-matchup-bar__actions">
+                        <div class="rs-table-view-toggle" role="group" aria-label="Table density">
+                            <button type="button" class="rs-table-view-toggle__btn" id="rsTableViewEssential">Essential</button>
+                            <button type="button" class="rs-table-view-toggle__btn is-active" id="rsTableViewFull">Full stats</button>
+                        </div>
                         <div class="rs-table-actions" id="rsTableActions">
                             <button type="button" class="rs-btn rs-btn--ghost rs-table-actions__reset" id="rsColResetBtn" hidden>Reset columns</button>
                             <button type="button" class="rs-btn rs-btn--ghost" id="rsColReorderBtn" aria-pressed="false">Sort columns</button>
@@ -298,8 +296,8 @@ python serve-research.py</pre>
                 </div>
                 <div class="rs-card-list" id="rsCardList" aria-live="polite"></div>
 
-                <div class="rs-table-wrap">
-                    <table class="rs-table">
+                <div class="rs-table-wrap rs-table-wrap--full">
+                    <table class="rs-table rs-table--full">
                         <thead id="rsTableHead"></thead>
                         <tbody id="rsTableBody"></tbody>
                     </table>
@@ -336,6 +334,6 @@ python serve-research.py</pre>
         </div>
     </dialog>
 
-    <script src="research.js?v=105" defer></script>
+    <script src="research.js?v=117" defer></script>
 </body>
 </html>

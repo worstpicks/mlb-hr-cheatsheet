@@ -4344,6 +4344,9 @@
             (g) => lineupIsRosterProjection(g.awayLineup) || lineupIsRosterProjection(g.homeLineup)
         );
         if (!needsPitcher && !needsLineup) return { pitchers: 0, lineups: 0 };
+        if (!(await proxyAvailable(`/api/rotowire-lineups?date=${encodeURIComponent(date)}`))) {
+            return { pitchers: 0, lineups: 0 };
+        }
         try {
             const res = await fetch(`/api/rotowire-lineups?date=${encodeURIComponent(date)}`);
             if (!res.ok) return { pitchers: 0, lineups: 0, error: res.status };

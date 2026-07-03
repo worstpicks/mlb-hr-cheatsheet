@@ -1,0 +1,30 @@
+Matchup,CWS @ CLE
+Pitcher,Anthony Kay
+Pitcher Team,CWS
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.1,1.24,="12-45",.267,.311,0.044,0,2,0,3,20.4,2,.306,.617
+Batting Second,8.2,2.31,="13-39",.333,.564,0.231,2,3,0,5,12.5,7,.438,1.002
+Batting Third,9.2,1.66,="14-41",.341,.512,0.171,1,2,1,6,12.8,2,.383,.895
+Batting Fourth,10.2,1.13,="10-38",.263,.553,0.290,3,2,0,8,18.6,2,.326,.879
+Batting Fifth,9.0,1.00,="5-32",.156,.156,0.000,0,0,0,1,16.2,4,.270,.426
+Batting Sixth,9.0,1.11,="6-32",.188,.219,0.031,0,1,0,0,31.6,4,.316,.535
+Batting Seventh,6.1,1.89,="7-26",.269,.808,0.539,4,2,0,9,14.3,5,.457,1.265
+Batting Eighth,6.2,1.80,="9-31",.290,.452,0.162,1,0,1,4,5.7,3,.371,.823
+Batting Ninth,8.1,1.08,="7-30",.233,.367,0.134,0,2,1,3,28.6,2,.303,.670
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="34-172",.198,.262,0.064,1,6,1,10,10.9,24,.302,.564
+Travis Bazzana LHB,Batting First ​,="27-113",.239,.487,0.248,5,11,1,16,22.0,13,.315,.802
+Chase DeLauter LHB,Batting Second ​,="37-134",.276,.493,0.217,6,9,1,23,9.3,16,.353,.846
+Rhys Hoskins RHB,Batting Fourth ​,="13-100",.130,.260,0.130,3,4,0,14,30.3,17,.262,.522
+Kyle Manzardo LHB,Batting Fourth ​,="39-179",.218,.346,0.128,6,5,0,20,34.3,19,.299,.645
+David Fry RHB,Batting Fifth ​,="9-41",.220,.268,0.048,0,2,0,2,34.0,6,.319,.587
+Daniel Schneemann LHB,Batting Fifth ​,="11-68",.162,.221,0.059,1,1,0,8,34.2,5,.219,.440
+Cooper Ingle LHB,Batting Sixth ​,="1-6",.167,.167,0.000,0,0,0,2,33.3,0,.167,.334
+Kahlil Watson LHB,Batting Sixth ​,="4-14",.286,.500,0.214,1,0,0,4,33.3,1,.333,.833
+Austin Hedges RHB,Batting Eighth ​,="28-101",.277,.406,0.129,2,7,0,12,16.2,10,.345,.751
+Patrick Bailey SHB,Batting Eighth ​,="20-110",.182,.264,0.082,1,4,1,7,21.0,8,.235,.499
+Gabriel Arias RHB,Batting Eighth ​,="8-28",.286,.643,0.357,3,1,0,4,35.5,3,.355,.998
+Brayan Rocchio SHB,Batting Ninth ​,="56-202",.277,.416,0.139,5,9,2,31,12.2,17,.346,.762

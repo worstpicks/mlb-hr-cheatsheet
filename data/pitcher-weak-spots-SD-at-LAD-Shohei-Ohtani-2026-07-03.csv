@@ -1,0 +1,30 @@
+Matchup,SD @ LAD
+Pitcher,Shohei Ohtani
+Pitcher Team,LAD
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="4-36",.111,.111,0.000,0,0,0,1,37.5,.179,.290
+Batting Second,="6-36",.167,.194,0.027,0,1,0,3,23.1,.231,.425
+Batting Third,="8-31",.258,.355,0.097,0,3,0,0,18.9,.378,.733
+Batting Fourth,="8-34",.235,.382,0.147,1,2,0,3,24.3,.297,.679
+Batting Fifth,="3-33",.091,.121,0.030,0,1,0,1,38.9,.167,.288
+Batting Sixth,="2-33",.061,.061,0.000,0,0,0,1,39.4,.061,.122
+Batting Seventh,="6-24",.250,.375,0.125,1,0,0,2,16.1,.387,.762
+Batting Eighth,="8-28",.286,.464,0.178,0,5,0,1,19.4,.355,.819
+Batting Ninth,="3-25",.120,.240,0.120,1,0,0,4,27.6,.207,.447
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="56-185",.303,.443,0.140,5,11,0,19,16.0,12,.350,.793
+Samad Taylor RHB,Batting Second ​,="13-38",.342,.342,0.000,0,0,0,3,29.8,8,.457,.799
+Jackson Merrill LHB,Batting Third ​,="29-128",.227,.359,0.132,4,5,0,12,28.1,7,.272,.631
+Manny Machado RHB,Batting Fourth ​,="34-172",.198,.419,0.221,10,8,0,31,22.2,22,.283,.702
+Xander Bogaerts RHB,Batting Fifth ​,="37-156",.237,.308,0.071,3,2,0,16,20.2,15,.306,.614
+Miguel Andujar RHB,Batting Sixth ​,="16-53",.302,.472,0.170,1,4,1,9,16.4,2,.327,.799
+Gavin Sheets LHB,Batting Sixth ​,="13-75",.173,.347,0.174,3,4,0,10,27.2,5,.235,.582
+Ty France RHB,Batting Seventh ​,="22-83",.265,.627,0.362,8,4,1,20,30.8,4,.319,.946
+Jase Bowen RHB,Batting Eighth ​,="0-16",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Sung-Mun Song LHB,Batting Eighth ​,="6-28",.214,.250,0.036,0,1,0,4,14.7,6,.353,.603
+Jake Cronenworth LHB,Batting Ninth ​,="9-58",.155,.241,0.086,1,2,0,4,17.1,8,.290,.531
+Rodolfo Durán RHB,Batting Ninth ​,="7-53",.132,.358,0.226,3,3,0,7,25.8,7,.246,.604
+Freddy Fermin RHB,Batting Ninth ​,="11-68",.162,.324,0.162,3,2,0,9,21.8,7,.237,.561

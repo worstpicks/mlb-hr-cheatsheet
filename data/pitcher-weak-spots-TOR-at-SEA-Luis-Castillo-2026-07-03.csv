@@ -1,0 +1,29 @@
+Matchup,TOR @ SEA
+Pitcher,Luis Castillo
+Pitcher Team,SEA
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.24,="7-36",.194,.306,0.112,1,1,0,5,14.0,5,.302,.608
+Batting Second,8.2,1.73,="9-36",.250,.583,0.333,3,3,0,6,19.0,6,.357,.940
+Batting Third,11.0,0.73,="7-40",.175,.375,0.200,2,0,1,4,23.8,1,.214,.589
+Batting Fourth,8.0,1.63,="11-35",.314,.457,0.143,1,2,0,7,26.3,2,.368,.825
+Batting Fifth,9.2,0.83,="5-33",.152,.212,0.060,0,0,1,3,22.2,3,.222,.434
+Batting Sixth,7.0,2.14,="12-33",.364,.697,0.333,2,5,0,8,13.9,3,.417,1.114
+Batting Seventh,6.1,2.37,="15-32",.469,.563,0.094,0,3,0,8,22.9,0,.471,1.034
+Batting Eighth,9.0,0.67,="3-29",.103,.103,0.000,0,0,0,2,42.9,3,.206,.309
+Batting Ninth,6.1,1.89,="9-27",.333,.407,0.074,0,2,0,3,9.4,3,.400,.807
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nathan Lukes LHB,Batting Second ​,="18-73",.247,.342,0.095,2,1,0,5,15.9,5,.300,.642
+Yohendrick Pinango LHB,Batting Second ​,="10-30",.333,.567,0.234,2,1,0,5,15.6,2,.375,.942
+Vladimir Guerrero Jr. RHB,Batting Third ​,="66-241",.274,.349,0.075,2,12,0,27,12.0,28,.353,.702
+Kazuma Okamoto RHB,Batting Fourth ​,="31-145",.214,.372,0.158,7,2,0,27,32.3,15,.293,.665
+Alejandro Kirk RHB,Batting Fifth ​,="7-34",.206,.412,0.206,2,1,0,3,15.8,4,.289,.701
+Daulton Varsho LHB,Batting Sixth ​,="21-78",.269,.436,0.167,2,7,0,7,17.9,6,.321,.757
+Luis Urias RHB,Batting Seventh ​,="5-10",.500,.900,0.400,1,1,0,2,16.7,2,.583,1.483
+Myles Straw RHB,Batting Seventh ​,="8-39",.205,.333,0.128,1,2,0,7,15.2,5,.283,.616
+Ernie Clement RHB,Batting Seventh ​,="24-70",.343,.443,0.100,1,4,0,7,8.3,2,.361,.804
+Andres Gimenez LHB,Batting Eighth ​,="33-138",.239,.399,0.160,5,7,0,21,18.7,5,.289,.688
+Sean Keys LHB,Batting Eighth ​,="1-4",.250,1.000,0.750,1,0,0,3,50.0,0,.250,1.250
+Brandon Valenzuela SHB,Batting Ninth ​,="19-85",.224,.471,0.247,6,3,0,13,24.5,13,.327,.798

@@ -1,0 +1,30 @@
+Matchup,SF @ COL
+Pitcher,Logan Webb
+Pitcher Team,SF
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="6-44",.136,.250,0.114,1,0,1,4,39.1,.156,.406
+Batting Second,="7-39",.179,.282,0.103,1,1,0,2,22.2,.289,.571
+Batting Third,="8-38",.211,.263,0.052,0,0,1,0,22.0,.268,.531
+Batting Fourth,="10-37",.270,.378,0.108,1,1,0,2,17.5,.325,.703
+Batting Fifth,="11-38",.289,.447,0.158,0,6,0,3,25.0,.325,.772
+Batting Sixth,="5-37",.135,.324,0.189,2,1,0,6,15.4,.179,.503
+Batting Seventh,="8-35",.229,.229,0.000,0,0,0,4,13.2,.289,.518
+Batting Eighth,="9-32",.281,.344,0.063,0,2,0,5,16.2,.378,.722
+Batting Ninth,="10-33",.303,.364,0.061,0,2,0,3,14.3,.324,.688
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="38-134",.284,.500,0.216,5,10,2,19,16.8,7,.322,.822
+Edouard Julien LHB,Batting First ​,="28-111",.252,.342,0.090,2,2,1,12,25.4,15,.341,.683
+Mickey Moniak LHB,Batting Second ​,="33-125",.264,.632,0.368,11,9,2,26,22.7,6,.303,.935
+Tyler Freeman RHB,Batting Second ​,="26-91",.286,.385,0.099,2,1,1,12,18.3,4,.363,.748
+TJ Rumfield LHB,Batting Third ​,="34-139",.245,.446,0.201,5,11,1,23,14.5,15,.340,.786
+Hunter Goodman RHB,Batting Third ​,="25-133",.188,.481,0.293,11,6,0,21,34.0,5,.227,.708
+Troy Johnston LHB,Batting Fifth ​,="30-108",.278,.333,0.055,0,6,0,13,15.4,12,.358,.691
+Willi Castro SHB,Batting Sixth ​,="23-68",.338,.529,0.191,3,4,0,12,27.3,7,.403,.932
+Cole Carrigg SHB,Batting Sixth ​,="9-35",.257,.543,0.286,3,1,0,10,21.4,4,.333,.876
+Ezequiel Tovar RHB,Batting Eighth ​,="13-77",.169,.234,0.065,1,2,0,7,27.1,6,.224,.458
+Braxton Fulford RHB,Batting Eighth ​,="2-12",.167,.167,0.000,0,0,0,2,53.3,1,.267,.434
+Kyle Karros RHB,Batting Eighth ​,="22-83",.265,.470,0.205,3,8,0,10,20.8,17,.386,.856
+Brett Sullivan LHB,Batting Ninth ​,="10-52",.192,.308,0.116,2,0,0,4,23.6,1,.218,.526

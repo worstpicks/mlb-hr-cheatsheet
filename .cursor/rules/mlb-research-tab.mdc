@@ -15,8 +15,8 @@ This is **separate from the cheat sheet** (`preview/index.html`) but shares them
 
 | Layer | Path | Role |
 |-------|------|------|
-| UI shell | `preview/research/index.html` | Layout, file:// guard, cache-bust `research.css?v=59` |
-| UI logic | `preview/research/research.js` | **~2.8k lines** — games, table, mobile cards, weather, park attach, Savant merge, pitch mix. **Bump `?v=` on deploy** (currently `v=62`). |
+| UI shell | `preview/research/index.html` | Layout, file:// guard, cache-bust (`research.css?v=117` as of 2026-07-02 — check file for current) |
+| UI logic | `preview/research/research.js` | **~6.8k lines** — games, table, mobile cards, weather, park attach, Savant merge, pitch mix, K projections, HR ticket, explore leaderboards, player profiles. **Bump `?v=` on deploy** (`v=129` as of 2026-07-02 — check file for current). |
 | Styles | `preview/research/research.css` | Dark/light theme, table groups, mobile cards |
 | Slate fetch | `fetch-research-slate.py` | CLI entry → `research-YYYY-MM-DD.json` + `park-factors-YYYY-MM-DD.json` |
 | API builder | `research/mlb_api.py` | `build_slate()` — schedule, lineups, Savant, pitch mix, park, weather |
@@ -26,8 +26,9 @@ This is **separate from the cheat sheet** (`preview/index.html`) but shares them
 | PropFinder | `research/propfinder_stats.py` | Near HR + recent-window stats from `hr-matchups-*` CSVs |
 | Weather | `research/park_weather.py`, `research/stadium_db.py`, `research/roof_status.py` | Open-Meteo, wind field, roof rules |
 | HR model | `research/hr_park_model.py` | Per-hitter HR prop % in game cards |
-| Local server | `serve-research.py` | Serves `preview/` on `:8080` + `/api/savant-batter` + `/api/propfinder` proxies |
-| Netlify fn | `netlify/functions/savant-batter.js` | Production Savant CORS proxy (`/.netlify/functions/savant-batter`) |
+| Local server | `serve-research.py` | Serves `preview/` on `:8080` + proxies (`savant-batter`, `propfinder`, `player-trends`, `pitcher-trends`, `savant-matchup`, `rotowire-lineups`, `zone`, `park`) + `GET /api/health`. Exclusive port bind — refuses to start if 8080 taken. |
+| Netlify fns | `netlify/functions/savant-batter.js`, `netlify/functions/savant-matchup.js` | Production Savant CORS proxies (redirect aliases `/api/savant-batter`, `/api/savant-matchup` in `netlify.toml`) |
+| Security headers | `preview/_headers` | Netlify CSP/HSTS/X-Frame-Options etc. — never delete |
 | Cached data | `preview/data/research-YYYY-MM-DD.json` | Pre-built slate (games, lineups, lookups) |
 | Park JSON | `preview/data/park-factors-YYYY-MM-DD.json` | **Per-date** park lookup (never a single `park-factors.json`) |
 | Savant cache | `preview/data/savant-batter-2026.json`, `savant-batter-pitch-type-2026.json`, `savant-pitcher-arsenal-2026.json` (+ 2025 arsenal fallback) |
@@ -76,7 +77,7 @@ research.js loadSlate(date) ──► table + mobile cards + weather panel
 | **Cheat sheet** | `meta name="sheet-date"` on `preview/index.html` |
 | **Research link from sheet** | `research/index.html` with **no** `?date=` — user lands on today |
 
-When shipping a new cheat sheet slate, still run `fetch-research-slate.py --date YYYY-MM-DD` so that date's JSON exists on production.
+When shipping a new cheat sheet slate, `patch-*-preview.py` auto-runs `post_patch.sync_research_tab_after_patch()` — no separate `fetch-research-slate.py` step unless refreshing without patching. Manual refresh: `python fetch-research-slate.py --date YYYY-MM-DD`.
 
 ---
 
@@ -136,6 +137,7 @@ python serve-research.py
 5. **Park & weather panel** — wind compass SVG, density altitude, fence boost, humidity; Ballpark Pal net HR %.
 6. **Theme toggle** — shares `worstpickz-theme` localStorage with cheat sheet.
 7. **Tooltips** — `tip` on columns shows on hover/focus. **No help cursor or ? icons** (removed intentionally — do not add `cursor: help` or question-mark affordances).
+8. **Pitcher panel** — between Park & weather and Hitters. Shows both probable SPs for the selected game with Savant contact-allowed stats + **Dinger Risk** (slate-relative weighted score from HR/9, Barrel%, HR/FB%, HH%, FB%, Meatball%, Sweet Spot%, K%). Backend: `research/savant_pitcher.py`, `research/pitcher_dinger_risk.py`; cache `preview/data/savant-pitcher-{season}.json`.
 
 ---
 
@@ -165,6 +167,18 @@ Production: `/.netlify/functions/savant-batter?season=2026` (redirect alias `/ap
 | Research defaulted to cheat sheet date | `initResearchDate()` | Default **today**, not sheet meta |
 | Auto-load latest ParkFactors | reverted in `park_factors.py` | **Never** reintroduce "pick newest CSV" |
 | Help cursor on tooltips | `research.css` | `cursor: default` on tips, not `help` |
+| K lines showed 0 (K% treated as K/9) | `seasonPitcherK9` in `research.js` | Keep K% → K/9 conversion (× 4.28 BF/IP × 9) and the "both k and ip present" start filter |
+| Live-site 404 spam from dev-only proxies | `proxyAvailable()` in `research.js` | Gate `/api/player-trends`, `/api/pitcher-trends` behind the probe |
+| XSS via player/team names in `innerHTML` | `escAttr()` / `escapeTip` in `research.js` | Escape all external strings in new render paths |
+| Stale server on 8080 serving old code | `serve-research.py` exclusive bind + `/api/health` | Kill all `serve-research` procs, restart, verify `codeMtime` |
+
+---
+
+## Changelog
+
+- **2026-07-02** — Formula overhaul + security hardening + pipeline health (see `mlb-research-formulas.mdc` for the full contract): Edge% history re-weighted (0.7/0.3, min 20 pitches), K projection K%→K/9 fix, HR Form weights update, platoon splits (`batter_splits.py`, `_fill_pitcher_throws`), `savant-matchup` Netlify fn, `proxyAvailable` 404 guard, `escAttr` XSS pass, `preview/_headers` CSP, slate health report in fetch summary, `/api/health` + exclusive port bind on dev server, legacy `bvp_stats.py` deleted. JS `v=129`.
+- **2026-06-28** — HR environment % tightened: weighted additive combine (not multiplicative), capped factors (±12% each, ±18% total), fence/wind aligned with weather panel display logic. JS `v=75`.
+- **2026-06-28** — Pitcher panel between Park & weather and Hitters: Savant contact-allowed stats, Dinger Risk score, `savant_pitcher.py` + `pitcher_dinger_risk.py`, cache `savant-pitcher-{season}.json`. Local-only until user deploys.
 
 ---
 
@@ -173,11 +187,11 @@ Production: `/.netlify/functions/savant-batter?season=2026` (redirect alias `/ap
 When changing `research.js` or `research.css`, increment query string in `preview/research/index.html`:
 
 ```html
-<link rel="stylesheet" href="research.css?v=59">
-<script src="research.js?v=62" defer></script>
+<link rel="stylesheet" href="research.css?v=117">
+<script src="research.js?v=129" defer></script>
 ```
 
-Bump **both** if either changes. Stale CDN/browser cache is a common "it works locally" failure mode.
+Bump the one that changed (versions may differ; always read the current values from `index.html`). Stale CDN/browser cache is a common "it works locally" failure mode.
 
 ---
 

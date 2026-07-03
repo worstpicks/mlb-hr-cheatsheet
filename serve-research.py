@@ -2,8 +2,11 @@
 """Serve preview/ + /api/savant-batter proxy (Savant CSV without browser CORS)."""
 from __future__ import annotations
 
+import datetime
 import json
+import os
 import re
+import socket
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -12,6 +15,11 @@ from urllib.parse import parse_qs, urlparse
 ROOT = Path(__file__).resolve().parent
 PREVIEW = ROOT / "preview"
 sys.path.insert(0, str(ROOT))
+
+SERVER_STARTED_AT = datetime.datetime.now().isoformat(timespec="seconds")
+CODE_MTIME = datetime.datetime.fromtimestamp(
+    Path(__file__).stat().st_mtime
+).isoformat(timespec="seconds")
 
 from research.savant_api import fetch_batter_statcast_lookup, fetch_pitcher_game_trends, fetch_player_game_trends  # noqa: E402
 
@@ -36,6 +44,17 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         super().do_OPTIONS()
 
     def do_GET(self) -> None:
+        if urlparse(self.path).path.rstrip("/") == "/api/health":
+            self._send_json(
+                200,
+                {
+                    "ok": True,
+                    "pid": os.getpid(),
+                    "startedAt": SERVER_STARTED_AT,
+                    "codeMtime": CODE_MTIME,
+                },
+            )
+            return
         if self._is_savant_api():
             self._handle_savant_api()
             return
@@ -301,11 +320,30 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             super().log_message(fmt, *args)
 
 
+class ExclusiveHTTPServer(ThreadingHTTPServer):
+    # On Windows, SO_REUSEADDR lets a second server bind the same port and
+    # silently serve stale code. Disable it so a double start fails loudly.
+    allow_reuse_address = False
+
+
+def _port_in_use(host: str, port: int) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+        probe.settimeout(0.5)
+        return probe.connect_ex((host, port)) == 0
+
+
 def main() -> None:
     port = 8080
     host = "127.0.0.1"
-    server = ThreadingHTTPServer((host, port), ResearchHandler)
+    if _port_in_use(host, port):
+        print(f"ERROR: something is already listening on {host}:{port}.")
+        print("A stale serve-research.py may be running with old code. Kill it first:")
+        print("  Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*serve-research*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }")
+        sys.exit(1)
+    server = ExclusiveHTTPServer((host, port), ResearchHandler)
+    print(f"serve-research.py pid={os.getpid()} started={SERVER_STARTED_AT} code-mtime={CODE_MTIME}")
     print(f"Serving preview at http://{host}:{port}/")
+    print(f"Health check  http://{host}:{port}/api/health")
     print(f"Savant proxy  http://{host}:{port}/api/savant-batter?season=2026")
     print(f"Player trends http://{host}:{port}/api/player-trends?playerId=592450&season=2026")
     print(f"Pitcher trends http://{host}:{port}/api/pitcher-trends?playerId=605483&season=2026")

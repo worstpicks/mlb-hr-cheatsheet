@@ -678,8 +678,8 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                 Path(__file__).resolve().parent.parent / "preview" / "data",
                 season,
             )
-        except Exception:
-            pass
+        except Exception as exc:
+            print(f"  WARN batter hand splits failed (platoon edge will be missing): {exc}")
         if savant_lookup:
             write_savant_cache(
                 savant_lookup,
@@ -693,8 +693,9 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                 Path(__file__).resolve().parent.parent / "preview" / "data",
                 season,
             )
-        except Exception:
+        except Exception as exc:
             savant_pitcher_lookup = {}
+            print(f"  WARN pitcher Savant stats failed (dinger risk / K stuff degraded): {exc}")
         try:
             pitcher_hand_lookup = fetch_pitcher_hand_split_lookup(season)
             write_savant_pitcher_hand_cache(
@@ -702,8 +703,9 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                 Path(__file__).resolve().parent.parent / "preview" / "data",
                 season,
             )
-        except Exception:
+        except Exception as exc:
             pitcher_hand_lookup = {}
+            print(f"  WARN pitcher hand splits failed (LHB/RHB dinger risk missing): {exc}")
         try:
             pitcher_arsenal_lookup = fetch_pitcher_arsenal_lookup(season)
             batter_pitch_lookup = fetch_batter_pitch_type_lookup(season)
@@ -736,11 +738,12 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                     + "\n",
                     encoding="utf-8",
                 )
-        except Exception:
+        except Exception as exc:
             pitcher_arsenal_lookup = {}
             pitcher_arsenal_prior_lookup = {}
             batter_pitch_lookup = {}
             league_pitch_avgs = {}
+            print(f"  WARN pitch mix data failed (Mix% / Edge% will be missing): {exc}")
         try:
             season_statcast = fetch_season_statcast_lookup(season)
             window_lookups["season"] = season_statcast
@@ -749,9 +752,10 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
                 for key in ("pullPct", "pullAirPct", "pullBarrelPct"):
                     if sav.get(key) is None and pull_stats.get(key) is not None:
                         sav[key] = pull_stats[key]
-        except Exception:
+        except Exception as exc:
             season_statcast = {}
             window_lookups = {}
+            print(f"  WARN season statcast pull data failed: {exc}")
     propfinder_lookup: dict[str, dict] = (
         load_propfinder_lookup(sheet_date) if with_stats else {}
     )

@@ -194,8 +194,8 @@ def fetch_batter_statcast_lookup(season: int) -> dict[int, dict]:
             for key, val in hr_stats.items():
                 if val is not None:
                     target[key] = val
-    except Exception:
-        pass
+    except Exception as exc:
+        print(f"  WARN HR tracker fetch failed (Due+ / nearHR will be missing): {exc}")
 
     return lookup
 

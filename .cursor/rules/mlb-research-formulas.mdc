@@ -1,0 +1,50 @@
+---
+description: Research tab formulas, security hardening, and pipeline decisions as of 2026-07-02 — do not revert
+alwaysApply: true
+---
+
+# Research formulas & hardening (2026-07-02) — DO NOT REVERT
+
+All constants live in `preview/research/research.js` unless noted. Python mirrors in `research/matchup_edge.py` must stay in sync.
+
+## Edge% (pitch-mix + BvP history blend)
+
+- `MATCHUP_EDGE_CAP = 25`, `MIN_HISTORY_PITCHES = 20`, `HISTORY_CONF_PITCHES = 90`, `MATCHUP_BLEND = 0.7`, `HISTORY_BLEND = 0.3`.
+- History = career batter-vs-pitcher Statcast xwOBA (Savant `/api/savant-matchup`), confidence-ramped by pitches seen. Do NOT lower the 20-pitch minimum or re-weight history above 0.3 — small BvP samples are noise.
+- Legacy CSV BvP is GONE: `research/bvp_stats.py` and `preview/data/bvp-*.json` were deleted. The `bvpKPct`-style keys in `matchup_edge.py` / `research.js` are Savant-history fields reusing old names — keep them, don't resurrect the module.
+
+## K projection (Exp K / suggested line)
+
+- `seasonPitcherK9(stats, games)`: only counts starts with BOTH `k` and `ip` reported (missing K data must not produce 0 K/9). Fallbacks: K% × PA / season IP × 9, then K% × `K_PROJ_BF_PER_IP (4.28)` × 9 — K% is per-batter, so it MUST be multiplied by BF/IP and 9; treating K/IP as K/9 was the "all lines show 0" bug.
+- Pick multiplier uses pitcher K-stuff only (lineup K% is already in the opponent adjustment — don't double count).
+- `hydrateKProjectionsFromTrends()` is called from `renderAll()` — keep it there or K cards render before data arrives.
+
+## HR Form% and HR Ticket
+
+- `HR_FORM_WEIGHTS`: hrLuckDiff 30, hrProximity 25, rollingHrBoost 15, mixPlus 20, hrContactShape 10.
+- `rollingHrBoostFromGames`: 14-game window, ≥8 PA, trust ramps to full at 40 PA.
+- Ticket mix pillar = mix percentile × 0.7 + platoon percentile × 0.3 (`platoonEdgeForEntry` — batter xwOBA vs SP hand, PA-shrunk). Platoon data comes from `xwobaVsLhp/paVsLhp/xwobaVsRhp/paVsRhp` in the slate savant lookup.
+
+## Platoon splits pipeline (Python)
+
+- `research/batter_splits.py` fetches L/R splits; `build_slate()` merges them into `savant_lookup` and writes `batter-hand-{season}.json`. Whitelists in `savant_api.py` (`merge_into_hitter_stats`) and `window_savant.py` include the four platoon keys — removing them silently kills platoon edge.
+- `_fill_pitcher_throws()` in `mlb_api.py` batch-fills missing SP throwing hands from the MLB API. Without it platoon edge dies for those games.
+
+## Security — never weaken
+
+- `preview/_headers` = Netlify security headers (CSP, HSTS, X-Frame-Options DENY, nosniff, etc.). When adding a new external domain, extend CSP `connect-src`/`img-src`; never delete the file.
+- All external-API strings interpolated into `innerHTML` in `research.js` go through `escAttr()` (escapes `&`, `"`, `<`); tooltips through `escapeTip` (also `>`). Player/team/matchup names are attacker-influenced — keep escaping when adding new render paths.
+
+## API proxies & 404 protection
+
+- Production BvP history proxy: `netlify/functions/savant-matchup.js` + `/api/savant-matchup` redirect in `netlify.toml`.
+- `/api/player-trends` and `/api/pitcher-trends` are LOCAL-ONLY (`serve-research.py`). `proxyAvailable(path)` in `research.js` probes each once and gates all calls — without it the live site spams hundreds of 404s. Wire any new dev-only endpoint through the same probe.
+
+## Dev server & pipeline health
+
+- `serve-research.py` binds port 8080 exclusively (`allow_reuse_address = False`) and refuses to start if the port is taken — the old Windows double-bind served stale code silently. It prints pid/start/code-mtime and serves `GET /api/health` returning `{ok, pid, startedAt, codeMtime}`. After editing any Python the server imports, kill ALL `serve-research` processes and restart; verify via `/api/health` codeMtime.
+- `fetch-research-slate.py` prints a slate health report (`_slate_health_report` in `research/sync_tab.py`): SP throws/arsenal, xwOBA, mix%, platoon, Due+, nearHR, park coverage. Silent `except` blocks in `build_slate()`/`savant_api.py` were replaced with WARN prints — keep failures loud.
+
+## Deploy checklist
+
+Bump `research.js?v=` in `preview/research/index.html` on every JS change (currently v=129; CSS v=117). Favicon links in research `index.html` fix a 404 — keep them.

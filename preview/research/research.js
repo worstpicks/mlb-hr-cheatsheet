@@ -5825,8 +5825,13 @@
         return `<svg class="rs-sparkline" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true"><polyline class="rs-sparkline__line ${strokeClass}" points="${pts.join(" ")}"/><circle class="rs-sparkline__dot ${strokeClass}" cx="${last[0]}" cy="${last[1]}" r="2.5"/></svg>`;
     }
 
+    // Trends proxies only exist on the local dev server; on the live site the
+    // first 404 disables further proxy attempts so we go straight to MLB API.
+    let trendsProxyAvailable = null;
+    let pitcherTrendsProxyAvailable = null;
+
     function trendsApiBase() {
-        if (isFileProtocol()) return null;
+        if (isFileProtocol() || trendsProxyAvailable === false) return null;
         return `${window.location.origin}/api/player-trends`;
     }
 
@@ -5837,6 +5842,7 @@
         if (base) {
             try {
                 const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=30`);
+                if (res.status === 404) trendsProxyAvailable = false;
                 if (res.ok) {
                     const data = await res.json();
                     const games = Array.isArray(data.games) ? data.games : [];
@@ -5925,10 +5931,14 @@
     async function fetchPitcherTrends(playerId, season) {
         const key = `${playerId}:${season}`;
         if (pitcherTrendsCache.has(key)) return pitcherTrendsCache.get(key);
-        const base = isFileProtocol() ? null : `${window.location.origin}/api/pitcher-trends`;
+        const base =
+            isFileProtocol() || pitcherTrendsProxyAvailable === false
+                ? null
+                : `${window.location.origin}/api/pitcher-trends`;
         if (base) {
             try {
                 const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=30`);
+                if (res.status === 404) pitcherTrendsProxyAvailable = false;
                 if (res.ok) {
                     const data = await res.json();
                     const games = Array.isArray(data.games) ? data.games : [];

@@ -2651,6 +2651,15 @@ html.theme-light .rs-card__order {
     0%, 20% { background: rgba(251, 191, 36, 0.35); }
     100% { background: transparent; }
 }
+.rs-row--jump {
+    animation: rsJumpFlash 4s ease-out;
+    outline: 2px solid #fcd34d;
+    outline-offset: -2px;
+}
+@keyframes rsJumpFlash {
+    0%, 35% { background: rgba(251, 191, 36, 0.45); }
+    100% { background: transparent; }
+}
 
 /* ── Player profile dialog ── */
 .rs-profile {

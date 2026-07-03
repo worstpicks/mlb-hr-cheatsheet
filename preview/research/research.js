@@ -6840,6 +6840,46 @@
         );
     }
 
+    function normalizePlayerKey(name) {
+        return String(name || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/\s*\((?:l|r|s)\)\s*$/i, "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, " ")
+            .trim();
+    }
+
+    async function jumpToPlayerFromQuery() {
+        const raw = qs("player");
+        if (!raw) return;
+        const target = normalizePlayerKey(raw);
+        if (!target) return;
+        const hitters = collectSlateHitters();
+        const entry =
+            hitters.find((e) => normalizePlayerKey(e.row.name) === target) ||
+            hitters.find((e) => {
+                const key = normalizePlayerKey(e.row.name);
+                return key.includes(target) || target.includes(key);
+            });
+        if (!entry) {
+            setStatus(`"${raw}" is not in a projected lineup on this slate — pick their game manually.`, true);
+            return;
+        }
+        activeGameIdx = entry.gameIdx;
+        activeSide = entry.side;
+        await renderAll();
+        const rowEl =
+            els.tableBody?.querySelector(`tr[data-hitter-id="${entry.row.id}"]`) ||
+            els.cardList?.querySelector(`.rs-card[data-hitter-id="${entry.row.id}"]`);
+        if (!rowEl) return;
+        rowEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        rowEl.classList.add("rs-row--jump");
+        setTimeout(() => rowEl.classList.remove("rs-row--jump"), 4000);
+    }
+
     wireUi();
-    loadSlate(initResearchDate(), false).catch((e) => setStatus(String(e.message || e), true));
+    loadSlate(initResearchDate(), false)
+        .then(() => jumpToPlayerFromQuery())
+        .catch((e) => setStatus(String(e.message || e), true));
 })();

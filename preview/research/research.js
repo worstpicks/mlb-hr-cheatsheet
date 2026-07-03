@@ -4073,35 +4073,27 @@
         return [...pairs.values()];
     }
 
-    // The savant-matchup proxy only exists on the local dev server; on the
-    // live site the first 404 disables further per-pair requests.
-    let matchupApiAvailable = null;
-
     async function fetchSavantMatchup(batterId, pitcherId) {
-        if (matchupApiAvailable === false) return null;
         const res = await fetch(
             `/api/savant-matchup?batterId=${encodeURIComponent(batterId)}&pitcherId=${encodeURIComponent(pitcherId)}`
         );
-        if (res.status === 404) {
-            matchupApiAvailable = false;
-            return null;
-        }
         if (!res.ok) return null;
-        matchupApiAvailable = true;
         const data = await res.json();
         return data.matchup || null;
     }
 
     function scheduleMatchupEdgeHydrate() {
-        if (matchupApiAvailable === false) return;
         const pairs = collectSlateMatchupPairs().filter(
             ({ batterId, pitcherId }) => !matchupHistoryCache.has(matchupPairKey(batterId, pitcherId))
         );
         if (!pairs.length) return;
         const gen = ++matchupHydrateGen;
         (async () => {
+            // Probe once — if the proxy is missing entirely, skip the whole batch
+            // instead of issuing hundreds of 404s.
+            if (!(await proxyAvailable("/api/savant-matchup?batterId=660271&pitcherId=543037"))) return;
             for (let i = 0; i < pairs.length; i += 6) {
-                if (gen !== matchupHydrateGen || matchupApiAvailable === false) return;
+                if (gen !== matchupHydrateGen) return;
                 const batch = pairs.slice(i, i + 6);
                 await Promise.all(
                     batch.map(async ({ batterId, pitcherId }) => {
@@ -5825,24 +5817,38 @@
         return `<svg class="rs-sparkline" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true"><polyline class="rs-sparkline__line ${strokeClass}" points="${pts.join(" ")}"/><circle class="rs-sparkline__dot ${strokeClass}" cx="${last[0]}" cy="${last[1]}" r="2.5"/></svg>`;
     }
 
-    // Trends proxies only exist on the local dev server; on the live site the
-    // first 404 disables further proxy attempts so we go straight to MLB API.
-    let trendsProxyAvailable = null;
-    let pitcherTrendsProxyAvailable = null;
+    // Trends proxies only exist on the local dev server. Requests fire in
+    // parallel bursts, so probe each proxy once and gate every request behind
+    // that probe — otherwise the live site spams dozens of 404s per load.
+    const proxyProbes = new Map();
 
-    function trendsApiBase() {
-        if (isFileProtocol() || trendsProxyAvailable === false) return null;
-        return `${window.location.origin}/api/player-trends`;
+    async function proxyAvailable(path) {
+        if (isFileProtocol()) return false;
+        if (!proxyProbes.has(path)) {
+            proxyProbes.set(
+                path,
+                (async () => {
+                    try {
+                        const res = await fetch(`${window.location.origin}${path}`);
+                        return res.status !== 404;
+                    } catch {
+                        return false;
+                    }
+                })()
+            );
+        }
+        return proxyProbes.get(path);
     }
 
     async function fetchPlayerTrends(playerId, season) {
         const key = `${playerId}:${season}`;
         if (trendsCache.has(key)) return trendsCache.get(key);
-        const base = trendsApiBase();
+        const base = (await proxyAvailable("/api/player-trends?playerId=660271&season=2026&limit=1"))
+            ? `${window.location.origin}/api/player-trends`
+            : null;
         if (base) {
             try {
                 const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=30`);
-                if (res.status === 404) trendsProxyAvailable = false;
                 if (res.ok) {
                     const data = await res.json();
                     const games = Array.isArray(data.games) ? data.games : [];
@@ -5931,14 +5937,12 @@
     async function fetchPitcherTrends(playerId, season) {
         const key = `${playerId}:${season}`;
         if (pitcherTrendsCache.has(key)) return pitcherTrendsCache.get(key);
-        const base =
-            isFileProtocol() || pitcherTrendsProxyAvailable === false
-                ? null
-                : `${window.location.origin}/api/pitcher-trends`;
+        const base = (await proxyAvailable("/api/pitcher-trends?playerId=543037&season=2026&limit=1"))
+            ? `${window.location.origin}/api/pitcher-trends`
+            : null;
         if (base) {
             try {
                 const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=30`);
-                if (res.status === 404) pitcherTrendsProxyAvailable = false;
                 if (res.ok) {
                     const data = await res.json();
                     const games = Array.isArray(data.games) ? data.games : [];

@@ -4073,16 +4073,27 @@
         return [...pairs.values()];
     }
 
+    // The savant-matchup proxy only exists on the local dev server; on the
+    // live site the first 404 disables further per-pair requests.
+    let matchupApiAvailable = null;
+
     async function fetchSavantMatchup(batterId, pitcherId) {
+        if (matchupApiAvailable === false) return null;
         const res = await fetch(
             `/api/savant-matchup?batterId=${encodeURIComponent(batterId)}&pitcherId=${encodeURIComponent(pitcherId)}`
         );
+        if (res.status === 404) {
+            matchupApiAvailable = false;
+            return null;
+        }
         if (!res.ok) return null;
+        matchupApiAvailable = true;
         const data = await res.json();
         return data.matchup || null;
     }
 
     function scheduleMatchupEdgeHydrate() {
+        if (matchupApiAvailable === false) return;
         const pairs = collectSlateMatchupPairs().filter(
             ({ batterId, pitcherId }) => !matchupHistoryCache.has(matchupPairKey(batterId, pitcherId))
         );
@@ -4090,7 +4101,7 @@
         const gen = ++matchupHydrateGen;
         (async () => {
             for (let i = 0; i < pairs.length; i += 6) {
-                if (gen !== matchupHydrateGen) return;
+                if (gen !== matchupHydrateGen || matchupApiAvailable === false) return;
                 const batch = pairs.slice(i, i + 6);
                 await Promise.all(
                     batch.map(async ({ batterId, pitcherId }) => {

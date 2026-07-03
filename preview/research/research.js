@@ -6723,7 +6723,20 @@
         renderDataFreshness();
     }
 
+    function wireTopFab() {
+        const fab = document.getElementById("rsTopFab");
+        if (!fab) return;
+        fab.hidden = false;
+        const sync = () => {
+            fab.classList.toggle("is-visible", window.scrollY > 900);
+        };
+        window.addEventListener("scroll", sync, { passive: true });
+        sync();
+        fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+
     function wireUi() {
+        wireTopFab();
         els.profileClose?.addEventListener("click", closePlayerProfile);
         els.profileJump?.addEventListener("click", () => {
             if (profileEntry) jumpToProfileEntry(profileEntry);

@@ -36,6 +36,10 @@
 html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
 }
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -1146,6 +1150,14 @@ html.theme-light .rs-pitcher-risk-card--fade .rs-pitcher-risk-card__score { colo
     padding: 48px 20px;
     text-align: center;
     color: var(--rs-muted);
+    animation: rsEmptyPulse 1.6s ease-in-out infinite;
+}
+@keyframes rsEmptyPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .rs-empty { animation: none; }
 }
 
 /* ── Mobile card layout (shown ≤768px) ── */
@@ -3052,6 +3064,40 @@ html.theme-light .rs-explore__input {
 .rs-subnav,
 .rs-bottom-bar { display: none !important; }
 
+.rs-top-fab {
+    position: fixed;
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    z-index: 60;
+    min-height: 40px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(234, 179, 8, 0.5);
+    background: rgba(8, 15, 28, 0.94);
+    color: #fde68a;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    pointer-events: none;
+}
+.rs-top-fab.is-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+.rs-top-fab:hover { border-color: rgba(234, 179, 8, 0.8); color: #fffbeb; }
+html.theme-light .rs-top-fab {
+    background: rgba(255, 255, 255, 0.96);
+    color: #b45309;
+    border-color: rgba(180, 83, 9, 0.35);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+}
+
 .rs-subnav {
     display: none;
     gap: 8px;
@@ -3135,6 +3181,10 @@ html.theme-light .rs-explore__input {
     gap: 10px 14px;
 }
 .rs-matchup-summary__item--wide { grid-column: 1 / -1; }
+@media (min-width: 901px) {
+    /* Desktop: SPs + park on one row, top targets full width below */
+    .rs-matchup-summary__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 .rs-matchup-summary__label {
     display: block;
     font-size: 0.62rem;

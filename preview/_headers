@@ -1,0 +1,9 @@
+# Security headers for all pages (Netlify serves this folder as site root).
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://img.mlbstatic.com https://worstpickz.win https://www.worstpickz.win https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://statsapi.mlb.com https://api.open-meteo.com https://www.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests

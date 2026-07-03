@@ -15,6 +15,8 @@
     <meta name="robots" content="noindex, nofollow">
     <title>MLB Research — Worst Pickz</title>
     <meta name="research-date" content="">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/apple-touch-icon.png" type="image/png">
     <link rel="stylesheet" href="research.css?v=117">
     <style>
         .rs-file-block {
@@ -100,7 +102,6 @@ python serve-research.py</pre>
                 <div class="rs-header-intro">
                     <span class="rs-brand-tag">Worst Pickz Research</span>
                     <h1>MLB Hitter Research</h1>
-                    <p>Savant stats from each hitter's last 20 games and each pitcher's last 10 starts, plus pitch-mix matchup scores for today's lineups.</p>
                 </div>
             </div>
         </header>
@@ -155,6 +156,8 @@ python serve-research.py</pre>
                                     <option value="ticketRank" selected>HR ticket score (/100)</option>
                                     <option value="hrEnv">HR environment</option>
                                     <option value="mixPlus">Pitch mix</option>
+                                    <option value="mixEdge">Savant edge</option>
+                                    <option value="matchWhiffPct">Swing &amp; miss (Savant)</option>
                                     <option value="barrelPct">Barrel%</option>
                                     <option value="boomPct">Boom%</option>
                                     <option value="avgEV">Exit velo</option>
@@ -186,6 +189,8 @@ python serve-research.py</pre>
                                                     <th>vs SP</th>
                                                     <th class="rs-lb-sort" data-sort="ticketRank">Score</th>
                                                     <th class="rs-lb-sort" data-sort="mixPlus">Mix</th>
+                                                    <th class="rs-lb-sort rs-has-tip" data-sort="mixEdge" data-tip="Savant matchup edge — today's pitch-mix fit blended with career Statcast history vs this starter." tabindex="0">Edge</th>
+                                                    <th class="rs-lb-sort rs-has-tip" data-sort="matchWhiffPct" data-tip="Savant swing &amp; miss vs this starter — career matchup whiff%. Lower is better." tabindex="0">SwM</th>
                                                     <th class="rs-lb-sort" data-sort="formPct">Form</th>
                                                     <th class="rs-lb-sort" data-sort="barrelPct">Barrel</th>
                                                 </tr>
@@ -334,6 +339,6 @@ python serve-research.py</pre>
         </div>
     </dialog>
 
-    <script src="research.js?v=117" defer></script>
+    <script src="research.js?v=126" defer></script>
 </body>
 </html>

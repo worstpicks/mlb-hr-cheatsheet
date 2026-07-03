@@ -12,6 +12,7 @@ from typing import Any
 from csv_slate_meta import name_lookup_key
 
 from game_row_enrich import load_pitcher_hr9_lookup
+from research.batter_splits import fetch_batter_hand_split_lookup, write_batter_hand_cache
 from research.park_factors import attach_park_factors_to_games, load_park_lookup
 from research.pitch_mix import (
     attach_pitcher_arsenal,
@@ -126,6 +127,30 @@ def _pitcher_dict(raw: dict) -> dict | None:
         "name": raw.get("fullName") or "",
         "throws": (raw.get("pitchHand") or {}).get("code") or "",
     }
+
+
+def _fill_pitcher_throws(games: list[dict]) -> None:
+    """Schedule hydration omits pitchHand — backfill via batched people call."""
+    missing: dict[int, list[dict]] = {}
+    for g in games:
+        for key in ("awayPitcher", "homePitcher"):
+            p = g.get(key)
+            if p and p.get("id") and not (p.get("throws") or "").strip():
+                missing.setdefault(int(p["id"]), []).append(p)
+    if not missing:
+        return
+    ids = ",".join(str(i) for i in sorted(missing))
+    try:
+        data = _get(f"/people?personIds={ids}")
+    except Exception:
+        return
+    for person in data.get("people") or []:
+        code = ((person.get("pitchHand") or {}).get("code") or "").strip().upper()
+        pid = person.get("id")
+        if not code or pid not in missing:
+            continue
+        for p in missing[pid]:
+            p["throws"] = code
 
 
 def fetch_lineup(game_pk: int) -> tuple[list[dict], list[dict]]:
@@ -641,6 +666,20 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
     season_statcast: dict[int, dict] = {}
     window_lookups: dict[str, dict[int, dict]] = {}
     if with_stats:
+        try:
+            hand_splits = fetch_batter_hand_split_lookup(season)
+            for pid, splits in hand_splits.items():
+                sav = savant_lookup.setdefault(pid, {})
+                for key, val in splits.items():
+                    if val is not None:
+                        sav[key] = val
+            write_batter_hand_cache(
+                hand_splits,
+                Path(__file__).resolve().parent.parent / "preview" / "data",
+                season,
+            )
+        except Exception:
+            pass
         if savant_lookup:
             write_savant_cache(
                 savant_lookup,
@@ -739,6 +778,7 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
     except Exception as exc:
         rotowire_meta = {"source": "rotowire", "error": str(exc)}
 
+    _fill_pitcher_throws(games)
     _attach_park_to_games(games, sheet_date)
     if with_stats:
         _attach_open_meteo_to_games(games)

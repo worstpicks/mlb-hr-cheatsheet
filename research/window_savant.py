@@ -136,6 +136,10 @@ def merge_season_savant(window_stats: dict, savant: dict | None) -> dict:
         "pullPct",
         "pullAirPct",
         "pullBarrelPct",
+        "xwobaVsLhp",
+        "paVsLhp",
+        "xwobaVsRhp",
+        "paVsRhp",
     ):
         if savant.get(key) is not None:
             out[key] = savant[key]

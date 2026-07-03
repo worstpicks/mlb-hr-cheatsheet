@@ -61,7 +61,7 @@
             minPitcherRisk: 50,
         },
         pillars: [
-            { id: "mix", label: "Pitch-mix fit", metrics: "Savant xwOBA vs starter arsenal" },
+            { id: "mix", label: "Pitch-mix fit", metrics: "Savant xwOBA vs starter arsenal + platoon split vs SP hand" },
             { id: "pitcher", label: "Pitcher leak", metrics: "Hand-specific dinger risk vs SP" },
             { id: "environment", label: "HR environment", metrics: "Park + weather + wind + dimensions" },
             { id: "form", label: "HR form", metrics: "Due+, near-HR, rolling HR rate, contact shape" },
@@ -75,6 +75,8 @@
         "hand",
         "ticketScore",
         "mixPlus",
+        "mixEdge",
+        "matchWhiffPct",
         "hrEnv",
         "hrFormPct",
         "boomPct",
@@ -96,7 +98,7 @@
         identity: "Who's batting and where — order and handedness set platoon context for today's HR look.",
         matchup: "Starter matchup and HR environment — pitch-mix fit plus park, weather, wind, and pitcher leak combined.",
         power: "Season power output — homers, expected HR, luck, and near misses that signal HR upside.",
-        contact: "Contact quality — how hard and true the hitter squares the ball; Boom% blends barrel, blast, hard-hit, air, FB, and solid contact for HR shape.",
+        contact: "Contact quality — how hard and true the hitter squares the ball; Boom% blends contact shape, pitch-mix fit vs today's starter, and HR Form%.",
         batted: "Batted-ball shape — launch angle, air rate, and pull profile tied to homer paths.",
         plate: "Overall plate profile — averages, whiff, and recent form that support or limit power.",
     };
@@ -116,8 +118,12 @@
             "Handed park HR factor for this stadium today (Ballpark Pal + weather). Positive % = park boosts homers for this hitter's side.",
         mixPlus:
             "Pitch-mix fit — xwOBA vs starter's arsenal vs league average. Positive % = favorable matchup; largest single input to ticket score.",
+        mixEdge:
+            "Savant matchup edge — today's pitch-mix xwOBA vs season baseline, blended with career Statcast history vs this starter when available.",
+        matchWhiffPct:
+            "Savant swing & miss vs today's starter — whiff rate in career Statcast matchups with this pitcher. Lower = handles this arm better.",
         formPct:
-            "HR form score (slate 0–100) — Due+, near-HR, contact quality gap, and last-7 HR rate vs season. ↑↓← = HR trend (last 4 games vs prior 4).",
+            "HR form score (slate 0–100) — Due+, near-HR, last-7 HR rate vs season, pitch-mix fit vs today's starter, and contact shape. ↑↓← = HR trend (last 4 games vs prior 4).",
         barrelPct: "Season barrel rate — ideal EV/LA contact. Core power signal; high barrels mean more true HR upside.",
         airPct: "Fly ball + line drive share. More balls in the air = more chances to leave the yard.",
         nearHr: "Near misses — balls that almost cleared the fence; hints at latent HR luck turning.",
@@ -142,7 +148,7 @@
         RHB: "K stuff vs right-handed hitters (Whiff% + K% on Savant hand splits).",
         Matchup: "Opposing lineup's average hitter K% — higher = lineup strikes out more often (easier K matchup).",
         Pick: "K pick score — 70% pitcher K stuff + 30% opposing lineup K susceptibility. Higher = stronger lean for strikeout props.",
-        ExpK: "Expected strikeouts — projected IP × effective K/9, adjusted for opposing lineup K% and K pick score.",
+        ExpK: "Expected strikeouts — projected IP × effective K/9, adjusted for opposing lineup K% and pitcher K stuff.",
         CeilingK: "Ceiling K — realistic max if pitch count runs deep and recent form plays up.",
         Line: "Nearest half-K prop line with Over (O) or Under (U) lean from expected K.",
     };
@@ -175,7 +181,8 @@
             tip: "HR ticket score (1–100 slate scale). Combines mix fit, pitcher leak, HR environment, form, and power contact.",
         },
         { key: "mixPlus", label: "Mix%", group: "matchup", stat: "mixPlus", fmt: (r) => fmtFormPct(hitterStats(r).mixPlus), tip: "Pitch-mix fit — weighted xwOBA vs this starter's pitch usage compared to league average on those pitches. Positive % = favorable matchup; heaviest input to HR ticket score." },
-        { key: "mixEdge", label: "Edge%", group: "matchup", stat: "mixEdge", fmt: (r) => fmtFormPct(hitterStats(r).mixEdge), tip: "Personal edge — how the hitter performs vs this pitch mix compared to their own season xwOBA. Positive % = better than their baseline for this SP." },
+        { key: "mixEdge", label: "Edge%", group: "matchup", stat: "mixEdge", fmt: (r) => fmtFormPct(hitterStats(r).mixEdge), tip: "Savant matchup edge — blends today's pitch-mix xwOBA vs your season baseline with career Statcast history vs this starter. Positive % = favorable personal edge. History weights up as pitch sample grows." },
+        { key: "matchWhiffPct", label: "SwM%", group: "matchup", stat: "matchWhiffPct", fmt: (r) => fmtPct(hitterStats(r).matchWhiffPct ?? hitterStats(r).bvpKPct), tip: "Savant swing & miss vs today's starter — whiff rate in career Statcast matchups with this pitcher. Lower % = better contact history vs this arm." },
         { key: "hrEnv", label: "HR env", group: "matchup", hrProp: true, fmt: (r) => fmtHrPropPct(r), tip: "HR environment — park, weather, wind, dimensions, and pitcher vulnerability combined. Positive = better homer conditions today; separate from ticket score but same slate context." },
         { key: "hr", label: "HR", group: "power", stat: "hr", fmt: (r) => fmtNum(hitterStats(r).hr), tip: "Home runs — balls hit over the fence. Core measure of raw power." },
         { key: "expectedHr", label: "xHR", group: "power", stat: "expectedHr", fmt: (r) => fmtXhr(hitterStats(r).expectedHr), tip: "Expected homers from contact quality — how many HRs Savant thinks this swing profile deserves (rounded)." },
@@ -193,8 +200,8 @@
         { key: "fbPct", label: "FB%", group: "plate", stat: "fbPct", fmt: (r) => fmtPct(hitterStats(r).fbPct), tip: "Fly ball rate — share of batted balls in the air. Fly-ball hitters tend to have more home run upside." },
         { key: "airPct", label: "Air%", group: "batted", stat: "airPct", fmt: (r) => fmtPct(hitterStats(r).airPct), tip: "Air rate (FB% + LD%) — share of batted balls in the air. Higher often means more HR upside." },
         { key: "hrFbPct", label: "HR/FB%", group: "plate", stat: "hrFbPct", fmt: (r) => fmtPct(hitterStats(r).hrFbPct), tip: "Home runs per fly ball — how often fly balls leave the yard. Power efficiency on balls in the air." },
-        { key: "hrFormPct", label: "HR Form%", group: "plate", stat: "hrFormPct", fmt: (r) => fmtHrFormWithTrend(hitterStats(r).hrFormPct, formTrendForRow(r)), tip: "HR form — slate-relative score from Due+ (xHR luck), near-HR/mostly-gone, wOBA vs xwOBA gap, and last-7 HR rate vs season. Higher = better HR momentum today. Arrow tracks HR in last 4 games vs prior 4." },
-        { key: "boomPct", label: "Boom%", group: "contact", stat: "boomPct", fmt: (r) => fmtBoomWithTrend(hitterStats(r).boomPct, boomTrendForRow(r)), tip: "Boom% — slate-relative HR contact score from Barrel%, Blast%, Hard Hit%, Air%, FB%, and Solid Contact%. Higher = more homer-shaped contact today. Arrow tracks recent ISO + HR power vs prior 4 games." },
+        { key: "hrFormPct", label: "HR Form%", group: "plate", stat: "hrFormPct", fmt: (r) => fmtHrFormWithTrend(hitterStats(r).hrFormPct, formTrendForRow(r)), tip: "HR form — slate-relative score from Due+ (xHR luck), near-HR/mostly-gone, last-7 HR rate vs season, pitch-mix fit vs today's starter, and contact shape (air/pull). Higher = better HR momentum today. Arrow tracks HR in last 4 games vs prior 4." },
+        { key: "boomPct", label: "Boom%", group: "contact", stat: "boomPct", fmt: (r) => fmtBoomWithTrend(hitterStats(r).boomPct, boomTrendForRow(r)), tip: "Boom% — slate-relative HR power score from contact quality (Barrel%, Blast%, Hard Hit%, Air%, FB%, Solid%), pitch-mix fit vs today's starter, and HR Form%. Higher = more homer upside today. Arrow tracks recent ISO + HR power vs prior 4 games." },
         { key: "whiffPct", label: "Whiff%", group: "plate", stat: "whiffPct", fmt: (r) => fmtPct(hitterStats(r).whiffPct), tip: "Whiff rate — swings and misses as a share of swings. Lower is better for contact hitters." },
         { key: "kPct", label: "K%", group: "plate", stat: "kPct", fmt: (r) => fmtPct(hitterStats(r).kPct), tip: "Strikeout rate — strikeouts as a share of plate appearances. Lower is better for contact." },
         { key: "gbPct", label: "GB%", group: "batted", stat: "gbPct", fmt: (r) => fmtPct(hitterStats(r).gbPct), tip: "Ground ball rate — share of batted balls on the ground. Lower rates often correlate with more power and fly balls." },
@@ -243,6 +250,7 @@
         ticketScore: "Scr",
         mixPlus: "Mix",
         mixEdge: "Edge",
+        matchWhiffPct: "SwM",
         hrEnv: "Env",
         expectedHr: "xHR",
         hrLuckDiff: "Due+",
@@ -453,18 +461,25 @@
 
     const HR_FORM_WEIGHTS = {
         hrLuckDiff: 30,
-        hrProximity: 30,
-        rollingHrBoost: 25,
-        hrContactShape: 15,
+        hrProximity: 25,
+        rollingHrBoost: 15,
+        mixPlus: 20,
+        hrContactShape: 10,
     };
 
-    const BOOM_WEIGHTS = {
+    const BOOM_CONTACT_WEIGHTS = {
         barrelPct: 26,
         blastPct: 20,
         hardHitPct: 18,
         airPct: 16,
         fbPct: 14,
         solidContactPct: 6,
+    };
+
+    const BOOM_WEIGHTS = {
+        boomContact: 55,
+        mixPlus: 25,
+        hrFormPct: 20,
     };
     const BET_TRACKER_LS = "worstpickz-bet-tracker-v1";
     let searchBlurTimer = null;
@@ -613,21 +628,23 @@
     }
 
     function rollingHrBoostFromGames(games, stats) {
-        const slice = (games || []).slice(-7);
+        // 14-game window — a single quiet week is normal for a power hitter,
+        // so a 7-game window was mostly noise.
+        const slice = (games || []).slice(-14);
         let hr = 0;
         let pa = 0;
         for (const g of slice) {
             hr += Number(g.hr) || 0;
             pa += Number(g.pa) || 0;
         }
-        if (pa < 4) return null;
-        const last7 = hr / pa;
+        if (pa < 8) return null;
+        const recentRate = hr / pa;
         const seasonPa = stats?.pa;
         const seasonHr = stats?.hr;
-        if (!seasonPa || seasonPa < 20 || seasonHr == null) return Math.round(last7 * 1000) / 10;
+        if (!seasonPa || seasonPa < 20 || seasonHr == null) return Math.round(recentRate * 1000) / 10;
         const seasonRate = seasonHr / seasonPa;
-        const trust = Math.min(pa / 20, 1);
-        const blended = trust * last7 + (1 - trust) * seasonRate;
+        const trust = Math.min(pa / 40, 1);
+        const blended = trust * recentRate + (1 - trust) * seasonRate;
         return Math.round((blended - seasonRate) * 1000) / 10;
     }
 
@@ -641,13 +658,14 @@
         return "flat";
     }
 
-    function scoreHrForm(stats, pools, rollingBoost) {
+    function scoreHrForm(stats, pools, rollingBoost, mixPlus) {
         let weighted = 0;
         let totalWeight = 0;
         const parts = [
             ["hrLuckDiff", stats.hrLuckDiff, HR_FORM_WEIGHTS.hrLuckDiff],
             ["hrProximity", hrProximitySignal(stats), HR_FORM_WEIGHTS.hrProximity],
             ["rollingHrBoost", rollingBoost, HR_FORM_WEIGHTS.rollingHrBoost],
+            ["mixPlus", mixPlus, HR_FORM_WEIGHTS.mixPlus],
             ["hrContactShape", hrContactShapeSignal(stats), HR_FORM_WEIGHTS.hrContactShape],
         ];
         for (const [key, val, weight] of parts) {
@@ -667,6 +685,7 @@
             hrLuckDiff: [],
             hrProximity: [],
             rollingHrBoost: [],
+            mixPlus: [],
             hrContactShape: [],
         };
         for (const entry of entries) {
@@ -678,6 +697,8 @@
             if (prox != null) pools.hrProximity.push(prox);
             const shape = hrContactShapeSignal(stats);
             if (shape != null) pools.hrContactShape.push(shape);
+            const mix = resolveMixPlusForEntry(entry, stats);
+            if (mix != null && !Number.isNaN(Number(mix))) pools.mixPlus.push(Number(mix));
             const id = entry.row?.id;
             const rolling =
                 hrFormRollingCache.get(id) ?? hrFormRollingCache.get(String(id)) ?? null;
@@ -686,6 +707,23 @@
             }
         }
         return pools;
+    }
+
+    function resolveMixPlusForEntry(entry, stats) {
+        if (stats?.mixPlus != null && !Number.isNaN(Number(stats.mixPlus))) return Number(stats.mixPlus);
+        const row = entry?.row;
+        const pitcher = entry?.pitcher;
+        if (!row?.id || !pitcher?.arsenal) return null;
+        const batterPitch = pitchMixCache?.batterPitch || slate?.batter_pitch_lookup || {};
+        const leagueAvgs = pitchMixCache?.leagueAvgs || slate?.league_pitch_avgs || {};
+        const mix = scoreBatterVsArsenal(
+            row.id,
+            pitcher.arsenal,
+            batterPitch[row.id] || batterPitch[String(row.id)],
+            stats?.xwoba,
+            leagueAvgs
+        );
+        return mix?.mixPlus ?? null;
     }
 
     function computeHrFormForSlate() {
@@ -699,7 +737,8 @@
             const id = row.id;
             const rolling =
                 hrFormRollingCache.get(id) ?? hrFormRollingCache.get(String(id)) ?? null;
-            const score = scoreHrForm(stats, pools, rolling);
+            const mixPlus = resolveMixPlusForEntry(entry, stats);
+            const score = scoreHrForm(stats, pools, rolling, mixPlus);
             if (score == null) continue;
             row.stats = { ...stats, hrFormPct: Math.round(score), hrForm: score };
         }
@@ -713,10 +752,10 @@
         return stats?.[key] ?? null;
     }
 
-    function boomRawSignal(stats) {
+    function boomContactSignal(stats) {
         let weighted = 0;
         let totalW = 0;
-        for (const [key, weight] of Object.entries(BOOM_WEIGHTS)) {
+        for (const [key, weight] of Object.entries(BOOM_CONTACT_WEIGHTS)) {
             const val = boomComponentValue(stats, key);
             if (val == null || Number.isNaN(Number(val))) continue;
             weighted += Number(val) * weight;
@@ -726,20 +765,43 @@
     }
 
     function buildBoomPools(entries) {
-        const pools = { boomRaw: [] };
+        const pools = {
+            boomContact: [],
+            mixPlus: [],
+            hrFormPct: [],
+        };
         for (const entry of entries) {
-            const raw = boomRawSignal(hitterStats(entry.row));
-            if (raw != null && !Number.isNaN(Number(raw))) pools.boomRaw.push(Number(raw));
+            const stats = hitterStats(entry.row);
+            const contact = boomContactSignal(stats);
+            if (contact != null && !Number.isNaN(Number(contact))) pools.boomContact.push(Number(contact));
+            const mix = resolveMixPlusForEntry(entry, stats);
+            if (mix != null && !Number.isNaN(Number(mix))) pools.mixPlus.push(Number(mix));
+            const form = stats.hrFormPct ?? stats.hrForm;
+            if (form != null && !Number.isNaN(Number(form))) pools.hrFormPct.push(Number(form));
         }
         return pools;
     }
 
-    function scoreBoom(stats, pools) {
-        const raw = boomRawSignal(stats);
-        if (raw == null || Number.isNaN(Number(raw))) return null;
-        const pool = pools.boomRaw;
-        if (!pool?.length) return null;
-        return Math.round(percentileRank(pool, raw, true) * 10) / 10;
+    function scoreBoom(stats, pools, entry) {
+        let weighted = 0;
+        let totalWeight = 0;
+        const mixPlus = resolveMixPlusForEntry(entry, stats);
+        const hrForm = stats.hrFormPct ?? stats.hrForm;
+        const parts = [
+            ["boomContact", boomContactSignal(stats), BOOM_WEIGHTS.boomContact],
+            ["mixPlus", mixPlus, BOOM_WEIGHTS.mixPlus],
+            ["hrFormPct", hrForm, BOOM_WEIGHTS.hrFormPct],
+        ];
+        for (const [key, val, weight] of parts) {
+            if (val == null || Number.isNaN(Number(val)) || !weight) continue;
+            const pool = pools[key];
+            if (!pool?.length) continue;
+            const pct = percentileRank(pool, Number(val), true);
+            weighted += pct * weight;
+            totalWeight += weight;
+        }
+        if (totalWeight <= 0) return null;
+        return Math.round((weighted / totalWeight) * 10) / 10;
     }
 
     function computeBoomForSlate() {
@@ -750,7 +812,7 @@
             const row = entry.row;
             if (!row) continue;
             const stats = hitterStats(row);
-            const score = scoreBoom(stats, pools);
+            const score = scoreBoom(stats, pools, entry);
             if (score == null) continue;
             row.stats = { ...stats, boomPct: Math.round(score), boom: score };
         }
@@ -866,12 +928,26 @@
         const game = activeGame();
         const pitcher = activeSide === "away" ? game?.homePitcher : game?.awayPitcher;
         const s = hitterStats(row);
-        if (s.mixPlus == null || !pitcher?.arsenal) return null;
-        const lines = [
-            `vs ${pitcher.name || "SP"}: ${pitcher.arsenalLabel || formatArsenal(pitcher.arsenal)}`,
-            `Mix% ${fmtFormPct(s.mixPlus)} · Edge% ${fmtFormPct(s.mixEdge)} · mix xwOBA ${s.mixXwoba != null ? Number(s.mixXwoba).toFixed(3) : "—"}`,
-        ];
-        return lines.join("\n");
+        if (s.mixPlus == null && s.mixEdge == null) return null;
+        const lines = [];
+        if (pitcher?.arsenal && s.mixPlus != null) {
+            lines.push(`vs ${pitcher.name || "SP"}: ${pitcher.arsenalLabel || formatArsenal(pitcher.arsenal)}`);
+            lines.push(
+                `Mix% ${fmtFormPct(s.mixPlus)} · mix xwOBA ${s.mixXwoba != null ? Number(s.mixXwoba).toFixed(3) : "—"}`
+            );
+        }
+        if (s.mixEdge != null) {
+            const bits = [`Edge% ${fmtFormPct(s.mixEdge)}`];
+            if (s.matchupEdge != null) bits.push(`mix ${fmtFormPct(s.matchupEdge)}`);
+            if (s.historyEdge != null) bits.push(`history ${fmtFormPct(s.historyEdge)}`);
+            if (s.matchPitches != null) bits.push(`${s.matchPitches} career pitches vs ${pitcher?.name || "SP"}`);
+            lines.push(bits.join(" · "));
+        }
+        const swm = s.matchWhiffPct ?? s.bvpKPct;
+        if (swm != null) {
+            lines.push(`SwM% ${fmtPct(swm)} vs ${pitcher?.name || "SP"} (Savant history)`);
+        }
+        return lines.length ? lines.join("\n") : null;
     }
 
     function formatArsenal(arsenal) {
@@ -1069,9 +1145,24 @@
 
     let ticketSlatePools = null;
 
+    function platoonEdgeForEntry(entry, statsIn) {
+        // Batter xwOBA vs today's SP hand relative to season xwOBA, shrunk by
+        // split PA so tiny platoon samples don't swing the score.
+        const stats = statsIn || hitterStats(entry.row);
+        const spHand = (entry.pitcher?.throws || "").trim().toUpperCase();
+        if (spHand !== "L" && spHand !== "R") return null;
+        const xw = spHand === "L" ? stats.xwobaVsLhp : stats.xwobaVsRhp;
+        const pa = spHand === "L" ? stats.paVsLhp : stats.paVsRhp;
+        if (xw == null || Number.isNaN(Number(xw))) return null;
+        const seasonXw = stats.xwoba != null && !Number.isNaN(Number(stats.xwoba)) ? Number(stats.xwoba) : 0.32;
+        const conf = Math.min((Number(pa) || 0) / 100, 1);
+        return Math.round((Number(xw) - seasonXw) * 1000 * conf) / 10;
+    }
+
     function buildTicketSlatePools(entries) {
         const pools = {
             mixPlus: [],
+            platoonEdge: [],
             pitcherSplit: [],
             hrEnv: [],
             hrFormPct: [],
@@ -1081,6 +1172,10 @@
             const stats = hitterStats(entry.row);
             if (stats.mixPlus != null && !Number.isNaN(Number(stats.mixPlus))) {
                 pools.mixPlus.push(Number(stats.mixPlus));
+            }
+            const platoon = platoonEdgeForEntry(entry, stats);
+            if (platoon != null && !Number.isNaN(Number(platoon))) {
+                pools.platoonEdge.push(Number(platoon));
             }
             const hand = (entry.row?.hand || "R").toUpperCase();
             const ps = pitcherStats(entry.pitcher);
@@ -1138,8 +1233,20 @@
         const parkPct = parkHrPctForHitter(game, hand);
         const envRaw = hrEnvScore(entry);
 
+        // Mix pillar: pitch-mix fit blended with the batter's platoon split
+        // vs today's SP hand (70/30) when split data is available.
+        const platoonEdge = platoonEdgeForEntry(entry, stats);
+        const mixPct = pillarPercentile(pools, "mixPlus", mixPlus, true);
+        const platoonPct = pillarPercentile(pools, "platoonEdge", platoonEdge, true);
+        let mixPillar = mixPct;
+        if (mixPct != null && platoonPct != null) {
+            mixPillar = mixPct * 0.7 + platoonPct * 0.3;
+        } else if (mixPct == null) {
+            mixPillar = platoonPct;
+        }
+
         const pillars = {
-            mix: pillarPercentile(pools, "mixPlus", mixPlus, true),
+            mix: mixPillar,
             pitcher: pillarPercentile(pools, "pitcherSplit", splitPct, true),
             environment: pillarPercentile(pools, "hrEnv", envRaw, true),
             form: stats.hrFormPct ?? stats.hrForm ?? pillarPercentile(pools, "hrFormPct", stats.hrFormPct, true),
@@ -1163,6 +1270,7 @@
             rank: score100,
             pillars,
             mixPlus,
+            platoonEdge,
             splitPct,
             riskPct: ps.dingerRiskPct ?? ps.dingerRisk ?? null,
             parkPct,
@@ -2069,16 +2177,31 @@
     }
 
     function seasonPitcherK9(stats, games) {
-        const starts = (games || []).filter((g) => g.ip != null && Number(g.ip) > 0);
+        // Only count starts that report both K and IP, so a log missing
+        // strikeout data can't produce a bogus 0 K/9.
+        const starts = (games || []).filter(
+            (g) => g.ip != null && Number(g.ip) > 0 && g.k != null && !Number.isNaN(Number(g.k))
+        );
         let k = 0;
         let ip = 0;
         for (const g of starts) {
-            if (g.k != null) k += Number(g.k);
-            if (g.ip != null) ip += Number(g.ip);
+            k += Number(g.k);
+            ip += Number(g.ip);
         }
         if (ip >= 8) return (k / ip) * 9;
+        const seasonIp = stats.inningsPitched ?? stats.ip;
+        if (
+            stats.kPct != null &&
+            stats.pa != null &&
+            seasonIp != null &&
+            Number(seasonIp) > 0 &&
+            !Number.isNaN(Number(stats.kPct))
+        ) {
+            const estK = (Number(stats.kPct) / 100) * Number(stats.pa);
+            return (estK / Number(seasonIp)) * 9;
+        }
         if (stats.kPct != null && !Number.isNaN(Number(stats.kPct))) {
-            return (Number(stats.kPct) / 100) * K_PROJ_BF_PER_IP;
+            return (Number(stats.kPct) / 100) * K_PROJ_BF_PER_IP * 9;
         }
         return null;
     }
@@ -2141,8 +2264,11 @@
             matchMult = Math.max(0.86, Math.min(1.2, matchMult));
         }
 
+        // Use K stuff only — kPick already blends lineup K%, which matchMult
+        // above accounts for, so using kPick here would double-count it.
         const kPick = stats.kPick ?? stats.kPickPct;
-        const pickMult = kPick != null ? 0.9 + (Number(kPick) / 100) * 0.18 : 1;
+        const kStuff = stats.kStuff ?? stats.kStuffPct;
+        const pickMult = kStuff != null ? 0.95 + (Number(kStuff) / 100) * 0.09 : 1;
 
         const expK =
             effK9 != null ? Math.round(((expIp / 9) * effK9 * matchMult * pickMult) * 10) / 10 : null;
@@ -2317,7 +2443,10 @@
     }
 
     function escapeTip(text) {
-        return String(text || "").replace(/"/g, "&quot;");
+        return String(text || "")
+            .replace(/&/g, "&amp;")
+            .replace(/"/g, "&quot;")
+            .replace(/</g, "&lt;");
     }
 
     function renderDingerRiskCardHtml(label, pct, sublabel, tipKey) {
@@ -2504,7 +2633,7 @@
                     <span class="rs-pitcher-card__team">${sideLabel} · ${team}</span>
                     <span class="rs-pitcher-card__hand">${hand}</span>
                 </div>
-                <h3 class="rs-pitcher-card__name">${pitcher.name}</h3>
+                <h3 class="rs-pitcher-card__name">${escAttr(pitcher.name || "—")}</h3>
                 ${arsenal}
                 ${renderDingerRiskRowHtml(stats)}
             </header>
@@ -3594,6 +3723,8 @@
         if (key === "parkPct") return ticket?.parkPct ?? null;
         if (key === "mixPlus") return ticket?.mixPlus ?? stats.mixPlus ?? null;
         if (key === "formPct") return stats.hrFormPct ?? stats.hrForm ?? null;
+        if (key === "matchWhiffPct") return stats.matchWhiffPct ?? stats.bvpKPct ?? null;
+        if (key === "mixEdge") return stats.mixEdge ?? ticket?.mixEdge ?? null;
         if (key === "barrelPct") return stats.barrelPct ?? null;
         if (key === "airPct") return stats.airPct ?? null;
         if (key === "nearHr") return stats.nearHr ?? null;
@@ -3788,6 +3919,201 @@
         return out;
     }
 
+    // History (batter vs pitcher career) is noisy at small samples, so it needs a
+    // real sample before it counts and never outweighs today's pitch-mix fit.
+    const MATCHUP_EDGE_CAP = 25;
+    const MIN_HISTORY_PITCHES = 20;
+    const HISTORY_CONF_PITCHES = 90;
+    const MATCHUP_BLEND = 0.7;
+    const HISTORY_BLEND = 0.3;
+
+    const matchupHistoryCache = new Map();
+    let matchupHydrateGen = 0;
+
+    function matchupPairKey(batterId, pitcherId) {
+        return `${batterId}|${pitcherId}`;
+    }
+
+    function seasonStatsForMatchup(row) {
+        const stats = { ...(row?.stats || {}) };
+        const pid = row?.id;
+        const sav =
+            (slate?.savant_lookup && (slate.savant_lookup[pid] || slate.savant_lookup[String(pid)])) ||
+            savantLookup?.[pid] ||
+            savantLookup?.[String(pid)] ||
+            {};
+        for (const k of ["iso", "slg", "hr", "pa", "xwoba"]) {
+            if (stats[k] == null && sav[k] != null) stats[k] = sav[k];
+        }
+        return stats;
+    }
+
+    function scoreSavantMatchupEdge(seasonStats, mixXwoba, history) {
+        seasonStats = seasonStats || {};
+        let seasonXwoba = seasonStats.xwoba != null ? Number(seasonStats.xwoba) : null;
+        if (seasonXwoba == null || Number.isNaN(seasonXwoba)) seasonXwoba = 0.32;
+
+        let matchupEdge = null;
+        if (mixXwoba != null && !Number.isNaN(Number(mixXwoba))) {
+            matchupEdge = Math.round((Number(mixXwoba) - seasonXwoba) * 1000) / 10;
+        }
+
+        let historyEdge = null;
+        let pitches = 0;
+        let histXwoba = null;
+        let whiff = null;
+        if (history) {
+            pitches = Number(history.pitches) || 0;
+            histXwoba = history.xwoba != null ? Number(history.xwoba) : null;
+            whiff = history.whiffPct != null ? Number(history.whiffPct) : null;
+            if (pitches >= MIN_HISTORY_PITCHES && histXwoba != null && !Number.isNaN(histXwoba)) {
+                const conf = Math.min(pitches / HISTORY_CONF_PITCHES, 1);
+                historyEdge = Math.round((histXwoba - seasonXwoba) * 100 * conf * 10) / 10;
+            }
+        }
+
+        let mixEdge;
+        if (matchupEdge != null && historyEdge != null) {
+            mixEdge = Math.round((matchupEdge * MATCHUP_BLEND + historyEdge * HISTORY_BLEND) * 10) / 10;
+        } else if (matchupEdge != null) {
+            mixEdge = matchupEdge;
+        } else if (historyEdge != null) {
+            mixEdge = historyEdge;
+        } else {
+            return null;
+        }
+
+        mixEdge = Math.max(-MATCHUP_EDGE_CAP, Math.min(MATCHUP_EDGE_CAP, mixEdge));
+        const out = { mixEdge, edgeSource: "savant-matchup" };
+        if (matchupEdge != null) out.matchupEdge = matchupEdge;
+        if (historyEdge != null) out.historyEdge = historyEdge;
+        if (pitches) out.matchPitches = pitches;
+        if (histXwoba != null) out.matchXwoba = Math.round(histXwoba * 1000) / 1000;
+        if (whiff != null) {
+            out.matchWhiffPct = whiff;
+        }
+        return out;
+    }
+
+    function clearMatchupEdgeStats(stats) {
+        for (const key of [
+            "mixEdge",
+            "matchupEdge",
+            "historyEdge",
+            "matchPitches",
+            "matchXwoba",
+            "matchWhiffPct",
+            "edgeSource",
+            "bvpKPct",
+            "bvpAb",
+            "bvpHr",
+            "bvpIso",
+            "bvpSlg",
+            "bvpAvg",
+            "bvpObp",
+            "bvpSource",
+        ]) {
+            delete stats[key];
+        }
+    }
+
+    function applyMatchupEdgeToRow(row, opposingPitcher, historyLookup) {
+        const enriched = { ...row };
+        const stats = seasonStatsForMatchup(enriched);
+        const batterId = enriched.id;
+        const pitcherId = opposingPitcher?.id;
+        const mixXwoba = stats.mixXwoba != null ? Number(stats.mixXwoba) : null;
+        const history =
+            historyLookup && batterId && pitcherId
+                ? historyLookup[matchupPairKey(batterId, pitcherId)] ||
+                  historyLookup.get?.(matchupPairKey(batterId, pitcherId))
+                : matchupHistoryCache.get(matchupPairKey(batterId, pitcherId));
+
+        const scored = scoreSavantMatchupEdge(stats, mixXwoba, history);
+        if (scored) {
+            Object.assign(stats, scored);
+        } else {
+            clearMatchupEdgeStats(stats);
+        }
+        enriched.stats = stats;
+        return enriched;
+    }
+
+    function matchupHistoryLookupFromCache() {
+        const out = {};
+        for (const [key, val] of matchupHistoryCache.entries()) out[key] = val;
+        return out;
+    }
+
+    function applyMatchupEdgeToAllLineups(historyLookup) {
+        const lookup = historyLookup || matchupHistoryLookupFromCache();
+        let n = 0;
+        for (const game of slate.games || []) {
+            game.awayLineup = (game.awayLineup || []).map((row) =>
+                applyMatchupEdgeToRow(row, game.homePitcher, lookup)
+            );
+            game.homeLineup = (game.homeLineup || []).map((row) =>
+                applyMatchupEdgeToRow(row, game.awayPitcher, lookup)
+            );
+            for (const h of [...(game.awayLineup || []), ...(game.homeLineup || [])]) {
+                if (h.stats?.mixEdge != null) n += 1;
+            }
+        }
+        return n;
+    }
+
+    function collectSlateMatchupPairs() {
+        const pairs = new Map();
+        for (const entry of collectSlateHitters()) {
+            const batterId = entry.row?.id;
+            const pitcherId = entry.pitcher?.id;
+            if (!batterId || !pitcherId) continue;
+            pairs.set(matchupPairKey(batterId, pitcherId), { batterId, pitcherId });
+        }
+        return [...pairs.values()];
+    }
+
+    async function fetchSavantMatchup(batterId, pitcherId) {
+        const res = await fetch(
+            `/api/savant-matchup?batterId=${encodeURIComponent(batterId)}&pitcherId=${encodeURIComponent(pitcherId)}`
+        );
+        if (!res.ok) return null;
+        const data = await res.json();
+        return data.matchup || null;
+    }
+
+    function scheduleMatchupEdgeHydrate() {
+        const pairs = collectSlateMatchupPairs().filter(
+            ({ batterId, pitcherId }) => !matchupHistoryCache.has(matchupPairKey(batterId, pitcherId))
+        );
+        if (!pairs.length) return;
+        const gen = ++matchupHydrateGen;
+        (async () => {
+            for (let i = 0; i < pairs.length; i += 6) {
+                if (gen !== matchupHydrateGen) return;
+                const batch = pairs.slice(i, i + 6);
+                await Promise.all(
+                    batch.map(async ({ batterId, pitcherId }) => {
+                        const key = matchupPairKey(batterId, pitcherId);
+                        try {
+                            const matchup = await fetchSavantMatchup(batterId, pitcherId);
+                            matchupHistoryCache.set(key, matchup || { pitches: 0 });
+                        } catch {
+                            matchupHistoryCache.set(key, { pitches: 0 });
+                        }
+                    })
+                );
+            }
+            if (gen !== matchupHydrateGen) return;
+            applyMatchupEdgeToAllLineups();
+            clearHrTicketCache();
+            if (columnReorderMode) return;
+            renderTable();
+            renderMobileCards();
+            renderExplorePanel();
+        })();
+    }
+
     function scoreBatterVsArsenal(batterId, arsenal, batterPitch, batterOverallXwoba, leagueAvgs) {
         const mix = normalizeArsenal(arsenal);
         if (!mix || !Object.keys(mix).length || !batterId) return null;
@@ -3854,26 +4180,24 @@
         return out;
     }
 
-    function enrichHitterPitchMix(row, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap) {
+    function enrichHitterPitchMix(row, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap, historyLookup) {
         const enriched = { ...row };
         const stats = { ...(enriched.stats || {}) };
-        if (stats.mixPlus != null) {
-            enriched.stats = stats;
-            return enriched;
+        if (stats.mixPlus == null) {
+            const pid = enriched.id;
+            const pitcher = opposingPitcher || {};
+            const batterPitch = batterPitchLookup?.[pid] || batterPitchLookup?.[String(pid)] || null;
+            const overallXwoba = stats.xwoba ?? savantLookupMap?.[pid]?.xwoba ?? savantLookupMap?.[String(pid)]?.xwoba;
+            const mix = scoreBatterVsArsenal(pid, pitcher.arsenal, batterPitch, overallXwoba, leagueAvgs);
+            if (mix) Object.assign(stats, mix);
         }
-        const pid = enriched.id;
-        const pitcher = opposingPitcher || {};
-        const batterPitch = batterPitchLookup?.[pid] || batterPitchLookup?.[String(pid)] || null;
-        const overallXwoba = stats.xwoba ?? savantLookupMap?.[pid]?.xwoba ?? savantLookupMap?.[String(pid)]?.xwoba;
-        const mix = scoreBatterVsArsenal(pid, pitcher.arsenal, batterPitch, overallXwoba, leagueAvgs);
-        if (mix) Object.assign(stats, mix);
         enriched.stats = stats;
-        return enriched;
+        return applyMatchupEdgeToRow(enriched, opposingPitcher, historyLookup);
     }
 
-    function enrichLineupPitchMix(lineup, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap) {
+    function enrichLineupPitchMix(lineup, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap, historyLookup) {
         return (lineup || []).map((row) =>
-            enrichHitterPitchMix(row, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap)
+            enrichHitterPitchMix(row, opposingPitcher, batterPitchLookup, leagueAvgs, savantLookupMap, historyLookup)
         );
     }
 
@@ -3913,12 +4237,13 @@
         return map;
     }
 
-    async function applyPitchMixEnrichment(season) {
+    async function applyPitchMixEnrichment(season, sheetDate) {
         const caches = await ensurePitchMixCaches(season);
         if (!Object.keys(caches.pitcherArsenal || {}).length && !Object.keys(caches.pitcherArsenalPrior || {}).length) {
             return { n: 0, source: null, lastStatus: caches.lastStatus };
         }
         const savMap = savantLookupMapFromSlate();
+        const historyLookup = matchupHistoryLookupFromCache();
         let n = 0;
         for (const game of slate.games || []) {
             game.awayPitcher = attachPitcherArsenal(
@@ -3938,14 +4263,16 @@
                 game.homePitcher,
                 caches.batterPitch,
                 caches.leagueAvgs,
-                savMap
+                savMap,
+                historyLookup
             );
             game.homeLineup = enrichLineupPitchMix(
                 game.homeLineup,
                 game.awayPitcher,
                 caches.batterPitch,
                 caches.leagueAvgs,
-                savMap
+                savMap,
+                historyLookup
             );
             for (const h of [...(game.awayLineup || []), ...(game.homeLineup || [])]) {
                 if (h.stats?.mixPlus != null) n += 1;
@@ -4274,6 +4601,10 @@
             "pullPct",
             "pullAirPct",
             "pullBarrelPct",
+            "xwobaVsLhp",
+            "paVsLhp",
+            "xwobaVsRhp",
+            "paVsRhp",
         ];
         for (const k of savantKeys) {
             if (rolling && out[k] != null) continue;
@@ -4801,8 +5132,8 @@
         els.matchupSummary.hidden = false;
         els.matchupSummary.innerHTML = `
             <div class="rs-matchup-summary__grid">
-                <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">${game.away} SP</span><span class="rs-matchup-summary__val">${awayP?.name || "TBD"}${awayRisk != null ? ` · Risk ${Math.round(awayRisk)}%` : ""}</span></div>
-                <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">${game.home} SP</span><span class="rs-matchup-summary__val">${homeP?.name || "TBD"}${homeRisk != null ? ` · Risk ${Math.round(homeRisk)}%` : ""}</span></div>
+                <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">${escAttr(game.away || "")} SP</span><span class="rs-matchup-summary__val">${escAttr(awayP?.name || "TBD")}${awayRisk != null ? ` · Risk ${Math.round(awayRisk)}%` : ""}</span></div>
+                <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">${escAttr(game.home || "")} SP</span><span class="rs-matchup-summary__val">${escAttr(homeP?.name || "TBD")}${homeRisk != null ? ` · Risk ${Math.round(homeRisk)}%` : ""}</span></div>
                 <div class="rs-matchup-summary__item"><span class="rs-matchup-summary__label">Park</span><span class="rs-matchup-summary__val">${park}</span></div>
                 <div class="rs-matchup-summary__item rs-matchup-summary__item--wide"><span class="rs-matchup-summary__label">Top targets</span><span class="rs-matchup-summary__val">${topLine}</span></div>
             </div>`;
@@ -4815,13 +5146,13 @@
         els.games.innerHTML = slate.games
             .map((g, i) => {
                 const time = fmtTime(g.startTime);
-                const sp = `${g.awayPitcher?.name || "?"} vs ${g.homePitcher?.name || "?"}`;
+                const sp = escAttr(`${g.awayPitcher?.name || "?"} vs ${g.homePitcher?.name || "?"}`);
                 const nAway = (g.awayLineup || []).length;
                 const nHome = (g.homeLineup || []).length;
                 const tops = topHittersForGame(i, 1);
                 const top = tops[0];
                 const topBadge = top
-                    ? `<span class="rs-game-pill__top">${top.entry.row.name} <strong>${top.score}</strong></span>`
+                    ? `<span class="rs-game-pill__top">${escAttr(top.entry.row.name || "")} <strong>${top.score}</strong></span>`
                     : "";
                 const awayRisk = pitcherStats(g.awayPitcher).dingerRiskPct;
                 const homeRisk = pitcherStats(g.homePitcher).dingerRiskPct;
@@ -4830,7 +5161,7 @@
                         ? `<span class="rs-game-pill__risk">${awayRisk != null ? `A ${Math.round(awayRisk)}%` : ""}${awayRisk != null && homeRisk != null ? " · " : ""}${homeRisk != null ? `H ${Math.round(homeRisk)}%` : ""}</span>`
                         : "";
                 return `<button type="button" class="rs-game-pill${i === activeGameIdx ? " is-active" : ""}" data-idx="${i}">
-                    <span class="rs-game-pill__matchup">${g.matchup}${weatherBadgeHtml(g)}</span>
+                    <span class="rs-game-pill__matchup">${escAttr(g.matchup || "")}${weatherBadgeHtml(g)}</span>
                     <span class="rs-game-pill__meta">${time}${time ? " · " : ""}${g.lineupStatus || ""} · ${nAway}/${nHome} hitters</span>
                     <span class="rs-game-pill__meta">${sp}</span>
                     ${topBadge}${riskBadge}
@@ -4920,6 +5251,7 @@
             hrEnv: true,
             mixPlus: true,
             mixEdge: true,
+            matchWhiffPct: false,
             hr: true,
             expectedHr: true,
             hrLuckDiff: true,
@@ -5000,8 +5332,8 @@
                       return `<article class="rs-lb-card" data-id="${e.row.id}" data-game="${e.gameIdx}" data-side="${e.side}">
                         <div class="rs-lb-card__rank">${idx + 1}</div>
                         <div class="rs-lb-card__main">
-                            <button type="button" class="rs-lb-card__name">${e.row.name || "—"}</button>
-                            <span class="rs-lb-card__meta">${e.game.matchup} · vs ${e.pitcher?.name || "TBD"}</span>
+                            <button type="button" class="rs-lb-card__name">${escAttr(e.row.name || "—")}</button>
+                            <span class="rs-lb-card__meta">${escAttr(e.game.matchup || "")} · vs ${escAttr(e.pitcher?.name || "TBD")}</span>
                             <span class="rs-lb-card__pillars">${ticket?.pillarLine || ""}</span>
                         </div>
                         <div class="rs-lb-card__score">${fmtTicketBadge(score)}</div>
@@ -5093,7 +5425,7 @@
                     <header class="rs-card__head">
                         <span class="rs-card__order">${row.order ?? "—"}</span>
                         <div class="rs-card__identity">
-                            <div class="rs-card__name"><button type="button" class="rs-hitter-btn rs-card__name-btn">${row.name || "—"}</button> <span class="rs-hand">${row.position || ""}</span>${projected}</div>
+                            <div class="rs-card__name"><button type="button" class="rs-hitter-btn rs-card__name-btn">${escAttr(row.name || "—")}</button> <span class="rs-hand">${escAttr(row.position || "")}</span>${projected}</div>
                             <div class="rs-card__meta">Bats ${row.hand || "—"}${(() => {
                                 const entry = entryForActiveRow(row);
                                 const ticket = entry ? computeHrTicket(entry) : null;
@@ -5422,7 +5754,9 @@
             if (av == null && bv == null) return (a.row.name || "").localeCompare(b.row.name || "");
             if (av == null) return 1;
             if (bv == null) return -1;
-            return bv - av;
+            const cmp = Number(bv) - Number(av);
+            if (sortKey === "matchWhiffPct") return -cmp;
+            return cmp;
         });
         return rows;
     }
@@ -5793,10 +6127,23 @@
             )
         );
         if (pitcher?.name) {
+            const matchCells =
+                stats.matchPitches != null || stats.matchWhiffPct != null
+                    ? [
+                          ...(stats.matchPitches != null
+                              ? [profileStatCell("Match pitches", String(stats.matchPitches))]
+                              : []),
+                          ...(stats.matchXwoba != null ? [profileStatCell("Match xwOBA", fmtRate(stats.matchXwoba))] : []),
+                          ...(stats.matchWhiffPct != null
+                              ? [profileStatCell("Match SwM%", fmtPct(stats.matchWhiffPct))]
+                              : []),
+                      ]
+                    : [];
             blocks.push(
                 profileBlockSection(
-                    `vs ${pitcher.name}`,
+                    `vs ${escAttr(pitcher.name || "SP")}`,
                     `<div class="rs-profile-block__grid">${[
+                        ...matchCells,
                         profileStatCell("Dinger risk", pstats.dingerRiskPct != null ? `${pstats.dingerRiskPct}%` : "—"),
                         profileStatCell("vs LHB", pstats.dingerRiskLhbPct != null ? `${pstats.dingerRiskLhbPct}%` : "—"),
                         profileStatCell("vs RHB", pstats.dingerRiskRhbPct != null ? `${pstats.dingerRiskRhbPct}%` : "—"),
@@ -6056,7 +6403,7 @@
         els.searchResults.innerHTML = matches
             .map(
                 (e) =>
-                    `<button type="button" class="rs-search-item" data-id="${e.row.id}" data-game="${e.gameIdx}" data-side="${e.side}"><span class="rs-search-item__name">${e.row.name}</span><span class="rs-search-item__meta">${e.team} · ${e.game.matchup} · vs ${e.pitcher?.name || "TBD"}</span></button>`
+                    `<button type="button" class="rs-search-item" data-id="${e.row.id}" data-game="${e.gameIdx}" data-side="${e.side}"><span class="rs-search-item__name">${escAttr(e.row.name || "")}</span><span class="rs-search-item__meta">${escAttr(e.team || "")} · ${escAttr(e.game.matchup || "")} · vs ${escAttr(e.pitcher?.name || "TBD")}</span></button>`
             )
             .join("");
         wireSlateSearchItems();
@@ -6107,6 +6454,8 @@
                 ticketRank: "HR ticket score (/100)",
                 hrEnv: "HR environment",
                 mixPlus: "Pitch mix",
+                mixEdge: "Savant edge",
+                matchWhiffPct: "Swing & miss (Savant)",
                 barrelPct: "Barrel%",
                 boomPct: "Boom%",
                 avgEV: "Exit velo",
@@ -6129,17 +6478,19 @@
                       const score = hrTicketScore100(e);
                       return `<tr class="rs-leaderboard-row" data-id="${e.row.id}" data-game="${e.gameIdx}" data-side="${e.side}">
                         <td>${idx + 1}</td>
-                        <td><button type="button" class="rs-leaderboard-link">${e.row.name || "—"}</button></td>
-                        <td>${e.game.matchup}</td>
-                        <td>${e.pitcher?.name || "TBD"}</td>
+                        <td><button type="button" class="rs-leaderboard-link">${escAttr(e.row.name || "—")}</button></td>
+                        <td>${escAttr(e.game.matchup || "")}</td>
+                        <td>${escAttr(e.pitcher?.name || "TBD")}</td>
                         <td>${fmtTicketBadge(score)}</td>
                         <td>${fmtFormPct(ticket?.mixPlus)}</td>
+                        <td>${fmtFormPct(stats.mixEdge)}</td>
+                        <td>${fmtPct(stats.matchWhiffPct ?? stats.bvpKPct)}</td>
                         <td>${fmtHrFormWithTrend(stats.hrFormPct, formTrendForRow(e.row))}</td>
                         <td>${fmtPct(stats.barrelPct)}</td>
                     </tr>`;
                   })
                   .join("")
-            : `<tr><td colspan="8" class="rs-empty">No hitters match these filters.</td></tr>`;
+            : `<tr><td colspan="10" class="rs-empty">No hitters match these filters.</td></tr>`;
 
         renderExploreLbCards(hitters);
 
@@ -6188,7 +6539,7 @@
                 ? pitchers
                       .map((e) => {
                           const ps = pitcherStats(e.pitcher);
-                          return `<tr class="rs-leaderboard-row rs-pitcher-lb-row" data-pitcher-id="${e.pitcher.id || ""}" data-game="${e.gameIdx}" data-side="${e.side}"><td><button type="button" class="rs-leaderboard-link">${e.pitcher.name}</button></td><td>${e.game.matchup}</td><td>${Math.round(Number(e.risk))}%</td><td>${ps.kPickPct != null ? `${ps.kPickPct}%` : "—"}</td><td>${fmtPct(ps.barrelPct)}</td><td>${ps.hr9 != null ? Number(ps.hr9).toFixed(2) : "—"}</td></tr>`;
+                          return `<tr class="rs-leaderboard-row rs-pitcher-lb-row" data-pitcher-id="${e.pitcher.id || ""}" data-game="${e.gameIdx}" data-side="${e.side}"><td><button type="button" class="rs-leaderboard-link">${escAttr(e.pitcher.name || "—")}</button></td><td>${escAttr(e.game.matchup || "")}</td><td>${Math.round(Number(e.risk))}%</td><td>${ps.kPickPct != null ? `${ps.kPickPct}%` : "—"}</td><td>${fmtPct(ps.barrelPct)}</td><td>${ps.hr9 != null ? Number(ps.hr9).toFixed(2) : "—"}</td></tr>`;
                       })
                       .join("")
                 : `<tr><td colspan="6" class="rs-empty">Pitcher dinger risk unavailable.</td></tr>`;
@@ -6241,6 +6592,7 @@
         renderWeatherPanel();
         await renderPitcherPanel();
         renderExplorePanel();
+        hydrateKProjectionsFromTrends();
         renderTable();
         renderMobileCards();
         syncMobileSortSelect();
@@ -6264,6 +6616,8 @@
         boomTrendCache.clear();
         hrFormRollingCache.clear();
         formTrendHydrateGen += 1;
+        matchupHistoryCache.clear();
+        matchupHydrateGen += 1;
         if (els.dateInput) els.dateInput.value = date;
         if (els.backLink) els.backLink.href = `../index.html`;
 
@@ -6298,7 +6652,9 @@
 
         const savantMerge = await mergeSavantIntoAllLineups(season);
         const pitcherSavantMerge = await mergePitcherSavantIntoGames(season);
-        const pitchMixMerge = await applyPitchMixEnrichment(season);
+        const pitchMixMerge = await applyPitchMixEnrichment(season, date);
+        applyMatchupEdgeToAllLineups();
+        scheduleMatchupEdgeHydrate();
         const pfLookup = await ensurePropfinderLookup(date);
         applyPropfinderToAllLineups(pfLookup);
         await ensureBatterHands();

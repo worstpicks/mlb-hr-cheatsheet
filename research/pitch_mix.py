@@ -187,7 +187,6 @@ def score_batter_vs_arsenal(
     weighted_xwoba /= total_w
     weighted_league /= total_w
     mix_plus = round((weighted_xwoba - weighted_league) * 1000) / 10
-    mix_edge = round((weighted_xwoba - baseline) * 1000) / 10
 
     edges.sort(key=lambda x: x[1] * x[2], reverse=True)
     best_pt = edges[0][0] if edges else None
@@ -195,7 +194,6 @@ def score_batter_vs_arsenal(
 
     return {
         "mixPlus": mix_plus,
-        "mixEdge": mix_edge,
         "mixXwoba": round(weighted_xwoba, 3),
         "mixBest": best_pt,
         "mixWorst": worst_pt,
@@ -243,19 +241,22 @@ def enrich_hitter_pitch_mix(
     stats = dict(enriched.get("stats") or {})
     pid = int(enriched.get("id") or 0)
     pitcher = opposing_pitcher or {}
-    batter_pitch = batter_pitch_lookup.get(pid) if pid else None
-    overall_xwoba = (savant_lookup.get(pid) or stats).get("xwoba")
-    mix = score_batter_vs_arsenal(
-        pid,
-        pitcher.get("arsenal"),
-        batter_pitch,
-        overall_xwoba,
-        league_avgs,
-    )
-    if mix:
-        stats.update(mix)
+    if stats.get("mixPlus") is None:
+        batter_pitch = batter_pitch_lookup.get(pid) if pid else None
+        overall_xwoba = (savant_lookup.get(pid) or stats).get("xwoba")
+        mix = score_batter_vs_arsenal(
+            pid,
+            pitcher.get("arsenal"),
+            batter_pitch,
+            overall_xwoba,
+            league_avgs,
+        )
+        if mix:
+            stats.update(mix)
+    from research.matchup_edge import apply_matchup_edge_to_row
+
     enriched["stats"] = stats
-    return enriched
+    return apply_matchup_edge_to_row(enriched, pitcher, history_lookup=None)
 
 
 def enrich_lineup_pitch_mix(

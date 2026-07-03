@@ -26,6 +26,7 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             or self._is_trends_api()
             or self._is_pitcher_trends_api()
             or self._is_propfinder_api()
+            or self._is_savant_matchup_api()
             or self._is_rotowire_api()
             or self._is_zone_api()
             or self._is_park_api()
@@ -46,6 +47,9 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             return
         if self._is_propfinder_api():
             self._handle_propfinder_api()
+            return
+        if self._is_savant_matchup_api():
+            self._handle_savant_matchup_api()
             return
         if self._is_rotowire_api():
             self._handle_rotowire_api()
@@ -97,6 +101,35 @@ class ResearchHandler(SimpleHTTPRequestHandler):
                     "source": "propfinder-csv",
                     "batters": len(lookup),
                     "lookup": lookup,
+                },
+            )
+        except Exception as exc:
+            self._send_json(502, {"error": str(exc)})
+
+    def _is_savant_matchup_api(self) -> bool:
+        path = urlparse(self.path).path.rstrip("/")
+        return path == "/api/savant-matchup"
+
+    def _handle_savant_matchup_api(self) -> None:
+        from research.matchup_edge import fetch_savant_matchup, matchup_pair_key
+
+        qs = parse_qs(urlparse(self.path).query)
+        batter_id = qs.get("batterId", [""])[0]
+        pitcher_id = qs.get("pitcherId", [""])[0]
+        if not batter_id.isdigit() or not pitcher_id.isdigit():
+            self._send_json(400, {"error": "batterId and pitcherId required"})
+            return
+        try:
+            entry = fetch_savant_matchup(int(batter_id), int(pitcher_id))
+            if not entry:
+                self._send_json(200, {"key": matchup_pair_key(batter_id, pitcher_id), "matchup": None})
+                return
+            self._send_json(
+                200,
+                {
+                    "key": matchup_pair_key(batter_id, pitcher_id),
+                    "source": "savant-matchup",
+                    "matchup": entry,
                 },
             )
         except Exception as exc:
@@ -259,6 +292,7 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             or self._is_trends_api()
             or self._is_pitcher_trends_api()
             or self._is_propfinder_api()
+            or self._is_savant_matchup_api()
             or self._is_rotowire_api()
             or self._is_zone_api()
             or self._is_park_api()

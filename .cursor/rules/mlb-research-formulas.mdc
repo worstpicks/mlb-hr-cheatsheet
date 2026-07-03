@@ -38,7 +38,7 @@ All constants live in `preview/research/research.js` unless noted. Python mirror
 ## API proxies & 404 protection
 
 - Production BvP history proxy: `netlify/functions/savant-matchup.js` + `/api/savant-matchup` redirect in `netlify.toml`.
-- `/api/player-trends` and `/api/pitcher-trends` are LOCAL-ONLY (`serve-research.py`). `proxyAvailable(path)` in `research.js` probes each once and gates all calls — without it the live site spams hundreds of 404s. Wire any new dev-only endpoint through the same probe.
+- `/api/player-trends`, `/api/pitcher-trends`, and `/api/rotowire-lineups` are LOCAL-ONLY (`serve-research.py`). `proxyAvailable(path)` in `research.js` probes each once and gates all calls — without it the live site spams hundreds of 404s. One probe 404 per endpoint per page load is expected and fine. Wire any new dev-only endpoint through the same probe.
 
 ## Dev server & pipeline health
 
@@ -47,4 +47,4 @@ All constants live in `preview/research/research.js` unless noted. Python mirror
 
 ## Deploy checklist
 
-Bump `research.js?v=` in `preview/research/index.html` on every JS change (currently v=129; CSS v=117). Favicon links in research `index.html` fix a 404 — keep them.
+Bump `research.js?v=` in `preview/research/index.html` on every JS change (v=131 / CSS v=118 as of 2026-07-03 — read the file for current). Favicon links in research `index.html` fix a 404 — keep them. The `#rsTopFab` back-to-top button, smooth scrolling, and `.rs-empty` loading pulse (2026-07-03 UI polish) are intentional — keep them.

@@ -56,4 +56,10 @@ All constants live in `preview/research/research.js` unless noted. Python mirror
 
 ## Deploy checklist
 
-Bump `research.js?v=` in `preview/research/index.html` on every JS change (v=131 / CSS v=118 as of 2026-07-03 — read the file for current). Favicon links in research `index.html` fix a 404 — keep them. The `#rsTopFab` back-to-top button, smooth scrolling, and `.rs-empty` loading pulse (2026-07-03 UI polish) are intentional — keep them.
+Bump `research.js?v=` in `preview/research/index.html` on every JS change (v=133 / CSS v=119 as of 2026-07-06 — read the file for current). Favicon links in research `index.html` fix a 404 — keep them. The `#rsTopFab` back-to-top button, smooth scrolling, and `.rs-empty` loading pulse (2026-07-03 UI polish) are intentional — keep them.
+
+## Power highlight preset (PropFinder-style, fixed rules)
+
+- Toggle: `⚡ Highlight` buttons `#rsPresetBtn` (desktop) / `#rsPresetBtnM` (mobile). Persists in `localStorage` key `research-preset-highlight-v1`.
+- Logic in `rowMatchesPreset()` — uses same slate-relative heat tiers as table cell colors (`heatClass` / top third = green, middle = yellow, bottom = red). **Green-only:** Hard Hit%, GB% (lower is green), Air%. **Green-or-yellow:** EV, Barrel%, Whiff% (lower is green), Blast%, Pull%. **Boom% + HR Form%:** green with any trend (↑ ↓ ←), or yellow only when trend is ↑ or ← (not ↓). Missing trend blocks yellow pass.
+- Matching rows get `.rs-row--preset` (green left bar); others dim (`.rs-table--preset-dim`). Button shows **slate-wide** match count; re-computes after trend hydration (`clearSlatePresetCache()`). Do not replace with editable PropFinder presets — this is our single fixed Worst Pickz power preset.

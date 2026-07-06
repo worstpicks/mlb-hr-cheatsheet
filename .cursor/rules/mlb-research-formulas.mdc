@@ -45,6 +45,15 @@ All constants live in `preview/research/research.js` unless noted. Python mirror
 - `serve-research.py` binds port 8080 exclusively (`allow_reuse_address = False`) and refuses to start if the port is taken — the old Windows double-bind served stale code silently. It prints pid/start/code-mtime and serves `GET /api/health` returning `{ok, pid, startedAt, codeMtime}`. After editing any Python the server imports, kill ALL `serve-research` processes and restart; verify via `/api/health` codeMtime.
 - `fetch-research-slate.py` prints a slate health report (`_slate_health_report` in `research/sync_tab.py`): SP throws/arsenal, xwOBA, mix%, platoon, Due+, nearHR, park coverage. Silent `except` blocks in `build_slate()`/`savant_api.py` were replaced with WARN prints — keep failures loud.
 
+## Preset highlight (PropFinder-style, added 2026-07-06)
+
+- `⚡ Preset` toggle (`#rsPresetBtn` desktop actions bar, `#rsPresetBtnM` mobile bar) highlights hitters matching the user's fixed power preset and dims the rest. State persists in localStorage `research-preset-highlight-v1`.
+- Criteria live in `rowMatchesPreset()` in `research.js` and use the SAME slate-relative heat tiers as the visible cell colors (`heatClass`, judged across all stat columns regardless of Essential/Full view):
+  - green only: `hardHitPct`, `gbPct` (low = green), `airPct`
+  - green or yellow: `avgEV`, `barrelPct`, `whiffPct` (low = green), `blastPct`, `pullPct`
+  - `boomPct` + `hrFormPct`: green with any trend arrow, or yellow only when the trend is up/flat (trend from `boomTrendForRow`/`formTrendForRow`; unknown trend on yellow = no match)
+- Missing data for any preset stat = no match (strict by design; typically only a handful of hitters per slate qualify). Do not loosen the rules or change tier sourcing without the user asking.
+
 ## Deploy checklist
 
 Bump `research.js?v=` in `preview/research/index.html` on every JS change (v=131 / CSS v=118 as of 2026-07-03 — read the file for current). Favicon links in research `index.html` fix a 404 — keep them. The `#rsTopFab` back-to-top button, smooth scrolling, and `.rs-empty` loading pulse (2026-07-03 UI polish) are intentional — keep them.

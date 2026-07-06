@@ -1,0 +1,203 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-07-06.csv",
+  "source_date": "2026-07-06",
+  "hand_date": "2026-07-06",
+  "by_game": {
+    "HOU @ WAS": {
+      "game": "HOU @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 3,
+      "stadium_pct": 3,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 0,
+      "park_lhb_pct": 0,
+      "rhb_stadium_pct": -1,
+      "park_rhb_pct": -1
+    },
+    "PHI @ KC": {
+      "game": "PHI @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": 12,
+      "stadium_pct": 11,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -15,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -5
+    },
+    "NYM @ ATL": {
+      "game": "NYM @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 8,
+      "stadium_pct": -1,
+      "weather_pct": 9,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": 7,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": 3
+    },
+    "COL @ LAD": {
+      "game": "COL @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 16,
+      "stadium_pct": 17,
+      "weather_pct": -1,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": 15,
+      "park_rhb_pct": 14
+    },
+    "MIL @ STL": {
+      "game": "MIL @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -8,
+      "stadium_pct": -9,
+      "weather_pct": 2,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -14,
+      "rhb_stadium_pct": -15,
+      "park_rhb_pct": -13
+    },
+    "ARI @ SD": {
+      "game": "ARI @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": -2,
+      "stadium_pct": -5,
+      "weather_pct": 4,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": 0,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 13
+    },
+    "NYY @ TB": {
+      "game": "NYY @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 8
+    },
+    "TOR @ SF": {
+      "game": "TOR @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -22,
+      "stadium_pct": -17,
+      "weather_pct": -6,
+      "lhb_stadium_pct": -21,
+      "park_lhb_pct": -27,
+      "rhb_stadium_pct": -18,
+      "park_rhb_pct": -24
+    }
+  },
+  "by_venue": {
+    "nationals park": {
+      "game": "HOU @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 3,
+      "stadium_pct": 3,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 0,
+      "park_lhb_pct": 0,
+      "rhb_stadium_pct": -1,
+      "park_rhb_pct": -1
+    },
+    "kauffman stadium": {
+      "game": "PHI @ KC",
+      "venue": "Kauffman Stadium",
+      "venue_key": "kauffman stadium",
+      "hr_pct": 12,
+      "stadium_pct": 11,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -15,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -5
+    },
+    "truist park": {
+      "game": "NYM @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 8,
+      "stadium_pct": -1,
+      "weather_pct": 9,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": 7,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": 3
+    },
+    "dodger stadium": {
+      "game": "COL @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 16,
+      "stadium_pct": 17,
+      "weather_pct": -1,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": 15,
+      "park_rhb_pct": 14
+    },
+    "busch stadium": {
+      "game": "MIL @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -8,
+      "stadium_pct": -9,
+      "weather_pct": 2,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -14,
+      "rhb_stadium_pct": -15,
+      "park_rhb_pct": -13
+    },
+    "petco park": {
+      "game": "ARI @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": -2,
+      "stadium_pct": -5,
+      "weather_pct": 4,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": 0,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 13
+    },
+    "tropicana field": {
+      "game": "NYY @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 8
+    },
+    "oracle park": {
+      "game": "TOR @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -22,
+      "stadium_pct": -17,
+      "weather_pct": -6,
+      "lhb_stadium_pct": -21,
+      "park_lhb_pct": -27,
+      "rhb_stadium_pct": -18,
+      "park_rhb_pct": -24
+    }
+  }
+}

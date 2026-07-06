@@ -1,0 +1,30 @@
+Matchup,HOU @ WSH
+Pitcher,Mike Burrows
+Pitcher Team,HOU
+Opposing Team,WSH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.1,1.65,="14-45",.311,.711,0.400,4,4,1,10,14.3,3,.367,1.078
+Batting Second,11.1,1.15,="11-45",.244,.400,0.156,2,1,0,2,14.6,2,.292,.692
+Batting Third,11.1,1.50,="11-42",.262,.333,0.071,0,3,0,2,18.8,6,.354,.687
+Batting Fourth,11.2,1.20,="9-41",.220,.390,0.170,2,1,0,7,23.9,5,.304,.694
+Batting Fifth,10.0,1.70,="12-41",.293,.463,0.170,2,1,0,5,17.4,5,.370,.833
+Batting Sixth,9.0,1.89,="16-42",.381,.619,0.238,3,1,0,9,27.3,1,.409,1.028
+Batting Seventh,9.1,1.61,="10-36",.278,.500,0.222,2,2,0,8,11.9,5,.381,.881
+Batting Eighth,9.1,1.39,="10-36",.278,.528,0.250,3,0,0,6,17.9,3,.333,.861
+Batting Ninth,7.2,1.70,="10-33",.303,.485,0.182,1,3,0,4,16.7,3,.361,.846
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+James Wood LHB,Batting First ​,="93-349",.266,.533,0.267,23,22,1,56,29.4,70,.393,.926
+Luis Garcia Jr. LHB,Batting Second ​,="65-222",.293,.595,0.302,16,13,3,53,15.7,8,.317,.912
+Curtis Mead RHB,Batting Second ​,="27-117",.231,.479,0.248,7,6,1,15,17.2,15,.328,.807
+Andres Chaparro RHB,Batting Third ​,="3-32",.094,.188,0.094,1,0,0,6,27.0,4,.216,.404
+CJ Abrams LHB,Batting Fourth ​,="64-256",.250,.457,0.207,12,13,2,41,23.9,22,.319,.776
+Dylan Crews RHB,Batting Fifth ​,="19-88",.216,.409,0.193,5,2,0,9,18.5,4,.250,.659
+Daylen Lile LHB,Batting Sixth ​,="29-127",.228,.441,0.213,6,7,1,17,21.2,6,.270,.711
+Jacob Young RHB,Batting Sixth ​,="13-68",.191,.338,0.147,2,4,0,9,28.0,5,.267,.605
+Jose Tena LHB,Batting Seventh ​,="14-57",.246,.333,0.087,0,3,1,5,27.7,8,.338,.671
+Jorbit Vivas LHB,Batting Eighth ​,="15-62",.242,.339,0.097,1,3,0,6,9.9,6,.304,.643
+Drew Millas SHB,Batting Eighth ​,="14-81",.173,.284,0.111,2,3,0,5,23.7,8,.272,.556
+Keibert Ruiz SHB,Batting Ninth ​,="28-111",.252,.369,0.117,1,10,0,12,15.4,5,.291,.660
+Nasim Nuñez SHB,Batting Ninth ​,="24-89",.270,.337,0.067,0,0,3,3,24.3,11,.347,.684

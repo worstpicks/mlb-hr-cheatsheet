@@ -3087,15 +3087,80 @@ html.theme-light .rs-explore__input {
     text-shadow: 0 0 14px rgba(192, 132, 252, 0.5);
 }
 .rs-section-title--goblins::before { background: #c084fc; }
-.rs-goblins__lede {
-    margin: 4px 0 0;
-    font-size: 0.78rem;
+.rs-goblins__empty {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px dashed rgba(168, 85, 247, 0.4);
+    font-size: 0.82rem;
     color: #c4b5fd;
+    text-align: center;
 }
+.rs-goblins__table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(168, 85, 247, 0.35);
+}
+.rs-goblin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+.rs-goblin-table thead th {
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #c4b5fd;
+    background: rgba(59, 7, 100, 0.55);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.35);
+    white-space: nowrap;
+}
+.rs-goblin-table thead th:nth-child(n+5) { text-align: center; }
+.rs-goblin-table__row {
+    cursor: pointer;
+    transition: background 0.12s, box-shadow 0.12s;
+}
+.rs-goblin-table__row:hover,
+.rs-goblin-table__row:focus-visible {
+    background: rgba(107, 33, 168, 0.35);
+    outline: none;
+    box-shadow: inset 3px 0 0 #c084fc;
+}
+.rs-goblin-table td {
+    padding: 11px 12px;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.18);
+    vertical-align: middle;
+}
+.rs-goblin-table tbody tr:last-child td { border-bottom: none; }
+.rs-goblin-table__rank {
+    width: 36px;
+    font-weight: 800;
+    color: #d8b4fe;
+    text-align: center;
+}
+.rs-goblin-table__name {
+    font-weight: 800;
+    color: #e9d5ff;
+    white-space: nowrap;
+}
+.rs-goblin-table__game,
+.rs-goblin-table__sp {
+    color: #a5b4fc;
+    font-size: 0.74rem;
+    white-space: nowrap;
+}
+.rs-goblin-table__stat {
+    text-align: center;
+    font-weight: 800;
+    color: #f5f3ff;
+    min-width: 52px;
+}
+.rs-goblins__cards { display: none; }
 .rs-goblins__list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-    gap: 10px;
+    display: block;
 }
 .rs-goblin-card {
     display: flex;
@@ -3181,8 +3246,15 @@ html.theme-light .rs-explore__input {
     font-weight: 800;
     color: #f5f3ff;
 }
+@media (max-width: 720px) {
+    .rs-goblins__table-wrap { display: none; }
+    .rs-goblins__cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
 @media (max-width: 560px) {
-    .rs-goblins__list { grid-template-columns: 1fr; }
     .rs-goblin-card__stats { width: 100%; justify-content: space-between; }
     .rs-goblin-stat { flex: 1; }
 }
@@ -3191,8 +3263,24 @@ html.theme-light .rs-goblins {
     border-color: rgba(147, 51, 234, 0.35);
     box-shadow: 0 0 14px rgba(168, 85, 247, 0.12);
 }
+html.theme-light .rs-goblins__empty {
+    color: #7e22ce;
+    border-color: rgba(147, 51, 234, 0.35);
+    background: #faf5ff;
+}
+html.theme-light .rs-goblin-table thead th {
+    background: #f3e8ff;
+    color: #6b21a8;
+}
+html.theme-light .rs-goblin-table__name { color: #6b21a8; }
+html.theme-light .rs-goblin-table__game,
+html.theme-light .rs-goblin-table__sp { color: #64748b; }
+html.theme-light .rs-goblin-table__stat { color: #3b0764; }
+html.theme-light .rs-goblin-table__row:hover,
+html.theme-light .rs-goblin-table__row:focus-visible {
+    background: #f3e8ff;
+}
 html.theme-light .rs-section-title--goblins { color: #6b21a8; text-shadow: none; }
-html.theme-light .rs-goblins__lede { color: #7e22ce; }
 html.theme-light .rs-goblin-card {
     background: #fff;
     border-color: rgba(147, 51, 234, 0.3);

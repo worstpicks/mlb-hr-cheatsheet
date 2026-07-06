@@ -5189,16 +5189,9 @@
         return viewIds;
     }
 
-    function renderGoblinsPanel() {
-        const section = document.getElementById("rsGoblinsSection");
-        const list = document.getElementById("rsGoblinsList");
-        if (!section || !list) return;
+    function collectGoblinEntries() {
         const ids = slatePresetMatchIds();
-        if (!ids.size) {
-            section.hidden = true;
-            list.innerHTML = "";
-            return;
-        }
+        if (!ids.size) return [];
         const seen = new Set();
         const entries = [];
         for (const entry of collectSlateHitters()) {
@@ -5207,41 +5200,29 @@
             seen.add(id);
             entries.push(entry);
         }
-        if (!entries.length) {
-            section.hidden = true;
-            list.innerHTML = "";
-            return;
-        }
         entries.sort((a, b) => {
             const ba = Number(hitterStats(a.row).boomPct);
             const bb = Number(hitterStats(b.row).boomPct);
             return (Number.isNaN(bb) ? -1 : bb) - (Number.isNaN(ba) ? -1 : ba);
         });
-        section.hidden = false;
-        list.innerHTML = entries
-            .map((entry, i) => {
-                const stats = hitterStats(entry.row);
-                const mix = stats.mixPlus ?? resolveMixPlusForEntry(entry, stats);
-                const park = entry.game?.parkHrPct;
-                const vsSp = entry.pitcher?.name ? `vs ${entry.pitcher.name}` : "";
-                return `<button type="button" class="rs-goblin-card" data-goblin-idx="${i}">
-                    <span class="rs-goblin-card__rank">${i + 1}</span>
-                    <span class="rs-goblin-card__who">
-                        <span class="rs-goblin-card__name">${escAttr(entry.row.name || "—")}</span>
-                        <span class="rs-goblin-card__game">${escAttr(entry.game?.matchup || "")}${vsSp ? ` · ${escAttr(vsSp)}` : ""}</span>
-                    </span>
-                    <span class="rs-goblin-card__stats">
-                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Mix</span><span class="rs-goblin-stat__val">${fmtSignedPct(mix)}</span></span>
-                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Boom</span><span class="rs-goblin-stat__val">${fmtPct(stats.boomPct)}</span></span>
-                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Park</span><span class="rs-goblin-stat__val">${fmtSignedPct(park)}</span></span>
-                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Hard Hit</span><span class="rs-goblin-stat__val">${fmtPct(stats.hardHitPct)}</span></span>
-                    </span>
-                </button>`;
-            })
-            .join("");
-        list.querySelectorAll(".rs-goblin-card").forEach((btn) => {
-            btn.addEventListener("click", async () => {
-                const entry = entries[parseInt(btn.getAttribute("data-goblin-idx"), 10)];
+        return entries;
+    }
+
+    function goblinRowStats(entry) {
+        const stats = hitterStats(entry.row);
+        return {
+            mix: stats.mixPlus ?? resolveMixPlusForEntry(entry, stats),
+            boom: stats.boomPct,
+            park: entry.game?.parkHrPct,
+            hardHit: stats.hardHitPct,
+        };
+    }
+
+    function wireGoblinJump(entries, root) {
+        if (!root) return;
+        root.querySelectorAll("[data-goblin-idx]").forEach((el) => {
+            const jump = async () => {
+                const entry = entries[parseInt(el.getAttribute("data-goblin-idx"), 10)];
                 if (!entry) return;
                 activeGameIdx = entry.gameIdx;
                 activeSide = entry.side;
@@ -5252,8 +5233,88 @@
                 rowEl?.scrollIntoView({ behavior: "smooth", block: "center" });
                 rowEl?.classList.add("rs-row--flash");
                 setTimeout(() => rowEl?.classList.remove("rs-row--flash"), 1800);
+            };
+            el.addEventListener("click", jump);
+            el.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    jump();
+                }
             });
         });
+    }
+
+    function renderGoblinsPanel() {
+        const section = document.getElementById("rsGoblinsSection");
+        const list = document.getElementById("rsGoblinsList");
+        const title = document.getElementById("rsGoblinsTitle");
+        if (!section || !list) return;
+        const entries = collectGoblinEntries();
+        if (title) {
+            title.textContent = entries.length
+                ? `Today's Goblin's (${entries.length})`
+                : "Today's Goblin's";
+        }
+        if (!entries.length) {
+            list.innerHTML =
+                `<p class="rs-goblins__empty">No Goblin&apos;s on today&apos;s slate yet — purple power plays show here once lineups and trends finish loading.</p>`;
+            return;
+        }
+        const tableRows = entries
+            .map((entry, i) => {
+                const s = goblinRowStats(entry);
+                const vsSp = entry.pitcher?.name ? `vs ${entry.pitcher.name}` : "—";
+                return `<tr class="rs-goblin-table__row" data-goblin-idx="${i}" tabindex="0" role="button">
+                    <td class="rs-goblin-table__rank">${i + 1}</td>
+                    <td class="rs-goblin-table__name">${escAttr(entry.row.name || "—")}</td>
+                    <td class="rs-goblin-table__game">${escAttr(entry.game?.matchup || "")}</td>
+                    <td class="rs-goblin-table__sp">${escAttr(vsSp)}</td>
+                    <td class="rs-goblin-table__stat">${fmtSignedPct(s.mix)}</td>
+                    <td class="rs-goblin-table__stat">${fmtPct(s.boom)}</td>
+                    <td class="rs-goblin-table__stat">${fmtSignedPct(s.park)}</td>
+                    <td class="rs-goblin-table__stat">${fmtPct(s.hardHit)}</td>
+                </tr>`;
+            })
+            .join("");
+        const cards = entries
+            .map((entry, i) => {
+                const s = goblinRowStats(entry);
+                const vsSp = entry.pitcher?.name ? `vs ${entry.pitcher.name}` : "";
+                return `<button type="button" class="rs-goblin-card" data-goblin-idx="${i}">
+                    <span class="rs-goblin-card__rank">${i + 1}</span>
+                    <span class="rs-goblin-card__who">
+                        <span class="rs-goblin-card__name">${escAttr(entry.row.name || "—")}</span>
+                        <span class="rs-goblin-card__game">${escAttr(entry.game?.matchup || "")}${vsSp ? ` · ${escAttr(vsSp)}` : ""}</span>
+                    </span>
+                    <span class="rs-goblin-card__stats">
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Mix</span><span class="rs-goblin-stat__val">${fmtSignedPct(s.mix)}</span></span>
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Boom</span><span class="rs-goblin-stat__val">${fmtPct(s.boom)}</span></span>
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Park</span><span class="rs-goblin-stat__val">${fmtSignedPct(s.park)}</span></span>
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Hard Hit</span><span class="rs-goblin-stat__val">${fmtPct(s.hardHit)}</span></span>
+                    </span>
+                </button>`;
+            })
+            .join("");
+        list.innerHTML = `
+            <div class="rs-goblins__table-wrap">
+                <table class="rs-goblin-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Hitter</th>
+                            <th>Game</th>
+                            <th>vs SP</th>
+                            <th>Mix</th>
+                            <th>Boom</th>
+                            <th>Park</th>
+                            <th>Hard Hit</th>
+                        </tr>
+                    </thead>
+                    <tbody>${tableRows}</tbody>
+                </table>
+            </div>
+            <div class="rs-goblins__cards">${cards}</div>`;
+        wireGoblinJump(entries, list);
     }
 
     function topHittersForGame(gameIdx, limit = 3) {

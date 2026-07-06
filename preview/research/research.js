@@ -5111,21 +5111,9 @@
         return "rs-cell-heat rs-cell-heat--bad";
     }
 
-    // ── PropFinder-style highlight preset (Worst Pickz power preset) ──
-    // Uses the same slate-relative heat tiers as the visible table colors:
-    //   green-only: Hard Hit%, GB% (low is green), Air%
-    //   green-or-yellow: EV, Barrel%, Whiff% (low is green), Blast%, Pull%
-    //   Boom% + HR Form%: green with any trend, or yellow only when the
-    //   trend arrow is up or sideways (flat).
+    // ── Goblin power highlight (always on; purple row/card accent) ──
     const PRESET_GREEN_ONLY = ["hardHitPct", "gbPct", "airPct"];
     const PRESET_GREEN_OR_YELLOW = ["avgEV", "barrelPct", "whiffPct", "blastPct", "pullPct"];
-    const PRESET_HIGHLIGHT_LS = "research-preset-highlight-v1";
-    let presetHighlightOn = false;
-    try {
-        presetHighlightOn = localStorage.getItem(PRESET_HIGHLIGHT_LS) === "1";
-    } catch {
-        presetHighlightOn = false;
-    }
 
     function presetHeatTier(colValues, higherBetter, key, val) {
         if (val == null || Number.isNaN(Number(val))) return null;
@@ -5192,41 +5180,12 @@
     }
 
     function presetIdsForViewRows(rows) {
-        if (!presetHighlightOn) return null;
         const slateIds = slatePresetMatchIds();
         const viewIds = new Set();
         for (const row of rows) {
             if (row.id != null && slateIds.has(String(row.id))) viewIds.add(String(row.id));
         }
         return viewIds;
-    }
-
-    function syncPresetButtons(slateCount, viewCount) {
-        const label =
-            presetHighlightOn && slateCount != null
-                ? viewCount != null && viewCount !== slateCount
-                    ? `\u26A1 Highlight (${slateCount} slate · ${viewCount} here)`
-                    : `\u26A1 Highlight (${slateCount})`
-                : "\u26A1 Highlight";
-        for (const id of ["rsPresetBtn", "rsPresetBtnM"]) {
-            const btn = document.getElementById(id);
-            if (!btn) continue;
-            btn.classList.toggle("is-active", presetHighlightOn);
-            btn.setAttribute("aria-pressed", presetHighlightOn ? "true" : "false");
-            btn.textContent = label;
-        }
-        const legend = document.getElementById("rsPresetLegend");
-        if (legend) legend.hidden = !presetHighlightOn;
-    }
-
-    function togglePresetHighlight() {
-        presetHighlightOn = !presetHighlightOn;
-        try {
-            localStorage.setItem(PRESET_HIGHLIGHT_LS, presetHighlightOn ? "1" : "0");
-        } catch { /* private mode */ }
-        clearSlatePresetCache();
-        renderTable();
-        renderMobileCards();
     }
 
     function topHittersForGame(gameIdx, limit = 3) {
@@ -5518,9 +5477,6 @@
         const cardGroups = GROUPS.filter((g) => g.id !== "identity");
         const highlightCols = MOBILE_HIGHLIGHT_KEYS.map((k) => COLS.find((c) => c.key === k)).filter(Boolean);
         const presetIds = presetIdsForViewRows(rows);
-        const slateCount = presetHighlightOn ? slatePresetMatchIds().size : null;
-        syncPresetButtons(slateCount, presetIds ? presetIds.size : null);
-        els.cardList.classList.toggle("rs-card-list--preset-dim", !!presetIds);
         els.cardList.innerHTML = rows
             .map((row) => {
                 const projected = row.projected ? '<span class="rs-hand rs-hand--proj">proj</span>' : "";
@@ -5674,9 +5630,7 @@
 
         const { colValues, higherBetter } = statHeatMap(rows, cols);
         const presetIds = presetIdsForViewRows(rows);
-        const slateCount = presetHighlightOn ? slatePresetMatchIds().size : null;
-        syncPresetButtons(slateCount, presetIds ? presetIds.size : null);
-        if (table) table.classList.toggle("rs-table--preset-dim", !!presetIds);
+        if (table) table.classList.remove("rs-table--preset-dim");
 
         els.tableBody.innerHTML = rows
             .map((r) => {
@@ -6871,9 +6825,6 @@
 
     function wireUi() {
         wireTopFab();
-        document.getElementById("rsPresetBtn")?.addEventListener("click", togglePresetHighlight);
-        document.getElementById("rsPresetBtnM")?.addEventListener("click", togglePresetHighlight);
-        syncPresetButtons(null, null);
         els.profileClose?.addEventListener("click", closePlayerProfile);
         els.profileJump?.addEventListener("click", () => {
             if (profileEntry) jumpToProfileEntry(profileEntry);

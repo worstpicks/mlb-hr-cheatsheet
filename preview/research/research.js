@@ -913,6 +913,7 @@
             computeHrFormForSlate();
             computeBoomForSlate();
             clearSlatePresetCache();
+            renderGoblinsPanel();
             if (columnReorderMode) return;
             renderTable();
             renderMobileCards();
@@ -5188,6 +5189,73 @@
         return viewIds;
     }
 
+    function renderGoblinsPanel() {
+        const section = document.getElementById("rsGoblinsSection");
+        const list = document.getElementById("rsGoblinsList");
+        if (!section || !list) return;
+        const ids = slatePresetMatchIds();
+        if (!ids.size) {
+            section.hidden = true;
+            list.innerHTML = "";
+            return;
+        }
+        const seen = new Set();
+        const entries = [];
+        for (const entry of collectSlateHitters()) {
+            const id = entry.row?.id != null ? String(entry.row.id) : null;
+            if (!id || !ids.has(id) || seen.has(id)) continue;
+            seen.add(id);
+            entries.push(entry);
+        }
+        if (!entries.length) {
+            section.hidden = true;
+            list.innerHTML = "";
+            return;
+        }
+        entries.sort((a, b) => {
+            const ba = Number(hitterStats(a.row).boomPct);
+            const bb = Number(hitterStats(b.row).boomPct);
+            return (Number.isNaN(bb) ? -1 : bb) - (Number.isNaN(ba) ? -1 : ba);
+        });
+        section.hidden = false;
+        list.innerHTML = entries
+            .map((entry, i) => {
+                const stats = hitterStats(entry.row);
+                const mix = stats.mixPlus ?? resolveMixPlusForEntry(entry, stats);
+                const park = entry.game?.parkHrPct;
+                const vsSp = entry.pitcher?.name ? `vs ${entry.pitcher.name}` : "";
+                return `<button type="button" class="rs-goblin-card" data-goblin-idx="${i}">
+                    <span class="rs-goblin-card__rank">${i + 1}</span>
+                    <span class="rs-goblin-card__who">
+                        <span class="rs-goblin-card__name">${escAttr(entry.row.name || "—")}</span>
+                        <span class="rs-goblin-card__game">${escAttr(entry.game?.matchup || "")}${vsSp ? ` · ${escAttr(vsSp)}` : ""}</span>
+                    </span>
+                    <span class="rs-goblin-card__stats">
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Mix</span><span class="rs-goblin-stat__val">${fmtSignedPct(mix)}</span></span>
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Boom</span><span class="rs-goblin-stat__val">${fmtPct(stats.boomPct)}</span></span>
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Park</span><span class="rs-goblin-stat__val">${fmtSignedPct(park)}</span></span>
+                        <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Hard Hit</span><span class="rs-goblin-stat__val">${fmtPct(stats.hardHitPct)}</span></span>
+                    </span>
+                </button>`;
+            })
+            .join("");
+        list.querySelectorAll(".rs-goblin-card").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                const entry = entries[parseInt(btn.getAttribute("data-goblin-idx"), 10)];
+                if (!entry) return;
+                activeGameIdx = entry.gameIdx;
+                activeSide = entry.side;
+                await renderAll();
+                const rowEl =
+                    els.tableBody?.querySelector(`tr[data-hitter-id="${entry.row.id}"]`) ||
+                    els.cardList?.querySelector(`.rs-card[data-hitter-id="${entry.row.id}"]`);
+                rowEl?.scrollIntoView({ behavior: "smooth", block: "center" });
+                rowEl?.classList.add("rs-row--flash");
+                setTimeout(() => rowEl?.classList.remove("rs-row--flash"), 1800);
+            });
+        });
+    }
+
     function topHittersForGame(gameIdx, limit = 3) {
         return collectSlateHitters()
             .filter((e) => e.gameIdx === gameIdx)
@@ -6699,6 +6767,7 @@
         refreshAllHrProps();
         rebuildTicketSlatePools();
         clearSlatePresetCache();
+        renderGoblinsPanel();
         renderGames();
         renderMatchupBar();
         renderWeatherPanel();

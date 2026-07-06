@@ -50,7 +50,8 @@ All constants live in `preview/research/research.js` unless noted. Python mirror
 - **Always active** — no toggle button, no localStorage. Matching hitters get `.rs-row--preset` / `.rs-card--preset` (purple accent). Non-matching rows are **not** dimmed.
 - Hint text only: `#rsGoblinHint` — "Goblin's are Highlighted in Purple" (no long rules legend).
 - Criteria unchanged in `rowMatchesPreset()` — slate heat tiers: green-only Hard Hit/GB/Air; green-or-yellow EV/Barrel/Whiff/Blast/Pull; Boom+HR Form with trend rules. Re-computes via `slatePresetMatchIds()` / `clearSlatePresetCache()` after trend hydration.
+- **"Today's Goblin's" section** (`#rsGoblinsSection` in `preview/research/index.html`, above Today's slate): `renderGoblinsPanel()` lists every slate-wide match as a purple card with Mix / Boom / Park / Hard Hit chips, sorted by Boom% desc, click jumps to the player's row. Called from `renderAll()` AND the form-trend hydrate callback (matches only exist after Boom/Form hydration). Section stays `hidden` when there are 0 matches — that's normal, not a bug.
 
 ## Deploy checklist
 
-Bump `research.js?v=` in `preview/research/index.html` on every JS change (v=134 / CSS v=120 as of 2026-07-06 — read the file for current). Favicon links in research `index.html` fix a 404 — keep them. The `#rsTopFab` back-to-top button, smooth scrolling, and `.rs-empty` loading pulse (2026-07-03 UI polish) are intentional — keep them.
+Bump `research.js?v=` in `preview/research/index.html` on every JS change (v=135 / CSS v=121 as of 2026-07-06 — read the file for current). Favicon links in research `index.html` fix a 404 — keep them. The `#rsTopFab` back-to-top button, smooth scrolling, and `.rs-empty` loading pulse (2026-07-03 UI polish) are intentional — keep them.

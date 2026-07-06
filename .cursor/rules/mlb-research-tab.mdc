@@ -176,6 +176,7 @@ Production: `/.netlify/functions/savant-batter?season=2026` (redirect alias `/ap
 
 ## Changelog
 
+- **2026-07-06** — Goblin power highlight finalized: always-on purple rows/cards (no toggle, no dimming), `#rsGoblinHint` text, and new "Today's Goblin's" section (`#rsGoblinsSection` + `renderGoblinsPanel()`) listing slate-wide matches with Mix/Boom/Park/Hard Hit chips, click-to-jump. JS `v=135`, CSS `v=121`.
 - **2026-07-02** — Formula overhaul + security hardening + pipeline health (see `mlb-research-formulas.mdc` for the full contract): Edge% history re-weighted (0.7/0.3, min 20 pitches), K projection K%→K/9 fix, HR Form weights update, platoon splits (`batter_splits.py`, `_fill_pitcher_throws`), `savant-matchup` Netlify fn, `proxyAvailable` 404 guard, `escAttr` XSS pass, `preview/_headers` CSP, slate health report in fetch summary, `/api/health` + exclusive port bind on dev server, legacy `bvp_stats.py` deleted. JS `v=129`.
 - **2026-06-28** — HR environment % tightened: weighted additive combine (not multiplicative), capped factors (±12% each, ±18% total), fence/wind aligned with weather panel display logic. JS `v=75`.
 - **2026-06-28** — Pitcher panel between Park & weather and Hitters: Savant contact-allowed stats, Dinger Risk score, `savant_pitcher.py` + `pitcher_dinger_risk.py`, cache `savant-pitcher-{season}.json`. Local-only until user deploys.

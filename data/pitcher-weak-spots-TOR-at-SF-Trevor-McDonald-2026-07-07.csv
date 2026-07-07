@@ -1,0 +1,31 @@
+Matchup,TOR @ SF
+Pitcher,Trevor McDonald
+Pitcher Team,SF
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.0,1.57,="10-30",.333,.467,0.134,1,1,0,2,21.2,1,.375,.842
+Batting Second,6.1,1.42,="7-27",.259,.259,0.000,0,0,0,1,16.1,2,.355,.614
+Batting Third,5.2,1.94,="8-23",.348,.652,0.304,1,4,0,1,31.0,3,.483,1.135
+Batting Fourth,6.2,1.20,="6-25",.240,.240,0.000,0,0,0,4,10.7,2,.286,.526
+Batting Fifth,7.0,1.00,="3-23",.130,.348,0.218,1,0,1,4,18.5,4,.259,.607
+Batting Sixth,6.2,1.05,="6-25",.240,.440,0.200,1,2,0,6,18.5,1,.259,.699
+Batting Seventh,6.0,1.00,="3-21",.143,.190,0.047,0,1,0,2,20.0,3,.280,.470
+Batting Eighth,6.1,1.11,="5-23",.217,.304,0.087,0,2,0,0,16.0,2,.280,.584
+Batting Ninth,5.1,0.75,="3-19",.158,.158,0.000,0,0,0,2,30.4,1,.273,.431
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-240",.221,.375,0.154,8,11,1,20,20.4,28,.309,.684
+Nathan Lukes LHB,Batting Second ​,="19-77",.247,.338,0.091,2,1,0,5,15.1,5,.298,.636
+Yohendrick Pinango LHB,Batting Second ​,="10-30",.333,.567,0.234,2,1,0,5,15.6,2,.375,.942
+Vladimir Guerrero Jr. RHB,Batting Third ​,="66-244",.270,.344,0.074,2,12,0,27,12.2,29,.351,.695
+Kazuma Okamoto RHB,Batting Fourth ​,="32-149",.215,.389,0.174,8,2,0,28,32.1,15,.292,.681
+Jonatan Clase SHB,Batting Fourth ​,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Alejandro Kirk RHB,Batting Fifth ​,="7-38",.184,.368,0.184,2,1,0,3,14.3,4,.262,.630
+Daulton Varsho LHB,Batting Sixth ​,="21-78",.269,.436,0.167,2,7,0,7,17.9,6,.321,.757
+Luis Urias RHB,Batting Seventh ​,="5-10",.500,.900,0.400,1,1,0,2,16.7,2,.583,1.483
+Myles Straw RHB,Batting Seventh ​,="8-39",.205,.333,0.128,1,2,0,7,15.2,5,.283,.616
+Ernie Clement RHB,Batting Seventh ​,="24-74",.324,.419,0.095,1,4,0,7,7.9,2,.342,.761
+Andres Gimenez LHB,Batting Eighth ​,="33-138",.239,.399,0.160,5,7,0,21,18.7,5,.289,.688
+Sean Keys LHB,Batting Eighth ​,="3-8",.375,.875,0.500,1,1,0,3,25.0,0,.375,1.250
+Brandon Valenzuela SHB,Batting Ninth ​,="19-85",.224,.471,0.247,6,3,0,13,24.5,13,.327,.798

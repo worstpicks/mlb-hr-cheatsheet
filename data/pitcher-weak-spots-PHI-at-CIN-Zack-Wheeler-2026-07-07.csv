@@ -1,0 +1,26 @@
+Matchup,PHI @ CIN
+Pitcher,Zack Wheeler
+Pitcher Team,PHI
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.1,0.87,="8-38",.211,.368,0.157,2,0,0,3,28.2,1,.231,.599
+Batting Second,10.1,0.77,="4-35",.114,.143,0.029,0,1,0,1,28.2,4,.205,.348
+Batting Third,9.0,1.33,="9-35",.257,.600,0.343,3,3,0,5,23.7,3,.316,.916
+Batting Fourth,8.1,1.32,="8-33",.242,.424,0.182,1,3,0,2,24.3,3,.324,.748
+Batting Fifth,9.1,1.07,="8-34",.235,.265,0.030,0,1,0,3,27.0,2,.270,.535
+Batting Sixth,8.1,1.20,="8-31",.258,.387,0.129,1,1,0,4,18.2,2,.303,.690
+Batting Seventh,8.2,0.58,="4-30",.133,.267,0.134,1,1,0,1,32.3,1,.161,.428
+Batting Eighth,6.2,0.90,="3-23",.130,.174,0.044,0,1,0,0,33.3,3,.259,.433
+Batting Ninth,8.1,0.48,="3-26",.115,.269,0.154,1,1,0,1,33.3,1,.148,.417
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Elly De La Cruz SHB,Batting First ​,="10-37",.270,.378,0.108,1,1,0,3,28.6,5,.357,.735
+Sal Stewart RHB,Batting Second ​,="11-38",.289,.632,0.343,3,4,0,6,20.0,2,.325,.957
+JJ Bleday LHB,Batting Third ​,="11-57",.193,.333,0.140,2,2,0,6,21.2,8,.303,.636
+Eugenio Suarez RHB,Batting Fourth ​,="6-37",.162,.270,0.108,1,1,0,5,33.3,7,.311,.581
+Nathaniel Lowe LHB,Batting Fifth ​,="18-77",.234,.494,0.260,5,5,0,10,30.6,8,.306,.800
+Spencer Steer RHB,Batting Sixth ​,="22-107",.206,.346,0.140,4,3,0,7,27.4,13,.306,.652
+Tyler Stephenson RHB,Batting Seventh ​,="15-88",.170,.273,0.103,2,3,0,11,30.4,13,.275,.548
+TJ Friedl LHB,Batting Eighth ​,="1-20",.050,.150,0.100,0,0,1,2,21.7,1,.130,.280
+Matt McLain RHB,Batting Ninth ​,="10-54",.185,.333,0.148,1,5,0,4,25.0,5,.254,.587

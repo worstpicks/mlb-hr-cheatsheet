@@ -1,0 +1,30 @@
+Matchup,BOS @ CWS
+Pitcher,Jake Bennett
+Pitcher Team,BOS
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.0,1.20,="5-19",.263,.421,0.158,1,0,0,4,13.6,1,.318,.739
+Batting Second,6.0,0.83,="5-21",.238,.286,0.048,0,1,0,2,14.3,0,.238,.524
+Batting Third,5.0,1.20,="4-17",.235,.235,0.000,0,0,0,0,21.1,2,.316,.551
+Batting Fourth,5.1,0.56,="1-15",.067,.067,0.000,0,0,0,1,22.2,2,.167,.234
+Batting Fifth,4.2,0.64,="2-16",.125,.125,0.000,0,0,0,0,35.3,1,.176,.301
+Batting Sixth,4.1,0.46,="2-15",.133,.133,0.000,0,0,0,1,13.3,0,.133,.266
+Batting Seventh,3.0,2.33,="7-15",.467,1.067,0.600,2,3,0,2,20.0,0,.467,1.534
+Batting Eighth,3.2,1.09,="4-14",.286,.286,0.000,0,0,0,1,26.7,0,.286,.572
+Batting Ninth,3.2,1.09,="3-13",.231,.231,0.000,0,0,0,2,13.3,1,.267,.498
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="47-161",.292,.391,0.099,3,7,0,14,17.0,14,.387,.778
+Chase Meidroth RHB,Batting First ​,="31-116",.267,.431,0.164,4,7,0,10,23.8,10,.325,.756
+Randal Grichuk RHB,Batting Second ​,="9-29",.310,.759,0.449,3,4,0,3,25.8,2,.355,1.114
+Andrew Benintendi LHB,Batting Third ​,="19-73",.260,.466,0.206,4,3,0,12,21.0,8,.333,.799
+Miguel Vargas RHB,Batting Third ​,="38-163",.233,.454,0.221,9,9,0,24,18.4,28,.354,.808
+Kyle Teel LHB,Batting Third ​,="5-22",.227,.545,0.318,2,1,0,9,33.3,2,.292,.837
+Colson Montgomery LHB,Batting Fourth ​,="51-223",.229,.502,0.273,17,10,0,39,32.4,20,.312,.814
+Junior Perez RHB,Batting Sixth ​,="3-7",.429,.857,0.428,1,0,0,1,14.3,0,.429,1.286
+Braden Montgomery SHB,Batting Sixth ​,="8-34",.235,.382,0.147,1,2,0,4,23.7,4,.316,.698
+Tristan Peters LHB,Batting Eighth ​,="30-106",.283,.500,0.217,4,7,2,20,15.1,10,.342,.842
+Luisangel Acuna RHB,Batting Ninth ​,="11-61",.180,.246,0.066,1,1,0,5,16.2,4,.239,.485
+Drew Romo SHB,Batting Ninth ​,="9-66",.136,.273,0.137,2,3,0,5,22.1,11,.260,.533
+Jacob Gonzalez LHB,Batting Ninth ​,="10-27",.370,.556,0.186,1,2,0,8,12.9,3,.433,.989

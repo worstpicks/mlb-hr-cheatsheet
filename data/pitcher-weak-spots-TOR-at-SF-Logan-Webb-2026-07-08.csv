@@ -1,0 +1,31 @@
+Matchup,TOR @ SF
+Pitcher,Logan Webb
+Pitcher Team,SF
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,13.2,0.73,="9-47",.191,.362,0.171,2,0,1,6,36.7,1,.208,.570
+Batting Second,10.2,1.41,="9-41",.220,.317,0.097,1,1,0,2,20.8,6,.333,.650
+Batting Third,11.2,1.03,="9-41",.220,.268,0.048,0,0,1,0,22.7,3,.273,.541
+Batting Fourth,9.2,1.45,="11-39",.282,.385,0.103,1,1,0,2,19.0,3,.333,.718
+Batting Fifth,9.1,1.61,="12-39",.308,.513,0.205,0,6,1,4,23.8,3,.357,.870
+Batting Sixth,12.0,0.50,="5-39",.128,.308,0.180,2,1,0,6,14.6,1,.171,.479
+Batting Seventh,9.1,1.07,="8-37",.216,.216,0.000,0,0,0,5,12.5,2,.275,.491
+Batting Eighth,8.2,1.62,="10-34",.294,.353,0.059,0,2,0,5,15.4,4,.385,.738
+Batting Ninth,7.2,1.70,="12-35",.343,.486,0.143,1,2,0,5,13.5,1,.361,.847
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-240",.221,.375,0.154,8,11,1,20,20.4,28,.309,.684
+Nathan Lukes LHB,Batting Second ​,="20-80",.250,.338,0.088,2,1,0,5,14.3,7,.315,.653
+Yohendrick Pinango LHB,Batting Second ​,="10-30",.333,.567,0.234,2,1,0,5,15.6,2,.375,.942
+Vladimir Guerrero Jr. RHB,Batting Third ​,="67-249",.269,.341,0.072,2,12,0,27,12.3,29,.349,.690
+Kazuma Okamoto RHB,Batting Fourth ​,="33-154",.214,.383,0.169,8,2,0,28,31.2,15,.289,.672
+Alejandro Kirk RHB,Batting Fifth ​,="7-38",.184,.368,0.184,2,1,0,3,14.3,4,.262,.630
+Daulton Varsho LHB,Batting Sixth ​,="21-82",.256,.415,0.159,2,7,0,7,17.0,6,.307,.722
+Luis Urias RHB,Batting Seventh ​,="5-10",.500,.900,0.400,1,1,0,2,16.7,2,.583,1.483
+Myles Straw RHB,Batting Seventh ​,="8-39",.205,.333,0.128,1,2,0,7,15.2,5,.283,.616
+Ernie Clement RHB,Batting Seventh ​,="24-74",.324,.419,0.095,1,4,0,7,7.9,2,.342,.761
+Sean Keys LHB,Batting Seventh ​,="2-9",.222,.222,0.000,0,0,0,2,33.3,0,.222,.444
+Andres Gimenez LHB,Batting Eighth ​,="33-138",.239,.399,0.160,5,7,0,21,18.7,5,.289,.688
+Jonatan Clase SHB,Batting Eighth ​,="2-4",.500,1.250,0.750,1,0,0,3,25.0,0,.500,1.750
+Brandon Valenzuela SHB,Batting Ninth ​,="19-85",.224,.471,0.247,6,3,0,13,24.5,13,.327,.798

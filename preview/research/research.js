@@ -1526,14 +1526,48 @@
         return true;
     }
 
+    function parkLookupHasData(lk) {
+        return !!(lk && (Object.keys(lk.by_game || {}).length || Object.keys(lk.by_venue || {}).length));
+    }
+
+    function isoShiftDays(date, deltaDays) {
+        const parts = String(date).split("-").map((n) => parseInt(n, 10));
+        if (parts.length !== 3 || parts.some(Number.isNaN)) return null;
+        const d = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+        d.setUTCDate(d.getUTCDate() + deltaDays);
+        return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`;
+    }
+
+    // When today's weather-adjusted file is missing, reuse a recent file's stadium
+    // baseline (weather stripped) so the Park factor still populates by venue.
+    function stadiumBaselineLookup(lookup, targetDate, sourceDate) {
+        const toBaseline = (entry) => {
+            if (!entry) return entry;
+            const out = { ...entry };
+            if (entry.stadium_pct != null) out.hr_pct = entry.stadium_pct;
+            if (entry.lhb_stadium_pct != null) out.park_lhb_pct = entry.lhb_stadium_pct;
+            if (entry.rhb_stadium_pct != null) out.park_rhb_pct = entry.rhb_stadium_pct;
+            out.weather_pct = null;
+            return out;
+        };
+        const mapObj = (obj) =>
+            Object.fromEntries(Object.entries(obj || {}).map(([k, v]) => [k, toBaseline(v)]));
+        return {
+            ...lookup,
+            by_game: mapObj(lookup.by_game),
+            by_venue: mapObj(lookup.by_venue),
+            source_date: targetDate,
+            stadium_only: true,
+            source_label: `Stadium baseline (from ${sourceDate})`,
+            fallback_from: sourceDate,
+        };
+    }
+
     async function ensureParkFactorsLookup(date) {
         if (parkFactorsLookup && parkFactorsLookupDate === date) return parkFactorsLookup;
         const res = await fetchDataJson(`park-factors-${date}.json`);
         const fileLookup = res.data;
-        if (
-            fileLookup &&
-            (Object.keys(fileLookup.by_game || {}).length || Object.keys(fileLookup.by_venue || {}).length)
-        ) {
+        if (parkLookupHasData(fileLookup)) {
             parkFactorsLookup = fileLookup;
             parkFactorsLookupDate = date;
             return parkFactorsLookup;
@@ -1542,7 +1576,7 @@
             const apiRes = await fetch(`/api/park-factors?date=${encodeURIComponent(date)}`);
             if (apiRes.ok) {
                 const data = await apiRes.json();
-                if (Object.keys(data.by_game || {}).length || Object.keys(data.by_venue || {}).length) {
+                if (parkLookupHasData(data)) {
                     parkFactorsLookup = data;
                     parkFactorsLookupDate = date;
                     return parkFactorsLookup;
@@ -1550,6 +1584,17 @@
             }
         } catch (err) {
             console.warn("park-factors", err);
+        }
+        // Fallback: probe recent prior dates and use their stadium baseline by venue.
+        for (let back = 1; back <= 14; back += 1) {
+            const priorDate = isoShiftDays(date, -back);
+            if (!priorDate) break;
+            const priorRes = await fetchDataJson(`park-factors-${priorDate}.json`);
+            if (parkLookupHasData(priorRes.data)) {
+                parkFactorsLookup = stadiumBaselineLookup(priorRes.data, date, priorDate);
+                parkFactorsLookupDate = date;
+                return parkFactorsLookup;
+            }
         }
         parkFactorsLookup = fileLookup || null;
         parkFactorsLookupDate = date;

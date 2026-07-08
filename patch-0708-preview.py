@@ -424,12 +424,12 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
             straight_names = trial
             break
 
-# 7/8: Hunter Goodman #1 O0.5 composite vs Sasaki 🧤 (bum, park +14%); Juan Soto best O1.5
-# multi-HR lane vs Cruz (different game). Both are the top available props by the model.
-_o05_lock = rows_by_plain_early.get("Hunter Goodman")
-_o15_lock = rows_by_plain_early.get("Juan Soto")
+# 7/8 (client pick): Garrett Mitchell O0.5 vs McGreevy (MIL @ STL); Kyle Karros O1.5 vs
+# Sasaki 🧤 (COL @ LAD, 3 HR / 3 near multi-HR profile). Different games.
+_o05_lock = rows_by_plain_early.get("Garrett Mitchell")
+_o15_lock = rows_by_plain_early.get("Kyle Karros")
 if _o05_lock and _o15_lock and _o05_lock["game_key"] != _o15_lock["game_key"]:
-    _o05_ok = _o05_lock in straight_o05_pool(straight_rows, strict=True)
+    _o05_ok = _o05_lock in straight_o05_pool(straight_rows, strict=False)
     _o15_ok = (
         _o15_lock["hr"] >= 2
         and _o15_lock["near"] >= 2

@@ -3158,6 +3158,14 @@ html.theme-light .rs-explore__input {
     color: #f5f3ff;
     min-width: 52px;
 }
+.rs-goblin-table__split {
+    color: #d8b4fe;
+    white-space: nowrap;
+    min-width: 68px;
+}
+html.theme-light .rs-goblin-table__split { color: #7e22ce; }
+.rs-goblin-stat--split .rs-goblin-stat__val { color: #d8b4fe; white-space: nowrap; }
+html.theme-light .rs-goblin-stat--split .rs-goblin-stat__val { color: #7e22ce; }
 .rs-goblins__cards { display: none; }
 .rs-goblins__list {
     display: block;

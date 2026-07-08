@@ -5210,12 +5210,22 @@
 
     function goblinRowStats(entry) {
         const stats = hitterStats(entry.row);
+        const batHand = effectiveBatterHand(entry.row?.hand, entry.pitcher?.throws);
+        const ps = pitcherStats(entry.pitcher);
         return {
             mix: stats.mixPlus ?? resolveMixPlusForEntry(entry, stats),
             boom: stats.boomPct,
             park: entry.game?.parkHrPct,
             hardHit: stats.hardHitPct,
+            batHand,
+            splitRisk: handDingerSplitPct(ps, batHand),
         };
+    }
+
+    function fmtGoblinSplit(s) {
+        const risk = s.splitRisk;
+        if (risk == null || Number.isNaN(Number(risk))) return `${s.batHand} · —`;
+        return `${s.batHand} · ${Math.round(Number(risk))}%`;
     }
 
     function wireGoblinJump(entries, root) {
@@ -5273,6 +5283,7 @@
                     <td class="rs-goblin-table__stat">${fmtPct(s.boom)}</td>
                     <td class="rs-goblin-table__stat">${fmtSignedPct(s.park)}</td>
                     <td class="rs-goblin-table__stat">${fmtPct(s.hardHit)}</td>
+                    <td class="rs-goblin-table__stat rs-goblin-table__split">${fmtGoblinSplit(s)}</td>
                 </tr>`;
             })
             .join("");
@@ -5291,6 +5302,7 @@
                         <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Boom</span><span class="rs-goblin-stat__val">${fmtPct(s.boom)}</span></span>
                         <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Park</span><span class="rs-goblin-stat__val">${fmtSignedPct(s.park)}</span></span>
                         <span class="rs-goblin-stat"><span class="rs-goblin-stat__label">Hard Hit</span><span class="rs-goblin-stat__val">${fmtPct(s.hardHit)}</span></span>
+                        <span class="rs-goblin-stat rs-goblin-stat--split"><span class="rs-goblin-stat__label">Split (vs SP)</span><span class="rs-goblin-stat__val">${fmtGoblinSplit(s)}</span></span>
                     </span>
                 </button>`;
             })
@@ -5308,6 +5320,7 @@
                             <th>Boom</th>
                             <th>Park</th>
                             <th>Hard Hit</th>
+                            <th>Split (vs SP)</th>
                         </tr>
                     </thead>
                     <tbody>${tableRows}</tbody>

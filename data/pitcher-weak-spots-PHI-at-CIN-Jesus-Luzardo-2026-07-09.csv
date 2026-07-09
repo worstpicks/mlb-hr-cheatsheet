@@ -1,0 +1,30 @@
+Matchup,PHI @ CIN
+Pitcher,Jesus Luzardo
+Pitcher Team,PHI
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,13.0,1.23,="11-50",.220,.340,0.120,2,0,0,8,29.1,5,.291,.631
+Batting Second,13.0,1.23,="10-47",.213,.426,0.213,2,2,1,3,28.3,6,.302,.728
+Batting Third,11.1,1.50,="10-46",.217,.261,0.044,0,2,0,1,30.2,7,.321,.582
+Batting Fourth,14.0,0.93,="11-50",.220,.340,0.120,1,3,0,4,34.0,2,.264,.604
+Batting Fifth,14.0,0.64,="7-48",.146,.229,0.083,1,1,0,5,27.5,2,.176,.405
+Batting Sixth,11.1,1.15,="12-44",.273,.364,0.091,1,1,0,4,23.4,1,.298,.662
+Batting Seventh,8.1,1.92,="12-37",.324,.486,0.162,1,3,0,6,25.6,4,.419,.905
+Batting Eighth,7.2,2.22,="15-37",.405,.541,0.136,1,2,0,7,24.4,2,.450,.991
+Batting Ninth,9.1,1.50,="10-35",.286,.400,0.114,0,4,0,5,34.1,4,.366,.766
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+TJ Friedl LHB,Batting First ​,="26-137",.190,.277,0.087,2,6,0,7,22.6,12,.270,.547
+JJ Bleday LHB,Batting Second ​,="19-99",.192,.444,0.252,7,4,0,14,22.6,13,.289,.733
+Matt McLain RHB,Batting Second ​,="23-118",.195,.297,0.102,2,6,0,9,27.3,19,.317,.614
+Elly De La Cruz SHB,Batting Third ​,="49-168",.292,.518,0.226,10,8,0,29,28.0,17,.355,.873
+Sal Stewart RHB,Batting Fourth ​,="56-203",.276,.502,0.226,11,13,0,37,20.5,28,.363,.865
+Eugenio Suarez RHB,Batting Fifth ​,="31-144",.215,.382,0.167,6,6,0,22,32.3,13,.278,.660
+Nathaniel Lowe LHB,Batting Fifth ​,="18-81",.222,.469,0.247,5,5,0,10,32.6,8,.292,.761
+Spencer Steer RHB,Batting Sixth ​,="23-111",.207,.342,0.135,4,3,0,7,27.3,13,.305,.647
+Noelvi Marte RHB,Batting Sixth ​,="9-45",.200,.444,0.244,3,2,0,8,25.5,2,.234,.678
+Ivan Johnson SHB,Batting Seventh ​,="0-3",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Jose Trevino RHB,Batting Eighth ​,="13-52",.250,.346,0.096,1,2,0,7,12.7,1,.264,.610
+Tyler Stephenson RHB,Batting Eighth ​,="27-96",.281,.448,0.167,4,4,0,12,18.0,14,.369,.817
+Edwin Arroyo SHB,Batting Ninth ​,="17-59",.288,.339,0.051,0,3,0,3,15.4,3,.328,.667

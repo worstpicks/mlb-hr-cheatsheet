@@ -103053,7 +103053,7 @@
     "source": "rotowire",
     "games": 13,
     "pitchersFilled": 2,
-    "lineupsFilled": 26,
+    "lineupsFilled": 25,
     "pageDate": "July 9, 2026",
     "sheetDate": "2026-07-09"
   },
@@ -103068,8 +103068,12 @@
       "startTime": "2026-07-09T16:35:00Z",
       "venue": "PNC Park",
       "venueId": 31,
-      "status": "Scheduled",
-      "mlbWeather": null,
+      "status": "Pre-Game",
+      "mlbWeather": {
+        "condition": "Partly Cloudy",
+        "temp": "84",
+        "wind": "6 mph, Out To LF"
+      },
       "awayPitcher": {
         "id": 693821,
         "name": "Bryce Elder",
@@ -103189,12 +103193,11 @@
       "awayLineup": [
         {
           "id": 671739,
-          "name": "Michael Harris",
+          "name": "Michael Harris II",
           "order": 1,
           "position": "CF",
           "hand": "L",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 84,
             "hr": 3,
@@ -103226,6 +103229,7 @@
             "mixBest": "ST",
             "mixWorst": "CU",
             "mixPitches": 7,
+            "nearHr": 1,
             "statWindow": "last20g",
             "slg": 0.519,
             "launchAngle": 7.6,
@@ -103257,8 +103261,7 @@
           "order": 2,
           "position": "2B",
           "hand": "S",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 87,
             "hr": 4,
@@ -103322,8 +103325,7 @@
           "order": 3,
           "position": "1B",
           "hand": "L",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 86,
             "hr": 4,
@@ -103387,8 +103389,7 @@
           "order": 4,
           "position": "C",
           "hand": "L",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 85,
             "hr": 2,
@@ -103448,12 +103449,11 @@
         },
         {
           "id": 643289,
-          "name": "Mauricio Dubon",
+          "name": "Mauricio Dub\u00f3n",
           "order": 5,
           "position": "LF",
           "hand": "R",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 86,
             "hr": 3,
@@ -103485,7 +103485,6 @@
             "mixBest": "CU",
             "mixWorst": "FF",
             "mixPitches": 7,
-            "nearHr": 0,
             "statWindow": "last20g",
             "slg": 0.506,
             "launchAngle": 12.2,
@@ -103517,8 +103516,7 @@
           "order": 6,
           "position": "DH",
           "hand": "L",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 60,
             "hr": 0,
@@ -103582,8 +103580,7 @@
           "order": 7,
           "position": "3B",
           "hand": "R",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 79,
             "hr": 1,
@@ -103647,8 +103644,7 @@
           "order": 8,
           "position": "RF",
           "hand": "L",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 58,
             "hr": 2,
@@ -103712,8 +103708,7 @@
           "order": 9,
           "position": "SS",
           "hand": "L",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 20,
             "hr": 0,
@@ -104885,7 +104880,7 @@
         "reason": "outdoor_grass_skip_roof",
         "highVariance": false
       },
-      "lineupStatus": "projected",
+      "lineupStatus": "partial",
       "hrModel": {
         "refAlleyFt": 377.0,
         "daDeltaFt": 1440,
@@ -127146,5 +127141,5 @@
       }
     }
   ],
-  "fetched_at": "2026-07-09T09:32:06"
+  "fetched_at": "2026-07-09T09:40:26"
 }

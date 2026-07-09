@@ -424,10 +424,10 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
             straight_names = trial
             break
 
-# 7/9: Josh Bell #1 O0.5 composite vs Williams 🧤 (CLE @ MIN); Matt Olson best O1.5
-# multi-HR lane in a different game (ATL @ PIT vs Keller). Top different-game pair.
+# 7/9 (client pick #8): Josh Bell O0.5 vs Williams 🧤 (CLE @ MIN);
+# Spencer Torkelson O1.5 vs Perkins (ATH @ DET). Different games.
 _o05_lock = rows_by_plain_early.get("Josh Bell")
-_o15_lock = rows_by_plain_early.get("Matt Olson")
+_o15_lock = rows_by_plain_early.get("Spencer Torkelson")
 if _o05_lock and _o15_lock and _o05_lock["game_key"] != _o15_lock["game_key"]:
     _o05_ok = _o05_lock in straight_o05_pool(straight_rows, strict=True)
     _o15_ok = (

@@ -66,6 +66,7 @@ RAW_PROPS = [
     "Jarren Duran⭐",
     "Kyle Teel💎",
     "Junior Perez",
+    "Munetaka Murakami⭐",
     "Nick Kurtz⭐",
     "Shea Langeliers⭐",
     "Brandon Nimmo",
@@ -109,7 +110,23 @@ ALIASES = {
     "Fernando Tatis Jr.": "Fernando Tatis Jr.",
 }
 
-MANUAL_BATTER_ROWS: dict[str, dict] = {}
+MANUAL_BATTER_ROWS: dict[str, dict] = {
+    # Missing from Civale hr-matchups export; L5 form from prior CWS start + vs-Civale weak-spot context.
+    "munetaka murakami": {
+        "game": "ATH @ CWS",
+        "team": "CWS",
+        "opp_sp": "Civale",
+        "row": {
+            "name": "Munetaka Murakami",
+            "hand": "L",
+            "odds": "N/A",
+            "hr": 2,
+            "near": 2,
+            "ev": 101.1,
+            "barrel": 20.0,
+        },
+    },
+}
 
 BATTER_GAME_OVERRIDES: dict[str, str] = {}
 

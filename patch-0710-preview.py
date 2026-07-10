@@ -811,6 +811,7 @@ rows_by_plain = {r["name_plain"]: r for r in rows}
 
 # Favorite 3-leg: user ⭐ only — ranked by attack lane on today's slate.
 _fav3_pick_order = [
+    "Munetaka Murakami",
     "Riley Greene",
     "Kyle Schwarber",
     "Ben Rice",

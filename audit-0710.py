@@ -10,7 +10,7 @@ html = (ROOT / "preview" / "index.html").read_text(encoding="utf-8")
 errors: list[str] = []
 
 EXPECTED_GAMES = 15
-EXPECTED_PROPS = 78
+EXPECTED_PROPS = 79
 ZONE_MIN = min(EXPECTED_PROPS, max(45, EXPECTED_PROPS - 20))
 
 if 'sheet-date" content="2026-07-10"' not in html:

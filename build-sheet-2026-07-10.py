@@ -23,6 +23,7 @@ FAVS = {
     "Max Kepler (L)",
     "Mike Trout (R)",
     "Mookie Betts (R)",
+    "Munetaka Murakami (L)",
     "Nick Kurtz (L)",
     "Pete Crow-Armstrong (L)",
     "Riley Greene (L)",
@@ -98,6 +99,7 @@ PLAYER_TEAMS = {
     "Mike Yastrzemski (L)": "ATL",
     "Mitch Garver (R)": "SEA",
     "Mookie Betts (R)": "LAD",
+    "Munetaka Murakami (L)": "CWS",
     "Nelson Velazquez (R)": "STL",
     "Nick Kurtz (L)": "ATH",
     "Pete Alonso (R)": "BAL",
@@ -177,6 +179,7 @@ games = [
         "rows": [
             row("Kyle Teel", "L", "+279", 89, "🌕 💣 💎", ["vs Civale"], """Worst Pickz Hidden Gem. 1 HR, 1 near-HR, 93.5 mph EV. Civale LHB split +1.22, HR risk 1.11.""", blast="good"),
             row("Junior Perez", "R", "N/A", 86, "🚀", ["vs Civale"], """1 HR, 1 near-HR, 100.9 mph EV. Civale RHB split +0.50, HR risk 1.11.""", blast="good"),
+            row("Munetaka Murakami", "L", "N/A", 94, "🚀 ⭐ 🌕 💣", ["vs Civale"], """Worst Pickz Favorite. 2 HR, 2 near-HR, 101.1 mph EV. Civale LHB split +1.22, HR risk 1.11.""", blast="high"),
             row("Nick Kurtz", "L", "+137", 71, "⭐", ["vs Burke"], """Worst Pickz Favorite. 1 HR, 2 near-HR, 96.9 mph EV. Burke LHB split +0.08, HR risk 0.23.""", blast="good"),
             row("Shea Langeliers", "R", "+155", 64, "⭐", ["vs Burke"], """Worst Pickz Favorite. 0 HR, 94.7 mph EV. Burke RHB split +0.25, HR risk 0.23. limited recent HR events.""", blast="good"),
         ],

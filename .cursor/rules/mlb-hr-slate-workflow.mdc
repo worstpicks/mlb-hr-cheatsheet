@@ -172,16 +172,17 @@ hits_parlay_legs = select_hits_parlay(rows, row_high_whiff=row_high_whiff, avoid
 hits_parlay_legs = fill_hits_parlay(rows, hits_parlay_legs, row_high_whiff=row_high_whiff)
 ```
 
-### Pick rules (current rubric)
+### Pick rules (current rubric — revised Jul 2026)
 
 | Priority | Signal |
 |----------|--------|
-| **1 — Zone fit** | `zone_score` (main), plus `zone_contact`, `zone_hard_hit`, `zone_barrel` |
-| **2 — Contact** | Recent HR/near-HR, EV, barrel; bonus for low K%/whiff |
-| **3 — Matchup** | Split + park (light weight) |
-| **Exclude** | High-whiff batters (`row_high_whiff(..., for_hits=True)` / Whiff pill / WHIFF% or K% ≥ 26) |
+| **1 — Contact zone** | `zone_contact` (main), then `zone_score`, `zone_hard_hit`, light `zone_barrel` |
+| **2 — Contact form** | EV / hard-hit / light recent events; bonus for low K%/whiff (not HR chase) |
+| **3 — Matchup** | Soft split edge + park (mild negative splits allowed) |
+| **Exclude** | High-whiff batters (`row_high_whiff(..., for_hits=True)` / Whiff pill / WHIFF% or K% ≥ 26); extreme negative splits (&lt; −0.85) |
+| **Coverage** | Max 2 legs per game and per team so the ticket spans the slate |
 
-**Pool:** prefer strong zone fit (`zone_score` ≥ 18, or zone + zone-contact combo). Relax thresholds only if fewer than 11 legs qualify. **Backfill to 11** with zone-fit names before contact-only fallbacks.
+**Pool:** prefer zone-contact / zone-fit across the full sheet (`split` ≥ −0.85). Mild/deep platoon headwinds stay eligible with a soft rank penalty. Relax thresholds only if fewer than 11 legs qualify. **Backfill to 11** with contact/zone names before form-only fallbacks.
 
 When bootstrapping a new daily patch, copy the hits block from **`patch-0614-preview.py`**, not older archives that still inline the contact-first formula.
 
@@ -225,19 +226,19 @@ annotate_hr_zone_ranks(rows, park_pct_fn=effective_park_pct)
 | **2 — HR power** | Recent HR/near-HR, EV, barrels |
 | **3 — Matchup** | Split, pitcher HR risk, park/weather |
 
-Hits parlay uses **`goblin_hits_parlay.py`** (contact-weighted zone fit). HR boards use **`goblin_hr_zone_fit.py`** (HR-weighted zone fit). Do not mix the two modules' formulas.
+Hits parlay uses **`goblin_hits_parlay.py`** (contact-first zone fit + slate coverage). HR boards use **`goblin_hr_zone_fit.py`** (HR-weighted zone fit). Do not mix the two modules' formulas.
 
 ## Rest of slate checklist (after CSV import)
 
 0. **Straights of the Day** — update `STRAIGHT_OF_DAY_CARD` in `patch-YYYY-MM-DD-preview.py`, resync, verify (Step 1 above)
-1. `python build-sheet-YYYY-MM-DD.py` → `python patch-XXXX-preview.py`
+1. `python build-sheet-YYYY-MM-DD.py` → `python patch-XXXX-preview.py` (auto-runs `post_patch.sync_research_tab_after_patch` → `research-YYYY-MM-DD.json` + `park-factors-YYYY-MM-DD.json`)
 2. `python validate-index-matchups.py` — zero matchup errors
 3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)
 4. Goblin parlays distinct — 3 Leg vs 2 Leg vs Favorite 3 Leg share no batters; **2 Leg HR must not reuse Straights of the Day** (`python goblin_parlay_rules.py`)
 5. **Top 5 diversification** — **Top 5 HR Tickets** and **Top 5 Weather Heavy HR Plays** must each have **at most 2 players from the same game** (skip lower-ranked same-game rows rather than stacking one matchup). Lists must stay **distinct** from each other (no duplicate names across the two charts). Weather-heavy rows require **park ≥ +5%**, **non-negative split**, and real HR form — never stack negative-platoon names just for weather rank.
 6. **Summary quality gates** — Top 5 HR Tickets, Weather Heavy, longshots (+700), and hits parlay must pass `summary_ticket_ok` / `weather_play_ok` / `longshot_ok` filters in the patch script (reject 0/0 split-risk lanes and negative platoon weather plays). Run `python verify-summary-YYYY-MM-DD.py` before push (e.g. `verify-summary-0608.py` for June 8).
 7. **Hits parlay** — `goblin_hits_parlay.py`. **Straights + Goblin HR boards** — `goblin_hr_zone_fit.py`. Do **not** copy old inline rank formulas from pre–June 14 patch files.
-8. `python verify-deploy.py` after audits — **stop here unless user explicitly requests push live**
+8. `python verify-deploy.py` after audits — confirms Research tab JSON exists for the sheet date — **stop here unless user explicitly requests push live**
 9. **Push live (user must ask)** — only then: `git add` relevant files → `git commit` → `git push origin main`. Do not push as part of audit, fix, or “task complete” unless the user said to.
 
 ## Damage Window — Homerun Form (ship with next slate push)

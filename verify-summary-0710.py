@@ -88,9 +88,21 @@ if len(longshots) < longshot_min:
 if len(longshots) > 4:
     errors.append(f"Longshots: expected at most 4, got {len(longshots)}")
 
+from goblin_hits_parlay import SPLIT_HARD_FLOOR
+
 for r in hits:
-    if r["split"] < 0.0:
-        errors.append(f"Hits parlay negative split: {r['name_plain']}")
+    if r["split"] < SPLIT_HARD_FLOOR:
+        errors.append(
+            f"Hits parlay extreme negative split ({r['split']:+.2f} < {SPLIT_HARD_FLOOR}): {r['name_plain']}"
+        )
+    if patch_globals["row_high_whiff"](r, for_hits=True):
+        errors.append(f"Hits parlay high-whiff leg: {r['name_plain']}")
+if len(hits) != 11:
+    errors.append(f"Hits parlay: expected 11 legs, got {len(hits)}")
+per_game = Counter(r.get("game_key") for r in hits)
+over_game = [g for g, c in per_game.items() if c > 2]
+if over_game:
+    errors.append(f"Hits parlay >2 legs in game(s): {over_game}")
 
 wh_block = text.split("Top 5 Weather Heavy HR Plays")[1].split("Best longshot")[0]
 if "split -" in wh_block:

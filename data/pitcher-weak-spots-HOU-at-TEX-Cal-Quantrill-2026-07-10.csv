@@ -1,0 +1,30 @@
+Matchup,HOU @ TEX
+Pitcher,Cal Quantrill
+Pitcher Team,TEX
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="4-18",.222,.278,0.056,0,1,0,0,9.5,.333,.611
+Batting Second,="2-17",.118,.118,0.000,0,0,0,0,23.8,.286,.404
+Batting Third,="3-17",.176,.353,0.177,1,0,0,1,10.5,.263,.616
+Batting Fourth,="4-17",.235,.412,0.177,1,0,0,4,22.2,.278,.690
+Batting Fifth,="4-19",.211,.263,0.052,0,1,0,1,26.3,.211,.474
+Batting Sixth,="5-18",.278,.500,0.222,1,1,0,4,14.3,.381,.881
+Batting Seventh,="5-18",.278,.333,0.055,0,1,0,1,11.1,.278,.611
+Batting Eighth,="4-16",.250,.500,0.250,1,1,0,6,5.9,.294,.794
+Batting Ninth,="4-12",.333,.583,0.250,1,0,0,3,18.8,.438,1.021
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="31-124",.250,.460,0.210,6,6,1,12,21.3,15,.333,.793
+Yordan Alvarez LHB,Batting Second ​,="95-302",.315,.603,0.288,24,15,0,59,17.5,50,.418,1.021
+Isaac Paredes RHB,Batting Third ​,="42-160",.263,.388,0.125,4,8,0,20,14.4,15,.343,.731
+Christian Walker RHB,Batting Fourth ​,="43-180",.239,.478,0.239,12,7,0,29,21.4,16,.313,.791
+LaMonte Wade Jr. LHB,Batting Fifth ​,="0-13",.000,.000,0.000,0,0,0,0,42.9,1,.071,.071
+Braden Shewmake LHB,Batting Sixth ​,="5-26",.192,.269,0.077,0,2,0,3,17.2,2,.241,.510
+Yainer Diaz RHB,Batting Sixth ​,="15-67",.224,.284,0.060,0,4,0,3,18.8,2,.246,.530
+Cam Smith RHB,Batting Sixth ​,="25-123",.203,.358,0.155,5,4,0,9,24.8,14,.286,.644
+Zach Dezenzo RHB,Batting Seventh ​,="2-18",.111,.333,0.222,1,1,0,2,40.0,2,.200,.533
+Taylor Trammell LHB,Batting Eighth ​,="5-22",.227,.409,0.182,1,1,0,2,33.3,2,.292,.701
+Nick Allen RHB,Batting Eighth ​,="8-37",.216,.270,0.054,0,2,0,6,33.3,2,.244,.514
+Brice Matthews RHB,Batting Eighth ​,="10-64",.156,.219,0.063,1,1,0,4,31.4,4,.206,.425
+Christian Vazquez RHB,Batting Ninth ​,="30-126",.238,.333,0.095,2,6,0,19,17.3,9,.287,.620

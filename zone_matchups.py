@@ -19,6 +19,9 @@ ZONE_PITCHER_ALIASES: dict[str, list[str]] = {
     "canning": ["marquez"],
     "quantrill": ["corniell"],
     "corniell": ["quantrill"],
+    # 7/10 ATH @ CWS: zone export still labeled Jacob Lopez; sheet SP is Aaron Civale
+    "civale": ["lopez"],
+    "lopez": ["civale"],
 }
 
 

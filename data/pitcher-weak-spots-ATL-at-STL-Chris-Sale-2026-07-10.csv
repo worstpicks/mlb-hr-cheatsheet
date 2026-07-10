@@ -1,0 +1,30 @@
+Matchup,ATL @ STL
+Pitcher,Chris Sale
+Pitcher Team,ATL
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.2,1.59,="14-46",.304,.413,0.109,1,2,0,4,14.3,3,.347,.760
+Batting Second,9.1,1.93,="15-44",.341,.386,0.045,0,2,0,0,20.8,3,.396,.782
+Batting Third,10.2,1.50,="14-43",.326,.581,0.255,3,2,0,5,27.7,2,.348,.929
+Batting Fourth,11.1,0.97,="6-39",.154,.231,0.077,1,0,0,3,30.4,5,.261,.492
+Batting Fifth,11.1,0.79,="7-41",.171,.268,0.097,1,1,0,5,42.2,2,.244,.512
+Batting Sixth,10.1,1.06,="10-40",.250,.275,0.025,0,1,0,2,30.2,1,.302,.577
+Batting Seventh,11.0,0.73,="4-35",.114,.200,0.086,1,0,0,5,31.7,4,.244,.444
+Batting Eighth,9.2,1.14,="8-35",.229,.343,0.114,1,1,0,3,28.9,3,.289,.632
+Batting Ninth,10.1,0.48,="4-33",.121,.152,0.031,0,1,0,1,34.3,1,.171,.323
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="89-336",.265,.408,0.143,13,9,0,36,15.4,38,.360,.768
+Ivan Herrera RHB,Batting Second ​,="83-331",.251,.399,0.148,11,14,1,40,16.2,50,.386,.785
+Alec Burleson LHB,Batting Third ​,="79-281",.281,.502,0.221,14,18,1,48,15.4,26,.349,.851
+Nelson Velazquez RHB,Batting Fourth ​,="11-38",.289,.605,0.316,3,3,0,10,13.3,5,.378,.983
+Jordan Walker RHB,Batting Fourth ​,="68-242",.281,.517,0.236,15,12,0,53,27.2,18,.332,.849
+Lars Nootbaar LHB,Batting Fifth ​,="16-65",.246,.354,0.108,1,4,0,5,25.0,10,.342,.696
+Masyn Winn RHB,Batting Sixth ​,="63-237",.266,.367,0.101,4,8,2,33,19.4,23,.340,.707
+Bryan Torres LHB,Batting Seventh ​,="8-26",.308,.500,0.192,1,0,1,3,10.3,2,.357,.857
+Jose Fermin RHB,Batting Seventh ​,="12-48",.250,.333,0.083,0,4,0,5,11.8,2,.275,.608
+Jimmy Crooks LHB,Batting Seventh ​,="4-31",.129,.258,0.129,1,1,0,4,20.0,3,.229,.487
+Nathan Church LHB,Batting Seventh ​,="33-137",.241,.394,0.153,5,6,0,17,15.3,5,.271,.665
+Pedro Pages RHB,Batting Eighth ​,="28-118",.237,.364,0.127,3,6,0,9,25.6,5,.278,.642
+Blaze Jordan RHB,Batting Eighth ​,="10-51",.196,.235,0.039,0,2,0,10,13.8,3,.224,.459

@@ -1,0 +1,31 @@
+Matchup,ATH @ CWS
+Pitcher,Aaron Civale
+Pitcher Team,ATH
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="15-43",.349,.558,0.209,1,4,1,2,11.4,.341,.899
+Batting Second,="11-35",.314,.657,0.343,4,0,0,5,15.9,.442,1.099
+Batting Third,="14-38",.368,.579,0.211,1,5,0,6,15.0,.400,.979
+Batting Fourth,="11-34",.324,.500,0.176,1,3,0,7,10.5,.395,.895
+Batting Fifth,="8-32",.250,.469,0.219,2,1,0,4,17.6,.265,.734
+Batting Sixth,="10-27",.370,.556,0.186,1,2,0,1,12.5,.452,1.008
+Batting Seventh,="6-31",.194,.419,0.225,2,1,0,5,25.0,.219,.638
+Batting Eighth,="8-29",.276,.483,0.207,2,0,0,5,18.8,.344,.827
+Batting Ninth,="9-30",.300,.600,0.300,2,3,0,4,25.8,.323,.923
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="47-161",.292,.391,0.099,3,7,0,14,17.0,14,.387,.778
+Chase Meidroth RHB,Batting First ​,="32-119",.269,.429,0.160,4,7,0,10,23.8,11,.331,.760
+Randal Grichuk RHB,Batting Second ​,="9-35",.257,.629,0.372,3,4,0,3,24.3,2,.297,.926
+Munetaka Murakami LHB,Batting Second ​,="38-152",.250,.533,0.283,13,4,0,29,33.5,29,.374,.907
+Andrew Benintendi LHB,Batting Third ​,="19-73",.260,.466,0.206,4,3,0,12,21.0,8,.333,.799
+Miguel Vargas RHB,Batting Third ​,="38-167",.228,.443,0.215,9,9,0,24,18.5,28,.347,.790
+Kyle Teel LHB,Batting Third ​,="5-22",.227,.545,0.318,2,1,0,9,33.3,2,.292,.837
+Colson Montgomery LHB,Batting Fourth ​,="53-227",.233,.502,0.269,17,10,0,39,31.9,20,.315,.817
+Junior Perez RHB,Batting Fifth ​,="0-9",.000,.000,0.000,0,0,0,0,44.4,0,.000,.000
+Braden Montgomery SHB,Batting Sixth ​,="8-37",.216,.351,0.135,1,2,0,4,24.4,4,.293,.644
+Tristan Peters LHB,Batting Eighth ​,="30-106",.283,.500,0.217,4,7,2,20,15.1,10,.342,.842
+Luisangel Acuna RHB,Batting Ninth ​,="13-63",.206,.270,0.064,1,1,0,5,15.7,4,.261,.531
+Drew Romo SHB,Batting Ninth ​,="9-68",.132,.265,0.133,2,3,0,5,21.5,11,.253,.518
+Jacob Gonzalez LHB,Batting Ninth ​,="10-27",.370,.556,0.186,1,2,0,8,12.9,3,.433,.989

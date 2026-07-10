@@ -1,0 +1,30 @@
+Matchup,NYY @ WSH
+Pitcher,Carson Palmquist
+Pitcher Team,WSH
+Opposing Team,NYY
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.0,1.00,="1-4",.250,.250,0.000,0,0,0,0,25.0,0,.250,.500
+Batting Second,0.1,9.00,="3-4",.750,1.000,0.250,0,1,0,0,25.0,0,.750,1.750
+Batting Third,1.1,0.75,="1-5",.200,.200,0.000,0,0,0,0,40.0,0,.200,.400
+Batting Fourth,1.0,1.00,="0-3",.000,.000,0.000,0,0,0,0,25.0,1,.250,.250
+Batting Fifth,1.1,0.00,="0-3",.000,.000,0.000,0,0,0,0,66.7,0,.000,.000
+Batting Sixth,0.0,-.--,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,1,1.000,2.000
+Batting Seventh,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.500,.500
+Batting Eighth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,0,.500,1.000
+Batting Ninth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,0,.500,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Paul Goldschmidt RHB,Batting First ​,="26-88",.295,.568,0.273,6,4,1,15,19.0,11,.380,.948
+Trent Grisham LHB,Batting First ​,="38-192",.198,.339,0.141,5,10,1,20,16.3,32,.308,.647
+Ben Rice LHB,Batting Second ​,="48-176",.273,.580,0.307,14,8,2,34,20.9,18,.342,.922
+Cody Bellinger LHB,Batting Fourth ​,="39-168",.232,.399,0.167,6,10,0,24,16.8,26,.332,.731
+Jasson Dominguez SHB,Batting Fourth ​,="6-28",.214,.393,0.179,1,2,0,3,16.7,2,.267,.660
+Jazz Chisholm Jr. LHB,Batting Fifth ​,="28-127",.220,.409,0.189,6,6,0,14,24.0,17,.308,.717
+Amed Rosario RHB,Batting Sixth ​,="10-32",.313,.563,0.250,2,2,0,5,23.5,2,.353,.916
+Ryan McMahon LHB,Batting Eighth ​,="23-88",.261,.443,0.182,4,4,0,13,29.3,4,.293,.736
+Jose Caballero RHB,Batting Eighth ​,="21-85",.247,.376,0.129,2,5,0,9,22.8,5,.297,.673
+Max Schuemann RHB,Batting Eighth ​,="8-21",.381,.667,0.286,1,3,0,5,17.9,6,.536,1.203
+Anthony Volpe RHB,Batting Eighth ​,="10-40",.250,.450,0.200,1,3,1,9,18.0,10,.400,.850
+Ali Sanchez RHB,Batting Ninth ​,="8-28",.286,.357,0.071,0,2,0,4,25.8,1,.323,.680
+Austin Wells LHB,Batting Ninth ​,="12-98",.122,.184,0.062,2,0,0,4,27.8,9,.196,.380

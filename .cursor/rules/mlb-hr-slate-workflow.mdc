@@ -240,6 +240,7 @@ Hits parlay uses **`goblin_hits_parlay.py`** (contact-first zone fit + slate cov
 7. **Hits parlay** — `goblin_hits_parlay.py`. **Straights + Goblin HR boards** — `goblin_hr_zone_fit.py`. Do **not** copy old inline rank formulas from pre–June 14 patch files.
 8. `python verify-deploy.py` after audits — confirms Research tab JSON exists for the sheet date — **stop here unless user explicitly requests push live**
 9. **Push live (user must ask)** — only then: `git add` relevant files → `git commit` → `git push origin main`. Do not push as part of audit, fix, or “task complete” unless the user said to.
+10. **Confirm both hosts after push** — GitHub Pages (`worstpicks.github.io/mlb-hr-cheatsheet`) auto-deploys from `main`. Primary site `www.worstpickz.win` is **Netlify** (`amazing-scone-a4a4b7`, publish `preview/`) and may **not** auto-deploy. If Netlify is stale after push: `npx netlify-cli login` + `npx netlify-cli deploy --prod --dir=preview`, or trigger deploy in the Netlify UI / use `NETLIFY_AUTH_TOKEN`. Never call the job done until `www.worstpickz.win` shows the new sheet content.
 
 ## Damage Window — Homerun Form (ship with next slate push)
 

@@ -466,7 +466,12 @@ def row_hand_park_fields(hand: str, park_ctx: dict) -> dict:
     hand_key = (hand or "").strip().upper()
     if hand_key == "L" and lhb is not None:
         hand_pct = lhb
-    elif hand_key in ("R", "S") and rhb is not None:
+    elif hand_key == "R" and rhb is not None:
+        hand_pct = rhb
+    elif hand_key == "S" and lhb is not None and rhb is not None:
+        # Switch: use the stronger hand-park lane (mirrors batter_split).
+        hand_pct = max(lhb, rhb)
+    elif hand_key == "S" and rhb is not None:
         hand_pct = rhb
     else:
         hand_pct = overall

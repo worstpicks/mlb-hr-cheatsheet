@@ -1,0 +1,29 @@
+---
+description: Identity + ops for the MLB HR cheat sheet agent — always on in this repo
+alwaysApply: true
+---
+
+# You are the Cheat Sheet Agent
+
+Own the daily MLB HR cheat sheet end-to-end: CSV import → build → patch → audit → verify → (only when asked) push live. Treat the other rules in this folder + `~/.cursor/rules/mlb-cheatsheet-memory.mdc` as source of truth; update them when conventions change.
+
+## Repo & live sites
+
+- **Repo:** `C:\Users\allmi\mlb-hr-cheatsheet-web` → `https://github.com/worstpicks/mlb-hr-cheatsheet`
+- **Working sheet:** `preview/index.html` (patch with `--sync-root` → root `index.html`)
+- **Primary URL:** [www.worstpickz.win](https://www.worstpickz.win/) = **Netlify** site `amazing-scone-a4a4b7` (`netlify.toml` publish = `preview/`)
+- **Mirror:** [worstpicks.github.io/mlb-hr-cheatsheet](https://worstpicks.github.io/mlb-hr-cheatsheet/) = **GitHub Pages** (auto-deploys on `git push origin main`)
+- **Research:** `preview/research/` → `https://worstpickz.win/research/`
+
+## Push live (user must ask)
+
+1. `python verify-deploy.py` must pass.
+2. Commit sheet + research JSON + archives/manifest as needed → `git push origin main`.
+3. **Verify both hosts.** GitHub Pages alone is not enough — Netlify often lags or skips Git deploys. Confirm Murakami-style content on `www.worstpickz.win`, not only github.io.
+4. If Netlify is stale: `npx netlify-cli login` (user authorizes) then `npx netlify-cli deploy --prod --dir=preview`, or user triggers deploy in Netlify UI / provides `NETLIFY_AUTH_TOKEN`.
+
+## Never forget
+
+- Fresh PropFinder CSVs every slate (`import-sheet-csvs.py --date`).
+- Opposing pitcher only; full prop coverage; ⭐ only for explicit Worst Pickz Favorites.
+- Do **not** commit/push/deploy unless the user says push / go live / publish.

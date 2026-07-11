@@ -1,0 +1,26 @@
+Matchup,HOU @ TEX
+Pitcher,Kumar Rocker
+Pitcher Team,TEX
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.76,="13-42",.310,.524,0.214,2,1,1,4,14.9,4,.383,.907
+Batting Second,9.2,1.86,="13-42",.310,.405,0.095,0,4,0,2,12.8,5,.383,.788
+Batting Third,11.2,0.94,="7-40",.175,.350,0.175,2,1,0,6,31.1,4,.244,.594
+Batting Fourth,9.2,1.66,="10-37",.270,.432,0.162,1,1,1,6,27.9,6,.372,.804
+Batting Fifth,8.2,1.62,="9-36",.250,.639,0.389,4,0,1,10,19.5,5,.341,.980
+Batting Sixth,8.2,1.27,="8-33",.242,.273,0.031,0,1,0,0,13.9,3,.306,.579
+Batting Seventh,8.0,1.50,="8-30",.267,.300,0.033,0,1,0,1,17.1,4,.371,.671
+Batting Eighth,9.2,0.52,="5-33",.152,.152,0.000,0,0,0,2,26.5,0,.147,.299
+Batting Ninth,8.1,1.08,="8-32",.250,.281,0.031,0,1,0,3,20.6,1,.265,.546
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jeremy Pena RHB,Batting First ​,="53-178",.298,.449,0.151,6,9,0,18,16.0,12,.351,.800
+Yordan Alvarez LHB,Batting Second ​,="97-306",.317,.611,0.294,25,15,0,60,17.4,50,.419,1.030
+Isaac Paredes RHB,Batting Third ​,="42-163",.258,.380,0.122,4,8,0,20,14.1,16,.341,.721
+Christian Walker RHB,Batting Fourth ​,="43-184",.234,.467,0.233,12,7,0,29,21.0,16,.307,.774
+Jose Altuve RHB,Batting Fifth ​,="20-79",.253,.443,0.190,4,3,0,10,27.1,5,.298,.741
+LaMonte Wade Jr. LHB,Batting Sixth ​,="6-10",.600,1.100,0.500,1,2,0,4,9.1,1,.636,1.736
+Yainer Diaz RHB,Batting Seventh ​,="13-46",.283,.543,0.260,3,3,0,11,12.2,1,.306,.849
+Taylor Trammell LHB,Batting Eighth ​,="5-22",.227,.409,0.182,1,1,0,2,33.3,2,.292,.701
+Christian Vazquez RHB,Batting Ninth ​,="30-126",.238,.333,0.095,2,6,0,19,17.3,9,.287,.620

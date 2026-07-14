@@ -394,10 +394,10 @@ if straight_o15 is None:
         )
     straight_o05 = o05_pool[0] if o05_pool else straight_o15
 
-# O0.5 / O1.5: keep favorites free for Favorite 3-leg on this thin ASG board.
-# Wood is the only true multi-HR profile; Abrams is the cleanest non-⭐ O0.5 lane vs Cease LHB.
+# O0.5 / O1.5: ASG starters only for straights (Wood is a reserve — off O1.5).
+# Caminero starts at AL 3B with the board's best multi-HR profile among starters (2 HR / 3 near / 101.7 EV).
 rows_by_plain_early = {r["name_plain"]: r for r in rows}
-_asg_o15 = rows_by_plain_early.get("James Wood")
+_asg_o15 = rows_by_plain_early.get("Junior Caminero")
 _asg_o05 = rows_by_plain_early.get("CJ Abrams")
 if _asg_o15 is not None and _asg_o05 is not None:
     straight_o15 = _asg_o15
@@ -828,7 +828,8 @@ if len(fav3) < 3 and len(rows) <= 30:
 
 rows_by_plain = {r["name_plain"]: r for r in rows}
 
-# 7/14 Favorite 3-leg: all Worst Pickz Favorites on the ASG board.
+# 7/14 Favorite 3-leg: all Worst Pickz Favorites (all ASG starters).
+# ASG exception: O1.5 favorite (Caminero) may also appear here — Fav3 is not blocked by straights.
 _fav3_pick_order = [
     "Junior Caminero",
     "Juan Soto",
@@ -837,7 +838,10 @@ _fav3_pick_order = [
 _fav3_manual: list[dict] = []
 for _nm in _fav3_pick_order:
     _r = rows_by_plain.get(_nm)
-    if not _r or _r["name"] not in FAVS or _r["name"] in straight_names:
+    if not _r or _r["name"] not in FAVS:
+        continue
+    # Thin ASG board: allow the O1.5 favorite to also sit on Favorite 3 Leg.
+    if _r["name"] in straight_names and _r["name"] != straight_o15["name"]:
         continue
     if _r["name"] in {x["name"] for x in top3} or _r["name"] in {x["name"] for x in two_leg}:
         continue
@@ -867,10 +871,10 @@ if len(fav3) < 3:
             r
             for r in rows
             if r["name"] in FAVS
-            and r["name"] not in straight_names
             and r["name"] not in {x["name"] for x in top3}
             and r["name"] not in {x["name"] for x in two_leg}
             and r["name"] not in {x["name"] for x in fav3}
+            and (r["name"] not in straight_names or r["name"] == straight_o15["name"])
             and (r["hr"] >= 1 or r["near"] >= 1 or r["score"] >= 80)
         ],
         key=lambda x: (x["straight_attack_rank"], x["hr_zone_fit"], x["score"]),
@@ -884,7 +888,6 @@ if len(fav3) < 3:
 
 def fav_leg_label(row: dict) -> str:
     return f"{row['name_plain']} HR &#11088;"
-
 
 assert len(top3) == 3, "Goblin 3-leg needs 3 picks"
 assert len(two_leg) == 2, "Goblin 2-leg needs 2 picks"

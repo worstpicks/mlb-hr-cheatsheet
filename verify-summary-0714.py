@@ -101,10 +101,12 @@ print("Top5", [r["name_plain"] for r in top5])
 print("Wx5", [r["name_plain"] for r in weather5])
 print("Hits", len(hits), [r["name_plain"] for r in hits])
 
-if straight_o15 != "James Wood":
-    errors.append(f"O1.5 expected James Wood, got {straight_o15}")
+if straight_o15 != "Junior Caminero":
+    errors.append(f"O1.5 expected Junior Caminero (ASG starter), got {straight_o15}")
 if set(fav3) != {"Junior Caminero", "Juan Soto", "Mike Trout"}:
     errors.append(f"Fav3 expected all three stars, got {fav3}")
+if "James Wood" in (straight_o05, straight_o15):
+    errors.append("James Wood (reserve) must not be a Straight of the Day")
 
 if errors:
     print("FAIL")

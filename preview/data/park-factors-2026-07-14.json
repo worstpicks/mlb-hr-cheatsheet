@@ -1,0 +1,35 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-07-14.csv",
+  "source_date": "2026-07-14",
+  "hand_date": "2026-07-14",
+  "by_game": {
+    "AL @ NL": {
+      "game": "AL @ NL",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 37,
+      "stadium_pct": 13,
+      "weather_pct": 24,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 35,
+      "rhb_stadium_pct": -2,
+      "park_rhb_pct": 22
+    }
+  },
+  "by_venue": {
+    "citizens bank park": {
+      "game": "AL @ NL",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 37,
+      "stadium_pct": 13,
+      "weather_pct": 24,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 35,
+      "rhb_stadium_pct": -2,
+      "park_rhb_pct": 22
+    }
+  }
+}

@@ -1,0 +1,37 @@
+Matchup,AL @ NL
+Pitcher,Cristopher Sanchez
+Pitcher Team,NL
+Opposing Team,AL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.0,1.13,="15-62",.242,.387,0.145,2,3,0,2,30.3,3,.277,.664
+Batting Second,15.2,1.15,="14-60",.233,.333,0.100,1,3,0,2,18.8,4,.281,.614
+Batting Third,13.0,1.69,="19-58",.328,.517,0.189,2,5,0,5,21.0,3,.371,.888
+Batting Fourth,16.0,0.88,="12-57",.211,.211,0.000,0,0,0,1,33.9,2,.237,.448
+Batting Fifth,13.2,1.32,="15-56",.268,.357,0.089,1,2,0,4,23.7,3,.305,.662
+Batting Sixth,13.0,1.46,="17-56",.304,.518,0.214,3,3,0,11,32.8,2,.328,.846
+Batting Seventh,12.1,1.54,="16-51",.314,.510,0.196,2,4,0,8,30.9,3,.345,.855
+Batting Eighth,12.0,1.33,="13-50",.260,.360,0.100,1,2,0,3,22.6,3,.302,.662
+Batting Ninth,14.0,0.50,="5-46",.109,.130,0.021,0,1,0,1,34.7,2,.163,.293
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Yandy Diaz RHB,Batting First ​,="80-232",.345,.500,0.155,7,13,1,39,15.0,25,.419,.919
+Travis Bazzana LHB,Batting First ​,="32-147",.218,.422,0.204,5,13,1,18,23.2,14,.287,.709
+Kevin McGonigle LHB,Batting First ​,="61-206",.296,.466,0.170,7,12,1,19,13.6,35,.401,.867
+Mike Trout RHB,Batting Second ​,="67-283",.237,.473,0.236,18,13,0,39,24.6,67,.390,.863
+Shea Langeliers RHB,Batting Second ​,="52-183",.284,.519,0.235,11,10,0,24,20.1,17,.353,.872
+Yordan Alvarez LHB,Batting Second ​,="101-312",.324,.625,0.301,26,16,0,62,16.9,54,.429,1.054
+Bobby Witt Jr. RHB,Batting Second ​,="103-360",.286,.461,0.175,13,22,1,39,17.1,39,.355,.816
+Ceddanne Rafaela RHB,Batting Second ​,="53-198",.268,.409,0.141,4,14,1,20,17.2,8,.300,.709
+Dillon Dingler RHB,Batting Second ​,="32-105",.305,.514,0.209,5,7,0,15,22.1,5,.336,.850
+Ben Rice LHB,Batting Second ​,="52-186",.280,.597,0.317,15,8,3,37,21.1,21,.354,.951
+Munetaka Murakami LHB,Batting Second ​,="39-163",.239,.509,0.270,13,5,0,30,34.9,31,.364,.873
+Adley Rutschman SHB,Batting Third ​,="43-172",.250,.465,0.215,8,11,1,39,15.2,19,.320,.785
+Miguel Vargas RHB,Batting Third ​,="43-179",.240,.475,0.235,10,12,0,27,17.8,28,.349,.824
+Junior Caminero RHB,Batting Third ​,="37-136",.272,.632,0.360,14,7,0,30,21.9,23,.381,1.013
+Willson Contreras RHB,Batting Fourth ​,="66-233",.283,.536,0.253,14,13,2,46,25.0,22,.367,.903
+Cody Bellinger LHB,Batting Fourth ​,="41-171",.240,.409,0.169,6,11,0,24,16.5,27,.340,.749
+Riley Greene LHB,Batting Fourth ​,="62-220",.282,.468,0.186,9,12,1,31,28.8,28,.364,.832
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Ernie Clement RHB,Batting Seventh ​,="24-74",.324,.419,0.095,1,4,0,7,7.9,2,.342,.761
+Tristan Peters LHB,Batting Eighth ​,="31-111",.279,.486,0.207,4,7,2,21,14.5,10,.336,.822

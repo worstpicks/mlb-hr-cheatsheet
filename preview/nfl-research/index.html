@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("worstpickz-theme") === "light") {
+                    document.documentElement.classList.add("theme-light");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <title>NFL Research — Worst Pickz</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/apple-touch-icon.png" type="image/png">
+    <link rel="stylesheet" href="nfl-research.css?v=15">
+    <script>
+        (function () {
+            if (location.protocol !== "file:") return;
+            document.addEventListener("DOMContentLoaded", function () {
+                var block = document.getElementById("nrsFileBlock");
+                var shell = document.querySelector(".nrs-container");
+                if (block) block.classList.add("is-visible");
+                if (shell) shell.style.display = "none";
+            });
+        })();
+    </script>
+</head>
+<body>
+    <div id="nrsFileBlock" class="nrs-file-block" role="alert">
+        <div class="nrs-file-block__card">
+            <h2>Cannot open this page as a file</h2>
+            <p>You opened the HTML file directly (<code>file://</code>). Browsers block loading slate data that way.</p>
+            <p><strong>Use the local server instead:</strong></p>
+            <pre>cd C:\Users\allmi\mlb-hr-cheatsheet-web
+python fetch-nfl-research-slate.py --season 2026 --week 1
+python serve-research.py</pre>
+            <p>Then open in your browser:</p>
+            <a class="nrs-file-block__link" href="http://localhost:8080/nfl-research/index.html">http://localhost:8080/nfl-research/index.html</a>
+        </div>
+    </div>
+
+    <div class="nrs-container">
+        <header class="nrs-header">
+            <div class="nrs-header-actions">
+                <a class="nrs-back" href="../index.html">← HR Cheat Sheet</a>
+                <div class="nrs-header-actions-right">
+                    <a class="nrs-back nrs-back--mlb" href="../research/index.html">MLB Research</a>
+                    <button type="button" class="nrs-theme-toggle" id="nrsThemeToggle" aria-pressed="false" title="Switch theme" aria-label="Switch theme">☀️</button>
+                </div>
+            </div>
+            <div class="nrs-header-brand">
+                <div class="nrs-hero-wrap">
+                    <img src="../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot" decoding="async" onerror="this.onerror=null;this.src='https://worstpickz.win/assets/worst-pickz-hero.png'">
+                </div>
+                <div class="nrs-header-intro">
+                    <span class="nrs-brand-tag">Worst Pickz Research</span>
+                    <h1>NFL Matchup Research</h1>
+                    <p id="nrsSeasonNote">Offense vs what the defense allows — green means the player beats the defensive average.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="nrs-toolbar">
+            <div class="nrs-controls">
+                <label>Season
+                    <select id="nrsSeason" class="nrs-select"></select>
+                </label>
+                <label>Week
+                    <select id="nrsWeek" class="nrs-select"></select>
+                </label>
+                <button type="button" class="nrs-btn nrs-btn--primary" id="nrsRefresh">Refresh</button>
+                <span class="nrs-updated" id="nrsLastUpdated" aria-live="polite"></span>
+            </div>
+            <span class="nrs-badge" id="nrsSourceBadge" hidden></span>
+        </div>
+
+        <div class="nrs-main">
+            <p class="nrs-status" id="nrsStatus" role="alert" hidden></p>
+
+            <section class="nrs-section">
+                <h2 class="nrs-section-title">Week slate</h2>
+                <div class="nrs-games-wrap">
+                    <div class="nrs-games" id="nrsGames"></div>
+                </div>
+            </section>
+
+            <section class="nrs-section" id="nrsMatchupSection" hidden>
+                <div class="nrs-matchup-bar">
+                    <div>
+                        <h2 class="nrs-section-title nrs-section-title--matchup" id="nrsMatchupTitle">—</h2>
+                        <span class="nrs-matchup-sub" id="nrsMatchupSub"></span>
+                    </div>
+                    <div class="nrs-matchup-bar__actions">
+                        <div class="nrs-side-toggle" role="group" aria-label="Offense team">
+                            <button type="button" id="nrsSideAway">AWY OFF</button>
+                            <button type="button" id="nrsSideHome">HOM OFF</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="nrsPosSections"></div>
+
+                <p class="nrs-legend">
+                    <strong>Player log (left):</strong> each game colored vs the player's season average —
+                    <span class="nrs-legend__chip nrs-cell-heat--good">green</span> above,
+                    <span class="nrs-legend__chip nrs-cell-heat--bad">red</span> below.
+                    <strong>Defense log (right):</strong> what the D allowed to that position slot each week, colored vs league average —
+                    <span class="nrs-legend__chip nrs-cell-heat--good">green</span> gives up more (matchup to attack).
+                    <strong>Avg rows:</strong> player avg colored vs this defense; defense avg colored vs league.
+                    Deeper color = bigger edge; near-even games stay neutral.
+                    The box under each card shows the sportsbook expected lines.
+                </p>
+                <p class="nrs-legend" id="nrsPropsHint" hidden></p>
+            </section>
+        </div>
+    </div>
+
+    <script src="nfl-research.js?v=15" defer></script>
+</body>
+</html>

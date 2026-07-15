@@ -1,0 +1,311 @@
+{
+  "source": "ballpark-pal-stadium",
+  "source_label": "Ballpark Pal stadium (2026-07-14)",
+  "source_file": "park-factors-L/R-all-2026-07-14.csv",
+  "source_date": "2026-07-17",
+  "hand_date": "2026-07-14",
+  "stadium_only": true,
+  "by_game": {},
+  "by_venue": {
+    "angel stadium": {
+      "venue_key": "angel stadium",
+      "hr_pct": 2,
+      "stadium_pct": 2,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 3,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": 2
+    },
+    "daikin park": {
+      "venue_key": "daikin park",
+      "hr_pct": 10,
+      "stadium_pct": 10,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 12,
+      "park_lhb_pct": 12,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 9
+    },
+    "american family field": {
+      "venue_key": "american family field",
+      "hr_pct": 4,
+      "stadium_pct": 4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 1,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": 6
+    },
+    "dodger stadium": {
+      "venue_key": "dodger stadium",
+      "hr_pct": 9,
+      "stadium_pct": 9,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 2,
+      "park_lhb_pct": 2,
+      "rhb_stadium_pct": 16,
+      "park_rhb_pct": 16
+    },
+    "kauffman stadium": {
+      "venue_key": "kauffman stadium",
+      "hr_pct": -11,
+      "stadium_pct": -11,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -16,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -6
+    },
+    "sutter health park": {
+      "venue_key": "sutter health park",
+      "hr_pct": 4,
+      "stadium_pct": 4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 1,
+      "rhb_stadium_pct": 7,
+      "park_rhb_pct": 7
+    },
+    "citi field": {
+      "venue_key": "citi field",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": -7,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 0
+    },
+    "pnc park": {
+      "venue_key": "pnc park",
+      "hr_pct": -11,
+      "stadium_pct": -11,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -5,
+      "rhb_stadium_pct": -17,
+      "park_rhb_pct": -17
+    },
+    "rate field": {
+      "venue_key": "rate field",
+      "hr_pct": -1,
+      "stadium_pct": -1,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -6
+    },
+    "tropicana field": {
+      "venue_key": "tropicana field",
+      "hr_pct": 3,
+      "stadium_pct": 3,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 9
+    },
+    "target field": {
+      "venue_key": "target field",
+      "hr_pct": -2,
+      "stadium_pct": -2,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": -2,
+      "rhb_stadium_pct": -2,
+      "park_rhb_pct": -2
+    },
+    "rogers centre": {
+      "venue_key": "rogers centre",
+      "hr_pct": 7,
+      "stadium_pct": 7,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 6,
+      "park_lhb_pct": 6,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 8
+    },
+    "nationals park": {
+      "venue_key": "nationals park",
+      "hr_pct": 0,
+      "stadium_pct": 0,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 1,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 0
+    },
+    "loandepot park": {
+      "venue_key": "loandepot park",
+      "hr_pct": -8,
+      "stadium_pct": -8,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -5,
+      "rhb_stadium_pct": -11,
+      "park_rhb_pct": -11
+    },
+    "progressive field": {
+      "venue_key": "progressive field",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": 5,
+      "rhb_stadium_pct": -12,
+      "park_rhb_pct": -12
+    },
+    "t-mobile park": {
+      "venue_key": "t-mobile park",
+      "hr_pct": -5,
+      "stadium_pct": -5,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": -7,
+      "park_rhb_pct": -7
+    },
+    "busch stadium": {
+      "venue_key": "busch stadium",
+      "hr_pct": -16,
+      "stadium_pct": -16,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -17,
+      "park_lhb_pct": -17,
+      "rhb_stadium_pct": -16,
+      "park_rhb_pct": -16
+    },
+    "coors field": {
+      "venue_key": "coors field",
+      "hr_pct": 9,
+      "stadium_pct": 9,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 13,
+      "park_lhb_pct": 13,
+      "rhb_stadium_pct": 5,
+      "park_rhb_pct": 5
+    },
+    "chase field": {
+      "venue_key": "chase field",
+      "hr_pct": -10,
+      "stadium_pct": -10,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -17,
+      "park_lhb_pct": -17,
+      "rhb_stadium_pct": -2,
+      "park_rhb_pct": -2
+    },
+    "oriole park at camden yards": {
+      "venue_key": "oriole park at camden yards",
+      "hr_pct": 1,
+      "stadium_pct": 1,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 7,
+      "park_lhb_pct": 7,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": -5
+    },
+    "citizens bank park": {
+      "venue_key": "citizens bank park",
+      "hr_pct": 4,
+      "stadium_pct": 4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 11,
+      "rhb_stadium_pct": -2,
+      "park_rhb_pct": -2
+    },
+    "globe life field": {
+      "venue_key": "globe life field",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -6
+    },
+    "yankee stadium": {
+      "venue_key": "yankee stadium",
+      "hr_pct": 4,
+      "stadium_pct": 4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": 5,
+      "park_rhb_pct": 5
+    },
+    "great american ball park": {
+      "venue_key": "great american ball park",
+      "hr_pct": 12,
+      "stadium_pct": 12,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 15,
+      "park_lhb_pct": 15,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 9
+    },
+    "wrigley field": {
+      "venue_key": "wrigley field",
+      "hr_pct": 0,
+      "stadium_pct": 0,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 4,
+      "park_rhb_pct": 4
+    },
+    "truist park": {
+      "venue_key": "truist park",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -1,
+      "park_lhb_pct": -1,
+      "rhb_stadium_pct": -7,
+      "park_rhb_pct": -7
+    },
+    "comerica park": {
+      "venue_key": "comerica park",
+      "hr_pct": 0,
+      "stadium_pct": 0,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 3,
+      "park_rhb_pct": 3
+    },
+    "oracle park": {
+      "venue_key": "oracle park",
+      "hr_pct": -20,
+      "stadium_pct": -20,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -22,
+      "park_lhb_pct": -22,
+      "rhb_stadium_pct": -17,
+      "park_rhb_pct": -17
+    },
+    "petco park": {
+      "venue_key": "petco park",
+      "hr_pct": 2,
+      "stadium_pct": 2,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 9
+    },
+    "fenway park": {
+      "venue_key": "fenway park",
+      "hr_pct": -12,
+      "stadium_pct": -12,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -16,
+      "park_lhb_pct": -16,
+      "rhb_stadium_pct": -8,
+      "park_rhb_pct": -8
+    }
+  }
+}

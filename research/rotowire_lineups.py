@@ -174,7 +174,12 @@ def _parse_game_box(box_html: str) -> dict[str, Any] | None:
 
 
 def fetch_rotowire_games(sheet_date: str) -> list[dict[str, Any]]:
-    """Parse RotoWire daily lineups for a calendar date (best-effort; page defaults to today)."""
+    """Parse RotoWire daily lineups for a calendar date (best-effort; page defaults to today).
+
+    Note: anonymous fetches often return a login/subscribe shell with zero
+    ``lineup__box`` nodes — callers should fall through to FantasyPros/ESPN
+    projected pitchers when this returns empty.
+    """
     html = _fetch_html(sheet_date)
     page_date_m = re.search(r"Starting MLB lineups for\s+([^<]+)", html, re.I)
     page_date_text = (page_date_m.group(1) or "").strip() if page_date_m else ""

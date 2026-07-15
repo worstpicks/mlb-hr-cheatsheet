@@ -782,6 +782,16 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
     except Exception as exc:
         rotowire_meta = {"source": "rotowire", "error": str(exc)}
 
+    # RotoWire daily lineups are often login-walled now; fill remaining TBD
+    # probables from FantasyPros (+ ESPN) so Savant pitcher stats still attach.
+    projected_meta: dict[str, Any] = {}
+    try:
+        from research.projected_pitchers import apply_projected_pitcher_fallback_to_games
+
+        projected_meta = apply_projected_pitcher_fallback_to_games(games, sheet_date)
+    except Exception as exc:
+        projected_meta = {"source": "projected-pitchers", "error": str(exc)}
+
     _fill_pitcher_throws(games)
     _attach_park_to_games(games, sheet_date)
     if with_stats:
@@ -931,6 +941,7 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         "batter_pitch_lookup": {str(k): v for k, v in batter_pitch_lookup.items()},
         "league_pitch_avgs": league_pitch_avgs,
         "rotowire": rotowire_meta,
+        "projected_pitchers": projected_meta,
         "games": games,
     }
 

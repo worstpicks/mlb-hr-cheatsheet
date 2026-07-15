@@ -36,6 +36,7 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             or self._is_propfinder_api()
             or self._is_savant_matchup_api()
             or self._is_rotowire_api()
+            or self._is_projected_pitchers_api()
             or self._is_zone_api()
             or self._is_park_api()
         ):
@@ -73,6 +74,9 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         if self._is_rotowire_api():
             self._handle_rotowire_api()
             return
+        if self._is_projected_pitchers_api():
+            self._handle_projected_pitchers_api()
+            return
         if self._is_zone_api():
             self._handle_zone_api()
             return
@@ -95,6 +99,24 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             return
         try:
             payload = build_rotowire_payload(sheet_date)
+            self._send_json(200, payload)
+        except Exception as exc:
+            self._send_json(502, {"error": str(exc)})
+
+    def _is_projected_pitchers_api(self) -> bool:
+        path = urlparse(self.path).path.rstrip("/")
+        return path == "/api/projected-pitchers"
+
+    def _handle_projected_pitchers_api(self) -> None:
+        from research.projected_pitchers import build_projected_pitchers_payload
+
+        qs = parse_qs(urlparse(self.path).query)
+        sheet_date = qs.get("date", [""])[0]
+        if not sheet_date or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", sheet_date):
+            self._send_json(400, {"error": "invalid date"})
+            return
+        try:
+            payload = build_projected_pitchers_payload(sheet_date)
             self._send_json(200, payload)
         except Exception as exc:
             self._send_json(502, {"error": str(exc)})
@@ -313,6 +335,7 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             or self._is_propfinder_api()
             or self._is_savant_matchup_api()
             or self._is_rotowire_api()
+            or self._is_projected_pitchers_api()
             or self._is_zone_api()
             or self._is_park_api()
             or str(args[0]).startswith("2")

@@ -2674,11 +2674,14 @@
         const leak = renderPitcherLeakGrid(stats, statsList);
         const kstrikeout = renderPitcherKTabHtml(stats, statsList);
         const arsenal = pitcher.arsenalLabel ? `<div class="rs-pitcher-card__mix">${pitcher.arsenalLabel}</div>` : "";
+        const projected = pitcher.projected
+            ? '<span class="rs-hand rs-hand--proj" title="Projected starter — swaps to confirmed when MLB announces">proj</span>'
+            : "";
         return `<article class="rs-pitcher-card rs-pitcher-card--${sideLabel.toLowerCase()} rs-pitcher-card--clickable" data-pitcher-id="${pid}" data-game="${gameIdx}" data-side="${side}" role="button" tabindex="0" title="Open pitcher profile">
             <header class="rs-pitcher-card__head">
                 <div class="rs-pitcher-card__top">
                     <span class="rs-pitcher-card__team">${sideLabel} · ${team}</span>
-                    <span class="rs-pitcher-card__hand">${hand}</span>
+                    <span class="rs-pitcher-card__hand">${hand}${projected ? ` ${projected}` : ""}</span>
                 </div>
                 <h3 class="rs-pitcher-card__name">${escAttr(pitcher.name || "—")}</h3>
                 ${arsenal}
@@ -4423,16 +4426,62 @@
         }
     }
 
+    async function applyProjectedPitcherFallback(date) {
+        if (!slate?.games?.length) return { pitchers: 0 };
+        const needsPitcher = slate.games.some(
+            (g) => pitcherMissing(g.awayPitcher) || pitcherMissing(g.homePitcher)
+        );
+        if (!needsPitcher) return { pitchers: 0 };
+        if (!(await proxyAvailable(`/api/projected-pitchers?date=${encodeURIComponent(date)}`))) {
+            return { pitchers: 0 };
+        }
+        try {
+            const res = await fetch(`/api/projected-pitchers?date=${encodeURIComponent(date)}`);
+            if (!res.ok) return { pitchers: 0, error: res.status };
+            const data = await res.json();
+            const byTeam = data.byTeam || {};
+            let pitchers = 0;
+            for (const game of slate.games) {
+                if (pitcherMissing(game.awayPitcher) && byTeam[game.away]?.name) {
+                    game.awayPitcher = { ...byTeam[game.away] };
+                    pitchers += 1;
+                }
+                if (pitcherMissing(game.homePitcher) && byTeam[game.home]?.name) {
+                    game.homePitcher = { ...byTeam[game.home] };
+                    pitchers += 1;
+                }
+            }
+            slate.projected_pitchers = {
+                source: data.source || "projected-pitchers",
+                pitchersFilled: pitchers,
+                meta: data.meta || null,
+            };
+            return { pitchers, meta: data.meta };
+        } catch (err) {
+            console.warn("projected pitcher fallback", err);
+            return { pitchers: 0, error: String(err.message || err) };
+        }
+    }
+
     function mergePitcher(live, cached) {
-        if (!cached) return live || null;
+        if (!cached) return live ? { ...live } : null;
         if (!live) return { ...cached };
-        return {
-            ...cached,
+        const sameId = live.id != null && cached.id != null && Number(live.id) === Number(cached.id);
+        const merged = {
+            ...(sameId ? cached : {}),
             ...live,
-            stats: { ...(cached.stats || {}), ...(live.stats || {}) },
-            arsenal: cached.arsenal || live.arsenal,
-            arsenalLabel: cached.arsenalLabel || live.arsenalLabel,
+            stats: sameId
+                ? { ...(cached.stats || {}), ...(live.stats || {}) }
+                : { ...(live.stats || {}) },
+            arsenal: sameId ? live.arsenal || cached.arsenal : live.arsenal,
+            arsenalLabel: sameId ? live.arsenalLabel || cached.arsenalLabel : live.arsenalLabel,
         };
+        // Confirmed MLB probable (no projection flags) beats RotoWire/FantasyPros proj.
+        if (live.id && live.projected == null && !live.source) {
+            delete merged.projected;
+            delete merged.source;
+        }
+        return merged;
     }
 
     function applyCachedEnrichment(live, cached) {
@@ -4453,6 +4502,7 @@
             "savant_only",
             "source",
             "rotowire",
+            "projected_pitchers",
         ]) {
             if (cached[key] != null && live[key] == null) live[key] = cached[key];
         }
@@ -6949,6 +6999,7 @@
         }
 
         await applyRotowireFallback(date);
+        await applyProjectedPitcherFallback(date);
         await expandAllLineupDepth(season, date);
 
         const savantMerge = await mergeSavantIntoAllLineups(season);

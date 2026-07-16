@@ -104,10 +104,10 @@ print("Top5", [r["name_plain"] for r in top5])
 print("Wx5", [r["name_plain"] for r in weather5])
 print("Hits", len(hits), [r["name_plain"] for r in hits])
 
-if straight_o15 != "Bryce Harper":
-    errors.append(f"O1.5 expected Bryce Harper, got {straight_o15}")
-if straight_o05 != "Kyle Schwarber":
-    errors.append(f"O0.5 expected Kyle Schwarber, got {straight_o05}")
+if straight_o15 != "Juan Soto":
+    errors.append(f"O1.5 expected Juan Soto, got {straight_o15}")
+if straight_o05 != "Bryce Harper":
+    errors.append(f"O0.5 expected Bryce Harper, got {straight_o05}")
 if "Juan Soto" not in fav3 or "Bryce Harper" not in fav3:
     errors.append(f"Fav3 must include both ⭐, got {fav3}")
 

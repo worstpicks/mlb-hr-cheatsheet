@@ -395,11 +395,11 @@ if straight_o15 is None:
     straight_o05 = o05_pool[0] if o05_pool else straight_o15
 
 # O0.5 / O1.5 judgment for thin NYM@PHI board (CBP +30%).
-# O1.5: Harper — only starter with true multi-HR form (2/2) + Scott LHB +0.40.
-# O0.5: Schwarber — 104 EV, 1 HR / 2 near, Scott LHB +0.40, keeps Soto free for Fav3.
+# O1.5: Soto — loudest multi-HR form (3/3), score 90 at CBP +30%.
+# O0.5: Harper — 2 HR / 2 near, Scott LHB +0.40, cleaner O0.5 lane.
 rows_by_plain_early = {r["name_plain"]: r for r in rows}
-_asg_o15 = rows_by_plain_early.get("Bryce Harper")
-_asg_o05 = rows_by_plain_early.get("Kyle Schwarber")
+_asg_o15 = rows_by_plain_early.get("Juan Soto")
+_asg_o05 = rows_by_plain_early.get("Bryce Harper")
 if _asg_o15 is not None and _asg_o05 is not None:
     straight_o15 = _asg_o15
     straight_o05 = _asg_o05
@@ -421,7 +421,10 @@ for _nm in ("Bryce Harper", "Juan Soto", "Francisco Lindor", "Brett Baty", "Edmu
     _r = rows_by_plain.get(_nm)
     if not _r:
         continue
-    if _r["name"] == straight_o05["name"]:
+    # Thin board (<3 ⭐): keep favorites on Fav3 even if they are the O0.5 straight.
+    if _r["name"] == straight_o05["name"] and not (
+        _r["name"] in FAVS and TOTAL_FAVS < 3
+    ):
         continue
     favs_seated = sum(1 for x in _early_fav3 if x["name"] in FAVS)
     if _r["name"] not in FAVS and favs_seated < min(2, len(FAVS)):
@@ -854,7 +857,7 @@ if len(fav3) < 3 and len(rows) <= 30:
 rows_by_plain = {r["name_plain"]: r for r in rows}
 
 # 7/16 Favorite 3-leg: both ⭐ plus best attack fill (only 2 favorites on board).
-# Allow O1.5 favorite (Harper) on Fav3 for this thin slate; keep O0.5 off Fav3.
+# Allow both straight favorites on Fav3 when TOTAL_FAVS < 3.
 _fav3_pick_order = [
     "Bryce Harper",
     "Juan Soto",
@@ -870,7 +873,9 @@ for _nm in _fav3_pick_order:
     favs_seated = sum(1 for x in _fav3_manual if x["name"] in FAVS)
     if _r["name"] not in FAVS and favs_seated < min(2, len(FAVS)):
         continue
-    if _r["name"] == straight_o05["name"]:
+    if _r["name"] == straight_o05["name"] and not (
+        _r["name"] in FAVS and TOTAL_FAVS < 3
+    ):
         continue
     if _r["name"] in {x["name"] for x in top3} or _r["name"] in {x["name"] for x in two_leg}:
         continue
@@ -911,7 +916,11 @@ if len(fav3) < 3:
             and r["name"] not in {x["name"] for x in top3}
             and r["name"] not in {x["name"] for x in two_leg}
             and r["name"] not in {x["name"] for x in fav3}
-            and (r["name"] not in straight_names or r["name"] == straight_o15["name"])
+            and (
+                r["name"] not in straight_names
+                or r["name"] == straight_o15["name"]
+                or (r["name"] in FAVS and TOTAL_FAVS < 3)
+            )
             and (r["hr"] >= 1 or r["near"] >= 1 or r["score"] >= 80)
         ],
         key=lambda x: (x["straight_attack_rank"], x["hr_zone_fit"], x["score"]),
@@ -944,7 +953,7 @@ if THIN_SLATE and len(rows) <= 10:
     if len(forced_top3) == 3:
         top3 = forced_top3
     forced_two = []
-    for _nm in ("Francisco Lindor", "Juan Soto"):
+    for _nm in ("Francisco Lindor", "Kyle Schwarber"):
         _r = rows_by_plain.get(_nm)
         if (
             _r

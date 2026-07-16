@@ -51,9 +51,20 @@ def validate_three_leg_parlays(html_text: str, fav_names: set[str] | None = None
         errors.append(f"3 Leg HR and Favorite 3 Leg share batters: {sorted(overlap)}")
 
     if fav_names:
-        for name in fav_b:
-            if name not in fav_names:
-                errors.append(f"Favorite 3 Leg batter not on ⭐ list: {name}")
+        fav_on_card = [name for name in fav_b if name in fav_names]
+        # Thin boards with fewer than 3 designated favorites may fill remaining
+        # Favorite 3 Leg seats with loud non-⭐ attack names, but every sheet
+        # favorite must still appear on the card.
+        if len(fav_names) >= 3:
+            for name in fav_b:
+                if name not in fav_names:
+                    errors.append(f"Favorite 3 Leg batter not on ⭐ list: {name}")
+        else:
+            missing_favs = sorted(set(fav_names) - set(fav_b))
+            if missing_favs:
+                errors.append(
+                    f"Favorite 3 Leg missing sheet ⭐ on thin board: {missing_favs}"
+                )
 
     row_pat = re.compile(
         r'name: "([^"]+)"[^}]*emojis: "([^"]*)"[^}]*note: "([^"]*)"'
@@ -65,7 +76,11 @@ def validate_three_leg_parlays(html_text: str, fav_names: set[str] | None = None
             errors.append(f"Favorite 3 Leg batter missing from sheet rows: {name}")
             continue
         emojis, note = rows[sheet_name]
-        if "⭐" not in emojis:
+        # On thin boards (<3 favorites), only require ⭐ on designated favorites.
+        if fav_names is not None and len(fav_names) < 3:
+            if name in fav_names and "⭐" not in emojis:
+                errors.append(f"Favorite 3 Leg batter missing ⭐ on sheet: {name}")
+        elif "⭐" not in emojis:
             errors.append(f"Favorite 3 Leg batter missing ⭐ on sheet: {name}")
 
     return errors

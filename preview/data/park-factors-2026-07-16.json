@@ -1,0 +1,35 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-07-16.csv",
+  "source_date": "2026-07-16",
+  "hand_date": "2026-07-16",
+  "by_game": {
+    "NYM @ PHI": {
+      "game": "NYM @ PHI",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 30,
+      "stadium_pct": 14,
+      "weather_pct": 16,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 27,
+      "rhb_stadium_pct": -2,
+      "park_rhb_pct": 14
+    }
+  },
+  "by_venue": {
+    "citizens bank park": {
+      "game": "NYM @ PHI",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 30,
+      "stadium_pct": 14,
+      "weather_pct": 16,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 27,
+      "rhb_stadium_pct": -2,
+      "park_rhb_pct": 14
+    }
+  }
+}

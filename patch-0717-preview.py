@@ -427,6 +427,15 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 
+# 7/17 judgment: O0.5 Rice vs Sasaki 🧤; O1.5 Alvarez vs Kremer 🧤.
+rows_by_plain_lock = {r["name_plain"]: r for r in rows}
+_lock_o15 = rows_by_plain_lock.get("Yordan Alvarez")
+_lock_o05 = rows_by_plain_lock.get("Ben Rice")
+if _lock_o15 is not None and _lock_o05 is not None:
+    straight_o15 = _lock_o15
+    straight_o05 = _lock_o05
+    straight_names = {straight_o05["name"], straight_o15["name"]}
+
 # Goblin HR legs: real form plus a usable opposing split/risk lane (reject 0/0 pitcher data).
 def goblin_hr_leg_ok(row: dict) -> bool:
     if row["hr"] < 1 and row["near"] < 2:
@@ -847,10 +856,9 @@ elif len(_fav3_manual) >= 1:
         if len(fav3) == 3:
             break
 
-# 7/17 lock: Ben Rice vs Sasaki 🧤 is the slate's clearest ⭐ lane — keep him on Fav3,
-# not Goblin 3-leg (attack-rank reserve had undersampled him vs zone-led peers).
+# 7/17 Fav3: Rice is O0.5 straight — seat next-best ⭐ (Devers / Ramos / DeLauter).
 _forced_fav3: list[dict] = []
-for _nm in ("Ben Rice", "Rafael Devers", "Heliot Ramos", "Chase DeLauter", "Alec Burleson"):
+for _nm in ("Rafael Devers", "Heliot Ramos", "Chase DeLauter", "Alec Burleson", "Casey Schmitt"):
     _r = rows_by_plain.get(_nm)
     if not _r or _r["name"] not in FAVS:
         continue

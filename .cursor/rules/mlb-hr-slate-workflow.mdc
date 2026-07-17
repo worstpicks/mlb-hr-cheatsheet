@@ -167,20 +167,24 @@ Confirm in `preview/index.html`:
 ```python
 from goblin_hits_parlay import annotate_hits_ranks, fill_hits_parlay, select_hits_parlay
 
-annotate_hits_ranks(rows, row_high_whiff=row_high_whiff)
+# sheet_date pulls BIP% / AVG / xwOBA / LD% / sweet-spot from preview/data/research-YYYY-MM-DD.json
+annotate_hits_ranks(rows, row_high_whiff=row_high_whiff, sheet_date=SHEET_DATE)
 hits_parlay_legs = select_hits_parlay(rows, row_high_whiff=row_high_whiff, avoid_whiff=True)
 hits_parlay_legs = fill_hits_parlay(rows, hits_parlay_legs, row_high_whiff=row_high_whiff)
 ```
 
-### Pick rules (current rubric — revised Jul 2026)
+### Pick rules (current rubric — revised Jul 11 2026)
 
 | Priority | Signal |
 |----------|--------|
-| **1 — Contact zone** | `zone_contact` (main), then `zone_score`, `zone_hard_hit`, light `zone_barrel` |
-| **2 — Contact form** | EV / hard-hit / light recent events; bonus for low K%/whiff (not HR chase) |
-| **3 — Matchup** | Soft split edge + park (mild negative splits allowed) |
+| **1 — Ball in play** | Research-tab **BIP%** (`bip_opportunity`) — high-BIP bats get more hit chances; low-BIP swing-and-miss profiles get dragged. Centered ~66%, capped both ways |
+| **2 — Contact zone** | `zone_contact` (main), then `zone_score`, `zone_hard_hit`, light `zone_barrel` |
+| **3 — Contact form** | EV / hard-hit / light recent events; plus research season form (`research_contact_form`: AVG, xwOBA, LD%, sweet-spot); bonus for low K%/whiff |
+| **4 — Matchup** | Soft split edge + park (mild negative splits allowed) |
 | **Exclude** | High-whiff batters (`row_high_whiff(..., for_hits=True)` / Whiff pill / WHIFF% or K% ≥ 26); extreme negative splits (&lt; −0.85) |
 | **Coverage** | Max 2 legs per game and per team so the ticket spans the slate |
+
+Research terms are sample-weighted (discounted below 60 PA) and no-op gracefully if the research JSON is missing — but the patch **must** pass `sheet_date=` so BIP% is live. High BIP% (≥72) or AVG ≥ .280 also counts as hit form for pool/backfill gates.
 
 **Pool:** prefer zone-contact / zone-fit across the full sheet (`split` ≥ −0.85). Mild/deep platoon headwinds stay eligible with a soft rank penalty. Relax thresholds only if fewer than 11 legs qualify. **Backfill to 11** with contact/zone names before form-only fallbacks.
 
@@ -231,8 +235,9 @@ Hits parlay uses **`goblin_hits_parlay.py`** (contact-first zone fit + slate cov
 ## Rest of slate checklist (after CSV import)
 
 0. **Straights of the Day** — update `STRAIGHT_OF_DAY_CARD` in `patch-YYYY-MM-DD-preview.py`, resync, verify (Step 1 above)
-1. `python build-sheet-YYYY-MM-DD.py` → `python patch-XXXX-preview.py` (auto-runs `post_patch.sync_research_tab_after_patch` → `research-YYYY-MM-DD.json` + `park-factors-YYYY-MM-DD.json`)
+1. `python build-sheet-YYYY-MM-DD.py` → `python patch-XXXX-preview.py` (auto-runs `post_patch.sync_research_tab_after_patch` → `research-YYYY-MM-DD.json` + `park-factors-YYYY-MM-DD.json`, then `build-straights-history.py` for the Straight-of-the-Day streak / last-7 tracker)
 2. `python validate-index-matchups.py` — zero matchup errors
+2a. Confirm `preview/data/straights-history.json` `updated` is today and includes the current sheet date plus recent archives (7/14, 7/16, …). If the tracker looks stale, run `python build-straights-history.py` manually.
 3. Bums onna mound (🧤 titles + ⚾🕊️🧤 on vs-bum rows)
 4. Goblin parlays distinct — 3 Leg vs 2 Leg vs Favorite 3 Leg share no batters; **2 Leg HR must not reuse Straights of the Day** (`python goblin_parlay_rules.py`)
 5. **Top 5 diversification** — **Top 5 HR Tickets** and **Top 5 Weather Heavy HR Plays** must each have **at most 2 players from the same game** (skip lower-ranked same-game rows rather than stacking one matchup). Lists must stay **distinct** from each other (no duplicate names across the two charts). Weather-heavy rows require **park ≥ +5%**, **non-negative split**, and real HR form — never stack negative-platoon names just for weather rank.

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-13T21:29:42Z",
+  "updated": "2026-07-17T05:10:51Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -598,6 +598,49 @@
         "matchup": "TOR @ SD",
         "result": "loss",
         "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-14",
+      "o05": {
+        "player": "CJ Abrams",
+        "matchup": "AL @ NL",
+        "result": "void",
+        "note": "no game"
+      },
+      "o15": {
+        "player": "Junior Caminero",
+        "matchup": "AL @ NL",
+        "result": "void",
+        "note": "no game"
+      }
+    },
+    {
+      "date": "2026-07-16",
+      "o05": {
+        "player": "Bryce Harper",
+        "matchup": "NYM @ PHI",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Juan Soto",
+        "matchup": "NYM @ PHI",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "o05": {
+        "player": "Ben Rice",
+        "matchup": "LAD @ NYY",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Yordan Alvarez",
+        "matchup": "BAL @ HOU",
+        "result": "pending"
       }
     }
   ]

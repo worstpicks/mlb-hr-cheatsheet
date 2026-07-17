@@ -1,0 +1,29 @@
+Matchup,STL @ ARI
+Pitcher,Andre Pallante
+Pitcher Team,STL
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="11-50",.220,.260,0.040,0,2,0,3,14.8,.278,.538
+Batting Second,="12-47",.255,.468,0.213,1,5,1,5,11.3,.340,.808
+Batting Third,="13-48",.271,.333,0.062,0,3,0,7,19.2,.327,.660
+Batting Fourth,="9-41",.220,.537,0.317,4,1,0,8,14.3,.327,.864
+Batting Fifth,="11-44",.250,.432,0.182,2,2,0,8,25.0,.313,.745
+Batting Sixth,="12-43",.279,.395,0.116,1,2,0,4,15.2,.326,.721
+Batting Seventh,="9-39",.231,.385,0.154,2,0,0,6,24.4,.268,.653
+Batting Eighth,="12-37",.324,.324,0.000,0,0,0,3,12.5,.375,.699
+Batting Ninth,="8-38",.211,.263,0.052,0,2,0,0,17.5,.250,.513
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="87-333",.261,.474,0.213,16,19,2,50,14.6,26,.316,.790
+Corbin Carroll LHB,Batting Second ​,="61-202",.302,.594,0.292,10,13,8,31,20.4,30,.396,.990
+Geraldo Perdomo SHB,Batting Third ​,="37-156",.237,.359,0.122,2,7,3,16,11.6,25,.337,.696
+Nolan Arenado RHB,Batting Fourth ​,="19-97",.196,.340,0.144,2,8,0,14,23.3,13,.310,.650
+Gabriel Moreno RHB,Batting Fourth ​,="41-123",.333,.390,0.057,0,7,0,14,12.7,16,.408,.798
+Ildemaro Vargas SHB,Batting Fifth ​,="20-89",.225,.281,0.056,1,2,0,9,8.4,5,.274,.555
+Lourdes Gurriel Jr. RHB,Batting Fifth ​,="11-65",.169,.308,0.139,2,3,0,9,17.4,3,.217,.525
+Max Kepler LHB,Batting Sixth ​,="4-14",.286,.571,0.285,1,1,0,4,14.3,0,.286,.857
+James McCann RHB,Batting Eighth ​,="6-32",.188,.406,0.218,2,1,0,5,24.2,1,.212,.618
+Tim Tawa RHB,Batting Eighth ​,="7-33",.212,.364,0.152,1,2,0,5,23.1,4,.289,.653
+Jorge Barrosa SHB,Batting Ninth ​,="15-76",.197,.342,0.145,0,9,1,6,27.6,7,.274,.616
+Ryan Waldschmidt RHB,Batting Ninth ​,="16-55",.291,.382,0.091,0,5,0,7,28.1,7,.365,.747

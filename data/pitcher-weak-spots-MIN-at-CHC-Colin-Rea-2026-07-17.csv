@@ -1,0 +1,30 @@
+Matchup,MIN @ CHC
+Pitcher,Colin Rea
+Pitcher Team,CHC
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.1,1.38,="10-45",.222,.311,0.089,1,1,0,3,11.3,7,.340,.651
+Batting Second,11.2,1.20,="9-43",.209,.209,0.000,0,0,0,3,19.6,5,.314,.523
+Batting Third,10.1,1.35,="9-40",.225,.450,0.225,2,3,0,6,14.6,5,.340,.790
+Batting Fourth,8.2,2.31,="15-41",.366,.683,0.317,4,1,0,9,21.3,5,.447,1.130
+Batting Fifth,12.1,0.89,="7-43",.163,.279,0.116,1,2,0,2,16.7,4,.250,.529
+Batting Sixth,11.0,1.09,="11-44",.250,.432,0.182,2,2,0,3,22.2,1,.267,.699
+Batting Seventh,9.0,2.00,="13-39",.333,.436,0.103,0,2,1,1,15.9,5,.409,.845
+Batting Eighth,9.2,1.34,="9-36",.250,.389,0.139,1,2,0,4,14.6,4,.325,.714
+Batting Ninth,7.1,2.45,="18-39",.462,.821,0.359,3,5,0,11,15.0,0,.462,1.283
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trevor Larnach LHB,Batting First ​,="31-90",.344,.567,0.223,4,8,0,15,10.1,8,.398,.965
+Austin Martin RHB,Batting First ​,="15-69",.217,.275,0.058,0,4,0,8,19.3,15,.375,.650
+Brooks Lee SHB,Batting Second ​,="22-130",.169,.308,0.139,5,3,0,16,17.6,10,.232,.540
+Kody Clemens LHB,Batting Third ​,="31-130",.238,.538,0.300,11,6,0,28,22.1,8,.279,.817
+Luke Keaschall RHB,Batting Third ​,="15-70",.214,.286,0.072,1,2,0,9,11.7,6,.273,.559
+Josh Bell SHB,Batting Fourth ​,="39-183",.213,.383,0.170,6,11,1,23,24.7,13,.268,.651
+Ryan Jeffers RHB,Batting Fourth ​,="17-60",.283,.517,0.234,3,3,1,14,14.5,9,.377,.894
+Royce Lewis RHB,Batting Fifth ​,="16-58",.276,.603,0.327,5,4,0,10,20.0,6,.338,.941
+Victor Caratini SHB,Batting Sixth ​,="19-105",.181,.371,0.190,5,5,0,15,20.5,12,.299,.670
+Alan Roden LHB,Batting Seventh ​,="1-7",.143,.143,0.000,0,0,0,1,12.5,1,.250,.393
+Tristan Gray LHB,Batting Eighth ​,="18-87",.207,.230,0.023,0,2,0,6,24.2,3,.231,.461
+Alex Jackson RHB,Batting Ninth ​,="15-51",.294,.412,0.118,1,3,0,4,28.3,0,.321,.733
+Ryan Kreidler RHB,Batting Ninth ​,="8-43",.186,.372,0.186,2,0,1,11,20.4,6,.286,.658

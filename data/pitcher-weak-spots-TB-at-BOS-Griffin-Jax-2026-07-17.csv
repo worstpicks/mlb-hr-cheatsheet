@@ -1,0 +1,29 @@
+Matchup,TB @ BOS
+Pitcher,Griffin Jax
+Pitcher Team,TB
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,0.90,="6-33",.182,.455,0.273,3,0,0,7,23.7,3,.243,.698
+Batting Second,7.2,1.70,="10-31",.323,.613,0.290,3,0,0,6,16.7,3,.389,1.002
+Batting Third,8.1,1.20,="7-31",.226,.419,0.193,2,0,0,5,32.4,3,.294,.713
+Batting Fourth,7.1,1.77,="8-28",.286,.607,0.321,2,3,0,4,21.2,5,.394,1.001
+Batting Fifth,6.2,1.65,="8-27",.296,.370,0.074,0,2,0,1,30.0,3,.367,.737
+Batting Sixth,7.2,1.04,="6-27",.222,.333,0.111,1,0,0,2,31.0,2,.276,.609
+Batting Seventh,8.0,0.88,="6-28",.214,.393,0.179,1,2,0,3,27.6,1,.241,.634
+Batting Eighth,8.0,0.63,="3-27",.111,.111,0.000,0,0,0,2,30.0,2,.172,.283
+Batting Ninth,6.0,1.67,="7-22",.318,.364,0.046,0,1,0,3,10.7,3,.385,.749
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Anthony Seigler SHB,Batting First ​,="7-46",.152,.261,0.109,1,2,0,3,22.6,4,.231,.492
+Jarren Duran LHB,Batting First ​,="39-181",.215,.409,0.194,9,4,2,25,29.9,12,.269,.678
+Ceddanne Rafaela RHB,Batting Second ​,="53-198",.268,.409,0.141,4,14,1,20,17.2,8,.300,.709
+Jahmai Jones RHB,Batting Third ​,="7-32",.219,.375,0.156,1,2,0,3,34.3,3,.286,.661
+Wilyer Abreu LHB,Batting Third ​,="59-246",.240,.398,0.158,7,14,2,29,20.9,24,.304,.702
+Romy Gonzalez RHB,Batting Fourth ​,="2-13",.154,.154,0.000,0,0,0,0,37.5,2,.313,.467
+Masataka Yoshida LHB,Batting Fifth ​,="17-68",.250,.426,0.176,2,4,1,7,13.3,5,.307,.733
+Andruw Monasterio RHB,Batting Sixth ​,="11-36",.306,.556,0.250,1,4,1,5,20.5,2,.342,.898
+Caleb Durbin RHB,Batting Sixth ​,="23-102",.225,.382,0.157,3,5,1,15,16.8,9,.292,.674
+Connor Wong RHB,Batting Eighth ​,="17-73",.233,.342,0.109,1,5,0,14,25.0,9,.337,.679
+Carlos Narvaez RHB,Batting Eighth ​,="17-101",.168,.228,0.060,1,3,0,4,30.8,8,.246,.474
+Tsung-Che Cheng LHB,Batting Ninth ​,="8-27",.296,.333,0.037,0,1,0,4,29.0,3,.355,.688

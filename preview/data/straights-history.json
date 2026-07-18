@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-17T05:10:51Z",
+  "updated": "2026-07-18T19:33:15Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -605,14 +605,12 @@
       "o05": {
         "player": "CJ Abrams",
         "matchup": "AL @ NL",
-        "result": "void",
-        "note": "no game"
+        "result": "void"
       },
       "o15": {
         "player": "Junior Caminero",
         "matchup": "AL @ NL",
-        "result": "void",
-        "note": "no game"
+        "result": "void"
       }
     },
     {
@@ -635,11 +633,26 @@
       "o05": {
         "player": "Ben Rice",
         "matchup": "LAD @ NYY",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Yordan Alvarez",
         "matchup": "BAL @ HOU",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-18",
+      "o05": {
+        "player": "Jose Siri",
+        "matchup": "DET @ LAA",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "James Wood",
+        "matchup": "WSH @ ATH",
         "result": "pending"
       }
     }

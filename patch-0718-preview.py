@@ -427,6 +427,15 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 
+# 7/18 user lock: McMahon O0.5 / Soderstrom O1.5.
+rows_by_plain_lock = {r["name_plain"]: r for r in rows}
+_lock_o05 = rows_by_plain_lock.get("Ryan McMahon")
+_lock_o15 = rows_by_plain_lock.get("Tyler Soderstrom")
+if _lock_o05 is not None and _lock_o15 is not None:
+    straight_o05 = _lock_o05
+    straight_o15 = _lock_o15
+    straight_names = {straight_o05["name"], straight_o15["name"]}
+
 # Goblin HR legs: real form plus a usable opposing split/risk lane (reject 0/0 pitcher data).
 def goblin_hr_leg_ok(row: dict) -> bool:
     if row["hr"] < 1 and row["near"] < 2:

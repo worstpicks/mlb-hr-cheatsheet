@@ -3073,6 +3073,220 @@ html.theme-light .rs-explore__input {
 .rs-subnav,
 .rs-bottom-bar { display: none !important; }
 
+/* ── AI Research-Based Parlay Suggestions ── */
+.rs-parlays {
+    border: 1px solid var(--rs-border-strong);
+    border-radius: 16px;
+    padding: 16px;
+    background: linear-gradient(145deg, rgba(8, 22, 18, 0.9) 0%, rgba(20, 14, 10, 0.88) 55%, rgba(12, 18, 28, 0.9) 100%);
+}
+.rs-parlays__head { margin-bottom: 14px; }
+.rs-section-title--parlays { color: #fef3c7; }
+.rs-section-title--parlays::before { background: #facc15; }
+.rs-parlay-block__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+    margin-bottom: 12px;
+}
+.rs-parlay-block__title { margin: 0; }
+.rs-parlay-block__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.rs-parlay-btn {
+    appearance: none;
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    background: rgba(250, 204, 21, 0.1);
+    color: #fef3c7;
+    font: inherit;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 7px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.rs-parlay-btn:hover,
+.rs-parlay-btn:focus-visible {
+    background: rgba(250, 204, 21, 0.2);
+    border-color: rgba(250, 204, 21, 0.7);
+    color: #fffbeb;
+    outline: none;
+}
+.rs-parlay-btn:active { transform: translateY(1px); }
+.rs-parlay-btn--gambly {
+    border-color: rgba(74, 222, 128, 0.45);
+    background: rgba(22, 101, 52, 0.35);
+    color: #bbf7d0;
+}
+.rs-parlay-btn--gambly:hover,
+.rs-parlay-btn--gambly:focus-visible {
+    background: rgba(22, 101, 52, 0.55);
+    border-color: rgba(74, 222, 128, 0.75);
+    color: #ecfccb;
+}
+.rs-parlay-btn.is-copied {
+    border-color: rgba(74, 222, 128, 0.7);
+    color: #86efac;
+}
+.rs-parlays__lede {
+    margin: 6px 0 0;
+    font-size: 0.78rem;
+    color: var(--rs-muted);
+    max-width: 52rem;
+    line-height: 1.45;
+}
+.rs-parlays__empty {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px dashed var(--rs-border);
+    font-size: 0.82rem;
+    color: var(--rs-muted);
+    text-align: center;
+}
+.rs-parlay-block {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--rs-border);
+    background: var(--rs-panel);
+}
+.rs-parlay-block:first-child { margin-top: 0; }
+.rs-parlay-block__title {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fde68a;
+}
+.rs-parlay-player {
+    display: grid;
+    gap: 4px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.14);
+}
+.rs-parlay-player:first-of-type { border-top: none; padding-top: 0; }
+.rs-parlay-player__name {
+    font-weight: 800;
+    color: var(--wpz-color-heading);
+    font-size: 0.95rem;
+}
+.rs-parlay-player__meta {
+    font-size: 0.72rem;
+    color: var(--rs-muted);
+}
+.rs-parlay-player__stats {
+    font-size: 0.78rem;
+    color: #fdba74;
+    line-height: 1.4;
+}
+.rs-parlay-player__why,
+.rs-parlay-block__why {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--wpz-color-paragraph);
+    line-height: 1.45;
+}
+.rs-parlay-block__why { margin-top: 10px; }
+.rs-parlay-hits {
+    display: grid;
+    gap: 8px;
+}
+.rs-parlay-hit {
+    display: grid;
+    gap: 2px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: var(--rs-panel-2);
+    border: 1px solid rgba(56, 189, 248, 0.18);
+}
+.rs-parlay-hit__name {
+    font-weight: 700;
+    color: #e0f2fe;
+    font-size: 0.85rem;
+}
+.rs-parlay-hit__stats {
+    font-size: 0.74rem;
+    color: #7dd3fc;
+    line-height: 1.35;
+}
+.rs-parlays__note {
+    margin: 14px 0 0;
+    font-size: 0.7rem;
+    color: var(--rs-muted);
+    font-style: italic;
+    line-height: 1.4;
+}
+.rs-gambly-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+}
+.rs-gambly-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 6, 12, 0.72);
+}
+.rs-gambly-modal__panel {
+    position: relative;
+    width: min(520px, 100%);
+    border-radius: 14px;
+    border: 1px solid var(--rs-border-strong);
+    background: #0f172a;
+    padding: 16px;
+    display: grid;
+    gap: 10px;
+}
+.rs-gambly-modal__title {
+    margin: 0;
+    color: #fde68a;
+    font-size: 1rem;
+}
+.rs-gambly-modal__note {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--rs-muted);
+    line-height: 1.4;
+}
+.rs-gambly-modal__ta {
+    width: 100%;
+    min-height: 140px;
+    border-radius: 10px;
+    border: 1px solid var(--rs-border);
+    background: #020617;
+    color: #e2e8f0;
+    padding: 10px;
+    font: inherit;
+    font-size: 0.8rem;
+    resize: vertical;
+}
+.rs-gambly-modal__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.rs-gambly-modal__actions a.rs-parlay-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+@media (max-width: 720px) {
+    .rs-parlays { padding: 12px; }
+    .rs-parlay-block { padding: 12px; }
+}
+
 /* ── Today's Goblin's (slate-wide purple picks) ── */
 .rs-goblins {
     border: 1px solid rgba(168, 85, 247, 0.4);

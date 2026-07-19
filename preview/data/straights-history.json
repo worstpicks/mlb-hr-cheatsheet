@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-18T19:43:14Z",
+  "updated": "2026-07-19T04:09:59Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -648,11 +648,24 @@
       "o05": {
         "player": "Ryan McMahon",
         "matchup": "LAD @ NYY",
-        "result": "pending"
+        "result": "void"
       },
       "o15": {
         "player": "Tyler Soderstrom",
         "matchup": "WSH @ ATH",
+        "result": "pending"
+      }
+    },
+    {
+      "date": "2026-07-19",
+      "o05": {
+        "player": "Jake McCarthy",
+        "matchup": "CIN @ COL",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Heriberto Hernandez",
+        "matchup": "MIA @ MIL",
         "result": "pending"
       }
     }

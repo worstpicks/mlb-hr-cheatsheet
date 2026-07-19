@@ -1,0 +1,30 @@
+Matchup,DET @ LAA
+Pitcher,Ryan Johnson
+Pitcher Team,LAA
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.2,1.50,="3-15",.200,.200,0.000,0,0,0,0,15.8,4,.368,.568
+Batting Second,5.0,0.80,="4-18",.222,.333,0.111,0,2,0,2,22.2,0,.222,.555
+Batting Third,4.1,0.69,="2-15",.133,.533,0.400,2,0,0,4,18.8,1,.188,.721
+Batting Fourth,3.0,2.33,="5-14",.357,1.071,0.714,3,1,0,8,11.8,2,.471,1.542
+Batting Fifth,3.1,1.80,="6-16",.375,.625,0.250,1,1,0,4,5.9,0,.353,.978
+Batting Sixth,3.0,2.33,="4-14",.286,.500,0.214,1,0,0,5,17.6,3,.412,.912
+Batting Seventh,3.1,1.80,="5-15",.333,.733,0.400,2,0,0,5,12.5,1,.375,1.108
+Batting Eighth,3.2,1.36,="4-13",.308,.308,0.000,0,0,0,1,13.3,1,.333,.641
+Batting Ninth,3.0,1.67,="4-12",.333,.333,0.000,0,0,0,1,35.7,1,.357,.690
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Matt Vierling RHB,Batting First ​,="13-47",.277,.447,0.170,2,2,0,7,17.3,4,.327,.774
+Kevin McGonigle LHB,Batting First ​,="61-206",.296,.466,0.170,7,12,1,19,13.6,35,.401,.867
+Dillon Dingler RHB,Batting Second ​,="32-105",.305,.514,0.209,5,7,0,15,22.1,5,.336,.850
+Colt Keith LHB,Batting Third ​,="25-101",.248,.307,0.059,0,6,0,5,23.4,6,.290,.597
+Riley Greene LHB,Batting Fourth ​,="62-220",.282,.468,0.186,9,12,1,31,28.8,28,.364,.832
+Spencer Torkelson RHB,Batting Fifth ​,="22-115",.191,.357,0.166,4,7,0,12,32.8,13,.285,.642
+Eduardo Valencia RHB,Batting Sixth ​,="5-12",.417,.917,0.500,2,0,0,3,30.8,0,.462,1.379
+Kerry Carpenter LHB,Batting Sixth ​,="14-62",.226,.452,0.226,2,4,2,8,28.2,6,.324,.776
+Zach McKinstry LHB,Batting Seventh ​,="15-75",.200,.293,0.093,2,1,0,10,18.5,5,.250,.543
+Ben Malgeri RHB,Batting Eighth ​,="5-15",.333,.467,0.134,0,2,0,3,10.5,4,.474,.941
+Hao-Yu Lee RHB,Batting Eighth ​,="15-60",.250,.400,0.150,1,4,1,5,28.1,3,.286,.686
+Jake Rogers RHB,Batting Ninth ​,="11-70",.157,.257,0.100,1,2,1,5,28.4,7,.238,.495
+James Outman LHB,Batting Ninth ​,="14-77",.182,.338,0.156,2,4,1,7,40.5,2,.203,.541

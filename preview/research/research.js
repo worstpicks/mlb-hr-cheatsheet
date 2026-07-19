@@ -914,6 +914,7 @@
             computeBoomForSlate();
             clearSlatePresetCache();
             renderGoblinsPanel();
+            renderParlaysPanel();
             if (columnReorderMode) return;
             renderTable();
             renderMobileCards();
@@ -4503,6 +4504,7 @@
             "source",
             "rotowire",
             "projected_pitchers",
+            "parlay_suggestions",
         ]) {
             if (cached[key] != null && live[key] == null) live[key] = cached[key];
         }
@@ -5346,6 +5348,651 @@
                     jump();
                 }
             });
+        });
+    }
+
+    function _parlayNum(x, fallback = null) {
+        const n = Number(x);
+        return Number.isFinite(n) ? n : fallback;
+    }
+
+    function _parlayPct(v, digits = 1) {
+        if (v == null || !Number.isFinite(Number(v))) return "—";
+        return Number(v).toFixed(digits);
+    }
+
+    function collectParlayHitterRows() {
+        const rows = [];
+        for (const g of slate?.games || []) {
+            const matchup = g.matchup || `${g.away} @ ${g.home}`;
+            const sides = [
+                ["away", g.awayLineup, g.homePitcher?.name],
+                ["home", g.homeLineup, g.awayPitcher?.name],
+            ];
+            for (const [side, lineup, oppPitcher] of sides) {
+                for (const h of lineup || []) {
+                    const st = h.stats || {};
+                    const pa = _parlayNum(st.pa, 0) || 0;
+                    if (pa < 25 || !h.name) continue;
+                    let bipPct = _parlayNum(st.bipPct);
+                    const bip = _parlayNum(st.bip);
+                    if (bipPct == null && bip != null && pa) bipPct = (100 * bip) / pa;
+                    rows.push({
+                        id: h.id,
+                        name: h.name,
+                        team: g[side],
+                        matchup,
+                        gamePk: g.gamePk,
+                        projected: !!h.projected,
+                        oppPitcher,
+                        pa,
+                        barrelPct: _parlayNum(st.barrelPct),
+                        hardHitPct: _parlayNum(st.hardHitPct),
+                        avgEV: _parlayNum(st.avgEV),
+                        fbPct: _parlayNum(st.fbPct),
+                        pullAirPct: _parlayNum(st.pullAirPct),
+                        pullBarrelPct: _parlayNum(st.pullBarrelPct),
+                        iso: _parlayNum(st.iso),
+                        xwoba: _parlayNum(st.xwoba),
+                        hrFbPct: _parlayNum(st.hrFbPct),
+                        whiffPct: _parlayNum(st.whiffPct),
+                        kPct: _parlayNum(st.kPct),
+                        bipPct,
+                        avg: _parlayNum(st.avg),
+                        recentForm: _parlayNum(st.recentForm),
+                    });
+                }
+            }
+        }
+        return rows;
+    }
+
+    function powerScoreParlay(r) {
+        const keys = ["barrelPct", "hardHitPct", "iso", "fbPct", "avgEV"];
+        if (keys.filter((k) => r[k] != null).length < 4) return null;
+        const b = r.barrelPct || 0;
+        const hh = r.hardHitPct || 0;
+        const iso = r.iso || 0;
+        if (b < 8 && iso < 0.18) return null;
+        if (hh < 35 && b < 10) return null;
+        let score =
+            b * 3.2 +
+            hh * 0.9 +
+            iso * 120 +
+            (r.fbPct || 0) * 0.55 +
+            Math.max(0, (r.avgEV || 0) - 88) * 4.5 +
+            (r.pullAirPct || 0) * 0.8 +
+            (r.pullBarrelPct || 0) * 1.4 +
+            (r.xwoba || 0) * 40 +
+            (r.hrFbPct || 0) * 0.35 +
+            Math.max(0, r.recentForm || 0) * 0.15;
+        if ((r.whiffPct || 0) > 38) score *= 0.92;
+        return score;
+    }
+
+    function hitsScoreParlay(r) {
+        if (r.whiffPct == null) return null;
+        const whiff = r.whiffPct;
+        if (whiff > 30) return null;
+        if (whiff > 28 && (r.bipPct || 0) < 65) return null;
+        const hh = r.hardHitPct || 0;
+        const xw = r.xwoba || 0;
+        let score = Math.max(0, 32 - whiff) * 3.2;
+        if (r.kPct != null) score += Math.max(0, 28 - r.kPct) * 1.8;
+        if (r.bipPct != null) score += (r.bipPct - 60) * 1.5;
+        score += hh * 0.55 + xw * 55 + (r.avg || 0) * 40;
+        score += Math.max(0, r.recentForm || 0) * 0.1;
+        if (hh < 28 && xw < 0.3) score *= 0.85;
+        return score;
+    }
+
+    function hrKeyStatsParlay(r) {
+        const out = [];
+        if (r.barrelPct != null) out.push(`Barrel% ${_parlayPct(r.barrelPct)}`);
+        if (r.hardHitPct != null) out.push(`HardHit% ${_parlayPct(r.hardHitPct)}`);
+        if (r.avgEV != null) out.push(`Avg EV ${_parlayPct(r.avgEV)} mph`);
+        if (r.fbPct != null) out.push(`FB% ${_parlayPct(r.fbPct)}`);
+        if (r.iso != null) out.push(`ISO ${_parlayPct(r.iso, 3)}`);
+        if (r.pullAirPct != null) out.push(`PullAir% ${_parlayPct(r.pullAirPct)}`);
+        if (r.xwoba != null) out.push(`xwOBA ${_parlayPct(r.xwoba, 3)}`);
+        return out.slice(0, 5);
+    }
+
+    function hitsKeyStatsLineParlay(r) {
+        return [
+            `Whiff% ${_parlayPct(r.whiffPct)}`,
+            r.kPct != null ? `K% ${_parlayPct(r.kPct)}` : null,
+            r.bipPct != null ? `BIP% ${_parlayPct(r.bipPct)}` : null,
+            r.hardHitPct != null ? `HardHit% ${_parlayPct(r.hardHitPct)}` : null,
+            r.xwoba != null ? `xwOBA ${_parlayPct(r.xwoba, 3)}` : null,
+            r.avg != null ? `AVG ${_parlayPct(r.avg, 3)}` : null,
+        ]
+            .filter(Boolean)
+            .join(" · ");
+    }
+
+    function whyHrParlay(r) {
+        const bits = [];
+        if ((r.barrelPct || 0) >= 18) bits.push("elite barrel rate");
+        else if ((r.barrelPct || 0) >= 14) bits.push("strong barrel rate");
+        if ((r.hardHitPct || 0) >= 50) bits.push("50%+ hard-hit");
+        else if ((r.hardHitPct || 0) >= 45) bits.push("elevated hard-hit");
+        if ((r.iso || 0) >= 0.3) bits.push("high ISO");
+        if ((r.avgEV || 0) >= 93) bits.push("high exit velocity");
+        if ((r.fbPct || 0) >= 32 || (r.pullAirPct || 0) >= 18) bits.push("air-ball authority");
+        if (!bits.length) bits.push("stacked power metrics in the Research window");
+        const note = r.projected ? "Projected lineup spot — " : "";
+        return `${note}${bits.slice(0, 4).join(" / ")} combine for a multi-factor HR upside profile.`;
+    }
+
+    function whyPairParlay(a, b, sameGame) {
+        const diversify = sameGame
+            ? "Same-game stack justified by two exceptional complementary power profiles."
+            : `Diversified across ${a.matchup} and ${b.matchup} to reduce single-game dependency.`;
+        return (
+            `Both clear multiple power thresholds (barrel, hard-hit, EV/ISO), not a single hot metric. ` +
+            `${diversify} ` +
+            `The combination pairs two independent higher-upside damage shapes from the Research tab window.`
+        );
+    }
+
+    /** Per-parlay regen: exclude last suggestion for 2 clicks; re-open every 3rd click. */
+    let parlayRegenState = {
+        sheetDate: null,
+        slots: {
+            hr2: { clickCount: 0, lastKey: null, lastKeys: [], offset: 0 },
+            hr3: { clickCount: 0, lastKey: null, lastKeys: [], offset: 0 },
+            hits: { clickCount: 0, lastNames: [], offset: 0 },
+        },
+    };
+
+    function emptyParlaySlotState() {
+        return {
+            hr2: { clickCount: 0, lastKey: null, lastKeys: [], offset: 0 },
+            hr3: { clickCount: 0, lastKey: null, lastKeys: [], offset: 0 },
+            hits: { clickCount: 0, lastNames: [], offset: 0 },
+        };
+    }
+
+    function resetParlayRegenState(sheetDate) {
+        parlayRegenState = { sheetDate: sheetDate || null, slots: emptyParlaySlotState() };
+    }
+
+    function parlayComboKey(names) {
+        return (names || []).map((n) => String(n || "")).filter(Boolean).sort().join("|");
+    }
+
+    function whyComboParlay(players) {
+        const list = players || [];
+        const games = new Set(list.map((p) => p.gamePk).filter((g) => g != null));
+        const matchups = [...new Set(list.map((p) => p.matchup).filter(Boolean))].join(" / ");
+        let diversify;
+        if (games.size >= list.length) {
+            diversify = `Diversified across ${matchups} to reduce single-game dependency.`;
+        } else if (games.size > 1) {
+            diversify = `Spread across ${games.size} games (${matchups}) for partial diversification.`;
+        } else {
+            diversify = "Same-game stack justified by exceptional complementary power profiles.";
+        }
+        return (
+            `All ${list.length} legs clear multiple power thresholds (barrel, hard-hit, EV/ISO), not a single hot metric. ` +
+            `${diversify} ` +
+            `The combination stacks independent higher-upside damage shapes from the Research tab window.`
+        );
+    }
+
+    function pickHrComboFromPower(power, size, opts = {}) {
+        const excludeKeys = new Set(opts.excludeKeys || []);
+        const offset = Math.max(0, Number(opts.offset) || 0);
+        const pool = power.slice(offset);
+        if (pool.length < size) return null;
+
+        const tryBuild = (allowSameGame) => {
+            const picked = [];
+            const usedNames = new Set();
+            const usedTeams = new Set();
+            const usedGames = new Set();
+            for (const r of pool) {
+                if (usedNames.has(r.name)) continue;
+                if (r.team && usedTeams.has(r.team)) continue;
+                if (!allowSameGame && r.gamePk != null && usedGames.has(r.gamePk)) continue;
+                const trial = picked.concat([r]);
+                if (trial.length === size) {
+                    const key = parlayComboKey(trial.map((p) => p.name));
+                    if (excludeKeys.has(key)) continue;
+                }
+                picked.push(r);
+                usedNames.add(r.name);
+                if (r.team) usedTeams.add(r.team);
+                if (r.gamePk != null) usedGames.add(r.gamePk);
+                if (picked.length >= size) return picked;
+            }
+            return null;
+        };
+
+        let built = tryBuild(false) || tryBuild(true);
+        if (!built && excludeKeys.size) {
+            built = (() => {
+                const picked = [];
+                const usedNames = new Set();
+                for (const r of pool) {
+                    if (usedNames.has(r.name)) continue;
+                    picked.push(r);
+                    usedNames.add(r.name);
+                    if (picked.length >= size) return picked;
+                }
+                return null;
+            })();
+        }
+        if (!built) return null;
+        const games = new Set(built.map((p) => p.gamePk).filter((g) => g != null));
+        return { players: built, sameGame: games.size <= 1, key: parlayComboKey(built.map((p) => p.name)) };
+    }
+
+    function buildParlaySuggestionsFromSlate(opts = {}) {
+        const slotOpts = opts.slots || {};
+        const note =
+            "These suggestions are generated exclusively from MLB Research tab data using multi-factor statistical analysis.";
+        const base = {
+            source: "research-multi-factor",
+            sheetDate: slate?.sheet_date || slate?.date || null,
+            note,
+            hr2Leg: opts.preserve?.hr2Leg || null,
+            hr3Leg: opts.preserve?.hr3Leg || null,
+            hitsParlay: opts.preserve?.hitsParlay || null,
+            meta: { hittersScored: 0, powerPool: 0, hitsPool: 0 },
+        };
+        const rows = collectParlayHitterRows();
+        const power = rows
+            .map((r) => {
+                const s = powerScoreParlay(r);
+                return s == null ? null : { ...r, powerScore: s };
+            })
+            .filter(Boolean)
+            .sort((a, b) => b.powerScore - a.powerScore);
+        const hits = rows
+            .map((r) => {
+                const s = hitsScoreParlay(r);
+                return s == null ? null : { ...r, hitsScore: s };
+            })
+            .filter(Boolean)
+            .sort((a, b) => b.hitsScore - a.hitsScore);
+        base.meta = { hittersScored: rows.length, powerPool: power.length, hitsPool: hits.length };
+
+        const hrPayload = (r) => ({
+            id: r.id,
+            name: r.name,
+            team: r.team,
+            matchup: r.matchup,
+            gamePk: r.gamePk,
+            projected: !!r.projected,
+            oppPitcher: r.oppPitcher,
+            keyStats: hrKeyStatsParlay(r),
+            why: whyHrParlay(r),
+            score: Math.round(r.powerScore * 100) / 100,
+        });
+        const hitsPayload = (r) => ({
+            id: r.id,
+            name: r.name,
+            team: r.team,
+            matchup: r.matchup,
+            gamePk: r.gamePk,
+            projected: !!r.projected,
+            keyStatsLine: hitsKeyStatsLineParlay(r),
+            score: Math.round(r.hitsScore * 100) / 100,
+        });
+
+        const rebuildHr2 = opts.rebuildAll || opts.rebuildSlot === "hr2";
+        const rebuildHr3 = opts.rebuildAll || opts.rebuildSlot === "hr3";
+        const rebuildHits = opts.rebuildAll || opts.rebuildSlot === "hits";
+
+        if (rebuildHr2 && power.length >= 2) {
+            const o = slotOpts.hr2 || {};
+            const picked = pickHrComboFromPower(power, 2, {
+                excludeKeys: o.excludeKeys || [],
+                offset: o.offset || 0,
+            });
+            if (picked) {
+                base.hr2Leg = {
+                    label: "2-Leg HR Parlay",
+                    players: picked.players.map(hrPayload),
+                    whyPair: whyComboParlay(picked.players),
+                    sameGame: picked.sameGame,
+                    comboKey: picked.key,
+                };
+            }
+        }
+
+        if (rebuildHr3 && power.length >= 3) {
+            const o = slotOpts.hr3 || {};
+            const avoidTwo = new Set((base.hr2Leg?.players || []).map((p) => p.name));
+            const pool = power.filter((r) => !avoidTwo.has(r.name));
+            const picked =
+                pickHrComboFromPower(pool.length >= 3 ? pool : power, 3, {
+                    excludeKeys: o.excludeKeys || [],
+                    offset: o.offset || 0,
+                }) ||
+                pickHrComboFromPower(power, 3, {
+                    excludeKeys: o.excludeKeys || [],
+                    offset: o.offset || 0,
+                });
+            if (picked) {
+                base.hr3Leg = {
+                    label: "3-Leg HR Parlay",
+                    players: picked.players.map(hrPayload),
+                    whyPair: whyComboParlay(picked.players),
+                    sameGame: picked.sameGame,
+                    comboKey: picked.key,
+                };
+            }
+        }
+
+        if (rebuildHits) {
+            const o = slotOpts.hits || {};
+            const excludeHitNames = new Set(o.excludeNames || []);
+            const pickedHits = [];
+            const gameCounts = new Map();
+            let skipHits = Math.max(0, Number(o.offset) || 0);
+            const tryPick = (respectExclude) => {
+                for (const r of hits) {
+                    if (respectExclude && excludeHitNames.has(r.name)) continue;
+                    if (pickedHits.some((p) => p.name === r.name)) continue;
+                    if (skipHits > 0) {
+                        skipHits -= 1;
+                        continue;
+                    }
+                    const gc = gameCounts.get(r.gamePk) || 0;
+                    if (gc >= 2 && pickedHits.length < 6) continue;
+                    pickedHits.push(r);
+                    gameCounts.set(r.gamePk, gc + 1);
+                    if (pickedHits.length >= 8) break;
+                }
+            };
+            tryPick(true);
+            if (pickedHits.length < 6) {
+                skipHits = 0;
+                tryPick(false);
+            }
+            if (pickedHits.length >= 6) {
+                base.hitsParlay = {
+                    label: "Smart Hits Parlay (Contact-Quality Focused)",
+                    players: pickedHits.map(hitsPayload),
+                    why:
+                        "Built from stacked contact traits — low whiff, low K%, high BIP% — " +
+                        "then filtered for hit quality via hard-hit rate and/or xwOBA/AVG so " +
+                        "the slate is not just soft-contact volume. Coverage spans multiple " +
+                        "games for diversification while staying anchored to Research-tab " +
+                        "contact and ball-in-play metrics.",
+                };
+            }
+        }
+
+        if (!base.hr2Leg && opts.preserve?.topHrPair) {
+            base.hr2Leg = { ...opts.preserve.topHrPair, label: "2-Leg HR Parlay" };
+        }
+        if (!base.hr3Leg && opts.preserve?.altHrPair) {
+            base.hr3Leg = { ...opts.preserve.altHrPair, label: "3-Leg HR Parlay" };
+        }
+
+        return base;
+    }
+
+    function gamblyLinesForParlay(slot, bundle) {
+        const players = bundle?.players || [];
+        if (slot === "hits") {
+            return players.map((p) => `${p.name} - Over 0.5 hits`);
+        }
+        return players.map((p) => `${p.name} - Over 0.5 homerun`);
+    }
+
+    function copyTextSmart(text) {
+        try {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;left:0;top:0;opacity:0;";
+            document.body.appendChild(ta);
+            ta.select();
+            const ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            if (ok) return Promise.resolve(true);
+        } catch (e) {
+            /* fall through */
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text).then(() => true).catch(() => false);
+        }
+        return Promise.resolve(false);
+    }
+
+    function showResearchGamblyModal(text) {
+        let wrap = document.getElementById("rsGamblyExportModal");
+        if (wrap) wrap.remove();
+        wrap = document.createElement("div");
+        wrap.id = "rsGamblyExportModal";
+        wrap.className = "rs-gambly-modal";
+        wrap.setAttribute("role", "dialog");
+        wrap.setAttribute("aria-modal", "true");
+        wrap.innerHTML =
+            '<div class="rs-gambly-modal__backdrop" data-close="1"></div>' +
+            '<div class="rs-gambly-modal__panel">' +
+            '<h3 class="rs-gambly-modal__title">Exported Props</h3>' +
+            '<p class="rs-gambly-modal__note">Research parlays copied for Gambly — one line per leg. Select all or Copy, then Open Gambly and paste.</p>' +
+            '<textarea class="rs-gambly-modal__ta" rows="8" readonly></textarea>' +
+            '<div class="rs-gambly-modal__actions">' +
+            '<button type="button" class="rs-parlay-btn" data-select="1">Select all</button>' +
+            '<button type="button" class="rs-parlay-btn" data-copy="1">Copy</button>' +
+            '<a class="rs-parlay-btn rs-parlay-btn--gambly" href="https://gambly.com/" target="_blank" rel="noopener noreferrer">Open Gambly</a>' +
+            '<button type="button" class="rs-parlay-btn" data-close="1">Close</button>' +
+            "</div></div>";
+        const ta = wrap.querySelector("textarea");
+        ta.value = text;
+        const close = () => wrap.remove();
+        wrap.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", close));
+        wrap.querySelector("[data-select]")?.addEventListener("click", () => {
+            ta.focus();
+            ta.select();
+        });
+        wrap.querySelector("[data-copy]")?.addEventListener("click", (ev) => {
+            const btn = ev.currentTarget;
+            copyTextSmart(ta.value).then((ok) => {
+                const prev = btn.textContent;
+                btn.textContent = ok ? "Copied!" : "Select all, then copy";
+                setTimeout(() => {
+                    btn.textContent = prev;
+                }, 1600);
+            });
+        });
+        document.body.appendChild(wrap);
+        requestAnimationFrame(() => {
+            ta.focus();
+            ta.select();
+        });
+    }
+
+    function addParlayToGambly(slot) {
+        const suggestions = slate?.parlay_suggestions;
+        const bundle =
+            slot === "hr2" ? suggestions?.hr2Leg : slot === "hr3" ? suggestions?.hr3Leg : suggestions?.hitsParlay;
+        const lines = gamblyLinesForParlay(slot, bundle);
+        if (!lines.length) {
+            showProfileToast("No parlay legs to export yet");
+            return;
+        }
+        const body = lines.join("\n");
+        copyTextSmart(body).finally(() => showResearchGamblyModal(body));
+        const btn = document.querySelector(`[data-parlay-gambly="${slot}"]`);
+        if (btn) {
+            btn.classList.add("is-copied");
+            const prev = btn.textContent;
+            btn.textContent = "Copied";
+            setTimeout(() => {
+                btn.textContent = prev;
+                btn.classList.remove("is-copied");
+            }, 1600);
+        }
+    }
+
+    function renderParlayBundleHtml(slot, bundle, whyLabel) {
+        if (!bundle?.players?.length) return "";
+        const playersHtml = bundle.players
+            .map((p, idx) => {
+                const meta = [p.team, p.matchup, p.projected ? "proj" : null].filter(Boolean).join(" · ");
+                const stats = (p.keyStats || []).join(" · ") || p.keyStatsLine || "";
+                const why = p.why
+                    ? `<p class="rs-parlay-player__why">Why this player: ${escAttr(p.why)}</p>`
+                    : "";
+                return `<div class="rs-parlay-player">
+                    <div class="rs-parlay-player__name">${idx + 1}) ${escAttr(p.name || "—")}</div>
+                    <div class="rs-parlay-player__meta">${escAttr(meta)}</div>
+                    <div class="rs-parlay-player__stats">${stats ? `Key supporting stats: ${escAttr(stats)}` : ""}</div>
+                    ${why}
+                </div>`;
+            })
+            .join("");
+        const bodyHtml =
+            slot === "hits"
+                ? `<div class="rs-parlay-hits">${bundle.players
+                      .map(
+                          (p) => `<div class="rs-parlay-hit">
+                        <div class="rs-parlay-hit__name">${escAttr(p.name)}${p.team ? ` (${escAttr(p.team)})` : ""}</div>
+                        <div class="rs-parlay-hit__stats">Key stats: ${escAttr(p.keyStatsLine || "")}</div>
+                    </div>`
+                      )
+                      .join("")}</div>`
+                : playersHtml;
+        const why = bundle.whyPair || bundle.why || "";
+        return `<article class="rs-parlay-block" data-parlay-slot="${slot}">
+            <div class="rs-parlay-block__head">
+                <h3 class="rs-parlay-block__title">${escAttr(bundle.label || "Parlay")}</h3>
+                <div class="rs-parlay-block__actions">
+                    <button type="button" class="rs-parlay-btn" data-parlay-regen="${slot}" title="Generate a new set (skips last suggestion; returns every 3rd click)">Regenerate</button>
+                    <button type="button" class="rs-parlay-btn rs-parlay-btn--gambly" data-parlay-gambly="${slot}">Add to Gambly</button>
+                </div>
+            </div>
+            ${bodyHtml}
+            <p class="rs-parlay-block__why"><strong>${escAttr(whyLabel)}:</strong> ${escAttr(why)}</p>
+        </article>`;
+    }
+
+    function paintParlaysPanel(suggestions) {
+        const section = document.getElementById("rsParlaysSection");
+        const body = document.getElementById("rsParlaysBody");
+        if (!section || !body) return;
+
+        const hasHr = !!(suggestions?.hr2Leg || suggestions?.hr3Leg);
+        const hasHits = !!suggestions?.hitsParlay?.players?.length;
+        if (!hasHr && !hasHits) {
+            section.hidden = true;
+            body.innerHTML = "";
+            return;
+        }
+        section.hidden = false;
+
+        const parts = [];
+        if (suggestions.hr2Leg) {
+            parts.push(renderParlayBundleHtml("hr2", suggestions.hr2Leg, "Why this is a strong pair"));
+        }
+        if (suggestions.hr3Leg) {
+            parts.push(renderParlayBundleHtml("hr3", suggestions.hr3Leg, "Why this is a strong trio"));
+        }
+        if (hasHits) {
+            parts.push(renderParlayBundleHtml("hits", suggestions.hitsParlay, "Why these players for a Hits Parlay"));
+        }
+        parts.push(`<p class="rs-parlays__note">${escAttr(suggestions.note || "")}</p>`);
+        body.innerHTML = parts.join("");
+        wireParlayBlockActions(body);
+    }
+
+    function wireParlayBlockActions(root) {
+        root.querySelectorAll("[data-parlay-regen]").forEach((btn) => {
+            btn.addEventListener("click", () => regenerateParlaySlot(btn.getAttribute("data-parlay-regen")));
+        });
+        root.querySelectorAll("[data-parlay-gambly]").forEach((btn) => {
+            btn.addEventListener("click", () => addParlayToGambly(btn.getAttribute("data-parlay-gambly")));
+        });
+    }
+
+    function anyParlayRegenClicks() {
+        const s = parlayRegenState.slots;
+        return (s.hr2.clickCount || 0) + (s.hr3.clickCount || 0) + (s.hits.clickCount || 0) > 0;
+    }
+
+    function renderParlaysPanel(opts = {}) {
+        const section = document.getElementById("rsParlaysSection");
+        const body = document.getElementById("rsParlaysBody");
+        if (!section || !body) return;
+
+        const sheetDate = slate?.sheet_date || slate?.date || els.dateInput?.value || null;
+        if (parlayRegenState.sheetDate !== sheetDate) {
+            resetParlayRegenState(sheetDate);
+        }
+
+        if (
+            !opts.rebuildAll &&
+            !opts.rebuildSlot &&
+            anyParlayRegenClicks() &&
+            slate.parlay_suggestions &&
+            (slate.parlay_suggestions.hr2Leg ||
+                slate.parlay_suggestions.hr3Leg ||
+                slate.parlay_suggestions.hitsParlay) &&
+            parlayRegenState.sheetDate === sheetDate
+        ) {
+            paintParlaysPanel(slate.parlay_suggestions);
+            return;
+        }
+
+        const suggestions = buildParlaySuggestionsFromSlate({
+            rebuildAll: !opts.rebuildSlot,
+            rebuildSlot: opts.rebuildSlot || null,
+            preserve: slate.parlay_suggestions || null,
+            slots: {
+                hr2: {
+                    excludeKeys: opts.slotExclude?.hr2 || [],
+                    offset: parlayRegenState.slots.hr2.offset,
+                },
+                hr3: {
+                    excludeKeys: opts.slotExclude?.hr3 || [],
+                    offset: parlayRegenState.slots.hr3.offset,
+                },
+                hits: {
+                    excludeNames: opts.slotExclude?.hits || [],
+                    offset: parlayRegenState.slots.hits.offset,
+                },
+            },
+        });
+        slate.parlay_suggestions = suggestions;
+        paintParlaysPanel(suggestions);
+    }
+
+    function regenerateParlaySlot(slot) {
+        if (!slate?.games?.length) return;
+        if (!["hr2", "hr3", "hits"].includes(slot)) return;
+        const st = parlayRegenState.slots[slot];
+        const current = slate.parlay_suggestions || {};
+        st.clickCount += 1;
+
+        const exclude = {};
+        if (slot === "hits") {
+            const names = (current.hitsParlay?.players || []).map((p) => p.name).filter(Boolean);
+            st.lastNames = names;
+            st.offset += 3;
+            if (st.clickCount % 3 === 0) st.offset = Math.max(0, st.offset - 6);
+            exclude.hits = st.clickCount % 3 === 0 ? [] : names;
+        } else {
+            const bundle = slot === "hr2" ? current.hr2Leg : current.hr3Leg;
+            const key = bundle?.comboKey || parlayComboKey((bundle?.players || []).map((p) => p.name));
+            st.lastKeys = [key, ...(st.lastKeys || [])].filter(Boolean).slice(0, 2);
+            st.lastKey = key;
+            st.offset += slot === "hr2" ? 2 : 3;
+            if (st.clickCount % 3 === 0) st.offset = Math.max(0, st.offset - (slot === "hr2" ? 4 : 6));
+            exclude[slot] = st.clickCount % 3 === 0 ? [] : st.lastKeys;
+        }
+
+        renderParlaysPanel({ rebuildSlot: slot, slotExclude: exclude });
+        document.querySelector(`[data-parlay-slot="${slot}"]`)?.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
         });
     }
 
@@ -6937,6 +7584,7 @@
         rebuildTicketSlatePools();
         clearSlatePresetCache();
         renderGoblinsPanel();
+        renderParlaysPanel();
         renderGames();
         renderMatchupBar();
         renderWeatherPanel();
@@ -6963,6 +7611,7 @@
         pitcherHandLookup = null;
         clearHrTicketCache();
         clearSlatePresetCache();
+        resetParlayRegenState(date);
         formTrendCache.clear();
         boomTrendCache.clear();
         hrFormRollingCache.clear();

@@ -1,0 +1,30 @@
+Matchup,MIA @ MIL
+Pitcher,Robert Gasser
+Pitcher Team,MIL
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.2,0.90,="5-25",.200,.360,0.160,1,1,0,2,14.8,1,.259,.619
+Batting Second,7.1,0.41,="2-25",.080,.200,0.120,1,0,0,1,33.3,1,.148,.348
+Batting Third,5.0,1.80,="7-21",.333,.381,0.048,0,1,0,1,16.7,2,.375,.756
+Batting Fourth,4.0,2.75,="7-18",.389,.944,0.555,2,4,0,7,9.1,4,.500,1.444
+Batting Fifth,4.2,1.50,="4-18",.222,.389,0.167,0,3,0,2,22.7,3,.364,.753
+Batting Sixth,4.1,1.38,="5-18",.278,.556,0.278,1,0,1,1,23.8,1,.381,.937
+Batting Seventh,4.1,1.85,="7-19",.368,.895,0.527,3,1,0,8,25.0,1,.400,1.295
+Batting Eighth,5.1,0.56,="3-18",.167,.222,0.055,0,1,0,0,21.1,0,.167,.389
+Batting Ninth,4.2,1.29,="5-18",.278,.611,0.333,2,0,0,4,26.3,1,.316,.927
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Liam Hicks LHB,Batting First ​,="28-91",.308,.440,0.132,2,4,1,10,9.5,12,.394,.834
+Jakob Marsee LHB,Batting First ​,="21-119",.176,.244,0.068,1,3,1,10,22.8,20,.303,.547
+Otto Lopez RHB,Batting Third ​,="43-142",.303,.437,0.134,3,8,1,19,17.1,4,.329,.766
+Kyle Stowers LHB,Batting Fourth ​,="23-100",.230,.450,0.220,5,7,0,12,33.6,10,.319,.769
+Xavier Edwards SHB,Batting Fourth ​,="37-125",.296,.368,0.072,1,4,1,18,11.0,24,.396,.764
+Heriberto Hernandez RHB,Batting Fifth ​,="16-71",.225,.451,0.226,4,2,1,13,23.7,5,.276,.727
+Griffin Conine LHB,Batting Seventh ​,="4-18",.222,.389,0.167,1,0,0,2,22.2,0,.222,.611
+Leo Jimenez RHB,Batting Seventh ​,="6-30",.200,.333,0.133,1,1,0,3,24.3,3,.351,.684
+Rece Hinds RHB,Batting Eighth ​,="4-23",.174,.304,0.130,0,3,0,5,46.2,1,.231,.535
+Joe Mack LHB,Batting Eighth ​,="19-82",.232,.451,0.219,5,3,0,12,17.4,8,.308,.759
+Brian Navarreto RHB,Batting Ninth ​,="2-8",.250,.375,0.125,0,1,0,0,27.3,1,.333,.708
+Esteury Ruiz RHB,Batting Ninth ​,="7-32",.219,.406,0.187,1,3,0,1,33.3,2,.286,.692
+Javier Sanoja RHB,Batting Ninth ​,="32-119",.269,.387,0.118,1,11,0,11,8.7,7,.310,.697

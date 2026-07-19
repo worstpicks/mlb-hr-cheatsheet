@@ -8,11 +8,17 @@ Do not duplicate this logic inline in patch-YYYY-MM-DD-preview.py.
 Design goals (revised Jul 2026):
 - Cover the whole cheat sheet, not only +split HR-zone names.
 - Prefer contact / put-in-play signals over HR power form.
+- Ball-in-play % from the Research tab (Savant) is the primary opportunity
+  signal — more balls in play means more chances at a hit.
 - Soften platoon headwinds (hits still happen on mild negative splits).
 - Spread legs across games so the ticket reflects the slate.
 """
 from __future__ import annotations
 
+import json
+import re
+import unicodedata
+from pathlib import Path
 from typing import Callable
 
 # Hits still happen on tough platoon lanes — only extreme headwinds are hard-cut.
@@ -23,6 +29,63 @@ SPLIT_SOFT_FLOOR = -0.15
 # Prefer slate coverage over stacking one game.
 MAX_PER_GAME = 2
 MAX_PER_TEAM = 2
+
+_ROOT = Path(__file__).resolve().parent
+
+
+def _norm_name(name: str) -> str:
+    """Accent-insensitive join key: 'J. Peña (R)' -> 'jpena'."""
+    base = unicodedata.normalize("NFKD", name or "")
+    base = "".join(c for c in base if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]", "", base.lower())
+
+
+def load_research_hit_stats(sheet_date: str, root: Path | None = None) -> dict[str, dict]:
+    """Per-batter contact stats from the Research tab JSON (Savant-backed).
+
+    Returns norm-name -> {bip_pct, avg_bat, xwoba_bat, ld_pct, sweet_spot_pct, pa_bat}.
+    Missing file returns {} so slates without research data still build.
+    """
+    path = (root or _ROOT) / "preview" / "data" / f"research-{sheet_date}.json"
+    if not path.is_file():
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    savant = data.get("savant_lookup") or {}
+    out: dict[str, dict] = {}
+    for game in data.get("games") or []:
+        for side in ("awayLineup", "homeLineup"):
+            for player in game.get(side) or []:
+                stats = player.get("stats") or {}
+                sv = savant.get(str(player.get("id"))) or {}
+                entry = {
+                    "bip_pct": stats.get("bipPct", sv.get("bipPct")),
+                    "avg_bat": stats.get("avg", sv.get("avg")),
+                    "xwoba_bat": stats.get("xwoba", sv.get("xwoba")),
+                    "ld_pct": stats.get("ldPct", sv.get("ldPct")),
+                    "sweet_spot_pct": sv.get("sweetSpotPct", stats.get("sweetSpotPct")),
+                    "pa_bat": stats.get("pa", sv.get("pa")),
+                }
+                key = _norm_name(player.get("name") or "")
+                if key and any(v is not None for v in entry.values()):
+                    out[key] = entry
+    return out
+
+
+def attach_research_hit_stats(
+    rows: list[dict], sheet_date: str, root: Path | None = None
+) -> int:
+    """Merge research-tab contact stats onto ranked rows by batter name."""
+    lookup = load_research_hit_stats(sheet_date, root=root)
+    if not lookup:
+        return 0
+    matched = 0
+    for row in rows:
+        key = _norm_name(row.get("name_plain") or row.get("name") or "")
+        entry = lookup.get(key)
+        if entry:
+            row.update(entry)
+            matched += 1
+    return matched
 
 
 def zone_hits_fit(row: dict) -> float:
@@ -84,6 +147,52 @@ def contact_hit_form(row: dict) -> float:
     return form
 
 
+def _research_sample_weight(row: dict) -> float:
+    """Discount research terms on thin season samples (<60 PA)."""
+    pa = row.get("pa_bat")
+    if pa is None:
+        return 1.0
+    if pa >= 60:
+        return 1.0
+    return max(pa, 0) / 60.0
+
+
+def bip_opportunity(row: dict) -> float:
+    """Ball-in-play % (Research tab) — the core hits-opportunity signal.
+
+    Slate median sits near 68%; reward high-BIP bats (more chances at a hit),
+    drag low-BIP swing-and-miss profiles. Capped so it complements zone fit
+    rather than dominating it.
+    """
+    bip = row.get("bip_pct")
+    if bip is None:
+        return 0.0
+    edge = bip - 66.0
+    if edge >= 0.0:
+        term = min(edge, 18.0) * 0.65
+    else:
+        term = max(edge, -20.0) * 0.50
+    return term * _research_sample_weight(row)
+
+
+def research_contact_form(row: dict) -> float:
+    """Season hit quality from the Research tab — AVG, xwOBA, LD%, sweet spot."""
+    form = 0.0
+    avg = row.get("avg_bat")
+    if avg is not None:
+        form += (avg - 0.240) * 40.0
+    xwoba = row.get("xwoba_bat")
+    if xwoba is not None:
+        form += (xwoba - 0.310) * 25.0
+    ld = row.get("ld_pct")
+    if ld is not None:
+        form += max(ld - 20.0, 0.0) * 0.15
+    sweet = row.get("sweet_spot_pct")
+    if sweet is not None:
+        form += max(sweet - 32.0, 0.0) * 0.10
+    return form * _research_sample_weight(row)
+
+
 def whiff_penalty(row: dict, *, row_high_whiff: Callable[..., bool]) -> float:
     penalty = 0.0
     for pct in (row.get("whiff_pct"), row.get("k_pct")):
@@ -115,6 +224,8 @@ def compute_hits_rank(row: dict, *, row_high_whiff: Callable[..., bool]) -> floa
     return (
         zone_fit
         + contact * 0.85
+        + bip_opportunity(row)
+        + research_contact_form(row)
         + split_adjustment(row)
         + park_edge
         + score_edge
@@ -122,7 +233,14 @@ def compute_hits_rank(row: dict, *, row_high_whiff: Callable[..., bool]) -> floa
     )
 
 
-def annotate_hits_ranks(rows: list[dict], *, row_high_whiff: Callable[..., bool]) -> None:
+def annotate_hits_ranks(
+    rows: list[dict],
+    *,
+    row_high_whiff: Callable[..., bool],
+    sheet_date: str | None = None,
+) -> None:
+    if sheet_date:
+        attach_research_hit_stats(rows, sheet_date)
     for row in rows:
         row["hits_rank"] = compute_hits_rank(row, row_high_whiff=row_high_whiff)
         row["hits_zone_fit"] = zone_hits_fit(row)
@@ -134,6 +252,9 @@ def _has_hit_form(row: dict) -> bool:
         or (row.get("near") or 0) >= 1
         or (row.get("ev") or 0) >= 88
         or (row.get("hh_pct") or 0) >= 40
+        # Research tab: high ball-in-play rate or strong hit tool counts as form.
+        or (row.get("bip_pct") or 0) >= 72
+        or (row.get("avg_bat") or 0) >= 0.280
     )
 
 
@@ -232,8 +353,9 @@ def select_hits_parlay(
     row_high_whiff: Callable[..., bool],
     avoid_whiff: bool = True,
     n: int = 11,
+    sheet_date: str | None = None,
 ) -> list[dict]:
-    annotate_hits_ranks(candidates, row_high_whiff=row_high_whiff)
+    annotate_hits_ranks(candidates, row_high_whiff=row_high_whiff, sheet_date=sheet_date)
     pool = hits_base_pool(candidates)
     if avoid_whiff:
         pool = [r for r in pool if not row_high_whiff(r, for_hits=True)]

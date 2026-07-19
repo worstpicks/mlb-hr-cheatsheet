@@ -104,6 +104,23 @@ def main() -> int:
     else:
         print("FAIL missing Pikkit wordmark on current sheet")
         failed = True
+    preview = ROOT / "preview" / "index.html"
+    if preview.is_file():
+        m = re.search(r'<meta name="sheet-date" content="([^"]+)">', preview.read_text(encoding="utf-8"))
+        if m:
+            sheet_date = m.group(1)
+            research_json = ROOT / "preview" / "data" / f"research-{sheet_date}.json"
+            park_json = ROOT / "preview" / "data" / f"park-factors-{sheet_date}.json"
+            if research_json.is_file():
+                print(f"OK   research tab JSON ({sheet_date})")
+            else:
+                print(f"FAIL missing {research_json.relative_to(ROOT)} — run patch or fetch-research-slate.py")
+                failed = True
+            if park_json.is_file():
+                print(f"OK   park factors JSON ({sheet_date})")
+            else:
+                print(f"FAIL missing {park_json.relative_to(ROOT)}")
+                failed = True
     return 1 if failed else 0
 
 

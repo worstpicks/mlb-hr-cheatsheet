@@ -1,0 +1,30 @@
+Matchup,CWS @ TOR
+Pitcher,Trey Yesavage
+Pitcher Team,TOR
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,1.00,="3-33",.091,.152,0.061,0,2,0,0,20.0,7,.250,.402
+Batting Second,8.1,1.80,="7-31",.226,.323,0.097,0,3,0,1,25.0,8,.385,.708
+Batting Third,8.2,1.27,="4-27",.148,.296,0.148,1,1,0,6,18.9,7,.297,.593
+Batting Fourth,9.1,0.96,="9-36",.250,.528,0.278,2,4,0,10,22.2,0,.250,.778
+Batting Fifth,7.2,1.30,="5-29",.172,.241,0.069,0,2,0,2,20.0,5,.314,.555
+Batting Sixth,6.2,1.95,="10-30",.333,.633,0.300,2,3,0,6,11.4,3,.400,1.033
+Batting Seventh,9.0,0.78,="4-28",.143,.429,0.286,2,2,0,4,21.9,3,.226,.655
+Batting Eighth,8.2,0.46,="1-26",.038,.038,0.000,0,0,0,0,37.9,3,.138,.176
+Batting Ninth,6.2,1.20,="5-24",.208,.292,0.084,0,2,0,0,25.9,3,.296,.588
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="51-178",.287,.410,0.123,5,7,0,18,16.9,15,.380,.790
+Chase Meidroth RHB,Batting First ​,="32-119",.269,.429,0.160,4,7,0,10,23.8,11,.331,.760
+Randal Grichuk RHB,Batting Second ​,="9-35",.257,.629,0.372,3,4,0,3,24.3,2,.297,.926
+Munetaka Murakami LHB,Batting Second ​,="41-170",.241,.506,0.265,13,6,0,30,34.3,33,.368,.874
+Andrew Benintendi LHB,Batting Third ​,="19-73",.260,.466,0.206,4,3,0,12,21.0,8,.333,.799
+Miguel Vargas RHB,Batting Third ​,="45-187",.241,.471,0.230,10,13,0,27,18.0,28,.348,.819
+Kyle Teel LHB,Batting Third ​,="5-22",.227,.545,0.318,2,1,0,9,33.3,2,.292,.837
+Colson Montgomery LHB,Batting Fourth ​,="57-246",.232,.484,0.252,17,11,0,42,33.0,23,.315,.799
+Junior Perez RHB,Batting Fifth ​,="0-9",.000,.000,0.000,0,0,0,0,44.4,0,.000,.000
+Braden Montgomery SHB,Batting Seventh ​,="11-39",.282,.590,0.308,2,4,1,11,16.3,3,.326,.916
+Tristan Peters LHB,Batting Eighth ​,="32-118",.271,.466,0.195,4,7,2,22,13.6,10,.323,.789
+Luisangel Acuna RHB,Batting Ninth ​,="13-63",.206,.270,0.064,1,1,0,5,15.7,4,.261,.531
+Drew Romo SHB,Batting Ninth ​,="9-71",.127,.254,0.127,2,3,0,5,24.4,11,.244,.498

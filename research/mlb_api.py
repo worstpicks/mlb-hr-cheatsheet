@@ -894,6 +894,19 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         except Exception:
             pass
 
+    parlay_suggestions: dict[str, Any] = {}
+    if with_stats:
+        try:
+            from research.parlay_suggestions import build_parlay_suggestions
+
+            parlay_suggestions = build_parlay_suggestions(games, sheet_date)
+        except Exception as exc:
+            parlay_suggestions = {
+                "source": "research-multi-factor",
+                "sheetDate": sheet_date,
+                "error": str(exc),
+            }
+
     return {
         "sheet_date": sheet_date,
         "season": season,
@@ -942,6 +955,7 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         "league_pitch_avgs": league_pitch_avgs,
         "rotowire": rotowire_meta,
         "projected_pitchers": projected_meta,
+        "parlay_suggestions": parlay_suggestions,
         "games": games,
     }
 

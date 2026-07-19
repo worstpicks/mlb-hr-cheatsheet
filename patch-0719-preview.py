@@ -184,13 +184,14 @@ def load_pitchers_to_attack():
 
 
 def load_weather_rows():
+    """Load PropFinder ParkFactors; split same-matchup DH rows into (G1)/(G2) by Time."""
     data_dir = ROOT / "data"
     path = data_dir / f"ParkFactors_{SHEET_DATE}.csv"
     if not path.exists():
         matches = sorted(data_dir.glob(f"ParkFactors_{SHEET_DATE}*.csv"))
         if matches:
             path = matches[0]
-    rows = []
+    by_game: dict[str, list[dict]] = {}
     with path.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -199,16 +200,36 @@ def load_weather_rows():
                 hr_pct = int(row["HR %"].replace("%", ""))
             except ValueError:
                 continue
-            rows.append(
-                {
-                    "game": game,
-                    "venue": row["Venue"],
-                    "hr_pct": hr_pct,
-                    "hr_pct_text": row["HR %"],
-                    "hr_stadium": row["HR % Stadium"],
-                    "hr_weather": row["HR % Weather"],
-                }
-            )
+            entry = {
+                "game": game,
+                "venue": row["Venue"],
+                "hr_pct": hr_pct,
+                "hr_pct_text": row["HR %"],
+                "hr_stadium": row["HR % Stadium"],
+                "hr_weather": row["HR % Weather"],
+                "time": (row.get("Time") or "").strip(),
+            }
+            by_game.setdefault(game, []).append(entry)
+
+    def _time_key(t: str) -> tuple[int, str]:
+        m = re.match(r"^(\d{1,2}):(\d{2})", (t or "").strip())
+        if not m:
+            return (99_999, t or "")
+        hour = int(m.group(1))
+        minute = int(m.group(2))
+        # PropFinder 12h clock without AM/PM: 1–11 = PM so 7:20 > 12:35.
+        if 1 <= hour <= 11:
+            hour += 12
+        return (hour * 60 + minute, t or "")
+
+    rows = []
+    for game, entries in by_game.items():
+        entries.sort(key=lambda e: _time_key(e.get("time", "")))
+        if len(entries) == 1:
+            rows.append(entries[0])
+            continue
+        for i, entry in enumerate(entries, 1):
+            rows.append({**entry, "game": f"{game} (G{i})"})
     return rows
 
 
@@ -225,13 +246,15 @@ weather_rows = load_weather_rows()
 def alias_game_keys(game: str) -> list[str]:
     normalized = " ".join(game.split())
     keys = {normalized}
-    if normalized.startswith("CHC @ NYM ("):
-        keys.add("CHC @ NYM")
-    if normalized.startswith("LAD @ NYY ("):
-        keys.add("LAD @ NYY")
+    # Only map bare matchup -> DH row for G1 so G2 keys stay distinct.
+    m = re.match(r"^(.+ @ .+)\s*\(G(\d+)\)$", normalized)
+    if m and m.group(2) == "1":
+        keys.add(m.group(1))
     for old, new in (("CHW @", "CWS @"), ("CWS @", "CHW @"), ("WAS @", "WSH @"), ("WSH @", "WAS @")):
         if old in normalized:
             keys.add(normalized.replace(old, new, 1))
+            if m and m.group(2) == "1":
+                keys.add(m.group(1).replace(old, new, 1))
     return list(keys)
 
 
@@ -244,7 +267,11 @@ for w in weather_rows:
 
 
 def effective_park_pct(row: dict) -> int:
-    w = weather_by_game.get(row["game_key"])
+    gk = row["game_key"]
+    w = weather_by_game.get(gk)
+    if w is None:
+        base = re.sub(r"\s*\(G\d+\)$", "", gk)
+        w = weather_by_game.get(base)
     return w["hr_pct"] if w else row["park_pct"]
 
 

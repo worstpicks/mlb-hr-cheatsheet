@@ -22,7 +22,9 @@ TITLE_WEATHER_KEY_ALIASES = {
     "PHI @ WSH": "PHI @ WAS",
     "WSH @ BAL": "WAS @ BAL",
     "WSH @ BOS": "WAS @ BOS",
+    "WSH @ ATH": "WAS @ ATH",
     "CWS @ BAL": "CHW @ BAL",
+    "CWS @ TOR": "CHW @ TOR",
     "KC @ CWS": "KC @ CHW",
     "CLE @ CWS": "CLE @ CHW",
     "CWS @ MIN": "CHW @ MIN",
@@ -282,6 +284,24 @@ def _pct_from_field(val: str | None) -> int | None:
     return int(m.group(1)) if m else None
 
 
+def _park_time_sort_key(time_str: str) -> tuple[int, str]:
+    """Sort PropFinder Time values like 12:35 / 7:20 for DH ordering.
+
+    PropFinder exports 12-hour clock without AM/PM. Day games use 12:xx and
+    1–11 for afternoon; evening slots are also 1–11. Treat 1–11 as PM so
+    7:20 sorts after 12:35 on doubleheaders.
+    """
+    raw = (time_str or "").strip()
+    m = re.match(r"^(\d{1,2}):(\d{2})", raw)
+    if not m:
+        return (99_999, raw)
+    hour = int(m.group(1))
+    minute = int(m.group(2))
+    if 1 <= hour <= 11:
+        hour += 12
+    return (hour * 60 + minute, raw)
+
+
 def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
     data_dir = ROOT / "data"
     path = data_dir / f"ParkFactors_{sheet_date}.csv"
@@ -293,6 +313,7 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
     lookup: dict[str, dict] = {}
     if not path.is_file():
         return lookup
+    by_game: dict[str, list[tuple[str, dict]]] = {}
     with path.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -317,6 +338,7 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
                 "hr_weather": row.get("HR % Weather", ""),
                 "stadium_pct": _pct_from_field(row.get("HR % Stadium")),
                 "weather_pct": wx_pct,
+                "time": (row.get("Time") or "").strip(),
             }
             if lhb_st is not None:
                 entry["lhb_stadium_pct"] = lhb_st
@@ -324,17 +346,36 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
             if rhb_st is not None:
                 entry["rhb_stadium_pct"] = rhb_st
                 entry["park_rhb_pct"] = rhb_st + (wx_pct or 0)
-            lookup[game] = entry
+            by_game.setdefault(game, []).append((entry["time"], entry))
+    for game, entries in by_game.items():
+        entries.sort(key=lambda item: _park_time_sort_key(item[0]))
+        if len(entries) == 1:
+            lookup[game] = entries[0][1]
+            continue
+        for i, (_, entry) in enumerate(entries, 1):
+            keyed = {**entry, "game": f"{game} (G{i})"}
+            lookup[f"{game} (G{i})"] = keyed
+        # Bare matchup falls back to earliest first-pitch row (G1).
+        lookup[game] = lookup[f"{game} (G1)"]
     return lookup
 
 
 def lookup_weather_for_game(title: str, weather_lookup: dict[str, dict]) -> dict | None:
     key = game_key_from_title(title)
-    key = TITLE_WEATHER_KEY_ALIASES.get(key, key)
-    if key not in weather_lookup:
-        base = re.sub(r"\s*\(G\d+\)$", "", key)
-        key = TITLE_WEATHER_KEY_ALIASES.get(base, base)
-    return weather_lookup.get(key)
+    aliased = TITLE_WEATHER_KEY_ALIASES.get(key, key)
+    if aliased in weather_lookup:
+        return weather_lookup[aliased]
+    if key in weather_lookup:
+        return weather_lookup[key]
+    base = re.sub(r"\s*\(G\d+\)$", "", key)
+    base_aliased = TITLE_WEATHER_KEY_ALIASES.get(base, base)
+    # Prefer DH-specific key when title has (Gn) and CSV was keyed that way.
+    gn = re.search(r"\(G(\d+)\)$", key)
+    if gn:
+        for candidate in (f"{base_aliased} (G{gn.group(1)})", f"{base} (G{gn.group(1)})"):
+            if candidate in weather_lookup:
+                return weather_lookup[candidate]
+    return weather_lookup.get(base_aliased) or weather_lookup.get(base)
 
 
 def parse_game_description(desc: str) -> dict:
@@ -363,17 +404,26 @@ def parse_game_description(desc: str) -> dict:
 
 
 def resolve_park_context(game: dict, weather: dict | None) -> dict:
-    """Net park % plus stadium/weather and per-hand HR park from PropFinder + Ballpark Pal."""
+    """Net park % plus stadium/weather and per-hand HR park from PropFinder + Ballpark Pal.
+
+    Prefer the fresh ParkFactors CSV (weather) over stale build descriptions so
+    mid-day park refreshes actually update gameMeta / parkPct.
+    """
     desc_meta = parse_game_description(game.get("description", ""))
-    park_pct = desc_meta["park_pct"]
-    stadium_pct = desc_meta["stadium_pct"]
-    weather_pct = desc_meta["weather_pct"]
-    if park_pct is None and weather:
+    if weather:
         park_pct = weather.get("hr_pct")
-    if stadium_pct is None and weather:
         stadium_pct = weather.get("stadium_pct")
-    if weather_pct is None and weather:
         weather_pct = weather.get("weather_pct")
+    else:
+        park_pct = desc_meta["park_pct"]
+        stadium_pct = desc_meta["stadium_pct"]
+        weather_pct = desc_meta["weather_pct"]
+    if park_pct is None:
+        park_pct = desc_meta["park_pct"]
+    if stadium_pct is None:
+        stadium_pct = desc_meta["stadium_pct"]
+    if weather_pct is None:
+        weather_pct = desc_meta["weather_pct"]
     park_lhb_stadium = weather.get("lhb_stadium_pct") if weather else None
     park_rhb_stadium = weather.get("rhb_stadium_pct") if weather else None
     park_lhb_pct = weather.get("park_lhb_pct") if weather else None

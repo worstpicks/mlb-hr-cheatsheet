@@ -1,0 +1,30 @@
+Matchup,CWS @ TEX
+Pitcher,Erick Fedde
+Pitcher Team,CWS
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.2,1.11,="8-41",.195,.390,0.195,2,2,0,3,10.4,5,.292,.682
+Batting Second,8.2,2.42,="15-39",.385,.897,0.512,6,0,1,9,13.3,6,.467,1.364
+Batting Third,10.1,1.16,="8-39",.205,.436,0.231,2,3,0,7,18.2,4,.273,.709
+Batting Fourth,8.0,2.00,="12-37",.324,.541,0.217,2,2,0,5,14.6,4,.390,.931
+Batting Fifth,10.0,1.40,="11-41",.268,.463,0.195,2,2,0,6,22.2,3,.318,.781
+Batting Sixth,8.2,1.73,="10-36",.278,.306,0.028,0,1,0,7,16.7,5,.381,.687
+Batting Seventh,9.2,1.66,="13-41",.317,.439,0.122,1,2,0,3,18.2,3,.364,.803
+Batting Eighth,12.0,0.67,="6-38",.158,.158,0.000,0,0,0,1,14.6,2,.195,.353
+Batting Ninth,9.1,1.18,="8-35",.229,.257,0.028,0,1,0,0,10.0,3,.308,.565
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Joc Pederson LHB,Batting First ​,="43-154",.279,.617,0.338,14,6,2,27,21.8,17,.358,.975
+Brandon Nimmo LHB,Batting First ​,="42-152",.276,.414,0.138,4,7,1,12,19.1,17,.358,.772
+Justin Foscue RHB,Batting First ​,="8-25",.320,.680,0.360,2,3,0,5,13.3,4,.433,1.113
+Josh Jung RHB,Batting Second ​,="34-104",.327,.481,0.154,3,7,0,14,18.2,13,.413,.894
+Wyatt Langford RHB,Batting Second ​,="23-108",.213,.417,0.204,5,3,2,12,23.3,7,.267,.684
+Jake Burger RHB,Batting Fourth ​,="33-154",.214,.357,0.143,5,7,0,17,28.7,12,.275,.632
+Ezequiel Duran RHB,Batting Fifth ​,="27-92",.293,.457,0.164,2,5,2,20,22.0,8,.350,.807
+Evan Carter LHB,Batting Sixth ​,="13-65",.200,.431,0.231,4,1,1,9,27.8,6,.278,.709
+Cameron Cauley RHB,Batting Seventh ​,="2-8",.250,.625,0.375,0,1,1,0,20.0,2,.400,1.025
+Alejandro Osuna LHB,Batting Seventh ​,="15-58",.259,.345,0.086,1,2,0,11,14.3,8,.386,.731
+Elias Diaz RHB,Batting Eighth ​,="15-53",.283,.453,0.170,2,3,0,12,20.0,1,.291,.744
+Kyle Higashioka RHB,Batting Ninth ​,="8-55",.145,.327,0.182,3,1,0,7,27.4,5,.242,.569
+Nicky Lopez LHB,Batting Ninth ​,="24-79",.304,.367,0.063,1,2,0,10,13.8,3,.345,.712

@@ -1,0 +1,30 @@
+Matchup,SD @ ATL
+Pitcher,JP Sears
+Pitcher Team,SD
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.1,1.71,="3-10",.300,.400,0.100,0,1,0,0,18.2,1,.364,.764
+Batting Second,2.1,1.71,="1-7",.143,.571,0.428,1,0,0,3,10.0,3,.400,.971
+Batting Third,3.0,0.67,="2-10",.200,.200,0.000,0,0,0,0,20.0,0,.200,.400
+Batting Fourth,2.1,1.29,="3-10",.300,.300,0.000,0,0,0,1,20.0,0,.300,.600
+Batting Fifth,1.2,3.00,="2-7",.286,.857,0.571,1,1,0,2,40.0,3,.500,1.357
+Batting Sixth,2.2,0.75,="1-9",.111,.111,0.000,0,0,0,0,20.0,1,.200,.311
+Batting Seventh,1.2,2.40,="4-10",.400,.700,0.300,1,0,0,2,10.0,0,.400,1.100
+Batting Eighth,2.0,1.00,="2-8",.250,.625,0.375,1,0,0,1,25.0,0,.250,.875
+Batting Ninth,1.2,1.20,="2-7",.286,.286,0.000,0,0,0,0,14.3,0,.286,.572
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ozzie Albies SHB,Batting Second ​,="20-114",.175,.316,0.141,3,7,0,11,20.8,8,.232,.548
+Michael Harris II LHB,Batting Second ​,="19-61",.311,.475,0.164,3,1,0,9,20.0,3,.338,.813
+Drake Baldwin LHB,Batting Second ​,="51-179",.285,.497,0.212,11,5,0,33,23.0,18,.360,.857
+Matt Olson LHB,Batting Third ​,="78-298",.262,.520,0.258,20,17,0,47,23.1,34,.338,.858
+Mauricio Dubon RHB,Batting Fifth ​,="30-114",.263,.430,0.167,4,5,1,23,15.4,7,.306,.736
+Austin Riley RHB,Batting Fifth ​,="23-102",.225,.353,0.128,3,2,1,13,32.2,10,.313,.666
+Eli White RHB,Batting Sixth ​,="10-39",.256,.513,0.257,2,2,1,5,20.9,4,.326,.839
+Kyle Farmer RHB,Batting Seventh ​,="3-9",.333,.444,0.111,0,1,0,2,22.2,0,.333,.777
+Dominic Smith LHB,Batting Seventh ​,="22-68",.324,.441,0.117,2,2,0,14,14.5,3,.360,.801
+Joey Bart RHB,Batting Eighth ​,="5-35",.143,.286,0.143,1,2,0,4,29.3,1,.268,.554
+Jorge Mateo RHB,Batting Ninth ​,="17-72",.236,.264,0.028,0,2,0,2,34.7,3,.267,.531
+Brewer Hicklen RHB,Batting Ninth ​,="5-11",.455,.727,0.272,0,3,0,2,23.1,2,.538,1.265
+Jim Jarvis LHB,Batting Ninth ​,="9-30",.300,.433,0.133,1,1,0,3,21.9,1,.344,.777

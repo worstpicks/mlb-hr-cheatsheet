@@ -169,6 +169,17 @@ def resolve_pitcher(pitcher_map: dict, chip: str):
     return matches[0] if len(matches) == 1 else None
 
 
+def _risk_cell(val: str | None, *, default: float = 0.0) -> float | None:
+    """Parse PropFinder risk cells; treat blank/'-' as default (thin platoon sample)."""
+    raw = (val or "").strip()
+    if not raw or raw == "-":
+        return default
+    try:
+        return float(raw)
+    except ValueError:
+        return None
+
+
 def load_pitcher_risk(csv_path: Path) -> dict:
     rows: dict = {}
     with csv_path.open(encoding="utf-8-sig", newline="") as f:
@@ -181,11 +192,10 @@ def load_pitcher_risk(csv_path: Path) -> dict:
             pitcher = row[2].strip()
             if pitcher == "-":
                 continue
-            try:
-                overall = float(row[4])
-                vs_lhb = float(row[5])
-                vs_rhb = float(row[6])
-            except ValueError:
+            overall = _risk_cell(row[4], default=None)
+            vs_lhb = _risk_cell(row[5], default=0.0)
+            vs_rhb = _risk_cell(row[6], default=0.0)
+            if overall is None or vs_lhb is None or vs_rhb is None:
                 continue
             rows[pitcher.lower()] = {
                 "pitcher": pitcher,

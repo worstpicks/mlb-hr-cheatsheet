@@ -1,0 +1,31 @@
+Matchup,MIA @ HOU
+Pitcher,Janson Junk
+Pitcher Team,MIA
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.2,1.27,="8-34",.235,.412,0.177,1,1,1,1,18.9,3,.297,.709
+Batting Second,8.1,1.20,="8-32",.250,.344,0.094,1,0,0,2,5.9,2,.294,.638
+Batting Third,7.0,2.00,="12-32",.375,.594,0.219,1,4,0,5,14.7,2,.412,1.006
+Batting Fourth,6.2,1.95,="10-29",.345,.517,0.172,1,0,1,6,18.2,3,.406,.923
+Batting Fifth,7.0,1.57,="10-29",.345,.621,0.276,2,2,0,8,6.5,1,.355,.976
+Batting Sixth,6.2,1.05,="6-26",.231,.346,0.115,0,3,0,1,21.4,1,.286,.632
+Batting Seventh,5.2,1.59,="6-24",.250,.500,0.250,2,0,0,5,33.3,3,.333,.833
+Batting Eighth,7.2,0.78,="5-25",.200,.360,0.160,1,1,0,3,14.8,1,.222,.582
+Batting Ninth,7.0,0.57,="3-24",.125,.167,0.042,0,1,0,3,28.0,1,.160,.327
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="33-128",.258,.492,0.234,7,7,1,13,21.4,15,.338,.830
+Jeremy Pena RHB,Batting First ​,="57-191",.298,.440,0.142,6,9,0,19,15.2,14,.355,.795
+Yordan Alvarez LHB,Batting Second ​,="105-323",.325,.625,0.300,26,19,0,65,16.8,57,.432,1.057
+Isaac Paredes RHB,Batting Third ​,="49-183",.268,.383,0.115,4,9,0,23,13.9,19,.349,.732
+Christian Walker RHB,Batting Fourth ​,="44-196",.224,.449,0.225,12,8,0,29,23.3,17,.301,.750
+LaMonte Wade Jr. LHB,Batting Fifth ​,="0-16",.000,.000,0.000,0,0,0,0,33.3,2,.111,.111
+Yainer Diaz RHB,Batting Sixth ​,="15-72",.208,.264,0.056,0,4,0,3,18.9,2,.230,.494
+Cam Smith RHB,Batting Sixth ​,="26-127",.205,.378,0.173,6,4,0,10,24.1,14,.285,.663
+Zach Dezenzo RHB,Batting Seventh ​,="2-18",.111,.333,0.222,1,1,0,2,40.0,2,.200,.533
+Taylor Trammell LHB,Batting Eighth ​,="5-28",.179,.321,0.142,1,1,0,2,33.3,2,.233,.554
+Christian Vazquez RHB,Batting Ninth ​,="31-133",.233,.346,0.113,3,6,0,20,16.9,10,.285,.631
+Raynel Delgado LHB,Batting Ninth ​,="6-23",.261,.435,0.174,1,1,0,4,12.0,1,.292,.727
+Nick Allen RHB,Batting Ninth ​,="11-37",.297,.405,0.108,1,1,0,3,9.5,4,.381,.786
+Lucas Spence LHB,Batting Ninth ​,="2-4",.500,.500,0.000,0,0,0,0,25.0,0,.500,1.000

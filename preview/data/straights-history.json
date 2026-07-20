@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-19T05:12:33Z",
+  "updated": "2026-07-20T17:58:34Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -662,11 +662,26 @@
       "o05": {
         "player": "Jake McCarthy",
         "matchup": "CIN @ COL",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Heriberto Hernandez",
         "matchup": "MIA @ MIL",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-20",
+      "o05": {
+        "player": "Derek Hill",
+        "matchup": "LAD @ PHI",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Spencer Torkelson",
+        "matchup": "DET @ CHC",
         "result": "pending"
       }
     }

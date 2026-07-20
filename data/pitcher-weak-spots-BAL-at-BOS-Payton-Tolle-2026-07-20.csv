@@ -1,0 +1,31 @@
+Matchup,BAL @ BOS
+Pitcher,Payton Tolle
+Pitcher Team,BOS
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,2.52,="11-35",.314,.429,0.115,1,1,0,4,21.7,10,.457,.886
+Batting Second,11.2,0.69,="4-40",.100,.275,0.175,1,2,1,2,31.8,4,.182,.457
+Batting Third,11.0,0.82,="8-40",.200,.325,0.125,1,2,0,4,14.6,1,.220,.545
+Batting Fourth,9.0,1.33,="9-35",.257,.343,0.086,0,3,0,2,26.3,3,.316,.659
+Batting Fifth,9.2,0.93,="5-33",.152,.152,0.000,0,0,0,0,35.1,4,.243,.395
+Batting Sixth,10.0,0.70,="6-36",.167,.333,0.166,1,3,0,4,13.5,1,.189,.522
+Batting Seventh,8.2,0.92,="6-33",.182,.424,0.242,2,2,0,4,37.1,2,.229,.653
+Batting Eighth,6.2,1.50,="10-30",.333,.600,0.267,2,2,0,5,21.9,0,.375,.975
+Batting Ninth,8.1,0.72,="6-30",.200,.267,0.067,0,2,0,2,29.0,0,.200,.467
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="59-239",.247,.351,0.104,5,10,0,19,21.5,41,.359,.710
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Adley Rutschman SHB,Batting Third ​,="43-172",.250,.465,0.215,8,11,1,39,15.2,19,.320,.785
+Pete Alonso RHB,Batting Fourth ​,="62-244",.254,.480,0.226,15,10,0,47,23.0,34,.351,.831
+Tyler O'Neill RHB,Batting Fifth ​,="9-57",.158,.228,0.070,1,1,0,2,25.8,8,.273,.501
+Samuel Basallo LHB,Batting Fifth ​,="44-190",.232,.421,0.189,9,7,1,31,26.5,18,.299,.720
+Leody Taveras SHB,Batting Sixth ​,="33-126",.262,.357,0.095,1,7,1,14,21.1,11,.326,.683
+Dylan Beavers LHB,Batting Sixth ​,="11-47",.234,.340,0.106,1,2,0,4,26.0,3,.280,.620
+Colton Cowser LHB,Batting Seventh ​,="22-127",.173,.244,0.071,3,0,0,13,31.8,17,.272,.516
+Christian Encarnacion-Strand RHB,Batting Eighth ​,="1-5",.200,.200,0.000,0,0,0,0,20.0,0,.200,.400
+Coby Mayo RHB,Batting Eighth ​,="18-91",.198,.319,0.121,3,2,0,11,33.3,7,.263,.582
+Sam Huff RHB,Batting Ninth ​,="2-13",.154,.231,0.077,0,1,0,0,46.2,0,.154,.385
+Jeremiah Jackson RHB,Batting Ninth ​,="21-84",.250,.381,0.131,2,5,0,14,20.0,3,.270,.651
+Jackson Holliday LHB,Batting Ninth ​,="17-68",.250,.426,0.176,3,3,0,8,19.7,7,.316,.742

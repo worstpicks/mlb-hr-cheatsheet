@@ -192,7 +192,9 @@ def load_pitcher_risk(csv_path: Path) -> dict:
             pitcher = row[2].strip()
             if pitcher == "-":
                 continue
-            overall = _risk_cell(row[4], default=None)
+            # Debut / zero-BF arms often ship overall/splits as "-" — treat as
+            # league-average 0.0 so both SPs still appear in game headers.
+            overall = _risk_cell(row[4], default=0.0)
             vs_lhb = _risk_cell(row[5], default=0.0)
             vs_rhb = _risk_cell(row[6], default=0.0)
             if overall is None or vs_lhb is None or vs_rhb is None:

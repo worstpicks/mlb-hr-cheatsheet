@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-20T17:58:34Z",
+  "updated": "2026-07-23T13:23:45Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -677,11 +677,55 @@
       "o05": {
         "player": "Derek Hill",
         "matchup": "LAD @ PHI",
-        "result": "pending"
+        "result": "win",
+        "hr": 1
       },
       "o15": {
         "player": "Spencer Torkelson",
         "matchup": "DET @ CHC",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-21",
+      "o05": {
+        "player": "Drake Baldwin",
+        "matchup": "SD @ ATL",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Coby Mayo",
+        "matchup": "BAL @ BOS",
+        "result": "void"
+      }
+    },
+    {
+      "date": "2026-07-22",
+      "o05": {
+        "player": "Bryce Eldridge",
+        "matchup": "SF @ KC",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Kyle Schwarber",
+        "matchup": "LAD @ PHI",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "o05": {
+        "player": "Cedric Mullins",
+        "matchup": "TB @ TOR",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Ryan Jeffers",
+        "matchup": "MIN @ CLE",
         "result": "pending"
       }
     }

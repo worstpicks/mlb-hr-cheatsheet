@@ -1,0 +1,131 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-07-23.csv",
+  "source_date": "2026-07-23",
+  "hand_date": "2026-07-23",
+  "by_game": {
+    "MIN @ CLE": {
+      "game": "MIN @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -11,
+      "stadium_pct": -3,
+      "weather_pct": -8,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": -11,
+      "park_rhb_pct": -19
+    },
+    "KC @ DET": {
+      "game": "KC @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": -21,
+      "stadium_pct": -10,
+      "weather_pct": -11,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -15,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": -9
+    },
+    "SD @ ATL": {
+      "game": "SD @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 0,
+      "stadium_pct": -4,
+      "weather_pct": 4,
+      "lhb_stadium_pct": 0,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -2
+    },
+    "TB @ TOR": {
+      "game": "TB @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": -1,
+      "stadium_pct": 6,
+      "weather_pct": -7,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": -2,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 1
+    },
+    "ARI @ STL": {
+      "game": "ARI @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -26,
+      "stadium_pct": -10,
+      "weather_pct": -16,
+      "lhb_stadium_pct": -17,
+      "park_lhb_pct": -33,
+      "rhb_stadium_pct": -16,
+      "park_rhb_pct": -32
+    }
+  },
+  "by_venue": {
+    "progressive field": {
+      "game": "MIN @ CLE",
+      "venue": "Progressive Field",
+      "venue_key": "progressive field",
+      "hr_pct": -11,
+      "stadium_pct": -3,
+      "weather_pct": -8,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": -11,
+      "park_rhb_pct": -19
+    },
+    "comerica park": {
+      "game": "KC @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": -21,
+      "stadium_pct": -10,
+      "weather_pct": -11,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -15,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": -9
+    },
+    "truist park": {
+      "game": "SD @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 0,
+      "stadium_pct": -4,
+      "weather_pct": 4,
+      "lhb_stadium_pct": 0,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -2
+    },
+    "rogers centre": {
+      "game": "TB @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": -1,
+      "stadium_pct": 6,
+      "weather_pct": -7,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": -2,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 1
+    },
+    "busch stadium": {
+      "game": "ARI @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -26,
+      "stadium_pct": -10,
+      "weather_pct": -16,
+      "lhb_stadium_pct": -17,
+      "park_lhb_pct": -33,
+      "rhb_stadium_pct": -16,
+      "park_rhb_pct": -32
+    }
+  }
+}

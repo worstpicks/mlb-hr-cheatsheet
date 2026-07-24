@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-23T13:23:45Z",
+  "updated": "2026-07-24T10:07:01Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -721,11 +721,25 @@
       "o05": {
         "player": "Cedric Mullins",
         "matchup": "TB @ TOR",
-        "result": "pending"
+        "result": "void"
       },
       "o15": {
         "player": "Ryan Jeffers",
         "matchup": "MIN @ CLE",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "o05": {
+        "player": "Derek Hill",
+        "matchup": "NYY @ PHI",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Joe Mack",
+        "matchup": "SD @ MIA",
         "result": "pending"
       }
     }

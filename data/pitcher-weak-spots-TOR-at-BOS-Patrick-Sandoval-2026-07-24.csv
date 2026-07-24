@@ -1,0 +1,30 @@
+Matchup,TOR @ BOS
+Pitcher,Patrick Sandoval
+Pitcher Team,BOS
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,6.00,="2-4",.500,.500,0.000,0,0,0,1,0.0,2,.667,1.167
+Batting Second,1.2,0.60,="1-5",.200,.400,0.200,0,1,0,0,40.0,0,.200,.600
+Batting Third,1.2,0.60,="1-5",.200,.200,0.000,0,0,0,0,20.0,0,.200,.400
+Batting Fourth,0.2,4.50,="3-5",.600,.800,0.200,0,1,0,0,20.0,0,.600,1.400
+Batting Fifth,1.0,2.00,="2-5",.400,.600,0.200,0,1,0,0,60.0,0,.400,1.000
+Batting Sixth,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Seventh,0.2,3.00,="2-4",.500,1.250,0.750,1,0,0,1,0.0,0,.500,1.750
+Batting Eighth,0.2,3.00,="2-4",.500,.500,0.000,0,0,0,1,25.0,0,.500,1.000
+Batting Ninth,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,0,0.0,0,.250,.750
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-240",.221,.375,0.154,8,11,1,20,20.4,28,.309,.684
+Nathan Lukes LHB,Batting Second ​,="28-106",.264,.358,0.094,3,1,0,6,13.3,9,.331,.689
+Yohendrick Pinango LHB,Batting Second ​,="10-30",.333,.567,0.234,2,1,0,5,15.6,2,.375,.942
+Vladimir Guerrero Jr. RHB,Batting Third ​,="73-277",.264,.357,0.093,4,14,0,32,13.0,32,.343,.700
+Kazuma Okamoto RHB,Batting Fourth ​,="35-161",.217,.385,0.168,8,3,0,28,30.4,16,.293,.678
+Alejandro Kirk RHB,Batting Fifth ​,="10-48",.208,.375,0.167,2,2,0,5,16.7,6,.296,.671
+Daulton Varsho LHB,Batting Sixth ​,="23-100",.230,.370,0.140,2,8,0,7,15.9,7,.280,.650
+Luis Urias RHB,Batting Seventh ​,="5-14",.357,.643,0.286,1,1,0,2,12.5,2,.438,1.081
+Ernie Clement RHB,Batting Seventh ​,="24-74",.324,.419,0.095,1,4,0,7,7.9,2,.342,.761
+Davis Schneider RHB,Batting Seventh ​,="3-32",.094,.250,0.156,1,2,0,3,32.6,9,.286,.536
+Myles Straw RHB,Batting Eighth ​,="14-40",.350,.400,0.050,0,2,0,2,7.0,2,.381,.781
+Andres Gimenez LHB,Batting Eighth ​,="34-153",.222,.366,0.144,5,7,0,22,18.8,5,.268,.634
+Brandon Valenzuela SHB,Batting Ninth ​,="19-85",.224,.471,0.247,6,3,0,13,24.5,13,.327,.798

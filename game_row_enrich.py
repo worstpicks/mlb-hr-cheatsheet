@@ -36,6 +36,15 @@ TITLE_WEATHER_KEY_ALIASES = {
     "BOS @ CWS": "BOS @ CHW",
     "PIT @ WSH": "PIT @ WAS",
     "HOU @ WSH": "HOU @ WAS",
+    "ARI @ WSH": "ARI @ WAS",
+    "HOU @ CWS": "HOU @ CHW",
+    "ATH @ CWS": "ATH @ CHW",
+    "DET @ CWS": "DET @ CHW",
+    "NYY @ CWS": "NYY @ CHW",
+    "SEA @ CWS": "SEA @ CHW",
+    "TEX @ CWS": "TEX @ CHW",
+    "MIN @ CWS": "MIN @ CHW",
+    "LAA @ CWS": "LAA @ CHW",
 }
 
 # PropFinder / sheet venue labels -> Ballpark Pal BALLPARK column.

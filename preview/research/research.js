@@ -1294,9 +1294,19 @@
         "MIA @ WSH": "MIA @ WAS",
         "KC @ WSH": "KC @ WAS",
         "PHI @ WSH": "PHI @ WAS",
+        "ARI @ WSH": "ARI @ WAS",
+        "PIT @ WSH": "PIT @ WAS",
+        "HOU @ WSH": "HOU @ WAS",
         "CLE @ CWS": "CLE @ CHW",
+        "HOU @ CWS": "HOU @ CHW",
+        "KC @ CWS": "KC @ CHW",
+        "BOS @ CWS": "BOS @ CHW",
         "CWS @ MIN": "CHW @ MIN",
         "CWS @ NYY": "CHW @ NYY",
+        "CWS @ CLE": "CHW @ CLE",
+        "CWS @ BAL": "CHW @ BAL",
+        "CWS @ TOR": "CHW @ TOR",
+        "CWS @ TEX": "CHW @ TEX",
     };
 
     function normVenueKey(name) {

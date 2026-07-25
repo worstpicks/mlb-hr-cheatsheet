@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-24T10:07:01Z",
+  "updated": "2026-07-25T20:13:37Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -735,11 +735,26 @@
       "o05": {
         "player": "Derek Hill",
         "matchup": "NYY @ PHI",
-        "result": "pending"
+        "result": "void",
+        "hr": 0
       },
       "o15": {
         "player": "Joe Mack",
         "matchup": "SD @ MIA",
+        "result": "loss",
+        "hr": 1
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "o05": {
+        "player": "Munetaka Murakami",
+        "matchup": "HOU @ CWS",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Hunter Goodman",
+        "matchup": "COL @ MIL",
         "result": "pending"
       }
     }

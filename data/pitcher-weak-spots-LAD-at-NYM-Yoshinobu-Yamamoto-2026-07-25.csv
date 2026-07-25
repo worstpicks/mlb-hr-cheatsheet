@@ -1,0 +1,26 @@
+Matchup,LAD @ NYM
+Pitcher,Yoshinobu Yamamoto
+Pitcher Team,LAD
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.0,0.63,="8-55",.145,.291,0.146,2,2,0,3,31.6,2,.175,.466
+Batting Second,15.0,0.80,="9-51",.176,.255,0.079,1,1,0,1,12.7,3,.236,.491
+Batting Third,14.1,0.91,="8-50",.160,.240,0.080,1,1,0,2,29.1,5,.236,.476
+Batting Fourth,13.0,1.23,="10-46",.217,.304,0.087,0,2,1,2,30.2,6,.321,.625
+Batting Fifth,13.0,1.00,="12-48",.250,.417,0.167,2,2,0,8,21.6,1,.255,.672
+Batting Sixth,11.2,1.20,="12-48",.250,.292,0.042,0,2,0,3,22.0,2,.280,.572
+Batting Seventh,13.0,0.69,="6-43",.140,.186,0.046,0,2,0,3,23.4,3,.213,.399
+Batting Eighth,12.2,0.55,="7-45",.156,.489,0.333,5,0,0,7,26.7,0,.156,.645
+Batting Ninth,10.1,1.06,="8-39",.205,.410,0.205,2,2,0,4,26.2,3,.262,.672
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+A.J. Ewing LHB,Batting First ​,="16-61",.262,.426,0.164,2,4,0,5,30.8,4,.308,.734
+Francisco Lindor SHB,Batting Second ​,="2-12",.167,.417,0.250,1,0,0,3,15.4,1,.231,.648
+Bo Bichette RHB,Batting Third ​,="30-123",.244,.317,0.073,1,6,0,12,21.6,8,.284,.601
+Carson Benge LHB,Batting Fourth ​,="4-14",.286,.286,0.000,0,0,0,1,25.0,2,.375,.661
+Luis Robert RHB,Batting Fifth ​,="6-18",.333,.500,0.167,1,0,0,5,21.7,5,.478,.978
+Jorge Polanco SHB,Batting Sixth ​,="2-12",.167,.250,0.083,0,1,0,1,15.4,1,.231,.481
+Marcus Semien RHB,Batting Seventh ​,="24-106",.226,.377,0.151,3,7,0,13,20.5,9,.291,.668
+Brett Baty LHB,Batting Eighth ​,="19-88",.216,.375,0.159,3,5,0,9,20.8,6,.260,.635
+Francisco Alvarez RHB,Batting Ninth ​,="23-68",.338,.691,0.353,7,3,0,12,24.1,9,.423,1.114

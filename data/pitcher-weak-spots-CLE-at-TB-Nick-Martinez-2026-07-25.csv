@@ -1,0 +1,26 @@
+Matchup,CLE @ TB
+Pitcher,Nick Martinez
+Pitcher Team,TB
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.2,1.58,="16-53",.302,.434,0.132,0,7,0,3,13.8,4,.345,.779
+Batting Second,13.1,1.35,="16-55",.291,.491,0.200,3,2,0,4,13.8,2,.328,.819
+Batting Third,14.0,1.07,="13-53",.245,.377,0.132,1,2,1,6,10.7,2,.286,.663
+Batting Fourth,11.1,1.59,="15-50",.300,.480,0.180,2,3,0,2,18.9,3,.340,.820
+Batting Fifth,13.1,0.83,="9-48",.188,.208,0.020,0,1,0,0,12.0,2,.220,.428
+Batting Sixth,13.0,0.92,="11-45",.244,.400,0.156,1,2,1,6,10.4,1,.255,.655
+Batting Seventh,10.0,1.60,="13-42",.310,.524,0.214,2,3,0,4,11.1,3,.356,.880
+Batting Eighth,12.0,0.58,="5-41",.122,.146,0.024,0,1,0,0,14.0,2,.163,.309
+Batting Ninth,10.2,0.75,="7-37",.189,.405,0.216,2,2,0,5,19.5,1,.225,.630
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="43-192",.224,.286,0.062,1,7,1,12,10.2,29,.330,.616
+Jose Ramirez SHB,Batting Second ​,="32-114",.281,.474,0.193,4,10,0,19,12.2,12,.346,.820
+Travis Bazzana LHB,Batting First ​,="35-154",.227,.455,0.228,6,13,2,21,23.7,16,.301,.756
+Brayan Rocchio SHB,Batting Fourth ​,="6-23",.261,.478,0.217,1,2,0,4,26.1,0,.261,.739
+Angel Martinez SHB,Batting Fifth ​,="3-15",.200,.200,0.000,0,0,0,1,40.0,0,.200,.400
+Kyle Manzardo LHB,Batting Sixth ​,="5-15",.333,.667,0.334,1,2,0,3,37.5,0,.375,1.042
+Gabriel Arias RHB,Batting Seventh ​,="9-38",.237,.237,0.000,0,0,0,2,40.0,2,.275,.512
+Patrick Bailey SHB,Batting Eighth ​,="31-146",.212,.342,0.130,4,5,1,14,21.4,11,.266,.608
+Petey Halpin LHB,Batting Ninth ​,="10-53",.189,.358,0.169,2,1,1,5,19.0,1,.200,.558

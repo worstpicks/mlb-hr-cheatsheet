@@ -1,0 +1,26 @@
+Matchup,ATH @ MIN
+Pitcher,Brady Basso
+Pitcher Team,ATH
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,0.75,="1-5",.200,.200,0.000,0,0,0,0,60.0,0,.200,.400
+Batting Second,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,1,0.0,0,.250,.750
+Batting Third,0.1,6.00,="1-2",.500,1.500,1.000,0,0,1,1,0.0,1,.667,2.167
+Batting Fourth,0.2,4.50,="3-5",.600,1.000,0.400,0,2,0,1,0.0,0,.600,1.600
+Batting Fifth,0.1,9.00,="2-3",.667,1.000,0.333,0,1,0,1,25.0,1,.750,1.750
+Batting Sixth,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,0,25.0,0,.250,.750
+Batting Seventh,1.2,0.00,="0-4",.000,.000,0.000,0,0,0,1,20.0,0,.000,.000
+Batting Eighth,1.1,1.50,="2-6",.333,.500,0.167,0,1,0,1,0.0,0,.333,.833
+Batting Ninth,0.2,4.50,="3-5",.600,1.600,1.000,1,2,0,2,20.0,0,.600,2.200
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trevor Larnach LHB,Batting First ​,="37-103",.359,.592,0.233,5,9,0,20,11.4,10,.416,1.008
+Byron Buxton RHB,Batting Second ​,="32-119",.269,.496,0.227,6,7,1,17,20.6,7,.321,.817
+Kody Clemens LHB,Batting Third ​,="32-140",.229,.514,0.285,11,7,0,28,23.3,8,.267,.781
+Josh Bell SHB,Batting Fourth ​,="43-204",.211,.373,0.162,6,13,1,25,25.5,14,.264,.637
+Royce Lewis RHB,Batting Fifth ​,="18-75",.240,.493,0.253,5,4,0,10,19.8,10,.326,.819
+Victor Caratini SHB,Batting Sixth ​,="20-119",.168,.345,0.177,5,6,0,16,22.7,12,.277,.622
+Alan Roden LHB,Batting Seventh ​,="2-13",.154,.154,0.000,0,0,0,1,13.3,2,.267,.421
+Brooks Lee SHB,Batting Eighth ​,="30-83",.361,.578,0.217,4,6,0,20,16.7,5,.404,.982
+Ryan Kreidler RHB,Batting Ninth ​,="10-61",.164,.295,0.131,2,0,1,12,20.9,6,.239,.534

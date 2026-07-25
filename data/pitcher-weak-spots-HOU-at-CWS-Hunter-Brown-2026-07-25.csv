@@ -1,0 +1,26 @@
+Matchup,HOU @ CWS
+Pitcher,Hunter Brown
+Pitcher Team,HOU
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.1,1.31,="5-21",.238,.381,0.143,1,0,0,2,43.5,2,.304,.685
+Batting Second,4.1,1.85,="2-16",.125,.375,0.250,1,1,0,1,21.7,6,.391,.766
+Batting Third,5.1,1.31,="4-20",.200,.200,0.000,0,0,0,0,34.8,3,.304,.504
+Batting Fourth,5.2,0.88,="4-19",.211,.263,0.052,0,1,0,1,19.0,1,.286,.549
+Batting Fifth,3.2,2.18,="3-13",.231,.231,0.000,0,0,0,2,15.8,5,.421,.652
+Batting Sixth,3.1,2.70,="5-15",.333,.733,0.400,2,0,0,6,5.3,4,.474,1.207
+Batting Seventh,4.0,1.25,="1-13",.077,.308,0.231,1,0,0,2,11.1,4,.333,.641
+Batting Eighth,3.2,1.64,="5-15",.333,.467,0.134,0,2,0,2,25.0,1,.375,.842
+Batting Ninth,4.0,0.75,="1-12",.083,.083,0.000,0,0,0,0,40.0,2,.267,.350
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="55-196",.281,.398,0.117,5,8,0,19,17.0,17,.376,.774
+Munetaka Murakami LHB,Batting Second ​,="44-186",.237,.489,0.252,13,8,0,30,34.1,39,.372,.861
+Miguel Vargas RHB,Batting Third ​,="49-207",.237,.459,0.222,10,16,0,29,18.0,30,.342,.801
+Colson Montgomery LHB,Batting Fourth ​,="59-261",.226,.475,0.249,18,11,0,44,32.8,24,.307,.782
+Andrew Benintendi LHB,Batting Fifth ​,="4-26",.154,.308,0.154,0,2,1,4,27.3,6,.303,.611
+Braden Montgomery SHB,Batting Sixth ​,="13-48",.271,.375,0.104,1,2,0,6,26.4,4,.340,.715
+Tristan Peters LHB,Batting Seventh ​,="26-86",.302,.453,0.151,1,10,0,6,20.2,4,.355,.808
+Chase Meidroth RHB,Batting Eighth ​,="4-9",.444,.667,0.223,0,2,0,2,7.7,3,.615,1.282
+Edgar Quero SHB,Batting Ninth ​,="3-19",.158,.158,0.000,0,0,0,1,27.3,1,.227,.385

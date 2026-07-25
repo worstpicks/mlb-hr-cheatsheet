@@ -1,0 +1,26 @@
+Matchup,ATL @ BAL
+Pitcher,Bryce Elder
+Pitcher Team,ATL
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,13.1,1.43,="13-53",.245,.434,0.189,3,1,0,5,16.9,6,.322,.756
+Batting Second,15.2,0.89,="10-54",.185,.185,0.000,0,0,0,3,20.7,4,.241,.426
+Batting Third,12.0,1.67,="16-51",.314,.529,0.215,3,2,0,5,19.6,4,.375,.904
+Batting Fourth,9.1,2.79,="19-46",.413,.913,0.500,7,0,1,15,16.4,7,.491,1.404
+Batting Fifth,12.2,1.11,="13-50",.260,.420,0.160,2,2,0,4,23.1,1,.269,.689
+Batting Sixth,11.2,0.94,="9-44",.205,.364,0.159,1,2,1,4,17.0,2,.239,.603
+Batting Seventh,10.1,1.26,="10-40",.250,.375,0.125,1,2,0,6,20.5,3,.302,.677
+Batting Eighth,12.0,0.58,="4-40",.100,.125,0.025,0,1,0,1,25.0,3,.159,.284
+Batting Ninth,10.2,0.94,="7-38",.184,.237,0.053,0,2,0,2,19.0,3,.244,.481
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dylan Beavers LHB,Batting First ​,="1-4",.250,.250,0.000,0,0,0,0,40.0,1,.400,.650
+Pete Alonso RHB,Batting Second ​,="6-19",.316,.474,0.158,0,3,0,0,20.0,0,.350,.824
+Gunnar Henderson LHB,Batting Third ​,="6-23",.261,.478,0.217,0,3,1,0,18.5,2,.370,.848
+Taylor Ward RHB,Batting Fourth ​,="1-5",.200,.200,0.000,0,0,0,0,0.0,0,.200,.400
+Christian Encarnacion-Strand RHB,Batting Fifth ​,="0-4",.000,.000,0.000,0,0,0,0,40.0,0,.000,.000
+Leody Taveras SHB,Batting Sixth ​,="34-136",.250,.338,0.088,1,7,1,14,21.9,13,.320,.658
+Tyler O'Neill RHB,Batting Seventh ​,="9-36",.250,.500,0.250,2,3,0,3,37.8,1,.270,.770
+Jackson Holliday LHB,Batting Eighth ​,="10-51",.196,.294,0.098,1,0,1,3,30.8,13,.354,.648
+Chadwick Tromp RHB,Batting Ninth ​,="7-35",.200,.229,0.029,0,1,0,4,24.3,0,.194,.423

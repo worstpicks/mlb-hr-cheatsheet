@@ -1245,7 +1245,7 @@ def update_manifest():
     if "2026-07-24" in old or (ARCHIVE_PREVIOUS.is_file()):
         old["2026-07-24"] = {
             "date": "2026-07-24",
-            "label": "July 23, 2026",
+            "label": "July 24, 2026",
             "href": "archive/2026-07-24.html",
         }
     ordered = [
@@ -1311,7 +1311,7 @@ def update_manifest():
             ordered.append(
                 {
                     "date": "2026-07-24",
-                    "label": "July 23, 2026",
+                    "label": "July 24, 2026",
                     "href": "archive/2026-07-24.html",
                 }
             )
@@ -1380,7 +1380,7 @@ def patch_preview(manifest):
         flags=re.DOTALL,
     )
     text = re.sub(
-        r"<p>(?:Saturday|Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday), \w+ \d+, 2026 — Worst Pickz HR cheat sheet",
+        r"<p>(?:Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday), \w+ \d+, 2026 — Worst Pickz HR cheat sheet",
         "<p>Saturday, July 25, 2026 — Worst Pickz HR cheat sheet",
         text,
         count=1,

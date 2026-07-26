@@ -24,6 +24,8 @@ BUM_RISK_MIN = 0.95
 
 RAW_PROPS = [
     "Patrick Bailey⭐",
+    "Junior Caminero",
+    "Rhys Hoskins",
     "Tim Tawa",
     "Ryan Waldschmidt",
     "Esmerlyn Valdez⭐",

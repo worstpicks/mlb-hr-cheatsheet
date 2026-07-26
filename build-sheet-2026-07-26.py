@@ -55,6 +55,7 @@ PLAYER_TEAMS = {
     "Jeremy Pena (R)": "HOU",
     "Joe Mack (L)": "MIA",
     "Jorge Soler (R)": "LAA",
+    "Junior Caminero (R)": "TB",
     "Kazuma Okamoto (R)": "TOR",
     "Kody Clemens (L)": "MIN",
     "Kyle Karros (R)": "COL",
@@ -77,6 +78,7 @@ PLAYER_TEAMS = {
     "Rafael Devers (L)": "SF",
     "Randal Grichuk (R)": "CWS",
     "Randy Arozarena (R)": "SEA",
+    "Rhys Hoskins (R)": "CLE",
     "Riley Greene (L)": "DET",
     "Royce Lewis (R)": "MIN",
     "Ryan Waldschmidt (R)": "ARI",
@@ -182,6 +184,8 @@ games = [
         "description": "Tail key data: Park boost -3% (stadium -4%, weather +1%). Messick (HR risk -0.85, vs LHB -0.80, vs RHB -0.67). Rasmussen (HR risk -0.28, vs LHB +0.08, vs RHB -0.41).",
         "rows": [
             row("Patrick Bailey", "S", "+850", 71, "⭐ 🌕 💣", ["vs Rasmussen"], """Worst Pickz Favorite. 2 HR, 2 near-HR, 97.2 mph EV. Rasmussen SHB→LHB split +0.08, HR risk -0.28. pitcher risk below avg (-0.28).""", blast="high"),
+            row("Junior Caminero", "R", "+296", 58, "", ["vs Messick"], """1 HR, 1 near-HR, 96.3 mph EV. Messick RHB split -0.67, HR risk -0.85. tough split lane (-0.67); pitcher suppresses HR (-0.85).""", blast="good"),
+            row("Rhys Hoskins", "R", "N/A", 65, "🌕 💣", ["vs Rasmussen"], """2 HR, 2 near-HR, 93.8 mph EV. Rasmussen RHB split -0.41, HR risk -0.28. tough split lane (-0.41); pitcher risk below avg (-0.28).""", blast="high"),
         ],
     },
     {

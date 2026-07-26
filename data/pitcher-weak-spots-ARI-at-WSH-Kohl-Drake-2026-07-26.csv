@@ -1,0 +1,31 @@
+Matchup,ARI @ WSH
+Pitcher,Kohl Drake
+Pitcher Team,ARI
+Opposing Team,WSH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,0.0,0,.333,.333
+Batting Second,0.1,6.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,1,.667,1.167
+Batting Third,0.2,1.50,="0-2",.000,.000,0.000,0,0,0,0,33.3,1,.333,.333
+Batting Fourth,1.0,0.00,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Fifth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,0,.500,1.000
+Batting Sixth,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Batting Seventh,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Eighth,0.1,3.00,="1-2",.500,1.500,1.000,0,0,1,0,0.0,0,.500,2.000
+Batting Ninth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,1,0.0,0,.500,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+James Wood LHB,Batting First ​,="109-405",.269,.543,0.274,28,25,1,69,29.4,81,.394,.937
+Luis Garcia Jr. LHB,Batting Second ​,="75-255",.294,.592,0.298,18,14,4,59,17.4,10,.321,.913
+Curtis Mead RHB,Batting Second ​,="36-140",.257,.493,0.236,7,10,1,19,16.0,21,.362,.855
+Andres Chaparro RHB,Batting Third ​,="10-50",.200,.480,0.280,4,2,0,17,21.1,6,.298,.778
+Brady House RHB,Batting Third ​,="30-122",.246,.443,0.197,6,6,0,20,28.6,4,.270,.713
+CJ Abrams LHB,Batting Fourth ​,="88-312",.282,.535,0.253,19,18,2,59,23.0,27,.345,.880
+Dylan Crews RHB,Batting Fifth ​,="25-116",.216,.422,0.206,7,3,0,14,22.5,11,.295,.717
+Harry Ford RHB,Batting Sixth ​,="3-8",.375,.875,0.500,1,1,0,4,30.0,1,.500,1.375
+Daylen Lile LHB,Batting Sixth ​,="31-152",.204,.388,0.184,6,8,1,17,21.8,8,.255,.643
+Jacob Young RHB,Batting Sixth ​,="18-78",.231,.397,0.166,3,4,0,10,25.6,5,.294,.691
+Jose Tena LHB,Batting Seventh ​,="16-60",.267,.367,0.100,0,4,1,5,26.1,8,.362,.729
+Jorbit Vivas LHB,Batting Eighth ​,="19-75",.253,.360,0.107,1,3,1,7,10.3,8,.318,.678
+Keibert Ruiz SHB,Batting Ninth ​,="31-126",.246,.381,0.135,2,11,0,14,14.3,5,.278,.659
+Nasim Nuñez SHB,Batting Ninth ​,="34-117",.291,.342,0.051,0,0,3,5,21.2,12,.354,.696

@@ -1,0 +1,30 @@
+Matchup,SEA @ TEX
+Pitcher,Jacob deGrom
+Pitcher Team,TEX
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.0,1.50,="12-48",.250,.521,0.271,4,1,0,7,13.0,6,.333,.854
+Batting Second,13.0,1.15,="10-49",.204,.408,0.204,2,4,0,4,35.2,5,.278,.686
+Batting Third,12.2,1.18,="14-52",.269,.500,0.231,3,3,0,7,32.1,1,.283,.783
+Batting Fourth,13.0,0.85,="9-49",.184,.306,0.122,1,3,0,3,43.1,2,.216,.522
+Batting Fifth,13.2,0.66,="8-49",.163,.265,0.102,1,2,0,7,42.0,1,.180,.445
+Batting Sixth,10.2,1.03,="8-39",.205,.282,0.077,1,0,0,4,25.6,3,.256,.538
+Batting Seventh,10.0,1.20,="10-39",.256,.513,0.257,3,1,0,6,24.4,2,.293,.806
+Batting Eighth,9.1,1.39,="10-37",.270,.378,0.108,1,1,0,4,32.5,3,.325,.703
+Batting Ninth,10.2,0.66,="6-36",.167,.194,0.027,0,1,0,0,21.1,1,.189,.383
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JP Crawford LHB,Batting First ​,="50-210",.238,.405,0.167,9,8,0,22,20.4,35,.356,.761
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Second ​,="47-192",.245,.401,0.156,7,9,0,20,18.5,16,.303,.704
+Josh Naylor LHB,Batting Fourth ​,="51-186",.274,.382,0.108,5,5,0,21,15.0,18,.343,.725
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Luke Raley LHB,Batting Sixth ​,="29-113",.257,.478,0.221,6,5,1,16,33.3,8,.320,.798
+Dominic Canzone LHB,Batting Seventh ​,="23-75",.307,.640,0.333,6,7,0,13,22.9,7,.373,1.013
+Mitch Garver RHB,Batting Eighth ​,="7-46",.152,.217,0.065,1,0,0,4,40.7,7,.278,.495
+Weston Wilson RHB,Batting Eighth ​,="10-34",.294,.471,0.177,2,0,0,4,23.7,4,.368,.839
+Victor Robles RHB,Batting Eighth ​,="9-45",.200,.244,0.044,0,2,0,2,20.0,3,.265,.509
+Cole Young LHB,Batting Eighth ​,="24-95",.253,.358,0.105,2,4,0,13,22.3,5,.301,.659
+Buddy Kennedy RHB,Batting Ninth ​,="1-8",.125,.250,0.125,0,1,0,0,22.2,1,.222,.472
+Colt Emerson LHB,Batting Ninth ​,="26-127",.205,.402,0.197,6,5,1,13,31.5,12,.275,.677

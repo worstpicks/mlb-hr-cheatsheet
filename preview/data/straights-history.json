@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-26T09:49:38Z",
+  "updated": "2026-07-27T16:38:38Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -765,11 +765,25 @@
       "o05": {
         "player": "Derek Hill",
         "matchup": "NYY @ PHI",
-        "result": "pending"
+        "result": "void"
       },
       "o15": {
         "player": "Esmerlyn Valdez",
         "matchup": "CHC @ PIT",
+        "result": "loss",
+        "hr": 1
+      }
+    },
+    {
+      "date": "2026-07-27",
+      "o05": {
+        "player": "James Wood",
+        "matchup": "TOR @ WSH",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Esmerlyn Valdez",
+        "matchup": "ARI @ PIT",
         "result": "pending"
       }
     }

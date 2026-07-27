@@ -1,0 +1,30 @@
+Matchup,TOR @ WSH
+Pitcher,Max Scherzer
+Pitcher Team,TOR
+Opposing Team,WSH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,1.33,="3-12",.250,.750,0.500,2,0,0,2,7.7,1,.308,1.058
+Batting Second,2.2,1.88,="3-11",.273,.545,0.272,1,0,0,1,15.4,2,.385,.930
+Batting Third,2.2,2.25,="5-12",.417,.667,0.250,1,0,0,2,23.1,1,.462,1.129
+Batting Fourth,3.1,1.20,="1-10",.100,.400,0.300,1,0,0,2,15.4,3,.308,.708
+Batting Fifth,1.1,4.50,="5-9",.556,.889,0.333,1,0,0,4,9.1,1,.636,1.525
+Batting Sixth,2.2,1.13,="2-9",.222,.333,0.111,0,1,0,3,9.1,1,.273,.606
+Batting Seventh,1.2,3.00,="4-9",.444,1.444,1.000,3,0,0,7,10.0,1,.500,1.944
+Batting Eighth,2.2,0.75,="1-8",.125,.125,0.000,0,0,0,0,22.2,1,.222,.347
+Batting Ninth,2.0,1.50,="3-9",.333,.444,0.111,0,1,0,1,11.1,0,.333,.777
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+James Wood LHB,Batting First ​,="111-409",.271,.557,0.286,30,25,1,72,29.3,82,.396,.953
+Luis Garcia Jr. LHB,Batting Second ​,="75-255",.294,.592,0.298,18,14,4,59,17.4,10,.321,.913
+Andres Chaparro RHB,Batting Third ​,="10-50",.200,.480,0.280,4,2,0,17,21.1,6,.298,.778
+Brady House RHB,Batting Third ​,="30-122",.246,.443,0.197,6,6,0,20,28.6,4,.270,.713
+CJ Abrams LHB,Batting Fourth ​,="91-317",.287,.555,0.268,21,18,2,62,22.9,27,.348,.903
+Dylan Crews RHB,Batting Fifth ​,="25-116",.216,.422,0.206,7,3,0,14,22.5,11,.295,.717
+Daylen Lile LHB,Batting Sixth ​,="31-152",.204,.388,0.184,6,8,1,17,21.8,8,.255,.643
+Jacob Young RHB,Batting Sixth ​,="20-82",.244,.415,0.171,3,5,0,12,24.4,5,.303,.718
+Jose Tena LHB,Batting Seventh ​,="16-60",.267,.367,0.100,0,4,1,5,26.1,8,.362,.729
+Harry Ford RHB,Batting Seventh ​,="1-9",.111,.111,0.000,0,0,0,0,40.0,1,.200,.311
+Jorbit Vivas LHB,Batting Eighth ​,="19-75",.253,.360,0.107,1,3,1,7,10.3,8,.318,.678
+Keibert Ruiz SHB,Batting Ninth ​,="31-126",.246,.381,0.135,2,11,0,14,14.3,5,.278,.659
+Nasim Nuñez SHB,Batting Ninth ​,="34-120",.283,.333,0.050,0,0,3,5,20.6,13,.351,.684

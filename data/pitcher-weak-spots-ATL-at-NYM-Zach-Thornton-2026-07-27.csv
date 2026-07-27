@@ -1,0 +1,31 @@
+Matchup,ATL @ NYM
+Pitcher,Zach Thornton
+Pitcher Team,NYM
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,0.67,="2-12",.167,.250,0.083,0,1,0,0,8.3,0,.167,.417
+Batting Second,2.2,1.13,="2-10",.200,.200,0.000,0,0,0,0,27.3,1,.273,.473
+Batting Third,2.0,2.00,="2-8",.250,.250,0.000,0,0,0,1,0.0,2,.400,.650
+Batting Fourth,3.2,0.55,="1-9",.111,.444,0.333,1,0,0,3,10.0,1,.200,.644
+Batting Fifth,3.1,0.00,="0-9",.000,.000,0.000,0,0,0,0,40.0,0,.000,.000
+Batting Sixth,2.1,0.86,="1-8",.125,.250,0.125,0,1,0,0,33.3,1,.222,.472
+Batting Seventh,2.2,0.38,="1-9",.111,.222,0.111,0,1,0,0,22.2,0,.111,.333
+Batting Eighth,2.0,1.00,="1-7",.143,.143,0.000,0,0,0,0,25.0,1,.250,.393
+Batting Ninth,1.1,3.00,="4-8",.500,.625,0.125,0,1,0,1,12.5,0,.500,1.125
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ronald Acuna Jr. RHB,Batting First ​,="49-195",.251,.421,0.170,7,10,1,22,22.0,35,.373,.794
+Ozzie Albies SHB,Batting Second ​,="27-146",.185,.356,0.171,6,7,0,15,23.4,9,.234,.590
+Drake Baldwin LHB,Batting Second ​,="51-179",.285,.497,0.212,11,5,0,33,23.0,18,.360,.857
+Matt Olson LHB,Batting Third ​,="84-325",.258,.508,0.250,21,18,0,51,23.0,39,.339,.847
+Michael Harris II LHB,Batting Fourth ​,="22-82",.268,.390,0.122,2,4,0,11,16.3,2,.291,.681
+Mauricio Dubon RHB,Batting Fifth ​,="33-129",.256,.403,0.147,4,5,1,25,13.5,8,.297,.700
+Austin Riley RHB,Batting Fifth ​,="25-107",.234,.355,0.121,3,2,1,14,33.3,10,.317,.672
+Eli White RHB,Batting Sixth ​,="10-40",.250,.500,0.250,2,2,1,5,20.5,4,.318,.818
+Dominic Smith LHB,Batting Seventh ​,="23-71",.324,.479,0.155,3,2,0,17,13.9,3,.359,.838
+Mike Yastrzemski LHB,Batting Eighth ​,="16-94",.170,.234,0.064,2,0,0,8,22.0,12,.275,.509
+Joey Bart RHB,Batting Eighth ​,="7-39",.179,.333,0.154,1,3,0,4,28.9,1,.289,.622
+Jorge Mateo RHB,Batting Ninth ​,="17-74",.230,.257,0.027,0,2,0,2,33.8,3,.260,.517
+Brewer Hicklen RHB,Batting Ninth ​,="7-15",.467,.733,0.266,0,4,0,3,23.5,2,.529,1.262
+Jim Jarvis LHB,Batting Ninth ​,="11-42",.262,.405,0.143,1,1,1,6,18.8,3,.326,.731

@@ -467,6 +467,25 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 
+# Manual Straight of the Day lock (user pick 2026-07-27):
+# O0.5 Willson Contreras vs Perkins · O1.5 Luis Garcia Jr. vs Scherzer
+def _force_straight(plain: str) -> dict:
+    for r in straight_rows:
+        if r["name_plain"] == plain:
+            return r
+    raise SystemExit(f"forced straight not on sheet: {plain}")
+
+
+straight_o05 = _force_straight("Willson Contreras")
+straight_o15 = _force_straight("Luis Garcia Jr.")
+if straight_o05["game_key"] == straight_o15["game_key"]:
+    raise SystemExit("forced straights must be different games")
+straight_names = {straight_o05["name"], straight_o15["name"]}
+print(
+    f"STRAIGHTS LOCKED: O0.5 {straight_o05['name_plain']} vs {straight_o05['chip']} | "
+    f"O1.5 {straight_o15['name_plain']} vs {straight_o15['chip']}"
+)
+
 
 # Goblin HR legs: real form plus a usable opposing split/risk lane (reject 0/0 pitcher data).
 def goblin_hr_leg_ok(row: dict) -> bool:

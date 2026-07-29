@@ -1,0 +1,30 @@
+Matchup,KC @ MIN
+Pitcher,Joe Ryan
+Pitcher Team,MIN
+Opposing Team,KC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,14.2,0.95,="12-58",.207,.310,0.103,1,3,0,6,29.0,2,.242,.552
+Batting Second,15.0,1.20,="13-56",.232,.536,0.304,5,2,0,11,26.2,5,.295,.831
+Batting Third,13.0,1.46,="16-54",.296,.519,0.223,2,6,0,6,24.1,3,.328,.847
+Batting Fourth,12.0,1.58,="16-53",.302,.472,0.170,2,3,0,8,23.2,3,.339,.811
+Batting Fifth,11.2,1.46,="13-47",.277,.532,0.255,3,3,0,8,33.3,4,.333,.865
+Batting Sixth,13.2,0.51,="6-46",.130,.130,0.000,0,0,0,4,18.0,1,.180,.310
+Batting Seventh,12.0,0.92,="8-42",.190,.262,0.072,0,3,0,1,23.9,3,.261,.523
+Batting Eighth,12.1,0.57,="6-43",.140,.163,0.023,0,1,0,2,44.4,1,.178,.341
+Batting Ninth,9.2,1.45,="11-40",.275,.575,0.300,3,3,0,6,30.2,3,.326,.901
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carter Jensen LHB,Batting First ​,="40-165",.242,.461,0.219,8,12,0,26,29.8,15,.304,.765
+Vinnie Pasquantino LHB,Batting Third ​,="50-216",.231,.370,0.139,6,8,2,27,16.5,28,.315,.685
+Jac Caglianone LHB,Batting Third ​,="26-112",.232,.500,0.268,8,4,1,15,23.5,5,.269,.769
+Salvador Perez RHB,Batting Fourth ​,="53-265",.200,.347,0.147,10,9,0,34,20.2,11,.247,.594
+Lane Thomas RHB,Batting Fourth ​,="16-62",.258,.516,0.258,3,7,0,7,26.1,7,.333,.849
+Starling Marte RHB,Batting Sixth ​,="13-44",.295,.318,0.023,0,1,0,4,16.0,2,.360,.678
+Josh Rojas LHB,Batting Seventh ​,="7-19",.368,.474,0.106,0,2,0,2,10.5,0,.368,.842
+Isaac Collins SHB,Batting Seventh ​,="24-94",.255,.383,0.128,1,9,0,12,22.2,20,.385,.768
+Nick Loftin RHB,Batting Eighth ​,="19-92",.207,.348,0.141,2,5,1,15,13.5,8,.272,.620
+Michael Massey LHB,Batting Eighth ​,="19-77",.247,.442,0.195,3,6,0,10,20.5,4,.280,.722
+Luke Maile RHB,Batting Ninth ​,="1-6",.167,.167,0.000,0,0,0,0,50.0,0,.167,.334
+Andrew Velazquez SHB,Batting Ninth ​,="1-13",.077,.077,0.000,0,0,0,0,15.4,0,.077,.154
+Tyler Tolbert RHB,Batting Ninth ​,="9-29",.310,.414,0.104,1,0,0,3,14.7,1,.323,.737

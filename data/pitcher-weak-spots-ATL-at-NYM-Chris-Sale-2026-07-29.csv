@@ -1,0 +1,30 @@
+Matchup,ATL @ NYM
+Pitcher,Chris Sale
+Pitcher Team,ATL
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.2,1.50,="14-52",.269,.365,0.096,1,2,0,5,14.0,5,.333,.698
+Batting Second,11.0,1.91,="18-52",.346,.385,0.039,0,2,0,2,21.4,3,.393,.778
+Batting Third,12.2,1.42,="16-50",.320,.560,0.240,3,3,0,5,27.8,2,.340,.900
+Batting Fourth,13.2,0.80,="6-46",.130,.196,0.066,1,0,0,3,32.1,5,.226,.422
+Batting Fifth,13.2,0.66,="7-48",.146,.229,0.083,1,1,0,5,44.2,2,.212,.441
+Batting Sixth,12.0,1.00,="11-46",.239,.261,0.022,0,1,0,2,34.7,1,.286,.547
+Batting Seventh,12.2,0.71,="5-41",.122,.195,0.073,1,0,0,5,36.2,4,.234,.429
+Batting Eighth,10.2,1.22,="10-40",.250,.375,0.125,1,2,0,3,27.9,3,.302,.677
+Batting Ninth,11.2,0.43,="4-37",.108,.135,0.027,0,1,0,1,32.5,1,.175,.310
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Francisco Lindor SHB,Batting First ​,="17-88",.193,.284,0.091,1,1,2,2,19.8,11,.297,.581
+Carson Benge LHB,Batting First ​,="59-210",.281,.429,0.148,7,6,2,23,21.6,13,.335,.764
+A.J. Ewing LHB,Batting First ​,="20-74",.270,.419,0.149,2,5,0,6,29.6,6,.321,.740
+Bo Bichette RHB,Batting Second ​,="55-217",.253,.387,0.134,7,6,1,30,17.8,15,.305,.692
+Jorge Polanco SHB,Batting Third ​,="5-26",.192,.346,0.154,1,1,0,1,23.1,0,.192,.538
+Luis Robert RHB,Batting Fourth ​,="12-43",.279,.349,0.070,0,3,0,2,14.6,5,.354,.703
+Eric Wagaman RHB,Batting Fourth ​,="1-9",.111,.111,0.000,0,0,0,0,30.0,1,.200,.311
+Jared Young LHB,Batting Fourth ​,="17-73",.233,.507,0.274,6,2,0,13,21.0,7,.309,.816
+Marcus Semien RHB,Batting Seventh ​,="24-110",.218,.364,0.146,3,7,0,13,20.7,9,.281,.645
+Tyrone Taylor RHB,Batting Seventh ​,="12-34",.353,.824,0.471,5,1,0,11,28.6,0,.371,1.195
+Brett Baty LHB,Batting Eighth ​,="20-94",.213,.362,0.149,3,5,0,9,23.3,7,.262,.624
+Luis Torrens RHB,Batting Ninth ​,="34-148",.230,.338,0.108,2,10,0,16,20.7,11,.301,.639
+Francisco Alvarez RHB,Batting Ninth ​,="24-70",.343,.686,0.343,7,3,0,12,24.1,11,.439,1.125

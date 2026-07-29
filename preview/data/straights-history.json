@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-27T16:46:14Z",
+  "updated": "2026-07-29T13:57:00Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -777,13 +777,28 @@
     {
       "date": "2026-07-27",
       "o05": {
-        "player": "James Wood",
+        "player": "Willson Contreras",
+        "matchup": "BOS @ ATH",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Luis Garcia Jr.",
         "matchup": "TOR @ WSH",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-07-29",
+      "o05": {
+        "player": "Tyler Soderstrom",
+        "matchup": "BOS @ ATH",
         "result": "pending"
       },
       "o15": {
-        "player": "Esmerlyn Valdez",
-        "matchup": "ARI @ PIT",
+        "player": "Munetaka Murakami",
+        "matchup": "NYY @ CWS",
         "result": "pending"
       }
     }

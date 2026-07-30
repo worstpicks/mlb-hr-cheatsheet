@@ -1,0 +1,30 @@
+Matchup,BOS @ ATH
+Pitcher,Mason Barnett
+Pitcher Team,ATH
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,1.33,="3-12",.250,.583,0.333,1,1,0,1,15.4,1,.308,.891
+Batting Second,2.2,1.88,="2-10",.200,.800,0.600,2,0,0,3,7.7,3,.385,1.185
+Batting Third,2.0,1.50,="2-8",.250,.375,0.125,0,1,0,0,33.3,1,.333,.708
+Batting Fourth,2.1,1.29,="1-8",.125,.125,0.000,0,0,0,0,10.0,2,.300,.425
+Batting Fifth,2.0,2.00,="4-9",.444,.556,0.112,0,1,0,0,22.2,0,.444,1.000
+Batting Sixth,2.0,2.00,="2-8",.250,.625,0.375,1,0,0,1,40.0,2,.400,1.025
+Batting Seventh,2.1,2.14,="4-11",.364,.727,0.363,1,1,0,7,25.0,1,.417,1.144
+Batting Eighth,4.0,0.50,="1-13",.077,.077,0.000,0,0,0,1,21.4,1,.143,.220
+Batting Ninth,4.0,1.00,="2-13",.154,.308,0.154,0,0,1,1,26.7,2,.267,.575
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Anthony Seigler SHB,Batting First ​,="15-75",.200,.347,0.147,2,5,0,6,20.0,7,.274,.621
+Jarren Duran LHB,Batting First ​,="39-184",.212,.402,0.190,9,4,2,25,29.5,12,.265,.667
+Ceddanne Rafaela RHB,Batting Second ​,="66-245",.269,.424,0.155,6,18,1,27,18.4,8,.295,.719
+Jahmai Jones RHB,Batting Third ​,="7-32",.219,.375,0.156,1,2,0,3,34.3,3,.286,.661
+Wilyer Abreu LHB,Batting Third ​,="66-289",.228,.412,0.184,11,16,2,37,21.8,27,.294,.706
+Willson Contreras RHB,Batting Fourth ​,="76-264",.288,.542,0.254,16,15,2,51,25.6,29,.384,.926
+Masataka Yoshida LHB,Batting Fifth ​,="22-89",.247,.427,0.180,3,5,1,9,12.2,7,.306,.733
+Romy Gonzalez RHB,Batting Sixth ​,="7-31",.226,.419,0.193,1,1,1,5,27.3,1,.250,.669
+Nick Sogard SHB,Batting Sixth ​,="5-19",.263,.368,0.105,0,0,1,1,17.4,4,.391,.759
+Caleb Durbin RHB,Batting Sixth ​,="28-129",.217,.372,0.155,4,6,1,16,18.1,11,.287,.659
+Andruw Monasterio RHB,Batting Eighth ​,="14-51",.275,.412,0.137,1,4,0,2,23.2,4,.321,.733
+Connor Wong RHB,Batting Eighth ​,="18-81",.222,.321,0.099,1,5,0,14,25.8,10,.326,.647
+Carlos Narvaez RHB,Batting Eighth ​,="20-105",.190,.276,0.086,2,3,0,7,29.8,8,.263,.539

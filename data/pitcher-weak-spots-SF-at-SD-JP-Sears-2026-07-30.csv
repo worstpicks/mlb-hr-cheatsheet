@@ -1,0 +1,30 @@
+Matchup,SF @ SD
+Pitcher,JP Sears
+Pitcher Team,SD
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.1,1.20,="3-13",.231,.308,0.077,0,1,0,0,14.3,1,.286,.594
+Batting Second,3.1,1.50,="2-11",.182,.455,0.273,1,0,0,3,14.3,3,.357,.812
+Batting Third,4.2,0.43,="2-14",.143,.143,0.000,0,0,0,0,21.4,0,.143,.286
+Batting Fourth,3.2,0.82,="3-14",.214,.214,0.000,0,0,0,1,14.3,0,.214,.428
+Batting Fifth,2.1,2.57,="3-10",.300,1.000,0.700,2,1,0,3,30.8,3,.462,1.462
+Batting Sixth,3.1,0.60,="1-11",.091,.091,0.000,0,0,0,0,15.4,1,.167,.258
+Batting Seventh,2.1,2.14,="5-13",.385,.692,0.307,1,1,0,3,23.1,0,.385,1.077
+Batting Eighth,2.2,1.13,="3-11",.273,.545,0.272,1,0,0,1,18.2,0,.273,.818
+Batting Ninth,2.1,1.29,="2-9",.222,.222,0.000,0,0,0,0,30.0,1,.300,.522
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Osleivis Basabe RHB,Batting First ​,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Luis Arraez LHB,Batting Second ​,="71-190",.374,.474,0.100,2,9,2,16,2.3,16,.425,.899
+Bryce Eldridge LHB,Batting Second ​,="15-76",.197,.408,0.211,5,1,0,9,28.7,11,.299,.707
+Rafael Devers LHB,Batting Fourth ​,="78-297",.263,.529,0.266,19,20,1,51,25.5,30,.331,.860
+Heliot Ramos RHB,Batting Fifth ​,="17-60",.283,.567,0.284,4,3,1,10,27.4,2,.306,.873
+Jung Hoo Lee LHB,Batting Fifth ​,="43-145",.297,.414,0.117,2,9,1,14,8.6,4,.318,.732
+Willy Adames RHB,Batting Sixth ​,="31-131",.237,.328,0.091,2,6,0,9,26.2,9,.291,.619
+Grant McCray LHB,Batting Eighth ​,="1-7",.143,.571,0.428,1,0,0,2,33.3,1,.250,.821
+Drew Gilbert LHB,Batting Eighth ​,="29-135",.215,.289,0.074,2,4,0,14,15.0,17,.327,.616
+Daniel Susac RHB,Batting Eighth ​,="16-48",.333,.438,0.105,0,3,1,5,20.0,4,.407,.845
+Jesus Rodriguez RHB,Batting Ninth ​,="5-25",.200,.360,0.160,1,1,0,4,22.2,1,.259,.619
+Christian Koss RHB,Batting Ninth ​,="4-21",.190,.190,0.000,0,0,0,1,9.1,1,.227,.417
+Drew Cavanaugh LHB,Batting Ninth ​,="5-31",.161,.161,0.000,0,0,0,0,28.2,6,.297,.458

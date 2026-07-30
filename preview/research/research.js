@@ -1307,6 +1307,18 @@
         "CWS @ BAL": "CHW @ BAL",
         "CWS @ TOR": "CHW @ TOR",
         "CWS @ TEX": "CHW @ TEX",
+        "NYY @ CWS": "NYY @ CHW",
+        "ATH @ CWS": "ATH @ CHW",
+        "DET @ CWS": "DET @ CHW",
+        "SEA @ CWS": "SEA @ CHW",
+        "TEX @ CWS": "TEX @ CHW",
+        "MIN @ CWS": "MIN @ CHW",
+        "LAA @ CWS": "LAA @ CHW",
+        "WSH @ ATL": "WAS @ ATL",
+        "WSH @ BAL": "WAS @ BAL",
+        "WSH @ BOS": "WAS @ BOS",
+        "WSH @ ATH": "WAS @ ATH",
+        "WSH @ COL": "WAS @ COL",
     };
 
     function normVenueKey(name) {

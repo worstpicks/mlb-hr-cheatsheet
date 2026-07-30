@@ -1,0 +1,26 @@
+Matchup,TEX @ TB
+Pitcher,Cole Winn
+Pitcher Team,TEX
+Opposing Team,TB
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.2,1.36,="5-16",.313,.563,0.250,0,2,1,0,31.3,0,.313,.876
+Batting Second,2.2,2.25,="5-13",.385,1.077,0.692,3,0,0,8,6.3,1,.467,1.544
+Batting Third,4.0,2.00,="6-18",.333,.778,0.445,2,0,1,6,20.0,2,.400,1.178
+Batting Fourth,4.1,1.62,="4-17",.235,.471,0.236,1,1,0,1,15.0,3,.350,.821
+Batting Fifth,3.2,1.09,="4-14",.286,.500,0.214,1,0,0,4,26.7,0,.267,.767
+Batting Sixth,5.1,0.56,="2-18",.111,.167,0.056,0,1,0,1,21.1,1,.158,.325
+Batting Seventh,4.1,1.38,="5-18",.278,.333,0.055,0,1,0,0,26.3,1,.316,.649
+Batting Eighth,4.0,0.75,="3-15",.200,.267,0.067,0,1,0,1,46.7,0,.200,.467
+Batting Ninth,3.1,1.80,="4-14",.286,.286,0.000,0,0,0,1,18.8,2,.375,.661
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Yandy Diaz RHB,Batting First ​,="89-286",.311,.462,0.151,9,14,1,46,15.6,30,.387,.849
+Jonathan Aranda LHB,Batting Second ​,="65-225",.289,.444,0.155,8,11,0,33,22.4,25,.371,.815
+Junior Caminero RHB,Batting Third ​,="53-188",.282,.590,0.308,15,11,1,36,19.4,27,.375,.965
+Cedric Mullins LHB,Batting Fourth ​,="6-56",.107,.286,0.179,2,2,1,3,24.2,3,.164,.450
+Jonny DeLuca RHB,Batting Fifth ​,="22-86",.256,.384,0.128,1,8,0,16,19.4,6,.304,.688
+Victor Mesa Jr. LHB,Batting Sixth ​,="12-40",.300,.600,0.300,4,0,0,7,33.3,5,.378,.978
+Ben Williamson RHB,Batting Seventh ​,="27-78",.346,.474,0.128,2,4,0,8,15.3,6,.400,.874
+Taylor Walls SHB,Batting Eighth ​,="12-52",.231,.308,0.077,0,4,0,3,20.6,8,.344,.652
+Hunter Feduccia LHB,Batting Ninth ​,="16-60",.267,.400,0.133,1,3,1,5,22.1,7,.343,.743

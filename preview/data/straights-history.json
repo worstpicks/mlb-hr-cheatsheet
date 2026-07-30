@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-29T13:57:00Z",
+  "updated": "2026-07-30T14:11:25Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -794,11 +794,26 @@
       "o05": {
         "player": "Tyler Soderstrom",
         "matchup": "BOS @ ATH",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Munetaka Murakami",
         "matchup": "NYY @ CWS",
+        "result": "loss",
+        "hr": 1
+      }
+    },
+    {
+      "date": "2026-07-30",
+      "o05": {
+        "player": "Willson Contreras",
+        "matchup": "BOS @ ATH",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Austin Riley",
+        "matchup": "WSH @ ATL",
         "result": "pending"
       }
     }

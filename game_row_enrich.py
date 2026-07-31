@@ -27,6 +27,8 @@ TITLE_WEATHER_KEY_ALIASES = {
     "CWS @ BAL": "CHW @ BAL",
     "CWS @ TOR": "CHW @ TOR",
     "CWS @ TEX": "CHW @ TEX",
+    "CWS @ TB": "CHW @ TB",
+    "TB @ CWS": "TB @ CHW",
 
     "KC @ CWS": "KC @ CHW",
     "CLE @ CWS": "CLE @ CHW",

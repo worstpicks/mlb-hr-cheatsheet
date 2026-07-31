@@ -1307,6 +1307,8 @@
         "CWS @ BAL": "CHW @ BAL",
         "CWS @ TOR": "CHW @ TOR",
         "CWS @ TEX": "CHW @ TEX",
+        "CWS @ TB": "CHW @ TB",
+        "TB @ CWS": "TB @ CHW",
         "NYY @ CWS": "NYY @ CHW",
         "ATH @ CWS": "ATH @ CHW",
         "DET @ CWS": "DET @ CHW",

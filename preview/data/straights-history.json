@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-30T14:11:25Z",
+  "updated": "2026-07-31T04:12:52Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -809,11 +809,25 @@
       "o05": {
         "player": "Willson Contreras",
         "matchup": "BOS @ ATH",
-        "result": "pending"
+        "result": "win",
+        "hr": 1
       },
       "o15": {
         "player": "Austin Riley",
         "matchup": "WSH @ ATL",
+        "result": "void"
+      }
+    },
+    {
+      "date": "2026-07-31",
+      "o05": {
+        "player": "James Wood",
+        "matchup": "WSH @ ATL",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Willi Castro",
+        "matchup": "KC @ COL",
         "result": "pending"
       }
     }

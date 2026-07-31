@@ -432,6 +432,12 @@ if straight_o05["game_key"] == straight_o15["game_key"]:
 
 straight_names = {straight_o05["name"], straight_o15["name"]}
 
+# 7/31 judgment: lock O0.5 Straight to Luis Garcia Jr. vs Elder.
+_garcia = next((r for r in straight_rows if r["name_plain"] == "Luis Garcia Jr."), None)
+if _garcia is not None and _garcia["game_key"] != straight_o15["game_key"]:
+    straight_o05 = _garcia
+    straight_names = {straight_o05["name"], straight_o15["name"]}
+
 # 6/22 judgment: O0.5 + O1.5 from best attack lanes after initial pool pick.
 rows_by_plain_early = {r["name_plain"]: r for r in rows}
 
@@ -847,10 +853,19 @@ if len(fav3) < 3 and len(rows) <= 30:
 
 rows_by_plain = {r["name_plain"]: r for r in rows}
 
-# 7/31 Fav3: lock top attack ⭐ (Clemens zone/form edge; drop mild-negative Mesa lane).
+# 7/31 Fav3: Garcia moved to O0.5 straight — use next-best ⭐ (Mesa) with PCA + Clemens.
 _fav3_lock = []
-for _nm in ("Pete Crow-Armstrong", "Kody Clemens", "Luis Garcia Jr."):
-    _hit = next((r for r in rows if r["name_plain"] == _nm and r["name"] in FAVS), None)
+for _nm in ("Pete Crow-Armstrong", "Kody Clemens", "Victor Mesa Jr."):
+    _hit = next(
+        (
+            r
+            for r in rows
+            if r["name_plain"] == _nm
+            and r["name"] in FAVS
+            and r["name"] not in straight_names
+        ),
+        None,
+    )
     if _hit is not None:
         _fav3_lock.append(_hit)
 if len(_fav3_lock) == 3:

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-31T04:17:39Z",
+  "updated": "2026-08-01T09:55:14Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -823,11 +823,25 @@
       "o05": {
         "player": "Luis Garcia Jr.",
         "matchup": "WSH @ ATL",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Willi Castro",
         "matchup": "KC @ COL",
+        "result": "void"
+      }
+    },
+    {
+      "date": "2026-08-01",
+      "o05": {
+        "player": "Corey Seager",
+        "matchup": "TEX @ HOU",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Coby Mayo",
+        "matchup": "PHI @ BAL",
         "result": "pending"
       }
     }

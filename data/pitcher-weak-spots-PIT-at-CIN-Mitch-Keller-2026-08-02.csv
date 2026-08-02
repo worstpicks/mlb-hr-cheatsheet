@@ -1,0 +1,30 @@
+Matchup,PIT @ CIN
+Pitcher,Mitch Keller
+Pitcher Team,PIT
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.1,2.03,="17-54",.315,.500,0.185,2,2,1,4,16.1,8,.403,.903
+Batting Second,16.0,0.94,="14-61",.230,.426,0.196,3,3,0,8,21.0,1,.242,.668
+Batting Third,13.1,1.50,="13-52",.250,.442,0.192,3,1,0,11,12.9,7,.371,.813
+Batting Fourth,11.1,2.21,="19-52",.365,.500,0.135,0,5,1,5,15.3,6,.441,.941
+Batting Fifth,14.2,0.89,="12-54",.222,.389,0.167,2,3,0,9,23.2,1,.250,.639
+Batting Sixth,10.0,2.20,="16-44",.364,.614,0.250,2,5,0,9,21.2,6,.423,1.037
+Batting Seventh,12.1,0.89,="9-45",.200,.356,0.156,1,4,0,7,10.4,2,.250,.606
+Batting Eighth,11.1,0.88,="6-40",.150,.150,0.000,0,0,0,3,17.8,4,.244,.394
+Batting Ninth,11.1,0.71,="5-37",.135,.162,0.027,0,1,0,3,24.4,3,.220,.382
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dane Myers RHB,Batting First ​,="10-46",.217,.435,0.218,3,1,0,6,31.6,10,.368,.803
+TJ Friedl LHB,Batting First ​,="26-137",.190,.277,0.087,2,6,0,7,22.6,12,.270,.547
+Matt McLain RHB,Batting Second ​,="23-118",.195,.297,0.102,2,6,0,9,27.3,19,.317,.614
+JJ Bleday LHB,Batting Third ​,="24-120",.200,.392,0.192,7,2,0,12,24.5,18,.309,.701
+Elly De La Cruz SHB,Batting Third ​,="49-168",.292,.518,0.226,10,8,0,29,28.0,17,.355,.873
+Sal Stewart RHB,Batting Fourth ​,="56-203",.276,.502,0.226,11,13,0,37,20.5,28,.363,.865
+Eugenio Suarez RHB,Batting Fifth ​,="35-166",.211,.398,0.187,8,7,0,25,34.8,14,.271,.669
+Nathaniel Lowe LHB,Batting Fifth ​,="32-121",.264,.521,0.257,8,7,0,19,27.7,9,.315,.836
+Noelvi Marte RHB,Batting Sixth ​,="11-64",.172,.359,0.187,3,3,0,9,21.2,2,.197,.556
+Tyler Stephenson RHB,Batting Seventh ​,="22-100",.220,.390,0.170,4,5,0,15,30.4,13,.313,.703
+Ivan Johnson SHB,Batting Seventh ​,="1-8",.125,.125,0.000,0,0,0,0,44.4,1,.222,.347
+Jose Trevino RHB,Batting Eighth ​,="16-62",.258,.435,0.177,3,2,0,9,15.4,1,.270,.705
+Ke'Bryan Hayes RHB,Batting Ninth ​,="21-145",.145,.234,0.089,3,2,1,6,18.1,9,.200,.434

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-01T09:55:14Z",
+  "updated": "2026-08-02T03:58:54Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -842,6 +842,19 @@
       "o15": {
         "player": "Coby Mayo",
         "matchup": "PHI @ BAL",
+        "result": "pending"
+      }
+    },
+    {
+      "date": "2026-08-02",
+      "o05": {
+        "player": "Jimmy Crooks",
+        "matchup": "STL @ TOR",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Willi Castro",
+        "matchup": "KC @ COL",
         "result": "pending"
       }
     }

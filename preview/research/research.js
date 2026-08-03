@@ -27,6 +27,10 @@
         ST: "sweeper",
         FS: "splitter",
         SV: "slurve",
+        FO: "forkball",
+        KN: "knuckleball",
+        EP: "eephus",
+        SC: "screwball",
     };
 
     function hitterStats(row) {
@@ -1321,6 +1325,7 @@
         "WSH @ BOS": "WAS @ BOS",
         "WSH @ ATH": "WAS @ ATH",
         "WSH @ COL": "WAS @ COL",
+        "WSH @ PHI": "WAS @ PHI",
     };
 
     function normVenueKey(name) {
@@ -7344,6 +7349,7 @@
         }
         wirePitcherProfileSavant(pitcher, season);
         loadPitcherProfileTrends(pitcher.id, season);
+        resetProfileTabs("pitcher", season);
         if (typeof els.playerProfile.showModal === "function") els.playerProfile.showModal();
     }
 
@@ -7365,17 +7371,570 @@
         wireProfileSavant(row, season);
         syncProfileTrackerBtn(entry);
         loadProfileTrends(row.id, season, stats);
+        resetProfileTabs("batter", season);
         if (typeof els.playerProfile.showModal === "function") els.playerProfile.showModal();
     }
 
     function closePlayerProfile() {
         profileEntry = null;
         profilePitcherEntry = null;
+        // Bump the generation so an in-flight detail fetch can't paint into the
+        // next player's modal.
+        profileDetailGen += 1;
         if (els.profileTrends) {
             els.profileTrends.hidden = true;
             els.profileTrends.innerHTML = "";
         }
         if (els.playerProfile && typeof els.playerProfile.close === "function") els.playerProfile.close();
+    }
+
+    /* ---------------------------------------------------------------------
+     * Player deep-dive tabs (Zones / Pitch mix / Spray / Batted balls)
+     *
+     * All four read one pitch-level Savant pull per player-season, fetched
+     * lazily the first time a tab is opened and cached for the session.
+     * ------------------------------------------------------------------- */
+
+    // Savant zones, catcher's view: 1-9 is the strike zone read left-to-right,
+    // top-to-bottom; 11-14 are the four outside-the-zone quadrants.
+    const ZONE_INNER = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const ZONE_SHADOW = { 11: "tl", 12: "tr", 13: "bl", 14: "br" };
+
+    const playerDetailCache = new Map();
+    let profileDetailGen = 0;
+    let activeProfileTab = "overview";
+    // Per-open state for the deep-dive tabs.
+    let profileDetail = null;
+    let profileOppDetail = null;
+    let profileDetailRole = "batter";
+    let profileDetailSeason = "";
+    let sprayFilter = { pitches: null, results: "all" };
+
+    function pitchLabel(code) {
+        return PITCH_LABELS[code] || code || "—";
+    }
+
+    async function fetchPlayerDetail(playerId, role, season) {
+        if (!playerId) return null;
+        const key = `${playerId}:${role}:${season}`;
+        if (playerDetailCache.has(key)) return playerDetailCache.get(key);
+        const promise = (async () => {
+            if (isFileProtocol()) return null;
+            try {
+                const res = await fetch(
+                    `${window.location.origin}/api/savant-player-detail?playerId=${encodeURIComponent(playerId)}` +
+                        `&role=${encodeURIComponent(role)}&season=${encodeURIComponent(season)}`
+                );
+                if (!res.ok) return null;
+                const data = await res.json();
+                return data && !data.error ? data : null;
+            } catch (err) {
+                console.warn("player detail", err);
+                return null;
+            }
+        })();
+        playerDetailCache.set(key, promise);
+        const out = await promise;
+        playerDetailCache.set(key, out);
+        return out;
+    }
+
+    function detailPanelEl(tab) {
+        return document.querySelector(`.rs-ptab-panel[data-ptab-panel="${tab}"]`);
+    }
+
+    function detailLoadingHtml(msg) {
+        return `<div class="rs-ptab-msg">${msg}</div>`;
+    }
+
+    function detailEmptyHtml(msg) {
+        return `<div class="rs-ptab-msg rs-ptab-msg--empty">${msg}</div>`;
+    }
+
+    // Heat tone for a zone cell, scaled against the spread of that player's own
+    // zones so the grid always reads even for cold or elite bats.
+    function zoneTone(value, values, higherIsStrength = true) {
+        if (value == null) return "none";
+        const nums = values.filter((v) => v != null);
+        if (nums.length < 3) return "mid";
+        const sorted = [...nums].sort((a, b) => a - b);
+        const q = (p) => sorted[Math.min(sorted.length - 1, Math.floor(p * (sorted.length - 1)))];
+        const lo = q(0.3);
+        const hi = q(0.7);
+        if (value >= hi && hi > lo) return higherIsStrength ? "hot" : "cold";
+        if (value <= lo && hi > lo) return higherIsStrength ? "cold" : "hot";
+        return "mid";
+    }
+
+    function zoneCellHtml(zone, cell, metric, values, label) {
+        const val = cell ? cell[metric] : null;
+        const tone = zoneTone(val, values, true);
+        const shown = val == null ? "—" : metric === "xwoba" ? fmtRate(val) : `${val}%`;
+        const sample = cell ? (metric === "usagePct" ? `${cell.pitches} p` : `${cell.bbe} BBE`) : "";
+        return (
+            `<div class="rs-zone-cell rs-zone-cell--${tone}" data-zone="${zone}" title="Zone ${zone} · ${sample}">` +
+            `<span class="rs-zone-cell__label">${label}</span>` +
+            `<span class="rs-zone-cell__val">${shown}</span>` +
+            `</div>`
+        );
+    }
+
+    function zoneGridHtml(zones, metric, label) {
+        if (!zones) return detailEmptyHtml("No zone data.");
+        const values = Object.values(zones).map((z) => (z ? z[metric] : null));
+        const inner = ZONE_INNER.map((z) => zoneCellHtml(z, zones[z], metric, values, label)).join("");
+        const shadow = Object.entries(ZONE_SHADOW)
+            .map(
+                ([z, pos]) =>
+                    `<div class="rs-zone-grid__shadow rs-zone-grid__shadow--${pos}">${zoneCellHtml(z, zones[z], metric, values, label)}</div>`
+            )
+            .join("");
+        return `<div class="rs-zone-grid">${shadow}<div class="rs-zone-grid__inner">${inner}</div></div>`;
+    }
+
+    // A zone the hitter punishes that this pitcher actually lives in.
+    function matchupEdges(batterZones, pitcherZones) {
+        if (!batterZones || !pitcherZones) return [];
+        const hrRates = Object.values(batterZones).map((z) => z?.hrRate).filter((v) => v != null);
+        if (!hrRates.length) return [];
+        const avgHr = hrRates.reduce((a, b) => a + b, 0) / hrRates.length;
+        return Object.keys(batterZones)
+            .map((z) => {
+                const bat = batterZones[z];
+                const pit = pitcherZones[z];
+                if (!bat || !pit || bat.hrRate == null || pit.usagePct == null) return null;
+                if (bat.bbe < 4) return null;
+                const lift = bat.hrRate - avgHr;
+                if (lift <= 0 || pit.usagePct <= 0) return null;
+                return { zone: z, lift, usage: pit.usagePct, weight: lift * pit.usagePct, hrRate: bat.hrRate };
+            })
+            .filter(Boolean)
+            .sort((a, b) => b.weight - a.weight)
+            .slice(0, 3);
+    }
+
+    function zoneName(z) {
+        return (
+            {
+                1: "Up & in",
+                2: "Up middle",
+                3: "Up & away",
+                4: "Middle in",
+                5: "Middle",
+                6: "Middle away",
+                7: "Down & in",
+                8: "Down middle",
+                9: "Down & away",
+                11: "Chase up/in",
+                12: "Chase up/away",
+                13: "Chase low/in",
+                14: "Chase low/away",
+            }[z] || `Zone ${z}`
+        );
+    }
+
+    function renderZonesPanel() {
+        const el = detailPanelEl("zones");
+        if (!el) return;
+        const detail = profileDetail;
+        if (!detail || !detail.pitches) {
+            el.innerHTML = detailEmptyHtml("No pitch-level Statcast data for this player and season.");
+            return;
+        }
+        const isBatter = profileDetailRole === "batter";
+        const selfMetric = isBatter ? "hrRate" : "usagePct";
+        const selfLabel = isBatter ? "HR Rate" : "Usage";
+        const oppName = profileOppDetail?.playerName ? tidySavantName(profileOppDetail.playerName) : null;
+
+        const edges = isBatter ? matchupEdges(detail.zones, profileOppDetail?.zones) : [];
+        const edgesHtml = edges.length
+            ? `<div class="rs-zone-edges"><h4 class="rs-zone-edges__title">Matchup edges</h4>` +
+              edges
+                  .map(
+                      (e) =>
+                          `<div class="rs-zone-edge"><span class="rs-zone-edge__z">${e.zone}</span>` +
+                          `<span class="rs-zone-edge__name">${zoneName(e.zone)}</span>` +
+                          `<span class="rs-zone-edge__bar"><span style="width:${Math.min(100, e.weight * 4).toFixed(0)}%"></span></span>` +
+                          `<span class="rs-zone-edge__num">${e.hrRate}% HR · ${e.usage}% used</span></div>`
+                  )
+                  .join("") +
+              `</div>`
+            : "";
+
+        const selfPanel =
+            `<div class="rs-zone-panel"><h4 class="rs-zone-panel__title">${escAttr(tidySavantName(detail.playerName || ""))}</h4>` +
+            `<p class="rs-zone-panel__sub">${isBatter ? "HR per batted ball by zone" : "Pitch usage by zone"}</p>` +
+            zoneGridHtml(detail.zones, selfMetric, selfLabel) +
+            `</div>`;
+
+        const oppPanel = profileOppDetail?.pitches
+            ? `<div class="rs-zone-panel"><h4 class="rs-zone-panel__title">${escAttr(oppName || "Opposing pitcher")}</h4>` +
+              `<p class="rs-zone-panel__sub">Pitch usage by zone${detail.hand ? ` vs ${detail.hand}HB` : ""}</p>` +
+              zoneGridHtml(
+                  detail.hand === "L"
+                      ? profileOppDetail.zonesVsL
+                      : detail.hand === "R"
+                        ? profileOppDetail.zonesVsR
+                        : profileOppDetail.zones,
+                  "usagePct",
+                  "Usage"
+              ) +
+              `</div>`
+            : "";
+
+        el.innerHTML =
+            edgesHtml +
+            `<div class="rs-zone-wrap">${selfPanel}${oppPanel}</div>` +
+            `<p class="rs-ptab-foot">Catcher's view · ${detail.pitches.toLocaleString()} pitches, ${detail.seasons.join("/")}. ` +
+            `Green = hitter strength, red = weakness.</p>`;
+    }
+
+    // Savant returns "Last, First" -- the rest of the page uses "First Last".
+    function tidySavantName(name) {
+        const s = String(name || "").trim();
+        if (!s.includes(",")) return s;
+        const [last, first] = s.split(",").map((p) => p.trim());
+        return `${first} ${last}`.trim();
+    }
+
+    function renderMixPanel() {
+        const el = detailPanelEl("mix");
+        if (!el) return;
+        const detail = profileDetail;
+        if (!detail || !detail.pitches) {
+            el.innerHTML = detailEmptyHtml("No pitch-level Statcast data for this player and season.");
+            return;
+        }
+        const isBatter = profileDetailRole === "batter";
+        // Facing pitcher's usage, so the hitter's per-pitch results can be read
+        // against what he is actually going to see.
+        const oppMix = isBatter
+            ? (detail.hand === "L"
+                  ? profileOppDetail?.pitchTypesVsL
+                  : detail.hand === "R"
+                    ? profileOppDetail?.pitchTypesVsR
+                    : profileOppDetail?.pitchTypes) || null
+            : null;
+        const codes = Object.keys(detail.pitchTypes || {}).filter((c) => detail.pitchTypes[c].pitches >= 20);
+        if (!codes.length) {
+            el.innerHTML = detailEmptyHtml("Not enough pitches by type.");
+            return;
+        }
+        const rows = codes
+            .map((code) => {
+                const d = detail.pitchTypes[code];
+                const usage = oppMix?.[code]?.usagePct ?? null;
+                const faced = usage != null && usage >= 10;
+                return {
+                    code,
+                    d,
+                    usage,
+                    faced,
+                    sort: faced ? 1000 + (usage || 0) : d.usagePct || 0,
+                };
+            })
+            .sort((a, b) => b.sort - a.sort);
+
+        const header = isBatter
+            ? `<tr><th>Pitch</th><th>Seen</th><th>SP use</th><th>xwOBA</th><th>Whiff</th><th>Barrel</th><th>HR</th><th>EV</th></tr>`
+            : `<tr><th>Pitch</th><th>Usage</th><th>Velo</th><th>xwOBA</th><th>Whiff</th><th>Barrel</th><th>HR</th><th>EV</th></tr>`;
+
+        const body = rows
+            .map(
+                ({ code, d, usage, faced }) =>
+                    `<tr class="${faced ? "is-faced" : ""}">` +
+                    `<td class="rs-mix-td-name"><span class="rs-mix-code">${code}</span> ${pitchLabel(code)}</td>` +
+                    `<td>${isBatter ? `${d.usagePct ?? "—"}%` : `${d.usagePct ?? "—"}%`}</td>` +
+                    `<td>${isBatter ? (usage != null ? `${usage}%` : "—") : d.avgVelo != null ? `${d.avgVelo}` : "—"}</td>` +
+                    `<td>${d.xwoba != null ? fmtRate(d.xwoba) : "—"}</td>` +
+                    `<td>${d.whiffPct != null ? `${d.whiffPct}%` : "—"}</td>` +
+                    `<td>${d.barrelPct != null ? `${d.barrelPct}%` : "—"}</td>` +
+                    `<td>${d.hr}</td>` +
+                    `<td>${d.avgEV != null ? d.avgEV.toFixed(1) : "—"}</td>` +
+                    `</tr>`
+            )
+            .join("");
+
+        const legend = isBatter && oppMix ? `<p class="rs-ptab-foot">Highlighted rows are pitches the starter throws at least 10% of the time to this side.</p>` : "";
+        el.innerHTML =
+            `<div class="rs-mix-wrap"><table class="rs-mix-table"><thead>${header}</thead><tbody>${body}</tbody></table></div>` +
+            legend;
+    }
+
+    function sprayPointColor(bb) {
+        if (bb.isHr) return "hr";
+        if (bb.result === "double" || bb.result === "triple") return "xbh";
+        if (bb.result === "single") return "single";
+        return "out";
+    }
+
+    function renderSprayChart(balls) {
+        const CX = 200;
+        const CY = 336;
+        const PPF = 0.68; // px per foot
+        const pt = (bb) => {
+            const dist = bb.dist != null && bb.dist > 0 ? bb.dist : 150;
+            const ang = ((bb.sprayAngle ?? 0) * Math.PI) / 180;
+            return {
+                x: CX + Math.sin(ang) * dist * PPF,
+                y: CY - Math.cos(ang) * dist * PPF,
+            };
+        };
+        const arc = (dist) => {
+            const a = ((-45 * Math.PI) / 180);
+            const b = ((45 * Math.PI) / 180);
+            const x1 = CX + Math.sin(a) * dist * PPF;
+            const y1 = CY - Math.cos(a) * dist * PPF;
+            const x2 = CX + Math.sin(b) * dist * PPF;
+            const y2 = CY - Math.cos(b) * dist * PPF;
+            return `M ${x1.toFixed(1)} ${y1.toFixed(1)} A ${(dist * PPF).toFixed(1)} ${(dist * PPF).toFixed(1)} 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+        };
+        const foul = (deg) => {
+            const a = (deg * Math.PI) / 180;
+            return `M ${CX} ${CY} L ${(CX + Math.sin(a) * 420 * PPF).toFixed(1)} ${(CY - Math.cos(a) * 420 * PPF).toFixed(1)}`;
+        };
+        const dots = balls
+            .map((bb) => {
+                const p = pt(bb);
+                const cls = sprayPointColor(bb);
+                const r = bb.isHr ? 4.5 : 3.2;
+                const label = `${bb.date} · ${bb.ev} EV · ${bb.dist ?? "—"} ft · ${(bb.result || "").replace(/_/g, " ")}`;
+                return `<circle class="rs-spray__dot rs-spray__dot--${cls}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${r}"><title>${escAttr(label)}</title></circle>`;
+            })
+            .join("");
+        return (
+            `<svg class="rs-spray__svg" viewBox="0 0 400 360" role="img" aria-label="Spray chart">` +
+            `<path class="rs-spray__grass" d="${arc(400)} L ${CX} ${CY} Z"/>` +
+            `<path class="rs-spray__arc" d="${arc(400)}"/>` +
+            `<path class="rs-spray__arc rs-spray__arc--in" d="${arc(300)}"/>` +
+            `<path class="rs-spray__line" d="${foul(-45)}"/>` +
+            `<path class="rs-spray__line" d="${foul(45)}"/>` +
+            `<path class="rs-spray__diamond" d="M ${CX} ${CY} L ${CX - 63} ${CY - 63} L ${CX} ${CY - 126} L ${CX + 63} ${CY - 63} Z"/>` +
+            dots +
+            `</svg>`
+        );
+    }
+
+    function filteredSprayBalls() {
+        const all = profileDetail?.battedBalls || [];
+        const pitches = sprayFilter.pitches;
+        return all.filter((bb) => {
+            if (pitches && pitches.size && !pitches.has(bb.pitchType)) return false;
+            if (sprayFilter.results === "hr" && !bb.isHr) return false;
+            if (sprayFilter.results === "hits" && !["single", "double", "triple", "home_run"].includes(bb.result)) return false;
+            if (sprayFilter.results === "air" && !["fly_ball", "line_drive", "popup"].includes(bb.bbType)) return false;
+            return true;
+        });
+    }
+
+    function renderSprayPanel() {
+        const el = detailPanelEl("spray");
+        if (!el) return;
+        const detail = profileDetail;
+        if (!detail || !detail.battedBalls?.length) {
+            el.innerHTML = detailEmptyHtml("No batted-ball data for this player and season.");
+            return;
+        }
+        const codes = Object.keys(detail.pitchTypes || {}).filter((c) => detail.pitchTypes[c].bbe > 0);
+        const active = sprayFilter.pitches;
+        const chips = codes
+            .map(
+                (c) =>
+                    `<button type="button" class="rs-spray-chip${!active || active.has(c) ? " is-on" : ""}" data-spray-pitch="${c}">${c}</button>`
+            )
+            .join("");
+        const oppCodes = profileOppDetail
+            ? Object.keys(
+                  (detail.hand === "L"
+                      ? profileOppDetail.pitchTypesVsL
+                      : detail.hand === "R"
+                        ? profileOppDetail.pitchTypesVsR
+                        : profileOppDetail.pitchTypes) || {}
+              ).filter((c) => {
+                  const m =
+                      (detail.hand === "L"
+                          ? profileOppDetail.pitchTypesVsL
+                          : detail.hand === "R"
+                            ? profileOppDetail.pitchTypesVsR
+                            : profileOppDetail.pitchTypes) || {};
+                  return (m[c]?.usagePct || 0) >= 10;
+              })
+            : [];
+        const balls = filteredSprayBalls();
+        const hrN = balls.filter((b) => b.isHr).length;
+        const avgEv = balls.length ? balls.reduce((a, b) => a + (b.ev || 0), 0) / balls.length : null;
+
+        el.innerHTML =
+            `<div class="rs-spray-controls">` +
+            `<div class="rs-spray-chips">${chips}</div>` +
+            `<div class="rs-spray-actions">` +
+            (oppCodes.length ? `<button type="button" class="rs-btn rs-btn--ghost" id="rsSprayMatchMix">Match SP mix</button>` : "") +
+            `<button type="button" class="rs-btn rs-btn--ghost" id="rsSprayReset">Reset</button>` +
+            `<select class="rs-explore__select" id="rsSprayResults">` +
+            `<option value="all"${sprayFilter.results === "all" ? " selected" : ""}>All contact</option>` +
+            `<option value="hits"${sprayFilter.results === "hits" ? " selected" : ""}>Hits only</option>` +
+            `<option value="hr"${sprayFilter.results === "hr" ? " selected" : ""}>HR only</option>` +
+            `<option value="air"${sprayFilter.results === "air" ? " selected" : ""}>Air balls</option>` +
+            `</select></div></div>` +
+            `<div class="rs-spray">${renderSprayChart(balls)}</div>` +
+            `<div class="rs-spray-legend">` +
+            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--hr"></i>HR ${hrN}</span>` +
+            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--xbh"></i>2B/3B</span>` +
+            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--single"></i>1B</span>` +
+            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--out"></i>Out</span>` +
+            `<span class="rs-spray-legend__item">${balls.length} BBE${avgEv != null ? ` · ${avgEv.toFixed(1)} avg EV` : ""}</span>` +
+            `</div>`;
+        wireSprayControls(oppCodes);
+    }
+
+    function wireSprayControls(oppCodes) {
+        const el = detailPanelEl("spray");
+        if (!el) return;
+        el.querySelectorAll("[data-spray-pitch]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const code = btn.getAttribute("data-spray-pitch");
+                const all = Object.keys(profileDetail?.pitchTypes || {}).filter(
+                    (c) => profileDetail.pitchTypes[c].bbe > 0
+                );
+                // No explicit selection means "everything", so the first click
+                // has to start from the full set to feel like a toggle.
+                const next = new Set(sprayFilter.pitches || all);
+                if (next.has(code)) next.delete(code);
+                else next.add(code);
+                sprayFilter.pitches = next.size && next.size < all.length ? next : null;
+                renderSprayPanel();
+            });
+        });
+        el.querySelector("#rsSprayReset")?.addEventListener("click", () => {
+            sprayFilter = { pitches: null, results: "all" };
+            renderSprayPanel();
+        });
+        el.querySelector("#rsSprayMatchMix")?.addEventListener("click", () => {
+            sprayFilter.pitches = new Set(oppCodes);
+            renderSprayPanel();
+        });
+        el.querySelector("#rsSprayResults")?.addEventListener("change", (ev) => {
+            sprayFilter.results = ev.target.value;
+            renderSprayPanel();
+        });
+    }
+
+    function prettyResult(result) {
+        return String(result || "")
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+
+    function renderBattedPanel() {
+        const el = detailPanelEl("batted");
+        if (!el) return;
+        const balls = profileDetail?.battedBalls || [];
+        if (!balls.length) {
+            el.innerHTML = detailEmptyHtml("No batted-ball data for this player and season.");
+            return;
+        }
+        const isBatter = profileDetailRole === "batter";
+        const rows = balls
+            .slice(0, 60)
+            .map((bb) => {
+                const tone = bb.isHr ? " is-hr" : bb.isBarrel ? " is-barrel" : "";
+                const evTone = bb.ev >= 100 ? " rs-bb-hot" : bb.ev >= 95 ? " rs-bb-warm" : "";
+                return (
+                    `<tr class="rs-bb-row${tone}">` +
+                    `<td>${bb.date.slice(5)}</td>` +
+                    `<td class="rs-bb-opp">${escAttr(bb.oppName || (bb.oppId ? String(bb.oppId) : "—"))}${bb.oppHand ? ` <span class="rs-bb-hand">${bb.oppHand}</span>` : ""}</td>` +
+                    `<td><span class="rs-mix-code">${bb.pitchType || "—"}</span></td>` +
+                    `<td>${bb.pitchVelo != null ? bb.pitchVelo.toFixed(1) : "—"}</td>` +
+                    `<td class="${evTone.trim()}">${bb.ev != null ? bb.ev.toFixed(1) : "—"}</td>` +
+                    `<td>${bb.la != null ? `${bb.la}°` : "—"}</td>` +
+                    `<td>${bb.dist != null ? bb.dist : "—"}</td>` +
+                    `<td>${bb.batSpeed != null ? bb.batSpeed.toFixed(1) : "—"}</td>` +
+                    `<td>${prettyResult(bb.result)}</td>` +
+                    `</tr>`
+                );
+            })
+            .join("");
+        el.innerHTML =
+            `<div class="rs-bb-wrap"><table class="rs-bb-table"><thead><tr>` +
+            `<th>Date</th><th>${isBatter ? "Pitcher" : "Batter"}</th><th>Pitch</th><th>Velo</th><th>EV</th><th>LA</th><th>Dist</th><th>Bat spd</th><th>Result</th>` +
+            `</tr></thead><tbody>${rows}</tbody></table></div>` +
+            `<p class="rs-ptab-foot">Most recent ${Math.min(60, balls.length)} balls in play. Purple = HR, amber = barrel.</p>`;
+    }
+
+    function renderActiveDetailTab() {
+        if (activeProfileTab === "zones") renderZonesPanel();
+        else if (activeProfileTab === "mix") renderMixPanel();
+        else if (activeProfileTab === "spray") renderSprayPanel();
+        else if (activeProfileTab === "batted") renderBattedPanel();
+    }
+
+    async function ensureProfileDetail() {
+        if (activeProfileTab === "overview") return;
+        const gen = profileDetailGen;
+        if (profileDetail !== null) {
+            renderActiveDetailTab();
+            return;
+        }
+        const panel = detailPanelEl(activeProfileTab);
+        if (panel) panel.innerHTML = detailLoadingHtml("Loading Statcast detail…");
+
+        const entry = profileEntry || profilePitcherEntry;
+        const selfId = profileEntry ? profileEntry.row?.id : profilePitcherEntry?.pitcher?.id;
+        const oppId = profileEntry ? profileEntry.pitcher?.id : null;
+        if (!selfId) {
+            if (panel) panel.innerHTML = detailEmptyHtml("No player id available.");
+            return;
+        }
+        const [self, opp] = await Promise.all([
+            fetchPlayerDetail(selfId, profileDetailRole, profileDetailSeason),
+            oppId ? fetchPlayerDetail(oppId, "pitcher", profileDetailSeason) : Promise.resolve(null),
+        ]);
+        if (gen !== profileDetailGen) return;
+        profileDetail = self || { pitches: 0, battedBalls: [], pitchTypes: {}, zones: null };
+        profileOppDetail = opp;
+        if (!self && panel) {
+            panel.innerHTML = detailEmptyHtml(
+                isFileProtocol()
+                    ? "Statcast detail needs the local server (serve-research.py)."
+                    : "Statcast detail unavailable right now."
+            );
+            return;
+        }
+        void entry;
+        renderActiveDetailTab();
+    }
+
+    function setProfileTab(tab) {
+        activeProfileTab = tab;
+        document.querySelectorAll(".rs-ptabs__btn").forEach((btn) => {
+            const on = btn.getAttribute("data-ptab") === tab;
+            btn.classList.toggle("is-active", on);
+            btn.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        document.querySelectorAll(".rs-ptab-panel").forEach((panel) => {
+            panel.classList.toggle("is-active", panel.getAttribute("data-ptab-panel") === tab);
+        });
+        void ensureProfileDetail();
+    }
+
+    function resetProfileTabs(role, season) {
+        profileDetailGen += 1;
+        profileDetail = null;
+        profileOppDetail = null;
+        profileDetailRole = role;
+        profileDetailSeason = String(season);
+        sprayFilter = { pitches: null, results: "all" };
+        ["zones", "mix", "spray", "batted"].forEach((tab) => {
+            const panel = detailPanelEl(tab);
+            if (panel) panel.innerHTML = "";
+        });
+        setProfileTab("overview");
+    }
+
+    function wireProfileTabs() {
+        document.querySelectorAll(".rs-ptabs__btn").forEach((btn) => {
+            btn.addEventListener("click", () => setProfileTab(btn.getAttribute("data-ptab")));
+        });
     }
 
     async function jumpToPitcherProfileEntry(entry) {
@@ -7738,6 +8297,7 @@
     function wireUi() {
         wireTopFab();
         els.profileClose?.addEventListener("click", closePlayerProfile);
+        wireProfileTabs();
         els.profileJump?.addEventListener("click", () => {
             if (profileEntry) jumpToProfileEntry(profileEntry);
             else if (profilePitcherEntry) jumpToPitcherProfileEntry(profilePitcherEntry);

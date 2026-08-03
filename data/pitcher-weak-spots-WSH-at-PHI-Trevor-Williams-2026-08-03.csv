@@ -1,0 +1,30 @@
+Matchup,WSH @ PHI
+Pitcher,Trevor Williams
+Pitcher Team,WSH
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="0-1",.000,.000,0.000,0,0,0,0,0.0,.500,.500
+Batting Second,="0-2",.000,.000,0.000,0,0,0,0,50.0,.000,.000
+Batting Third,="0-1",.000,.000,0.000,0,0,0,0,100.0,.000,.000
+Batting Fourth,="0-1",.000,.000,0.000,0,0,0,0,0.0,.000,.000
+Batting Fifth,="1-2",.500,.500,0.000,0,0,0,0,50.0,.500,1.000
+Batting Sixth,="0-2",.000,.000,0.000,0,0,0,0,50.0,.000,.000
+Batting Seventh,="0-2",.000,.000,0.000,0,0,0,0,50.0,.000,.000
+Batting Eighth,="0-2",.000,.000,0.000,0,0,0,0,0.0,.333,.333
+Batting Ninth,="2-2",1.000,1.000,0.000,0,0,0,1,0.0,1.000,2.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="96-370",.259,.422,0.163,14,16,1,38,21.6,25,.308,.730
+Kyle Schwarber LHB,Batting Second ​,="77-312",.247,.580,0.333,30,12,1,58,34.0,54,.364,.944
+Bryce Harper LHB,Batting Third ​,="100-378",.265,.516,0.251,23,20,3,66,21.1,64,.367,.883
+Alec Bohm RHB,Batting Fourth ​,="43-186",.231,.355,0.124,5,8,0,27,12.6,12,.281,.636
+Brandon Marsh LHB,Batting Fourth ​,="33-139",.237,.381,0.144,6,2,0,15,31.5,8,.289,.670
+Edmundo Sosa RHB,Batting Fifth ​,="12-54",.222,.241,0.019,0,1,0,9,19.7,3,.267,.508
+Bryson Stott LHB,Batting Sixth ​,="45-158",.285,.449,0.164,4,6,4,22,19.8,13,.337,.786
+J.T. Realmuto RHB,Batting Seventh ​,="24-106",.226,.368,0.142,3,6,0,12,24.0,8,.314,.682
+Gabriel Rincones Jr. LHB,Batting Seventh ​,="5-39",.128,.231,0.103,1,1,0,4,24.4,0,.146,.377
+Derek Hill RHB,Batting Eighth ​,="14-50",.280,.600,0.320,5,1,0,7,30.4,5,.345,.945
+Garrett Stubbs LHB,Batting Ninth ​,="2-23",.087,.087,0.000,0,0,0,2,14.8,1,.185,.272
+Bryan De La Cruz RHB,Batting Ninth ​,="2-6",.333,.833,0.500,1,0,0,4,14.3,0,.286,1.119
+Justin Crawford LHB,Batting Ninth ​,="47-182",.258,.341,0.083,1,10,1,13,21.6,13,.313,.654

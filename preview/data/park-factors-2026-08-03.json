@@ -1,0 +1,203 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-08-03.csv",
+  "source_date": "2026-08-03",
+  "hand_date": "2026-08-03",
+  "by_game": {
+    "TB @ COL": {
+      "game": "TB @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 22,
+      "stadium_pct": 18,
+      "weather_pct": 4,
+      "lhb_stadium_pct": 13,
+      "park_lhb_pct": 17,
+      "rhb_stadium_pct": 7,
+      "park_rhb_pct": 11
+    },
+    "WAS @ PHI": {
+      "game": "WAS @ PHI",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 26,
+      "stadium_pct": 16,
+      "weather_pct": 10,
+      "lhb_stadium_pct": 10,
+      "park_lhb_pct": 20,
+      "rhb_stadium_pct": -1,
+      "park_rhb_pct": 9
+    },
+    "STL @ NYY": {
+      "game": "STL @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 18,
+      "stadium_pct": 3,
+      "weather_pct": 15,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 18,
+      "rhb_stadium_pct": 4,
+      "park_rhb_pct": 19
+    },
+    "SD @ ARI": {
+      "game": "SD @ ARI",
+      "venue": "Chase Field",
+      "venue_key": "chase field",
+      "hr_pct": -9,
+      "stadium_pct": -9,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -17,
+      "park_lhb_pct": -17,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 0
+    },
+    "TOR @ HOU": {
+      "game": "TOR @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 5,
+      "stadium_pct": 6,
+      "weather_pct": -1,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 10,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 8
+    },
+    "PIT @ MIL": {
+      "game": "PIT @ MIL",
+      "venue": "American Family Fld",
+      "venue_key": "american family field",
+      "hr_pct": 4,
+      "stadium_pct": 11,
+      "weather_pct": -7,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": -1
+    },
+    "SF @ TEX": {
+      "game": "SF @ TEX",
+      "venue": "Globe Life Field",
+      "venue_key": "globe life field",
+      "hr_pct": -10,
+      "stadium_pct": -10,
+      "weather_pct": -1,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -5,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -7
+    },
+    "LAD @ CHC": {
+      "game": "LAD @ CHC",
+      "venue": "Wrigley Field",
+      "venue_key": "wrigley field",
+      "hr_pct": -10,
+      "stadium_pct": -2,
+      "weather_pct": -8,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -11,
+      "rhb_stadium_pct": 5,
+      "park_rhb_pct": -3
+    }
+  },
+  "by_venue": {
+    "coors field": {
+      "game": "TB @ COL",
+      "venue": "Coors Field",
+      "venue_key": "coors field",
+      "hr_pct": 22,
+      "stadium_pct": 18,
+      "weather_pct": 4,
+      "lhb_stadium_pct": 13,
+      "park_lhb_pct": 17,
+      "rhb_stadium_pct": 7,
+      "park_rhb_pct": 11
+    },
+    "citizens bank park": {
+      "game": "WAS @ PHI",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 26,
+      "stadium_pct": 16,
+      "weather_pct": 10,
+      "lhb_stadium_pct": 10,
+      "park_lhb_pct": 20,
+      "rhb_stadium_pct": -1,
+      "park_rhb_pct": 9
+    },
+    "yankee stadium": {
+      "game": "STL @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 18,
+      "stadium_pct": 3,
+      "weather_pct": 15,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 18,
+      "rhb_stadium_pct": 4,
+      "park_rhb_pct": 19
+    },
+    "chase field": {
+      "game": "SD @ ARI",
+      "venue": "Chase Field",
+      "venue_key": "chase field",
+      "hr_pct": -9,
+      "stadium_pct": -9,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -17,
+      "park_lhb_pct": -17,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 0
+    },
+    "daikin park": {
+      "game": "TOR @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 5,
+      "stadium_pct": 6,
+      "weather_pct": -1,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 10,
+      "rhb_stadium_pct": 9,
+      "park_rhb_pct": 8
+    },
+    "american family field": {
+      "game": "PIT @ MIL",
+      "venue": "American Family Fld",
+      "venue_key": "american family field",
+      "hr_pct": 4,
+      "stadium_pct": 11,
+      "weather_pct": -7,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": -6,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": -1
+    },
+    "globe life field": {
+      "game": "SF @ TEX",
+      "venue": "Globe Life Field",
+      "venue_key": "globe life field",
+      "hr_pct": -10,
+      "stadium_pct": -10,
+      "weather_pct": -1,
+      "lhb_stadium_pct": -4,
+      "park_lhb_pct": -5,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -7
+    },
+    "wrigley field": {
+      "game": "LAD @ CHC",
+      "venue": "Wrigley Field",
+      "venue_key": "wrigley field",
+      "hr_pct": -10,
+      "stadium_pct": -2,
+      "weather_pct": -8,
+      "lhb_stadium_pct": -3,
+      "park_lhb_pct": -11,
+      "rhb_stadium_pct": 5,
+      "park_rhb_pct": -3
+    }
+  }
+}

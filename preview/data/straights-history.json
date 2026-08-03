@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-02T03:58:54Z",
+  "updated": "2026-08-03T14:44:55Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -837,12 +837,14 @@
       "o05": {
         "player": "Corey Seager",
         "matchup": "TEX @ HOU",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Coby Mayo",
         "matchup": "PHI @ BAL",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       }
     },
     {
@@ -850,11 +852,25 @@
       "o05": {
         "player": "Jimmy Crooks",
         "matchup": "STL @ TOR",
-        "result": "pending"
+        "result": "void"
       },
       "o15": {
         "player": "Willi Castro",
         "matchup": "KC @ COL",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "o05": {
+        "player": "CJ Abrams",
+        "matchup": "WSH @ PHI",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Jeremy Pena",
+        "matchup": "TOR @ HOU",
         "result": "pending"
       }
     }

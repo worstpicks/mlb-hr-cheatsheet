@@ -17,7 +17,7 @@
     <meta name="research-date" content="">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
-    <link rel="stylesheet" href="research.css?v=133">
+    <link rel="stylesheet" href="research.css?v=134">
     <style>
         .rs-file-block {
             display: none;
@@ -282,6 +282,28 @@ python serve-research.py</pre>
                     <div class="rs-pitcher-duo" id="rsPitcherCards"></div>
                 </div>
 
+                <details class="rs-pboard" id="rsPboard" hidden>
+                    <summary class="rs-pboard__head">
+                        <span class="rs-pboard__title">Pitcher matchup board</span>
+                        <span class="rs-pboard__meta" id="rsPboardMeta"></span>
+                        <span class="rs-pboard__chev" aria-hidden="true"></span>
+                    </summary>
+                    <div class="rs-pboard__body">
+                        <div class="rs-pboard__controls">
+                            <label class="rs-pboard__pick">Pitcher
+                                <select id="rsPboardPitcher" class="rs-explore__select"></select>
+                            </label>
+                            <div class="rs-pboard__ranges" id="rsPboardRanges" role="group" aria-label="Range"></div>
+                        </div>
+                        <div class="rs-pboard__tabs" id="rsPboardTabs" role="tablist" aria-label="Pitcher board view">
+                            <button type="button" class="rs-pboard__tab is-active" role="tab" aria-selected="true" data-pbtab="splits">Splits</button>
+                            <button type="button" class="rs-pboard__tab" role="tab" aria-selected="false" data-pbtab="arsenal">Pitch arsenal</button>
+                            <button type="button" class="rs-pboard__tab" role="tab" aria-selected="false" data-pbtab="batters">Active batters</button>
+                        </div>
+                        <div id="rsPboardBody" aria-live="polite"></div>
+                    </div>
+                </details>
+
                 <h2 class="rs-section-title rs-section-title--hitters">Hitters</h2>
                 <div class="rs-matchup-bar">
                     <div>
@@ -370,6 +392,6 @@ python serve-research.py</pre>
 
     <button type="button" class="rs-top-fab" id="rsTopFab" aria-label="Back to top" hidden>&#8593; Top</button>
 
-    <script src="research.js?v=146" defer></script>
+    <script src="research.js?v=148" defer></script>
 </body>
 </html>

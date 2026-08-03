@@ -2815,6 +2815,7 @@
             ].join("");
             wirePitcherCards();
         }
+        void renderPitcherBoard();
     }
 
     async function mergePitcherSavantIntoGames(season) {
@@ -8222,6 +8223,402 @@
         });
     }
 
+    /* ---------------------------------------------------------------------
+     * Pitcher matchup board
+     *
+     * A pitcher-first read on the active game: windowed splits, the arsenal,
+     * and how the opposing lineup has fared against the pitches he actually
+     * throws. Splits come from the same pitch-level pull the profile uses.
+     * ------------------------------------------------------------------- */
+
+    const PBOARD_RANGES = [
+        { key: "season", label: "Season" },
+        { key: "g10", label: "L10" },
+        { key: "g5", label: "L5" },
+        { key: "g3", label: "L3" },
+        { key: "g1", label: "Last" },
+    ];
+
+    // dir: +1 means a higher number favours the batter, -1 favours the pitcher.
+    // hi/lo are the thresholds for the batter-favourable and pitcher-favourable
+    // ends, always expressed in the stat's own units.
+    const PBOARD_COLS = [
+        { group: "Stats", key: "ip", label: "IP", fmt: "n1" },
+        { group: "Stats", key: "bf", label: "BF", fmt: "int" },
+        { group: "Stats", key: "baa", label: "BAA", fmt: "rate", dir: 1, hi: 0.27, lo: 0.23 },
+        { group: "Stats", key: "woba", label: "wOBA", fmt: "rate", dir: 1, hi: 0.33, lo: 0.29 },
+        { group: "Stats", key: "slg", label: "SLG", fmt: "rate", dir: 1, hi: 0.43, lo: 0.37 },
+        { group: "Stats", key: "iso", label: "ISO", fmt: "rate", dir: 1, hi: 0.17, lo: 0.13 },
+        { group: "Stats", key: "hr", label: "HR", fmt: "int" },
+        { group: "Stats", key: "hr9", label: "HR/9", fmt: "n2", dir: 1, hi: 1.4, lo: 0.9 },
+        { group: "Stats", key: "bbPct", label: "BB%", fmt: "pct", dir: 1, hi: 10, lo: 6 },
+        { group: "Strikes", key: "whiffPct", label: "Whiff%", fmt: "pct", dir: -1, hi: 22, lo: 28 },
+        { group: "Strikes", key: "kPct", label: "K%", fmt: "pct", dir: -1, hi: 19, lo: 26 },
+        { group: "Strikes", key: "putawayPct", label: "Putaway%", fmt: "pct", dir: -1, hi: 16, lo: 22 },
+        { group: "Strikes", key: "swStrPct", label: "SwStr%", fmt: "pct", dir: -1, hi: 9, lo: 13 },
+        { group: "Strikes", key: "k9", label: "K/9", fmt: "n2", dir: -1, hi: 7, lo: 10 },
+        { group: "Strikes", key: "firstStrikePct", label: "1stPS%", fmt: "pct", dir: -1, hi: 58, lo: 64 },
+        { group: "Strikes", key: "meatballPct", label: "Meatball%", fmt: "pct", dir: 1, hi: 7.5, lo: 5.5 },
+        { group: "Statcast", key: "barrelPct", label: "Barrel%", fmt: "pct", dir: 1, hi: 9, lo: 6 },
+        { group: "Statcast", key: "hardHitPct", label: "HH%", fmt: "pct", dir: 1, hi: 42, lo: 36 },
+        { group: "Statcast", key: "fbPct", label: "FB%", fmt: "pct", dir: 1, hi: 27, lo: 22 },
+        { group: "Statcast", key: "hrFbPct", label: "HR/FB%", fmt: "pct", dir: 1, hi: 14, lo: 9 },
+        { group: "Statcast", key: "avgEV", label: "EV", fmt: "n1", dir: 1, hi: 89.5, lo: 87 },
+    ];
+
+    const pboard = { pitcherId: null, side: null, range: "season", tab: "splits", pitches: null };
+
+    function pboardFmt(val, fmt) {
+        if (val == null || Number.isNaN(Number(val))) return "—";
+        const n = Number(val);
+        if (fmt === "int") return String(Math.round(n));
+        if (fmt === "n1") return n.toFixed(1);
+        if (fmt === "n2") return n.toFixed(2);
+        if (fmt === "pct") return `${n.toFixed(1)}%`;
+        if (fmt === "rate") return n.toFixed(3).replace(/^0/, "");
+        return String(n);
+    }
+
+    // Tone is always read from the batter's side: green favours the hitter.
+    function pboardTone(val, col) {
+        if (val == null || !col.dir) return "";
+        const n = Number(val);
+        if (col.dir > 0) {
+            if (n >= col.hi) return "good";
+            if (n <= col.lo) return "bad";
+        } else {
+            if (n <= col.hi) return "good";
+            if (n >= col.lo) return "bad";
+        }
+        return "mid";
+    }
+
+    function pboardStarters() {
+        const game = activeGame();
+        if (!game) return [];
+        return [
+            { side: "away", pitcher: game.awayPitcher, team: game.away, opp: game.home },
+            { side: "home", pitcher: game.homePitcher, team: game.home, opp: game.away },
+        ].filter((s) => s.pitcher?.id && s.pitcher?.name);
+    }
+
+    function pboardSelected() {
+        const starters = pboardStarters();
+        if (!starters.length) return null;
+        return starters.find((s) => idsMatch(s.pitcher.id, pboard.pitcherId)) || starters[0];
+    }
+
+    function pboardDetail() {
+        const sel = pboardSelected();
+        if (!sel) return null;
+        const key = `${sel.pitcher.id}:pitcher:${profileDetailSeason || seasonFromDate(slate?.sheet_date || sheetDateFromQuery())}`;
+        const hit = playerDetailCache.get(key);
+        // A pending fetch is stored as a promise; only a settled object counts.
+        return hit && typeof hit.then !== "function" ? hit : null;
+    }
+
+    function pboardSplitsTableHtml(detail) {
+        const set = detail?.splits?.[pboard.range];
+        if (!set) return detailEmptyHtml("No pitch-level data for this window.");
+        const groups = [];
+        PBOARD_COLS.forEach((c) => {
+            const last = groups[groups.length - 1];
+            if (last && last.name === c.group) last.span += 1;
+            else groups.push({ name: c.group, span: 1 });
+        });
+        const groupRow = groups.map((g) => `<th colspan="${g.span}" class="rs-pb-group">${g.name}</th>`).join("");
+        const headRow = PBOARD_COLS.map((c) => `<th>${c.label}</th>`).join("");
+        const rows = [
+            { label: "Overall", split: set.all },
+            { label: "vs LHB", split: set.L },
+            { label: "vs RHB", split: set.R },
+        ]
+            .map(({ label, split }) => {
+                const cells = PBOARD_COLS.map((c) => {
+                    const v = split ? split[c.key] : null;
+                    const tone = pboardTone(v, c);
+                    return `<td class="${tone ? `rs-pb-${tone}` : ""}">${pboardFmt(v, c.fmt)}</td>`;
+                }).join("");
+                return `<tr><th scope="row" class="rs-pb-rowhead">${label}</th>${cells}</tr>`;
+            })
+            .join("");
+        return (
+            `<div class="rs-pb-wrap"><table class="rs-pb-table">` +
+            `<thead><tr><th class="rs-pb-rowhead"></th>${groupRow}</tr>` +
+            `<tr><th class="rs-pb-rowhead">Split</th>${headRow}</tr></thead>` +
+            `<tbody>${rows}</tbody></table></div>` +
+            `<p class="rs-ptab-foot">Green favours the hitter, red favours the pitcher. ` +
+            `Windows are starts, not days — L3 is his last three appearances. ` +
+            `IP is rebuilt from recorded outs, so it can sit a fraction under the official line.</p>`
+        );
+    }
+
+    function pboardArsenalHtml(detail) {
+        const mixes = [
+            { label: "Overall", mix: detail?.pitchTypes },
+            { label: "vs LHB", mix: detail?.pitchTypesVsL },
+            { label: "vs RHB", mix: detail?.pitchTypesVsR },
+        ];
+        const codes = Object.keys(detail?.pitchTypes || {}).filter((c) => detail.pitchTypes[c].pitches >= 20);
+        if (!codes.length) return detailEmptyHtml("No arsenal data.");
+        const head =
+            `<tr><th>Pitch</th><th>Usage</th><th>vs LHB</th><th>vs RHB</th><th>Velo</th>` +
+            `<th>Whiff%</th><th>xwOBA</th><th>Barrel%</th><th>HR</th><th>EV</th></tr>`;
+        const body = codes
+            .map((c) => {
+                const d = detail.pitchTypes[c];
+                const l = mixes[1].mix?.[c];
+                const r = mixes[2].mix?.[c];
+                return (
+                    `<tr><td class="rs-mix-td-name"><span class="rs-mix-code">${c}</span> ${pitchLabel(c)}</td>` +
+                    `<td>${d.usagePct ?? "—"}%</td>` +
+                    `<td>${l?.usagePct != null ? `${l.usagePct}%` : "—"}</td>` +
+                    `<td>${r?.usagePct != null ? `${r.usagePct}%` : "—"}</td>` +
+                    `<td>${d.avgVelo != null ? d.avgVelo.toFixed(1) : "—"}</td>` +
+                    `<td>${d.whiffPct != null ? `${d.whiffPct}%` : "—"}</td>` +
+                    `<td>${d.xwoba != null ? fmtRate(d.xwoba) : "—"}</td>` +
+                    `<td>${d.barrelPct != null ? `${d.barrelPct}%` : "—"}</td>` +
+                    `<td>${d.hr}</td>` +
+                    `<td>${d.avgEV != null ? d.avgEV.toFixed(1) : "—"}</td></tr>`
+                );
+            })
+            .join("");
+        return (
+            `<div class="rs-pb-wrap"><table class="rs-pb-table rs-pb-table--arsenal"><thead>${head}</thead><tbody>${body}</tbody></table></div>` +
+            `<p class="rs-ptab-foot">Season pitch-level totals. Usage splits show how the mix changes by batter side.</p>`
+        );
+    }
+
+    // Blend a hitter's per-pitch-type history down to just the pitches this
+    // starter actually throws, weighted by how many he has seen of each.
+    function blendBatterVsPitches(batterId, codes) {
+        const lookup = slate?.batter_pitch_lookup?.[batterId] || slate?.batter_pitch_lookup?.[String(batterId)];
+        if (!lookup) return null;
+        let pitches = 0;
+        const acc = { xwoba: 0, woba: 0, whiffPct: 0, barrelPct: 0 };
+        codes.forEach((c) => {
+            const e = lookup[c];
+            if (!e || !e.pitches) return;
+            pitches += e.pitches;
+            acc.xwoba += (e.xwoba ?? 0) * e.pitches;
+            acc.woba += (e.woba ?? 0) * e.pitches;
+            acc.whiffPct += (e.whiffPct ?? 0) * e.pitches;
+            acc.barrelPct += (e.barrelPct ?? 0) * e.pitches;
+        });
+        if (!pitches) return null;
+        return {
+            pitches,
+            xwoba: acc.xwoba / pitches,
+            woba: acc.woba / pitches,
+            whiffPct: acc.whiffPct / pitches,
+            barrelPct: acc.barrelPct / pitches,
+        };
+    }
+
+    function pboardBattersHtml(detail) {
+        const sel = pboardSelected();
+        const game = activeGame();
+        if (!sel || !game) return detailEmptyHtml("No matchup selected.");
+        // The lineup this pitcher faces is the other side's.
+        const lineup = sel.side === "away" ? game.homeLineup : game.awayLineup;
+        if (!lineup?.length) return detailEmptyHtml("Lineup not posted yet.");
+
+        const arsenal = detail?.pitchTypes || {};
+        const allCodes = Object.keys(arsenal).filter((c) => arsenal[c].pitches >= 20);
+        const active = pboard.pitches || new Set(allCodes.filter((c) => (arsenal[c].usagePct || 0) >= 10));
+        const codes = [...active];
+
+        const chips = allCodes
+            .map(
+                (c) =>
+                    `<button type="button" class="rs-spray-chip${active.has(c) ? " is-on" : ""}" data-pb-pitch="${c}">` +
+                    `${c} ${arsenal[c].usagePct ?? 0}%</button>`
+            )
+            .join("");
+
+        const rows = lineup
+            .map((row, i) => {
+                const stats = hitterStats(row);
+                const blend = blendBatterVsPitches(row.id, codes);
+                const toneW = blend ? (blend.xwoba >= 0.34 ? "good" : blend.xwoba <= 0.29 ? "bad" : "mid") : "";
+                return (
+                    `<tr data-pb-hitter="${row.id}">` +
+                    `<td>${i + 1}</td>` +
+                    `<td class="rs-pb-batter">${escAttr(row.name || "")} <span class="rs-bb-hand">${row.hand || ""}</span></td>` +
+                    `<td>${blend ? blend.pitches : "—"}</td>` +
+                    `<td class="${toneW ? `rs-pb-${toneW}` : ""}">${blend ? fmtRate(blend.xwoba) : "—"}</td>` +
+                    `<td>${blend ? fmtRate(blend.woba) : "—"}</td>` +
+                    `<td>${blend ? `${blend.whiffPct.toFixed(1)}%` : "—"}</td>` +
+                    `<td>${blend ? `${blend.barrelPct.toFixed(1)}%` : "—"}</td>` +
+                    `<td>${fmtNum(stats.hr)}</td>` +
+                    `<td>${fmtPct(stats.barrelPct)}</td>` +
+                    `<td>${fmtPct(stats.hardHitPct)}</td>` +
+                    `<td>${fmtEv(stats.avgEV)}</td>` +
+                    `<td>${fmtPct(stats.hrFbPct)}</td>` +
+                    `</tr>`
+                );
+            })
+            .join("");
+
+        return (
+            `<div class="rs-pb-chips"><span class="rs-pb-chips__label">Pitches</span>${chips}` +
+            `<button type="button" class="rs-btn rs-btn--ghost" data-pb-allpitches>All</button></div>` +
+            `<div class="rs-pb-wrap"><table class="rs-pb-table"><thead><tr>` +
+            `<th>#</th><th>Batter</th><th>Seen</th><th>xwOBA</th><th>wOBA</th><th>Whiff%</th><th>Barrel%</th>` +
+            `<th>HR</th><th>Brl%</th><th>HH%</th><th>EV</th><th>HR/FB%</th>` +
+            `</tr></thead><tbody>${rows}</tbody></table></div>` +
+            `<p class="rs-ptab-foot">Seen / xwOBA / wOBA / Whiff / Barrel cover only the selected pitch types — ` +
+            `pitches at 10%+ usage are picked for you. The last five columns are each hitter's season line, all pitches.</p>`
+        );
+    }
+
+    function renderPboardBody() {
+        const body = document.getElementById("rsPboardBody");
+        if (!body) return;
+        const detail = pboardDetail();
+        if (!detail) {
+            body.innerHTML = detailLoadingHtml("Loading pitcher detail…");
+            return;
+        }
+        if (!detail.pitches) {
+            body.innerHTML = detailEmptyHtml("No pitch-level Statcast data for this pitcher and season.");
+            return;
+        }
+        if (pboard.tab === "arsenal") body.innerHTML = pboardArsenalHtml(detail);
+        else if (pboard.tab === "batters") body.innerHTML = pboardBattersHtml(detail);
+        else body.innerHTML = pboardSplitsTableHtml(detail);
+        wirePboardBody();
+    }
+
+    function wirePboardBody() {
+        const body = document.getElementById("rsPboardBody");
+        if (!body) return;
+        body.querySelectorAll("[data-pb-pitch]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const code = btn.getAttribute("data-pb-pitch");
+                const detail = pboardDetail();
+                const arsenal = detail?.pitchTypes || {};
+                const allCodes = Object.keys(arsenal).filter((c) => arsenal[c].pitches >= 20);
+                const current = pboard.pitches || new Set(allCodes.filter((c) => (arsenal[c].usagePct || 0) >= 10));
+                const next = new Set(current);
+                if (next.has(code)) next.delete(code);
+                else next.add(code);
+                pboard.pitches = next;
+                renderPboardBody();
+            });
+        });
+        body.querySelector("[data-pb-allpitches]")?.addEventListener("click", () => {
+            const detail = pboardDetail();
+            const arsenal = detail?.pitchTypes || {};
+            pboard.pitches = new Set(Object.keys(arsenal).filter((c) => arsenal[c].pitches >= 20));
+            renderPboardBody();
+        });
+        // The board lists the lineup facing the selected pitcher, which is not
+        // always the side the hitters table is showing, so the entry is built
+        // from the game rather than read off the active table.
+        body.querySelectorAll("[data-pb-hitter]").forEach((tr) => {
+            tr.addEventListener("click", () => {
+                const sel = pboardSelected();
+                const game = activeGame();
+                if (!sel || !game) return;
+                const side = sel.side === "away" ? "home" : "away";
+                const lineup = side === "away" ? game.awayLineup : game.homeLineup;
+                const id = tr.getAttribute("data-pb-hitter");
+                const row = (lineup || []).find((r) => idsMatch(r.id, id));
+                if (!row) return;
+                openPlayerProfile({
+                    row,
+                    game,
+                    gameIdx: activeGameIdx,
+                    side,
+                    team: side === "away" ? game.away : game.home,
+                    pitcher: sel.pitcher,
+                });
+            });
+        });
+    }
+
+    async function renderPitcherBoard() {
+        const el = document.getElementById("rsPboard");
+        if (!el) return;
+        const starters = pboardStarters();
+        if (!starters.length) {
+            el.hidden = true;
+            return;
+        }
+        el.hidden = false;
+
+        const sel = pboardSelected();
+        pboard.pitcherId = sel.pitcher.id;
+        pboard.side = sel.side;
+
+        const select = document.getElementById("rsPboardPitcher");
+        if (select) {
+            select.innerHTML = starters
+                .map(
+                    (s) =>
+                        `<option value="${s.pitcher.id}"${idsMatch(s.pitcher.id, pboard.pitcherId) ? " selected" : ""}>` +
+                        `${escAttr(s.pitcher.name)} (${escAttr(s.team || "")}${s.pitcher.throws ? ` ${s.pitcher.throws}HP` : ""})</option>`
+                )
+                .join("");
+        }
+        const ranges = document.getElementById("rsPboardRanges");
+        if (ranges) {
+            ranges.innerHTML = PBOARD_RANGES.map(
+                (r) =>
+                    `<button type="button" class="rs-pboard__range${pboard.range === r.key ? " is-active" : ""}" data-pbrange="${r.key}">${r.label}</button>`
+            ).join("");
+        }
+        const meta = document.getElementById("rsPboardMeta");
+        if (meta) meta.textContent = `${sel.pitcher.name} vs ${sel.opp || "opponent"}`;
+        document.querySelectorAll(".rs-pboard__tab").forEach((btn) => {
+            const on = btn.getAttribute("data-pbtab") === pboard.tab;
+            btn.classList.toggle("is-active", on);
+            btn.setAttribute("aria-selected", on ? "true" : "false");
+        });
+
+        renderPboardBody();
+
+        // Only pull once the section is actually open, so a collapsed board
+        // costs nothing.
+        if (!el.open) return;
+        const season = seasonFromDate(slate?.sheet_date || sheetDateFromQuery());
+        profileDetailSeason = String(season);
+        const detail = await fetchPlayerDetail(sel.pitcher.id, "pitcher", String(season));
+        if (!idsMatch(sel.pitcher.id, pboard.pitcherId)) return;
+        if (!detail) {
+            const body = document.getElementById("rsPboardBody");
+            if (body) body.innerHTML = detailErrorHtml();
+            return;
+        }
+        renderPboardBody();
+    }
+
+    function wirePitcherBoard() {
+        const el = document.getElementById("rsPboard");
+        if (!el) return;
+        el.addEventListener("toggle", () => {
+            if (el.open) void renderPitcherBoard();
+        });
+        document.getElementById("rsPboardPitcher")?.addEventListener("change", (ev) => {
+            pboard.pitcherId = Number(ev.target.value) || ev.target.value;
+            pboard.pitches = null;
+            void renderPitcherBoard();
+        });
+        document.getElementById("rsPboardRanges")?.addEventListener("click", (ev) => {
+            const btn = ev.target.closest("[data-pbrange]");
+            if (!btn) return;
+            pboard.range = btn.getAttribute("data-pbrange");
+            void renderPitcherBoard();
+        });
+        document.getElementById("rsPboardTabs")?.addEventListener("click", (ev) => {
+            const btn = ev.target.closest("[data-pbtab]");
+            if (!btn) return;
+            pboard.tab = btn.getAttribute("data-pbtab");
+            void renderPitcherBoard();
+        });
+    }
+
     async function jumpToPitcherProfileEntry(entry) {
         if (!entry) return;
         activeGameIdx = entry.gameIdx;
@@ -8583,6 +8980,7 @@
         wireTopFab();
         els.profileClose?.addEventListener("click", closePlayerProfile);
         wireProfileTabs();
+        wirePitcherBoard();
         els.profileJump?.addEventListener("click", () => {
             if (profileEntry) jumpToProfileEntry(profileEntry);
             else if (profilePitcherEntry) jumpToPitcherProfileEntry(profilePitcherEntry);

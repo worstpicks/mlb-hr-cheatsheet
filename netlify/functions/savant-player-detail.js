@@ -188,6 +188,177 @@ function buildPitchTypes(rows) {
     return { pitchTypes: out, pitches: total };
 }
 
+// Events that retire runners, with how many outs each records. Used to rebuild
+// innings pitched for an arbitrary window, since Savant reports pitches, not IP.
+const OUT_EVENTS = {
+    field_out: 1,
+    strikeout: 1,
+    force_out: 1,
+    sac_fly: 1,
+    sac_bunt: 1,
+    fielders_choice_out: 1,
+    caught_stealing_2b: 1,
+    caught_stealing_3b: 1,
+    caught_stealing_home: 1,
+    other_out: 1,
+    strikeout_double_play: 2,
+    grounded_into_double_play: 2,
+    double_play: 2,
+    sac_fly_double_play: 2,
+    sac_bunt_double_play: 2,
+    triple_play: 3,
+};
+const TOTAL_BASES = { single: 1, double: 2, triple: 3, home_run: 4 };
+const WALK_EVENTS = new Set(["walk", "intent_walk"]);
+const NON_AB_EVENTS = new Set([
+    "walk",
+    "intent_walk",
+    "hit_by_pitch",
+    "sac_fly",
+    "sac_bunt",
+    "sac_fly_double_play",
+    "sac_bunt_double_play",
+    "catcher_interf",
+]);
+
+function emptySplit() {
+    return {
+        pitches: 0,
+        pa: 0,
+        ab: 0,
+        hits: 0,
+        hr: 0,
+        bb: 0,
+        so: 0,
+        outs: 0,
+        bases: 0,
+        wobaValue: 0,
+        wobaDenom: 0,
+        swings: 0,
+        whiffs: 0,
+        twoStrikePitches: 0,
+        firstPitches: 0,
+        firstPitchStrikes: 0,
+        heartPitches: 0,
+        bbe: 0,
+        barrels: 0,
+        hardHits: 0,
+        flyBalls: 0,
+        hrOnFb: 0,
+        evSum: 0,
+        evN: 0,
+    };
+}
+
+function addSplitPitch(s, row) {
+    s.pitches += 1;
+    const desc = row.description || "";
+    if (SWING_DESCRIPTIONS.has(desc)) s.swings += 1;
+    if (WHIFF_DESCRIPTIONS.has(desc)) s.whiffs += 1;
+
+    const balls = num(row.balls);
+    const strikes = num(row.strikes);
+    if (strikes === 2) s.twoStrikePitches += 1;
+    if (balls === 0 && strikes === 0) {
+        s.firstPitches += 1;
+        // A first-pitch strike is anything not called a ball -- swings, fouls,
+        // called strikes, and balls put in play all count.
+        if (row.type === "S" || row.type === "X") s.firstPitchStrikes += 1;
+    }
+    // Zone 5 is middle-middle: the closest stand-in for Savant's "meatball".
+    if (String(row.zone || "") === "5") s.heartPitches += 1;
+
+    const ev = num(row.launch_speed);
+    if (desc === "hit_into_play" && ev != null) {
+        s.bbe += 1;
+        s.evSum += ev;
+        s.evN += 1;
+        if (ev >= 95) s.hardHits += 1;
+        if (num(row.launch_speed_angle) === 6) s.barrels += 1;
+        if (row.bb_type === "fly_ball") {
+            s.flyBalls += 1;
+            if (row.events === "home_run") s.hrOnFb += 1;
+        }
+    }
+
+    const ev2 = row.events || "";
+    if (!ev2) return;
+    // Only the final pitch of a plate appearance carries an event.
+    s.pa += 1;
+    if (!NON_AB_EVENTS.has(ev2)) s.ab += 1;
+    if (HIT_EVENTS.has(ev2)) s.hits += 1;
+    if (ev2 === "home_run") s.hr += 1;
+    if (WALK_EVENTS.has(ev2)) s.bb += 1;
+    if (ev2 === "strikeout" || ev2 === "strikeout_double_play") s.so += 1;
+    s.outs += OUT_EVENTS[ev2] || 0;
+    s.bases += TOTAL_BASES[ev2] || 0;
+    const wv = num(row.woba_value);
+    const wd = num(row.woba_denom);
+    if (wv != null) s.wobaValue += wv;
+    if (wd != null) s.wobaDenom += wd;
+}
+
+function finishSplit(s) {
+    const p = (n, d) => (d > 0 ? round((n / d) * 100, 1) : null);
+    const rate = (n, d) => (d > 0 ? round(n / d, 3) : null);
+    const ip = s.outs / 3;
+    const baa = rate(s.hits, s.ab);
+    const slg = rate(s.bases, s.ab);
+    return {
+        pitches: s.pitches,
+        bf: s.pa,
+        ip: round(ip, 1),
+        baa,
+        woba: rate(s.wobaValue, s.wobaDenom),
+        slg,
+        iso: baa != null && slg != null ? round(slg - baa, 3) : null,
+        hr: s.hr,
+        hr9: ip > 0 ? round((s.hr * 9) / ip, 2) : null,
+        k9: ip > 0 ? round((s.so * 9) / ip, 2) : null,
+        bbPct: p(s.bb, s.pa),
+        kPct: p(s.so, s.pa),
+        whiffPct: p(s.whiffs, s.swings),
+        swStrPct: p(s.whiffs, s.pitches),
+        putawayPct: p(s.so, s.twoStrikePitches),
+        firstStrikePct: p(s.firstPitchStrikes, s.firstPitches),
+        meatballPct: p(s.heartPitches, s.pitches),
+        bbe: s.bbe,
+        barrelPct: p(s.barrels, s.bbe),
+        hardHitPct: p(s.hardHits, s.bbe),
+        fbPct: p(s.flyBalls, s.bbe),
+        hrFbPct: p(s.hrOnFb, s.flyBalls),
+        avgEV: s.evN ? round(s.evSum / s.evN, 1) : null,
+    };
+}
+
+function buildSplitSet(rows, handKey) {
+    const all = emptySplit();
+    const vsL = emptySplit();
+    const vsR = emptySplit();
+    rows.forEach((row) => {
+        addSplitPitch(all, row);
+        if (row[handKey] === "L") addSplitPitch(vsL, row);
+        else if (row[handKey] === "R") addSplitPitch(vsR, row);
+    });
+    return { all: finishSplit(all), L: finishSplit(vsL), R: finishSplit(vsR) };
+}
+
+// A starter's useful windows are appearances, not calendar days -- "last 3"
+// means three starts even when they span two weeks.
+function buildSplitsByGames(rows, handKey) {
+    const dates = [...new Set(rows.map((r) => r.game_date))].sort();
+    const out = { season: buildSplitSet(rows, handKey), games: dates.length };
+    [10, 5, 3, 1].forEach((n) => {
+        if (dates.length < 1) return;
+        const keep = new Set(dates.slice(-n));
+        out[`g${n}`] = buildSplitSet(
+            rows.filter((r) => keep.has(r.game_date)),
+            handKey
+        );
+    });
+    return out;
+}
+
 // Savant's hit coordinates share the origin of its field image. Converting to a
 // spray angle + distance keeps the chart independent of that image's scaling.
 function sprayAngleDeg(hcX, hcY) {
@@ -346,6 +517,10 @@ exports.handler = async (event) => {
             pitchTypes: mix.pitchTypes,
             pitchTypesVsL: buildPitchTypes(vsL).pitchTypes,
             pitchTypesVsR: buildPitchTypes(vsR).pitchTypes,
+            // Windowed splits power the pitcher board's Season/L10/L5/L3/Last
+            // toggle without a refetch per range.
+            splits: buildSplitsByGames(rows, handKey),
+            gameDates: [...new Set(rows.map((r) => r.game_date))].sort(),
             battedBalls,
         };
         return { statusCode: 200, headers: HEADERS, body: JSON.stringify(payload) };

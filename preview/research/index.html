@@ -17,7 +17,7 @@
     <meta name="research-date" content="">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
-    <link rel="stylesheet" href="research.css?v=135">
+    <link rel="stylesheet" href="research.css?v=136">
     <style>
         .rs-file-block {
             display: none;
@@ -367,14 +367,16 @@ python serve-research.py</pre>
             <div class="rs-profile__body">
                 <div class="rs-profile__hero" id="rsProfileHero"></div>
                 <nav class="rs-ptabs" id="rsProfileTabs" role="tablist" aria-label="Player detail sections">
-                    <button type="button" class="rs-ptabs__btn is-active" role="tab" aria-selected="true" data-ptab="overview">Overview</button>
+                    <button type="button" class="rs-ptabs__btn is-active" role="tab" aria-selected="true" data-ptab="read">The Read</button>
+                    <button type="button" class="rs-ptabs__btn" role="tab" aria-selected="false" data-ptab="overview">Overview</button>
                     <button type="button" class="rs-ptabs__btn" role="tab" aria-selected="false" data-ptab="hrlog">HR log</button>
                     <button type="button" class="rs-ptabs__btn" role="tab" aria-selected="false" data-ptab="zones">Zones</button>
                     <button type="button" class="rs-ptabs__btn" role="tab" aria-selected="false" data-ptab="mix">Pitch mix</button>
                     <button type="button" class="rs-ptabs__btn" role="tab" aria-selected="false" data-ptab="spray">Spray</button>
                     <button type="button" class="rs-ptabs__btn" role="tab" aria-selected="false" data-ptab="batted">Batted balls</button>
                 </nav>
-                <div class="rs-ptab-panel is-active" data-ptab-panel="overview">
+                <div class="rs-ptab-panel is-active" data-ptab-panel="read" id="rsProfileRead"></div>
+                <div class="rs-ptab-panel" data-ptab-panel="overview">
                     <div class="rs-profile__trends" id="rsProfileTrends" hidden></div>
                     <div class="rs-profile__grid" id="rsProfileGrid"></div>
                 </div>
@@ -394,6 +396,6 @@ python serve-research.py</pre>
 
     <button type="button" class="rs-top-fab" id="rsTopFab" aria-label="Back to top" hidden>&#8593; Top</button>
 
-    <script src="research.js?v=151" defer></script>
+    <script src="research.js?v=154" defer></script>
 </body>
 </html>

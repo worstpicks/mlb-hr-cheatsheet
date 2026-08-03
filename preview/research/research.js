@@ -7405,7 +7405,7 @@
 
     const playerDetailCache = new Map();
     let profileDetailGen = 0;
-    let activeProfileTab = "overview";
+    let activeProfileTab = "read";
     // Per-open state for the deep-dive tabs.
     let profileDetail = null;
     let profileOppDetail = null;
@@ -8129,13 +8129,360 @@
     }
 
     /* ---------------------------------------------------------------------
-     * HR log — the prop line, game-by-game results, and hit rates
+     * The Read — an auto-written scouting brief
+     *
+     * Every other tab answers "what are the numbers". This one answers "why is
+     * this a spot", by running a set of detectors over the slate and Statcast
+     * data and keeping only the findings that clear a threshold. Each finding
+     * carries the numbers that produced it, so nothing here is a black box, and
+     * anything resting on a thin sample says so rather than being dressed up as
+     * a conclusion.
      * ------------------------------------------------------------------- */
 
-    function hrOddsForRow(row) {
-        const o = row?.hrOdds;
-        return o && o.odds ? o : null;
+    // Signals are ranked by weight; roughly, 70+ is worth leading with.
+    function readFinding(dir, weight, headline, detail, opts = {}) {
+        return { dir, weight, headline, detail, thin: !!opts.thin };
     }
+
+    function pitchNiceName(code) {
+        return pitchLabel(code);
+    }
+
+    // How the hitter fares against the pitches this starter actually leans on,
+    // measured against the league's xwOBA for that same pitch type.
+    function readArsenalFit(row, pitcher) {
+        const arsenal = slate?.pitcher_arsenal_lookup?.[pitcher?.id] || slate?.pitcher_arsenal_lookup?.[String(pitcher?.id)];
+        const batterPitch = slate?.batter_pitch_lookup?.[row?.id] || slate?.batter_pitch_lookup?.[String(row?.id)];
+        const league = slate?.league_pitch_avgs || {};
+        if (!arsenal || !batterPitch) return [];
+        // Below the floor there is no finding at all -- labelling a read off ten
+        // pitches "small sample" does not make it worth stating.
+        const MIN_PITCHES = 40;
+        const CONFIDENT_PITCHES = 150;
+        const out = [];
+        Object.entries(arsenal)
+            .filter(([, usage]) => Number(usage) >= 10)
+            .sort((a, b) => b[1] - a[1])
+            .forEach(([code, usage]) => {
+                const b = batterPitch[code];
+                if (!b || !b.pitches || b.xwoba == null) return;
+                if (b.pitches < MIN_PITCHES) return;
+                const lg = league[code]?.xwoba;
+                if (lg == null) return;
+                const gap = b.xwoba - lg;
+                const thin = b.pitches < CONFIDENT_PITCHES;
+                if (Math.abs(gap) < 0.035) return;
+                // Damp by sample so a thin read can never lead the brief.
+                const conf = Math.min(1, b.pitches / CONFIDENT_PITCHES);
+                const weight = Math.min(100, Math.round((Math.abs(gap) * 320 + Number(usage)) * conf));
+                const verb = gap > 0 ? "punishes" : "struggles with";
+                out.push(
+                    readFinding(
+                        gap > 0 ? "for" : "against",
+                        weight,
+                        `${verb.charAt(0).toUpperCase() + verb.slice(1)} the ${pitchNiceName(code)} — ${Number(usage).toFixed(0)}% of this starter's mix`,
+                        `${fmtRate(b.xwoba)} xwOBA on ${b.pitches} career pitches, against ${fmtRate(lg)} league average on the pitch` +
+                            (b.barrelPct != null ? ` · ${b.barrelPct.toFixed(1)}% barrel` : ""),
+                        { thin }
+                    )
+                );
+            });
+        return out.slice(0, 3);
+    }
+
+    // Park, weather and wind are already decomposed by the HR model.
+    function readEnvironment(prop, game) {
+        if (prop?.propPass || game?.propPass) return [];
+        const parts = [
+            { pct: multToPct(prop?.stadiumMult), label: "park" },
+            { pct: multToPct(prop?.dimMult), label: "fences" },
+            { pct: multToPct(prop?.windMult), label: "wind" },
+            { pct: multToPct(prop?.weatherMult), label: "air" },
+        ].filter((p) => p.pct != null && Math.abs(p.pct) >= 1);
+        if (!parts.length) return [];
+        // These are four slices of one thing -- reading them as separate
+        // findings buried the rest of the brief under near-duplicates.
+        const net = parts.reduce((a, p) => a + p.pct, 0);
+        if (Math.abs(net) < 4) return [];
+        const breakdown = parts
+            .sort((a, b) => Math.abs(b.pct) - Math.abs(a.pct))
+            .map((p) => `${p.label} ${fmtSignedPct(p.pct)}`)
+            .join(" · ");
+        return [
+            readFinding(
+                net > 0 ? "for" : "against",
+                Math.min(100, Math.round(Math.abs(net) * 4 + 25)),
+                `${escAttr(game?.venue || "This park")} plays ${net > 0 ? "up" : "down"} for this bat: ${fmtSignedPct(net)}`,
+                breakdown
+            ),
+        ];
+    }
+
+    // The starter's own home-run leak, split by the side this hitter bats from.
+    function readPitcherLeak(row, pitcher) {
+        const ps = pitcherStats(pitcher);
+        const out = [];
+        const hand = String(row?.hand || "").toUpperCase();
+        const side = hand === "S" ? (pitcher?.throws === "L" ? "R" : "L") : hand;
+        const splitPct = side === "L" ? ps.dingerRiskLhbPct : side === "R" ? ps.dingerRiskRhbPct : null;
+        if (splitPct != null && splitPct >= 60) {
+            out.push(
+                readFinding(
+                    "for",
+                    Math.min(100, Math.round(splitPct)),
+                    `${escAttr(pitcher?.name || "The starter")} leaks homers to ${side}HB`,
+                    `${splitPct}% dinger risk to this side` +
+                        (ps.hr9 != null ? ` · ${Number(ps.hr9).toFixed(2)} HR/9` : "") +
+                        (ps.barrelPct != null ? ` · ${ps.barrelPct.toFixed(1)}% barrel allowed` : "")
+                )
+            );
+        } else if (splitPct != null && splitPct <= 30) {
+            out.push(
+                readFinding(
+                    "against",
+                    Math.min(100, Math.round(100 - splitPct)),
+                    `${escAttr(pitcher?.name || "The starter")} suppresses homers to ${side}HB`,
+                    `${splitPct}% dinger risk to this side` + (ps.hr9 != null ? ` · ${Number(ps.hr9).toFixed(2)} HR/9` : "")
+                )
+            );
+        }
+        if (ps.whiffPct != null && ps.whiffPct >= 30) {
+            out.push(
+                readFinding(
+                    "against",
+                    Math.round(ps.whiffPct + 30),
+                    "Bat-missing starter",
+                    `${ps.whiffPct.toFixed(1)}% whiff` + (ps.kPct != null ? ` · ${ps.kPct.toFixed(1)}% K rate` : "") + " — fewer balls in play to work with."
+                )
+            );
+        }
+        return out;
+    }
+
+    function readPower(stats) {
+        const out = [];
+        if (stats.barrelPct != null && stats.barrelPct >= 13) {
+            out.push(
+                readFinding(
+                    "for",
+                    Math.round(stats.barrelPct * 4),
+                    "Elite barrel rate",
+                    `${stats.barrelPct.toFixed(1)}% barrel` +
+                        (stats.avgEV != null ? ` · ${stats.avgEV.toFixed(1)} mph average exit velo` : "") +
+                        (stats.hardHitPct != null ? ` · ${stats.hardHitPct.toFixed(1)}% hard-hit` : "")
+                )
+            );
+        } else if (stats.barrelPct != null && stats.barrelPct <= 5) {
+            out.push(
+                readFinding("against", Math.round(60 - stats.barrelPct * 4), "Light contact quality", `Only ${stats.barrelPct.toFixed(1)}% barrel this season.`)
+            );
+        }
+        if (stats.hrLuckDiff != null && Math.abs(stats.hrLuckDiff) >= 2) {
+            const owed = stats.hrLuckDiff > 0;
+            out.push(
+                readFinding(
+                    owed ? "for" : "against",
+                    Math.min(100, Math.round(Math.abs(stats.hrLuckDiff) * 18 + 25)),
+                    owed ? "Owed home runs" : "Running hot",
+                    `${fmtXhr(stats.expectedHr)} expected against ${fmtNum(stats.hr)} actual — ${owed ? "batted balls say more should have left" : "output is ahead of the contact"}.`
+                )
+            );
+        }
+        if (stats.pullAirPct != null && stats.pullAirPct >= 22) {
+            out.push(
+                readFinding(
+                    "for",
+                    Math.round(stats.pullAirPct * 2.5),
+                    "Pulls the ball in the air",
+                    `${stats.pullAirPct.toFixed(1)}% pulled air contact — the profile that turns into home runs.`
+                )
+            );
+        }
+        if (stats.gbPct != null && stats.gbPct >= 50) {
+            out.push(readFinding("against", Math.round(stats.gbPct), "Beats the ball into the ground", `${stats.gbPct.toFixed(1)}% ground balls.`));
+        }
+        return out;
+    }
+
+    function readPlatoon(row, pitcher, stats) {
+        const throws = pitcher?.throws;
+        if (!throws) return [];
+        const x = throws === "L" ? stats.xwobaVsLhp : stats.xwobaVsRhp;
+        const pa = throws === "L" ? stats.paVsLhp : stats.paVsRhp;
+        if (x == null || !pa || pa < 40) return [];
+        if (x >= 0.36) {
+            return [
+                readFinding(
+                    "for",
+                    Math.round(x * 200),
+                    `Handles ${throws}HP`,
+                    `${fmtRate(x)} xwOBA against ${throws}HP across ${pa} plate appearances.`,
+                    { thin: pa < 80 }
+                ),
+            ];
+        }
+        if (x <= 0.28) {
+            return [
+                readFinding(
+                    "against",
+                    Math.round((0.36 - x) * 250),
+                    `Struggles against ${throws}HP`,
+                    `${fmtRate(x)} xwOBA against ${throws}HP across ${pa} plate appearances.`,
+                    { thin: pa < 80 }
+                ),
+            ];
+        }
+        return [];
+    }
+
+    // Recent contact quality, taken from the pitch-level pull when it is loaded.
+    function readForm(stats, detail) {
+        const out = [];
+        if (detail?.battedBalls?.length) {
+            const cutoff = rangeCutoffIso(14);
+            const recent = detail.battedBalls.filter((b) => !cutoff || b.date >= cutoff);
+            if (recent.length >= 8) {
+                const evs = recent.map((b) => b.ev).filter((v) => v != null);
+                const avg = evs.reduce((a, b) => a + b, 0) / evs.length;
+                const barrels = recent.filter((b) => b.isBarrel).length;
+                const brl = (barrels / recent.length) * 100;
+                const seasonEv = stats.avgEV;
+                if (seasonEv != null && avg - seasonEv >= 1.5) {
+                    out.push(
+                        readFinding(
+                            "for",
+                            Math.round((avg - seasonEv) * 18 + 40),
+                            "Squaring it up lately",
+                            `${avg.toFixed(1)} mph average exit velo over the last 14 days against ${seasonEv.toFixed(1)} for the season · ${brl.toFixed(1)}% barrel on ${recent.length} batted balls.`
+                        )
+                    );
+                } else if (seasonEv != null && seasonEv - avg >= 2) {
+                    out.push(
+                        readFinding(
+                            "against",
+                            Math.round((seasonEv - avg) * 18 + 35),
+                            "Contact has gone soft",
+                            `${avg.toFixed(1)} mph average exit velo over the last 14 days against ${seasonEv.toFixed(1)} for the season, on ${recent.length} batted balls.`
+                        )
+                    );
+                }
+            }
+        }
+        if (stats.hrFormPct != null && stats.hrFormPct >= 75) {
+            out.push(readFinding("for", Math.round(stats.hrFormPct), "Form model is hot", `HR form score ${Math.round(stats.hrFormPct)}/100 across the slate.`));
+        } else if (stats.hrFormPct != null && stats.hrFormPct <= 25) {
+            out.push(readFinding("against", Math.round(100 - stats.hrFormPct), "Form model is cold", `HR form score ${Math.round(stats.hrFormPct)}/100 across the slate.`));
+        }
+        return out;
+    }
+
+    // Where the pitcher lives against where this hitter does damage.
+    function readZoneCollision(detail, oppDetail, row, pitcher) {
+        if (!detail?.zones || !oppDetail?.zones) return [];
+        const oppThrows = pitcher?.throws || oppDetail.hand || null;
+        const stance = effectiveStance(row?.hand || detail.hand, oppThrows);
+        const bat = splitZonesFor(detail, oppThrows).zones;
+        const pit = splitPitcherZonesFor(oppDetail, stance).zones;
+        const edges = matchupEdges(bat, pit);
+        if (!edges.length) return [];
+        const top = edges[0];
+        // "Lives in" is only fair at real usage; below that it is a tendency,
+        // not a pattern, and the headline should not oversell the number
+        // sitting right underneath it.
+        const heavy = top.usage >= 10;
+        return [
+            readFinding(
+                "for",
+                Math.min(100, Math.round(top.weight * 3 + 35)),
+                `${heavy ? "Lives in" : "Goes to"} a zone this hitter damages: ${zoneName(top.zone).toLowerCase()}`,
+                `${top.hrRate}% of batted balls there leave the yard, and the starter puts ${top.usage}% of his pitches in it.`
+            ),
+        ];
+    }
+
+    function readWhiffRisk(stats) {
+        if (stats.whiffPct != null && stats.whiffPct >= 33) {
+            return [readFinding("against", Math.round(stats.whiffPct + 25), "Swing-and-miss prone", `${stats.whiffPct.toFixed(1)}% whiff rate` + (stats.kPct != null ? ` · ${stats.kPct.toFixed(1)}% strikeouts` : "") + ".")];
+        }
+        return [];
+    }
+
+    function buildReadFindings() {
+        const row = profileEntry?.row;
+        if (!row) return [];
+        const stats = hitterStats(row);
+        const pitcher = profileEntry?.pitcher;
+        const game = profileEntry?.game;
+        const prop = row.hrProp || {};
+        return [
+            ...readArsenalFit(row, pitcher),
+            ...readZoneCollision(profileDetail, profileOppDetail, row, pitcher),
+            ...readPitcherLeak(row, pitcher),
+            ...readEnvironment(prop, game),
+            ...readPower(stats),
+            ...readPlatoon(row, pitcher, stats),
+            ...readForm(stats, profileDetail),
+            ...readWhiffRisk(stats),
+        ].sort((a, b) => b.weight - a.weight);
+    }
+
+    function readVerdict(score) {
+        if (score == null) return { label: "No read", tone: "mid", line: "Not enough data to score this spot." };
+        if (score >= 80) return { label: "Strong spot", tone: "good", line: "Most of the inputs line up in this hitter's favour." };
+        if (score >= 65) return { label: "Live", tone: "good", line: "More working for him than against." };
+        if (score >= 45) return { label: "Mixed", tone: "mid", line: "Real positives, real problems — read both columns." };
+        return { label: "Soft spot", tone: "bad", line: "The inputs mostly point the other way." };
+    }
+
+    function readCardHtml(f) {
+        return (
+            `<li class="rs-read-item${f.thin ? " is-thin" : ""}">` +
+            `<span class="rs-read-item__head">${f.headline}${f.thin ? ` <span class="rs-read-thin">small sample</span>` : ""}</span>` +
+            `<span class="rs-read-item__detail">${f.detail}</span></li>`
+        );
+    }
+
+    function renderReadPanel() {
+        const el = detailPanelEl("read");
+        if (!el) return;
+        const row = profileEntry?.row;
+        if (!row) {
+            el.innerHTML = detailEmptyHtml("The Read is written for hitters.");
+            return;
+        }
+        const findings = buildReadFindings();
+        const score = profileEntry ? hrTicketScore100(profileEntry) : null;
+        const verdict = readVerdict(score);
+        const forList = findings.filter((f) => f.dir === "for").slice(0, 5);
+        const againstList = findings.filter((f) => f.dir === "against").slice(0, 4);
+
+        const pitcher = profileEntry?.pitcher;
+        const head =
+            `<div class="rs-read-head rs-read-head--${verdict.tone}">` +
+            `<span class="rs-read-head__verdict">${verdict.label}</span>` +
+            `<span class="rs-read-head__score">${score != null ? `${score}<span>/100</span>` : "—"}</span>` +
+            `<span class="rs-read-head__line">${verdict.line}</span>` +
+            `</div>` +
+            `<p class="rs-read-sub">${escAttr(row.name || "This hitter")} vs ${escAttr(pitcher?.name || "TBD")}${pitcher?.throws ? ` (${pitcher.throws}HP)` : ""}</p>`;
+
+        const col = (title, list, cls, empty) =>
+            `<div class="rs-read-col rs-read-col--${cls}"><h4 class="rs-read-col__title">${title}</h4>` +
+            (list.length ? `<ul class="rs-read-list">${list.map(readCardHtml).join("")}</ul>` : `<p class="rs-read-empty">${empty}</p>`) +
+            `</div>`;
+
+        el.innerHTML =
+            head +
+            `<div class="rs-read-cols">` +
+            col("Working for him", forList, "for", "Nothing stands out in his favour.") +
+            col("Working against him", againstList, "against", "No red flags surfaced.") +
+            `</div>` +
+            `<p class="rs-ptab-foot">Written from this slate's data — every line shows the numbers behind it. ` +
+            `Zone and recent-form reads appear once the Statcast pull finishes.</p>`;
+    }
+
+    /* ---------------------------------------------------------------------
+     * HR log — game-by-game results and hit rates
+     * ------------------------------------------------------------------- */
 
     // Share of games with at least one home run -- the thing an Over 0.5 ticket
     // actually needs, as opposed to total HR.
@@ -8225,7 +8572,6 @@
             return;
         }
 
-        const odds = hrOddsForRow(row);
         const pitcher = profileEntry?.pitcher;
         // Head-to-head comes from the pitch-level pull already in memory, so it
         // costs nothing extra -- but it only covers the seasons pulled.
@@ -8234,15 +8580,6 @@
             const vs = profileDetail.battedBalls.filter((b) => idsMatch(b.oppId, pitcher.id));
             if (vs.length) h2h = { hr: vs.filter((b) => b.isHr).length, bbe: vs.length };
         }
-
-        const oddsHtml = odds
-            ? `<div class="rs-hrlog-head"><span class="rs-hrlog-head__label">Over ${odds.line ?? 0.5} home runs</span>` +
-              `<span class="rs-hrlog-odds">${escAttr(odds.odds)}</span>` +
-              (odds.impliedPct != null ? `<span class="rs-hrlog-head__imp">${odds.impliedPct}% implied</span>` : "") +
-              (odds.book ? `<span class="rs-hrlog-head__book">${escAttr(odds.book)}</span>` : "") +
-              `</div>`
-            : `<div class="rs-hrlog-head rs-hrlog-head--noline"><span class="rs-hrlog-head__label">Over 0.5 home runs</span>` +
-              `<span class="rs-hrlog-head__imp">No line — set ODDS_API_KEY to pull prices</span></div>`;
 
         const seasonRate = hrHitRate(games);
         const tiles =
@@ -8257,7 +8594,6 @@
                 : "");
 
         el.innerHTML =
-            oddsHtml +
             `<div class="rs-hrlog-tiles">${tiles}</div>` +
             `<div class="rs-hrlog">${renderHrLogChart(games)}</div>` +
             `<p class="rs-ptab-foot">Bars are home runs per game, last ${Math.min(20, games.length)} games; ` +
@@ -8267,7 +8603,8 @@
     }
 
     function renderActiveDetailTab() {
-        if (activeProfileTab === "hrlog") void renderHrLogPanel();
+        if (activeProfileTab === "read") renderReadPanel();
+        else if (activeProfileTab === "hrlog") void renderHrLogPanel();
         else if (activeProfileTab === "zones") renderZonesPanel();
         else if (activeProfileTab === "mix") renderMixPanel();
         else if (activeProfileTab === "spray") renderSprayPanel();
@@ -8277,15 +8614,17 @@
     async function ensureProfileDetail() {
         if (activeProfileTab === "overview") return;
         const gen = profileDetailGen;
-        // The HR log only needs the MLB game log, which lands far quicker than
-        // the Savant pull. Paint it now; the head-to-head tile fills in when
-        // the pitch-level detail arrives and this repaints.
+        // The Read and the HR log are built from slate data and the MLB game
+        // log, both of which land far sooner than the Savant pull. Paint them
+        // now; the zone, form and head-to-head lines fill in on the repaint
+        // once the pitch-level detail arrives.
+        if (activeProfileTab === "read") renderReadPanel();
         if (activeProfileTab === "hrlog") void renderHrLogPanel();
         if (profileDetail !== null) {
             renderActiveDetailTab();
             return;
         }
-        const panel = activeProfileTab === "hrlog" ? null : detailPanelEl(activeProfileTab);
+        const panel = ["read", "hrlog"].includes(activeProfileTab) ? null : detailPanelEl(activeProfileTab);
         if (panel) panel.innerHTML = detailLoadingHtml("Loading Statcast detail…");
 
         const selfId = profileEntry ? profileEntry.row?.id : profilePitcherEntry?.pitcher?.id;
@@ -8348,11 +8687,11 @@
         profileDetailRole = role;
         profileDetailSeason = String(season);
         sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
-        ["hrlog", "zones", "mix", "spray", "batted"].forEach((tab) => {
+        ["read", "hrlog", "zones", "mix", "spray", "batted"].forEach((tab) => {
             const panel = detailPanelEl(tab);
             if (panel) panel.innerHTML = "";
         });
-        setProfileTab("overview");
+        setProfileTab("read");
     }
 
     function wireProfileTabs() {

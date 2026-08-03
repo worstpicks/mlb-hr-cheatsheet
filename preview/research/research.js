@@ -7408,34 +7408,65 @@
     let profileOppDetail = null;
     let profileDetailRole = "batter";
     let profileDetailSeason = "";
-    let sprayFilter = { pitches: null, results: "all" };
+    let sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
 
     function pitchLabel(code) {
         return PITCH_LABELS[code] || code || "—";
+    }
+
+    // Why the last detail fetch failed, so the panel can say something better
+    // than "unavailable".
+    let lastDetailError = "";
+
+    async function fetchDetailOnce(playerId, role, season) {
+        const ctl = new AbortController();
+        // Netlify gives the function 10s; give up a little after that rather
+        // than leaving the panel spinning forever.
+        const timer = setTimeout(() => ctl.abort(), 14000);
+        try {
+            const res = await fetch(
+                `${window.location.origin}/api/savant-player-detail?playerId=${encodeURIComponent(playerId)}` +
+                    `&role=${encodeURIComponent(role)}&season=${encodeURIComponent(season)}`,
+                { signal: ctl.signal }
+            );
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            if (!data || data.error) throw new Error(data?.error || "empty response");
+            return data;
+        } finally {
+            clearTimeout(timer);
+        }
     }
 
     async function fetchPlayerDetail(playerId, role, season) {
         if (!playerId) return null;
         const key = `${playerId}:${role}:${season}`;
         if (playerDetailCache.has(key)) return playerDetailCache.get(key);
+        if (isFileProtocol()) {
+            lastDetailError = "file:// — start serve-research.py";
+            return null;
+        }
         const promise = (async () => {
-            if (isFileProtocol()) return null;
-            try {
-                const res = await fetch(
-                    `${window.location.origin}/api/savant-player-detail?playerId=${encodeURIComponent(playerId)}` +
-                        `&role=${encodeURIComponent(role)}&season=${encodeURIComponent(season)}`
-                );
-                if (!res.ok) return null;
-                const data = await res.json();
-                return data && !data.error ? data : null;
-            } catch (err) {
-                console.warn("player detail", err);
-                return null;
+            // Savant occasionally stalls and Netlify cold starts can blow the
+            // budget, so one retry covers the common blip.
+            for (let attempt = 0; attempt < 2; attempt++) {
+                try {
+                    return await fetchDetailOnce(playerId, role, season);
+                } catch (err) {
+                    const why = err?.name === "AbortError" ? "timed out" : String(err?.message || err);
+                    lastDetailError = why;
+                    console.warn(`player detail ${playerId} (${role}) attempt ${attempt + 1}: ${why}`);
+                    if (attempt === 0) await new Promise((r) => setTimeout(r, 900));
+                }
             }
+            return null;
         })();
         playerDetailCache.set(key, promise);
         const out = await promise;
-        playerDetailCache.set(key, out);
+        // Never cache a failure -- a cached null used to make one transient
+        // blip look permanent until a full page reload.
+        if (out) playerDetailCache.set(key, out);
+        else playerDetailCache.delete(key);
         return out;
     }
 
@@ -7466,28 +7497,63 @@
         return "mid";
     }
 
-    function zoneCellHtml(zone, cell, metric, values, label) {
-        const val = cell ? cell[metric] : null;
-        const tone = zoneTone(val, values, true);
+    // A zone only holds a fraction of a season's contact, so rates off two or
+    // three batted balls are noise -- those cells read "--" rather than
+    // screaming 50% HR.
+    const ZONE_MIN_BBE = 5;
+    const ZONE_MIN_PITCHES = 15;
+
+    function zoneSampleOk(cell, metric) {
+        if (!cell) return false;
+        return metric === "usagePct" ? cell.pitches >= ZONE_MIN_PITCHES : cell.bbe >= ZONE_MIN_BBE;
+    }
+
+    function zoneCellHtml(zone, cell, metric, values, label, scale = "heat", topZones = null) {
+        const ok = zoneSampleOk(cell, metric);
+        const val = ok ? cell[metric] : null;
+        // Usage isn't good or bad for the hitter -- it gets a neutral emphasis
+        // scale (where the pitcher lives) rather than the green/red heat scale.
+        const tone =
+            scale === "usage"
+                ? topZones && topZones.has(String(zone))
+                    ? "use-hi"
+                    : "use-lo"
+                : ok
+                  ? zoneTone(val, values, true)
+                  : "none";
         const shown = val == null ? "—" : metric === "xwoba" ? fmtRate(val) : `${val}%`;
-        const sample = cell ? (metric === "usagePct" ? `${cell.pitches} p` : `${cell.bbe} BBE`) : "";
+        const sample = cell ? (metric === "usagePct" ? `${cell.pitches} pitches` : `${cell.bbe} BBE`) : "no data";
+        const tip = `Zone ${zone} — ${zoneName(zone)} · ${sample}${ok ? "" : " · too few to rate"}`;
         return (
-            `<div class="rs-zone-cell rs-zone-cell--${tone}" data-zone="${zone}" title="Zone ${zone} · ${sample}">` +
+            `<div class="rs-zone-cell rs-zone-cell--${tone}" data-zone="${zone}" title="${escAttr(tip)}">` +
             `<span class="rs-zone-cell__label">${label}</span>` +
             `<span class="rs-zone-cell__val">${shown}</span>` +
             `</div>`
         );
     }
 
-    function zoneGridHtml(zones, metric, label) {
+    function zoneGridHtml(zones, metric, label, scale = "heat") {
         if (!zones) return detailEmptyHtml("No zone data.");
-        const values = Object.values(zones).map((z) => (z ? z[metric] : null));
-        const inner = ZONE_INNER.map((z) => zoneCellHtml(z, zones[z], metric, values, label)).join("");
+        // Scale the heat off rateable zones only, so thin cells can't stretch it.
+        const values = Object.values(zones)
+            .filter((z) => zoneSampleOk(z, metric))
+            .map((z) => z[metric]);
+        // The seven zones a pitcher goes to most -- the ones worth planning for.
+        // Only rateable zones qualify, so a "--" cell is never shaded as a
+        // top zone on a thin sample.
+        const topZones =
+            scale === "usage"
+                ? new Set(
+                      Object.keys(zones)
+                          .filter((z) => zoneSampleOk(zones[z], "usagePct"))
+                          .sort((a, b) => (zones[b]?.usagePct || 0) - (zones[a]?.usagePct || 0))
+                          .slice(0, 7)
+                  )
+                : null;
+        const cell = (z) => zoneCellHtml(z, zones[z], metric, values, label, scale, topZones);
+        const inner = ZONE_INNER.map(cell).join("");
         const shadow = Object.entries(ZONE_SHADOW)
-            .map(
-                ([z, pos]) =>
-                    `<div class="rs-zone-grid__shadow rs-zone-grid__shadow--${pos}">${zoneCellHtml(z, zones[z], metric, values, label)}</div>`
-            )
+            .map(([z, pos]) => `<div class="rs-zone-grid__shadow rs-zone-grid__shadow--${pos}">${cell(z)}</div>`)
             .join("");
         return `<div class="rs-zone-grid">${shadow}<div class="rs-zone-grid__inner">${inner}</div></div>`;
     }
@@ -7503,7 +7569,9 @@
                 const bat = batterZones[z];
                 const pit = pitcherZones[z];
                 if (!bat || !pit || bat.hrRate == null || pit.usagePct == null) return null;
-                if (bat.bbe < 4) return null;
+                // Calling something an edge needs more than the bar to colour a
+                // cell, or every thin zone becomes a "strength".
+                if (bat.bbe < 8 || pit.pitches < ZONE_MIN_PITCHES) return null;
                 const lift = bat.hrRate - avgHr;
                 if (lift <= 0 || pit.usagePct <= 0) return null;
                 return { zone: z, lift, usage: pit.usagePct, weight: lift * pit.usagePct, hrRate: bat.hrRate };
@@ -7533,6 +7601,42 @@
         );
     }
 
+    // Splitting halves the sample, so only prefer the platoon view when enough
+    // pitches survive it -- otherwise the grid turns into a wall of "--".
+    const SPLIT_MIN_PITCHES = 350;
+
+    // Which hand the hitter will actually stand on today: switch hitters take
+    // the opposite side from the starter.
+    function effectiveStance(hand, oppThrows) {
+        const h = String(hand || "").toUpperCase();
+        if (h === "S") return oppThrows === "L" ? "R" : oppThrows === "R" ? "L" : null;
+        return h === "L" || h === "R" ? h : null;
+    }
+
+    // A hitter's zone profile vs LHP differs from vs RHP, so show the split that
+    // matches today's starter when the sample supports it.
+    function splitZonesFor(detail, hand) {
+        if (!detail) return { zones: null, label: "" };
+        if (hand === "L" && detail.zonePitchesVsL >= SPLIT_MIN_PITCHES) {
+            return { zones: detail.zonesVsL, label: " vs LHP" };
+        }
+        if (hand === "R" && detail.zonePitchesVsR >= SPLIT_MIN_PITCHES) {
+            return { zones: detail.zonesVsR, label: " vs RHP" };
+        }
+        return { zones: detail.zones, label: "" };
+    }
+
+    function splitPitcherZonesFor(detail, stance) {
+        if (!detail) return { zones: null, label: "" };
+        if (stance === "L" && detail.zonePitchesVsL >= SPLIT_MIN_PITCHES) {
+            return { zones: detail.zonesVsL, label: " vs LHB" };
+        }
+        if (stance === "R" && detail.zonePitchesVsR >= SPLIT_MIN_PITCHES) {
+            return { zones: detail.zonesVsR, label: " vs RHB" };
+        }
+        return { zones: detail.zones, label: "" };
+    }
+
     function renderZonesPanel() {
         const el = detailPanelEl("zones");
         if (!el) return;
@@ -7546,7 +7650,12 @@
         const selfLabel = isBatter ? "HR Rate" : "Usage";
         const oppName = profileOppDetail?.playerName ? tidySavantName(profileOppDetail.playerName) : null;
 
-        const edges = isBatter ? matchupEdges(detail.zones, profileOppDetail?.zones) : [];
+        const oppThrows = profileEntry?.pitcher?.throws || profileOppDetail?.hand || null;
+        const stance = effectiveStance(profileEntry?.row?.hand || detail.hand, oppThrows);
+        const selfSplit = isBatter ? splitZonesFor(detail, oppThrows) : { zones: detail.zones, label: "" };
+        const oppSplit = splitPitcherZonesFor(profileOppDetail, stance);
+
+        const edges = isBatter ? matchupEdges(selfSplit.zones, oppSplit.zones) : [];
         const edgesHtml = edges.length
             ? `<div class="rs-zone-edges"><h4 class="rs-zone-edges__title">Matchup edges</h4>` +
               edges
@@ -7563,30 +7672,32 @@
 
         const selfPanel =
             `<div class="rs-zone-panel"><h4 class="rs-zone-panel__title">${escAttr(tidySavantName(detail.playerName || ""))}</h4>` +
-            `<p class="rs-zone-panel__sub">${isBatter ? "HR per batted ball by zone" : "Pitch usage by zone"}</p>` +
-            zoneGridHtml(detail.zones, selfMetric, selfLabel) +
+            `<p class="rs-zone-panel__sub">${isBatter ? "HR per batted ball by zone" : "Pitch usage by zone"}${selfSplit.label}</p>` +
+            zoneGridHtml(selfSplit.zones, selfMetric, selfLabel, isBatter ? "heat" : "usage") +
             `</div>`;
 
         const oppPanel = profileOppDetail?.pitches
             ? `<div class="rs-zone-panel"><h4 class="rs-zone-panel__title">${escAttr(oppName || "Opposing pitcher")}</h4>` +
-              `<p class="rs-zone-panel__sub">Pitch usage by zone${detail.hand ? ` vs ${detail.hand}HB` : ""}</p>` +
-              zoneGridHtml(
-                  detail.hand === "L"
-                      ? profileOppDetail.zonesVsL
-                      : detail.hand === "R"
-                        ? profileOppDetail.zonesVsR
-                        : profileOppDetail.zones,
-                  "usagePct",
-                  "Usage"
-              ) +
+              `<p class="rs-zone-panel__sub">Pitch usage by zone${oppSplit.label}</p>` +
+              zoneGridHtml(oppSplit.zones, "usagePct", "Usage", "usage") +
               `</div>`
             : "";
 
+        // Under a few hundred pitches the grid is mostly noise -- say so rather
+        // than letting a handful of zones read as a profile.
+        const thinHtml =
+            detail.pitches < 400
+                ? `<p class="rs-ptab-msg rs-ptab-msg--empty">Only ${detail.pitches.toLocaleString()} pitches tracked this season — treat these zones as a small sample.</p>`
+                : "";
+
         el.innerHTML =
+            thinHtml +
             edgesHtml +
             `<div class="rs-zone-wrap">${selfPanel}${oppPanel}</div>` +
             `<p class="rs-ptab-foot">Catcher's view · ${detail.pitches.toLocaleString()} pitches, ${detail.seasons.join("/")}. ` +
-            `Green = hitter strength, red = weakness.</p>`;
+            (isBatter ? `Green = hitter strength, red = weakness. ` : "") +
+            (profileOppDetail?.pitches ? `Shaded cells on the right are the starter's 7 most-used zones. ` : "") +
+            `Zones under ${ZONE_MIN_BBE} batted balls show “—”.</p>`;
     }
 
     // Savant returns "Last, First" -- the rest of the page uses "First Last".
@@ -7595,6 +7706,20 @@
         if (!s.includes(",")) return s;
         const [last, first] = s.split(",").map((p) => p.trim());
         return `${first} ${last}`.trim();
+    }
+
+    // The starter's arsenal usage against the side this hitter will bat from.
+    function opposingPitchMix() {
+        if (!profileOppDetail) return null;
+        const oppThrows = profileEntry?.pitcher?.throws || profileOppDetail.hand || null;
+        const stance = effectiveStance(profileEntry?.row?.hand || profileDetail?.hand, oppThrows);
+        if (stance === "L" && profileOppDetail.zonePitchesVsL >= SPLIT_MIN_PITCHES) {
+            return profileOppDetail.pitchTypesVsL;
+        }
+        if (stance === "R" && profileOppDetail.zonePitchesVsR >= SPLIT_MIN_PITCHES) {
+            return profileOppDetail.pitchTypesVsR;
+        }
+        return profileOppDetail.pitchTypes;
     }
 
     function renderMixPanel() {
@@ -7608,13 +7733,7 @@
         const isBatter = profileDetailRole === "batter";
         // Facing pitcher's usage, so the hitter's per-pitch results can be read
         // against what he is actually going to see.
-        const oppMix = isBatter
-            ? (detail.hand === "L"
-                  ? profileOppDetail?.pitchTypesVsL
-                  : detail.hand === "R"
-                    ? profileOppDetail?.pitchTypesVsR
-                    : profileOppDetail?.pitchTypes) || null
-            : null;
+        const oppMix = isBatter ? opposingPitchMix() : null;
         const codes = Object.keys(detail.pitchTypes || {}).filter((c) => detail.pitchTypes[c].pitches >= 20);
         if (!codes.length) {
             el.innerHTML = detailEmptyHtml("Not enough pitches by type.");
@@ -7674,7 +7793,10 @@
         const PPF = 0.68; // px per foot
         const pt = (bb) => {
             const dist = bb.dist != null && bb.dist > 0 ? bb.dist : 150;
-            const ang = ((bb.sprayAngle ?? 0) * Math.PI) / 180;
+            // Keep the handful of out-of-bounds coordinates inside the wedge so
+            // they don't render as stray dots in foul ground.
+            const deg = Math.max(-45, Math.min(45, bb.sprayAngle ?? 0));
+            const ang = (deg * Math.PI) / 180;
             return {
                 x: CX + Math.sin(ang) * dist * PPF,
                 y: CY - Math.cos(ang) * dist * PPF,
@@ -7715,10 +7837,31 @@
         );
     }
 
-    function filteredSprayBalls() {
+    // Range is in days back from the slate date, so "L5" means the same window
+    // everywhere it appears. 0 means the whole season pulled.
+    const RANGE_OPTIONS = [
+        { days: 5, label: "L5 days" },
+        { days: 10, label: "L10 days" },
+        { days: 15, label: "L15 days" },
+        { days: 30, label: "L30 days" },
+        { days: 0, label: "Season" },
+    ];
+
+    function rangeCutoffIso(days) {
+        if (!days) return null;
+        const base = slate?.sheet_date || sheetDateFromQuery() || todayLocalIso();
+        const d = new Date(`${base}T00:00:00`);
+        if (Number.isNaN(d.getTime())) return null;
+        d.setDate(d.getDate() - days);
+        return d.toISOString().slice(0, 10);
+    }
+
+    function filteredBattedBalls() {
         const all = profileDetail?.battedBalls || [];
         const pitches = sprayFilter.pitches;
+        const cutoff = rangeCutoffIso(sprayFilter.rangeDays);
         return all.filter((bb) => {
+            if (cutoff && bb.date < cutoff) return false;
             if (pitches && pitches.size && !pitches.has(bb.pitchType)) return false;
             if (sprayFilter.results === "hr" && !bb.isHr) return false;
             if (sprayFilter.results === "hits" && !["single", "double", "triple", "home_run"].includes(bb.result)) return false;
@@ -7727,15 +7870,118 @@
         });
     }
 
-    function renderSprayPanel() {
-        const el = detailPanelEl("spray");
-        if (!el) return;
+    function pct(n, d) {
+        return d > 0 ? Math.round((n / d) * 1000) / 10 : null;
+    }
+
+    function fmtStripPct(v) {
+        return v == null ? "—" : `${v.toFixed(1)}%`;
+    }
+
+    // Spray angle is absolute field direction, so which side counts as "pull"
+    // flips with the hitter's stance. Savant's stringer coordinates put a few
+    // balls per season outside the foul lines (foul-ground outs and plain
+    // mis-codes); counting those as extreme pull/oppo skews the split several
+    // points, so they sit out of the denominator.
+    function sprayThird(bb) {
+        if (bb.sprayAngle == null || Math.abs(bb.sprayAngle) > 45) return null;
+        if (Math.abs(bb.sprayAngle) <= 15) return "straight";
+        const toRight = bb.sprayAngle > 0;
+        return bb.batSide === "L" ? (toRight ? "pull" : "oppo") : toRight ? "oppo" : "pull";
+    }
+
+    function battedBallMetrics(balls) {
+        const evs = balls.map((b) => b.ev).filter((v) => v != null);
+        const barrels = balls.filter((b) => b.isBarrel).length;
+        const hard = balls.filter((b) => b.ev != null && b.ev >= 95).length;
+        const speeds = balls.map((b) => b.batSpeed).filter((v) => v != null);
+        return {
+            bbe: balls.length,
+            avgEV: evs.length ? Math.round((evs.reduce((a, b) => a + b, 0) / evs.length) * 10) / 10 : null,
+            maxEV: evs.length ? Math.max(...evs) : null,
+            barrelPct: pct(barrels, balls.length),
+            hardHitPct: pct(hard, balls.length),
+            batSpeed: speeds.length ? Math.round((speeds.reduce((a, b) => a + b, 0) / speeds.length) * 10) / 10 : null,
+        };
+    }
+
+    function battedBallStatcast(balls) {
+        const n = balls.length;
+        const type = (t) => balls.filter((b) => b.bbType === t).length;
+        const fb = type("fly_ball");
+        const hrOnFb = balls.filter((b) => b.isHr).length;
+        const thirds = balls.map(sprayThird);
+        const third = (k) => thirds.filter((t) => t === k).length;
+        const spraysKnown = thirds.filter(Boolean).length;
+        return {
+            gbPct: pct(type("ground_ball"), n),
+            fbPct: pct(fb, n),
+            ldPct: pct(type("line_drive"), n),
+            puPct: pct(type("popup"), n),
+            // HR per fly ball -- the standard denominator, not all contact.
+            hrFbPct: pct(hrOnFb, fb),
+            hardHitPct: pct(balls.filter((b) => b.ev != null && b.ev >= 95).length, n),
+            pullPct: pct(third("pull"), spraysKnown),
+            straightPct: pct(third("straight"), spraysKnown),
+            oppoPct: pct(third("oppo"), spraysKnown),
+        };
+    }
+
+    function metricTileHtml(label, value, tone) {
+        return (
+            `<div class="rs-strip__tile${tone ? ` rs-strip__tile--${tone}` : ""}">` +
+            `<span class="rs-strip__label">${label}</span><span class="rs-strip__val">${value}</span></div>`
+        );
+    }
+
+    function rangeLabel() {
+        return RANGE_OPTIONS.find((o) => o.days === sprayFilter.rangeDays)?.label || "Season";
+    }
+
+    function metricsStripHtml(balls) {
+        const cur = battedBallMetrics(balls);
+        const rl = rangeLabel();
+        const evTone = (v) => (v == null ? null : v >= 92 ? "good" : v >= 88 ? "mid" : "bad");
+        const brTone = (v) => (v == null ? null : v >= 12 ? "good" : v >= 8 ? "mid" : "bad");
+        // The season baseline earns a tile only when the window is narrower than
+        // the season -- otherwise it just repeats the tiles beside it.
+        const season = sprayFilter.rangeDays > 0 ? battedBallMetrics(profileDetail?.battedBalls || []) : null;
+        return (
+            `<div class="rs-strip"><h4 class="rs-strip__title">Metrics</h4><div class="rs-strip__row">` +
+            metricTileHtml(`${rl} BBE`, String(cur.bbe)) +
+            metricTileHtml(`${rl} avg EV`, cur.avgEV != null ? `${cur.avgEV.toFixed(1)}` : "—", evTone(cur.avgEV)) +
+            metricTileHtml(`${rl} barrel%`, fmtStripPct(cur.barrelPct), brTone(cur.barrelPct)) +
+            metricTileHtml(`${rl} max EV`, cur.maxEV != null ? `${cur.maxEV.toFixed(1)}` : "—") +
+            metricTileHtml(`${rl} bat spd`, cur.batSpeed != null ? `${cur.batSpeed.toFixed(1)}` : "—") +
+            (season
+                ? metricTileHtml("Season avg EV", season.avgEV != null ? `${season.avgEV.toFixed(1)}` : "—", evTone(season.avgEV)) +
+                  metricTileHtml("Season barrel%", fmtStripPct(season.barrelPct), brTone(season.barrelPct))
+                : "") +
+            `</div></div>`
+        );
+    }
+
+    function statcastStripHtml(balls) {
+        const s = battedBallStatcast(balls);
+        return (
+            `<div class="rs-strip"><h4 class="rs-strip__title">Statcast · ${rangeLabel()}</h4><div class="rs-strip__row rs-strip__row--wide">` +
+            metricTileHtml("GB%", fmtStripPct(s.gbPct)) +
+            metricTileHtml("FB%", fmtStripPct(s.fbPct)) +
+            metricTileHtml("LD%", fmtStripPct(s.ldPct)) +
+            metricTileHtml("PU%", fmtStripPct(s.puPct)) +
+            metricTileHtml("HR/FB%", fmtStripPct(s.hrFbPct)) +
+            metricTileHtml("Hard hit%", fmtStripPct(s.hardHitPct)) +
+            metricTileHtml("Pull%", fmtStripPct(s.pullPct)) +
+            metricTileHtml("Straight%", fmtStripPct(s.straightPct)) +
+            metricTileHtml("Oppo%", fmtStripPct(s.oppoPct)) +
+            `</div><p class="rs-strip__note">Computed from balls in play in this window, so it can differ a point or two from Savant's season figures on the Overview tab.</p></div>`
+        );
+    }
+
+    // One filter bar, one state -- switching tabs keeps the same window.
+    function detailFilterBarHtml(oppCodes) {
         const detail = profileDetail;
-        if (!detail || !detail.battedBalls?.length) {
-            el.innerHTML = detailEmptyHtml("No batted-ball data for this player and season.");
-            return;
-        }
-        const codes = Object.keys(detail.pitchTypes || {}).filter((c) => detail.pitchTypes[c].bbe > 0);
+        const codes = Object.keys(detail?.pitchTypes || {}).filter((c) => detail.pitchTypes[c].bbe > 0);
         const active = sprayFilter.pitches;
         const chips = codes
             .map(
@@ -7743,54 +7989,28 @@
                     `<button type="button" class="rs-spray-chip${!active || active.has(c) ? " is-on" : ""}" data-spray-pitch="${c}">${c}</button>`
             )
             .join("");
-        const oppCodes = profileOppDetail
-            ? Object.keys(
-                  (detail.hand === "L"
-                      ? profileOppDetail.pitchTypesVsL
-                      : detail.hand === "R"
-                        ? profileOppDetail.pitchTypesVsR
-                        : profileOppDetail.pitchTypes) || {}
-              ).filter((c) => {
-                  const m =
-                      (detail.hand === "L"
-                          ? profileOppDetail.pitchTypesVsL
-                          : detail.hand === "R"
-                            ? profileOppDetail.pitchTypesVsR
-                            : profileOppDetail.pitchTypes) || {};
-                  return (m[c]?.usagePct || 0) >= 10;
-              })
-            : [];
-        const balls = filteredSprayBalls();
-        const hrN = balls.filter((b) => b.isHr).length;
-        const avgEv = balls.length ? balls.reduce((a, b) => a + (b.ev || 0), 0) / balls.length : null;
-
-        el.innerHTML =
+        const ranges = RANGE_OPTIONS.map(
+            (o) => `<option value="${o.days}"${sprayFilter.rangeDays === o.days ? " selected" : ""}>${o.label}</option>`
+        ).join("");
+        return (
             `<div class="rs-spray-controls">` +
             `<div class="rs-spray-chips">${chips}</div>` +
             `<div class="rs-spray-actions">` +
-            (oppCodes.length ? `<button type="button" class="rs-btn rs-btn--ghost" id="rsSprayMatchMix">Match SP mix</button>` : "") +
-            `<button type="button" class="rs-btn rs-btn--ghost" id="rsSprayReset">Reset</button>` +
-            `<select class="rs-explore__select" id="rsSprayResults">` +
+            `<select class="rs-explore__select" data-detail-range aria-label="Date range">${ranges}</select>` +
+            `<select class="rs-explore__select" data-detail-results aria-label="Contact type">` +
             `<option value="all"${sprayFilter.results === "all" ? " selected" : ""}>All contact</option>` +
             `<option value="hits"${sprayFilter.results === "hits" ? " selected" : ""}>Hits only</option>` +
             `<option value="hr"${sprayFilter.results === "hr" ? " selected" : ""}>HR only</option>` +
             `<option value="air"${sprayFilter.results === "air" ? " selected" : ""}>Air balls</option>` +
-            `</select></div></div>` +
-            `<div class="rs-spray">${renderSprayChart(balls)}</div>` +
-            `<div class="rs-spray-legend">` +
-            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--hr"></i>HR ${hrN}</span>` +
-            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--xbh"></i>2B/3B</span>` +
-            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--single"></i>1B</span>` +
-            `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--out"></i>Out</span>` +
-            `<span class="rs-spray-legend__item">${balls.length} BBE${avgEv != null ? ` · ${avgEv.toFixed(1)} avg EV` : ""}</span>` +
-            `</div>`;
-        wireSprayControls(oppCodes);
+            `</select>` +
+            (oppCodes?.length ? `<button type="button" class="rs-btn rs-btn--ghost" data-detail-matchmix>Match SP mix</button>` : "") +
+            `<button type="button" class="rs-btn rs-btn--ghost" data-detail-reset>Reset</button>` +
+            `</div></div>`
+        );
     }
 
-    function wireSprayControls(oppCodes) {
-        const el = detailPanelEl("spray");
-        if (!el) return;
-        el.querySelectorAll("[data-spray-pitch]").forEach((btn) => {
+    function wireDetailFilterBar(root, rerender, oppCodes) {
+        root.querySelectorAll("[data-spray-pitch]").forEach((btn) => {
             btn.addEventListener("click", () => {
                 const code = btn.getAttribute("data-spray-pitch");
                 const all = Object.keys(profileDetail?.pitchTypes || {}).filter(
@@ -7802,21 +8022,54 @@
                 if (next.has(code)) next.delete(code);
                 else next.add(code);
                 sprayFilter.pitches = next.size && next.size < all.length ? next : null;
-                renderSprayPanel();
+                rerender();
             });
         });
-        el.querySelector("#rsSprayReset")?.addEventListener("click", () => {
-            sprayFilter = { pitches: null, results: "all" };
-            renderSprayPanel();
+        root.querySelector("[data-detail-range]")?.addEventListener("change", (ev) => {
+            sprayFilter.rangeDays = Number(ev.target.value) || 0;
+            rerender();
         });
-        el.querySelector("#rsSprayMatchMix")?.addEventListener("click", () => {
-            sprayFilter.pitches = new Set(oppCodes);
-            renderSprayPanel();
-        });
-        el.querySelector("#rsSprayResults")?.addEventListener("change", (ev) => {
+        root.querySelector("[data-detail-results]")?.addEventListener("change", (ev) => {
             sprayFilter.results = ev.target.value;
-            renderSprayPanel();
+            rerender();
         });
+        root.querySelector("[data-detail-matchmix]")?.addEventListener("click", () => {
+            sprayFilter.pitches = new Set(oppCodes);
+            rerender();
+        });
+        root.querySelector("[data-detail-reset]")?.addEventListener("click", () => {
+            sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
+            rerender();
+        });
+    }
+
+    function renderSprayPanel() {
+        const el = detailPanelEl("spray");
+        if (!el) return;
+        const detail = profileDetail;
+        if (!detail || !detail.battedBalls?.length) {
+            el.innerHTML = detailEmptyHtml("No batted-ball data for this player and season.");
+            return;
+        }
+        const oppMix = opposingPitchMix() || {};
+        const oppCodes = Object.keys(oppMix).filter((c) => (oppMix[c]?.usagePct || 0) >= 10);
+        const balls = filteredBattedBalls();
+        const hrN = balls.filter((b) => b.isHr).length;
+        const avgEv = balls.length ? balls.reduce((a, b) => a + (b.ev || 0), 0) / balls.length : null;
+
+        el.innerHTML =
+            detailFilterBarHtml(oppCodes) +
+            (balls.length
+                ? `<div class="rs-spray">${renderSprayChart(balls)}</div>` +
+                  `<div class="rs-spray-legend">` +
+                  `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--hr"></i>HR ${hrN}</span>` +
+                  `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--xbh"></i>2B/3B</span>` +
+                  `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--single"></i>1B</span>` +
+                  `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--out"></i>Out</span>` +
+                  `<span class="rs-spray-legend__item">${balls.length} BBE${avgEv != null ? ` · ${avgEv.toFixed(1)} avg EV` : ""}</span>` +
+                  `</div>`
+                : detailEmptyHtml(`No balls in play in this window (${rangeLabel()}).`));
+        wireDetailFilterBar(el, renderSprayPanel, oppCodes);
     }
 
     function prettyResult(result) {
@@ -7828,14 +8081,17 @@
     function renderBattedPanel() {
         const el = detailPanelEl("batted");
         if (!el) return;
-        const balls = profileDetail?.battedBalls || [];
-        if (!balls.length) {
+        if (!profileDetail?.battedBalls?.length) {
             el.innerHTML = detailEmptyHtml("No batted-ball data for this player and season.");
             return;
         }
         const isBatter = profileDetailRole === "batter";
+        const oppMix = opposingPitchMix() || {};
+        const oppCodes = Object.keys(oppMix).filter((c) => (oppMix[c]?.usagePct || 0) >= 10);
+        const balls = filteredBattedBalls();
+
         const rows = balls
-            .slice(0, 60)
+            .slice(0, 80)
             .map((bb) => {
                 const tone = bb.isHr ? " is-hr" : bb.isBarrel ? " is-barrel" : "";
                 const evTone = bb.ev >= 100 ? " rs-bb-hot" : bb.ev >= 95 ? " rs-bb-warm" : "";
@@ -7845,20 +8101,28 @@
                     `<td class="rs-bb-opp">${escAttr(bb.oppName || (bb.oppId ? String(bb.oppId) : "—"))}${bb.oppHand ? ` <span class="rs-bb-hand">${bb.oppHand}</span>` : ""}</td>` +
                     `<td><span class="rs-mix-code">${bb.pitchType || "—"}</span></td>` +
                     `<td>${bb.pitchVelo != null ? bb.pitchVelo.toFixed(1) : "—"}</td>` +
+                    `<td>${bb.count || "—"}</td>` +
                     `<td class="${evTone.trim()}">${bb.ev != null ? bb.ev.toFixed(1) : "—"}</td>` +
                     `<td>${bb.la != null ? `${bb.la}°` : "—"}</td>` +
                     `<td>${bb.dist != null ? bb.dist : "—"}</td>` +
                     `<td>${bb.batSpeed != null ? bb.batSpeed.toFixed(1) : "—"}</td>` +
+                    `<td>${prettyResult(bb.bbType)}</td>` +
                     `<td>${prettyResult(bb.result)}</td>` +
                     `</tr>`
                 );
             })
             .join("");
-        el.innerHTML =
-            `<div class="rs-bb-wrap"><table class="rs-bb-table"><thead><tr>` +
-            `<th>Date</th><th>${isBatter ? "Pitcher" : "Batter"}</th><th>Pitch</th><th>Velo</th><th>EV</th><th>LA</th><th>Dist</th><th>Bat spd</th><th>Result</th>` +
-            `</tr></thead><tbody>${rows}</tbody></table></div>` +
-            `<p class="rs-ptab-foot">Most recent ${Math.min(60, balls.length)} balls in play. Purple = HR, amber = barrel.</p>`;
+
+        const table = balls.length
+            ? `<div class="rs-bb-wrap"><table class="rs-bb-table"><thead><tr>` +
+              `<th>Date</th><th>${isBatter ? "Pitcher" : "Batter"}</th><th>Pitch</th><th>Velo</th><th>Count</th>` +
+              `<th>EV</th><th>LA</th><th>Dist</th><th>Bat spd</th><th>Trajectory</th><th>Result</th>` +
+              `</tr></thead><tbody>${rows}</tbody></table></div>` +
+              `<p class="rs-ptab-foot">${balls.length > 80 ? `Showing 80 of ${balls.length}` : `${balls.length}`} balls in play · ${rangeLabel()}. Purple = HR, amber = barrel.</p>`
+            : detailEmptyHtml(`No balls in play in this window (${rangeLabel()}).`);
+
+        el.innerHTML = detailFilterBarHtml(oppCodes) + metricsStripHtml(balls) + statcastStripHtml(balls) + table;
+        wireDetailFilterBar(el, renderBattedPanel, oppCodes);
     }
 
     function renderActiveDetailTab() {
@@ -7878,30 +8142,44 @@
         const panel = detailPanelEl(activeProfileTab);
         if (panel) panel.innerHTML = detailLoadingHtml("Loading Statcast detail…");
 
-        const entry = profileEntry || profilePitcherEntry;
         const selfId = profileEntry ? profileEntry.row?.id : profilePitcherEntry?.pitcher?.id;
         const oppId = profileEntry ? profileEntry.pitcher?.id : null;
         if (!selfId) {
             if (panel) panel.innerHTML = detailEmptyHtml("No player id available.");
             return;
         }
-        const [self, opp] = await Promise.all([
-            fetchPlayerDetail(selfId, profileDetailRole, profileDetailSeason),
-            oppId ? fetchPlayerDetail(oppId, "pitcher", profileDetailSeason) : Promise.resolve(null),
-        ]);
+
+        // Only Zones and Pitch mix genuinely need the opposing pitcher, so the
+        // player's own pull is awaited alone and the pitcher folds in when it
+        // lands. A slow or failed pitcher pull no longer blanks Batted balls.
+        const oppPromise = oppId ? fetchPlayerDetail(oppId, "pitcher", profileDetailSeason) : Promise.resolve(null);
+        const self = await fetchPlayerDetail(selfId, profileDetailRole, profileDetailSeason);
         if (gen !== profileDetailGen) return;
-        profileDetail = self || { pitches: 0, battedBalls: [], pitchTypes: {}, zones: null };
-        profileOppDetail = opp;
-        if (!self && panel) {
-            panel.innerHTML = detailEmptyHtml(
-                isFileProtocol()
-                    ? "Statcast detail needs the local server (serve-research.py)."
-                    : "Statcast detail unavailable right now."
-            );
+
+        if (!self) {
+            if (panel) panel.innerHTML = detailErrorHtml();
             return;
         }
-        void entry;
+        profileDetail = self;
         renderActiveDetailTab();
+
+        oppPromise.then((opp) => {
+            if (gen !== profileDetailGen || !opp) return;
+            profileOppDetail = opp;
+            // Repaint whichever tab is showing -- all four use the pitcher for
+            // something, even if only the "Match SP mix" button.
+            renderActiveDetailTab();
+        });
+    }
+
+    function detailErrorHtml() {
+        const why = isFileProtocol()
+            ? "Statcast detail needs the local server (serve-research.py)."
+            : `Couldn't load Statcast detail${lastDetailError ? ` — ${escAttr(lastDetailError)}` : ""}.`;
+        return (
+            `<div class="rs-ptab-msg rs-ptab-msg--empty">${why}` +
+            `<br><button type="button" class="rs-btn rs-btn--ghost rs-ptab-retry" data-detail-retry>Try again</button></div>`
+        );
     }
 
     function setProfileTab(tab) {
@@ -7923,7 +8201,7 @@
         profileOppDetail = null;
         profileDetailRole = role;
         profileDetailSeason = String(season);
-        sprayFilter = { pitches: null, results: "all" };
+        sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
         ["zones", "mix", "spray", "batted"].forEach((tab) => {
             const panel = detailPanelEl(tab);
             if (panel) panel.innerHTML = "";
@@ -7934,6 +8212,13 @@
     function wireProfileTabs() {
         document.querySelectorAll(".rs-ptabs__btn").forEach((btn) => {
             btn.addEventListener("click", () => setProfileTab(btn.getAttribute("data-ptab")));
+        });
+        // Delegated so it survives every repaint of the tab panels.
+        els.playerProfile?.addEventListener("click", (ev) => {
+            if (!ev.target.closest("[data-detail-retry]")) return;
+            profileDetail = null;
+            profileOppDetail = null;
+            void ensureProfileDetail();
         });
     }
 

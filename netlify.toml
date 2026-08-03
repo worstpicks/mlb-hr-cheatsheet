@@ -20,3 +20,9 @@
   to = "/.netlify/functions/savant-matchup"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/api/savant-player-detail"
+  to = "/.netlify/functions/savant-player-detail"
+  status = 200
+  force = true

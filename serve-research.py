@@ -7,6 +7,7 @@ import json
 import os
 import re
 import socket
+import subprocess
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -39,6 +40,7 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             or self._is_projected_pitchers_api()
             or self._is_zone_api()
             or self._is_park_api()
+            or self._is_player_detail_api()
         ):
             self._send_json(204, {})
             return
@@ -83,7 +85,48 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         if self._is_park_api():
             self._handle_park_api()
             return
+        if self._is_player_detail_api():
+            self._handle_player_detail_api()
+            return
         super().do_GET()
+
+    def _is_player_detail_api(self) -> bool:
+        path = urlparse(self.path).path.rstrip("/")
+        return path == "/api/savant-player-detail"
+
+    def _handle_player_detail_api(self) -> None:
+        """Run the deployed Netlify handler so local matches production."""
+        qs = parse_qs(urlparse(self.path).query)
+        player_id = qs.get("playerId", [""])[0]
+        if not player_id.isdigit():
+            self._send_json(400, {"error": "playerId required"})
+            return
+        query = {"playerId": player_id}
+        role = qs.get("role", [""])[0]
+        if role in ("batter", "pitcher"):
+            query["role"] = role
+        season = qs.get("season", [""])[0]
+        if re.fullmatch(r"\d{4}(?:[,|]\d{4})*", season or ""):
+            query["season"] = season
+        fn = ROOT / "tools" / "invoke-netlify-function.js"
+        try:
+            proc = subprocess.run(
+                ["node", str(fn), "savant-player-detail", json.dumps(query)],
+                capture_output=True,
+                timeout=120,
+            )
+        except FileNotFoundError:
+            self._send_json(501, {"error": "node not on PATH — needed for /api/savant-player-detail"})
+            return
+        except subprocess.TimeoutExpired:
+            self._send_json(504, {"error": "savant-player-detail timed out"})
+            return
+        body = proc.stdout.decode("utf-8", "replace")
+        if not body.strip():
+            err = proc.stderr.decode("utf-8", "replace").strip() or "empty response"
+            self._send_json(502, {"error": err})
+            return
+        self._send_raw_json(200 if proc.returncode == 0 else 502, body)
 
     def _is_rotowire_api(self) -> bool:
         path = urlparse(self.path).path.rstrip("/")
@@ -316,7 +359,10 @@ class ResearchHandler(SimpleHTTPRequestHandler):
             self._send_json(502, {"error": str(exc)})
 
     def _send_json(self, code: int, payload: dict) -> None:
-        body = json.dumps(payload).encode("utf-8")
+        self._send_raw_json(code, json.dumps(payload))
+
+    def _send_raw_json(self, code: int, text: str) -> None:
+        body = text.encode("utf-8")
         self.send_response(code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Access-Control-Allow-Origin", "*")

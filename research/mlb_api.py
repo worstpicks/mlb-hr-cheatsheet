@@ -894,6 +894,20 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         except Exception:
             pass
 
+    # HR prop lines are optional: no ODDS_API_KEY means the slate builds without
+    # them rather than failing. See research/odds_api.py for the credit budget.
+    hr_odds_meta: dict[str, Any] = {"source": "the-odds-api", "market": "batter_home_runs"}
+    if with_stats:
+        try:
+            from research.odds_api import attach_hr_props_to_games, fetch_hr_props
+
+            props = fetch_hr_props(games)
+            hr_odds_meta["games"] = len(props)
+            hr_odds_meta["batters"] = attach_hr_props_to_games(games, props)
+        except Exception as exc:
+            print(f"  WARN HR prop lines failed (odds column will be empty): {exc}")
+            hr_odds_meta["error"] = str(exc)
+
     parlay_suggestions: dict[str, Any] = {}
     if with_stats:
         try:
@@ -911,6 +925,7 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         "sheet_date": sheet_date,
         "season": season,
         "roster_season": roster_season,
+        "hr_odds": hr_odds_meta,
         "stat_window": "rolling",
         "stat_windows": {
             "hitters": {

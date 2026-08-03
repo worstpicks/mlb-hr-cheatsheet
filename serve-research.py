@@ -290,11 +290,13 @@ class ResearchHandler(SimpleHTTPRequestHandler):
         except ValueError:
             self._send_json(400, {"error": "invalid playerId, season, or limit"})
             return
-        if player_id <= 0 or limit <= 0 or limit > 60:
+        # A full season is ~162 games; the HR log's season hit-rate tile needs
+        # all of them, and production reads the MLB API directly with no cap.
+        if player_id <= 0 or limit <= 0 or limit > 200:
             self._send_json(400, {"error": "invalid playerId or limit"})
             return
         try:
-            games = fetch_player_game_trends(player_id, season, limit=min(limit, 60))
+            games = fetch_player_game_trends(player_id, season, limit=min(limit, 200))
             self._send_json(
                 200,
                 {

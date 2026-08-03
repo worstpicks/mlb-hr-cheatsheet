@@ -4655,3 +4655,97 @@ html.theme-light .rs-pb-group { color: #92400e !important; }
     .rs-pboard__pick { width: 100%; }
     .rs-pboard__tab { padding: 7px 10px; font-size: 0.78rem; }
 }
+
+/* HR log tab — prop line, hit rates, game-by-game bars */
+.rs-hrlog-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border: 1px solid var(--rs-border-strong);
+    border-radius: 10px;
+    background: var(--rs-panel);
+}
+.rs-hrlog-head--noline { border-color: var(--rs-border); }
+.rs-hrlog-head__label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--wpz-color-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.rs-hrlog-odds {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--wpz-accent-green);
+    font-variant-numeric: tabular-nums;
+}
+.rs-hrlog-head__imp, .rs-hrlog-head__book {
+    font-size: 0.72rem;
+    color: var(--rs-muted);
+}
+.rs-hrlog-head__book { text-transform: capitalize; }
+
+.rs-hrlog-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+    gap: 6px;
+    margin-bottom: 14px;
+}
+.rs-hrlog-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 6px;
+    border-radius: 8px;
+    background: rgba(148, 163, 184, 0.1);
+    text-align: center;
+}
+.rs-hrlog-tile__label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-muted);
+}
+.rs-hrlog-tile__val {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--wpz-color-text);
+    font-variant-numeric: tabular-nums;
+}
+.rs-hrlog-tile__pct {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--rs-muted);
+}
+.rs-hrlog-tile--good { background: var(--rs-good-bg); }
+.rs-hrlog-tile--mid { background: var(--rs-mid-bg); }
+.rs-hrlog-tile--bad { background: var(--rs-bad-bg); }
+
+.rs-hrlog { width: 100%; }
+.rs-hrlog__svg { width: 100%; height: 150px; display: block; }
+.rs-hrlog__bar--hit { fill: #4ade80; }
+.rs-hrlog__bar--miss { fill: rgba(148, 163, 184, 0.35); }
+.rs-hrlog__axis { stroke: rgba(148, 163, 184, 0.4); stroke-width: 1; }
+.rs-hrlog__line { stroke: var(--wpz-accent-gold); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.rs-hrlog__linelabel { fill: var(--wpz-accent-gold); font-size: 10px; font-weight: 800; }
+.rs-hrlog__tick { fill: var(--rs-muted); font-size: 9px; }
+
+html.theme-light .rs-hrlog-head { background: #fff; }
+html.theme-light .rs-hrlog-odds { color: #15803d; }
+html.theme-light .rs-hrlog-tile { background: rgba(148, 163, 184, 0.16); }
+html.theme-light .rs-hrlog-tile__val { color: #1e293b; }
+html.theme-light .rs-hrlog-tile--good { background: rgba(34, 197, 94, 0.3); }
+html.theme-light .rs-hrlog-tile--mid { background: rgba(234, 179, 8, 0.28); }
+html.theme-light .rs-hrlog-tile--bad { background: rgba(244, 63, 94, 0.26); }
+html.theme-light .rs-hrlog__bar--hit { fill: #16a34a; }
+html.theme-light .rs-hrlog__bar--miss { fill: rgba(100, 116, 139, 0.35); }
+html.theme-light .rs-hrlog__line, html.theme-light .rs-hrlog__linelabel { stroke: #b45309; fill: #b45309; }
+
+@media (max-width: 700px) {
+    .rs-hrlog-tiles { grid-template-columns: repeat(3, 1fr); }
+}

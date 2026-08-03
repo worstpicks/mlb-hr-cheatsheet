@@ -6848,7 +6848,7 @@
             : null;
         if (base) {
             try {
-                const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=30`);
+                const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=200`);
                 if (res.ok) {
                     const data = await res.json();
                     const games = Array.isArray(data.games) ? data.games : [];
@@ -6868,7 +6868,9 @@
             if (!res.ok) return [];
             const data = await res.json();
             const splits = data?.stats?.[0]?.splits || [];
-            const games = splits.slice(-30).map((split) => {
+            // Keep the whole season: the HR log's season hit-rate tile counts
+            // every game, and the charts slice to the window they need.
+            const games = splits.map((split) => {
                 const st = split.stat || {};
                 const avg = parseFloat(String(st.avg || "").replace(/^\./, "0.")) || null;
                 const slg = parseFloat(String(st.slg || "").replace(/^\./, "0.")) || null;
@@ -6942,7 +6944,7 @@
             : null;
         if (base) {
             try {
-                const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=30`);
+                const res = await fetch(`${base}?playerId=${encodeURIComponent(playerId)}&season=${encodeURIComponent(season)}&limit=200`);
                 if (res.ok) {
                     const data = await res.json();
                     const games = Array.isArray(data.games) ? data.games : [];
@@ -8126,8 +8128,147 @@
         wireDetailFilterBar(el, renderBattedPanel, oppCodes);
     }
 
+    /* ---------------------------------------------------------------------
+     * HR log — the prop line, game-by-game results, and hit rates
+     * ------------------------------------------------------------------- */
+
+    function hrOddsForRow(row) {
+        const o = row?.hrOdds;
+        return o && o.odds ? o : null;
+    }
+
+    // Share of games with at least one home run -- the thing an Over 0.5 ticket
+    // actually needs, as opposed to total HR.
+    function hrHitRate(games) {
+        const played = games.filter((g) => (g.pa || 0) > 0 || g.hr != null);
+        if (!played.length) return null;
+        const hit = played.filter((g) => (g.hr || 0) >= 1).length;
+        return { hit, games: played.length, pct: Math.round((hit / played.length) * 100) };
+    }
+
+    function hrRateTile(label, rate, tone) {
+        const body = rate ? `${rate.hit}/${rate.games}<span class="rs-hrlog-tile__pct">${rate.pct}%</span>` : "—";
+        return (
+            `<div class="rs-hrlog-tile${tone ? ` rs-hrlog-tile--${tone}` : ""}">` +
+            `<span class="rs-hrlog-tile__label">${label}</span><span class="rs-hrlog-tile__val">${body}</span></div>`
+        );
+    }
+
+    function hrRateTone(rate) {
+        if (!rate || rate.games < 5) return null;
+        if (rate.pct >= 20) return "good";
+        if (rate.pct <= 8) return "bad";
+        return "mid";
+    }
+
+    function renderHrLogChart(games) {
+        const slice = games.slice(-20);
+        if (!slice.length) return detailEmptyHtml("No game log available.");
+        const w = 640;
+        const h = 150;
+        const padB = 26;
+        const padT = 12;
+        const bw = w / slice.length;
+        const maxHr = Math.max(1, ...slice.map((g) => g.hr || 0));
+        // The 0.5 line is what the prop is priced against, so it is drawn to
+        // scale rather than as a fixed fraction of the plot.
+        const yFor = (v) => padT + (1 - v / (maxHr + 0.5)) * (h - padT - padB);
+        const bars = slice
+            .map((g, i) => {
+                const hr = g.hr || 0;
+                const y = yFor(hr);
+                const x = i * bw + bw * 0.15;
+                const bwi = bw * 0.7;
+                const cls = hr >= 1 ? "rs-hrlog__bar--hit" : "rs-hrlog__bar--miss";
+                const label = `${g.date || ""} · ${hr} HR${g.pa != null ? ` · ${g.pa} PA` : ""}`;
+                return (
+                    `<rect class="rs-hrlog__bar ${cls}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" ` +
+                    `width="${bwi.toFixed(1)}" height="${(h - padB - y).toFixed(1)}" rx="2">` +
+                    `<title>${escAttr(label)}</title></rect>`
+                );
+            })
+            .join("");
+        const lineY = yFor(0.5);
+        const ticks = slice
+            .map((g, i) =>
+                i % 4 === 0
+                    ? `<text class="rs-hrlog__tick" x="${(i * bw + bw / 2).toFixed(1)}" y="${h - 8}" text-anchor="middle">${(g.date || "").slice(5)}</text>`
+                    : ""
+            )
+            .join("");
+        return (
+            `<svg class="rs-hrlog__svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Home runs by game">` +
+            `<line class="rs-hrlog__axis" x1="0" y1="${h - padB}" x2="${w}" y2="${h - padB}"/>` +
+            bars +
+            `<line class="rs-hrlog__line" x1="0" y1="${lineY.toFixed(1)}" x2="${w}" y2="${lineY.toFixed(1)}"/>` +
+            `<text class="rs-hrlog__linelabel" x="4" y="${(lineY - 4).toFixed(1)}">0.5</text>` +
+            ticks +
+            `</svg>`
+        );
+    }
+
+    async function renderHrLogPanel() {
+        const el = detailPanelEl("hrlog");
+        if (!el) return;
+        const row = profileEntry?.row;
+        if (!row) {
+            el.innerHTML = detailEmptyHtml("Home-run logs are for hitters.");
+            return;
+        }
+        const season = seasonFromDate(slate?.sheet_date || sheetDateFromQuery());
+        el.innerHTML = detailLoadingHtml("Loading game log…");
+        const gen = profileDetailGen;
+        const games = await fetchPlayerTrends(row.id, season);
+        if (gen !== profileDetailGen) return;
+        if (!games.length) {
+            el.innerHTML = detailEmptyHtml("Game log unavailable right now.");
+            return;
+        }
+
+        const odds = hrOddsForRow(row);
+        const pitcher = profileEntry?.pitcher;
+        // Head-to-head comes from the pitch-level pull already in memory, so it
+        // costs nothing extra -- but it only covers the seasons pulled.
+        let h2h = null;
+        if (profileDetail?.battedBalls && pitcher?.id) {
+            const vs = profileDetail.battedBalls.filter((b) => idsMatch(b.oppId, pitcher.id));
+            if (vs.length) h2h = { hr: vs.filter((b) => b.isHr).length, bbe: vs.length };
+        }
+
+        const oddsHtml = odds
+            ? `<div class="rs-hrlog-head"><span class="rs-hrlog-head__label">Over ${odds.line ?? 0.5} home runs</span>` +
+              `<span class="rs-hrlog-odds">${escAttr(odds.odds)}</span>` +
+              (odds.impliedPct != null ? `<span class="rs-hrlog-head__imp">${odds.impliedPct}% implied</span>` : "") +
+              (odds.book ? `<span class="rs-hrlog-head__book">${escAttr(odds.book)}</span>` : "") +
+              `</div>`
+            : `<div class="rs-hrlog-head rs-hrlog-head--noline"><span class="rs-hrlog-head__label">Over 0.5 home runs</span>` +
+              `<span class="rs-hrlog-head__imp">No line — set ODDS_API_KEY to pull prices</span></div>`;
+
+        const seasonRate = hrHitRate(games);
+        const tiles =
+            hrRateTile(`${season}`, seasonRate, hrRateTone(seasonRate)) +
+            [20, 10, 5].map((n) => {
+                const r = hrHitRate(games.slice(-n));
+                return hrRateTile(`L${n}`, r, hrRateTone(r));
+            }).join("") +
+            (h2h
+                ? `<div class="rs-hrlog-tile"><span class="rs-hrlog-tile__label">vs ${escAttr((pitcher.name || "SP").split(" ").pop())}</span>` +
+                  `<span class="rs-hrlog-tile__val">${h2h.hr}/${h2h.bbe}<span class="rs-hrlog-tile__pct">BBE</span></span></div>`
+                : "");
+
+        el.innerHTML =
+            oddsHtml +
+            `<div class="rs-hrlog-tiles">${tiles}</div>` +
+            `<div class="rs-hrlog">${renderHrLogChart(games)}</div>` +
+            `<p class="rs-ptab-foot">Bars are home runs per game, last ${Math.min(20, games.length)} games; ` +
+            `green cleared the line. Rates are games with at least one HR, not total HR` +
+            (h2h ? `. The head-to-head tile counts this season's batted balls against that starter only` : "") +
+            `.</p>`;
+    }
+
     function renderActiveDetailTab() {
-        if (activeProfileTab === "zones") renderZonesPanel();
+        if (activeProfileTab === "hrlog") void renderHrLogPanel();
+        else if (activeProfileTab === "zones") renderZonesPanel();
         else if (activeProfileTab === "mix") renderMixPanel();
         else if (activeProfileTab === "spray") renderSprayPanel();
         else if (activeProfileTab === "batted") renderBattedPanel();
@@ -8136,11 +8277,15 @@
     async function ensureProfileDetail() {
         if (activeProfileTab === "overview") return;
         const gen = profileDetailGen;
+        // The HR log only needs the MLB game log, which lands far quicker than
+        // the Savant pull. Paint it now; the head-to-head tile fills in when
+        // the pitch-level detail arrives and this repaints.
+        if (activeProfileTab === "hrlog") void renderHrLogPanel();
         if (profileDetail !== null) {
             renderActiveDetailTab();
             return;
         }
-        const panel = detailPanelEl(activeProfileTab);
+        const panel = activeProfileTab === "hrlog" ? null : detailPanelEl(activeProfileTab);
         if (panel) panel.innerHTML = detailLoadingHtml("Loading Statcast detail…");
 
         const selfId = profileEntry ? profileEntry.row?.id : profilePitcherEntry?.pitcher?.id;
@@ -8203,7 +8348,7 @@
         profileDetailRole = role;
         profileDetailSeason = String(season);
         sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
-        ["zones", "mix", "spray", "batted"].forEach((tab) => {
+        ["hrlog", "zones", "mix", "spray", "batted"].forEach((tab) => {
             const panel = detailPanelEl(tab);
             if (panel) panel.innerHTML = "";
         });

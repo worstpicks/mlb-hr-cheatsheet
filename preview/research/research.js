@@ -7411,7 +7411,23 @@
     let profileOppDetail = null;
     let profileDetailRole = "batter";
     let profileDetailSeason = "";
-    let sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
+    // Research defaults to the matchup view: the last 10 days, narrowed to the
+    // pitches this starter actually throws. `pitchesTouched` records whether the
+    // chips have been set by hand, so the auto-match never fights the user.
+    const DEFAULT_RANGE_DAYS = 10;
+
+    function defaultDetailFilter() {
+        return { pitches: null, results: "all", rangeDays: DEFAULT_RANGE_DAYS, pitchesTouched: false };
+    }
+
+    let sprayFilter = defaultDetailFilter();
+
+    // The starter's mix only exists once his pitch-level pull lands, so the
+    // default selection is applied on arrival rather than at open.
+    function applyAutoPitchMix(oppCodes) {
+        if (sprayFilter.pitchesTouched || sprayFilter.pitches || !oppCodes?.length) return;
+        sprayFilter.pitches = new Set(oppCodes);
+    }
 
     function pitchLabel(code) {
         return PITCH_LABELS[code] || code || "—";
@@ -8025,6 +8041,7 @@
                 if (next.has(code)) next.delete(code);
                 else next.add(code);
                 sprayFilter.pitches = next.size && next.size < all.length ? next : null;
+                sprayFilter.pitchesTouched = true;
                 rerender();
             });
         });
@@ -8038,12 +8055,24 @@
         });
         root.querySelector("[data-detail-matchmix]")?.addEventListener("click", () => {
             sprayFilter.pitches = new Set(oppCodes);
+            sprayFilter.pitchesTouched = true;
             rerender();
         });
         root.querySelector("[data-detail-reset]")?.addEventListener("click", () => {
-            sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
+            // Back to the matchup default, not to "season, all pitches".
+            sprayFilter = defaultDetailFilter();
             rerender();
         });
+    }
+
+    // With the matchup defaults an empty result is common enough that the
+    // message has to say which filter emptied it, not just "nothing here".
+    function emptyWindowHtml() {
+        const bits = [rangeLabel()];
+        const n = sprayFilter.pitches?.size;
+        if (n) bits.push(`${n} pitch type${n === 1 ? "" : "s"}`);
+        if (sprayFilter.results !== "all") bits.push(sprayFilter.results === "hr" ? "HR only" : sprayFilter.results);
+        return detailEmptyHtml(`No balls in play matching ${bits.join(" · ")}. Widen the range or clear the pitch filter.`);
     }
 
     function renderSprayPanel() {
@@ -8056,6 +8085,7 @@
         }
         const oppMix = opposingPitchMix() || {};
         const oppCodes = Object.keys(oppMix).filter((c) => (oppMix[c]?.usagePct || 0) >= 10);
+        applyAutoPitchMix(oppCodes);
         const balls = filteredBattedBalls();
         const hrN = balls.filter((b) => b.isHr).length;
         const avgEv = balls.length ? balls.reduce((a, b) => a + (b.ev || 0), 0) / balls.length : null;
@@ -8071,7 +8101,7 @@
                   `<span class="rs-spray-legend__item"><i class="rs-spray-legend__dot rs-spray-legend__dot--out"></i>Out</span>` +
                   `<span class="rs-spray-legend__item">${balls.length} BBE${avgEv != null ? ` · ${avgEv.toFixed(1)} avg EV` : ""}</span>` +
                   `</div>`
-                : detailEmptyHtml(`No balls in play in this window (${rangeLabel()}).`));
+                : emptyWindowHtml());
         wireDetailFilterBar(el, renderSprayPanel, oppCodes);
     }
 
@@ -8091,6 +8121,7 @@
         const isBatter = profileDetailRole === "batter";
         const oppMix = opposingPitchMix() || {};
         const oppCodes = Object.keys(oppMix).filter((c) => (oppMix[c]?.usagePct || 0) >= 10);
+        applyAutoPitchMix(oppCodes);
         const balls = filteredBattedBalls();
 
         const rows = balls
@@ -8122,7 +8153,7 @@
               `<th>EV</th><th>LA</th><th>Dist</th><th>Bat spd</th><th>Trajectory</th><th>Result</th>` +
               `</tr></thead><tbody>${rows}</tbody></table></div>` +
               `<p class="rs-ptab-foot">${balls.length > 80 ? `Showing 80 of ${balls.length}` : `${balls.length}`} balls in play · ${rangeLabel()}. Purple = HR, amber = barrel.</p>`
-            : detailEmptyHtml(`No balls in play in this window (${rangeLabel()}).`);
+            : emptyWindowHtml();
 
         el.innerHTML = detailFilterBarHtml(oppCodes) + metricsStripHtml(balls) + statcastStripHtml(balls) + table;
         wireDetailFilterBar(el, renderBattedPanel, oppCodes);
@@ -8686,7 +8717,7 @@
         profileOppDetail = null;
         profileDetailRole = role;
         profileDetailSeason = String(season);
-        sprayFilter = { pitches: null, results: "all", rangeDays: 0 };
+        sprayFilter = defaultDetailFilter();
         ["read", "hrlog", "zones", "mix", "spray", "batted"].forEach((tab) => {
             const panel = detailPanelEl(tab);
             if (panel) panel.innerHTML = "";

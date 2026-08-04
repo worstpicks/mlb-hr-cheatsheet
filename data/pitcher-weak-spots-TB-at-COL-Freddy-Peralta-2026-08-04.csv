@@ -1,0 +1,26 @@
+Matchup,TB @ COL
+Pitcher,Freddy Peralta
+Pitcher Team,TB
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.60,="21-65",.323,.446,0.123,1,3,1,6,22.1,3,.353,.799
+Batting Second,13.2,1.68,="16-57",.281,.719,0.438,7,4,0,9,22.7,7,.379,1.098
+Batting Third,14.1,1.53,="16-58",.276,.517,0.241,3,5,0,9,17.2,6,.344,.861
+Batting Fourth,13.0,1.54,="11-48",.229,.375,0.146,1,4,0,6,23.7,9,.373,.748
+Batting Fifth,13.0,1.31,="9-46",.196,.304,0.108,1,2,0,6,19.6,8,.321,.625
+Batting Sixth,12.1,1.30,="13-49",.265,.408,0.143,2,1,0,5,18.9,3,.308,.716
+Batting Seventh,11.0,1.36,="12-48",.250,.375,0.125,0,6,0,5,27.5,3,.294,.669
+Batting Eighth,10.2,1.50,="11-42",.262,.452,0.190,2,2,0,6,22.9,5,.333,.785
+Batting Ninth,10.1,1.45,="11-42",.262,.357,0.095,0,4,0,5,25.5,4,.326,.683
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="64-228",.281,.509,0.228,9,17,4,38,17.8,10,.314,.823
+Cole Carrigg SHB,Batting Second ​,="4-9",.444,.444,0.000,0,0,0,1,18.2,1,.545,.989
+Mickey Moniak LHB,Batting Third ​,="8-24",.333,.833,0.500,4,0,0,7,25.9,2,.370,1.203
+Hunter Goodman RHB,Batting Fourth ​,="44-147",.299,.667,0.368,16,6,0,33,28.9,22,.393,1.060
+TJ Rumfield LHB,Batting Fifth ​,="23-84",.274,.393,0.119,2,2,1,12,14.3,13,.367,.760
+Kyle Karros RHB,Batting Sixth ​,="7-27",.259,.407,0.148,1,1,0,5,23.7,9,.474,.881
+Willi Castro SHB,Batting Seventh ​,="9-47",.191,.468,0.277,4,1,0,7,38.5,3,.269,.737
+Jordan Beck RHB,Batting Eighth ​,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Ezequiel Tovar RHB,Batting Ninth ​,="14-59",.237,.441,0.204,3,3,0,10,17.9,4,.273,.714

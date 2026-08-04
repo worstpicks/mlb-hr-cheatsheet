@@ -1,0 +1,26 @@
+Matchup,SF @ TEX
+Pitcher,Blade Tidwell
+Pitcher Team,SF
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,1.50,="2-6",.333,.833,0.500,1,0,0,3,16.7,0,.333,1.166
+Batting Second,1.1,1.50,="2-5",.400,.600,0.200,0,1,0,0,0.0,0,.400,1.000
+Batting Third,1.1,0.75,="1-4",.250,.250,0.000,0,0,0,0,0.0,0,.250,.500
+Batting Fourth,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,40.0,0,.000,.000
+Batting Fifth,1.1,0.75,="1-5",.200,.200,0.000,0,0,0,0,20.0,0,.200,.400
+Batting Sixth,1.1,0.75,="0-4",.000,.000,0.000,0,0,0,0,40.0,1,.200,.200
+Batting Seventh,1.1,1.50,="1-5",.200,.200,0.000,0,0,0,0,33.3,1,.333,.533
+Batting Eighth,1.0,3.00,="3-5",.600,.600,0.000,0,0,0,1,0.0,0,.600,1.200
+Batting Ninth,1.1,0.75,="0-4",.000,.000,0.000,0,0,0,0,33.3,1,.333,.333
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Joc Pederson LHB,Batting First ​,="55-190",.289,.637,0.348,18,8,2,33,22.6,19,.360,.997
+Wyatt Langford RHB,Batting Second ​,="32-148",.216,.426,0.210,7,6,2,15,25.9,9,.266,.692
+Corey Seager LHB,Batting Third ​,="29-153",.190,.359,0.169,7,5,0,19,28.7,25,.304,.663
+Brandon Nimmo LHB,Batting Fourth ​,="38-131",.290,.427,0.137,2,10,1,11,23.1,12,.350,.777
+Ezequiel Duran RHB,Batting Fifth ​,="29-100",.290,.450,0.160,2,6,2,20,23.1,8,.343,.793
+Evan Carter LHB,Batting Sixth ​,="17-75",.227,.427,0.200,4,1,1,12,26.2,7,.301,.728
+Elias Diaz RHB,Batting Seventh ​,="2-9",.222,.667,0.445,1,1,0,1,20.0,1,.300,.967
+Nicky Lopez LHB,Batting Eighth ​,="14-41",.341,.366,0.025,0,1,0,3,9.3,1,.357,.723
+Justin Foscue RHB,Batting Ninth ​,="3-19",.158,.316,0.158,1,0,0,1,36.8,0,.158,.474

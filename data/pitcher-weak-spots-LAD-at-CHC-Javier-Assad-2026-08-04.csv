@@ -1,0 +1,31 @@
+Matchup,LAD @ CHC
+Pitcher,Javier Assad
+Pitcher Team,CHC
+Opposing Team,LAD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.1,1.07,="8-35",.229,.343,0.114,1,1,0,1,16.2,2,.270,.613
+Batting Second,8.0,1.25,="8-32",.250,.438,0.188,2,0,0,3,26.5,2,.294,.732
+Batting Third,7.2,0.91,="6-29",.207,.241,0.034,0,1,0,0,13.3,1,.233,.474
+Batting Fourth,8.1,0.72,="4-26",.154,.308,0.154,1,1,0,2,25.0,2,.214,.522
+Batting Fifth,5.0,2.60,="9-24",.375,.792,0.417,3,1,0,8,7.1,4,.464,1.256
+Batting Sixth,6.2,1.50,="6-26",.231,.346,0.115,1,0,0,3,9.7,4,.323,.669
+Batting Seventh,7.2,1.57,="11-31",.355,.484,0.129,1,1,0,8,12.5,1,.375,.859
+Batting Eighth,8.1,0.96,="6-28",.214,.536,0.322,3,0,0,8,12.5,2,.290,.826
+Batting Ninth,8.0,0.63,="5-28",.179,.250,0.071,0,2,0,0,30.0,0,.207,.457
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Shohei Ohtani LHB,Batting First ​,="116-394",.294,.543,0.249,24,22,2,67,22.8,67,.399,.942
+Andy Pages RHB,Batting Second ​,="60-230",.261,.426,0.165,7,13,2,28,20.0,24,.338,.764
+Freddie Freeman LHB,Batting Third ​,="78-237",.329,.565,0.236,13,17,0,37,17.8,38,.420,.985
+Mookie Betts RHB,Batting Fourth ​,="43-165",.261,.436,0.175,7,8,0,21,12.2,16,.326,.762
+Max Muncy LHB,Batting Fifth ​,="35-125",.280,.528,0.248,7,8,1,20,18.9,22,.392,.920
+Kyle Tucker LHB,Batting Sixth ​,="23-97",.237,.330,0.093,1,4,1,13,18.8,12,.321,.651
+Tommy Edman SHB,Batting Sixth ​,="12-33",.364,.606,0.242,1,3,1,5,19.4,2,.417,1.023
+Teoscar Hernandez RHB,Batting Seventh ​,="25-84",.298,.500,0.202,5,2,0,19,23.1,6,.352,.852
+Alex Call RHB,Batting Eighth ​,="10-43",.233,.256,0.023,0,1,0,8,17.6,5,.333,.589
+Hunter Feduccia LHB,Batting Eighth ​,="14-68",.206,.294,0.088,1,3,0,7,29.9,6,.276,.570
+Miguel Rojas RHB,Batting Ninth ​,="12-50",.240,.320,0.080,1,1,0,4,14.3,3,.304,.624
+Enrique Hernandez RHB,Batting Ninth ​,="4-7",.571,1.286,0.715,1,2,0,2,14.3,0,.571,1.857
+Chuckie Robinson RHB,Batting Ninth ​,="2-19",.105,.105,0.000,0,0,0,1,13.6,0,.105,.210
+Eliezer Alfonzo SHB,Batting Ninth ​,="5-24",.208,.292,0.084,0,2,0,3,8.3,0,.208,.500

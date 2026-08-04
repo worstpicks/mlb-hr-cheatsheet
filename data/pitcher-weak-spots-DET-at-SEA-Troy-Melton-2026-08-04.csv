@@ -1,0 +1,32 @@
+Matchup,DET @ SEA
+Pitcher,Troy Melton
+Pitcher Team,DET
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.1,1.64,="9-31",.290,.516,0.226,2,1,0,2,20.0,3,.371,.887
+Batting Second,10.0,0.50,="4-33",.121,.242,0.121,1,1,0,1,23.5,1,.147,.389
+Batting Third,7.1,1.36,="3-25",.120,.280,0.160,1,1,0,2,12.5,7,.313,.593
+Batting Fourth,8.2,0.81,="4-29",.138,.276,0.138,1,1,0,2,25.0,3,.219,.495
+Batting Fifth,7.1,0.68,="4-26",.154,.231,0.077,0,2,0,2,24.1,1,.207,.438
+Batting Sixth,7.0,0.86,="4-24",.167,.333,0.166,1,1,0,2,26.9,2,.231,.564
+Batting Seventh,4.2,2.14,="7-21",.333,.571,0.238,1,2,0,1,16.7,3,.417,.988
+Batting Eighth,6.1,0.79,="4-23",.174,.304,0.130,1,0,0,1,33.3,1,.208,.512
+Batting Ninth,7.2,0.26,="2-24",.083,.125,0.042,0,1,0,0,29.2,0,.083,.208
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Rob Refsnyder RHB,Batting First ​,="4-39",.103,.179,0.076,1,0,0,2,27.9,3,.163,.342
+Taylor Ward RHB,Batting First ​,="63-257",.245,.346,0.101,5,11,0,21,21.3,43,.357,.703
+Brendan Donovan LHB,Batting First ​,="20-70",.286,.500,0.214,3,4,1,8,12.9,9,.400,.900
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Second ​,="49-199",.246,.397,0.151,7,9,0,22,17.7,16,.305,.702
+Dominic Canzone LHB,Batting Third ​,="20-92",.217,.391,0.174,4,4,0,13,20.6,10,.294,.685
+Josh Naylor LHB,Batting Fourth ​,="51-186",.274,.382,0.108,5,5,0,21,15.0,18,.343,.725
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Mitch Garver RHB,Batting Seventh ​,="10-50",.200,.400,0.200,3,1,0,9,29.3,8,.310,.710
+Stuart Fairchild RHB,Batting Seventh ​,="2-9",.222,.222,0.000,0,0,0,0,54.5,1,.364,.586
+Weston Wilson RHB,Batting Eighth ​,="12-48",.250,.396,0.146,2,1,0,4,28.3,5,.321,.717
+Victor Robles RHB,Batting Eighth ​,="9-45",.200,.244,0.044,0,2,0,2,20.0,3,.265,.509
+Cole Young LHB,Batting Eighth ​,="24-95",.253,.358,0.105,2,4,0,13,22.3,5,.301,.659
+Leo Rivas SHB,Batting Ninth ​,="11-86",.128,.174,0.046,0,2,1,7,29.2,14,.269,.443
+Colt Emerson LHB,Batting Ninth ​,="29-144",.201,.375,0.174,6,5,1,13,30.0,12,.264,.639

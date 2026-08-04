@@ -1305,6 +1305,7 @@
         "HOU @ CWS": "HOU @ CHW",
         "KC @ CWS": "KC @ CHW",
         "BOS @ CWS": "BOS @ CHW",
+        "CWS @ BOS": "CHW @ BOS",
         "CWS @ MIN": "CHW @ MIN",
         "CWS @ NYY": "CHW @ NYY",
         "CWS @ CLE": "CHW @ CLE",

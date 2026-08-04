@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-03T14:44:55Z",
+  "updated": "2026-08-04T21:43:21Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -866,11 +866,26 @@
       "o05": {
         "player": "CJ Abrams",
         "matchup": "WSH @ PHI",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Jeremy Pena",
         "matchup": "TOR @ HOU",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "o05": {
+        "player": "Bryce Harper",
+        "matchup": "WSH @ PHI",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Owen Caissie",
+        "matchup": "MIA @ ATL",
         "result": "pending"
       }
     }

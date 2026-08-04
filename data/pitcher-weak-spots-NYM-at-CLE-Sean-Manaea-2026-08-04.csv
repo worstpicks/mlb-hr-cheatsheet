@@ -1,0 +1,26 @@
+Matchup,NYM @ CLE
+Pitcher,Sean Manaea
+Pitcher Team,NYM
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.0,1.45,="14-47",.298,.596,0.298,3,3,1,6,28.0,2,.340,.936
+Batting Second,11.1,1.32,="11-44",.250,.545,0.295,3,2,1,5,20.4,4,.327,.872
+Batting Third,12.1,0.65,="5-42",.119,.286,0.167,2,1,0,7,23.4,3,.213,.499
+Batting Fourth,10.0,1.50,="13-42",.310,.452,0.142,1,3,0,6,23.9,2,.356,.808
+Batting Fifth,11.1,1.15,="10-41",.244,.268,0.024,0,1,0,3,21.7,3,.326,.594
+Batting Sixth,10.1,1.55,="12-39",.308,.615,0.307,1,5,2,6,20.0,4,.364,.979
+Batting Seventh,8.1,1.56,="9-35",.257,.429,0.172,1,3,0,4,17.5,4,.350,.779
+Batting Eighth,7.0,2.43,="10-31",.323,.355,0.032,0,1,0,4,20.5,7,.462,.817
+Batting Ninth,9.2,1.03,="9-34",.265,.500,0.235,2,2,0,11,20.5,1,.282,.782
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="53-220",.241,.300,0.059,1,8,1,15,10.5,32,.340,.640
+Jo Adell RHB,Batting Sixth ​,="43-168",.256,.405,0.149,6,5,1,21,24.3,5,.294,.699
+Chase DeLauter LHB,Batting Third ​,="50-189",.265,.402,0.137,6,8,0,27,17.3,17,.322,.724
+Rhys Hoskins RHB,Batting Fourth ​,="16-115",.139,.304,0.165,5,4,0,18,29.6,22,.282,.586
+Angel Martinez SHB,Batting Fifth ​,="5-24",.208,.250,0.042,0,1,0,1,37.5,0,.208,.458
+Travis Bazzana LHB,Batting Sixth ​,="12-37",.324,.405,0.081,1,0,0,3,13.3,5,.444,.849
+Gabriel Arias RHB,Batting Seventh ​,="13-53",.245,.264,0.019,0,1,0,3,39.3,3,.286,.550
+Austin Hedges RHB,Batting Eighth ​,="38-134",.284,.425,0.141,4,7,0,17,18.2,13,.347,.772
+Brayan Rocchio SHB,Batting Ninth ​,="56-205",.273,.410,0.137,5,9,2,31,12.8,17,.345,.755

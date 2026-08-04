@@ -1,0 +1,26 @@
+Matchup,NYM @ CLE
+Pitcher,Joey Cantillo
+Pitcher Team,CLE
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.34,="14-59",.237,.542,0.305,5,3,0,9,31.3,7,.313,.855
+Batting Second,12.1,2.35,="20-56",.357,.589,0.232,3,4,0,8,26.2,9,.446,1.035
+Batting Third,15.0,1.33,="12-54",.222,.259,0.037,0,2,0,1,22.6,8,.323,.582
+Batting Fourth,12.2,1.66,="13-47",.277,.532,0.255,3,1,1,10,26.8,8,.375,.907
+Batting Fifth,11.2,1.80,="13-44",.295,.341,0.046,0,2,0,4,13.5,8,.404,.745
+Batting Sixth,12.1,1.22,="11-45",.244,.333,0.089,0,4,0,1,28.0,4,.320,.653
+Batting Seventh,11.2,1.20,="9-43",.209,.349,0.140,1,3,0,5,22.4,5,.292,.641
+Batting Eighth,11.1,0.88,="7-42",.167,.214,0.047,0,2,0,3,32.6,3,.222,.436
+Batting Ninth,10.1,1.35,="12-42",.286,.429,0.143,1,1,1,6,22.2,2,.333,.762
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+A.J. Ewing LHB,Batting First ​,="23-93",.247,.366,0.119,2,5,0,8,26.5,7,.294,.660
+Francisco Lindor SHB,Batting Second ​,="12-42",.286,.643,0.357,4,1,1,12,16.3,7,.388,1.031
+Bo Bichette RHB,Batting Third ​,="40-157",.255,.318,0.063,1,7,0,14,19.5,8,.284,.602
+Francisco Alvarez RHB,Batting Fourth ​,="1-14",.071,.071,0.000,0,0,0,1,40.0,1,.133,.204
+Carson Benge LHB,Batting Fifth ​,="12-50",.240,.360,0.120,1,3,0,6,24.6,6,.316,.676
+Luis Robert RHB,Batting Sixth ​,="2-9",.222,.889,0.667,2,0,0,2,10.0,1,.300,1.189
+Marcus Semien RHB,Batting Seventh ​,="26-118",.220,.356,0.136,3,7,0,13,20.8,10,.285,.641
+Jared Young LHB,Batting Fourth ​,="17-73",.233,.507,0.274,6,2,0,13,21.0,7,.309,.816
+Luis Torrens RHB,Batting Ninth ​,="34-154",.221,.325,0.104,2,10,0,16,20.6,11,.290,.615

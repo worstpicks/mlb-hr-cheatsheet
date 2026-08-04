@@ -1,0 +1,26 @@
+Matchup,TOR @ HOU
+Pitcher,Trey Yesavage
+Pitcher Team,TOR
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.1,1.24,="6-40",.150,.275,0.125,1,2,0,1,16.7,8,.292,.567
+Batting Second,10.1,1.65,="8-38",.211,.368,0.157,1,3,0,3,27.1,9,.362,.730
+Batting Third,11.1,0.97,="4-35",.114,.229,0.115,1,1,0,6,22.2,7,.244,.473
+Batting Fourth,10.2,1.22,="12-43",.279,.581,0.302,3,4,0,11,25.0,1,.295,.876
+Batting Fifth,9.1,1.39,="6-34",.176,.265,0.089,0,3,0,3,16.3,7,.326,.591
+Batting Sixth,8.2,1.85,="13-38",.342,.579,0.237,2,3,0,7,16.3,3,.395,.974
+Batting Seventh,10.2,0.84,="5-33",.152,.424,0.272,2,3,0,5,23.1,4,.243,.667
+Batting Eighth,10.2,0.47,="2-33",.061,.061,0.000,0,0,0,0,41.7,3,.139,.200
+Batting Ninth,8.2,0.92,="5-30",.167,.233,0.066,0,2,0,0,33.3,3,.242,.475
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jeremy Pena RHB,Batting First ​,="81-250",.324,.536,0.212,13,12,1,34,17.9,15,.374,.910
+Yordan Alvarez LHB,Batting Second ​,="124-369",.336,.642,0.306,30,23,0,76,16.8,70,.447,1.089
+Isaac Paredes RHB,Batting Third ​,="60-233",.258,.395,0.137,7,9,1,33,12.6,26,.349,.744
+Daulton Varsho LHB,Batting Fourth ​,="4-28",.143,.179,0.036,0,1,0,2,16.1,2,.194,.373
+Christian Walker RHB,Batting Fifth ​,="23-67",.343,.597,0.254,4,5,0,12,19.2,5,.397,.994
+Jose Altuve RHB,Batting Sixth ​,="4-11",.364,.364,0.000,0,0,0,1,0.0,2,.462,.826
+Taylor Trammell LHB,Batting Seventh ​,="12-43",.279,.442,0.163,2,1,0,6,28.9,2,.311,.753
+Yainer Diaz RHB,Batting Eighth ​,="11-43",.256,.419,0.163,2,1,0,8,17.4,2,.283,.702
+Cam Smith RHB,Batting Ninth ​,="4-12",.333,.500,0.167,0,0,1,0,30.8,0,.385,.885

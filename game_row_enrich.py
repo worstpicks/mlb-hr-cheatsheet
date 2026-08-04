@@ -36,6 +36,7 @@ TITLE_WEATHER_KEY_ALIASES = {
     "CWS @ NYY": "CHW @ NYY",
     "CWS @ CLE": "CHW @ CLE",
     "BOS @ CWS": "BOS @ CHW",
+    "CWS @ BOS": "CHW @ BOS",
     "PIT @ WSH": "PIT @ WAS",
     "HOU @ WSH": "HOU @ WAS",
     "ARI @ WSH": "ARI @ WAS",

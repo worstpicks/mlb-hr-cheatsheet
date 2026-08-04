@@ -145,13 +145,40 @@ def derive_games_from_csv(sheet_date: str, data_dir: Path | None = None) -> list
             gm["home_sp"] = sp_last
             gm["home_sp_full"] = hdr["pitcher"]
         for b in read_batter_rows(path):
-            gm["batters"][name_lookup_key(b["name"])] = {**b, "vs": sp_last, "file": path.name}
+            gm["batters"][name_lookup_key(b["name"])] = {
+                **b,
+                "vs": sp_last,
+                "vs_full": hdr["pitcher"],
+                "file": path.name,
+            }
+
+    # When two SPs share a last name (e.g. Grayson/Eduardo Rodriguez), chips must
+    # use the full name so resolve_pitcher() can score splits/risk correctly.
+    last_counts: dict[str, int] = {}
+    for gm in by_game.values():
+        for full in (gm.get("away_sp_full"), gm.get("home_sp_full")):
+            if not full or full == "TBD":
+                continue
+            last = full.split()[-1]
+            last_counts[last] = last_counts.get(last, 0) + 1
+    for gm in by_game.values():
+        for batter in gm["batters"].values():
+            last = (batter.get("vs") or "").strip()
+            full = (batter.get("vs_full") or last).strip()
+            if last and last_counts.get(last, 0) > 1 and full:
+                batter["vs"] = full
 
     risk = load_pitcher_risk(hr_targets_csv(sheet_date) or Path("__missing__"))
     games = []
     for key in sorted(by_game):
         gm = by_game[key]
-        if not gm["away_sp"] or not gm["home_sp"]:
+        if not gm["away_sp"] and gm["home_sp"]:
+            gm["away_sp"] = "TBD"
+            gm["away_sp_full"] = "TBD"
+        elif gm["away_sp"] and not gm["home_sp"]:
+            gm["home_sp"] = "TBD"
+            gm["home_sp_full"] = "TBD"
+        elif not gm["away_sp"] or not gm["home_sp"]:
             raise SystemExit(f"Incomplete SP pair for {key}: {gm}")
         away_r = risk.get(gm["away_sp_full"].lower()) or risk.get(gm["away_sp"].lower())
         home_r = risk.get(gm["home_sp_full"].lower()) or risk.get(gm["home_sp"].lower())

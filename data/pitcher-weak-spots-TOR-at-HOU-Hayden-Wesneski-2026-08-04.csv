@@ -1,0 +1,26 @@
+Matchup,TOR @ HOU
+Pitcher,Hayden Wesneski
+Pitcher Team,HOU
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,1.50,="0-2",.000,.000,0.000,0,0,0,0,33.3,1,.333,.333
+Batting Second,0.2,1.50,="1-3",.333,.667,0.334,0,1,0,0,33.3,0,.333,1.000
+Batting Third,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,0.0,0,.333,.333
+Batting Fourth,1.0,1.00,="1-3",.333,.667,0.334,0,1,0,2,33.3,0,.333,1.000
+Batting Fifth,0.1,6.00,="2-3",.667,.667,0.000,0,0,0,1,33.3,0,.667,1.334
+Batting Sixth,0.2,1.50,="1-3",.333,.333,0.000,0,0,0,0,0.0,0,.333,.666
+Batting Seventh,1.0,1.00,="1-3",.333,.333,0.000,0,0,0,0,0.0,0,.333,.666
+Batting Eighth,0.1,3.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,1,.500,.500
+Batting Ninth,0.1,3.00,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,0,1.000,2.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nathan Lukes LHB,Batting First ​,="24-77",.312,.442,0.130,1,7,0,8,12.3,2,.338,.780
+Vladimir Guerrero Jr. RHB,Batting Second ​,="28-110",.255,.336,0.081,2,3,0,12,16.7,13,.333,.669
+Kazuma Okamoto RHB,Batting Third ​,="19-68",.279,.544,0.265,5,3,0,13,27.4,4,.329,.873
+George Springer RHB,Batting Fourth ​,="22-76",.289,.513,0.224,4,3,1,15,13.3,7,.349,.862
+Alejandro Kirk RHB,Batting Fifth ​,="16-70",.229,.386,0.157,3,2,0,8,18.8,10,.325,.711
+Jesus Sanchez LHB,Batting Sixth ​,="11-35",.314,.371,0.057,0,2,0,3,19.4,1,.333,.704
+Ernie Clement RHB,Batting Seventh ​,="28-93",.301,.398,0.097,1,6,0,9,8.3,2,.313,.711
+Andres Gimenez LHB,Batting Eighth ​,="39-172",.227,.360,0.133,5,8,0,25,18.3,5,.270,.630
+Myles Straw RHB,Batting Ninth ​,="6-38",.158,.211,0.053,0,2,0,2,2.3,3,.214,.425

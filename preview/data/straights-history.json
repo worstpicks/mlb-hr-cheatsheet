@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-04T21:43:21Z",
+  "updated": "2026-08-05T13:23:02Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -881,11 +881,26 @@
       "o05": {
         "player": "Bryce Harper",
         "matchup": "WSH @ PHI",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Owen Caissie",
         "matchup": "MIA @ ATL",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "o05": {
+        "player": "Daylen Lile",
+        "matchup": "WSH @ PHI",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Coby Mayo",
+        "matchup": "LAA @ BAL",
         "result": "pending"
       }
     }

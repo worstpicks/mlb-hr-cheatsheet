@@ -4920,3 +4920,155 @@ html.theme-light .rs-ptabs {
     .rs-profile__name { font-size: 1.02rem; }
     .rs-ptabs__btn { padding: 8px 8px; font-size: 0.76rem; }
 }
+
+/* ============================================================================
+   WORST PICKZ RESEARCH — NIGHT GAME / HEAT THEME              added 2026-08-06
+   ----------------------------------------------------------------------------
+   Same two rules as the cheat sheet:
+     Rule 1  hue encodes data           (heat ramp)
+     Rule 2  brightness encodes UI state (selection is white, never coloured)
+
+   This page was already well tokenised, so most of the work is done by
+   redefining :root. The rules after that only exist to flatten the handful
+   of surfaces that paint a gradient directly.
+
+   Delete everything between START and END to restore the previous look.
+   ============================================================================ */
+/* === WPZ-NIGHT-HEAT START === */
+
+:root {
+  /* shared shell tokens */
+  --wpz-color-text:       #DCE3EB;
+  --wpz-color-text-soft:  #DCE3EB;
+  --wpz-color-heading:    #F3F6FA;
+  --wpz-color-paragraph:  #9DAEBF;
+  --wpz-bg-body:          radial-gradient(120% 80% at 50% -10%, #131C26 0%, #0B0F14 55%, #07090C 100%);
+  --wpz-bg-container:     #10161E;
+  --wpz-border-container: rgba(255,255,255,.10);
+  --wpz-bg-header:        #0C1118;
+  --wpz-border-header:    rgba(255,255,255,.08);
+  --wpz-brand-tag-bg:     rgba(255,255,255,.04);
+  --wpz-brand-tag-border: rgba(255,255,255,.22);
+  --wpz-brand-tag-text:   rgba(255,255,255,.82);
+  --wpz-hero-frame:       rgba(255,255,255,.10);
+
+  /* the four legacy accents collapse onto the ramp */
+  --wpz-accent-gold:      #FFB020;
+  --wpz-accent-green:     #3FBF87;
+  --wpz-accent-rose:      #E0625C;
+  --wpz-accent-orange:    #C98A2E;
+
+  /* research panel tokens */
+  --rs-panel:             #141C25;
+  --rs-panel-2:           #0C1219;
+  --rs-border:            rgba(255,255,255,.10);
+  --rs-border-strong:     rgba(255,255,255,.17);
+  --rs-muted:             #7E8D9D;
+
+  /* Rule 1 — the research good/mid/bad scale IS the heat ramp */
+  --rs-good-bg:           rgba(255,176,32,.18);
+  --rs-mid-bg:            rgba(139,152,166,.16);
+  --rs-bad-bg:            rgba(90,140,196,.18);
+
+  /* stat-group tints drop to near-neutral so they stop competing with data */
+  --rs-group-power:       rgba(255,176,32,.07);
+  --rs-group-contact:     rgba(90,140,196,.06);
+  --rs-group-batted:      rgba(201,138,46,.07);
+  --rs-group-plate:       rgba(139,152,166,.06);
+  --rs-group-matchup:     rgba(255,255,255,.04);
+
+  /* same names the cheat sheet uses, so the two pages stay in step */
+  --wpz-heat-hot:         #FFB020;
+  --wpz-heat-warm:        #C98A2E;
+  --wpz-heat-neutral:     #8B98A6;
+  --wpz-heat-cold:        #5A8CC4;
+  --wpz-ui-on:            #E8EEF4;
+  --wpz-ui-on-ink:        #0B0F14;
+  --wpz-bg-surface:       #141C25;
+  --wpz-bg-sunken:        #0C1219;
+  --wpz-border-hair:      rgba(255,255,255,.07);
+}
+
+/* ---- flatten the surfaces that paint a gradient directly ---- */
+body,
+.rs-toolbar, .rs-matchup-bar, .rs-table-wrap, .rs-mobile-bar,
+.rs-card, .rs-card__head, .rs-weather, .rs-explore-lb-nav, .rs-explore__panel,
+.rs-pitcher-card__head,
+.rs-pitcher-card--awy .rs-pitcher-card__head,
+.rs-pitcher-card--hom .rs-pitcher-card__head {
+  background-image: none !important;
+}
+body { background: var(--wpz-bg-body) !important; background-attachment: fixed !important; }
+.rs-toolbar, .rs-matchup-bar, .rs-explore-lb-nav, .rs-mobile-bar {
+  background: var(--wpz-bg-container) !important;
+  border-color: var(--wpz-border-container) !important;
+}
+.rs-table-wrap, .rs-card, .rs-weather, .rs-explore__panel {
+  background: var(--rs-panel) !important;
+  border-color: var(--wpz-border-container) !important;
+}
+.rs-card__head,
+.rs-pitcher-card__head,
+.rs-pitcher-card--awy .rs-pitcher-card__head,
+.rs-pitcher-card--hom .rs-pitcher-card__head {
+  background: var(--rs-panel-2) !important;
+  border-bottom: 1px solid var(--wpz-border-hair) !important;
+}
+
+/* decorative bars keep a fill so they don't vanish with the gradient */
+.rs-section-title::before { background: var(--wpz-heat-hot) !important; background-image: none !important; }
+.rs-pitcher-arsenal__bar span { background: var(--wpz-heat-warm) !important; background-image: none !important; }
+
+/* ---- Rule 2 — selection is brightness, never hue ---- */
+.rs-btn--primary,
+.rs-game-pill.is-active,
+.rs-side-toggle button.is-active,
+.rs-explore-lb-nav__btn.is-active {
+  background: var(--wpz-ui-on) !important;
+  background-image: none !important;
+  border-color: var(--wpz-ui-on) !important;
+  color: var(--wpz-ui-on-ink) !important;
+}
+
+/* ---- jump + highlight ------------------------------------------------------
+   rsFlash animated `background` straight to transparent. On a table row that
+   reads fine, because the row has no background of its own. On a mobile
+   .rs-card it wipes the card's panel fill mid-animation, so the card blinks
+   empty and snaps back. Cards get a box-shadow overlay instead, which sits on
+   top of the fill rather than replacing it, plus a ring so the target is
+   obvious on a small screen. */
+@keyframes rsFlash {
+  0%, 20% { background: rgba(255,176,32,.30); }
+  100%    { background: transparent; }
+}
+@keyframes rsJumpFlash {
+  0%, 35% { background: rgba(255,176,32,.38); }
+  100%    { background: transparent; }
+}
+@keyframes rsCardFlash {
+  0%, 25% { box-shadow: inset 0 0 0 999px rgba(255,176,32,.22); }
+  100%    { box-shadow: inset 0 0 0 999px rgba(255,176,32,0); }
+}
+.rs-row--jump { outline: 2px solid var(--wpz-heat-hot) !important; outline-offset: -2px !important; }
+.rs-card.rs-row--flash,
+.rs-card.rs-row--jump {
+  animation: rsCardFlash 1.8s ease-out !important;
+  outline: 2px solid var(--wpz-heat-hot) !important;
+  outline-offset: -2px !important;
+  border-radius: inherit;
+}
+.rs-card.rs-row--jump { animation-duration: 2.6s !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-row--flash, .rs-row--jump,
+  .rs-card.rs-row--flash, .rs-card.rs-row--jump { animation: none !important; }
+}
+
+
+/* the file:// warning overlay lives in index.html's inline <style> */
+html body .rs-file-block__card {
+  background: var(--rs-panel) !important;
+  background-image: none !important;
+  border: 1px solid var(--wpz-border-container) !important;
+}
+/* === WPZ-NIGHT-HEAT END === */

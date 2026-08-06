@@ -492,6 +492,34 @@
         return window.matchMedia("(max-width: 768px)").matches;
     }
 
+    // Below 900px the CSS hides .rs-table-wrap and shows .rs-card-list, but the
+    // table markup stays in the DOM. Picking the <tr> first therefore hands back
+    // a display:none element on phones — scrollIntoView is a no-op on those and
+    // the flash class lands somewhere invisible. Always take whichever of the
+    // two is actually being rendered.
+    function visibleHitterEl(id) {
+        const candidates = [
+            els.tableBody?.querySelector(`tr[data-hitter-id="${id}"]`),
+            els.cardList?.querySelector(`.rs-card[data-hitter-id="${id}"]`),
+        ].filter(Boolean);
+        return candidates.find((el) => el.offsetParent !== null || el.getClientRects().length > 0) || null;
+    }
+
+    // Two smooth scrolls fired back to back cancel each other; the browser keeps
+    // the last one. Callers that want a fallback target should pass it here so
+    // only one scroll is ever issued.
+    function revealHitterEl(id, { flashClass = "rs-row--flash", ms = 1800, fallback = null } = {}) {
+        const el = visibleHitterEl(id);
+        if (!el) {
+            fallback?.scrollIntoView({ behavior: "smooth", block: "start" });
+            return null;
+        }
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.classList.add(flashClass);
+        setTimeout(() => el.classList.remove(flashClass), ms);
+        return el;
+    }
+
     const MOBILE_CARD_OPEN_GROUPS = new Set(["matchup", "power"]);
     const MOBILE_HIGHLIGHT_KEYS = [
         "ticketScore",
@@ -5365,12 +5393,7 @@
                 activeGameIdx = entry.gameIdx;
                 activeSide = entry.side;
                 await renderAll();
-                const rowEl =
-                    els.tableBody?.querySelector(`tr[data-hitter-id="${entry.row.id}"]`) ||
-                    els.cardList?.querySelector(`.rs-card[data-hitter-id="${entry.row.id}"]`);
-                rowEl?.scrollIntoView({ behavior: "smooth", block: "center" });
-                rowEl?.classList.add("rs-row--flash");
-                setTimeout(() => rowEl?.classList.remove("rs-row--flash"), 1800);
+                revealHitterEl(entry.row.id);
             };
             el.addEventListener("click", jump);
             el.addEventListener("keydown", (e) => {
@@ -6354,16 +6377,11 @@
         activeGameIdx = gi;
         activeSide = side;
         await renderAll();
-        const entry = collectSlateHitters().find((e) => e.row.id === id && e.gameIdx === gi && e.side === side);
-        const rowEl =
-            els.tableBody?.querySelector(`tr[data-hitter-id="${id}"]`) ||
-            els.cardList?.querySelector(`.rs-card[data-hitter-id="${id}"]`);
-        rowEl?.scrollIntoView({ behavior: "smooth", block: "center" });
-        rowEl?.classList.add("rs-row--flash");
-        setTimeout(() => rowEl?.classList.remove("rs-row--flash"), 1800);
-        if (entry) {
-            document.querySelector(".rs-section-title--hitters")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        // Only scroll to the section heading when the player's own row could not
+        // be found. Doing both meant the heading scroll always won, which on a
+        // phone left you at the top of the section with the highlighted player
+        // still below the fold.
+        revealHitterEl(id, { fallback: document.querySelector(".rs-section-title--hitters") });
     }
 
     function mobileCardStatHtml(c, row, colValues, higherBetter) {
@@ -9151,12 +9169,7 @@
         activeSide = entry.side;
         closePlayerProfile();
         await renderAll();
-        const rowEl =
-            els.tableBody?.querySelector(`tr[data-hitter-id="${entry.row.id}"]`) ||
-            els.cardList?.querySelector(`.rs-card[data-hitter-id="${entry.row.id}"]`);
-        rowEl?.scrollIntoView({ behavior: "smooth", block: "center" });
-        rowEl?.classList.add("rs-row--flash");
-        setTimeout(() => rowEl?.classList.remove("rs-row--flash"), 1800);
+        revealHitterEl(entry.row.id);
     }
 
     function renderSearchResults(query) {
@@ -9625,13 +9638,7 @@
         activeGameIdx = entry.gameIdx;
         activeSide = entry.side;
         await renderAll();
-        const rowEl =
-            els.tableBody?.querySelector(`tr[data-hitter-id="${entry.row.id}"]`) ||
-            els.cardList?.querySelector(`.rs-card[data-hitter-id="${entry.row.id}"]`);
-        if (!rowEl) return;
-        rowEl.scrollIntoView({ behavior: "smooth", block: "center" });
-        rowEl.classList.add("rs-row--jump");
-        setTimeout(() => rowEl.classList.remove("rs-row--jump"), 4000);
+        revealHitterEl(entry.row.id, { flashClass: "rs-row--jump", ms: 4000 });
     }
 
     wireUi();

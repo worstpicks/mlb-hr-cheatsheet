@@ -3251,7 +3251,293 @@
             }
             .site-footer-cta__link { color: #0f172a !important; text-decoration: underline !important; border-bottom: none !important; }
         }
-    </style>
+    
+/* ============================================================================
+   WORST PICKZ — NIGHT GAME / HEAT THEME                        added 2026-08-06
+   ----------------------------------------------------------------------------
+   Rule 1  hue encodes data      — four stops, one per score band
+   Rule 2  brightness encodes UI state — selection is white, never coloured
+   Exception: green/red appear only on settled results (win/loss), never on a
+   projection.
+
+   This block is self-contained and additive. Deleting everything between the
+   START and END markers restores the previous look exactly.
+
+   Some rules carry !important because the existing sheet sets these same
+   properties with !important at up to 4-class specificity (e.g.
+   `.game-card .pick-row.pick-row--worst-pickz-gem.strong`). When those legacy
+   gradient rules are removed, the !important here can go with them.
+   ============================================================================ */
+/* === WPZ-NIGHT-HEAT START === */
+
+:root {
+  --wpz-bg-body:          radial-gradient(120% 80% at 50% -10%, #131C26 0%, #0B0F14 55%, #07090C 100%);
+  --wpz-bg-container:     #10161E;
+  --wpz-bg-header:        #0C1118;
+  --wpz-bg-surface:       #141C25;
+  --wpz-bg-sunken:        #0C1219;
+
+  --wpz-border-container: rgba(255,255,255,.10);
+  --wpz-border-header:    rgba(255,255,255,.08);
+  --wpz-border-hair:      rgba(255,255,255,.07);
+
+  --wpz-color-heading:    #F3F6FA;
+  --wpz-color-text:       #DCE3EB;
+  --wpz-color-text-soft:  #DCE3EB;
+  --wpz-color-paragraph:  #9DAEBF;
+  --wpz-color-muted:      #6B7C8E;
+
+  /* Rule 1 — the ramp, mapped onto the published score bands */
+  --wpz-heat-hot:         #FFB020;  /* 90+   elite     */
+  --wpz-heat-warm:        #C98A2E;  /* 80-89 strong    */
+  --wpz-heat-neutral:     #8B98A6;  /* 70-79 playable  */
+  --wpz-heat-cold:        #5A8CC4;  /* <=69  thin/fade */
+
+  /* Rule 2 — UI state */
+  --wpz-ui-on:            #E8EEF4;
+  --wpz-ui-on-ink:        #0B0F14;
+
+  /* settled outcomes only */
+  --wpz-hit:              #3FBF87;
+  --wpz-miss:             #E0625C;
+
+  /* legacy names still read elsewhere in this sheet */
+  --wpz-hero-frame:       rgba(255,255,255,.10);
+  --wpz-brand-tag-bg:     rgba(255,255,255,.04);
+  --wpz-brand-tag-border: rgba(255,255,255,.22);
+  --wpz-brand-tag-text:   rgba(255,255,255,.82);
+}
+
+/* ---- 1. retire the decorative gradients ---- */
+body, .intro, .summary-section, .games-section, .game-picks-panel,
+.straight-of-day-card, .top-five-card, .best-bets-card, .game-pick-card,
+.game-header, .game-card, .site-footer-cta, .site-footer-cta__btn,
+.pick-row, .rating-box, .letter-box, .zone-fit-box, .zone-fit-strip,
+.player-rpg, .chip, .signal-pill, .gambly-pick-btn, .bet-save-corner__btn,
+.game-pick-card__rank, .hr-row-result__pill, .props-table, .th-sheet,
+header, .game-card-toggle {
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* ---- 2. grounds ---- */
+html, body {
+  background: var(--wpz-bg-body) !important;
+  background-attachment: fixed !important;
+  color: var(--wpz-color-text) !important;
+}
+header { background: var(--wpz-bg-header) !important; border-color: var(--wpz-border-header) !important; }
+.intro, .summary-section, .games-section, .game-picks-panel, .game-card {
+  background: var(--wpz-bg-container) !important;
+  border-color: var(--wpz-border-container) !important;
+}
+.straight-of-day-card, .top-five-card, .best-bets-card, .game-pick-card,
+.pick-row, .game-header {
+  background: var(--wpz-bg-surface) !important;
+  border: 1px solid var(--wpz-border-container) !important;
+  border-radius: 10px !important;
+}
+.rating-box, .letter-box, .zone-fit-box, .player-rpg, .chip, .signal-pill,
+.gambly-pick-btn, .bet-save-corner__btn, .game-pick-card__chip,
+.hr-row-result__pill, input, select {
+  background: var(--wpz-bg-sunken) !important;
+  border-color: var(--wpz-border-hair) !important;
+}
+
+/* ---- 3. type ---- */
+h1, h2, h3, h4, h5, .game-pick-card__name, .pick-name, .straight-name { color: var(--wpz-color-heading) !important; }
+p, .pick-note, .game-pick-card__why { color: var(--wpz-color-paragraph) !important; }
+small, .player-rpg-label, .zone-fit-item__label, .chip { color: var(--wpz-color-muted) !important; }
+html body .th-sheet, html body .th-gambly, html body .th-tags, html body th {
+  background: var(--wpz-bg-sunken) !important;
+  background-image: none !important;
+  color: var(--wpz-color-muted) !important;
+  border-bottom: 1px solid var(--wpz-border-container) !important;
+  box-shadow: none !important;
+}
+.td-bet-sheet, td { border-color: var(--wpz-border-hair) !important; color: var(--wpz-color-text) !important; }
+a { color: var(--wpz-color-text); }
+
+/* ---- 4. RULE 1 — the ramp, driven by classes already in the markup ---- */
+.rating-box.elite  strong { color: var(--wpz-heat-hot) !important; }
+.rating-box.strong strong { color: var(--wpz-heat-warm) !important; }
+.rating-box.thin   strong { color: var(--wpz-heat-cold) !important; }
+
+.letter-box.s-plus strong, .letter-box.s strong, .letter-box.a strong { color: var(--wpz-heat-hot) !important; }
+.letter-box.b-plus strong, .letter-box.b strong { color: var(--wpz-heat-warm) !important; }
+.letter-box.c-plus strong, .letter-box.c strong { color: var(--wpz-heat-neutral) !important; }
+.letter-box.d strong, .letter-box.f strong { color: var(--wpz-heat-cold) !important; }
+
+.zone-fit-box__brand strong { color: var(--wpz-heat-hot) !important; }
+.game-pick-card__score      { color: var(--wpz-heat-hot) !important; }
+.game-top-pick              { color: var(--wpz-heat-hot) !important; }
+.star-fill                  { color: var(--wpz-heat-hot) !important; }
+.star-base                  { color: var(--wpz-border-hair) !important; }
+
+.signal-pill { color: var(--wpz-color-paragraph) !important; }
+.signal-pill--hot .signal-pill__dot,
+.signal-pill--high-hh .signal-pill__dot { background: var(--wpz-heat-hot) !important; }
+.signal-pill--low-gb .signal-pill__dot  { background: var(--wpz-heat-warm) !important; }
+.signal-pill--flat .signal-pill__dot    { background: var(--wpz-heat-neutral) !important; }
+.signal-pill--cold .signal-pill__dot,
+.signal-pill--whiff .signal-pill__dot,
+.signal-pill--high-gb .signal-pill__dot,
+.signal-pill--low-hh .signal-pill__dot  { background: var(--wpz-heat-cold) !important; }
+
+/* badges */
+.favorite-badge, .hidden-gem-badge { background-image: none !important; box-shadow: none !important; }
+.favorite-badge {
+  background: rgba(255,176,32,.13) !important; color: var(--wpz-heat-hot) !important;
+  border: 1px solid rgba(255,176,32,.45) !important;
+}
+.hidden-gem-badge {
+  background: rgba(90,140,196,.14) !important; color: var(--wpz-heat-cold) !important;
+  border: 1px solid rgba(90,140,196,.45) !important;
+}
+
+/* score bands take the ramp they describe */
+.band-pill, .band {
+  background: var(--wpz-bg-sunken) !important; background-image: none !important;
+  border: 1px solid var(--wpz-border-hair) !important;
+  color: var(--wpz-color-text) !important; box-shadow: none !important;
+}
+.band-pill.elite,    .band.elite-band    { border-left: 3px solid var(--wpz-heat-hot) !important;     color: var(--wpz-heat-hot) !important; }
+.band-pill.strong,   .band.strong-band   { border-left: 3px solid var(--wpz-heat-warm) !important;    color: var(--wpz-heat-warm) !important; }
+.band-pill.playable, .band.playable-band { border-left: 3px solid var(--wpz-heat-neutral) !important; color: var(--wpz-heat-neutral) !important; }
+.band-pill.thin,     .band.thin-band     { border-left: 3px solid var(--wpz-heat-cold) !important;    color: var(--wpz-heat-cold) !important; }
+
+/* ---- 5. RULE 2 — UI state is brightness, never hue ---- */
+html body .gambly-pick-btn.is-on, html body button[aria-pressed="true"], html body .site-footer-cta__btn, html body .current-slate-btn {
+  background: var(--wpz-ui-on) !important; background-image: none !important;
+  border-color: var(--wpz-ui-on) !important; color: var(--wpz-ui-on-ink) !important;
+  box-shadow: none !important;
+}
+.btn-gambly, .best-bets-gambly-btn, .straight-of-day-card__cta {
+  background: var(--wpz-bg-sunken) !important; background-image: none !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  color: var(--wpz-color-text) !important; box-shadow: none !important;
+}
+.btn-gambly:hover, .best-bets-gambly-btn:hover, .straight-of-day-card__cta:hover {
+  background: var(--wpz-ui-on) !important; border-color: var(--wpz-ui-on) !important;
+  color: var(--wpz-ui-on-ink) !important;
+}
+.research-tab-link {
+  background: transparent !important; background-image: none !important;
+  border: 1px solid rgba(255,255,255,.2) !important;
+  color: rgba(255,255,255,.82) !important; box-shadow: none !important;
+}
+.research-tab-link:first-of-type {
+  background: var(--wpz-ui-on) !important; border-color: var(--wpz-ui-on) !important;
+  color: var(--wpz-ui-on-ink) !important;
+}
+.brand-tag, .straight-pick-tag {
+  background: rgba(255,255,255,.04) !important; background-image: none !important;
+  border: 1px solid rgba(255,255,255,.22) !important; color: rgba(255,255,255,.82) !important;
+}
+html body .theme-toggle { background: var(--wpz-bg-sunken) !important; border: 1px solid var(--wpz-border-hair) !important; }
+html body .my-slip-fab {
+  background: var(--wpz-ui-on) !important; background-image: none !important;
+  color: var(--wpz-ui-on-ink) !important; border: none !important;
+  box-shadow: 0 6px 20px -6px rgba(0,0,0,.7) !important;
+}
+html body .my-slip-panel {
+  background: var(--wpz-bg-container) !important; background-image: none !important;
+  border-left: 1px solid var(--wpz-border-container) !important; box-shadow: none !important;
+}
+html body .batters-won-section, html body .batters-hit-section, html body .table-wrap-inner {
+  background: var(--wpz-bg-container) !important; background-image: none !important;
+  border: 1px solid var(--wpz-border-container) !important; box-shadow: none !important;
+}
+
+/* ---- 6. settled outcomes — the only place green/red survives ---- */
+.hr-row-result__pill--pending {
+  color: var(--wpz-color-muted) !important;
+  border: 1px dashed var(--wpz-border-hair) !important;
+}
+.straight-last7__day {
+  background: var(--wpz-bg-sunken) !important; background-image: none !important;
+  border: 1px solid var(--wpz-border-hair) !important; color: var(--wpz-color-muted) !important;
+}
+.straight-last7__day.is-win {
+  color: var(--wpz-hit) !important; border-color: rgba(63,191,135,.55) !important;
+  background: rgba(63,191,135,.10) !important;
+}
+.straight-last7__day.is-loss {
+  color: var(--wpz-miss) !important; border-color: rgba(224,98,92,.45) !important;
+  background: rgba(224,98,92,.09) !important;
+}
+.straight-last7__day.is-void, .straight-last7__day.is-pending {
+  color: var(--wpz-color-muted) !important; background: var(--wpz-bg-sunken) !important;
+  border-color: var(--wpz-border-hair) !important;
+}
+
+/* ---- 7. pick rows — outranks the legacy 4-class !important gradients ---- */
+html body .games-section .games-grid .game-card .pick-list .pick-row,
+html body .games-section .games-grid .game-card .pick-list .pick-row.elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.playable,
+html body .games-section .games-grid .game-card .pick-list .pick-row.thin {
+  background: var(--wpz-bg-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--wpz-border-container) !important;
+  border-radius: 10px !important;
+}
+
+/* band stripe */
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-elite.elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-elite.strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-elite.playable,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-elite.thin {
+  box-shadow: inset 3px 0 0 var(--wpz-heat-hot) !important;
+}
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-strong.elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-strong.strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-strong.playable,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-strong.thin {
+  box-shadow: inset 3px 0 0 var(--wpz-heat-warm) !important;
+}
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-mid,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-mid.elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-mid.strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-mid.playable,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-mid.thin {
+  box-shadow: inset 3px 0 0 var(--wpz-heat-neutral) !important;
+}
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-low,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-low.elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-low.strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-low.playable,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--heat-low.thin {
+  box-shadow: none !important;
+}
+
+/* ⭐ / 💎 are model designations, so they outrank the band stripe */
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav.elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav.strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav.playable,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav.thin {
+  background: var(--wpz-bg-surface) !important;
+  background-image: none !important;
+  box-shadow: inset 3px 0 0 var(--wpz-heat-hot) !important;
+  border: 1px solid rgba(255,176,32,.30) !important;
+}
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem.elite,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem.strong,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem.playable,
+html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem.thin {
+  background: var(--wpz-bg-surface) !important;
+  background-image: none !important;
+  box-shadow: inset 3px 0 0 var(--wpz-heat-cold) !important;
+  border: 1px solid rgba(90,140,196,.32) !important;
+}
+
+/* === WPZ-NIGHT-HEAT END === */
+</style>
 </head>
 <body>
     <div class="container">

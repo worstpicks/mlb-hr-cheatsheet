@@ -3385,15 +3385,20 @@ a { color: var(--wpz-color-text); }
 .signal-pill--high-gb .signal-pill__dot,
 .signal-pill--low-hh .signal-pill__dot  { background: var(--wpz-heat-cold) !important; }
 
-/* badges */
-.favorite-badge, .hidden-gem-badge { background-image: none !important; box-shadow: none !important; }
-.favorite-badge {
-  background: rgba(255,176,32,.13) !important; color: var(--wpz-heat-hot) !important;
-  border: 1px solid rgba(255,176,32,.45) !important;
+/* badges — solid, so the designation is legible mid-scroll. These pills sit
+   astride the top edge of the row, so they double as the row marker. */
+html body .favorite-badge, html body .hidden-gem-badge {
+  background-image: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.50) !important;
+  font-weight: 800 !important;
 }
-.hidden-gem-badge {
-  background: rgba(90,140,196,.14) !important; color: var(--wpz-heat-cold) !important;
-  border: 1px solid rgba(90,140,196,.45) !important;
+html body .favorite-badge {
+  background: var(--wpz-heat-hot) !important; color: #1A1204 !important;
+  border: 1px solid var(--wpz-heat-hot) !important;
+}
+html body .hidden-gem-badge {
+  background: var(--wpz-heat-cold) !important; color: #06101F !important;
+  border: 1px solid var(--wpz-heat-cold) !important;
 }
 
 /* score bands take the ramp they describe */
@@ -3514,7 +3519,9 @@ html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--h
   box-shadow: none !important;
 }
 
-/* ⭐ / 💎 are model designations, so they outrank the band stripe */
+/* ⭐ / 💎 are model designations. They ring the whole row via outline, which
+   costs no layout and leaves box-shadow free — so a marked row still shows its
+   band stripe. Designation and band read at the same time. */
 html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav,
 html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav.elite,
 html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav.strong,
@@ -3522,8 +3529,9 @@ html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--w
 html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-fav.thin {
   background: var(--wpz-bg-surface) !important;
   background-image: none !important;
-  box-shadow: inset 3px 0 0 var(--wpz-heat-hot) !important;
-  border: 1px solid rgba(255,176,32,.30) !important;
+  outline: 2px solid var(--wpz-heat-hot) !important;
+  outline-offset: -2px !important;
+  border: 1px solid rgba(255,176,32,.55) !important;
 }
 html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem,
 html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem.elite,
@@ -3532,8 +3540,9 @@ html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--w
 html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--worst-pickz-gem.thin {
   background: var(--wpz-bg-surface) !important;
   background-image: none !important;
-  box-shadow: inset 3px 0 0 var(--wpz-heat-cold) !important;
-  border: 1px solid rgba(90,140,196,.32) !important;
+  outline: 2px solid var(--wpz-heat-cold) !important;
+  outline-offset: -2px !important;
+  border: 1px solid rgba(90,140,196,.55) !important;
 }
 
 

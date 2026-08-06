@@ -3336,7 +3336,7 @@ header { background: var(--wpz-bg-header) !important; border-color: var(--wpz-bo
 .pick-row, .game-header {
   background: var(--wpz-bg-surface) !important;
   border: 1px solid var(--wpz-border-container) !important;
-  border-radius: 10px !important;
+  border-radius: var(--wpz-r-surface) !important;
 }
 .rating-box, .letter-box, .zone-fit-box, .player-rpg, .chip, .signal-pill,
 .gambly-pick-btn, .bet-save-corner__btn, .game-pick-card__chip,
@@ -3486,7 +3486,7 @@ html body .games-section .games-grid .game-card .pick-list .pick-row.thin {
   background: var(--wpz-bg-surface) !important;
   background-image: none !important;
   border: 1px solid var(--wpz-border-container) !important;
-  border-radius: 10px !important;
+  border-radius: var(--wpz-r-surface) !important;
 }
 
 /* band stripe */
@@ -3598,6 +3598,105 @@ html body .site-footer-cta__btn:hover {
 
 /* faint hint text was only 3.95:1 */
 html body .parlay-leg .parlay-drag-hint { color: var(--wpz-color-paragraph) !important; }
+
+/* ---- 9. player card ---------------------------------------------------------
+   This component was missed by the original theme pass, so it was still on the
+   old palette: a #0f172a -> #1e293b slate gradient panel, gradient result
+   bubbles, and an orange border from the pre-restyle accent. Sitting inside a
+   flat dark page, it read as a leftover.
+
+   It also had no radius scale. Six different corner radii stacked inside one
+   card — 14px panel, 14px result bubble, 12px stat boxes, 7px zone box, 5px
+   zone items, 999px chips — which is most of the "inconsistent borders" feel.
+   The sheet as a whole used 16 distinct radius values.
+
+   Scale from here on: 12px surfaces / 8px inner boxes / 4px micro / pill.
+   ------------------------------------------------------------------------- */
+:root {
+  --wpz-r-surface: 12px;  /* modal panel, cards, rows        */
+  --wpz-r-box:     8px;   /* stat boxes, bubbles, zone box   */
+  --wpz-r-micro:   4px;   /* zone items, tiny readouts       */
+  --wpz-r-pill:    999px; /* chips and signal pills          */
+}
+
+/* the panel itself */
+html body .player-pop__panel {
+  background: var(--wpz-bg-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--wpz-border-container) !important;
+  border-radius: var(--wpz-r-surface) !important;
+  box-shadow: 0 18px 48px -20px rgba(0,0,0,.85) !important;
+}
+html body .player-pop__backdrop { background: rgba(4,7,11,.78) !important; }
+
+/* one radius per role, everywhere the card can reach */
+html body .player-pop__panel .rating-box,
+html body .player-pop__panel .letter-box,
+html body .player-pop__panel .player-rpg,
+html body .player-pop__panel .zone-fit-box,
+html body .player-pop__result-bubble,
+html body .rating-box, html body .letter-box,
+html body .player-rpg, html body .zone-fit-box {
+  border-radius: var(--wpz-r-box) !important;
+}
+html body .zone-fit-item { border-radius: var(--wpz-r-micro) !important; }
+html body .chip, html body .signal-pill { border-radius: var(--wpz-r-pill) !important; }
+
+/* top-level surfaces line up on the same step */
+html body .straight-of-day-card, html body .top-five-card,
+html body .best-bets-card, html body .game-pick-card,
+html body .pick-row, html body .game-header {
+  border-radius: var(--wpz-r-surface) !important;
+}
+
+/* one border colour per depth: containers get the container hairline,
+   anything nested inside them gets the finer one */
+html body .player-pop__panel .rating-box,
+html body .player-pop__panel .letter-box,
+html body .player-pop__panel .player-rpg,
+html body .player-pop__panel .zone-fit-box,
+html body .player-pop__panel .chip,
+html body .player-pop__panel .signal-pill {
+  border: 1px solid var(--wpz-border-hair) !important;
+}
+
+/* result bubble — settled outcomes are the one place green/red is allowed,
+   so wins and losses keep their meaning and everything else goes quiet */
+html body .player-pop__result-bubble {
+  background: var(--wpz-bg-sunken) !important;
+  background-image: none !important;
+  border: 1px solid var(--wpz-border-hair) !important;
+  border-radius: var(--wpz-r-box) !important;
+  color: var(--wpz-color-text) !important;
+}
+html body .player-pop__result-bubble.is-win {
+  background: rgba(63,191,135,.12) !important;
+  border-color: rgba(63,191,135,.55) !important;
+  color: var(--wpz-hit) !important;
+}
+html body .player-pop__result-bubble.is-loss {
+  background: rgba(224,98,92,.11) !important;
+  border-color: rgba(224,98,92,.45) !important;
+  color: var(--wpz-miss) !important;
+}
+html body .player-pop__result-bubble.is-void,
+html body .player-pop__result-bubble.is-pending,
+html body .player-pop__result-bubble.is-loading,
+html body .player-pop__result-bubble.is-na,
+html body .player-pop__result-bubble.is-error {
+  background: var(--wpz-bg-sunken) !important;
+  border-color: var(--wpz-border-hair) !important;
+  color: var(--wpz-color-muted) !important;
+}
+html body .player-pop__result-label { color: var(--wpz-color-muted) !important; }
+
+/* card type */
+html body .player-pop__title { color: var(--wpz-color-heading) !important; }
+html body .player-pop__meta,
+html body .player-pop__match { color: var(--wpz-color-paragraph) !important; }
+html body .player-pop__note  { color: var(--wpz-color-paragraph) !important; }
+html body .player-pop__fav   { color: var(--wpz-heat-hot) !important; }
+
 /* === WPZ-NIGHT-HEAT END === */
 </style>
 </head>

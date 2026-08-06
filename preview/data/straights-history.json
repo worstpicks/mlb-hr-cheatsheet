@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-05T13:23:02Z",
+  "updated": "2026-08-06T12:29:27Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -896,11 +896,26 @@
       "o05": {
         "player": "Daylen Lile",
         "matchup": "WSH @ PHI",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Coby Mayo",
         "matchup": "LAA @ BAL",
+        "result": "loss",
+        "hr": 1
+      }
+    },
+    {
+      "date": "2026-08-06",
+      "o05": {
+        "player": "Derek Hill",
+        "matchup": "WSH @ PHI",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Wilyer Abreu",
+        "matchup": "CWS @ BOS",
         "result": "pending"
       }
     }

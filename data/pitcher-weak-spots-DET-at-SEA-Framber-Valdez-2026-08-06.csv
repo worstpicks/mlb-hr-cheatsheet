@@ -1,0 +1,30 @@
+Matchup,DET @ SEA
+Pitcher,Framber Valdez
+Pitcher Team,DET
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.40,="17-62",.274,.403,0.129,1,3,1,4,20.6,4,.338,.741
+Batting Second,14.1,1.74,="16-56",.286,.518,0.232,4,1,0,9,18.2,9,.394,.912
+Batting Third,13.0,2.00,="18-53",.340,.509,0.169,2,3,0,7,15.4,8,.446,.955
+Batting Fourth,13.0,1.69,="16-54",.296,.389,0.093,0,5,0,5,12.7,6,.381,.770
+Batting Fifth,15.0,1.00,="13-57",.228,.386,0.158,3,0,0,12,23.3,2,.250,.636
+Batting Sixth,12.1,1.38,="14-52",.269,.385,0.116,1,3,0,5,17.5,3,.333,.718
+Batting Seventh,11.1,1.68,="12-47",.255,.362,0.107,1,2,0,5,16.7,7,.352,.714
+Batting Eighth,14.2,0.61,="7-49",.143,.163,0.020,0,1,0,6,21.2,2,.192,.355
+Batting Ninth,11.2,1.11,="11-45",.244,.311,0.067,0,1,1,4,20.8,2,.292,.603
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="63-257",.245,.346,0.101,5,11,0,21,21.3,43,.357,.703
+Brendan Donovan LHB,Batting First ​,="20-70",.286,.500,0.214,3,4,1,8,12.9,9,.400,.900
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Second ​,="49-199",.246,.397,0.151,7,9,0,22,17.7,16,.305,.702
+Dominic Canzone LHB,Batting Third ​,="21-99",.212,.374,0.162,4,4,0,13,20.0,11,.291,.665
+Josh Naylor LHB,Batting Fourth ​,="51-186",.274,.382,0.108,5,5,0,21,15.0,18,.343,.725
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Jhonny Pereda RHB,Batting Eighth ​,="12-47",.255,.319,0.064,1,0,0,3,18.0,3,.300,.619
+Weston Wilson RHB,Batting Eighth ​,="12-48",.250,.396,0.146,2,1,0,4,28.3,5,.321,.717
+Victor Robles RHB,Batting Eighth ​,="9-45",.200,.244,0.044,0,2,0,2,20.0,3,.265,.509
+Cole Young LHB,Batting Eighth ​,="24-95",.253,.358,0.105,2,4,0,13,22.3,5,.301,.659
+Leo Rivas SHB,Batting Ninth ​,="11-86",.128,.174,0.046,0,2,1,7,29.2,14,.269,.443
+Colt Emerson LHB,Batting Ninth ​,="30-150",.200,.387,0.187,7,5,1,14,30.1,12,.261,.648

@@ -1,0 +1,31 @@
+Matchup,CWS @ BOS
+Pitcher,Luis Castillo
+Pitcher Team,CWS
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.1,1.30,="10-46",.217,.435,0.218,3,1,0,8,10.9,6,.315,.750
+Batting Second,11.2,1.54,="12-47",.255,.532,0.277,3,4,0,8,20.4,6,.333,.865
+Batting Third,13.2,0.88,="10-51",.196,.373,0.177,2,1,1,4,22.2,2,.241,.614
+Batting Fourth,11.0,1.45,="14-47",.298,.596,0.298,4,2,0,10,24.0,2,.340,.936
+Batting Fifth,12.2,0.87,="8-45",.178,.222,0.044,0,0,1,4,16.7,3,.229,.451
+Batting Sixth,9.2,1.97,="16-45",.356,.689,0.333,3,6,0,10,14.6,3,.396,1.085
+Batting Seventh,9.0,2.00,="17-43",.395,.465,0.070,0,3,0,8,21.3,1,.413,.878
+Batting Eighth,11.1,0.97,="6-38",.158,.263,0.105,1,1,0,3,34.8,5,.267,.530
+Batting Ninth,7.1,2.45,="14-35",.400,.514,0.114,0,4,0,4,9.8,4,.462,.976
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Anthony Seigler SHB,Batting First ​,="16-84",.190,.321,0.131,2,5,0,6,20.2,7,.258,.579
+Jarren Duran LHB,Batting First ​,="39-184",.212,.402,0.190,9,4,2,25,29.5,12,.265,.667
+Ceddanne Rafaela RHB,Batting Second ​,="76-269",.283,.476,0.193,10,20,1,36,18.4,9,.311,.787
+Jahmai Jones RHB,Batting Third ​,="7-32",.219,.375,0.156,1,2,0,3,34.3,3,.286,.661
+Adley Rutschman SHB,Batting Third ​,="43-172",.250,.465,0.215,8,11,1,39,15.2,19,.320,.785
+Wilyer Abreu LHB,Batting Third ​,="74-312",.237,.455,0.218,16,16,2,42,21.6,31,.306,.761
+Willson Contreras RHB,Batting Fourth ​,="81-278",.291,.543,0.252,17,15,2,55,25.5,31,.388,.931
+Masataka Yoshida LHB,Batting Fifth ​,="29-112",.259,.438,0.179,4,6,1,13,11.5,8,.311,.749
+Eli White RHB,Batting Sixth ​,="10-40",.250,.500,0.250,2,2,1,5,20.5,4,.318,.818
+Nick Sogard SHB,Batting Sixth ​,="5-21",.238,.333,0.095,0,0,1,1,15.4,5,.385,.718
+Caleb Durbin RHB,Batting Sixth ​,="34-145",.234,.400,0.166,5,7,1,22,15.7,14,.317,.717
+Andruw Monasterio RHB,Batting Eighth ​,="18-61",.295,.410,0.115,1,4,0,6,22.4,4,.328,.738
+Connor Wong RHB,Batting Eighth ​,="18-81",.222,.321,0.099,1,5,0,14,25.8,10,.326,.647
+Jake Rogers RHB,Batting Ninth ​,="12-81",.148,.235,0.087,1,2,1,5,27.4,10,.245,.480

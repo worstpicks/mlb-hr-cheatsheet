@@ -3285,7 +3285,7 @@
   --wpz-color-text:       #DCE3EB;
   --wpz-color-text-soft:  #DCE3EB;
   --wpz-color-paragraph:  #9DAEBF;
-  --wpz-color-muted:      #6B7C8E;
+  --wpz-color-muted:      #7E8D9D;
 
   /* Rule 1 — the ramp, mapped onto the published score bands */
   --wpz-heat-hot:         #FFB020;  /* 90+   elite     */
@@ -3536,6 +3536,59 @@ html body .games-section .games-grid .game-card .pick-list .pick-row.pick-row--w
   border: 1px solid rgba(90,140,196,.32) !important;
 }
 
+
+/* ---- 8. readability repairs ----------------------------------------------
+   The original sheet paired near-black text with bright gradient fills
+   (grade chips, footer CTA, card rank). Those fills are gone, so the text
+   has to come back up off the dark ground. Verified >= 4.5:1 throughout. */
+
+/* grade chips: muted label, heat-coloured letter, heat-tinted edge */
+html body .letter-box,
+html body .letter-box.s-plus, html body .letter-box.s, html body .letter-box.a,
+html body .letter-box.b-plus, html body .letter-box.b,
+html body .letter-box.c-plus, html body .letter-box.c,
+html body .letter-box.d, html body .letter-box.f {
+  background: var(--wpz-bg-sunken) !important;
+  background-image: none !important;
+  color: var(--wpz-color-muted) !important;
+}
+html body .letter-box.s-plus, html body .letter-box.s, html body .letter-box.a {
+  border: 1px solid rgba(255,176,32,.45) !important;
+}
+html body .letter-box.b-plus, html body .letter-box.b {
+  border: 1px solid rgba(201,138,46,.45) !important;
+}
+html body .letter-box.c-plus, html body .letter-box.c {
+  border: 1px solid rgba(139,152,166,.45) !important;
+}
+html body .letter-box.d, html body .letter-box.f {
+  border: 1px solid rgba(90,140,196,.45) !important;
+}
+
+/* rank badge on the game pick cards */
+html body .game-pick-card__rank {
+  background: var(--wpz-bg-sunken) !important;
+  background-image: none !important;
+  color: var(--wpz-color-muted) !important;
+  border: 1px solid var(--wpz-border-hair) !important;
+}
+
+/* footer call-to-action */
+html body .site-footer-cta {
+  background: var(--wpz-bg-container) !important;
+  background-image: none !important;
+  border-top: 1px solid var(--wpz-border-container) !important;
+}
+html body .site-footer-cta__title { color: var(--wpz-color-heading) !important; }
+html body .site-footer-cta__text  { color: var(--wpz-color-paragraph) !important; }
+html body .site-footer-cta__link  { color: var(--wpz-color-text) !important; }
+html body .site-footer-cta__btn:hover {
+  background: var(--wpz-ui-on) !important;
+  color: var(--wpz-ui-on-ink) !important;
+}
+
+/* faint hint text was only 3.95:1 */
+html body .parlay-leg .parlay-drag-hint { color: var(--wpz-color-paragraph) !important; }
 /* === WPZ-NIGHT-HEAT END === */
 </style>
 </head>

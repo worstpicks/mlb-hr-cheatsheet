@@ -5263,6 +5263,9 @@
         if (min === max) return "rs-cell-heat rs-cell-heat--mid";
         const t = (val - min) / (max - min);
         const score = higherBetter ? t : 1 - t;
+        // Top step keeps --good alongside --elite so presetHeatTier() and the
+        // mobile card pass, which both match on "--good", still see it.
+        if (score >= 0.85) return "rs-cell-heat rs-cell-heat--good rs-cell-heat--elite";
         if (score >= 0.66) return "rs-cell-heat rs-cell-heat--good";
         if (score >= 0.33) return "rs-cell-heat rs-cell-heat--mid";
         return "rs-cell-heat rs-cell-heat--bad";

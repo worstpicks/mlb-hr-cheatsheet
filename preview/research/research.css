@@ -4965,10 +4965,14 @@ html.theme-light .rs-ptabs {
   --rs-border-strong:     rgba(255,255,255,.17);
   --rs-muted:             #7E8D9D;
 
-  /* Rule 1 — the research good/mid/bad scale IS the heat ramp */
-  --rs-good-bg:           rgba(255,176,32,.18);
-  --rs-mid-bg:            rgba(139,152,166,.16);
-  --rs-bad-bg:            rgba(90,140,196,.18);
+  /* The stat table is a DIVERGING scale and stays that way. A single-hue ramp
+     works for the cheat sheet, where one score is being ranked, but here every
+     column has a good and a bad direction — red/yellow/green is read instantly
+     and carries that direction. Original values, kept deliberately. */
+  --rs-bad-bg:            rgba(244, 63, 94, 0.32);   /* low            */
+  --rs-mid-bg:            rgba(234, 179, 8, 0.32);   /* borderline     */
+  --rs-good-bg:           rgba(34, 197, 94, 0.38);   /* good           */
+  --rs-elite-bg:          rgba(74, 222, 128, 0.45);  /* really good    */
 
   /* stat-group tints drop to near-neutral so they stop competing with data */
   --rs-group-power:       rgba(255,176,32,.07);
@@ -5071,4 +5075,14 @@ html body .rs-file-block__card {
   background-image: none !important;
   border: 1px solid var(--wpz-border-container) !important;
 }
+
+/* Top step of the scale. Carries --good too, so the mobile card pass and the
+   Goblin preset tiers keep matching it; !important because that mobile pass
+   assigns --rs-good-bg inline. */
+.rs-cell-heat--elite {
+  background: var(--rs-elite-bg) !important;
+  box-shadow: inset 0 0 0 1px rgba(134, 239, 172, 0.55) !important;
+  color: #ecfccb !important;
+}
+html.theme-light .rs-cell-heat--elite { color: #14532d !important; }
 /* === WPZ-NIGHT-HEAT END === */

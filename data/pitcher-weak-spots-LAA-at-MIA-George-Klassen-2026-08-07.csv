@@ -1,0 +1,26 @@
+Matchup,LAA @ MIA
+Pitcher,George Klassen
+Pitcher Team,LAA
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,0,50.0,0,.250,.750
+Batting Second,0.1,9.00,="1-2",.500,2.000,1.500,1,0,0,1,0.0,2,.750,2.750
+Batting Third,1.0,1.00,="1-4",.250,.250,0.000,0,0,0,0,50.0,0,.250,.500
+Batting Fourth,0.1,6.00,="1-3",.333,.333,0.000,0,0,0,1,0.0,1,.500,.833
+Batting Fifth,0.0,-.--,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,3,1.000,2.000
+Batting Sixth,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,3,50.0,0,.250,.750
+Batting Seventh,0.1,9.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,3,.750,.750
+Batting Eighth,0.1,3.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,1,.500,.500
+Batting Ninth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,2,0.0,0,.500,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kyle Stowers LHB,Batting First ​,="2-7",.286,.286,0.000,0,0,0,0,33.3,2,.444,.730
+Otto Lopez RHB,Batting Second ​,="50-127",.394,.591,0.197,2,11,4,12,8.6,11,.439,1.030
+Griffin Conine LHB,Batting Third ​,="4-5",.800,1.000,0.200,0,1,0,2,0.0,1,.833,1.833
+Xavier Edwards SHB,Batting Fourth ​,="46-166",.277,.343,0.066,1,6,1,21,12.5,29,.375,.718
+Owen Caissie LHB,Batting Fifth ​,="2-12",.167,.417,0.250,1,0,0,3,58.3,0,.167,.584
+Leo Jimenez RHB,Batting Sixth ​,="5-29",.172,.345,0.173,1,2,0,3,25.0,3,.250,.595
+Jakob Marsee LHB,Batting Seventh ​,="17-91",.187,.319,0.132,3,3,0,7,23.1,10,.282,.601
+Joe Mack LHB,Batting Eighth ​,="22-98",.224,.418,0.194,5,4,0,16,17.6,8,.290,.708
+Esteury Ruiz RHB,Batting Ninth ​,="8-38",.211,.368,0.157,1,3,0,1,30.2,3,.286,.654

@@ -1,0 +1,30 @@
+Matchup,DET @ SF
+Pitcher,Adrian Houser
+Pitcher Team,SF
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.2,2.54,="14-41",.341,.854,0.513,6,3,0,11,7.8,8,.451,1.305
+Batting Second,10.2,1.59,="12-43",.279,.535,0.256,3,2,0,8,16.3,5,.354,.889
+Batting Third,9.1,2.14,="14-42",.333,.548,0.215,1,6,0,7,14.6,6,.417,.965
+Batting Fourth,11.0,1.18,="11-41",.268,.439,0.171,2,1,0,10,10.9,2,.304,.743
+Batting Fifth,11.2,0.77,="5-38",.132,.237,0.105,1,1,0,4,11.1,4,.222,.459
+Batting Sixth,10.2,0.84,="8-40",.200,.225,0.025,0,1,0,1,9.8,1,.220,.445
+Batting Seventh,8.2,1.62,="12-38",.316,.526,0.210,0,6,1,2,26.2,2,.366,.892
+Batting Eighth,10.2,1.03,="10-39",.256,.333,0.077,1,0,0,2,12.5,1,.275,.608
+Batting Ninth,10.1,1.06,="10-39",.256,.462,0.206,1,3,1,4,30.0,1,.275,.737
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="79-254",.311,.504,0.193,11,14,1,28,13.3,44,.413,.917
+Gleyber Torres RHB,Batting Second ​,="37-123",.301,.439,0.138,5,2,0,18,18.2,27,.429,.868
+Dillon Dingler RHB,Batting Second ​,="37-126",.294,.476,0.182,5,8,0,15,24.1,5,.336,.812
+Colt Keith LHB,Batting Third ​,="33-119",.277,.361,0.084,0,8,1,7,21.4,6,.310,.671
+Riley Greene LHB,Batting Fourth ​,="73-271",.269,.469,0.200,12,16,1,40,28.7,31,.345,.814
+Spencer Torkelson RHB,Batting Fifth ​,="30-137",.219,.431,0.212,7,8,0,21,31.0,14,.299,.730
+Eduardo Valencia RHB,Batting Sixth ​,="5-18",.278,.611,0.333,2,0,0,3,26.3,0,.316,.927
+Zach McKinstry LHB,Batting Seventh ​,="20-94",.213,.319,0.106,2,4,0,11,15.8,6,.260,.579
+Max Clark LHB,Batting Seventh ​,="8-24",.333,.542,0.209,1,2,0,4,31.0,4,.448,.990
+Ben Malgeri RHB,Batting Eighth ​,="6-21",.286,.381,0.095,0,2,0,3,7.7,5,.423,.804
+Hao-Yu Lee RHB,Batting Eighth ​,="16-64",.250,.438,0.188,2,4,1,8,27.9,3,.284,.722
+Javier Baez RHB,Batting Ninth ​,="20-68",.294,.426,0.132,2,3,0,8,23.6,2,.319,.745
+James Outman LHB,Batting Ninth ​,="18-94",.191,.351,0.160,3,4,1,10,40.6,2,.208,.559

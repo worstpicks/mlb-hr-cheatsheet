@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-06T12:29:27Z",
+  "updated": "2026-08-07T20:06:59Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -911,11 +911,25 @@
       "o05": {
         "player": "Derek Hill",
         "matchup": "WSH @ PHI",
-        "result": "pending"
+        "result": "void"
       },
       "o15": {
         "player": "Wilyer Abreu",
         "matchup": "CWS @ BOS",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-07",
+      "o05": {
+        "player": "Willson Contreras",
+        "matchup": "ATH @ BOS",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Alec Burleson",
+        "matchup": "COL @ STL",
         "result": "pending"
       }
     }

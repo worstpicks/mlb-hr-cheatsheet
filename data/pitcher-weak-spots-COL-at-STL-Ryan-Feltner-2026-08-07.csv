@@ -1,0 +1,26 @@
+Matchup,COL @ STL
+Pitcher,Ryan Feltner
+Pitcher Team,COL
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.0,1.67,="10-38",.263,.526,0.263,2,4,0,4,13.6,5,.364,.890
+Batting Second,11.0,1.09,="10-42",.238,.405,0.167,2,1,0,7,20.5,2,.273,.678
+Batting Third,9.1,1.50,="9-36",.250,.556,0.306,3,2,0,5,24.4,5,.341,.897
+Batting Fourth,8.1,1.92,="12-36",.333,.722,0.389,3,3,1,7,10.0,4,.400,1.122
+Batting Fifth,8.0,1.88,="12-35",.343,.600,0.257,2,1,1,8,23.7,3,.395,.995
+Batting Sixth,8.1,1.20,="8-32",.250,.563,0.313,2,4,0,5,14.7,2,.294,.857
+Batting Seventh,7.0,1.57,="9-28",.321,.571,0.250,2,1,0,6,9.4,2,.344,.915
+Batting Eighth,7.2,1.04,="6-29",.207,.345,0.138,1,1,0,3,19.4,2,.258,.603
+Batting Ninth,7.0,1.57,="6-25",.240,.360,0.120,0,3,0,0,16.7,5,.367,.727
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="105-421",.249,.390,0.141,16,11,0,43,15.3,54,.352,.742
+Jordan Walker RHB,Batting Second ​,="13-51",.255,.294,0.039,0,2,0,5,26.4,2,.283,.577
+Alec Burleson LHB,Batting Third ​,="101-343",.294,.516,0.222,17,23,1,55,15.7,34,.364,.880
+Ivan Herrera RHB,Batting Fourth ​,="4-30",.133,.200,0.067,0,2,0,2,18.2,2,.212,.412
+Jimmy Crooks LHB,Batting Ninth ​,="9-44",.205,.432,0.227,3,1,0,5,41.3,2,.239,.671
+Masyn Winn RHB,Batting Sixth ​,="73-291",.251,.340,0.089,4,10,2,39,20.4,32,.333,.673
+Nathan Church LHB,Batting Seventh ​,="43-175",.246,.383,0.137,6,6,0,23,14.5,8,.280,.663
+Bryan Torres LHB,Batting Eighth ​,="0-4",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+César Prieto LHB,Batting Ninth ​,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000

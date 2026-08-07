@@ -40,6 +40,8 @@ TITLE_WEATHER_KEY_ALIASES = {
     "PIT @ WSH": "PIT @ WAS",
     "HOU @ WSH": "HOU @ WAS",
     "ARI @ WSH": "ARI @ WAS",
+    "CIN @ WSH": "CIN @ WAS",
+    "CIN @ WAS": "CIN @ WAS",
     "HOU @ CWS": "HOU @ CHW",
     "ATH @ CWS": "ATH @ CHW",
     "DET @ CWS": "DET @ CHW",

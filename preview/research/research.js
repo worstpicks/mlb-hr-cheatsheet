@@ -1329,6 +1329,8 @@
         "ARI @ WSH": "ARI @ WAS",
         "PIT @ WSH": "PIT @ WAS",
         "HOU @ WSH": "HOU @ WAS",
+        "CIN @ WSH": "CIN @ WAS",
+        "CIN @ WAS": "CIN @ WAS",
         "CLE @ CWS": "CLE @ CHW",
         "HOU @ CWS": "HOU @ CHW",
         "KC @ CWS": "KC @ CHW",

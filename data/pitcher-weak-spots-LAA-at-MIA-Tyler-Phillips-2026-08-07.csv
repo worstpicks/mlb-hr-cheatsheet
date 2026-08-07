@@ -1,0 +1,26 @@
+Matchup,LAA @ MIA
+Pitcher,Tyler Phillips
+Pitcher Team,MIA
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.1,1.71,="14-41",.341,.610,0.269,3,2,0,5,25.0,2,.386,.996
+Batting Second,11.0,1.73,="12-42",.286,.429,0.143,1,3,0,4,20.4,7,.388,.817
+Batting Third,11.2,1.20,="7-42",.167,.262,0.095,1,1,0,3,16.3,7,.286,.548
+Batting Fourth,9.2,1.55,="12-39",.308,.385,0.077,1,0,0,6,21.4,3,.357,.742
+Batting Fifth,8.2,1.62,="9-35",.257,.429,0.172,0,2,2,4,17.5,5,.350,.779
+Batting Sixth,11.0,1.00,="9-42",.214,.357,0.143,2,0,0,5,15.9,2,.250,.607
+Batting Seventh,9.1,1.50,="8-33",.242,.455,0.213,2,1,0,3,14.6,6,.375,.830
+Batting Eighth,9.2,0.83,="6-34",.176,.324,0.148,1,2,0,6,10.5,2,.243,.567
+Batting Ninth,8.1,1.20,="6-32",.188,.219,0.031,0,1,0,0,11.1,4,.278,.497
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Wade Meckler LHB,Batting First ​,="2-5",.400,.400,0.000,0,0,0,0,0.0,0,.400,.800
+Mike Trout RHB,Batting Second ​,="83-347",.239,.441,0.202,18,16,0,40,25.6,77,.384,.825
+Nolan Schanuel LHB,Batting Third ​,="62-223",.278,.399,0.121,4,15,0,23,15.0,19,.332,.731
+Zach Neto RHB,Batting Fourth ​,="2-5",.400,1.000,0.600,1,0,0,3,20.0,0,.400,1.400
+Vaughn Grissom RHB,Batting Fifth ​,="23-74",.311,.473,0.162,3,3,0,9,19.5,5,.370,.843
+Moisés Ballesteros LHB,Batting Sixth ​,="14-41",.341,.659,0.318,4,1,0,11,15.9,2,.364,1.023
+Oswald Peraza RHB,Batting Seventh ​,="15-73",.205,.356,0.151,3,2,0,7,31.6,4,.266,.622
+Josh Lowe LHB,Batting Eighth ​,="8-32",.250,.406,0.156,1,2,0,6,25.0,4,.333,.739
+Tyler Heineman SHB,Batting Ninth ​,="15-96",.156,.219,0.063,1,1,1,5,18.3,5,.214,.433

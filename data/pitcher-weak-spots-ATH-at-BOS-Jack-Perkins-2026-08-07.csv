@@ -1,0 +1,26 @@
+Matchup,ATH @ BOS
+Pitcher,Jack Perkins
+Pitcher Team,ATH
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.92,="8-33",.242,.394,0.152,1,2,0,1,22.7,8,.432,.826
+Batting Second,8.0,1.88,="12-36",.333,.556,0.223,2,2,0,4,20.0,3,.400,.956
+Batting Third,6.2,2.70,="14-36",.389,.583,0.194,1,2,1,5,17.5,4,.450,1.033
+Batting Fourth,6.1,2.05,="9-25",.360,.640,0.280,2,1,0,9,25.8,4,.419,1.059
+Batting Fifth,8.0,1.13,="8-32",.250,.438,0.188,2,0,0,11,35.3,1,.265,.703
+Batting Sixth,8.1,1.08,="5-30",.167,.333,0.166,1,0,1,4,32.4,4,.324,.657
+Batting Seventh,8.1,1.08,="9-34",.265,.529,0.264,3,0,0,9,35.3,0,.265,.794
+Batting Eighth,10.0,0.70,="4-33",.121,.364,0.243,2,2,0,4,27.0,3,.216,.580
+Batting Ninth,9.2,0.72,="6-34",.176,.206,0.030,0,1,0,0,28.6,1,.200,.406
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nick Sogard SHB,Batting First ​,="4-20",.200,.250,0.050,0,1,0,0,22.2,6,.385,.635
+Ceddanne Rafaela RHB,Batting Second ​,="78-276",.283,.471,0.188,10,20,1,36,18.7,9,.310,.781
+Wilyer Abreu LHB,Batting Third ​,="75-317",.237,.451,0.214,16,16,2,44,21.7,32,.305,.756
+Caleb Durbin RHB,Batting Fourth ​,="8-17",.471,.529,0.058,0,1,0,2,15.0,2,.550,1.079
+Masataka Yoshida LHB,Batting Fifth ​,="31-116",.267,.448,0.181,4,7,1,14,11.8,9,.323,.771
+Andruw Monasterio RHB,Batting Sixth ​,="13-42",.310,.571,0.261,1,6,1,7,20.0,2,.341,.912
+Jarren Duran LHB,Batting Seventh ​,="19-85",.224,.341,0.117,2,2,1,16,27.6,7,.278,.619
+Anthony Seigler SHB,Batting Eighth ​,="3-7",.429,.714,0.285,0,2,0,3,10.0,2,.500,1.214
+Jake Rogers RHB,Batting Ninth ​,="12-81",.148,.235,0.087,1,2,1,6,26.8,11,.250,.485

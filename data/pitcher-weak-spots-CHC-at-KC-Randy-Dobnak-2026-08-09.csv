@@ -1,0 +1,30 @@
+Matchup,CHC @ KC
+Pitcher,Randy Dobnak
+Pitcher Team,KC
+Opposing Team,CHC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.0,1.00,="1-12",.083,.333,0.250,1,0,0,1,0.0,3,.267,.600
+Batting Second,4.1,0.69,="2-14",.143,.143,0.000,0,0,0,0,13.3,1,.200,.343
+Batting Third,3.2,1.09,="3-14",.214,.214,0.000,0,0,0,0,13.3,1,.267,.481
+Batting Fourth,3.1,0.90,="1-11",.091,.091,0.000,0,0,0,0,7.7,2,.231,.322
+Batting Fifth,2.0,4.00,="7-13",.538,.615,0.077,0,1,0,0,7.1,1,.571,1.186
+Batting Sixth,3.1,1.20,="3-13",.231,.538,0.307,1,1,0,2,7.1,1,.286,.824
+Batting Seventh,3.2,0.82,="1-11",.091,.182,0.091,0,1,0,1,21.4,2,.214,.396
+Batting Eighth,3.2,0.82,="3-14",.214,.214,0.000,0,0,0,0,14.3,0,.214,.428
+Batting Ninth,2.2,1.88,="3-11",.273,.455,0.182,0,2,0,0,23.1,2,.385,.840
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nico Hoerner RHB,Batting First ​,="51-196",.260,.383,0.123,4,12,0,28,6.3,23,.341,.724
+Pete Crow-Armstrong LHB,Batting First ​,="80-243",.329,.675,0.346,19,17,5,47,27.9,46,.443,1.118
+Alex Bregman RHB,Batting Third ​,="48-175",.274,.440,0.166,6,11,0,24,15.7,19,.350,.790
+Michael Busch LHB,Batting Third ​,="44-187",.235,.380,0.145,8,3,0,28,23.1,28,.344,.724
+Ian Happ SHB,Batting Fifth ​,="38-166",.229,.464,0.235,8,13,1,23,28.1,17,.308,.772
+Seiya Suzuki RHB,Batting Fifth ​,="26-104",.250,.452,0.202,5,6,0,16,26.9,13,.336,.788
+Carson Kelly RHB,Batting Seventh ​,="19-77",.247,.338,0.091,1,4,0,15,20.5,10,.341,.679
+Michael Conforto LHB,Batting Seventh ​,="14-63",.222,.429,0.207,4,1,0,8,31.9,6,.290,.719
+Pedro Ramirez SHB,Batting Seventh ​,="13-44",.295,.455,0.160,1,4,0,7,30.0,5,.367,.822
+Dansby Swanson RHB,Batting Ninth ​,="41-209",.196,.392,0.196,10,7,2,41,22.9,23,.277,.669
+Tyrone Taylor RHB,Batting Ninth ​,="9-37",.243,.297,0.054,0,2,0,2,9.8,2,.300,.597
+Miguel Amaya RHB,Batting Ninth ​,="24-74",.324,.514,0.190,3,5,0,14,22.1,9,.419,.933
+James Triantos RHB,Batting Ninth ​,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000

@@ -1,0 +1,30 @@
+Matchup,DET @ SF
+Pitcher,Troy Melton
+Pitcher Team,DET
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.0,1.63,="9-33",.273,.485,0.212,2,1,0,2,18.4,4,.368,.853
+Batting Second,11.0,0.55,="5-36",.139,.250,0.111,1,1,0,1,21.6,1,.162,.412
+Batting Third,8.0,1.38,="4-28",.143,.286,0.143,1,1,0,2,11.4,7,.314,.600
+Batting Fourth,9.1,0.86,="4-31",.129,.258,0.129,1,1,0,2,22.9,4,.229,.487
+Batting Fifth,8.1,0.60,="4-29",.138,.207,0.069,0,2,0,2,25.0,1,.188,.395
+Batting Sixth,7.2,0.91,="5-27",.185,.333,0.148,1,1,0,2,27.6,2,.241,.574
+Batting Seventh,5.2,1.76,="7-24",.292,.500,0.208,1,2,0,1,14.8,3,.370,.870
+Batting Eighth,7.0,0.71,="4-25",.160,.280,0.120,1,0,0,1,34.6,1,.192,.472
+Batting Ninth,8.1,0.24,="2-26",.077,.115,0.038,0,1,0,0,30.8,0,.077,.192
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nate Furman LHB,Batting First ​,="0-4",.000,.000,0.000,0,0,0,0,20.0,1,.200,.200
+Bryce Eldridge LHB,Batting Second ​,="16-80",.200,.400,0.200,5,1,0,9,28.6,11,.297,.697
+Rafael Devers LHB,Batting Fourth ​,="87-328",.265,.524,0.259,21,20,1,55,24.4,34,.334,.858
+Jung Hoo Lee LHB,Batting Fifth ​,="46-154",.299,.422,0.123,2,11,1,14,8.0,6,.331,.753
+Willy Adames RHB,Batting Sixth ​,="33-143",.231,.315,0.084,2,6,0,10,24.8,9,.281,.596
+Buddy Kennedy RHB,Batting Sixth ​,="0-9",.000,.000,0.000,0,0,0,0,60.0,1,.100,.100
+Eddys Leonard RHB,Batting Seventh ​,="1-5",.200,.200,0.000,0,0,0,0,40.0,0,.200,.400
+Grant McCray LHB,Batting Eighth ​,="2-18",.111,.278,0.167,1,0,0,2,20.0,5,.304,.582
+Drew Gilbert LHB,Batting Eighth ​,="29-138",.210,.283,0.073,2,4,0,14,15.2,18,.325,.608
+Daniel Susac RHB,Batting Eighth ​,="16-51",.314,.412,0.098,0,3,1,5,22.4,4,.386,.798
+Osleivis Basabe RHB,Batting Ninth ​,="3-7",.429,1.429,1.000,2,1,0,5,12.5,0,.500,1.929
+Christian Koss RHB,Batting Ninth ​,="7-40",.175,.175,0.000,0,0,0,1,19.5,1,.195,.370
+Drew Cavanaugh LHB,Batting Ninth ​,="7-35",.200,.229,0.029,0,1,0,0,30.2,6,.317,.546

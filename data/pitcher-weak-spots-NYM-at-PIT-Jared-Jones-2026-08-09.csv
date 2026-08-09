@@ -1,0 +1,30 @@
+Matchup,NYM @ PIT
+Pitcher,Jared Jones
+Pitcher Team,PIT
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.2,0.81,="7-32",.219,.531,0.312,2,2,1,4,37.5,0,.219,.750
+Batting Second,6.1,1.74,="8-28",.286,.536,0.250,2,1,0,4,19.4,3,.355,.891
+Batting Third,7.1,1.09,="7-28",.250,.536,0.286,2,2,0,4,41.4,1,.276,.812
+Batting Fourth,6.0,0.83,="4-23",.174,.174,0.000,0,0,0,0,29.2,1,.208,.382
+Batting Fifth,6.1,0.95,="5-23",.217,.435,0.218,1,2,0,4,33.3,1,.250,.685
+Batting Sixth,6.2,0.60,="2-22",.091,.227,0.136,1,0,0,2,29.2,2,.167,.394
+Batting Seventh,5.2,1.06,="3-20",.150,.200,0.050,0,1,0,1,21.7,3,.261,.461
+Batting Eighth,5.0,1.20,="4-19",.211,.316,0.105,0,2,0,0,9.5,2,.286,.602
+Batting Ninth,4.0,2.25,="6-17",.353,.588,0.235,1,1,0,6,14.3,3,.450,1.038
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Francisco Lindor SHB,Batting First ​,="19-98",.194,.306,0.112,2,1,2,5,21.6,11,.288,.594
+Carson Benge LHB,Batting First ​,="59-210",.281,.429,0.148,7,6,2,23,21.6,13,.335,.764
+A.J. Ewing LHB,Batting First ​,="29-110",.264,.391,0.127,2,8,0,8,24.8,8,.314,.705
+Bo Bichette RHB,Batting Second ​,="57-226",.252,.385,0.133,7,7,1,31,18.7,16,.305,.690
+Jorge Polanco SHB,Batting Third ​,="5-26",.192,.346,0.154,1,1,0,1,23.1,0,.192,.538
+Luis Robert RHB,Batting Fourth ​,="12-43",.279,.349,0.070,0,3,0,2,14.6,5,.354,.703
+Jared Young LHB,Batting Fourth ​,="17-76",.224,.487,0.263,6,2,0,13,21.4,7,.298,.785
+Marcus Semien RHB,Batting Seventh ​,="26-124",.210,.339,0.129,3,7,0,13,21.2,11,.277,.616
+Gabriel Arias RHB,Batting Seventh ​,="13-57",.228,.246,0.018,0,1,0,3,40.0,3,.267,.513
+Brett Baty LHB,Batting Eighth ​,="21-96",.219,.365,0.146,3,5,0,9,22.9,7,.267,.632
+Luis Torrens RHB,Batting Ninth ​,="37-160",.231,.350,0.119,3,10,0,20,19.7,13,.305,.655
+Cristian Pache RHB,Batting Ninth ​,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Francisco Alvarez RHB,Batting Ninth ​,="27-84",.321,.631,0.310,7,5,0,13,23.8,15,.430,1.061

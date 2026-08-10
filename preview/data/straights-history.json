@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-09T04:35:54Z",
+  "updated": "2026-08-10T18:57:13Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -953,11 +953,26 @@
       "o05": {
         "player": "Josh Bell",
         "matchup": "MIN @ MIL",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Jazz Chisholm Jr.",
         "matchup": "ATL @ NYY",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "o05": {
+        "player": "Jake Burger",
+        "matchup": "TEX @ LAA",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Jackson Merrill",
+        "matchup": "MIL @ SD",
         "result": "pending"
       }
     }

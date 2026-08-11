@@ -1,0 +1,30 @@
+Matchup,TEX @ LAA
+Pitcher,Cody Bradford
+Pitcher Team,TEX
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Second,0.2,1.50,="1-3",.333,.333,0.000,0,0,0,0,0.0,0,.333,.666
+Batting Third,0.1,3.00,="0-1",.000,.000,0.000,0,0,0,0,50.0,1,.500,.500
+Batting Fourth,0.0,-.--,="2-2",1.000,1.000,0.000,0,0,0,0,0.0,0,1.000,2.000
+Batting Fifth,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Sixth,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Seventh,0.1,3.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,1,.500,.500
+Batting Eighth,0.1,3.00,="1-2",.500,1.000,0.500,0,1,0,0,0.0,0,.500,1.500
+Batting Ninth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,50.0,0,.500,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="96-434",.221,.408,0.187,18,21,3,45,32.0,46,.305,.713
+Mike Trout RHB,Batting Second ​,="85-359",.237,.448,0.211,20,16,0,42,25.7,82,.385,.833
+Vaughn Grissom RHB,Batting Third ​,="23-84",.274,.417,0.143,2,6,0,24,12.8,6,.319,.736
+Nolan Schanuel LHB,Batting Third ​,="65-237",.274,.401,0.127,5,15,0,26,14.3,23,.336,.737
+Wade Meckler LHB,Batting Fifth ​,="10-45",.222,.311,0.089,1,1,0,5,19.1,2,.255,.566
+Josh Lowe LHB,Batting Seventh ​,="18-92",.196,.348,0.152,4,2,0,8,30.7,6,.250,.598
+Oswald Peraza RHB,Batting Seventh ​,="17-80",.213,.350,0.137,3,2,0,7,31.4,4,.267,.617
+Denzer Guzman RHB,Batting Seventh ​,="9-42",.214,.286,0.072,1,0,0,6,21.7,3,.267,.553
+Moisés Ballesteros LHB,Batting Seventh ​,="10-56",.179,.196,0.017,0,1,0,4,23.4,8,.281,.477
+Travis d'Arnaud RHB,Batting Eighth ​,="6-31",.194,.323,0.129,1,1,0,3,19.4,3,.306,.629
+Jose Siri RHB,Batting Eighth ​,="12-47",.255,.468,0.213,2,4,0,7,28.8,3,.294,.762
+Tyler Heineman SHB,Batting Ninth ​,="17-102",.167,.225,0.058,1,1,1,5,17.2,5,.220,.445
+Adam Frazier LHB,Batting Ninth ​,="16-78",.205,.321,0.116,1,4,1,5,28.1,8,.287,.608

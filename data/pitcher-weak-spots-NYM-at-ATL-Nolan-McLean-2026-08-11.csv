@@ -1,0 +1,30 @@
+Matchup,NYM @ ATL
+Pitcher,Nolan McLean
+Pitcher Team,NYM
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.33,="15-62",.242,.387,0.145,2,3,0,8,30.0,5,.329,.716
+Batting Second,16.0,1.19,="10-54",.185,.296,0.111,1,3,0,5,30.3,9,.297,.593
+Batting Third,14.0,1.50,="14-56",.250,.464,0.214,3,3,0,4,16.7,7,.364,.828
+Batting Fourth,16.0,0.88,="10-58",.172,.293,0.121,2,1,0,9,39.1,4,.250,.543
+Batting Fifth,13.2,1.46,="17-56",.304,.500,0.196,2,5,0,11,23.0,3,.361,.861
+Batting Sixth,15.2,0.89,="8-52",.154,.212,0.058,0,3,0,1,27.6,6,.241,.453
+Batting Seventh,14.2,1.02,="11-52",.212,.346,0.134,2,1,0,9,29.3,4,.276,.622
+Batting Eighth,9.2,2.28,="14-44",.318,.432,0.114,1,2,0,3,16.7,8,.444,.876
+Batting Ninth,15.0,0.47,="5-48",.104,.188,0.084,1,1,0,3,45.1,2,.140,.328
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ronald Acuna Jr. RHB,Batting First ​,="52-211",.246,.403,0.157,7,10,1,22,22.0,36,.366,.769
+Ozzie Albies SHB,Batting Second ​,="27-146",.185,.356,0.171,6,7,0,15,23.4,9,.234,.590
+Drake Baldwin LHB,Batting Second ​,="56-196",.286,.485,0.199,11,6,0,33,22.6,18,.355,.840
+Matt Olson LHB,Batting Third ​,="97-374",.259,.532,0.273,27,21,0,59,24.6,43,.338,.870
+Lane Thomas RHB,Batting Fourth ​,="16-62",.258,.516,0.258,3,7,0,7,26.1,7,.333,.849
+Michael Harris II LHB,Batting Fourth ​,="32-122",.262,.393,0.131,2,8,1,14,17.3,3,.283,.676
+Mauricio Dubon RHB,Batting Fifth ​,="38-137",.277,.423,0.146,4,6,1,27,12.7,9,.320,.743
+Dominic Smith LHB,Batting Seventh ​,="25-78",.321,.462,0.141,3,2,0,17,12.8,3,.353,.815
+Austin Riley RHB,Batting Seventh ​,="26-108",.241,.463,0.222,6,6,0,18,33.3,13,.333,.796
+Mike Yastrzemski LHB,Batting Eighth ​,="19-102",.186,.294,0.108,3,2,0,10,21.4,12,.282,.576
+Sean Murphy RHB,Batting Eighth ​,="1-10",.100,.100,0.000,0,0,0,0,30.0,0,.100,.200
+Ha-Seong Kim RHB,Batting Eighth ​,="3-38",.079,.079,0.000,0,0,0,2,25.6,5,.186,.265
+Jim Jarvis LHB,Batting Ninth ​,="17-75",.227,.320,0.093,1,2,1,9,18.1,5,.284,.604

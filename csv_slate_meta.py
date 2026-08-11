@@ -26,7 +26,12 @@ def normalize_batter_name(raw: str) -> str:
 
 def name_lookup_key(name: str) -> str:
     """Canonical lookup key for prop-list ↔ CSV batter matching."""
+    import unicodedata
+
     key = normalize_batter_name(name).lower()
+    key = "".join(
+        ch for ch in unicodedata.normalize("NFD", key) if unicodedata.category(ch) != "Mn"
+    )
     key = key.replace(".", "")
     key = re.sub(r"\s+", " ", key).strip()
     return key

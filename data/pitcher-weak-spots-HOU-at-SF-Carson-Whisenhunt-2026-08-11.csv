@@ -1,0 +1,31 @@
+Matchup,HOU @ SF
+Pitcher,Carson Whisenhunt
+Pitcher Team,SF
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="2-10",.200,.400,0.200,0,2,0,0,28.6,.429,.829
+Batting Second,="4-11",.364,.455,0.091,0,1,0,0,28.6,.500,.955
+Batting Third,="2-10",.200,.200,0.000,0,0,0,2,7.7,.308,.508
+Batting Fourth,="6-10",.600,.900,0.300,1,0,0,2,8.3,.667,1.567
+Batting Fifth,="3-10",.300,.500,0.200,0,0,1,3,0.0,.417,.917
+Batting Sixth,="5-10",.500,.900,0.400,1,1,0,4,10.0,.500,1.400
+Batting Seventh,="1-10",.100,.400,0.300,1,0,0,2,30.0,.100,.500
+Batting Eighth,="0-9",.000,.000,0.000,0,0,0,0,30.0,.100,.100
+Batting Ninth,="3-9",.333,.778,0.445,1,1,0,1,30.0,.400,1.178
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="33-128",.258,.492,0.234,7,7,1,13,21.4,15,.338,.830
+Jeremy Pena RHB,Batting First ​,="82-275",.298,.491,0.193,13,12,1,35,19.6,18,.352,.843
+Yordan Alvarez LHB,Batting Second ​,="129-394",.327,.617,0.290,30,24,0,78,17.1,73,.438,1.055
+Isaac Paredes RHB,Batting Third ​,="66-253",.261,.399,0.138,7,12,1,35,12.4,27,.348,.747
+Christian Walker RHB,Batting Fourth ​,="51-217",.235,.475,0.240,14,10,0,32,23.9,20,.313,.788
+Nelson Velazquez RHB,Batting Fourth ​,="12-47",.255,.532,0.277,3,4,0,10,24.1,5,.333,.865
+LaMonte Wade Jr. LHB,Batting Fifth ​,="2-28",.071,.071,0.000,0,0,0,2,20.0,7,.257,.328
+Daulton Varsho LHB,Batting Sixth ​,="27-120",.225,.358,0.133,2,10,0,8,15.6,8,.273,.631
+Yainer Diaz RHB,Batting Sixth ​,="17-80",.213,.263,0.050,0,4,0,3,19.5,2,.232,.495
+Cam Smith RHB,Batting Sixth ​,="26-131",.198,.366,0.168,6,4,0,10,24.8,14,.277,.643
+Taylor Trammell LHB,Batting Seventh ​,="13-46",.283,.500,0.217,3,1,0,9,26.5,3,.327,.827
+Jake Meyers RHB,Batting Seventh ​,="13-44",.295,.477,0.182,2,2,0,4,14.0,5,.360,.837
+Nick Allen RHB,Batting Eighth ​,="9-43",.209,.256,0.047,0,2,0,7,28.6,3,.250,.506
+Christian Vazquez RHB,Batting Ninth ​,="36-159",.226,.327,0.101,3,7,0,21,18.9,11,.275,.602

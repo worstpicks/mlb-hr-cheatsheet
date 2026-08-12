@@ -37,15 +37,23 @@ def main() -> int:
     sheets = manifest.get("sheets", [])
     errors: list[str] = []
 
-    required = {"2026-06-06", "2026-06-05", "2026-06-04", "2026-06-01"}
+    # The current slate moves every day, so read it from the live preview rather than
+    # pinning a date here — a hardcoded date turns this check into permanent noise.
+    preview_m = re.search(
+        r'<meta name="sheet-date" content="([^"]+)">',
+        (PREVIEW / "index.html").read_text(encoding="utf-8"),
+    )
+    expected_current = preview_m.group(1) if preview_m else ""
+
     listed = {s["date"] for s in sheets}
-    missing = required - listed
+    on_disk = {p.stem for p in (PREVIEW / "archive").glob("20??-??-??.html")}
+    missing = on_disk - listed
     if missing:
-        errors.append(f"manifest missing dates: {sorted(missing)}")
+        errors.append(f"manifest missing archives on disk: {sorted(missing)}")
 
     current = [s for s in sheets if "current slate" in s.get("label", "").lower()]
-    if len(current) != 1 or current[0]["date"] != "2026-06-06":
-        errors.append("manifest current slate must be 2026-06-06")
+    if len(current) != 1 or current[0]["date"] != expected_current:
+        errors.append(f"manifest current slate must be {expected_current}")
 
     for sheet in sheets:
         iso = sheet.get("date", "")

@@ -14,6 +14,20 @@ MATCHUP_RE = re.compile(
     re.I,
 )
 LINEUP_PREFIX_RE = re.compile(r"^\d+\s+")
+GENERATIONAL_SUFFIXES = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v"}
+
+
+def pitcher_chip_name(full_name: str) -> str:
+    """Short SP label for `vs` chips.
+
+    Keeps a generational suffix attached ("Daniel Lynch IV" -> "Lynch IV") so the
+    chip reads correctly and every downstream `split()[-1]` key still matches the
+    same token the raw CSVs use.
+    """
+    parts = (full_name or "").split()
+    if len(parts) >= 3 and parts[-1].lower() in GENERATIONAL_SUFFIXES:
+        return " ".join(parts[-2:])
+    return parts[-1] if parts else full_name
 
 
 def normalize_batter_name(raw: str) -> str:
@@ -141,7 +155,7 @@ def derive_games_from_csv(sheet_date: str, data_dir: Path | None = None) -> list
                 "batters": {},
             },
         )
-        sp_last = hdr["pitcher"].split()[-1]
+        sp_last = pitcher_chip_name(hdr["pitcher"])
         team = hdr["pitcher_team"]
         if team == meta["away"]:
             gm["away_sp"] = sp_last
@@ -164,7 +178,7 @@ def derive_games_from_csv(sheet_date: str, data_dir: Path | None = None) -> list
         for full in (gm.get("away_sp_full"), gm.get("home_sp_full")):
             if not full or full == "TBD":
                 continue
-            last = full.split()[-1]
+            last = pitcher_chip_name(full)
             last_counts[last] = last_counts.get(last, 0) + 1
     for gm in by_game.values():
         for batter in gm["batters"].values():

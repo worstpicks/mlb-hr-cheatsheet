@@ -110,6 +110,7 @@ def import_sheet_csvs(
         copied.append(target)
 
     # Drop stale matchup/weak-spots exports for this date not in today's Downloads pull.
+    synthetic: list[Path] = []
     if not dry_run and copied:
         keep = {p.name for p in copied}
         for pattern in (f"hr-matchups-*-{sheet_date}.csv", f"pitcher-weak-spots-*-{sheet_date}.csv"):
@@ -117,12 +118,22 @@ def import_sheet_csvs(
                 if stale.name not in keep:
                     stale.unlink()
         _run_synthetic_matchups(sheet_date, dest)
+        # The synthetic builder fills PropFinder gaps after the stale sweep, so its
+        # output must be folded into the manifest below — otherwise the file sits on
+        # disk unreferenced and those hitters silently vanish from the sheet.
+        synthetic = sorted(
+            p
+            for p in dest.glob(f"hr-matchups-*-{sheet_date}.csv")
+            if p.name not in keep
+        )
+        for path in synthetic:
+            print(f"  synthetic (kept in manifest): {path.name}")
 
     manifest = {
         "sheet_date": sheet_date,
         "imported_at": datetime.now().isoformat(timespec="seconds"),
         "downloads_dir": str(downloads_dir or DEFAULT_DOWNLOADS),
-        "files": [p.name for p in copied],
+        "files": sorted({p.name for p in copied} | {p.name for p in synthetic}),
     }
     manifest_name = f"manifest-{sheet_date}.json"
     if not dry_run:
@@ -204,6 +215,11 @@ def load_pitcher_risk(csv_path: Path) -> dict:
                 "overall": overall,
                 "vs_lhb": vs_lhb,
                 "vs_rhb": vs_rhb,
+                # All three cells blank means PropFinder has no book on this arm, so
+                # the 0.0 defaults above are a placeholder, not a measured neutral.
+                "no_data": all(
+                    (row[i] or "").strip() in ("", "-") for i in (4, 5, 6)
+                ),
             }
     return rows
 

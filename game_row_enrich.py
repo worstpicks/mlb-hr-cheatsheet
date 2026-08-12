@@ -509,6 +509,8 @@ def resolve_pitcher_risk_row(
 def _pitcher_meta_segment(name: str, row: dict, hr9_lookup: dict[str, float]) -> str:
     last = name.split()[-1]
     hr9 = hr9_lookup.get(name.lower()) or hr9_lookup.get(last.lower())
+    if row.get("no_data"):
+        return f'<strong class="pitcher-meta">{name} — no MLB HR data yet</strong>'
     seg = (
         f"{name} {format_pitcher_risk_pct(row['overall'])} overall · "
         f"LHB {format_pitcher_risk_pct(row['vs_lhb'])} · "

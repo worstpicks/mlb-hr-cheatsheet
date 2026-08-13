@@ -1,0 +1,30 @@
+Matchup,CIN @ CWS
+Pitcher,Andrew Abbott
+Pitcher Team,CIN
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.67,="15-61",.246,.295,0.049,1,0,0,4,12.7,10,.352,.647
+Batting Second,16.0,1.31,="10-57",.175,.281,0.106,1,3,0,5,15.9,11,.304,.585
+Batting Third,15.2,1.53,="21-65",.323,.477,0.154,3,1,0,7,20.3,3,.348,.825
+Batting Fourth,16.2,1.08,="12-59",.203,.475,0.272,4,2,1,15,19.4,6,.269,.744
+Batting Fifth,15.0,1.27,="13-58",.224,.328,0.104,1,3,0,7,10.8,6,.297,.625
+Batting Sixth,13.0,1.85,="16-53",.302,.472,0.170,2,3,0,6,17.7,8,.387,.859
+Batting Seventh,13.1,1.05,="8-45",.178,.267,0.089,1,1,0,3,17.3,6,.275,.542
+Batting Eighth,11.2,1.37,="9-43",.209,.326,0.117,1,2,0,1,28.0,7,.320,.646
+Batting Ninth,10.2,1.69,="14-46",.304,.500,0.196,3,0,0,7,22.0,4,.360,.860
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="64-235",.272,.391,0.119,6,10,0,21,15.9,19,.362,.753
+Chase Meidroth RHB,Batting First ​,="37-134",.276,.470,0.194,6,8,0,14,23.2,17,.358,.828
+Randal Grichuk RHB,Batting Second ​,="9-35",.257,.629,0.372,3,4,0,3,24.3,2,.297,.926
+Munetaka Murakami LHB,Batting Second ​,="61-254",.240,.512,0.272,19,12,0,42,34.0,48,.363,.875
+Andrew Benintendi LHB,Batting Third ​,="19-76",.250,.447,0.197,4,3,0,12,21.4,8,.321,.768
+Miguel Vargas RHB,Batting Third ​,="61-270",.226,.448,0.222,14,18,0,36,19.9,38,.329,.777
+Colson Montgomery LHB,Batting Fourth ​,="66-296",.223,.456,0.233,19,12,0,49,34.1,27,.302,.758
+Edgar Quero SHB,Batting Fifth ​,="4-47",.085,.170,0.085,1,1,0,6,24.6,7,.193,.363
+Braden Montgomery SHB,Batting Sixth ​,="19-75",.253,.347,0.094,1,2,1,8,29.4,8,.341,.688
+Brenton Doyle RHB,Batting Seventh ​,="6-39",.154,.154,0.000,0,0,0,0,34.9,4,.233,.387
+Tristan Peters LHB,Batting Eighth ​,="33-126",.262,.452,0.190,4,8,2,22,15.7,10,.312,.764
+Luisangel Acuna RHB,Batting Ninth ​,="17-81",.210,.259,0.049,1,1,0,5,17.0,4,.253,.512
+Drew Romo SHB,Batting Ninth ​,="14-106",.132,.245,0.113,3,3,0,7,24.4,12,.227,.472

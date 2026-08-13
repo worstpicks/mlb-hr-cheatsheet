@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import re
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from csv_slate_meta import derive_games_from_csv, name_lookup_key, read_batter_rows
@@ -16,6 +17,10 @@ from zone_matchups import load_zone_lookup, lookup_zone_row
 ROOT = Path(__file__).resolve().parent
 
 # Sheet title keys that differ from ParkFactors CSV Game column.
+# Reserved slot in the weather lookup holding ParkFactors rows that shipped without
+# a Game label, indexed by first pitch. Never a real game key.
+_UNKEYED_BY_TIME = "__by_time__"
+
 TITLE_WEATHER_KEY_ALIASES = {
     "MIA @ WSH": "MIA @ WAS",
     "KC @ WSH": "KC @ WAS",
@@ -163,9 +168,25 @@ def _read_extra_statcast(path: Path, batter_name: str) -> dict:
     return out
 
 
+def pitcher_summary_path(split: str, sheet_date: str) -> Path | None:
+    """Locate a pitcher-summary export regardless of its window suffix.
+
+    PropFinder names these by the window it was exported with (`-l10-`, `-season-`),
+    so pinning one suffix silently drops HR/9 from every game header when the export
+    window changes.
+    """
+    data = ROOT / "data"
+    exact = data / f"pitcher-summary-{split}-l10-{sheet_date}.csv"
+    if exact.is_file():
+        return exact
+    matches = sorted(data.glob(f"pitcher-summary-{split}-*-{sheet_date}.csv"))
+    return matches[0] if matches else None
+
+
 def load_pitcher_hr9_lookup(sheet_date: str) -> dict[str, float]:
-    path = ROOT / "data" / f"pitcher-summary-season-l10-{sheet_date}.csv"
-    if not path.is_file():
+    path = pitcher_summary_path("season", sheet_date)
+    if path is None:
+        print(f"WARN: no pitcher-summary-season-*-{sheet_date}.csv — HR/9 will be blank")
         return {}
     lookup: dict[str, float] = {}
     with path.open(encoding="utf-8-sig", newline="") as f:
@@ -339,12 +360,11 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
     if not path.is_file():
         return lookup
     by_game: dict[str, list[tuple[str, dict]]] = {}
+    by_time: dict[str, dict] = {}
     with path.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
             game = normalize_game_key(row.get("Game", ""))
-            if not game:
-                continue
             try:
                 hr_pct = int(str(row["HR %"]).replace("%", "").strip())
             except (ValueError, KeyError):
@@ -371,6 +391,13 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
             if rhb_st is not None:
                 entry["rhb_stadium_pct"] = rhb_st
                 entry["park_rhb_pct"] = rhb_st + (wx_pct or 0)
+            if not game:
+                # Special-event sites (e.g. Field of Dreams) ship a blank Game
+                # column. Keep them keyed by first pitch so the slate can still
+                # resolve park factors by start time.
+                if entry["time"]:
+                    by_time[entry["time"]] = entry
+                continue
             by_game.setdefault(game, []).append((entry["time"], entry))
     for game, entries in by_game.items():
         entries.sort(key=lambda item: _park_time_sort_key(item[0]))
@@ -382,10 +409,33 @@ def load_weather_lookup(sheet_date: str) -> dict[str, dict]:
             lookup[f"{game} (G{i})"] = keyed
         # Bare matchup falls back to earliest first-pitch row (G1).
         lookup[game] = lookup[f"{game} (G1)"]
+    if by_time:
+        lookup[_UNKEYED_BY_TIME] = by_time
     return lookup
 
 
-def lookup_weather_for_game(title: str, weather_lookup: dict[str, dict]) -> dict | None:
+def _et_clock_from_iso(start_time: str | None) -> str | None:
+    """ISO UTC start -> 'H:MM' Eastern, matching the ParkFactors Time column."""
+    if not start_time:
+        return None
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})", start_time)
+    if not m:
+        return None
+    y, mo, d, hh, mm = (int(g) for g in m.groups())
+    stamp = datetime(y, mo, d, hh, mm) - timedelta(hours=_et_utc_offset(y, mo, d))
+    return f"{(stamp.hour % 12) or 12}:{stamp.minute:02d}"
+
+
+def _et_utc_offset(year: int, month: int, day: int) -> int:
+    """4 during EDT, 5 during EST — MLB slates only ever need the coarse rule."""
+    return 4 if 3 < month < 11 else 5
+
+
+def lookup_weather_for_game(
+    title: str,
+    weather_lookup: dict[str, dict],
+    start_time: str | None = None,
+) -> dict | None:
     key = game_key_from_title(title)
     aliased = TITLE_WEATHER_KEY_ALIASES.get(key, key)
     if aliased in weather_lookup:
@@ -400,7 +450,19 @@ def lookup_weather_for_game(title: str, weather_lookup: dict[str, dict]) -> dict
         for candidate in (f"{base_aliased} (G{gn.group(1)})", f"{base} (G{gn.group(1)})"):
             if candidate in weather_lookup:
                 return weather_lookup[candidate]
-    return weather_lookup.get(base_aliased) or weather_lookup.get(base)
+    hit = weather_lookup.get(base_aliased) or weather_lookup.get(base)
+    if hit is not None:
+        return hit
+    clock = _et_clock_from_iso(start_time)
+    if clock:
+        by_time = weather_lookup.get(_UNKEYED_BY_TIME) or {}
+        entry = by_time.get(clock)
+        if entry is not None:
+            print(
+                f"park: matched {key} to {entry.get('venue') or '?'} by first pitch {clock}"
+            )
+            return entry
+    return None
 
 
 def parse_game_description(desc: str) -> dict:
@@ -806,7 +868,9 @@ def enrich_games_list(games: list[dict], sheet_date: str) -> list[dict]:
     enriched: list[dict] = []
     for game in games:
         g = dict(game)
-        weather = lookup_weather_for_game(g.get("title", ""), weather_lookup)
+        weather = lookup_weather_for_game(
+            g.get("title", ""), weather_lookup, g.get("startTime")
+        )
         rows = []
         for entry in game.get("rows", []):
             plain = entry["name"].rsplit(" (", 1)[0]

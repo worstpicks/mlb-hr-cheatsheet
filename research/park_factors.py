@@ -125,15 +125,17 @@ def _entry_from_row(
     lhb_stadium: dict[str, int],
     rhb_stadium: dict[str, int],
 ) -> dict | None:
+    # Special-event sites (e.g. Field of Dreams) ship a blank Game column. Keep the row
+    # so it can still be matched on venue instead of dropping the game's park factors.
     game = normalize_game_key(row.get("Game", ""))
-    if not game:
-        return None
     try:
         hr_pct = int(str(row["HR %"]).replace("%", "").strip())
     except (ValueError, KeyError):
         return None
     venue = (row.get("Venue") or "").strip()
     venue_key = normalize_venue_key(venue)
+    if not game and not venue_key:
+        return None
     wx_pct = _pct_from_field(row.get("HR % Weather"))
     lhb_st = lhb_stadium.get(venue_key)
     rhb_st = rhb_stadium.get(venue_key)
@@ -175,7 +177,8 @@ def load_park_lookup(sheet_date: str, data_dir: Path | None = None) -> dict:
             entry = _entry_from_row(row, lhb_stadium, rhb_stadium)
             if not entry:
                 continue
-            by_game[entry["game"]] = entry
+            if entry["game"]:
+                by_game[entry["game"]] = entry
             if entry.get("venue_key"):
                 by_venue[entry["venue_key"]] = entry
 

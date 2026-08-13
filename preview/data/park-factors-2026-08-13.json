@@ -1,0 +1,211 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-08-13 00_00_00.csv",
+  "source_date": "2026-08-13",
+  "hand_date": "2026-08-13",
+  "by_game": {
+    "SEA @ NYY": {
+      "game": "SEA @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 22,
+      "stadium_pct": 6,
+      "weather_pct": 16,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 20,
+      "rhb_stadium_pct": 5,
+      "park_rhb_pct": 21
+    },
+    "MIL @ LAD": {
+      "game": "MIL @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 12,
+      "stadium_pct": 19,
+      "weather_pct": -6,
+      "lhb_stadium_pct": 2,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 16,
+      "park_rhb_pct": 10
+    },
+    "BOS @ TOR": {
+      "game": "BOS @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 10,
+      "stadium_pct": 7,
+      "weather_pct": 3,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": 7,
+      "park_rhb_pct": 10
+    },
+    "CHC @ WAS": {
+      "game": "CHC @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 5,
+      "stadium_pct": 4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": 2,
+      "park_lhb_pct": 3,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 2
+    },
+    "CIN @ CHW": {
+      "game": "CIN @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -2,
+      "stadium_pct": -6,
+      "weather_pct": 5,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 9,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -1
+    },
+    "CLE @ DET": {
+      "game": "CLE @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": -3,
+      "stadium_pct": -9,
+      "weather_pct": 6,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": 1,
+      "rhb_stadium_pct": 3,
+      "park_rhb_pct": 9
+    },
+    "TEX @ LAA": {
+      "game": "TEX @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": -7,
+      "stadium_pct": -8,
+      "weather_pct": 2,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 5,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 3
+    },
+    "PIT @ MIA": {
+      "game": "PIT @ MIA",
+      "venue": "LoanDepot Park",
+      "venue_key": "loandepot park",
+      "hr_pct": -13,
+      "stadium_pct": -13,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -5,
+      "rhb_stadium_pct": -12,
+      "park_rhb_pct": -12
+    }
+  },
+  "by_venue": {
+    "yankee stadium": {
+      "game": "SEA @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 22,
+      "stadium_pct": 6,
+      "weather_pct": 16,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 20,
+      "rhb_stadium_pct": 5,
+      "park_rhb_pct": 21
+    },
+    "dodger stadium": {
+      "game": "MIL @ LAD",
+      "venue": "Dodger Stadium",
+      "venue_key": "dodger stadium",
+      "hr_pct": 12,
+      "stadium_pct": 19,
+      "weather_pct": -6,
+      "lhb_stadium_pct": 2,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 16,
+      "park_rhb_pct": 10
+    },
+    "rogers centre": {
+      "game": "BOS @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 10,
+      "stadium_pct": 7,
+      "weather_pct": 3,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": 7,
+      "park_rhb_pct": 10
+    },
+    "nationals park": {
+      "game": "CHC @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 5,
+      "stadium_pct": 4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": 2,
+      "park_lhb_pct": 3,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 2
+    },
+    "rate field": {
+      "game": "CIN @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -2,
+      "stadium_pct": -6,
+      "weather_pct": 5,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 9,
+      "rhb_stadium_pct": -6,
+      "park_rhb_pct": -1
+    },
+    "comerica park": {
+      "game": "CLE @ DET",
+      "venue": "Comerica Park",
+      "venue_key": "comerica park",
+      "hr_pct": -3,
+      "stadium_pct": -9,
+      "weather_pct": 6,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": 1,
+      "rhb_stadium_pct": 3,
+      "park_rhb_pct": 9
+    },
+    "angel stadium": {
+      "game": "TEX @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": -7,
+      "stadium_pct": -8,
+      "weather_pct": 2,
+      "lhb_stadium_pct": 3,
+      "park_lhb_pct": 5,
+      "rhb_stadium_pct": 1,
+      "park_rhb_pct": 3
+    },
+    "field of dreams": {
+      "game": "",
+      "venue": "Field of Dreams",
+      "venue_key": "field of dreams",
+      "hr_pct": -10,
+      "stadium_pct": -7,
+      "weather_pct": -3
+    },
+    "loandepot park": {
+      "game": "PIT @ MIA",
+      "venue": "LoanDepot Park",
+      "venue_key": "loandepot park",
+      "hr_pct": -13,
+      "stadium_pct": -13,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -5,
+      "rhb_stadium_pct": -12,
+      "park_rhb_pct": -12
+    }
+  }
+}

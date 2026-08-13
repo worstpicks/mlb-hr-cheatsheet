@@ -1,0 +1,31 @@
+Matchup,PHI @ MIN
+Pitcher,Aaron Nola
+Pitcher Team,PHI
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.66,="21-67",.313,.403,0.090,1,3,0,6,22.2,5,.361,.764
+Batting Second,15.1,1.70,="18-61",.295,.623,0.328,6,0,1,10,20.0,8,.371,.994
+Batting Third,15.1,1.63,="20-63",.317,.651,0.334,5,6,0,10,21.7,5,.362,1.013
+Batting Fourth,13.0,2.00,="21-60",.350,.617,0.267,4,4,0,12,19.7,5,.409,1.026
+Batting Fifth,14.1,1.33,="14-55",.255,.382,0.127,2,1,0,6,23.0,5,.317,.699
+Batting Sixth,13.1,1.05,="11-50",.220,.440,0.220,3,2,0,8,27.8,3,.259,.699
+Batting Seventh,13.2,0.95,="9-48",.188,.375,0.187,1,2,2,2,36.5,4,.250,.625
+Batting Eighth,12.2,0.95,="8-45",.178,.422,0.244,3,2,0,8,22.0,4,.240,.662
+Batting Ninth,10.0,2.00,="16-45",.356,.689,0.333,4,3,0,10,24.0,4,.408,1.097
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Byron Buxton RHB,Batting First ​,="55-201",.274,.602,0.328,19,9,0,28,26.4,17,.336,.938
+Trevor Larnach LHB,Batting First ​,="43-143",.301,.510,0.209,7,9,0,24,12.7,14,.363,.873
+Austin Martin RHB,Batting First ​,="25-104",.240,.346,0.106,1,8,0,11,16.8,20,.382,.728
+Brooks Lee SHB,Batting Second ​,="24-139",.173,.324,0.151,6,3,0,20,18.5,10,.232,.556
+Kody Clemens LHB,Batting Third ​,="33-157",.210,.465,0.255,11,7,0,28,22.5,10,.254,.719
+Josh Bell SHB,Batting Fourth ​,="52-233",.223,.391,0.168,8,13,1,32,23.2,19,.283,.674
+Ryan Jeffers RHB,Batting Fourth ​,="17-60",.283,.517,0.234,3,3,1,14,14.5,9,.377,.894
+Royce Lewis RHB,Batting Fifth ​,="31-106",.292,.575,0.283,8,6,0,15,17.8,10,.356,.931
+Victor Caratini SHB,Batting Sixth ​,="24-133",.180,.338,0.158,5,6,0,16,21.9,12,.277,.615
+Luke Keaschall RHB,Batting Sixth ​,="14-89",.157,.213,0.056,1,2,0,8,21.0,6,.222,.435
+Kaelen Culpepper RHB,Batting Seventh ​,="1-9",.111,.444,0.333,1,0,0,2,38.5,1,.308,.752
+Alan Roden LHB,Batting Seventh ​,="5-26",.192,.231,0.039,0,1,0,4,16.1,4,.290,.521
+Alex Jackson RHB,Batting Ninth ​,="17-55",.309,.436,0.127,1,4,0,5,27.6,1,.345,.781
+Ryan Kreidler RHB,Batting Ninth ​,="20-104",.192,.327,0.135,2,4,2,13,19.8,7,.243,.570

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent
 DATE = "2026-08-13"
 PREVIEW = ROOT / "preview" / "index.html"
 BUM_MIN = 0.95
-PROPCOUNT = 57
+PROPCOUNT = 59
 GAMECOUNT = 9
 
 errs: list[str] = []

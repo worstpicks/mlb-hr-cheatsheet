@@ -57,6 +57,8 @@ USER_PROPS: list[tuple[str, str]] = [
     ("Bryson Stott", ""),
     ("Bryan De La Cruz", ""),
     ("Moises Ballesteros", ""),
+    ("Alex Bregman", ""),
+    ("Miguel Amaya", ""),
     ("Mike Trout", ""),
     ("Travis d'Arnaud", ""),
     ("Vaughn Grissom", ""),

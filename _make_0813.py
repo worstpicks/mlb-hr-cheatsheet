@@ -49,6 +49,8 @@ RAW_PROPS = """RAW_PROPS = [
     "Bryson Stott",
     "Bryan De La Cruz",
     "Moises Ballesteros",
+    "Alex Bregman",
+    "Miguel Amaya",
     "Mike Trout",
     "Travis d'Arnaud",
     "Vaughn Grissom",
@@ -244,13 +246,16 @@ def main() -> None:
         a,
         count=1,
     )
-    a = re.sub(r"PROPCOUNT = \d+", "PROPCOUNT = 57", a, count=1)
+    # Derive from RAW_PROPS rather than restating it: a hand-edited count silently
+    # stops checking the props that were added after it was last touched.
+    propcount = len(re.findall(r'^\s+"', RAW_PROPS, flags=re.M))
+    a = re.sub(r"PROPCOUNT = \d+", f"PROPCOUNT = {propcount}", a, count=1)
     # Slate size changes day to day; the old audits hardcoded 15 games inline, which
     # then failed every short slate. Keep it a named constant the scaffold updates.
     if "GAMECOUNT" in a:
         a = re.sub(r"GAMECOUNT = \d+", "GAMECOUNT = 9", a, count=1)
     else:
-        a = a.replace("PROPCOUNT = 57", "PROPCOUNT = 57\nGAMECOUNT = 9", 1)
+        a = a.replace(f"PROPCOUNT = {propcount}", f"PROPCOUNT = {propcount}\nGAMECOUNT = 9", 1)
         a = re.sub(
             r"if len\(titles\) != \d+:\n            fail\(f\"expected \d+ games, got \{len\(titles\)\}\"\)",
             'if len(titles) != GAMECOUNT:\n            fail(f"expected {GAMECOUNT} games, got {len(titles)}")',

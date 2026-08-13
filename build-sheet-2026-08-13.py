@@ -35,6 +35,7 @@ GEMS = {
 PLAYER_TEAMS = {
     "Abimelec Ortiz (L)": "WSH",
     "Alejandro Kirk (R)": "TOR",
+    "Alex Bregman (R)": "CHC",
     "Andy Pages (R)": "LAD",
     "Angel Genao (S)": "CLE",
     "Ben Rice (L)": "NYY",
@@ -72,6 +73,7 @@ PLAYER_TEAMS = {
     "Kody Clemens (L)": "MIN",
     "Kyle Schwarber (L)": "PHI",
     "Kyle Tucker (L)": "LAD",
+    "Miguel Amaya (R)": "CHC",
     "Miguel Vargas (R)": "CWS",
     "Mike Trout (R)": "LAA",
     "Moises Ballesteros (L)": "LAA",
@@ -148,6 +150,8 @@ games = [
             row("Abimelec Ortiz", "L", "+541", 58, "", ["vs Gausman"], """1 HR, 1 near-HR, 92.9 mph EV. Gausman LHB split -0.78, HR risk -0.75. tough split lane (-0.78); pitcher suppresses HR (-0.75).""", blast="good"),
             row("Daylen Lile", "L", "+528", 58, "", ["vs Gausman"], """1 HR, 2 near-HR, 93.3 mph EV. Gausman LHB split -0.78, HR risk -0.75. tough split lane (-0.78); pitcher suppresses HR (-0.75).""", blast="good"),
             row("Keibert Ruiz", "S", "+750", 58, "", ["vs Gausman"], """0 HR, 91.4 mph EV. Gausman SHB→RHB split -0.37, HR risk -0.75. slight split headwind (-0.37); pitcher suppresses HR (-0.75)."""),
+            row("Alex Bregman", "R", "+630", 89, "🌕 💣", ["vs Cavalli"], """3 HR, 3 near-HR, 92.1 mph EV. Cavalli RHB split +0.43, HR risk 0.46.""", blast="high"),
+            row("Miguel Amaya", "R", "+890", 77, "", ["vs Cavalli"], """1 HR, 2 near-HR, 97.0 mph EV. Cavalli RHB split +0.43, HR risk 0.46.""", blast="good"),
         ],
     },
     {

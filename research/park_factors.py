@@ -9,7 +9,7 @@ from pathlib import Path
 
 from game_row_enrich import (
     ROOT,
-    TITLE_WEATHER_KEY_ALIASES,
+    alias_weather_game_key,
     load_venue_hand_stadium_pcts,
     normalize_game_key,
     normalize_venue_key,
@@ -201,7 +201,7 @@ def attach_park_factors_to_games(games: list[dict], lookup: dict) -> None:
     source_label = lookup.get("source_label") or "Ballpark Pal"
     for game in games:
         key = normalize_game_key(game.get("matchup") or "")
-        key = TITLE_WEATHER_KEY_ALIASES.get(key, key)
+        key = alias_weather_game_key(key)
         ctx = by_game.get(key)
         if not ctx:
             vk = normalize_venue_key(game.get("venue") or "")

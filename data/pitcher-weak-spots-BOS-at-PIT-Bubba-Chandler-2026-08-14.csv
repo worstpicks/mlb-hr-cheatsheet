@@ -1,0 +1,26 @@
+Matchup,BOS @ PIT
+Pitcher,Bubba Chandler
+Pitcher Team,PIT
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,14.1,1.74,="15-57",.263,.368,0.105,0,6,0,6,23.5,10,.373,.741
+Batting Second,12.0,2.58,="21-57",.368,.667,0.299,3,4,2,11,25.4,10,.463,1.130
+Batting Third,16.2,1.02,="10-58",.172,.362,0.190,3,2,0,14,16.7,7,.258,.620
+Batting Fourth,16.1,0.55,="6-54",.111,.185,0.074,1,1,0,2,28.8,3,.169,.354
+Batting Fifth,12.1,1.38,="12-48",.250,.375,0.125,1,3,0,6,12.7,5,.345,.720
+Batting Sixth,11.0,1.55,="8-41",.195,.317,0.122,1,2,0,4,20.0,9,.340,.657
+Batting Seventh,12.2,0.79,="4-41",.098,.146,0.048,0,2,0,2,20.4,6,.245,.391
+Batting Eighth,10.1,1.74,="10-40",.250,.325,0.075,1,0,0,2,14.6,8,.375,.700
+Batting Ninth,10.1,1.55,="12-41",.293,.341,0.048,0,2,0,3,17.4,4,.356,.697
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nick Sogard SHB,Batting First ​,="6-37",.162,.189,0.027,0,1,0,0,17.0,9,.326,.515
+Masataka Yoshida LHB,Batting Second ​,="3-12",.250,.250,0.000,0,0,0,0,7.1,2,.357,.607
+Adley Rutschman SHB,Batting Third ​,="44-178",.247,.455,0.208,8,11,1,39,15.5,22,.325,.780
+Willson Contreras RHB,Batting Fourth ​,="84-299",.281,.528,0.247,18,16,2,57,25.6,33,.380,.908
+Wilyer Abreu LHB,Batting Fifth ​,="26-74",.351,.662,0.311,5,6,1,11,18.3,8,.415,1.077
+Caleb Durbin RHB,Batting Sixth ​,="39-162",.241,.407,0.166,6,7,1,28,16.9,14,.315,.722
+Jarren Duran LHB,Batting Seventh ​,="23-107",.215,.355,0.140,3,4,1,19,25.2,10,.279,.634
+Andruw Monasterio RHB,Batting Eighth ​,="21-70",.300,.400,0.100,1,4,0,7,20.3,6,.342,.742
+Eli White RHB,Batting Ninth ​,="4-19",.211,.368,0.157,1,0,0,2,28.6,2,.286,.654

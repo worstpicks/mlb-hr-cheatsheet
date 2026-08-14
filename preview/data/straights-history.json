@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-13T14:49:31Z",
+  "updated": "2026-08-14T21:05:29Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -998,11 +998,26 @@
       "o05": {
         "player": "Teoscar Hernandez",
         "matchup": "MIL @ LAD",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Owen Caissie",
         "matchup": "PIT @ MIA",
+        "result": "loss",
+        "hr": 1
+      }
+    },
+    {
+      "date": "2026-08-14",
+      "o05": {
+        "player": "Teoscar Hernandez",
+        "matchup": "MIL @ LAD",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Jackson Merrill",
+        "matchup": "SD @ CLE",
         "result": "pending"
       }
     }

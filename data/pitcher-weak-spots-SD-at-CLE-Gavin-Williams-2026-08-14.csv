@@ -1,0 +1,26 @@
+Matchup,SD @ CLE
+Pitcher,Gavin Williams
+Pitcher Team,CLE
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,17.1,1.27,="12-63",.190,.270,0.080,1,2,0,2,31.5,10,.301,.571
+Batting Second,17.1,1.15,="17-69",.246,.493,0.247,4,5,0,8,34.7,3,.278,.771
+Batting Third,19.1,0.62,="10-67",.149,.299,0.150,2,4,0,8,34.8,2,.174,.473
+Batting Fourth,18.1,0.65,="9-63",.143,.302,0.159,3,1,0,8,35.8,3,.194,.496
+Batting Fifth,13.2,1.61,="15-56",.268,.429,0.161,3,0,0,4,41.3,7,.349,.778
+Batting Sixth,16.1,0.98,="10-55",.182,.382,0.200,3,2,0,6,26.2,6,.262,.644
+Batting Seventh,13.2,1.24,="12-53",.226,.434,0.208,2,5,0,3,33.9,5,.305,.739
+Batting Eighth,11.2,1.71,="19-54",.352,.593,0.241,4,1,0,13,23.2,1,.375,.968
+Batting Ninth,15.1,0.59,="5-47",.106,.170,0.064,0,1,1,1,26.4,4,.176,.346
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="95-324",.293,.475,0.182,12,21,1,41,16.4,30,.359,.834
+Jake Cronenworth LHB,Batting Second ​,="18-72",.250,.292,0.042,1,0,0,8,28.9,10,.341,.633
+Manny Machado RHB,Batting Third ​,="52-236",.220,.424,0.204,12,12,0,35,22.0,29,.302,.726
+Ty France RHB,Batting Fourth ​,="35-101",.347,.545,0.198,5,5,0,18,20.4,6,.398,.943
+Jackson Merrill LHB,Batting Fifth ​,="39-119",.328,.613,0.285,9,5,1,26,21.1,7,.359,.972
+Luis Campusano RHB,Batting Sixth ​,="10-31",.323,.419,0.096,1,0,0,4,21.6,5,.432,.851
+Gavin Sheets LHB,Batting Seventh ​,="11-47",.234,.404,0.170,2,2,0,8,11.9,10,.356,.760
+Xander Bogaerts RHB,Batting Eighth ​,="6-40",.150,.250,0.100,1,1,0,2,17.0,6,.255,.505
+Luis Rengifo SHB,Batting Ninth ​,="2-13",.154,.154,0.000,0,0,0,1,12.5,3,.313,.467

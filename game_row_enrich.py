@@ -65,6 +65,25 @@ TITLE_WEATHER_KEY_ALIASES = {
     "WAS @ PHI": "WAS @ PHI",
 }
 
+# Only two codes actually differ between the sheet and Ballpark Pal. The map above
+# enumerates opponent pairs, so every matchup combination that had not been seen
+# before missed and the game silently lost its park row. Normalize each side of the
+# key instead, and keep the explicit map ahead of it for genuine exceptions.
+WEATHER_TEAM_CODE_ALIASES = {"CWS": "CHW", "WSH": "WAS"}
+
+
+def alias_weather_game_key(key: str) -> str:
+    explicit = TITLE_WEATHER_KEY_ALIASES.get(key)
+    if explicit:
+        return explicit
+    m = re.match(r"^([A-Z]{2,3})\s*@\s*([A-Z]{2,3})\s*(.*)$", (key or "").strip())
+    if not m:
+        return key
+    away = WEATHER_TEAM_CODE_ALIASES.get(m.group(1), m.group(1))
+    home = WEATHER_TEAM_CODE_ALIASES.get(m.group(2), m.group(2))
+    suffix = f" {m.group(3)}" if m.group(3) else ""
+    return f"{away} @ {home}{suffix}"
+
 # PropFinder / sheet venue labels -> Ballpark Pal BALLPARK column.
 VENUE_BALLPARK_ALIASES = {
     "american family fld": "american family field",
@@ -201,6 +220,75 @@ def load_pitcher_hr9_lookup(sheet_date: str) -> dict[str, float]:
                 lookup[pitcher.lower()] = hr9
                 lookup[pitcher.split()[-1].lower()] = hr9
     return lookup
+
+
+def load_pitcher_rates_from_matchups(sheet_date: str) -> dict[str, dict]:
+    """Measured Season / vsLHB / vsRHB rates from each hr-matchups pitcher block.
+
+    PropFinder omits late-added starters from hr-targets-overall and pitcher-summary
+    but still ships their own matchup export, which carries the same stat block. This
+    is the fallback so a game header never loses a starter entirely.
+    """
+    out: dict[str, dict] = {}
+    for path in sorted((ROOT / "data").glob(f"hr-matchups-*-{sheet_date}.csv")):
+        pitcher = ""
+        header: list[str] | None = None
+        splits: dict[str, dict] = {}
+        for line in path.read_text(encoding="utf-8-sig").splitlines():
+            if line.startswith("Pitcher,"):
+                pitcher = line.split(",", 1)[1].strip()
+                continue
+            if line.startswith("SPLIT,"):
+                header = next(csv.reader([line]))
+                continue
+            if header and line.split(",", 1)[0].strip() in ("Season", "vsLHB", "vsRHB"):
+                row = next(csv.reader([line]))
+                splits[row[0].strip()] = dict(zip(header, row))
+                continue
+            if line.startswith("BATTER,"):
+                break
+        if not pitcher or "Season" not in splits:
+            continue
+
+        def rate(split: str, col: str) -> float | None:
+            return _num((splits.get(split) or {}).get(col))
+
+        entry = {
+            "pitcher": pitcher,
+            "hr9": rate("Season", "HR/9"),
+            "hr9_lhb": rate("vsLHB", "HR/9"),
+            "hr9_rhb": rate("vsRHB", "HR/9"),
+            "barrel_pct": rate("Season", "BARREL%"),
+            "hh_pct": rate("Season", "HH%"),
+        }
+        if entry["hr9"] is None:
+            continue
+        out[pitcher.lower()] = entry
+        out.setdefault(pitcher.split()[-1].lower(), entry)
+    return out
+
+
+def _pitcher_measured_segment(name: str, rates: dict) -> str:
+    """Header segment for an arm PropFinder never scored, using its real rates.
+
+    Deliberately not the risk index: the calibrated proxy carries ~0.4 MAE, and one
+    risk point is 50 percentage points on this display, so a proxy would read as a
+    measured figure while being off by up to ~40 points.
+    """
+    seg = f"{name} {rates['hr9']:.2f} HR/9"
+    if rates.get("hr9_lhb") is not None:
+        seg += f" · LHB {rates['hr9_lhb']:.2f}"
+    if rates.get("hr9_rhb") is not None:
+        seg += f" · RHB {rates['hr9_rhb']:.2f}"
+    extra = []
+    if rates.get("barrel_pct") is not None:
+        extra.append(f"{rates['barrel_pct']:.1f}% barrel")
+    if rates.get("hh_pct") is not None:
+        extra.append(f"{rates['hh_pct']:.1f}% hard hit")
+    if extra:
+        seg += f" ({', '.join(extra)})"
+    seg += " · no PropFinder HR risk"
+    return f'<strong class="pitcher-meta">{seg}</strong>'
 
 
 def form_trend(hr: int, near: int, ev: float) -> str:
@@ -437,13 +525,13 @@ def lookup_weather_for_game(
     start_time: str | None = None,
 ) -> dict | None:
     key = game_key_from_title(title)
-    aliased = TITLE_WEATHER_KEY_ALIASES.get(key, key)
+    aliased = alias_weather_game_key(key)
     if aliased in weather_lookup:
         return weather_lookup[aliased]
     if key in weather_lookup:
         return weather_lookup[key]
     base = re.sub(r"\s*\(G\d+\)$", "", key)
-    base_aliased = TITLE_WEATHER_KEY_ALIASES.get(base, base)
+    base_aliased = alias_weather_game_key(base)
     # Prefer DH-specific key when title has (Gn) and CSV was keyed that way.
     gn = re.search(r"\(G(\d+)\)$", key)
     if gn:
@@ -658,6 +746,7 @@ def build_game_meta_line(
     hr9_lookup: dict[str, float],
     weather: dict | None = None,
     pitcher_risk: dict | None = None,
+    rate_lookup: dict[str, dict] | None = None,
 ) -> str:
     parts: list[str] = []
     if game.get("startTime"):
@@ -683,12 +772,19 @@ def build_game_meta_line(
         away_seg, home_seg = matchup.split(" vs ", 1)
         away_label = pitcher_name_from_title_segment(away_seg)
         home_label = pitcher_name_from_title_segment(home_seg)
-        away_row = resolve_pitcher_risk_row(away_label, pitcher_risk, desc_blocks)
-        home_row = resolve_pitcher_risk_row(home_label, pitcher_risk, desc_blocks)
-        if away_row:
-            parts.append(_pitcher_meta_segment(away_label, away_row, hr9_lookup))
-        if home_row:
-            parts.append(_pitcher_meta_segment(home_label, home_row, hr9_lookup))
+        for label in (away_label, home_label):
+            row = resolve_pitcher_risk_row(label, pitcher_risk, desc_blocks)
+            if row:
+                parts.append(_pitcher_meta_segment(label, row, hr9_lookup))
+                continue
+            rates = (rate_lookup or {}).get(label.lower()) or (rate_lookup or {}).get(
+                label.split()[-1].lower()
+            )
+            if rates:
+                print(f"note: {label} absent from HR risk export — using measured rates")
+                parts.append(_pitcher_measured_segment(label, rates))
+            else:
+                print(f"WARN: no risk or rate data for {label} — header will omit this SP")
     return " · ".join(parts)
 
 
@@ -865,6 +961,7 @@ def enrich_games_list(games: list[dict], sheet_date: str) -> list[dict]:
     weather_lookup = load_weather_lookup(sheet_date)
     risk_path = ROOT / "data" / f"hr-targets-overall-{sheet_date}.csv"
     pitcher_risk = load_pitcher_risk(risk_path) if risk_path.is_file() else {}
+    rate_lookup = load_pitcher_rates_from_matchups(sheet_date)
     enriched: list[dict] = []
     for game in games:
         g = dict(game)
@@ -888,7 +985,9 @@ def enrich_games_list(games: list[dict], sheet_date: str) -> list[dict]:
             g["sleeper"] = plain_name(sleeper)
             g["sleeperDetail"] = pick_card(sleeper, None, sleeper_why(sleeper, top3))
         park_ctx = resolve_park_context(g, weather)
-        g["gameMeta"] = build_game_meta_line(g, hr9_lookup, weather, pitcher_risk)
+        g["gameMeta"] = build_game_meta_line(
+            g, hr9_lookup, weather, pitcher_risk, rate_lookup
+        )
         if park_ctx["park_pct"] is not None:
             g["parkPct"] = park_ctx["park_pct"]
             lhb_pct, rhb_pct = hand_park_pcts(park_ctx)

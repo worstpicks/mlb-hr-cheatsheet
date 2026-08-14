@@ -1363,6 +1363,20 @@
         "WSH @ PHI": "WAS @ PHI",
     };
 
+    // Mirrors alias_weather_game_key() in game_row_enrich.py. Only CWS and WSH
+    // differ from Ballpark Pal's codes, so normalize each side of the key rather
+    // than relying on the pair list above to cover every opponent combination.
+    const PARK_TEAM_CODE_ALIASES = { CWS: "CHW", WSH: "WAS" };
+
+    function aliasParkGameKey(key) {
+        if (PARK_GAME_KEY_ALIASES[key]) return PARK_GAME_KEY_ALIASES[key];
+        const m = /^([A-Z]{2,3})\s*@\s*([A-Z]{2,3})\s*(.*)$/.exec(String(key || "").trim());
+        if (!m) return key;
+        const away = PARK_TEAM_CODE_ALIASES[m[1]] || m[1];
+        const home = PARK_TEAM_CODE_ALIASES[m[2]] || m[2];
+        return `${away} @ ${home}${m[3] ? " " + m[3] : ""}`;
+    }
+
     function normVenueKey(name) {
         return String(name || "")
             .toLowerCase()
@@ -1563,7 +1577,7 @@
             .toUpperCase()
             .replace(/\s+/g, " ")
             .trim();
-        key = PARK_GAME_KEY_ALIASES[key] || key;
+        key = aliasParkGameKey(key);
         let ctx = byGame[key];
         if (!ctx) {
             const vk = normVenueKey(game.venue);

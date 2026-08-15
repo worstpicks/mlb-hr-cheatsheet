@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-14T21:05:29Z",
+  "updated": "2026-08-15T09:50:54Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1013,11 +1013,26 @@
       "o05": {
         "player": "Teoscar Hernandez",
         "matchup": "MIL @ LAD",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Jackson Merrill",
         "matchup": "SD @ CLE",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-15",
+      "o05": {
+        "player": "Jackson Chourio",
+        "matchup": "MIL @ LAD",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Christian Encarnacion-Strand",
+        "matchup": "BAL @ TB",
         "result": "pending"
       }
     }

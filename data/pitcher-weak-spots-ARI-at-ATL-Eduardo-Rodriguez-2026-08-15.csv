@@ -1,0 +1,30 @@
+Matchup,ARI @ ATL
+Pitcher,Eduardo Rodriguez
+Pitcher Team,ARI
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.0,1.63,="18-66",.273,.424,0.151,2,2,1,3,16.2,8,.351,.775
+Batting Second,14.1,2.09,="23-65",.354,.631,0.277,4,6,0,8,15.3,7,.417,1.048
+Batting Third,18.1,1.15,="13-61",.213,.311,0.098,1,3,0,7,15.7,8,.304,.615
+Batting Fourth,18.2,0.96,="13-65",.200,.231,0.031,0,2,0,1,24.3,5,.257,.488
+Batting Fifth,16.1,1.35,="14-61",.230,.377,0.147,3,0,0,11,13.0,8,.319,.696
+Batting Sixth,16.2,0.96,="14-63",.222,.429,0.207,2,5,1,7,22.7,2,.246,.675
+Batting Seventh,17.2,0.62,="11-62",.177,.306,0.129,1,3,1,1,24.2,0,.177,.483
+Batting Eighth,13.1,1.20,="10-49",.204,.265,0.061,0,3,0,1,7.3,6,.291,.556
+Batting Ninth,12.0,1.33,="13-48",.271,.396,0.125,0,4,1,4,13.5,3,.314,.710
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ronald Acuna Jr. RHB,Batting First ​,="54-214",.252,.411,0.159,7,11,1,23,21.7,37,.372,.783
+Ozzie Albies SHB,Batting Second ​,="27-146",.185,.356,0.171,6,7,0,15,23.4,9,.234,.590
+Drake Baldwin LHB,Batting Second ​,="59-200",.295,.490,0.195,11,6,0,34,22.2,18,.362,.852
+Matt Olson LHB,Batting Third ​,="98-385",.255,.527,0.272,28,21,0,61,24.6,44,.333,.860
+Lane Thomas RHB,Batting Fourth ​,="16-62",.258,.516,0.258,3,7,0,7,26.1,7,.333,.849
+Michael Harris II LHB,Batting Fourth ​,="34-128",.266,.391,0.125,2,8,1,14,17.9,4,.291,.682
+Mauricio Dubon RHB,Batting Fifth ​,="38-137",.277,.423,0.146,4,6,1,27,12.7,9,.320,.743
+Dominic Smith LHB,Batting Seventh ​,="25-78",.321,.462,0.141,3,2,0,17,12.8,3,.353,.815
+Austin Riley RHB,Batting Seventh ​,="26-108",.241,.463,0.222,6,6,0,18,33.3,13,.333,.796
+Mike Yastrzemski LHB,Batting Eighth ​,="19-102",.186,.294,0.108,3,2,0,10,21.4,12,.282,.576
+Ha-Seong Kim RHB,Batting Eighth ​,="3-38",.079,.079,0.000,0,0,0,2,25.6,5,.186,.265
+Sean Murphy RHB,Batting Ninth ​,="3-10",.300,.400,0.100,0,1,0,0,50.0,0,.300,.700
+Jim Jarvis LHB,Batting Ninth ​,="17-80",.213,.300,0.087,1,2,1,9,19.3,5,.267,.567

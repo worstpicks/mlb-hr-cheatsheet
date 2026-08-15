@@ -1,0 +1,30 @@
+Matchup,BOS @ PIT
+Pitcher,Sonny Gray
+Pitcher Team,BOS
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.15,="15-63",.238,.397,0.159,2,4,0,2,17.9,3,.284,.681
+Batting Second,16.0,1.44,="16-58",.276,.448,0.172,2,4,0,9,19.7,7,.348,.796
+Batting Third,17.2,0.79,="13-60",.217,.217,0.000,0,0,0,2,24.2,1,.242,.459
+Batting Fourth,14.1,1.26,="13-54",.241,.407,0.166,2,3,0,6,18.3,5,.317,.724
+Batting Fifth,14.2,0.75,="8-53",.151,.245,0.094,1,2,0,3,22.8,3,.211,.456
+Batting Sixth,11.2,1.54,="15-49",.306,.673,0.367,3,7,1,8,22.6,3,.358,1.031
+Batting Seventh,10.2,1.78,="16-46",.348,.500,0.152,1,4,0,2,20.4,3,.388,.888
+Batting Eighth,12.0,1.17,="9-43",.209,.372,0.163,2,1,0,3,26.5,5,.286,.658
+Batting Ninth,12.1,0.81,="7-43",.163,.209,0.046,0,2,0,4,23.4,3,.213,.422
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake Mangum SHB,Batting First ​,="43-151",.285,.404,0.119,3,7,1,12,22.6,8,.335,.739
+Spencer Horwitz LHB,Batting First ​,="29-104",.279,.462,0.183,5,4,0,8,12.3,15,.385,.847
+Brandon Lowe LHB,Batting Second ​,="106-408",.260,.505,0.245,25,23,1,72,28.2,42,.328,.833
+Bryan Reynolds SHB,Batting Third ​,="119-450",.264,.438,0.174,15,29,2,61,24.3,74,.376,.814
+Jack Brannigan RHB,Batting Third ​,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Esmerlyn Valdez RHB,Batting Fourth ​,="24-112",.214,.500,0.286,8,6,1,28,37.4,24,.353,.853
+Ronny Simon SHB,Batting Sixth ​,="5-11",.455,.545,0.090,0,1,0,2,8.3,1,.500,1.045
+Nick Gonzales RHB,Batting Sixth ​,="55-151",.364,.483,0.119,3,9,0,17,14.7,9,.411,.894
+Jared Triolo RHB,Batting Eighth ​,="31-103",.301,.398,0.097,2,4,0,14,21.1,8,.363,.761
+Jacob Gonzalez LHB,Batting Eighth ​,="11-49",.224,.408,0.184,2,3,0,9,19.6,0,.235,.643
+Rafael Flores RHB,Batting Eighth ​,="3-17",.176,.412,0.236,1,1,0,2,19.0,4,.333,.745
+Henry Davis RHB,Batting Ninth ​,="33-197",.168,.315,0.147,8,5,0,27,21.3,20,.263,.578
+Billy Cook RHB,Batting Ninth ​,="6-27",.222,.296,0.074,0,0,1,2,48.1,0,.222,.518

@@ -1,0 +1,30 @@
+Matchup,TEX @ ATH
+Pitcher,Cody Bradford
+Pitcher Team,TEX
+Opposing Team,ATH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,1.50,="2-6",.333,.500,0.167,0,1,0,1,16.7,0,.333,.833
+Batting Second,1.1,0.75,="1-5",.200,.200,0.000,0,0,0,0,0.0,0,.333,.533
+Batting Third,0.2,4.50,="1-2",.500,.500,0.000,0,0,0,1,20.0,2,.600,1.100
+Batting Fourth,1.1,2.25,="3-5",.600,.800,0.200,0,1,0,1,0.0,0,.600,1.400
+Batting Fifth,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,20.0,0,.000,.000
+Batting Sixth,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,20.0,0,.000,.000
+Batting Seventh,1.1,0.75,="0-4",.000,.000,0.000,0,0,0,0,20.0,1,.200,.200
+Batting Eighth,1.0,2.00,="2-5",.400,.600,0.200,0,1,0,0,0.0,0,.400,1.000
+Batting Ninth,1.0,1.00,="1-3",.333,.333,0.000,0,0,0,0,25.0,0,.333,.666
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jonah Heim SHB,Batting Fourth ​,="13-69",.188,.275,0.087,1,3,0,5,23.3,2,.219,.494
+Tyler Soderstrom LHB,Batting Fourth ​,="36-155",.232,.445,0.213,7,10,1,22,15.9,20,.318,.763
+Carlos Cortes LHB,Batting Fifth ​,="13-51",.255,.353,0.098,0,3,1,3,23.1,1,.269,.622
+Tommy White RHB,Batting Fifth ​,="10-43",.233,.233,0.000,0,0,0,1,18.2,1,.250,.483
+Jacob Wilson RHB,Batting Fifth ​,="37-131",.282,.397,0.115,3,6,0,15,10.9,5,.307,.704
+Lawrence Butler LHB,Batting Sixth ​,="21-96",.219,.344,0.125,2,6,0,11,25.7,12,.312,.656
+Zack Gelof RHB,Batting Seventh ​,="20-59",.339,.525,0.186,3,2,0,7,18.5,4,.381,.906
+Max Muncy RHB,Batting Seventh ​,="25-103",.243,.359,0.116,2,4,1,10,35.3,6,.302,.661
+Henry Bolte RHB,Batting Seventh ​,="18-60",.300,.417,0.117,2,1,0,8,26.5,7,.382,.799
+Donovan Walton LHB,Batting Eighth ​,="12-36",.333,.583,0.250,2,3,0,5,17.5,3,.400,.983
+Jeff McNeil LHB,Batting Eighth ​,="24-114",.211,.228,0.017,0,2,0,13,11.7,12,.289,.517
+Brian Serven RHB,Batting Ninth ​,="2-11",.182,.455,0.273,1,0,0,2,27.3,0,.182,.637
+Alika Williams RHB,Batting Ninth ​,="24-89",.270,.449,0.179,2,10,0,9,26.3,4,.309,.758

@@ -1,0 +1,30 @@
+Matchup,SEA @ HOU
+Pitcher,Hunter Brown
+Pitcher Team,HOU
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.20,="6-31",.194,.387,0.193,2,0,0,3,34.3,4,.286,.673
+Batting Second,6.2,1.80,="6-28",.214,.393,0.179,1,2,0,2,22.9,6,.371,.764
+Batting Third,7.2,1.57,="8-31",.258,.484,0.226,2,1,0,3,31.4,4,.343,.827
+Batting Fourth,9.1,0.86,="4-28",.143,.179,0.036,0,1,0,1,21.2,4,.273,.452
+Batting Fifth,7.2,1.17,="4-25",.160,.160,0.000,0,0,0,2,38.7,5,.290,.450
+Batting Sixth,5.0,2.40,="7-22",.318,.591,0.273,2,0,0,7,7.4,5,.444,1.035
+Batting Seventh,6.0,1.17,="3-21",.143,.286,0.143,1,0,0,2,11.5,4,.308,.594
+Batting Eighth,6.1,1.11,="6-23",.261,.348,0.087,0,2,0,3,20.8,1,.292,.640
+Batting Ninth,6.0,0.67,="2-20",.100,.150,0.050,0,1,0,0,30.4,2,.217,.367
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-283",.237,.336,0.099,5,11,1,21,20.8,43,.341,.677
+Brendan Donovan LHB,Batting First ​,="23-75",.307,.507,0.200,3,4,1,11,12.2,9,.411,.918
+Cole Young LHB,Batting First ​,="29-98",.296,.418,0.122,2,2,2,5,11.3,5,.349,.767
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Second ​,="50-203",.246,.394,0.148,7,9,0,22,18.3,16,.304,.698
+Dominic Canzone LHB,Batting Third ​,="26-115",.226,.374,0.148,4,5,0,14,21.9,13,.305,.679
+Josh Naylor LHB,Batting Fourth ​,="51-186",.274,.382,0.108,5,5,0,21,15.0,18,.343,.725
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Jhonny Pereda RHB,Batting Eighth ​,="13-50",.260,.320,0.060,1,0,0,3,18.9,3,.302,.622
+Weston Wilson RHB,Batting Eighth ​,="12-53",.226,.358,0.132,2,1,0,4,28.3,7,.317,.675
+Victor Robles RHB,Batting Eighth ​,="14-54",.259,.370,0.111,0,2,2,6,18.3,4,.322,.692
+Leo Rivas SHB,Batting Ninth ​,="11-88",.125,.170,0.045,0,2,1,7,28.7,14,.264,.434
+Brock Rodden SHB,Batting Ninth ​,="2-8",.250,.500,0.250,0,2,0,3,50.0,1,.300,.800

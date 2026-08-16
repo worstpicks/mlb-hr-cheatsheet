@@ -1,0 +1,30 @@
+Matchup,COL @ SF
+Pitcher,Blade Tidwell
+Pitcher Team,SF
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,1.00,="2-11",.182,.455,0.273,1,0,0,3,25.0,1,.250,.705
+Batting Second,2.2,1.50,="4-11",.364,.545,0.181,0,2,0,0,0.0,0,.364,.909
+Batting Third,2.0,2.50,="4-9",.444,.444,0.000,0,0,0,0,0.0,1,.500,.944
+Batting Fourth,3.0,0.67,="2-10",.200,.300,0.100,0,1,0,2,27.3,0,.182,.482
+Batting Fifth,2.1,0.86,="2-9",.222,.222,0.000,0,0,0,1,22.2,0,.222,.444
+Batting Sixth,2.2,0.38,="0-8",.000,.000,0.000,0,0,0,0,22.2,1,.111,.111
+Batting Seventh,2.2,0.75,="1-9",.111,.111,0.000,0,0,0,0,30.0,1,.200,.311
+Batting Eighth,1.2,3.00,="5-9",.556,.556,0.000,0,0,0,1,11.1,0,.556,1.112
+Batting Ninth,2.2,0.38,="0-8",.000,.000,0.000,0,0,0,0,50.0,1,.200,.200
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="79-271",.292,.513,0.221,11,19,4,41,16.4,11,.322,.835
+Jordan Beck RHB,Batting First ​,="7-29",.241,.345,0.104,0,3,0,3,25.8,1,.258,.603
+Mickey Moniak LHB,Batting Second ​,="45-180",.250,.533,0.283,12,11,2,33,25.1,9,.288,.821
+TJ Rumfield LHB,Batting Third ​,="40-160",.250,.425,0.175,5,11,1,26,14.8,17,.341,.766
+Adael Amador SHB,Batting Third ​,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Hunter Goodman RHB,Batting Third ​,="41-187",.219,.508,0.289,15,9,0,28,36.3,11,.269,.777
+Troy Johnston LHB,Batting Fifth ​,="32-114",.281,.351,0.070,0,6,1,15,15.2,13,.364,.715
+Cole Carrigg SHB,Batting Fifth ​,="18-45",.400,.644,0.244,1,4,2,11,15.7,4,.440,1.084
+Willi Castro SHB,Batting Sixth ​,="32-95",.337,.558,0.221,4,7,1,17,24.5,9,.396,.954
+Connor Norby RHB,Batting Seventh ​,="11-56",.196,.339,0.143,1,5,0,5,34.4,6,.281,.620
+Zac Veen LHB,Batting Seventh ​,="2-6",.333,1.333,1.000,2,0,0,4,28.6,1,.429,1.762
+Ezequiel Tovar RHB,Batting Eighth ​,="15-99",.152,.202,0.050,1,2,0,7,26.6,8,.211,.413
+Brett Sullivan LHB,Batting Ninth ​,="17-75",.227,.373,0.146,3,2,0,8,22.8,2,.253,.626

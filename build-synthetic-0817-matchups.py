@@ -8,6 +8,11 @@ Two gaps on this slate:
    bats in that game (Acuna, Olson, Riley, Yastrzemski, Buxton, Bell) would drop
    and Ober -- a real 0.64-risk arm -- would vanish from the board.
 
+   RESOLVED 09:56 the same morning: PropFinder shipped both files with real
+   odds. The entries stay in GAPS on purpose -- is_real_export() makes them a
+   no-op while the real export is on disk, and they refill the game if a later
+   import ever drops it again.
+
 2. STL @ CIN is a doubleheader and PropFinder only exported the nightcap
    (Pallante / Lowder). Game 1 (Quinn Mathews / Chase Petty) has no matchup,
    weak-spot, zone or HR-risk row anywhere in the 8/17 pull.

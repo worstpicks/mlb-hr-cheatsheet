@@ -108,12 +108,12 @@ const games = [
         description: "Tail key data: Park boost +1% (stadium -7%, weather +8%). Perez (HR risk -0.71, vs LHB -0.23, vs RHB -0.67). Ober (HR risk 0.64, vs LHB +0.47, vs RHB +0.59).",
         startTime: "2026-08-17T23:40:00Z",
         rows: [
-            { name: "Josh Bell (S)", odds: "Listed prop - Over 0.5 HR", score: 58, emojis: "💎", note: "Worst Pickz Hidden Gem. 1 HR, 1 near-HR, 92.6 mph EV. Perez SHB→LHB split -0.23, HR risk -0.71. slight split headwind (-0.23); pitcher suppresses HR (-0.71).", chips: ["vs Perez"], blast: "good" },
-            { name: "Byron Buxton (R)", odds: "Listed prop - Over 0.5 HR", score: 58, emojis: "", note: "0 HR, 80.4 mph EV. Perez RHB split -0.67, HR risk -0.71. tough split lane (-0.67); pitcher suppresses HR (-0.71).", chips: ["vs Perez"] },
-            { name: "Austin Riley (R)", odds: "Listed prop - Over 0.5 HR", score: 72, emojis: "", note: "0 HR, 1 near-HR, 93.7 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%); limited recent HR events.", chips: ["vs Ober"], blast: "good" },
-            { name: "Matt Olson (L)", odds: "Listed prop - Over 0.5 HR", score: 85, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 89.3 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).", chips: ["vs Ober"], blast: "high" },
-            { name: "Mike Yastrzemski (L)", odds: "Listed prop - Over 0.5 HR", score: 77, emojis: "", note: "1 HR, 2 near-HR, 93.9 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).", chips: ["vs Ober"], blast: "good" },
-            { name: "Ronald Acuna Jr. (R)", odds: "Listed prop - Over 0.5 HR", score: 73, emojis: "", note: "0 HR, 1 near-HR, 95.2 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%); limited recent HR events.", chips: ["vs Ober"], blast: "good" },
+            { name: "Josh Bell (S)", odds: "Listed +625 - Over 0.5 HR", score: 58, emojis: "💎", note: "Worst Pickz Hidden Gem. 1 HR, 1 near-HR, 91.8 mph EV. Perez SHB→LHB split -0.23, HR risk -0.71. slight split headwind (-0.23); pitcher suppresses HR (-0.71).", chips: ["vs Perez"], blast: "good" },
+            { name: "Byron Buxton (R)", odds: "Listed +292 - Over 0.5 HR", score: 65, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 93.6 mph EV. Perez RHB split -0.67, HR risk -0.71. tough split lane (-0.67); pitcher suppresses HR (-0.71).", chips: ["vs Perez"], blast: "high" },
+            { name: "Austin Riley (R)", odds: "Listed +425 - Over 0.5 HR", score: 79, emojis: "", note: "1 HR, 2 near-HR, 95.5 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%).", chips: ["vs Ober"], blast: "good" },
+            { name: "Matt Olson (L)", odds: "Listed +254 - Over 0.5 HR", score: 87, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 91.5 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).", chips: ["vs Ober"], blast: "high" },
+            { name: "Mike Yastrzemski (L)", odds: "Listed +514 - Over 0.5 HR", score: 78, emojis: "", note: "1 HR, 2 near-HR, 94.8 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).", chips: ["vs Ober"], blast: "good" },
+            { name: "Ronald Acuna Jr. (R)", odds: "Listed +329 - Over 0.5 HR", score: 71, emojis: "", note: "0 HR, 1 near-HR, 92.4 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%); limited recent HR events.", chips: ["vs Ober"], blast: "good" },
         ],
     },
     {

@@ -169,12 +169,12 @@ games = [
         "title": "ATL @ MIN - Martin Perez (L, ATL) vs Bailey Ober (R, MIN)",
         "description": "Tail key data: Park boost +1% (stadium -7%, weather +8%). Perez (HR risk -0.71, vs LHB -0.23, vs RHB -0.67). Ober (HR risk 0.64, vs LHB +0.47, vs RHB +0.59).",
         "rows": [
-            row("Josh Bell", "S", "N/A", 58, "💎", ["vs Perez"], """Worst Pickz Hidden Gem. 1 HR, 1 near-HR, 92.6 mph EV. Perez SHB→LHB split -0.23, HR risk -0.71. slight split headwind (-0.23); pitcher suppresses HR (-0.71).""", blast="good"),
-            row("Byron Buxton", "R", "N/A", 58, "", ["vs Perez"], """0 HR, 80.4 mph EV. Perez RHB split -0.67, HR risk -0.71. tough split lane (-0.67); pitcher suppresses HR (-0.71)."""),
-            row("Austin Riley", "R", "N/A", 72, "", ["vs Ober"], """0 HR, 1 near-HR, 93.7 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%); limited recent HR events.""", blast="good"),
-            row("Matt Olson", "L", "N/A", 85, "🌕 💣", ["vs Ober"], """2 HR, 3 near-HR, 89.3 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).""", blast="high"),
-            row("Mike Yastrzemski", "L", "N/A", 77, "", ["vs Ober"], """1 HR, 2 near-HR, 93.9 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).""", blast="good"),
-            row("Ronald Acuna Jr.", "R", "N/A", 73, "", ["vs Ober"], """0 HR, 1 near-HR, 95.2 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%); limited recent HR events.""", blast="good"),
+            row("Josh Bell", "S", "+625", 58, "💎", ["vs Perez"], """Worst Pickz Hidden Gem. 1 HR, 1 near-HR, 91.8 mph EV. Perez SHB→LHB split -0.23, HR risk -0.71. slight split headwind (-0.23); pitcher suppresses HR (-0.71).""", blast="good"),
+            row("Byron Buxton", "R", "+292", 65, "🌕 💣", ["vs Perez"], """2 HR, 3 near-HR, 93.6 mph EV. Perez RHB split -0.67, HR risk -0.71. tough split lane (-0.67); pitcher suppresses HR (-0.71).""", blast="high"),
+            row("Austin Riley", "R", "+425", 79, "", ["vs Ober"], """1 HR, 2 near-HR, 95.5 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%).""", blast="good"),
+            row("Matt Olson", "L", "+254", 87, "🌕 💣", ["vs Ober"], """2 HR, 3 near-HR, 91.5 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).""", blast="high"),
+            row("Mike Yastrzemski", "L", "+514", 78, "", ["vs Ober"], """1 HR, 2 near-HR, 94.8 mph EV. Ober LHB split +0.47, HR risk 0.64. park suppresses carry (-7%).""", blast="good"),
+            row("Ronald Acuna Jr.", "R", "+329", 71, "", ["vs Ober"], """0 HR, 1 near-HR, 92.4 mph EV. Ober RHB split +0.59, HR risk 0.64. park suppresses carry (-7%); limited recent HR events.""", blast="good"),
         ],
     },
     {

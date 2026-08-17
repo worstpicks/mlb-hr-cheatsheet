@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-16T09:52:27Z",
+  "updated": "2026-08-17T13:10:19Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1043,11 +1043,26 @@
       "o05": {
         "player": "Francisco Lindor",
         "matchup": "WSH @ NYM",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Munetaka Murakami",
         "matchup": "CWS @ DET",
+        "result": "loss",
+        "hr": 1
+      }
+    },
+    {
+      "date": "2026-08-17",
+      "o05": {
+        "player": "Max Muncy",
+        "matchup": "LAD @ COL",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Zack Gelof",
+        "matchup": "ATH @ KC",
         "result": "pending"
       }
     }

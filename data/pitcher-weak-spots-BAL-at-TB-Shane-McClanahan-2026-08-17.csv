@@ -1,0 +1,30 @@
+Matchup,BAL @ TB
+Pitcher,Shane McClanahan
+Pitcher Team,TB
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,0.70,="9-55",.164,.200,0.036,0,2,0,4,26.3,2,.193,.393
+Batting Second,11.0,1.55,="10-43",.233,.349,0.116,1,2,0,3,17.0,7,.365,.714
+Batting Third,12.0,1.25,="8-42",.190,.357,0.167,2,1,0,7,18.0,7,.320,.677
+Batting Fourth,11.1,0.97,="9-43",.209,.442,0.233,2,4,0,8,33.3,2,.244,.686
+Batting Fifth,10.1,1.16,="7-39",.179,.231,0.052,0,0,1,3,22.7,5,.273,.504
+Batting Sixth,10.1,1.06,="10-41",.244,.317,0.073,1,0,0,3,16.7,1,.262,.579
+Batting Seventh,8.2,1.62,="11-37",.297,.378,0.081,0,3,0,3,17.1,3,.366,.744
+Batting Eighth,10.0,1.00,="5-33",.152,.303,0.151,1,2,0,2,25.6,5,.263,.566
+Batting Ninth,9.0,1.11,="7-35",.200,.229,0.029,0,1,0,2,23.7,3,.263,.492
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Pete Alonso RHB,Batting Fourth ​,="62-248",.250,.472,0.222,15,10,0,47,23.8,34,.346,.818
+Tyler O'Neill RHB,Batting Fifth ​,="11-61",.180,.246,0.066,1,1,0,2,23.9,9,.296,.542
+Christian Encarnacion-Strand RHB,Batting Fifth ​,="5-21",.238,.381,0.143,1,0,0,2,21.7,1,.273,.654
+Leody Taveras SHB,Batting Sixth ​,="40-161",.248,.348,0.100,1,9,2,15,21.9,16,.320,.668
+Dylan Beavers LHB,Batting Sixth ​,="13-51",.255,.353,0.098,1,2,0,6,24.1,3,.296,.649
+Christian Franklin RHB,Batting Seventh ​,="0-9",.000,.000,0.000,0,0,0,0,27.3,2,.182,.182
+Colton Cowser LHB,Batting Seventh ​,="24-132",.182,.273,0.091,4,0,0,15,32.0,17,.276,.549
+Carlos Narvaez RHB,Batting Eighth ​,="20-105",.190,.276,0.086,2,3,0,7,29.8,8,.263,.539
+Coby Mayo RHB,Batting Eighth ​,="19-94",.202,.319,0.117,3,2,0,11,32.0,8,.272,.591
+Yohel Pozo RHB,Batting Ninth ​,="4-19",.211,.368,0.157,1,0,0,1,15.0,1,.250,.618
+Jeremiah Jackson RHB,Batting Ninth ​,="21-85",.247,.376,0.129,2,5,0,14,19.8,3,.267,.643
+Jackson Holliday LHB,Batting Ninth ​,="19-71",.268,.437,0.169,3,3,0,11,20.3,7,.329,.766

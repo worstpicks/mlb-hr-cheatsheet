@@ -1,0 +1,30 @@
+Matchup,MIA @ PHI
+Pitcher,Janson Junk
+Pitcher Team,MIA
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.1,1.14,="11-48",.229,.417,0.188,2,1,1,6,17.6,3,.275,.692
+Batting Second,10.0,1.80,="15-44",.341,.545,0.204,3,0,0,5,10.6,3,.383,.928
+Batting Third,9.2,1.97,="14-42",.333,.548,0.215,1,6,0,6,10.6,5,.404,.952
+Batting Fourth,9.2,1.66,="13-40",.325,.475,0.150,1,1,1,6,15.9,3,.372,.847
+Batting Fifth,9.1,1.61,="13-38",.342,.579,0.237,2,3,0,8,12.2,2,.366,.945
+Batting Sixth,9.0,1.00,="8-35",.229,.314,0.085,0,3,0,1,16.2,1,.270,.584
+Batting Seventh,7.2,1.70,="10-32",.313,.500,0.187,2,0,0,7,27.8,3,.361,.861
+Batting Eighth,10.1,0.58,="5-34",.147,.265,0.118,1,1,0,3,19.4,1,.167,.432
+Batting Ninth,9.1,0.64,="3-31",.097,.129,0.032,0,1,0,3,29.4,3,.176,.305
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="96-374",.257,.417,0.160,14,16,1,38,21.6,25,.305,.722
+Luis Arraez LHB,Batting Second ​,="71-190",.374,.474,0.100,2,9,2,16,2.3,16,.425,.899
+Kyle Schwarber LHB,Batting Second ​,="77-314",.245,.576,0.331,30,12,1,58,34.1,56,.365,.941
+Bryce Harper LHB,Batting Third ​,="111-420",.264,.510,0.246,25,22,3,72,20.7,83,.382,.892
+Alec Bohm RHB,Batting Fourth ​,="44-190",.232,.353,0.121,5,8,0,27,12.3,12,.281,.634
+Edmundo Sosa RHB,Batting Fifth ​,="12-54",.222,.241,0.019,0,1,0,9,19.7,3,.267,.508
+Brandon Marsh LHB,Batting Fifth ​,="43-140",.307,.464,0.157,5,7,0,19,22.1,8,.342,.806
+Bryson Stott LHB,Batting Sixth ​,="49-168",.292,.446,0.154,4,6,4,23,19.4,16,.351,.797
+J.T. Realmuto RHB,Batting Seventh ​,="28-125",.224,.352,0.128,3,7,0,13,24.3,8,.300,.652
+Bryan De La Cruz RHB,Batting Eighth ​,="5-13",.385,.462,0.077,0,1,0,2,15.4,0,.385,.847
+Garrett Stubbs LHB,Batting Ninth ​,="2-33",.061,.061,0.000,0,0,0,2,21.1,2,.158,.219
+Derek Hill RHB,Batting Ninth ​,="12-57",.211,.263,0.052,1,0,0,6,44.1,1,.237,.500
+Justin Crawford LHB,Batting Ninth ​,="54-204",.265,.343,0.078,1,11,1,15,20.4,15,.318,.661

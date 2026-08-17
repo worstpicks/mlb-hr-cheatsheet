@@ -140,10 +140,15 @@ STALE_8_16 = [
 # HR risk >= 0.95 on today's hr-targets export.
 EXPECTED_BUMS = {"Mason Barnett", "Luis Castillo", "Tomoyuki Sugano"}
 
-# PropFinder shipped no 8/17 row of any kind for Quinn Mathews (STL @ CIN Game 1), so
-# that header carries one pitcher's splits instead of two. Recorded here so the audit
-# reports it as a known data gap rather than silently passing or hard-failing.
-SINGLE_SPLIT_GAMES = {"STL @ CIN (G1)"}
+# Every game now carries both starters' splits: the 11:42 re-export shipped rows for
+# all 22 arms, and the two 0-BF arms (Emanuel, Gamboa) render the honest
+# "no MLB HR data yet" lane rather than being dropped from the header.
+SINGLE_SPLIT_GAMES: set[str] = set()
+
+# Probables that were replaced during the day. They must not survive anywhere on the
+# sheet: Cincinnati's Game 1 starter went Chase Petty -> Kent Emanuel and Boston's went
+# Brayan Bello -> Alec Gamboa (MLB Stats API, 11:42).
+SUPERSEDED_PROBABLES = ["Chase Petty", "Brayan Bello"]
 
 errs: list[str] = []
 warns: list[str] = []
@@ -264,6 +269,9 @@ def main() -> int:
     for name in STALE_8_16:
         if fold(name) in body_folded:
             fail(f"stale 8/16 content on sheet: {name}")
+    for name in SUPERSEDED_PROBABLES:
+        if fold(name) in body_folded:
+            fail(f"superseded probable still on sheet: {name}")
 
     # Date correctness
     if f"{WEEKDAY}, {DATE_TEXT}" not in html:

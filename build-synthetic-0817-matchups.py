@@ -71,18 +71,31 @@ GAPS: dict[str, dict] = {
         "lineups": "sibling",
         # Pallante is the STL arm in G2, so his batter rows are the CIN lineup.
         "sibling": f"hr-matchups-STL-at-CIN-Andre-Pallante-{DATE}.csv",
-        "block_from": None,  # no export exists for Mathews -- blank on purpose
+        "block_from": None,
     },
-    "Chase Petty": {
-        "matchup": "STL @ CIN",
-        "pteam": "CIN",
-        "oteam": "STL",
+    # 11:42 probable change: Boston went from Brayan Bello to Alec Gamboa (MLB
+    # Stats API confirms). PropFinder shipped Gamboa's HR-risk row but no
+    # hr-matchups export, so the three listed Arizona bats (Carroll, Kepler,
+    # Marte) would drop. Bello's export is the same Arizona lineup with the same
+    # pitcher-independent form, so it is re-pointed at Gamboa. Gamboa has 0 BF,
+    # so his pitcher block is blank and the sheet shows the no-data lane.
+    "Alec Gamboa": {
+        "matchup": "ARI @ BOS",
+        "pteam": "BOS",
+        "oteam": "ARI",
         "lineups": "sibling",
-        # Lowder is the CIN arm in G2, so his batter rows are the STL lineup.
-        "sibling": f"hr-matchups-STL-at-CIN-Rhett-Lowder-{DATE}.csv",
-        "block_from": "hr-matchups-CIN-at-WSH-Chase-Petty-2026-08-07.csv",
+        "sibling": f"hr-matchups-ARI-at-BOS-Brayan-Bello-{DATE}.csv",
+        "block_from": None,
     },
 }
+
+# Matchup exports on disk whose pitcher is no longer the probable starter. They are
+# dropped from the manifest so derive_games_from_csv does not see three arms for one
+# game, but the FILE stays on disk because a GAPS entry above reads its batter rows.
+SUPERSEDED: list[str] = [
+    f"hr-matchups-ARI-at-BOS-Brayan-Bello-{DATE}.csv",
+    f"hr-matchups-STL-at-CIN-Chase-Petty-{DATE}.csv",
+]
 
 PITCHER_BLOCK_COLS = [
     "IP", "BF", "BAA", "WOBA", "SLG", "ISO", "WHIP", "HR", "HR/9", "BB%",
@@ -384,15 +397,36 @@ def write_game(pitcher: str, zrows, summaries, prior_index) -> str | None:
 #
 # This runs from the same script the importer re-invokes, so the carry survives
 # every re-import instead of being wiped by a fresh Downloads copy.
-CARRIED_RISK_ROWS: list[dict] = [
-    {
-        "pitcher": "Chase Petty",
-        "time": "1:40 PM",
-        "vs": "vs",  # CIN is home in Game 1
-        "source": "hr-targets-overall-2026-08-07.csv",
-        "cells": ["0.31", "-0.09", "0.55", "1.82", "6.9%", "21.4%", "34.6%", "25.3%", "7.3%", "204"],
-    },
-]
+# Emptied 11:42: PropFinder's re-export lists all 22 arms, including Pallante and
+# Quinn Mathews, so nothing needs carrying. The Chase Petty carry that lived here is
+# gone with him -- Cincinnati's Game 1 starter is now Kent Emanuel.
+CARRIED_RISK_ROWS: list[dict] = []
+
+
+def promote_newest_hr_targets() -> None:
+    """Make the newest hr-targets export the canonical one.
+
+    Re-exporting mid-slate lands a browser-deduped copy in Downloads --
+    `hr-targets-overall-DATE(1).csv` -- while the original keeps the canonical
+    name. The importer copies both verbatim, and `hr_targets_csv()` prefers the
+    exact `hr-targets-overall-DATE.csv`, so the STALE file wins and every risk
+    number silently stays at its earlier value. Pick by Downloads mtime instead.
+    """
+    downloads = Path.home() / "Downloads"
+    if not downloads.is_dir():
+        return
+    exports = sorted(
+        downloads.glob(f"hr-targets-overall-{DATE}*.csv"),
+        key=lambda p: p.stat().st_mtime,
+    )
+    if len(exports) < 2:
+        return
+    newest = exports[-1]
+    canonical = DATA / f"hr-targets-overall-{DATE}.csv"
+    if canonical.is_file() and canonical.read_bytes() == newest.read_bytes():
+        return
+    canonical.write_bytes(newest.read_bytes())
+    print(f"promoted newest HR-targets export: {newest.name} -> {canonical.name}")
 
 
 def carry_pitcher_risk_rows() -> None:
@@ -431,13 +465,17 @@ def update_manifest(names: list[str]) -> None:
     man = json.loads(path.read_text(encoding="utf-8"))
     files = set(man.get("files") or [])
     added = [n for n in names if n not in files]
-    man["files"] = sorted(files | set(names))
+    dropped = sorted(files & set(SUPERSEDED))
+    man["files"] = sorted((files | set(names)) - set(SUPERSEDED))
     path.write_text(json.dumps(man, indent=2) + "\n", encoding="utf-8")
     for n in added:
         print("manifest +", n)
+    for n in dropped:
+        print("manifest - (superseded probable)", n)
 
 
 def main() -> None:
+    promote_newest_hr_targets()
     lineups = load_zone_lineups()
     zone_gaps = [p for p, s in GAPS.items() if s["lineups"] == "zone"]
     missing = [p for p in zone_gaps if p not in lineups]

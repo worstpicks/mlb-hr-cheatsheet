@@ -1,0 +1,26 @@
+Matchup,STL @ CIN
+Pitcher,Quinn Mathews
+Pitcher Team,STL
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,1.50,="1-2",.500,.500,0.000,0,0,0,1,0.0,0,.333,.833
+Batting Second,0.2,1.50,="1-3",.333,.333,0.000,0,0,0,0,0.0,0,.333,.666
+Batting Third,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Fourth,0.2,1.50,="1-3",.333,.333,0.000,0,0,0,1,0.0,0,.333,.666
+Batting Fifth,0.1,6.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,2,.667,.667
+Batting Sixth,0.2,1.50,="1-3",.333,.333,0.000,0,0,0,0,33.3,0,.333,.666
+Batting Seventh,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,0,.500,1.000
+Batting Eighth,0.1,3.00,="1-2",.500,1.000,0.500,0,1,0,0,0.0,0,.500,1.500
+Batting Ninth,0.1,3.00,="0-1",.000,.000,0.000,0,0,0,0,50.0,1,.500,.500
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Elly De La Cruz SHB,Batting First ​,="41-167",.246,.455,0.209,8,5,3,18,23.1,27,.349,.804
+Sal Stewart RHB,Batting Second ​,="45-166",.271,.524,0.253,12,6,0,35,22.8,11,.321,.845
+Tyler Stephenson RHB,Batting Seventh ​,="22-101",.218,.386,0.168,4,5,0,15,31.0,13,.310,.696
+Eugenio Suarez RHB,Batting Fourth ​,="13-81",.160,.358,0.198,5,1,0,11,41.1,13,.284,.642
+Dane Myers RHB,Batting Fifth ​,="2-7",.286,.429,0.143,0,1,0,2,33.3,1,.333,.762
+Michael Toglia SHB,Batting Sixth ​,="1-2",.500,1.000,0.500,0,1,0,0,0.0,1,.667,1.667
+Matt McLain RHB,Batting Seventh ​,="10-26",.385,.923,0.538,4,2,0,7,20.0,8,.543,1.466
+Noelvi Marte RHB,Batting Eighth ​,="11-45",.244,.289,0.045,0,2,0,0,26.7,0,.244,.533
+Ke'Bryan Hayes RHB,Batting Ninth ​,="23-159",.145,.245,0.100,4,2,1,7,18.1,10,.205,.450

@@ -23,10 +23,10 @@ DATE = "2026-08-17"
 OUT = ROOT / "build-sheet-2026-08-17.py"
 BUM_RISK_MIN = 0.95
 
-# PropFinder dropped these arms from the 8/17 hr-targets export; their risk row is
-# carried from an earlier slate by build-synthetic-0817-matchups.py. Label it so a
-# reader never mistakes a 10-day-old split for a same-day number.
-CARRIED_RISK = {"Petty": "8/7"}
+# Arms whose HR-risk row was carried from an earlier slate get labelled here so a
+# reader never mistakes a stale split for a same-day number. Empty since the 11:42
+# re-export shipped all 22 arms.
+CARRIED_RISK: dict[str, str] = {}
 
 RAW_PROPS = [
     "Elly De La Cruz(G1)",
@@ -151,12 +151,12 @@ PROP_GAME_OVERRIDES: dict[str, str] = {}
 STL_CIN_DH_SPECS: dict[str, dict] = {
     "STL @ CIN (G1)": {
         "away_sp": "Mathews",
-        "home_sp": "Petty",
+        "home_sp": "Emanuel",
         "away_sp_full": "Quinn Mathews",
-        "home_sp_full": "Chase Petty",
+        "home_sp_full": "Kent Emanuel",
         "files": [
             "hr-matchups-STL-at-CIN-Quinn-Mathews-2026-08-17.csv",
-            "hr-matchups-STL-at-CIN-Chase-Petty-2026-08-17.csv",
+            "hr-matchups-STL-at-CIN-Kent-Emanuel-2026-08-17.csv",
         ],
     },
     "STL @ CIN (G2)": {
@@ -176,6 +176,8 @@ PROBABLE_OVERRIDES: dict[str, dict] = {}
 PITCHER_HAND = {
     # 8/17 LHP
     "Quinn Mathews": "L",
+    "Kent Emanuel": "L",
+    "Alec Gamboa": "L",
     "Shane McClanahan": "L",
     "Cristopher Sanchez": "L",
     "Framber Valdez": "L",
@@ -184,13 +186,11 @@ PITCHER_HAND = {
     "Shota Imanaga": "L",
     "Blake Snell": "L",
     # 8/17 RHP
-    "Chase Petty": "R",
     "Brandon Young": "R",
     "Janson Junk": "R",
     "Andre Pallante": "R",
     "Rhett Lowder": "R",
     "Carmen Mlodzinski": "R",
-    "Brayan Bello": "R",
     "Walker Buehler": "R",
     "Nolan McLean": "R",
     "Mason Barnett": "R",

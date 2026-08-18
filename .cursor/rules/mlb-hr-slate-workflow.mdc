@@ -173,7 +173,63 @@ hits_parlay_legs = select_hits_parlay(rows, row_high_whiff=row_high_whiff, avoid
 hits_parlay_legs = fill_hits_parlay(rows, hits_parlay_legs, row_high_whiff=row_high_whiff)
 ```
 
-### Pick rules (current rubric — revised Jul 11 2026)
+### Pick rules (current rubric — revised Aug 17 2026, backtested)
+
+**The ticket now ranks on a calibrated `hit_prob` = P(1+ hit), not a score.**
+`hit_prob = 1 - (1 - p_PA) ** E[PA]`, where `E[PA]` comes from the hitter's lineup
+slot and `p_PA` from his contact rate scaled by the opposing starter's BAA in his
+hand lane and the park's 1B factor. `parlay_probability(legs)` gives the ticket's
+odds of cashing.
+
+Measured over 76 archived slates (765 graded legs, real boxscores):
+
+| | per-leg | tickets cashed |
+|---|---|---|
+| old contact-first rubric | **.609** | **0 / 76** |
+| new model, top 11 | .654 | 0 / 47 |
+| new model, top 8 | .657 | 1 / 47 |
+| new model, **top 5** | **.681** | **7 / 47** |
+
+Three things the old rubric got wrong, all now fixed:
+
+1. **It ignored batting order.** Implied hit rate *per PA* is nearly flat by slot
+   (.200–.223), but `E[PA]` runs 4.54 leadoff to 3.45 in the nine hole. That gap is
+   the entire 68% → 55% spread in P(1+ hit), and it dwarfs every contact signal.
+   `SLOT_EXPECTED_PA` is empirical from those 76 slates.
+2. **It judged the pitcher on HR platoon split.** HR risk answers "will this leave
+   the yard" — wrong question. Now uses `BAA`/`K%` in the batter's hand lane from
+   `hr-matchups-*.csv` (`load_sp_lane_baa`).
+3. **It used the HR park factor.** Now uses the Ballpark Pal **1B %** column
+   (`load_park_hit_pct`).
+
+Also: research-JSON lineups list the whole available group, and **slots 10+ are
+bench, not the batting order**. `is_starting()` keeps them off the ticket — without
+it the model put two hitters who were out of the lineup in its top three.
+
+`SELECTION_CALIBRATION = 0.81` corrects a measured +.09 optimism: the last-20-game
+AVG runs hot for exactly the hitters that rank top. Keep predicted ≈ realized, or the
+displayed parlay probability is worthless.
+
+**Selection policy (Aug 17, backtested top-11 realized):** cap 2/game `.6480` |
+cap 3 `.6576` | uncapped `.6615` | uncapped + 150-PA floor `.6673`. A parlay is not a
+portfolio — every leg must hit, so spreading buys nothing, and same-game legs are
+positively correlated, which *helps*. `MAX_PER_GAME = 4`, `MAX_PER_TEAM = 3`,
+`MIN_SEASON_PA = 150` (soft — relaxed if the slate cannot fill 11).
+
+**Formula (same sweep):** V0 current `.6438` | +season blend `.6438` |
++K structure `.6531` | +platoon xwOBA `.6568`. `p_PA = (1 - K) x hit-rate-on-contact`,
+contact blended 65% season / 35% last-20, plus the hitter's own xwOBA vs that arm's
+hand at 40+ PA. Each step is inside the ±2pt noise band at n≈539 — they are kept
+because they stack and every one is directionally principled, not because any single
+one is significant.
+
+**The card ships 11 legs — `TICKET_LEGS = 11`, and that is deliberate.** The sheet's
+owner wants the Hits Lotto to be a long shot with a big payout. Do not shorten it; that
+trade was considered and rejected. What this rubric bought the lotto is *better odds on
+the same bet*: old top-11 .609 per leg (~0.6% to cash) vs new top-11 .654 (~1.5%),
+roughly double. `CORE_LEGS = 5` is informational only.
+
+### Legacy notes (pre-Aug 17 rubric)
 
 | Priority | Signal |
 |----------|--------|

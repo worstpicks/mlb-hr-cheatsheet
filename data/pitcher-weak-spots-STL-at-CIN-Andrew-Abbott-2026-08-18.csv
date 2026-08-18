@@ -1,0 +1,26 @@
+Matchup,STL @ CIN
+Pitcher,Andrew Abbott
+Pitcher Team,CIN
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.87,="17-63",.270,.349,0.079,1,2,0,5,12.2,11,.378,.727
+Batting Second,16.1,1.41,="12-60",.200,.333,0.133,1,5,0,8,15.3,11,.319,.652
+Batting Third,16.2,1.44,="21-68",.309,.456,0.147,3,1,0,7,19.4,3,.333,.789
+Batting Fourth,17.0,1.18,="12-60",.200,.467,0.267,4,2,1,15,20.0,8,.286,.753
+Batting Fifth,15.2,1.28,="14-61",.230,.328,0.098,1,3,0,7,10.3,6,.299,.627
+Batting Sixth,13.2,1.76,="16-55",.291,.455,0.164,2,3,0,6,17.2,8,.375,.830
+Batting Seventh,14.0,1.00,="8-47",.170,.255,0.085,1,1,0,3,16.7,6,.264,.519
+Batting Eighth,12.0,1.42,="10-45",.222,.333,0.111,1,2,0,1,28.8,7,.327,.660
+Batting Ninth,11.0,1.73,="15-48",.313,.500,0.187,3,0,0,7,23.1,4,.365,.865
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="113-460",.246,.378,0.132,16,13,0,46,15.6,62,.351,.729
+Ivan Herrera RHB,Batting Second ​,="102-415",.246,.378,0.132,12,17,1,46,17.1,58,.370,.748
+Jordan Walker RHB,Batting Third ​,="30-100",.300,.490,0.190,4,7,0,11,19.3,13,.386,.876
+Alec Burleson LHB,Batting Fourth ​,="14-54",.259,.370,0.111,1,3,0,10,28.8,4,.305,.675
+Joshua Baez RHB,Batting Fifth ​,="3-14",.214,.857,0.643,3,0,0,5,35.7,0,.214,1.071
+Blaze Jordan RHB,Batting Sixth ​,="6-16",.375,.688,0.313,1,0,1,3,12.5,0,.375,1.063
+Masyn Winn RHB,Batting Seventh ​,="1-9",.111,.111,0.000,0,0,0,1,45.5,2,.273,.384
+Jose Fermin RHB,Batting Eighth ​,="9-54",.167,.241,0.074,1,1,0,6,16.9,4,.224,.465
+Pedro Pages RHB,Batting Ninth ​,="5-41",.122,.195,0.073,1,0,0,2,28.3,3,.178,.373

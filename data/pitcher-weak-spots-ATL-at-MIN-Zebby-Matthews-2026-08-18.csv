@@ -1,0 +1,26 @@
+Matchup,ATL @ MIN
+Pitcher,Zebby Matthews
+Pitcher Team,MIN
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.2,1.29,="12-47",.255,.468,0.213,2,4,0,4,10.0,3,.300,.768
+Batting Second,10.1,1.74,="11-41",.268,.585,0.317,4,1,0,8,14.6,7,.375,.960
+Batting Third,12.2,0.79,="9-42",.214,.405,0.191,2,2,0,8,23.4,1,.234,.639
+Batting Fourth,10.2,1.31,="11-43",.256,.558,0.302,3,4,0,4,19.1,3,.319,.877
+Batting Fifth,9.1,1.50,="9-37",.243,.486,0.243,2,3,0,8,19.0,5,.333,.819
+Batting Sixth,9.1,1.50,="11-38",.289,.553,0.264,2,2,1,9,29.3,3,.341,.894
+Batting Seventh,8.2,1.73,="11-36",.306,.417,0.111,1,1,0,3,25.0,4,.375,.792
+Batting Eighth,8.0,1.88,="11-32",.344,.531,0.187,2,0,0,7,27.0,4,.405,.936
+Batting Ninth,10.1,0.77,="8-34",.235,.265,0.030,0,1,0,1,14.3,0,.257,.522
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Drake Baldwin LHB,Batting First ​,="44-157",.280,.471,0.191,9,3,0,26,19.0,24,.380,.851
+Ronald Acuna Jr. RHB,Batting Second ​,="11-56",.196,.482,0.286,5,1,0,10,32.2,3,.237,.719
+Matt Olson LHB,Batting Third ​,="102-395",.258,.537,0.279,29,23,0,64,24.4,46,.338,.875
+Michael Harris II LHB,Batting Fourth ​,="36-136",.265,.382,0.117,2,8,1,14,17.6,4,.289,.671
+Ozzie Albies SHB,Batting Fifth ​,="15-60",.250,.483,0.233,4,2,0,12,10.3,6,.324,.807
+Mike Yastrzemski LHB,Batting Sixth ​,="8-28",.286,.429,0.143,0,2,1,1,24.1,0,.310,.739
+Austin Riley RHB,Batting Seventh ​,="26-108",.241,.463,0.222,6,6,0,18,33.3,13,.333,.796
+Mauricio Dubon RHB,Batting Eighth ​,="5-24",.208,.292,0.084,0,2,0,3,20.0,0,.240,.532
+Sean Murphy RHB,Batting Ninth ​,="3-13",.231,.308,0.077,0,1,0,0,38.5,0,.231,.539

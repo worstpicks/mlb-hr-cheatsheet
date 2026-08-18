@@ -1,0 +1,26 @@
+Matchup,ATL @ MIN
+Pitcher,Tyler Mahle
+Pitcher Team,ATL
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,13.1,1.50,="16-55",.291,.636,0.345,5,2,1,8,30.0,4,.339,.975
+Batting Second,14.2,1.02,="7-50",.140,.140,0.000,0,0,0,1,29.3,8,.259,.399
+Batting Third,11.1,2.03,="16-47",.340,.553,0.213,1,5,1,8,16.4,7,.418,.971
+Batting Fourth,11.2,1.54,="14-48",.292,.458,0.166,2,2,0,10,18.9,4,.358,.816
+Batting Fifth,12.1,1.22,="14-47",.298,.426,0.128,1,3,0,6,26.0,1,.300,.726
+Batting Sixth,10.0,1.70,="10-39",.256,.282,0.026,0,1,0,2,27.7,7,.383,.665
+Batting Seventh,11.2,1.03,="9-39",.231,.385,0.154,2,0,0,5,27.9,3,.279,.664
+Batting Eighth,10.1,1.06,="7-37",.189,.405,0.216,2,2,0,4,23.8,4,.268,.673
+Batting Ninth,11.0,0.91,="9-38",.237,.447,0.210,2,2,0,3,7.5,1,.256,.703
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Luke Keaschall RHB,Batting First ​,="2-7",.286,.429,0.143,0,1,0,0,42.9,0,.286,.715
+Trevor Larnach LHB,Batting Second ​,="25-89",.281,.337,0.056,0,5,0,5,18.6,13,.373,.710
+Ryan Jeffers RHB,Batting Third ​,="21-71",.296,.521,0.225,4,4,0,11,15.5,12,.393,.914
+Josh Bell SHB,Batting Fourth ​,="54-239",.226,.393,0.167,8,14,1,34,22.9,21,.290,.683
+Kody Clemens LHB,Batting Fifth ​,="20-78",.256,.474,0.218,3,4,2,8,14.6,2,.284,.758
+Royce Lewis RHB,Batting Sixth ​,="9-32",.281,.500,0.219,2,1,0,3,17.1,3,.343,.843
+Brooks Lee SHB,Batting Seventh ​,="14-53",.264,.509,0.245,3,2,1,8,12.1,4,.328,.837
+Alan Roden LHB,Batting Eighth ​,="5-16",.313,.438,0.125,0,2,0,5,15.8,2,.368,.806
+Kaelen Culpepper RHB,Batting Ninth ​,="5-15",.333,.400,0.067,0,1,0,0,25.0,1,.375,.775

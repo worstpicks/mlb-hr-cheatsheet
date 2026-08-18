@@ -1,0 +1,26 @@
+Matchup,TOR @ TB
+Pitcher,Nick Martinez
+Pitcher Team,TB
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.53,="20-66",.303,.409,0.106,0,7,0,3,14.1,4,.338,.747
+Batting Second,16.1,1.35,="20-68",.294,.500,0.206,4,2,0,6,15.5,2,.324,.824
+Batting Third,17.1,1.15,="18-66",.273,.424,0.151,2,2,1,7,10.1,2,.304,.728
+Batting Fourth,14.0,1.57,="19-62",.306,.516,0.210,3,4,0,6,23.1,3,.338,.854
+Batting Fifth,16.1,0.86,="12-59",.203,.322,0.119,2,1,0,3,11.5,2,.230,.552
+Batting Sixth,16.2,0.78,="12-56",.214,.357,0.143,1,3,1,6,8.5,1,.224,.581
+Batting Seventh,12.1,1.46,="15-51",.294,.471,0.177,2,3,0,4,11.1,3,.333,.804
+Batting Eighth,14.2,0.61,="7-50",.140,.160,0.020,0,1,0,0,15.4,2,.173,.333
+Batting Ninth,13.2,0.59,="7-46",.152,.326,0.174,2,2,0,5,18.0,1,.184,.510
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Brett Bateman LHB,Batting First ​,="6-19",.316,.316,0.000,0,0,0,1,25.0,1,.350,.666
+Nathan Lukes LHB,Batting Second ​,="31-122",.254,.336,0.082,3,1,0,7,12.0,13,.333,.669
+Alejandro Kirk RHB,Batting Third ​,="12-29",.414,.414,0.000,0,0,0,3,6.1,4,.485,.899
+George Springer RHB,Batting Fourth ​,="26-109",.239,.394,0.155,4,3,1,15,14.2,11,.308,.702
+Jesus Sanchez LHB,Batting Fifth ​,="5-20",.250,.500,0.250,1,2,0,3,34.8,1,.348,.848
+Kazuma Okamoto RHB,Batting Sixth ​,="7-35",.200,.457,0.257,2,3,0,5,33.3,1,.222,.679
+Andres Gimenez LHB,Batting Seventh ​,="5-30",.167,.200,0.033,0,1,0,0,19.4,0,.194,.394
+Ernie Clement RHB,Batting Eighth ​,="9-27",.333,.444,0.111,0,3,0,0,3.6,1,.357,.801
+Josh Smith LHB,Batting Ninth ​,="1-3",.333,.667,0.334,0,1,0,1,20.0,1,.400,1.067

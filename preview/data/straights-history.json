@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-17T15:51:14Z",
+  "updated": "2026-08-18T21:05:55Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1058,11 +1058,26 @@
       "o05": {
         "player": "Max Muncy",
         "matchup": "LAD @ COL",
-        "result": "pending"
+        "result": "win",
+        "hr": 1
       },
       "o15": {
         "player": "Zack Gelof",
         "matchup": "ATH @ KC",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-18",
+      "o05": {
+        "player": "Yordan Alvarez",
+        "matchup": "LAA @ HOU",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Max Muncy",
+        "matchup": "LAD @ COL",
         "result": "pending"
       }
     }

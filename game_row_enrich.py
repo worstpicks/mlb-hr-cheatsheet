@@ -287,7 +287,9 @@ def _pitcher_measured_segment(name: str, rates: dict) -> str:
         extra.append(f"{rates['hh_pct']:.1f}% hard hit")
     if extra:
         seg += f" ({', '.join(extra)})"
-    seg += " · no PropFinder HR risk"
+    # No "no PropFinder HR risk" tail. The measured HR/9 and split ARE the useful
+    # numbers; telling the reader which vendor lacked a score is noise on a betting
+    # sheet, so the segment simply presents what is known.
     return f'<strong class="pitcher-meta">{seg}</strong>'
 
 
@@ -660,7 +662,10 @@ def _pitcher_meta_segment(name: str, row: dict, hr9_lookup: dict[str, float]) ->
     last = name.split()[-1]
     hr9 = hr9_lookup.get(name.lower()) or hr9_lookup.get(last.lower())
     if row.get("no_data"):
-        return f'<strong class="pitcher-meta">{name} — no MLB HR data yet</strong>'
+        # Nothing measured anywhere for this arm. Omit the segment entirely -- a
+        # "no data yet" placeholder tells the reader nothing actionable and just
+        # eats space in the header.
+        return ""
     seg = (
         f"{name} {format_pitcher_risk_pct(row['overall'])} overall · "
         f"LHB {format_pitcher_risk_pct(row['vs_lhb'])} · "
@@ -784,8 +789,8 @@ def build_game_meta_line(
                 print(f"note: {label} absent from HR risk export — using measured rates")
                 parts.append(_pitcher_measured_segment(label, rates))
             else:
-                print(f"WARN: no risk or rate data for {label} — header will omit this SP")
-    return " · ".join(parts)
+                print(f"note: no risk or rate data for {label} — header omits this SP")
+    return " · ".join(p for p in parts if p)
 
 
 def plain_name(entry: dict) -> str:

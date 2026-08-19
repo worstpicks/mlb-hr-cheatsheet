@@ -1,0 +1,30 @@
+Matchup,STL @ CIN
+Pitcher,Chase Burns
+Pitcher Team,CIN
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.28,="15-62",.242,.468,0.226,4,2,0,6,23.5,5,.309,.777
+Batting Second,14.0,1.79,="17-59",.288,.441,0.153,1,4,1,6,23.9,8,.373,.814
+Batting Third,16.0,1.06,="12-59",.203,.407,0.204,3,3,0,10,26.2,5,.262,.669
+Batting Fourth,17.1,0.69,="7-58",.121,.155,0.034,0,2,0,2,39.1,5,.188,.343
+Batting Fifth,14.1,1.26,="11-53",.208,.283,0.075,1,1,0,2,26.7,7,.300,.583
+Batting Sixth,14.0,1.07,="11-51",.216,.412,0.196,2,4,0,5,32.7,4,.273,.685
+Batting Seventh,12.2,1.03,="8-45",.178,.311,0.133,1,1,1,2,28.0,5,.260,.571
+Batting Eighth,13.1,0.60,="5-45",.111,.200,0.089,1,1,0,1,28.6,3,.167,.367
+Batting Ninth,11.1,1.32,="11-44",.250,.295,0.045,0,2,0,2,31.3,4,.313,.608
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="113-465",.243,.374,0.131,16,13,0,46,15.8,62,.348,.722
+Ivan Herrera RHB,Batting Second ​,="102-419",.243,.375,0.132,12,17,1,46,17.4,58,.367,.742
+Alec Burleson LHB,Batting Third ​,="110-371",.296,.526,0.230,19,26,1,66,15.7,37,.367,.893
+Jordan Walker RHB,Batting Fourth ​,="84-287",.293,.530,0.237,17,17,0,63,26.0,22,.346,.876
+Everson Pereira RHB,Batting Fifth ​,="3-30",.100,.167,0.067,0,2,0,2,29.4,2,.176,.343
+Joshua Baez RHB,Batting Fifth ​,="3-17",.176,.706,0.530,3,0,0,6,33.3,0,.167,.873
+Masyn Winn RHB,Batting Sixth ​,="81-324",.250,.340,0.090,4,13,2,43,21.2,33,.326,.666
+Bryan Torres LHB,Batting Seventh ​,="13-51",.255,.392,0.137,1,0,2,5,14.3,4,.309,.701
+Jose Fermin RHB,Batting Seventh ​,="17-68",.250,.353,0.103,1,4,0,8,11.8,6,.316,.669
+Nathan Church LHB,Batting Seventh ​,="45-181",.249,.381,0.132,6,6,0,24,15.5,9,.284,.665
+Pedro Pages RHB,Batting Eighth ​,="29-121",.240,.364,0.124,3,6,0,9,26.5,5,.279,.643
+Blaze Jordan RHB,Batting Eighth ​,="19-89",.213,.270,0.057,0,5,0,16,16.5,4,.237,.507
+Jimmy Crooks LHB,Batting Ninth ​,="9-47",.191,.404,0.213,3,1,0,5,40.0,2,.240,.644

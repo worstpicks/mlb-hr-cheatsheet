@@ -1,0 +1,30 @@
+Matchup,DET @ PIT
+Pitcher,Jackson Jobe
+Pitcher Team,DET
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,40.0,0,.200,.200
+Batting Second,1.0,1.00,="1-4",.250,1.000,0.750,1,0,0,1,20.0,0,.400,1.400
+Batting Third,0.2,4.50,="3-5",.600,.800,0.200,0,1,0,0,0.0,0,.600,1.400
+Batting Fourth,1.2,0.60,="0-4",.000,.000,0.000,0,0,0,0,40.0,1,.200,.200
+Batting Fifth,0.2,4.50,="3-5",.600,1.000,0.400,0,0,1,3,0.0,0,.600,1.600
+Batting Sixth,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,25.0,0,.000,.000
+Batting Seventh,1.0,1.00,="1-4",.250,.250,0.000,0,0,0,0,25.0,0,.250,.500
+Batting Eighth,0.0,-.--,="2-2",1.000,2.500,1.500,1,0,0,2,0.0,1,1.000,3.500
+Batting Ninth,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake Mangum SHB,Batting First ​,="43-151",.285,.404,0.119,3,7,1,12,22.6,8,.335,.739
+Oneil Cruz LHB,Batting First ​,="41-175",.234,.406,0.172,7,9,0,25,35.8,13,.295,.701
+Spencer Horwitz LHB,Batting First ​,="30-110",.273,.445,0.172,5,4,0,9,13.1,16,.385,.830
+Brandon Lowe LHB,Batting Second ​,="107-416",.257,.498,0.241,25,23,1,72,28.1,42,.324,.822
+Bryan Reynolds SHB,Batting Third ​,="122-466",.262,.431,0.169,15,30,2,64,24.3,75,.372,.803
+Esmerlyn Valdez RHB,Batting Fourth ​,="26-119",.218,.487,0.269,8,6,1,28,37.4,25,.354,.841
+Nick Yorke RHB,Batting Fifth ​,="7-31",.226,.290,0.064,0,2,0,1,20.0,2,.314,.604
+Nick Gonzales RHB,Batting Sixth ​,="55-151",.364,.483,0.119,3,9,0,17,14.7,9,.411,.894
+Jared Triolo RHB,Batting Eighth ​,="31-103",.301,.398,0.097,2,4,0,14,21.1,8,.363,.761
+Jacob Gonzalez LHB,Batting Eighth ​,="11-52",.212,.385,0.173,2,3,0,9,18.5,0,.222,.607
+Rafael Flores RHB,Batting Eighth ​,="4-20",.200,.400,0.200,1,1,0,2,20.8,4,.333,.733
+Henry Davis RHB,Batting Ninth ​,="34-204",.167,.309,0.142,8,5,0,29,21.5,20,.259,.568
+Billy Cook RHB,Batting Ninth ​,="6-27",.222,.296,0.074,0,0,1,2,48.1,0,.222,.518

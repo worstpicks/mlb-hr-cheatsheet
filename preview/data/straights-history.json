@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-19T11:14:56Z",
+  "updated": "2026-08-20T12:02:26Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1081,6 +1081,34 @@
         "matchup": "LAD @ COL",
         "result": "loss",
         "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-19",
+      "o05": {
+        "player": "Pete Alonso",
+        "matchup": "NYY @ BAL",
+        "result": "win",
+        "hr": 1
+      },
+      "o15": {
+        "player": "Oneil Cruz",
+        "matchup": "DET @ PIT",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-20",
+      "o05": {
+        "player": "Yordan Alvarez",
+        "matchup": "LAA @ HOU",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Bryce Eldridge",
+        "matchup": "SF @ CLE",
+        "result": "pending"
       }
     }
   ]

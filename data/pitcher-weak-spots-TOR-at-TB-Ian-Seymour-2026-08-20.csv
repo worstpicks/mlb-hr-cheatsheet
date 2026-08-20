@@ -1,0 +1,30 @@
+Matchup,TOR @ TB
+Pitcher,Ian Seymour
+Pitcher Team,TB
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.1,1.24,="9-44",.205,.455,0.250,1,6,1,3,24.5,5,.286,.741
+Batting Second,11.2,0.69,="7-41",.171,.244,0.073,1,0,0,5,32.6,1,.186,.430
+Batting Third,11.2,1.11,="11-44",.250,.432,0.182,2,2,0,5,28.3,2,.283,.715
+Batting Fourth,9.2,1.66,="15-43",.349,.628,0.279,2,6,0,5,28.9,1,.378,1.006
+Batting Fifth,11.1,0.97,="7-39",.179,.231,0.052,0,0,1,4,31.1,4,.267,.498
+Batting Sixth,9.2,1.34,="9-37",.243,.622,0.379,3,1,2,4,29.5,4,.349,.971
+Batting Seventh,12.0,0.83,="6-41",.146,.146,0.000,0,0,0,3,30.4,4,.217,.363
+Batting Eighth,9.1,1.50,="9-37",.243,.676,0.433,5,1,0,10,31.0,5,.333,1.009
+Batting Ninth,9.2,1.03,="5-32",.156,.281,0.125,1,1,0,2,23.1,5,.263,.544
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-241",.220,.373,0.153,8,11,1,20,20.3,28,.308,.681
+Brett Bateman LHB,Batting First ​,="8-27",.296,.296,0.000,0,0,0,2,21.4,1,.321,.617
+Nathan Lukes LHB,Batting Second ​,="32-131",.244,.321,0.077,3,1,0,8,14.4,14,.322,.643
+Jesus Sanchez LHB,Batting Fourth ​,="27-94",.287,.468,0.181,4,5,0,13,19.2,6,.317,.785
+Kazuma Okamoto RHB,Batting Fourth ​,="37-168",.220,.381,0.161,8,3,0,29,30.0,18,.300,.681
+Alejandro Kirk RHB,Batting Fifth ​,="21-81",.259,.444,0.185,4,3,0,10,16.1,12,.355,.799
+Daz Cameron RHB,Batting Seventh ​,="1-4",.250,.500,0.250,0,1,0,1,25.0,0,.250,.750
+Ernie Clement RHB,Batting Seventh ​,="30-108",.278,.389,0.111,2,6,0,13,8.9,3,.295,.684
+Andres Gimenez LHB,Batting Eighth ​,="42-182",.231,.357,0.126,5,8,0,26,18.8,5,.276,.633
+Josh Smith LHB,Batting Eighth ​,="16-71",.225,.282,0.057,1,1,0,2,23.5,8,.313,.595
+Myles Straw RHB,Batting Ninth ​,="11-54",.204,.333,0.129,0,5,1,5,4.9,5,.267,.600
+Brandon Valenzuela SHB,Batting Ninth ​,="20-92",.217,.457,0.240,6,4,0,13,23.8,13,.314,.771
+Charles McAdoo RHB,Batting Ninth ​,="5-15",.333,.467,0.134,0,2,0,4,20.0,0,.333,.800

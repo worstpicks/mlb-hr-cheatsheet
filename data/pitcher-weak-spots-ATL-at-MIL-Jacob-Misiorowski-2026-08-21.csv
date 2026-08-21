@@ -1,0 +1,26 @@
+Matchup,ATL @ MIL
+Pitcher,Jacob Misiorowski
+Pitcher Team,MIL
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,17.1,0.75,="8-61",.131,.262,0.131,2,0,1,4,43.3,5,.209,.471
+Batting Second,18.1,0.55,="8-63",.127,.270,0.143,3,0,0,4,50.7,2,.179,.449
+Batting Third,16.2,0.78,="5-56",.089,.107,0.018,0,1,0,0,27.7,8,.215,.322
+Batting Fourth,15.1,0.98,="11-57",.193,.368,0.175,3,1,0,5,46.0,4,.270,.638
+Batting Fifth,16.1,0.73,="10-58",.172,.259,0.087,1,2,0,3,31.7,2,.200,.459
+Batting Sixth,15.1,0.85,="9-52",.173,.288,0.115,2,0,0,7,28.1,4,.228,.516
+Batting Seventh,13.2,0.73,="8-50",.160,.160,0.000,0,0,0,0,49.1,2,.208,.368
+Batting Eighth,12.0,1.00,="10-46",.217,.370,0.153,2,1,0,6,42.9,2,.265,.635
+Batting Ninth,14.0,0.43,="4-42",.095,.095,0.000,0,0,0,0,39.1,2,.156,.251
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ronald Acuna Jr. RHB,Batting First ​,="57-227",.251,.414,0.163,8,11,1,25,21.8,37,.365,.779
+Drake Baldwin LHB,Batting Second ​,="60-213",.282,.469,0.187,11,7,0,34,22.2,18,.346,.815
+Matt Olson LHB,Batting Third ​,="103-406",.254,.525,0.271,29,23,0,64,24.6,47,.333,.858
+Michael Harris II LHB,Batting Fourth ​,="40-144",.278,.403,0.125,2,10,1,14,17.3,4,.300,.703
+Ozzie Albies SHB,Batting Fifth ​,="16-64",.250,.469,0.219,4,2,0,12,9.7,6,.319,.788
+Mauricio Dubon RHB,Batting Sixth ​,="22-101",.218,.267,0.049,0,5,0,10,8.3,4,.252,.519
+Dominic Smith LHB,Batting Seventh ​,="26-82",.317,.451,0.134,3,2,0,17,13.3,3,.348,.799
+Austin Riley RHB,Batting Eighth ​,="14-53",.264,.472,0.208,2,5,0,7,41.1,1,.286,.758
+Mike Yastrzemski LHB,Batting Ninth ​,="7-28",.250,.464,0.214,1,3,0,7,34.4,4,.344,.808

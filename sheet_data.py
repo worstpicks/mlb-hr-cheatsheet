@@ -132,7 +132,8 @@ def import_sheet_csvs(
     manifest = {
         "sheet_date": sheet_date,
         "imported_at": datetime.now().isoformat(timespec="seconds"),
-        "downloads_dir": str(downloads_dir or DEFAULT_DOWNLOADS),
+        # Deliberately not recording the source directory: this repo is public
+        # and the absolute path is a Windows home directory. Nothing reads it back.
         "files": sorted({p.name for p in copied} | {p.name for p in synthetic}),
     }
     manifest_name = f"manifest-{sheet_date}.json"

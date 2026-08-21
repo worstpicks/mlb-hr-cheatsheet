@@ -1,0 +1,30 @@
+Matchup,PIT @ LAD
+Pitcher,Bubba Chandler
+Pitcher Team,PIT
+Opposing Team,LAD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.1,1.63,="15-59",.254,.356,0.102,0,6,0,7,22.5,10,.357,.713
+Batting Second,12.2,2.53,="22-60",.367,.650,0.283,3,4,2,11,25.7,10,.457,1.107
+Batting Third,17.1,0.98,="10-60",.167,.350,0.183,3,2,0,14,17.6,7,.250,.600
+Batting Fourth,16.2,0.60,="7-56",.125,.196,0.071,1,1,0,2,27.9,3,.180,.376
+Batting Fifth,13.0,1.38,="13-50",.260,.400,0.140,1,4,0,6,12.3,5,.351,.751
+Batting Sixth,11.1,1.59,="8-42",.190,.310,0.120,1,2,0,4,19.2,10,.346,.656
+Batting Seventh,13.0,0.85,="4-42",.095,.143,0.048,0,2,0,2,21.6,7,.255,.398
+Batting Eighth,10.2,1.78,="11-42",.262,.333,0.071,1,0,0,3,14.0,8,.380,.713
+Batting Ninth,11.0,1.45,="12-43",.279,.326,0.047,0,2,0,3,20.8,4,.340,.666
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Shohei Ohtani LHB,Batting First ​,="133-456",.292,.555,0.263,30,24,3,80,23.2,71,.389,.944
+Andy Pages RHB,Batting Second ​,="71-269",.264,.431,0.167,9,14,2,31,19.9,27,.338,.769
+Freddie Freeman LHB,Batting Third ​,="85-261",.326,.540,0.214,13,17,0,40,16.9,40,.414,.954
+Mookie Betts RHB,Batting Fourth ​,="44-169",.260,.432,0.172,7,8,0,22,12.4,16,.324,.756
+Max Muncy LHB,Batting Fifth ​,="37-129",.287,.527,0.240,7,8,1,21,18.3,22,.399,.926
+Kyle Tucker LHB,Batting Sixth ​,="28-123",.228,.366,0.138,3,4,2,16,17.3,13,.302,.668
+Tommy Edman SHB,Batting Sixth ​,="14-40",.350,.600,0.250,1,5,1,5,18.2,3,.409,1.009
+Teoscar Hernandez RHB,Batting Seventh ​,="26-103",.252,.417,0.165,5,2,0,19,26.4,6,.300,.717
+Enrique Hernandez RHB,Batting Eighth ​,="4-18",.222,.389,0.167,1,0,0,3,31.6,1,.263,.652
+Alex Call RHB,Batting Eighth ​,="13-51",.255,.294,0.039,0,2,0,9,18.6,5,.339,.633
+Miguel Rojas RHB,Batting Ninth ​,="14-54",.259,.352,0.093,1,2,0,4,13.1,4,.328,.680
+Ben Rortvedt LHB,Batting Ninth ​,="3-15",.200,.200,0.000,0,0,0,1,33.3,0,.200,.400
+Hunter Feduccia LHB,Batting Ninth ​,="23-90",.256,.367,0.111,1,5,1,5,18.6,11,.337,.704

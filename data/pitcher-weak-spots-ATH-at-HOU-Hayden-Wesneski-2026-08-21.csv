@@ -1,0 +1,26 @@
+Matchup,ATH @ HOU
+Pitcher,Hayden Wesneski
+Pitcher Team,HOU
+Opposing Team,ATH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,1.33,="3-11",.273,.545,0.272,1,0,0,3,8.3,1,.333,.878
+Batting Second,3.0,1.00,="1-10",.100,.200,0.100,0,1,0,0,25.0,2,.250,.450
+Batting Third,3.0,0.33,="1-10",.100,.200,0.100,0,1,0,0,27.3,0,.182,.382
+Batting Fourth,2.2,1.50,="2-9",.222,.333,0.111,0,1,0,2,27.3,2,.364,.697
+Batting Fifth,2.1,2.14,="5-11",.455,.455,0.000,0,0,0,1,18.2,0,.455,.910
+Batting Sixth,2.0,2.00,="4-9",.444,.778,0.334,1,0,0,3,10.0,0,.400,1.178
+Batting Seventh,3.1,0.30,="1-10",.100,.100,0.000,0,0,0,0,10.0,0,.100,.200
+Batting Eighth,1.2,2.40,="2-7",.286,.571,0.285,0,0,1,2,22.2,2,.444,1.015
+Batting Ninth,1.2,2.40,="4-8",.500,.875,0.375,0,1,1,1,22.2,0,.500,1.375
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Henry Bolte RHB,Batting First ​,="22-78",.282,.410,0.128,2,4,0,9,28.9,2,.317,.727
+Jeff McNeil LHB,Batting Second ​,="5-18",.278,.333,0.055,0,1,0,2,22.2,0,.278,.611
+Zack Gelof RHB,Batting Third ​,="4-16",.250,.438,0.188,1,0,0,3,17.6,1,.294,.732
+Carlos Cortes LHB,Batting Fourth ​,="7-36",.194,.472,0.278,2,4,0,10,17.9,1,.256,.728
+Lawrence Butler LHB,Batting Fifth ​,="8-28",.286,.607,0.321,3,0,0,5,32.1,0,.286,.893
+Tommy White RHB,Batting Sixth ​,="3-18",.167,.389,0.222,1,1,0,1,15.0,2,.250,.639
+Jonah Heim SHB,Batting Seventh ​,="4-22",.182,.409,0.227,1,2,0,6,13.0,0,.174,.583
+Donovan Walton LHB,Batting Eighth ​,="15-45",.333,.556,0.223,2,4,0,6,16.0,4,.400,.956
+Max Muncy RHB,Batting Ninth ​,="4-12",.333,.833,0.500,2,0,0,5,15.4,1,.385,1.218

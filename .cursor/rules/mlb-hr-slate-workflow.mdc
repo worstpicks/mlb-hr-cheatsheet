@@ -206,7 +206,8 @@ Also: research-JSON lineups list the whole available group, and **slots 10+ are
 bench, not the batting order**. `is_starting()` keeps them off the ticket — without
 it the model put two hitters who were out of the lineup in its top three.
 
-`SELECTION_CALIBRATION = 0.81` corrects a measured +.09 optimism: the last-20-game
+`SELECTION_CALIBRATION = 0.74` corrects a measured +.09 optimism (re-fit from 0.81
+against `_hits_final_backtest.py`; the constant in code is the authority, not this doc): the last-20-game
 AVG runs hot for exactly the hitters that rank top. Keep predicted ≈ realized, or the
 displayed parlay probability is worthless.
 
@@ -314,3 +315,38 @@ Hits parlay uses **`goblin_hits_parlay.py`** (contact-first zone fit + slate cov
 3. Run patch with **`--sync-root`** so `preview/index.html` → root `index.html` — that ships Homerun Form to production together with the new slate.
 
 Homerun Form stars use recent HR/near-HR from the pick note plus `formTrend` and `blast` from `games[gi].rows[ri]`.
+
+## Slate-scope and name-resolution landmines (added 2026-08-21)
+
+**The pasted game blocks are not the slate.** Build the game list from the MLB Stats
+API schedule for the date, then reconcile against the exports. On 8/21 the user pasted
+12 blocks while MLB had 15 games and PropFinder had exported props for 14 of them.
+Two of the three unpasted games (STL @ PHI, TOR @ NYY) carried listed props and had to
+be built; the third (ATL @ MIL) was already in progress with no props and no matchup
+export, and was correctly left off.
+
+**A pasted probable can be stale.** On 8/21 the paste said Will Dion for Washington
+(really Brad Lord, which the export already had) and Joe Musgrove for San Diego
+(really Randy Vasquez, named after the export). Always diff paste vs
+`schedule?hydrate=probablePitcher` before building.
+
+**Duplicate prop names resolve by dict order, which is arbitrary.** `batter_ctx[key] =
+entry` is last-write-wins over games sorted alphabetically. With two Max Muncys on the
+slate (ATH DH, LAD 3B) the prop silently landed on whichever game sorted last.
+`build-0821-from-csv.py` now raises when a prop name matches batters in more than one
+game and is not pinned in `BATTER_GAME_OVERRIDES`. Resolve the pin from the user's list
+order — the list runs game by game — and confirm against the listed hand.
+
+**`name_lookup_key` folds hyphens.** PropFinder exports "Pete Crow-Armstrong"; the prop
+list writes "Pete Crow Armstrong". Without the fold the prop is dropped silently.
+
+**Header splits when PropFinder has no risk row.** An arm named after the HR-targets
+export has no risk row at all. `_sp_line` now falls back to that arm's own measured
+Season/vsLHB/vsRHB BAA + HR/9 from the matchup CSV pitcher block. Do not invent a risk
+score — it would not be on the same scale as every other arm on the board — and do not
+print a placeholder.
+
+**Hardcoded regression guards silently stop guarding.** The CWS/WSH park-alias check
+was pinned to "ATL @ CWS" / "WSH @ TEX", so it passed on every slate without those
+exact pairings. Derive the games to check from the slate. Same failure mode as the
+hardcoded wrong-weekday list.

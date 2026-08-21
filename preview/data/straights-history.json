@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-20T12:02:26Z",
+  "updated": "2026-08-21T22:14:34Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1103,11 +1103,26 @@
       "o05": {
         "player": "Yordan Alvarez",
         "matchup": "LAA @ HOU",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Bryce Eldridge",
         "matchup": "SF @ CLE",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-21",
+      "o05": {
+        "player": "Munetaka Murakami",
+        "matchup": "NYM @ CWS",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Fernando Tatis Jr.",
+        "matchup": "MIN @ SD",
         "result": "pending"
       }
     }

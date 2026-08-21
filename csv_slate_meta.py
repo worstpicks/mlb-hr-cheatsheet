@@ -47,6 +47,10 @@ def name_lookup_key(name: str) -> str:
         ch for ch in unicodedata.normalize("NFD", key) if unicodedata.category(ch) != "Mn"
     )
     key = key.replace(".", "")
+    # Hyphenated surnames are written both ways -- PropFinder exports
+    # "Pete Crow-Armstrong" while the prop list says "Pete Crow Armstrong".
+    # Fold the hyphen to a space so one spelling cannot drop a prop.
+    key = key.replace("-", " ")
     key = re.sub(r"\s+", " ", key).strip()
     return key
 

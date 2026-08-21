@@ -1,0 +1,26 @@
+Matchup,DET @ KC
+Pitcher,Troy Melton
+Pitcher Team,DET
+Opposing Team,KC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.1,1.61,="10-38",.263,.474,0.211,2,2,0,2,20.5,5,.364,.838
+Batting Second,12.1,0.65,="6-41",.146,.268,0.122,1,2,0,1,20.9,2,.186,.454
+Batting Third,9.1,1.39,="6-34",.176,.324,0.148,1,2,0,2,12.2,7,.317,.641
+Batting Fourth,10.1,0.97,="6-37",.162,.270,0.108,1,1,0,2,22.0,4,.244,.514
+Batting Fifth,9.1,0.64,="5-33",.152,.212,0.060,0,2,0,3,25.0,1,.194,.406
+Batting Sixth,8.2,1.04,="7-31",.226,.452,0.226,1,2,1,4,27.3,2,.273,.725
+Batting Seventh,6.2,1.65,="8-28",.286,.464,0.178,1,2,0,1,16.1,3,.355,.819
+Batting Eighth,7.2,0.91,="6-29",.207,.310,0.103,1,0,0,1,30.0,1,.233,.543
+Batting Ninth,10.0,0.20,="2-30",.067,.100,0.033,0,1,0,0,30.0,0,.067,.167
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carter Jensen LHB,Batting First ​,="47-215",.219,.433,0.214,10,14,1,30,29.6,23,.296,.729
+Bobby Witt Jr. RHB,Batting Second ​,="123-430",.286,.463,0.177,16,26,1,48,17.3,51,.362,.825
+Jac Caglianone LHB,Batting Third ​,="58-189",.307,.587,0.280,14,9,1,38,19.1,7,.337,.924
+Salvador Perez RHB,Batting Fourth ​,="69-325",.212,.354,0.142,11,11,1,42,19.4,12,.254,.608
+Vinnie Pasquantino LHB,Batting Fifth ​,="19-70",.271,.357,0.086,1,3,0,4,17.7,7,.354,.711
+Nick Loftin RHB,Batting Sixth ​,="15-50",.300,.560,0.260,2,7,0,9,13.8,12,.438,.998
+Michael Massey LHB,Batting Seventh ​,="30-91",.330,.484,0.154,3,5,0,13,14.4,4,.351,.835
+Isaac Collins SHB,Batting Eighth ​,="17-92",.185,.326,0.141,3,4,0,10,25.0,9,.279,.605
+Kyle Isbel LHB,Batting Ninth ​,="47-203",.232,.335,0.103,4,7,1,17,21.7,12,.282,.617

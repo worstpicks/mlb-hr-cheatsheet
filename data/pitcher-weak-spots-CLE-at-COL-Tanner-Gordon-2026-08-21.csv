@@ -1,0 +1,26 @@
+Matchup,CLE @ COL
+Pitcher,Tanner Gordon
+Pitcher Team,COL
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.1,1.39,="10-33",.303,.364,0.061,0,2,0,2,10.8,3,.351,.715
+Batting Second,8.2,1.27,="10-35",.286,.543,0.257,1,4,1,4,27.0,1,.297,.840
+Batting Third,9.0,1.00,="8-34",.235,.559,0.324,3,2,0,7,22.9,1,.257,.816
+Batting Fourth,6.0,2.67,="13-31",.419,.935,0.516,4,4,0,6,8.8,3,.471,1.406
+Batting Fifth,10.0,0.50,="4-34",.118,.147,0.029,0,1,0,2,14.3,1,.143,.290
+Batting Sixth,8.0,1.38,="11-32",.344,.500,0.156,1,2,0,4,23.5,0,.353,.853
+Batting Seventh,6.1,2.05,="11-30",.367,.767,0.400,3,3,0,7,24.2,2,.406,1.173
+Batting Eighth,7.2,1.57,="11-31",.355,.613,0.258,1,5,0,5,11.4,1,.394,1.007
+Batting Ninth,6.1,2.05,="12-31",.387,.613,0.226,2,1,0,6,37.5,1,.406,1.019
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="69-274",.252,.314,0.062,2,9,1,18,10.8,44,.359,.673
+Chase DeLauter LHB,Batting Second ​,="55-185",.297,.481,0.184,7,11,1,26,12.0,23,.375,.856
+Jose Ramirez SHB,Batting Third ​,="42-191",.220,.361,0.141,6,9,0,20,13.3,39,.352,.713
+Jo Adell RHB,Batting Fourth ​,="22-83",.265,.482,0.217,3,9,0,16,24.2,3,.330,.812
+Nathaniel Lowe LHB,Batting Fifth ​,="37-133",.278,.534,0.256,8,10,0,21,27.3,10,.329,.863
+Angel Genao SHB,Batting Sixth ​,="6-14",.429,.500,0.071,0,1,0,0,6.3,2,.500,1.000
+Travis Bazzana LHB,Batting Seventh ​,="8-46",.174,.196,0.022,0,1,0,3,18.5,8,.296,.492
+Patrick Bailey SHB,Batting Eighth ​,="35-189",.185,.307,0.122,5,6,1,20,22.6,15,.242,.549
+Petey Halpin LHB,Batting Ninth ​,="15-74",.203,.324,0.121,2,1,1,5,14.6,2,.241,.565

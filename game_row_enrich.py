@@ -646,6 +646,42 @@ def parse_pitcher_blocks_from_description(desc: str) -> dict[str, dict]:
     return out
 
 
+def parse_pitcher_measured_from_description(desc: str) -> dict[str, dict]:
+    """Last-name key -> measured BAA/HR-9 lane from Tail key data lines.
+
+    An arm named after PropFinder's HR-targets export has no risk row, so the build
+    writes his real measured lane instead of a risk score. Without this parser the
+    game header dropped that starter entirely and the sheet showed one split.
+    """
+    out: dict[str, dict] = {}
+    pat = re.compile(
+        r"([A-Za-z][A-Za-z\s.'-]+?)\s*\(BAA vs LHB\s*(\.\d+)"
+        r"(?:,\s*vs RHB\s*(\.\d+))?"
+        r"(?:,\s*HR/9\s*(\d+\.?\d*))?\)"
+    )
+    for m in pat.finditer(desc or ""):
+        name = re.sub(r"\s*🧤\s*", " ", m.group(1)).strip()
+        out[name.split()[-1].lower()] = {
+            "pitcher": name,
+            "baa_lhb": m.group(2),
+            "baa_rhb": m.group(3),
+            "hr9": m.group(4),
+        }
+    return out
+
+
+def _pitcher_measured_lane_segment(label: str, lane: dict) -> str:
+    bits = []
+    if lane.get("baa_lhb"):
+        bits.append(f"BAA vs LHB {lane['baa_lhb']}")
+    if lane.get("baa_rhb"):
+        bits.append(f"vs RHB {lane['baa_rhb']}")
+    if lane.get("hr9"):
+        bits.append(f"{lane['hr9']} HR/9")
+    inner = " · ".join(bits)
+    return f'<span class="pitcher-meta">{label} {inner}</span>' if inner else ""
+
+
 def resolve_pitcher_risk_row(
     label: str,
     pitcher_risk: dict | None,
@@ -771,6 +807,7 @@ def build_game_meta_line(
         parts.append(park_seg)
     desc = game.get("description", "")
     desc_blocks = parse_pitcher_blocks_from_description(desc)
+    desc_lanes = parse_pitcher_measured_from_description(desc)
     title = game.get("title", "")
     if " - " in title and " vs " in title:
         _, matchup = title.split(" - ", 1)
@@ -789,7 +826,13 @@ def build_game_meta_line(
                 print(f"note: {label} absent from HR risk export — using measured rates")
                 parts.append(_pitcher_measured_segment(label, rates))
             else:
-                print(f"note: no risk or rate data for {label} — header omits this SP")
+                lane = desc_lanes.get(label.split()[-1].lower())
+                seg = _pitcher_measured_lane_segment(label, lane) if lane else ""
+                if seg:
+                    print(f"note: {label} absent from HR risk export — using measured BAA lane")
+                    parts.append(seg)
+                else:
+                    print(f"note: no risk or rate data for {label} — header omits this SP")
     return " · ".join(p for p in parts if p)
 
 

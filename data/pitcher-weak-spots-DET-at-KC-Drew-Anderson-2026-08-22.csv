@@ -1,0 +1,29 @@
+Matchup,DET @ KC
+Pitcher,Drew Anderson
+Pitcher Team,DET
+Opposing Team,KC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.55,="11-38",.289,.500,0.211,2,2,0,7,28.6,4,.357,.857
+Batting Second,9.0,1.33,="7-35",.200,.343,0.143,1,2,0,2,15.0,5,.300,.643
+Batting Third,8.0,1.38,="8-33",.242,.364,0.122,1,1,0,4,25.0,3,.306,.670
+Batting Fourth,6.1,1.74,="6-26",.231,.577,0.346,3,0,0,5,21.9,5,.375,.952
+Batting Fifth,8.1,1.20,="8-31",.258,.387,0.129,1,1,0,5,20.6,2,.294,.681
+Batting Sixth,6.2,1.80,="9-28",.321,.464,0.143,0,2,1,4,25.8,3,.387,.851
+Batting Seventh,8.0,1.38,="10-33",.303,.455,0.152,1,2,0,4,29.4,1,.324,.779
+Batting Eighth,9.1,1.07,="5-33",.152,.212,0.060,0,2,0,0,38.5,5,.282,.494
+Batting Ninth,10.0,0.70,="6-34",.176,.353,0.177,2,0,0,3,33.3,1,.243,.596
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carter Jensen LHB,Batting First ​,="48-219",.219,.443,0.224,11,14,1,31,29.0,24,.298,.741
+Bobby Witt Jr. RHB,Batting Second ​,="125-434",.288,.463,0.175,16,26,1,48,17.3,51,.363,.826
+Vinnie Pasquantino LHB,Batting Third ​,="50-216",.231,.370,0.139,6,8,2,27,16.5,28,.315,.685
+Jac Caglianone LHB,Batting Third ​,="58-193",.301,.575,0.274,14,9,1,38,19.7,7,.330,.905
+Salvador Perez RHB,Batting Fourth ​,="70-329",.213,.353,0.140,11,11,1,42,19.2,12,.254,.607
+John Rave LHB,Batting Seventh ​,="5-25",.200,.480,0.280,1,2,1,1,25.0,2,.259,.739
+Isaac Collins SHB,Batting Seventh ​,="26-111",.234,.342,0.108,1,9,0,12,21.7,24,.370,.712
+Michael Massey LHB,Batting Seventh ​,="31-95",.326,.484,0.158,3,6,0,13,13.9,4,.347,.831
+Nick Loftin RHB,Batting Eighth ​,="19-92",.207,.348,0.141,2,5,1,15,13.5,8,.272,.620
+Luke Maile RHB,Batting Ninth ​,="2-13",.154,.154,0.000,0,0,0,1,53.8,0,.154,.308
+Kyle Isbel LHB,Batting Ninth ​,="49-207",.237,.357,0.120,5,8,1,19,21.3,12,.286,.643
+Tyler Tolbert RHB,Batting Ninth ​,="17-46",.370,.565,0.195,2,3,0,6,17.3,2,.388,.953

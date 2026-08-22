@@ -1,0 +1,30 @@
+Matchup,CLE @ COL
+Pitcher,Tanner Bibee
+Pitcher Team,CLE
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.2,1.29,="19-74",.257,.595,0.338,6,7,0,10,17.7,5,.304,.899
+Batting Second,15.0,1.93,="21-65",.323,.508,0.185,3,3,0,8,16.2,8,.392,.900
+Batting Third,18.2,0.91,="12-65",.185,.308,0.123,2,2,0,7,18.1,5,.264,.572
+Batting Fourth,17.2,0.96,="14-64",.219,.328,0.109,2,1,0,5,25.4,3,.282,.610
+Batting Fifth,16.1,1.10,="12-60",.200,.267,0.067,1,1,0,4,17.9,6,.269,.536
+Batting Sixth,16.2,1.02,="14-64",.219,.344,0.125,2,2,0,5,25.4,3,.254,.598
+Batting Seventh,16.1,1.16,="15-60",.250,.583,0.333,6,0,1,9,18.8,4,.297,.880
+Batting Eighth,15.1,0.91,="10-54",.185,.352,0.167,2,3,0,7,20.0,4,.233,.585
+Batting Ninth,14.1,1.26,="13-53",.245,.302,0.057,1,0,0,5,11.9,5,.310,.612
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="83-290",.286,.497,0.211,11,20,4,42,16.5,15,.324,.821
+Jordan Beck RHB,Batting First ​,="7-29",.241,.345,0.104,0,3,0,3,25.8,1,.258,.603
+Mickey Moniak LHB,Batting Second ​,="48-185",.259,.557,0.298,13,12,2,35,25.0,9,.296,.853
+Cole Carrigg SHB,Batting Third ​,="16-56",.286,.446,0.160,0,9,0,7,27.4,5,.339,.785
+TJ Rumfield LHB,Batting Fourth ​,="50-162",.309,.481,0.172,6,10,0,17,15.3,18,.388,.869
+Troy Johnston LHB,Batting Fifth ​,="33-118",.280,.347,0.067,0,6,1,15,14.6,14,.365,.712
+Willi Castro SHB,Batting Sixth ​,="32-95",.337,.558,0.221,4,7,1,17,24.5,9,.396,.954
+Connor Norby RHB,Batting Seventh ​,="11-56",.196,.339,0.143,1,5,0,5,34.4,6,.281,.620
+Zac Veen LHB,Batting Seventh ​,="2-6",.333,1.333,1.000,2,0,0,4,28.6,1,.429,1.762
+Ezequiel Tovar RHB,Batting Eighth ​,="15-99",.152,.202,0.050,1,2,0,7,26.6,8,.211,.413
+Braxton Fulford RHB,Batting Eighth ​,="4-23",.174,.174,0.000,0,0,0,2,51.9,2,.259,.433
+Kyle Karros RHB,Batting Eighth ​,="25-89",.281,.494,0.213,3,8,1,10,19.4,18,.398,.892
+Brett Sullivan LHB,Batting Ninth ​,="17-75",.227,.373,0.146,3,2,0,8,22.8,2,.253,.626

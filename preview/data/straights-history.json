@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-21T22:14:34Z",
+  "updated": "2026-08-22T09:40:50Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1118,11 +1118,26 @@
       "o05": {
         "player": "Munetaka Murakami",
         "matchup": "NYM @ CWS",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Fernando Tatis Jr.",
         "matchup": "MIN @ SD",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-22",
+      "o05": {
+        "player": "Max Muncy",
+        "matchup": "PIT @ LAD",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Griffin Conine",
+        "matchup": "WSH @ MIA",
         "result": "pending"
       }
     }

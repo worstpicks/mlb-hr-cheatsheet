@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-22T09:40:50Z",
+  "updated": "2026-08-24T17:35:23Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1133,11 +1133,26 @@
       "o05": {
         "player": "Max Muncy",
         "matchup": "PIT @ LAD",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Griffin Conine",
         "matchup": "WSH @ MIA",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-24",
+      "o05": {
+        "player": "Alec Bohm",
+        "matchup": "PHI @ SEA",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Zack Gelof",
+        "matchup": "MIN @ ATH",
         "result": "pending"
       }
     }

@@ -1,0 +1,30 @@
+Matchup,TEX @ CWS
+Pitcher,José Urquidy
+Pitcher Team,CWS
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="4-7",.571,.571,0.000,0,0,0,0,12.5,.625,1.196
+Batting Second,="3-9",.333,.556,0.223,0,2,0,2,11.1,.333,.889
+Batting Third,="2-10",.200,.200,0.000,0,0,0,0,10.0,.200,.400
+Batting Fourth,="2-9",.222,.333,0.111,0,1,0,1,33.3,.222,.555
+Batting Fifth,="2-7",.286,.714,0.428,1,0,0,2,50.0,.375,1.089
+Batting Sixth,="3-8",.375,.375,0.000,0,0,0,1,25.0,.375,.750
+Batting Seventh,="1-6",.167,.333,0.166,0,1,0,0,33.3,.167,.500
+Batting Eighth,="3-7",.429,1.000,0.571,1,1,0,5,28.6,.429,1.429
+Batting Ninth,="2-6",.333,.500,0.167,0,1,0,0,16.7,.333,.833
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Joc Pederson LHB,Batting First ​,="58-218",.266,.596,0.330,20,8,2,37,22.4,25,.347,.943
+Justin Foscue RHB,Batting First ​,="9-37",.243,.486,0.243,2,3,0,5,15.9,6,.364,.850
+Wyatt Langford RHB,Batting Second ​,="33-165",.200,.388,0.188,7,6,2,15,25.3,11,.258,.646
+Corey Seager LHB,Batting Third ​,="38-180",.211,.394,0.183,9,6,0,24,26.9,29,.321,.715
+Brandon Nimmo LHB,Batting Fourth ​,="50-180",.278,.400,0.122,3,11,1,18,22.4,15,.332,.732
+Jake Burger RHB,Batting Fourth ​,="38-169",.225,.379,0.154,6,8,0,19,28.4,13,.284,.663
+Ezequiel Duran RHB,Batting Fifth ​,="42-141",.298,.468,0.170,3,9,3,25,25.2,13,.361,.829
+Evan Carter LHB,Batting Sixth ​,="20-101",.198,.356,0.158,4,2,1,13,27.9,7,.257,.613
+Elias Diaz RHB,Batting Eighth ​,="23-87",.264,.414,0.150,3,4,0,14,22.8,2,.278,.692
+Danny Jansen RHB,Batting Eighth ​,="7-46",.152,.196,0.044,0,2,0,1,23.6,5,.278,.474
+Logan O'Hoppe RHB,Batting Eighth ​,="29-146",.199,.267,0.068,2,4,0,12,28.3,10,.258,.525
+Cody Freeman RHB,Batting Eighth ​,="4-13",.308,.462,0.154,0,0,1,2,26.7,2,.400,.862
+Nicky Lopez LHB,Batting Ninth ​,="25-108",.231,.278,0.047,1,2,0,11,19.3,3,.272,.550

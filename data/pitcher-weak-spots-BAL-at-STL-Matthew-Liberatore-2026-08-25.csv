@@ -1,0 +1,30 @@
+Matchup,BAL @ STL
+Pitcher,Matthew Liberatore
+Pitcher Team,STL
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="16-62",.258,.419,0.161,3,1,0,5,12.5,.347,.766
+Batting Second,="19-66",.288,.636,0.348,7,2,0,16,20.0,.314,.950
+Batting Third,="17-60",.283,.517,0.234,3,5,0,11,25.0,.353,.870
+Batting Fourth,="15-53",.283,.453,0.170,2,3,0,8,32.3,.415,.868
+Batting Fifth,="20-55",.364,.436,0.072,0,4,0,5,16.7,.400,.836
+Batting Sixth,="15-52",.288,.385,0.097,1,2,0,8,27.3,.309,.694
+Batting Seventh,="7-46",.152,.196,0.044,0,2,0,1,28.8,.235,.431
+Batting Eighth,="14-44",.318,.568,0.250,3,2,0,9,20.0,.380,.948
+Batting Ninth,="13-47",.277,.468,0.191,2,1,1,5,28.6,.306,.774
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Pete Alonso RHB,Batting Fourth ​,="62-248",.250,.472,0.222,15,10,0,47,23.8,34,.346,.818
+Tyler O'Neill RHB,Batting Fifth ​,="11-61",.180,.246,0.066,1,1,0,2,23.9,9,.296,.542
+Samuel Basallo LHB,Batting Fifth ​,="44-193",.228,.415,0.187,9,7,1,31,26.2,18,.294,.709
+Leody Taveras SHB,Batting Sixth ​,="40-161",.248,.348,0.100,1,9,2,15,21.9,16,.320,.668
+Dylan Beavers LHB,Batting Sixth ​,="16-63",.254,.476,0.222,4,2,0,9,25.4,4,.299,.775
+Christian Encarnacion-Strand RHB,Batting Sixth ​,="6-31",.194,.419,0.225,2,1,0,6,28.6,3,.257,.676
+Christian Franklin RHB,Batting Seventh ​,="0-12",.000,.000,0.000,0,0,0,0,26.7,3,.200,.200
+Colton Cowser LHB,Batting Seventh ​,="24-132",.182,.273,0.091,4,0,0,15,32.0,17,.276,.549
+Carlos Narvaez RHB,Batting Eighth ​,="20-107",.187,.271,0.084,2,3,0,7,28.8,9,.270,.541
+Coby Mayo RHB,Batting Eighth ​,="19-94",.202,.319,0.117,3,2,0,11,32.0,8,.272,.591
+Yohel Pozo RHB,Batting Ninth ​,="4-20",.200,.350,0.150,1,0,0,1,14.3,1,.238,.588
+Jackson Holliday LHB,Batting Ninth ​,="19-71",.268,.437,0.169,3,3,0,11,20.3,7,.329,.766

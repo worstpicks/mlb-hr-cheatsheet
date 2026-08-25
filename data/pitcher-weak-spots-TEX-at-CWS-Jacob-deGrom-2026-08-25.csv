@@ -1,0 +1,30 @@
+Matchup,TEX @ CWS
+Pitcher,Jacob deGrom
+Pitcher Team,TEX
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.1,1.37,="15-61",.246,.508,0.262,4,2,1,7,20.9,6,.313,.821
+Batting Second,15.2,1.28,="14-61",.230,.410,0.180,2,5,0,6,32.8,6,.299,.709
+Batting Third,15.0,1.33,="17-62",.274,.516,0.242,4,3,0,8,29.2,3,.308,.824
+Batting Fourth,15.0,1.07,="12-58",.207,.310,0.103,1,3,0,4,40.3,4,.258,.568
+Batting Fifth,15.2,0.83,="11-57",.193,.281,0.088,1,2,0,7,37.3,2,.220,.501
+Batting Sixth,12.1,1.22,="10-46",.217,.283,0.066,1,0,0,4,25.0,5,.288,.571
+Batting Seventh,12.0,1.25,="13-48",.271,.500,0.229,3,2,0,8,28.0,2,.300,.800
+Batting Eighth,12.0,1.17,="11-46",.239,.326,0.087,1,1,0,4,34.7,3,.286,.612
+Batting Ninth,13.1,0.68,="8-45",.178,.200,0.022,0,1,0,2,23.4,1,.196,.396
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="68-265",.257,.366,0.109,6,11,0,23,16.5,25,.356,.722
+Chase Meidroth RHB,Batting First ​,="39-146",.267,.459,0.192,6,10,0,15,24.2,19,.352,.811
+Munetaka Murakami LHB,Batting Second ​,="67-296",.226,.493,0.267,22,13,0,46,34.5,56,.353,.846
+Andrew Benintendi LHB,Batting Third ​,="19-76",.250,.447,0.197,4,3,0,12,21.4,8,.321,.768
+Miguel Vargas RHB,Batting Third ​,="76-312",.244,.487,0.243,18,22,0,42,18.8,51,.356,.843
+Randal Grichuk RHB,Batting Fourth ​,="18-44",.409,.750,0.341,3,6,0,12,17.4,2,.435,1.185
+Colson Montgomery LHB,Batting Fourth ​,="66-296",.223,.456,0.233,19,12,0,49,34.1,27,.302,.758
+Braden Montgomery SHB,Batting Fifth ​,="17-78",.218,.321,0.103,1,3,1,9,22.7,10,.307,.628
+Brenton Doyle RHB,Batting Seventh ​,="6-39",.154,.154,0.000,0,0,0,0,34.9,4,.233,.387
+Tristan Peters LHB,Batting Eighth ​,="45-156",.288,.532,0.244,8,10,2,29,15.0,13,.339,.871
+Jake Rogers RHB,Batting Ninth ​,="16-100",.160,.250,0.090,1,4,1,7,28.6,14,.263,.513
+Luisangel Acuna RHB,Batting Ninth ​,="18-83",.217,.265,0.048,1,1,0,5,17.8,4,.258,.523
+Drew Romo SHB,Batting Ninth ​,="18-122",.148,.270,0.122,4,3,0,10,21.6,14,.246,.516

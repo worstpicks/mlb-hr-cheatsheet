@@ -1,0 +1,30 @@
+Matchup,BOS @ MIA
+Pitcher,Tyler Phillips
+Pitcher Team,MIA
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="15-47",.319,.553,0.234,3,2,0,5,24.0,.360,.913
+Batting Second,="13-48",.271,.458,0.187,2,3,0,5,27.3,.364,.822
+Batting Third,="7-46",.152,.239,0.087,1,1,0,3,14.5,.291,.530
+Batting Fourth,="15-45",.333,.400,0.067,1,0,0,6,20.8,.375,.775
+Batting Fifth,="10-41",.244,.390,0.146,0,2,2,4,19.6,.326,.716
+Batting Sixth,="10-46",.217,.348,0.131,2,0,0,5,14.3,.265,.613
+Batting Seventh,="10-38",.263,.500,0.237,2,1,1,3,15.2,.378,.878
+Batting Eighth,="8-39",.205,.410,0.205,2,2,0,7,13.6,.279,.689
+Batting Ninth,="8-37",.216,.243,0.027,0,1,0,1,12.2,.293,.536
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jahmai Jones RHB,Batting First ​,="12-36",.333,.667,0.334,2,4,1,6,25.6,3,.385,1.052
+Anthony Seigler SHB,Batting First ​,="16-85",.188,.318,0.130,2,5,0,6,20.0,7,.255,.573
+Jarren Duran LHB,Batting First ​,="39-184",.212,.402,0.190,9,4,2,25,29.5,12,.265,.667
+Nick Sogard SHB,Batting First ​,="18-69",.261,.362,0.101,1,4,0,6,18.6,14,.381,.743
+Ceddanne Rafaela RHB,Batting Second ​,="99-347",.285,.455,0.170,11,24,1,43,18.6,11,.311,.766
+Adley Rutschman SHB,Batting Third ​,="44-186",.237,.435,0.198,8,11,1,39,17.2,23,.316,.751
+Wilyer Abreu LHB,Batting Third ​,="85-359",.237,.437,0.200,16,18,3,52,21.1,43,.316,.753
+Willson Contreras RHB,Batting Fourth ​,="93-332",.280,.527,0.247,20,18,2,63,25.3,39,.382,.909
+Eli White RHB,Batting Sixth ​,="10-44",.227,.455,0.228,2,2,1,5,22.4,5,.306,.761
+Mickey Gasper SHB,Batting Sixth ​,="11-32",.344,.594,0.250,1,3,1,6,13.9,4,.417,1.011
+Caleb Durbin RHB,Batting Sixth ​,="48-186",.258,.403,0.145,6,7,1,30,14.6,18,.336,.739
+Andruw Monasterio RHB,Batting Eighth ​,="25-88",.284,.375,0.091,1,5,0,12,18.2,8,.333,.708
+Connor Wong RHB,Batting Ninth ​,="26-85",.306,.482,0.176,3,6,0,9,23.2,6,.366,.848

@@ -816,9 +816,13 @@ def build_game_meta_line(
         home_label = pitcher_name_from_title_segment(home_seg)
         for label in (away_label, home_label):
             row = resolve_pitcher_risk_row(label, pitcher_risk, desc_blocks)
-            if row:
-                parts.append(_pitcher_meta_segment(label, row, hr9_lookup))
+            seg = _pitcher_meta_segment(label, row, hr9_lookup) if row else ""
+            if seg:
+                parts.append(seg)
                 continue
+            # A row that exists but carries no measured book renders as an empty
+            # segment, which silently dropped the arm from the header even when a real
+            # BAA lane was available further down. Fall through instead of continuing.
             rates = (rate_lookup or {}).get(label.lower()) or (rate_lookup or {}).get(
                 label.split()[-1].lower()
             )
@@ -831,6 +835,15 @@ def build_game_meta_line(
                 if seg:
                     print(f"note: {label} absent from HR risk export — using measured BAA lane")
                     parts.append(seg)
+                elif any(
+                    f"{n} - MLB debut" in desc or f"{n} — MLB debut" in desc
+                    # the description uses the chip (last) name, the title the full one
+                    for n in (label, label.split()[-1])
+                ):
+                    print(f"note: {label} is an MLB debut — header says so")
+                    parts.append(
+                        f'<span class="pitcher-meta">{label} MLB debut, no book</span>'
+                    )
                 else:
                     print(f"note: no risk or rate data for {label} — header omits this SP")
     return " · ".join(p for p in parts if p)

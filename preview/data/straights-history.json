@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-24T17:35:23Z",
+  "updated": "2026-08-25T18:12:01Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1148,11 +1148,26 @@
       "o05": {
         "player": "Alec Bohm",
         "matchup": "PHI @ SEA",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Zack Gelof",
         "matchup": "MIN @ ATH",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-25",
+      "o05": {
+        "player": "William Contreras",
+        "matchup": "MIL @ NYM",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Kyle Schwarber",
+        "matchup": "PHI @ SEA",
         "result": "pending"
       }
     }

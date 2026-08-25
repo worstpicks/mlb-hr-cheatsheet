@@ -1,0 +1,30 @@
+Matchup,PIT @ SD
+Pitcher,Paul Skenes
+Pitcher Team,PIT
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,2.20,="24-65",.369,.677,0.308,4,6,1,10,24.0,9,.440,1.117
+Batting Second,20.2,0.68,="12-72",.167,.222,0.055,1,1,0,9,34.7,2,.187,.409
+Batting Third,17.0,1.24,="14-60",.233,.450,0.217,3,4,0,9,30.0,7,.314,.764
+Batting Fourth,17.1,0.92,="11-64",.172,.328,0.156,2,4,0,5,31.9,5,.232,.560
+Batting Fifth,14.1,1.60,="19-61",.311,.541,0.230,2,8,0,11,25.8,4,.364,.905
+Batting Sixth,13.1,1.20,="12-50",.240,.340,0.100,0,3,1,8,28.8,4,.328,.668
+Batting Seventh,15.1,0.72,="8-53",.151,.170,0.019,0,1,0,2,31.6,3,.211,.381
+Batting Eighth,13.1,1.05,="11-49",.224,.327,0.103,1,2,0,2,30.8,3,.269,.596
+Batting Ninth,12.0,0.92,="7-42",.167,.238,0.071,1,0,0,2,32.0,4,.286,.524
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="110-365",.301,.510,0.209,17,23,1,53,16.0,34,.365,.875
+Jake Cronenworth LHB,Batting Second ​,="29-107",.271,.346,0.075,2,2,0,12,29.2,12,.345,.691
+Manny Machado RHB,Batting Third ​,="61-273",.223,.410,0.187,13,12,0,37,21.3,37,.315,.725
+Ty France RHB,Batting Fourth ​,="43-135",.319,.504,0.185,6,7,0,23,19.7,14,.395,.899
+Xander Bogaerts RHB,Batting Fifth ​,="38-164",.232,.305,0.073,3,3,0,16,19.8,16,.302,.607
+Austin Hays RHB,Batting Fifth ​,="4-19",.211,.211,0.000,0,0,0,2,35.0,1,.250,.461
+Jackson Merrill LHB,Batting Fifth ​,="44-157",.280,.535,0.255,11,5,1,29,24.7,10,.324,.859
+Luis Rengifo SHB,Batting Sixth ​,="25-87",.287,.425,0.138,2,6,0,12,12.0,10,.374,.799
+Gavin Sheets LHB,Batting Sixth ​,="14-79",.177,.342,0.165,3,4,0,10,27.1,5,.235,.577
+Luis Campusano RHB,Batting Sixth ​,="12-44",.273,.386,0.113,1,2,0,7,20.8,8,.396,.782
+Jase Bowen RHB,Batting Eighth ​,="3-31",.097,.129,0.032,0,1,0,3,37.5,0,.125,.254
+Freddy Fermin RHB,Batting Ninth ​,="18-93",.194,.323,0.129,3,3,0,9,21.9,7,.255,.578
+Dustin Harris LHB,Batting Ninth ​,="5-15",.333,.467,0.134,0,2,0,0,11.8,0,.375,.842

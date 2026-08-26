@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-25T18:12:01Z",
+  "updated": "2026-08-26T11:35:00Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1163,12 +1163,14 @@
       "o05": {
         "player": "William Contreras",
         "matchup": "MIL @ NYM",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Kyle Schwarber",
         "matchup": "PHI @ SEA",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       }
     }
   ]

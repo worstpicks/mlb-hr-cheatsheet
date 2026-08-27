@@ -1,0 +1,30 @@
+Matchup,HOU @ NYY
+Pitcher,Gerrit Cole
+Pitcher Team,NYY
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.2,1.59,="13-44",.295,.432,0.137,1,3,0,3,16.7,4,.354,.786
+Batting Second,11.0,1.36,="13-46",.283,.413,0.130,1,3,0,3,22.9,2,.313,.726
+Batting Third,12.1,0.89,="8-44",.182,.341,0.159,2,1,0,4,29.8,3,.234,.575
+Batting Fourth,12.1,0.81,="6-42",.143,.333,0.190,2,2,0,5,28.3,4,.217,.550
+Batting Fifth,10.0,1.30,="9-39",.231,.487,0.256,2,4,0,6,22.2,4,.318,.805
+Batting Sixth,8.0,1.88,="14-38",.368,.605,0.237,2,3,0,5,23.1,1,.385,.990
+Batting Seventh,9.1,0.64,="6-34",.176,.382,0.206,2,1,0,4,25.7,0,.176,.558
+Batting Eighth,9.1,0.64,="5-33",.152,.182,0.030,0,1,0,0,41.2,1,.176,.358
+Batting Ninth,9.1,0.64,="5-33",.152,.242,0.090,0,1,1,1,35.3,1,.176,.418
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="35-132",.265,.492,0.227,7,7,1,13,20.8,15,.342,.834
+Jeremy Pena RHB,Batting First ​,="91-320",.284,.478,0.194,15,15,1,40,21.4,18,.332,.810
+Yordan Alvarez LHB,Batting Second ​,="142-435",.326,.607,0.281,31,27,1,83,17.0,82,.439,1.046
+Isaac Paredes RHB,Batting Third ​,="80-298",.268,.413,0.145,9,14,1,45,10.7,35,.359,.772
+Christian Walker RHB,Batting Fourth ​,="51-217",.235,.475,0.240,14,10,0,32,23.9,20,.313,.788
+Nelson Velazquez RHB,Batting Fourth ​,="12-47",.255,.532,0.277,3,4,0,10,24.1,5,.333,.865
+LaMonte Wade Jr. LHB,Batting Fifth ​,="3-33",.091,.091,0.000,0,0,0,2,22.5,7,.250,.341
+Daulton Varsho LHB,Batting Sixth ​,="30-128",.234,.383,0.149,3,10,0,10,16.1,9,.285,.668
+Yainer Diaz RHB,Batting Sixth ​,="18-84",.214,.262,0.048,0,4,0,3,18.6,2,.233,.495
+Cam Smith RHB,Batting Sixth ​,="26-136",.191,.353,0.162,6,4,0,11,25.2,14,.266,.619
+Taylor Trammell LHB,Batting Seventh ​,="14-58",.241,.448,0.207,3,1,1,9,33.9,4,.290,.738
+Nick Allen RHB,Batting Eighth ​,="12-49",.245,.286,0.041,0,2,0,8,25.0,3,.273,.559
+Christian Vazquez RHB,Batting Ninth ​,="40-177",.226,.350,0.124,5,7,0,23,19.9,13,.277,.627

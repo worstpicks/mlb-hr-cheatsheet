@@ -1,0 +1,179 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-08-27.csv",
+  "source_date": "2026-08-27",
+  "hand_date": "2026-08-27",
+  "by_game": {
+    "HOU @ NYY": {
+      "game": "HOU @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 22,
+      "stadium_pct": 4,
+      "weather_pct": 19,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 23,
+      "rhb_stadium_pct": 4,
+      "park_rhb_pct": 23
+    },
+    "COL @ WAS": {
+      "game": "COL @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 18,
+      "stadium_pct": 3,
+      "weather_pct": 15,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 16,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": 17
+    },
+    "KC @ TOR": {
+      "game": "KC @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 14,
+      "stadium_pct": 6,
+      "weather_pct": 8,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 12,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": 14
+    },
+    "MIL @ NYM": {
+      "game": "MIL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 13,
+      "stadium_pct": -1,
+      "weather_pct": 15,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 15
+    },
+    "LAD @ ATL": {
+      "game": "LAD @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 2,
+      "stadium_pct": -3,
+      "weather_pct": 5,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 6,
+      "rhb_stadium_pct": -4,
+      "park_rhb_pct": 1
+    },
+    "BAL @ STL": {
+      "game": "BAL @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -17,
+      "stadium_pct": -8,
+      "weather_pct": -9,
+      "lhb_stadium_pct": -18,
+      "park_lhb_pct": -27,
+      "rhb_stadium_pct": -16,
+      "park_rhb_pct": -25
+    },
+    "ARI @ SF": {
+      "game": "ARI @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -20,
+      "stadium_pct": -20,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -20,
+      "park_lhb_pct": -20,
+      "rhb_stadium_pct": -18,
+      "park_rhb_pct": -18
+    }
+  },
+  "by_venue": {
+    "yankee stadium": {
+      "game": "HOU @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 22,
+      "stadium_pct": 4,
+      "weather_pct": 19,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 23,
+      "rhb_stadium_pct": 4,
+      "park_rhb_pct": 23
+    },
+    "nationals park": {
+      "game": "COL @ WAS",
+      "venue": "Nationals Park",
+      "venue_key": "nationals park",
+      "hr_pct": 18,
+      "stadium_pct": 3,
+      "weather_pct": 15,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 16,
+      "rhb_stadium_pct": 2,
+      "park_rhb_pct": 17
+    },
+    "rogers centre": {
+      "game": "KC @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": 14,
+      "stadium_pct": 6,
+      "weather_pct": 8,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 12,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": 14
+    },
+    "citi field": {
+      "game": "MIL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 13,
+      "stadium_pct": -1,
+      "weather_pct": 15,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 15
+    },
+    "truist park": {
+      "game": "LAD @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 2,
+      "stadium_pct": -3,
+      "weather_pct": 5,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 6,
+      "rhb_stadium_pct": -4,
+      "park_rhb_pct": 1
+    },
+    "busch stadium": {
+      "game": "BAL @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -17,
+      "stadium_pct": -8,
+      "weather_pct": -9,
+      "lhb_stadium_pct": -18,
+      "park_lhb_pct": -27,
+      "rhb_stadium_pct": -16,
+      "park_rhb_pct": -25
+    },
+    "oracle park": {
+      "game": "ARI @ SF",
+      "venue": "Oracle Park",
+      "venue_key": "oracle park",
+      "hr_pct": -20,
+      "stadium_pct": -20,
+      "weather_pct": 0,
+      "lhb_stadium_pct": -20,
+      "park_lhb_pct": -20,
+      "rhb_stadium_pct": -18,
+      "park_rhb_pct": -18
+    }
+  }
+}

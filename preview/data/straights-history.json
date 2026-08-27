@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-26T11:35:00Z",
+  "updated": "2026-08-27T09:20:20Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1169,6 +1169,21 @@
       "o15": {
         "player": "Kyle Schwarber",
         "matchup": "PHI @ SEA",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-26",
+      "o05": {
+        "player": "Daylen Lile",
+        "matchup": "COL @ WSH",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Mickey Gasper",
+        "matchup": "BOS @ MIA",
         "result": "loss",
         "hr": 0
       }

@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -54,11 +55,38 @@ def _int(val: Any) -> int | None:
     return int(f)
 
 
-def _fetch_csv(url: str, timeout: int = 90) -> list[dict]:
+# Transient upstream conditions -- Savant returns these under load and they clear on
+# their own. Anything else (404, 403) is a real problem and should surface immediately.
+_RETRY_STATUSES = {408, 425, 429, 500, 502, 503, 504}
+
+
+def _fetch_csv(url: str, timeout: int = 90, attempts: int = 4) -> list[dict]:
+    """Fetch a Savant CSV, retrying transient failures.
+
+    A single 502 from Savant used to abort the whole slate build before the sheet was
+    written -- one flaky third-party call and the day does not ship. Back off and try
+    again instead.
+    """
+    import time
+
     req = urllib.request.Request(url, headers={"User-Agent": "WorstPickz-Research/1.0"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        text = resp.read().decode("utf-8-sig")
-    return list(csv.DictReader(io.StringIO(text)))
+    last: Exception | None = None
+    for attempt in range(attempts):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                text = resp.read().decode("utf-8-sig")
+            return list(csv.DictReader(io.StringIO(text)))
+        except urllib.error.HTTPError as exc:
+            last = exc
+            if exc.code not in _RETRY_STATUSES:
+                raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+            last = exc
+        if attempt < attempts - 1:
+            delay = 3 * (2 ** attempt)
+            print(f"  savant fetch failed ({last}); retrying in {delay}s")
+            time.sleep(delay)
+    raise last if last else RuntimeError(f"savant fetch failed: {url}")
 
 
 def _hr_fb_pct(row: dict) -> float | None:

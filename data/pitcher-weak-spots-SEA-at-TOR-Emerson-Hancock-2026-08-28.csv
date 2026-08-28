@@ -1,0 +1,30 @@
+Matchup,SEA @ TOR
+Pitcher,Emerson Hancock
+Pitcher Team,SEA
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="18-66",.273,.515,0.242,5,1,0,8,15.7,.314,.829
+Batting Second,="14-61",.230,.410,0.180,3,2,0,6,17.6,.294,.704
+Batting Third,="21-61",.344,.623,0.279,4,5,0,9,13.6,.379,1.002
+Batting Fourth,="13-58",.224,.397,0.173,3,1,0,7,32.8,.297,.694
+Batting Fifth,="15-58",.259,.328,0.069,0,4,0,4,30.0,.283,.611
+Batting Sixth,="9-56",.161,.214,0.053,0,3,0,2,23.7,.203,.417
+Batting Seventh,="8-49",.163,.224,0.061,1,0,0,5,29.6,.241,.465
+Batting Eighth,="10-46",.217,.304,0.087,1,1,0,2,23.1,.308,.612
+Batting Ninth,="10-48",.208,.354,0.146,1,4,0,4,24.0,.240,.594
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-241",.220,.373,0.153,8,11,1,20,20.3,28,.308,.681
+Brett Bateman LHB,Batting First ​,="17-47",.362,.426,0.064,0,1,1,3,23.5,2,.380,.806
+Charles McAdoo RHB,Batting First ​,="4-18",.222,.222,0.000,0,0,0,1,33.3,2,.286,.508
+Nathan Lukes LHB,Batting Second ​,="34-138",.246,.319,0.073,3,1,0,10,13.7,15,.325,.644
+Vladimir Guerrero Jr. RHB,Batting Third ​,="84-311",.270,.370,0.100,5,16,0,34,12.3,33,.343,.713
+Jesus Sanchez LHB,Batting Fourth ​,="29-98",.296,.480,0.184,4,6,0,13,19.4,6,.324,.804
+Kazuma Okamoto RHB,Batting Fourth ​,="37-171",.216,.374,0.158,8,3,0,29,30.4,19,.299,.673
+Alejandro Kirk RHB,Batting Fifth ​,="21-81",.259,.444,0.185,4,3,0,10,16.1,12,.355,.799
+Daz Cameron RHB,Batting Seventh ​,="1-13",.077,.154,0.077,0,1,0,2,28.6,0,.071,.225
+Ernie Clement RHB,Batting Seventh ​,="31-111",.279,.387,0.108,2,6,0,13,9.5,4,.302,.689
+Andres Gimenez LHB,Batting Eighth ​,="42-182",.231,.357,0.126,5,8,0,26,18.8,5,.276,.633
+Myles Straw RHB,Batting Ninth ​,="14-66",.212,.364,0.152,0,8,1,5,5.4,6,.274,.638
+Brandon Valenzuela SHB,Batting Ninth ​,="20-92",.217,.457,0.240,6,4,0,13,23.8,13,.314,.771

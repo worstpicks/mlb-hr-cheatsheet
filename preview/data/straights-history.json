@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-27T09:20:20Z",
+  "updated": "2026-08-28T09:45:58Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1184,6 +1184,21 @@
       "o15": {
         "player": "Mickey Gasper",
         "matchup": "BOS @ MIA",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-27",
+      "o05": {
+        "player": "Willi Castro",
+        "matchup": "COL @ WSH",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Rafael Devers",
+        "matchup": "ARI @ SF",
         "result": "loss",
         "hr": 0
       }

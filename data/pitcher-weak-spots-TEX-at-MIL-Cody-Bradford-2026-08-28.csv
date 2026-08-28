@@ -1,0 +1,30 @@
+Matchup,TEX @ MIL
+Pitcher,Cody Bradford
+Pitcher Team,TEX
+Opposing Team,MIL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,3.00,="6-12",.500,.750,0.250,0,3,0,1,8.3,0,.500,1.250
+Batting Second,2.0,2.00,="4-10",.400,.500,0.100,0,1,0,1,9.1,0,.455,.955
+Batting Third,2.1,1.29,="1-7",.143,.143,0.000,0,0,0,1,30.0,2,.300,.443
+Batting Fourth,2.0,3.00,="5-9",.556,.778,0.222,0,2,0,2,0.0,1,.600,1.378
+Batting Fifth,3.0,0.33,="1-9",.111,.111,0.000,0,0,0,0,11.1,0,.111,.222
+Batting Sixth,2.0,1.50,="3-9",.333,.667,0.334,1,0,0,2,11.1,0,.333,1.000
+Batting Seventh,2.1,0.86,="1-8",.125,.125,0.000,0,0,0,0,11.1,1,.222,.347
+Batting Eighth,2.1,0.86,="2-9",.222,.333,0.111,0,1,0,0,22.2,0,.222,.555
+Batting Ninth,2.0,1.00,="2-7",.286,.286,0.000,0,0,0,0,37.5,0,.286,.572
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Christian Yelich LHB,Batting First ​,="43-183",.235,.350,0.115,2,13,1,21,26.5,23,.327,.677
+Jackson Chourio RHB,Batting Second ​,="72-251",.287,.474,0.187,12,11,0,38,23.0,24,.353,.827
+Brice Turang LHB,Batting Third ​,="55-199",.276,.508,0.232,10,12,2,39,26.2,28,.364,.872
+Gary Sanchez RHB,Batting Fourth ​,="14-66",.212,.394,0.182,2,4,1,10,27.2,13,.346,.740
+William Contreras RHB,Batting Fourth ​,="45-206",.218,.350,0.132,6,9,0,25,17.2,19,.284,.634
+Jake Bauers LHB,Batting Fifth ​,="63-207",.304,.609,0.305,17,10,1,50,23.1,46,.435,1.044
+Garrett Mitchell LHB,Batting Sixth ​,="36-109",.330,.569,0.239,4,10,2,17,31.0,16,.421,.990
+Andrew Vaughn RHB,Batting Sixth ​,="26-83",.313,.518,0.205,4,5,0,19,19.4,9,.387,.905
+Sal Frelick LHB,Batting Seventh ​,="37-156",.237,.327,0.090,2,8,0,20,8.5,15,.308,.635
+Luis Lara SHB,Batting Seventh ​,="12-44",.273,.386,0.113,0,5,0,6,17.6,6,.353,.739
+Cooper Pratt RHB,Batting Eighth ​,="30-118",.254,.347,0.093,2,3,1,14,20.3,15,.341,.688
+David Hamilton LHB,Batting Ninth ​,="44-180",.244,.372,0.128,4,7,2,16,23.8,18,.317,.689
+Joey Ortiz RHB,Batting Ninth ​,="47-190",.247,.389,0.142,5,8,2,24,17.3,18,.308,.697

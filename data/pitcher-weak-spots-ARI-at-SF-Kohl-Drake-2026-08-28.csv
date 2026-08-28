@@ -1,0 +1,30 @@
+Matchup,ARI @ SF
+Pitcher,Kohl Drake
+Pitcher Team,ARI
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.2,3.00,="4-9",.444,.889,0.445,1,1,0,2,9.1,1,.545,1.434
+Batting Second,1.2,2.40,="3-8",.375,.375,0.000,0,0,0,0,0.0,1,.444,.819
+Batting Third,2.2,0.75,="1-8",.125,.250,0.125,0,1,0,1,11.1,1,.222,.472
+Batting Fourth,2.0,1.50,="3-7",.429,1.429,1.000,2,1,0,4,25.0,0,.375,1.804
+Batting Fifth,1.2,1.80,="3-8",.375,.625,0.250,0,2,0,0,25.0,0,.375,1.000
+Batting Sixth,1.2,1.80,="2-7",.286,.286,0.000,0,0,0,1,37.5,1,.375,.661
+Batting Seventh,2.1,0.43,="0-7",.000,.000,0.000,0,0,0,0,25.0,1,.125,.125
+Batting Eighth,2.0,1.00,="2-8",.250,.500,0.250,0,0,1,0,12.5,0,.250,.750
+Batting Ninth,1.0,3.00,="2-5",.400,.600,0.200,0,1,0,1,12.5,1,.625,1.225
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Bryce Eldridge LHB,Batting Second ​,="16-80",.200,.400,0.200,5,1,0,9,28.6,11,.297,.697
+Rafael Devers LHB,Batting Fourth ​,="89-340",.262,.512,0.250,21,20,1,55,24.7,38,.336,.848
+Osleivis Basabe RHB,Batting Fifth ​,="5-29",.172,.207,0.035,0,1,0,0,16.1,1,.226,.433
+Jung Hoo Lee LHB,Batting Fifth ​,="47-165",.285,.400,0.115,2,11,1,14,8.0,7,.320,.720
+Nate Furman LHB,Batting Sixth ​,="1-5",.200,.200,0.000,0,0,0,0,50.0,1,.333,.533
+Turner Hill LHB,Batting Seventh ​,="2-11",.182,.273,0.091,0,1,0,2,30.8,1,.231,.504
+Andrew Knizner RHB,Batting Eighth ​,="0-6",.000,.000,0.000,0,0,0,0,28.6,1,.143,.143
+Grant McCray LHB,Batting Eighth ​,="4-35",.114,.286,0.172,1,1,1,2,27.9,6,.244,.530
+Drew Gilbert LHB,Batting Eighth ​,="29-142",.204,.275,0.071,2,4,0,14,16.7,18,.317,.592
+Christian Koss RHB,Batting Ninth ​,="21-87",.241,.287,0.046,0,4,0,2,22.8,4,.275,.562
+Shay Whitcomb RHB,Batting Ninth ​,="3-11",.273,.909,0.636,2,1,0,5,54.5,0,.273,1.182
+Drew Cavanaugh LHB,Batting Ninth ​,="7-35",.200,.229,0.029,0,1,0,0,30.2,6,.317,.546
+Jonah Cox RHB,Batting Ninth ​,="6-21",.286,.524,0.238,1,0,1,3,50.0,0,.286,.810

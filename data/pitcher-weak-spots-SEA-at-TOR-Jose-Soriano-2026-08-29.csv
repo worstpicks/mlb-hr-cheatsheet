@@ -1,0 +1,30 @@
+Matchup,SEA @ TOR
+Pitcher,Jose Soriano
+Pitcher Team,TOR
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.2,1.02,="13-70",.186,.243,0.057,1,1,0,2,19.2,8,.269,.512
+Batting Second,17.1,1.56,="19-69",.275,.391,0.116,2,2,0,5,28.6,8,.351,.742
+Batting Third,16.0,1.56,="10-56",.179,.250,0.071,1,1,0,6,20.8,15,.361,.611
+Batting Fourth,17.1,1.10,="17-66",.258,.394,0.136,2,3,0,8,26.8,2,.286,.680
+Batting Fifth,15.2,1.40,="14-60",.233,.367,0.134,2,2,0,7,20.3,8,.333,.700
+Batting Sixth,14.0,1.50,="14-57",.246,.386,0.140,2,2,0,8,33.8,7,.338,.724
+Batting Seventh,16.1,1.04,="13-57",.228,.351,0.123,2,1,0,3,23.0,4,.279,.630
+Batting Eighth,13.1,1.35,="12-50",.240,.320,0.080,1,1,0,5,15.8,6,.333,.653
+Batting Ninth,12.1,1.30,="9-43",.209,.233,0.024,0,1,0,4,24.5,7,.333,.566
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-287",.233,.331,0.098,5,11,1,21,20.6,43,.337,.668
+JP Crawford LHB,Batting First ​,="50-210",.238,.405,0.167,9,8,0,22,20.4,35,.356,.761
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Third ​,="52-212",.245,.406,0.161,9,7,0,26,24.8,15,.304,.710
+Dominic Canzone LHB,Batting Third ​,="32-136",.235,.382,0.147,4,8,0,18,23.2,15,.311,.693
+Josh Naylor LHB,Batting Fourth ​,="55-202",.272,.371,0.099,5,5,0,22,15.7,18,.336,.707
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Cole Young LHB,Batting Sixth ​,="25-108",.231,.324,0.093,2,4,0,11,16.1,6,.282,.606
+Patrick Wisdom RHB,Batting Seventh ​,="3-18",.167,.389,0.222,1,1,0,3,40.0,2,.250,.639
+Jhonny Pereda RHB,Batting Eighth ​,="15-55",.273,.327,0.054,1,0,0,3,22.0,4,.322,.649
+Weston Wilson RHB,Batting Eighth ​,="14-63",.222,.349,0.127,2,2,0,4,29.2,9,.319,.668
+Victor Robles RHB,Batting Eighth ​,="15-59",.254,.356,0.102,0,2,2,6,16.2,7,.343,.699
+Brock Rodden SHB,Batting Ninth ​,="6-35",.171,.286,0.115,0,2,1,3,34.1,5,.268,.554

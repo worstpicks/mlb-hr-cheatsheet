@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-28T09:45:58Z",
+  "updated": "2026-08-29T04:17:37Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1199,6 +1199,21 @@
       "o15": {
         "player": "Rafael Devers",
         "matchup": "ARI @ SF",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-28",
+      "o05": {
+        "player": "Max Muncy",
+        "matchup": "LAD @ DET",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Jordan Walker",
+        "matchup": "PIT @ STL",
         "result": "loss",
         "hr": 0
       }

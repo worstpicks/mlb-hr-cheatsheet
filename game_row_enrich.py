@@ -835,6 +835,14 @@ def build_game_meta_line(
                 if seg:
                     print(f"note: {label} absent from HR risk export — using measured BAA lane")
                     parts.append(seg)
+                elif (m_season := re.search(
+                    rf"{re.escape(label.split()[-1])}\s*\(season BAA (\.\d+)\)", desc
+                )):
+                    print(f"note: {label} has no split book — header shows season BAA")
+                    parts.append(
+                        f'<span class="pitcher-meta">{label} season BAA '
+                        f'{m_season.group(1)}</span>'
+                    )
                 elif any(
                     f"{n} - MLB debut" in desc or f"{n} — MLB debut" in desc
                     # the description uses the chip (last) name, the title the full one

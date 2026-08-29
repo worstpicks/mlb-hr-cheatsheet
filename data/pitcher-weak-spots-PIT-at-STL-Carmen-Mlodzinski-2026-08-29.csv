@@ -1,0 +1,30 @@
+Matchup,PIT @ STL
+Pitcher,Carmen Mlodzinski
+Pitcher Team,PIT
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="15-51",.294,.431,0.137,1,2,1,4,14.5,.345,.776
+Batting Second,="11-48",.229,.417,0.188,2,3,0,7,20.0,.327,.744
+Batting Third,="12-48",.250,.396,0.146,1,4,0,2,16.7,.333,.729
+Batting Fourth,="18-49",.367,.510,0.143,2,1,0,7,11.5,.404,.914
+Batting Fifth,="14-45",.311,.356,0.045,0,2,0,6,15.4,.404,.760
+Batting Sixth,="15-46",.326,.478,0.152,1,4,0,6,19.6,.380,.858
+Batting Seventh,="14-46",.304,.478,0.174,2,2,0,13,28.6,.327,.805
+Batting Eighth,="9-48",.188,.271,0.083,0,4,0,2,24.5,.204,.475
+Batting Ninth,="10-43",.233,.279,0.046,0,2,0,5,14.3,.306,.585
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="122-493",.247,.379,0.132,17,14,0,48,16.0,63,.350,.729
+Ivan Herrera RHB,Batting Second ​,="109-449",.243,.365,0.122,12,17,1,46,18.4,64,.366,.731
+Alec Burleson LHB,Batting Third ​,="115-390",.295,.513,0.218,19,26,1,70,15.9,38,.366,.879
+Jordan Walker RHB,Batting Fourth ​,="87-306",.284,.529,0.245,19,18,0,70,26.4,25,.341,.870
+Nolan Gorman LHB,Batting Fifth ​,="35-162",.216,.327,0.111,5,3,0,24,30.1,18,.290,.617
+Joshua Baez RHB,Batting Fifth ​,="5-36",.139,.417,0.278,3,1,0,7,41.0,2,.179,.596
+Ramon Urias RHB,Batting Seventh ​,="5-22",.227,.545,0.318,2,1,0,6,12.0,2,.280,.825
+Bryan Torres LHB,Batting Seventh ​,="15-56",.268,.393,0.125,1,0,2,6,12.9,4,.328,.721
+Jose Fermin RHB,Batting Seventh ​,="18-76",.237,.368,0.131,2,4,0,10,13.1,6,.298,.666
+Nathan Church LHB,Batting Seventh ​,="45-181",.249,.381,0.132,6,6,0,24,15.5,9,.284,.665
+Pedro Pages RHB,Batting Eighth ​,="29-121",.240,.364,0.124,3,6,0,9,26.5,5,.279,.643
+Thomas Saggese RHB,Batting Eighth ​,="7-38",.184,.342,0.158,1,1,1,2,30.0,2,.225,.567
+Jimmy Crooks LHB,Batting Ninth ​,="9-56",.161,.339,0.178,3,1,0,5,38.3,3,.217,.556

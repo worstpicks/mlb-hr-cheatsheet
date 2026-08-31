@@ -37,7 +37,10 @@ STAT_COLUMNS = {
 RANK_STAT = {"QB": "pass_yds", "RB": "rush_yds", "WR": "rec_yds", "TE": "rec_yds"}
 # stats kept in per-game logs (position-relevant subset to keep the JSON lean)
 POS_LOG_KEYS = {
-    "QB": ("pass_att", "pass_cmp", "pass_yds", "pass_td", "pass_int", "rush_yds"),
+    # QBs carry rush_td so the sheet can separate a thrown touchdown (PTD) from
+    # one the quarterback scored himself. Without it every QB TD looked alike.
+    "QB": ("pass_att", "pass_cmp", "pass_yds", "pass_td", "pass_int",
+           "rush_att", "rush_yds", "rush_td"),
     "RB": ("rush_att", "rush_yds", "rush_td", "tgt", "rec", "rec_yds"),
     "WR": ("tgt", "rec", "rec_yds", "rec_td"),
     "TE": ("tgt", "rec", "rec_yds", "rec_td"),

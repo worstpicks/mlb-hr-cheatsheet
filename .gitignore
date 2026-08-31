@@ -2,3 +2,9 @@
 Thumbs.db
 .env
 .env.*
+
+# Local Netlify folder
+.netlify
+
+# ESPN preseason boxscore cache: regenerable, ~39MB, never ship it
+data/espn-preseason-cache/

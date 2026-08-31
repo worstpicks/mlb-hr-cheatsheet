@@ -16,7 +16,7 @@
     <title>NFL Research — Worst Pickz</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
-    <link rel="stylesheet" href="nfl-research.css?v=15">
+    <link rel="stylesheet" href="nfl-research.css?v=21">
     <script>
         (function () {
             if (location.protocol !== "file:") return;
@@ -78,9 +78,13 @@ python serve-research.py</pre>
             <span class="nrs-badge" id="nrsSourceBadge" hidden></span>
         </div>
 
-        <div class="nrs-main">
+        <div class="nrs-shell">
+            <nav class="nrs-rail" id="nrsRail" aria-label="Research sheets"></nav>
+
+            <div class="nrs-main">
             <p class="nrs-status" id="nrsStatus" role="alert" hidden></p>
 
+            <div id="nrsMatchupHost">
             <section class="nrs-section">
                 <h2 class="nrs-section-title">Week slate</h2>
                 <div class="nrs-games-wrap">
@@ -95,12 +99,19 @@ python serve-research.py</pre>
                         <span class="nrs-matchup-sub" id="nrsMatchupSub"></span>
                     </div>
                     <div class="nrs-matchup-bar__actions">
+                        <div class="nrs-src-toggle" id="nrsSrcToggle" role="group" aria-label="Stat source" hidden>
+                            <button type="button" data-src="reg" class="is-active">2025 REG</button>
+                            <button type="button" data-src="pre">2026 PRE</button>
+                        </div>
+                        <button type="button" class="nrs-colgear" id="nrsColGear" aria-expanded="false" aria-haspopup="true" title="Choose columns" aria-label="Choose columns">&#9881;</button>
                         <div class="nrs-side-toggle" role="group" aria-label="Offense team">
                             <button type="button" id="nrsSideAway">AWY OFF</button>
                             <button type="button" id="nrsSideHome">HOM OFF</button>
                         </div>
                     </div>
                 </div>
+
+                <p class="nrs-src-warn" id="nrsSrcWarn" hidden></p>
 
                 <div id="nrsPosSections"></div>
 
@@ -116,9 +127,14 @@ python serve-research.py</pre>
                 </p>
                 <p class="nrs-legend" id="nrsPropsHint" hidden></p>
             </section>
+            </div>
+
+            <div class="nrs-section nrs-sheet" id="nrsSheet" hidden></div>
+            </div>
         </div>
     </div>
 
-    <script src="nfl-research.js?v=15" defer></script>
+    <script src="nfl-sheets.js?v=3" defer></script>
+    <script src="nfl-research.js?v=18" defer></script>
 </body>
 </html>

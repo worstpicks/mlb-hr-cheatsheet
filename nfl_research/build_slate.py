@@ -7,7 +7,10 @@ from pathlib import Path
 
 from nfl_research.espn_api import fetch_week_games
 from nfl_research.nflverse_stats import POSITIONS, build_aggregates, download_weekly_stats
+from nfl_research.cheatsheets import build_cheatsheets
+from nfl_research.espn_preseason import build_preseason
 from nfl_research.odds_api import fetch_props, normalize_name
+from nfl_research.weather import fetch_game_weather
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "preview" / "data"
 
@@ -42,13 +45,41 @@ def build_slate(season: int, week: int) -> dict:
             }
         )
 
+    # Preseason is the only football newer than last season -- nflverse has no
+    # rows for a season before it starts. It rides alongside the real aggregates
+    # as an opt-in source; it is never the default, because the snaps belong to
+    # roster hopefuls rather than the players anyone is betting.
+    teams_list = sorted({g["away"] for g in games} | {g["home"] for g in games})
+    try:
+        pre_players, pre_defense, pre_rows = build_preseason(season, teams_list)
+    except Exception as exc:
+        print(f"[nfl-research] preseason fetch failed ({exc}); regular season only")
+        pre_players, pre_defense, pre_rows = {}, {}, 0
+    if pre_rows:
+        print(f"[nfl-research] preseason: {pre_rows} player-game rows from ESPN")
+        for game, slate_game in zip(games, slate_games):
+            slate_game["away_offense_pre"] = pre_players.get(game["away"], empty_pos)
+            slate_game["home_offense_pre"] = pre_players.get(game["home"], empty_pos)
+            slate_game["away_def_vs_pos_pre"] = pre_defense.get(game["away"], {})
+            slate_game["home_def_vs_pos_pre"] = pre_defense.get(game["home"], {})
+
+    weather = fetch_game_weather(games)
+    for game in slate_games:
+        game["weather"] = weather.get(game["id"])
+
+    teams = {g["away"] for g in games} | {g["home"] for g in games}
+    sheets = build_cheatsheets(stats_season, teams)
+
     return {
         "season": season,
         "week": week,
         "stats_season": stats_season,
         "has_props": bool(props),
+        "has_preseason": bool(pre_rows),
+        "preseason_rows": pre_rows,
         "fetched_at": datetime.now().isoformat(timespec="seconds"),
         "games": slate_games,
+        "sheets": sheets,
     }
 
 

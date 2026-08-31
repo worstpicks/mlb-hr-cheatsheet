@@ -10,55 +10,84 @@
     const MAX_WEEK = 18;
     const POSITIONS = ["QB", "RB", "WR", "TE"];
 
-    // columns shown per position (offense + defense share the same set)
+    /* Columns per position. Yards and touchdowns lead — they are what gets bet,
+       so they sit immediately after W/L instead of at the far end of a wide row.
+       `group` drives the band above the header and is computed from whatever is
+       visible, so hiding a column never leaves a mislabelled span behind.
+       `optional: true` means hidden until switched on in the column picker. */
     const POS_COLUMNS = {
         QB: [
-            { key: "pass_att", label: "Att" },
-            { key: "pass_cmp", label: "Cmp" },
-            { key: "pass_yds", label: "Yds" },
-            { key: "pass_td", label: "TD" },
-            { key: "pass_int", label: "INT", lowerBetter: true },
-            { key: "rush_yds", label: "Yds" },
+            { key: "pass_yds", label: "Yds", group: "Key" },
+            { key: "pass_td", label: "PTD", group: "Key" },
+            { key: "rush_td", label: "Rush TD", group: "Key" },
+            { key: "pass_att", label: "Att", group: "Passing" },
+            { key: "pass_cmp", label: "Cmp", group: "Passing" },
+            { key: "pass_int", label: "INT", group: "Passing", lowerBetter: true },
+            { key: "rush_yds", label: "Yds", group: "Rushing" },
+            { key: "rush_att", label: "Att", group: "Rushing", optional: true },
         ],
         RB: [
-            { key: "rush_att", label: "Att" },
-            { key: "rush_yds", label: "Yds" },
-            { key: "rush_td", label: "TD" },
-            { key: "tgt", label: "Tgt" },
-            { key: "rec", label: "Rec" },
-            { key: "rec_yds", label: "Yds" },
+            { key: "rush_yds", label: "Yds", group: "Key" },
+            { key: "rush_td", label: "TD", group: "Key" },
+            { key: "rush_att", label: "Att", group: "Rushing" },
+            { key: "tgt", label: "Tgt", group: "Receiving" },
+            { key: "rec", label: "Rec", group: "Receiving" },
+            { key: "rec_yds", label: "Yds", group: "Receiving" },
         ],
         WR: [
-            { key: "tgt", label: "Tgt" },
-            { key: "rec", label: "Rec" },
-            { key: "rec_yds", label: "Yds" },
-            { key: "rec_td", label: "TD" },
+            { key: "rec_yds", label: "Yds", group: "Key" },
+            { key: "rec_td", label: "TD", group: "Key" },
+            { key: "tgt", label: "Tgt", group: "Receiving" },
+            { key: "rec", label: "Rec", group: "Receiving" },
         ],
         TE: [
-            { key: "tgt", label: "Tgt" },
-            { key: "rec", label: "Rec" },
-            { key: "rec_yds", label: "Yds" },
-            { key: "rec_td", label: "TD" },
+            { key: "rec_yds", label: "Yds", group: "Key" },
+            { key: "rec_td", label: "TD", group: "Key" },
+            { key: "tgt", label: "Tgt", group: "Receiving" },
+            { key: "rec", label: "Rec", group: "Receiving" },
         ],
     };
 
-    // group bands over the stat columns (counts must match POS_COLUMNS order)
-    const POS_GROUPS = {
-        QB: [
-            { label: "Passing", span: 5 },
-            { label: "Rushing", span: 1 },
-        ],
-        RB: [
-            { label: "Rushing", span: 3 },
-            { label: "Receiving", span: 3 },
-        ],
-        WR: [{ label: "Receiving", span: 4 }],
-        TE: [{ label: "Receiving", span: 4 }],
-    };
+    const COLS_STORAGE_KEY = "worstpickz-nfl-cols";
+
+    /* Which columns the reader has switched on, per position. */
+    function loadColPrefs() {
+        try {
+            const raw = JSON.parse(localStorage.getItem(COLS_STORAGE_KEY) || "{}");
+            if (raw && typeof raw === "object") return raw;
+        } catch (e) {}
+        return {};
+    }
+
+    function saveColPrefs(prefs) {
+        try { localStorage.setItem(COLS_STORAGE_KEY, JSON.stringify(prefs)); } catch (e) {}
+    }
+
+    function visibleCols(pos) {
+        const all = POS_COLUMNS[pos] || [];
+        const pref = state.colPrefs[pos];
+        if (!pref) return all.filter((c) => !c.optional);
+        const on = all.filter((c) => pref.indexOf(c.key) !== -1);
+        // never let the picker empty a table out entirely
+        return on.length ? on : all.filter((c) => !c.optional);
+    }
+
+    /* Band the visible columns into their groups, collapsing runs of the same
+       label so the colspans always match what is actually on screen. */
+    function colGroups(cols) {
+        const out = [];
+        cols.forEach((c) => {
+            const last = out[out.length - 1];
+            if (last && last.label === c.group) last.span += 1;
+            else out.push({ label: c.group, span: 1 });
+        });
+        return out;
+    }
 
     // Doink-style line label per market (full words for the lines box)
     const LINE_LABELS = {
         pass_att: "Pass Att", pass_cmp: "Cmp", pass_yds: "Pass Yds", pass_td: "Pass TD", pass_int: "INT",
+        // a QB's own rushing touchdown is a different market from a thrown one
         rush_att: "Rush Att", rush_yds: "Rush Yds", rush_td: "Rush TD",
         tgt: "Targets", rec: "Receptions", rec_yds: "Rec Yds", rec_td: "Rec TD",
     };
@@ -70,6 +99,7 @@
     const THRESHOLDS = {
         pass_att: 1.5, pass_cmp: 1.0, pass_yds: 12, pass_td: 0.15, pass_int: 0.1,
         rush_att: 1.0, rush_yds: 5, rush_td: 0.1,
+        rec_td: 0.1,
         tgt: 0.75, rec: 0.5, rec_yds: 5, rec_td: 0.1,
     };
 
@@ -81,6 +111,8 @@
         side: "away", // which team's offense is shown on the left
         leagueAvg: null, // per-position league average allowed (from slate defenses)
         cardFilters: {}, // per-player-card log filter: l5 | l10 | l15 | all | opp | home | away
+        colPrefs: {}, // per-position visible stat columns (column picker)
+        source: "reg", // "reg" = last full season, "pre" = this preseason
     };
     const DEFAULT_FILTER = "l10";
 
@@ -100,6 +132,148 @@
             sync();
         });
         sync();
+    }
+
+
+
+    /* Which stat block a game exposes. Preseason lives on parallel *_pre keys so
+       switching source never rewrites the slate -- and falls back silently when
+       a slate file predates the preseason build. */
+    function usingPre() {
+        return state.source === "pre" && state.slate && state.slate.has_preseason;
+    }
+
+    function offenseBlock(game, side) {
+        const key = side === "away" ? "away_offense" : "home_offense";
+        if (usingPre() && game[key + "_pre"]) return game[key + "_pre"];
+        return game[key];
+    }
+
+    function defenseBlock(game, side) {
+        const key = side === "away" ? "away_def_vs_pos" : "home_def_vs_pos";
+        if (usingPre() && game[key + "_pre"]) return game[key + "_pre"];
+        return game[key];
+    }
+
+    // ── stat source: last full season vs this preseason ──
+    function initSourceToggle() {
+        const wrap = el("nrsSrcToggle");
+        if (!wrap) return;
+        wrap.addEventListener("click", (ev) => {
+            const btn = ev.target.closest("[data-src]");
+            if (!btn) return;
+            state.source = btn.dataset.src;
+            syncSourceToggle();
+            state.leagueAvg = computeLeagueAverages(state.slate ? state.slate.games : []);
+            renderMatchup();
+        });
+    }
+
+    function syncSourceToggle() {
+        const wrap = el("nrsSrcToggle");
+        const warn = el("nrsSrcWarn");
+        if (!wrap) return;
+        const available = !!(state.slate && state.slate.has_preseason);
+        wrap.hidden = !available;
+        if (!available && state.source === "pre") state.source = "reg";
+        wrap.querySelectorAll("[data-src]").forEach((b) => {
+            b.classList.toggle("is-active", b.dataset.src === state.source);
+        });
+        if (warn) {
+            const on = usingPre();
+            warn.hidden = !on;
+            if (on) {
+                warn.innerHTML =
+                    "<strong>Preseason sample.</strong> These are August snaps, and most of them belong "
+                    + "to roster hopefuls rather than the players you are betting — a camp arm throwing "
+                    + "22 passes is not evidence about the week-one starter. Recent, but thin. Switch back "
+                    + "to 2025 REG for a sample worth leaning on.";
+            }
+        }
+    }
+
+    // ── column picker (cogwheel) ──
+    function colPickerHtml() {
+        const body = POSITIONS.map((pos) => {
+            const all = POS_COLUMNS[pos] || [];
+            const on = visibleCols(pos).map((c) => c.key);
+            return `<div class="nrs-colpick__group">
+                <span class="nrs-colpick__pos">${pos}</span>
+                ${all.map((c) => `<label class="nrs-colpick__opt">
+                    <input type="checkbox" data-colpos="${pos}" data-colkey="${c.key}"${on.indexOf(c.key) !== -1 ? " checked" : ""}>
+                    <span>${c.group === "Key" ? c.label : `${c.group.slice(0, 4)} ${c.label}`}</span>
+                </label>`).join("")}
+            </div>`;
+        }).join("");
+        return `<div class="nrs-colpick" id="nrsColPick" hidden>
+            <div class="nrs-colpick__head">Columns<button type="button" class="nrs-colpick__reset" id="nrsColReset">Reset</button></div>
+            ${body}
+        </div>`;
+    }
+
+    function initColPicker() {
+        const btn = el("nrsColGear");
+        if (!btn) return;
+        btn.insertAdjacentHTML("afterend", colPickerHtml());
+        const panel = el("nrsColPick");
+
+        btn.addEventListener("click", (ev) => {
+            ev.stopPropagation();
+            panel.hidden = !panel.hidden;
+            btn.setAttribute("aria-expanded", String(!panel.hidden));
+        });
+        document.addEventListener("click", (ev) => {
+            if (!panel.hidden && !panel.contains(ev.target) && ev.target !== btn) panel.hidden = true;
+        });
+        panel.addEventListener("change", (ev) => {
+            const box = ev.target.closest("[data-colpos]");
+            if (!box) return;
+            const pos = box.dataset.colpos;
+            const current = new Set(visibleCols(pos).map((c) => c.key));
+            if (box.checked) current.add(box.dataset.colkey);
+            else current.delete(box.dataset.colkey);
+            if (!current.size) { box.checked = true; return; } // keep at least one
+            state.colPrefs[pos] = (POS_COLUMNS[pos] || [])
+                .filter((c) => current.has(c.key))
+                .map((c) => c.key);
+            saveColPrefs(state.colPrefs);
+            renderMatchup();
+        });
+        el("nrsColReset").addEventListener("click", () => {
+            state.colPrefs = {};
+            saveColPrefs(state.colPrefs);
+            panel.remove();
+            btn.insertAdjacentHTML("afterend", colPickerHtml());
+            initColPickerRebind();
+            renderMatchup();
+        });
+    }
+
+    // re-attach handlers after a reset rebuilds the panel markup
+    function initColPickerRebind() {
+        const btn = el("nrsColGear");
+        const panel = el("nrsColPick");
+        if (!btn || !panel) return;
+        panel.hidden = false;
+        panel.addEventListener("change", (ev) => {
+            const box = ev.target.closest("[data-colpos]");
+            if (!box) return;
+            const pos = box.dataset.colpos;
+            const current = new Set(visibleCols(pos).map((c) => c.key));
+            if (box.checked) current.add(box.dataset.colkey);
+            else current.delete(box.dataset.colkey);
+            if (!current.size) { box.checked = true; return; }
+            state.colPrefs[pos] = (POS_COLUMNS[pos] || [])
+                .filter((c) => current.has(c.key))
+                .map((c) => c.key);
+            saveColPrefs(state.colPrefs);
+            renderMatchup();
+        });
+        el("nrsColReset").addEventListener("click", () => {
+            state.colPrefs = {};
+            saveColPrefs(state.colPrefs);
+            renderMatchup();
+        });
     }
 
     // ── toolbar ──
@@ -191,6 +365,8 @@
         }
         if (!games.some((g) => g.id === state.gameId)) state.gameId = games[0].id;
         state.leagueAvg = computeLeagueAverages(games);
+        syncSourceToggle();
+        if (window.NRSSheets) window.NRSSheets.onSlate(state.slate);
         renderGames();
         renderMatchup();
     }
@@ -207,8 +383,8 @@
             }
         };
         for (const game of games) {
-            for (const sideKey of ["away_def_vs_pos", "home_def_vs_pos"]) {
-                const defense = game[sideKey] || {};
+            for (const side of ["away", "home"]) {
+                const defense = defenseBlock(game, side) || {};
                 for (const pos of POSITIONS) {
                     const block = defense[pos];
                     if (!block) continue;
@@ -322,8 +498,8 @@
         const offLogo = offenseIsAway ? game.away_logo : game.home_logo;
         const defName = offenseIsAway ? game.home_name : game.away_name;
         const defLogo = offenseIsAway ? game.home_logo : game.away_logo;
-        const offense = (offenseIsAway ? game.away_offense : game.home_offense) || {};
-        const defense = (offenseIsAway ? game.home_def_vs_pos : game.away_def_vs_pos) || {};
+        const offense = offenseBlock(game, offenseIsAway ? "away" : "home") || {};
+        const defense = defenseBlock(game, offenseIsAway ? "home" : "away") || {};
 
         el("nrsMatchupTitle").textContent = `${game.away_name} @ ${game.home_name}`;
         let sub = formatKickoff(game.kickoff) + (game.status ? ` · ${game.status}` : "");
@@ -345,7 +521,7 @@
         const meta = { offName, offLogo, defName, defLogo, offAbbr, defAbbr };
         const cards = POSITIONS
             .flatMap((pos) => {
-                const cols = POS_COLUMNS[pos];
+                const cols = visibleCols(pos);
                 const defBlock = defense[pos] || { overall: null, ranks: {} };
                 return (offense[pos] || []).map((player) => playerCardHtml(pos, cols, player, defBlock, meta));
             })
@@ -363,7 +539,7 @@
                 const overall = (defense[pos] || {}).overall;
                 const league = (state.leagueAvg && state.leagueAvg[pos] && state.leagueAvg[pos].overall) || null;
                 if (!overall) return "";
-                const rows = POS_COLUMNS[pos]
+                const rows = visibleCols(pos)
                     .map((col) => {
                         const allowed = overall[col.key];
                         const leagueVal = league ? league[col.key] : null;
@@ -432,7 +608,7 @@
 
         const groupRow =
             `<tr class="nrs-group-row"><th colspan="3"></th>` +
-            POS_GROUPS[pos].map((g) => `<th colspan="${g.span}" class="nrs-group-th">${g.label}</th>`).join("") +
+            colGroups(cols).map((g) => `<th colspan="${g.span}" class="nrs-group-th">${g.label}</th>`).join("") +
             `</tr>`;
         const statHead = cols.map((c) => `<th>${c.label}</th>`).join("");
         const logHead = `${groupRow}<tr><th>Wk</th><th class="nrs-th-opp">Opp</th><th>W/L</th>${statHead}</tr>`;
@@ -542,6 +718,9 @@
     document.addEventListener("DOMContentLoaded", () => {
         if (location.protocol === "file:") return;
         initTheme();
+        state.colPrefs = loadColPrefs();
+        initColPicker();
+        initSourceToggle();
         initControls();
         const params = new URLSearchParams(location.search);
         const season = Number(params.get("season"));

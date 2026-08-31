@@ -1,0 +1,30 @@
+Matchup,CWS @ HOU
+Pitcher,Peter Lambert
+Pitcher Team,HOU
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,17.1,0.81,="7-59",.119,.119,0.000,0,0,0,1,27.9,7,.221,.340
+Batting Second,15.2,1.28,="16-61",.262,.443,0.181,3,2,0,6,16.2,4,.338,.781
+Batting Third,17.0,0.94,="10-60",.167,.183,0.016,0,1,0,1,22.4,6,.254,.437
+Batting Fourth,14.1,1.47,="10-54",.185,.352,0.167,2,3,0,9,25.8,11,.333,.685
+Batting Fifth,14.2,1.30,="14-57",.246,.439,0.193,3,2,0,7,31.7,5,.302,.741
+Batting Sixth,12.2,1.66,="15-52",.288,.462,0.174,2,3,0,7,28.3,6,.383,.845
+Batting Seventh,10.2,1.97,="16-47",.340,.489,0.149,2,1,0,6,17.3,5,.404,.893
+Batting Eighth,13.2,0.88,="8-43",.186,.209,0.023,0,1,0,3,22.0,4,.271,.480
+Batting Ninth,11.2,1.11,="10-45",.222,.378,0.156,1,4,0,5,12.5,3,.271,.649
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="72-279",.258,.376,0.118,6,13,1,24,16.3,28,.359,.735
+Chase Meidroth RHB,Batting First ​,="39-146",.267,.459,0.192,6,10,0,15,24.2,19,.352,.811
+Munetaka Murakami LHB,Batting Second ​,="69-313",.220,.476,0.256,22,14,0,46,34.2,62,.353,.829
+Andrew Benintendi LHB,Batting Third ​,="19-76",.250,.447,0.197,4,3,0,12,21.4,8,.321,.768
+Miguel Vargas RHB,Batting Third ​,="80-327",.245,.477,0.232,18,22,0,43,19.0,54,.357,.834
+Randal Grichuk RHB,Batting Fourth ​,="18-45",.400,.733,0.333,3,6,0,12,19.1,2,.426,1.159
+Colson Montgomery LHB,Batting Fourth ​,="66-296",.223,.456,0.233,19,12,0,49,34.1,27,.302,.758
+Braden Montgomery SHB,Batting Fifth ​,="20-95",.211,.305,0.094,1,4,1,11,18.9,11,.292,.597
+Brenton Doyle RHB,Batting Seventh ​,="6-39",.154,.154,0.000,0,0,0,0,34.9,4,.233,.387
+Tristan Peters LHB,Batting Eighth ​,="49-167",.293,.545,0.252,9,11,2,31,15.1,14,.344,.889
+Jake Rogers RHB,Batting Ninth ​,="16-104",.154,.240,0.086,1,4,1,7,29.3,14,.254,.494
+Luisangel Acuna RHB,Batting Ninth ​,="20-87",.230,.287,0.057,1,2,0,5,17.0,4,.269,.556
+Drew Romo SHB,Batting Ninth ​,="19-132",.144,.258,0.114,4,3,0,10,21.9,16,.247,.505

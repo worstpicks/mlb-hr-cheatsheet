@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-29T04:17:37Z",
+  "updated": "2026-08-31T16:21:12Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1216,6 +1216,34 @@
         "matchup": "PIT @ STL",
         "result": "loss",
         "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-29",
+      "o05": {
+        "player": "George Springer",
+        "matchup": "SEA @ TOR",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Griffin Conine",
+        "matchup": "MIA @ WSH",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-08-31",
+      "o05": {
+        "player": "Brady House",
+        "matchup": "MIA @ WSH",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Luis Torrens",
+        "matchup": "NYM @ TB",
+        "result": "pending"
       }
     }
   ]

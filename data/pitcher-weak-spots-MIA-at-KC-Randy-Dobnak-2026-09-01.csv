@@ -1,0 +1,29 @@
+Matchup,MIA @ KC
+Pitcher,Randy Dobnak
+Pitcher Team,KC
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.2,0.78,="3-24",.125,.250,0.125,1,0,0,1,18.5,3,.222,.472
+Batting Second,7.0,1.14,="7-26",.269,.308,0.039,0,1,0,0,11.1,1,.296,.604
+Batting Third,5.2,1.59,="7-23",.304,.304,0.000,0,0,0,1,7.7,2,.360,.664
+Batting Fourth,5.1,1.50,="5-21",.238,.238,0.000,0,0,0,0,12.5,3,.333,.571
+Batting Fifth,4.0,3.25,="10-21",.476,.571,0.095,0,2,0,2,16.0,3,.520,1.091
+Batting Sixth,5.0,1.80,="6-21",.286,.476,0.190,1,1,0,3,8.3,3,.375,.851
+Batting Seventh,6.2,0.60,="2-21",.095,.286,0.191,1,1,0,4,33.3,2,.167,.453
+Batting Eighth,5.1,1.31,="6-22",.273,.364,0.091,0,2,0,0,17.4,1,.304,.668
+Batting Ninth,4.2,1.50,="4-18",.222,.333,0.111,0,2,0,0,14.3,3,.333,.666
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jakob Marsee LHB,Batting First ​,="28-146",.192,.295,0.103,2,3,3,11,20.9,25,.316,.611
+Otto Lopez RHB,Batting Third ​,="50-181",.276,.387,0.111,3,9,1,19,15.6,5,.302,.689
+Agustin Ramirez RHB,Batting Third ​,="21-68",.309,.412,0.103,1,4,0,11,19.2,3,.342,.754
+Kyle Stowers LHB,Batting Fourth ​,="26-107",.243,.514,0.271,7,8,0,14,31.4,11,.331,.845
+Heriberto Hernandez RHB,Batting Fifth ​,="22-99",.222,.384,0.162,4,2,1,14,26.4,7,.274,.658
+Griffin Conine LHB,Batting Sixth ​,="11-39",.282,.641,0.359,4,2,0,8,22.2,6,.378,1.019
+Owen Caissie LHB,Batting Sixth ​,="21-109",.193,.349,0.156,4,5,0,21,35.2,10,.272,.621
+Leo Jimenez RHB,Batting Seventh ​,="9-48",.188,.271,0.083,1,1,0,5,24.1,6,.328,.599
+Joe Mack LHB,Batting Eighth ​,="22-117",.188,.350,0.162,5,4,0,16,21.9,9,.252,.602
+Brian Navarreto RHB,Batting Ninth ​,="5-34",.147,.265,0.118,1,1,0,2,34.1,2,.211,.476
+Esteury Ruiz RHB,Batting Ninth ​,="11-53",.208,.396,0.188,2,4,0,2,31.3,6,.333,.729
+Javier Sanoja RHB,Batting Ninth ​,="46-146",.315,.445,0.130,2,13,0,16,8.4,8,.351,.796

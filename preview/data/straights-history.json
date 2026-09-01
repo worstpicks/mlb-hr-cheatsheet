@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-31T16:21:12Z",
+  "updated": "2026-09-01T15:53:03Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1238,11 +1238,26 @@
       "o05": {
         "player": "Brady House",
         "matchup": "MIA @ WSH",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Lars Nootbaar",
+        "matchup": "PHI @ ARI",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-01",
+      "o05": {
+        "player": "Jordan Walker",
+        "matchup": "STL @ LAD",
         "result": "pending"
       },
       "o15": {
-        "player": "Luis Torrens",
-        "matchup": "NYM @ TB",
+        "player": "Mickey Gasper",
+        "matchup": "SEA @ BOS",
         "result": "pending"
       }
     }

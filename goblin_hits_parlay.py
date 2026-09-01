@@ -111,6 +111,17 @@ def _norm_name(name: str) -> str:
     return re.sub(r"[^a-z0-9]", "", base.lower())
 
 
+_NAME_SUFFIXES = ("jr", "sr", "ii", "iii", "iv")
+
+
+def _suffix_key(norm: str) -> str:
+    """Normalised name with a generational suffix removed, for merging variants."""
+    for suf in _NAME_SUFFIXES:
+        if norm.endswith(suf) and len(norm) > len(suf) + 2:
+            return norm[: -len(suf)]
+    return norm
+
+
 def load_research_hit_stats(sheet_date: str, root: Path | None = None) -> dict[str, dict]:
     """Per-batter contact stats from the Research tab JSON (Savant-backed).
 
@@ -156,6 +167,24 @@ def load_research_hit_stats(sheet_date: str, root: Path | None = None) -> dict[s
                 key = _norm_name(player.get("name") or "")
                 if key and any(v is not None for v in entry.values()):
                     out[key] = entry
+
+    # A lineup can list the same human twice under name variants -- San Diego on
+    # 2026-09-01 carried "Fernando Tatis" at order 1 and "Fernando Tatis Jr." at
+    # order 10. Keyed separately, the suffixed form looked like a bench bat and
+    # got the real leadoff hitter barred from every pick board. Collapse the
+    # variants and give every spelling the best (lowest) batting order.
+    best: dict[str, int] = {}
+    for key, entry in out.items():
+        slot = entry.get("lineup_slot")
+        if slot is None:
+            continue
+        base = _suffix_key(key)
+        if base not in best or slot < best[base]:
+            best[base] = slot
+    for key, entry in out.items():
+        base = _suffix_key(key)
+        if base in best:
+            entry["lineup_slot"] = best[base]
     return out
 
 

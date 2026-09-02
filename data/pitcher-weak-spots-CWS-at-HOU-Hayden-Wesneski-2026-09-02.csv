@@ -1,0 +1,31 @@
+Matchup,CWS @ HOU
+Pitcher,Hayden Wesneski
+Pitcher Team,HOU
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.0,1.50,="3-14",.214,.429,0.215,1,0,0,3,11.8,3,.353,.782
+Batting Second,4.1,1.15,="3-15",.200,.333,0.133,0,2,0,0,17.6,2,.294,.627
+Batting Third,4.1,0.23,="1-14",.071,.143,0.072,0,1,0,0,33.3,0,.133,.276
+Batting Fourth,3.2,1.36,="2-12",.167,.250,0.083,0,1,0,2,26.7,3,.333,.583
+Batting Fifth,3.2,1.36,="5-15",.333,.333,0.000,0,0,0,1,20.0,0,.333,.666
+Batting Sixth,3.1,1.20,="4-13",.308,.538,0.230,1,0,0,3,21.4,0,.286,.824
+Batting Seventh,4.0,0.75,="2-13",.154,.154,0.000,0,0,0,0,14.3,1,.214,.368
+Batting Eighth,2.1,2.57,="3-10",.300,.500,0.200,0,0,1,2,30.8,3,.462,.962
+Batting Ninth,3.0,1.33,="4-12",.333,.583,0.250,0,1,1,1,15.4,0,.333,.916
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="73-286",.255,.371,0.116,6,13,1,24,16.4,30,.360,.731
+Chase Meidroth RHB,Batting First ​,="39-146",.267,.459,0.192,6,10,0,15,24.2,19,.352,.811
+Munetaka Murakami LHB,Batting Second ​,="69-319",.216,.467,0.251,22,14,0,47,34.4,66,.354,.821
+Miguel Vargas RHB,Batting Third ​,="83-335",.248,.475,0.227,18,22,0,43,18.8,56,.361,.836
+Randal Grichuk RHB,Batting Fourth ​,="18-47",.383,.702,0.319,3,6,0,12,20.4,2,.408,1.110
+Andrew Benintendi LHB,Batting Fourth ​,="19-78",.244,.410,0.166,3,4,0,13,20.0,6,.294,.704
+Colson Montgomery LHB,Batting Fourth ​,="66-296",.223,.456,0.233,19,12,0,49,34.1,27,.302,.758
+Braden Montgomery SHB,Batting Fifth ​,="20-100",.200,.290,0.090,1,4,1,11,18.0,11,.279,.569
+Brenton Doyle RHB,Batting Seventh ​,="6-39",.154,.154,0.000,0,0,0,0,34.9,4,.233,.387
+Tommy Pham RHB,Batting Eighth ​,="0-6",.000,.000,0.000,0,0,0,0,66.7,0,.000,.000
+Tristan Peters LHB,Batting Eighth ​,="49-169",.290,.538,0.248,9,11,2,31,15.4,14,.344,.882
+Jake Rogers RHB,Batting Ninth ​,="16-107",.150,.234,0.084,1,4,1,7,29.1,15,.254,.488
+Luisangel Acuna RHB,Batting Ninth ​,="20-87",.230,.287,0.057,1,2,0,5,17.0,4,.269,.556
+Drew Romo SHB,Batting Ninth ​,="19-134",.142,.254,0.112,4,3,0,10,21.3,18,.253,.507

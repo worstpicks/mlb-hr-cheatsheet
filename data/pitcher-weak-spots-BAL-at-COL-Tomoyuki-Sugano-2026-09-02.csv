@@ -1,0 +1,31 @@
+Matchup,BAL @ COL
+Pitcher,Tomoyuki Sugano
+Pitcher Team,COL
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,14.0,1.93,="24-66",.364,.818,0.454,6,6,3,8,12.9,3,.386,1.204
+Batting Second,14.1,1.88,="23-66",.348,.576,0.228,3,4,1,10,10.0,4,.386,.962
+Batting Third,14.0,2.00,="21-60",.350,.733,0.383,6,5,0,16,14.7,7,.412,1.145
+Batting Fourth,15.2,1.28,="16-61",.262,.426,0.164,2,4,0,9,10.3,4,.324,.750
+Batting Fifth,16.2,0.78,="10-57",.175,.316,0.141,1,3,1,6,21.3,3,.217,.533
+Batting Sixth,12.1,1.38,="15-50",.300,.600,0.300,3,4,1,7,11.1,2,.321,.921
+Batting Seventh,11.1,1.50,="14-45",.311,.600,0.289,3,4,0,8,20.0,3,.340,.940
+Batting Eighth,13.2,0.95,="10-47",.213,.489,0.276,3,4,0,5,10.0,3,.260,.749
+Batting Ninth,13.0,0.69,="9-48",.188,.229,0.041,0,2,0,1,16.3,0,.204,.433
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Pete Alonso RHB,Batting Fourth ​,="62-248",.250,.472,0.222,15,10,0,47,23.8,34,.346,.818
+Luis Robert RHB,Batting Fourth ​,="18-60",.300,.400,0.100,1,3,0,3,15.9,9,.391,.791
+Christian Encarnacion-Strand RHB,Batting Fifth ​,="14-48",.292,.479,0.187,2,3,0,8,27.5,2,.320,.799
+Samuel Basallo LHB,Batting Fifth ​,="44-197",.223,.406,0.183,9,7,1,31,25.7,18,.289,.695
+Leody Taveras SHB,Batting Sixth ​,="40-169",.237,.331,0.094,1,9,2,15,23.4,17,.310,.641
+Dylan Beavers LHB,Batting Sixth ​,="19-73",.260,.466,0.206,4,3,0,10,25.0,7,.325,.791
+Colton Cowser LHB,Batting Seventh ​,="25-133",.188,.286,0.098,4,1,0,15,31.6,18,.286,.572
+Carlos Narvaez RHB,Batting Eighth ​,="20-111",.180,.261,0.081,2,3,0,7,29.5,9,.262,.523
+Coby Mayo RHB,Batting Eighth ​,="19-94",.202,.319,0.117,3,2,0,11,32.0,8,.272,.591
+Yohel Pozo RHB,Batting Ninth ​,="4-20",.200,.350,0.150,1,0,0,1,14.3,1,.238,.588
+Heston Kjerstad LHB,Batting Ninth ​,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Blaze Alexander RHB,Batting Ninth ​,="42-143",.294,.364,0.070,0,8,1,14,27.2,10,.342,.706
+Jackson Holliday LHB,Batting Ninth ​,="19-71",.268,.437,0.169,3,3,0,11,20.3,7,.329,.766

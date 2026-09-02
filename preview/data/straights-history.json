@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-01T15:53:03Z",
+  "updated": "2026-09-02T15:52:27Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1253,6 +1253,21 @@
       "o05": {
         "player": "Jordan Walker",
         "matchup": "STL @ LAD",
+        "result": "win",
+        "hr": 1
+      },
+      "o15": {
+        "player": "Mickey Gasper",
+        "matchup": "SEA @ BOS",
+        "result": "loss",
+        "hr": 1
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "o05": {
+        "player": "Yordan Alvarez",
+        "matchup": "CWS @ HOU",
         "result": "pending"
       },
       "o15": {

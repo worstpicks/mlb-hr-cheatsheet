@@ -1,0 +1,31 @@
+Matchup,TOR @ CLE
+Pitcher,Dylan Cease
+Pitcher Team,TOR
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.0,1.22,="10-65",.154,.262,0.108,2,1,0,3,28.2,12,.295,.557
+Batting Second,18.1,1.15,="17-68",.250,.426,0.176,3,3,0,9,26.7,4,.293,.719
+Batting Third,16.0,1.75,="15-61",.246,.328,0.082,0,5,0,4,36.0,13,.373,.701
+Batting Fourth,19.1,0.93,="10-66",.152,.227,0.075,1,2,0,6,39.2,8,.243,.470
+Batting Fifth,17.0,0.94,="8-59",.136,.237,0.101,2,0,0,7,34.3,8,.239,.476
+Batting Sixth,15.0,1.33,="10-53",.189,.377,0.188,2,4,0,6,30.2,10,.317,.694
+Batting Seventh,16.2,0.42,="6-56",.107,.107,0.000,0,0,0,0,50.0,1,.138,.245
+Batting Eighth,15.1,0.85,="9-53",.170,.189,0.019,0,1,0,2,45.6,4,.228,.417
+Batting Ninth,14.2,0.89,="8-48",.167,.188,0.021,0,1,0,1,40.7,5,.245,.433
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="85-318",.267,.327,0.060,2,11,1,21,10.5,48,.367,.694
+Travis Bazzana LHB,Batting First ​,="35-156",.224,.449,0.225,6,13,2,21,23.9,17,.301,.750
+Chase DeLauter LHB,Batting Second ​,="64-211",.303,.493,0.190,7,13,3,29,13.9,26,.380,.873
+Jose Ramirez SHB,Batting Third ​,="52-225",.231,.382,0.151,7,13,0,29,14.1,41,.348,.730
+Nathaniel Lowe LHB,Batting Fifth ​,="44-161",.273,.509,0.236,9,11,0,25,26.3,13,.326,.835
+David Fry RHB,Batting Fifth ​,="9-48",.188,.229,0.041,0,2,0,2,33.3,6,.278,.507
+Jo Adell RHB,Batting Sixth ​,="43-168",.256,.405,0.149,6,5,1,21,24.3,5,.294,.699
+Daniel Schneemann LHB,Batting Sixth ​,="14-72",.194,.250,0.056,1,1,0,6,32.1,9,.284,.534
+Angel Martinez SHB,Batting Sixth ​,="17-95",.179,.305,0.126,2,6,0,12,20.0,5,.233,.538
+Angel Genao SHB,Batting Sixth ​,="8-23",.348,.435,0.087,0,2,0,0,8.0,2,.400,.835
+Austin Hedges RHB,Batting Eighth ​,="44-170",.259,.388,0.129,5,7,0,21,17.9,18,.330,.718
+Patrick Bailey SHB,Batting Eighth ​,="39-200",.195,.345,0.150,7,7,1,26,22.3,16,.251,.596
+Brayan Rocchio SHB,Batting Ninth ​,="68-265",.257,.381,0.124,6,11,2,35,13.1,20,.321,.702
+Petey Halpin LHB,Batting Ninth ​,="16-81",.198,.346,0.148,3,1,1,6,13.2,4,.250,.596

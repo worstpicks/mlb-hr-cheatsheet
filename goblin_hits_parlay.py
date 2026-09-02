@@ -188,6 +188,30 @@ def load_research_hit_stats(sheet_date: str, root: Path | None = None) -> dict[s
     return out
 
 
+def lookup_research_entry(stats: dict, name: str) -> dict | None:
+    """Find a batter's research row, tolerating a generational suffix either way.
+
+    The prop list and the lineup feed disagree about "Jr." in both directions --
+    "LaMonte Wade Jr." on the board against "LaMonte Wade" in the lineup, and
+    "Fernando Tatis Jr." against "Fernando Tatis". An exact-key lookup silently
+    returns nothing, which reads downstream as "not in the lineup".
+    """
+    if not stats:
+        return None
+    key = _norm_name(name)
+    hit = stats.get(key)
+    if hit is not None:
+        return hit
+    base = _suffix_key(key)
+    if base != key and base in stats:
+        return stats[base]
+    # the stored name may be the suffixed one instead
+    for k, v in stats.items():
+        if _suffix_key(k) == base:
+            return v
+    return None
+
+
 def attach_research_hit_stats(
     rows: list[dict], sheet_date: str, root: Path | None = None
 ) -> int:
@@ -197,8 +221,7 @@ def attach_research_hit_stats(
         return 0
     matched = 0
     for row in rows:
-        key = _norm_name(row.get("name_plain") or row.get("name") or "")
-        entry = lookup.get(key)
+        entry = lookup_research_entry(lookup, row.get("name_plain") or row.get("name") or "")
         if entry:
             row.update(entry)
             matched += 1

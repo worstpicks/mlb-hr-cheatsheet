@@ -1,0 +1,31 @@
+Matchup,PHI @ ARI
+Pitcher,Taylor Clarke
+Pitcher Team,ARI
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.2,0.91,="5-26",.192,.231,0.039,0,1,0,4,19.4,2,.258,.489
+Batting Second,5.0,1.80,="8-23",.348,.478,0.130,0,3,0,3,0.0,1,.375,.853
+Batting Third,6.0,0.67,="2-18",.111,.167,0.056,0,1,0,3,23.8,2,.238,.405
+Batting Fourth,5.1,0.75,="4-20",.200,.350,0.150,1,0,0,2,20.0,0,.200,.550
+Batting Fifth,6.2,0.60,="3-23",.130,.261,0.131,1,0,0,2,8.3,1,.167,.428
+Batting Sixth,5.0,1.60,="6-21",.286,.429,0.143,1,0,0,3,4.3,2,.348,.777
+Batting Seventh,8.1,0.60,="5-30",.167,.300,0.133,1,1,0,1,26.7,0,.167,.467
+Batting Eighth,8.1,0.60,="5-30",.167,.367,0.200,1,1,1,4,22.6,0,.161,.528
+Batting Ninth,8.1,1.08,="6-27",.222,.333,0.111,1,0,0,6,11.8,3,.313,.646
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="96-374",.257,.417,0.160,14,16,1,38,21.6,25,.305,.722
+Luis Arraez LHB,Batting Second ​,="71-190",.374,.474,0.100,2,9,2,16,2.3,16,.425,.899
+Kyle Schwarber LHB,Batting Second ​,="77-314",.245,.576,0.331,30,12,1,58,34.1,56,.365,.941
+Bryce Harper LHB,Batting Third ​,="133-471",.282,.524,0.242,27,27,3,80,20.2,94,.398,.922
+Alec Bohm RHB,Batting Fourth ​,="44-194",.227,.345,0.118,5,8,0,27,12.5,13,.279,.624
+Edmundo Sosa RHB,Batting Fifth ​,="13-57",.228,.298,0.070,1,1,0,10,20.3,3,.270,.568
+Brandon Marsh LHB,Batting Fifth ​,="44-143",.308,.462,0.154,5,7,0,19,21.6,9,.346,.808
+Bryson Stott LHB,Batting Sixth ​,="57-200",.285,.435,0.150,5,7,4,26,19.7,21,.351,.786
+J.T. Realmuto RHB,Batting Seventh ​,="28-125",.224,.352,0.128,3,7,0,13,24.3,8,.300,.652
+Bryan De La Cruz RHB,Batting Eighth ​,="5-13",.385,.462,0.077,0,1,0,2,15.4,0,.385,.847
+Garrett Stubbs LHB,Batting Ninth ​,="5-43",.116,.116,0.000,0,0,0,3,18.8,2,.188,.304
+Derek Hill RHB,Batting Ninth ​,="17-70",.243,.300,0.057,1,1,0,10,38.4,2,.274,.574
+Rafael Marchan SHB,Batting Ninth ​,="7-55",.127,.236,0.109,2,0,0,4,11.9,2,.186,.422
+Justin Crawford LHB,Batting Ninth ​,="61-223",.274,.350,0.076,1,12,1,19,19.4,16,.324,.674

@@ -1,0 +1,31 @@
+Matchup,TB @ TEX
+Pitcher,Cal Quantrill
+Pitcher Team,TEX
+Opposing Team,TB
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.1,1.45,="11-42",.262,.381,0.119,1,2,0,4,19.1,4,.340,.721
+Batting Second,9.2,1.66,="12-41",.293,.537,0.244,3,1,0,5,21.7,4,.370,.907
+Batting Third,11.0,1.18,="7-38",.184,.395,0.211,2,2,0,2,15.9,6,.295,.690
+Batting Fourth,10.2,0.75,="7-38",.184,.368,0.184,2,1,0,5,19.5,1,.225,.593
+Batting Fifth,11.1,0.71,="7-41",.171,.195,0.024,0,1,0,1,21.4,1,.190,.385
+Batting Sixth,10.0,1.30,="11-39",.282,.436,0.154,1,3,0,5,14.3,2,.333,.769
+Batting Seventh,9.0,1.22,="11-36",.306,.333,0.027,0,1,0,4,24.3,0,.297,.630
+Batting Eighth,9.1,0.75,="5-33",.152,.273,0.121,1,1,0,6,14.3,2,.200,.473
+Batting Ninth,8.1,0.96,="6-30",.200,.333,0.133,1,1,0,3,14.7,2,.265,.598
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Yandy Diaz RHB,Batting First ​,="124-406",.305,.461,0.156,14,19,1,58,15.3,38,.372,.833
+Jonathan Aranda LHB,Batting Second ​,="93-330",.282,.415,0.133,10,14,0,46,21.5,32,.355,.770
+Junior Caminero RHB,Batting Third ​,="80-283",.283,.572,0.289,23,11,1,55,19.4,38,.373,.945
+Ryan Vilade RHB,Batting Fourth ​,="30-93",.323,.591,0.268,6,5,1,21,17.4,12,.398,.989
+Liam Hicks LHB,Batting Fourth ​,="37-112",.330,.563,0.233,7,5,0,30,8.7,8,.386,.949
+Chandler Simpson LHB,Batting Fifth ​,="60-173",.347,.387,0.040,0,7,0,11,5.9,7,.368,.755
+Jonny DeLuca RHB,Batting Sixth ​,="29-109",.266,.431,0.165,4,6,0,17,19.5,4,.292,.723
+Victor Mesa Jr. LHB,Batting Sixth ​,="16-65",.246,.477,0.231,5,0,0,10,26.8,5,.310,.787
+Cedric Mullins LHB,Batting Seventh ​,="25-119",.210,.370,0.160,5,2,1,16,18.0,9,.275,.645
+Nick Fortes RHB,Batting Eighth ​,="31-133",.233,.293,0.060,1,5,0,12,14.0,3,.270,.563
+Richie Palacios LHB,Batting Eighth ​,="22-93",.237,.355,0.118,2,5,0,13,13.1,12,.321,.676
+Kenny Piper RHB,Batting Eighth ​,="1-4",.250,.250,0.000,0,0,0,0,0.0,1,.400,.650
+Jorge Mateo RHB,Batting Ninth ​,="18-76",.237,.303,0.066,1,2,0,4,32.9,3,.266,.569
+Taylor Walls SHB,Batting Ninth ​,="52-236",.220,.297,0.077,2,8,2,26,24.5,28,.305,.602

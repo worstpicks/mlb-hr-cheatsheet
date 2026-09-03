@@ -1,0 +1,31 @@
+Matchup,TB @ TEX
+Pitcher,Shane McClanahan
+Pitcher Team,TB
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.1,0.60,="9-63",.143,.175,0.032,0,2,0,4,24.6,2,.169,.344
+Batting Second,13.0,1.46,="12-51",.235,.333,0.098,1,2,0,3,14.8,7,.350,.683
+Batting Third,13.1,1.35,="11-49",.224,.388,0.164,2,2,0,7,19.3,7,.333,.721
+Batting Fourth,12.2,1.11,="11-49",.224,.510,0.286,3,5,0,9,30.8,3,.269,.779
+Batting Fifth,11.2,1.29,="9-45",.200,.311,0.111,1,0,1,5,23.5,6,.294,.605
+Batting Sixth,11.2,1.03,="11-46",.239,.304,0.065,1,0,0,3,17.0,1,.255,.559
+Batting Seventh,9.2,1.55,="11-41",.268,.341,0.073,0,3,0,3,17.4,4,.348,.689
+Batting Eighth,11.2,0.86,="5-38",.132,.263,0.131,1,2,0,3,25.0,5,.233,.496
+Batting Ninth,10.1,1.06,="8-40",.200,.225,0.025,0,1,0,3,27.9,3,.256,.481
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Joc Pederson LHB,Batting First ​,="61-230",.265,.604,0.339,22,8,2,40,23.1,26,.347,.951
+Justin Foscue RHB,Batting First ​,="13-50",.260,.540,0.280,3,5,0,7,15.5,6,.362,.902
+Wyatt Langford RHB,Batting Second ​,="33-165",.200,.388,0.188,7,6,2,15,25.3,11,.258,.646
+Corey Seager LHB,Batting Third ​,="38-180",.211,.394,0.183,9,6,0,24,26.9,29,.321,.715
+Brandon Nimmo LHB,Batting Fourth ​,="63-214",.294,.425,0.131,4,14,1,27,22.0,19,.352,.777
+Jake Burger RHB,Batting Fourth ​,="38-169",.225,.379,0.154,6,8,0,19,28.4,13,.284,.663
+Ezequiel Duran RHB,Batting Fifth ​,="50-167",.299,.473,0.174,4,11,3,34,25.3,18,.371,.844
+Evan Carter LHB,Batting Sixth ​,="22-111",.198,.351,0.153,4,3,1,15,27.0,8,.258,.609
+Cameron Cauley RHB,Batting Sixth ​,="4-16",.250,.563,0.313,1,2,0,1,35.3,0,.294,.857
+Elias Diaz RHB,Batting Eighth ​,="23-94",.245,.383,0.138,3,4,0,14,22.8,3,.273,.656
+Logan O'Hoppe RHB,Batting Eighth ​,="29-148",.196,.264,0.068,2,4,0,12,28.6,10,.255,.519
+Cody Freeman RHB,Batting Eighth ​,="10-32",.313,.406,0.093,0,1,1,5,14.3,3,.371,.777
+Danny Jansen RHB,Batting Ninth ​,="10-54",.185,.500,0.315,4,3,1,10,31.6,3,.228,.728
+Nicky Lopez LHB,Batting Ninth ​,="25-108",.231,.278,0.047,1,2,0,11,19.3,3,.272,.550

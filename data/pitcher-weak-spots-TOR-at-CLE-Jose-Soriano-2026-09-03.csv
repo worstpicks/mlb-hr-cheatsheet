@@ -1,0 +1,26 @@
+Matchup,TOR @ CLE
+Pitcher,Jose Soriano
+Pitcher Team,TOR
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,22.0,0.95,="13-73",.178,.233,0.055,1,1,0,2,19.8,8,.259,.492
+Batting Second,18.1,1.47,="19-72",.264,.375,0.111,2,2,0,5,27.5,8,.338,.713
+Batting Third,17.0,1.47,="10-59",.169,.237,0.068,1,1,0,6,22.7,15,.347,.584
+Batting Fourth,18.0,1.11,="18-69",.261,.391,0.130,2,3,0,8,25.7,2,.288,.679
+Batting Fifth,15.2,1.60,="16-62",.258,.435,0.177,3,2,0,8,19.4,9,.361,.796
+Batting Sixth,14.2,1.50,="14-59",.237,.373,0.136,2,2,0,8,32.4,8,.338,.711
+Batting Seventh,17.0,1.06,="14-60",.233,.350,0.117,2,1,0,5,25.0,4,.281,.631
+Batting Eighth,14.0,1.36,="13-53",.245,.321,0.076,1,1,0,5,16.7,6,.333,.654
+Batting Ninth,13.1,1.20,="9-46",.196,.217,0.021,0,1,0,4,23.2,7,.315,.532
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="85-321",.265,.324,0.059,2,11,1,21,10.4,48,.364,.688
+Chase DeLauter LHB,Batting Second ​,="67-215",.312,.502,0.190,7,14,3,29,13.7,26,.386,.888
+Jose Ramirez SHB,Batting Third ​,="52-228",.228,.377,0.149,7,13,0,29,13.9,41,.344,.721
+Jo Adell RHB,Batting Fourth ​,="32-119",.269,.462,0.193,4,11,0,23,22.1,7,.336,.798
+Nathaniel Lowe LHB,Batting Fifth ​,="44-165",.267,.497,0.230,9,11,0,25,26.8,13,.318,.815
+Angel Genao SHB,Batting Sixth ​,="8-23",.348,.435,0.087,0,2,0,0,8.0,2,.400,.835
+Travis Bazzana LHB,Batting Seventh ​,="13-59",.220,.237,0.017,0,1,0,6,16.2,9,.324,.561
+Austin Hedges RHB,Batting Eighth ​,="44-170",.259,.388,0.129,5,7,0,21,17.9,18,.330,.718
+Brayan Rocchio SHB,Batting Ninth ​,="68-265",.257,.381,0.124,6,11,2,35,13.1,20,.321,.702

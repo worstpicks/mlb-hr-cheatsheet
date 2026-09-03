@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-02T15:52:27Z",
+  "updated": "2026-09-03T14:58:47Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1268,12 +1268,14 @@
       "o05": {
         "player": "Yordan Alvarez",
         "matchup": "CWS @ HOU",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Mickey Gasper",
         "matchup": "SEA @ BOS",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       }
     }
   ]

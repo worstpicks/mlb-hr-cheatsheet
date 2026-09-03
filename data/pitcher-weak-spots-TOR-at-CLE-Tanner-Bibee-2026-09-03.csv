@@ -1,0 +1,31 @@
+Matchup,TOR @ CLE
+Pitcher,Tanner Bibee
+Pitcher Team,CLE
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.1,1.23,="20-80",.250,.563,0.313,6,7,0,10,18.8,5,.294,.857
+Batting Second,16.1,1.90,="23-71",.324,.549,0.225,4,4,0,9,16.3,8,.388,.937
+Batting Third,19.2,1.02,="14-70",.200,.314,0.114,2,2,0,7,16.7,6,.282,.596
+Batting Fourth,19.1,0.93,="15-70",.214,.314,0.100,2,1,0,6,24.7,3,.273,.587
+Batting Fifth,17.2,1.13,="13-64",.203,.266,0.063,1,1,0,4,19.2,7,.288,.554
+Batting Sixth,18.1,0.98,="15-70",.214,.329,0.115,2,2,0,5,26.0,3,.247,.576
+Batting Seventh,16.2,1.38,="18-64",.281,.609,0.328,6,1,1,10,17.4,5,.333,.942
+Batting Eighth,16.2,0.90,="11-59",.186,.356,0.170,2,4,0,7,20.0,4,.231,.587
+Batting Ninth,16.0,1.13,="13-58",.224,.276,0.052,1,0,0,5,14.1,5,.286,.562
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-241",.220,.373,0.153,8,11,1,20,20.3,28,.308,.681
+Brett Bateman LHB,Batting First ​,="22-65",.338,.400,0.062,0,2,1,5,23.0,6,.389,.789
+Nathan Lukes LHB,Batting Second ​,="35-142",.246,.338,0.092,4,1,0,11,13.3,16,.327,.665
+Vladimir Guerrero Jr. RHB,Batting Third ​,="89-326",.273,.383,0.110,6,18,0,40,11.7,34,.344,.727
+Jesus Sanchez LHB,Batting Fourth ​,="29-98",.296,.480,0.184,4,6,0,13,19.4,6,.324,.804
+Kazuma Okamoto RHB,Batting Fourth ​,="37-171",.216,.374,0.158,8,3,0,29,30.4,19,.299,.673
+Alejandro Kirk RHB,Batting Fifth ​,="21-81",.259,.444,0.185,4,3,0,10,16.1,12,.355,.799
+Ernie Clement RHB,Batting Seventh ​,="32-120",.267,.367,0.100,2,6,0,13,9.6,4,.288,.655
+Sean Keys LHB,Batting Seventh ​,="2-12",.167,.167,0.000,0,0,0,2,33.3,0,.167,.334
+Andres Gimenez LHB,Batting Eighth ​,="44-185",.238,.362,0.124,5,8,0,26,19.0,5,.281,.643
+Josh Smith LHB,Batting Eighth ​,="17-73",.233,.329,0.096,2,1,0,3,22.9,8,.317,.646
+Charles McAdoo RHB,Batting Eighth ​,="2-18",.111,.111,0.000,0,0,0,1,26.3,1,.158,.269
+Myles Straw RHB,Batting Ninth ​,="19-77",.247,.390,0.143,0,9,1,6,5.7,9,.322,.712
+Brandon Valenzuela SHB,Batting Ninth ​,="20-95",.211,.442,0.231,6,4,0,13,22.9,14,.312,.754

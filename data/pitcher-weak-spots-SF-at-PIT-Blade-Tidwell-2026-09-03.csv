@@ -1,0 +1,26 @@
+Matchup,SF @ PIT
+Pitcher,Blade Tidwell
+Pitcher Team,SF
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.2,1.71,="5-18",.278,.667,0.389,2,1,0,4,23.8,3,.381,1.048
+Batting Second,4.0,2.00,="5-16",.313,.625,0.312,1,2,0,2,10.5,3,.421,1.046
+Batting Third,5.0,1.00,="4-17",.235,.235,0.000,0,0,0,0,22.2,1,.278,.513
+Batting Fourth,4.1,1.15,="4-16",.250,.313,0.063,0,1,0,2,16.7,1,.278,.591
+Batting Fifth,3.2,1.36,="5-16",.313,.375,0.062,0,1,0,1,18.8,0,.313,.688
+Batting Sixth,4.0,1.00,="3-14",.214,.429,0.215,1,0,0,4,13.3,1,.267,.696
+Batting Seventh,5.0,0.40,="1-15",.067,.067,0.000,0,0,0,0,31.3,1,.125,.192
+Batting Eighth,3.1,1.80,="5-14",.357,.357,0.000,0,0,0,1,13.3,1,.400,.757
+Batting Ninth,3.2,0.82,="1-12",.083,.333,0.250,1,0,0,3,31.3,2,.313,.646
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Spencer Horwitz LHB,Batting First ​,="36-145",.248,.379,0.131,5,4,0,12,15.8,16,.339,.718
+Brandon Lowe LHB,Batting Second ​,="116-443",.262,.512,0.250,28,25,1,75,28.2,49,.334,.846
+Bryan Reynolds SHB,Batting Third ​,="136-516",.264,.422,0.158,15,33,2,64,23.6,79,.371,.793
+Nick Gonzales RHB,Batting Fourth ​,="28-85",.329,.412,0.083,1,4,0,11,15.5,10,.412,.824
+Oneil Cruz LHB,Batting Fifth ​,="26-74",.351,.635,0.284,7,0,0,22,30.7,13,.455,1.090
+Jake Mangum SHB,Batting Sixth ​,="5-22",.227,.227,0.000,0,0,0,0,30.4,1,.261,.488
+Rafael Flores RHB,Batting Seventh ​,="3-17",.176,.412,0.236,1,1,0,3,33.3,1,.222,.634
+Jacob Gonzalez LHB,Batting Eighth ​,="12-61",.197,.344,0.147,2,3,0,10,19.0,0,.206,.550
+Jared Triolo RHB,Batting Ninth ​,="22-102",.216,.275,0.059,0,6,0,6,21.6,9,.292,.567

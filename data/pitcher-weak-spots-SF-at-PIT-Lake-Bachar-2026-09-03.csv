@@ -1,0 +1,26 @@
+Matchup,SF @ PIT
+Pitcher,Lake Bachar
+Pitcher Team,PIT
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.0,0.86,="2-22",.091,.136,0.045,0,1,0,1,26.7,4,.300,.436
+Batting Second,6.1,1.74,="8-26",.308,.577,0.269,2,1,0,4,17.2,3,.379,.956
+Batting Third,6.2,1.65,="6-25",.240,.520,0.280,2,1,0,5,26.7,5,.367,.887
+Batting Fourth,8.1,1.80,="7-32",.219,.531,0.312,3,1,0,7,22.5,8,.375,.906
+Batting Fifth,10.1,0.87,="6-37",.162,.243,0.081,1,0,0,2,19.0,3,.244,.487
+Batting Sixth,10.1,1.16,="9-38",.237,.447,0.210,2,2,0,5,24.4,3,.293,.740
+Batting Seventh,10.0,0.40,="3-32",.094,.094,0.000,0,0,0,0,42.4,1,.121,.215
+Batting Eighth,8.0,1.00,="7-31",.226,.452,0.226,2,1,0,6,15.6,1,.250,.702
+Batting Ninth,8.1,0.72,="4-28",.143,.250,0.107,1,0,0,3,32.3,2,.194,.444
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Drew Gilbert LHB,Batting First ​,="11-38",.289,.605,0.316,3,3,0,11,14.9,6,.404,1.009
+Rafael Devers LHB,Batting Second ​,="37-146",.253,.534,0.281,10,11,0,23,25.7,24,.363,.897
+Bryce Eldridge LHB,Batting Third ​,="21-79",.266,.443,0.177,3,5,0,15,27.4,15,.379,.822
+Jonah Cox RHB,Batting Fourth ​,="6-13",.462,.769,0.307,1,1,0,4,20.0,2,.533,1.302
+Turner Hill LHB,Batting Fifth ​,="4-11",.364,.455,0.091,0,1,0,1,0.0,2,.462,.917
+Andrew Knizner RHB,Batting Sixth ​,="1-6",.167,.333,0.166,0,1,0,0,14.3,0,.286,.619
+Shay Whitcomb RHB,Batting Seventh ​,="1-15",.067,.267,0.200,1,0,0,1,33.3,0,.067,.334
+Nate Furman LHB,Batting Eighth ​,="3-7",.429,.429,0.000,0,0,0,2,12.5,1,.500,.929
+Christian Koss RHB,Batting Ninth ​,="24-105",.229,.267,0.038,0,4,0,3,24.1,4,.257,.524

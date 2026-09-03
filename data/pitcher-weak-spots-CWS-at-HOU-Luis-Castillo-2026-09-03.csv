@@ -1,0 +1,31 @@
+Matchup,CWS @ HOU
+Pitcher,Luis Castillo
+Pitcher Team,CWS
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,14.2,1.43,="15-58",.259,.483,0.224,4,1,0,9,11.8,6,.343,.826
+Batting Second,14.2,1.57,="16-59",.271,.593,0.322,5,4,0,12,17.9,7,.343,.936
+Batting Third,17.2,0.74,="11-64",.172,.359,0.187,3,1,1,5,23.9,2,.209,.568
+Batting Fourth,12.2,1.82,="21-59",.356,.661,0.305,5,3,0,12,25.8,2,.387,1.048
+Batting Fifth,16.1,0.80,="10-57",.175,.211,0.036,0,0,1,4,21.7,3,.217,.428
+Batting Sixth,11.1,2.21,="21-55",.382,.727,0.345,4,7,0,14,13.6,4,.424,1.151
+Batting Seventh,11.1,1.85,="19-52",.365,.442,0.077,0,4,0,8,22.8,2,.393,.835
+Batting Eighth,13.0,1.15,="8-46",.174,.283,0.109,1,2,0,5,28.6,7,.291,.574
+Batting Ninth,9.0,2.44,="17-43",.395,.558,0.163,1,4,0,6,8.0,5,.458,1.016
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="35-132",.265,.492,0.227,7,7,1,13,20.8,15,.342,.834
+Jeremy Pena RHB,Batting First ​,="98-347",.282,.481,0.199,17,16,1,43,21.5,20,.332,.813
+Yordan Alvarez LHB,Batting Second ​,="147-458",.321,.596,0.275,32,28,1,86,17.2,87,.435,1.031
+Isaac Paredes RHB,Batting Third ​,="85-322",.264,.407,0.143,10,14,1,47,10.7,41,.360,.767
+Christian Walker RHB,Batting Fourth ​,="51-220",.232,.468,0.236,14,10,0,33,23.5,21,.312,.780
+Nelson Velazquez RHB,Batting Fourth ​,="12-47",.255,.532,0.277,3,4,0,10,24.1,5,.333,.865
+LaMonte Wade Jr. LHB,Batting Fifth ​,="3-35",.086,.086,0.000,0,0,0,2,26.2,7,.238,.324
+Daulton Varsho LHB,Batting Sixth ​,="30-132",.227,.371,0.144,3,10,0,11,15.6,9,.277,.648
+Cam Smith RHB,Batting Sixth ​,="28-140",.200,.379,0.179,6,5,1,13,25.2,14,.272,.651
+Taylor Trammell LHB,Batting Seventh ​,="14-63",.222,.413,0.191,3,1,1,9,32.8,4,.269,.682
+Yainer Diaz RHB,Batting Seventh ​,="26-87",.299,.540,0.241,5,6,0,16,16.5,1,.319,.859
+Jake Meyers RHB,Batting Seventh ​,="13-44",.295,.477,0.182,2,2,0,4,14.0,5,.360,.837
+Nick Allen RHB,Batting Eighth ​,="13-55",.236,.273,0.037,0,2,0,8,27.0,4,.274,.547
+Christian Vazquez RHB,Batting Ninth ​,="41-185",.222,.341,0.119,5,7,0,23,19.5,14,.275,.616

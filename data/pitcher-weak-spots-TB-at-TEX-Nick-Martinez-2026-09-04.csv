@@ -1,0 +1,26 @@
+Matchup,TB @ TEX
+Pitcher,Nick Martinez
+Pitcher Team,TB
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.1,1.36,="21-75",.280,.373,0.093,0,7,0,3,17.5,4,.313,.686
+Batting Second,18.1,1.31,="21-75",.280,.480,0.200,4,3,0,7,15.2,3,.316,.796
+Batting Third,18.2,1.29,="22-74",.297,.486,0.189,3,3,1,10,10.4,2,.325,.811
+Batting Fourth,15.0,1.80,="23-69",.333,.565,0.232,4,4,0,9,21.9,4,.370,.935
+Batting Fifth,18.1,0.82,="13-66",.197,.318,0.121,2,2,0,4,13.2,2,.221,.539
+Batting Sixth,19.0,0.68,="12-63",.190,.317,0.127,1,3,1,6,10.6,1,.200,.517
+Batting Seventh,14.0,1.43,="17-58",.293,.448,0.155,2,3,0,4,11.5,3,.328,.776
+Batting Eighth,16.0,0.69,="9-56",.161,.196,0.035,0,2,0,0,13.8,2,.190,.386
+Batting Ninth,15.0,0.67,="9-52",.173,.327,0.154,2,2,0,5,17.9,1,.200,.527
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Joc Pederson LHB,Batting First ​,="61-230",.265,.604,0.339,22,8,2,40,23.1,26,.347,.951
+Corey Seager LHB,Batting Second ​,="28-116",.241,.440,0.199,5,8,0,13,18.2,13,.326,.766
+Wyatt Langford RHB,Batting Third ​,="29-88",.330,.511,0.181,3,7,0,9,16.5,14,.427,.938
+Brandon Nimmo LHB,Batting Fourth ​,="63-217",.290,.419,0.129,4,14,1,27,22.1,20,.350,.769
+Ezequiel Duran RHB,Batting Fifth ​,="50-167",.299,.473,0.174,4,11,3,34,25.3,18,.371,.844
+Jake Burger RHB,Batting Sixth ​,="18-83",.217,.386,0.169,4,2,0,11,20.9,7,.275,.661
+Evan Carter LHB,Batting Seventh ​,="14-60",.233,.317,0.084,1,2,0,8,17.8,9,.338,.655
+Cody Freeman RHB,Batting Eighth ​,="10-35",.286,.371,0.085,0,1,1,5,12.8,3,.342,.713
+Elias Diaz RHB,Batting Ninth ​,="14-49",.286,.531,0.245,2,6,0,6,26.4,2,.321,.852

@@ -1,0 +1,31 @@
+Matchup,DET @ CLE
+Pitcher,Andrew Sears
+Pitcher Team,DET
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.1,6.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,1,.667,1.167
+Batting Second,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,66.7,0,.000,.000
+Batting Third,0.2,1.50,="1-3",.333,.667,0.334,0,1,0,1,0.0,0,.333,1.000
+Batting Fourth,0.2,1.50,="1-3",.333,.667,0.334,0,1,0,1,33.3,0,.333,1.000
+Batting Fifth,0.2,3.00,="2-3",.667,.667,0.000,0,0,0,0,0.0,0,.667,1.334
+Batting Sixth,0.1,9.00,="3-4",.750,1.750,1.000,1,1,0,2,0.0,0,.750,2.500
+Batting Seventh,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Eighth,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Ninth,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="87-326",.267,.325,0.058,2,11,1,21,10.2,48,.364,.689
+Travis Bazzana LHB,Batting First ​,="35-156",.224,.449,0.225,6,13,2,21,23.9,17,.301,.750
+Chase DeLauter LHB,Batting Second ​,="68-220",.309,.500,0.191,7,15,3,29,13.4,26,.382,.882
+Jose Ramirez SHB,Batting Third ​,="53-233",.227,.373,0.146,7,13,0,29,14.0,41,.342,.715
+Nathaniel Lowe LHB,Batting Fifth ​,="45-169",.266,.491,0.225,9,11,0,25,26.6,14,.321,.812
+David Fry RHB,Batting Fifth ​,="9-48",.188,.229,0.041,0,2,0,2,33.3,6,.278,.507
+Jo Adell RHB,Batting Sixth ​,="43-168",.256,.405,0.149,6,5,1,21,24.3,5,.294,.699
+Daniel Schneemann LHB,Batting Sixth ​,="14-72",.194,.250,0.056,1,1,0,6,32.1,9,.284,.534
+Angel Martinez SHB,Batting Sixth ​,="17-98",.173,.296,0.123,2,6,0,12,21.1,5,.234,.530
+Angel Genao SHB,Batting Sixth ​,="9-27",.333,.407,0.074,0,2,0,1,10.0,3,.400,.807
+Austin Hedges RHB,Batting Eighth ​,="45-172",.262,.390,0.128,5,7,0,23,18.2,19,.335,.725
+Patrick Bailey SHB,Batting Eighth ​,="41-203",.202,.350,0.148,7,7,1,26,22.4,16,.257,.607
+Brayan Rocchio SHB,Batting Ninth ​,="68-268",.254,.377,0.123,6,11,2,35,13.2,20,.320,.697
+Petey Halpin LHB,Batting Ninth ​,="16-81",.198,.346,0.148,3,1,1,6,13.2,4,.250,.596

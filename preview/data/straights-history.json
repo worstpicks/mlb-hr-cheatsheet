@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-03T14:58:47Z",
+  "updated": "2026-09-04T21:28:09Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1276,6 +1276,33 @@
         "matchup": "SEA @ BOS",
         "result": "loss",
         "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-03",
+      "o05": {
+        "player": "Yainer Diaz",
+        "matchup": "CWS @ HOU",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Pete Crow Armstrong",
+        "matchup": "MIL @ CHC",
+        "result": "void"
+      }
+    },
+    {
+      "date": "2026-09-04",
+      "o05": {
+        "player": "Oneil Cruz",
+        "matchup": "LAA @ PIT",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Carter Jensen",
+        "matchup": "TOR @ KC",
+        "result": "pending"
       }
     }
   ]

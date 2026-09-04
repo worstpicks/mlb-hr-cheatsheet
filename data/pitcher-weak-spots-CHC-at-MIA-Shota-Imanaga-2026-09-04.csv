@@ -1,0 +1,26 @@
+Matchup,CHC @ MIA
+Pitcher,Shota Imanaga
+Pitcher Team,CHC
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,19.0,1.37,="19-74",.257,.608,0.351,7,5,0,10,27.2,7,.321,.929
+Batting Second,18.0,1.06,="16-70",.229,.371,0.142,3,1,0,6,28.9,3,.289,.660
+Batting Third,19.0,1.05,="16-71",.225,.394,0.169,4,0,0,7,14.7,4,.267,.661
+Batting Fourth,14.0,2.21,="25-66",.379,.758,0.379,7,4,0,14,20.3,6,.432,1.190
+Batting Fifth,17.0,1.18,="16-67",.239,.448,0.209,3,3,1,5,25.4,4,.282,.730
+Batting Sixth,16.2,0.90,="14-64",.219,.438,0.219,4,2,0,9,24.6,1,.231,.669
+Batting Seventh,16.0,0.81,="10-56",.179,.250,0.071,1,1,0,3,25.0,3,.233,.483
+Batting Eighth,15.0,1.07,="13-56",.232,.429,0.197,3,2,0,8,22.0,3,.271,.700
+Batting Ninth,14.1,0.84,="8-49",.163,.245,0.082,1,1,0,1,29.1,4,.241,.486
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Heriberto Hernandez RHB,Batting First ​,="7-30",.233,.700,0.467,4,2,0,7,25.0,5,.361,1.061
+Otto Lopez RHB,Batting Second ​,="55-158",.348,.538,0.190,3,11,5,15,9.4,12,.392,.930
+Griffin Conine LHB,Batting Third ​,="8-18",.444,.722,0.278,1,2,0,3,16.7,6,.583,1.305
+Javier Sanoja RHB,Batting Fourth ​,="4-20",.200,.250,0.050,0,1,0,0,4.8,1,.238,.488
+Agustin Ramirez RHB,Batting Fifth ​,="2-12",.167,.167,0.000,0,0,0,1,20.0,2,.333,.500
+Esteury Ruiz RHB,Batting Sixth ​,="6-20",.300,.750,0.450,1,4,1,2,15.4,4,.462,1.212
+Deyvison De Los Santos RHB,Batting Seventh ​,="1-2",.500,.500,0.000,0,0,0,0,0.0,0,.500,1.000
+Jared Serna RHB,Batting Eighth ​,="1-2",.500,.500,0.000,0,0,0,1,0.0,1,.500,1.000
+Brian Navarreto RHB,Batting Ninth ​,="5-34",.147,.265,0.118,1,1,0,2,34.1,2,.211,.476

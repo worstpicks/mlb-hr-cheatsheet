@@ -1,0 +1,26 @@
+Matchup,ARI @ HOU
+Pitcher,Cristian Javier
+Pitcher Team,HOU
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.1,1.50,="6-22",.273,.500,0.227,1,2,0,5,25.0,2,.333,.833
+Batting Second,6.1,1.26,="5-22",.227,.227,0.000,0,0,0,3,16.0,3,.320,.547
+Batting Third,4.2,2.79,="9-22",.409,.591,0.182,0,2,1,2,11.5,4,.500,1.091
+Batting Fourth,5.2,1.24,="4-21",.190,.333,0.143,1,0,0,2,20.8,3,.292,.625
+Batting Fifth,6.1,0.79,="5-23",.217,.565,0.348,2,0,1,4,29.2,0,.250,.815
+Batting Sixth,5.1,1.69,="6-22",.273,.409,0.136,1,0,0,3,16.0,3,.360,.769
+Batting Seventh,4.0,2.00,="6-17",.353,.647,0.294,1,2,0,4,20.0,2,.400,1.047
+Batting Eighth,4.1,1.15,="4-16",.250,.250,0.000,0,0,0,1,22.2,1,.333,.583
+Batting Ninth,2.2,3.75,="9-17",.529,.941,0.412,2,1,0,5,27.8,1,.556,1.497
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Geraldo Perdomo SHB,Batting First ​,="16-75",.213,.347,0.134,1,3,2,6,20.7,12,.322,.669
+Corbin Carroll LHB,Batting Second ​,="85-302",.281,.553,0.272,13,19,12,40,19.4,46,.380,.933
+Gabriel Moreno RHB,Batting Third ​,="46-167",.275,.509,0.234,7,16,1,33,14.1,19,.354,.863
+Ketel Marte SHB,Batting Fourth ​,="16-76",.211,.368,0.157,3,3,0,7,14.3,11,.341,.709
+Lars Nootbaar LHB,Batting Fifth ​,="25-128",.195,.281,0.086,2,5,0,9,23.3,21,.307,.588
+Nolan Arenado RHB,Batting Sixth ​,="35-147",.238,.395,0.157,5,8,0,21,20.4,9,.287,.682
+Max Kepler LHB,Batting Seventh ​,="3-20",.150,.150,0.000,0,0,0,0,31.8,2,.227,.377
+Tim Tawa RHB,Batting Eighth ​,="11-54",.204,.315,0.111,1,3,0,7,27.4,6,.279,.594
+Ryan Waldschmidt RHB,Batting Ninth ​,="46-160",.288,.406,0.118,3,10,0,19,24.2,17,.361,.767

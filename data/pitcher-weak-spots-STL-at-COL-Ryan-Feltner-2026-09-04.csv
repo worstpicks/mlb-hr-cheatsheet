@@ -1,0 +1,31 @@
+Matchup,STL @ COL
+Pitcher,Ryan Feltner
+Pitcher Team,COL
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.2,1.89,="15-51",.294,.569,0.275,3,5,0,7,15.3,7,.390,.959
+Batting Second,13.2,1.32,="14-53",.264,.434,0.170,2,1,1,9,19.0,4,.310,.744
+Batting Third,12.1,1.62,="13-49",.265,.510,0.245,3,3,0,7,21.4,7,.357,.867
+Batting Fourth,11.1,1.85,="16-48",.333,.708,0.375,4,4,1,10,11.1,5,.389,1.097
+Batting Fifth,11.2,1.63,="14-47",.298,.511,0.213,2,2,1,8,17.3,5,.365,.876
+Batting Sixth,11.1,1.41,="12-44",.273,.568,0.295,2,7,0,5,12.5,4,.333,.901
+Batting Seventh,9.1,1.61,="12-38",.316,.526,0.210,2,2,0,8,15.9,3,.341,.867
+Batting Eighth,10.1,1.16,="10-40",.250,.425,0.175,1,2,1,5,20.9,2,.279,.704
+Batting Ninth,9.0,1.67,="7-32",.219,.313,0.094,0,3,0,0,17.1,8,.375,.688
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ivan Herrera RHB,Batting Second ​,="115-474",.243,.361,0.118,12,18,1,49,17.9,67,.364,.725
+Alec Burleson LHB,Batting Third ​,="116-405",.286,.496,0.210,19,26,1,72,15.9,40,.358,.854
+Jordan Walker RHB,Batting Fourth ​,="91-323",.282,.517,0.235,19,19,0,70,26.8,25,.336,.853
+Nolan Gorman LHB,Batting Fifth ​,="35-166",.211,.319,0.108,5,3,0,24,29.4,18,.283,.602
+Joshua Baez RHB,Batting Fifth ​,="6-39",.154,.487,0.333,4,1,0,8,39.5,2,.209,.696
+Leonardo Bernal SHB,Batting Fifth ​,="3-8",.375,.750,0.375,1,0,0,2,12.5,0,.375,1.125
+Ramon Urias RHB,Batting Seventh ​,="6-24",.250,.667,0.417,3,1,0,7,14.3,3,.321,.988
+Bryan Torres LHB,Batting Seventh ​,="15-56",.268,.393,0.125,1,0,2,6,12.9,4,.328,.721
+Jose Fermin RHB,Batting Seventh ​,="19-79",.241,.367,0.126,2,4,0,10,12.5,7,.307,.674
+Nathan Church LHB,Batting Seventh ​,="45-185",.243,.373,0.130,6,6,0,24,15.7,9,.278,.651
+Pedro Pages RHB,Batting Eighth ​,="29-121",.240,.364,0.124,3,6,0,9,26.5,5,.279,.643
+Thomas Saggese RHB,Batting Eighth ​,="9-41",.220,.512,0.292,3,1,1,5,26.7,3,.267,.779
+Victor Scott II LHB,Batting Ninth ​,="30-152",.197,.263,0.066,2,4,0,9,23.2,16,.281,.544
+César Prieto LHB,Batting Ninth ​,="1-12",.083,.083,0.000,0,0,0,0,16.7,0,.083,.166

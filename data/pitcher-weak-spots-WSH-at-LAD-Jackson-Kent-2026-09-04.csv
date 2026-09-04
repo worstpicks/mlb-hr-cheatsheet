@@ -1,0 +1,31 @@
+Matchup,WSH @ LAD
+Pitcher,Jackson Kent
+Pitcher Team,WSH
+Opposing Team,LAD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,3.00,="3-9",.333,.444,0.111,0,1,0,1,16.7,3,.500,.944
+Batting Second,1.2,3.60,="3-8",.375,.500,0.125,0,1,0,0,9.1,3,.545,1.045
+Batting Third,2.2,1.50,="2-8",.250,.375,0.125,0,1,0,1,20.0,2,.400,.775
+Batting Fourth,2.0,1.50,="2-9",.222,.333,0.111,0,1,0,1,10.0,1,.300,.633
+Batting Fifth,2.1,1.29,="2-8",.250,.250,0.000,0,0,0,1,33.3,1,.333,.583
+Batting Sixth,2.0,2.00,="3-8",.375,.875,0.500,1,1,0,2,0.0,1,.444,1.319
+Batting Seventh,2.2,0.38,="1-9",.111,.111,0.000,0,0,0,0,22.2,0,.111,.222
+Batting Eighth,1.1,3.75,="2-6",.333,.333,0.000,0,0,0,1,33.3,3,.556,.889
+Batting Ninth,2.2,0.38,="0-8",.000,.000,0.000,0,0,0,0,33.3,1,.111,.111
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Shohei Ohtani LHB,Batting First ​,="139-498",.279,.526,0.247,30,25,4,80,24.0,79,.382,.908
+Freddie Freeman LHB,Batting Third ​,="85-261",.326,.540,0.214,13,17,0,40,16.9,40,.414,.954
+Will Smith RHB,Batting Third ​,="21-79",.266,.342,0.076,1,3,0,11,14.6,9,.337,.679
+Mookie Betts RHB,Batting Fourth ​,="44-169",.260,.432,0.172,7,8,0,22,12.4,16,.324,.756
+Max Muncy LHB,Batting Fifth ​,="37-129",.287,.527,0.240,7,8,1,21,18.3,22,.399,.926
+Tommy Edman SHB,Batting Fifth ​,="11-45",.244,.400,0.156,2,1,0,7,18.9,5,.358,.758
+Kyle Tucker LHB,Batting Sixth ​,="34-156",.218,.333,0.115,3,5,2,19,14.4,20,.306,.639
+Teoscar Hernandez RHB,Batting Seventh ​,="30-120",.250,.400,0.150,5,3,0,20,28.3,6,.291,.691
+Enrique Hernandez RHB,Batting Eighth ​,="5-27",.185,.296,0.111,1,0,0,3,42.9,1,.214,.510
+Alex Call RHB,Batting Eighth ​,="13-52",.250,.288,0.038,0,2,0,9,19.7,6,.344,.632
+Dalton Rushing LHB,Batting Eighth ​,="22-94",.234,.479,0.245,6,5,0,14,33.0,12,.330,.809
+Miguel Rojas RHB,Batting Ninth ​,="15-57",.263,.351,0.088,1,2,0,5,12.5,4,.328,.679
+Hunter Feduccia LHB,Batting Ninth ​,="29-107",.271,.374,0.103,1,6,1,8,20.5,13,.350,.724
+Alex Freeland SHB,Batting Ninth ​,="35-139",.252,.367,0.115,3,7,0,17,25.3,17,.333,.700

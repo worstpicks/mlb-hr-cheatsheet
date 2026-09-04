@@ -387,6 +387,28 @@ def main() -> int:
         if phrase in html:
             fail(f"missing-HR-risk placeholder on sheet: {phrase!r}")
 
+    # Each game's first pitch must be the one MLB has for the STARTERS the sheet
+    # lists. A doubleheader files its plain key under game one, so a board that
+    # carries only game two was showing a first pitch hours too early.
+    try:
+        from game_start_times import annotate_and_sort_games
+
+        _stub = [{"title": ttl} for ttl in titles]
+        _resolved = {g["title"]: g.get("startTime") for g in annotate_and_sort_games(_stub, DATE)}
+        for ttl, meta in zip(titles, metas):
+            want = _resolved.get(ttl)
+            if not want:
+                continue
+            import datetime as _dt
+
+            _utc = _dt.datetime.fromisoformat(want.replace("Z", "+00:00"))
+            _et = _utc.astimezone(_dt.timezone(_dt.timedelta(hours=-4)))
+            _hh = _et.strftime("%I:%M %p").lstrip("0")
+            if _hh not in meta:
+                fail(f"{ttl.split(' - ')[0]}: header time disagrees with MLB (expected {_hh} ET)")
+    except Exception as _exc:
+        warns.append(f"could not verify start times: {_exc}")
+
     # Date correctness
     if f"{WEEKDAY}, {DATE_TEXT}" not in html:
         fail(f"hero must read {WEEKDAY}, {DATE_TEXT}")

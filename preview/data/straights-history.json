@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-04T21:59:27Z",
+  "updated": "2026-09-05T22:07:56Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1297,11 +1297,26 @@
       "o05": {
         "player": "Oneil Cruz",
         "matchup": "LAA @ PIT",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Carter Jensen",
         "matchup": "TOR @ KC",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-05",
+      "o05": {
+        "player": "Hunter Goodman",
+        "matchup": "STL @ COL",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Esmerlyn Valdez",
+        "matchup": "LAA @ PIT",
         "result": "pending"
       }
     }

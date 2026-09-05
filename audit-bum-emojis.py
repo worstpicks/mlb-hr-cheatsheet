@@ -16,15 +16,22 @@ BUM_RE = re.compile(r"([\w.'\-\s]+?)\s*\U0001f9e4\s*\(", re.UNICODE)
 
 missing = []
 checked = 0
-for gm in re.finditer(
-    r'title: "([^"]+)".*?rows: \[(.*?)\]\s*\}',
-    text,
-    re.S,
-):
+# The game objects carry several bracketed fields (top3, top3Detail) between the
+# title and the rows array, and rows entries hold nested arrays of their own -- so
+# the old `rows: \[(.*?)\]\s*\}` pattern matched NOTHING and this audit quietly
+# checked zero rows. Anchor on the shape the deep audit uses: the rows array closes
+# on its own line at the game's indent level.
+GAME_RE = re.compile(
+    r'\{\s*title: "([^"]+)".*?\n        rows: \[(.*?)\n        \],', re.S
+)
+
+bum_games = 0
+for gm in GAME_RE.finditer(text):
     title = gm.group(1)
     bums = {m.group(1).strip().split()[-1].lower() for m in BUM_RE.finditer(title)}
     if not bums:
         continue
+    bum_games += 1
     for row in re.finditer(
         r'\{\s*name: "([^"]+)".*?emojis: "([^"]*)".*?chips: (\[[^\]]+\])',
         gm.group(2),
@@ -44,4 +51,20 @@ if missing:
         print(f"  {name} vs {vs}: {emojis}")
     sys.exit(1)
 
-print(f"OK — all {checked} rows facing bum SPs include glove in static emojis")
+# A vacuous pass is the failure this audit actually had: it printed OK while
+# matching no games at all. Cross-check against the gloves present in the titles.
+titles_with_glove = sum(
+    1 for t in re.findall(r'title: "([^"]+)"', text) if '\U0001f9e4' in t
+)
+if titles_with_glove and not bum_games:
+    sys.exit(
+        f'audit is not matching games: {titles_with_glove} title(s) carry a glove '
+        'but the game regex found none — fix the parser, do not trust this OK'
+    )
+if bum_games and not checked:
+    sys.exit(f'{bum_games} bum game(s) matched but no rows parsed inside them')
+
+print(
+    f'OK — all {checked} rows in {bum_games} bum game(s) facing bum SPs '
+    'include glove in static emojis'
+)

@@ -1,0 +1,26 @@
+Matchup,ATL @ PHI
+Pitcher,Martin Perez
+Pitcher Team,ATL
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.33,="12-57",.211,.368,0.157,2,3,0,4,13.6,8,.318,.686
+Batting Second,14.2,1.64,="16-56",.286,.446,0.160,1,2,2,5,15.4,8,.385,.831
+Batting Third,14.1,1.19,="10-49",.204,.367,0.163,2,0,1,6,15.5,7,.298,.665
+Batting Fourth,13.0,1.46,="11-49",.224,.388,0.164,2,2,0,6,17.5,8,.333,.721
+Batting Fifth,13.0,1.46,="13-49",.265,.286,0.021,0,1,0,2,19.6,6,.339,.625
+Batting Sixth,14.1,1.05,="12-51",.235,.392,0.157,1,3,1,8,18.5,3,.278,.670
+Batting Seventh,13.1,0.83,="6-45",.133,.289,0.156,2,1,0,3,23.5,5,.216,.505
+Batting Eighth,10.2,1.31,="10-42",.238,.357,0.119,1,2,0,2,27.7,4,.319,.676
+Batting Ninth,12.2,0.63,="7-42",.167,.310,0.143,1,3,0,5,15.6,1,.178,.488
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kyle Schwarber LHB,Batting First ​,="43-191",.225,.408,0.183,10,5,0,25,31.0,30,.329,.737
+Trea Turner RHB,Batting Second ​,="38-186",.204,.296,0.092,3,8,0,14,21.8,13,.262,.558
+Bryce Harper LHB,Batting Third ​,="134-477",.281,.520,0.239,27,27,3,80,20.5,96,.398,.918
+Luis Arraez LHB,Batting Fourth ​,="38-136",.279,.390,0.111,2,7,1,13,4.3,3,.291,.681
+Alec Bohm RHB,Batting Fifth ​,="54-193",.280,.456,0.176,7,11,1,38,16.0,12,.343,.799
+Edmundo Sosa RHB,Batting Sixth ​,="10-43",.233,.372,0.139,1,1,1,6,17.0,2,.298,.670
+J.T. Realmuto RHB,Batting Seventh ​,="28-125",.224,.352,0.128,3,7,0,13,24.3,8,.300,.652
+Bryson Stott LHB,Batting Eighth ​,="10-33",.303,.455,0.152,0,5,0,3,17.9,6,.410,.865
+Derek Hill RHB,Batting Ninth ​,="17-72",.236,.292,0.056,1,1,0,10,37.3,2,.267,.559

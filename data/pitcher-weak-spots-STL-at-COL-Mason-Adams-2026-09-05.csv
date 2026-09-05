@@ -1,0 +1,31 @@
+Matchup,STL @ COL
+Pitcher,Mason Adams
+Pitcher Team,COL
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,0.75,="1-5",.200,.200,0.000,0,0,0,0,40.0,0,.200,.400
+Batting Second,1.0,3.00,="2-4",.500,.500,0.000,0,0,0,1,0.0,1,.600,1.100
+Batting Third,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,25.0,0,.000,.000
+Batting Fourth,0.2,3.00,="1-3",.333,1.333,1.000,1,0,0,1,25.0,1,.500,1.833
+Batting Fifth,1.0,1.00,="1-4",.250,.250,0.000,0,0,0,0,50.0,0,.250,.500
+Batting Sixth,0.2,3.00,="0-2",.000,.000,0.000,0,0,0,0,25.0,2,.500,.500
+Batting Seventh,0.2,3.00,="1-3",.333,1.333,1.000,1,0,0,1,25.0,1,.500,1.833
+Batting Eighth,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,0,25.0,0,.250,.750
+Batting Ninth,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,0,25.0,0,.250,.750
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ivan Herrera RHB,Batting Second ​,="117-479",.244,.367,0.123,13,18,1,52,17.9,67,.365,.732
+Alec Burleson LHB,Batting Third ​,="117-410",.285,.493,0.208,19,26,1,73,16.2,40,.356,.849
+Jordan Walker RHB,Batting Fourth ​,="92-327",.281,.514,0.233,19,19,0,71,26.7,25,.334,.848
+Nolan Gorman LHB,Batting Fifth ​,="35-166",.211,.319,0.108,5,3,0,24,29.4,18,.283,.602
+Joshua Baez RHB,Batting Fifth ​,="6-39",.154,.487,0.333,4,1,0,8,39.5,2,.209,.696
+Leonardo Bernal SHB,Batting Fifth ​,="4-10",.400,.800,0.400,1,1,0,2,8.3,2,.500,1.300
+Ramon Urias RHB,Batting Seventh ​,="6-25",.240,.640,0.400,3,1,0,7,13.8,3,.310,.950
+Bryan Torres LHB,Batting Seventh ​,="15-56",.268,.393,0.125,1,0,2,6,12.9,4,.328,.721
+Jose Fermin RHB,Batting Seventh ​,="19-79",.241,.367,0.126,2,4,0,10,12.5,7,.307,.674
+Nathan Church LHB,Batting Seventh ​,="45-185",.243,.373,0.130,6,6,0,24,15.7,9,.278,.651
+Pedro Pages RHB,Batting Eighth ​,="29-121",.240,.364,0.124,3,6,0,9,26.5,5,.279,.643
+Thomas Saggese RHB,Batting Eighth ​,="10-44",.227,.523,0.296,3,2,1,6,26.5,4,.286,.809
+Victor Scott II LHB,Batting Ninth ​,="30-152",.197,.263,0.066,2,4,0,9,23.2,16,.281,.544
+César Prieto LHB,Batting Ninth ​,="1-12",.083,.083,0.000,0,0,0,0,16.7,0,.083,.166

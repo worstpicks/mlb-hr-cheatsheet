@@ -1,0 +1,26 @@
+Matchup,MIL @ CIN
+Pitcher,Dustin May
+Pitcher Team,MIL
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.0,1.56,="20-64",.313,.422,0.109,1,4,0,6,17.1,5,.371,.793
+Batting Second,16.2,1.14,="8-56",.143,.268,0.125,2,1,0,6,25.0,11,.294,.562
+Batting Third,16.0,1.13,="10-58",.172,.259,0.087,1,2,0,5,26.9,8,.284,.543
+Batting Fourth,15.2,1.28,="16-60",.267,.350,0.083,1,2,0,6,21.2,4,.303,.653
+Batting Fifth,14.0,1.50,="17-57",.298,.439,0.141,1,5,0,10,17.7,4,.355,.794
+Batting Sixth,12.1,1.62,="14-50",.280,.380,0.100,0,5,0,10,25.4,6,.390,.770
+Batting Seventh,14.1,1.12,="12-49",.245,.408,0.163,2,2,0,8,30.4,4,.321,.729
+Batting Eighth,11.2,1.20,="13-46",.283,.457,0.174,2,2,0,9,20.0,1,.292,.749
+Batting Ninth,11.1,1.50,="15-46",.326,.435,0.109,0,3,1,2,16.3,2,.367,.802
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Héctor Rodríguez LHB,Batting First ​,="7-24",.292,.708,0.416,3,1,0,4,28.0,1,.320,1.028
+Elly De La Cruz SHB,Batting Second ​,="32-105",.305,.467,0.162,2,7,2,12,29.2,12,.383,.850
+Sal Stewart RHB,Batting Third ​,="25-123",.203,.366,0.163,5,5,0,24,22.1,15,.286,.652
+JJ Bleday LHB,Batting Fourth ​,="11-36",.306,.583,0.277,2,4,0,9,12.8,9,.447,1.030
+Tyler Stephenson RHB,Batting Fifth ​,="6-29",.207,.310,0.103,0,3,0,0,43.8,3,.281,.591
+Eugenio Suarez RHB,Batting Sixth ​,="13-59",.220,.441,0.221,3,4,0,7,37.9,5,.303,.744
+Jose Trevino RHB,Batting Seventh ​,="8-37",.216,.324,0.108,1,1,0,3,27.0,0,.216,.540
+Carlos Jorge LHB,Batting Ninth ​,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Matt McLain RHB,Batting Ninth ​,="22-93",.237,.462,0.225,4,9,0,7,27.2,8,.304,.766

@@ -1,0 +1,26 @@
+Matchup,ATL @ PHI
+Pitcher,Zack Wheeler
+Pitcher Team,PHI
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.60,="16-59",.271,.424,0.153,2,1,1,5,25.4,8,.358,.782
+Batting Second,17.2,0.85,="10-59",.169,.186,0.017,0,1,0,4,30.3,5,.242,.428
+Batting Third,13.1,1.73,="17-57",.298,.649,0.351,5,5,0,11,20.3,6,.375,1.024
+Batting Fourth,14.1,1.40,="16-58",.276,.552,0.276,4,4,0,7,30.2,4,.333,.885
+Batting Fifth,16.1,0.92,="10-56",.179,.214,0.035,0,2,0,4,33.9,5,.242,.456
+Batting Sixth,14.1,1.12,="12-53",.226,.528,0.302,5,1,0,9,24.6,4,.281,.809
+Batting Seventh,14.2,0.68,="8-53",.151,.283,0.132,2,1,0,2,32.7,2,.182,.465
+Batting Eighth,11.2,0.77,="6-41",.146,.171,0.025,0,1,0,0,35.6,3,.222,.393
+Batting Ninth,12.1,0.81,="6-41",.146,.317,0.171,1,4,0,2,35.6,4,.222,.539
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Drake Baldwin LHB,Batting First ​,="60-201",.299,.498,0.199,11,7,0,33,20.3,28,.388,.886
+Ronald Acuna Jr. RHB,Batting Second ​,="20-95",.211,.411,0.200,6,1,0,14,29.1,8,.272,.683
+Matt Olson LHB,Batting Third ​,="112-455",.246,.499,0.253,30,25,0,67,25.0,50,.323,.822
+Michael Harris II LHB,Batting Fourth ​,="46-160",.288,.431,0.143,3,12,1,18,17.5,4,.307,.738
+Mauricio Dubon RHB,Batting Fifth ​,="39-147",.265,.401,0.136,4,6,1,27,13.0,11,.314,.715
+Ozzie Albies SHB,Batting Sixth ​,="18-76",.237,.316,0.079,1,3,0,7,14.9,7,.310,.626
+Dominic Smith LHB,Batting Seventh ​,="27-86",.314,.442,0.128,3,2,0,17,12.8,3,.344,.786
+Austin Riley RHB,Batting Eighth ​,="23-90",.256,.389,0.133,2,6,0,11,34.7,5,.296,.685
+Ha-Seong Kim RHB,Batting Ninth ​,="7-44",.159,.182,0.023,0,1,0,3,24.0,5,.260,.442

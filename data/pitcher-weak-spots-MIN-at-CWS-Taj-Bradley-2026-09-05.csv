@@ -1,0 +1,26 @@
+Matchup,MIN @ CWS
+Pitcher,Taj Bradley
+Pitcher Team,MIN
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.0,1.25,="18-77",.234,.455,0.221,4,3,1,11,29.8,7,.298,.753
+Batting Second,16.1,1.84,="15-65",.231,.369,0.138,2,3,0,4,23.8,15,.375,.744
+Batting Third,16.0,1.81,="21-68",.309,.574,0.265,5,3,0,7,25.0,8,.382,.956
+Batting Fourth,19.0,1.00,="14-69",.203,.246,0.043,1,0,0,5,30.7,5,.267,.513
+Batting Fifth,19.1,0.93,="12-67",.179,.403,0.224,3,6,0,11,26.7,6,.253,.656
+Batting Sixth,17.1,1.10,="15-66",.227,.303,0.076,1,2,0,6,18.6,4,.271,.574
+Batting Seventh,15.1,1.37,="12-57",.211,.281,0.070,0,4,0,4,29.4,9,.324,.605
+Batting Eighth,17.0,0.82,="12-61",.197,.459,0.262,4,4,0,7,38.1,2,.222,.681
+Batting Ninth,14.0,1.43,="10-51",.196,.275,0.079,1,1,0,4,23.8,10,.339,.614
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="75-297",.253,.364,0.111,6,13,1,25,16.4,31,.357,.721
+Miguel Vargas RHB,Batting Second ​,="33-117",.282,.573,0.291,9,7,0,23,14.3,23,.400,.973
+Munetaka Murakami LHB,Batting Third ​,="6-41",.146,.439,0.293,4,0,0,7,30.2,12,.340,.779
+Andrew Benintendi LHB,Batting Fourth ​,="19-85",.224,.376,0.152,3,4,0,13,20.2,8,.287,.663
+Colson Montgomery LHB,Batting Fifth ​,="18-82",.220,.366,0.146,3,3,0,14,30.9,10,.309,.675
+Braden Montgomery SHB,Batting Sixth ​,="20-78",.256,.385,0.129,2,2,1,9,28.4,8,.341,.726
+Chase Meidroth RHB,Batting Seventh ​,="24-93",.258,.344,0.086,2,2,0,5,17.0,11,.333,.677
+Tristan Peters LHB,Batting Eighth ​,="51-174",.293,.546,0.253,9,11,3,31,15.5,14,.346,.892
+Jake Rogers RHB,Batting Ninth ​,="17-110",.155,.236,0.081,1,4,1,8,28.5,15,.256,.492

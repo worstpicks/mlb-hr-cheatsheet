@@ -1,0 +1,26 @@
+Matchup,LAA @ PIT
+Pitcher,Braxton Ashcraft
+Pitcher Team,PIT
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.0,1.25,="21-80",.263,.413,0.150,2,4,1,4,21.2,4,.306,.719
+Batting Second,19.1,1.14,="14-71",.197,.366,0.169,4,0,0,10,24.7,8,.284,.650
+Batting Third,17.0,1.53,="21-72",.292,.375,0.083,1,3,0,7,26.0,5,.338,.713
+Batting Fourth,20.2,0.97,="16-67",.239,.328,0.089,1,3,0,7,28.0,4,.280,.608
+Batting Fifth,17.0,1.24,="19-68",.279,.603,0.324,7,1,0,14,24.3,2,.300,.903
+Batting Sixth,18.2,0.70,="9-61",.148,.197,0.049,0,3,0,3,35.3,4,.206,.403
+Batting Seventh,17.2,0.91,="15-65",.231,.477,0.246,4,2,1,7,32.8,1,.254,.731
+Batting Eighth,15.1,0.98,="13-60",.217,.333,0.116,1,4,0,3,21.0,2,.242,.575
+Batting Ninth,14.0,1.07,="10-51",.196,.294,0.098,1,2,0,5,15.0,5,.288,.582
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="111-491",.226,.415,0.189,20,25,4,51,31.5,49,.306,.721
+Mike Trout RHB,Batting Second ​,="106-444",.239,.421,0.182,20,21,0,50,25.7,89,.374,.795
+Wade Meckler LHB,Batting Third ​,="20-59",.339,.424,0.085,0,5,0,8,18.8,10,.435,.859
+Vaughn Grissom RHB,Batting Fourth ​,="19-75",.253,.493,0.240,4,6,0,14,20.7,3,.309,.802
+Moisés Ballesteros LHB,Batting Fifth ​,="13-57",.228,.316,0.088,1,2,0,5,20.3,7,.313,.629
+Christian Moore RHB,Batting Sixth ​,="7-32",.219,.406,0.187,1,1,1,5,27.3,0,.242,.648
+Josh Lowe LHB,Batting Seventh ​,="27-125",.216,.384,0.168,6,3,0,12,30.7,9,.272,.656
+Denzer Guzman RHB,Batting Eighth ​,="9-47",.191,.319,0.128,1,3,0,4,40.8,1,.224,.543
+Adam Frazier LHB,Batting Ninth ​,="22-92",.239,.348,0.109,1,5,1,8,26.4,8,.320,.668

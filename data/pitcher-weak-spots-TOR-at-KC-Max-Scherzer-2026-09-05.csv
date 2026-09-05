@@ -1,0 +1,26 @@
+Matchup,TOR @ KC
+Pitcher,Max Scherzer
+Pitcher Team,TOR
+Opposing Team,KC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.1,1.50,="8-30",.267,.500,0.233,2,1,0,4,18.2,3,.333,.833
+Batting Second,7.0,1.86,="10-30",.333,.600,0.267,2,2,0,4,15.2,3,.394,.994
+Batting Third,7.1,1.50,="8-29",.276,.483,0.207,2,0,0,3,25.0,3,.344,.827
+Batting Fourth,7.0,1.57,="5-24",.208,.542,0.334,2,2,0,6,13.3,6,.367,.909
+Batting Fifth,5.2,1.76,="8-25",.320,.440,0.120,1,0,0,4,21.4,2,.393,.833
+Batting Sixth,6.0,1.00,="2-20",.100,.150,0.050,0,1,0,3,16.0,4,.240,.390
+Batting Seventh,5.0,1.60,="5-20",.250,.700,0.450,3,0,0,7,13.0,3,.348,1.048
+Batting Eighth,6.0,0.83,="3-20",.150,.200,0.050,0,1,0,2,22.7,2,.227,.427
+Batting Ninth,5.2,0.71,="4-21",.190,.238,0.048,0,1,0,2,22.7,0,.190,.428
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Carter Jensen LHB,Batting First ​,="62-261",.238,.502,0.264,16,17,2,41,28.4,32,.321,.823
+Bobby Witt Jr. RHB,Batting Second ​,="136-480",.283,.452,0.169,17,28,1,51,17.1,58,.360,.812
+Jac Caglianone LHB,Batting Third ​,="72-236",.305,.564,0.259,15,14,1,47,20.6,8,.332,.896
+Salvador Perez RHB,Batting Fourth ​,="82-372",.220,.371,0.151,13,15,1,51,19.3,14,.260,.631
+Vinnie Pasquantino LHB,Batting Fifth ​,="25-103",.243,.379,0.136,3,5,0,7,14.8,9,.322,.701
+Michael Massey LHB,Batting Sixth ​,="11-52",.212,.385,0.173,1,4,1,4,16.4,2,.236,.621
+John Rave LHB,Batting Seventh ​,="6-37",.162,.351,0.189,1,2,1,1,22.0,3,.225,.576
+Josh Rojas LHB,Batting Eighth ​,="11-47",.234,.319,0.085,1,1,0,8,11.8,2,.265,.584
+Isaac Collins SHB,Batting Ninth ​,="20-65",.308,.446,0.138,1,4,1,7,20.0,4,.357,.803

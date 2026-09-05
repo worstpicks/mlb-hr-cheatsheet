@@ -21,13 +21,33 @@ def _clamp(value: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, value))
 
 
-def batter_split(hand: str, risk: dict | None) -> float | None:
-    """Platoon split vs opposing SP; switch hitters get their better lane."""
+def batter_split(hand: str, risk: dict | None, throws: str | None = None) -> float | None:
+    """Platoon split vs the opposing SP, in the lane the batter will actually stand in.
+
+    A switch hitter does not get to pick his better side -- he bats OPPOSITE the arm.
+    Against a left-hander he is a right-handed batter, so the pitcher's vs-RHB lane
+    is the one that applies. Taking max() of the two lanes, which is what this did
+    until 2026-09-05, can only ever inflate a switch hitter and never deflate him:
+    it put Cal Raleigh on the 3-leg card carrying a +1.58 split he was never going to
+    see (Springs is a lefty, Raleigh bats right against him, and Springs sits at
+    +0.25 in that lane), and it made Leo Bernal the second-highest score on the whole
+    board off +1.50 when his real lane against Mason Adams is +0.82.
+
+    `throws` is optional only so the historical dated scripts that import this keep
+    running; every current builder passes it.
+    """
     if not risk:
         return None
     if hand == "S":
+        if throws:
+            return risk["vs_rhb"] if throws.upper() == "L" else risk["vs_lhb"]
         return max(risk["vs_lhb"], risk["vs_rhb"])
     return risk["vs_lhb"] if hand == "L" else risk["vs_rhb"]
+
+
+def switch_side(throws: str | None) -> str:
+    """Which side a switch hitter bats from against this arm."""
+    return "RHB" if (throws or "").upper() == "L" else "LHB"
 
 
 def score_from_model(

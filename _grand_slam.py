@@ -113,15 +113,16 @@ def pitcher_risk_lookup() -> dict:
     return load_pitcher_risk(ROOT / "data" / f"hr-targets-overall-{DATE}.csv")
 
 
-def hand_split(risk_row: dict | None, hand: str) -> float | None:
+def hand_split(risk_row: dict | None, hand: str, throws: str | None = None) -> float | None:
     if not risk_row or risk_row.get("no_data"):
         return None
     if hand == "L":
         return risk_row.get("vs_lhb")
     if hand == "R":
         return risk_row.get("vs_rhb")
-    # switch hitter takes the friendlier of the two lanes
-    return max(risk_row.get("vs_lhb", 0.0), risk_row.get("vs_rhb", 0.0))
+    # A switch hitter bats OPPOSITE the arm -- he does not get to take the friendlier
+    # of the two lanes, which is what max() here was quietly granting him.
+    return risk_row.get("vs_rhb") if (throws or "").upper() == "L" else risk_row.get("vs_lhb")
 
 
 def main() -> int:
@@ -182,7 +183,7 @@ def main() -> int:
                 # hand-correct split from the risk export, never the overall figure
                 opp = (game.get(opp_key) or {}).get("name") or ""
                 rrow = risk.get(opp.lower()) or risk.get(opp.split()[-1].lower() if opp else "")
-                split = hand_split(rrow, hand)
+                split = hand_split(rrow, hand, throws)
                 if split is None:
                     split = row.get("split")
                 split_mult = 1.0 + max(-0.6, min(0.9, (split or 0.0) * 0.42))

@@ -1,0 +1,26 @@
+Matchup,MIL @ CIN
+Pitcher,Andrew Abbott
+Pitcher Team,CIN
+Opposing Team,MIL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.2,1.92,="21-72",.292,.458,0.166,3,3,0,8,12.0,11,.386,.844
+Batting Second,18.0,1.44,="15-68",.221,.382,0.161,1,6,1,8,17.5,11,.325,.707
+Batting Third,18.2,1.39,="22-74",.297,.473,0.176,4,1,0,10,17.5,4,.325,.798
+Batting Fourth,19.2,1.07,="13-68",.191,.426,0.235,4,2,1,15,20.5,8,.269,.695
+Batting Fifth,18.1,1.09,="14-69",.203,.290,0.087,1,3,0,7,11.8,6,.267,.557
+Batting Sixth,15.0,1.80,="18-62",.290,.435,0.145,2,3,0,6,15.3,9,.375,.810
+Batting Seventh,14.2,1.36,="14-54",.259,.444,0.185,2,4,0,4,16.1,6,.333,.777
+Batting Eighth,13.0,1.69,="12-50",.240,.360,0.120,1,3,0,2,26.7,10,.367,.727
+Batting Ninth,12.2,1.58,="15-53",.283,.453,0.170,3,0,0,7,25.9,5,.345,.798
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jackson Chourio RHB,Batting First ​,="43-160",.269,.463,0.194,7,10,0,15,26.0,13,.324,.787
+Luis Lara SHB,Batting Second ​,="3-16",.188,.188,0.000,0,0,0,2,15.8,3,.316,.504
+William Contreras RHB,Batting Third ​,="59-165",.358,.491,0.133,3,11,1,24,13.2,14,.412,.903
+Andrew Vaughn RHB,Batting Fourth ​,="21-67",.313,.403,0.090,0,2,2,7,11.4,9,.405,.808
+Garrett Mitchell LHB,Batting Fifth ​,="24-88",.273,.409,0.136,1,7,1,17,27.8,8,.340,.749
+Joey Ortiz RHB,Batting Sixth ​,="5-18",.278,.389,0.111,0,0,1,1,36.8,1,.316,.705
+Cooper Pratt RHB,Batting Seventh ​,="5-15",.333,.400,0.067,0,1,0,2,25.0,0,.313,.713
+Gary Sanchez RHB,Batting Eighth ​,="1-2",.500,.500,0.000,0,0,0,0,50.0,0,.500,1.000
+David Hamilton LHB,Batting Ninth ​,="49-195",.251,.379,0.128,4,7,3,18,23.1,18,.318,.697

@@ -164,52 +164,125 @@ def load_research_hit_stats(sheet_date: str, root: Path | None = None) -> dict[s
                     "platoon_xwoba": plat,
                     "platoon_pa": plat_pa,
                 }
+                entry["game"] = f"{game.get('away')} @ {game.get('home')}"
+                entry["player_id"] = player.get("id")
+                entry["name_research"] = player.get("name")
                 key = _norm_name(player.get("name") or "")
-                if key and any(v is not None for v in entry.values()):
+                if not key or not any(v is not None for v in entry.values()):
+                    continue
+                prior = out.get(key)
+                if prior is None:
                     out[key] = entry
+                elif prior.get("player_id") != entry.get("player_id"):
+                    # Two DIFFERENT humans share this name on the same slate --
+                    # Oakland's right-handed Max Muncy and the Dodgers' left-handed
+                    # one, both listed on 2026-09-05. Keying by name alone made the
+                    # later game overwrite the earlier, so the Dodgers' cleanup
+                    # hitter inherited the Athletic's bench slot and was barred from
+                    # every pick board. Keep both and let the caller pick by game.
+                    prior.setdefault("_alts", []).append(entry)
+                    entry["_alts"] = prior["_alts"]
 
     # A lineup can list the same human twice under name variants -- San Diego on
     # 2026-09-01 carried "Fernando Tatis" at order 1 and "Fernando Tatis Jr." at
     # order 10. Keyed separately, the suffixed form looked like a bench bat and
     # got the real leadoff hitter barred from every pick board. Collapse the
     # variants and give every spelling the best (lowest) batting order.
-    best: dict[str, int] = {}
-    for key, entry in out.items():
+    # Scope the merge to one game: the two spellings of a name inside a single
+    # lineup are one player, but the same name in two different games is not, and
+    # a slate-wide minimum would hand a bench bat his namesake's batting order.
+    best: dict[tuple[str, str], int] = {}
+    for entry in _all_entries(out):
         slot = entry.get("lineup_slot")
         if slot is None:
             continue
-        base = _suffix_key(key)
-        if base not in best or slot < best[base]:
-            best[base] = slot
-    for key, entry in out.items():
-        base = _suffix_key(key)
-        if base in best:
-            entry["lineup_slot"] = best[base]
+        ident = (entry.get("game") or "", _suffix_key(_norm_name(entry.get("name_research") or "")))
+        if ident not in best or slot < best[ident]:
+            best[ident] = slot
+    for entry in _all_entries(out):
+        ident = (entry.get("game") or "", _suffix_key(_norm_name(entry.get("name_research") or "")))
+        if ident in best:
+            entry["lineup_slot"] = best[ident]
     return out
 
 
-def lookup_research_entry(stats: dict, name: str) -> dict | None:
+def _all_entries(stats: dict) -> list[dict]:
+    """Every research row, including same-name alternates parked under _alts."""
+    seen, out = set(), []
+    for entry in stats.values():
+        for cand in [entry, *(entry.get("_alts") or [])]:
+            if id(cand) not in seen:
+                seen.add(id(cand))
+                out.append(cand)
+    return out
+
+
+def _pick_candidate(entry: dict, game: str | None) -> dict:
+    """Choose between hitters who share a name: by game if known, else by slot.
+
+    Falling back to the lowest starting slot is deliberate. A prop is written for
+    the hitter a book priced, and books price the man who is playing -- so when the
+    board cannot say which game it means, the starter is the better guess than a
+    bench bat who happens to sort later.
+    """
+    cands = [entry, *(entry.get("_alts") or [])]
+    if len(cands) == 1:
+        return entry
+    if game:
+        plain = game.split(" (G")[0]
+        for cand in cands:
+            if cand.get("game") == plain:
+                return cand
+    return min(cands, key=lambda c: (c.get("lineup_slot") is None, c.get("lineup_slot") or 99))
+
+
+def _nickname_match(stats: dict, key: str) -> dict | None:
+    """Last resort: same surname, one first name a prefix of the other.
+
+    MLB's lineup feed calls St. Louis's catcher "Leo Bernal" while both the prop
+    list and the PropFinder export say "Leonardo Bernal". An exact key misses, and
+    downstream that reads as "not in a posted lineup" -- it barred a starting
+    catcher on 2026-09-05. Only an unambiguous single match is accepted.
+    """
+    hits = []
+    for k, v in stats.items():
+        if k == key or len(k) < 5 or len(key) < 5:
+            continue
+        # names normalise to one run of letters, so compare from both ends
+        if k.endswith(key[-6:]) or key.endswith(k[-6:]):
+            short, long = sorted((k, key), key=len)
+            if long.startswith(short[:3]) and long.endswith(short[-4:]):
+                hits.append(v)
+    uniq = {id(h): h for h in hits}
+    return next(iter(uniq.values())) if len(uniq) == 1 else None
+
+
+def lookup_research_entry(stats: dict, name: str, game: str | None = None) -> dict | None:
     """Find a batter's research row, tolerating a generational suffix either way.
 
     The prop list and the lineup feed disagree about "Jr." in both directions --
     "LaMonte Wade Jr." on the board against "LaMonte Wade" in the lineup, and
     "Fernando Tatis Jr." against "Fernando Tatis". An exact-key lookup silently
     returns nothing, which reads downstream as "not in the lineup".
+
+    Pass `game` ("AWY @ HOM") whenever the caller knows it: two different players
+    can share a name on one slate, and only the game tells them apart.
     """
     if not stats:
         return None
     key = _norm_name(name)
     hit = stats.get(key)
     if hit is not None:
-        return hit
+        return _pick_candidate(hit, game)
     base = _suffix_key(key)
     if base != key and base in stats:
-        return stats[base]
+        return _pick_candidate(stats[base], game)
     # the stored name may be the suffixed one instead
     for k, v in stats.items():
         if _suffix_key(k) == base:
-            return v
-    return None
+            return _pick_candidate(v, game)
+    nick = _nickname_match(stats, key)
+    return _pick_candidate(nick, game) if nick else None
 
 
 def attach_research_hit_stats(
@@ -221,7 +294,11 @@ def attach_research_hit_stats(
         return 0
     matched = 0
     for row in rows:
-        entry = lookup_research_entry(lookup, row.get("name_plain") or row.get("name") or "")
+        entry = lookup_research_entry(
+            lookup,
+            row.get("name_plain") or row.get("name") or "",
+            row.get("game"),
+        )
         if entry:
             row.update(entry)
             matched += 1

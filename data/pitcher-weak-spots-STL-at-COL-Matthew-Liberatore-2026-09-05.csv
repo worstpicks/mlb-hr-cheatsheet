@@ -1,0 +1,26 @@
+Matchup,STL @ COL
+Pitcher,Matthew Liberatore
+Pitcher Team,STL
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.2,1.74,="20-67",.299,.493,0.194,4,1,0,6,12.8,9,.385,.878
+Batting Second,17.0,1.47,="23-72",.319,.694,0.375,8,3,0,19,18.4,2,.342,1.036
+Batting Third,16.1,1.59,="18-65",.277,.492,0.215,3,5,0,11,25.7,8,.351,.843
+Batting Fourth,15.1,1.83,="16-59",.271,.424,0.153,2,3,0,9,32.4,12,.394,.818
+Batting Fifth,13.1,1.88,="22-60",.367,.500,0.133,1,5,0,6,18.5,3,.400,.900
+Batting Sixth,15.0,1.20,="16-57",.281,.421,0.140,2,2,0,10,26.7,2,.300,.721
+Batting Seventh,15.1,0.78,="8-51",.157,.196,0.039,0,2,0,1,33.3,4,.232,.428
+Batting Eighth,11.2,1.63,="14-48",.292,.521,0.229,3,2,0,9,21.8,5,.364,.885
+Batting Ninth,12.1,1.30,="14-51",.275,.451,0.176,2,1,1,5,30.2,2,.302,.753
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="98-345",.284,.484,0.200,12,23,5,46,15.9,18,.324,.808
+Connor Norby RHB,Batting Second ​,="3-15",.200,.200,0.000,0,0,0,2,25.0,1,.250,.450
+Hunter Goodman RHB,Batting Third ​,="50-224",.223,.500,0.277,17,11,0,33,35.1,14,.273,.773
+TJ Rumfield LHB,Batting Fourth ​,="64-201",.318,.502,0.184,8,11,1,22,13.9,33,.422,.924
+Cole Carrigg SHB,Batting Fifth ​,="23-59",.390,.678,0.288,2,5,3,13,15.4,4,.422,1.100
+Jordan Beck RHB,Batting Sixth ​,="7-32",.219,.344,0.125,0,2,1,5,39.4,1,.242,.586
+Troy Johnston LHB,Batting Seventh ​,="19-59",.322,.441,0.119,0,7,0,9,15.2,6,.379,.820
+Adael Amador SHB,Batting Eighth ​,="3-7",.429,.857,0.428,1,0,0,2,0.0,0,.429,1.286
+Ezequiel Tovar RHB,Batting Ninth ​,="27-111",.243,.396,0.153,4,5,0,15,21.0,8,.285,.681

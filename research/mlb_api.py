@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -497,6 +498,74 @@ def resolve_side_lineup(
     return lineup
 
 
+def _sheet_starters(sheet_date: str) -> dict[str, tuple[str, str]]:
+    """game key -> (away SP, home SP) as the built cheat sheet names them."""
+    root = Path(__file__).resolve().parent.parent
+    path = root / f"build-sheet-{sheet_date}.py"
+    if not path.is_file():
+        return {}
+    out: dict[str, tuple[str, str]] = {}
+    for title in re.findall(r'"title":\s*"([^"]+)"', path.read_text(encoding="utf-8")):
+        if " - " not in title or " vs " not in title:
+            continue
+        key, matchup = title.split(" - ", 1)
+        away_seg, home_seg = matchup.split(" vs ", 1)
+
+        def arm(seg: str) -> str:
+            return seg.rsplit(" (", 1)[0].replace("\U0001f9e4", "").strip()
+
+        out[key.split(" (G")[0].strip()] = (arm(away_seg), arm(home_seg))
+    return out
+
+
+def _align_pitchers_with_sheet(games: list[dict], sheet_date: str) -> dict:
+    """Replace a research probable when the cheat sheet names a different arm.
+
+    MLB's probable and PropFinder's projection can disagree: on 2026-09-07 MLB
+    listed Derek Law for Arizona while both PropFinder's page and its export had
+    Jose Cabrera, so the two tabs of this site named different starters for the
+    same game. The sheet wins, because every number on that board -- splits, risk,
+    park lane, the whole batter block -- was computed against that arm.
+
+    The entire pitcher dict is rebuilt from the name, never patched in place: a
+    rename alone would leave the previous arm's id, arsenal and Savant stats
+    hanging under someone else's name, which is a worse error than the mismatch.
+    An unresolvable name is left alone and reported.
+    """
+    from research.projected_pitchers import _resolve_projected_pitcher
+
+    starters = _sheet_starters(sheet_date)
+    stats: dict = {"checked": 0, "aligned": [], "unresolved": []}
+    if not starters:
+        return stats
+
+    def fold(name: str) -> str:
+        base = unicodedata.normalize("NFKD", name or "")
+        base = "".join(c for c in base if not unicodedata.combining(c))
+        return re.sub(r"[^a-z]", "", base.lower())
+
+    for game in games:
+        key = game_key(game.get("away") or "", game.get("home") or "")
+        want = starters.get(key)
+        if not want:
+            continue
+        for side, wanted in (("awayPitcher", want[0]), ("homePitcher", want[1])):
+            have = (game.get(side) or {}).get("name") or ""
+            stats["checked"] += 1
+            if not wanted or fold(have) == fold(wanted):
+                continue
+            # a surname-only match is the same human, just spelled shorter
+            if have and (fold(have).endswith(fold(wanted)) or fold(wanted).endswith(fold(have))):
+                continue
+            resolved = _resolve_projected_pitcher({"name": wanted}, source="cheatsheet")
+            if not resolved:
+                stats["unresolved"].append(f"{key} {side[:4]}: {wanted}")
+                continue
+            stats["aligned"].append(f"{key} {side[:4]}: {have or 'TBD'} -> {resolved['name']}")
+            game[side] = resolved
+    return stats
+
+
 def _collect_player_ids(games: list[dict]) -> list[int]:
     ids: set[int] = set()
     for game in games:
@@ -791,6 +860,12 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
         projected_meta = apply_projected_pitcher_fallback_to_games(games, sheet_date)
     except Exception as exc:
         projected_meta = {"source": "projected-pitchers", "error": str(exc)}
+
+    align_meta = _align_pitchers_with_sheet(games, sheet_date)
+    for line in align_meta.get("aligned", []):
+        print(f"  research tab follows the sheet's starter — {line}")
+    for line in align_meta.get("unresolved", []):
+        print(f"  WARN research tab could not resolve the sheet's starter — {line}")
 
     _fill_pitcher_throws(games)
     _attach_park_to_games(games, sheet_date)

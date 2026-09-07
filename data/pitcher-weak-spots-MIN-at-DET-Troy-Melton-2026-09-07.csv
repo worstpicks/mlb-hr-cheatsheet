@@ -1,0 +1,31 @@
+Matchup,MIN @ DET
+Pitcher,Troy Melton
+Pitcher Team,DET
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.2,1.46,="11-46",.239,.435,0.196,2,3,0,3,17.0,6,.340,.775
+Batting Second,13.2,0.88,="10-49",.204,.327,0.123,1,3,0,1,21.2,2,.250,.577
+Batting Third,11.1,1.41,="9-43",.209,.395,0.186,2,2,0,3,16.0,7,.320,.715
+Batting Fourth,13.2,0.80,="7-45",.156,.289,0.133,1,1,1,3,20.0,4,.220,.509
+Batting Fifth,11.0,0.91,="9-42",.214,.357,0.143,1,3,0,4,24.4,1,.244,.601
+Batting Sixth,10.1,1.16,="8-37",.216,.432,0.216,1,3,1,5,26.2,4,.310,.742
+Batting Seventh,8.2,1.62,="11-36",.306,.556,0.250,2,3,0,5,12.5,3,.359,.915
+Batting Eighth,9.2,0.93,="7-36",.194,.278,0.084,1,0,0,1,26.3,2,.237,.515
+Batting Ninth,11.2,0.34,="4-37",.108,.216,0.108,1,1,0,2,24.3,0,.108,.324
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trevor Larnach LHB,Batting First ​,="46-151",.305,.503,0.198,7,9,0,24,12.6,15,.367,.870
+Brooks Lee SHB,Batting Second ​,="35-177",.198,.367,0.169,9,3,0,29,17.4,10,.242,.609
+Kody Clemens LHB,Batting Third ​,="38-177",.215,.475,0.260,13,7,0,31,22.1,14,.272,.747
+Ryan Jeffers RHB,Batting Third ​,="25-94",.266,.489,0.223,5,6,0,16,17.3,15,.364,.853
+Josh Bell SHB,Batting Fourth ​,="60-256",.234,.410,0.176,9,16,1,40,22.7,21,.294,.704
+Royce Lewis RHB,Batting Fifth ​,="35-130",.269,.500,0.231,8,6,0,16,17.9,13,.338,.838
+Ben Ross RHB,Batting Fifth ​,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Victor Caratini SHB,Batting Sixth ​,="24-133",.180,.338,0.158,5,6,0,17,21.8,13,.282,.620
+Gabriel Gonzalez RHB,Batting Sixth ​,="0-3",.000,.000,0.000,0,0,0,0,66.7,0,.000,.000
+Luke Keaschall RHB,Batting Sixth ​,="16-93",.172,.237,0.065,1,3,0,8,21.2,6,.233,.470
+Alex Jackson RHB,Batting Ninth ​,="17-55",.309,.436,0.127,1,4,0,5,27.6,1,.345,.781
+Ryan Kreidler RHB,Batting Ninth ​,="21-113",.186,.336,0.150,3,4,2,14,20.3,8,.246,.582
+Kaelen Culpepper RHB,Batting Ninth ​,="11-32",.344,.469,0.125,1,1,0,1,18.2,1,.364,.833
+Walker Jenkins LHB,Batting Ninth ​,="3-26",.115,.269,0.154,1,1,0,3,25.8,5,.258,.527

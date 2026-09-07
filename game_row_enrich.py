@@ -202,6 +202,10 @@ def pitcher_summary_path(split: str, sheet_date: str) -> Path | None:
     return matches[0] if matches else None
 
 
+# An arm needs a real sample before a zero HR count becomes a printed 0.00 rate.
+MIN_IP_FOR_DERIVED_HR9 = 10.0
+
+
 def load_pitcher_hr9_lookup(sheet_date: str) -> dict[str, float]:
     path = pitcher_summary_path("season", sheet_date)
     if path is None:
@@ -219,7 +223,61 @@ def load_pitcher_hr9_lookup(sheet_date: str) -> dict[str, float]:
             if pitcher and hr9 is not None:
                 lookup[pitcher.lower()] = hr9
                 lookup[pitcher.split()[-1].lower()] = hr9
+
+    # PropFinder writes "-" for HR/9 when an arm has allowed no home runs at all,
+    # so the most suppressed starter on a slate is the one whose header goes blank:
+    # Nick Pivetta on 2026-09-07 sat at 0 HR in 16 innings and printed nothing.
+    # 9 x HR / IP is arithmetic, not a guess -- derive it, but only off a real
+    # sample, since 0.00 from three innings would say more than the data does.
+    for pitcher, ip, hr in _matchup_season_ip_hr(sheet_date):
+        key = pitcher.lower()
+        if key in lookup or ip < MIN_IP_FOR_DERIVED_HR9:
+            continue
+        value = round(9.0 * hr / ip, 2)
+        lookup[key] = value
+        lookup[key.split()[-1]] = value
+        print(f"  HR/9 for {pitcher}: {value:.2f} derived from {hr:g} HR in {ip:g} IP")
     return lookup
+
+
+def _innings(text) -> float | None:
+    """Baseball innings notation to a real number: "97.2" is 97 and two thirds.
+
+    Reading it as the decimal 97.2 is close enough to look right and wrong enough
+    to print a different HR/9 than the export does -- 1.02 against its 1.01.
+    """
+    value = _num(text)
+    if value is None:
+        return None
+    whole = int(value)
+    tenths = round((value - whole) * 10)
+    if tenths in (1, 2):
+        return whole + tenths / 3.0
+    return float(value)
+
+
+def _matchup_season_ip_hr(sheet_date: str) -> list[tuple[str, float, float]]:
+    """(pitcher, season IP, season HR) from each arm's own matchup export."""
+    out: list[tuple[str, float, float]] = []
+    for path in sorted((ROOT / "data").glob(f"hr-matchups-*-{sheet_date}.csv")):
+        pitcher = ""
+        header: list[str] | None = None
+        for line in path.read_text(encoding="utf-8-sig").splitlines():
+            if line.startswith("Pitcher,"):
+                pitcher = line.split(",", 1)[1].strip()
+                continue
+            if line.startswith("SPLIT,"):
+                header = next(csv.reader([line]))
+                continue
+            if header and line.split(",", 1)[0].strip() == "Season":
+                row = dict(zip(header, next(csv.reader([line]))))
+                ip, hr = _innings(row.get("IP")), _num(row.get("HR"))
+                if pitcher and ip is not None and hr is not None:
+                    out.append((pitcher, ip, hr))
+                break
+            if line.startswith("BATTER,"):
+                break
+    return out
 
 
 def load_pitcher_rates_from_matchups(sheet_date: str) -> dict[str, dict]:

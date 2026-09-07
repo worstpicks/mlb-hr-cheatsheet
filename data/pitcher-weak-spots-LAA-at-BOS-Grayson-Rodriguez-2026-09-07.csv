@@ -1,0 +1,31 @@
+Matchup,LAA @ BOS
+Pitcher,Grayson Rodriguez
+Pitcher Team,LAA
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,1.60,="12-41",.293,.488,0.195,1,3,1,4,31.1,4,.356,.844
+Batting Second,9.1,1.71,="10-35",.286,.457,0.171,1,3,0,6,20.5,6,.409,.866
+Batting Third,9.2,1.55,="14-39",.359,.513,0.154,1,3,0,9,11.6,1,.372,.885
+Batting Fourth,9.0,1.56,="9-34",.265,.618,0.353,3,3,0,6,20.0,5,.350,.968
+Batting Fifth,8.1,1.56,="10-35",.286,.686,0.400,4,2,0,8,28.9,3,.342,1.028
+Batting Sixth,8.2,1.15,="5-30",.167,.300,0.133,0,2,1,3,16.2,5,.297,.597
+Batting Seventh,7.2,1.57,="6-30",.200,.367,0.167,1,2,0,3,16.7,6,.333,.700
+Batting Eighth,8.0,1.25,="9-32",.281,.438,0.157,1,0,1,4,23.5,1,.294,.732
+Batting Ninth,7.0,1.71,="10-27",.370,.444,0.074,0,2,0,3,16.1,2,.452,.896
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jahmai Jones RHB,Batting First ​,="13-41",.317,.610,0.293,2,4,1,6,26.1,4,.391,1.001
+Jarren Duran LHB,Batting First ​,="39-184",.212,.402,0.190,9,4,2,25,29.5,12,.265,.667
+Nate Eaton RHB,Batting First ​,="3-17",.176,.294,0.118,0,2,0,3,25.0,2,.300,.594
+Nick Sogard SHB,Batting First ​,="18-82",.220,.305,0.085,1,4,0,6,20.0,15,.337,.642
+Roman Anthony LHB,Batting First ​,="28-119",.235,.361,0.126,2,5,2,5,27.1,20,.350,.711
+Mickey Gasper SHB,Batting Second ​,="15-55",.273,.455,0.182,3,1,0,5,22.7,6,.369,.824
+Adley Rutschman SHB,Batting Third ​,="47-198",.237,.460,0.223,10,12,1,41,17.6,23,.313,.773
+Wilyer Abreu LHB,Batting Third ​,="92-386",.238,.440,0.202,17,21,3,53,20.9,45,.317,.757
+Trevor Story RHB,Batting Fourth ​,="12-51",.235,.314,0.079,1,1,0,5,38.9,2,.278,.592
+Caleb Durbin RHB,Batting Sixth ​,="50-208",.240,.370,0.130,6,7,1,30,14.7,25,.339,.709
+Eli White RHB,Batting Eighth ​,="13-46",.283,.391,0.108,1,2,0,5,23.4,1,.298,.689
+Andruw Monasterio RHB,Batting Eighth ​,="25-92",.272,.359,0.087,1,5,0,12,19.4,8,.320,.679
+Isiah Kiner-Falefa RHB,Batting Ninth ​,="11-50",.220,.300,0.080,1,1,0,9,13.0,4,.278,.578
+Connor Wong RHB,Batting Ninth ​,="28-108",.259,.398,0.139,3,6,0,10,22.5,7,.322,.720

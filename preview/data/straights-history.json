@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-05T22:07:56Z",
+  "updated": "2026-09-07T14:44:52Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1312,11 +1312,26 @@
       "o05": {
         "player": "Hunter Goodman",
         "matchup": "STL @ COL",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Esmerlyn Valdez",
         "matchup": "LAA @ PIT",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-07",
+      "o05": {
+        "player": "Juan Soto",
+        "matchup": "NYM @ MIA",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Mickey Gasper",
+        "matchup": "LAA @ BOS",
         "result": "pending"
       }
     }

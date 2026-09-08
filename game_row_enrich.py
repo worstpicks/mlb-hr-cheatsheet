@@ -872,11 +872,33 @@ def build_game_meta_line(
         away_seg, home_seg = matchup.split(" vs ", 1)
         away_label = pitcher_name_from_title_segment(away_seg)
         home_label = pitcher_name_from_title_segment(home_seg)
+        k_lines = game.get("kLines") or {}
+
+        def with_k_line(segment: str, name: str) -> str:
+            """Append the projected strikeout line to an arm's header segment."""
+            proj = k_lines.get(name) or k_lines.get(name.split()[-1])
+            if not proj or not segment:
+                return segment
+            tip = (
+                f"Projected {proj['k']} K over about {proj['bf']:.0f} batters. "
+                f"He runs {proj['matchupK']}% K against this order"
+                + (f" (his own rate {proj['ownK']}%)" if proj.get("ownK") else "")
+                + f". Range covers roughly two starts in three -- a single start is "
+                f"close to a coin-flip sequence, so the honest spread is wide."
+            )
+            extra = (
+                f'<span class="k-line" title="{tip}">'
+                f"proj {proj['k']} K <em>({proj['lo']}-{proj['hi']})</em></span>"
+            )
+            return segment.replace("</strong>", f" · {extra}</strong>", 1) if segment.endswith(
+                "</strong>"
+            ) else segment.replace("</span>", f" · {extra}</span>", 1)
+
         for label in (away_label, home_label):
             row = resolve_pitcher_risk_row(label, pitcher_risk, desc_blocks)
             seg = _pitcher_meta_segment(label, row, hr9_lookup) if row else ""
             if seg:
-                parts.append(seg)
+                parts.append(with_k_line(seg, label))
                 continue
             # A row that exists but carries no measured book renders as an empty
             # segment, which silently dropped the arm from the header even when a real
@@ -886,32 +908,39 @@ def build_game_meta_line(
             )
             if rates:
                 print(f"note: {label} absent from HR risk export — using measured rates")
-                parts.append(_pitcher_measured_segment(label, rates))
+                parts.append(with_k_line(_pitcher_measured_segment(label, rates), label))
             else:
                 lane = desc_lanes.get(label.split()[-1].lower())
                 seg = _pitcher_measured_lane_segment(label, lane) if lane else ""
                 if seg:
                     print(f"note: {label} absent from HR risk export — using measured BAA lane")
-                    parts.append(seg)
+                    parts.append(with_k_line(seg, label))
                 elif (m_season := re.search(
                     rf"{re.escape(label.split()[-1])}\s*\(season BAA (\.\d+)\)", desc
                 )):
                     print(f"note: {label} has no split book — header shows season BAA")
-                    parts.append(
+                    parts.append(with_k_line(
                         f'<span class="pitcher-meta">{label} season BAA '
-                        f'{m_season.group(1)}</span>'
-                    )
+                        f'{m_season.group(1)}</span>',
+                        label,
+                    ))
                 elif any(
                     f"{n} - MLB debut" in desc or f"{n} — MLB debut" in desc
                     # the description uses the chip (last) name, the title the full one
                     for n in (label, label.split()[-1])
                 ):
                     print(f"note: {label} is an MLB debut — header says so")
-                    parts.append(
-                        f'<span class="pitcher-meta">{label} MLB debut, no book</span>'
-                    )
+                    parts.append(with_k_line(
+                        f'<span class="pitcher-meta">{label} MLB debut, no book</span>',
+                        label,
+                    ))
                 else:
-                    print(f"note: no risk or rate data for {label} — header omits this SP")
+                    bare = with_k_line(f'<span class="pitcher-meta">{label}</span>', label)
+                    if "k-line" in bare:
+                        print(f"note: no risk or rate data for {label} — header shows the K line only")
+                        parts.append(bare)
+                    else:
+                        print(f"note: no risk or rate data for {label} — header omits this SP")
     return " · ".join(p for p in parts if p)
 
 
@@ -1182,6 +1211,11 @@ def emit_games_js(games_data: list[dict]) -> str:
                 parts.append(f"fbPct: {entry['fbPct']}")
             if entry.get("pullAir") is not None:
                 parts.append(f"pullAir: {entry['pullAir']}")
+            if entry.get("contact"):
+                # The five-star contact meter and the numbers behind its tooltip.
+                # This emitter is an allowlist, so a field the builder adds but
+                # nobody lists here is silently dropped on the way to the page.
+                parts.append(f"contact: {json.dumps(entry['contact'], ensure_ascii=False)}")
             if entry.get("zoneScore") is not None:
                 parts.append(f"zoneScore: {entry['zoneScore']}")
             if entry.get("zoneContact") is not None:

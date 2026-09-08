@@ -118,11 +118,20 @@ def read_batter_rows(path: Path) -> list[dict]:
             if odds_raw.startswith("+") or odds_raw.startswith("-"):
                 odds = odds_raw
             def num(key):
-                v = data.get(key, "").strip()
+                """Numeric cell, tolerating the percent signs PropFinder writes.
+
+                float("25.0%") raises, so every percent column silently parsed as
+                None -- which meant the barrel term in the rating, 6 of the 30
+                Power Profile points, never fired on any slate since launch.
+                """
+                v = data.get(key, "").strip().rstrip("%").strip()
+                if v in ("", "-", "--", "N/A"):
+                    return None
                 try:
                     return float(v)
                 except ValueError:
                     return None
+
             rows.append(
                 {
                     "name": name,
@@ -132,6 +141,13 @@ def read_batter_rows(path: Path) -> list[dict]:
                     "near": int(num("NEAR HR") or 0),
                     "ev": num("EV"),
                     "barrel": num("BARREL%"),
+                    # Carried for the rating: measured against results these
+                    # separate 1.7x, 1.4x and 1.65x, against 1.2x for the pitcher
+                    # terms the score was leaning on.
+                    "hh": num("HH%"),
+                    "hrfb": num("HR/FB%"),
+                    "pullair": num("PULLAIR%"),
+                    "zone": num("ZONE"),
                 }
             )
     return rows

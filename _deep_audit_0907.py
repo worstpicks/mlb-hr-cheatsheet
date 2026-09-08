@@ -443,6 +443,27 @@ def main() -> int:
                 )
     print(f'switch-hitter lanes checked: {_sw}')
 
+    # The score is only worth printing if it distinguishes rows. Before the
+    # 2026-09-07 rebalance the model ended in a clamp at 58 and a third of every
+    # board landed exactly there -- favorites the owner had flagged sat at the same
+    # number as bats with no form at all, because the scale had bottomed out rather
+    # than rated them. Fail loudly if any single value ever swallows the board again.
+    _scores = [int(x) for x in re.findall(r"score: (\d+)", html)]
+    if _scores:
+        from collections import Counter as _Counter
+
+        _top_val, _top_n = _Counter(_scores).most_common(1)[0]
+        _share = 100.0 * _top_n / len(_scores)
+        print(f"score spread: {len(set(_scores))} distinct values over {len(_scores)} rows; "
+              f"most common {_top_val} on {_share:.0f}%")
+        if _share > 20.0:
+            fail(
+                f"{_share:.0f}% of the board prints {_top_val} — the score has stopped "
+                "separating rows (a clamp is probably binding)"
+            )
+        if min(_scores) <= 41 and _scores.count(min(_scores)) > max(2, len(_scores) // 20):
+            fail(f"{_scores.count(min(_scores))} rows pinned at the score floor")
+
     # The owner asked for no "no HR risk" placeholders anywhere on the board: either
     # a real number or nothing at all.
     for phrase in ("no MLB HR data yet", "no PropFinder HR risk", "split/risk data unavailable"):

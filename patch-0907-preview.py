@@ -516,7 +516,7 @@ def straight_o05_pool(
         pool = [
             r
             for r in pool
-            if r["score"] >= 72
+            if r["score"] >= 78
             and r["split"] >= 0.0
             and (
                 r["risk"] >= 0.50
@@ -562,7 +562,7 @@ def fav_secondary_lane_ok(row: dict) -> bool:
     """Favorites with loud HR form can qualify even without a huge platoon edge."""
     park = park_gate_pct(row, park_pct_fn=effective_park_pct)
     hand_park = effective_hand_park_pct(row)
-    if row["score"] >= 88 and row["hr"] >= 2 and row["split"] >= -0.20:
+    if row["score"] >= 89 and row["hr"] >= 2 and row["split"] >= -0.20:
         return True
     if row["risk"] >= 0.25 or row["split"] >= 0.50 or park >= 3 or hand_park >= 6:
         return True
@@ -598,7 +598,7 @@ o15_candidates = [
     and (r.get("odds_value") or 0) > 0  # headline straight must carry a price
     and r["hr"] >= 2
     and r["near"] >= 2
-    and r["score"] >= 78
+    and r["score"] >= 84
     and r["split"] >= 0.0
     and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
     and (r["split"] >= 0.15 or r["risk"] >= 0.25 or r["split"] >= 0.75)
@@ -632,7 +632,7 @@ if straight_o15 is None:
                 if r["name"] not in STRAIGHT_O15_BLOCKLIST
                 and r["hr"] >= 2
                 and r["near"] >= 2
-                and r["score"] >= 78
+                and r["score"] >= 84
                 and r["split"] >= 0.15
                 and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
             ],
@@ -700,6 +700,10 @@ if available_fav_count(straight_names) < 3 and row_is_favorite(straight_o05):
 
 
 # Goblin HR legs: real form plus a usable opposing split/risk lane (reject 0/0 pitcher data).
+# Score gates below are percentile-matched to the pre-2026-09-08 scale. The rating
+# was rebuilt that day (see hr_score_model), and a gate left at its old number would
+# have quietly loosened: the same printed score now sits somewhere else in the
+# distribution. These preserve how selective each filter actually is.
 def goblin_hr_leg_ok(row: dict) -> bool:
     if row["hr"] < 1 and row["near"] < 2:
         return False
@@ -735,7 +739,7 @@ def summary_ticket_ok(row: dict) -> bool:
     hand_park = effective_hand_park_pct(row)
     if park < -5 and hand_park < -3 and row["split"] < 0.50:
         return False
-    return goblin_hr_leg_ok(row) or (row["score"] >= 80 and row["split"] >= 0.0)
+    return goblin_hr_leg_ok(row) or (row["score"] >= 86 and row["split"] >= 0.0)
 
 
 def weather_play_ok(row: dict) -> bool:
@@ -750,12 +754,12 @@ def weather_play_ok(row: dict) -> bool:
     # The weather board requires real HR form. A high composite score is not a stand-in:
     # score already carries the park edge that put the row in this pool, so accepting it
     # alone admitted bats with zero HR and zero near-HR on circular evidence.
-    has_form = row["hr"] >= 1 or row["near"] >= 2 or (row["near"] >= 1 and row["score"] >= 75)
+    has_form = row["hr"] >= 1 or row["near"] >= 2 or (row["near"] >= 1 and row["score"] >= 81)
 
     # Positive split + usable platoon at a boosted park.
     if row["split"] >= 0.0:
         if park >= 20 and row["split"] >= 0.50:
-            return has_form or row["score"] >= 65
+            return has_form or row["score"] >= 72
         has_platoon = row["split"] >= 0.15 or row["risk"] >= 0.35
         if has_form and has_platoon:
             return True
@@ -763,15 +767,15 @@ def weather_play_ok(row: dict) -> bool:
             return True
 
     # Wind-out spots: near-neutral split with loud form.
-    if park >= 8 and row["split"] >= -0.10 and row["score"] >= 82 and has_form:
+    if park >= 8 and row["split"] >= -0.10 and row["score"] >= 87 and has_form:
         return True
 
     # Extreme park carry (+35%+): environment leads even when SP split fights it.
-    if park >= 35 and row["score"] >= 75 and has_form:
+    if park >= 35 and row["score"] >= 81 and has_form:
         return True
 
     # Coors-grade net park (+28%+): playable form even with slight split drag.
-    if park >= 28 and row["split"] >= -0.30 and row["score"] >= 68 and has_form:
+    if park >= 28 and row["split"] >= -0.30 and row["score"] >= 75 and has_form:
         return True
 
     return False
@@ -788,7 +792,7 @@ def longshot_ok(row: dict) -> bool:
             and row["risk"] >= 0.50
             and (row["hr"] >= 1 or row["near"] >= 2)
         )
-    return row["split"] >= -0.10 and row["score"] >= 72 and (row["hr"] >= 1 or row["near"] >= 1)
+    return row["split"] >= -0.10 and row["score"] >= 78 and (row["hr"] >= 1 or row["near"] >= 1)
 
 
 top3_pool = [
@@ -843,7 +847,7 @@ if len(top3) < 3 and len(rows) <= 30:
             if r["name"] not in straight_names
             and r["name"] not in {x["name"] for x in top3}
             and (r["hr"] >= 1 or r["near"] >= 2)
-            and r["score"] >= 70
+            and r["score"] >= 77
         ],
         key=hr_rank_sort_key,
         reverse=True,
@@ -1224,7 +1228,7 @@ weather_fill = [
     and effective_park_pct(r) >= 10
     and r["split"] >= 0.0
     and not (r["split"] <= 0.0 and r["risk"] <= 0.0)
-    and r["score"] >= 75
+    and r["score"] >= 81
 ]
 # One gate for the whole weather board. The three pools above are built off `rows`,
 # which still contains bats with no posted lineup; filtering only the sorted

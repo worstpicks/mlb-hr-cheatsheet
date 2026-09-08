@@ -17,6 +17,7 @@ from csv_slate_meta import (
     read_batter_rows,
     read_matchup_header,
 )
+from contact_rating import batters_faced_estimate, contact_profile, projected_k_line
 from hr_score_model import batter_split, score_from_model, switch_side
 from sheet_data import load_pitcher_risk, resolve_pitcher
 
@@ -423,6 +424,171 @@ def _within_one_edit(a: str, b: str) -> bool:
     return True
 
 
+def load_batter_profiles() -> dict[str, dict]:
+    """Savant contact rates and each hitter's xwOBA against the arm he faces.
+
+    The rating used to read the PITCHER's platoon split and never the batter's own
+    lane, and it scored contact off the export's per-matchup percentages, which are
+    computed over roughly eight batted balls. Both live properly in the research
+    JSON, so read them from there.
+
+    The file is built HERE, before anything is scored, rather than being picked up
+    if it happens to exist. That distinction has bitten this pipeline twice: a
+    lookup that silently returns nothing reads downstream as "no edge", and the
+    scores would then differ between the first run of a slate and the second.
+    """
+    path = ROOT / "preview" / "data" / f"research-{DATE}.json"
+    if not path.is_file():
+        print(f"  research profile missing for {DATE} — building it before scoring")
+        from research.sync_tab import refresh_research_tab
+
+        refresh_research_tab(DATE, with_stats=True, update_meta=False)
+    if not path.is_file():
+        print("  WARN no research profile available; contact/own-lane go neutral")
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    out: dict[str, dict] = {}
+    for game in data.get("games", []):
+        for side, opp in (("awayLineup", "homePitcher"), ("homeLineup", "awayPitcher")):
+            throws = ((game.get(opp) or {}).get("throws") or "R").upper()
+            for player in game.get(side) or []:
+                st = player.get("stats") or {}
+                if not player.get("name"):
+                    continue
+                out[name_lookup_key(player["name"])] = {
+                    "barrel": st.get("barrelPct"),
+                    "hrfb": st.get("hrFbPct"),
+                    "hard": st.get("hardHitPct"),
+                    "lane_xwoba": st.get("xwobaVsLhp") if throws == "L" else st.get("xwobaVsRhp"),
+                    "lane_pa": st.get("paVsLhp") if throws == "L" else st.get("paVsRhp"),
+                    # kept under Savant's own key names so contact_rating can read
+                    # this dict directly rather than needing a second shape
+                    "kPct": st.get("kPct"),
+                    "whiffPct": st.get("whiffPct"),
+                    "pa": st.get("pa"),
+                }
+    print(f"  batter profiles loaded: {len(out)}")
+    return out
+
+
+def load_lineup_order() -> dict[tuple[str, str], list[dict]]:
+    """(game key, side) -> the nine posted hitters, in batting order.
+
+    The projected K line walks the order rather than treating the lineup as a bag
+    of nine: the top of the order gets a third look at the starter and the bottom
+    does not, which is worth roughly half a strikeout by itself.
+    """
+    path = ROOT / "preview" / "data" / f"research-{DATE}.json"
+    if not path.is_file():
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    out: dict[tuple[str, str], list[dict]] = {}
+    for game in data.get("games", []):
+        key = f"{game.get('away')} @ {game.get('home')}"
+        for side, field in (("away", "awayLineup"), ("home", "homeLineup")):
+            order = sorted(
+                (p for p in (game.get(field) or []) if p.get("order") and p["order"] <= 9),
+                key=lambda p: p["order"],
+            )
+            if len(order) == 9:
+                out[(key, side)] = [p.get("stats") or {} for p in order]
+    return out
+
+
+def load_pitcher_k_profiles() -> dict[str, dict]:
+    """Opposing arm -> strikeout profile, keyed by full name AND surname.
+
+    Row chips carry a surname ("Webb"), the research JSON carries the full name,
+    so file both. A collision on surname is left to the first writer -- the chips
+    are already disambiguated upstream when two arms on a slate share one.
+    """
+    path = ROOT / "preview" / "data" / f"research-{DATE}.json"
+    if not path.is_file():
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    out: dict[str, dict] = {}
+    for game in data.get("games", []):
+        for key in ("awayPitcher", "homePitcher"):
+            arm = game.get(key) or {}
+            name = arm.get("name")
+            if not name:
+                continue
+            st = arm.get("stats") or {}
+            # innings included on purpose: pitcher_sample() falls back to them when
+            # batters-faced is absent, and without it every arm regresses all the
+            # way to the league strikeout rate -- which flattened Cease's 32.5% and
+            # Holmes's 16.4% into the same 22-ish projection.
+            profile = {"kPct": st.get("kPct"), "bf": st.get("bf"), "ip": st.get("ip")}
+            out.setdefault(name_lookup_key(name), profile)
+            out.setdefault(name_lookup_key(name.split()[-1]), profile)
+    return out
+
+
+def load_pitcher_workload(games_csv: dict[str, dict]) -> dict[str, float]:
+    """Probable -> expected batters faced this start, cached per slate.
+
+    A projected strikeout line is a rate times a workload, and the workload is the
+    half that separates an ace from an opener. Season batters-faced over starts is
+    the honest figure; it is regressed toward the league start so a pitcher with two
+    outings does not set his own line.
+    """
+    cache = ROOT / "data" / f"pitcher-workload-{DATE}.json"
+    if cache.is_file():
+        try:
+            return json.loads(cache.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            pass
+    import urllib.parse
+    import urllib.request
+
+    out: dict[str, float] = {}
+    names = set()
+    for gm in games_csv.values():
+        names.update({gm.get("away_sp_full"), gm.get("home_sp_full")})
+    names.discard(None)
+    for full in sorted(names):
+        try:
+            url = "https://statsapi.mlb.com/api/v1/people/search?names=" + urllib.parse.quote(full)
+            people = [
+                p
+                for p in json.load(urllib.request.urlopen(url, timeout=30)).get("people", [])
+                if (p.get("primaryPosition") or {}).get("code") == "1"
+            ]
+            if len(people) != 1:
+                continue
+            # Starter-only split. Season totals mix in relief work, and dividing
+            # those by games STARTED inflates the figure badly: Brayan Bello came
+            # out at 38.9 batters a start, which is nine and a half innings, and
+            # projected him for 9 strikeouts.
+            stats = json.load(
+                urllib.request.urlopen(
+                    f"https://statsapi.mlb.com/api/v1/people/{people[0]['id']}"
+                    f"/stats?stats=statSplits&sitCodes=sp&season={DATE[:4]}&group=pitching",
+                    timeout=30,
+                )
+            )
+            bf = gs = 0
+            for st in stats.get("stats", []):
+                for sp in st.get("splits", []):
+                    bf = sp["stat"].get("battersFaced") or bf
+                    gs = sp["stat"].get("gamesStarted") or gs
+            if bf and gs:
+                per_start = bf / gs
+                if not 10.0 <= per_start <= 32.0:
+                    print(f"  WARN {full}: {per_start:.1f} batters per start is out of "
+                          "range for a starter; using the league figure")
+                    continue
+                out[full] = round(batters_faced_estimate(bf, gs), 1)
+        except Exception:
+            continue
+    if out:
+        cache.write_text(json.dumps(out, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
+    missing = sorted(names - set(out))
+    print(f"  pitcher workload: {len(out)}/{len(names)} arms"
+          + (f" (league default for {', '.join(missing)})" if missing else ""))
+    return out
+
+
 def build_game_title(gm: dict) -> str:
     away_full = gm["away_sp_full"]
     home_full = gm["home_sp_full"]
@@ -718,6 +884,10 @@ def main() -> int:
     apply_probable_overrides(games_csv)
     pitcher_risk = load_pitcher_risk(ROOT / "data" / f"hr-targets-overall-{DATE}.csv")
     measured_lanes = load_measured_lanes()
+    batter_profiles = load_batter_profiles()
+    pitcher_k_profiles = load_pitcher_k_profiles()
+    pitcher_workload = load_pitcher_workload(games_csv)
+    lineup_order = load_lineup_order()
     park_context = load_park_context(DATE)
 
     batter_ctx: dict[str, dict] = {}
@@ -850,6 +1020,8 @@ def main() -> int:
             split,
             sp_risk["overall"] if sp_risk else None,
             park_ctx["hr_pct"] if park_ctx else None,
+            batter_profiles.get(name_lookup_key(name)),
+            row.get("zone"),
         )
         team_map[display(name, hand)] = ctx["team"]
         gkey = ctx["game"]
@@ -924,7 +1096,7 @@ def main() -> int:
             "def odds_text(odds):",
             '    return "Listed prop - Over 0.5 HR" if odds == "N/A" else f"Listed {odds} - Over 0.5 HR"',
             "",
-            "def row(name, hand, odds, score, emojis, chips, note, blast=None):",
+            "def row(name, hand, odds, score, emojis, chips, note, blast=None, contact=None):",
             "    item = {",
             '        "name": f"{name} ({hand})",',
             '        "odds": odds_text(odds),',
@@ -935,6 +1107,8 @@ def main() -> int:
             "    }",
             "    if blast:",
             '        item["blast"] = blast',
+            "    if contact:",
+            '        item["contact"] = contact',
             "    return item",
             "",
             "def add_bum_row_emojis(entry, game_key):",
@@ -1027,7 +1201,22 @@ def main() -> int:
                 home_name = f"{home_name} 🧤"
             game_title = f"{key_part} - {away_name}{away_tail} vs {home_name}{home_tail}"
         lines.append("    {")
+        k_lines = {}
+        for side, lineup_side in (("away", "home"), ("home", "away")):
+            arm = gm.get(f"{side}_sp_full")
+            order = lineup_order.get((gm["key"], lineup_side))
+            if not arm or not order:
+                continue
+            proj = projected_k_line(
+                pitcher_k_profiles.get(name_lookup_key(arm)),
+                order,
+                pitcher_workload.get(arm),
+            )
+            if proj:
+                k_lines[gm[f"{side}_sp"]] = proj
         lines.append(f'        "title": {json.dumps(game_title, ensure_ascii=False)},')
+        if k_lines:
+            lines.append(f'        "kLines": {json.dumps(k_lines, ensure_ascii=False)},')
         lines.append(f'        "description": {json.dumps(desc, ensure_ascii=False)},')
         lines.append('        "rows": [')
         for p in prop_by_game[gm["key"]]:
@@ -1074,15 +1263,23 @@ def main() -> int:
                 note += f" {matchup}."
             if fade:
                 note += f" {fade}."
+            # Contact stars: expected strikeout rate for THIS matchup, not the
+            # hitter's season K%. Rendered as a 5-star meter whose tooltip carries
+            # the percentage and both inputs.
+            contact = contact_profile(
+                batter_profiles.get(name_lookup_key(name)),
+                pitcher_k_profiles.get(name_lookup_key(chip)),
+            )
+            contact_arg = f", contact={contact!r}" if contact else ""
             if blast:
                 lines.append(
                     f'            row("{name}", "{hand}", "{odds}", {score}, "{em}", ["vs {chip}"], '
-                    f'"""{note}""", blast="{blast}"),'
+                    f'"""{note}""", blast="{blast}"{contact_arg}),'
                 )
             else:
                 lines.append(
                     f'            row("{name}", "{hand}", "{odds}", {score}, "{em}", ["vs {chip}"], '
-                    f'"""{note}"""),'
+                    f'"""{note}"""{contact_arg}),'
                 )
         lines.extend(["        ],", "    },"])
 

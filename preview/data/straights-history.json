@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-07T14:44:52Z",
+  "updated": "2026-09-08T17:31:17Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1327,12 +1327,14 @@
       "o05": {
         "player": "Juan Soto",
         "matchup": "NYM @ MIA",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Mickey Gasper",
         "matchup": "LAA @ BOS",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       }
     }
   ]

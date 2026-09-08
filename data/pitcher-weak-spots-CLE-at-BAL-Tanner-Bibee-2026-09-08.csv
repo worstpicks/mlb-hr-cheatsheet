@@ -1,0 +1,31 @@
+Matchup,CLE @ BAL
+Pitcher,Tanner Bibee
+Pitcher Team,CLE
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.2,1.31,="22-83",.265,.566,0.301,6,7,0,10,18.2,5,.307,.873
+Batting Second,17.1,1.85,="24-74",.324,.554,0.230,4,5,0,11,15.7,8,.386,.940
+Batting Third,20.0,1.05,="14-71",.197,.310,0.113,2,2,0,7,17.5,7,.288,.598
+Batting Fourth,20.0,0.90,="15-72",.208,.306,0.098,2,1,0,6,25.3,3,.266,.572
+Batting Fifth,17.2,1.25,="14-65",.215,.277,0.062,1,1,0,5,18.7,8,.307,.584
+Batting Sixth,18.2,1.02,="15-71",.211,.324,0.113,2,2,0,5,26.7,4,.253,.577
+Batting Seventh,17.1,1.33,="18-66",.273,.591,0.318,6,1,1,10,16.9,5,.324,.915
+Batting Eighth,17.0,0.94,="11-60",.183,.350,0.167,2,4,0,7,20.9,5,.239,.589
+Batting Ninth,16.1,1.16,="13-59",.220,.271,0.051,1,0,0,5,13.6,6,.292,.563
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Pete Alonso RHB,Batting Fourth ​,="63-258",.244,.469,0.225,16,10,0,49,23.8,35,.339,.808
+Christian Encarnacion-Strand RHB,Batting Fifth ​,="14-48",.292,.479,0.187,2,3,0,8,27.5,2,.320,.799
+Samuel Basallo LHB,Batting Fifth ​,="45-205",.220,.395,0.175,9,7,1,32,24.7,19,.286,.681
+Leody Taveras SHB,Batting Sixth ​,="40-169",.237,.331,0.094,1,9,2,15,23.4,17,.310,.641
+Heston Kjerstad LHB,Batting Sixth ​,="1-5",.200,.200,0.000,0,0,0,0,20.0,0,.200,.400
+Dylan Beavers LHB,Batting Sixth ​,="19-73",.260,.466,0.206,4,3,0,10,25.0,7,.325,.791
+Colton Cowser LHB,Batting Seventh ​,="25-133",.188,.286,0.098,4,1,0,15,31.6,18,.286,.572
+Carlos Narvaez RHB,Batting Eighth ​,="20-116",.172,.250,0.078,2,3,0,7,28.9,9,.258,.508
+Rece Hinds RHB,Batting Eighth ​,="6-25",.240,.360,0.120,0,3,0,5,40.0,3,.333,.693
+Coby Mayo RHB,Batting Eighth ​,="19-94",.202,.319,0.117,3,2,0,11,32.0,8,.272,.591
+Yohel Pozo RHB,Batting Ninth ​,="4-20",.200,.350,0.150,1,0,0,1,14.3,1,.238,.588
+Blaze Alexander RHB,Batting Ninth ​,="42-143",.294,.364,0.070,0,8,1,14,27.2,10,.342,.706
+Jackson Holliday LHB,Batting Ninth ​,="19-71",.268,.437,0.169,3,3,0,11,20.3,7,.329,.766

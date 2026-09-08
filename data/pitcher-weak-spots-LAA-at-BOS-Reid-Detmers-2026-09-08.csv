@@ -1,0 +1,31 @@
+Matchup,LAA @ BOS
+Pitcher,Reid Detmers
+Pitcher Team,LAA
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,19.1,1.24,="17-75",.227,.413,0.186,4,2,0,5,32.5,7,.293,.706
+Batting Second,20.2,0.92,="16-76",.211,.329,0.118,2,1,1,5,24.4,3,.268,.597
+Batting Third,17.2,1.64,="20-68",.294,.456,0.162,2,5,0,10,20.3,9,.367,.823
+Batting Fourth,16.2,1.56,="18-68",.265,.471,0.206,4,2,0,10,25.0,8,.342,.813
+Batting Fifth,17.0,1.35,="16-65",.246,.462,0.216,3,5,0,7,26.0,7,.315,.777
+Batting Sixth,18.1,0.87,="14-66",.212,.318,0.106,1,2,1,11,32.4,2,.225,.543
+Batting Seventh,19.0,0.58,="8-61",.131,.213,0.082,1,2,0,6,31.3,3,.182,.395
+Batting Eighth,15.2,0.96,="13-60",.217,.267,0.050,0,3,0,3,21.0,2,.242,.509
+Batting Ninth,17.0,0.53,="6-54",.111,.111,0.000,0,0,0,1,41.4,3,.158,.269
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jahmai Jones RHB,Batting First ​,="13-41",.317,.610,0.293,2,4,1,6,26.1,4,.391,1.001
+Jarren Duran LHB,Batting First ​,="39-184",.212,.402,0.190,9,4,2,25,29.5,12,.265,.667
+Nate Eaton RHB,Batting First ​,="3-17",.176,.294,0.118,0,2,0,3,25.0,2,.300,.594
+Nick Sogard SHB,Batting First ​,="18-82",.220,.305,0.085,1,4,0,6,20.0,15,.337,.642
+Roman Anthony LHB,Batting First ​,="29-123",.236,.358,0.122,2,5,2,5,26.9,21,.352,.710
+Mickey Gasper SHB,Batting Second ​,="15-58",.259,.431,0.172,3,1,0,5,21.4,7,.362,.793
+Adley Rutschman SHB,Batting Third ​,="48-202",.238,.470,0.232,11,12,1,44,17.7,23,.312,.782
+Wilyer Abreu LHB,Batting Third ​,="92-386",.238,.440,0.202,17,21,3,53,20.9,45,.317,.757
+Trevor Story RHB,Batting Fifth ​,="11-52",.212,.288,0.076,0,4,0,7,24.1,4,.259,.547
+Caleb Durbin RHB,Batting Sixth ​,="52-212",.245,.377,0.132,6,8,1,30,14.9,25,.341,.718
+Eli White RHB,Batting Eighth ​,="13-46",.283,.391,0.108,1,2,0,5,23.4,1,.298,.689
+Andruw Monasterio RHB,Batting Eighth ​,="25-92",.272,.359,0.087,1,5,0,12,19.4,8,.320,.679
+Isiah Kiner-Falefa RHB,Batting Ninth ​,="11-50",.220,.300,0.080,1,1,0,9,13.0,4,.278,.578
+Connor Wong RHB,Batting Ninth ​,="28-108",.259,.398,0.139,3,6,0,10,22.5,7,.322,.720

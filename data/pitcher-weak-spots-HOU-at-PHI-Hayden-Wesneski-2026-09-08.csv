@@ -1,0 +1,31 @@
+Matchup,HOU @ PHI
+Pitcher,Hayden Wesneski
+Pitcher Team,HOU
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.2,1.50,="3-16",.188,.375,0.187,1,0,0,3,10.0,4,.350,.725
+Batting Second,5.1,0.94,="3-18",.167,.278,0.111,0,2,0,0,20.0,2,.250,.528
+Batting Third,5.1,0.19,="1-17",.059,.118,0.059,0,1,0,0,33.3,0,.111,.229
+Batting Fourth,4.1,1.15,="2-15",.133,.200,0.067,0,1,0,2,22.2,3,.278,.478
+Batting Fifth,4.1,1.38,="5-17",.294,.294,0.000,0,0,0,1,16.7,1,.333,.627
+Batting Sixth,4.0,1.00,="4-15",.267,.467,0.200,1,0,0,3,23.5,0,.294,.761
+Batting Seventh,5.1,0.56,="2-16",.125,.125,0.000,0,0,0,0,11.8,1,.176,.301
+Batting Eighth,2.2,2.63,="4-12",.333,.500,0.167,0,0,1,2,33.3,3,.467,.967
+Batting Ninth,3.2,1.09,="4-14",.286,.500,0.214,0,1,1,1,20.0,0,.286,.786
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="96-374",.257,.417,0.160,14,16,1,38,21.6,25,.305,.722
+Luis Arraez LHB,Batting Second ​,="71-190",.374,.474,0.100,2,9,2,16,2.3,16,.425,.899
+Kyle Schwarber LHB,Batting Second ​,="77-314",.245,.576,0.331,30,12,1,58,34.1,56,.365,.941
+Bryce Harper LHB,Batting Third ​,="136-487",.279,.513,0.234,27,27,3,80,20.8,97,.395,.908
+Edmundo Sosa RHB,Batting Fifth ​,="13-57",.228,.298,0.070,1,1,0,10,20.3,3,.270,.568
+Alec Bohm RHB,Batting Fifth ​,="55-202",.272,.446,0.174,7,12,1,39,16.5,14,.339,.785
+Brandon Marsh LHB,Batting Fifth ​,="44-143",.308,.462,0.154,5,7,0,19,21.6,9,.346,.808
+Bryson Stott LHB,Batting Sixth ​,="58-207",.280,.425,0.145,5,7,4,26,19.6,21,.345,.770
+J.T. Realmuto RHB,Batting Seventh ​,="28-128",.219,.344,0.125,3,7,0,14,25.0,9,.299,.643
+Bryan De La Cruz RHB,Batting Eighth ​,="5-15",.333,.400,0.067,0,1,0,2,13.3,0,.333,.733
+Garrett Stubbs LHB,Batting Ninth ​,="6-46",.130,.130,0.000,0,0,0,3,19.6,2,.196,.326
+Derek Hill RHB,Batting Ninth ​,="19-76",.250,.329,0.079,1,1,1,10,36.7,2,.278,.607
+Rafael Marchan SHB,Batting Ninth ​,="7-55",.127,.236,0.109,2,0,0,4,11.9,2,.186,.422
+Justin Crawford LHB,Batting Ninth ​,="61-227",.269,.344,0.075,1,12,1,19,19.8,16,.319,.663

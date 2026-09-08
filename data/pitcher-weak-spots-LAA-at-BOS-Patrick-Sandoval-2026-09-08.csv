@@ -1,0 +1,31 @@
+Matchup,LAA @ BOS
+Pitcher,Patrick Sandoval
+Pitcher Team,BOS
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.1,1.58,="6-25",.240,.360,0.120,1,0,0,3,10.0,4,.333,.693
+Batting Second,5.1,2.44,="10-25",.400,.600,0.200,0,5,0,2,24.1,3,.483,1.083
+Batting Third,6.2,1.50,="8-25",.320,.520,0.200,1,2,0,5,28.6,2,.357,.877
+Batting Fourth,5.1,2.44,="8-23",.348,.435,0.087,0,2,0,3,28.6,5,.464,.899
+Batting Fifth,4.0,3.50,="9-21",.429,.619,0.190,1,1,0,1,26.9,5,.538,1.157
+Batting Sixth,8.0,0.25,="1-22",.045,.045,0.000,0,0,0,1,30.4,1,.087,.132
+Batting Seventh,4.0,2.25,="8-20",.400,.550,0.150,1,0,0,3,19.0,1,.429,.979
+Batting Eighth,3.2,2.45,="5-17",.294,.471,0.177,1,0,0,2,19.0,4,.429,.900
+Batting Ninth,5.1,0.94,="5-19",.263,.474,0.211,1,1,0,2,9.5,0,.250,.724
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="115-503",.229,.414,0.185,20,25,4,52,31.4,49,.309,.723
+Mike Trout RHB,Batting Second ​,="111-456",.243,.423,0.180,20,22,0,51,26.0,89,.376,.799
+Wade Meckler LHB,Batting Third ​,="24-70",.343,.443,0.100,0,7,0,10,15.9,12,.439,.882
+Vaughn Grissom RHB,Batting Third ​,="27-106",.255,.368,0.113,2,6,0,25,13.6,6,.305,.673
+Moisés Ballesteros LHB,Batting Fifth ​,="17-68",.250,.382,0.132,2,3,0,7,18.7,7,.320,.702
+Christian Moore RHB,Batting Sixth ​,="9-44",.205,.341,0.136,1,1,1,6,28.9,0,.222,.563
+Josh Lowe LHB,Batting Seventh ​,="28-133",.211,.391,0.180,7,3,0,13,31.3,11,.274,.665
+Oswald Peraza RHB,Batting Seventh ​,="17-82",.207,.341,0.134,3,2,0,7,31.5,5,.270,.611
+Denzer Guzman RHB,Batting Seventh ​,="10-56",.179,.232,0.053,1,0,0,6,17.7,5,.246,.478
+Travis d'Arnaud RHB,Batting Eighth ​,="7-39",.179,.282,0.103,1,1,0,3,24.4,4,.289,.571
+Jose Siri RHB,Batting Eighth ​,="13-51",.255,.451,0.196,2,4,0,9,30.4,3,.291,.742
+Kyren Paris RHB,Batting Eighth ​,="0-3",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Tyler Heineman SHB,Batting Ninth ​,="21-131",.160,.214,0.054,1,2,1,5,16.2,5,.214,.428
+Adam Frazier LHB,Batting Ninth ​,="23-95",.242,.358,0.116,1,6,1,8,25.5,8,.321,.679

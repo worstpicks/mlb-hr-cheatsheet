@@ -1,0 +1,31 @@
+Matchup,ARI @ KC
+Pitcher,Michael Wacha
+Pitcher Team,KC
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,24.0,0.75,="13-82",.159,.293,0.134,3,2,0,6,22.5,5,.213,.506
+Batting Second,20.2,1.31,="18-76",.237,.395,0.158,2,6,0,5,23.3,9,.326,.721
+Batting Third,23.0,0.70,="10-75",.133,.160,0.027,0,2,0,1,25.6,6,.195,.355
+Batting Fourth,18.2,1.34,="18-73",.247,.452,0.205,3,4,1,9,18.3,7,.329,.781
+Batting Fifth,19.0,1.37,="23-78",.295,.538,0.243,4,5,1,8,17.3,3,.321,.859
+Batting Sixth,17.1,1.56,="22-72",.306,.569,0.263,4,7,0,12,14.1,5,.359,.928
+Batting Seventh,18.0,1.28,="18-70",.257,.471,0.214,3,6,0,8,20.8,5,.316,.787
+Batting Eighth,17.1,1.15,="17-69",.246,.435,0.189,3,4,0,9,18.1,3,.278,.713
+Batting Ninth,17.2,0.74,="12-63",.190,.365,0.175,2,1,2,6,20.0,1,.203,.568
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="95-362",.262,.470,0.208,17,20,2,56,15.2,28,.316,.786
+Corbin Carroll LHB,Batting Second ​,="85-306",.278,.546,0.268,13,19,12,40,19.8,46,.376,.922
+Gabriel Moreno RHB,Batting Third ​,="52-183",.284,.525,0.241,8,18,1,36,13.8,21,.362,.887
+Geraldo Perdomo SHB,Batting Third ​,="40-176",.227,.335,0.108,2,7,3,16,12.3,27,.325,.660
+Adrian Del Castillo LHB,Batting Fourth ​,="14-77",.182,.299,0.117,2,3,0,11,31.3,2,.200,.499
+Ildemaro Vargas SHB,Batting Fifth ​,="22-97",.227,.278,0.051,1,2,0,9,8.7,6,.279,.557
+Lars Nootbaar LHB,Batting Fifth ​,="25-131",.191,.275,0.084,2,5,0,9,23.4,22,.305,.580
+Lourdes Gurriel Jr. RHB,Batting Fifth ​,="11-68",.162,.294,0.132,2,3,0,9,18.1,3,.208,.502
+Nolan Arenado RHB,Batting Sixth ​,="36-154",.234,.383,0.149,5,8,0,21,20.6,10,.285,.668
+Jordan Lawlar RHB,Batting Seventh ​,="9-31",.290,.452,0.162,1,2,0,5,22.2,2,.371,.823
+Tim Tawa RHB,Batting Seventh ​,="19-89",.213,.292,0.079,2,1,0,7,27.8,6,.263,.555
+James McCann RHB,Batting Eighth ​,="21-66",.318,.500,0.182,3,3,0,13,21.1,4,.366,.866
+Tommy Troy RHB,Batting Ninth ​,="21-98",.214,.347,0.133,3,2,1,6,23.6,12,.300,.647
+Ryan Waldschmidt RHB,Batting Ninth ​,="47-170",.276,.388,0.112,3,10,0,19,24.9,18,.351,.739

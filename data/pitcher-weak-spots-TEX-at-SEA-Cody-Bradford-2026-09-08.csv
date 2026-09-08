@@ -1,0 +1,31 @@
+Matchup,TEX @ SEA
+Pitcher,Cody Bradford
+Pitcher Team,TEX
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="10-18",.556,1.056,0.500,2,3,0,5,5.6,.556,1.612
+Batting Second,="5-16",.313,.563,0.250,1,1,0,2,11.8,.353,.916
+Batting Third,="4-11",.364,.364,0.000,0,0,0,1,26.7,.467,.831
+Batting Fourth,="6-14",.429,.571,0.142,0,2,0,3,6.7,.467,1.038
+Batting Fifth,="3-14",.214,.286,0.072,0,1,0,1,7.1,.214,.500
+Batting Sixth,="4-14",.286,.500,0.214,1,0,0,2,7.1,.286,.786
+Batting Seventh,="1-12",.083,.083,0.000,0,0,0,0,7.1,.214,.297
+Batting Eighth,="4-13",.308,.538,0.230,0,3,0,0,14.3,.357,.895
+Batting Ninth,="4-12",.333,.333,0.000,0,0,0,1,23.1,.333,.666
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-287",.233,.331,0.098,5,11,1,21,20.6,43,.337,.668
+JP Crawford LHB,Batting First ​,="50-210",.238,.405,0.167,9,8,0,22,20.4,35,.356,.761
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Third ​,="58-251",.231,.378,0.147,9,10,0,31,25.8,17,.288,.666
+Dominic Canzone LHB,Batting Third ​,="32-136",.235,.382,0.147,4,8,0,18,23.2,15,.311,.693
+Josh Naylor LHB,Batting Fourth ​,="58-211",.275,.370,0.095,5,5,0,23,15.1,18,.336,.706
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Cole Young LHB,Batting Sixth ​,="30-128",.234,.320,0.086,2,5,0,12,17.0,8,.293,.613
+Stuart Fairchild RHB,Batting Seventh ​,="2-9",.222,.222,0.000,0,0,0,0,54.5,1,.364,.586
+Lazaro Montes LHB,Batting Seventh ​,="3-12",.250,.500,0.250,1,0,0,3,53.8,1,.308,.808
+Jhonny Pereda RHB,Batting Eighth ​,="15-55",.273,.327,0.054,1,0,0,3,22.0,4,.322,.649
+Weston Wilson RHB,Batting Eighth ​,="15-67",.224,.343,0.119,2,2,0,4,31.2,10,.325,.668
+Michael Arroyo RHB,Batting Eighth ​,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Brock Rodden SHB,Batting Ninth ​,="11-49",.224,.306,0.082,0,2,1,4,29.3,8,.328,.634

@@ -1,0 +1,31 @@
+Matchup,COL @ NYY
+Pitcher,Cam Schlittler
+Pitcher Team,NYY
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,21.1,1.03,="16-80",.200,.300,0.100,1,5,0,6,18.2,6,.261,.561
+Batting Second,23.0,0.87,="16-81",.198,.296,0.098,1,5,0,3,33.7,4,.235,.531
+Batting Third,19.2,1.07,="19-76",.250,.539,0.289,6,4,0,12,30.9,2,.278,.817
+Batting Fourth,20.2,0.77,="11-74",.149,.324,0.175,4,1,0,8,40.5,5,.203,.527
+Batting Fifth,21.0,0.67,="12-74",.162,.189,0.027,0,2,0,2,36.4,2,.182,.371
+Batting Sixth,17.2,1.13,="14-66",.212,.364,0.152,2,2,1,4,26.4,6,.278,.642
+Batting Seventh,15.0,1.60,="15-59",.254,.322,0.068,0,4,0,4,25.0,9,.353,.675
+Batting Eighth,16.0,0.94,="11-58",.190,.259,0.069,0,2,1,2,29.2,4,.266,.525
+Batting Ninth,17.0,0.53,="5-53",.094,.151,0.057,1,0,0,3,41.0,4,.183,.334
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="102-353",.289,.493,0.204,13,23,5,49,15.5,20,.332,.825
+Mickey Moniak LHB,Batting Second ​,="51-202",.252,.540,0.288,14,12,2,36,23.9,9,.286,.826
+Cole Carrigg SHB,Batting Second ​,="14-71",.197,.282,0.085,1,3,0,7,23.8,7,.288,.570
+Hunter Goodman RHB,Batting Third ​,="51-229",.223,.493,0.270,17,11,0,35,35.2,14,.271,.764
+TJ Rumfield LHB,Batting Fourth ​,="68-209",.325,.512,0.187,8,13,1,24,13.9,33,.424,.936
+Troy Johnston LHB,Batting Fifth ​,="33-120",.275,.342,0.067,0,6,1,15,14.2,15,.369,.711
+Connor Norby RHB,Batting Sixth ​,="18-70",.257,.343,0.086,1,3,0,4,25.9,8,.358,.701
+Jordan Beck RHB,Batting Sixth ​,="7-34",.206,.324,0.118,0,2,1,5,40.0,1,.229,.553
+Adael Amador SHB,Batting Seventh ​,="4-12",.333,.500,0.167,0,2,0,3,28.6,2,.429,.929
+Vimael Machín LHB,Batting Eighth ​,="0-2",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Kyle Karros RHB,Batting Eighth ​,="25-89",.281,.494,0.213,3,8,1,10,19.4,18,.398,.892
+Brett Sullivan LHB,Batting Ninth ​,="17-75",.227,.373,0.146,3,2,0,8,22.8,2,.253,.626
+Ezequiel Tovar RHB,Batting Ninth ​,="29-118",.246,.390,0.144,4,5,0,15,22.1,8,.285,.675
+Zac Veen LHB,Batting Ninth ​,="2-10",.200,.400,0.200,0,0,1,1,41.7,1,.273,.673

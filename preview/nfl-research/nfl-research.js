@@ -111,6 +111,7 @@
         side: "away", // which team's offense is shown on the left
         leagueAvg: null, // per-position league average allowed (from slate defenses)
         cardFilters: {}, // per-player-card log filter: l5 | l10 | l15 | all | opp | home | away
+        trackOpen: null, // card whose market picker is showing
         colPrefs: {}, // per-position visible stat columns (column picker)
         source: "reg", // "reg" = last full season, "pre" = this preseason
     };
@@ -526,11 +527,13 @@
             kickoff: game.kickoff,
             gameLabel: `${game.away} @ ${game.home}`,
         };
+        // resolved once per render so every picker knows what is already saved
+        const trackedIds = trackedIdSet();
         const cards = POSITIONS
             .flatMap((pos) => {
                 const cols = visibleCols(pos);
                 const defBlock = defense[pos] || { overall: null, ranks: {} };
-                return (offense[pos] || []).map((player) => playerCardHtml(pos, cols, player, defBlock, meta));
+                return (offense[pos] || []).map((player) => playerCardHtml(pos, cols, player, defBlock, meta, trackedIds));
             })
             .join("");
         el("nrsPosSections").innerHTML =
@@ -603,7 +606,7 @@
         return `<div class="nrs-card-filterbar"><div class="nrs-log-filter nrs-log-filter--card" role="group" aria-label="Game log filter" data-key="${cardKey}">${buttons}</div></div>`;
     }
 
-    function playerCardHtml(pos, cols, player, defBlock, meta) {
+    function playerCardHtml(pos, cols, player, defBlock, meta, trackedIds) {
         const rank = player.rank;
         const defRow = defForRank(defBlock, rank);
         const league = (state.leagueAvg && state.leagueAvg[pos]) || null;
@@ -685,18 +688,60 @@
             })
             .join("");
 
-        const trackId = `${state.season}-${state.week}-${meta.gameId || ""}-${cardKey}`;
-        const trackLines = cols
-            .filter((col) => lines[col.key] != null)
-            .map((col) => `${LINE_LABELS[col.key] || col.label} ${lines[col.key]}`)
-            .concat(lines.atd ? [`Anytime TD ${lines.atd}`] : []);
+        // Doink puts the track control on a MARKET, not on a player -- you are not
+        // betting "Drake Maye", you are betting his passing yards over some number.
+        // So the button opens a picker of this card's markets, each with a line you
+        // can set. Book lines fill it in when a feed is connected; without one the
+        // player's own per-game average is the sensible starting point.
+        const baseId = `${state.season}-${state.week}-${meta.gameId || ""}-${cardKey}`;
+        const trackExpires = trackExpiry(meta.kickoff);
+        const trackMeta = `${pos}${rank} · ${meta.offAbbr} vs ${meta.defAbbr}`;
+        const markets = cols
+            .map((col) => ({
+                key: col.key,
+                label: LINE_LABELS[col.key] || col.label,
+                avg: player.stats ? player.stats[col.key] : null,
+                book: lines[col.key],
+            }))
+            .filter((m) => m.avg != null || m.book != null);
+        if (lines.atd != null) {
+            markets.push({ key: "atd", label: "Anytime TD", avg: null, book: lines.atd });
+        }
+        const openPicker = state.trackOpen === baseId;
         const trackBtn =
-            `<button type="button" class="nrs-track-btn" data-track-id="${trackId}"` +
-            ` data-track-name="${(player.name || "").replace(/"/g, "&quot;")}"` +
-            ` data-track-meta="${pos}${rank} · ${meta.offAbbr} vs ${meta.defAbbr}"` +
-            ` data-track-game="${meta.gameLabel || ""}"` +
-            ` data-track-lines="${trackLines.join("|").replace(/"/g, "&quot;")}"` +
-            ` data-track-expires="${trackExpiry(meta.kickoff)}">Track bet</button>`;
+            `<button type="button" class="nrs-track-btn${openPicker ? " is-open" : ""}" ` +
+            `data-track-open="${baseId}">${openPicker ? "Close" : "Track bet"}</button>`;
+        const pickerRows = markets
+            .map((m) => {
+                const suggested = m.book != null ? m.book : halfStep(m.avg);
+                const id = `${baseId}|${m.key}`;
+                const on = trackedIds.has(id);
+                const avgTxt = m.avg != null ? `avg ${fmtStat(m.avg)}` : "no season average";
+                const src = m.book != null ? "book" : "your line";
+                return (
+                    `<div class="nrs-mkt-row${on ? " is-on" : ""}">` +
+                    `<span class="nrs-mkt-name">${m.label}</span>` +
+                    `<span class="nrs-mkt-avg">${avgTxt}</span>` +
+                    `<div class="nrs-mkt-side" role="group" aria-label="Over or under">` +
+                    `<button type="button" data-mkt-side="over" class="is-active">O</button>` +
+                    `<button type="button" data-mkt-side="under">U</button>` +
+                    `</div>` +
+                    `<input class="nrs-mkt-line" type="number" step="0.5" value="${suggested}" ` +
+                    `aria-label="${m.label} line" title="${src}">` +
+                    `<button type="button" class="nrs-mkt-add${on ? " is-on" : ""}" ` +
+                    `data-mkt-id="${id}" data-mkt-key="${m.key}" ` +
+                    `data-mkt-label="${m.label}" ` +
+                    `data-track-name="${(player.name || "").replace(/"/g, "&quot;")}" ` +
+                    `data-track-meta="${trackMeta}" ` +
+                    `data-track-game="${meta.gameLabel || ""}" ` +
+                    `data-track-expires="${trackExpires}">${on ? "Tracked ✓" : "Track"}</button>` +
+                    `</div>`
+                );
+            })
+            .join("");
+        const pickerHtml = openPicker
+            ? `<div class="nrs-mkt-picker"><span class="nrs-mkt-picker__title">Track a prop</span>${pickerRows}</div>`
+            : "";
 
         const photo = player.headshot
             ? `<img class="nrs-card__photo" src="${player.headshot}" alt="" loading="lazy" onerror="this.remove()">`
@@ -721,6 +766,7 @@
             `<span class="nrs-player-card__name">${player.name}</span>` +
             `<span class="nrs-player-card__meta">${pos}${rank} · ${player.gp} games</span>` +
             `</div>${trackBtn}</header>` +
+            pickerHtml +
             filterBarHtml(offKey, offFilter, meta.defAbbr) +
             `<div class="nrs-table-wrap"><table class="nrs-table nrs-table--log">` +
             `<thead>${logHead}</thead><tbody>${playerRows}</tbody>` +
@@ -773,6 +819,19 @@
         } catch (err) {
             /* private window or storage disabled: the tracker just will not persist */
         }
+    }
+
+    function halfStep(value) {
+        // Always land ON a half. Rounding to the nearest 0.5 let whole numbers
+        // through -- a 1.8 average suggested "2", which no book offers because it
+        // can push. floor + 0.5 keeps every suggestion a real line shape.
+        const n = Number(value);
+        if (value == null || Number.isNaN(n)) return 0.5;
+        return Math.max(0.5, Math.floor(n) + 0.5);
+    }
+
+    function trackedIdSet() {
+        return new Set(trackLoad().map((e) => e.id));
     }
 
     function trackExpiry(kickoff) {
@@ -828,12 +887,9 @@
                 .join("");
         }
         // keep the buttons on the cards in sync with the list
-        const ids = new Set(list.map((e) => e.id));
-        document.querySelectorAll("[data-track-id]").forEach((btn) => {
-            const on = ids.has(btn.dataset.trackId);
-            btn.classList.toggle("is-on", on);
-            btn.textContent = on ? "Tracked ✓" : "Track bet";
-        });
+        // The market rows carry the line in their id, which the button cannot know
+        // until it is clicked, so nothing to sync here -- the picker is rebuilt from
+        // trackedIds on every matchup render.
     }
 
     function initTracker() {
@@ -866,16 +922,42 @@
             });
         }
         el("nrsPosSections").addEventListener("click", (e) => {
-            const btn = e.target.closest("[data-track-id]");
-            if (!btn) return;
-            trackToggle({
-                id: btn.dataset.trackId,
-                name: btn.dataset.trackName,
-                meta: btn.dataset.trackMeta,
-                game: btn.dataset.trackGame,
-                lines: (btn.dataset.trackLines || "").split("|").filter(Boolean),
-                expires: Number(btn.dataset.trackExpires),
+            const opener = e.target.closest("[data-track-open]");
+            if (opener) {
+                const id = opener.dataset.trackOpen;
+                state.trackOpen = state.trackOpen === id ? null : id;
+                renderMatchup();
+                return;
+            }
+            const side = e.target.closest("[data-mkt-side]");
+            if (side) {
+                side.parentElement.querySelectorAll("[data-mkt-side]").forEach((b) =>
+                    b.classList.toggle("is-active", b === side)
+                );
+                return;
+            }
+            const add = e.target.closest("[data-mkt-id]");
+            if (!add) return;
+            const row = add.closest(".nrs-mkt-row");
+            const input = row.querySelector(".nrs-mkt-line");
+            const sideBtn = row.querySelector("[data-mkt-side].is-active");
+            const dir = sideBtn ? sideBtn.dataset.mktSide : "over";
+            const line = input && input.value !== "" ? Number(input.value) : null;
+            const now = trackToggle({
+                // the line is part of the identity: o62.5 and o74.5 are two bets
+                id: `${add.dataset.mktId}|${dir}|${line}`,
+                name: add.dataset.trackName,
+                meta: add.dataset.trackMeta,
+                game: add.dataset.trackGame,
+                market: add.dataset.mktLabel,
+                side: dir,
+                line: line,
+                lines: [`${dir === "under" ? "U" : "O"}${line} ${add.dataset.mktLabel}`],
+                expires: Number(add.dataset.trackExpires),
             });
+            add.classList.toggle("is-on", now);
+            add.textContent = now ? "Tracked ✓" : "Track";
+            row.classList.toggle("is-on", now);
         });
         trackRender();
         // A tab can sit open for days. Sweep on a timer so entries disappear when

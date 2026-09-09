@@ -1236,3 +1236,44 @@ html.theme-light .nrs-src-toggle button.is-active { background: rgba(180, 83, 9,
         .nrs-track-btn.is-on {
             background: rgba(52,211,153,0.18); border-color: rgba(52,211,153,0.5); color: #6ee7b7;
         }
+
+        .nrs-track-btn.is-open { background: rgba(56,189,248,0.3); color: #f0f9ff; }
+        .nrs-mkt-picker {
+            margin: 6px 0 8px;
+            padding: 8px 10px;
+            border-radius: 9px;
+            background: rgba(2, 6, 23, 0.5);
+            border: 1px solid rgba(56, 189, 248, 0.26);
+        }
+        .nrs-mkt-picker__title {
+            display: block; margin-bottom: 6px;
+            color: #7dd3fc; font-size: 0.64rem; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .nrs-mkt-row {
+            display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+            padding: 4px 0; border-bottom: 1px solid rgba(148,163,184,0.12);
+        }
+        .nrs-mkt-row:last-child { border-bottom: 0; }
+        .nrs-mkt-row.is-on { background: rgba(52,211,153,0.07); }
+        .nrs-mkt-name { color: #e2e8f0; font-size: 0.76rem; font-weight: 700; min-width: 78px; }
+        .nrs-mkt-avg { color: #94a3b8; font-size: 0.68rem; min-width: 74px; }
+        .nrs-mkt-side { display: inline-flex; margin-left: auto; border-radius: 6px; overflow: hidden; }
+        .nrs-mkt-side button {
+            background: rgba(148,163,184,0.14); border: 0; color: #cbd5e1;
+            font-size: 0.68rem; font-weight: 800; padding: 2px 7px; cursor: pointer;
+        }
+        .nrs-mkt-side button.is-active { background: #38bdf8; color: #04293b; }
+        .nrs-mkt-line {
+            width: 62px; padding: 2px 5px; border-radius: 6px;
+            background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.34);
+            color: #f1f5f9; font-size: 0.74rem; text-align: center;
+        }
+        .nrs-mkt-add {
+            background: rgba(56,189,248,0.14); border: 1px solid rgba(56,189,248,0.36);
+            color: #7dd3fc; border-radius: 6px; padding: 2px 9px;
+            font-size: 0.68rem; font-weight: 800; cursor: pointer; white-space: nowrap;
+        }
+        .nrs-mkt-add.is-on {
+            background: rgba(52,211,153,0.2); border-color: rgba(52,211,153,0.5); color: #6ee7b7;
+        }

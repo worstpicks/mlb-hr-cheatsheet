@@ -758,12 +758,36 @@ def power_ratings(pbp: pl.DataFrame, season: int) -> dict:
 # --------------------------------------------------------------------------
 
 
-def roster_context(season: int, teams: set[str]) -> dict:
-    """Injuries, snap shares and depth chart for the slate's teams."""
-    out: dict[str, dict] = {t: {"injuries": [], "snaps": [], "depth": []} for t in teams}
+def _newest(loader, season: int) -> tuple[object | None, int | None]:
+    """This season's table if published, else last season's. Reports which it got.
 
+    These three feeds do not arrive together. Before week one, nflverse already has
+    2026 depth charts but no 2026 injuries or snap counts, and asking all three for
+    the stats season silently served a year-old depth chart alongside them.
+    """
+    for candidate in (season, season - 1):
+        try:
+            df = loader(seasons=[candidate])
+        except Exception:
+            continue
+        if getattr(df, "height", 0):
+            return df, candidate
+    return None, None
+
+
+def roster_context(season: int, teams: set[str]) -> dict:
+    """Injuries, snap shares and depth chart for the slate's teams.
+
+    `season` is the season being PLAYED, not the season the stats came from: a
+    depth chart from last year is not roster context, it is history.
+    """
+    out: dict[str, dict] = {t: {"injuries": [], "snaps": [], "depth": []} for t in teams}
+    sources: dict[str, int | None] = {}
+
+    inj, sources["injuries"] = _newest(nfl.load_injuries, season)
     try:
-        inj = nfl.load_injuries(seasons=[season])
+        if inj is None:
+            raise ValueError("no injury table")
         # Take each club's own most recent report. A single league-wide max week
         # leaves every team that was on bye -- or whose season ended earlier --
         # showing an empty injury list.
@@ -786,8 +810,10 @@ def roster_context(season: int, teams: set[str]) -> dict:
     except Exception:
         pass
 
+    snaps, sources["snaps"] = _newest(nfl.load_snap_counts, season)
     try:
-        snaps = nfl.load_snap_counts(seasons=[season])
+        if snaps is None:
+            raise ValueError("no snap table")
         agg = (
             snaps.group_by(["team", "player", "position"])
             .agg(
@@ -813,8 +839,10 @@ def roster_context(season: int, teams: set[str]) -> dict:
     except Exception:
         pass
 
+    depth, sources["depth"] = _newest(nfl.load_depth_charts, season)
     try:
-        depth = nfl.load_depth_charts(seasons=[season])
+        if depth is None:
+            raise ValueError("no depth table")
         wk = depth["week"].max()
         depth = depth.filter(pl.col("week") == wk)
         for row in depth.iter_rows(named=True):
@@ -830,14 +858,27 @@ def roster_context(season: int, teams: set[str]) -> dict:
     except Exception:
         pass
 
+    for name, got in sources.items():
+        if got is None:
+            print(f"[nfl-research] roster {name}: nothing published, section empty")
+        elif got != season:
+            print(f"[nfl-research] roster {name}: {season} not published yet, using {got}")
+        else:
+            print(f"[nfl-research] roster {name}: {got}")
+    out["_sources"] = sources
     return out
 
 
 # --------------------------------------------------------------------------
 
 
-def build_cheatsheets(stats_season: int, teams: set[str]) -> dict:
-    """Everything the Research tab's sheets need, in one payload."""
+def build_cheatsheets(stats_season: int, teams: set[str], season: int | None = None) -> dict:
+    """Everything the Research tab's sheets need, in one payload.
+
+    `stats_season` is where the play-by-play comes from; `season` is the one being
+    played. They differ before a season starts, and roster context has to follow the
+    second or it describes last year's team.
+    """
     pbp = load_pbp(stats_season)
     return {
         "stats_season": stats_season,
@@ -852,5 +893,5 @@ def build_cheatsheets(stats_season: int, teams: set[str]) -> dict:
         "receiving_value": receiving_value(stats_season),
         "power_ratings": power_ratings(pbp, stats_season),
         "hfa": home_field_advantage(stats_season),
-        "roster": roster_context(stats_season, teams),
+        "roster": roster_context(season or stats_season, teams),
     }

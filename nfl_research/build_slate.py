@@ -6,7 +6,12 @@ from datetime import datetime
 from pathlib import Path
 
 from nfl_research.espn_api import fetch_week_games
-from nfl_research.nflverse_stats import POSITIONS, build_aggregates, download_weekly_stats
+from nfl_research.nflverse_stats import (
+    POSITIONS,
+    build_aggregates,
+    current_team_lookup,
+    download_weekly_stats,
+)
 from nfl_research.cheatsheets import build_cheatsheets
 from nfl_research.espn_preseason import build_preseason
 from nfl_research.odds_api import fetch_props, normalize_name
@@ -28,7 +33,14 @@ def resolve_stats_season(schedule_season: int) -> tuple[int, list[dict]]:
 def build_slate(season: int, week: int) -> dict:
     games = fetch_week_games(season, week)
     stats_season, rows = resolve_stats_season(season)
-    players, defense = build_aggregates(rows)
+    # Stats come from whatever season nflverse has published; the uniform comes from
+    # THIS season's roster. Without the second half the board shows last year's
+    # depth charts -- A.J. Brown under Philadelphia when he plays for New England.
+    current_teams = current_team_lookup(season)
+    if not current_teams:
+        print(f"[nfl-research] WARN no {season} roster published yet; "
+              f"players stay on their {stats_season} teams")
+    players, defense = build_aggregates(rows, current_teams)
     props = fetch_props(games)
 
     empty_pos = {pos: [] for pos in POSITIONS}
@@ -68,7 +80,7 @@ def build_slate(season: int, week: int) -> dict:
         game["weather"] = weather.get(game["id"])
 
     teams = {g["away"] for g in games} | {g["home"] for g in games}
-    sheets = build_cheatsheets(stats_season, teams)
+    sheets = build_cheatsheets(stats_season, teams, season)
 
     return {
         "season": season,

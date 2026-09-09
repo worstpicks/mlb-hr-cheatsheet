@@ -1718,8 +1718,18 @@ def apply_hidden_gem_ui():
 
 
 def sync_root_index():
-    shutil.copy2(PREVIEW, ROOT / "index.html")
-    print("synced root index.html")
+    """Copy the built sheet to the repo root, fixing paths that only work in preview/.
+
+    GitHub Pages serves this repo from its root, so a link written as
+    "nfl-research/index.html" -- correct on Netlify, whose publish directory IS
+    preview/ -- resolves to a directory that does not exist there. The NFL tab has
+    been a 404 on the mirror for that reason.
+    """
+    html = PREVIEW.read_text(encoding="utf-8")
+    fixed = html.replace('href="nfl-research/', 'href="preview/nfl-research/')
+    (ROOT / "index.html").write_text(fixed, encoding="utf-8")
+    moved = html.count('href="nfl-research/')
+    print(f"synced root index.html" + (f" ({moved} NFL link(s) repointed for the mirror)" if moved else ""))
 
 
 def main():

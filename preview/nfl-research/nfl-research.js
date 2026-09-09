@@ -518,7 +518,14 @@
         const offAbbr = offenseIsAway ? game.away : game.home;
         const defAbbr = offenseIsAway ? game.home : game.away;
 
-        const meta = { offName, offLogo, defName, defLogo, offAbbr, defAbbr };
+        // gameId/kickoff/gameLabel ride along so a tracked prop can carry its own
+        // expiry and still name its game after the slate rolls to the next week
+        const meta = {
+            offName, offLogo, defName, defLogo, offAbbr, defAbbr,
+            gameId: game.id,
+            kickoff: game.kickoff,
+            gameLabel: `${game.away} @ ${game.home}`,
+        };
         const cards = POSITIONS
             .flatMap((pos) => {
                 const cols = visibleCols(pos);
@@ -581,6 +588,10 @@
         return n && log.length > n ? log.slice(-n) : log;
     }
 
+    // One bar per panel. They used to share a single filter, so narrowing the
+    // player to "vs SEA" also narrowed what the defense showed -- you could not ask
+    // "his last five against that defense's whole season", which is usually the
+    // comparison you actually want.
     function filterBarHtml(cardKey, active, defAbbr) {
         const options = [
             ["l5", "L5"], ["l10", "L10"], ["l15", "L15"], ["all", "All"],
@@ -600,11 +611,16 @@
         const lines = player.lines || {};
 
         const cardKey = `${pos}${rank}-${(player.name || "").replace(/[^a-zA-Z0-9]/g, "")}`;
-        const filter = state.cardFilters[cardKey] || DEFAULT_FILTER;
+        const offKey = `${cardKey}|off`;
+        const defKey = `${cardKey}|def`;
+        // fall back to the old single key so a filter set before this split survives
+        const legacy = state.cardFilters[cardKey];
+        const offFilter = state.cardFilters[offKey] || legacy || DEFAULT_FILTER;
+        const defFilter = state.cardFilters[defKey] || legacy || DEFAULT_FILTER;
 
         // "vs OPP": player log vs this defense, defense log vs the player's team
-        const playerLog = filterLog(player.log || [], meta.defAbbr, filter);
-        const defLog = filterLog((defBlock.rank_logs || {})[String(rank)] || [], meta.offAbbr, filter);
+        const playerLog = filterLog(player.log || [], meta.defAbbr, offFilter);
+        const defLog = filterLog((defBlock.rank_logs || {})[String(rank)] || [], meta.offAbbr, defFilter);
 
         const groupRow =
             `<tr class="nrs-group-row"><th colspan="3"></th>` +
@@ -669,6 +685,19 @@
             })
             .join("");
 
+        const trackId = `${state.season}-${state.week}-${meta.gameId || ""}-${cardKey}`;
+        const trackLines = cols
+            .filter((col) => lines[col.key] != null)
+            .map((col) => `${LINE_LABELS[col.key] || col.label} ${lines[col.key]}`)
+            .concat(lines.atd ? [`Anytime TD ${lines.atd}`] : []);
+        const trackBtn =
+            `<button type="button" class="nrs-track-btn" data-track-id="${trackId}"` +
+            ` data-track-name="${(player.name || "").replace(/"/g, "&quot;")}"` +
+            ` data-track-meta="${pos}${rank} · ${meta.offAbbr} vs ${meta.defAbbr}"` +
+            ` data-track-game="${meta.gameLabel || ""}"` +
+            ` data-track-lines="${trackLines.join("|").replace(/"/g, "&quot;")}"` +
+            ` data-track-expires="${trackExpiry(meta.kickoff)}">Track bet</button>`;
+
         const photo = player.headshot
             ? `<img class="nrs-card__photo" src="${player.headshot}" alt="" loading="lazy" onerror="this.remove()">`
             : "";
@@ -686,13 +715,13 @@
 
         return (
             `<article class="nrs-matchup-card">` +
-            filterBarHtml(cardKey, filter, meta.defAbbr) +
             `<div class="nrs-mc-duo">` +
             `<div class="nrs-mc-panel nrs-mc-panel--player">` +
             `<header class="nrs-mc-panel__head">${photo}<div>` +
             `<span class="nrs-player-card__name">${player.name}</span>` +
             `<span class="nrs-player-card__meta">${pos}${rank} · ${player.gp} games</span>` +
-            `</div></header>` +
+            `</div>${trackBtn}</header>` +
+            filterBarHtml(offKey, offFilter, meta.defAbbr) +
             `<div class="nrs-table-wrap"><table class="nrs-table nrs-table--log">` +
             `<thead>${logHead}</thead><tbody>${playerRows}</tbody>` +
             `<tfoot><tr><td class="nrs-log-week nrs-log-avg" colspan="3">Avg</td>${playerAvgCells}</tr></tfoot>` +
@@ -703,6 +732,7 @@
             `<span class="nrs-player-card__name">${meta.defName} Defense</span>` +
             `<span class="nrs-player-card__meta">allows vs ${pos}${rank} each game</span>` +
             `</div></header>` +
+            filterBarHtml(defKey, defFilter, meta.offAbbr) +
             `<div class="nrs-table-wrap"><table class="nrs-table nrs-table--log">` +
             `<thead>${logHead}</thead><tbody>${defRows}</tbody>` +
             `<tfoot><tr><td class="nrs-log-week nrs-log-avg" colspan="3">Avg</td>${defAvgCells}</tr></tfoot>` +
@@ -714,6 +744,149 @@
         );
     }
 
+    // ── prop tracker ─────────────────────────────────────────────────────────
+    // Saved props live in this browser only. Each entry carries its own expiry so
+    // the list empties itself: a bet is no use once the game is long over, and an
+    // NFL slate rolls over weekly, so pruning by "is this game still on the board"
+    // would lose entries the moment the week advanced.
+    const TRACK_KEY = "nrsTrackedProps.v1";
+    const GAME_LENGTH_MS = 3.5 * 3600 * 1000;   // kickoff to final, generously
+    const KEEP_AFTER_MS = 12 * 3600 * 1000;     // the owner's 12-hour window
+
+    function trackLoad() {
+        let raw = [];
+        try {
+            raw = JSON.parse(localStorage.getItem(TRACK_KEY) || "[]");
+        } catch (err) {
+            raw = [];
+        }
+        if (!Array.isArray(raw)) raw = [];
+        const now = Date.now();
+        const live = raw.filter((e) => e && typeof e.expires === "number" && e.expires > now);
+        if (live.length !== raw.length) trackSave(live);
+        return live;
+    }
+
+    function trackSave(list) {
+        try {
+            localStorage.setItem(TRACK_KEY, JSON.stringify(list));
+        } catch (err) {
+            /* private window or storage disabled: the tracker just will not persist */
+        }
+    }
+
+    function trackExpiry(kickoff) {
+        const t = kickoff ? Date.parse(kickoff) : NaN;
+        // No parseable kickoff: keep it a day so it cannot linger forever.
+        if (Number.isNaN(t)) return Date.now() + 24 * 3600 * 1000;
+        return t + GAME_LENGTH_MS + KEEP_AFTER_MS;
+    }
+
+    function trackToggle(entry) {
+        const list = trackLoad();
+        const at = list.findIndex((e) => e.id === entry.id);
+        if (at >= 0) list.splice(at, 1);
+        else list.push(entry);
+        trackSave(list);
+        trackRender();
+        return at < 0;
+    }
+
+    function trackRender() {
+        const list = trackLoad();
+        const count = el("nrsTrackCount");
+        const openBtn = el("nrsTrackOpen");
+        if (count) count.textContent = String(list.length);
+        if (openBtn) openBtn.classList.toggle("is-empty", list.length === 0);
+        const body = el("nrsTrackBody");
+        if (!body) return;
+        if (!list.length) {
+            body.innerHTML =
+                '<p class="nrs-track-empty">Nothing tracked yet. Hit <strong>Track</strong> on any player card.</p>';
+        } else {
+            const byGame = {};
+            list.forEach((e) => (byGame[e.game] = byGame[e.game] || []).push(e));
+            body.innerHTML = Object.keys(byGame)
+                .map((game) => {
+                    const rows = byGame[game]
+                        .map((e) => {
+                            const chips = (e.lines || [])
+                                .map((l) => `<span class="nrs-track-chip">${l}</span>`)
+                                .join("");
+                            return (
+                                `<div class="nrs-track-row">` +
+                                `<span class="nrs-track-row__name">${e.name}</span>` +
+                                `<span class="nrs-track-row__meta">${e.meta}</span>` +
+                                `<span class="nrs-track-row__lines">${chips}</span>` +
+                                `<button type="button" class="nrs-track-row__x" data-untrack="${e.id}" title="Remove">✕</button>` +
+                                `</div>`
+                            );
+                        })
+                        .join("");
+                    return `<div class="nrs-track-game"><span class="nrs-track-game__title">${game}</span>${rows}</div>`;
+                })
+                .join("");
+        }
+        // keep the buttons on the cards in sync with the list
+        const ids = new Set(list.map((e) => e.id));
+        document.querySelectorAll("[data-track-id]").forEach((btn) => {
+            const on = ids.has(btn.dataset.trackId);
+            btn.classList.toggle("is-on", on);
+            btn.textContent = on ? "Tracked ✓" : "Track bet";
+        });
+    }
+
+    function initTracker() {
+        const openBtn = el("nrsTrackOpen");
+        const panel = el("nrsTrackPanel");
+        if (openBtn && panel) {
+            openBtn.addEventListener("click", () => {
+                const show = panel.hidden;
+                panel.hidden = !show;
+                openBtn.setAttribute("aria-expanded", show ? "true" : "false");
+                // Re-render on open: trackLoad() is what drops expired entries, so
+                // without this the sweep only ran on a page load and a tab left open
+                // would keep showing bets whose games finished yesterday.
+                if (show) trackRender();
+            });
+        }
+        const clear = el("nrsTrackClear");
+        if (clear) {
+            clear.addEventListener("click", () => {
+                trackSave([]);
+                trackRender();
+            });
+        }
+        if (panel) {
+            panel.addEventListener("click", (e) => {
+                const x = e.target.closest("[data-untrack]");
+                if (!x) return;
+                trackSave(trackLoad().filter((entry) => entry.id !== x.dataset.untrack));
+                trackRender();
+            });
+        }
+        el("nrsPosSections").addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-track-id]");
+            if (!btn) return;
+            trackToggle({
+                id: btn.dataset.trackId,
+                name: btn.dataset.trackName,
+                meta: btn.dataset.trackMeta,
+                game: btn.dataset.trackGame,
+                lines: (btn.dataset.trackLines || "").split("|").filter(Boolean),
+                expires: Number(btn.dataset.trackExpires),
+            });
+        });
+        trackRender();
+        // A tab can sit open for days. Sweep on a timer so entries disappear when
+        // their 12 hours are up rather than waiting for the next reload, and again
+        // whenever the tab is brought back to the front.
+        setInterval(trackRender, 5 * 60 * 1000);
+        document.addEventListener("visibilitychange", () => {
+            if (!document.hidden) trackRender();
+        });
+    }
+
     // ── boot ──
     document.addEventListener("DOMContentLoaded", () => {
         if (location.protocol === "file:") return;
@@ -722,6 +895,7 @@
         initColPicker();
         initSourceToggle();
         initControls();
+        initTracker();
         const params = new URLSearchParams(location.search);
         const season = Number(params.get("season"));
         const week = Number(params.get("week"));

@@ -1166,3 +1166,73 @@ html.theme-light .nrs-chart-grid { stroke: rgba(100, 116, 139, 0.25); }
 html.theme-light .nrs-colpick { box-shadow: 0 12px 32px rgba(100, 116, 139, 0.25); }
 html.theme-light .nrs-src-warn { background: rgba(254, 226, 226, 0.8); border-color: rgba(185, 28, 28, 0.35); color: #7f1d1d; }
 html.theme-light .nrs-src-toggle button.is-active { background: rgba(180, 83, 9, 0.14); color: #9a3412; }
+
+        .nrs-track-open { position: relative; }
+        .nrs-track-count {
+            display: inline-block;
+            min-width: 18px;
+            margin-left: 5px;
+            padding: 0 5px;
+            border-radius: 9px;
+            background: #38bdf8;
+            color: #04293b;
+            font-size: 0.68rem;
+            font-weight: 900;
+            line-height: 18px;
+            text-align: center;
+        }
+        .nrs-track-open.is-empty .nrs-track-count { background: rgba(148,163,184,0.4); color: #e2e8f0; }
+        .nrs-track-panel {
+            margin: 10px 0 14px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(8, 47, 73, 0.28);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .nrs-track-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+        .nrs-track-head h3 { margin: 0; font-size: 0.95rem; color: #e0f2fe; }
+        .nrs-track-note { color: #94a3b8; font-size: 0.72rem; flex: 1 1 auto; }
+        .nrs-track-clear {
+            background: rgba(248,113,113,0.14);
+            border: 1px solid rgba(248,113,113,0.4);
+            color: #fca5a5;
+            border-radius: 7px;
+            padding: 3px 9px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .nrs-track-empty { color: #94a3b8; font-size: 0.8rem; padding: 6px 2px; }
+        .nrs-track-game { margin-top: 8px; }
+        .nrs-track-game__title {
+            color: #7dd3fc; font-size: 0.7rem; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .nrs-track-row {
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            padding: 5px 0; border-bottom: 1px solid rgba(148,163,184,0.14);
+        }
+        .nrs-track-row:last-child { border-bottom: 0; }
+        .nrs-track-row__name { color: #f1f5f9; font-weight: 700; font-size: 0.82rem; }
+        .nrs-track-row__meta { color: #94a3b8; font-size: 0.72rem; }
+        .nrs-track-row__lines { display: flex; gap: 5px; flex-wrap: wrap; margin-left: auto; }
+        .nrs-track-chip {
+            background: rgba(56,189,248,0.14);
+            border: 1px solid rgba(56,189,248,0.32);
+            color: #e0f2fe; border-radius: 6px; padding: 1px 6px; font-size: 0.7rem;
+        }
+        .nrs-track-row__x {
+            background: none; border: 0; color: #94a3b8; cursor: pointer;
+            font-size: 0.95rem; line-height: 1; padding: 0 2px;
+        }
+        .nrs-track-row__x:hover { color: #fca5a5; }
+        .nrs-track-btn {
+            background: rgba(56,189,248,0.12);
+            border: 1px solid rgba(56,189,248,0.34);
+            color: #7dd3fc; border-radius: 7px; padding: 2px 9px;
+            font-size: 0.7rem; font-weight: 800; cursor: pointer; white-space: nowrap;
+        }
+        .nrs-track-btn:hover { background: rgba(56,189,248,0.22); }
+        .nrs-track-btn.is-on {
+            background: rgba(52,211,153,0.18); border-color: rgba(52,211,153,0.5); color: #6ee7b7;
+        }

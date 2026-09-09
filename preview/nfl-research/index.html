@@ -16,7 +16,7 @@
     <title>NFL Research — Worst Pickz</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
-    <link rel="stylesheet" href="nfl-research.css?v=21">
+    <link rel="stylesheet" href="nfl-research.css?v=22">
     <script>
         (function () {
             if (location.protocol !== "file:") return;
@@ -103,6 +103,9 @@ python serve-research.py</pre>
                             <button type="button" data-src="reg" class="is-active">2025 REG</button>
                             <button type="button" data-src="pre">2026 PRE</button>
                         </div>
+                        <button type="button" class="nrs-btn nrs-track-open" id="nrsTrackOpen" aria-expanded="false">
+                            Prop List <span class="nrs-track-count" id="nrsTrackCount">0</span>
+                        </button>
                         <button type="button" class="nrs-colgear" id="nrsColGear" aria-expanded="false" aria-haspopup="true" title="Choose columns" aria-label="Choose columns">&#9881;</button>
                         <div class="nrs-side-toggle" role="group" aria-label="Offense team">
                             <button type="button" id="nrsSideAway">AWY OFF</button>
@@ -110,6 +113,15 @@ python serve-research.py</pre>
                         </div>
                     </div>
                 </div>
+
+                <section class="nrs-track-panel" id="nrsTrackPanel" hidden aria-label="Tracked props">
+                    <header class="nrs-track-head">
+                        <h3>Prop List</h3>
+                        <span class="nrs-track-note">Clears itself 12 hours after each game ends.</span>
+                        <button type="button" class="nrs-track-clear" id="nrsTrackClear">Clear all</button>
+                    </header>
+                    <div id="nrsTrackBody"></div>
+                </section>
 
                 <p class="nrs-src-warn" id="nrsSrcWarn" hidden></p>
 
@@ -135,6 +147,6 @@ python serve-research.py</pre>
     </div>
 
     <script src="nfl-sheets.js?v=3" defer></script>
-    <script src="nfl-research.js?v=18" defer></script>
+    <script src="nfl-research.js?v=19" defer></script>
 </body>
 </html>

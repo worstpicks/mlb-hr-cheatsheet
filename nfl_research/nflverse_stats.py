@@ -58,6 +58,31 @@ def espn_abbr(team: str) -> str:
     return TEAM_TO_ESPN.get(team, team)
 
 
+def current_team_lookup(season: int) -> dict[str, str]:
+    """gsis id -> the team he plays for NOW, from this season's published roster.
+
+    Player-to-team used to come from whichever season the STATS came from, so every
+    offseason move was invisible: A.J. Brown sat under Philadelphia while playing
+    for New England, and 150 players were filed under a team they had left. nflverse
+    publishes rosters well before it publishes weekly stats, which is exactly the
+    gap this closes -- last season's production, this season's uniform.
+
+    Abbreviations are normalised on the way out. The roster feed says LA and WAS
+    where the schedule says LAR and WSH, and comparing them raw makes it look like
+    the entire Rams roster changed teams.
+    """
+    try:
+        roster = nflreadpy.load_rosters(seasons=season)
+    except Exception:
+        return {}
+    out: dict[str, str] = {}
+    for row in roster.iter_rows(named=True):
+        gsis, team = row.get("gsis_id"), row.get("team")
+        if gsis and team:
+            out[gsis] = espn_abbr(team)
+    return out
+
+
 def _schedule_lookup(season: int) -> dict:
     """(week, team) -> {"ha": "vs"|"@", "wl": "W"|"L"|"T"} from nflverse schedules."""
     try:
@@ -140,7 +165,9 @@ def _per_game(totals: dict, games: int) -> dict:
     return {key: round(totals[key] / games, 1) for key in STAT_COLUMNS}
 
 
-def build_aggregates(rows: list[dict]) -> tuple[dict, dict]:
+def build_aggregates(
+    rows: list[dict], current_teams: dict[str, str] | None = None
+) -> tuple[dict, dict]:
     """Return (players_by_team, defense_vs_pos_by_team).
 
     players_by_team: { "KC": { "QB": [ {name, pos, gp, rank, headshot, stats{}} ] } }
@@ -155,6 +182,7 @@ def build_aggregates(rows: list[dict]) -> tuple[dict, dict]:
                 "name": row["name"],
                 "pos": row["pos"],
                 "team": row["team"],
+                "player_id": row["player_id"],
                 "headshot": row["headshot"],
                 "gp": 0,
                 "last_week": -1,
@@ -239,9 +267,26 @@ def build_aggregates(rows: list[dict]) -> tuple[dict, dict]:
     # ── offense panels: top players per team/position with depth rank ──
     players: dict[str, dict] = {}
     by_team_pos: dict[tuple, list] = defaultdict(list)
+    dropped = moved = 0
     for entry in player_totals.values():
-        if entry["gp"] > 0:
-            by_team_pos[(entry["team"], entry["pos"])].append(entry)
+        if entry["gp"] <= 0:
+            continue
+        team = entry["team"]
+        if current_teams:
+            now = current_teams.get(entry["player_id"])
+            if now is None:
+                # Off every roster this season -- retired or unsigned. Showing him
+                # under last season's team puts a player on the board who cannot
+                # take the field.
+                dropped += 1
+                continue
+            if now != team:
+                moved += 1
+            team = now
+        by_team_pos[(team, entry["pos"])].append(entry)
+    if current_teams:
+        print(f"[nfl-research] rosters: {moved} players re-filed onto their current "
+              f"team, {dropped} no longer rostered and dropped")
 
     for (team, pos), entries in by_team_pos.items():
         entries.sort(key=lambda e: e["totals"][RANK_STAT[pos]], reverse=True)

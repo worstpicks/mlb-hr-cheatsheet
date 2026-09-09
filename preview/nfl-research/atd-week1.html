@@ -1002,25 +1002,95 @@
                     : "");
         }
 
-        var scoredBtn = document.getElementById("atdScoredRefresh");
-        scoredBtn.addEventListener("click", async function () {
-            scoredBtn.disabled = true;
-            var was = scoredBtn.textContent;
-            scoredBtn.textContent = "Refreshing…";
-            document.getElementById("atdScoredStatus").textContent = "Reading ESPN scoring plays…";
+        /* Auto-refresh. The sheet is static, so there is no server to push scores
+           in -- the page keeps itself current in whoever's browser has it open.
+
+           Cadence follows the week rather than a fixed interval, because a fixed
+           one is wrong in both directions: too slow while a game is live, and
+           pure waste at 3am on a Wednesday.
+             ball in the air          -> every 90s
+             nothing live yet         -> sleep until just after the next kickoff
+             every game final         -> stand down entirely
+           Polling pauses while the tab is hidden; a page nobody is looking at
+           should not be spending requests. */
+        var POLL_LIVE = 90 * 1000;
+        var POLL_MAX = 30 * 60 * 1000;
+        var POLL_MIN = 60 * 1000;
+        var pollTimer = null, inFlight = false;
+
+        function nextPollDelay(data) {
+            if (!data) return POLL_MIN;
+            if (data.pending && data.pending.length) return POLL_LIVE;
+            if (data.final >= data.total) return null;   // week is done
+            var now = Date.now(), soonest = Infinity;
+            Object.keys(KICK).forEach(function (k) {
+                var t = new Date(KICK[k]).getTime();
+                if (t > now && t < soonest) soonest = t;
+            });
+            if (soonest === Infinity) return POLL_MAX;
+            // wake a little after kickoff -- nobody scores in the first 30 seconds
+            return Math.max(POLL_MIN, Math.min(soonest - now + 30000, POLL_MAX));
+        }
+
+        function describeNext(ms) {
+            if (ms == null) return " · all games final, auto-refresh off";
+            var mins = Math.round(ms / 60000);
+            return " · next check " + (mins < 1 ? "in under a minute" : "in " + mins + " min");
+        }
+
+        function schedulePoll(data) {
+            if (pollTimer) clearTimeout(pollTimer);
+            var d = nextPollDelay(data);
+            if (d == null) return;
+            pollTimer = setTimeout(function () { runRefresh(true); }, d);
+        }
+
+        async function runRefresh(auto) {
+            if (inFlight) return;
+            // A hidden tab gets rescheduled rather than fetched.
+            if (auto && document.hidden) { schedulePoll(readCache()); return; }
+
+            inFlight = true;
+            var statusEl = document.getElementById("atdScoredStatus");
+            if (!auto) {
+                scoredBtn.disabled = true;
+                scoredBtn.textContent = "Refreshing…";
+                statusEl.textContent = "Reading ESPN scoring plays…";
+            }
             try {
                 var data = await fetchScored();
                 writeCache(data);
                 paintScored(data);
+                statusEl.textContent += describeNext(nextPollDelay(data));
+                schedulePoll(data);
             } catch (e) {
-                document.getElementById("atdScoredStatus").textContent =
-                    "Could not reach ESPN (" + (e && e.message ? e.message : e) + ").";
+                statusEl.textContent = "Could not reach ESPN (" +
+                    (e && e.message ? e.message : e) + ")." +
+                    (auto ? " Retrying shortly." : "");
+                // A failed poll must not end the loop, or one blip stops the week.
+                if (pollTimer) clearTimeout(pollTimer);
+                pollTimer = setTimeout(function () { runRefresh(true); }, POLL_LIVE * 2);
             } finally {
-                scoredBtn.disabled = false;
-                scoredBtn.textContent = was;
+                inFlight = false;
+                if (!auto) { scoredBtn.disabled = false; scoredBtn.textContent = "Refresh"; }
             }
+        }
+
+        var scoredBtn = document.getElementById("atdScoredRefresh");
+        scoredBtn.addEventListener("click", function () { runRefresh(false); });
+
+        // Coming back to a tab that has been asleep should not show a stale board.
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) return;
+            var c = readCache();
+            var age = c ? Date.now() - new Date(c.at).getTime() : Infinity;
+            if (age > POLL_LIVE) runRefresh(true); else schedulePoll(c);
         });
+
+        // Paint whatever was cached so the board is populated immediately, then
+        // go and get the truth.
         paintScored(readCache());
+        runRefresh(true);
 
         /* ── Theme toggle, shared worstpickz-theme key ── */
         var tBtn = document.getElementById("atdTheme");

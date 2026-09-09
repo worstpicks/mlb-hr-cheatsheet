@@ -15,6 +15,7 @@ from nfl_research.nflverse_stats import (
 from nfl_research.cheatsheets import build_cheatsheets
 from nfl_research.espn_preseason import build_preseason
 from nfl_research.odds_api import fetch_props, normalize_name
+from nfl_research.redzone import attach_td_chance
 from nfl_research.weather import fetch_game_weather
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "preview" / "data"
@@ -81,6 +82,13 @@ def build_slate(season: int, week: int) -> dict:
 
     teams = {g["away"] for g in games} | {g["home"] for g in games}
     sheets = build_cheatsheets(stats_season, teams, season)
+
+    # Anytime-TD chance per player. The season aggregates ride in `sheets`; this
+    # is the matchup join, so the cheat sheet no longer needs a pasted board.
+    rz_report = attach_td_chance(slate_games, sheets.get("red_zone_proj") or {})
+    print(f"[nfl-research] red zone: {rz_report['projected']} players projected, "
+          f"{rz_report['skipped']} without an input, {rz_report['moved']} on a share "
+          f"earned with another team")
 
     return {
         "season": season,

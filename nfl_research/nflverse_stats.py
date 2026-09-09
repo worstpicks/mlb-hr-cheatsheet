@@ -297,6 +297,9 @@ def build_aggregates(
             bucket.append(
                 {
                     "name": entry["name"],
+                    # kept so the red-zone projection can join on an id rather
+                    # than guessing that "C.McCaffrey" is "Christian McCaffrey"
+                    "player_id": entry["player_id"],
                     "pos": pos,
                     "gp": entry["gp"],
                     "rank": min(idx, MAX_RANKS[pos]),

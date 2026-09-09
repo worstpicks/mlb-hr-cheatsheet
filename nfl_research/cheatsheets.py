@@ -24,6 +24,13 @@ from collections import defaultdict
 import nflreadpy as nfl
 import polars as pl
 
+# Red-zone share weights: a target converts more often than a handoff.
+TGT_WEIGHT = 1.00
+CAR_WEIGHT = 0.75
+MIN_RZ_TOUCHES = 4
+# Plays that count as an offence reaching the red zone.
+SCRIMMAGE_PLAYS = ("run", "pass", "field_goal", "punt", "qb_kneel", "qb_spike")
+
 POSITIONS = ("QB", "RB", "WR", "TE")
 
 # nflverse spells a few clubs differently from ESPN; normalise to ESPN's codes.
@@ -872,6 +879,139 @@ def roster_context(season: int, teams: set[str]) -> dict:
 # --------------------------------------------------------------------------
 
 
+def red_zone_projection(pbp: pl.DataFrame) -> dict:
+    """The anytime-touchdown inputs: who owns the red-zone work, how often each
+    offence gets inside the 20, and how often each defence lets a trip end in six.
+
+    Feeds the model the ATD cheat sheet reads:
+
+        xTD    = weighted red-zone share x team trips per game x opponent TD rate allowed
+        chance = 1 - exp(-xTD)
+
+    A target counts 1.00 and a carry 0.75 -- a red-zone target ends in the end zone
+    more often than a red-zone handoff. Trips are drives that reached the 20, not
+    plays, so a drive that stalls at the 21 never enters the denominator, and a
+    drive that snaps six times from the 3 still only counts once.
+    """
+    rz = pbp.filter(pl.col("yardline_100") <= 20)
+    # Extra points and kickoffs are snapped inside the 20 as well, and nflverse
+    # files some of them under their own drive number. Counting those invented
+    # roughly one extra "trip" per touchdown, so trips come off scrimmage only.
+    scrimmage = rz.filter(pl.col("play_type").is_in(SCRIMMAGE_PLAYS))
+
+    # One row per drive that got inside the 20. "Opp touchdown" is a defensive
+    # score on that drive -- it is not the offence converting, so only a plain
+    # "Touchdown" counts.
+    trips = (
+        scrimmage.filter(pl.col("posteam").is_not_null() & pl.col("fixed_drive").is_not_null())
+        .group_by(["game_id", "posteam", "defteam", "fixed_drive"])
+        .agg(pl.col("fixed_drive_result").drop_nulls().first().alias("result"))
+        .with_columns((pl.col("result") == "Touchdown").alias("scored"))
+    )
+
+    games = {
+        r["posteam"]: r["games"]
+        for r in pbp.filter(pl.col("posteam").is_not_null())
+        .group_by("posteam")
+        .agg(pl.col("game_id").n_unique().alias("games"))
+        .iter_rows(named=True)
+    }
+
+    out_teams = {}
+    for r in trips.group_by("posteam").agg(
+        pl.len().alias("trips"), pl.col("scored").sum().alias("td")
+    ).iter_rows(named=True):
+        gp = games.get(r["posteam"], 0)
+        out_teams[r["posteam"]] = {
+            "trips": r["trips"],
+            "games": gp,
+            "trips_per_game": round(r["trips"] / gp, 2) if gp else None,
+            "td_rate": _pct_of_fraction(r["td"] / r["trips"]) if r["trips"] else None,
+        }
+
+    out_def = {}
+    for r in trips.group_by("defteam").agg(
+        pl.len().alias("faced"), pl.col("scored").sum().alias("allowed")
+    ).iter_rows(named=True):
+        if not r["defteam"] or not r["faced"]:
+            continue
+        out_def[r["defteam"]] = {
+            "trips_faced": r["faced"],
+            "td_allowed": r["allowed"],
+            "td_rate_allowed": _pct_of_fraction(r["allowed"] / r["faced"]),
+        }
+    # Rank 1 is the toughest defence, so the softest spot on a slate is the high number.
+    for rank, team in enumerate(
+        sorted(out_def, key=lambda t: out_def[t]["td_rate_allowed"]), start=1
+    ):
+        out_def[team]["rank"] = rank
+        out_def[team]["of"] = len(out_def)
+
+    # Red-zone work per player. Keyed by nflverse player_id so the slate can join
+    # on an id rather than guessing that "C.McCaffrey" is "Christian McCaffrey".
+    plays = rz.filter(pl.col("play_type").is_in(["run", "pass"]))
+    work: dict[str, dict] = {}
+
+    def _bump(pid, name, team, field):
+        if not pid:
+            return
+        rec = work.setdefault(
+            pid, {"name": name, "rz_car": 0, "rz_tgt": 0, "by_team": defaultdict(int)}
+        )
+        rec[field] += 1
+        rec["by_team"][team] += 1
+
+    for row in plays.select(
+        ["posteam", "rusher_player_id", "rusher_player_name",
+         "receiver_player_id", "receiver_player_name"]
+    ).iter_rows(named=True):
+        _bump(row["rusher_player_id"], row["rusher_player_name"], row["posteam"], "rz_car")
+        _bump(row["receiver_player_id"], row["receiver_player_name"], row["posteam"], "rz_tgt")
+
+    team_weighted: dict[str, float] = defaultdict(float)
+    for rec in work.values():
+        weighted = rec["rz_tgt"] * TGT_WEIGHT + rec["rz_car"] * CAR_WEIGHT
+        rec["weighted"] = weighted
+        # A player traded mid-season earned his share with one offence. Bill it to
+        # the team he did most of the work for; the slate later applies that share
+        # to whichever offence he lines up for now.
+        rec["team"] = max(rec["by_team"], key=rec["by_team"].get) if rec["by_team"] else None
+        if rec["team"]:
+            team_weighted[rec["team"]] += weighted
+
+    # Team red-zone work per game is the denominator of every share.
+    for team, row in out_teams.items():
+        gp = games.get(team, 0)
+        row["weighted_per_game"] = round(team_weighted[team] / gp, 3) if gp else None
+
+    out_players = {}
+    for pid, rec in work.items():
+        touches = rec["rz_car"] + rec["rz_tgt"]
+        if touches < MIN_RZ_TOUCHES or not rec["team"]:
+            continue
+        out_players[pid] = {
+            "name": rec["name"],
+            "team": rec["team"],
+            "rz_car": rec["rz_car"],
+            "rz_tgt": rec["rz_tgt"],
+            # Season totals. The share is a per-game rate, and the games a player
+            # actually played live in the slate aggregates, not in play-by-play --
+            # so the division happens in redzone.attach_td_chance.
+            "weighted": round(rec["weighted"], 3),
+        }
+
+    lg = _pct_of_fraction(
+        sum(d["td_allowed"] for d in out_def.values())
+        / max(sum(d["trips_faced"] for d in out_def.values()), 1)
+    )
+    return {
+        "league_td_rate": lg,
+        "teams": out_teams,
+        "defense": out_def,
+        "players": out_players,
+    }
+
+
 def build_cheatsheets(stats_season: int, teams: set[str], season: int | None = None) -> dict:
     """Everything the Research tab's sheets need, in one payload.
 
@@ -884,6 +1024,7 @@ def build_cheatsheets(stats_season: int, teams: set[str], season: int | None = N
         "stats_season": stats_season,
         "rushing_gaps": rushing_gaps(pbp),
         "red_zone": red_zone(pbp),
+        "red_zone_proj": red_zone_projection(pbp),
         "explosive": explosive_plays(pbp),
         "team_stats": team_defense(pbp),
         "team_share": team_share(pbp),

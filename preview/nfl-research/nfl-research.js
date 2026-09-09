@@ -715,8 +715,12 @@
                     `<td class="nrs-tc${on ? " is-on" : ""}" data-tc-key="${col.key}" data-tc-label="${label}">` +
                     `<div class="nrs-tc__wrap">` +
                     `<button type="button" class="nrs-tc__side" data-tc-side="over" title="Over / Under">O</button>` +
-                    `<input class="nrs-tc__line" type="number" step="0.5" value="${suggested}" ` +
+                    `<select class="nrs-tc__line" ` +
                     `aria-label="${label} line for ${player.name}"${book != null ? ' data-book="1"' : ""}>` +
+                    lineLadder(col.key, suggested)
+                        .map((v) => `<option value="${v}"${v === Number(suggested) ? " selected" : ""}>${v}</option>`)
+                        .join("") +
+                    `</select>` +
                     `<button type="button" class="nrs-tc__add" data-tc-id="${id}"${trackAttrs} ` +
                     `aria-label="Track ${label} for ${player.name}" title="Track this prop">` +
                     `${on ? "✓" : "+"}</button>` +
@@ -803,6 +807,33 @@
         } catch (err) {
             /* private window or storage disabled: the tracker just will not persist */
         }
+    }
+
+    // Books post on a ladder, not on arbitrary decimals: yardage moves in fives,
+    // counting stats in ones, touchdowns in halves. Offering the rungs a book
+    // would actually have up beats a spinner you can type 37.3 into.
+    // Every step is a whole number so each rung stays on a half. A 0.5 step off a
+    // .5 base walks onto 1.0 and 2.0, and no book posts a whole-number line -- it
+    // can push.
+    const LINE_STEP = {
+        pass_yds: 5, pass_att: 1, pass_cmp: 1, pass_td: 1, pass_int: 1,
+        rush_yds: 5, rush_att: 1, rush_td: 1,
+        tgt: 1, rec: 1, rec_yds: 5, rec_td: 1,
+    };
+    const LINE_RUNGS = 4; // either side of the suggestion
+
+    function lineLadder(key, suggested) {
+        const step = LINE_STEP[key] || 0.5;
+        const base = halfStep(suggested);
+        const out = [];
+        for (let i = -LINE_RUNGS; i <= LINE_RUNGS; i += 1) {
+            const v = Number((base + i * step).toFixed(1));
+            // belt and braces: a rung that is not on a half is not a real line
+            if (v >= 0.5 && Math.abs(v % 1) === 0.5) out.push(v);
+        }
+        // A book line off a feed may not sit on our ladder; keep it selectable.
+        if (suggested != null && !out.includes(Number(suggested))) out.push(Number(suggested));
+        return [...new Set(out)].sort((a, b) => a - b);
     }
 
     function halfStep(value) {

@@ -1293,11 +1293,18 @@ html.theme-light .nrs-src-toggle button.is-active { background: rgba(180, 83, 9,
         }
         .nrs-tc__side.is-under { background: #fb923c; }
         .nrs-tc__line {
-            width: 46px; height: 19px; padding: 0 3px;
+            width: 52px; height: 19px; padding: 0 2px;
             border-radius: 4px; background: rgba(15,23,42,0.9);
             border: 1px solid rgba(148,163,184,0.34);
             color: #f1f5f9; font-size: 0.66rem; text-align: center;
+            /* a native select arrow eats most of a 52px cell, so drop it and let
+               the number use the whole width */
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            text-align-last: center; cursor: pointer;
         }
+        .nrs-tc__line:hover { border-color: rgba(56,189,248,0.55); }
+        .nrs-tc__line:focus { outline: 2px solid rgba(56,189,248,0.6); outline-offset: 1px; }
+        html.theme-light .nrs-tc__line { background: #fff; color: #1e293b; border-color: rgba(100,116,139,0.4); }
         .nrs-tc__line[data-book] { border-color: rgba(52,211,153,0.55); }
         .nrs-tc__add {
             background: rgba(56,189,248,0.16); border: 1px solid rgba(56,189,248,0.4);
@@ -1310,5 +1317,5 @@ html.theme-light .nrs-src-toggle button.is-active { background: rgba(180, 83, 9,
             background: rgba(52,211,153,0.24); border-color: rgba(52,211,153,0.55); color: #6ee7b7;
         }
         @media (max-width: 640px) {
-            .nrs-tc__line { width: 38px; }
+            .nrs-tc__line { width: 44px; }
         }

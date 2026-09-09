@@ -68,6 +68,38 @@
             align-items: center;
             gap: 8px;
         }
+        /* Cross-sport switch: the NFL board is a sibling page, not a section of
+           this one, so it gets the opposite corner from the utility actions. */
+        .sheet-switch {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 20;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(234, 179, 8, 0.45);
+            background: rgba(15, 23, 42, 0.72);
+            color: #fde68a;
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .sheet-switch:hover { background: rgba(15, 23, 42, 0.9); border-color: #facc15; color: #fff; }
+        .sheet-switch__emoji { font-size: 1rem; line-height: 1; }
+        @media (max-width: 640px) {
+            .sheet-switch { top: 10px; left: 8px; padding: 7px 11px; font-size: 0.76rem; }
+            .sheet-switch__label { display: none; }
+        }
+        html.theme-light .sheet-switch {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(180, 83, 9, 0.35);
+            color: #7c2d12;
+        }
         .theme-toggle {
             display: inline-flex;
             align-items: center;
@@ -3747,6 +3779,7 @@ html body .player-pop__fav   { color: var(--wpz-heat-hot) !important; }
     <div class="container">
 
         <header>
+            <a class="sheet-switch" href="nfl-research/atd-week1.html" title="Go to the NFL anytime-touchdown cheat sheet"><span class="sheet-switch__emoji" aria-hidden="true">🏈</span><span class="sheet-switch__label">NFL Cheat Sheet</span></a>
             <div class="header-actions">
                 <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false" title="Switch to light mode" aria-label="Switch to light mode">☀️</button>
                 <button type="button" class="header-install-btn" id="installShortcutBtn" hidden title="Add Worst Pickz to your Home Screen — fullscreen app-style view, optimized on mobile" aria-label="Install Worst Pickz shortcut on your Home Screen"><span class="header-install-btn__long">Install shortcut</span><span class="header-install-btn__short" aria-hidden="true">Install</span></button>

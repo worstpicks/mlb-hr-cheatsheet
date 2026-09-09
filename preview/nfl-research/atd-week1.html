@@ -93,6 +93,7 @@
         border-bottom: 3px solid var(--wpz-border-header);
     }
     .atd-header-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    .atd-header-actions-right { display: flex; align-items: center; gap: 8px; }
     .atd-back, .atd-theme-toggle {
         display: inline-flex; align-items: center; gap: 6px;
         padding: 7px 13px; border-radius: 999px;
@@ -320,7 +321,10 @@
         <header class="atd-header">
             <div class="atd-header-actions">
                 <a class="atd-back atd-back--switch" href="../index.html" title="Go to the MLB home run cheat sheet"><span aria-hidden="true">&#9918;</span> MLB Cheat Sheet</a>
-                <button type="button" class="atd-theme-toggle" id="atdTheme" title="Switch theme" aria-label="Switch theme">&#9728;&#65039;</button>
+                <div class="atd-header-actions-right">
+                    <a class="atd-back" href="index.html" title="Open the NFL matchup research board">NFL Research &rarr;</a>
+                    <button type="button" class="atd-theme-toggle" id="atdTheme" title="Switch theme" aria-label="Switch theme">&#9728;&#65039;</button>
+                </div>
             </div>
             <div class="atd-header-brand">
                 <div class="atd-hero">

@@ -1277,3 +1277,38 @@ html.theme-light .nrs-src-toggle button.is-active { background: rgba(180, 83, 9,
         .nrs-mkt-add.is-on {
             background: rgba(52,211,153,0.2); border-color: rgba(52,211,153,0.5); color: #6ee7b7;
         }
+
+        .nrs-track-row-cells td { border-top: 1px solid rgba(56,189,248,0.24); padding-top: 5px; }
+        .nrs-tc__label {
+            color: #7dd3fc !important;
+            font-size: 0.62rem; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .nrs-tc { text-align: center; padding: 4px 2px !important; }
+        .nrs-tc__wrap { display: inline-flex; align-items: center; gap: 2px; }
+        .nrs-tc__side {
+            background: #38bdf8; color: #04293b; border: 0;
+            border-radius: 4px; width: 17px; height: 19px;
+            font-size: 0.62rem; font-weight: 900; cursor: pointer; padding: 0;
+        }
+        .nrs-tc__side.is-under { background: #fb923c; }
+        .nrs-tc__line {
+            width: 46px; height: 19px; padding: 0 3px;
+            border-radius: 4px; background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(148,163,184,0.34);
+            color: #f1f5f9; font-size: 0.66rem; text-align: center;
+        }
+        .nrs-tc__line[data-book] { border-color: rgba(52,211,153,0.55); }
+        .nrs-tc__add {
+            background: rgba(56,189,248,0.16); border: 1px solid rgba(56,189,248,0.4);
+            color: #7dd3fc; border-radius: 4px; width: 19px; height: 19px;
+            font-size: 0.72rem; font-weight: 900; line-height: 1; cursor: pointer; padding: 0;
+        }
+        .nrs-tc__add:hover { background: rgba(56,189,248,0.3); }
+        .nrs-tc.is-on { background: rgba(52,211,153,0.1); }
+        .nrs-tc.is-on .nrs-tc__add {
+            background: rgba(52,211,153,0.24); border-color: rgba(52,211,153,0.55); color: #6ee7b7;
+        }
+        @media (max-width: 640px) {
+            .nrs-tc__line { width: 38px; }
+        }

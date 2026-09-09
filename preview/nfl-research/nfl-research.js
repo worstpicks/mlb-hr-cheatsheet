@@ -111,7 +111,6 @@
         side: "away", // which team's offense is shown on the left
         leagueAvg: null, // per-position league average allowed (from slate defenses)
         cardFilters: {}, // per-player-card log filter: l5 | l10 | l15 | all | opp | home | away
-        trackOpen: null, // card whose market picker is showing
         colPrefs: {}, // per-position visible stat columns (column picker)
         source: "reg", // "reg" = last full season, "pre" = this preseason
     };
@@ -688,60 +687,46 @@
             })
             .join("");
 
-        // Doink puts the track control on a MARKET, not on a player -- you are not
-        // betting "Drake Maye", you are betting his passing yards over some number.
-        // So the button opens a picker of this card's markets, each with a line you
-        // can set. Book lines fill it in when a feed is connected; without one the
-        // player's own per-game average is the sensible starting point.
+        // The track control sits UNDER its own column. A separate picker meant
+        // reading a market name off a list and hoping it matched the column you had
+        // been looking at; here the button is directly beneath the numbers it refers
+        // to, so there is nothing to match up. Book lines fill the box when a feed
+        // is connected -- without one the player's own per-game average is the
+        // honest starting point, and it is nudged onto a half so the line has the
+        // shape a real one would.
         const baseId = `${state.season}-${state.week}-${meta.gameId || ""}-${cardKey}`;
         const trackExpires = trackExpiry(meta.kickoff);
         const trackMeta = `${pos}${rank} · ${meta.offAbbr} vs ${meta.defAbbr}`;
-        const markets = cols
-            .map((col) => ({
-                key: col.key,
-                label: LINE_LABELS[col.key] || col.label,
-                avg: player.stats ? player.stats[col.key] : null,
-                book: lines[col.key],
-            }))
-            .filter((m) => m.avg != null || m.book != null);
-        if (lines.atd != null) {
-            markets.push({ key: "atd", label: "Anytime TD", avg: null, book: lines.atd });
-        }
-        const openPicker = state.trackOpen === baseId;
-        const trackBtn =
-            `<button type="button" class="nrs-track-btn${openPicker ? " is-open" : ""}" ` +
-            `data-track-open="${baseId}">${openPicker ? "Close" : "Track bet"}</button>`;
-        const pickerRows = markets
-            .map((m) => {
-                const suggested = m.book != null ? m.book : halfStep(m.avg);
-                const id = `${baseId}|${m.key}`;
-                const on = trackedIds.has(id);
-                const avgTxt = m.avg != null ? `avg ${fmtStat(m.avg)}` : "no season average";
-                const src = m.book != null ? "book" : "your line";
+        const trackAttrs =
+            ` data-track-name="${(player.name || "").replace(/"/g, "&quot;")}"` +
+            ` data-track-meta="${trackMeta}"` +
+            ` data-track-game="${meta.gameLabel || ""}"` +
+            ` data-track-expires="${trackExpires}"`;
+
+        const trackCells = cols
+            .map((col) => {
+                const label = LINE_LABELS[col.key] || col.label;
+                const book = lines[col.key];
+                const suggested = book != null ? book : halfStep(player.stats ? player.stats[col.key] : null);
+                const id = `${baseId}|${col.key}`;
+                // any side/line already saved for this market lights the cell up
+                const on = [...trackedIds].some((t) => t.startsWith(`${id}|`));
                 return (
-                    `<div class="nrs-mkt-row${on ? " is-on" : ""}">` +
-                    `<span class="nrs-mkt-name">${m.label}</span>` +
-                    `<span class="nrs-mkt-avg">${avgTxt}</span>` +
-                    `<div class="nrs-mkt-side" role="group" aria-label="Over or under">` +
-                    `<button type="button" data-mkt-side="over" class="is-active">O</button>` +
-                    `<button type="button" data-mkt-side="under">U</button>` +
-                    `</div>` +
-                    `<input class="nrs-mkt-line" type="number" step="0.5" value="${suggested}" ` +
-                    `aria-label="${m.label} line" title="${src}">` +
-                    `<button type="button" class="nrs-mkt-add${on ? " is-on" : ""}" ` +
-                    `data-mkt-id="${id}" data-mkt-key="${m.key}" ` +
-                    `data-mkt-label="${m.label}" ` +
-                    `data-track-name="${(player.name || "").replace(/"/g, "&quot;")}" ` +
-                    `data-track-meta="${trackMeta}" ` +
-                    `data-track-game="${meta.gameLabel || ""}" ` +
-                    `data-track-expires="${trackExpires}">${on ? "Tracked ✓" : "Track"}</button>` +
-                    `</div>`
+                    `<td class="nrs-tc${on ? " is-on" : ""}" data-tc-key="${col.key}" data-tc-label="${label}">` +
+                    `<div class="nrs-tc__wrap">` +
+                    `<button type="button" class="nrs-tc__side" data-tc-side="over" title="Over / Under">O</button>` +
+                    `<input class="nrs-tc__line" type="number" step="0.5" value="${suggested}" ` +
+                    `aria-label="${label} line for ${player.name}"${book != null ? ' data-book="1"' : ""}>` +
+                    `<button type="button" class="nrs-tc__add" data-tc-id="${id}"${trackAttrs} ` +
+                    `aria-label="Track ${label} for ${player.name}" title="Track this prop">` +
+                    `${on ? "✓" : "+"}</button>` +
+                    `</div></td>`
                 );
             })
             .join("");
-        const pickerHtml = openPicker
-            ? `<div class="nrs-mkt-picker"><span class="nrs-mkt-picker__title">Track a prop</span>${pickerRows}</div>`
-            : "";
+        const trackRow =
+            `<tr class="nrs-track-row-cells">` +
+            `<td class="nrs-log-week nrs-tc__label" colspan="3">Track</td>${trackCells}</tr>`;
 
         const photo = player.headshot
             ? `<img class="nrs-card__photo" src="${player.headshot}" alt="" loading="lazy" onerror="this.remove()">`
@@ -765,12 +750,11 @@
             `<header class="nrs-mc-panel__head">${photo}<div>` +
             `<span class="nrs-player-card__name">${player.name}</span>` +
             `<span class="nrs-player-card__meta">${pos}${rank} · ${player.gp} games</span>` +
-            `</div>${trackBtn}</header>` +
-            pickerHtml +
+            `</div></header>` +
             filterBarHtml(offKey, offFilter, meta.defAbbr) +
             `<div class="nrs-table-wrap"><table class="nrs-table nrs-table--log">` +
             `<thead>${logHead}</thead><tbody>${playerRows}</tbody>` +
-            `<tfoot><tr><td class="nrs-log-week nrs-log-avg" colspan="3">Avg</td>${playerAvgCells}</tr></tfoot>` +
+            `<tfoot><tr><td class="nrs-log-week nrs-log-avg" colspan="3">Avg</td>${playerAvgCells}</tr>${trackRow}</tfoot>` +
             `</table></div>` +
             `</div>` +
             `<div class="nrs-mc-panel nrs-mc-panel--def">` +
@@ -922,42 +906,37 @@
             });
         }
         el("nrsPosSections").addEventListener("click", (e) => {
-            const opener = e.target.closest("[data-track-open]");
-            if (opener) {
-                const id = opener.dataset.trackOpen;
-                state.trackOpen = state.trackOpen === id ? null : id;
-                renderMatchup();
-                return;
-            }
-            const side = e.target.closest("[data-mkt-side]");
+            // O/U flips in place -- one button rather than a pair, because a stat
+            // column is not wide enough for two and the state is obvious either way.
+            const side = e.target.closest(".nrs-tc__side");
             if (side) {
-                side.parentElement.querySelectorAll("[data-mkt-side]").forEach((b) =>
-                    b.classList.toggle("is-active", b === side)
-                );
+                const over = side.dataset.tcSide === "over";
+                side.dataset.tcSide = over ? "under" : "over";
+                side.textContent = over ? "U" : "O";
+                side.classList.toggle("is-under", over);
                 return;
             }
-            const add = e.target.closest("[data-mkt-id]");
+            const add = e.target.closest(".nrs-tc__add");
             if (!add) return;
-            const row = add.closest(".nrs-mkt-row");
-            const input = row.querySelector(".nrs-mkt-line");
-            const sideBtn = row.querySelector("[data-mkt-side].is-active");
-            const dir = sideBtn ? sideBtn.dataset.mktSide : "over";
+            const cell = add.closest(".nrs-tc");
+            const input = cell.querySelector(".nrs-tc__line");
+            const dir = cell.querySelector(".nrs-tc__side").dataset.tcSide;
             const line = input && input.value !== "" ? Number(input.value) : null;
+            const market = cell.dataset.tcLabel;
             const now = trackToggle({
-                // the line is part of the identity: o62.5 and o74.5 are two bets
-                id: `${add.dataset.mktId}|${dir}|${line}`,
+                // the line is part of the identity: O62.5 and O74.5 are two bets
+                id: `${add.dataset.tcId}|${dir}|${line}`,
                 name: add.dataset.trackName,
                 meta: add.dataset.trackMeta,
                 game: add.dataset.trackGame,
-                market: add.dataset.mktLabel,
+                market: market,
                 side: dir,
                 line: line,
-                lines: [`${dir === "under" ? "U" : "O"}${line} ${add.dataset.mktLabel}`],
+                lines: [`${dir === "under" ? "U" : "O"}${line} ${market}`],
                 expires: Number(add.dataset.trackExpires),
             });
-            add.classList.toggle("is-on", now);
-            add.textContent = now ? "Tracked ✓" : "Track";
-            row.classList.toggle("is-on", now);
+            add.textContent = now ? "✓" : "+";
+            cell.classList.toggle("is-on", now);
         });
         trackRender();
         // A tab can sit open for days. Sweep on a timer so entries disappear when

@@ -1,0 +1,31 @@
+﻿Matchup,CLE @ BAL
+Pitcher,Shane Baz
+Pitcher Team,BAL
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,19.0,1.63,="26-84",.310,.524,0.214,3,7,1,9,19.1,5,.348,.872
+Batting Second,20.0,1.35,="20-76",.263,.447,0.184,3,5,0,11,14.1,7,.318,.765
+Batting Third,18.2,1.50,="20-72",.278,.417,0.139,2,4,0,11,18.1,8,.337,.754
+Batting Fourth,17.0,1.88,="19-67",.284,.373,0.089,1,3,0,10,18.5,13,.395,.768
+Batting Fifth,17.1,1.44,="22-73",.301,.438,0.137,1,7,0,6,16.9,3,.338,.776
+Batting Sixth,20.1,0.89,="14-67",.209,.269,0.060,0,4,0,9,28.6,4,.263,.532
+Batting Seventh,19.0,1.05,="13-63",.206,.238,0.032,0,2,0,6,27.4,7,.288,.526
+Batting Eighth,17.0,1.06,="13-62",.210,.290,0.080,1,2,0,5,29.4,5,.265,.555
+Batting Ninth,15.0,1.27,="14-56",.250,.464,0.214,1,7,1,6,17.7,5,.311,.775
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="93-350",.266,.329,0.063,2,14,1,21,10.3,50,.360,.689
+Travis Bazzana LHB,Batting First ​,="35-156",.224,.449,0.225,6,13,2,21,23.9,17,.301,.750
+Chase DeLauter LHB,Batting Second ​,="70-225",.311,.507,0.196,7,17,3,29,13.5,27,.385,.892
+Jose Ramirez SHB,Batting Third ​,="56-253",.221,.356,0.135,7,13,0,29,13.4,41,.331,.687
+Nathaniel Lowe LHB,Batting Fifth ​,="48-179",.268,.503,0.235,10,12,0,29,27.0,16,.327,.830
+David Fry RHB,Batting Fifth ​,="10-54",.185,.222,0.037,0,2,0,2,30.0,6,.267,.489
+Jo Adell RHB,Batting Sixth ​,="43-168",.256,.405,0.149,6,5,1,21,24.3,5,.294,.699
+Daniel Schneemann LHB,Batting Sixth ​,="14-74",.189,.243,0.054,1,1,0,6,33.7,9,.277,.520
+Angel Martinez SHB,Batting Sixth ​,="19-103",.184,.320,0.136,2,6,1,12,21.9,5,.241,.561
+Angel Genao SHB,Batting Sixth ​,="12-42",.286,.357,0.071,0,3,0,1,15.6,3,.333,.690
+Austin Hedges RHB,Batting Eighth ​,="45-177",.254,.379,0.125,5,7,0,23,18.6,20,.330,.709
+Patrick Bailey SHB,Batting Eighth ​,="41-207",.198,.343,0.145,7,7,1,26,22.8,17,.256,.599
+Brayan Rocchio SHB,Batting Ninth ​,="75-288",.260,.410,0.150,9,12,2,43,13.0,21,.324,.734
+Petey Halpin LHB,Batting Ninth ​,="16-81",.198,.346,0.148,3,1,1,6,13.2,4,.250,.596

@@ -1,0 +1,31 @@
+﻿Matchup,LAA @ BOS
+Pitcher,Ryan Johnson
+Pitcher Team,LAA
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.1,2.04,="9-35",.257,.514,0.257,3,0,0,5,17.8,10,.422,.936
+Batting Second,11.0,1.09,="9-41",.220,.341,0.121,1,2,0,3,22.7,3,.273,.614
+Batting Third,10.1,0.77,="3-34",.088,.294,0.206,2,1,0,4,20.5,5,.205,.499
+Batting Fourth,9.0,1.44,="9-33",.273,.606,0.333,3,2,0,9,10.3,4,.385,.991
+Batting Fifth,7.2,1.70,="11-34",.324,.529,0.205,2,1,0,6,10.8,2,.351,.880
+Batting Sixth,7.1,1.77,="6-29",.207,.414,0.207,2,0,0,8,13.9,7,.361,.775
+Batting Seventh,8.1,1.20,="8-31",.258,.516,0.258,2,2,0,7,20.6,2,.324,.840
+Batting Eighth,8.0,1.25,="9-31",.290,.290,0.000,0,0,0,1,15.2,1,.303,.593
+Batting Ninth,7.0,1.57,="7-25",.280,.400,0.120,1,0,0,3,21.9,4,.387,.787
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jahmai Jones RHB,Batting First ​,="13-41",.317,.610,0.293,2,4,1,6,26.1,4,.391,1.001
+Jarren Duran LHB,Batting First ​,="39-184",.212,.402,0.190,9,4,2,25,29.5,12,.265,.667
+Nate Eaton RHB,Batting First ​,="3-17",.176,.294,0.118,0,2,0,3,25.0,2,.300,.594
+Nick Sogard SHB,Batting First ​,="18-82",.220,.305,0.085,1,4,0,6,20.0,15,.337,.642
+Roman Anthony LHB,Batting First ​,="29-127",.228,.346,0.118,2,5,2,5,27.5,21,.342,.688
+Mickey Gasper SHB,Batting Second ​,="15-58",.259,.431,0.172,3,1,0,5,21.4,7,.362,.793
+Adley Rutschman SHB,Batting Third ​,="48-202",.238,.470,0.232,11,12,1,44,17.7,23,.312,.782
+Wilyer Abreu LHB,Batting Third ​,="93-389",.239,.440,0.201,17,21,3,53,20.8,46,.319,.759
+Trevor Story RHB,Batting Fourth ​,="13-55",.236,.327,0.091,1,2,0,5,41.4,2,.276,.603
+Caleb Durbin RHB,Batting Sixth ​,="52-214",.243,.374,0.131,6,8,1,30,14.6,27,.344,.718
+Eli White RHB,Batting Eighth ​,="13-50",.260,.360,0.100,1,2,0,5,25.5,1,.275,.635
+Andruw Monasterio RHB,Batting Eighth ​,="25-92",.272,.359,0.087,1,5,0,12,19.4,8,.320,.679
+Isiah Kiner-Falefa RHB,Batting Ninth ​,="11-50",.220,.300,0.080,1,1,0,9,13.0,4,.278,.578
+Connor Wong RHB,Batting Ninth ​,="28-111",.252,.387,0.135,3,6,0,10,22.8,7,.314,.701

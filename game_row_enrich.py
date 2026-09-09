@@ -877,6 +877,15 @@ def build_game_meta_line(
         def with_k_line(segment: str, name: str) -> str:
             """Append the projected strikeout line to an arm's header segment."""
             proj = k_lines.get(name) or k_lines.get(name.split()[-1])
+            if not proj:
+                # A generational suffix splits the chip across two tokens: the K line
+                # for "Daniel Lynch IV" is filed under "Lynch IV", so the full name
+                # misses and the last token is just "IV". Match on the tail instead.
+                folded = re.sub(r"[^a-z]", "", name.lower())
+                for key, val in k_lines.items():
+                    if folded.endswith(re.sub(r"[^a-z]", "", key.lower())):
+                        proj = val
+                        break
             if not proj or not segment:
                 return segment
             tip = (

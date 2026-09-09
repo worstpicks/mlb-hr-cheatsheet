@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-08T18:26:53Z",
+  "updated": "2026-09-09T15:21:07Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1335,6 +1335,34 @@
         "matchup": "LAA @ BOS",
         "result": "loss",
         "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "o05": {
+        "player": "Kyle Schwarber",
+        "matchup": "HOU @ PHI",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Daylen Lile",
+        "matchup": "WSH @ SD",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "o05": {
+        "player": "Pete Crow Armstrong",
+        "matchup": "CHC @ MIL",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Jake Burger",
+        "matchup": "TEX @ SEA",
+        "result": "pending"
       }
     }
   ]

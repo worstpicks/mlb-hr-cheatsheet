@@ -151,10 +151,10 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                         <div class="best-bets-group">
                             <h4>Hits Parlay</h4>
                             <ul>
-                                <li><strong>Soto, Lowe, Harris, Riley, Machado, Schwarber</strong><small>Top attack-pitcher lanes versus Meyer, Bradley, Paddack, and Alvarez.</small></li>
+                                <li><strong>Soto, Lowe, Harris, Riley, Machado, Schwarber, Devers</strong><small>Top attack-pitcher lanes versus Meyer, Bradley, Paddack, Alvarez, and Lorenzen.</small></li>
                                 <li><strong>Duran, Hoskins, Buxton, Freeman, Neto, Sheets</strong><small>Hot hitters versus Cecconi, Bello, Jones, Wheeler, Martinez, and Alvarez.</small></li>
                             </ul>
-                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Juan Soto - Over 0.5 hits", "Brandon Lowe - Over 0.5 hits", "Michael Harris II - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Manny Machado - Over 0.5 hits", "Kyle Schwarber - Over 0.5 hits", "Jarren Duran - Over 0.5 hits", "Rhys Hoskins - Over 0.5 hits", "Byron Buxton - Over 0.5 hits", "Freddie Freeman - Over 0.5 hits", "Zach Neto - Over 0.5 hits", "Gavin Sheets - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
+                            <div class="best-bets-actions"><button type="button" class="btn-gambly best-bets-gambly-btn" data-goblin-gambly-lines='{data_attr(["Juan Soto - Over 0.5 hits", "Brandon Lowe - Over 0.5 hits", "Michael Harris II - Over 0.5 hits", "Austin Riley - Over 0.5 hits", "Manny Machado - Over 0.5 hits", "Kyle Schwarber - Over 0.5 hits", "Rafael Devers - Over 0.5 hits", "Jarren Duran - Over 0.5 hits", "Rhys Hoskins - Over 0.5 hits", "Byron Buxton - Over 0.5 hits", "Freddie Freeman - Over 0.5 hits", "Zach Neto - Over 0.5 hits", "Gavin Sheets - Over 0.5 hits"])}'>Add Hits Parlay to Gambly</button></div>
                         </div>
                         <div class="best-bets-group">
                             <h4>Worst Pickz Favorite 3 Leg</h4>
@@ -169,7 +169,7 @@ GOBLIN_CARD = f"""                <div class="summary-card full-width best-bets-
                             <h4>Top 5 Pitchers To Attack</h4>
                             <ol>
                                 <li><strong>Erick Fedde</strong><small>Slate-high HR risk (1.67); 2.68 HR/9 with 1.94 vs RHB at Rate Field.</small></li>
-                                <li><strong>Michael Lorenzen</strong><small>1.24 HR risk with 2.29 vs LHB split at Coors Field.</small></li>
+                                <li><strong>Michael Lorenzen</strong><small>1.24 HR risk with 2.29 vs LHB; Devers and Adames are the Giant anchors at Coors.</small></li>
                                 <li><strong>Grant Holmes</strong><small>1.22 HR risk; Reds righties and switch hitters get the GABP boost.</small></li>
                                 <li><strong>Shota Imanaga</strong><small>1.04 HR risk with 2.12 HR/9 versus LHB; Jordan Walker is the Cardinal anchor.</small></li>
                                 <li><strong>Trevor Rogers</strong><small>0.82 HR risk with 0.87 vs RHB; Blue Jays righties live at Camden.</small></li>
@@ -201,7 +201,7 @@ PARK_INNER = """
 WEATHER5_INNER = """
                         <div class="summary-item"><span>#1 Juan Soto <small>6 HR versus Meyer despite Citi drag</small></span><strong>95</strong></div>
                         <div class="summary-item"><span>#2 Brandon Lowe <small>Bradley LHB leakage at PNC</small></span><strong>92</strong></div>
-                        <div class="summary-item"><span>#3 Michael Harris II <small>GABP +9% HR versus Paddack</small></span><strong>88</strong></div>
+                        <div class="summary-item"><span>#3 Rafael Devers <small>Coors + Lorenzen LHB leak</small></span><strong>88</strong></div>
                         <div class="summary-item"><span>#4 Munetaka Murakami <small>101.1 mph EV versus Melton at Rate Field</small></span><strong>91</strong></div>
                         <div class="summary-item"><span>#5 Manny Machado <small>Nationals +8% HR, 100.5 mph EV</small></span><strong>90</strong></div>
                     """

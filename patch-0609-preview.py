@@ -22,6 +22,7 @@ build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
 from game_row_enrich import (
+from post_patch import sync_research_tab_after_patch
     contact_risk,
     enrich_games_list,
     emit_games_js,
@@ -1156,6 +1157,18 @@ def patch_preview(manifest):
     print("patched", PREVIEW.relative_to(ROOT), f"({zone_written} zone rows)")
 
 
+def apply_hidden_gem_ui():
+    """Blue border + badge for sheet-designated Hidden Gemz rows."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("gemui", ROOT / "patch-hidden-gem-ui.py")
+    gemui = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gemui)
+    text = PREVIEW.read_text(encoding="utf-8")
+    PREVIEW.write_text(gemui.patch(text), encoding="utf-8")
+    print("applied hidden gem UI styling")
+
+
 def sync_root_index():
     shutil.copy2(PREVIEW, ROOT / "index.html")
     print("synced root index.html")
@@ -1181,6 +1194,8 @@ def main():
         )
     manifest = update_manifest()
     patch_preview(manifest)
+    apply_hidden_gem_ui()
+    sync_research_tab_after_patch(SHEET_DATE)
     if "--sync-root" in sys.argv:
         sync_root_index()
     else:

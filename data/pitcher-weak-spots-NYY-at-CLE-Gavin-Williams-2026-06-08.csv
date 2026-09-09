@@ -1,0 +1,30 @@
+Matchup,NYY @ CLE
+Pitcher,Gavin Williams
+Pitcher Team,CLE
+Opposing Team,NYY
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.0,1.56,="7-33",.212,.273,0.061,0,2,0,0,30.0,7,.350,.623
+Batting Second,10.0,0.90,="9-40",.225,.425,0.200,1,5,0,2,37.5,0,.225,.650
+Batting Third,11.2,0.43,="3-37",.081,.135,0.054,0,2,0,2,30.8,2,.128,.263
+Batting Fourth,10.0,0.90,="8-36",.222,.417,0.195,2,1,0,6,21.1,1,.263,.680
+Batting Fifth,7.1,1.64,="9-32",.281,.469,0.188,2,0,0,3,42.9,3,.343,.812
+Batting Sixth,9.0,1.11,="6-30",.200,.433,0.233,2,1,0,3,26.5,4,.294,.727
+Batting Seventh,8.0,1.25,="7-31",.226,.516,0.290,2,3,0,2,29.4,3,.294,.810
+Batting Eighth,6.1,2.05,="12-31",.387,.613,0.226,2,1,0,8,21.2,1,.424,1.037
+Batting Ninth,9.0,0.67,="2-27",.074,.185,0.111,0,1,1,1,19.4,4,.194,.379
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Paul Goldschmidt RHB,Batting First ​,="15-49",.306,.592,0.286,3,3,1,8,19.0,8,.414,1.006
+Trent Grisham LHB,Batting First ​,="28-156",.179,.314,0.135,4,7,1,15,14.9,30,.309,.623
+Ben Rice LHB,Batting Second ​,="34-107",.318,.682,0.364,9,8,2,24,22.9,10,.373,1.055
+Cody Bellinger LHB,Batting Third ​,="34-117",.291,.513,0.222,5,5,3,22,12.3,18,.377,.890
+Jazz Chisholm Jr. LHB,Batting Fifth ​,="20-96",.208,.354,0.146,3,5,0,10,25.2,9,.271,.625
+Amed Rosario RHB,Batting Sixth ​,="8-28",.286,.571,0.285,2,2,0,4,24.1,1,.310,.881
+J.C. Escarra LHB,Batting Seventh ​,="4-26",.154,.231,0.077,0,2,0,2,22.2,1,.185,.416
+Ryan McMahon LHB,Batting Eighth ​,="16-63",.254,.381,0.127,2,2,0,9,28.1,1,.266,.647
+Jose Caballero RHB,Batting Eighth ​,="17-72",.236,.347,0.111,1,5,0,7,24.7,4,.286,.633
+Max Schuemann RHB,Batting Eighth ​,="5-15",.333,.533,0.200,0,3,0,3,21.1,4,.474,1.007
+Spencer Jones LHB,Batting Eighth ​,="1-9",.111,.111,0.000,0,0,0,1,55.6,0,.111,.222
+Anthony Volpe RHB,Batting Eighth ​,="5-21",.238,.476,0.238,1,2,0,5,25.0,7,.429,.905
+Ali Sanchez RHB,Batting Ninth ​,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000

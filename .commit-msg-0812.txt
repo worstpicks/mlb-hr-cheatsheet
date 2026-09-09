@@ -1,0 +1,20 @@
+Ship 2026-08-12 slate and fix archive/pipeline data-integrity bugs
+
+Sheet: 79 props across 15 games, bums Feltner/Perkins/Castillo, straights
+Elly De La Cruz (O0.5) and Pete Alonso (O1.5).
+
+Pipeline fixes surfaced while auditing this slate:
+
+- import_sheet_csvs wrote the manifest after running the synthetic matchup
+  builder, so gap-fill CSVs landed on disk unreferenced and their hitters
+  silently dropped off the sheet. Fold synthetic output into the manifest.
+- Archives were copied verbatim from preview/index.html, leaving bare
+  "assets/" paths that resolve to preview/archive/assets/ and 404. Rewrite
+  on archive and repair the 64 already-published pages.
+- Debut arms with no PropFinder book rendered as a measured "+0% overall"
+  instead of admitting the gap; label them "no MLB HR data yet".
+- verify-archives pinned the current slate to a hardcoded 2026-06-06 and
+  only checked manifest membership against a fixed date list.
+- 2026-06-02.html actually held the June 3 sheet and 2026-06-03.html a
+  stale June 4 duplicate; relabel to match content and drop the June 2
+  manifest entry, since no June 2 sheet exists.

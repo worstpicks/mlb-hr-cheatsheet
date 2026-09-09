@@ -1,0 +1,31 @@
+Matchup,BAL @ BOS
+Pitcher,Eduardo Rivera
+Pitcher Team,BOS
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,20.0,0,.000,.000
+Batting Second,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,20.0,0,.000,.000
+Batting Third,1.0,2.00,="2-5",.400,1.000,0.600,1,0,0,1,0.0,0,.400,1.400
+Batting Fourth,0.2,3.00,="0-2",.000,.000,0.000,0,0,0,0,25.0,2,.500,.500
+Batting Fifth,0.2,3.00,="1-3",.333,.333,0.000,0,0,0,0,50.0,1,.500,.833
+Batting Sixth,0.2,1.50,="1-3",.333,.333,0.000,0,0,0,2,0.0,0,.333,.666
+Batting Seventh,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Eighth,0.1,6.00,="1-2",.500,.500,0.000,0,0,0,0,33.3,1,.667,1.167
+Batting Ninth,1.1,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="60-244",.246,.352,0.106,5,11,0,19,21.5,41,.356,.708
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Pete Alonso RHB,Batting Fourth ​,="62-244",.254,.480,0.226,15,10,0,47,23.0,34,.351,.831
+Tyler O'Neill RHB,Batting Fifth ​,="9-57",.158,.228,0.070,1,1,0,2,25.8,8,.273,.501
+Samuel Basallo LHB,Batting Fifth ​,="44-190",.232,.421,0.189,9,7,1,31,26.5,18,.299,.720
+Leody Taveras SHB,Batting Sixth ​,="34-129",.264,.357,0.093,1,7,1,14,21.9,12,.331,.688
+Dylan Beavers LHB,Batting Sixth ​,="11-47",.234,.340,0.106,1,2,0,4,26.0,3,.280,.620
+Colton Cowser LHB,Batting Seventh ​,="22-127",.173,.244,0.071,3,0,0,13,31.8,17,.272,.516
+Christian Encarnacion-Strand RHB,Batting Eighth ​,="3-8",.375,.750,0.375,1,0,0,2,25.0,0,.375,1.125
+Coby Mayo RHB,Batting Eighth ​,="18-91",.198,.319,0.121,3,2,0,11,33.3,7,.263,.582
+Chadwick Tromp RHB,Batting Ninth ​,="6-27",.222,.259,0.037,0,1,0,4,24.1,0,.214,.473
+Sam Huff RHB,Batting Ninth ​,="2-16",.125,.188,0.063,0,1,0,0,56.3,0,.125,.313
+Jeremiah Jackson RHB,Batting Ninth ​,="21-84",.250,.381,0.131,2,5,0,14,20.0,3,.270,.651
+Jackson Holliday LHB,Batting Ninth ​,="17-68",.250,.426,0.176,3,3,0,8,19.7,7,.316,.742

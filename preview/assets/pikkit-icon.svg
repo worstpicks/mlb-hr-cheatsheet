@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Pikkit">
-  <rect width="48" height="48" rx="11" fill="#000000"/>
-  <g fill="#4F5FFF" transform="translate(24 22.5) scale(0.96)">
-    <path d="M0-9.5c-3.8-5.8-11.2-4.2-8.2 2.2-.8 1.6 0 4.2 0 4.2s.8-2.6 0-4.2c3-6.4 10.4-8 8.2-2.2z"/>
-    <path d="M0-9.5c-3.8-5.8-11.2-4.2-8.2 2.2-.8 1.6 0 4.2 0 4.2s.8-2.6 0-4.2c3-6.4 10.4-8 8.2-2.2z" transform="rotate(90)"/>
-    <path d="M0-9.5c-3.8-5.8-11.2-4.2-8.2 2.2-.8 1.6 0 4.2 0 4.2s.8-2.6 0-4.2c3-6.4 10.4-8 8.2-2.2z" transform="rotate(180)"/>
-    <path d="M0-9.5c-3.8-5.8-11.2-4.2-8.2 2.2-.8 1.6 0 4.2 0 4.2s.8-2.6 0-4.2c3-6.4 10.4-8 8.2-2.2z" transform="rotate(270)"/>
+  <g fill="#FFFFFF" transform="translate(24 24) scale(0.88)">
+  <!-- Wide base at center — no cleft square; tips point outward -->
+    <path d="M0-9C-5.5-9-9.5-4.5-8.5 0.5C-7 4 0 7 0 7C0 7 7 4 8.5 0.5C9.5-4.5 5.5-9 0-9Z"/>
+    <path d="M0-9C-5.5-9-9.5-4.5-8.5 0.5C-7 4 0 7 0 7C0 7 7 4 8.5 0.5C9.5-4.5 5.5-9 0-9Z" transform="rotate(90)"/>
+    <path d="M0-9C-5.5-9-9.5-4.5-8.5 0.5C-7 4 0 7 0 7C0 7 7 4 8.5 0.5C9.5-4.5 5.5-9 0-9Z" transform="rotate(180)"/>
+    <path d="M0-9C-5.5-9-9.5-4.5-8.5 0.5C-7 4 0 7 0 7C0 7 7 4 8.5 0.5C9.5-4.5 5.5-9 0-9Z" transform="rotate(270)"/>
   </g>
 </svg>

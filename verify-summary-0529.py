@@ -7,6 +7,12 @@ t = Path("preview/index.html").read_text(encoding="utf-8")
 
 checks = [
     ("Straights of the Day section", "Worst Pickz Straights of the Day" in t),
+    ("Devers on sheet", 'name: "Rafael Devers (L)"' in t and "vs Lorenzen" in t),
+    ("Adames on sheet", 'name: "Willy Adames (R)"' in t and "vs Lorenzen" in t),
+    ("Devers favorite", "Rafael Devers (L)" in t and "Worst Pickz favorite with 2 HR" in t),
+    ("Coors game copy", "Devers and Willy Adames lead the Giants attack" in t),
+    ("Weather Devers", "#3 Rafael Devers <small>Coors + Lorenzen LHB leak</small>" in t),
+    ("Lorenzen attack Devers", "Devers and Adames are the Giant anchors at Coors" in t),
     ("Straight pick Lowe O0.5", "Over 0.5 HR Straight" in t and "Brandon Lowe &mdash; vs Taj Bradley" in t),
     ("Straight pick Horwitz O1.5", "Over 1.5 HR Straight" in t and "Spencer Horwitz &mdash; vs Taj Bradley" in t),
     ("Straight Gambly O0.5", "Brandon Lowe - Over 0.5 homerun" in t),

@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+"""Shorten Overdue (💤) legend — drop 6/6 HR Due Indicator detail."""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+from patch_targets import SHEET_HTML  # noqa: E402
+
+REPLACEMENTS = [
+    (
+        "<strong>💤</strong> Overdue — 6/6 HR Due Indicator (barrel form, drought, LA, pitcher HR/9, park)",
+        "<strong>💤</strong> Overdue",
+    ),
+    ('title="Overdue — passes all 6 HR Due Indicator rules"', 'title="Overdue"'),
+    ('title="All six HR Due Indicator rules met">💤 Overdue', 'title="Overdue">💤 Overdue'),
+]
+
+
+def patch(path: Path) -> None:
+    t = path.read_text(encoding="utf-8")
+    o = t
+    for old, new in REPLACEMENTS:
+        t = t.replace(old, new)
+    if t != o:
+        path.write_text(t, encoding="utf-8")
+        print("updated", path.relative_to(ROOT))
+    else:
+        print("ok", path.relative_to(ROOT))
+
+
+if __name__ == "__main__":
+    for p in SHEET_HTML:
+        if p.is_file():
+            patch(p)

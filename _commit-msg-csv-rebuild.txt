@@ -1,0 +1,4 @@
+Rebuild May 30 sheet from fresh CSV probables and fix summary blocks.
+
+Derive game SPs and vs chips from imported hr-matchups exports instead of
+yesterdays hardcoded meta; sync straights, Goblin, and bum-on-mound rows.

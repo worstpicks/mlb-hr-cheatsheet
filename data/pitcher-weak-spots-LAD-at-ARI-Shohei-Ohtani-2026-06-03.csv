@@ -1,0 +1,30 @@
+Matchup,LAD @ ARI
+Pitcher,Shohei Ohtani
+Pitcher Team,LAD
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="1-24",.042,.042,0.000,0,0,0,0,40.7,.115,.157
+Batting Second,="3-24",.125,.125,0.000,0,0,0,1,30.8,.192,.317
+Batting Third,="6-22",.273,.364,0.091,0,2,0,0,19.2,.385,.749
+Batting Fourth,="6-23",.261,.478,0.217,1,2,0,2,15.4,.346,.824
+Batting Fifth,="1-22",.045,.091,0.046,0,1,0,0,36.0,.160,.251
+Batting Sixth,="2-22",.091,.091,0.000,0,0,0,1,45.5,.091,.182
+Batting Seventh,="4-18",.222,.222,0.000,0,0,0,1,23.8,.286,.508
+Batting Eighth,="3-18",.167,.278,0.111,0,2,0,1,14.3,.286,.564
+Batting Ninth,="2-17",.118,.294,0.176,1,0,0,1,31.6,.211,.505
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="51-190",.268,.479,0.211,9,11,1,32,15.2,17,.324,.803
+Corbin Carroll LHB,Batting Second ​,="52-164",.317,.598,0.281,6,12,8,26,21.5,26,.408,1.006
+Geraldo Perdomo SHB,Batting Third ​,="37-156",.237,.359,0.122,2,7,3,16,11.6,25,.337,.696
+Nolan Arenado RHB,Batting Fourth ​,="14-57",.246,.491,0.245,2,8,0,13,18.3,10,.380,.871
+Gabriel Moreno RHB,Batting Fourth ​,="12-46",.261,.348,0.087,0,4,0,5,17.6,3,.314,.662
+Adrian Del Castillo LHB,Batting Fourth ​,="13-72",.181,.306,0.125,2,3,0,11,33.3,2,.200,.506
+Ildemaro Vargas SHB,Batting Fifth ​,="20-81",.247,.309,0.062,1,2,0,9,8.2,3,.282,.591
+Pavin Smith LHB,Batting Fifth ​,="0-4",.000,.000,0.000,0,0,0,0,16.7,2,.333,.333
+Aramis Garcia RHB,Batting Eighth ​,="1-10",.100,.100,0.000,0,0,0,1,30.0,0,.100,.200
+Jose Fernandez RHB,Batting Eighth ​,="10-39",.256,.385,0.129,0,5,0,5,23.8,0,.275,.660
+Jorge Barrosa SHB,Batting Ninth ​,="13-64",.203,.375,0.172,0,9,1,5,27.4,6,.282,.657
+Tommy Troy RHB,Batting Ninth ​,="8-26",.308,.500,0.192,1,2,0,1,13.8,3,.379,.879
+Ryan Waldschmidt RHB,Batting Ninth ​,="15-46",.326,.413,0.087,0,4,0,6,28.8,5,.392,.805

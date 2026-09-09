@@ -33,6 +33,7 @@ from game_row_enrich import (
 )
 from note_compact import compact_goblin_leg, compact_note, compact_row_line, straight_pick_why
 from goblin_hits_parlay import annotate_hits_ranks, fill_hits_parlay, select_hits_parlay
+from post_patch import sync_research_tab_after_patch
 from goblin_hr_zone_fit import (
     annotate_hr_zone_ranks,
     hand_park_pct,
@@ -1398,6 +1399,7 @@ def main():
     manifest = update_manifest()
     patch_preview(manifest)
     apply_hidden_gem_ui()
+    sync_research_tab_after_patch(SHEET_DATE)
     if "--sync-root" in sys.argv:
         sync_root_index()
     else:

@@ -1,0 +1,29 @@
+Matchup,TEX @ STL
+Pitcher,Andre Pallante
+Pitcher Team,STL
+Opposing Team,TEX
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,0.96,="4-28",.143,.143,0.000,0,0,0,2,15.6,4,.250,.393
+Batting Second,6.2,1.65,="7-27",.259,.519,0.260,1,4,0,3,12.5,4,.375,.894
+Batting Third,7.1,1.23,="6-28",.214,.286,0.072,0,2,0,4,22.6,3,.290,.576
+Batting Fourth,5.1,2.06,="8-23",.348,.870,0.522,4,0,0,8,14.3,3,.429,1.299
+Batting Fifth,5.2,1.94,="8-24",.333,.542,0.209,1,2,0,4,18.5,3,.407,.949
+Batting Sixth,6.0,1.50,="8-25",.320,.440,0.120,1,0,0,4,23.1,1,.346,.786
+Batting Seventh,6.2,0.75,="4-24",.167,.292,0.125,1,0,0,2,28.0,1,.200,.492
+Batting Eighth,6.0,1.33,="6-23",.261,.261,0.000,0,0,0,1,16.0,2,.320,.581
+Batting Ninth,5.2,1.06,="6-24",.250,.292,0.042,0,1,0,0,16.0,0,.280,.572
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Joc Pederson LHB,Batting First ​,="18-59",.305,.678,0.373,6,4,0,13,17.1,9,.406,1.084
+Brandon Nimmo LHB,Batting First ​,="42-152",.276,.414,0.138,4,7,1,12,19.1,17,.358,.772
+Jake Burger RHB,Batting Fourth ​,="30-128",.234,.406,0.172,5,7,0,15,29.9,8,.285,.691
+Josh Jung RHB,Batting Fourth ​,="25-71",.352,.535,0.183,3,4,0,7,11.7,5,.403,.938
+Ezequiel Duran RHB,Batting Fifth ​,="16-45",.356,.600,0.244,1,4,2,13,25.0,3,.396,.996
+Evan Carter LHB,Batting Sixth ​,="11-53",.208,.434,0.226,3,1,1,8,22.4,4,.276,.710
+Alejandro Osuna LHB,Batting Seventh ​,="7-30",.233,.267,0.034,0,1,0,5,19.4,3,.361,.628
+Danny Jansen RHB,Batting Eighth ​,="7-46",.152,.196,0.044,0,2,0,1,23.6,5,.278,.474
+Kyle Higashioka RHB,Batting Ninth ​,="4-26",.154,.385,0.231,2,0,0,5,25.8,4,.290,.675
+Nicky Lopez LHB,Batting Ninth ​,="3-17",.176,.353,0.177,1,0,0,3,26.3,1,.222,.575
+Justin Foscue RHB,Batting Ninth ​,="3-14",.214,.429,0.215,1,0,0,1,28.6,0,.214,.643
+Michael Helman RHB,Batting Ninth ​,="3-14",.214,.214,0.000,0,0,0,0,25.0,0,.267,.481

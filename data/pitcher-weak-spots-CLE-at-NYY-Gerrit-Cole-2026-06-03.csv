@@ -1,0 +1,30 @@
+Matchup,CLE @ NYY
+Pitcher,Gerrit Cole
+Pitcher Team,NYY
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.1,2.25,="3-6",.500,.667,0.167,0,1,0,0,0.0,0,.500,1.167
+Batting Second,1.2,0.60,="0-5",.000,.000,0.000,0,0,0,0,16.7,1,.167,.167
+Batting Third,2.0,0.00,="0-6",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Fourth,1.2,0.60,="1-6",.167,.167,0.000,0,0,0,0,33.3,0,.167,.334
+Batting Fifth,1.1,0.75,="0-4",.000,.000,0.000,0,0,0,0,20.0,1,.200,.200
+Batting Sixth,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Seventh,1.0,1.00,="1-4",.250,.250,0.000,0,0,0,0,50.0,0,.250,.500
+Batting Eighth,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,0,25.0,0,.250,.750
+Batting Ninth,1.0,1.00,="0-3",.000,.000,0.000,0,0,0,0,25.0,1,.250,.250
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="32-159",.201,.258,0.057,1,6,0,10,11.2,23,.308,.566
+Travis Bazzana LHB,Batting First ​,="12-36",.333,.639,0.306,1,8,0,6,20.5,2,.359,.998
+Chase DeLauter LHB,Batting Second ​,="32-120",.267,.492,0.225,6,7,1,21,10.3,16,.353,.845
+Jose Ramirez SHB,Batting Third ​,="34-162",.210,.370,0.160,6,8,0,16,14.5,31,.337,.707
+Rhys Hoskins RHB,Batting Fourth ​,="8-65",.123,.262,0.139,2,3,0,9,26.2,15,.286,.548
+Kyle Manzardo LHB,Batting Fourth ​,="29-141",.206,.326,0.120,5,2,0,17,37.6,13,.280,.606
+David Fry RHB,Batting Fifth ​,="9-36",.250,.306,0.056,0,2,0,2,35.0,4,.325,.631
+Daniel Schneemann LHB,Batting Sixth ​,="11-55",.200,.273,0.073,1,1,0,6,34.9,8,.302,.575
+Angel Martinez SHB,Batting Sixth ​,="6-48",.125,.188,0.063,0,3,0,7,22.6,2,.157,.345
+Stuart Fairchild RHB,Batting Seventh ​,="0-3",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Austin Hedges RHB,Batting Eighth ​,="19-78",.244,.333,0.089,1,4,0,6,18.9,9,.318,.651
+Patrick Bailey SHB,Batting Eighth ​,="9-66",.136,.242,0.106,1,2,1,5,18.1,5,.194,.436
+Brayan Rocchio SHB,Batting Ninth ​,="51-169",.302,.438,0.136,4,9,1,27,11.4,15,.372,.810

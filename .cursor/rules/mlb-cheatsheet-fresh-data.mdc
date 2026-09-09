@@ -13,8 +13,7 @@ When building or updating a daily MLB HR cheat sheet:
 2. Use **PropFinder Weather** ([propfinder.app/weather](https://propfinder.app/weather) / `ParkFactors_YYYY-MM-DD.csv`) for park/weather columns.
 3. Run the full pipeline in order:
    - `python build-MMDD-from-csv.py`
-   - `python patch-MMDD-preview.py --sync-root`
-   - `python fetch-research-slate.py --date YYYY-MM-DD` (refresh MLB Research tab JSON + set `research-date` meta to slate date)
+   - `python patch-MMDD-preview.py --sync-root` (auto-refreshes Research tab JSON via `post_patch.py`)
    - `python hard-verify-MMDD.py`
    - `python verify-summary-MMDD.py`
    - `python verify-deploy.py`

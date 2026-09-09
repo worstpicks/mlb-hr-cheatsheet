@@ -70,6 +70,7 @@ PLAYER_TEAMS = {
     "Will Benson (L)": "CIN",
     "Willson Contreras (R)": "BOS",
     "Willy Adames (R)": "SF",
+    "Wilyer Abreu (L)": "BOS",
     "Yandy Diaz (R)": "TB",
     "Yordan Alvarez (L)": "HOU",
     "Zach Neto (R)": "LAA",
@@ -119,6 +120,7 @@ games = [
             row("Jonathan Aranda", "L", "+690", 74, "⭐ 💎", ["vs Early"], """Worst Pickz Favorite. 0 HR, 1 near-HR, 96.5 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events.""", blast="good"),
             row("Hunter Feduccia", "L", "N/A", 64, "💎", ["vs Early"], """0 HR, 89.7 mph EV. Early LHB split +0.99, HR risk 0.55. limited recent HR events."""),
             row("Willson Contreras", "R", "+350", 77, "💎", ["vs Englert"], """1 HR, 2 near-HR, 93.1 mph EV. Englert split/risk data unavailable. limited split/risk sample.""", blast="good"),
+            row("Wilyer Abreu", "L", "+562", 63, "💎", ["vs Englert"], """0 HR, 88.6 mph EV. Englert split/risk data unavailable. limited split/risk sample; limited recent HR events."""),
         ],
     },
     {

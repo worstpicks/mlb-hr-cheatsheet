@@ -1,0 +1,29 @@
+Matchup,HOU @ SF
+Pitcher,Bryan King
+Pitcher Team,HOU
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.2,1.50,="6-25",.240,.400,0.160,1,1,0,2,33.3,4,.367,.767
+Batting Second,6.1,1.42,="7-24",.292,.542,0.250,1,1,1,9,14.8,2,.333,.875
+Batting Third,7.0,1.14,="4-25",.160,.320,0.160,1,1,0,3,27.6,4,.276,.596
+Batting Fourth,5.1,1.50,="6-22",.273,.273,0.000,0,0,0,3,12.0,2,.360,.633
+Batting Fifth,5.2,1.06,="5-20",.250,.400,0.150,1,0,0,5,9.1,1,.318,.718
+Batting Sixth,5.0,1.00,="5-19",.263,.316,0.053,0,1,0,3,5.0,0,.300,.616
+Batting Seventh,4.1,1.38,="5-16",.313,.563,0.250,1,1,0,3,10.5,1,.333,.896
+Batting Eighth,4.1,2.08,="7-20",.350,.550,0.200,1,1,0,2,27.3,2,.409,.959
+Batting Ninth,4.2,1.29,="5-20",.250,.400,0.150,1,0,0,3,18.2,1,.318,.718
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nate Furman LHB,Batting First ​,="0-4",.000,.000,0.000,0,0,0,0,20.0,1,.200,.200
+Bryce Eldridge LHB,Batting Second ​,="16-80",.200,.400,0.200,5,1,0,9,28.6,11,.297,.697
+Rafael Devers LHB,Batting Fourth ​,="89-337",.264,.516,0.252,21,20,1,55,24.7,37,.337,.853
+Osleivis Basabe RHB,Batting Fifth ​,="2-15",.133,.133,0.000,0,0,0,0,20.0,0,.133,.266
+Jung Hoo Lee LHB,Batting Fifth ​,="46-154",.299,.422,0.123,2,11,1,14,8.0,6,.331,.753
+Willy Adames RHB,Batting Sixth ​,="33-143",.231,.315,0.084,2,6,0,10,24.8,9,.281,.596
+Buddy Kennedy RHB,Batting Sixth ​,="0-9",.000,.000,0.000,0,0,0,0,60.0,1,.100,.100
+Victor Bericoto RHB,Batting Eighth ​,="6-22",.273,.364,0.091,0,2,0,3,27.3,0,.273,.637
+Grant McCray LHB,Batting Eighth ​,="2-25",.080,.200,0.120,1,0,0,2,25.0,5,.233,.433
+Drew Gilbert LHB,Batting Eighth ​,="29-138",.210,.283,0.073,2,4,0,14,15.2,18,.325,.608
+Christian Koss RHB,Batting Ninth ​,="10-52",.192,.212,0.020,0,1,0,2,18.9,1,.208,.420
+Drew Cavanaugh LHB,Batting Ninth ​,="7-35",.200,.229,0.029,0,1,0,0,30.2,6,.317,.546

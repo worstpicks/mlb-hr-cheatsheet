@@ -1,0 +1,26 @@
+Matchup,BAL @ BOS
+Pitcher,Jake Bennett
+Pitcher Team,BOS
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.0,0.86,="5-25",.200,.320,0.120,1,0,0,4,14.3,1,.250,.570
+Batting Second,7.2,0.78,="5-26",.192,.231,0.039,0,1,0,2,14.8,1,.222,.453
+Batting Third,6.2,1.05,="5-23",.217,.217,0.000,0,0,0,0,24.0,2,.280,.497
+Batting Fourth,6.2,0.60,="2-20",.100,.100,0.000,0,0,0,1,17.4,2,.174,.274
+Batting Fifth,5.2,0.88,="3-20",.150,.150,0.000,0,0,0,0,27.3,2,.227,.377
+Batting Sixth,6.1,0.32,="2-20",.100,.100,0.000,0,0,0,1,15.0,0,.100,.200
+Batting Seventh,4.2,1.50,="7-20",.350,.800,0.450,2,3,0,2,25.0,0,.350,1.150
+Batting Eighth,5.0,0.80,="4-18",.222,.222,0.000,0,0,0,1,21.1,0,.222,.444
+Batting Ninth,4.0,1.50,="5-16",.313,.313,0.000,0,0,0,2,10.5,1,.368,.681
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="60-244",.246,.352,0.106,5,11,0,19,21.5,41,.356,.708
+Pete Alonso RHB,Batting Second ​,="1-4",.250,.250,0.000,0,0,0,0,40.0,0,.400,.650
+Gunnar Henderson LHB,Batting Third ​,="4-12",.333,.583,0.250,0,3,0,0,23.1,0,.385,.968
+Tyler O'Neill RHB,Batting Fourth ​,="3-12",.250,.333,0.083,0,1,0,2,15.4,1,.308,.641
+Coby Mayo RHB,Batting Fifth ​,="6-39",.154,.256,0.102,1,1,0,2,43.2,4,.250,.506
+Leody Taveras SHB,Batting Sixth ​,="34-129",.264,.357,0.093,1,7,1,14,21.9,12,.331,.688
+Christian Encarnacion-Strand RHB,Batting Eighth ​,="3-8",.375,.750,0.375,1,0,0,2,25.0,0,.375,1.125
+Jackson Holliday LHB,Batting Eighth ​,="7-44",.159,.273,0.114,1,0,1,3,33.3,12,.333,.606
+Sam Huff RHB,Batting Ninth ​,="2-16",.125,.188,0.063,0,1,0,0,56.3,0,.125,.313

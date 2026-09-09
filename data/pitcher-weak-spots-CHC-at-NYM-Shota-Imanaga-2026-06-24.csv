@@ -1,0 +1,32 @@
+Matchup,CHC @ NYM
+Pitcher,Shota Imanaga
+Pitcher Team,CHC
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="10-41",.244,.415,0.171,1,4,0,3,28.3,.326,.741
+Batting Second,="6-40",.150,.375,0.225,3,0,0,5,35.7,.190,.565
+Batting Third,="7-40",.175,.400,0.225,3,0,0,6,11.9,.214,.614
+Batting Fourth,="15-36",.417,.722,0.305,3,2,0,6,9.5,.476,1.198
+Batting Fifth,="9-36",.250,.639,0.389,3,3,1,5,23.1,.308,.947
+Batting Sixth,="8-37",.216,.432,0.216,2,2,0,7,34.2,.237,.669
+Batting Seventh,="4-32",.125,.125,0.000,0,0,0,1,22.9,.200,.325
+Batting Eighth,="6-33",.182,.333,0.151,1,2,0,3,20.6,.206,.539
+Batting Ninth,="5-28",.179,.321,0.142,1,1,0,1,32.3,.258,.579
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Francisco Lindor SHB,Batting First ​,="14-76",.184,.289,0.105,1,1,2,1,18.4,10,.287,.576
+Carson Benge LHB,Batting First ​,="48-170",.282,.435,0.153,6,4,2,19,21.6,11,.341,.776
+Bo Bichette RHB,Batting Second ​,="54-213",.254,.390,0.136,7,6,1,30,16.9,15,.303,.693
+Juan Soto LHB,Batting Third ​,="42-130",.323,.646,0.323,13,3,0,28,11.8,21,.417,1.063
+Mark Vientos RHB,Batting Fourth ​,="18-96",.188,.313,0.125,2,6,0,12,21.2,2,.212,.525
+Jared Young LHB,Batting Fourth ​,="13-67",.194,.403,0.209,4,2,0,8,21.6,6,.270,.673
+Brett Baty LHB,Batting Fifth ​,="15-63",.238,.381,0.143,2,3,0,9,29.0,5,.290,.671
+A.J. Ewing LHB,Batting Fifth ​,="15-54",.278,.407,0.129,1,4,0,7,25.9,3,.310,.717
+Marcus Semien RHB,Batting Sixth ​,="18-100",.180,.300,0.120,3,1,1,10,23.8,4,.210,.510
+Eric Wagaman RHB,Batting Seventh ​,="1-5",.200,.800,0.600,1,0,0,1,60.0,0,.200,1.000
+MJ Melendez LHB,Batting Eighth ​,="6-45",.133,.289,0.156,1,4,0,3,37.0,7,.278,.567
+Luis Torrens RHB,Batting Ninth ​,="25-108",.231,.333,0.102,1,8,0,13,22.0,5,.291,.624
+Jared Oliva RHB,Batting Ninth ​,="0-5",.000,.000,0.000,0,0,0,0,20.0,0,.000,.000
+Zack Short RHB,Batting Ninth ​,="7-39",.179,.231,0.052,0,2,0,2,32.0,7,.306,.537
+Francisco Alvarez RHB,Batting Ninth ​,="16-44",.364,.682,0.318,4,2,0,7,17.3,6,.451,1.133

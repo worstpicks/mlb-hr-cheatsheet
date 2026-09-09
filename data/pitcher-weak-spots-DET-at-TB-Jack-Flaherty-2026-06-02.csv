@@ -1,0 +1,26 @@
+Matchup,DET @ TB
+Pitcher,Jack Flaherty
+Pitcher Team,DET
+Opposing Team,TB
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.2,1.43,="6-28",.214,.250,0.036,0,1,0,2,28.6,5,.353,.603
+Batting Second,5.0,3.00,="8-24",.333,.583,0.250,1,3,0,3,21.2,7,.485,1.068
+Batting Third,5.2,2.47,="8-24",.333,.750,0.417,2,2,1,7,12.9,6,.452,1.202
+Batting Fourth,7.0,1.43,="8-26",.308,.538,0.230,2,0,0,10,34.5,2,.345,.883
+Batting Fifth,7.2,0.52,="3-25",.120,.240,0.120,1,0,0,3,25.9,1,.148,.388
+Batting Sixth,5.1,1.50,="4-20",.200,.300,0.100,0,2,0,0,24.0,4,.360,.660
+Batting Seventh,5.1,1.50,="5-20",.250,.400,0.150,0,1,1,0,43.5,3,.348,.748
+Batting Eighth,5.1,0.75,="3-20",.150,.150,0.000,0,0,0,1,30.4,1,.261,.411
+Batting Ninth,3.2,3.00,="10-21",.476,.905,0.429,2,3,0,6,13.0,1,.500,1.405
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Chandler Simpson LHB,Batting First ​,="36-133",.271,.323,0.052,0,3,2,6,13.4,7,.305,.628
+Junior Caminero RHB,Batting Second ​,="32-113",.283,.522,0.239,8,3,0,16,14.8,14,.359,.881
+Jonathan Aranda LHB,Batting Third ​,="30-104",.288,.519,0.231,6,6,0,27,23.6,18,.386,.905
+Yandy Diaz RHB,Batting Fourth ​,="27-102",.265,.480,0.215,6,4,0,15,10.4,11,.348,.828
+Richie Palacios LHB,Batting Fifth ​,="8-34",.235,.265,0.030,0,1,0,5,18.9,3,.297,.562
+Ryan Vilade RHB,Batting Sixth ​,="1-6",.167,.333,0.166,0,1,0,3,0.0,1,.250,.583
+Victor Mesa Jr. LHB,Batting Seventh ​,="2-8",.250,.625,0.375,1,0,0,2,20.0,1,.333,.958
+Hunter Feduccia LHB,Batting Eighth ​,="11-49",.224,.327,0.103,1,2,0,6,30.4,4,.291,.618
+Ben Williamson RHB,Batting Ninth ​,="1-4",.250,.250,0.000,0,0,0,2,0.0,0,.250,.500

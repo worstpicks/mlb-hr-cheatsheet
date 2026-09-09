@@ -871,8 +871,8 @@ assert len(two_leg) == 2, "Goblin 2-leg needs 2 picks"
 assert len(fav3) == 3, "Favorite 3-leg needs 3 picks"
 assert not ({x["name"] for x in two_leg} & straight_names), "2 Leg HR must not reuse Straights of the Day"
 
-# Hits parlay selector (max 11 legs): zone fit first, contact-friendly form second.
-annotate_hits_ranks(rows, row_high_whiff=row_high_whiff)
+# Hits parlay selector (max 11 legs): BIP% + zone fit first, contact form second.
+annotate_hits_ranks(rows, row_high_whiff=row_high_whiff, sheet_date=SHEET_DATE)
 
 hits_parlay_legs = select_hits_parlay(rows, row_high_whiff=row_high_whiff, avoid_whiff=True)
 hits_parlay_legs = fill_hits_parlay(rows, hits_parlay_legs, row_high_whiff=row_high_whiff)

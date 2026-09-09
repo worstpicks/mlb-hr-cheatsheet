@@ -1,0 +1,26 @@
+Matchup,PIT @ HOU
+Pitcher,Bubba Chandler
+Pitcher Team,PIT
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.2,1.95,="8-26",.308,.423,0.115,0,3,0,2,21.9,5,.419,.842
+Batting Second,4.2,3.64,="11-25",.440,.720,0.280,1,2,1,6,19.4,6,.548,1.268
+Batting Third,6.1,1.74,="5-24",.208,.625,0.417,3,1,0,10,12.9,6,.355,.980
+Batting Fourth,8.2,0.35,="1-26",.038,.038,0.000,0,0,0,1,31.0,2,.103,.141
+Batting Fifth,5.2,1.41,="6-23",.261,.478,0.217,1,2,0,6,15.4,2,.346,.824
+Batting Sixth,5.2,1.06,="3-20",.150,.400,0.250,1,2,0,2,21.7,3,.261,.661
+Batting Seventh,5.1,1.13,="2-18",.111,.167,0.056,0,1,0,1,22.7,4,.273,.440
+Batting Eighth,4.1,1.85,="3-16",.188,.375,0.187,1,0,0,1,28.6,5,.381,.756
+Batting Ninth,4.2,1.50,="4-18",.222,.278,0.056,0,1,0,0,28.6,3,.333,.611
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jeremy Pena RHB,Batting First ​,="24-87",.276,.425,0.149,3,4,0,6,13.7,4,.326,.751
+Yordan Alvarez LHB,Batting Second ​,="55-179",.307,.620,0.313,15,11,0,31,18.1,30,.419,1.039
+Christian Walker RHB,Batting Third ​,="2-18",.111,.444,0.333,2,0,0,6,19.0,1,.238,.682
+Isaac Paredes RHB,Batting Fourth ​,="4-16",.250,.250,0.000,0,0,0,0,25.0,2,.400,.650
+Taylor Trammell LHB,Batting Fifth ​,="1-3",.333,.333,0.000,0,0,0,0,33.3,0,.333,.666
+Cam Smith RHB,Batting Sixth ​,="16-83",.193,.301,0.108,2,3,0,5,27.1,10,.284,.585
+Jake Meyers RHB,Batting Seventh ​,="7-29",.241,.379,0.138,1,1,0,3,11.8,4,.324,.703
+Brice Matthews RHB,Batting Eighth ​,="7-33",.212,.242,0.030,0,1,0,2,29.7,3,.278,.520
+Christian Vazquez RHB,Batting Ninth ​,="21-75",.280,.413,0.133,2,4,0,15,15.7,6,.333,.746

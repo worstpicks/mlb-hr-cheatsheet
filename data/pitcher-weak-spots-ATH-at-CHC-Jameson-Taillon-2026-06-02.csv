@@ -1,0 +1,30 @@
+Matchup,ATH @ CHC
+Pitcher,Jameson Taillon
+Pitcher Team,CHC
+Opposing Team,ATH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.2,1.30,="7-30",.233,.333,0.100,1,0,0,1,21.2,3,.303,.636
+Batting Second,7.1,1.64,="9-30",.300,.900,0.600,6,0,0,12,12.1,3,.364,1.264
+Batting Third,8.1,0.96,="7-31",.226,.452,0.226,2,1,0,6,25.0,1,.250,.702
+Batting Fourth,7.0,1.43,="9-29",.310,.552,0.242,2,1,0,2,16.7,1,.333,.885
+Batting Fifth,8.1,0.60,="4-28",.143,.250,0.107,1,0,0,1,27.6,1,.172,.422
+Batting Sixth,5.0,2.40,="10-25",.400,.920,0.520,3,4,0,3,7.4,2,.444,1.364
+Batting Seventh,5.2,1.24,="3-21",.143,.429,0.286,2,0,0,4,28.0,4,.280,.709
+Batting Eighth,5.1,1.13,="3-18",.167,.333,0.166,1,0,0,4,17.4,3,.348,.681
+Batting Ninth,5.1,1.31,="5-20",.250,.500,0.250,1,2,0,2,27.3,2,.318,.818
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nick Kurtz LHB,Batting First ​,="28-96",.292,.521,0.229,5,5,1,16,28.5,25,.447,.968
+Shea Langeliers RHB,Batting Second ​,="48-144",.333,.632,0.299,11,10,0,24,18.4,15,.405,1.037
+Colby Thomas RHB,Batting Third ​,="4-11",.364,.545,0.181,0,2,0,3,45.5,0,.364,.909
+Brent Rooker RHB,Batting Fourth ​,="27-129",.209,.388,0.179,7,2,0,24,30.2,16,.302,.690
+Tyler Soderstrom LHB,Batting Fourth ​,="16-75",.213,.427,0.214,3,7,0,11,9.3,10,.302,.729
+Carlos Cortes LHB,Batting Fifth ​,="10-35",.286,.400,0.114,0,2,1,3,11.1,1,.306,.706
+Zack Gelof RHB,Batting Sixth ​,="5-42",.119,.214,0.095,1,1,0,4,24.4,3,.178,.392
+Henry Bolte RHB,Batting Sixth ​,="7-24",.292,.292,0.000,0,0,0,0,29.2,0,.292,.584
+Jonah Heim SHB,Batting Eighth ​,="7-33",.212,.303,0.091,0,3,0,3,16.2,4,.297,.600
+Jeff McNeil LHB,Batting Eighth ​,="12-49",.245,.265,0.020,0,1,0,2,19.6,7,.339,.604
+Lawrence Butler LHB,Batting Eighth ​,="7-48",.146,.229,0.083,1,1,0,6,21.1,9,.281,.510
+Alika Williams RHB,Batting Ninth ​,="1-8",.125,.125,0.000,0,0,0,1,50.0,0,.125,.250
+Darell Hernaiz RHB,Batting Ninth ​,="12-49",.245,.286,0.041,0,2,0,1,7.1,5,.327,.613

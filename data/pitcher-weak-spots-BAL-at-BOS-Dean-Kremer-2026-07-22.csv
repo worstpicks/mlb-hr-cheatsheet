@@ -1,0 +1,26 @@
+Matchup,BAL @ BOS
+Pitcher,Dean Kremer
+Pitcher Team,BAL
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,4.00,="7-13",.538,1.692,1.154,5,0,0,5,28.6,1,.571,2.263
+Batting Second,3.2,0.82,="3-14",.214,.286,0.072,0,1,0,1,14.3,0,.214,.500
+Batting Third,3.2,0.82,="2-12",.167,.167,0.000,0,0,0,1,14.3,1,.214,.381
+Batting Fourth,4.0,0.25,="1-12",.083,.167,0.084,0,1,0,0,50.0,0,.083,.250
+Batting Fifth,2.2,0.75,="1-9",.111,.111,0.000,0,0,0,0,10.0,1,.200,.311
+Batting Sixth,2.0,2.00,="1-7",.143,.143,0.000,0,0,0,0,20.0,3,.400,.543
+Batting Seventh,2.1,1.71,="4-10",.400,1.000,0.600,2,0,0,3,50.0,0,.400,1.400
+Batting Eighth,2.2,0.75,="1-9",.111,.444,0.333,1,0,0,1,40.0,1,.200,.644
+Batting Ninth,2.1,0.86,="2-9",.222,.667,0.445,1,1,0,3,33.3,0,.222,.889
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Masataka Yoshida LHB,Batting First ​,="6-19",.316,.526,0.210,1,1,0,1,15.0,1,.350,.876
+Ceddanne Rafaela RHB,Batting Second ​,="59-219",.269,.411,0.142,4,17,1,23,17.4,8,.298,.709
+Wilyer Abreu LHB,Batting Third ​,="66-264",.250,.447,0.197,11,15,2,36,20.4,26,.316,.763
+Willson Contreras RHB,Batting Fourth ​,="71-246",.289,.557,0.268,16,14,2,51,25.0,24,.375,.932
+Caleb Durbin RHB,Batting Fifth ​,="4-27",.148,.370,0.222,2,0,0,4,3.2,3,.233,.603
+Romy Gonzalez RHB,Batting Sixth ​,="5-19",.263,.526,0.263,1,0,1,5,30.0,1,.300,.826
+Jarren Duran LHB,Batting Seventh ​,="7-43",.163,.256,0.093,1,1,0,10,29.6,6,.264,.520
+Connor Wong RHB,Batting Eighth ​,="18-78",.231,.333,0.102,1,5,0,14,24.5,10,.337,.670
+Tsung-Che Cheng LHB,Batting Ninth ​,="10-36",.278,.306,0.028,0,1,0,5,31.7,4,.341,.647

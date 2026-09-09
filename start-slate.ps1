@@ -19,5 +19,5 @@ if (-not $DryRun) {
     Write-Host "Next steps:"
     Write-Host "  python recheck-straight.py --import"
     Write-Host "  python build-sheet-2026-XX-XX.py"
-    Write-Host "  python patch-XXXX-preview.py"
+    Write-Host "  python patch-XXXX-preview.py --sync-root   # also refreshes MLB Research tab JSON"
 }

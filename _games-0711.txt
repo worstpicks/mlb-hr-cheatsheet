@@ -1,0 +1,168 @@
+const games = [
+    {
+        title: "CLE @ TB - Parker Messick (L, CLE) vs Drew Rasmussen (R, TB)",
+        description: "Tail key data: Park boost -3% (stadium -4%, weather +1%). Messick (HR risk -0.85, vs LHB -0.80, vs RHB -0.67). Rasmussen (HR risk -0.28, vs LHB +0.08, vs RHB -0.41).",
+        startTime: "2026-07-26T16:15:00Z",
+        rows: [
+            { name: "Patrick Bailey (S)", odds: "Listed +850 - Over 0.5 HR", score: 71, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 2 near-HR, 97.2 mph EV. Rasmussen SHB→LHB split +0.08, HR risk -0.28. pitcher risk below avg (-0.28).", chips: ["vs Rasmussen"], blast: "high" },
+            { name: "Junior Caminero (R)", odds: "Listed +296 - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 1 near-HR, 96.3 mph EV. Messick RHB split -0.67, HR risk -0.85. tough split lane (-0.67); pitcher suppresses HR (-0.85).", chips: ["vs Messick"], blast: "good" },
+            { name: "Rhys Hoskins (R)", odds: "Listed prop - Over 0.5 HR", score: 65, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 93.8 mph EV. Rasmussen RHB split -0.41, HR risk -0.28. tough split lane (-0.41); pitcher risk below avg (-0.28).", chips: ["vs Rasmussen"], blast: "high" },
+        ],
+    },
+    {
+        title: "ARI @ WSH - Kohl Drake (L, ARI) vs Miles Mikolas (R, WSH)",
+        description: "Tail key data: Park boost data unavailable. Drake (HR risk 0.00, vs LHB +0.00, vs RHB -0.25). Mikolas (HR risk 0.43, vs LHB +0.05, vs RHB +0.74).",
+        startTime: "2026-07-26T17:35:00Z",
+        rows: [
+            { name: "Tim Tawa (R)", odds: "Listed +561 - Over 0.5 HR", score: 74, emojis: "", note: "0 HR, 2 near-HR, 95.5 mph EV. Mikolas RHB split +0.74, HR risk 0.43.", chips: ["vs Mikolas"], blast: "good" },
+            { name: "Ryan Waldschmidt (R)", odds: "Listed +660 - Over 0.5 HR", score: 73, emojis: "", note: "1 HR, 1 near-HR, 91.7 mph EV. Mikolas RHB split +0.74, HR risk 0.43.", chips: ["vs Mikolas"], blast: "good" },
+        ],
+    },
+    {
+        title: "ATL @ BAL - Reynaldo Lopez (R, ATL) vs Shane Baz (R, BAL)",
+        description: "Tail key data: Park boost +0% (stadium -1%, weather +1%). Lopez (HR risk 0.11, vs LHB +0.50, vs RHB -0.30). Baz (HR risk -0.75, vs LHB -0.32, vs RHB -0.78).",
+        startTime: "2026-07-26T17:35:00Z",
+        rows: [
+            { name: "Christian Encarnacion-Strand (R)", odds: "Listed +450 - Over 0.5 HR", score: 58, emojis: "", note: "0 HR, 1 near-HR, 88.9 mph EV. Lopez RHB split -0.30, HR risk 0.11. slight split headwind (-0.30); limited recent HR events.", chips: ["vs Lopez"] },
+            { name: "Drake Baldwin (L)", odds: "Listed +379 - Over 0.5 HR", score: 64, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 95.8 mph EV. Baz LHB split -0.32, HR risk -0.75. slight split headwind (-0.32); pitcher suppresses HR (-0.75).", chips: ["vs Baz"], blast: "high" },
+            { name: "Matt Olson (L)", odds: "Listed +271 - Over 0.5 HR", score: 64, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 2 near-HR, 95.8 mph EV. Baz LHB split -0.32, HR risk -0.75. slight split headwind (-0.32); pitcher suppresses HR (-0.75).", chips: ["vs Baz"], blast: "high" },
+        ],
+    },
+    {
+        title: "CHC @ PIT - Jameson Taillon 🧤 (R, CHC) vs Braxton Ashcraft (R, PIT)",
+        description: "Tail key data: Park boost -11% (stadium -15%, weather +4%). Taillon 🧤 (HR risk 1.17, vs LHB +1.14, vs RHB +0.98). Ashcraft (HR risk 0.56, vs LHB +1.03, vs RHB -0.77).",
+        startTime: "2026-07-26T17:35:00Z",
+        rows: [
+            { name: "Esmerlyn Valdez (R)", odds: "Listed +389 - Over 0.5 HR", score: 91, emojis: "⭐ 🌕 💣 ⚾ 🕊️ 🧤", note: "Worst Pickz Favorite. 2 HR, 2 near-HR, 95.1 mph EV. Taillon RHB split +0.98, HR risk 1.17. park/weather net drag (-11%).", chips: ["vs Taillon"], blast: "high" },
+            { name: "Nick Gonzales (R)", odds: "Listed +920 - Over 0.5 HR", score: 77, emojis: "⚾ 🕊️ 🧤", note: "1 HR, 1 near-HR, 87.7 mph EV. Taillon RHB split +0.98, HR risk 1.17. park/weather net drag (-11%); lighter EV form (87.7 mph).", chips: ["vs Taillon"], blast: "good" },
+            { name: "Pete Crow-Armstrong (L)", odds: "Listed +350 - Over 0.5 HR", score: 77, emojis: "⭐", note: "Worst Pickz Favorite. 1 HR, 2 near-HR, 93.8 mph EV. Ashcraft LHB split +1.03, HR risk 0.56. park/weather net drag (-11%).", chips: ["vs Ashcraft"], blast: "good" },
+            { name: "Michael Busch (L)", odds: "Listed +450 - Over 0.5 HR", score: 75, emojis: "", note: "1 HR, 1 near-HR, 93.3 mph EV. Ashcraft LHB split +1.03, HR risk 0.56. park/weather net drag (-11%).", chips: ["vs Ashcraft"], blast: "good" },
+            { name: "Ian Happ (S)", odds: "Listed +447 - Over 0.5 HR", score: 72, emojis: "⭐", note: "Worst Pickz Favorite. 1 HR, 1 near-HR, 89.7 mph EV. Ashcraft SHB→LHB split +1.03, HR risk 0.56. park/weather net drag (-11%).", chips: ["vs Ashcraft"], blast: "good" },
+        ],
+    },
+    {
+        title: "TOR @ BOS - Kevin Gausman (R, TOR) vs Ranger Suarez (L, BOS)",
+        description: "Tail key data: Park boost -6% (stadium -7%, weather +1%). Gausman (HR risk -0.16, vs LHB -0.42, vs RHB +0.51). Suarez (HR risk -1.35, vs LHB +0.10, vs RHB -1.45).",
+        startTime: "2026-07-26T17:35:00Z",
+        rows: [
+            { name: "Willson Contreras (R)", odds: "Listed +400 - Over 0.5 HR", score: 58, emojis: "⭐", note: "Worst Pickz Favorite. 0 HR, 89.6 mph EV. Gausman RHB split +0.51, HR risk -0.16. pitcher risk below avg (-0.16); park/weather net drag (-6%).", chips: ["vs Gausman"] },
+            { name: "Alejandro Kirk (R)", odds: "Listed +870 - Over 0.5 HR", score: 58, emojis: "⭐", note: "Worst Pickz Favorite. 1 HR, 2 near-HR, 89.1 mph EV. Suarez RHB split -1.45, HR risk -1.35. tough split lane (-1.45); pitcher suppresses HR (-1.35).", chips: ["vs Suarez"], blast: "good" },
+            { name: "Kazuma Okamoto (R)", odds: "Listed +458 - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 2 near-HR, 96.8 mph EV. Suarez RHB split -1.45, HR risk -1.35. tough split lane (-1.45); pitcher suppresses HR (-1.35).", chips: ["vs Suarez"], blast: "good" },
+        ],
+    },
+    {
+        title: "KC @ DET - Luinder Avila (R, KC) vs Framber Valdez (L, DET)",
+        description: "Tail key data: Park boost -1% (stadium -10%, weather +9%). Avila (HR risk -0.85, vs LHB -0.69, vs RHB -0.08). Valdez (HR risk -0.73, vs LHB -0.45, vs RHB -0.66).",
+        startTime: "2026-07-26T17:40:00Z",
+        rows: [
+            { name: "Riley Greene (L)", odds: "Listed +363 - Over 0.5 HR", score: 63, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 1 HR, 4 near-HR, 99.2 mph EV. Avila LHB split -0.69, HR risk -0.85. tough split lane (-0.69); pitcher suppresses HR (-0.85).", chips: ["vs Avila"], blast: "high" },
+            { name: "Lane Thomas (R)", odds: "Listed +680 - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 3 near-HR, 93.6 mph EV. Valdez RHB split -0.66, HR risk -0.73. tough split lane (-0.66); pitcher suppresses HR (-0.73).", chips: ["vs Valdez"], blast: "good" },
+            { name: "Salvador Perez (R)", odds: "Listed +466 - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 1 near-HR, 90.7 mph EV. Valdez RHB split -0.66, HR risk -0.73. tough split lane (-0.66); pitcher suppresses HR (-0.73).", chips: ["vs Valdez"], blast: "good" },
+        ],
+    },
+    {
+        title: "LAD @ NYM - Emmet Sheehan (R, LAD) vs Freddy Peralta (R, NYM)",
+        description: "Tail key data: Park boost -1% (stadium -2%, weather +1%). Sheehan (HR risk 0.38, vs LHB +0.45, vs RHB +0.31). Peralta (HR risk -0.11, vs LHB +0.06, vs RHB -0.07).",
+        startTime: "2026-07-26T17:40:00Z",
+        rows: [
+            { name: "Brett Baty (L)", odds: "Listed prop - Over 0.5 HR", score: 78, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 93.2 mph EV. Sheehan LHB split +0.45, HR risk 0.38.", chips: ["vs Sheehan"], blast: "high" },
+            { name: "Francisco Lindor (S)", odds: "Listed +450 - Over 0.5 HR", score: 67, emojis: "", note: "1 HR, 1 near-HR, 92.1 mph EV. Sheehan SHB→LHB split +0.45, HR risk 0.38.", chips: ["vs Sheehan"], blast: "good" },
+            { name: "Shohei Ohtani (L)", odds: "Listed +263 - Over 0.5 HR", score: 58, emojis: "", note: "0 HR, 97.9 mph EV. Peralta LHB split +0.06, HR risk -0.11. pitcher risk below avg (-0.11); limited recent HR events.", chips: ["vs Peralta"], blast: "good" },
+            { name: "Kyle Tucker (L)", odds: "Listed +582 - Over 0.5 HR", score: 63, emojis: "", note: "1 HR, 2 near-HR, 93.6 mph EV. Peralta LHB split +0.06, HR risk -0.11. pitcher risk below avg (-0.11).", chips: ["vs Peralta"], blast: "good" },
+        ],
+    },
+    {
+        title: "SD @ MIA - Walker Buehler (R, SD) vs Janson Junk (R, MIA)",
+        description: "Tail key data: Park boost -13% (stadium -12%, weather +0%). Buehler (HR risk 0.61, vs LHB +0.21, vs RHB +1.10). Junk (HR risk 0.39, vs LHB +0.31, vs RHB +0.41).",
+        startTime: "2026-07-26T17:40:00Z",
+        rows: [
+            { name: "Joe Mack (L)", odds: "Listed +760 - Over 0.5 HR", score: 87, emojis: "🌕 💣", note: "3 HR, 3 near-HR, 93.8 mph EV. Buehler LHB split +0.21, HR risk 0.61. park/weather net drag (-13%).", chips: ["vs Buehler"], blast: "high" },
+            { name: "Griffin Conine (L)", odds: "Listed +533 - Over 0.5 HR", score: 89, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 3 HR, 3 near-HR, 96.6 mph EV. Buehler LHB split +0.21, HR risk 0.61. park/weather net drag (-13%).", chips: ["vs Buehler"], blast: "high" },
+            { name: "Ty France (R)", odds: "Listed +596 - Over 0.5 HR", score: 78, emojis: "🚀 ⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 2 near-HR, 100.7 mph EV. Junk RHB split +0.41, HR risk 0.39. park/weather net drag (-13%).", chips: ["vs Junk"], blast: "high" },
+        ],
+    },
+    {
+        title: "ATH @ MIN - Jeffrey Springs (L, ATH) vs Connor Prielipp (L, MIN)",
+        description: "Tail key data: Park boost +1% (stadium -5%, weather +6%). Springs (HR risk 0.88, vs LHB -0.41, vs RHB +1.23). Prielipp (HR risk 0.03, vs LHB -0.44, vs RHB +0.11).",
+        startTime: "2026-07-26T18:10:00Z",
+        rows: [
+            { name: "Byron Buxton (R)", odds: "Listed +210 - Over 0.5 HR", score: 81, emojis: "", note: "0 HR, 1 near-HR, 95.6 mph EV. Springs RHB split +1.23, HR risk 0.88. limited recent HR events.", chips: ["vs Springs"], blast: "good" },
+            { name: "Kody Clemens (L)", odds: "Listed prop - Over 0.5 HR", score: 67, emojis: "", note: "1 HR, 1 near-HR, 90.9 mph EV. Springs LHB split -0.41, HR risk 0.88. tough split lane (-0.41).", chips: ["vs Springs"], blast: "good" },
+            { name: "Royce Lewis (R)", odds: "Listed +330 - Over 0.5 HR", score: 71, emojis: "", note: "0 HR, 91.3 mph EV. Springs RHB split +1.23, HR risk 0.88. limited recent HR events.", chips: ["vs Springs"] },
+            { name: "Shea Langeliers (R)", odds: "Listed +303 - Over 0.5 HR", score: 65, emojis: "", note: "1 HR, 2 near-HR, 93.9 mph EV. Prielipp RHB split +0.11, HR risk 0.03.", chips: ["vs Prielipp"], blast: "good" },
+        ],
+    },
+    {
+        title: "COL @ MIL - Kyle Freeland (L, COL) vs Jacob Misiorowski (R, MIL)",
+        description: "Tail key data: Park boost +18% (stadium +10%, weather +8%). Freeland (HR risk 0.68, vs LHB -0.09, vs RHB +0.92). Misiorowski (HR risk -0.25, vs LHB -0.84, vs RHB +0.95).",
+        startTime: "2026-07-26T18:10:00Z",
+        rows: [
+            { name: "Gary Sanchez (R)", odds: "Listed +204 - Over 0.5 HR", score: 82, emojis: "", note: "1 HR, 1 near-HR, 92.5 mph EV. Freeland RHB split +0.92, HR risk 0.68.", chips: ["vs Freeland"], blast: "good" },
+            { name: "Hunter Goodman (R)", odds: "Listed +364 - Over 0.5 HR", score: 83, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 3 HR, 3 near-HR, 87.1 mph EV. Misiorowski RHB split +0.95, HR risk -0.25. pitcher risk below avg (-0.25); lighter EV form (87.1 mph).", chips: ["vs Misiorowski"], blast: "high" },
+            { name: "Kyle Karros (R)", odds: "Listed +910 - Over 0.5 HR", score: 61, emojis: "", note: "0 HR, 1 near-HR, 90.9 mph EV. Misiorowski RHB split +0.95, HR risk -0.25. pitcher risk below avg (-0.25); limited recent HR events.", chips: ["vs Misiorowski"] },
+        ],
+    },
+    {
+        title: "HOU @ CWS - Ronel Blanco 🧤 (R, HOU) vs Erick Fedde (R, CWS)",
+        description: "Tail key data: Park boost data unavailable. Blanco 🧤 (HR risk 2.77, vs LHB +3.38, vs RHB -0.60). Fedde (HR risk -0.36, vs LHB -0.21, vs RHB -0.15).",
+        startTime: "2026-07-26T18:10:00Z",
+        rows: [
+            { name: "Munetaka Murakami (L)", odds: "Listed +241 - Over 0.5 HR", score: 97, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "2 HR, 3 near-HR, 92.9 mph EV. Blanco LHB split +3.38, HR risk 2.77.", chips: ["vs Blanco"], blast: "high" },
+            { name: "Randal Grichuk (R)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 92.8 mph EV. Blanco RHB split -0.60, HR risk 2.77. tough split lane (-0.60); limited recent HR events.", chips: ["vs Blanco"], blast: "good" },
+            { name: "Tristan Peters (L)", odds: "Listed +640 - Over 0.5 HR", score: 90, emojis: "🌕 💣 ⚾ 🕊️ 🧤", note: "0 HR, 1 near-HR, 93.5 mph EV. Blanco LHB split +3.38, HR risk 2.77. limited recent HR events.", chips: ["vs Blanco"], blast: "good" },
+            { name: "Jeremy Pena (R)", odds: "Listed +620 - Over 0.5 HR", score: 69, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 2 near-HR, 95.7 mph EV. Fedde RHB split -0.15, HR risk -0.36. slight split headwind (-0.15); pitcher risk below avg (-0.36).", chips: ["vs Fedde"], blast: "high" },
+            { name: "Yordan Alvarez (L)", odds: "Listed +219 - Over 0.5 HR", score: 58, emojis: "", note: "0 HR, 91.7 mph EV. Fedde LHB split -0.21, HR risk -0.36. slight split headwind (-0.21); pitcher risk below avg (-0.36).", chips: ["vs Fedde"] },
+        ],
+    },
+    {
+        title: "CIN @ STL - Andrew Abbott (L, CIN) vs Kyle Leahy (R, STL)",
+        description: "Tail key data: Park boost +7% (stadium -9%, weather +15%). Abbott (HR risk -0.26, vs LHB -0.10, vs RHB -0.23). Leahy (HR risk -0.49, vs LHB -0.29, vs RHB -0.41).",
+        startTime: "2026-07-26T18:15:00Z",
+        rows: [
+            { name: "JJ Wetherholt (L)", odds: "Listed +600 - Over 0.5 HR", score: 73, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 2 near-HR, 96.9 mph EV. Abbott LHB split -0.10, HR risk -0.26. slight split headwind (-0.10); pitcher risk below avg (-0.26).", chips: ["vs Abbott"], blast: "high" },
+            { name: "Nelson Velazquez (R)", odds: "Listed +465 - Over 0.5 HR", score: 61, emojis: "", note: "1 HR, 1 near-HR, 94.5 mph EV. Abbott RHB split -0.23, HR risk -0.26. slight split headwind (-0.23); pitcher risk below avg (-0.26).", chips: ["vs Abbott"], blast: "good" },
+            { name: "Lars Nootbaar (L)", odds: "Listed prop - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 1 near-HR, 90.9 mph EV. Abbott LHB split -0.10, HR risk -0.26. slight split headwind (-0.10); pitcher risk below avg (-0.26).", chips: ["vs Abbott"], blast: "good" },
+            { name: "Eugenio Suarez (R)", odds: "Listed +485 - Over 0.5 HR", score: 64, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 91.7 mph EV. Leahy RHB split -0.41, HR risk -0.49. tough split lane (-0.41); pitcher suppresses HR (-0.49).", chips: ["vs Leahy"], blast: "high" },
+            { name: "Nathaniel Lowe (L)", odds: "Listed +730 - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 2 near-HR, 86.2 mph EV. Leahy LHB split -0.29, HR risk -0.49. slight split headwind (-0.29); pitcher suppresses HR (-0.49).", chips: ["vs Leahy"], blast: "good" },
+        ],
+    },
+    {
+        title: "SEA @ TEX - Logan Gilbert (R, SEA) vs Jacob deGrom (R, TEX)",
+        description: "Tail key data: Park boost -10% (stadium -9%, weather -1%). Gilbert (HR risk -0.36, vs LHB -0.15, vs RHB -0.17). deGrom (HR risk -0.01, vs LHB +0.13, vs RHB -0.04).",
+        startTime: "2026-07-26T18:35:00Z",
+        rows: [
+            { name: "Jake Burger (R)", odds: "Listed +440 - Over 0.5 HR", score: 71, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 3 near-HR, 96.4 mph EV. Gilbert RHB split -0.17, HR risk -0.36. slight split headwind (-0.17); pitcher risk below avg (-0.36).", chips: ["vs Gilbert"], blast: "high" },
+            { name: "Wyatt Langford (R)", odds: "Listed +568 - Over 0.5 HR", score: 60, emojis: "", note: "1 HR, 3 near-HR, 92.2 mph EV. Gilbert RHB split -0.17, HR risk -0.36. slight split headwind (-0.17); pitcher risk below avg (-0.36).", chips: ["vs Gilbert"], blast: "good" },
+            { name: "Ezequiel Duran (R)", odds: "Listed +990 - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 1 near-HR, 93.2 mph EV. Gilbert RHB split -0.17, HR risk -0.36. slight split headwind (-0.17); pitcher risk below avg (-0.36).", chips: ["vs Gilbert"], blast: "good" },
+            { name: "Luke Raley (L)", odds: "Listed +551 - Over 0.5 HR", score: 61, emojis: "⭐", note: "Worst Pickz Favorite. 1 HR, 1 near-HR, 94.1 mph EV. deGrom LHB split +0.13, HR risk -0.01. pitcher risk below avg (-0.01); park/weather net drag (-10%).", chips: ["vs deGrom"], blast: "good" },
+            { name: "Mitch Garver (R)", odds: "Listed prop - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 1 near-HR, 91.4 mph EV. deGrom RHB split -0.04, HR risk -0.01. slight split headwind (-0.04); pitcher risk below avg (-0.01).", chips: ["vs deGrom"], blast: "good" },
+            { name: "Randy Arozarena (R)", odds: "Listed +670 - Over 0.5 HR", score: 60, emojis: "", note: "1 HR, 1 near-HR, 94.5 mph EV. deGrom RHB split -0.04, HR risk -0.01. slight split headwind (-0.04); pitcher risk below avg (-0.01).", chips: ["vs deGrom"], blast: "good" },
+        ],
+    },
+    {
+        title: "LAA @ SF - Jose Soriano (R, LAA) vs Carson Whisenhunt (L, SF)",
+        description: "Tail key data: Park boost -10% (stadium -11%, weather +1%). Soriano (HR risk -0.62, vs LHB +0.13, vs RHB -1.25). Whisenhunt (HR risk -0.20, vs LHB -1.10, vs RHB +0.51).",
+        startTime: "2026-07-26T20:05:00Z",
+        rows: [
+            { name: "Rafael Devers (L)", odds: "Listed +460 - Over 0.5 HR", score: 58, emojis: "", note: "1 HR, 2 near-HR, 91.9 mph EV. Soriano LHB split +0.13, HR risk -0.62. pitcher suppresses HR (-0.62); park/weather net drag (-10%).", chips: ["vs Soriano"], blast: "good" },
+            { name: "Casey Schmitt (R)", odds: "Listed +560 - Over 0.5 HR", score: 58, emojis: "🌕 💣 💎", note: "Worst Pickz Hidden Gem. 2 HR, 2 near-HR, 88.2 mph EV. Soriano RHB split -1.25, HR risk -0.62. tough split lane (-1.25); pitcher suppresses HR (-0.62).", chips: ["vs Soriano"], blast: "high" },
+            { name: "Bryce Eldridge (L)", odds: "Listed +531 - Over 0.5 HR", score: 68, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 3 near-HR, 93.0 mph EV. Soriano LHB split +0.13, HR risk -0.62. pitcher suppresses HR (-0.62); park/weather net drag (-10%).", chips: ["vs Soriano"], blast: "high" },
+            { name: "Jorge Soler (R)", odds: "Listed +452 - Over 0.5 HR", score: 58, emojis: "", note: "0 HR, 1 near-HR, 87.2 mph EV. Whisenhunt RHB split +0.51, HR risk -0.20. pitcher risk below avg (-0.20); park/weather net drag (-10%).", chips: ["vs Whisenhunt"] },
+            { name: "Zach Neto (R)", odds: "Listed +412 - Over 0.5 HR", score: 62, emojis: "", note: "1 HR, 2 near-HR, 92.6 mph EV. Whisenhunt RHB split +0.51, HR risk -0.20. pitcher risk below avg (-0.20); park/weather net drag (-10%).", chips: ["vs Whisenhunt"], blast: "good" },
+        ],
+    },
+    {
+        title: "NYY @ PHI - Will Warren (R, NYY) vs Cristopher Sanchez (L, PHI)",
+        description: "Tail key data: Park boost +18% (stadium +14%, weather +4%). Warren (HR risk 0.62, vs LHB +0.62, vs RHB +0.34). Sanchez (HR risk -0.13, vs LHB -0.95, vs RHB +0.18).",
+        startTime: "2026-07-26T23:20:00Z",
+        rows: [
+            { name: "Trea Turner (R)", odds: "Listed +508 - Over 0.5 HR", score: 80, emojis: "", note: "1 HR, 1 near-HR, 97.3 mph EV. Warren RHB split +0.34, HR risk 0.62.", chips: ["vs Warren"], blast: "good" },
+            { name: "Brandon Marsh (L)", odds: "Listed +600 - Over 0.5 HR", score: 81, emojis: "", note: "1 HR, 1 near-HR, 94.6 mph EV. Warren LHB split +0.62, HR risk 0.62.", chips: ["vs Warren"], blast: "good" },
+            { name: "Kyle Schwarber (L)", odds: "Listed +210 - Over 0.5 HR", score: 79, emojis: "⭐", note: "Worst Pickz Favorite. 0 HR, 1 near-HR, 99.3 mph EV. Warren LHB split +0.62, HR risk 0.62. limited recent HR events.", chips: ["vs Warren"], blast: "good" },
+            { name: "Derek Hill (R)", odds: "Listed prop - Over 0.5 HR", score: 73, emojis: "", note: "1 HR, 1 near-HR, 88.6 mph EV. Warren RHB split +0.34, HR risk 0.62.", chips: ["vs Warren"], blast: "good" },
+            { name: "Max Schuemann (R)", odds: "Listed +1180 - Over 0.5 HR", score: 65, emojis: "", note: "1 HR, 1 near-HR, 92.0 mph EV. Sanchez RHB split +0.18, HR risk -0.13. pitcher risk below avg (-0.13).", chips: ["vs Sanchez"], blast: "good" },
+            { name: "Jasson Dominguez (S)", odds: "Listed prop - Over 0.5 HR", score: 63, emojis: "", note: "1 HR, 1 near-HR, 89.6 mph EV. Sanchez SHB→RHB split +0.18, HR risk -0.13. pitcher risk below avg (-0.13).", chips: ["vs Sanchez"], blast: "good" },
+            { name: "Paul Goldschmidt (R)", odds: "Listed +534 - Over 0.5 HR", score: 61, emojis: "", note: "1 HR, 2 near-HR, 82.1 mph EV. Sanchez RHB split +0.18, HR risk -0.13. pitcher risk below avg (-0.13); lighter EV form (82.1 mph).", chips: ["vs Sanchez"], blast: "good" },
+        ],
+    },
+];

@@ -1,0 +1,30 @@
+Matchup,SD @ ATL
+Pitcher,Reynaldo Lopez
+Pitcher Team,ATL
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.2,1.30,="5-28",.179,.321,0.142,1,1,0,2,21.2,5,.303,.624
+Batting Second,7.1,1.23,="6-29",.207,.276,0.069,0,2,0,0,21.9,3,.281,.557
+Batting Third,6.2,1.35,="7-26",.269,.462,0.193,1,2,0,4,13.8,2,.310,.772
+Batting Fourth,5.0,2.20,="9-24",.375,.750,0.375,2,3,0,5,18.5,2,.444,1.194
+Batting Fifth,6.1,1.26,="3-22",.136,.545,0.409,3,0,0,7,22.2,5,.296,.841
+Batting Sixth,6.2,0.90,="5-25",.200,.200,0.000,0,0,0,2,30.8,1,.231,.431
+Batting Seventh,6.0,1.83,="9-26",.346,.462,0.116,0,1,1,2,17.2,2,.393,.855
+Batting Eighth,7.2,1.04,="5-27",.185,.333,0.148,1,1,0,4,23.3,3,.267,.600
+Batting Ninth,7.2,0.78,="4-25",.160,.240,0.080,0,2,0,1,18.5,2,.222,.462
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="73-244",.299,.447,0.148,7,15,0,27,17.2,19,.356,.803
+Jackson Merrill LHB,Batting Third ​,="29-128",.227,.359,0.132,4,5,0,12,28.1,7,.272,.631
+Manny Machado RHB,Batting Fourth ​,="42-198",.212,.419,0.207,11,8,0,35,21.6,25,.295,.714
+Xander Bogaerts RHB,Batting Fifth ​,="38-160",.238,.313,0.075,3,3,0,16,19.7,16,.309,.622
+Luis Rengifo SHB,Batting Sixth ​,="15-49",.306,.408,0.102,0,5,0,8,10.7,6,.393,.801
+Gavin Sheets LHB,Batting Sixth ​,="13-75",.173,.347,0.174,3,4,0,10,27.2,5,.235,.582
+Ty France RHB,Batting Seventh ​,="22-83",.265,.627,0.362,8,4,1,20,30.8,4,.319,.946
+Luis Campusano RHB,Batting Eighth ​,="10-34",.294,.706,0.412,3,5,0,6,23.7,3,.368,1.074
+Jase Bowen RHB,Batting Eighth ​,="3-28",.107,.143,0.036,0,1,0,3,37.9,0,.138,.281
+Jake Cronenworth LHB,Batting Ninth ​,="9-58",.155,.241,0.086,1,2,0,4,17.1,8,.290,.531
+Rodolfo Durán RHB,Batting Ninth ​,="10-61",.164,.361,0.197,3,3,0,7,28.6,7,.261,.622
+Freddy Fermin RHB,Batting Ninth ​,="12-71",.169,.338,0.169,3,3,0,9,21.0,7,.241,.579
+Sung-Mun Song LHB,Batting Ninth ​,="12-48",.250,.375,0.125,1,3,0,10,20.4,5,.321,.696

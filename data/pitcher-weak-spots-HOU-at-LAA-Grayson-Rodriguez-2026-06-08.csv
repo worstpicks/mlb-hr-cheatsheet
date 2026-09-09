@@ -1,0 +1,30 @@
+Matchup,HOU @ LAA
+Pitcher,Grayson Rodriguez
+Pitcher Team,LAA
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,3.00,="4-10",.400,.500,0.100,0,1,0,3,16.7,2,.500,1.000
+Batting Second,3.2,0.55,="1-10",.100,.400,0.300,1,0,0,3,27.3,1,.182,.582
+Batting Third,2.2,0.75,="2-11",.182,.455,0.273,1,0,0,3,18.2,0,.182,.637
+Batting Fourth,1.2,2.40,="3-8",.375,.750,0.375,1,0,0,1,11.1,1,.444,1.194
+Batting Fifth,1.2,2.40,="2-7",.286,.571,0.285,0,2,0,0,33.3,2,.444,1.015
+Batting Sixth,2.1,0.86,="1-7",.143,.143,0.000,0,0,0,1,22.2,1,.222,.365
+Batting Seventh,1.2,2.40,="2-7",.286,.286,0.000,0,0,0,1,11.1,2,.444,.730
+Batting Eighth,1.0,5.00,="4-6",.667,1.500,0.833,1,0,1,4,12.5,1,.625,2.125
+Batting Ninth,1.1,3.75,="4-7",.571,.571,0.000,0,0,0,2,25.0,1,.625,1.196
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jose Altuve RHB,Batting First ​,="22-75",.293,.507,0.214,4,4,0,7,20.9,9,.372,.879
+Jeremy Pena RHB,Batting First ​,="33-110",.300,.445,0.145,3,7,0,10,11.5,8,.361,.806
+Yordan Alvarez LHB,Batting Second ​,="65-200",.325,.640,0.315,17,12,0,40,16.6,35,.436,1.076
+Isaac Paredes RHB,Batting Third ​,="30-114",.263,.377,0.114,2,7,0,15,15.4,13,.354,.731
+Christian Walker RHB,Batting Fourth ​,="29-133",.218,.466,0.248,10,3,0,23,21.8,12,.286,.752
+LaMonte Wade Jr. LHB,Batting Sixth ​,="3-5",.600,1.400,0.800,1,1,0,3,20.0,0,.600,2.000
+Cam Smith RHB,Batting Sixth ​,="16-93",.172,.269,0.097,2,3,0,5,28.7,12,.271,.540
+Taylor Trammell LHB,Batting Seventh ​,="6-16",.375,.438,0.063,0,1,0,1,29.4,1,.412,.850
+Jake Meyers RHB,Batting Seventh ​,="9-36",.250,.389,0.139,1,2,0,3,14.6,4,.317,.706
+Nick Allen RHB,Batting Eighth ​,="7-26",.269,.346,0.077,0,2,0,3,28.6,0,.259,.605
+Brice Matthews RHB,Batting Eighth ​,="8-39",.205,.231,0.026,0,1,0,2,30.2,3,.262,.493
+Collin Price RHB,Batting Eighth ​,="0-3",.000,.000,0.000,0,0,0,0,50.0,1,.250,.250
+Christian Vazquez RHB,Batting Ninth ​,="25-89",.281,.416,0.135,2,6,0,17,16.3,7,.333,.749

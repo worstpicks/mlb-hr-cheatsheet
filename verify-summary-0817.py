@@ -111,7 +111,16 @@ if len(hits) != 11:
     errors.append(f"Hits parlay: expected 11 legs, got {len(hits)}")
 n_games = len({r.get("game_key") for r in patch_globals["rows"] if r.get("game_key")})
 # Thin slates (≤5 games) cannot fill 11 legs at 2/game — allow ceil(11/n).
-hits_game_cap = 2 if n_games >= 6 else max(2, (11 + max(n_games, 1) - 1) // max(n_games, 1))
+# Read the cap from the rubric module rather than restating it. The two drifted on
+# 2026-08-17: the rubric moved to 4 per game (a parlay is not a portfolio -- see
+# goblin_hits_parlay) while this check still demanded 2, and failed a correct sheet.
+from goblin_hits_parlay import MAX_PER_GAME as _HITS_MAX_PER_GAME, TICKET_LEGS as _HITS_LEGS
+
+hits_game_cap = (
+    _HITS_MAX_PER_GAME
+    if n_games >= 6
+    else max(_HITS_MAX_PER_GAME, (_HITS_LEGS + max(n_games, 1) - 1) // max(n_games, 1))
+)
 per_game = Counter(r.get("game_key") for r in hits)
 over_game = [g for g, c in per_game.items() if c > hits_game_cap]
 if over_game:

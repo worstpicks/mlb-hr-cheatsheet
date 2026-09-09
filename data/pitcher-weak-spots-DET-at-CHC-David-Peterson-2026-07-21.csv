@@ -1,0 +1,31 @@
+Matchup,DET @ CHC
+Pitcher,David Peterson
+Pitcher Team,CHC
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.0,1.36,="10-40",.250,.400,0.150,1,1,1,5,17.0,5,.362,.762
+Batting Second,10.0,1.90,="12-41",.293,.512,0.219,2,3,0,10,20.8,7,.396,.908
+Batting Third,10.1,1.16,="8-39",.205,.256,0.051,0,2,0,4,22.7,4,.273,.529
+Batting Fourth,8.1,2.16,="9-32",.281,.500,0.219,1,2,1,8,18.6,9,.419,.919
+Batting Fifth,9.2,1.34,="11-41",.268,.415,0.147,1,3,0,8,23.3,2,.302,.717
+Batting Sixth,8.1,1.80,="13-38",.342,.526,0.184,1,2,1,6,19.5,2,.366,.892
+Batting Seventh,8.2,1.62,="13-38",.342,.474,0.132,1,2,0,8,22.5,1,.350,.824
+Batting Eighth,8.1,1.56,="9-33",.273,.364,0.091,0,1,1,2,2.6,4,.368,.732
+Batting Ninth,7.1,2.18,="13-34",.382,.588,0.206,2,1,0,6,16.2,3,.432,1.020
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Matt Vierling RHB,Batting First ​,="13-47",.277,.447,0.170,2,2,0,7,17.3,4,.327,.774
+Kevin McGonigle LHB,Batting First ​,="65-218",.298,.482,0.184,8,14,1,20,13.2,38,.405,.887
+Gleyber Torres RHB,Batting Second ​,="28-90",.311,.389,0.078,2,1,0,9,15.4,24,.453,.842
+Dillon Dingler RHB,Batting Second ​,="33-112",.295,.500,0.205,5,8,0,15,22.1,5,.336,.836
+Colt Keith LHB,Batting Third ​,="30-109",.275,.339,0.064,0,7,0,7,22.4,6,.310,.649
+Riley Greene LHB,Batting Fourth ​,="65-231",.281,.485,0.204,11,12,1,36,28.9,29,.361,.846
+Spencer Torkelson RHB,Batting Fifth ​,="24-123",.195,.398,0.203,6,7,0,16,32.4,13,.283,.681
+Eduardo Valencia RHB,Batting Sixth ​,="5-12",.417,.917,0.500,2,0,0,3,30.8,0,.462,1.379
+Kerry Carpenter LHB,Batting Sixth ​,="14-75",.187,.373,0.186,2,4,2,8,25.0,6,.274,.647
+Zach McKinstry LHB,Batting Seventh ​,="16-78",.205,.308,0.103,2,2,0,10,17.6,6,.262,.570
+Ben Malgeri RHB,Batting Eighth ​,="5-15",.333,.467,0.134,0,2,0,3,10.5,4,.474,.941
+Hao-Yu Lee RHB,Batting Eighth ​,="15-60",.250,.400,0.150,1,4,1,5,28.1,3,.286,.686
+Jake Rogers RHB,Batting Ninth ​,="11-71",.155,.254,0.099,1,2,1,5,27.7,8,.244,.498
+James Outman LHB,Batting Ninth ​,="15-86",.174,.314,0.140,2,4,1,7,40.9,2,.193,.507

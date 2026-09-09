@@ -1,0 +1,30 @@
+Matchup,HOU @ DET
+Pitcher,Tatsuya Imai
+Pitcher Team,HOU
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.0,3.25,="7-18",.389,.444,0.055,0,1,0,0,8.3,6,.542,.986
+Batting Second,6.2,0.75,="2-21",.095,.095,0.000,0,0,0,0,37.5,3,.208,.303
+Batting Third,5.0,2.00,="5-18",.278,.333,0.055,0,1,0,2,13.0,5,.435,.768
+Batting Fourth,5.0,1.60,="4-18",.222,.444,0.222,1,1,0,6,36.4,4,.364,.808
+Batting Fifth,4.1,1.38,="5-18",.278,.944,0.666,4,0,0,9,23.8,1,.381,1.325
+Batting Sixth,5.0,0.60,="3-18",.167,.167,0.000,0,0,0,2,45.0,0,.250,.417
+Batting Seventh,3.1,2.10,="4-14",.286,.357,0.071,0,1,0,2,23.5,3,.412,.769
+Batting Eighth,3.1,1.50,="4-14",.286,.500,0.214,1,0,0,4,40.0,1,.333,.833
+Batting Ninth,4.1,0.46,="1-13",.077,.077,0.000,0,0,0,0,13.3,1,.143,.220
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="48-157",.306,.490,0.184,5,12,1,15,13.2,24,.401,.891
+Jahmai Jones RHB,Batting Third ​,="7-32",.219,.375,0.156,1,2,0,3,34.3,3,.286,.661
+Colt Keith LHB,Batting Third ​,="25-98",.255,.316,0.061,0,6,0,5,23.3,5,.291,.607
+Riley Greene LHB,Batting Fourth ​,="51-184",.277,.418,0.141,5,11,0,21,28.4,26,.370,.788
+Spencer Torkelson RHB,Batting Fifth ​,="19-99",.192,.354,0.162,3,7,0,10,31.0,11,.286,.640
+Dillon Dingler RHB,Batting Fifth ​,="12-69",.174,.391,0.217,4,1,1,10,18.2,5,.250,.641
+Kerry Carpenter LHB,Batting Sixth ​,="13-54",.241,.481,0.240,2,3,2,8,27.9,4,.328,.809
+Matt Vierling RHB,Batting Seventh ​,="9-39",.231,.385,0.154,1,3,0,5,20.9,3,.279,.664
+Zach McKinstry LHB,Batting Eighth ​,="9-69",.130,.188,0.058,1,1,0,2,22.4,6,.200,.388
+Hao-Yu Lee RHB,Batting Eighth ​,="15-60",.250,.400,0.150,1,4,1,5,28.1,3,.286,.686
+Jake Rogers RHB,Batting Ninth ​,="9-59",.153,.271,0.118,1,2,1,5,30.4,6,.235,.506
+James Outman LHB,Batting Ninth ​,="11-57",.193,.351,0.158,1,4,1,4,43.1,1,.207,.558
+Ben Malgeri RHB,Batting Ninth ​,="2-3",.667,.667,0.000,0,0,0,0,0.0,0,.667,1.334

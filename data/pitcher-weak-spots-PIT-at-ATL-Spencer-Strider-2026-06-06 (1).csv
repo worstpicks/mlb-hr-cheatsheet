@@ -1,0 +1,26 @@
+Matchup,PIT @ ATL
+Pitcher,Spencer Strider
+Pitcher Team,ATL
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.2,0.86,="2-15",.133,.333,0.200,1,0,0,1,52.9,2,.235,.568
+Batting Second,3.1,1.80,="4-14",.286,.500,0.214,1,0,0,1,6.3,2,.375,.875
+Batting Third,4.0,1.25,="3-14",.214,.357,0.143,0,2,0,2,25.0,2,.313,.670
+Batting Fourth,2.1,3.00,="6-13",.462,1.154,0.692,3,0,0,4,28.6,1,.500,1.654
+Batting Fifth,3.2,0.82,="1-11",.091,.182,0.091,0,1,0,1,42.9,2,.214,.396
+Batting Sixth,4.0,0.50,="0-12",.000,.000,0.000,0,0,0,0,35.7,2,.143,.143
+Batting Seventh,2.2,1.50,="2-10",.200,.500,0.300,1,0,0,1,41.7,2,.333,.833
+Batting Eighth,2.1,2.14,="3-10",.300,.500,0.200,0,2,0,0,16.7,2,.417,.917
+Batting Ninth,3.0,1.00,="1-10",.100,.300,0.200,0,0,1,0,33.3,2,.250,.550
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Spencer Horwitz LHB,Batting First ​,="13-45",.289,.444,0.155,2,1,0,2,7.7,7,.385,.829
+Brandon Lowe LHB,Batting Second ​,="52-196",.265,.577,0.312,15,14,1,39,23.5,27,.358,.935
+Bryan Reynolds SHB,Batting Third ​,="60-221",.271,.425,0.154,6,12,2,38,21.3,45,.401,.826
+Ryan O'Hearn LHB,Batting Fourth ​,="38-127",.299,.472,0.173,6,4,0,26,23.2,13,.366,.838
+Nick Gonzales RHB,Batting Fifth ​,="23-56",.411,.500,0.089,1,2,0,9,20.6,5,.476,.976
+Oneil Cruz LHB,Batting Sixth ​,="5-11",.455,.727,0.272,1,0,0,4,25.0,5,.625,1.352
+Endy Rodriguez SHB,Batting Seventh ​,="7-22",.318,.500,0.182,1,1,0,3,18.5,4,.423,.923
+Tyler Callihan LHB,Batting Seventh ​,="1-2",.500,1.000,0.500,0,1,0,1,0.0,1,.667,1.667
+Jared Triolo RHB,Batting Ninth ​,="5-28",.179,.214,0.035,0,1,0,2,25.0,3,.258,.472

@@ -119,7 +119,7 @@ def add_bum_row_emojis(entry):
 games = [
     {
         "title": "COL @ LAA - Kyle Freeland 🧤 (R, COL) vs Jose Soriano (R, LAA)",
-        "description": "Tail key data: Kyle Freeland 🧤 (HR risk 2.04, vs LHB -0.14, vs RHB +2.43). Jose Soriano (HR risk -0.10, vs LHB -0.44, vs RHB +0.47).",
+        "description": "Tail key data: Park boost +5% (stadium +8%, weather -3%). Kyle Freeland 🧤 (HR risk 2.04, vs LHB -0.14, vs RHB +2.43). Jose Soriano (HR risk -0.10, vs LHB -0.44, vs RHB +0.47).",
         "rows": [
             row("Jose Siri", "R", "N/A", 71, "💎", ["vs Freeland"], """Tail: 1 HR, 1 near-HR, 89.3 mph EV. Matchup: Freeland RHB split +2.43, HR risk 2.04. Fade: HR outcomes are still high-variance. Model score 71; odds Listed prop - Over 0.5 HR.""", blast="good"),
             row("Mike Trout", "R", "+319", 74, "⭐ 💎", ["vs Freeland"], """Worst Pickz Favorite. Tail: 1 HR, 1 near-HR, 92.4 mph EV. Matchup: Freeland RHB split +2.43, HR risk 2.04. Fade: HR outcomes are still high-variance. Model score 74; odds Listed +319 - Over 0.5 HR.""", blast="good"),
@@ -132,7 +132,7 @@ games = [
     },
     {
         "title": "CWS @ MIN - David Sandlin (R, CWS) vs Joe Ryan (R, MIN)",
-        "description": "Tail key data: Away starter risk unavailable. Joe Ryan (HR risk -0.07, vs LHB +0.21, vs RHB -0.61).",
+        "description": "Tail key data: Park boost data unavailable. Away starter risk unavailable. Joe Ryan (HR risk -0.07, vs LHB +0.21, vs RHB -0.61).",
         "rows": [
             row("Byron Buxton", "R", "+271", 77, "⭐ 💎", ["vs Sandlin"], """Worst Pickz Favorite. Tail: 1 HR, 1 near-HR, 95.2 mph EV. Matchup: Sandlin split/risk data unavailable. Fade: limited split/risk sample. Model score 77; odds Listed +271 - Over 0.5 HR.""", blast="good"),
             row("Brooks Lee", "S", "+820", 82, "🌕 💣", ["vs Sandlin"], """Tail: 2 HR, 4 near-HR, 88.0 mph EV. Matchup: Sandlin split/risk data unavailable. Fade: limited split/risk sample. Model score 82; odds Listed +820 - Over 0.5 HR.""", blast="high"),
@@ -143,7 +143,7 @@ games = [
     },
     {
         "title": "DET @ TB - Ty Madden (R, DET) vs Griffin Jax (R, TB)",
-        "description": "Tail key data: Ty Madden (HR risk -0.48, vs LHB +0.39, vs RHB -0.87). Griffin Jax (HR risk -0.54, vs LHB -0.95, vs RHB +0.60).",
+        "description": "Tail key data: Park boost -3% (stadium -4%, weather +1%). Ty Madden (HR risk -0.48, vs LHB +0.39, vs RHB -0.87). Griffin Jax (HR risk -0.54, vs LHB -0.95, vs RHB +0.60).",
         "rows": [
             row("Jonathan Aranda", "L", "+540", 94, "⭐ 🌕 💣", ["vs Madden"], """Worst Pickz Favorite. Tail: 2 HR, 5 near-HR, 97.9 mph EV. Matchup: Madden LHB split +0.39, HR risk -0.48. Fade: pitcher suppresses HR (-0.48). Model score 94; odds Listed +540 - Over 0.5 HR.""", blast="high"),
             row("Yandy Diaz", "R", "+544", 82, "🌕 💣", ["vs Madden"], """Tail: 2 HR, 3 near-HR, 90.4 mph EV. Matchup: Madden RHB split -0.87, HR risk -0.48. Fade: tough split lane (-0.87); pitcher suppresses HR (-0.48). Model score 82; odds Listed +544 - Over 0.5 HR.""", blast="high"),
@@ -154,7 +154,7 @@ games = [
     },
     {
         "title": "KC @ CIN - Luinder Avila (R, KC) vs Chase Burns (R, CIN)",
-        "description": "Tail key data: Luinder Avila (HR risk -1.05, vs LHB -0.73, vs RHB -0.73). Chase Burns (HR risk 0.02, vs LHB +0.19, vs RHB -0.07).",
+        "description": "Tail key data: Park boost +11% (stadium +14%, weather -3%). Luinder Avila (HR risk -1.05, vs LHB -0.73, vs RHB -0.73). Chase Burns (HR risk 0.02, vs LHB +0.19, vs RHB -0.07).",
         "rows": [
             row("JJ Bleday", "L", "+310", 81, "🌕 💣", ["vs Avila"], """Tail: 2 HR, 2 near-HR, 91.1 mph EV. Matchup: Avila LHB split -0.73, HR risk -1.05. Fade: tough split lane (-0.73); pitcher suppresses HR (-1.05). Model score 81; odds Listed +310 - Over 0.5 HR.""", blast="high"),
             row("Nathaniel Lowe", "L", "+390", 81, "🌕 💣", ["vs Avila"], """Tail: 2 HR, 3 near-HR, 88.9 mph EV. Matchup: Avila LHB split -0.73, HR risk -1.05. Fade: tough split lane (-0.73); pitcher suppresses HR (-1.05). Model score 81; odds Listed +390 - Over 0.5 HR.""", blast="high"),
@@ -166,7 +166,7 @@ games = [
     },
     {
         "title": "LAD @ ARI - Emmet Sheehan (R, LAD) vs Eduardo Rodriguez (R, ARI)",
-        "description": "Tail key data: Emmet Sheehan (HR risk 0.77, vs LHB +0.84, vs RHB +0.42). Eduardo Rodriguez (HR risk -0.61, vs LHB -0.46, vs RHB -0.29).",
+        "description": "Tail key data: Park boost -8% (stadium -8%, weather +0%). Emmet Sheehan (HR risk 0.77, vs LHB +0.84, vs RHB +0.42). Eduardo Rodriguez (HR risk -0.61, vs LHB -0.46, vs RHB -0.29).",
         "rows": [
             row("Ketel Marte", "S", "+411", 70, "💎", ["vs Sheehan"], """Tail: 1 HR, 1 near-HR, 80.9 mph EV. Matchup: Sheehan RHB split +0.42, HR risk 0.77. Fade: park/weather net drag (-8%); lighter EV form (80.9 mph). Model score 70; odds Listed +411 - Over 0.5 HR.""", blast="good"),
             row("Nolan Arenado", "R", "+630", 62, "💎", ["vs Sheehan"], """Tail: 0 HR, 83.2 mph EV. Matchup: Sheehan RHB split +0.42, HR risk 0.77. Fade: park/weather net drag (-8%); limited recent HR events. Model score 62; odds Listed +630 - Over 0.5 HR."""),
@@ -179,7 +179,7 @@ games = [
     },
     {
         "title": "MIA @ WSH - Sandy Alcantara (R, MIA) vs Cade Cavalli (R, WSH)",
-        "description": "Tail key data: Sandy Alcantara (HR risk 0.21, vs LHB +0.50, vs RHB -0.30). Cade Cavalli (HR risk -0.27, vs LHB -0.45, vs RHB +0.14).",
+        "description": "Tail key data: Park boost data unavailable. Sandy Alcantara (HR risk 0.21, vs LHB +0.50, vs RHB -0.30). Cade Cavalli (HR risk -0.27, vs LHB -0.45, vs RHB +0.14).",
         "rows": [
             row("Curtis Mead", "R", "+750", 91, "🌕 💣", ["vs Alcantara"], """Tail: 3 HR, 4 near-HR, 93.3 mph EV. Matchup: Alcantara RHB split -0.30, HR risk 0.21. Fade: slight split headwind (-0.30). Model score 91; odds Listed +750 - Over 0.5 HR.""", blast="high"),
             row("James Wood", "L", "+301", 83, "💎", ["vs Alcantara"], """Tail: 1 HR, 3 near-HR, 97.4 mph EV. Matchup: Alcantara LHB split +0.50, HR risk 0.21. Fade: HR outcomes are still high-variance. Model score 83; odds Listed +301 - Over 0.5 HR.""", blast="good"),
@@ -193,7 +193,7 @@ games = [
     },
     {
         "title": "NYM @ SEA - Austin Warren (R, NYM) vs Emerson Hancock (R, SEA)",
-        "description": "Tail key data: Austin Warren (HR risk -0.66, vs LHB +0.11, vs RHB -1.23). Emerson Hancock (HR risk -0.12, vs LHB +0.11, vs RHB -0.38).",
+        "description": "Tail key data: Park boost -8% (stadium +0%, weather -8%). Austin Warren (HR risk -0.66, vs LHB +0.11, vs RHB -1.23). Emerson Hancock (HR risk -0.12, vs LHB +0.11, vs RHB -0.38).",
         "rows": [
             row("Julio Rodriguez", "R", "+520", 87, "⭐ 🌕 💣", ["vs Warren"], """Worst Pickz Favorite. Tail: 3 HR, 3 near-HR, 91.0 mph EV. Matchup: Warren RHB split -1.23, HR risk -0.66. Fade: tough split lane (-1.23); pitcher suppresses HR (-0.66). Model score 87; odds Listed +520 - Over 0.5 HR.""", blast="high"),
             row("Colt Emerson", "L", "+980", 81, "💎", ["vs Warren"], """Tail: 1 HR, 1 near-HR, 98.7 mph EV. Matchup: Warren LHB split +0.11, HR risk -0.66. Fade: pitcher suppresses HR (-0.66); park/weather net drag (-8%). Model score 81; odds Listed +980 - Over 0.5 HR.""", blast="good"),
@@ -208,7 +208,7 @@ games = [
     },
     {
         "title": "SF @ MIL - Landen Roupp (R, SF) vs Shane Drohan (R, MIL)",
-        "description": "Tail key data: Landen Roupp (HR risk -1.04, vs LHB -1.38, vs RHB +0.05). Shane Drohan (HR risk -0.03, vs LHB -0.39, vs RHB +0.01).",
+        "description": "Tail key data: Park boost +6% (stadium +11%, weather -4%). Landen Roupp (HR risk -1.04, vs LHB -1.38, vs RHB +0.05). Shane Drohan (HR risk -0.03, vs LHB -0.39, vs RHB +0.01).",
         "rows": [
             row("Christian Yelich", "L", "+880", 70, "💎", ["vs Roupp"], """Tail: 1 HR, 1 near-HR, 84.1 mph EV. Matchup: Roupp LHB split -1.38, HR risk -1.04. Fade: tough split lane (-1.38); pitcher suppresses HR (-1.04). Model score 70; odds Listed +880 - Over 0.5 HR.""", blast="good"),
             row("William Contreras", "R", "+650", 71, "💎", ["vs Roupp"], """Tail: 0 HR, 94.7 mph EV. Matchup: Roupp RHB split +0.05, HR risk -1.04. Fade: pitcher suppresses HR (-1.04); weather carry headwind (-4%). Model score 71; odds Listed +650 - Over 0.5 HR.""", blast="good"),
@@ -220,7 +220,7 @@ games = [
     },
     {
         "title": "TEX @ STL - Jacob deGrom 🧤 (R, TEX) vs Michael McGreevy (R, STL)",
-        "description": "Tail key data: Jacob deGrom 🧤 (HR risk 1.61, vs LHB +2.04, vs RHB +0.67). Michael McGreevy (HR risk 0.30, vs LHB +0.55, vs RHB -0.32).",
+        "description": "Tail key data: Park boost -12% (stadium -9%, weather -3%). Jacob deGrom 🧤 (HR risk 1.61, vs LHB +2.04, vs RHB +0.67). Michael McGreevy (HR risk 0.30, vs LHB +0.55, vs RHB -0.32).",
         "rows": [
             row("Jordan Walker", "R", "+407", 71, "💎", ["vs deGrom"], """Tail: 1 HR, 1 near-HR, 89.2 mph EV. Matchup: deGrom RHB split +0.67, HR risk 1.61. Fade: park/weather net drag (-12%). Model score 71; odds Listed +407 - Over 0.5 HR.""", blast="good"),
             row("Alec Burleson", "L", "+448", 78, "💎", ["vs deGrom"], """Tail: 1 HR, 1 near-HR, 96.4 mph EV. Matchup: deGrom LHB split +2.04, HR risk 1.61. Fade: park/weather net drag (-12%). Model score 78; odds Listed +448 - Over 0.5 HR.""", blast="good"),

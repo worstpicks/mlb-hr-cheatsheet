@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+"""Generate games[] block for 2026-05-16 MLB HR cheat sheet."""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+
+FAVS = {
+    "Angel Martinez (S)",
+    "Sal Stewart (R)",
+    "Colson Montgomery (L)",
+    "Jarred Kelenic (L)",
+    "Ian Happ (S)",
+    "Alex Bregman (R)",
+    "Paul Goldschmidt (R)",
+    "Matt Olson (L)",
+    "Jo Adell (R)",
+}
+
+games = [
+    {
+        "title": "CIN @ CLE - Chris Paddack 🧤 (R, CLE) vs Joey Cantillo (L, CIN)",
+        "description": "Progressive Field — +16% HR row, 74°F, 9 mph, high receptivity. Paddack's vs-RHB HR-risk (0.92) and 1.76 HR/9 power the Cleveland side; Cantillo suppresses lefties (-0.82 vs LHB) but Cincinnati righties still carry loud L5 damage.",
+        "rows": [
+            {"name": "Angel Martinez (S)", "odds": "Listed +740 - Over 0.5 HR", "score": 88, "emojis": "🚀 🌕 ⚾ 🕊️", "blast": "high", "note": "90.6 mph EV with 50% pull-air and two near-HR in the window; clear pitcher HR-risk advantage—Paddack's vs-RHB lane (0.92) is the slate's best SHB/RHB attack point into Cleveland.", "chips": ["vs Paddack", "📜 0-5 vs Paddack"]},
+            {"name": "Kyle Manzardo (L)", "odds": "Listed +490 - Over 0.5 HR", "score": 84, "emojis": "🚀 ⚾ 🕊️", "blast": "good", "note": "92.5 mph EV with 16.7% barrels and 66.7% hard-hit; Paddack's LHB line is only modestly green but Manzardo's pull-side damage still grades strong.", "chips": ["vs Paddack", "📜 1-5 vs Paddack"]},
+            {"name": "Daniel Schneemann (L)", "odds": "Listed +650 - Over 0.5 HR", "score": 76, "emojis": "💎 🏟️", "note": "40% pull-air and 100 mph EV in a small window; Progressive's +16% HR row helps more than Paddack's overall suppression.", "chips": ["vs Paddack", "📜 1-4 vs Paddack"]},
+            {"name": "Sal Stewart (R)", "odds": "Listed +525 - Over 0.5 HR", "score": 93, "emojis": "🚀 🌕 💣", "blast": "high", "note": "Two HR and two near-HR with 66.7% barrels and 100.4 mph EV; Cantillo's vs-RHB split (0.63) is hittable even if his LHB suppression is real.", "chips": ["vs Cantillo"]},
+            {"name": "Elly De La Cruz (S)", "odds": "Listed +600 - Over 0.5 HR", "score": 81, "emojis": "🚀 💎", "blast": "good", "note": "101.6 mph EV with 25% barrels and a near-HR; SHB uses Cantillo's LHB mix where the HR-risk chip is red for pitchers.", "chips": ["vs Cantillo"]},
+            {"name": "Spencer Steer (R)", "odds": "Listed +750 - Over 0.5 HR", "score": 79, "emojis": "🚀 ⚾", "blast": "good", "note": "One HR and one near-HR with 33.3% barrels; same Cantillo RHB lane as Stewart with a longer price.", "chips": ["vs Cantillo"]},
+        ],
+    },
+    {
+        "title": "MIL @ MIN - Logan Henderson 🧤 (R, MIL) vs Connor Prielipp (L, MIN)",
+        "description": "Target Field — -7% HR row, 78°F, 9 mph. Henderson's vs-RHB HR-risk (2.66) is the slate's most extreme righty leak; Prielipp is stingy overall but Minnesota's Jeffers fits the Henderson lane.",
+        "rows": [
+            {"name": "Ryan Jeffers (R)", "odds": "Listed +550 - Over 0.5 HR", "score": 87, "emojis": "🚀 🌕 ⚾ 🕊️", "blast": "high", "note": "One HR and one near-HR with 30.8% barrels and 94.6 mph EV; clear pitcher HR-risk advantage—Henderson's vs-RHB index (2.66) is the board's top righty leak.", "chips": ["vs Henderson"]},
+            {"name": "Andrew Vaughn (R)", "odds": "Listed +550 - Over 0.5 HR", "score": 74, "emojis": "🚀 💎", "blast": "good", "note": "98.8 mph EV and 50% hard-hit in a micro-sample; Prielipp's vs-RHB HR-risk (0.60) is only mildly green—mostly price and form.", "chips": ["vs Prielipp"]},
+        ],
+    },
+    {
+        "title": "TEX @ HOU - Jacob deGrom (R, TEX) vs Kai-Wei Teng (R, HOU)",
+        "description": "Daikin Park — roof closed, +5% HR row, 83°F indoor script. deGrom limits RHB damage (-0.20 vs RHB); Teng is contact-managed. Lefty pull power is the main Houston path versus deGrom.",
+        "rows": [
+            {"name": "Joc Pederson (L)", "odds": "Listed +446 - Over 0.5 HR", "score": 83, "emojis": "🚀 ⚾ 🏟️", "blast": "good", "note": "One HR with 16.7% barrels and 50% pull-air; deGrom's vs-LHB HR-risk (0.28) is the clearest Texas lefty lane inside the roof.", "chips": ["vs deGrom"]},
+            {"name": "Evan Carter (L)", "odds": "Listed +790 - Over 0.5 HR", "score": 80, "emojis": "🚀 💎", "blast": "good", "note": "16.7% barrels, 92.3 mph EV, and 38.9% fly-ball rate with two near-HR; same deGrom LHB context at plus money.", "chips": ["vs deGrom"]},
+            {"name": "Christian Walker (R)", "odds": "Listed +429 - Over 0.5 HR", "score": 77, "emojis": "🚀 💎", "blast": "good", "note": "Two HR and two near-HR in the window; deGrom's vs-RHB suppression (-0.20) caps the ceiling despite Walker's pull-side damage.", "chips": ["vs deGrom", "📜 1-18 vs deGrom"]},
+            {"name": "Zach Cole (L)", "odds": "Listed +620 - Over 0.5 HR", "score": 75, "emojis": "💎", "note": "25% barrels with 87.7 mph EV; modest deGrom LHB HR-risk edge at a playable price.", "chips": ["vs deGrom"]},
+            {"name": "Zach Dezenzo (R)", "odds": "Listed +775 - Over 0.5 HR", "score": 72, "emojis": "💎", "note": "94.1 mph EV and 40% hard-hit; deGrom's RHB lane is not a classic HR leak—longshot contact only.", "chips": ["vs deGrom"]},
+            {"name": "Ezequiel Duran (R)", "odds": "Listed +820 - Over 0.5 HR", "score": 78, "emojis": "🚀 💎", "blast": "good", "note": "One HR and two near-HR with 16.7% barrels and .882 SLG in the window; power spike versus deGrom but still a tough arm overall.", "chips": ["vs deGrom"]},
+        ],
+    },
+    {
+        "title": "CHC @ CWS - Jameson Taillon 🧤 (R, CHW) vs Davis Martin (R, CHC)",
+        "description": "Rate Field — +6% HR row in MLB's smallest outfield, 79°F, 9 mph R-L. Taillon's vs-RHB HR-risk (1.39) and 2.17 HR/9 headline the White Sox side; Davis Martin suppresses both hands.",
+        "rows": [
+            {"name": "Colson Montgomery (L)", "odds": "Listed +300 - Over 0.5 HR", "score": 94, "emojis": "🚀 🌕 ⚾ 🕊️ 🏟️", "blast": "high", "note": "Three HR and four near-HR with 23.1% barrels and 38.5% pull-air; clear pitcher HR-risk advantage—Taillon's vs-RHB index (1.39) in the smallest outfield.", "chips": ["vs Taillon"]},
+            {"name": "Jarred Kelenic (L)", "odds": "Listed +500 - Over 0.5 HR", "score": 90, "emojis": "🚀 🌕 ⚾ 🕊️", "blast": "high", "note": "99.8 mph EV with 33.3% barrels and two near-HR; same Taillon LHB/RHB attack lane with elite exit velocity.", "chips": ["vs Taillon"]},
+            {"name": "Munetaka Murakami (L)", "odds": "Listed +310 - Over 0.5 HR", "score": 88, "emojis": "🚀 🌕 ⚾ 🕊️", "blast": "high", "note": "95.9 mph EV with 54.5% fly-ball rate and 18.2% barrels; Taillon's HR/9 (2.17) and RHB leakage fit Murakami's pull loft.", "chips": ["vs Taillon"]},
+            {"name": "Miguel Vargas (R)", "odds": "Listed +475 - Over 0.5 HR", "score": 86, "emojis": "🚀 ⚾ 🕊️ 🏟️", "blast": "good", "note": "Two HR and two near-HR with 23.5% barrels; clear pitcher HR-risk advantage on Taillon's vs-RHB split.", "chips": ["vs Taillon", "📜 1-5 vs Taillon"]},
+            {"name": "Ian Happ (S)", "odds": "Listed +416 - Over 0.5 HR", "score": 87, "emojis": "🚀 🌕 ⚾", "blast": "high", "note": "Two HR and three near-HR with 42.9% barrels and 97.1 mph EV; SHB uses Martin's LHB mix where Chicago's attack is cleaner than the Sox side.", "chips": ["vs Martin"]},
+            {"name": "Alex Bregman (R)", "odds": "Listed +575 - Over 0.5 HR", "score": 82, "emojis": "🚀 ⚾", "blast": "good", "note": "One HR and two near-HR with 50% hard-hit; Martin's vs-RHB suppression (-0.74) is the drag—Bregman's damage form carries the score.", "chips": ["vs Martin", "📜 1-2 vs Martin"]},
+            {"name": "Michael Conforto (L)", "odds": "Listed +480 - Over 0.5 HR", "score": 85, "emojis": "🚀 🌕", "blast": "high", "note": "Two HR and three near-HR with 22.2% barrels and 96.8 mph EV; Martin's LHB lane is the softer Cubs path.", "chips": ["vs Martin"]},
+        ],
+    },
+    {
+        "title": "SD @ SEA - Walker Buehler 🧤 (R, SD) vs Logan Gilbert (R, SEA)",
+        "description": "T-Mobile Park — -11% HR row, 55°F, 57% rain risk, roof. Buehler's vs-LHB HR-risk (-1.07 overall but vs-RHB 1.18 green) helps Seattle lefties; Gilbert is a top HR-risk arm for San Diego (1.18).",
+        "rows": [
+            {"name": "Luke Raley (L)", "odds": "Listed +550 - Over 0.5 HR", "score": 91, "emojis": "🚀 🌕 ⚾ 🕊️", "blast": "high", "note": "Three HR and three near-HR with 33.3% barrels; clear pitcher HR-risk advantage—Buehler's vs-LHB lane is green for batters despite T-Mobile's carry tax.", "chips": ["vs Buehler"]},
+            {"name": "J.P. Crawford (L)", "odds": "Listed +980 - Over 0.5 HR", "score": 79, "emojis": "🚀 💎 📜", "blast": "good", "note": "Two HR and two near-HR with 14.3% barrels; Buehler LHB leakage plus long price—BvP is thin but Crawford's L5 stick is loud.", "chips": ["vs Buehler", "📜 1-7 vs Buehler"]},
+            {"name": "Jackson Merrill (L)", "odds": "Listed +550 - Over 0.5 HR", "score": 81, "emojis": "🚀 💎", "blast": "good", "note": "94.8 mph EV with 73.7% hard-hit and two near-HR; Gilbert's overall HR-risk rank (1.18) keeps Merrill in play despite the park fade.", "chips": ["vs Gilbert"]},
+            {"name": "Miguel Andujar (R)", "odds": "Listed +850 - Over 0.5 HR", "score": 73, "emojis": "💎", "note": "One HR with pull-side fly balls; Gilbert's RHB lane is green (0.95) but T-Mobile and rain risk cap the ceiling.", "chips": ["vs Gilbert"]},
+        ],
+    },
+    {
+        "title": "NYY @ NYM - Carlos Rodon (L, NYY) vs David Peterson (L, NYM)",
+        "description": "Citi Field — +5% HR row, 73°F, 13 mph wind. Peterson's overall line is contact-heavy; Rodon's tiny 2026 sample is stingy. Yankees righty power is the cleaner Peterson lane.",
+        "rows": [
+            {"name": "Paul Goldschmidt (R)", "odds": "Listed +625 - Over 0.5 HR", "score": 89, "emojis": "🚀 🌕 💎", "blast": "high", "note": "Three HR and three near-HR with 29.4% barrels; Peterson's vs-RHB HR-risk (-0.62) is soft enough for Goldschmidt's pull-side damage.", "chips": ["vs Peterson", "📜 2-5 vs Peterson"]},
+            {"name": "Ben Rice (L)", "odds": "Listed +420 - Over 0.5 HR", "score": 80, "emojis": "🚀 💎", "blast": "good", "note": "One HR with 16.7% barrels and 97.4 mph EV; Peterson's LHB split is only mildly green—mostly Rice's short price and form.", "chips": ["vs Peterson"]},
+            {"name": "Cody Bellinger (L)", "odds": "Listed +650 - Over 0.5 HR", "score": 78, "emojis": "🚀 💎", "blast": "good", "note": "Hot .778 ISO in a tiny window with 95.2 mph EV; same Peterson LHB context—upside if he stays in the lineup.", "chips": ["vs Peterson", "📜 1-4 vs Peterson"]},
+            {"name": "Mark Vientos (R)", "odds": "Listed +540 - Over 0.5 HR", "score": 76, "emojis": "🚀 💎", "blast": "good", "note": "91.7 mph EV with 42.9% hard-hit and a near-HR; Rodon's RHB suppression in a four-inning sample is the main drag.", "chips": ["vs Rodon", "📜 2-8 vs Rodon"]},
+        ],
+    },
+    {
+        "title": "BOS @ ATL - Payton Tolle (L, BOS) vs Bryce Elder (R, ATL)",
+        "description": "Truist Park — -8% HR row but 84°F and 1,050 ft altitude help contact. Tolle's vs-RHB HR-risk (0.37) is the Boston leverage side; Elder suppresses HR (0.49 HR/9).",
+        "rows": [
+            {"name": "Drake Baldwin (L)", "odds": "Listed +546 - Over 0.5 HR", "score": 92, "emojis": "🚀 🌕", "blast": "high", "note": "Four HR and five near-HR with 37.5% barrels and 98.1 mph EV; Tolle's fly-ball shape is hittable for Atlanta lefties despite Truist's HR row.", "chips": ["vs Tolle"]},
+            {"name": "Matt Olson (L)", "odds": "Listed +410 - Over 0.5 HR", "score": 84, "emojis": "🚀 ⚾", "blast": "good", "note": "One HR and two near-HR with 15.4% barrels and 96.4 mph EV; Elder's overall suppression is real but Olson's pull-side ceiling keeps him elite.", "chips": ["vs Elder"]},
+            {"name": "Wilyer Abreu (L)", "odds": "Listed +475 - Over 0.5 HR", "score": 79, "emojis": "🚀 💎", "blast": "good", "note": "One HR and two near-HR with 52.6% fly-ball rate; Elder misses bats but Abreu's pull-side fit versus RHP is live.", "chips": ["vs Elder", "📜 0-3 vs Elder"]},
+            {"name": "Mickey Gasper (S)", "odds": "Listed +875 - Over 0.5 HR", "score": 71, "emojis": "💎", "note": "16.7% barrels and 95.7 mph EV in a small window; Elder suppresses HR—bench/longshot only.", "chips": ["vs Elder"]},
+        ],
+    },
+    {
+        "title": "LAD @ LAA - Justin Wrobleski (L, LAD) vs Jose Soriano (R, LAA)",
+        "description": "Angel Stadium — +6% HR row, consistent out-blowing wind pattern, 73°F. Wrobleski's vs-LHB HR-risk (0.38) is the Angels' main HR path; Soriano suppresses damage overall.",
+        "rows": [
+            {"name": "Jo Adell (R)", "odds": "Listed +460 - Over 0.5 HR", "score": 93, "emojis": "🚀 🌕 💣 🏟️", "blast": "high", "note": "Three HR and three near-HR with 40% barrels and 102 mph EV; Wrobleski's LHB leakage (1.80 HR/9 to lefties in the split) is the clearest Angels lane.", "chips": ["vs Wrobleski"]},
+            {"name": "Will Smith (R)", "odds": "Listed +650 - Over 0.5 HR", "score": 88, "emojis": "🚀 🌕", "blast": "high", "note": "36.8% barrels with 97.1 mph EV and four near-HR; Soriano's RHB line is workable for catcher pop at plus money.", "chips": ["vs Soriano", "📜 1-2 vs Soriano"]},
+            {"name": "Teoscar Hernandez (R)", "odds": "Listed +790 - Over 0.5 HR", "score": 82, "emojis": "🚀 💎", "blast": "good", "note": "One HR with 18.2% barrels and 93.9 mph EV; Soriano limits HR but Hernandez's pull-side damage keeps him in the strong band.", "chips": ["vs Soriano", "📜 1-4 vs Soriano"]},
+            {"name": "Oswald Peraza (R)", "odds": "Listed +725 - Over 0.5 HR", "score": 70, "emojis": "💎", "note": "Modest contact in a tiny window; Wrobleski LHB lane is the only real angle—mostly longshot price.", "chips": ["vs Wrobleski"]},
+        ],
+    },
+    {
+        "title": "SF @ ATH - Trevor McDonald 🧤 (R, SF) vs Luis Severino (R, ATH)",
+        "description": "Sutter Health Park — +18% HR row, very high receptivity, 82°F clearing to 75°F. McDonald's vs-LHB HR-risk (1.53) and 4.15 HR/9 to lefties power Sacramento; Severino is hittable for Giants lefties.",
+        "rows": [
+            {"name": "Shea Langeliers (R)", "odds": "Listed +302 - Over 0.5 HR", "score": 94, "emojis": "🚀 🌕 🏟️ 🧤", "blast": "high", "note": "36.4% barrels with 27.3% pull-air; McDonald's LHB HR leakage (4.15 HR/9) plus Sutter's +18% HR row is the slate's top park-plus-pitcher stack.", "chips": ["vs McDonald"]},
+            {"name": "Nick Kurtz (L)", "odds": "Listed +300 - Over 0.5 HR", "score": 86, "emojis": "🚀 🏟️ 🧤", "blast": "good", "note": "95 mph EV with 70% hard-hit in a small sample; same McDonald LHB leak at a short price.", "chips": ["vs McDonald"]},
+            {"name": "Lawrence Butler (L)", "odds": "Listed +575 - Over 0.5 HR", "score": 83, "emojis": "🚀 🏟️ 🧤", "blast": "good", "note": "40% barrels with 91.2 mph EV; McDonald's fly-ball HR profile in Sacramento heat.", "chips": ["vs McDonald"]},
+            {"name": "Rafael Devers (L)", "odds": "Listed +400 - Over 0.5 HR", "score": 84, "emojis": "🚀 ⚾ 📜", "blast": "good", "note": "Two HR and two near-HR with 60% hard-hit; Severino's vs-LHB line is hittable with a light BvP tiebreaker (2-21, two HR).", "chips": ["vs Severino", "📜 2-21 vs Severino"]},
+        ],
+    },
+]
+
+# Verify all props accounted
+PROP_NAMES = [
+    "Angel Martinez", "Daniel Schneemann", "Kyle Manzardo", "Sal Stewart", "Elly De La Cruz",
+    "Spencer Steer", "Ryan Jeffers", "Andrew Vaughn", "Christian Walker", "Zach Cole",
+    "Zach Dezenzo", "Evan Carter", "Joc Pederson", "Ezequiel Duran", "Colson Montgomery",
+    "Munetaka Murakami", "Jarred Kelenic", "Miguel Vargas", "Ian Happ", "Alex Bregman",
+    "Michael Conforto", "Luke Raley", "J.P. Crawford", "Miguel Andujar", "Jackson Merrill",
+    "Mark Vientos", "Paul Goldschmidt", "Ben Rice", "Cody Bellinger", "Drake Baldwin",
+    "Matt Olson", "Mickey Gasper", "Wilyer Abreu", "Jo Adell", "Oswald Peraza",
+    "Will Smith", "Teoscar Hernandez", "Nick Kurtz", "Shea Langeliers", "Lawrence Butler",
+    "Rafael Devers",
+]
+
+found = set()
+for g in games:
+    for r in g["rows"]:
+        base = r["name"].split(" (")[0]
+        found.add(base)
+        if "J.P." in r["name"]:
+            found.add("J.P. Crawford")
+
+missing = [n for n in PROP_NAMES if n not in found and n.replace(".", "") not in {x.replace(".", "") for x in found}]
+if missing:
+    raise SystemExit(f"Missing props: {missing}")
+
+def js_str(s):
+    return json.dumps(s, ensure_ascii=False)
+
+lines = ["            const games = ["]
+for gi, g in enumerate(games):
+    lines.append(f'                {{ title: {js_str(g["title"])}, description: {js_str(g["description"])}, rows: [')
+    for r in g["rows"]:
+        blast = f', blast: {js_str(r["blast"])}' if r.get("blast") else ""
+        chips = ", ".join(js_str(c) for c in r["chips"])
+        lines.append(
+            f'                    {{ name: {js_str(r["name"])}, odds: {js_str(r["odds"])}, score: {r["score"]}, emojis: {js_str(r["emojis"])}{blast}, note: {js_str(r["note"])}, chips: [{chips}] }},'
+        )
+    lines.append("                ]},")
+lines.append("            ];")
+out = "\n".join(lines)
+print(out)
+(ROOT / "_games-0516.txt").write_text(out + "\n", encoding="utf-8")

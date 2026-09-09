@@ -1,0 +1,27 @@
+Ship 2026-08-15 slate and make the deep audit's game count data-driven
+
+Full 15-game board with all 112 requested props, dated Saturday, August 15,
+2026. PropFinder exported cleanly for every game this slate, so no synthetic
+matchup files were needed.
+
+Two prop-list ambiguities resolved rather than guessed: "Btaden Montgomery" is
+Braden Montgomery, who is in the CWS export and lineup, and Max Muncy appears
+twice because two players share the name. PropFinder separates them by hand, so
+the prop is pinned to Max Muncy LHB in MIL @ LAD per the Dodgers lineup.
+
+Randy Vasquez has matchup and weak-spots files but no row in hr-targets-overall
+or pitcher-summary, so the SD @ CLE header falls back to rates measured from his
+own matchup file and says so instead of implying a 0% risk.
+
+Straights lead with the complete lane rather than the top composite score:
+Chourio for O0.5 behind the slate's most HR-prone arm, a +1.17 split and a +18%
+hand park, and Encarnacion-Strand for O1.5 on 2 HR plus 4 near-HR. The board's
+highest attack row, Yordan Alvarez, is left off both straights and the weather
+board because he has zero HR and zero near-HR, so that score is carrying park
+and matchup with no power behind it.
+
+The deep audit compared game count against a hardcoded 13 that the date-swap
+scaffold never touched, so it failed on the first 15-game slate it saw. Read a
+GAMECOUNT constant the scaffold already knows how to substitute.
+
+Co-authored-by: Cursor <cursoragent@cursor.com>

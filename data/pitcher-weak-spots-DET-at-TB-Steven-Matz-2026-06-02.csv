@@ -1,0 +1,26 @@
+Matchup,DET @ TB
+Pitcher,Steven Matz
+Pitcher Team,TB
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.1,1.31,="4-20",.200,.500,0.300,2,0,0,2,8.3,3,.333,.833
+Batting Second,5.2,1.41,="7-23",.304,.522,0.218,1,2,0,2,25.0,1,.333,.855
+Batting Third,5.1,1.31,="4-19",.211,.368,0.157,1,0,0,4,26.1,3,.304,.672
+Batting Fourth,5.0,1.80,="6-19",.316,.316,0.000,0,0,0,1,9.1,3,.409,.725
+Batting Fifth,4.1,1.38,="3-16",.188,.375,0.187,0,1,1,1,15.8,3,.316,.691
+Batting Sixth,5.0,0.80,="2-17",.118,.118,0.000,0,0,0,1,36.8,2,.211,.329
+Batting Seventh,4.1,1.38,="4-17",.235,.647,0.412,2,1,0,6,26.3,2,.316,.963
+Batting Eighth,5.0,0.80,="4-18",.222,.222,0.000,0,0,0,3,16.7,0,.222,.444
+Batting Ninth,4.1,0.92,="4-16",.250,.500,0.250,1,1,0,1,6.3,0,.250,.750
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Gleyber Torres RHB,Batting First ​,="2-15",.133,.200,0.067,0,1,0,1,5.6,3,.278,.478
+Matt Vierling RHB,Batting Second ​,="3-23",.130,.174,0.044,0,1,0,3,14.3,5,.286,.460
+Dillon Dingler RHB,Batting Third ​,="6-29",.207,.517,0.310,2,3,0,6,20.0,6,.343,.860
+Riley Greene LHB,Batting Fourth ​,="43-150",.287,.420,0.133,3,11,0,19,31.0,17,.363,.783
+Jahmai Jones RHB,Batting Fifth ​,="0-4",.000,.000,0.000,0,0,0,0,0.0,1,.200,.200
+Spencer Torkelson RHB,Batting Sixth ​,="8-23",.348,.696,0.348,2,2,0,4,29.2,1,.375,1.071
+Wenceel Perez SHB,Batting Seventh ​,="4-37",.108,.270,0.162,2,0,0,2,17.1,4,.195,.465
+Zach McKinstry LHB,Batting Eighth ​,="3-36",.083,.111,0.028,0,1,0,0,22.5,3,.154,.265
+Zack Short RHB,Batting Ninth ​,="3-24",.125,.167,0.042,0,1,0,1,21.2,7,.333,.500

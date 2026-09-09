@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Patch preview sheet to 2026-05-20. Does not touch root live index or push/deploy."""
 import json
 import re

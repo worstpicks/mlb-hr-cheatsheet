@@ -153,17 +153,17 @@ const games = [
         ],
     },
     {
-        title: "MIL @ COL - Jacob Misiorowski (R, MIL) vs Valente Bellozo 🧤 (R, COL)",
-        description: "Tail key data: Park boost +19% (stadium +20%, weather -1%). Misiorowski (HR risk -1.35, vs LHB -0.85, vs RHB -0.97). Bellozo 🧤 (HR risk 1.09, vs LHB +0.68, vs RHB +1.15).",
+        title: "MIL @ COL - Jacob Misiorowski (R, MIL) vs Zach Agnos (R, COL)",
+        description: "Tail key data: Park boost +19% (stadium +20%, weather -1%). Misiorowski (HR risk -1.35, vs LHB -0.85, vs RHB -0.97). Home starter risk unavailable.",
         startTime: "2026-06-07T01:10:00Z",
         rows: [
             { name: "Hunter Goodman (R)", odds: "Listed prop - Over 0.5 HR", score: 94, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 3 HR, 3 near-HR, 98.3 mph EV. Misiorowski RHB split -0.97, HR risk -1.35. tough split lane (-0.97); pitcher suppresses HR (-1.35).", chips: ["vs Misiorowski"], blast: "high" },
             { name: "Ezequiel Tovar (R)", odds: "Listed prop - Over 0.5 HR", score: 70, emojis: "💎", note: "1 HR, 1 near-HR, 82.9 mph EV. Misiorowski RHB split -0.97, HR risk -1.35. tough split lane (-0.97); pitcher suppresses HR (-1.35).", chips: ["vs Misiorowski"], blast: "good" },
             { name: "Willi Castro (S)", odds: "Listed prop - Over 0.5 HR", score: 83, emojis: "💎", note: "1 HR, 2 near-HR, 98.7 mph EV. Misiorowski RHB split -0.97, HR risk -1.35. tough split lane (-0.97); pitcher suppresses HR (-1.35).", chips: ["vs Misiorowski"], blast: "good" },
-            { name: "Jackson Chourio (R)", odds: "Listed +399 - Over 0.5 HR", score: 96, emojis: "⭐ 🌕 💣 ⚾ 🕊️ 🧤", note: "Worst Pickz Favorite. 3 HR, 5 near-HR, 96.4 mph EV. Bellozo RHB split +1.15, HR risk 1.09.", chips: ["vs Bellozo"], blast: "high" },
-            { name: "Jake Bauers (L)", odds: "Listed +375 - Over 0.5 HR", score: 73, emojis: "💎 ⚾ 🕊️ 🧤", note: "1 HR, 1 near-HR, 91.4 mph EV. Bellozo LHB split +0.68, HR risk 1.09.", chips: ["vs Bellozo"], blast: "good" },
-            { name: "Garrett Mitchell (L)", odds: "Listed +505 - Over 0.5 HR", score: 78, emojis: "💎 ⚾ 🕊️ 🧤", note: "1 HR, 1 near-HR, 96.0 mph EV. Bellozo LHB split +0.68, HR risk 1.09.", chips: ["vs Bellozo"], blast: "good" },
-            { name: "Brice Turang (L)", odds: "Listed +469 - Over 0.5 HR", score: 64, emojis: "💎 ⚾ 🕊️ 🧤", note: "0 HR, 89.8 mph EV. Bellozo LHB split +0.68, HR risk 1.09. limited recent HR events.", chips: ["vs Bellozo"] },
+            { name: "Jackson Chourio (R)", odds: "Listed +333 - Over 0.5 HR", score: 93, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 3 HR, 5 near-HR, 93.1 mph EV. Agnos split/risk data unavailable. limited split/risk sample.", chips: ["vs Agnos"], blast: "high" },
+            { name: "Jake Bauers (L)", odds: "Listed +360 - Over 0.5 HR", score: 84, emojis: "🌕 💣", note: "2 HR, 2 near-HR, 93.8 mph EV. Agnos split/risk data unavailable. limited split/risk sample.", chips: ["vs Agnos"], blast: "high" },
+            { name: "Garrett Mitchell (L)", odds: "Listed +475 - Over 0.5 HR", score: 78, emojis: "💎", note: "1 HR, 1 near-HR, 95.7 mph EV. Agnos split/risk data unavailable. limited split/risk sample.", chips: ["vs Agnos"], blast: "good" },
+            { name: "Brice Turang (L)", odds: "Listed +550 - Over 0.5 HR", score: 72, emojis: "💎", note: "0 HR, 2 near-HR, 91.8 mph EV. Agnos split/risk data unavailable. limited split/risk sample.", chips: ["vs Agnos"], blast: "good" },
         ],
     },
     {

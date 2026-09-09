@@ -34,6 +34,7 @@ FAVS = [
     "Shohei Ohtani (L)",
     "Kyle Schwarber (L)",
     "Bryce Harper (L)",
+    "Rafael Devers (L)",
 ]
 
 ROCKET = {"Manny Machado", "Rhys Hoskins", "Jordan Walker", "Munetaka Murakami"}
@@ -131,8 +132,10 @@ PROPS = [
     ("Christian Walker", "R", "+410", 77, "Crow", 1, 1, 87.1, 7.1, "Walker righty lane versus Crow RHB split", "good"),
     ("Yordan Alvarez", "L", "+300", 85, "Crow", 0, 1, 98.1, 0, "Alvarez lefty power versus Crow at the dome", "high"),
     # SF @ COL
-    ("Tj Rumfield", "L", "+880", 74, "Lorenzen", 1, 3, 82.5, 11.1, "Coors +14% HR plus Lorenzen bum (1.24 HR risk)", "good"),
-    ("Hunter Goodman", "R", "+410", 78, "Lorenzen", 1, 1, 89.8, 11.1, "Lorenzen RHB split at Coors +30% runs", "good"),
+    ("Willy Adames", "R", "+540", 84, "Lorenzen", 2, 3, 96.5, 22.0, "Adames righty power versus Lorenzen at Coors +14% HR", "high"),
+    ("Rafael Devers", "L", "+380", 88, "Lorenzen", 2, 3, 98.4, 28.0, "Devers lefty lane versus Lorenzen 2.29 LHB HR leak at Coors", "high"),
+    ("Tj Rumfield", "L", "+880", 74, "Webb", 1, 3, 82.5, 11.1, "Coors +14% HR with Webb on the mound", "good"),
+    ("Hunter Goodman", "R", "+410", 78, "Webb", 1, 1, 89.8, 11.1, "Goodman righty lane versus Webb at Coors", "good"),
     # NYY @ ATH
     ("Ben Rice", "L", "+328", 88, "Severino", 1, 1, 90.0, 0, "Worst Pickz favorite with pull-side fit versus Severino", "good"),
     ("Aaron Judge", "R", "+235", 84, "Severino", 1, 2, 97.0, 15.4, "Judge BvP history versus Severino at Sutter +9% HR", "high"),
@@ -264,7 +267,7 @@ GAME_META = [
     {
         "key": "SF @ COL",
         "title": "SF @ COL - Logan Webb (R, SF) vs Michael Lorenzen 🧤 (R, COL)",
-        "desc": "Coors Field — slate-best +14% HR and +30% combined runs with 77°F air and 6 mph wind. Michael Lorenzen is a bum arm (1.24 HR risk, 2.32 vs LHB); Rockies bats are live despite Webb on the mound.",
+        "desc": "Coors Field — slate-best +14% HR and +30% combined runs with 77°F air and 6 mph wind. Michael Lorenzen is a bum arm (1.24 HR risk, 2.29 vs LHB); Rafael Devers and Willy Adames lead the Giants attack versus Lorenzen while Rockies bats stay live versus Webb.",
         "away": "SF",
         "home": "COL",
         "away_sp": "Webb",
@@ -369,6 +372,8 @@ TEAM_MAP = {
     "Isaac Paredes": "HOU",
     "Christian Walker": "HOU",
     "Yordan Alvarez": "HOU",
+    "Willy Adames": "SF",
+    "Rafael Devers": "SF",
     "Tj Rumfield": "COL",
     "Hunter Goodman": "COL",
     "Ben Rice": "NYY",

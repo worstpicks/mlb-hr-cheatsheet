@@ -29,6 +29,7 @@ RAW_PROPS = [
     "Jonathan Aranda⭐",
     "Hunter Fedduccia",
     "Willson Contreras",
+    "Wilyer Abreu",
     "Jose Ramirez⭐",
     "Travis Bazzana",
     "Chase DeLauter",

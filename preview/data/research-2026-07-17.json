@@ -112506,7 +112506,7 @@
         "windDir": "NNE",
         "windComponentMph": -4.1,
         "pressureHpa": 991.5,
-        "precipPct": 1,
+        "precipPct": 2,
         "roof": "open",
         "cfBearing": 45,
         "densityAltFt": 2588,
@@ -114350,7 +114350,7 @@
         "windDir": "WNW",
         "windComponentMph": 0.7,
         "pressureHpa": 981.1,
-        "precipPct": 14,
+        "precipPct": 17,
         "roof": "open",
         "cfBearing": 23,
         "densityAltFt": 3076,
@@ -118055,7 +118055,7 @@
         "windDir": "ESE",
         "windComponentMph": -5.2,
         "pressureHpa": 989.1,
-        "precipPct": 12,
+        "precipPct": 10,
         "roof": "retractable",
         "cfBearing": 68,
         "densityAltFt": 3045,
@@ -118069,7 +118069,7 @@
           "source": "climate",
           "confidence": "low",
           "propPass": true,
-          "reason": "borderline_88F_precip_12%",
+          "reason": "borderline_88F_precip_10%",
           "highVariance": true
         },
         "propPass": true
@@ -118080,7 +118080,7 @@
         "source": "climate",
         "confidence": "low",
         "propPass": true,
-        "reason": "borderline_88F_precip_12%",
+        "reason": "borderline_88F_precip_10%",
         "highVariance": true
       },
       "propPass": true,
@@ -123583,7 +123583,7 @@
         "windDir": "SSW",
         "windComponentMph": 9.0,
         "pressureHpa": 984.8,
-        "precipPct": 8,
+        "precipPct": 10,
         "roof": "open",
         "cfBearing": 45,
         "densityAltFt": 2946,
@@ -125411,7 +125411,7 @@
         "windDir": "E",
         "windComponentMph": -0.7,
         "pressureHpa": 844.9,
-        "precipPct": 4,
+        "precipPct": 3,
         "roof": "open",
         "cfBearing": 15,
         "densityAltFt": 8254,
@@ -132724,5 +132724,5 @@
       }
     }
   ],
-  "fetched_at": "2026-07-17T01:01:42"
+  "fetched_at": "2026-07-17T01:08:06"
 }

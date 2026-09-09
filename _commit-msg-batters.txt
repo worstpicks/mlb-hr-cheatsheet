@@ -1,0 +1,3 @@
+Exclude void and DNP batters from Won and Hits recap totals.
+
+Active counts now use only win/loss/pending rows so voided or scratched props no longer inflate listed-batter denominators.

@@ -1,0 +1,25 @@
+Matchup,KC @ CIN
+Pitcher,Luinder Avila
+Pitcher Team,KC
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.1,1.50,="5-12",.417,.667,0.250,0,3,0,2,25.0,0,.417,1.084
+Batting Second,1.2,3.60,="5-10",.500,.700,0.200,0,2,0,3,9.1,1,.545,1.245
+Batting Third,2.1,2.14,="3-9",.333,.556,0.223,0,2,0,3,9.1,2,.455,1.011
+Batting Fourth,3.0,0.33,="1-9",.111,.111,0.000,0,0,0,0,22.2,0,.111,.222
+Batting Fifth,1.2,1.80,="3-8",.375,1.000,0.625,1,2,0,5,0.0,0,.375,1.375
+Batting Sixth,1.1,4.50,="3-7",.429,.714,0.285,0,2,0,1,0.0,3,.600,1.314
+Batting Seventh,2.1,1.29,="1-7",.143,.143,0.000,0,0,0,0,33.3,2,.333,.476
+Batting Eighth,3.0,1.33,="2-10",.200,.200,0.000,0,0,0,1,41.7,2,.333,.533
+Batting Ninth,2.1,2.57,="4-11",.364,.364,0.000,0,0,0,0,38.5,2,.462,.826
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Blake Dunn RHB,Batting First ​,="7-33",.212,.242,0.030,0,1,0,1,27.8,2,.278,.520
+JJ Bleday LHB,Batting Second ​,="7-27",.259,.630,0.371,3,1,0,5,20.0,3,.333,.963
+Sal Stewart RHB,Batting Third ​,="2-27",.074,.074,0.000,0,0,0,2,31.3,5,.219,.293
+Eugenio Suarez RHB,Batting Fourth ​,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Nathaniel Lowe LHB,Batting Fifth ​,="13-47",.277,.660,0.383,5,3,0,10,26.9,5,.346,1.006
+Spencer Steer RHB,Batting Sixth ​,="18-91",.198,.319,0.121,3,2,0,6,28.8,9,.288,.607
+Tyler Stephenson RHB,Batting Seventh ​,="11-68",.162,.265,0.103,2,1,0,10,31.3,11,.275,.540
+Matt McLain RHB,Batting Ninth ​,="6-24",.250,.458,0.208,1,2,0,3,11.5,1,.280,.738

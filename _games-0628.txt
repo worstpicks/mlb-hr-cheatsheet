@@ -1,0 +1,37 @@
+const games = [
+    {
+        title: "ATL @ SF - Chris Sale (L, ATL) vs Robbie Ray (L, SF)",
+        description: "Tail key data: Park boost -6% (stadium -14%, weather +9%). Sale (HR risk -1.18, vs LHB -1.06, vs RHB -0.93). Ray (HR risk -0.25, vs LHB -0.32, vs RHB -0.20).",
+        startTime: "2026-06-28T20:05:00Z",
+        rows: [
+            { name: "Rafael Devers (L)", odds: "Listed +800 - Over 0.5 HR", score: 82, emojis: "", note: "1 HR, 3 near-HR, 96.3 mph EV. Sale LHB split -1.06, HR risk -1.18. tough split lane (-1.06); pitcher suppresses HR (-1.18).", chips: ["vs Sale"], blast: "good" },
+            { name: "Willy Adames (R)", odds: "Listed +660 - Over 0.5 HR", score: 80, emojis: "🌕 💣", note: "2 HR, 3 near-HR, 88.0 mph EV. Sale RHB split -0.93, HR risk -1.18. tough split lane (-0.93); pitcher suppresses HR (-1.18).", chips: ["vs Sale"], blast: "high" },
+            { name: "Austin Riley (R)", odds: "Listed +500 - Over 0.5 HR", score: 76, emojis: "🚀 ⭐", note: "Worst Pickz Favorite. 0 HR, 100.3 mph EV. Ray RHB split -0.20, HR risk -0.25. slight split headwind (-0.20); pitcher risk below avg (-0.25).", chips: ["vs Ray"], blast: "good" },
+        ],
+    },
+    {
+        title: "LAD @ SD - Emmet Sheehan (R, LAD) vs Michael King (R, SD)",
+        description: "Tail key data: Park boost -1% (stadium -5%, weather +3%). Sheehan (HR risk 0.45, vs LHB +0.32, vs RHB +0.58). King (HR risk -0.11, vs LHB -0.15, vs RHB +0.00).",
+        startTime: "2026-06-28T20:10:00Z",
+        rows: [
+            { name: "Gavin Sheets (L)", odds: "Listed +503 - Over 0.5 HR", score: 70, emojis: "", note: "1 HR, 1 near-HR, 87.8 mph EV. Sheehan LHB split +0.32, HR risk 0.45. lighter EV form (87.8 mph).", chips: ["vs Sheehan"], blast: "good" },
+            { name: "Fernando Tatis Jr. (R)", odds: "Listed +438 - Over 0.5 HR", score: 78, emojis: "🚀 ⭐", note: "Worst Pickz Favorite. 0 HR, 1 near-HR, 100.7 mph EV. Sheehan RHB split +0.58, HR risk 0.45. limited recent HR events.", chips: ["vs Sheehan"], blast: "good" },
+            { name: "Shohei Ohtani (L)", odds: "Listed +243 - Over 0.5 HR", score: 90, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 2 HR, 2 near-HR, 99.7 mph EV. King LHB split -0.15, HR risk -0.11. slight split headwind (-0.15); pitcher risk below avg (-0.11).", chips: ["vs King"], blast: "high" },
+            { name: "Mookie Betts (R)", odds: "Listed +630 - Over 0.5 HR", score: 87, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 3 HR, 3 near-HR, 91.0 mph EV. King RHB split +0.00, HR risk -0.11. pitcher risk below avg (-0.11).", chips: ["vs King"], blast: "high" },
+            { name: "Max Muncy (L)", odds: "Listed +405 - Over 0.5 HR", score: 66, emojis: "⭐", note: "Worst Pickz Favorite. 0 HR, 1 near-HR, 89.9 mph EV. King LHB split -0.15, HR risk -0.11. slight split headwind (-0.15); pitcher risk below avg (-0.11).", chips: ["vs King"] },
+        ],
+    },
+    {
+        title: "NYY @ BOS - Carlos Rodon (L, NYY) vs Sonny Gray (R, BOS)",
+        description: "Tail key data: Park boost +3% (stadium -6%, weather +9%). Rodon (HR risk -0.53, vs LHB -0.10, vs RHB -0.54). Gray (HR risk -0.38, vs LHB -0.21, vs RHB -0.64).",
+        startTime: "2026-06-28T23:20:00Z",
+        rows: [
+            { name: "Willson Contreras (R)", odds: "Listed +434 - Over 0.5 HR", score: 73, emojis: "", note: "1 HR, 2 near-HR, 88.8 mph EV. Rodon RHB split -0.54, HR risk -0.53. tough split lane (-0.54); pitcher suppresses HR (-0.53).", chips: ["vs Rodon"], blast: "good" },
+            { name: "Andruw Monasterio (R)", odds: "Listed +950 - Over 0.5 HR", score: 70, emojis: "", note: "1 HR, 1 near-HR, 88.5 mph EV. Rodon RHB split -0.54, HR risk -0.53. tough split lane (-0.54); pitcher suppresses HR (-0.53).", chips: ["vs Rodon"], blast: "good" },
+            { name: "Ben Rice (L)", odds: "Listed +350 - Over 0.5 HR", score: 98, emojis: "⭐ 🌕 💣", note: "Worst Pickz Favorite. 3 HR, 6 near-HR, 98.0 mph EV. Gray LHB split -0.21, HR risk -0.38. slight split headwind (-0.21); pitcher risk below avg (-0.38).", chips: ["vs Gray"], blast: "high" },
+            { name: "Max Schuemann (R)", odds: "Listed prop - Over 0.5 HR", score: 71, emojis: "", note: "0 HR, 95.4 mph EV. Gray RHB split -0.64, HR risk -0.38. tough split lane (-0.64); pitcher risk below avg (-0.38).", chips: ["vs Gray"], blast: "good" },
+            { name: "Paul Goldschmidt (R)", odds: "Listed +570 - Over 0.5 HR", score: 62, emojis: "", note: "0 HR, 84.0 mph EV. Gray RHB split -0.64, HR risk -0.38. tough split lane (-0.64); pitcher risk below avg (-0.38).", chips: ["vs Gray"] },
+            { name: "Spencer Jones (L)", odds: "Listed +690 - Over 0.5 HR", score: 77, emojis: "", note: "1 HR, 97.4 mph EV. Gray LHB split -0.21, HR risk -0.38. slight split headwind (-0.21); pitcher risk below avg (-0.38).", chips: ["vs Gray"], blast: "good" },
+        ],
+    },
+];

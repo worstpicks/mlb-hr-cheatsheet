@@ -3,9 +3,11 @@
 import json
 from pathlib import Path
 
+from game_start_times import annotate_and_sort_games
 from overdue_eval import apply_inferred_due
 
 ROOT = Path(__file__).resolve().parent
+SHEET_DATE = "2026-06-03"
 
 FAVS = {
     "Brandon Lowe (L)",
@@ -350,6 +352,8 @@ for game in games:
         add_bum_row_emojis(entry)
         apply_inferred_due(entry, game)
 
+games = annotate_and_sort_games(games, SHEET_DATE)
+
 if __name__ == '__main__':
     def js_string(value):
         return json.dumps(value, ensure_ascii=False)
@@ -360,6 +364,8 @@ if __name__ == '__main__':
             out.append('    {')
             out.append(f"        title: {js_string(game['title'])},")
             out.append(f"        description: {js_string(game['description'])},")
+            if game.get("startTime"):
+                out.append(f"        startTime: {js_string(game['startTime'])},")
             out.append('        rows: [')
             for entry in game['rows']:
                 parts = [

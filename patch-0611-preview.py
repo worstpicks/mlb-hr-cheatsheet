@@ -22,6 +22,7 @@ build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
 from game_row_enrich import (
+from post_patch import sync_research_tab_after_patch
     contact_risk,
     enrich_games_list,
     emit_games_js,
@@ -1225,6 +1226,7 @@ def main():
     manifest = update_manifest()
     patch_preview(manifest)
     apply_hidden_gem_ui()
+    sync_research_tab_after_patch(SHEET_DATE)
     if "--sync-root" in sys.argv:
         sync_root_index()
     else:

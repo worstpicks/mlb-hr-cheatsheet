@@ -1,0 +1,79 @@
+﻿const games = [
+    {
+        title: "CLE @ DET - Joey Cantillo (L, CLE) vs Casey Mize (R, DET)",
+        description: "Comerica Park — the slate's harshest HR environment: -34% HR, cool air, high pressure, wind in and a huge outfield. Detroit righties still get Cantillo's RHB weak spot, while Cleveland props must beat Casey Mize's run prevention.",
+        rows: [
+            { name: "Hao-Yu Lee (R)", odds: "Listed +1300 - Over 0.5 HR", score: 77, emojis: "🚀 💎", note: "1 HR, 2 near-HR, 91.4 mph EV and 21.4% barrels at a massive price. Draws opposing starter Cantillo; Comerica caps the carry but Cantillo is weaker to RHB damage.", chips: ["vs Cantillo"] },
+            { name: "Matt Vierling (R)", odds: "Listed +1040 - Over 0.5 HR", score: 70, emojis: "💎 📜", note: "1 HR and a BvP extra-base signal, but only 5.3% barrels in the selected sample. Draws opposing starter Cantillo; righty split helps, park hurts.", chips: ["vs Cantillo"] },
+            { name: "Chase DeLauter (L)", odds: "Listed +760 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "4 HR, 5 near-HR, .268 ISO and 93.2 mph EV keep him playable despite Comerica. Draws opposing starter Mize; Mize is tough to LHB, so this is bat-form over matchup.", chips: ["vs Mize"] },
+            { name: "Patrick Bailey (S)", odds: "Listed +1720 - Over 0.5 HR", score: 60, emojis: "💎", note: "0 HR in the pitch-mix sample, but 94.3 mph EV and 10.0% barrels keep him barely listed. Draws opposing starter Mize; deep longshot in a bad HR park.", chips: ["vs Mize"] },
+        ],
+    },
+    {
+        title: "PIT @ STL - Braxton Ashcraft (R, PIT) vs Dustin May (R, STL)",
+        description: "Busch Stadium — pitcher-friendly: -26% HR with cool/high-pressure air and wind in. Lefty power is the only real path, especially against Ashcraft's LHB risk and Brandon Lowe's loud form versus May.",
+        rows: [
+            { name: "Alec Burleson (L)", odds: "Listed +725 - Over 0.5 HR", score: 86, emojis: "🚀 ⭐ 💎", note: "Worst Pickz favorite with 4 HR, 10 near-HR, 93.8 mph EV and 19.5% barrels. Draws opposing starter Ashcraft; Busch is a drag, but Ashcraft's LHB lane is attackable.", chips: ["vs Ashcraft"], blast: "good" },
+            { name: "Pedro Pages (R)", odds: "Listed +1120 - Over 0.5 HR", score: 68, emojis: "💎", note: "4 HR in form, but lower EV and park/weather keep him a thin dart. Draws opposing starter Ashcraft; righty split is not the preferred side.", chips: ["vs Ashcraft"] },
+            { name: "Nolan Gorman (L)", odds: "Listed +800 - Over 0.5 HR", score: 84, emojis: "🚀 🌕 💎", note: "4 HR, 5 near-HR, 95.0 mph EV and 41.7% pull-air. Draws opposing starter Ashcraft; lefty power is the Cardinals path.", chips: ["vs Ashcraft"] },
+            { name: "Brandon Lowe (L)", odds: "Listed +600 - Over 0.5 HR", score: 91, emojis: "🚀 ⭐ 🌕 💣", note: "Worst Pickz favorite with 9 HR, 12 near-HR, .467 ISO and 21.7% barrels. Draws opposing starter Dustin May; park is bad but the bat form is slate-best tier.", chips: ["vs Dustin May"], blast: "high" },
+            { name: "Marcell Ozuna (R)", odds: "Listed +850 - Over 0.5 HR", score: 72, emojis: "💎 📜", note: "3 HR, 5 near-HR and a career HR off May keep him alive at price. Draws opposing starter Dustin May; righty split is neutral and Busch suppresses.", chips: ["vs Dustin May"] },
+        ],
+    },
+    {
+        title: "NYM @ WSH - David Peterson (L, NYM) vs Cade Cavalli (R, WSH)",
+        description: "Nationals Park — -24% HR with rain/delay risk and high pressure. The weather is ugly, but Cade Cavalli gives up enough LHB quality contact for the Mets lefties, while James Wood is the clear Washington ceiling bat.",
+        rows: [
+            { name: "Jacob Young (R)", odds: "Listed +1650 - Over 0.5 HR", score: 62, emojis: "💎", note: "1 HR at a big number, but power indicators are light. Draws opposing starter Peterson; Peterson's RHB split is pitcher-friendly.", chips: ["vs Peterson"] },
+            { name: "James Wood (L)", odds: "Listed +555 - Over 0.5 HR", score: 85, emojis: "🚀 🌕 💎", note: "3 HR, 4 near-HR, 98.5 mph EV and 20.0% barrels. Draws opposing starter Peterson; weather is the only major drawback.", chips: ["vs Peterson"] },
+            { name: "Juan Soto (L)", odds: "Listed +484 - Over 0.5 HR", score: 92, emojis: "🚀 ⭐ 🌕 💣 📜", note: "Worst Pickz favorite with 7 HR, 12 near-HR, 95.3 mph EV and a BvP HR signal. Draws opposing starter Cavalli; Cavalli is beatable by LHB contact quality.", chips: ["vs Cavalli"], blast: "high" },
+            { name: "Marcus Semien (R)", odds: "Listed +800 - Over 0.5 HR", score: 74, emojis: "💎", note: "3 HR and 8 near-HR keep him in play, but the current EV is lighter. Draws opposing starter Cavalli; righty split is closer to neutral.", chips: ["vs Cavalli"] },
+            { name: "A.J. Ewing (L)", odds: "Listed +1040 - Over 0.5 HR", score: 80, emojis: "🚀 💎", note: "1 HR with .445 wOBA, 90.8 mph EV and 16.7% barrels. Draws opposing starter Cavalli; lefty lane plus price make the longshot interesting.", chips: ["vs Cavalli"] },
+            { name: "MJ Melendez (L)", odds: "Listed +775 - Over 0.5 HR", score: 78, emojis: "🚀 💎", note: "2 HR, 4 near-HR, 94.1 mph EV and 16.2% barrels. Draws opposing starter Cavalli; lefty contact quality fits the matchup.", chips: ["vs Cavalli"] },
+        ],
+    },
+    {
+        title: "ATL @ MIA - Spencer Strider (R, ATL) vs Sandy Alcantara (R, MIA)",
+        description: "loanDepot park — roof closed and -12% HR. Atlanta has the better raw bats but faces a suppressive Sandy Alcantara profile; Miami lefties get Strider's LHB risk, but strikeouts are a major tax.",
+        rows: [
+            { name: "Jakob Marsee (L)", odds: "Listed +1040 - Over 0.5 HR", score: 71, emojis: "⭐ 💎", note: "Worst Pickz favorite with 2 HR and 5 near-HR, though barrel rate is light. Draws opposing starter Strider; Strider has LHB HR risk but elite strikeout pressure.", chips: ["vs Strider"] },
+            { name: "Xavier Edwards (S)", odds: "Listed +1400 - Over 0.5 HR", score: 73, emojis: "💎", note: "2 HR and 5 near-HR with strong on-base form. Draws opposing starter Strider; roof park suppresses, price helps.", chips: ["vs Strider"] },
+            { name: "Liam Hicks (L)", odds: "Listed +875 - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "6 HR, .256 ISO and steady contact skills. Draws opposing starter Strider; lefty HR-risk lane is real if he handles the whiffs.", chips: ["vs Strider"] },
+            { name: "Austin Riley (R)", odds: "Listed +630 - Over 0.5 HR", score: 81, emojis: "🚀 ⭐ 💎", note: "Worst Pickz favorite with 7 HR, 10 near-HR, 92.8 mph EV and 14.1% barrels. Draws opposing starter Alcantara; BvP is poor but current power keeps him listed.", chips: ["vs Alcantara"] },
+            { name: "Matt Olson (L)", odds: "Listed +375 - Over 0.5 HR", score: 89, emojis: "🚀 🌕 💣", note: "10 HR, 15 near-HR, .333 ISO and 19.8% barrels. Draws opposing starter Alcantara; Sandy suppresses, but Olson has the loudest Braves power indicators.", chips: ["vs Alcantara"], blast: "high" },
+        ],
+    },
+    {
+        title: "TOR @ NYY - Braydon Fisher (R, TOR) vs Carlos Rodon (L, NYY)",
+        description: "Yankee Stadium — official weather model is -15% HR due to cool/high-pressure air, but the short porch still gives elite power a path. Braydon Fisher's RHB risk is the clear attack point; Rodon is tougher, making Toronto mostly BvP/price.",
+        rows: [
+            { name: "Ben Rice (L)", odds: "Listed +360 - Over 0.5 HR", score: 87, emojis: "🚀 🌕", note: "11 HR, 15 near-HR, 94.0 mph EV and 22.0% barrels. Draws opposing starter Fisher; lefty porch helps even with Fisher's better LHB split.", chips: ["vs Fisher"], blast: "good" },
+            { name: "Aaron Judge (R)", odds: "Listed +290 - Over 0.5 HR", score: 94, emojis: "🚀 ⭐ 🌕 💣 🏟️", note: "Worst Pickz favorite with 11 HR, 12 near-HR and 23.2% barrels. Draws opposing starter Fisher; Fisher owns the slate's loudest RHB risk.", chips: ["vs Fisher"], blast: "high" },
+            { name: "Jazz Chisholm Jr. (L)", odds: "Listed +550 - Over 0.5 HR", score: 78, emojis: "💎 🏟️", note: "4 HR, 5 near-HR and 22.5% pull-air. Draws opposing starter Fisher; park helps lefty lift but the split is less friendly.", chips: ["vs Fisher"] },
+            { name: "Ryan McMahon (L)", odds: "Listed +600 - Over 0.5 HR", score: 76, emojis: "💎 🏟️", note: "4 HR, 7 near-HR and 90.6 mph EV. Draws opposing starter Fisher; Yankee porch is the hook.", chips: ["vs Fisher"] },
+            { name: "Brandon Valenzuela (S)", odds: "Listed +920 - Over 0.5 HR", score: 86, emojis: "🚀 ⭐ 🌕", note: "Worst Pickz favorite with 2 HR, 96.6 mph EV and 23.1% barrels. Draws opposing starter Rodon; Rodon is strong overall, but the switch bat's contact is loud.", chips: ["vs Rodon"], blast: "good" },
+            { name: "George Springer (R)", odds: "Listed +512 - Over 0.5 HR", score: 84, emojis: "🚀 ⭐ 💎 📜", note: "Worst Pickz favorite with 1 recent HR, 3 near-HR and 2 career HR off Rodon. Draws opposing starter Rodon; BvP history gives him the Toronto edge.", chips: ["vs Rodon"], blast: "good" },
+            { name: "Ernie Clement (R)", odds: "Listed +1000 - Over 0.5 HR", score: 68, emojis: "💎", note: "2 HR in form, but only 2.2% barrels. Draws opposing starter Rodon; contact profile is better than HR profile.", chips: ["vs Rodon"] },
+        ],
+    },
+    {
+        title: "ATH @ LAA - Luis Severino (R, ATH) vs Jose Soriano (R, LAA)",
+        description: "Angel Stadium — the best pure HR weather on the slate at +5% HR with mild temps and typical out-blowing carry. Angels righties attack Severino's RHB damage, while A's lefty power gets Soriano's LHB weak spot.",
+        rows: [
+            { name: "Zach Neto (R)", odds: "Listed +518 - Over 0.5 HR", score: 82, emojis: "🚀 💎 🏟️", note: "6 HR, 8 near-HR and 28.9% pull-air. Draws opposing starter Severino; Angel Stadium gives the best weather lift today.", chips: ["vs Severino"] },
+            { name: "Jo Adell (R)", odds: "Listed +525 - Over 0.5 HR", score: 72, emojis: "💎 🏟️", note: "90.1 mph EV with 42.0% hard-hit. Draws opposing starter Severino; righty split is good but recent HR form is lighter.", chips: ["vs Severino"] },
+            { name: "Mike Trout (R)", odds: "Listed +370 - Over 0.5 HR", score: 90, emojis: "🚀 🌕 💣 🏟️ 📜", note: "9 HR, 16 near-HR, 21.6% barrels and a career HR off Severino. Draws opposing starter Severino; weather and BvP both help.", chips: ["vs Severino"], blast: "high" },
+            { name: "Nick Kurtz (L)", odds: "Listed +401 - Over 0.5 HR", score: 93, emojis: "🚀 ⭐ 🌕 💣 🏟️ 📜", note: "Worst Pickz favorite with 4 HR, 5 near-HR, 97.6 mph EV and a BvP HR. Draws opposing starter Soriano; Soriano's LHB HR-risk plus Angel carry is premium.", chips: ["vs Soriano"], blast: "high" },
+            { name: "Brent Rooker (R)", odds: "Listed +460 - Over 0.5 HR", score: 86, emojis: "🚀 🌕 💎 🏟️ 📜", note: "4 HR, 6 near-HR, 20.9% barrels and a career HR off Soriano. Draws opposing starter Soriano; righty split is tougher but form and BvP are strong.", chips: ["vs Soriano"], blast: "good" },
+        ],
+    },
+    {
+        title: "COL @ ARI - Zach Agnos (R, COL) vs Eduardo Rodriguez (L, ARI)",
+        description: "Chase Field — roof scheduled open, 90° desert air and a 9.5 total. Ballpark Pal still grades HR at -8%, but altitude/temperature and Agnos' RHB risk keep Arizona bats live.",
+        rows: [
+            { name: "Corbin Carroll (L)", odds: "Listed +410 - Over 0.5 HR", score: 88, emojis: "🚀 ⭐ 🌕 💎", note: "Worst Pickz favorite with 6 HR, 10 near-HR, .289 ISO and 16.7% barrels. Draws opposing starter Agnos; Agnos is better vs LHB, but Chase open/heat helps.", chips: ["vs Agnos"], blast: "high" },
+            { name: "Ketel Marte (S)", odds: "Listed +425 - Over 0.5 HR", score: 84, emojis: "🚀 🌕 💎", note: "6 HR, 12 near-HR and 21.8% pull-air. Draws opposing starter Agnos; RHB/S switch-hit lane is helped by Agnos' RHB risk.", chips: ["vs Agnos"] },
+            { name: "Hunter Goodman (R)", odds: "Listed +460 - Over 0.5 HR", score: 82, emojis: "🚀 💎", note: "3 HR, 4 near-HR, 91.5 mph EV and 16.0% barrels. Draws opposing starter Eduardo Rodriguez; roof-open Chase helps counter a neutral split.", chips: ["vs Eduardo Rodriguez"] },
+        ],
+    },
+];

@@ -1,0 +1,31 @@
+﻿Matchup,HOU @ PHI
+Pitcher,Zack Wheeler
+Pitcher Team,PHI
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.60,="17-62",.274,.419,0.145,2,1,1,5,25.7,8,.357,.776
+Batting Second,18.0,0.94,="12-62",.194,.258,0.064,1,1,0,5,30.4,5,.261,.519
+Batting Third,14.0,1.71,="17-59",.288,.627,0.339,5,5,0,11,20.9,7,.373,1.000
+Batting Fourth,15.1,1.30,="16-61",.262,.525,0.263,4,4,0,7,30.3,4,.318,.843
+Batting Fifth,17.1,0.87,="10-59",.169,.203,0.034,0,2,0,4,35.4,5,.231,.434
+Batting Sixth,15.0,1.07,="12-55",.218,.509,0.291,5,1,0,9,23.7,4,.271,.780
+Batting Seventh,15.0,0.73,="8-54",.148,.278,0.130,2,1,0,2,31.6,3,.193,.471
+Batting Eighth,12.1,0.73,="6-43",.140,.163,0.023,0,1,0,0,38.3,3,.213,.376
+Batting Ninth,13.0,0.77,="6-43",.140,.302,0.162,1,4,0,2,36.2,4,.213,.515
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jeremy Pena RHB,Batting First ​,="102-374",.273,.463,0.190,17,18,1,44,22.3,20,.322,.785
+Yordan Alvarez LHB,Batting Second ​,="152-482",.315,.585,0.270,33,29,1,88,17.2,90,.430,1.015
+Isaac Paredes RHB,Batting Third ​,="92-343",.268,.417,0.149,11,16,1,55,11.2,44,.367,.784
+Jose Altuve RHB,Batting Fourth ​,="29-136",.213,.324,0.111,2,9,0,12,20.3,13,.288,.612
+Christian Walker RHB,Batting Fourth ​,="51-220",.232,.468,0.236,14,10,0,33,23.5,21,.312,.780
+Nelson Velazquez RHB,Batting Fourth ​,="12-47",.255,.532,0.277,3,4,0,10,24.1,5,.333,.865
+Daulton Varsho LHB,Batting Fifth ​,="35-146",.240,.384,0.144,4,5,2,16,18.1,13,.306,.690
+LaMonte Wade Jr. LHB,Batting Fifth ​,="3-35",.086,.086,0.000,0,0,0,2,26.2,7,.238,.324
+Cam Smith RHB,Batting Sixth ​,="28-140",.200,.379,0.179,6,5,1,13,25.2,14,.272,.651
+Taylor Trammell LHB,Batting Seventh ​,="15-69",.217,.406,0.189,3,2,1,9,31.1,5,.270,.676
+Yainer Diaz RHB,Batting Seventh ​,="28-91",.308,.538,0.230,5,6,0,16,16.8,1,.326,.864
+Nick Allen RHB,Batting Eighth ​,="13-55",.236,.273,0.037,0,2,0,8,27.0,4,.274,.547
+Christian Vazquez RHB,Batting Ninth ​,="42-188",.223,.340,0.117,5,7,0,23,19.2,14,.276,.616
+Jorge Barrosa SHB,Batting Ninth ​,="17-89",.191,.326,0.135,0,10,1,7,25.5,10,.277,.603

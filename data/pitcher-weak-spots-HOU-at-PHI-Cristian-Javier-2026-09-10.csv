@@ -1,0 +1,31 @@
+﻿Matchup,HOU @ PHI
+Pitcher,Cristian Javier
+Pitcher Team,HOU
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.0,1.50,="6-24",.250,.458,0.208,1,2,0,5,22.2,3,.333,.791
+Batting Second,7.0,1.14,="5-24",.208,.208,0.000,0,0,0,3,22.2,3,.296,.504
+Batting Third,5.0,2.80,="10-24",.417,.708,0.291,1,2,1,3,14.3,4,.500,1.208
+Batting Fourth,6.0,1.33,="4-22",.182,.318,0.136,1,0,0,2,23.1,4,.308,.626
+Batting Fifth,7.0,0.71,="5-25",.200,.520,0.320,2,0,1,4,30.8,0,.231,.751
+Batting Sixth,5.2,1.76,="6-23",.261,.391,0.130,1,0,0,3,14.8,4,.370,.761
+Batting Seventh,4.2,1.71,="6-19",.316,.579,0.263,1,2,0,4,18.2,2,.364,.943
+Batting Eighth,5.0,1.00,="4-18",.222,.222,0.000,0,0,0,1,30.0,1,.300,.522
+Batting Ninth,3.1,3.00,="9-19",.474,.842,0.368,2,1,0,5,30.0,1,.500,1.342
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="96-374",.257,.417,0.160,14,16,1,38,21.6,25,.305,.722
+Luis Arraez LHB,Batting Second ​,="71-190",.374,.474,0.100,2,9,2,16,2.3,16,.425,.899
+Kyle Schwarber LHB,Batting Second ​,="77-314",.245,.576,0.331,30,12,1,58,34.1,56,.365,.941
+Bryce Harper LHB,Batting Third ​,="138-495",.279,.509,0.230,27,27,3,82,21.1,98,.394,.903
+Edmundo Sosa RHB,Batting Fifth ​,="13-57",.228,.298,0.070,1,1,0,10,20.3,3,.270,.568
+Alec Bohm RHB,Batting Fifth ​,="56-206",.272,.447,0.175,7,13,1,39,17.1,14,.338,.785
+Brandon Marsh LHB,Batting Fifth ​,="44-143",.308,.462,0.154,5,7,0,19,21.6,9,.346,.808
+Bryson Stott LHB,Batting Sixth ​,="59-210",.281,.424,0.143,5,7,4,26,19.2,21,.348,.772
+J.T. Realmuto RHB,Batting Seventh ​,="28-128",.219,.344,0.125,3,7,0,14,25.0,9,.299,.643
+Garrett Stubbs LHB,Batting Ninth ​,="6-46",.130,.130,0.000,0,0,0,3,19.6,2,.196,.326
+Bryan De La Cruz RHB,Batting Ninth ​,="8-17",.471,.765,0.294,1,2,0,6,15.8,1,.474,1.239
+Derek Hill RHB,Batting Ninth ​,="19-78",.244,.321,0.077,1,1,1,10,37.0,2,.272,.593
+Rafael Marchan SHB,Batting Ninth ​,="7-55",.127,.236,0.109,2,0,0,4,11.9,2,.186,.422
+Justin Crawford LHB,Batting Ninth ​,="62-229",.271,.349,0.078,1,13,1,19,19.7,16,.320,.669

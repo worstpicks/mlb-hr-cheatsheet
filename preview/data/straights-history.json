@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-09T15:21:07Z",
+  "updated": "2026-09-10T11:16:52Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1357,12 +1357,14 @@
       "o05": {
         "player": "Pete Crow Armstrong",
         "matchup": "CHC @ MIL",
-        "result": "pending"
+        "result": "void",
+        "note": "player not in box"
       },
       "o15": {
         "player": "Jake Burger",
         "matchup": "TEX @ SEA",
-        "result": "pending"
+        "result": "loss",
+        "hr": 1
       }
     }
   ]

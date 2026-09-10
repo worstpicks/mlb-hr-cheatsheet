@@ -1,0 +1,131 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-09-10 00_00_00.csv",
+  "source_date": "2026-09-10",
+  "hand_date": "2026-09-10",
+  "by_game": {
+    "HOU @ PHI": {
+      "game": "HOU @ PHI",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 28,
+      "stadium_pct": 14,
+      "weather_pct": 14,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 25,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 14
+    },
+    "COL @ NYY": {
+      "game": "COL @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 22,
+      "stadium_pct": 5,
+      "weather_pct": 17,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 21,
+      "rhb_stadium_pct": 4,
+      "park_rhb_pct": 21
+    },
+    "TB @ ATL": {
+      "game": "TB @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 1,
+      "stadium_pct": -6,
+      "weather_pct": 7,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 2
+    },
+    "TEX @ SEA": {
+      "game": "TEX @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": -1,
+      "stadium_pct": 1,
+      "weather_pct": -2,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": -1,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": -7
+    },
+    "PIT @ CHW": {
+      "game": "PIT @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -12,
+      "stadium_pct": -5,
+      "weather_pct": -7,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": -4,
+      "park_rhb_pct": -11
+    }
+  },
+  "by_venue": {
+    "citizens bank park": {
+      "game": "HOU @ PHI",
+      "venue": "Citizens Bank Park",
+      "venue_key": "citizens bank park",
+      "hr_pct": 28,
+      "stadium_pct": 14,
+      "weather_pct": 14,
+      "lhb_stadium_pct": 11,
+      "park_lhb_pct": 25,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 14
+    },
+    "yankee stadium": {
+      "game": "COL @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 22,
+      "stadium_pct": 5,
+      "weather_pct": 17,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": 21,
+      "rhb_stadium_pct": 4,
+      "park_rhb_pct": 21
+    },
+    "truist park": {
+      "game": "TB @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 1,
+      "stadium_pct": -6,
+      "weather_pct": 7,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": 2
+    },
+    "t-mobile park": {
+      "game": "TEX @ SEA",
+      "venue": "T-Mobile Park",
+      "venue_key": "t-mobile park",
+      "hr_pct": -1,
+      "stadium_pct": 1,
+      "weather_pct": -2,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": -1,
+      "rhb_stadium_pct": -5,
+      "park_rhb_pct": -7
+    },
+    "rate field": {
+      "game": "PIT @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -12,
+      "stadium_pct": -5,
+      "weather_pct": -7,
+      "lhb_stadium_pct": 4,
+      "park_lhb_pct": -3,
+      "rhb_stadium_pct": -4,
+      "park_rhb_pct": -11
+    }
+  }
+}

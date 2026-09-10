@@ -1,0 +1,31 @@
+﻿Matchup,TEX @ SEA
+Pitcher,Jacob deGrom
+Pitcher Team,TEX
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.0,1.28,="16-69",.232,.478,0.246,4,3,1,7,18.4,7,.303,.781
+Batting Second,18.1,1.15,="14-69",.203,.362,0.159,2,5,0,6,35.5,7,.276,.638
+Batting Third,17.0,1.35,="19-70",.271,.529,0.258,5,3,0,9,29.7,4,.311,.840
+Batting Fourth,16.1,1.16,="15-65",.231,.323,0.092,1,3,0,5,37.7,4,.275,.598
+Batting Fifth,17.1,0.81,="11-62",.177,.258,0.081,1,2,0,7,38.5,3,.215,.473
+Batting Sixth,14.1,1.19,="12-52",.231,.288,0.057,1,0,0,4,25.9,5,.293,.581
+Batting Seventh,13.1,1.28,="14-53",.264,.491,0.227,3,3,0,10,25.0,3,.304,.795
+Batting Eighth,13.1,1.20,="13-52",.250,.385,0.135,2,1,0,7,30.9,3,.291,.676
+Batting Ninth,15.0,0.67,="8-50",.160,.180,0.020,0,1,0,2,26.4,2,.192,.372
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-287",.233,.331,0.098,5,11,1,21,20.6,43,.337,.668
+JP Crawford LHB,Batting First ​,="50-213",.235,.399,0.164,9,8,0,22,20.1,36,.354,.753
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Third ​,="58-255",.227,.373,0.146,9,10,0,31,25.5,17,.284,.657
+Dominic Canzone LHB,Batting Third ​,="32-140",.229,.371,0.142,4,8,0,18,22.6,15,.303,.674
+Josh Naylor LHB,Batting Fourth ​,="58-211",.275,.370,0.095,5,5,0,23,15.1,18,.336,.706
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Cole Young LHB,Batting Sixth ​,="30-128",.234,.320,0.086,2,5,0,12,17.0,8,.293,.613
+Lazaro Montes LHB,Batting Seventh ​,="3-12",.250,.500,0.250,1,0,0,3,53.8,1,.308,.808
+Jhonny Pereda RHB,Batting Eighth ​,="15-55",.273,.327,0.054,1,0,0,3,22.0,4,.322,.649
+Weston Wilson RHB,Batting Eighth ​,="15-67",.224,.343,0.119,2,2,0,4,31.2,10,.325,.668
+Victor Robles RHB,Batting Eighth ​,="15-59",.254,.356,0.102,0,2,2,6,16.2,7,.343,.699
+Michael Arroyo RHB,Batting Eighth ​,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Brock Rodden SHB,Batting Ninth ​,="12-51",.235,.333,0.098,0,3,1,4,28.3,8,.333,.666

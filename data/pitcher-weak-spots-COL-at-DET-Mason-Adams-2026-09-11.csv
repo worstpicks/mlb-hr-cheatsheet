@@ -1,0 +1,26 @@
+﻿Matchup,COL @ DET
+Pitcher,Mason Adams
+Pitcher Team,COL
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.2,1.80,="2-7",.286,.286,0.000,0,0,0,0,37.5,1,.375,.661
+Batting Second,1.2,2.40,="3-7",.429,.857,0.428,1,0,0,3,12.5,1,.500,1.357
+Batting Third,2.1,0.43,="1-7",.143,.143,0.000,0,0,0,0,28.6,0,.143,.286
+Batting Fourth,1.1,1.50,="1-5",.200,.800,0.600,1,0,0,1,33.3,1,.333,1.133
+Batting Fifth,1.1,1.50,="2-6",.333,.333,0.000,0,0,0,0,50.0,0,.333,.666
+Batting Sixth,1.0,3.00,="1-4",.250,1.000,0.750,1,0,0,1,33.3,2,.500,1.500
+Batting Seventh,1.1,1.50,="1-5",.200,.800,0.600,1,0,0,1,33.3,1,.333,1.133
+Batting Eighth,1.0,3.00,="3-6",.500,.833,0.333,0,2,0,0,16.7,0,.500,1.333
+Batting Ninth,1.2,1.20,="2-6",.333,.500,0.167,0,1,0,0,16.7,0,.333,.833
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="90-296",.304,.486,0.182,12,16,1,34,13.3,49,.403,.889
+Gleyber Torres RHB,Batting Second ​,="42-152",.276,.388,0.112,5,2,0,20,17.6,31,.401,.789
+Colt Keith LHB,Batting Third ​,="37-136",.272,.368,0.096,1,8,1,9,21.5,7,.306,.674
+Riley Greene LHB,Batting Fourth ​,="81-307",.264,.459,0.195,13,19,1,47,29.3,35,.342,.801
+Dillon Dingler RHB,Batting Fifth ​,="23-94",.245,.479,0.234,6,2,1,18,17.1,7,.308,.787
+Max Clark LHB,Batting Sixth ​,="0-4",.000,.000,0.000,0,0,0,0,25.0,0,.000,.000
+John Peck RHB,Batting Seventh ​,="2-3",.667,.667,0.000,0,0,0,0,0.0,1,.750,1.417
+Zach McKinstry LHB,Batting Eighth ​,="12-84",.143,.202,0.059,1,2,0,4,22.0,6,.200,.402
+Javier Baez RHB,Batting Ninth ​,="24-101",.238,.356,0.118,2,6,0,11,22.6,2,.264,.620

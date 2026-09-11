@@ -1,0 +1,26 @@
+﻿Matchup,LAD @ MIA
+Pitcher,Blake Snell
+Pitcher Team,LAD
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="3-16",.188,.313,0.125,0,2,0,2,41.2,.235,.548
+Batting Second,="3-14",.214,.214,0.000,0,0,0,0,23.5,.353,.567
+Batting Third,="3-14",.214,.214,0.000,0,0,0,2,29.4,.353,.567
+Batting Fourth,="3-16",.188,.188,0.000,0,0,0,3,29.4,.176,.364
+Batting Fifth,="2-14",.143,.143,0.000,0,0,0,1,26.7,.200,.343
+Batting Sixth,="2-13",.154,.231,0.077,0,1,0,0,38.5,.154,.385
+Batting Seventh,="2-10",.200,.300,0.100,0,1,0,0,50.0,.333,.633
+Batting Eighth,="1-8",.125,.125,0.000,0,0,0,0,25.0,.417,.542
+Batting Ninth,="2-10",.200,.300,0.100,0,1,0,0,33.3,.273,.573
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Heriberto Hernandez RHB,Batting First ​,="8-38",.211,.579,0.368,4,2,0,7,25.0,5,.318,.897
+Otto Lopez RHB,Batting Second ​,="56-166",.337,.518,0.181,3,11,5,16,9.5,12,.380,.898
+Jakob Marsee LHB,Batting Third ​,="5-27",.185,.296,0.111,0,1,1,0,25.8,4,.290,.586
+Javier Sanoja RHB,Batting Fourth ​,="6-28",.214,.286,0.072,0,2,0,1,6.9,1,.241,.527
+Agustin Ramirez RHB,Batting Fifth ​,="2-16",.125,.125,0.000,0,0,0,1,15.8,2,.263,.388
+Kyle Stowers LHB,Batting Sixth ​,="4-25",.160,.240,0.080,0,2,0,2,37.0,2,.222,.462
+Esteury Ruiz RHB,Batting Seventh ​,="10-37",.270,.432,0.162,1,3,0,2,37.8,6,.386,.818
+Jared Serna RHB,Batting Eighth ​,="3-7",.429,.714,0.285,0,2,0,2,11.1,1,.444,1.158
+Griffin Conine LHB,Batting Ninth ​,="2-3",.667,1.667,1.000,1,0,0,1,0.0,1,.750,2.417

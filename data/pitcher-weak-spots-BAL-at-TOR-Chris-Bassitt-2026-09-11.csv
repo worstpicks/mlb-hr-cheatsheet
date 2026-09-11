@@ -1,0 +1,26 @@
+﻿Matchup,BAL @ TOR
+Pitcher,Chris Bassitt
+Pitcher Team,BAL
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,1.40,="11-41",.268,.293,0.025,0,1,0,2,21.3,3,.362,.655
+Batting Second,11.1,1.24,="12-44",.273,.364,0.091,1,1,0,4,12.8,2,.319,.683
+Batting Third,10.0,1.90,="11-38",.289,.474,0.185,2,1,0,5,2.1,8,.404,.878
+Batting Fourth,9.2,1.76,="13-41",.317,.537,0.220,1,6,0,9,19.6,4,.391,.928
+Batting Fifth,8.1,2.28,="14-38",.368,.474,0.106,1,1,0,3,13.0,5,.457,.931
+Batting Sixth,10.0,1.40,="9-37",.243,.324,0.081,0,3,0,2,18.2,5,.341,.665
+Batting Seventh,10.1,1.06,="9-38",.237,.342,0.105,1,1,0,8,27.5,2,.275,.617
+Batting Eighth,7.2,1.96,="15-35",.429,.771,0.342,3,3,0,9,16.2,0,.432,1.203
+Batting Ninth,7.1,1.64,="8-30",.267,.300,0.033,0,1,0,3,11.8,4,.353,.653
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Brett Bateman LHB,Batting First ​,="32-92",.348,.402,0.054,0,3,1,5,19.8,9,.413,.815
+George Springer RHB,Batting Second ​,="2-20",.100,.200,0.100,0,2,0,3,19.0,1,.143,.343
+Vladimir Guerrero Jr. RHB,Batting Third ​,="95-353",.269,.371,0.102,6,18,0,41,12.1,36,.338,.709
+Alejandro Kirk RHB,Batting Fourth ​,="12-49",.245,.347,0.102,1,2,0,7,17.0,3,.283,.630
+Nathan Lukes LHB,Batting Fifth ​,="6-21",.286,.286,0.000,0,0,0,2,27.3,0,.318,.604
+Kazuma Okamoto RHB,Batting Sixth ​,="18-64",.281,.641,0.360,6,5,0,13,22.1,3,.309,.950
+Josh Smith LHB,Batting Seventh ​,="8-39",.205,.333,0.128,1,0,1,4,18.6,4,.279,.612
+Andres Gimenez LHB,Batting Eighth ​,="46-192",.240,.380,0.140,6,9,0,28,18.4,5,.282,.662
+Ernie Clement RHB,Batting Ninth ​,="2-8",.250,.250,0.000,0,0,0,0,0.0,0,.250,.500

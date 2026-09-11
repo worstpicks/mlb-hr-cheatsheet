@@ -1,0 +1,26 @@
+﻿Matchup,HOU @ TB
+Pitcher,Miguel Ullola
+Pitcher Team,HOU
+Opposing Team,TB
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.0,-.--,="2-2",1.000,2.500,1.500,1,0,0,2,0.0,0,1.000,3.500
+Batting Second,0.2,1.50,="1-3",.333,1.333,1.000,1,0,0,1,33.3,0,.333,1.666
+Batting Third,1.0,1.00,="1-4",.250,.500,0.250,0,1,0,0,50.0,0,.250,.750
+Batting Fourth,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Fifth,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Sixth,1.1,0.00,="0-4",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Seventh,1.0,1.00,="0-3",.000,.000,0.000,0,0,0,0,50.0,1,.250,.250
+Batting Eighth,1.0,0.00,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Batting Ninth,0.1,3.00,="1-2",.500,.500,0.000,0,0,0,0,0.0,0,.500,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Yandy Diaz RHB,Batting First ​,="135-437",.309,.465,0.156,15,21,1,62,14.9,39,.371,.836
+Jonathan Aranda LHB,Batting Second ​,="100-351",.285,.433,0.148,12,16,0,52,21.9,33,.358,.791
+Junior Caminero RHB,Batting Third ​,="87-310",.281,.568,0.287,25,12,1,60,19.3,42,.373,.941
+Liam Hicks LHB,Batting Fourth ​,="42-128",.328,.555,0.227,8,5,0,34,8.3,9,.386,.941
+Victor Mesa Jr. LHB,Batting Fifth ​,="3-21",.143,.286,0.143,1,0,0,3,11.5,4,.269,.555
+Chandler Simpson LHB,Batting Sixth ​,="34-97",.351,.423,0.072,0,3,2,6,4.8,3,.363,.786
+Cedric Mullins LHB,Batting Seventh ​,="27-130",.208,.354,0.146,5,2,1,18,17.2,10,.273,.627
+Richie Palacios LHB,Batting Eighth ​,="26-108",.241,.426,0.185,5,5,0,17,12.8,14,.331,.757
+Jorge Mateo RHB,Batting Ninth ​,="20-84",.238,.298,0.060,1,2,0,6,34.1,3,.264,.562

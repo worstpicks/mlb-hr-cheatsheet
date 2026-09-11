@@ -1,0 +1,26 @@
+﻿Matchup,CLE @ MIN
+Pitcher,Taj Bradley
+Pitcher Team,MIN
+Opposing Team,CLE
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.1,1.33,="18-78",.231,.449,0.218,4,3,1,11,28.7,9,.310,.759
+Batting Second,17.0,1.82,="16-68",.235,.368,0.133,2,3,0,5,24.1,15,.373,.741
+Batting Third,16.2,1.80,="22-71",.310,.606,0.296,6,3,0,9,26.6,8,.380,.986
+Batting Fourth,19.2,0.97,="14-71",.197,.239,0.042,1,0,0,5,29.9,5,.260,.499
+Batting Fifth,19.2,0.97,="13-69",.188,.449,0.261,4,6,0,12,27.3,6,.260,.709
+Batting Sixth,18.0,1.06,="15-68",.221,.294,0.073,1,2,0,6,18.1,4,.264,.558
+Batting Seventh,15.2,1.40,="13-59",.220,.288,0.068,0,4,0,4,28.6,9,.329,.617
+Batting Eighth,17.2,0.79,="12-63",.190,.444,0.254,4,4,0,7,38.5,2,.215,.659
+Batting Ninth,14.2,1.36,="10-53",.189,.264,0.075,1,1,0,4,24.6,10,.328,.592
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Steven Kwan LHB,Batting First ​,="95-355",.268,.330,0.062,2,14,1,21,10.4,50,.361,.691
+Chase DeLauter LHB,Batting Second ​,="72-230",.313,.517,0.204,8,17,3,31,13.2,27,.385,.902
+Jose Ramirez SHB,Batting Third ​,="56-257",.218,.350,0.132,7,13,0,29,13.5,42,.329,.679
+Jo Adell RHB,Batting Fourth ​,="36-140",.257,.421,0.164,4,11,0,25,22.9,9,.331,.752
+Travis Bazzana LHB,Batting Fifth ​,="11-58",.190,.259,0.069,1,1,0,3,28.4,8,.299,.558
+Nathaniel Lowe LHB,Batting Sixth ​,="19-73",.260,.507,0.247,4,6,0,15,20.5,10,.349,.856
+Angel Martinez SHB,Batting Seventh ​,="16-53",.302,.698,0.396,6,3,0,11,29.3,2,.339,1.037
+Austin Hedges RHB,Batting Eighth ​,="45-177",.254,.379,0.125,5,7,0,23,18.6,20,.330,.709
+Brayan Rocchio SHB,Batting Ninth ​,="75-292",.257,.404,0.147,9,12,2,43,13.1,21,.320,.724

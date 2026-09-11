@@ -1,0 +1,26 @@
+﻿Matchup,COL @ DET
+Pitcher,Framber Valdez
+Pitcher Team,DET
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,19.2,1.32,="20-79",.253,.354,0.101,1,3,1,4,18.4,6,.322,.676
+Batting Second,19.0,1.58,="20-74",.270,.446,0.176,4,1,0,9,17.6,10,.365,.811
+Batting Third,17.2,1.64,="19-68",.279,.412,0.133,2,3,0,8,16.9,10,.398,.810
+Batting Fourth,16.1,1.90,="23-69",.333,.493,0.160,1,8,0,7,12.3,8,.420,.913
+Batting Fifth,18.1,1.31,="21-74",.284,.500,0.216,5,1,0,17,19.2,3,.308,.808
+Batting Sixth,17.0,1.35,="18-67",.269,.388,0.119,1,5,0,6,16.0,5,.333,.721
+Batting Seventh,16.2,1.26,="12-60",.200,.283,0.083,1,2,0,5,15.5,9,.304,.587
+Batting Eighth,17.2,0.85,="10-61",.164,.197,0.033,0,2,0,10,20.9,5,.239,.436
+Batting Ninth,15.1,1.04,="14-58",.241,.293,0.052,0,1,1,4,19.7,2,.279,.572
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="106-366",.290,.492,0.202,13,23,6,50,15.7,20,.331,.823
+Connor Norby RHB,Batting Second ​,="4-20",.200,.200,0.000,0,0,0,3,24.0,4,.360,.560
+Cole Carrigg SHB,Batting Third ​,="17-63",.270,.413,0.143,0,9,0,7,28.6,6,.329,.742
+Hunter Goodman RHB,Batting Fourth ​,="50-181",.276,.619,0.343,18,6,1,38,27.3,24,.364,.983
+Kyle Karros RHB,Batting Fifth ​,="5-36",.139,.333,0.194,2,1,0,2,29.7,1,.162,.495
+Adael Amador SHB,Batting Sixth ​,="0-4",.000,.000,0.000,0,0,0,0,25.0,0,.000,.000
+Troy Johnston LHB,Batting Seventh ​,="20-63",.317,.429,0.112,0,7,0,10,14.3,6,.371,.800
+Jordan Beck RHB,Batting Eighth ​,="4-20",.200,.300,0.100,0,0,1,0,36.4,2,.273,.573
+Ezequiel Tovar RHB,Batting Ninth ​,="31-124",.250,.387,0.137,4,5,0,15,21.7,9,.292,.679

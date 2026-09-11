@@ -1,0 +1,26 @@
+﻿Matchup,TEX @ ARI
+Pitcher,MacKenzie Gore
+Pitcher Team,TEX
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.0,1.78,="24-78",.308,.564,0.256,4,6,1,11,24.4,8,.372,.936
+Batting Second,20.1,1.23,="19-77",.247,.377,0.130,2,4,0,5,21.2,6,.294,.671
+Batting Third,20.1,1.18,="17-76",.224,.329,0.105,1,3,1,11,26.5,7,.289,.618
+Batting Fourth,18.1,1.42,="16-70",.229,.514,0.285,5,5,0,11,26.8,10,.341,.855
+Batting Fifth,16.0,1.88,="24-71",.338,.535,0.197,3,5,0,12,22.8,6,.392,.927
+Batting Sixth,17.1,1.44,="14-64",.219,.344,0.125,2,2,0,5,28.0,11,.333,.677
+Batting Seventh,17.0,1.00,="11-60",.183,.283,0.100,1,3,0,8,32.9,6,.275,.558
+Batting Eighth,15.1,1.04,="11-57",.193,.281,0.088,0,3,1,8,25.0,5,.270,.551
+Batting Ninth,14.1,1.12,="12-55",.218,.291,0.073,0,4,0,3,15.0,4,.283,.574
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ildemaro Vargas SHB,Batting First ​,="12-57",.211,.439,0.228,2,3,2,11,12.7,3,.258,.697
+Ketel Marte SHB,Batting Second ​,="12-53",.226,.321,0.095,1,0,1,6,11.9,5,.288,.609
+Gabriel Moreno RHB,Batting Third ​,="53-188",.282,.516,0.234,8,18,1,36,13.4,22,.361,.877
+Geraldo Perdomo SHB,Batting Fourth ​,="13-43",.302,.349,0.047,0,2,0,6,9.1,8,.396,.745
+Corbin Carroll LHB,Batting Fifth ​,="3-11",.273,.455,0.182,0,2,0,0,27.3,0,.273,.728
+Nolan Arenado RHB,Batting Sixth ​,="36-154",.234,.383,0.149,5,8,0,21,20.6,10,.285,.668
+Lourdes Gurriel Jr. RHB,Batting Seventh ​,="5-25",.200,.280,0.080,0,2,0,3,19.2,0,.231,.511
+Jordan Lawlar RHB,Batting Eighth ​,="10-23",.435,.826,0.391,3,0,0,4,25.0,0,.458,1.284
+Ryan Waldschmidt RHB,Batting Ninth ​,="47-173",.272,.382,0.110,3,10,0,19,25.2,19,.348,.730

@@ -1,0 +1,31 @@
+﻿Matchup,LAA @ WSH
+Pitcher,Andrew Alvarez
+Pitcher Team,WSH
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,13.1,0.90,="10-49",.204,.245,0.041,0,2,0,3,23.5,2,.235,.480
+Batting Second,11.1,1.24,="8-42",.190,.405,0.215,2,1,1,5,18.8,6,.292,.697
+Batting Third,11.0,1.18,="12-46",.261,.457,0.196,2,1,1,3,25.5,1,.277,.734
+Batting Fourth,10.1,1.26,="9-40",.225,.250,0.025,0,1,0,1,20.0,4,.311,.561
+Batting Fifth,9.1,1.93,="8-34",.235,.324,0.089,0,3,0,0,26.7,10,.422,.746
+Batting Sixth,9.2,1.66,="10-37",.270,.486,0.216,1,5,0,5,20.9,6,.372,.858
+Batting Seventh,10.0,1.10,="4-33",.121,.152,0.031,0,1,0,0,26.2,7,.293,.445
+Batting Eighth,8.2,2.08,="12-33",.364,.424,0.060,0,2,0,4,15.0,6,.450,.874
+Batting Ninth,10.1,0.97,="9-38",.237,.342,0.105,0,2,1,6,27.5,1,.250,.592
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="121-515",.235,.429,0.194,22,26,4,57,31.1,49,.314,.743
+Mike Trout RHB,Batting Second ​,="114-467",.244,.430,0.186,21,24,0,52,26.1,90,.376,.806
+Wade Meckler LHB,Batting Third ​,="24-73",.329,.425,0.096,0,7,0,10,16.5,12,.424,.849
+Vaughn Grissom RHB,Batting Third ​,="27-106",.255,.368,0.113,2,6,0,25,13.6,6,.305,.673
+Moisés Ballesteros LHB,Batting Fifth ​,="19-74",.257,.378,0.121,2,3,0,7,20.7,8,.329,.707
+Christian Moore RHB,Batting Sixth ​,="13-52",.250,.385,0.135,1,2,1,8,26.4,0,.264,.649
+Josh Lowe LHB,Batting Seventh ​,="28-135",.207,.385,0.178,7,3,0,13,32.0,11,.275,.660
+Oswald Peraza RHB,Batting Seventh ​,="19-86",.221,.349,0.128,3,2,0,7,31.2,5,.280,.629
+Kyren Paris RHB,Batting Seventh ​,="0-4",.000,.000,0.000,0,0,0,0,20.0,1,.200,.200
+Travis d'Arnaud RHB,Batting Eighth ​,="7-39",.179,.282,0.103,1,1,0,3,24.4,4,.289,.571
+Jose Siri RHB,Batting Eighth ​,="13-51",.255,.451,0.196,2,4,0,9,30.4,3,.291,.742
+Denzer Guzman RHB,Batting Eighth ​,="14-63",.222,.365,0.143,2,3,0,5,38.5,1,.246,.611
+Tyler Heineman SHB,Batting Ninth ​,="23-134",.172,.224,0.052,1,2,1,5,15.8,5,.224,.448
+Adam Frazier LHB,Batting Ninth ​,="24-98",.245,.357,0.112,1,6,1,8,25.7,8,.321,.678

@@ -1,0 +1,31 @@
+﻿Matchup,COL @ DET
+Pitcher,Tanner Gordon
+Pitcher Team,COL
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.2,1.46,="12-42",.286,.333,0.047,0,2,0,2,10.4,5,.354,.687
+Batting Second,11.2,1.11,="12-46",.261,.457,0.196,1,4,1,4,25.0,1,.271,.728
+Batting Third,11.2,1.11,="12-45",.267,.578,0.311,3,3,1,7,19.6,1,.283,.861
+Batting Fourth,8.1,2.40,="16-41",.390,.780,0.390,4,4,0,7,13.3,4,.444,1.224
+Batting Fifth,12.0,0.83,="9-45",.200,.311,0.111,1,2,0,5,10.9,1,.217,.528
+Batting Sixth,10.0,1.50,="15-42",.357,.548,0.191,1,5,0,5,22.7,0,.364,.912
+Batting Seventh,8.2,1.85,="14-40",.350,.650,0.300,3,3,0,9,20.9,2,.381,1.031
+Batting Eighth,10.2,1.22,="12-41",.293,.512,0.219,1,6,0,5,13.3,1,.326,.838
+Batting Ninth,8.1,1.92,="14-39",.359,.615,0.256,3,1,0,8,34.1,2,.390,1.005
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="90-300",.300,.480,0.180,12,16,1,34,13.4,49,.399,.879
+Gleyber Torres RHB,Batting Second ​,="42-155",.271,.381,0.110,5,2,0,20,17.8,32,.398,.779
+Dillon Dingler RHB,Batting Second ​,="38-143",.266,.434,0.168,5,9,0,16,24.0,5,.305,.739
+Colt Keith LHB,Batting Third ​,="37-138",.268,.362,0.094,1,8,1,9,21.9,7,.301,.663
+Riley Greene LHB,Batting Fourth ​,="84-311",.270,.473,0.203,13,20,2,49,29.0,35,.347,.820
+Spencer Torkelson RHB,Batting Fifth ​,="34-149",.228,.430,0.202,7,9,0,24,31.2,17,.314,.744
+Eduardo Valencia RHB,Batting Fifth ​,="11-33",.333,.545,0.212,1,4,0,4,27.3,0,.333,.878
+Brett Callahan LHB,Batting Sixth ​,="2-17",.118,.235,0.117,0,2,0,1,63.2,1,.211,.446
+Zach McKinstry LHB,Batting Seventh ​,="20-99",.202,.303,0.101,2,4,0,11,15.9,6,.255,.558
+Max Clark LHB,Batting Seventh ​,="18-63",.286,.444,0.158,1,5,1,8,23.6,7,.375,.819
+Ben Malgeri RHB,Batting Eighth ​,="8-29",.276,.552,0.276,2,2,0,6,11.8,5,.382,.934
+Hao-Yu Lee RHB,Batting Eighth ​,="16-67",.239,.418,0.179,2,4,1,8,29.6,3,.271,.689
+Javier Baez RHB,Batting Ninth ​,="24-104",.231,.346,0.115,2,6,0,11,22.0,2,.257,.603
+John Peck RHB,Batting Ninth ​,="2-14",.143,.143,0.000,0,0,0,1,25.0,1,.250,.393

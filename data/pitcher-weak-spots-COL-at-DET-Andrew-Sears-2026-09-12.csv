@@ -1,0 +1,31 @@
+﻿Matchup,COL @ DET
+Pitcher,Andrew Sears
+Pitcher Team,DET
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,6.00,="2-4",.500,.500,0.000,0,0,0,0,0.0,2,.667,1.167
+Batting Second,2.0,0.00,="0-6",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Third,1.1,0.75,="1-5",.200,.400,0.200,0,1,0,1,0.0,0,.333,.733
+Batting Fourth,1.2,0.60,="1-6",.167,.333,0.166,0,1,0,1,16.7,0,.167,.500
+Batting Fifth,1.1,2.25,="3-6",.500,.667,0.167,0,1,0,1,33.3,0,.500,1.167
+Batting Sixth,0.2,6.00,="4-6",.667,1.333,0.666,1,1,0,2,0.0,0,.667,2.000
+Batting Seventh,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Eighth,1.2,0.00,="0-5",.000,.000,0.000,0,0,0,0,40.0,0,.000,.000
+Batting Ninth,1.1,1.50,="1-4",.250,.500,0.250,0,1,0,0,0.0,1,.400,.900
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="109-371",.294,.493,0.199,13,23,6,50,15.5,20,.334,.827
+Mickey Moniak LHB,Batting Second ​,="51-202",.252,.540,0.288,14,12,2,36,23.9,9,.286,.826
+Cole Carrigg SHB,Batting Second ​,="14-78",.179,.256,0.077,1,3,0,7,26.1,8,.273,.529
+Hunter Goodman RHB,Batting Third ​,="51-234",.218,.483,0.265,17,11,0,35,34.9,14,.266,.749
+TJ Rumfield LHB,Batting Fourth ​,="68-213",.319,.502,0.183,8,13,1,24,14.0,34,.420,.922
+Troy Johnston LHB,Batting Fifth ​,="33-120",.275,.342,0.067,0,6,1,15,14.2,15,.369,.711
+Connor Norby RHB,Batting Sixth ​,="18-70",.257,.343,0.086,1,3,0,4,25.9,8,.358,.701
+Jordan Beck RHB,Batting Sixth ​,="7-34",.206,.324,0.118,0,2,1,5,40.0,1,.229,.553
+Adael Amador SHB,Batting Seventh ​,="6-19",.316,.579,0.263,1,2,0,4,23.8,2,.381,.960
+Vimael Machín LHB,Batting Eighth ​,="0-2",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Kyle Karros RHB,Batting Eighth ​,="25-89",.281,.494,0.213,3,8,1,10,19.4,18,.398,.892
+Brett Sullivan LHB,Batting Ninth ​,="17-75",.227,.373,0.146,3,2,0,8,22.8,2,.253,.626
+Ezequiel Tovar RHB,Batting Ninth ​,="31-126",.246,.381,0.135,4,5,0,15,22.1,9,.288,.669
+Zac Veen LHB,Batting Ninth ​,="4-14",.286,.429,0.143,0,0,1,2,35.3,2,.375,.804

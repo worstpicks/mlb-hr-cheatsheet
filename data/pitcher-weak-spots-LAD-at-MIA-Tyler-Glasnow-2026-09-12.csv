@@ -1,0 +1,31 @@
+﻿Matchup,LAD @ MIA
+Pitcher,Tyler Glasnow
+Pitcher Team,LAD
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.1,0.95,="4-25",.160,.280,0.120,1,0,0,1,32.1,3,.250,.530
+Batting Second,6.0,1.67,="7-24",.292,.583,0.291,1,2,1,3,17.9,3,.357,.940
+Batting Third,8.0,0.63,="5-28",.179,.286,0.107,1,0,0,4,32.1,0,.179,.465
+Batting Fourth,7.1,0.68,="3-25",.120,.120,0.000,0,0,0,3,33.3,2,.185,.305
+Batting Fifth,5.2,1.41,="4-22",.182,.364,0.182,1,1,0,2,30.8,4,.308,.672
+Batting Sixth,6.2,0.75,="2-20",.100,.150,0.050,0,1,0,2,29.2,3,.208,.358
+Batting Seventh,6.1,0.16,="1-19",.053,.053,0.000,0,0,0,1,50.0,0,.050,.103
+Batting Eighth,4.2,1.07,="3-17",.176,.235,0.059,0,1,0,1,42.1,2,.263,.498
+Batting Ninth,4.2,1.07,="5-19",.263,.579,0.316,1,3,0,2,26.3,0,.263,.842
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jakob Marsee LHB,Batting First ​,="28-146",.192,.295,0.103,2,3,3,11,20.9,25,.316,.611
+Kyle Stowers LHB,Batting Third ​,="24-110",.218,.436,0.218,5,5,2,21,31.3,14,.315,.751
+Otto Lopez RHB,Batting Third ​,="50-184",.272,.380,0.108,3,9,1,19,15.3,6,.301,.681
+Agustin Ramirez RHB,Batting Third ​,="21-72",.292,.389,0.097,1,4,0,11,19.5,3,.325,.714
+Heriberto Hernandez RHB,Batting Fifth ​,="24-103",.233,.417,0.184,5,2,1,16,25.2,8,.288,.705
+Griffin Conine LHB,Batting Sixth ​,="11-39",.282,.641,0.359,4,2,0,8,22.2,6,.378,1.019
+Owen Caissie LHB,Batting Sixth ​,="21-112",.188,.339,0.151,4,5,0,22,35.2,10,.266,.605
+Graham Pauley LHB,Batting Eighth ​,="20-67",.299,.537,0.238,3,5,1,17,17.3,6,.360,.897
+Deyvison De Los Santos RHB,Batting Eighth ​,="1-5",.200,.400,0.200,0,1,0,0,40.0,0,.200,.600
+Joe Mack LHB,Batting Eighth ​,="23-122",.189,.344,0.155,5,4,0,17,22.6,9,.250,.594
+Jared Serna RHB,Batting Eighth ​,="3-10",.300,.500,0.200,0,2,0,2,33.3,1,.333,.833
+Brian Navarreto RHB,Batting Ninth ​,="6-38",.158,.289,0.131,1,2,0,3,33.3,2,.214,.503
+Esteury Ruiz RHB,Batting Ninth ​,="11-53",.208,.396,0.188,2,4,0,2,31.3,6,.333,.729
+Javier Sanoja RHB,Batting Ninth ​,="51-158",.323,.462,0.139,3,13,0,19,7.8,8,.355,.817

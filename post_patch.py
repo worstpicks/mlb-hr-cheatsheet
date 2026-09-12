@@ -11,9 +11,16 @@ from research.sync_tab import print_refresh_summary, refresh_research_tab
 ROOT = Path(__file__).resolve().parent
 
 
-def sync_research_tab_after_patch(sheet_date: str, *, with_stats: bool = True) -> None:
+def sync_research_tab_after_patch(
+    sheet_date: str, *, with_stats: bool = True, reuse_existing: bool = False
+) -> None:
     """Refresh MLB Research tab JSON whenever the cheat sheet is patched."""
-    result = refresh_research_tab(sheet_date, with_stats=with_stats, update_meta=True)
+    result = refresh_research_tab(
+        sheet_date,
+        with_stats=with_stats,
+        update_meta=True,
+        reuse_existing=reuse_existing,
+    )
     print_refresh_summary(result)
     sync_straights_history_after_patch()
 

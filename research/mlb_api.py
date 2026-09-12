@@ -518,6 +518,27 @@ def _sheet_starters(sheet_date: str) -> dict[str, tuple[str, str]]:
     return out
 
 
+def _same_person_diff_spelling(a: str, b: str, fold) -> bool:
+    """Two renderings of one name: same surname, first names a keystroke apart.
+
+    Scoped to one side of one game, where exactly one pitcher is being named, so a
+    surname collision between two different people cannot arise here.
+    """
+    pa, pb = (a or "").split(), (b or "").split()
+    if len(pa) < 2 or len(pb) < 2:
+        return False
+    if fold(pa[-1]) != fold(pb[-1]):
+        return False
+    fa, fb = fold(pa[0]), fold(pb[0])
+    if not fa or not fb:
+        return False
+    if fa.startswith(fb) or fb.startswith(fa):
+        return abs(len(fa) - len(fb)) <= 2
+    if len(fa) == len(fb):
+        return sum(1 for x, y in zip(fa, fb) if x != y) <= 1
+    return False
+
+
 def _align_pitchers_with_sheet(games: list[dict], sheet_date: str) -> dict:
     """Replace a research probable when the cheat sheet names a different arm.
 
@@ -556,6 +577,13 @@ def _align_pitchers_with_sheet(games: list[dict], sheet_date: str) -> dict:
                 continue
             # a surname-only match is the same human, just spelled shorter
             if have and (fold(have).endswith(fold(wanted)) or fold(wanted).endswith(fold(have))):
+                continue
+            # ...and so is a first name spelled two ways. PropFinder exports "Zach
+            # Thornton", MLB has "Zac Thornton": same surname, same game, same side,
+            # one arm each. Rebuilding the pitcher from the export's spelling would
+            # fail to resolve and throw away MLB's correct id and arsenal, so a
+            # surname match plus a near-identical first name is treated as one person.
+            if have and _same_person_diff_spelling(have, wanted, fold):
                 continue
             resolved = _resolve_projected_pitcher({"name": wanted}, source="cheatsheet")
             if not resolved:

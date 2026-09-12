@@ -1,0 +1,31 @@
+﻿Matchup,PHI @ ATL
+Pitcher,Tyler Mahle
+Pitcher Team,ATL
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.0,1.50,="19-66",.288,.621,0.333,6,2,1,9,25.0,5,.338,.959
+Batting Second,18.0,0.94,="9-62",.145,.161,0.016,0,1,0,1,30.0,8,.243,.404
+Batting Third,14.1,1.81,="19-59",.322,.508,0.186,1,6,1,8,19.4,7,.388,.896
+Batting Fourth,14.0,1.64,="19-59",.322,.508,0.186,3,2,0,14,18.5,4,.369,.877
+Batting Fifth,15.0,1.27,="17-58",.293,.414,0.121,1,4,0,7,27.4,2,.306,.720
+Batting Sixth,13.0,1.54,="12-50",.240,.260,0.020,0,1,0,2,25.4,8,.356,.616
+Batting Seventh,14.0,1.07,="11-47",.234,.362,0.128,2,0,0,5,25.0,4,.288,.650
+Batting Eighth,13.0,0.85,="7-44",.159,.341,0.182,2,2,0,4,22.0,4,.245,.586
+Batting Ninth,13.1,0.83,="10-46",.217,.391,0.174,2,2,0,3,8.3,1,.234,.625
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="96-374",.257,.417,0.160,14,16,1,38,21.6,25,.305,.722
+Luis Arraez LHB,Batting Second ​,="71-190",.374,.474,0.100,2,9,2,16,2.3,16,.425,.899
+Kyle Schwarber LHB,Batting Second ​,="77-314",.245,.576,0.331,30,12,1,58,34.1,56,.365,.941
+Bryce Harper LHB,Batting Third ​,="140-503",.278,.507,0.229,27,28,3,82,21.2,98,.392,.899
+Edmundo Sosa RHB,Batting Fifth ​,="13-57",.228,.298,0.070,1,1,0,10,20.3,3,.270,.568
+Alec Bohm RHB,Batting Fifth ​,="57-213",.268,.441,0.173,7,14,1,39,16.9,15,.335,.776
+Brandon Marsh LHB,Batting Fifth ​,="44-143",.308,.462,0.154,5,7,0,19,21.6,9,.346,.808
+Bryson Stott LHB,Batting Sixth ​,="59-214",.276,.416,0.140,5,7,4,27,19.7,22,.345,.761
+J.T. Realmuto RHB,Batting Seventh ​,="28-128",.219,.344,0.125,3,7,0,14,25.0,9,.299,.643
+Garrett Stubbs LHB,Batting Ninth ​,="6-46",.130,.130,0.000,0,0,0,3,19.6,2,.196,.326
+Bryan De La Cruz RHB,Batting Ninth ​,="8-17",.471,.765,0.294,1,2,0,6,15.8,1,.474,1.239
+Derek Hill RHB,Batting Ninth ​,="20-80",.250,.338,0.088,1,2,1,13,35.7,3,.286,.624
+Rafael Marchan SHB,Batting Ninth ​,="7-57",.123,.228,0.105,2,0,0,4,13.1,2,.180,.408
+Justin Crawford LHB,Batting Ninth ​,="62-229",.271,.349,0.078,1,13,1,19,19.7,16,.320,.669

@@ -38,14 +38,27 @@ def refresh_research_tab(
     *,
     with_stats: bool = True,
     update_meta: bool = True,
+    reuse_existing: bool = False,
 ) -> dict[str, Path | str | None]:
-    """Build and write research + park-factors JSON for a slate date."""
+    """Build and write research + park-factors JSON for a slate date.
+
+    reuse_existing keeps the snapshot already on disk instead of re-fetching. The
+    patch script picks its boards from this file near the top of the run and then
+    calls this again at the bottom; re-fetching there meant the page shipped a
+    lineup card the picks had never seen, so a bat scratched in between could ride
+    onto a parlay while the audit -- reading the newer file -- saw him benched.
+    One fetch, one snapshot, picks and page agreeing by construction.
+    """
     sheet_date = normalize_sheet_date(sheet_date)
-    payload = build_slate(sheet_date, with_stats=with_stats)
-    payload["fetched_at"] = datetime.now().isoformat(timespec="seconds")
+    research_path = OUT_DIR / f"research-{sheet_date}.json"
+    if reuse_existing and research_path.is_file():
+        payload = json.loads(research_path.read_text(encoding="utf-8"))
+        print(f"research tab reusing this run's snapshot for {sheet_date}")
+    else:
+        payload = build_slate(sheet_date, with_stats=with_stats)
+        payload["fetched_at"] = datetime.now().isoformat(timespec="seconds")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    research_path = OUT_DIR / f"research-{sheet_date}.json"
     research_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     pf_path = write_park_factors_json(OUT_DIR, sheet_date)
 

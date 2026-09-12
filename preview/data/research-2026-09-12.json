@@ -119191,7 +119191,7 @@
     "source": "rotowire",
     "games": 15,
     "pitchersFilled": 2,
-    "lineupsFilled": 28,
+    "lineupsFilled": 27,
     "pageDate": "September 12, 2026",
     "sheetDate": "2026-09-12"
   },
@@ -119597,11 +119597,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.11,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -119665,7 +119665,7 @@
             "dimMult": 1.045,
             "pitcherMult": 0.907,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -119729,7 +119729,7 @@
             "dimMult": 1.045,
             "pitcherMult": 0.907,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -119789,11 +119789,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.11,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -119857,7 +119857,7 @@
             "dimMult": 1.045,
             "pitcherMult": 0.907,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -119921,7 +119921,7 @@
             "dimMult": 1.045,
             "pitcherMult": 0.907,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -119985,7 +119985,7 @@
             "dimMult": 1.045,
             "pitcherMult": 0.907,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -120049,7 +120049,7 @@
             "dimMult": 1.045,
             "pitcherMult": 0.907,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -120113,7 +120113,7 @@
             "dimMult": 1.045,
             "pitcherMult": 0.907,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -120173,11 +120173,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.11,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120237,11 +120237,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.11,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120301,11 +120301,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.11,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120365,11 +120365,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.11,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120420,11 +120420,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.11,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120481,16 +120481,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120554,7 +120554,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -120609,16 +120609,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120673,16 +120673,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120746,7 +120746,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -120801,16 +120801,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -120874,7 +120874,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -120927,16 +120927,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -121000,7 +121000,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -121064,7 +121064,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -121119,16 +121119,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.03,
-            "windMult": 1.04,
+            "windMult": 1.06,
             "dimMult": 1.075,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 4.4,
+            "windOutMph": 5.6,
             "pullWallFt": 365,
             "pullBearing": 67
           }
@@ -121192,7 +121192,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -121256,7 +121256,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -121320,7 +121320,7 @@
             "dimMult": 1.045,
             "pitcherMult": 1.075,
             "parkPct": 1,
-            "windOutMph": 8.5,
+            "windOutMph": 7.9,
             "pullWallFt": 370,
             "pullBearing": 23
           }
@@ -121337,19 +121337,19 @@
         "source": "open-meteo",
         "venue": "Comerica Park",
         "gameHourLocal": "2026-09-12T13:00",
-        "tempF": 78.2,
-        "humidityPct": 64,
-        "windMph": 8.8,
-        "windDirDeg": 187,
-        "windDir": "S",
-        "windComponentMph": 6.9,
-        "pressureHpa": 991.5,
+        "tempF": 78.3,
+        "humidityPct": 73,
+        "windMph": 7.9,
+        "windDirDeg": 202,
+        "windDir": "SSW",
+        "windComponentMph": 7.3,
+        "pressureHpa": 991.2,
         "precipPct": 0,
         "roof": "open",
         "cfBearing": 45,
-        "densityAltFt": 2243,
+        "densityAltFt": 2299,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 2.8,
+        "distanceBoostFt": 2.9,
         "hrCarryScore": 3,
         "hrCarryLabel": "Helps HR carry",
         "roofStatus": {
@@ -121374,13 +121374,13 @@
       },
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 1001,
+        "daDeltaFt": 1057,
         "daMult": 1.04,
         "carryMult": 1.0,
         "weatherMult": 1.03,
-        "windOutLhbMph": 4.4,
-        "windOutRhbMph": 8.5,
-        "windMultLhb": 1.04,
+        "windOutLhbMph": 5.6,
+        "windOutRhbMph": 7.9,
+        "windMultLhb": 1.06,
         "windMultRhb": 1.08,
         "dimMultLhb": 1.15,
         "dimMultRhb": 1.09,
@@ -121399,8 +121399,12 @@
       "startTime": "2026-09-12T17:35:00Z",
       "venue": "Yankee Stadium",
       "venueId": 3313,
-      "status": "Scheduled",
-      "mlbWeather": null,
+      "status": "Pre-Game",
+      "mlbWeather": {
+        "condition": "Partly Cloudy",
+        "temp": "78",
+        "wind": "10 mph, In From RF"
+      },
       "awayPitcher": {
         "id": 804267,
         "name": "Zac Thornton",
@@ -121570,12 +121574,12 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 0.983,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
@@ -121635,12 +121639,12 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 0.983,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
@@ -121700,12 +121704,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -121765,12 +121769,12 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 0.983,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
@@ -121830,12 +121834,12 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 0.983,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
@@ -121895,12 +121899,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -121960,12 +121964,12 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 0.983,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
@@ -122025,12 +122029,12 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 0.983,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
@@ -122090,12 +122094,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122154,12 +122158,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122218,12 +122222,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122282,12 +122286,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122346,12 +122350,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122406,12 +122410,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.103,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122424,8 +122428,7 @@
           "order": 1,
           "position": "1B",
           "hand": "R",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 53,
             "hr": 2,
@@ -122473,89 +122476,23 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.12,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
         },
         {
-          "id": 700250,
-          "name": "Ben Rice",
-          "order": 2,
-          "position": "DH",
-          "hand": "L",
-          "projected": true,
-          "source": "rotowire",
-          "stats": {
-            "pa": 90,
-            "hr": 3,
-            "avg": 0.312,
-            "iso": 0.143,
-            "xwoba": 0.39,
-            "woba": 0.376,
-            "barrelPct": 10.16949152542373,
-            "hardHitPct": 42.3728813559322,
-            "avgEV": 90.3,
-            "whiffPct": 22.1,
-            "bip": 59,
-            "pullPct": 44.9,
-            "pullAirPct": 19.2,
-            "pullBarrelPct": 6.6,
-            "source": "savant-last20g",
-            "fbPct": 31.8,
-            "gbPct": 40.7,
-            "ldPct": 23.4,
-            "hrFbPct": 30.6,
-            "recentForm": 0.1,
-            "xwobaVsLhp": 0.346,
-            "paVsLhp": 206,
-            "xwobaVsRhp": 0.39,
-            "paVsRhp": 402,
-            "mixPlus": 6.8,
-            "mixEdge": 1.7,
-            "mixXwoba": 0.392,
-            "mixBest": "FF",
-            "mixWorst": "SI",
-            "mixPitches": 5,
-            "nearHr": 0,
-            "statWindow": "last20g",
-            "slg": 0.455,
-            "launchAngle": 15.4,
-            "kPct": 20.0,
-            "bipPct": 65.6,
-            "windowStart": "2026-08-20",
-            "windowEnd": "2026-09-11",
-            "windowGames": 20
-          },
-          "hrProp": {
-            "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
-            "dimMult": 1.11,
-            "pitcherMult": 1.01,
-            "parkPct": 4,
-            "windOutMph": -4.2,
-            "pullWallFt": 314,
-            "pullBearing": 101
-          }
-        },
-        {
           "id": 592450,
           "name": "Aaron Judge",
-          "order": 3,
-          "position": "RF",
+          "order": 2,
+          "position": "DH",
           "hand": "R",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 87,
             "hr": 1,
@@ -122603,12 +122540,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.12,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122616,11 +122553,10 @@
         {
           "id": 641355,
           "name": "Cody Bellinger",
-          "order": 4,
-          "position": "CF",
+          "order": 3,
+          "position": "LF",
           "hand": "L",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 84,
             "hr": 3,
@@ -122668,12 +122604,12 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 1.01,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
@@ -122681,11 +122617,10 @@
         {
           "id": 671218,
           "name": "Heliot Ramos",
-          "order": 5,
-          "position": "LF",
+          "order": 4,
+          "position": "RF",
           "hand": "R",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 60,
             "hr": 2,
@@ -122733,12 +122668,12 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.12,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -122746,11 +122681,10 @@
         {
           "id": 642708,
           "name": "Amed Rosario",
-          "order": 6,
+          "order": 5,
           "position": "3B",
           "hand": "R",
-          "projected": true,
-          "source": "rotowire",
+          "projected": false,
           "stats": {
             "pa": 51,
             "hr": 1,
@@ -122798,378 +122732,23 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.12,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
-          }
-        },
-        {
-          "id": 136601,
-          "name": "George Lombard",
-          "order": 7,
-          "position": "SS",
-          "hand": "R",
-          "projected": true,
-          "source": "rotowire",
-          "stats": {
-            "source": "savant",
-            "mixPlus": -0.4,
-            "mixEdge": 0.0,
-            "mixXwoba": 0.32,
-            "mixBest": "ST",
-            "mixWorst": "FC",
-            "mixPitches": 5
-          },
-          "hrProp": {
-            "hand": "R",
-            "combinedMult": 1.06,
-            "combinedPct": 6.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 1.08,
-            "dimMult": 1.11,
-            "pitcherMult": 1.12,
-            "parkPct": 4,
-            "windOutMph": 7.6,
-            "pullWallFt": 318,
-            "pullBearing": 11
-          }
-        },
-        {
-          "id": 676609,
-          "name": "Jos\u00e9 Caballero",
-          "order": 8,
-          "position": "2B",
-          "hand": "R",
-          "projected": true,
-          "source": "rotowire",
-          "stats": {
-            "pa": 60,
-            "hr": 1,
-            "avg": 0.182,
-            "iso": 0.073,
-            "xwoba": 0.277,
-            "woba": 0.291,
-            "barrelPct": 4.651162790697675,
-            "hardHitPct": 30.23255813953488,
-            "avgEV": 82.5,
-            "whiffPct": 30.0,
-            "bip": 43,
-            "pullPct": 43.9,
-            "pullAirPct": 17.3,
-            "pullBarrelPct": 2.8,
-            "source": "savant-last20g",
-            "fbPct": 20.8,
-            "gbPct": 46.4,
-            "ldPct": 21.5,
-            "hrFbPct": 21.7,
-            "recentForm": 1.0,
-            "xwobaVsLhp": 0.27,
-            "paVsLhp": 142,
-            "xwobaVsRhp": 0.286,
-            "paVsRhp": 280,
-            "mixPlus": -5.4,
-            "mixEdge": -1.0,
-            "mixXwoba": 0.271,
-            "mixBest": "SI",
-            "mixWorst": "FC",
-            "mixPitches": 5,
-            "nearHr": 1,
-            "statWindow": "last20g",
-            "slg": 0.255,
-            "launchAngle": 18.5,
-            "kPct": 23.3,
-            "bipPct": 71.7,
-            "windowStart": "2026-08-20",
-            "windowEnd": "2026-09-11",
-            "windowGames": 20
-          },
-          "hrProp": {
-            "hand": "R",
-            "combinedMult": 1.06,
-            "combinedPct": 6.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 1.08,
-            "dimMult": 1.11,
-            "pitcherMult": 1.12,
-            "parkPct": 4,
-            "windOutMph": 7.6,
-            "pullWallFt": 318,
-            "pullBearing": 11
-          }
-        },
-        {
-          "id": 645305,
-          "name": "Ali Sanchez",
-          "order": 9,
-          "position": "C",
-          "hand": "R",
-          "projected": true,
-          "source": "rotowire",
-          "stats": {
-            "pa": 29,
-            "hr": 1,
-            "avg": 0.25,
-            "iso": 0.107,
-            "xwoba": 0.185,
-            "woba": 0.254,
-            "barrelPct": 5.555555555555555,
-            "hardHitPct": 44.44444444444444,
-            "avgEV": 80.0,
-            "whiffPct": 22.4,
-            "bip": 18,
-            "pullPct": 35.4,
-            "pullAirPct": 0.0,
-            "pullBarrelPct": 0.0,
-            "source": "savant-last20g",
-            "fbPct": 20.8,
-            "gbPct": 43.8,
-            "ldPct": 22.9,
-            "hrFbPct": 10.0,
-            "recentForm": 0.8,
-            "xwobaVsLhp": 0.285,
-            "paVsLhp": 40,
-            "xwobaVsRhp": 0.2,
-            "paVsRhp": 33,
-            "mixPlus": -8.2,
-            "mixEdge": -0.4,
-            "mixXwoba": 0.242,
-            "mixBest": "ST",
-            "mixWorst": "FC",
-            "mixPitches": 5,
-            "nearHr": 1,
-            "statWindow": "last20g",
-            "slg": 0.357,
-            "launchAngle": 14.0,
-            "kPct": 37.9,
-            "bipPct": 62.1,
-            "windowStart": "2026-07-26",
-            "windowEnd": "2026-09-10",
-            "windowGames": 20
-          },
-          "hrProp": {
-            "hand": "R",
-            "combinedMult": 1.06,
-            "combinedPct": 6.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 1.08,
-            "dimMult": 1.11,
-            "pitcherMult": 1.12,
-            "parkPct": 4,
-            "windOutMph": 7.6,
-            "pullWallFt": 318,
-            "pullBearing": 11
-          }
-        },
-        {
-          "id": 671277,
-          "name": "Luis Garc\u00eda Jr.",
-          "hand": "L",
-          "position": "1B",
-          "projected": true,
-          "order": 10,
-          "stats": {
-            "pa": 74,
-            "hr": 6,
-            "avg": 0.386,
-            "iso": 0.3,
-            "xwoba": 0.407,
-            "woba": 0.373,
-            "barrelPct": 18.181818181818183,
-            "hardHitPct": 54.54545454545454,
-            "avgEV": 92.7,
-            "whiffPct": 27.3,
-            "bip": 55,
-            "pullPct": 43.7,
-            "pullAirPct": 18.3,
-            "pullBarrelPct": 7.4,
-            "source": "savant-last20g",
-            "fbPct": 22.1,
-            "gbPct": 43.7,
-            "ldPct": 26.6,
-            "hrFbPct": 34.5,
-            "recentForm": 1.9,
-            "xwobaVsLhp": 0.257,
-            "paVsLhp": 82,
-            "xwobaVsRhp": 0.374,
-            "paVsRhp": 421,
-            "mixPlus": 9.1,
-            "mixEdge": 6.1,
-            "mixXwoba": 0.415,
-            "mixBest": "ST",
-            "mixWorst": "SI",
-            "mixPitches": 5,
-            "nearHr": 1,
-            "statWindow": "last20g",
-            "slg": 0.686,
-            "launchAngle": 10.2,
-            "kPct": 20.3,
-            "bipPct": 74.3,
-            "windowStart": "2026-08-20",
-            "windowEnd": "2026-09-11",
-            "windowGames": 20
-          },
-          "hrProp": {
-            "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
-            "dimMult": 1.11,
-            "pitcherMult": 1.01,
-            "parkPct": 4,
-            "windOutMph": -4.2,
-            "pullWallFt": 314,
-            "pullBearing": 101
-          }
-        },
-        {
-          "id": 669224,
-          "name": "Austin Wells",
-          "hand": "L",
-          "position": "C",
-          "projected": true,
-          "order": 11,
-          "stats": {
-            "pa": 64,
-            "hr": 2,
-            "avg": 0.192,
-            "iso": 0.135,
-            "xwoba": 0.284,
-            "woba": 0.263,
-            "barrelPct": 6.0606060606060606,
-            "hardHitPct": 42.42424242424242,
-            "avgEV": 90.8,
-            "whiffPct": 24.8,
-            "bip": 33,
-            "pullPct": 47.7,
-            "pullAirPct": 20.8,
-            "pullBarrelPct": 3.2,
-            "source": "savant-last20g",
-            "fbPct": 32.4,
-            "gbPct": 34.7,
-            "ldPct": 20.4,
-            "hrFbPct": 14.3,
-            "recentForm": -2.6,
-            "xwobaVsLhp": 0.229,
-            "paVsLhp": 93,
-            "xwobaVsRhp": 0.31,
-            "paVsRhp": 262,
-            "mixPlus": 4.6,
-            "mixEdge": 8.1,
-            "mixXwoba": 0.37,
-            "mixBest": "FC",
-            "mixWorst": "ST",
-            "mixPitches": 5,
-            "nearHr": 1,
-            "statWindow": "last20g",
-            "slg": 0.327,
-            "launchAngle": 24.2,
-            "kPct": 31.3,
-            "bipPct": 51.6,
-            "windowStart": "2026-08-21",
-            "windowEnd": "2026-09-11",
-            "windowGames": 20
-          },
-          "hrProp": {
-            "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
-            "dimMult": 1.11,
-            "pitcherMult": 1.01,
-            "parkPct": 4,
-            "windOutMph": -4.2,
-            "pullWallFt": 314,
-            "pullBearing": 101
-          }
-        },
-        {
-          "id": 641857,
-          "name": "Ryan McMahon",
-          "hand": "L",
-          "position": "3B",
-          "projected": true,
-          "order": 12,
-          "stats": {
-            "pa": 61,
-            "hr": 0,
-            "avg": 0.226,
-            "iso": 0.057,
-            "xwoba": 0.279,
-            "woba": 0.284,
-            "barrelPct": 2.564102564102564,
-            "hardHitPct": 28.205128205128204,
-            "avgEV": 87.0,
-            "whiffPct": 25.4,
-            "bip": 39,
-            "pullPct": 40.9,
-            "pullAirPct": 15.9,
-            "pullBarrelPct": 0.0,
-            "source": "savant-last20g",
-            "fbPct": 31.7,
-            "gbPct": 41.3,
-            "ldPct": 23.1,
-            "hrFbPct": 15.2,
-            "recentForm": -1.9,
-            "xwobaVsLhp": 0.305,
-            "paVsLhp": 63,
-            "xwobaVsRhp": 0.303,
-            "paVsRhp": 271,
-            "mixPlus": -0.9,
-            "mixEdge": 1.3,
-            "mixXwoba": 0.316,
-            "mixBest": "FC",
-            "mixWorst": "ST",
-            "mixPitches": 5,
-            "nearHr": 0,
-            "statWindow": "last20g",
-            "slg": 0.283,
-            "launchAngle": 16.3,
-            "kPct": 24.6,
-            "bipPct": 63.9,
-            "windowStart": "2026-08-07",
-            "windowEnd": "2026-09-11",
-            "windowGames": 20
-          },
-          "hrProp": {
-            "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
-            "dimMult": 1.11,
-            "pitcherMult": 1.01,
-            "parkPct": 4,
-            "windOutMph": -4.2,
-            "pullWallFt": 314,
-            "pullBearing": 101
           }
         },
         {
           "id": 682987,
           "name": "Spencer Jones",
+          "order": 6,
+          "position": "CF",
           "hand": "L",
-          "position": "RF",
-          "projected": true,
-          "order": 13,
+          "projected": false,
           "stats": {
             "pa": 72,
             "hr": 3,
@@ -123217,87 +122796,23 @@
             "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 0.96,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
             "dimMult": 1.11,
             "pitcherMult": 1.01,
             "parkPct": 4,
-            "windOutMph": -4.2,
+            "windOutMph": -4.7,
             "pullWallFt": 314,
             "pullBearing": 101
           }
         },
         {
-          "id": 683011,
-          "name": "Anthony Volpe",
-          "hand": "R",
-          "position": "SS",
-          "projected": true,
-          "order": 14,
-          "stats": {
-            "pa": 62,
-            "hr": 1,
-            "avg": 0.263,
-            "iso": 0.105,
-            "xwoba": 0.268,
-            "woba": 0.306,
-            "barrelPct": 4.545454545454546,
-            "hardHitPct": 38.63636363636363,
-            "avgEV": 86.4,
-            "whiffPct": 23.9,
-            "bip": 44,
-            "pullPct": 31.1,
-            "pullAirPct": 11.9,
-            "pullBarrelPct": 0.0,
-            "source": "savant-last20g",
-            "fbPct": 20.7,
-            "gbPct": 44.4,
-            "ldPct": 26.7,
-            "hrFbPct": 7.1,
-            "recentForm": 1.4,
-            "xwobaVsLhp": 0.316,
-            "paVsLhp": 87,
-            "xwobaVsRhp": 0.274,
-            "paVsRhp": 115,
-            "mixPlus": -6.7,
-            "mixEdge": -3.5,
-            "mixXwoba": 0.257,
-            "mixBest": "SI",
-            "mixWorst": "FC",
-            "mixPitches": 5,
-            "nearHr": 0,
-            "statWindow": "last20g",
-            "slg": 0.368,
-            "launchAngle": 10.7,
-            "kPct": 22.6,
-            "bipPct": 71.0,
-            "windowStart": "2026-07-04",
-            "windowEnd": "2026-09-11",
-            "windowGames": 20
-          },
-          "hrProp": {
-            "hand": "R",
-            "combinedMult": 1.06,
-            "combinedPct": 6.0,
-            "propPass": false,
-            "stadiumMult": 1.018,
-            "weatherMult": 1.0,
-            "windMult": 1.08,
-            "dimMult": 1.11,
-            "pitcherMult": 1.12,
-            "parkPct": 4,
-            "windOutMph": 7.6,
-            "pullWallFt": 318,
-            "pullBearing": 11
-          }
-        },
-        {
           "id": 806146,
           "name": "George Lombard Jr.",
-          "hand": "R",
+          "order": 7,
           "position": "SS",
-          "projected": true,
-          "order": 15,
+          "hand": "R",
+          "projected": false,
           "stats": {
             "pa": 77,
             "hr": 1,
@@ -123345,12 +122860,460 @@
             "combinedPct": 6.0,
             "propPass": false,
             "stadiumMult": 1.018,
-            "weatherMult": 1.0,
+            "weatherMult": 1.01,
             "windMult": 1.08,
             "dimMult": 1.11,
             "pitcherMult": 1.12,
             "parkPct": 4,
-            "windOutMph": 7.6,
+            "windOutMph": 7.8,
+            "pullWallFt": 318,
+            "pullBearing": 11
+          }
+        },
+        {
+          "id": 683011,
+          "name": "Anthony Volpe",
+          "order": 8,
+          "position": "2B",
+          "hand": "R",
+          "projected": false,
+          "stats": {
+            "pa": 62,
+            "hr": 1,
+            "avg": 0.263,
+            "iso": 0.105,
+            "xwoba": 0.268,
+            "woba": 0.306,
+            "barrelPct": 4.545454545454546,
+            "hardHitPct": 38.63636363636363,
+            "avgEV": 86.4,
+            "whiffPct": 23.9,
+            "bip": 44,
+            "pullPct": 31.1,
+            "pullAirPct": 11.9,
+            "pullBarrelPct": 0.0,
+            "source": "savant-last20g",
+            "fbPct": 20.7,
+            "gbPct": 44.4,
+            "ldPct": 26.7,
+            "hrFbPct": 7.1,
+            "recentForm": 1.4,
+            "xwobaVsLhp": 0.316,
+            "paVsLhp": 87,
+            "xwobaVsRhp": 0.274,
+            "paVsRhp": 115,
+            "mixPlus": -6.7,
+            "mixEdge": -3.5,
+            "mixXwoba": 0.257,
+            "mixBest": "SI",
+            "mixWorst": "FC",
+            "mixPitches": 5,
+            "nearHr": 0,
+            "statWindow": "last20g",
+            "slg": 0.368,
+            "launchAngle": 10.7,
+            "kPct": 22.6,
+            "bipPct": 71.0,
+            "windowStart": "2026-07-04",
+            "windowEnd": "2026-09-11",
+            "windowGames": 20
+          },
+          "hrProp": {
+            "hand": "R",
+            "combinedMult": 1.06,
+            "combinedPct": 6.0,
+            "propPass": false,
+            "stadiumMult": 1.018,
+            "weatherMult": 1.01,
+            "windMult": 1.08,
+            "dimMult": 1.11,
+            "pitcherMult": 1.12,
+            "parkPct": 4,
+            "windOutMph": 7.8,
+            "pullWallFt": 318,
+            "pullBearing": 11
+          }
+        },
+        {
+          "id": 669224,
+          "name": "Austin Wells",
+          "order": 9,
+          "position": "C",
+          "hand": "L",
+          "projected": false,
+          "stats": {
+            "pa": 64,
+            "hr": 2,
+            "avg": 0.192,
+            "iso": 0.135,
+            "xwoba": 0.284,
+            "woba": 0.263,
+            "barrelPct": 6.0606060606060606,
+            "hardHitPct": 42.42424242424242,
+            "avgEV": 90.8,
+            "whiffPct": 24.8,
+            "bip": 33,
+            "pullPct": 47.7,
+            "pullAirPct": 20.8,
+            "pullBarrelPct": 3.2,
+            "source": "savant-last20g",
+            "fbPct": 32.4,
+            "gbPct": 34.7,
+            "ldPct": 20.4,
+            "hrFbPct": 14.3,
+            "recentForm": -2.6,
+            "xwobaVsLhp": 0.229,
+            "paVsLhp": 93,
+            "xwobaVsRhp": 0.31,
+            "paVsRhp": 262,
+            "mixPlus": 4.6,
+            "mixEdge": 8.1,
+            "mixXwoba": 0.37,
+            "mixBest": "FC",
+            "mixWorst": "ST",
+            "mixPitches": 5,
+            "nearHr": 1,
+            "statWindow": "last20g",
+            "slg": 0.327,
+            "launchAngle": 24.2,
+            "kPct": 31.3,
+            "bipPct": 51.6,
+            "windowStart": "2026-08-21",
+            "windowEnd": "2026-09-11",
+            "windowGames": 20
+          },
+          "hrProp": {
+            "hand": "L",
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
+            "propPass": false,
+            "stadiumMult": 1.018,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
+            "dimMult": 1.11,
+            "pitcherMult": 1.01,
+            "parkPct": 4,
+            "windOutMph": -4.7,
+            "pullWallFt": 314,
+            "pullBearing": 101
+          }
+        },
+        {
+          "id": 700250,
+          "name": "Ben Rice",
+          "hand": "L",
+          "position": "DH",
+          "projected": true,
+          "order": 10,
+          "stats": {
+            "pa": 90,
+            "hr": 3,
+            "avg": 0.312,
+            "iso": 0.143,
+            "xwoba": 0.39,
+            "woba": 0.376,
+            "barrelPct": 10.16949152542373,
+            "hardHitPct": 42.3728813559322,
+            "avgEV": 90.3,
+            "whiffPct": 22.1,
+            "bip": 59,
+            "pullPct": 44.9,
+            "pullAirPct": 19.2,
+            "pullBarrelPct": 6.6,
+            "source": "savant-last20g",
+            "fbPct": 31.8,
+            "gbPct": 40.7,
+            "ldPct": 23.4,
+            "hrFbPct": 30.6,
+            "recentForm": 0.1,
+            "xwobaVsLhp": 0.346,
+            "paVsLhp": 206,
+            "xwobaVsRhp": 0.39,
+            "paVsRhp": 402,
+            "mixPlus": 6.8,
+            "mixEdge": 1.7,
+            "mixXwoba": 0.392,
+            "mixBest": "FF",
+            "mixWorst": "SI",
+            "mixPitches": 5,
+            "nearHr": 0,
+            "statWindow": "last20g",
+            "slg": 0.455,
+            "launchAngle": 15.4,
+            "kPct": 20.0,
+            "bipPct": 65.6,
+            "windowStart": "2026-08-20",
+            "windowEnd": "2026-09-11",
+            "windowGames": 20
+          },
+          "hrProp": {
+            "hand": "L",
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
+            "propPass": false,
+            "stadiumMult": 1.018,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
+            "dimMult": 1.11,
+            "pitcherMult": 1.01,
+            "parkPct": 4,
+            "windOutMph": -4.7,
+            "pullWallFt": 314,
+            "pullBearing": 101
+          }
+        },
+        {
+          "id": 671277,
+          "name": "Luis Garc\u00eda Jr.",
+          "hand": "L",
+          "position": "1B",
+          "projected": true,
+          "order": 11,
+          "stats": {
+            "pa": 74,
+            "hr": 6,
+            "avg": 0.386,
+            "iso": 0.3,
+            "xwoba": 0.407,
+            "woba": 0.373,
+            "barrelPct": 18.181818181818183,
+            "hardHitPct": 54.54545454545454,
+            "avgEV": 92.7,
+            "whiffPct": 27.3,
+            "bip": 55,
+            "pullPct": 43.7,
+            "pullAirPct": 18.3,
+            "pullBarrelPct": 7.4,
+            "source": "savant-last20g",
+            "fbPct": 22.1,
+            "gbPct": 43.7,
+            "ldPct": 26.6,
+            "hrFbPct": 34.5,
+            "recentForm": 1.9,
+            "xwobaVsLhp": 0.257,
+            "paVsLhp": 82,
+            "xwobaVsRhp": 0.374,
+            "paVsRhp": 421,
+            "mixPlus": 9.1,
+            "mixEdge": 6.1,
+            "mixXwoba": 0.415,
+            "mixBest": "ST",
+            "mixWorst": "SI",
+            "mixPitches": 5,
+            "nearHr": 1,
+            "statWindow": "last20g",
+            "slg": 0.686,
+            "launchAngle": 10.2,
+            "kPct": 20.3,
+            "bipPct": 74.3,
+            "windowStart": "2026-08-20",
+            "windowEnd": "2026-09-11",
+            "windowGames": 20
+          },
+          "hrProp": {
+            "hand": "L",
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
+            "propPass": false,
+            "stadiumMult": 1.018,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
+            "dimMult": 1.11,
+            "pitcherMult": 1.01,
+            "parkPct": 4,
+            "windOutMph": -4.7,
+            "pullWallFt": 314,
+            "pullBearing": 101
+          }
+        },
+        {
+          "id": 676609,
+          "name": "Jos\u00e9 Caballero",
+          "hand": "R",
+          "position": "SS",
+          "projected": true,
+          "order": 12,
+          "stats": {
+            "pa": 60,
+            "hr": 1,
+            "avg": 0.182,
+            "iso": 0.073,
+            "xwoba": 0.277,
+            "woba": 0.291,
+            "barrelPct": 4.651162790697675,
+            "hardHitPct": 30.23255813953488,
+            "avgEV": 82.5,
+            "whiffPct": 30.0,
+            "bip": 43,
+            "pullPct": 43.9,
+            "pullAirPct": 17.3,
+            "pullBarrelPct": 2.8,
+            "source": "savant-last20g",
+            "fbPct": 20.8,
+            "gbPct": 46.4,
+            "ldPct": 21.5,
+            "hrFbPct": 21.7,
+            "recentForm": 1.0,
+            "xwobaVsLhp": 0.27,
+            "paVsLhp": 142,
+            "xwobaVsRhp": 0.286,
+            "paVsRhp": 280,
+            "mixPlus": -5.4,
+            "mixEdge": -1.0,
+            "mixXwoba": 0.271,
+            "mixBest": "SI",
+            "mixWorst": "FC",
+            "mixPitches": 5,
+            "nearHr": 1,
+            "statWindow": "last20g",
+            "slg": 0.255,
+            "launchAngle": 18.5,
+            "kPct": 23.3,
+            "bipPct": 71.7,
+            "windowStart": "2026-08-20",
+            "windowEnd": "2026-09-11",
+            "windowGames": 20
+          },
+          "hrProp": {
+            "hand": "R",
+            "combinedMult": 1.06,
+            "combinedPct": 6.0,
+            "propPass": false,
+            "stadiumMult": 1.018,
+            "weatherMult": 1.01,
+            "windMult": 1.08,
+            "dimMult": 1.11,
+            "pitcherMult": 1.12,
+            "parkPct": 4,
+            "windOutMph": 7.8,
+            "pullWallFt": 318,
+            "pullBearing": 11
+          }
+        },
+        {
+          "id": 641857,
+          "name": "Ryan McMahon",
+          "hand": "L",
+          "position": "3B",
+          "projected": true,
+          "order": 13,
+          "stats": {
+            "pa": 61,
+            "hr": 0,
+            "avg": 0.226,
+            "iso": 0.057,
+            "xwoba": 0.279,
+            "woba": 0.284,
+            "barrelPct": 2.564102564102564,
+            "hardHitPct": 28.205128205128204,
+            "avgEV": 87.0,
+            "whiffPct": 25.4,
+            "bip": 39,
+            "pullPct": 40.9,
+            "pullAirPct": 15.9,
+            "pullBarrelPct": 0.0,
+            "source": "savant-last20g",
+            "fbPct": 31.7,
+            "gbPct": 41.3,
+            "ldPct": 23.1,
+            "hrFbPct": 15.2,
+            "recentForm": -1.9,
+            "xwobaVsLhp": 0.305,
+            "paVsLhp": 63,
+            "xwobaVsRhp": 0.303,
+            "paVsRhp": 271,
+            "mixPlus": -0.9,
+            "mixEdge": 1.3,
+            "mixXwoba": 0.316,
+            "mixBest": "FC",
+            "mixWorst": "ST",
+            "mixPitches": 5,
+            "nearHr": 0,
+            "statWindow": "last20g",
+            "slg": 0.283,
+            "launchAngle": 16.3,
+            "kPct": 24.6,
+            "bipPct": 63.9,
+            "windowStart": "2026-08-07",
+            "windowEnd": "2026-09-11",
+            "windowGames": 20
+          },
+          "hrProp": {
+            "hand": "L",
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
+            "propPass": false,
+            "stadiumMult": 1.018,
+            "weatherMult": 1.01,
+            "windMult": 0.95,
+            "dimMult": 1.11,
+            "pitcherMult": 1.01,
+            "parkPct": 4,
+            "windOutMph": -4.7,
+            "pullWallFt": 314,
+            "pullBearing": 101
+          }
+        },
+        {
+          "id": 645305,
+          "name": "Ali S\u00e1nchez",
+          "hand": "R",
+          "position": "C",
+          "projected": true,
+          "order": 14,
+          "stats": {
+            "pa": 29,
+            "hr": 1,
+            "avg": 0.25,
+            "iso": 0.107,
+            "xwoba": 0.185,
+            "woba": 0.254,
+            "barrelPct": 5.555555555555555,
+            "hardHitPct": 44.44444444444444,
+            "avgEV": 80.0,
+            "whiffPct": 22.4,
+            "bip": 18,
+            "pullPct": 35.4,
+            "pullAirPct": 0.0,
+            "pullBarrelPct": 0.0,
+            "source": "savant-last20g",
+            "fbPct": 20.8,
+            "gbPct": 43.8,
+            "ldPct": 22.9,
+            "hrFbPct": 10.0,
+            "recentForm": 0.8,
+            "xwobaVsLhp": 0.285,
+            "paVsLhp": 40,
+            "xwobaVsRhp": 0.2,
+            "paVsRhp": 33,
+            "mixPlus": -8.2,
+            "mixEdge": -0.4,
+            "mixXwoba": 0.242,
+            "mixBest": "ST",
+            "mixWorst": "FC",
+            "mixPitches": 5,
+            "nearHr": 1,
+            "statWindow": "last20g",
+            "slg": 0.357,
+            "launchAngle": 14.0,
+            "kPct": 37.9,
+            "bipPct": 62.1,
+            "windowStart": "2026-07-26",
+            "windowEnd": "2026-09-10",
+            "windowGames": 20
+          },
+          "hrProp": {
+            "hand": "R",
+            "combinedMult": 1.06,
+            "combinedPct": 6.0,
+            "propPass": false,
+            "stadiumMult": 1.018,
+            "weatherMult": 1.01,
+            "windMult": 1.08,
+            "dimMult": 1.11,
+            "pitcherMult": 1.12,
+            "parkPct": 4,
+            "windOutMph": 7.8,
             "pullWallFt": 318,
             "pullBearing": 11
           }
@@ -123366,19 +123329,19 @@
         "source": "open-meteo",
         "venue": "Yankee Stadium",
         "gameHourLocal": "2026-09-12T13:00",
-        "tempF": 79.2,
-        "humidityPct": 51,
-        "windMph": 8.7,
-        "windDirDeg": 162,
+        "tempF": 79.7,
+        "humidityPct": 49,
+        "windMph": 9.1,
+        "windDirDeg": 160,
         "windDir": "SSE",
-        "windComponentMph": 2.4,
-        "pressureHpa": 1018.6,
+        "windComponentMph": 2.2,
+        "pressureHpa": 1018.1,
         "precipPct": 1,
         "roof": "open",
         "cfBearing": 56,
-        "densityAltFt": 1341,
+        "densityAltFt": 1384,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 0.3,
+        "distanceBoostFt": 0.4,
         "hrCarryScore": 0,
         "hrCarryLabel": "Neutral carry",
         "roofStatus": {
@@ -123401,16 +123364,16 @@
         "reason": "outdoor_grass_skip_roof",
         "highVariance": false
       },
-      "lineupStatus": "projected",
+      "lineupStatus": "partial",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 99,
-        "daMult": 1.0,
+        "daDeltaFt": 142,
+        "daMult": 1.01,
         "carryMult": 1.0,
-        "weatherMult": 1.0,
-        "windOutLhbMph": -4.2,
-        "windOutRhbMph": 7.6,
-        "windMultLhb": 0.96,
+        "weatherMult": 1.01,
+        "windOutLhbMph": -4.7,
+        "windOutRhbMph": 7.8,
+        "windMultLhb": 0.95,
         "windMultRhb": 1.08,
         "dimMultLhb": 1.22,
         "dimMultRhb": 1.22,
@@ -123603,11 +123566,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.99,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -123668,11 +123631,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.892,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -123733,11 +123696,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.892,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -123798,11 +123761,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.892,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -123863,11 +123826,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.892,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -123928,11 +123891,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.99,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -123993,11 +123956,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.892,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -124058,11 +124021,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.99,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124123,11 +124086,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.99,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124187,11 +124150,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.892,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -124251,11 +124214,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.99,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124315,11 +124278,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.99,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124379,11 +124342,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.892,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -124443,11 +124406,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.99,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124510,11 +124473,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.935,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -124575,11 +124538,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124640,11 +124603,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.935,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -124705,11 +124668,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124770,11 +124733,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.935,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -124835,11 +124798,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -124900,11 +124863,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.935,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -124965,11 +124928,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.935,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -125030,11 +124993,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -125094,11 +125057,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -125158,11 +125121,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -125222,11 +125185,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -125286,11 +125249,11 @@
             "propPass": false,
             "stadiumMult": 1.036,
             "weatherMult": 1.05,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.05,
             "pitcherMult": 0.973,
             "parkPct": 8,
-            "windOutMph": 8.1,
+            "windOutMph": 7.4,
             "pullWallFt": 368,
             "pullBearing": 23
           }
@@ -125350,11 +125313,11 @@
             "propPass": false,
             "stadiumMult": 0.991,
             "weatherMult": 1.05,
-            "windMult": 1.09,
+            "windMult": 1.08,
             "dimMult": 1.05,
             "pitcherMult": 0.935,
             "parkPct": -2,
-            "windOutMph": 9.2,
+            "windOutMph": 8.2,
             "pullWallFt": 368,
             "pullBearing": 67
           }
@@ -125370,20 +125333,20 @@
         "source": "open-meteo",
         "venue": "Wrigley Field",
         "gameHourLocal": "2026-09-12T13:00",
-        "tempF": 85.6,
-        "humidityPct": 42,
-        "windMph": 9.4,
-        "windDirDeg": 234,
+        "tempF": 85.3,
+        "humidityPct": 43,
+        "windMph": 8.5,
+        "windDirDeg": 233,
         "windDir": "SW",
-        "windComponentMph": 9.3,
-        "pressureHpa": 988.8,
+        "windComponentMph": 8.4,
+        "pressureHpa": 989.2,
         "precipPct": 1,
         "roof": "open",
         "cfBearing": 45,
-        "densityAltFt": 2749,
+        "densityAltFt": 2720,
         "baselineDaFt": 1242,
         "distanceBoostFt": 4.1,
-        "hrCarryScore": 4,
+        "hrCarryScore": 3,
         "hrCarryLabel": "Helps HR carry",
         "roofStatus": {
           "state": "skip",
@@ -125408,14 +125371,14 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 1507,
+        "daDeltaFt": 1478,
         "daMult": 1.06,
         "carryMult": 1.0,
         "weatherMult": 1.05,
-        "windOutLhbMph": 9.2,
-        "windOutRhbMph": 8.1,
-        "windMultLhb": 1.09,
-        "windMultRhb": 1.08,
+        "windOutLhbMph": 8.2,
+        "windOutRhbMph": 7.4,
+        "windMultLhb": 1.08,
+        "windMultRhb": 1.07,
         "dimMultLhb": 1.099,
         "dimMultRhb": 1.099,
         "wallLfFt": 355,
@@ -125604,11 +125567,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 0.953,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -125669,11 +125632,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 0.88,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -125734,11 +125697,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 0.953,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -125799,11 +125762,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 0.88,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -125864,11 +125827,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 0.953,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -125929,11 +125892,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 0.88,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -125994,11 +125957,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 0.953,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -126059,11 +126022,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 0.953,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -126124,11 +126087,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 0.953,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -126188,11 +126151,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 0.88,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126252,11 +126215,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 0.88,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126316,11 +126279,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 0.88,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126380,11 +126343,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 0.88,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126438,11 +126401,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 0.953,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -126505,11 +126468,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 1.075,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -126570,11 +126533,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126603,11 +126566,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126668,11 +126631,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126733,11 +126696,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 1.075,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -126798,11 +126761,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126863,11 +126826,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 1.075,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -126928,11 +126891,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -126993,11 +126956,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -127057,11 +127020,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -127121,11 +127084,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 1.075,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -127185,11 +127148,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 1.075,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -127249,11 +127212,11 @@
             "propPass": false,
             "stadiumMult": 1.027,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.03,
             "dimMult": 1.01,
             "pitcherMult": 1.048,
             "parkPct": 6,
-            "windOutMph": 3.7,
+            "windOutMph": 2.9,
             "pullWallFt": 375,
             "pullBearing": 338
           }
@@ -127313,11 +127276,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 1.075,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -127345,11 +127308,11 @@
             "propPass": false,
             "stadiumMult": 1.022,
             "weatherMult": 1.02,
-            "windMult": 0.99,
+            "windMult": 0.98,
             "dimMult": 1.01,
             "pitcherMult": 1.075,
             "parkPct": 5,
-            "windOutMph": -1.1,
+            "windOutMph": -1.7,
             "pullWallFt": 375,
             "pullBearing": 22
           }
@@ -127367,17 +127330,17 @@
         "gameHourLocal": "2026-09-12T15:00",
         "tempF": 75.7,
         "humidityPct": 57,
-        "windMph": 6.6,
-        "windDirDeg": 102,
-        "windDir": "ESE",
-        "windComponentMph": 1.4,
-        "pressureHpa": 1002.8,
+        "windMph": 6.1,
+        "windDirDeg": 96,
+        "windDir": "E",
+        "windComponentMph": 0.6,
+        "pressureHpa": 1002.1,
         "precipPct": 0,
         "roof": "retractable",
         "cfBearing": 0,
-        "densityAltFt": 1652,
+        "densityAltFt": 1676,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 1.1,
+        "distanceBoostFt": 1.2,
         "hrCarryScore": 1,
         "hrCarryLabel": "Neutral carry",
         "roofStatus": {
@@ -127403,14 +127366,14 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 410,
+        "daDeltaFt": 434,
         "daMult": 1.02,
         "carryMult": 1.0,
         "weatherMult": 1.02,
-        "windOutLhbMph": -1.1,
-        "windOutRhbMph": 3.7,
-        "windMultLhb": 0.99,
-        "windMultRhb": 1.04,
+        "windOutLhbMph": -1.7,
+        "windOutRhbMph": 2.9,
+        "windMultLhb": 0.98,
+        "windMultRhb": 1.03,
         "dimMultLhb": 1.02,
         "dimMultRhb": 1.02,
         "wallLfFt": 328,
@@ -127598,7 +127561,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -127663,7 +127626,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -127728,7 +127691,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -127789,11 +127752,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.963,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -127858,7 +127821,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -127923,7 +127886,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -127988,7 +127951,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -128053,7 +128016,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -128114,11 +128077,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.963,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128182,7 +128145,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -128242,11 +128205,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.963,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128310,7 +128273,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -128370,11 +128333,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.963,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128438,7 +128401,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.963,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -128501,11 +128464,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.93,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128566,11 +128529,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.93,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128635,7 +128598,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.953,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -128696,11 +128659,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.93,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128765,7 +128728,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.953,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -128826,11 +128789,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.93,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128891,11 +128854,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.93,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -128960,7 +128923,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.953,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -129021,11 +128984,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.93,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -129085,11 +129048,11 @@
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.02,
-            "windMult": 0.96,
+            "windMult": 0.97,
             "dimMult": 1.045,
             "pitcherMult": 0.93,
             "parkPct": 1,
-            "windOutMph": -3.5,
+            "windOutMph": -3.0,
             "pullWallFt": 370,
             "pullBearing": 56
           }
@@ -129153,7 +129116,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.953,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -129217,7 +129180,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.953,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -129281,7 +129244,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.953,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -129345,7 +129308,7 @@
             "dimMult": 1.0,
             "pitcherMult": 0.953,
             "parkPct": 2,
-            "windOutMph": 1.9,
+            "windOutMph": 2.3,
             "pullWallFt": 377,
             "pullBearing": 12
           }
@@ -129361,19 +129324,19 @@
         "source": "open-meteo",
         "venue": "Nationals Park",
         "gameHourLocal": "2026-09-12T16:00",
-        "tempF": 84.8,
-        "humidityPct": 66,
-        "windMph": 7.3,
-        "windDirDeg": 117,
+        "tempF": 83.1,
+        "humidityPct": 63,
+        "windMph": 7.0,
+        "windDirDeg": 121,
         "windDir": "ESE",
-        "windComponentMph": -0.9,
-        "pressureHpa": 1015.3,
+        "windComponentMph": -0.4,
+        "pressureHpa": 1015.0,
         "precipPct": 6,
         "roof": "open",
         "cfBearing": 34,
-        "densityAltFt": 1922,
+        "densityAltFt": 1794,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 1.9,
+        "distanceBoostFt": 1.5,
         "hrCarryScore": 1,
         "hrCarryLabel": "Neutral carry",
         "roofStatus": {
@@ -129399,13 +129362,13 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 680,
-        "daMult": 1.03,
+        "daDeltaFt": 552,
+        "daMult": 1.02,
         "carryMult": 1.0,
         "weatherMult": 1.02,
-        "windOutLhbMph": -3.5,
-        "windOutRhbMph": 1.9,
-        "windMultLhb": 0.96,
+        "windOutLhbMph": -3.0,
+        "windOutRhbMph": 2.3,
+        "windMultLhb": 0.97,
         "windMultRhb": 1.02,
         "dimMultLhb": 1.09,
         "dimMultRhb": 1.0,
@@ -129566,7 +129529,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -129631,7 +129594,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -129696,7 +129659,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -129761,7 +129724,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -129826,7 +129789,7 @@
             "dimMult": 1.091,
             "pitcherMult": 1.12,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -129891,7 +129854,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -129956,7 +129919,7 @@
             "dimMult": 1.091,
             "pitcherMult": 1.12,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130021,7 +129984,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -130086,7 +130049,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -130150,7 +130113,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -130214,7 +130177,7 @@
             "dimMult": 1.091,
             "pitcherMult": 1.12,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130278,7 +130241,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -130342,7 +130305,7 @@
             "dimMult": 1.091,
             "pitcherMult": 1.12,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130403,7 +130366,7 @@
             "dimMult": 1.091,
             "pitcherMult": 1.12,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130435,7 +130398,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.89,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -130502,7 +130465,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130567,7 +130530,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130632,7 +130595,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130697,7 +130660,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130762,7 +130725,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130827,7 +130790,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.953,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -130892,7 +130855,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -130957,7 +130920,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.953,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -131022,7 +130985,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.953,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -131086,7 +131049,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.953,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -131150,7 +131113,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -131214,7 +131177,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.953,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -131276,7 +131239,7 @@
             "dimMult": 1.091,
             "pitcherMult": 0.99,
             "parkPct": -20,
-            "windOutMph": 9.3,
+            "windOutMph": 8.8,
             "pullWallFt": 309,
             "pullBearing": 45
           }
@@ -131340,7 +131303,7 @@
             "dimMult": 0.88,
             "pitcherMult": 0.953,
             "parkPct": -19,
-            "windOutMph": -5.3,
+            "windOutMph": -5.0,
             "pullWallFt": 399,
             "pullBearing": 0
           }
@@ -131356,17 +131319,17 @@
         "source": "open-meteo",
         "venue": "Oracle Park",
         "gameHourLocal": "2026-09-12T13:00",
-        "tempF": 66.8,
-        "humidityPct": 68,
-        "windMph": 19.1,
+        "tempF": 66.6,
+        "humidityPct": 69,
+        "windMph": 18.1,
         "windDirDeg": 286,
         "windDir": "WNW",
-        "windComponentMph": 2.3,
-        "pressureHpa": 1013.8,
+        "windComponentMph": 2.2,
+        "pressureHpa": 1012.9,
         "precipPct": 1,
         "roof": "open",
         "cfBearing": 23,
-        "densityAltFt": 686,
+        "densityAltFt": 705,
         "baselineDaFt": 1242,
         "distanceBoostFt": -1.5,
         "hrCarryScore": -1,
@@ -131394,12 +131357,12 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": -556,
+        "daDeltaFt": -537,
         "daMult": 0.98,
         "carryMult": 1.0,
         "weatherMult": 0.98,
-        "windOutLhbMph": 9.3,
-        "windOutRhbMph": -5.3,
+        "windOutLhbMph": 8.8,
+        "windOutRhbMph": -5.0,
         "windMultLhb": 1.09,
         "windMultRhb": 0.95,
         "dimMultLhb": 1.183,
@@ -131596,7 +131559,7 @@
             "dimMult": 1.12,
             "pitcherMult": 0.925,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -131620,16 +131583,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -131694,7 +131657,7 @@
             "dimMult": 1.12,
             "pitcherMult": 0.925,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -131750,16 +131713,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -131815,16 +131778,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -131889,7 +131852,7 @@
             "dimMult": 1.12,
             "pitcherMult": 0.925,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -131945,16 +131908,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -132010,16 +131973,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -132084,7 +132047,7 @@
             "dimMult": 1.12,
             "pitcherMult": 0.925,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132139,16 +132102,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -132212,7 +132175,7 @@
             "dimMult": 1.12,
             "pitcherMult": 0.925,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132276,7 +132239,7 @@
             "dimMult": 1.12,
             "pitcherMult": 0.925,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132340,7 +132303,7 @@
             "dimMult": 1.12,
             "pitcherMult": 0.925,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132395,16 +132358,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -132452,16 +132415,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.935,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -132528,7 +132491,7 @@
             "dimMult": 1.12,
             "pitcherMult": 1.048,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132593,7 +132556,7 @@
             "dimMult": 1.12,
             "pitcherMult": 1.048,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132658,7 +132621,7 @@
             "dimMult": 1.12,
             "pitcherMult": 1.048,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132723,7 +132686,7 @@
             "dimMult": 1.12,
             "pitcherMult": 1.048,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132784,11 +132747,11 @@
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.897,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -132853,7 +132816,7 @@
             "dimMult": 1.12,
             "pitcherMult": 1.048,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -132914,11 +132877,11 @@
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.897,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -132983,7 +132946,7 @@
             "dimMult": 1.12,
             "pitcherMult": 1.048,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -133044,11 +133007,11 @@
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.897,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -133108,11 +133071,11 @@
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.897,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -133172,11 +133135,11 @@
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.897,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -133240,7 +133203,7 @@
             "dimMult": 1.12,
             "pitcherMult": 1.048,
             "parkPct": -14,
-            "windOutMph": -10.3,
+            "windOutMph": -10.0,
             "pullWallFt": 302,
             "pullBearing": 90
           }
@@ -133300,11 +133263,11 @@
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.897,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -133364,11 +133327,11 @@
             "propPass": false,
             "stadiumMult": 0.96,
             "weatherMult": 0.98,
-            "windMult": 0.98,
+            "windMult": 0.99,
             "dimMult": 1.091,
             "pitcherMult": 0.897,
             "parkPct": -9,
-            "windOutMph": -2.4,
+            "windOutMph": -1.1,
             "pullWallFt": 310,
             "pullBearing": 0
           }
@@ -133385,16 +133348,16 @@
         "venue": "Fenway Park",
         "gameHourLocal": "2026-09-12T16:00",
         "tempF": 71.8,
-        "humidityPct": 48,
-        "windMph": 10.6,
-        "windDirDeg": 77,
-        "windDir": "ENE",
-        "windComponentMph": -9.0,
-        "pressureHpa": 1018.2,
+        "humidityPct": 52,
+        "windMph": 10.1,
+        "windDirDeg": 84,
+        "windDir": "E",
+        "windComponentMph": -7.8,
+        "pressureHpa": 1018.0,
         "precipPct": 0,
         "roof": "open",
         "cfBearing": 45,
-        "densityAltFt": 827,
+        "densityAltFt": 848,
         "baselineDaFt": 1242,
         "distanceBoostFt": -1.1,
         "hrCarryScore": -2,
@@ -133422,14 +133385,14 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": -415,
+        "daDeltaFt": -394,
         "daMult": 0.98,
         "carryMult": 1.0,
         "weatherMult": 0.98,
-        "windOutLhbMph": -10.3,
-        "windOutRhbMph": -2.4,
+        "windOutLhbMph": -10.0,
+        "windOutRhbMph": -1.1,
         "windMultLhb": 0.9,
-        "windMultRhb": 0.98,
+        "windMultRhb": 0.99,
         "dimMultLhb": 1.244,
         "dimMultRhb": 1.183,
         "wallLfFt": 310,
@@ -133617,11 +133580,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -133682,11 +133645,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -133751,7 +133714,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -133816,7 +133779,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -133877,11 +133840,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -133946,7 +133909,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134007,11 +133970,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -134076,7 +134039,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134141,7 +134104,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134205,7 +134168,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134265,11 +134228,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -134333,7 +134296,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134397,7 +134360,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134457,11 +134420,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -134528,7 +134491,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134589,11 +134552,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 0.88,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -134654,11 +134617,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 0.88,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -134723,7 +134686,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134784,11 +134747,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 0.88,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -134853,7 +134816,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -134914,11 +134877,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 0.88,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -134983,7 +134946,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -135044,11 +135007,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 0.88,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -135108,11 +135071,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 0.88,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -135176,7 +135139,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -135240,7 +135203,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -135304,7 +135267,7 @@
             "dimMult": 1.0,
             "pitcherMult": 1.038,
             "parkPct": -4,
-            "windOutMph": -2.0,
+            "windOutMph": -2.5,
             "pullWallFt": 377,
             "pullBearing": 23
           }
@@ -135332,11 +135295,11 @@
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.08,
+            "windMult": 1.07,
             "dimMult": 1.06,
             "pitcherMult": 0.88,
             "parkPct": -4,
-            "windOutMph": 7.5,
+            "windOutMph": 7.0,
             "pullWallFt": 367,
             "pullBearing": 67
           }
@@ -135352,17 +135315,17 @@
         "source": "open-meteo",
         "venue": "Target Field",
         "gameHourLocal": "2026-09-12T15:00",
-        "tempF": 74.5,
+        "tempF": 74.0,
         "humidityPct": 34,
-        "windMph": 13.0,
-        "windDirDeg": 302,
-        "windDir": "WNW",
-        "windComponentMph": 2.9,
-        "pressureHpa": 984.4,
+        "windMph": 12.9,
+        "windDirDeg": 304,
+        "windDir": "NW",
+        "windComponentMph": 2.5,
+        "pressureHpa": 983.5,
         "precipPct": 0,
         "roof": "open",
         "cfBearing": 45,
-        "densityAltFt": 2109,
+        "densityAltFt": 2106,
         "baselineDaFt": 1242,
         "distanceBoostFt": 2.4,
         "hrCarryScore": 2,
@@ -135390,13 +135353,13 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 867,
+        "daDeltaFt": 864,
         "daMult": 1.03,
         "carryMult": 1.0,
         "weatherMult": 1.02,
-        "windOutLhbMph": 7.5,
-        "windOutRhbMph": -2.0,
-        "windMultLhb": 1.08,
+        "windOutLhbMph": 7.0,
+        "windOutRhbMph": -2.5,
+        "windMultLhb": 1.07,
         "windMultRhb": 0.98,
         "dimMultLhb": 1.12,
         "dimMultRhb": 1.0,
@@ -135582,16 +135545,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -135647,16 +135610,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -135712,16 +135675,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.01,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -135777,16 +135740,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -135842,16 +135805,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.01,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -135907,16 +135870,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.01,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -135972,16 +135935,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136028,16 +135991,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136093,16 +136056,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136157,16 +136120,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136221,16 +136184,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.01,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -136285,16 +136248,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.01,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -136349,16 +136312,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.01,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -136413,16 +136376,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 1.0,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136480,16 +136443,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 0.973,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136545,16 +136508,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -136610,16 +136573,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 0.973,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136675,16 +136638,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -136740,16 +136703,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 0.973,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136805,16 +136768,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -136870,16 +136833,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 0.973,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -136935,16 +136898,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 0.973,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -137000,16 +136963,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.01,
-            "combinedPct": 1.0,
+            "combinedMult": 1.02,
+            "combinedPct": 2.0,
             "propPass": false,
             "stadiumMult": 0.982,
             "weatherMult": 1.02,
-            "windMult": 1.04,
+            "windMult": 1.08,
             "dimMult": 1.025,
             "pitcherMult": 0.973,
             "parkPct": -4,
-            "windOutMph": 4.3,
+            "windOutMph": 8.1,
             "pullWallFt": 373,
             "pullBearing": 78
           }
@@ -137064,16 +137027,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -137128,16 +137091,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -137192,16 +137155,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -137254,16 +137217,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -137315,16 +137278,16 @@
           },
           "hrProp": {
             "hand": "R",
-            "combinedMult": 1.02,
-            "combinedPct": 2.0,
+            "combinedMult": 1.03,
+            "combinedPct": 3.0,
             "propPass": false,
             "stadiumMult": 0.942,
             "weatherMult": 1.02,
-            "windMult": 1.02,
+            "windMult": 1.06,
             "dimMult": 1.09,
             "pitcherMult": 1.093,
             "parkPct": -13,
-            "windOutMph": 2.3,
+            "windOutMph": 6.0,
             "pullWallFt": 362,
             "pullBearing": 34
           }
@@ -137340,28 +137303,28 @@
         "source": "open-meteo",
         "venue": "loanDepot park",
         "gameHourLocal": "2026-09-12T16:00",
-        "tempF": 80.9,
-        "humidityPct": 85,
-        "windMph": 4.5,
-        "windDirDeg": 273,
-        "windDir": "W",
-        "windComponentMph": 3.6,
-        "pressureHpa": 1017.6,
+        "tempF": 82.9,
+        "humidityPct": 81,
+        "windMph": 8.1,
+        "windDirDeg": 256,
+        "windDir": "WSW",
+        "windComponentMph": 7.6,
+        "pressureHpa": 1016.1,
         "precipPct": 18,
         "roof": "retractable",
         "cfBearing": 56,
-        "densityAltFt": 1649,
+        "densityAltFt": 1831,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 1.1,
-        "hrCarryScore": 1,
-        "hrCarryLabel": "Neutral carry",
+        "distanceBoostFt": 1.6,
+        "hrCarryScore": 2,
+        "hrCarryLabel": "Helps HR carry",
         "roofStatus": {
           "state": "open",
           "effective": "open",
           "source": "climate",
           "confidence": "medium",
           "propPass": false,
-          "reason": "climate_comfort_81F_precip_18%",
+          "reason": "climate_comfort_83F_precip_18%",
           "highVariance": false
         },
         "propPass": false
@@ -137372,20 +137335,20 @@
         "source": "climate",
         "confidence": "medium",
         "propPass": false,
-        "reason": "climate_comfort_81F_precip_18%",
+        "reason": "climate_comfort_83F_precip_18%",
         "highVariance": false
       },
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 407,
+        "daDeltaFt": 589,
         "daMult": 1.02,
         "carryMult": 1.0,
         "weatherMult": 1.02,
-        "windOutLhbMph": 4.3,
-        "windOutRhbMph": 2.3,
-        "windMultLhb": 1.04,
-        "windMultRhb": 1.02,
+        "windOutLhbMph": 8.1,
+        "windOutRhbMph": 6.0,
+        "windMultLhb": 1.08,
+        "windMultRhb": 1.06,
         "dimMultLhb": 1.05,
         "dimMultRhb": 1.18,
         "wallLfFt": 315,
@@ -139602,12 +139565,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -139667,12 +139630,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -139732,12 +139695,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -139797,12 +139760,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -139862,12 +139825,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -139927,12 +139890,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 0.895,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -139992,12 +139955,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140057,12 +140020,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140091,12 +140054,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 0.895,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140155,12 +140118,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 0.895,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140219,12 +140182,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140283,12 +140246,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140345,12 +140308,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 0.895,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140401,12 +140364,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.1,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140468,12 +140431,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140533,12 +140496,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140598,12 +140561,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.055,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140663,12 +140626,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140728,12 +140691,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.055,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140793,12 +140756,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140858,12 +140821,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -140923,12 +140886,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.055,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -140988,12 +140951,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -141052,12 +141015,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.055,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -141116,12 +141079,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.055,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -141180,12 +141143,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.032,
-            "weatherMult": 1.04,
+            "weatherMult": 1.03,
             "windMult": 1.04,
             "dimMult": 1.045,
             "pitcherMult": 1.055,
             "parkPct": 7,
-            "windOutMph": 3.5,
+            "windOutMph": 4.1,
             "pullWallFt": 370,
             "pullBearing": 46
           }
@@ -141244,12 +141207,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -141308,12 +141271,12 @@
             "combinedPct": null,
             "propPass": true,
             "stadiumMult": 1.004,
-            "weatherMult": 1.04,
-            "windMult": 1.08,
+            "weatherMult": 1.03,
+            "windMult": 1.09,
             "dimMult": 1.02,
             "pitcherMult": 1.103,
             "parkPct": 1,
-            "windOutMph": 8.3,
+            "windOutMph": 9.4,
             "pullWallFt": 374,
             "pullBearing": 90
           }
@@ -141329,19 +141292,19 @@
         "source": "open-meteo",
         "venue": "American Family Field",
         "gameHourLocal": "2026-09-12T18:00",
-        "tempF": 80.5,
-        "humidityPct": 55,
-        "windMph": 9.0,
-        "windDirDeg": 293,
+        "tempF": 78.7,
+        "humidityPct": 62,
+        "windMph": 10.1,
+        "windDirDeg": 292,
         "windDir": "WNW",
-        "windComponentMph": 6.4,
-        "pressureHpa": 988.2,
+        "windComponentMph": 7.3,
+        "pressureHpa": 988.7,
         "precipPct": 1,
         "roof": "retractable",
         "cfBearing": 68,
-        "densityAltFt": 2479,
+        "densityAltFt": 2366,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 3.4,
+        "distanceBoostFt": 3.1,
         "hrCarryScore": 3,
         "hrCarryLabel": "Helps HR carry",
         "roofStatus": {
@@ -141350,7 +141313,7 @@
           "source": "climate",
           "confidence": "low",
           "propPass": true,
-          "reason": "borderline_80F_precip_1%",
+          "reason": "borderline_79F_precip_1%",
           "highVariance": true
         },
         "propPass": true
@@ -141361,20 +141324,20 @@
         "source": "climate",
         "confidence": "low",
         "propPass": true,
-        "reason": "borderline_80F_precip_1%",
+        "reason": "borderline_79F_precip_1%",
         "highVariance": true
       },
       "propPass": true,
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 1237,
-        "daMult": 1.05,
+        "daDeltaFt": 1124,
+        "daMult": 1.04,
         "carryMult": 1.0,
-        "weatherMult": 1.04,
-        "windOutLhbMph": 8.3,
-        "windOutRhbMph": 3.5,
-        "windMultLhb": 1.08,
+        "weatherMult": 1.03,
+        "windOutLhbMph": 9.4,
+        "windOutRhbMph": 4.1,
+        "windMultLhb": 1.09,
         "windMultRhb": 1.04,
         "dimMultLhb": 1.04,
         "dimMultRhb": 1.09,
@@ -141554,16 +141517,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -141624,11 +141587,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -141684,16 +141647,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -141749,16 +141712,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -141819,11 +141782,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -141879,16 +141842,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -141944,16 +141907,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -142014,11 +141977,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142074,16 +142037,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -142143,11 +142106,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142207,11 +142170,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142266,16 +142229,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -142335,11 +142298,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.028,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142394,16 +142357,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.945,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -142465,11 +142428,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142525,16 +142488,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.948,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -142595,11 +142558,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142655,16 +142618,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.948,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -142725,11 +142688,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142784,16 +142747,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.948,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -142854,11 +142817,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142917,11 +142880,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -142982,11 +142945,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -143041,16 +143004,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.948,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -143105,16 +143068,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.948,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -143174,11 +143137,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -143236,11 +143199,11 @@
             "propPass": false,
             "stadiumMult": 0.978,
             "weatherMult": 1.05,
-            "windMult": 1.02,
+            "windMult": 1.03,
             "dimMult": 0.98,
             "pitcherMult": 1.032,
             "parkPct": -5,
-            "windOutMph": 1.7,
+            "windOutMph": 2.9,
             "pullWallFt": 380,
             "pullBearing": 1
           }
@@ -143263,16 +143226,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 1.0,
-            "combinedPct": 0.0,
+            "combinedMult": 1.01,
+            "combinedPct": 1.0,
             "propPass": false,
             "stadiumMult": 1.004,
             "weatherMult": 1.05,
-            "windMult": 1.01,
+            "windMult": 1.02,
             "dimMult": 1.01,
             "pitcherMult": 0.948,
             "parkPct": 1,
-            "windOutMph": 0.9,
+            "windOutMph": 2.3,
             "pullWallFt": 375,
             "pullBearing": 45
           }
@@ -143288,19 +143251,19 @@
         "source": "open-meteo",
         "venue": "Truist Park",
         "gameHourLocal": "2026-09-12T19:00",
-        "tempF": 78.4,
+        "tempF": 78.9,
         "humidityPct": 86,
-        "windMph": 1.8,
-        "windDirDeg": 166,
-        "windDir": "SSE",
-        "windComponentMph": 1.4,
-        "pressureHpa": 977.9,
+        "windMph": 2.9,
+        "windDirDeg": 189,
+        "windDir": "S",
+        "windComponentMph": 2.8,
+        "pressureHpa": 978.7,
         "precipPct": 12,
         "roof": "open",
         "cfBearing": 23,
-        "densityAltFt": 2820,
+        "densityAltFt": 2830,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 4.3,
+        "distanceBoostFt": 4.4,
         "hrCarryScore": 3,
         "hrCarryLabel": "Helps HR carry",
         "roofStatus": {
@@ -143326,14 +143289,14 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 1578,
+        "daDeltaFt": 1588,
         "daMult": 1.06,
         "carryMult": 1.0,
         "weatherMult": 1.05,
-        "windOutLhbMph": 0.9,
-        "windOutRhbMph": 1.7,
-        "windMultLhb": 1.01,
-        "windMultRhb": 1.02,
+        "windOutLhbMph": 2.3,
+        "windOutRhbMph": 2.9,
+        "windMultLhb": 1.02,
+        "windMultRhb": 1.03,
         "dimMultLhb": 1.02,
         "dimMultRhb": 0.96,
         "wallLfFt": 335,
@@ -143518,16 +143481,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -143592,7 +143555,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.983,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -143648,16 +143611,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -143713,16 +143676,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -143778,16 +143741,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -143843,16 +143806,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -143908,16 +143871,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -143982,7 +143945,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.983,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144038,16 +144001,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -144111,7 +144074,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.983,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144166,16 +144129,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.98,
-            "combinedPct": -2.0,
+            "combinedMult": 0.99,
+            "combinedPct": -1.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 1.018,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -144239,7 +144202,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.983,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144303,7 +144266,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.983,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144367,7 +144330,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.983,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144434,7 +144397,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144499,7 +144462,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144564,7 +144527,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144620,16 +144583,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.96,
-            "combinedPct": -4.0,
+            "combinedMult": 0.97,
+            "combinedPct": -3.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 0.892,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -144694,7 +144657,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144758,7 +144721,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144823,7 +144786,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144888,7 +144851,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -144953,7 +144916,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -145008,16 +144971,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.96,
-            "combinedPct": -4.0,
+            "combinedMult": 0.97,
+            "combinedPct": -3.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 0.892,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -145072,16 +145035,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.96,
-            "combinedPct": -4.0,
+            "combinedMult": 0.97,
+            "combinedPct": -3.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 0.892,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -145145,7 +145108,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.917,
             "parkPct": -16,
-            "windOutMph": 2.3,
+            "windOutMph": 2.1,
             "pullWallFt": 375,
             "pullBearing": 102
           }
@@ -145200,16 +145163,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.96,
-            "combinedPct": -4.0,
+            "combinedMult": 0.97,
+            "combinedPct": -3.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 0.892,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -145264,16 +145227,16 @@
           },
           "hrProp": {
             "hand": "L",
-            "combinedMult": 0.96,
-            "combinedPct": -4.0,
+            "combinedMult": 0.97,
+            "combinedPct": -3.0,
             "propPass": false,
             "stadiumMult": 0.914,
             "weatherMult": 1.05,
-            "windMult": 0.99,
+            "windMult": 1.0,
             "dimMult": 1.01,
             "pitcherMult": 0.892,
             "parkPct": -19,
-            "windOutMph": -0.6,
+            "windOutMph": 0.2,
             "pullWallFt": 375,
             "pullBearing": 146
           }
@@ -145289,20 +145252,20 @@
         "source": "open-meteo",
         "venue": "Busch Stadium",
         "gameHourLocal": "2026-09-12T18:00",
-        "tempF": 87.7,
+        "tempF": 86.4,
         "humidityPct": 50,
-        "windMph": 4.0,
-        "windDirDeg": 227,
-        "windDir": "SW",
-        "windComponentMph": 0.9,
-        "pressureHpa": 994.5,
+        "windMph": 2.8,
+        "windDirDeg": 241,
+        "windDir": "WSW",
+        "windComponentMph": 1.3,
+        "pressureHpa": 995.5,
         "precipPct": 1,
         "roof": "open",
         "cfBearing": 124,
-        "densityAltFt": 2745,
+        "densityAltFt": 2620,
         "baselineDaFt": 1242,
-        "distanceBoostFt": 4.1,
-        "hrCarryScore": 3,
+        "distanceBoostFt": 3.8,
+        "hrCarryScore": 2,
         "hrCarryLabel": "Helps HR carry",
         "roofStatus": {
           "state": "skip",
@@ -145327,13 +145290,13 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 1503,
+        "daDeltaFt": 1378,
         "daMult": 1.06,
         "carryMult": 1.0,
         "weatherMult": 1.05,
-        "windOutLhbMph": -0.6,
-        "windOutRhbMph": 2.3,
-        "windMultLhb": 0.99,
+        "windOutLhbMph": 0.2,
+        "windOutRhbMph": 2.1,
+        "windMultLhb": 1.0,
         "windMultRhb": 1.02,
         "dimMultLhb": 1.02,
         "dimMultRhb": 1.02,
@@ -147531,7 +147494,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -147596,7 +147559,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.907,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -147630,7 +147593,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -147695,7 +147658,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -147760,7 +147723,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.907,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -147825,7 +147788,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.907,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -147890,7 +147853,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -147955,7 +147918,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.907,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -148012,7 +147975,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148076,7 +148039,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148140,7 +148103,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148204,7 +148167,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148268,7 +148231,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.083,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148330,7 +148293,7 @@
             "dimMult": 1.01,
             "pitcherMult": 0.907,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -148397,7 +148360,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148462,7 +148425,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -148527,7 +148490,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148592,7 +148555,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -148657,7 +148620,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -148722,7 +148685,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148787,7 +148750,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148852,7 +148815,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -148917,7 +148880,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -148981,7 +148944,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 3,
-            "windOutMph": 13.4,
+            "windOutMph": 12.9,
             "pullWallFt": 375,
             "pullBearing": 67
           }
@@ -149045,7 +149008,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -149109,7 +149072,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -149173,7 +149136,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -149235,7 +149198,7 @@
             "dimMult": 1.01,
             "pitcherMult": 1.065,
             "parkPct": 9,
-            "windOutMph": 11.8,
+            "windOutMph": 11.7,
             "pullWallFt": 375,
             "pullBearing": 23
           }
@@ -149251,17 +149214,17 @@
         "source": "open-meteo",
         "venue": "Sutter Health Park",
         "gameHourLocal": "2026-09-12T18:00",
-        "tempF": 77.5,
-        "humidityPct": 34,
-        "windMph": 13.8,
-        "windDirDeg": 234,
+        "tempF": 77.3,
+        "humidityPct": 35,
+        "windMph": 13.4,
+        "windDirDeg": 232,
         "windDir": "SW",
-        "windComponentMph": 13.6,
+        "windComponentMph": 13.3,
         "pressureHpa": 1009.2,
         "precipPct": 0,
         "roof": "open",
         "cfBearing": 45,
-        "densityAltFt": 1468,
+        "densityAltFt": 1459,
         "baselineDaFt": 1242,
         "distanceBoostFt": 0.6,
         "hrCarryScore": 2,
@@ -149289,12 +149252,12 @@
       "lineupStatus": "projected",
       "hrModel": {
         "refAlleyFt": 377.0,
-        "daDeltaFt": 226,
+        "daDeltaFt": 217,
         "daMult": 1.01,
         "carryMult": 1.0,
         "weatherMult": 1.01,
-        "windOutLhbMph": 13.4,
-        "windOutRhbMph": 11.8,
+        "windOutLhbMph": 12.9,
+        "windOutRhbMph": 11.7,
         "windMultLhb": 1.12,
         "windMultRhb": 1.12,
         "dimMultLhb": 1.02,
@@ -149305,5 +149268,5 @@
       }
     }
   ],
-  "fetched_at": "2026-09-12T10:28:54"
+  "fetched_at": "2026-09-12T10:43:34"
 }

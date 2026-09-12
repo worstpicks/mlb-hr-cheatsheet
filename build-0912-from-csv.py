@@ -33,122 +33,146 @@ BUM_RISK_MIN = 0.95
 CARRIED_RISK: dict[str, str] = {}
 
 RAW_PROPS = [
-    "Dillion DIngler",
-    "Gleyber Torres",
-    "Colt Keith",
+    "Kevin McGonigle💎",
+    "John Peck",
+    "Colt Keith💎",
+    "Max Clark",
+    "Spencer Torkelson",
+    "Jake McCarthy",
     "Troy Johnston",
-    "Adael Amador💎",
-    "Yohandy Morales",
-    "James Wood",
-    "Andres Chaparro💎",
-    "Dylan Crews",
-    "Harry Ford",
-    "Moises Ballesteros💎",
-    "Zach Neto",
-    "Spencer Jones⭐",
-    "Luis Garcia Jr.",
-    "Austin Wells",
-    "Cody Bellinger⭐",
-    "Aaron Judge",
-    "Ben Rice",
-    "Mark Vientos",
-    "Francisco Alvarez",
+    "Cole Craigg",
+    "Adael Amador",
+    "Heliot Ramos⭐",
+    "Aaron Judge💎",
+    "Amed Rosario",
+    "Cody Bellinger",
+    "Luis Torrens",
+    "Marcus Semien",
+    "Brett Baty",
+    "Francisco Lindor",
+    "Juan Soto",
     "Bo Bichette",
-    "Francisco Lindor💎",
-    "Kazuma Okamoto💎",
-    "Vladimir Guerrero Jr.⭐",
-    "Nathan Lukes",
-    "Alejandro Kirk⭐",
-    "Brett Bateman",
+    "Pete Crow Armstrong💎",
+    "Seiya Suzuki",
+    "BJ Murray Jr.",
+    "Bryan Reynolds💎",
+    "Ryan O'Hearn",
+    "Oneil Cruz",
+    "Brandon Lowe⭐",
+    "Kazuma Okamoto",
+    "Sean Keys",
+    "Brandon Valenzuela",
+    "Alejandro Kirk",
     "Coby Mayo⭐",
-    "Samuel Basallo",
-    "Leody Taveras",
-    "Pete Alonso",
-    "Christian Encarnacion-Strand",
-    "Junior Caminero⭐",
-    "Victor Mesa Jr.💎",
-    "Yandy Diaz",
-    "Nick Allen",
-    "Nelson Velazquez",
-    "Cam Smith",
-    "Yainer Diaz💎",
-    "Isaac Paredes⭐",
-    "Heriberto Hernandez⭐",
-    "Kyle Stowers",
-    "Griffin Conine",
-    "Jared Serna",
-    "Kyle Tucker",
-    "Will Smith⭐",
-    "Mookie Betts⭐",
-    "Teoscar Hernandez",
-    "Roman Anthony💎",
-    "Jarren Duran",
-    "Mickey Gasper",
-    "Adley Rutschman",
-    "Bobby Witt Jr.",
-    "Salvador Perez",
-    "Vinnie Pasuqantino",
-    "Michael Massey",
-    "Matt Olson💎",
-    "Ozzie Albies",
-    "Austin Riley",
-    "Sean Murphy",
-    "Drake Baldwin",
-    "Kyle Schwarber⭐",
-    "Alec Bohm",
-    "Trea Turner💎",
-    "Jake Bauers⭐",
-    "Garrett Mitchell",
-    "William Contreras⭐",
-    "Andrew Vaughn",
-    "Brice Turang",
-    "Elly De La Cruz⭐",
-    "Eugenio Suarez",
-    "JJ Bleday",
-    "Tyler Stephenson",
-    "Sal Stewart",
-    "Ke'Bryan Hayes",
-    "Kody Clemens",
-    "Josh Bell",
-    "Brooks Lee",
+    "Samuel Basallo💎",
+    "Colton Cowser",
+    "Yohandy Morales",
+    "Daylen Lile",
+    "Dylan Crews",
+    "Keibert Ruiz",
+    "James Wood⭐",
+    "Andrew Pinckney",
+    "Jose Siri",
+    "Travis d'Arnaud",
+    "Christian Moore",
+    "Rafael Devers⭐",
+    "Bryce Eldridge⭐",
+    "Andrew Knizner",
+    "Sung-Mun Song",
+    "Jase Bowen",
+    "Jackson Merrill",
+    "Manny Machado",
+    "Fernando Tatis Jr.",
+    "Kody Clemens💎",
+    "Ryan Jeffers⭐",
+    "Josh Bell💎",
+    "Brooks Lee💎",
     "Royce Lewis",
-    "Chase DeLauter⭐",
-    "Travis Bazzana⭐",
+    "Angel Martinez",
+    "Patrick Bailey",
     "Nathaniel Lowe",
-    "Leonardo Bernal💎",
-    "Thomas Saggese",
+    "David Fry",
+    "Kyle Stowers",
+    "Otto Lopez💎",
+    "Owen Caissie",
+    "Javier Sanoja",
+    "Griffin Conine",
+    "Joe Mack",
+    "Teoscar Hernandez",
+    "Mookie Betts💎",
+    "Kyle Tucker",
+    "Freddie Freeman",
+    "Alex Freeland",
+    "Adley Rutshcman⭐",
+    "Mickey Gasper💎",
+    "Wilyer Abreu",
+    "Jarren Duran",
+    "Roman Anthony💎",
+    "Carter Jensen",
+    "Vinnie Pasquantino",
+    "Michael Massey",
+    "Victor Mesa Jr.💎",
+    "Junior Caminero⭐",
+    "Ryan Vilade💎",
+    "Nelson Velazquez",
+    "Yordan Alvarez",
+    "Yainer Diaz",
+    "Cam Smith",
+    "LaMonte Wade Jr.",
+    "Daulton Varsho",
+    "Brice Turang💎",
+    "Jake Bauers",
+    "William Contreras",
+    "Bo Naylor",
+    "Garrett Mitchell",
+    "David Hamilton",
+    "Elly De La Cruz",
+    "Sal Stewart",
+    "Eugenio Suarez",
+    "Tyler Stephenson",
+    "Joshua Baez",
+    "Nolan Gorman",
     "Jordan Walker",
-    "Masyn Winn",
     "Ivan Herrera",
-    "Colson Montgomery",
+    "Alec Burleson",
+    "Leonardo Bernal",
+    "Munetaka Murakami💎",
+    "Andrew Benintendi💎",
+    "Tristan Peters",
+    "Braden Montgomery",
     "Randal Grichuk",
-    "Miguel Vargas",
-    "Jake Rogers💎",
+    "Austin Riley💎",
+    "Ronald Acuna Jr.",
+    "Brewer Hicklen",
+    "Ozzie Albies",
+    "Trea Turner💎",
+    "Kyle Schwarber",
+    "Bryson Stott",
+    "Bryce Harper",
+    "Brandon Marsh💎",
+    "Lars Nootbaar💎",
+    "Corbin Carroll",
+    "Tim Tawa",
+    "Joc Pederson",
+    "Brandon Nimmo",
+    "Corey Seager",
+    "Wyatt Langford",
     "Lawrence Butler💎",
     "Zack Gelof💎",
+    "Michael Stefanic",
+    "Max Muncy",
     "Jonah Heim",
-    "Dominic Canzone💎",
-    "Brock Rodden",
+    "Dominic Canzone",
     "Cole Young",
-    "Corbin Carroll💎",
-    "Gabriel Moreno",
-    "Ketel Marte💎",
-    "Wyatt Langford",
-    "Brandon Nimmo",
-    "Ezequiel Duran",
-    "Justin Foscue",
-    "Corey Seager",
-    "Bryce Eldridge⭐",
-    "Rafael Devers",
-    "Turner Hill",
-    "Manny Machado💎",
-    "Jackson Merrill⭐",
-    "Fernando Tatis Jr.💎",
-    "Ty France💎",
-    "Xander Bogaerts",
+    "Julio Rodriguez",
 ]
 
 ALIASES = {
+    # Colorado's shortstop is Cole CARRIGG, batting 5th today. The list spells him
+    # "Craigg", which is two edits away, so the one-character corrector could not
+    # reach it. Named here rather than loosening that corrector: at two edits it
+    # starts matching genuinely different players to each other.
+    "Cole Craigg": "Cole Carrigg",
     # prop-list spellings that differ from the export
     "J.T Realmuto": "J.T. Realmuto",
     "Ronald Acuna Jr.": "Ronald Acuna Jr.",
@@ -183,7 +207,15 @@ ALIASES = {
 
 MANUAL_BATTER_ROWS: dict[str, dict] = {}
 
-BATTER_GAME_OVERRIDES: dict[str, str] = {}
+BATTER_GAME_OVERRIDES: dict[str, str] = {
+    # Two Max Muncys are batting today -- Los Angeles hits him 4th, Oakland 7th --
+    # and the list gives one name. The owner named the Oakland one for this slate.
+    # (On 9/8 it was the Dodger, so this is a per-slate call, not a standing rule:
+    # ask each time rather than carrying the last answer forward.) Pinned rather
+    # than guessed, because an unpinned duplicate is how one of them once
+    # overwrote the other and vanished off the board entirely.
+    "Max Muncy": "SEA @ ATH",
+}
 
 PROP_GAME_OVERRIDES: dict[str, str] = {}
 
@@ -465,6 +497,9 @@ def _within_one_edit(a: str, b: str) -> bool:
     return True
 
 
+SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
+
+
 def load_batter_profiles() -> dict[str, dict]:
     """Savant contact rates and each hitter's xwOBA against the arm he faces.
 
@@ -517,21 +552,48 @@ def load_batter_profiles() -> dict[str, dict]:
     # one player on the slate answers to it: if two do, the alias is dropped rather
     # than guessed, because handing one hitter another's K rate is worse than
     # showing no stars at all.
-    def _alias(key: str) -> str | None:
+    def _variants(key: str) -> set[str]:
+        """Keys this hitter could also be written under.
+
+        Two spellings routinely differ from the board's: a shortened first name
+        ("Leo" for "Leonardo") and a dropped generational suffix -- the MLB feed
+        files Ronald Acuna Jr. as "Ronald Acuna", Bobby Witt Jr. as "Bobby Witt".
+        Both come back as a miss on the exact key, and a miss reads downstream as
+        "this hitter has no strikeout data" rather than "we did not find him".
+        """
         parts = key.split()
-        return f"{parts[0][0]} {' '.join(parts[1:])}" if len(parts) >= 2 else None
+        if len(parts) < 2:
+            return set()
+        base = parts[:-1] if parts[-1] in SUFFIXES and len(parts) > 2 else parts
+        out_keys = {" ".join(base), f"{base[0][0]} {' '.join(base[1:])}"}
+        return {k for k in out_keys if k and k != key}
 
     owners: dict[str, set[str]] = {}
     for key in out:
-        a = _alias(key)
-        if a:
+        for a in _variants(key):
             owners.setdefault(a, set()).add(key)
+    def _person(key: str) -> str:
+        """Collapse one human's spellings so a self-collision is not a collision.
+
+        "bobby witt jr" and "bobby witt" are the same hitter written two ways; only
+        two genuinely different people sharing an alias should block it.
+        """
+        parts = key.split()
+        if len(parts) > 2 and parts[-1] in SUFFIXES:
+            parts = parts[:-1]
+        return " ".join(parts)
+
     added = 0
+    ambiguous: list[str] = []
     for a, keys in owners.items():
-        if len(keys) == 1 and a not in out:
-            out[a] = out[next(iter(keys))]
+        if a in out:
+            continue
+        if len({_person(k) for k in keys}) == 1:
+            out[a] = out[sorted(keys)[0]]
             added += 1
-    dropped = sorted(a for a, keys in owners.items() if len(keys) > 1)
+        else:
+            ambiguous.append(a)
+    dropped = sorted(ambiguous)
     print(f"  batter profiles loaded: {len(owners)} hitters (+{added} short-name aliases)")
     if dropped:
         print(f"  {len(dropped)} alias(es) ambiguous on this slate, left unmatched: {', '.join(dropped[:4])}")
@@ -1438,7 +1500,18 @@ def main() -> int:
             if _bp is None:
                 _parts = _bk.split()
                 if len(_parts) >= 2:
-                    _bp = batter_profiles.get(f"{_parts[0][0]} {' '.join(_parts[1:])}")
+                    _base = (
+                        _parts[:-1]
+                        if _parts[-1] in SUFFIXES and len(_parts) > 2
+                        else _parts
+                    )
+                    for _try in (
+                        " ".join(_base),
+                        f"{_base[0][0]} {' '.join(_base[1:])}",
+                    ):
+                        _bp = batter_profiles.get(_try)
+                        if _bp is not None:
+                            break
             contact = contact_profile(
                 _bp,
                 pitcher_k_profiles.get(name_lookup_key(chip)),

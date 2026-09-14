@@ -1024,12 +1024,15 @@
                 settle[k] = (playedSet[k] && !outSet[k]) ? "active" : "void";
             });
 
-            var counts = { active: 0, void: 0, pending: 0, favActive: 0, favVoid: 0 };
+            /* Only a void leaves the denominator. A player whose game has not
+               kicked off yet is still a live ticket -- he has not failed, but he
+               has not been refunded either, so he stays counted. */
+            var counts = { active: 0, void: 0, pending: 0, live: 0, favLive: 0 };
             Object.keys(idx).forEach(function (k) {
                 counts[settle[k]]++;
-                if (idx[k].fav) {
-                    if (settle[k] === "active") counts.favActive++;
-                    if (settle[k] === "void") counts.favVoid++;
+                if (settle[k] !== "void") {
+                    counts.live++;
+                    if (idx[k].fav) counts.favLive++;
                 }
             });
 
@@ -1039,8 +1042,8 @@
 
             sumEl.hidden = false;
             sumEl.innerHTML =
-                '<span class="atd-count">' + rows.length + " of " + counts.active + " who played scored</span>" +
-                '<span class="atd-count">' + favHit + " of " + counts.favActive + " favorites</span>" +
+                '<span class="atd-count">' + rows.length + " of " + counts.live + " listed players scored</span>" +
+                '<span class="atd-count">' + favHit + " of " + counts.favLive + " favorites</span>" +
                 (counts["void"] ? '<span class="atd-count atd-count--void">' + counts["void"] +
                     " voided &mdash; did not play</span>" : "") +
                 (counts.pending ? '<span class="atd-count">' + counts.pending + " still to play</span>" : "") +

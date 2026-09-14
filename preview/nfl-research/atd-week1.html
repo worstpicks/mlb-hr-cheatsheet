@@ -180,6 +180,11 @@
     html.theme-light .chip--q   { color: #92400e; background: rgba(251, 191, 36, 0.3); }
     html.theme-light .chip--out { color: #991b1b; background: rgba(239, 68, 68, 0.22); }
 
+    .chip--void { background: rgba(148, 163, 184, 0.22); border-color: rgba(148, 163, 184, 0.5); color: #cbd5e1; }
+    html.theme-light .chip--void { color: #475569; background: rgba(148, 163, 184, 0.3); }
+    .atd-play.is-void { opacity: 0.55; border-left-color: rgba(148, 163, 184, 0.6); }
+    .atd-count--void { border-color: rgba(148, 163, 184, 0.45); }
+
     /* ── Measured inputs ── */
     .atd-metrics { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
     .atd-m {
@@ -901,15 +906,54 @@
                 return n && n !== "STATUS_SCHEDULED" && n !== "STATUS_POSTPONED";
             });
 
-            var scorers = [];
+            var scorers = [], played = [], out = [], gameState = {};
+
+            events.forEach(function (e) {
+                var c = (e.competitions && e.competitions[0]) || {};
+                var away = "", home = "";
+                (c.competitors || []).forEach(function (t) {
+                    var ab = (t.team || {}).abbreviation || "";
+                    if (t.homeAway === "home") home = ab; else away = ab;
+                });
+                var t = e.status && e.status.type;
+                gameState[away + "@" + home] =
+                    t && t.completed ? "final"
+                    : (t && t.name !== "STATUS_SCHEDULED" && t.name !== "STATUS_POSTPONED") ? "live"
+                    : "scheduled";
+            });
+
             for (var i = 0; i < started.length; i++) {
                 try {
                     var r = await fetch(ESPN + "summary?event=" + started[i].id);
                     if (!r.ok) continue;
-                    ((await r.json()).scoringPlays || []).forEach(function (p) {
+                    var s = await r.json();
+
+                    (s.scoringPlays || []).forEach(function (p) {
                         if (!p.type || p.type.abbreviation !== "TD") return;
                         var m = /^(.+?)\s+\d+\s+Yd\b/i.exec(p.text || "");
                         if (m) scorers.push({ name: m[1].trim(), team: (p.team || {}).abbreviation || "" });
+                    });
+
+                    // Anyone with an offensive stat line was on the field. A player
+                    // who dressed but never got a touch is a losing bet, not a void --
+                    // but at RB1/WR1/TE1, no touch at all almost always means no snaps.
+                    ((s.boxscore || {}).players || []).forEach(function (tm) {
+                        (tm.statistics || []).forEach(function (cat) {
+                            if (["rushing", "receiving", "passing"].indexOf(cat.name) === -1) return;
+                            (cat.athletes || []).forEach(function (a) {
+                                if (a.athlete && a.athlete.displayName) played.push(a.athlete.displayName);
+                            });
+                        });
+                    });
+
+                    // The injury report is the definitive read: ruled out means the
+                    // book voids the ticket rather than settling it a loss.
+                    (s.injuries || []).forEach(function (tm) {
+                        (tm.injuries || []).forEach(function (inj) {
+                            var st = String(inj.status || "").toLowerCase();
+                            if (st.indexOf("out") === -1 && st.indexOf("inactive") === -1) return;
+                            if (inj.athlete && inj.athlete.displayName) out.push(inj.athlete.displayName);
+                        });
                     });
                 } catch (e) { /* one unreachable game should not sink the board */ }
             }
@@ -925,8 +969,20 @@
                     var t = e.status && e.status.type;
                     return t && !t.completed && t.name !== "STATUS_SCHEDULED";
                 }).map(function (e) { return e.shortName; }),
-                scorers: scorers
+                scorers: scorers,
+                played: played,
+                out: out,
+                gameState: gameState
             };
+        }
+
+        /* Which game is a player in, and has it finished? */
+        function gameKeyOf(team) {
+            for (var i = 0; i < GAMES.length; i++) {
+                var g = GAMES[i];
+                if (g.sides[team]) return g.away + "@" + g.home;
+            }
+            return null;
         }
 
         function paintScored(data) {
@@ -947,17 +1003,47 @@
                 }
             });
 
+            var playedSet = {}, outSet = {};
+            (data.played || []).forEach(function (n) { playedSet[normName(n)] = 1; });
+            (data.out || []).forEach(function (n) { outSet[normName(n)] = 1; });
+            var state = data.gameState || {};
+
+            /* A listed player settles three ways:
+                 active  – his game is final and he took the field: the bet stood
+                 void    – his game is final and he never played, or he was ruled
+                           out: a book refunds these rather than settling them lost
+                 pending – his game has not finished, so nothing is decided yet
+               Only `active` belongs in the denominator. Counting a player who never
+               dressed as a miss is the same mistake as counting a voided ticket
+               as a loss. */
+            var settle = {};
+            Object.keys(idx).forEach(function (k) {
+                var who = idx[k];
+                var st = state[gameKeyOf(who.team)] || "scheduled";
+                if (st !== "final") { settle[k] = "pending"; return; }
+                settle[k] = (playedSet[k] && !outSet[k]) ? "active" : "void";
+            });
+
+            var counts = { active: 0, void: 0, pending: 0, favActive: 0, favVoid: 0 };
+            Object.keys(idx).forEach(function (k) {
+                counts[settle[k]]++;
+                if (idx[k].fav) {
+                    if (settle[k] === "active") counts.favActive++;
+                    if (settle[k] === "void") counts.favVoid++;
+                }
+            });
+
             var rows = Object.keys(hits).map(function (k) { return hits[k]; });
             rows.sort(function (a, b) { return (b.who.fav - a.who.fav) || (b.n - a.n); });
-
-            var listed = Object.keys(idx).length, favTotal = 0;
-            Object.keys(idx).forEach(function (k) { if (idx[k].fav) favTotal++; });
             var favHit = rows.filter(function (r) { return r.who.fav; }).length;
 
             sumEl.hidden = false;
             sumEl.innerHTML =
-                '<span class="atd-count">' + rows.length + " of " + listed + " listed players scored</span>" +
-                '<span class="atd-count">' + favHit + " of " + favTotal + " favorites</span>" +
+                '<span class="atd-count">' + rows.length + " of " + counts.active + " who played scored</span>" +
+                '<span class="atd-count">' + favHit + " of " + counts.favActive + " favorites</span>" +
+                (counts["void"] ? '<span class="atd-count atd-count--void">' + counts["void"] +
+                    " voided &mdash; did not play</span>" : "") +
+                (counts.pending ? '<span class="atd-count">' + counts.pending + " still to play</span>" : "") +
                 '<span class="atd-count">' + data.final + " of " + data.total + " games final</span>";
 
             listEl.innerHTML = rows.length
@@ -973,18 +1059,29 @@
                   }).join("")
                 : '<p class="atd-scored-empty">No listed player has scored yet.</p>';
 
-            // Mark the board itself, so a hit shows where you read the play.
+            // Mark the board: a hit where you read the play, and a void where the
+            // player never took the field.
             Array.prototype.forEach.call(document.querySelectorAll(".atd-play"), function (el) {
                 var nm = el.querySelector(".atd-play__name");
-                var hit = nm && hits[normName(nm.textContent)];
+                var key = nm ? normName(nm.textContent) : "";
+                var hit = hits[key];
                 el.classList.toggle("is-hit", !!hit);
-                var old = el.querySelector(".chip--hit");
+                el.classList.toggle("is-void", settle[key] === "void");
+
+                var old = el.querySelector(".chip--hit, .chip--void");
                 if (old) old.remove();
+                var head = el.querySelector(".atd-play__top");
                 if (hit) {
                     var chip = document.createElement("span");
                     chip.className = "chip chip--hit";
                     chip.textContent = hit.n > 1 ? hit.n + " TD" : "TD";
-                    el.querySelector(".atd-play__top").appendChild(chip);
+                    head.appendChild(chip);
+                } else if (settle[key] === "void") {
+                    var v = document.createElement("span");
+                    v.className = "chip chip--void";
+                    v.textContent = "Voided";
+                    v.title = "Did not play — a book refunds this rather than settling it lost";
+                    head.appendChild(v);
                 }
             });
 

@@ -1,0 +1,26 @@
+﻿Matchup,BAL @ NYM
+Pitcher,Jonah Tong
+Pitcher Team,NYM
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.1,0.43,="0-7",.000,.000,0.000,0,0,0,0,44.4,1,.222,.222
+Batting Second,2.1,0.00,="0-7",.000,.000,0.000,0,0,0,1,37.5,0,.000,.000
+Batting Third,2.1,0.00,="0-8",.000,.000,0.000,0,0,0,0,12.5,0,.000,.000
+Batting Fourth,1.2,0.60,="0-6",.000,.000,0.000,0,0,0,0,28.6,1,.143,.143
+Batting Fifth,1.1,2.25,="2-6",.333,.333,0.000,0,0,0,0,14.3,1,.429,.762
+Batting Sixth,1.0,5.00,="4-7",.571,.857,0.286,0,0,1,2,0.0,1,.625,1.482
+Batting Seventh,1.0,4.00,="1-4",.250,.250,0.000,0,0,0,0,14.3,3,.571,.821
+Batting Eighth,1.2,1.80,="3-7",.429,1.286,0.857,2,0,0,6,14.3,0,.429,1.715
+Batting Ninth,1.1,2.25,="2-6",.333,.333,0.000,0,0,0,0,14.3,1,.429,.762
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dylan Beavers LHB,Batting First ​,="14-52",.269,.385,0.116,1,3,0,8,27.6,6,.345,.730
+Pete Alonso RHB,Batting Second ​,="57-172",.331,.599,0.268,13,7,0,32,19.7,21,.419,1.018
+Gunnar Henderson LHB,Batting Third ​,="24-115",.209,.391,0.182,3,6,3,9,18.3,24,.359,.750
+Coby Mayo RHB,Batting Fourth ​,="16-59",.271,.678,0.407,7,3,0,16,28.8,5,.333,1.011
+Jackson Holliday LHB,Batting Fifth ​,="1-12",.083,.083,0.000,0,0,0,1,30.8,1,.154,.237
+Christian Encarnacion-Strand RHB,Batting Sixth ​,="10-50",.200,.400,0.200,3,1,0,8,22.8,6,.281,.681
+Heston Kjerstad LHB,Batting Seventh ​,="0-2",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Colton Cowser LHB,Batting Eighth ​,="24-89",.270,.483,0.213,5,4,0,11,34.0,7,.320,.803
+Carlos Narvaez RHB,Batting Ninth ​,="17-103",.165,.214,0.049,1,2,0,3,35.9,7,.237,.451

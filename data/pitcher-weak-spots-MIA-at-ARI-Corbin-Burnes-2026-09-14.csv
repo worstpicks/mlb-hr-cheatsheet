@@ -1,0 +1,31 @@
+﻿Matchup,MIA @ ARI
+Pitcher,Corbin Burnes
+Pitcher Team,ARI
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.1,3.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,1,.500,.500
+Batting Second,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Third,0.1,3.00,="1-2",.500,1.000,0.500,0,1,0,0,0.0,0,.500,1.500
+Batting Fourth,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Batting Fifth,0.0,-.--,="1-1",1.000,2.000,1.000,0,1,0,0,0.0,0,1.000,3.000
+Batting Sixth,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Batting Seventh,0.0,-.--,="0-0",.000,.000,0.000,0,0,0,0,0.0,1,1.000,1.000
+Batting Eighth,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Ninth,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jakob Marsee LHB,Batting First ​,="28-146",.192,.295,0.103,2,3,3,11,20.9,25,.316,.611
+Kyle Stowers LHB,Batting Third ​,="24-110",.218,.436,0.218,5,5,2,21,31.3,14,.315,.751
+Otto Lopez RHB,Batting Third ​,="51-188",.271,.378,0.107,3,9,1,21,15.0,6,.300,.678
+Agustin Ramirez RHB,Batting Third ​,="21-72",.292,.389,0.097,1,4,0,11,19.5,3,.325,.714
+Xavier Edwards SHB,Batting Fourth ​,="49-185",.265,.324,0.059,1,6,1,23,11.3,32,.365,.689
+Heriberto Hernandez RHB,Batting Fifth ​,="24-103",.233,.417,0.184,5,2,1,16,25.2,8,.288,.705
+Griffin Conine LHB,Batting Sixth ​,="11-39",.282,.641,0.359,4,2,0,8,22.2,6,.378,1.019
+Graham Pauley LHB,Batting Eighth ​,="21-69",.304,.580,0.276,4,5,1,19,18.2,6,.364,.944
+Deyvison De Los Santos RHB,Batting Eighth ​,="1-5",.200,.400,0.200,0,1,0,0,40.0,0,.200,.600
+Joe Mack LHB,Batting Eighth ​,="24-125",.192,.344,0.152,5,4,0,17,22.8,9,.252,.596
+Jared Serna RHB,Batting Eighth ​,="3-11",.273,.455,0.182,0,2,0,2,30.8,1,.308,.763
+Brian Navarreto RHB,Batting Ninth ​,="6-38",.158,.289,0.131,1,2,0,3,33.3,2,.214,.503
+Esteury Ruiz RHB,Batting Ninth ​,="12-56",.214,.393,0.179,2,4,0,2,29.9,6,.333,.726
+Javier Sanoja RHB,Batting Ninth ​,="51-158",.323,.462,0.139,3,13,0,19,7.8,8,.355,.817

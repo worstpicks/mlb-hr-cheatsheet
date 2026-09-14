@@ -1,0 +1,31 @@
+﻿Matchup,SEA @ LAA
+Pitcher,Reid Detmers
+Pitcher Team,LAA
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.1,1.18,="17-78",.218,.397,0.179,4,2,0,5,32.6,7,.282,.679
+Batting Second,21.1,0.89,="16-78",.205,.321,0.116,2,1,1,5,25.9,3,.271,.592
+Batting Third,18.1,1.64,="21-71",.296,.451,0.155,2,5,0,10,19.5,9,.366,.817
+Batting Fourth,17.1,1.50,="18-70",.257,.457,0.200,4,2,0,10,26.9,8,.333,.790
+Batting Fifth,17.2,1.30,="16-67",.239,.448,0.209,3,5,0,7,28.0,7,.307,.755
+Batting Sixth,18.2,0.91,="14-67",.209,.313,0.104,1,2,1,11,31.5,3,.233,.546
+Batting Seventh,19.2,0.56,="8-63",.127,.206,0.079,1,2,0,6,30.4,3,.176,.382
+Batting Eighth,16.1,0.92,="13-62",.210,.258,0.048,0,3,0,3,21.9,2,.234,.492
+Batting Ninth,17.2,0.51,="6-56",.107,.107,0.000,0,0,0,1,41.7,3,.153,.260
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-287",.233,.331,0.098,5,11,1,21,20.6,43,.337,.668
+JP Crawford LHB,Batting First ​,="55-231",.238,.403,0.165,10,8,0,25,18.9,37,.354,.757
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Third ​,="58-255",.227,.373,0.146,9,10,0,31,25.5,17,.284,.657
+Dominic Canzone LHB,Batting Third ​,="38-158",.241,.405,0.164,5,9,1,21,23.1,15,.306,.711
+Josh Naylor LHB,Batting Fourth ​,="58-211",.275,.370,0.095,5,5,0,23,15.1,18,.336,.706
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Cole Young LHB,Batting Sixth ​,="30-128",.234,.320,0.086,2,5,0,12,17.0,8,.293,.613
+Lazaro Montes LHB,Batting Seventh ​,="4-15",.267,.667,0.400,2,0,0,5,43.8,1,.313,.980
+Jhonny Pereda RHB,Batting Eighth ​,="15-55",.273,.327,0.054,1,0,0,3,22.0,4,.322,.649
+Weston Wilson RHB,Batting Eighth ​,="16-69",.232,.348,0.116,2,2,0,4,30.4,10,.329,.677
+Victor Robles RHB,Batting Eighth ​,="15-59",.254,.356,0.102,0,2,2,6,16.2,7,.343,.699
+Michael Arroyo RHB,Batting Eighth ​,="3-7",.429,1.000,0.571,1,1,0,3,11.1,1,.444,1.444
+Brock Rodden SHB,Batting Ninth ​,="12-54",.222,.315,0.093,0,3,1,4,31.7,8,.317,.632

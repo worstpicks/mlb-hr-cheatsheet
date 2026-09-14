@@ -712,18 +712,26 @@ def parse_pitcher_measured_from_description(desc: str) -> dict[str, dict]:
     game header dropped that starter entirely and the sheet showed one split.
     """
     out: dict[str, dict] = {}
+    # HR/9 arrives either as one season figure or split by hand. The per-hand form
+    # is the better signal on a home-run sheet -- an arm can be 1.20 to lefties and
+    # 0.83 to righties, and collapsing that to one number hides the thing the row is
+    # actually betting on -- so capture it when it is there.
     pat = re.compile(
         r"([A-Za-z][A-Za-z\s.'-]+?)\s*\(BAA vs LHB\s*(\.\d+)"
         r"(?:,\s*vs RHB\s*(\.\d+))?"
-        r"(?:,\s*HR/9\s*(\d+\.?\d*))?\)"
+        r"(?:,\s*HR/9\s*(\d+\.?\d*)"
+        r"(?:\s*vs LHB,\s*(\d+\.?\d*)\s*vs RHB)?)?\)"
     )
     for m in pat.finditer(desc or ""):
         name = re.sub(r"\s*🧤\s*", " ", m.group(1)).strip()
+        per_hand = m.group(5) is not None
         out[name.split()[-1].lower()] = {
             "pitcher": name,
             "baa_lhb": m.group(2),
             "baa_rhb": m.group(3),
-            "hr9": m.group(4),
+            "hr9": None if per_hand else m.group(4),
+            "hr9_lhb": m.group(4) if per_hand else None,
+            "hr9_rhb": m.group(5),
         }
     return out
 
@@ -734,7 +742,9 @@ def _pitcher_measured_lane_segment(label: str, lane: dict) -> str:
         bits.append(f"BAA vs LHB {lane['baa_lhb']}")
     if lane.get("baa_rhb"):
         bits.append(f"vs RHB {lane['baa_rhb']}")
-    if lane.get("hr9"):
+    if lane.get("hr9_lhb") and lane.get("hr9_rhb"):
+        bits.append(f"HR/9 {lane['hr9_lhb']} vs LHB · {lane['hr9_rhb']} vs RHB")
+    elif lane.get("hr9"):
         bits.append(f"{lane['hr9']} HR/9")
     inner = " · ".join(bits)
     return f'<span class="pitcher-meta">{label} {inner}</span>' if inner else ""

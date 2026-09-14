@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-12T14:42:53Z",
+  "updated": "2026-09-14T20:40:48Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1401,11 +1401,25 @@
       "o05": {
         "player": "Cam Smith",
         "matchup": "HOU @ TB",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Ryan Jeffers",
         "matchup": "CLE @ MIN",
+        "result": "void"
+      }
+    },
+    {
+      "date": "2026-09-14",
+      "o05": {
+        "player": "Zach Neto",
+        "matchup": "SEA @ LAA",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Ben Rice",
+        "matchup": "NYY @ MIN",
         "result": "pending"
       }
     }

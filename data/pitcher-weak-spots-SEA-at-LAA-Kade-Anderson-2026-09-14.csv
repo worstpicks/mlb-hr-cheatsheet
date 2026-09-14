@@ -1,0 +1,31 @@
+﻿Matchup,SEA @ LAA
+Pitcher,Kade Anderson
+Pitcher Team,SEA
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.2,1.50,="2-10",.200,.300,0.100,0,1,0,0,8.3,2,.333,.633
+Batting Second,3.1,1.20,="4-11",.364,.636,0.272,1,0,0,1,18.2,0,.364,1.000
+Batting Third,2.0,2.50,="4-10",.400,.700,0.300,1,0,0,3,18.2,1,.455,1.155
+Batting Fourth,2.1,1.71,="4-11",.364,.727,0.363,1,1,0,1,18.2,0,.364,1.091
+Batting Fifth,2.0,1.50,="0-6",.000,.000,0.000,0,0,0,0,22.2,3,.333,.333
+Batting Sixth,1.2,2.40,="2-7",.286,.714,0.428,1,0,0,1,11.1,2,.444,1.158
+Batting Seventh,2.0,1.00,="2-8",.250,.250,0.000,0,0,0,0,37.5,0,.250,.500
+Batting Eighth,3.0,0.00,="0-7",.000,.000,0.000,0,0,0,1,25.0,0,.000,.000
+Batting Ninth,2.0,1.50,="3-8",.375,.375,0.000,0,0,0,0,12.5,0,.375,.750
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="122-524",.233,.429,0.196,23,26,4,58,31.1,50,.312,.741
+Mike Trout RHB,Batting Second ​,="115-472",.244,.430,0.186,21,25,0,52,26.3,94,.379,.809
+Wade Meckler LHB,Batting Third ​,="25-77",.325,.429,0.104,0,8,0,11,15.4,14,.429,.858
+Vaughn Grissom RHB,Batting Fourth ​,="23-106",.217,.425,0.208,5,7,0,17,24.1,6,.278,.703
+Moisés Ballesteros LHB,Batting Fifth ​,="20-76",.263,.421,0.158,3,3,0,9,19.8,9,.337,.758
+Christian Moore RHB,Batting Sixth ​,="13-52",.250,.385,0.135,1,2,1,8,26.4,0,.264,.649
+Josh Lowe LHB,Batting Seventh ​,="29-139",.209,.388,0.179,7,4,0,13,32.5,11,.275,.663
+Oswald Peraza RHB,Batting Seventh ​,="19-86",.221,.349,0.128,3,2,0,7,31.2,5,.280,.629
+Travis d'Arnaud RHB,Batting Eighth ​,="7-39",.179,.282,0.103,1,1,0,3,24.4,4,.289,.571
+Jose Siri RHB,Batting Eighth ​,="13-54",.241,.426,0.185,2,4,0,9,32.2,3,.276,.702
+Kyren Paris RHB,Batting Eighth ​,="0-6",.000,.000,0.000,0,0,0,0,71.4,1,.143,.143
+Denzer Guzman RHB,Batting Eighth ​,="14-63",.222,.365,0.143,2,3,0,5,38.5,1,.246,.611
+Tyler Heineman SHB,Batting Ninth ​,="23-136",.169,.221,0.052,1,2,1,5,15.6,5,.221,.442
+Adam Frazier LHB,Batting Ninth ​,="24-98",.245,.357,0.112,1,6,1,8,25.7,8,.321,.678

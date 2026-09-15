@@ -1,0 +1,26 @@
+﻿Matchup,LAD @ CIN
+Pitcher,Rhett Lowder
+Pitcher Team,CIN
+Opposing Team,LAD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.0,1.53,="17-61",.279,.426,0.147,2,3,0,6,22.1,6,.353,.779
+Batting Second,14.2,1.57,="17-60",.283,.567,0.284,4,3,1,7,19.4,6,.358,.925
+Batting Third,15.2,1.28,="12-58",.207,.345,0.138,2,2,0,5,16.7,8,.303,.648
+Batting Fourth,13.1,1.95,="19-57",.333,.474,0.141,1,5,0,8,15.4,7,.415,.889
+Batting Fifth,13.1,1.43,="15-56",.268,.571,0.303,5,2,0,8,16.4,4,.317,.888
+Batting Sixth,10.2,2.53,="21-52",.404,.654,0.250,2,7,0,12,13.6,6,.475,1.129
+Batting Seventh,12.2,1.34,="11-50",.220,.300,0.080,0,4,0,4,16.1,6,.304,.604
+Batting Eighth,12.0,1.33,="13-47",.277,.383,0.106,0,3,1,10,15.7,3,.314,.697
+Batting Ninth,12.0,0.92,="8-43",.186,.326,0.140,1,1,1,5,20.8,3,.239,.565
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Josue De Paula LHB,Batting Seventh ​,="0-5",.000,.000,0.000,0,0,0,0,0.0,3,.375,.375
+Freddie Freeman LHB,Batting Second ​,="30-145",.207,.255,0.048,0,7,0,10,19.1,14,.284,.539
+Mookie Betts RHB,Batting Third ​,="23-85",.271,.518,0.247,5,6,0,17,12.4,10,.361,.879
+Kyle Tucker LHB,Batting Fourth ​,="24-91",.264,.462,0.198,2,8,2,15,14.2,20,.398,.860
+Teoscar Hernandez RHB,Batting Fifth ​,="22-81",.272,.407,0.135,3,0,1,18,34.4,12,.375,.782
+Max Muncy LHB,Batting Sixth ​,="34-121",.281,.570,0.289,10,5,0,20,23.9,16,.370,.940
+Tommy Edman SHB,Batting Seventh ​,="14-40",.350,.425,0.075,1,0,0,6,14.3,1,.381,.806
+Hunter Feduccia LHB,Batting Eighth ​,="16-76",.211,.329,0.118,2,3,0,9,27.9,7,.282,.611
+Alex Freeland SHB,Batting Ninth ​,="38-147",.259,.367,0.108,3,7,0,17,25.3,17,.335,.702

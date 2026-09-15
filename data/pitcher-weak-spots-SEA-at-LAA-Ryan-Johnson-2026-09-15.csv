@@ -1,0 +1,31 @@
+﻿Matchup,SEA @ LAA
+Pitcher,Ryan Johnson
+Pitcher Team,LAA
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,10.0,2.00,="10-38",.263,.579,0.316,4,0,0,7,20.8,10,.417,.996
+Batting Second,12.0,1.00,="9-44",.205,.318,0.113,1,2,0,3,23.4,3,.255,.573
+Batting Third,10.2,0.94,="4-36",.111,.389,0.278,3,1,0,5,19.0,6,.238,.627
+Batting Fourth,10.0,1.30,="9-36",.250,.556,0.306,3,2,0,9,11.9,4,.357,.913
+Batting Fifth,8.1,1.68,="12-37",.324,.514,0.190,2,1,0,6,12.5,2,.350,.864
+Batting Sixth,8.0,1.75,="7-32",.219,.406,0.187,2,0,0,8,12.8,7,.359,.765
+Batting Seventh,8.2,1.27,="9-33",.273,.515,0.242,2,2,0,7,19.4,2,.333,.848
+Batting Eighth,8.2,1.15,="9-33",.273,.273,0.000,0,0,0,1,14.3,1,.286,.559
+Batting Ninth,7.2,1.43,="7-27",.259,.370,0.111,1,0,0,3,20.6,4,.364,.734
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-287",.233,.331,0.098,5,11,1,21,20.6,43,.337,.668
+JP Crawford LHB,Batting First ​,="57-236",.242,.415,0.173,11,8,0,26,18.9,37,.355,.770
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Julio Rodriguez RHB,Batting Third ​,="58-255",.227,.373,0.146,9,10,0,31,25.5,17,.284,.657
+Dominic Canzone LHB,Batting Third ​,="39-162",.241,.401,0.160,5,9,1,21,23.7,15,.305,.706
+Josh Naylor LHB,Batting Fourth ​,="58-211",.275,.370,0.095,5,5,0,23,15.1,18,.336,.706
+Randy Arozarena RHB,Batting Fifth ​,="47-149",.315,.456,0.141,3,10,1,14,23.7,16,.399,.855
+Cole Young LHB,Batting Sixth ​,="30-128",.234,.320,0.086,2,5,0,12,17.0,8,.293,.613
+Lazaro Montes LHB,Batting Seventh ​,="4-15",.267,.667,0.400,2,0,0,5,41.2,2,.353,1.020
+Jhonny Pereda RHB,Batting Eighth ​,="15-55",.273,.327,0.054,1,0,0,3,22.0,4,.322,.649
+Weston Wilson RHB,Batting Eighth ​,="16-69",.232,.348,0.116,2,2,0,4,30.4,10,.329,.677
+Victor Robles RHB,Batting Eighth ​,="15-59",.254,.356,0.102,0,2,2,6,16.2,7,.343,.699
+Michael Arroyo RHB,Batting Eighth ​,="3-7",.429,1.000,0.571,1,1,0,3,11.1,1,.444,1.444
+Brock Rodden SHB,Batting Ninth ​,="12-54",.222,.315,0.093,0,3,1,4,31.7,8,.317,.632

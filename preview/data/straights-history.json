@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-14T20:40:48Z",
+  "updated": "2026-09-15T20:09:08Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1415,12 +1415,14 @@
       "o05": {
         "player": "Zach Neto",
         "matchup": "SEA @ LAA",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Ben Rice",
         "matchup": "NYY @ MIN",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       }
     }
   ]

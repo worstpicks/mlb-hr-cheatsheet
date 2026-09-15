@@ -165,11 +165,37 @@ LINE_BAND_SD = 0.7
 BF_PRIOR_STARTS = 6.0
 
 
+# An opener is a different job, not a short starter, so he gets his own prior.
+# Regressing him toward the starter mean describes neither role: Braydon Fisher has
+# nine starts averaging 4.4 batters, and pulling that toward 21.7 produces 11, a
+# number no one in baseball has ever thrown. Workload is bimodal -- either you are
+# going five innings or you are going one -- so the prior has to follow the role.
+OPENER_BF_CEILING = 10.0     # below this, over a real sample, the arm is an opener
+OPENER_MIN_STARTS = 2.0      # one short outing is an injury, two is a pattern
+LEAGUE_BF_PER_OPENER = 6.5   # roughly an inning and a half
+OPENER_PRIOR_STARTS = 3.0
+
+
+def is_opener(bf_total: float | None, starts: float | None) -> bool:
+    """True when the starter-only book says this arm is used as an opener.
+
+    Read off starts alone, never relief work: a reliever who happened to start twice
+    looks identical in season totals, which is the confusion the starter-only split
+    exists to remove.
+    """
+    if not bf_total or not starts or starts < OPENER_MIN_STARTS:
+        return False
+    return (bf_total / starts) < OPENER_BF_CEILING
+
+
 def batters_faced_estimate(bf_total: float | None, starts: float | None) -> float:
-    """How many hitters this arm should see, regressed toward the league start."""
+    """How many hitters this arm should see, regressed toward his own role."""
     if not bf_total or not starts:
         return LEAGUE_BF_PER_START
     own = bf_total / starts
+    if is_opener(bf_total, starts):
+        weight = starts / (starts + OPENER_PRIOR_STARTS)
+        return weight * own + (1.0 - weight) * LEAGUE_BF_PER_OPENER
     weight = starts / (starts + BF_PRIOR_STARTS)
     return weight * own + (1.0 - weight) * LEAGUE_BF_PER_START
 

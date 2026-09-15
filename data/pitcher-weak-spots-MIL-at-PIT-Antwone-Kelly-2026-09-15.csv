@@ -1,0 +1,26 @@
+﻿Matchup,MIL @ PIT
+Pitcher,Antwone Kelly
+Pitcher Team,PIT
+Opposing Team,MIL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,4.50,="2-4",.500,1.250,0.750,1,0,0,3,0.0,1,.600,1.850
+Batting Second,1.2,1.20,="2-5",.400,.800,0.400,0,0,1,0,0.0,0,.400,1.200
+Batting Third,0.2,4.50,="2-4",.500,1.250,0.750,1,0,0,3,0.0,1,.600,1.850
+Batting Fourth,1.0,2.00,="2-5",.400,.600,0.200,0,1,0,0,40.0,0,.400,1.000
+Batting Fifth,1.0,3.00,="1-3",.333,.333,0.000,0,0,0,1,16.7,2,.500,.833
+Batting Sixth,2.0,0.50,="1-6",.167,.333,0.166,0,1,0,1,16.7,0,.167,.500
+Batting Seventh,2.1,0.00,="0-7",.000,.000,0.000,0,0,0,0,28.6,0,.000,.000
+Batting Eighth,1.0,2.00,="2-6",.333,.500,0.167,0,1,0,0,0.0,0,.333,.833
+Batting Ninth,1.0,2.00,="2-5",.400,.600,0.200,0,1,0,0,0.0,0,.400,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Garrett Mitchell LHB,Batting First ​,="6-35",.171,.200,0.029,0,1,0,2,35.0,5,.275,.475
+Jackson Chourio RHB,Batting Second ​,="75-268",.280,.470,0.190,13,12,0,40,23.4,24,.342,.812
+Brice Turang LHB,Batting Third ​,="57-202",.282,.510,0.228,10,12,2,39,25.8,29,.371,.881
+William Contreras RHB,Batting Fourth ​,="53-224",.237,.375,0.138,7,10,0,30,17.3,22,.303,.678
+Jake Bauers LHB,Batting Fifth ​,="66-220",.300,.614,0.314,19,10,1,53,23.4,47,.428,1.042
+Christian Yelich LHB,Batting Sixth ​,="9-36",.250,.389,0.139,1,2,0,2,14.6,4,.341,.730
+Luis Lara SHB,Batting Seventh ​,="15-56",.268,.357,0.089,0,5,0,8,22.2,6,.333,.690
+Joey Ortiz RHB,Batting Eighth ​,="22-81",.272,.407,0.135,3,2,0,14,15.8,11,.351,.758
+David Hamilton LHB,Batting Ninth ​,="51-205",.249,.371,0.122,4,7,3,18,23.7,19,.316,.687

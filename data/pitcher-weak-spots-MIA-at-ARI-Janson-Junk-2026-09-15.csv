@@ -1,0 +1,32 @@
+﻿Matchup,MIA @ ARI
+Pitcher,Janson Junk
+Pitcher Team,MIA
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.1,1.04,="13-59",.220,.390,0.170,2,2,1,6,19.0,3,.270,.660
+Batting Second,13.2,1.39,="16-55",.291,.455,0.164,3,0,0,6,10.3,3,.328,.783
+Batting Third,11.2,2.14,="18-52",.346,.538,0.192,1,7,0,8,8.5,7,.424,.962
+Batting Fourth,12.2,1.50,="16-52",.308,.423,0.115,1,1,1,8,12.5,3,.345,.768
+Batting Fifth,13.1,1.28,="15-50",.300,.480,0.180,2,3,0,8,13.2,2,.321,.801
+Batting Sixth,10.1,1.45,="12-43",.279,.372,0.093,0,4,0,1,12.8,3,.340,.712
+Batting Seventh,10.0,1.60,="12-40",.300,.450,0.150,2,0,0,9,23.9,4,.370,.820
+Batting Eighth,12.0,0.92,="9-43",.209,.372,0.163,2,1,0,6,17.4,2,.239,.611
+Batting Ninth,11.1,0.79,="6-39",.154,.256,0.102,0,4,0,6,27.3,3,.233,.489
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="95-362",.262,.470,0.208,17,20,2,56,15.2,28,.316,.786
+Corbin Carroll LHB,Batting Second ​,="85-306",.278,.546,0.268,13,19,12,40,19.8,46,.376,.922
+Gabriel Moreno RHB,Batting Third ​,="59-205",.288,.517,0.229,9,18,1,39,13.6,23,.366,.883
+Geraldo Perdomo SHB,Batting Third ​,="41-180",.228,.339,0.111,2,8,3,16,12.0,27,.324,.663
+Jesus Sanchez LHB,Batting Fourth ​,="30-103",.291,.466,0.175,4,6,0,14,19.5,6,.319,.785
+Ildemaro Vargas SHB,Batting Fifth ​,="22-97",.227,.278,0.051,1,2,0,9,8.7,6,.279,.557
+Pavin Smith LHB,Batting Fifth ​,="4-33",.121,.121,0.000,0,0,0,2,22.0,7,.268,.389
+Lars Nootbaar LHB,Batting Fifth ​,="25-131",.191,.275,0.084,2,5,0,9,23.4,22,.305,.580
+Nolan Arenado RHB,Batting Sixth ​,="41-167",.246,.431,0.185,7,10,0,25,21.5,12,.304,.735
+Tim Tawa RHB,Batting Seventh ​,="24-104",.231,.356,0.125,3,2,1,10,23.7,8,.286,.642
+James McCann RHB,Batting Eighth ​,="21-70",.300,.471,0.171,3,3,0,13,20.0,4,.347,.818
+Jose Fernandez RHB,Batting Eighth ​,="16-58",.276,.397,0.121,0,7,0,6,21.2,5,.344,.741
+Jordan Lawlar RHB,Batting Ninth ​,="7-31",.226,.355,0.129,1,1,0,4,30.6,2,.333,.688
+Tommy Troy RHB,Batting Ninth ​,="21-98",.214,.347,0.133,3,2,1,6,23.6,12,.300,.647
+Ryan Waldschmidt RHB,Batting Ninth ​,="47-179",.263,.369,0.106,3,10,0,19,26.2,20,.345,.714

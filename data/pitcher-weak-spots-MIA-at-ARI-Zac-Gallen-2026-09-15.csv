@@ -1,0 +1,31 @@
+﻿Matchup,MIA @ ARI
+Pitcher,Zac Gallen
+Pitcher Team,ARI
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.1,1.78,="17-53",.321,.698,0.377,5,5,0,9,11.9,5,.390,1.088
+Batting Second,11.0,1.91,="20-52",.385,.731,0.346,3,5,2,6,8.9,1,.411,1.142
+Batting Third,15.2,1.02,="12-52",.231,.327,0.096,1,2,0,9,16.1,4,.286,.613
+Batting Fourth,11.1,1.59,="9-43",.209,.233,0.024,0,1,0,4,17.0,9,.340,.573
+Batting Fifth,12.1,1.46,="13-46",.283,.543,0.260,3,1,1,9,17.3,5,.346,.889
+Batting Sixth,11.1,1.32,="12-47",.255,.553,0.298,4,0,1,13,16.0,3,.300,.853
+Batting Seventh,9.2,1.76,="15-43",.349,.442,0.093,1,1,0,5,8.7,2,.391,.833
+Batting Eighth,8.1,2.28,="17-40",.425,.525,0.100,1,1,0,4,16.3,2,.452,.977
+Batting Ninth,9.1,1.39,="11-38",.289,.447,0.158,1,3,0,4,10.0,2,.325,.772
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jakob Marsee LHB,Batting First ​,="28-146",.192,.295,0.103,2,3,3,11,20.9,25,.316,.611
+Kyle Stowers LHB,Batting Third ​,="24-110",.218,.436,0.218,5,5,2,21,31.3,14,.315,.751
+Otto Lopez RHB,Batting Third ​,="51-188",.271,.378,0.107,3,9,1,21,15.0,6,.300,.678
+Agustin Ramirez RHB,Batting Third ​,="21-72",.292,.389,0.097,1,4,0,11,19.5,3,.325,.714
+Griffin Conine LHB,Batting Fourth ​,="7-41",.171,.390,0.219,3,0,0,5,48.9,2,.244,.634
+Xavier Edwards SHB,Batting Fourth ​,="49-185",.265,.324,0.059,1,6,1,23,11.3,32,.365,.689
+Heriberto Hernandez RHB,Batting Fifth ​,="24-103",.233,.417,0.184,5,2,1,16,25.2,8,.288,.705
+Graham Pauley LHB,Batting Eighth ​,="21-69",.304,.580,0.276,4,5,1,19,18.2,6,.364,.944
+Deyvison De Los Santos RHB,Batting Eighth ​,="1-5",.200,.400,0.200,0,1,0,0,40.0,0,.200,.600
+Joe Mack LHB,Batting Eighth ​,="25-127",.197,.346,0.149,5,4,0,18,22.1,10,.259,.605
+Jared Serna RHB,Batting Eighth ​,="3-11",.273,.455,0.182,0,2,0,2,30.8,1,.308,.763
+Brian Navarreto RHB,Batting Ninth ​,="6-38",.158,.289,0.131,1,2,0,3,33.3,2,.214,.503
+Esteury Ruiz RHB,Batting Ninth ​,="12-56",.214,.393,0.179,2,4,0,2,29.9,6,.333,.726
+Javier Sanoja RHB,Batting Ninth ​,="51-158",.323,.462,0.139,3,13,0,19,7.8,8,.355,.817

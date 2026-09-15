@@ -1,0 +1,31 @@
+﻿Matchup,SD @ COL
+Pitcher,Kyle Freeland
+Pitcher Team,COL
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.34,="15-64",.234,.328,0.094,1,3,0,4,12.7,6,.310,.638
+Batting Second,16.2,1.32,="20-67",.299,.463,0.164,2,3,1,8,24.3,2,.329,.792
+Batting Third,15.1,1.50,="20-63",.317,.587,0.270,4,5,0,11,8.8,3,.353,.940
+Batting Fourth,14.0,1.64,="16-59",.271,.458,0.187,1,6,1,5,33.3,7,.348,.806
+Batting Fifth,12.0,2.00,="19-55",.345,.691,0.346,4,5,1,16,13.1,5,.410,1.101
+Batting Sixth,13.2,1.32,="16-55",.291,.527,0.236,3,2,1,9,22.4,2,.310,.837
+Batting Seventh,13.2,0.88,="12-54",.222,.426,0.204,3,2,0,9,12.7,0,.236,.662
+Batting Eighth,11.1,1.68,="16-49",.327,.714,0.387,5,4,0,13,15.1,3,.358,1.072
+Batting Ninth,11.1,1.68,="19-51",.373,.627,0.254,1,8,1,6,25.0,0,.385,1.012
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="132-439",.301,.517,0.216,22,25,2,63,16.3,40,.363,.880
+Jake Cronenworth LHB,Batting Second ​,="33-144",.229,.319,0.090,3,4,0,15,27.7,14,.297,.616
+Samad Taylor RHB,Batting Second ​,="15-49",.306,.347,0.041,0,0,1,3,28.3,9,.424,.771
+Manny Machado RHB,Batting Third ​,="78-337",.231,.424,0.193,17,14,0,48,20.6,47,.324,.748
+Ty France RHB,Batting Fourth ​,="62-189",.328,.513,0.185,8,11,0,31,19.5,23,.407,.920
+Xander Bogaerts RHB,Batting Fifth ​,="40-167",.240,.311,0.071,3,3,0,16,19.4,17,.312,.623
+Jackson Merrill LHB,Batting Fifth ​,="68-223",.305,.578,0.273,15,10,3,46,22.1,15,.350,.928
+Luis Campusano RHB,Batting Sixth ​,="17-69",.246,.362,0.116,2,2,0,9,20.7,11,.366,.728
+Austin Hays RHB,Batting Seventh ​,="9-29",.310,.448,0.138,1,1,0,3,29.0,2,.355,.803
+Dustin Harris LHB,Batting Seventh ​,="5-25",.200,.280,0.080,0,0,1,2,33.3,2,.259,.539
+Jase Bowen RHB,Batting Eighth ​,="3-33",.091,.121,0.030,0,1,0,3,38.2,0,.118,.239
+Freddy Fermin RHB,Batting Ninth ​,="22-105",.210,.343,0.133,3,5,0,12,22.3,10,.280,.623
+Ethan Salas LHB,Batting Ninth ​,="1-7",.143,.429,0.286,0,0,1,0,28.6,0,.143,.572
+Sung-Mun Song LHB,Batting Ninth ​,="14-74",.189,.270,0.081,1,3,0,11,21.2,7,.256,.526

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-15T20:09:08Z",
+  "updated": "2026-09-15T20:27:26Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1423,6 +1423,19 @@
         "matchup": "NYY @ MIN",
         "result": "loss",
         "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-15",
+      "o05": {
+        "player": "Cole Carrigg",
+        "matchup": "SD @ COL",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Jonathan Aranda",
+        "matchup": "ATH @ TB",
+        "result": "pending"
       }
     }
   ]

@@ -31,6 +31,7 @@ PLAYER_TEAMS = {
     "Aaron Judge (R)": "NYY",
     "Adley Rutschman (S)": "BOS",
     "Alec Bohm (R)": "PHI",
+    "Alec Burleson (L)": "STL",
     "Alejandro Kirk (R)": "TOR",
     "Andrew Pinckney (R)": "WSH",
     "Austin Riley (R)": "ATL",
@@ -186,7 +187,7 @@ games = [
     },
     {
         "title": "BOS @ TEX - Patrick Sandoval (L, BOS) vs Jacob deGrom (R, TEX)",
-        "kLines": {'Sandoval': {'k': 4.9, 'lo': 3, 'hi': 7, 'bf': 22.5, 'matchupK': 22.0, 'ownK': 22.2}, 'deGrom': {'k': 6.5, 'lo': 5, 'hi': 8, 'bf': 21.5, 'matchupK': 30.4, 'ownK': 32.0}},
+        "kLines": {'Sandoval': {'k': 5.1, 'lo': 4, 'hi': 7, 'bf': 22.5, 'matchupK': 22.8, 'ownK': 22.2}, 'deGrom': {'k': 6.5, 'lo': 5, 'hi': 8, 'bf': 21.5, 'matchupK': 30.4, 'ownK': 32.0}},
         "description": "Tail key data: Park boost -12% (stadium -12%, weather -1%). Sandoval (HR risk -0.08, vs LHB -0.64, vs RHB +0.16). deGrom (HR risk -0.29, vs LHB -0.02, vs RHB -0.33).",
         "rows": [
             row("Jake Burger", "R", "+428", 92, "🌕 💣", ["vs Sandoval"], """3 HR, 3 near-HR, 94.9 mph EV, 50.0% barrels. Sandoval RHB split +0.16, HR risk -0.08. pitcher risk below avg (-0.08); park/weather net drag (-12%).""", blast="high", contact={'stars': 2, 'k': 26.0, 'batterK': 28.4, 'batterWhiff': 36.7, 'pitcherK': 22.2}),
@@ -229,7 +230,7 @@ games = [
         "description": "Tail key data: Park boost +6% (stadium +6%, weather +0%). Wacha (HR risk 0.18, vs LHB -0.58, vs RHB +1.18). Brown (HR risk -0.46, vs LHB -0.05, vs RHB -0.51).",
         "rows": [
             row("Nelson Velazquez", "R", "N/A", 88, "🌕 💣", ["vs Wacha"], """1 HR, 2 near-HR, 99.3 mph EV, 25.0% barrels. Wacha RHB split +1.18, HR risk 0.18.""", blast="high", contact={'stars': 2, 'k': 26.1, 'batterK': 39.5, 'batterWhiff': 44.3, 'pitcherK': 20.5}),
-            row("Taylor Trammell", "L", "+650", 72, "", ["vs Wacha"], """0 HR, 1 near-HR, 94.3 mph EV, 25.0% barrels. Wacha LHB split -0.58, HR risk 0.18. tough split lane (-0.58); limited recent HR events.""", blast="good", contact={'stars': 3, 'k': 22.9, 'batterK': 23.2, 'batterWhiff': 32.7, 'pitcherK': 20.5}),
+            row("Taylor Trammell", "L", "+650", 73, "", ["vs Wacha"], """0 HR, 1 near-HR, 94.3 mph EV, 25.0% barrels. Wacha LHB split -0.58, HR risk 0.18. tough split lane (-0.58); limited recent HR events.""", blast="good"),
             row("Cam Smith", "R", "+680", 60, "", ["vs Wacha"], """0 HR, 89.4 mph EV. Wacha RHB split +1.18, HR risk 0.18. limited recent HR events.""", contact={'stars': 3, 'k': 23.2, 'batterK': 30.8, 'batterWhiff': 27.5, 'pitcherK': 20.5}),
             row("Vinnie Pasquantino", "L", "+650", 76, "", ["vs Brown"], """1 HR, 2 near-HR, 94.0 mph EV, 25.0% barrels. Brown LHB split -0.05, HR risk -0.46. slight split headwind (-0.05); pitcher suppresses HR (-0.46).""", blast="good", contact={'stars': 4, 'k': 18.9, 'batterK': 10.6, 'batterWhiff': 14.8, 'pitcherK': 26.2}),
             row("Salvador Perez", "R", "+630", 59, "💎", ["vs Brown"], """Worst Pickz Hidden Gem. 0 HR, 93.2 mph EV. Brown RHB split -0.51, HR risk -0.46. tough split lane (-0.51); pitcher suppresses HR (-0.46).""", blast="good", contact={'stars': 3, 'k': 22.6, 'batterK': 16.5, 'batterWhiff': 24.7, 'pitcherK': 26.2}),
@@ -335,6 +336,7 @@ games = [
         "rows": [
             row("Leonardo Bernal", "S", "+680", 89, "🌕 💣", ["vs Tidwell"], """2 HR, 2 near-HR, 97.2 mph EV, 25.0% barrels. Tidwell SHB→LHB split +1.78, HR risk 0.86. park/weather net drag (-9%).""", blast="high", contact={'stars': 4, 'k': 19.3, 'batterK': 17.9, 'batterWhiff': 21.3, 'pitcherK': 18.6}),
             row("Ivan Herrera", "R", "+790", 65, "", ["vs Tidwell"], """0 HR, 93.9 mph EV. Tidwell RHB split -0.46, HR risk 0.86. tough split lane (-0.46); park/weather net drag (-9%).""", blast="good", contact={'stars': 4, 'k': 18.6, 'batterK': 19.6, 'batterWhiff': 17.2, 'pitcherK': 18.6}),
+            row("Alec Burleson", "L", "+475", 89, "🌕 💣", ["vs Tidwell"], """1 HR, 2 near-HR, 93.9 mph EV, 25.0% barrels. Tidwell LHB split +1.78, HR risk 0.86. park/weather net drag (-9%).""", blast="good", contact={'stars': 4, 'k': 19.3, 'batterK': 18.8, 'batterWhiff': 22.6, 'pitcherK': 18.6}),
             row("Bryce Eldridge", "L", "+710", 57, "", ["vs Pallante"], """0 HR, 95.6 mph EV. Pallante LHB split -1.04, HR risk -1.54. tough split lane (-1.04); pitcher suppresses HR (-1.54).""", blast="good", contact={'stars': 3, 'k': 20.0, 'batterK': 27.5, 'batterWhiff': 27.1, 'pitcherK': 14.9}),
             row("Jung Hoo Lee", "L", "+1800", 47, "", ["vs Pallante"], """0 HR, 95.0 mph EV. Pallante LHB split -1.04, HR risk -1.54. tough split lane (-1.04); pitcher suppresses HR (-1.54).""", blast="good", contact={'stars': 5, 'k': 13.2, 'batterK': 7.7, 'batterWhiff': 12.3, 'pitcherK': 14.9}),
         ],

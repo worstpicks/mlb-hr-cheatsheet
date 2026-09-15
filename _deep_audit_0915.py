@@ -79,6 +79,7 @@ USER_PROPS: list[tuple[str, str | None, str]] = [
     ("Austin Riley", ANY, ""),
     ("Leonardo Bernal", ANY, ""),
     ("Ivan Herrera", ANY, ""),
+    ("Alec Burleson", ANY, ""),
     ("Bryce Eldridge", ANY, ""),
     ("Jung Hoo Lee", ANY, ""),
     ("Jake Burger", ANY, ""),

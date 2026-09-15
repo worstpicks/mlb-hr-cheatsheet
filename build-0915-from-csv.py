@@ -86,6 +86,7 @@ RAW_PROPS = [
     "Austin Riley",
     "Leonardo Bernal",
     "Ivan Herrera",
+    "Alec Burleson",
     "Bryce Eldridge",
     "Jung Hoo Lee",
     "Jake Burger",

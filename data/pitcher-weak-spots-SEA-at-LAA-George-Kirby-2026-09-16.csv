@@ -1,0 +1,31 @@
+﻿Matchup,SEA @ LAA
+Pitcher,George Kirby
+Pitcher Team,SEA
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,23.1,0.99,="17-83",.205,.361,0.156,3,4,0,7,19.1,6,.258,.619
+Batting Second,18.2,1.77,="28-81",.346,.543,0.197,4,4,0,9,14.9,5,.391,.934
+Batting Third,18.1,1.80,="27-77",.351,.597,0.246,5,2,1,13,12.0,6,.398,.995
+Batting Fourth,21.2,0.83,="16-78",.205,.397,0.192,3,6,0,10,26.3,2,.225,.622
+Batting Fifth,17.1,1.67,="24-72",.333,.458,0.125,1,6,0,9,23.1,5,.372,.830
+Batting Sixth,17.2,1.53,="21-68",.309,.515,0.206,3,3,1,12,21.3,6,.365,.880
+Batting Seventh,16.1,1.35,="18-66",.273,.424,0.151,2,4,0,9,28.6,4,.314,.738
+Batting Eighth,14.1,1.81,="23-65",.354,.477,0.123,0,6,1,8,14.7,3,.382,.859
+Batting Ninth,17.0,0.82,="12-61",.197,.213,0.016,0,1,0,0,20.0,2,.246,.459
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="124-531",.234,.431,0.197,23,26,5,59,31.0,51,.313,.744
+Mike Trout RHB,Batting Second ​,="116-478",.243,.427,0.184,21,25,0,52,26.2,96,.379,.806
+Wade Meckler LHB,Batting Third ​,="27-81",.333,.432,0.099,0,8,0,11,15.8,14,.432,.864
+Vaughn Grissom RHB,Batting Fourth ​,="25-111",.225,.432,0.207,5,8,0,19,22.6,7,.293,.725
+Moisés Ballesteros LHB,Batting Fifth ​,="22-80",.275,.425,0.150,3,3,0,9,20.0,9,.344,.769
+Christian Moore RHB,Batting Sixth ​,="13-52",.250,.385,0.135,1,2,1,8,26.4,0,.264,.649
+Josh Lowe LHB,Batting Seventh ​,="31-142",.218,.415,0.197,8,4,0,14,32.5,11,.282,.697
+Oswald Peraza RHB,Batting Seventh ​,="19-86",.221,.349,0.128,3,2,0,7,31.2,5,.280,.629
+Travis d'Arnaud RHB,Batting Eighth ​,="7-39",.179,.282,0.103,1,1,0,3,24.4,4,.289,.571
+Jose Siri RHB,Batting Eighth ​,="13-54",.241,.426,0.185,2,4,0,9,32.2,3,.276,.702
+Kyren Paris RHB,Batting Eighth ​,="0-8",.000,.000,0.000,0,0,0,0,66.7,1,.111,.111
+Denzer Guzman RHB,Batting Eighth ​,="14-63",.222,.365,0.143,2,3,0,5,38.5,1,.246,.611
+Tyler Heineman SHB,Batting Ninth ​,="23-139",.165,.216,0.051,1,2,1,5,15.3,5,.216,.432
+Adam Frazier LHB,Batting Ninth ​,="24-98",.245,.357,0.112,1,6,1,8,25.7,8,.321,.678

@@ -943,6 +943,16 @@ def build_game_meta_line(
                         f'{m_season.group(1)}</span>',
                         label,
                     ))
+                elif (m_thin := re.search(
+                    rf"{re.escape(label.split()[-1])} - thin book: (.+?)(?=\.\s+[A-Z]|\.?$)", desc
+                )):
+                    # Too few innings to split. Say how few, which is true and is itself
+                    # the angle, rather than print a rate over four batters.
+                    print(f"note: {label} has a thin book ({m_thin.group(1)}) — header says so")
+                    parts.append(with_k_line(
+                        f'<span class="pitcher-meta">{label} {m_thin.group(1)}</span>',
+                        label,
+                    ))
                 elif any(
                     f"{n} - MLB debut" in desc or f"{n} — MLB debut" in desc
                     # the description uses the chip (last) name, the title the full one

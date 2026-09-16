@@ -1,0 +1,32 @@
+﻿Matchup,PHI @ WSH
+Pitcher,Zack Wheeler
+Pitcher Team,PHI
+Opposing Team,WSH
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.2,1.50,="17-65",.262,.400,0.138,2,1,1,5,27.4,8,.342,.742
+Batting Second,19.0,0.89,="12-65",.185,.246,0.061,1,1,0,5,33.3,5,.250,.496
+Batting Third,14.2,1.70,="18-62",.290,.613,0.323,5,5,0,11,21.4,7,.371,.984
+Batting Fourth,16.0,1.31,="17-64",.266,.516,0.250,4,4,0,7,29.0,4,.319,.835
+Batting Fifth,18.1,0.82,="10-62",.161,.194,0.033,0,2,0,4,35.3,5,.221,.415
+Batting Sixth,15.2,1.09,="13-58",.224,.500,0.276,5,1,0,9,22.6,4,.274,.774
+Batting Seventh,15.1,0.85,="9-56",.161,.286,0.125,2,1,0,2,31.7,4,.217,.503
+Batting Eighth,13.0,0.85,="7-45",.156,.200,0.044,0,2,0,1,36.0,4,.240,.440
+Batting Ninth,14.0,0.71,="6-46",.130,.283,0.153,1,4,0,2,36.0,4,.200,.483
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+James Wood LHB,Batting First ​,="127-474",.268,.523,0.255,30,29,1,75,28.4,98,.395,.918
+Abimelec Ortiz LHB,Batting Second ​,="22-94",.234,.436,0.202,5,4,0,12,27.3,5,.273,.709
+Andres Chaparro RHB,Batting Third ​,="18-86",.209,.419,0.210,5,3,0,18,25.3,8,.284,.703
+Brady House RHB,Batting Third ​,="42-167",.251,.425,0.174,7,8,0,27,28.3,11,.300,.725
+CJ Abrams LHB,Batting Fourth ​,="105-405",.259,.501,0.242,24,22,2,69,25.2,38,.327,.828
+Dylan Crews RHB,Batting Fifth ​,="31-144",.215,.389,0.174,7,4,0,15,23.4,12,.285,.674
+Yohandy Morales RHB,Batting Fifth ​,="5-12",.417,.750,0.333,1,1,0,2,16.7,0,.417,1.167
+Daylen Lile LHB,Batting Sixth ​,="40-200",.200,.375,0.175,7,8,3,21,23.3,10,.247,.622
+Jose Tena LHB,Batting Seventh ​,="19-71",.268,.366,0.098,0,5,1,6,28.4,8,.346,.712
+Harry Ford RHB,Batting Seventh ​,="8-45",.178,.267,0.089,1,1,0,3,22.6,8,.302,.569
+Jorbit Vivas LHB,Batting Eighth ​,="32-123",.260,.366,0.106,1,8,1,14,14.6,16,.340,.706
+Keibert Ruiz SHB,Batting Ninth ​,="33-133",.248,.376,0.128,2,11,0,15,13.5,6,.284,.660
+Nasim Nuñez SHB,Batting Ninth ​,="40-162",.247,.290,0.043,0,1,3,6,19.0,16,.313,.603
+Andrew Pinckney RHB,Batting Ninth ​,="4-15",.267,.400,0.133,0,0,1,1,41.2,0,.294,.694
+Jacob Young RHB,Batting Ninth ​,="29-122",.238,.369,0.131,2,8,1,18,17.5,11,.307,.676

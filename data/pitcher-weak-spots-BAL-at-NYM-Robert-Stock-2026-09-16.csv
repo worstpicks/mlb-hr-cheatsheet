@@ -1,0 +1,31 @@
+﻿Matchup,BAL @ NYM
+Pitcher,Robert Stock
+Pitcher Team,NYM
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.2,2.45,="6-17",.353,.529,0.176,0,3,0,4,25.0,3,.450,.979
+Batting Second,4.2,0.86,="2-17",.118,.118,0.000,0,0,0,1,36.8,2,.211,.329
+Batting Third,2.2,3.75,="7-15",.467,.733,0.266,1,1,0,4,21.1,3,.579,1.312
+Batting Fourth,3.1,1.50,="3-13",.231,.231,0.000,0,0,0,0,5.9,2,.412,.643
+Batting Fifth,4.2,0.43,="2-16",.125,.188,0.063,0,1,0,3,12.5,0,.125,.313
+Batting Sixth,2.2,2.25,="4-12",.333,.417,0.084,0,1,0,2,14.3,2,.429,.846
+Batting Seventh,2.1,3.00,="4-11",.364,.636,0.272,1,0,0,1,35.7,3,.500,1.136
+Batting Eighth,2.2,1.88,="5-13",.385,.462,0.077,0,1,0,3,14.3,0,.429,.891
+Batting Ninth,3.1,1.50,="5-14",.357,.357,0.000,0,0,0,2,7.1,0,.357,.714
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jackson Holliday LHB,Batting First ​,="18-72",.250,.347,0.097,1,4,0,7,20.0,2,.267,.614
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Pete Alonso RHB,Batting Fourth ​,="63-258",.244,.469,0.225,16,10,0,49,23.8,35,.339,.808
+Samuel Basallo LHB,Batting Fifth ​,="45-212",.212,.382,0.170,9,7,1,33,25.2,19,.278,.660
+Leody Taveras SHB,Batting Sixth ​,="40-169",.237,.331,0.094,1,9,2,15,23.4,17,.310,.641
+Dylan Beavers LHB,Batting Sixth ​,="19-77",.247,.442,0.195,4,3,0,10,25.0,7,.310,.752
+Christian Encarnacion-Strand RHB,Batting Sixth ​,="11-54",.204,.407,0.203,3,2,0,8,24.6,6,.279,.686
+Heston Kjerstad LHB,Batting Seventh ​,="2-7",.286,.429,0.143,0,1,0,1,71.4,0,.286,.715
+Colton Cowser LHB,Batting Seventh ​,="25-133",.188,.286,0.098,4,1,0,15,31.6,18,.286,.572
+Carlos Narvaez RHB,Batting Eighth ​,="20-116",.172,.250,0.078,2,3,0,7,28.9,9,.258,.508
+Rece Hinds RHB,Batting Eighth ​,="6-27",.222,.333,0.111,0,3,0,5,40.6,3,.313,.646
+Coby Mayo RHB,Batting Eighth ​,="19-94",.202,.319,0.117,3,2,0,11,32.0,8,.272,.591
+Yohel Pozo RHB,Batting Ninth ​,="5-21",.238,.381,0.143,1,0,0,1,13.6,1,.273,.654
+Jeremiah Jackson RHB,Batting Ninth ​,="21-86",.244,.372,0.128,2,5,0,14,20.7,3,.264,.636

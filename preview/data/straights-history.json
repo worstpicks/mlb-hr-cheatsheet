@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-15T20:27:26Z",
+  "updated": "2026-09-16T13:37:53Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1430,11 +1430,26 @@
       "o05": {
         "player": "Cole Carrigg",
         "matchup": "SD @ COL",
-        "result": "pending"
+        "result": "win",
+        "hr": 2
       },
       "o15": {
         "player": "Jonathan Aranda",
         "matchup": "ATH @ TB",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-16",
+      "o05": {
+        "player": "Kyle Tucker",
+        "matchup": "LAD @ CIN",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Hunter Goodman",
+        "matchup": "SD @ COL",
         "result": "pending"
       }
     }

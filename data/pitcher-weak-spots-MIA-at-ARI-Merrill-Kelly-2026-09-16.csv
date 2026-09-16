@@ -1,0 +1,31 @@
+﻿Matchup,MIA @ ARI
+Pitcher,Merrill Kelly
+Pitcher Team,ARI
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,16.2,1.98,="23-70",.329,.529,0.200,3,3,1,5,8.5,10,.407,.936
+Batting Second,17.2,1.70,="23-73",.315,.562,0.247,5,3,0,12,10.0,7,.375,.937
+Batting Third,17.1,1.67,="17-67",.254,.493,0.239,4,4,0,11,18.8,12,.367,.860
+Batting Fourth,17.2,1.53,="17-65",.262,.477,0.215,3,5,0,11,19.2,10,.359,.836
+Batting Fifth,20.0,0.85,="10-67",.149,.254,0.105,2,1,0,7,19.7,7,.237,.491
+Batting Sixth,17.1,1.33,="16-65",.246,.431,0.185,2,2,2,14,13.7,7,.315,.746
+Batting Seventh,15.2,1.47,="16-62",.258,.565,0.307,5,2,1,11,15.9,7,.333,.898
+Batting Eighth,14.0,1.57,="18-57",.316,.509,0.193,2,5,0,3,17.2,4,.365,.874
+Batting Ninth,13.1,1.35,="15-53",.283,.377,0.094,1,2,0,8,17.2,3,.333,.710
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jakob Marsee LHB,Batting First ​,="28-146",.192,.295,0.103,2,3,3,11,20.9,25,.316,.611
+Kyle Stowers LHB,Batting Third ​,="24-110",.218,.436,0.218,5,5,2,21,31.3,14,.315,.751
+Otto Lopez RHB,Batting Third ​,="51-191",.267,.372,0.105,3,9,1,21,15.1,8,.302,.674
+Agustin Ramirez RHB,Batting Third ​,="21-72",.292,.389,0.097,1,4,0,11,19.5,3,.325,.714
+Griffin Conine LHB,Batting Fourth ​,="8-43",.186,.465,0.279,4,0,0,6,46.8,2,.255,.720
+Xavier Edwards SHB,Batting Fourth ​,="49-185",.265,.324,0.059,1,6,1,23,11.3,32,.365,.689
+Heriberto Hernandez RHB,Batting Fifth ​,="24-103",.233,.417,0.184,5,2,1,16,25.2,8,.288,.705
+Graham Pauley LHB,Batting Eighth ​,="21-71",.296,.563,0.267,4,5,1,19,19.0,6,.354,.917
+Joe Mack LHB,Batting Eighth ​,="25-127",.197,.346,0.149,5,4,0,18,22.1,10,.259,.605
+Jared Serna RHB,Batting Eighth ​,="3-13",.231,.385,0.154,0,2,0,2,33.3,1,.267,.652
+Brian Navarreto RHB,Batting Ninth ​,="6-38",.158,.289,0.131,1,2,0,3,33.3,2,.214,.503
+Esteury Ruiz RHB,Batting Ninth ​,="12-56",.214,.393,0.179,2,4,0,2,29.9,6,.333,.726
+Deyvison De Los Santos RHB,Batting Ninth ​,="2-7",.286,.286,0.000,0,0,0,0,28.6,0,.286,.572
+Javier Sanoja RHB,Batting Ninth ​,="51-158",.323,.462,0.139,3,13,0,19,7.8,8,.355,.817

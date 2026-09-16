@@ -1,0 +1,31 @@
+﻿Matchup,SF @ STL
+Pitcher,Anthony Molina
+Pitcher Team,SF
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.2,1.88,="4-12",.333,.417,0.084,0,1,0,1,30.8,1,.385,.802
+Batting Second,2.2,1.88,="4-12",.333,.333,0.000,0,0,0,0,7.7,1,.385,.718
+Batting Third,3.1,0.30,="1-11",.091,.091,0.000,0,0,0,4,18.2,0,.091,.182
+Batting Fourth,3.0,0.33,="1-10",.100,.200,0.100,0,1,0,1,40.0,0,.100,.300
+Batting Fifth,1.2,1.80,="3-9",.333,.778,0.445,1,1,0,1,33.3,0,.333,1.111
+Batting Sixth,2.0,1.50,="2-8",.250,.750,0.500,1,1,0,3,22.2,1,.333,1.083
+Batting Seventh,2.0,1.50,="3-9",.333,.667,0.334,1,0,0,2,11.1,0,.333,1.000
+Batting Eighth,1.2,3.00,="3-8",.375,.625,0.250,0,0,1,2,20.0,2,.500,1.125
+Batting Ninth,3.1,0.60,="2-10",.200,.400,0.200,0,2,0,2,0.0,0,.200,.600
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ivan Herrera RHB,Batting Second ​,="124-517",.240,.362,0.122,14,19,1,58,18.2,71,.359,.721
+Alec Burleson LHB,Batting Third ​,="127-441",.288,.499,0.211,21,28,1,80,16.5,47,.363,.862
+Jordan Walker RHB,Batting Fourth ​,="94-354",.266,.480,0.214,19,19,0,71,27.8,28,.321,.801
+Nolan Gorman LHB,Batting Fifth ​,="35-166",.211,.319,0.108,5,3,0,24,29.4,18,.283,.602
+Joshua Baez RHB,Batting Fifth ​,="10-47",.213,.553,0.340,4,4,0,10,37.3,2,.255,.808
+Leonardo Bernal SHB,Batting Fifth ​,="12-43",.279,.465,0.186,2,2,0,7,17.0,4,.340,.805
+Masyn Winn RHB,Batting Sixth ​,="81-328",.247,.335,0.088,4,13,2,43,21.4,34,.324,.659
+Ramon Urias RHB,Batting Seventh ​,="6-26",.231,.615,0.384,3,1,0,7,13.3,3,.300,.915
+Bryan Torres LHB,Batting Seventh ​,="15-56",.268,.393,0.125,1,0,2,6,12.9,4,.328,.721
+Jose Fermin RHB,Batting Seventh ​,="19-79",.241,.367,0.126,2,4,0,10,12.5,7,.307,.674
+Nathan Church LHB,Batting Seventh ​,="45-188",.239,.367,0.128,6,6,0,24,15.3,10,.277,.644
+Pedro Pages RHB,Batting Eighth ​,="29-121",.240,.364,0.124,3,6,0,9,26.5,5,.279,.643
+Thomas Saggese RHB,Batting Eighth ​,="16-55",.291,.564,0.273,3,4,1,7,24.2,5,.339,.903
+Victor Scott II LHB,Batting Ninth ​,="30-152",.197,.263,0.066,2,4,0,9,23.2,16,.281,.544

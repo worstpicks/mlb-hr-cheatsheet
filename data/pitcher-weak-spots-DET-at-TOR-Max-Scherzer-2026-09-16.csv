@@ -1,0 +1,31 @@
+﻿Matchup,DET @ TOR
+Pitcher,Max Scherzer
+Pitcher Team,TOR
+Opposing Team,DET
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,8.1,1.56,="10-35",.286,.571,0.285,3,1,0,7,15.4,3,.359,.930
+Batting Second,8.2,1.62,="11-36",.306,.556,0.250,2,3,0,4,15.4,3,.359,.915
+Batting Third,9.0,1.33,="9-35",.257,.429,0.172,2,0,0,4,23.7,3,.316,.745
+Batting Fourth,8.2,1.38,="6-30",.200,.467,0.267,2,2,0,7,11.1,6,.333,.800
+Batting Fifth,7.1,1.50,="9-31",.290,.387,0.097,1,0,0,4,20.6,2,.353,.740
+Batting Sixth,7.0,1.14,="4-25",.160,.200,0.040,0,1,0,3,13.3,4,.267,.467
+Batting Seventh,5.1,2.06,="7-23",.304,.826,0.522,4,0,0,8,14.8,4,.407,1.233
+Batting Eighth,7.0,0.86,="4-24",.167,.208,0.041,0,1,0,3,23.1,2,.231,.439
+Batting Ninth,6.1,0.95,="5-24",.208,.292,0.084,0,2,0,4,19.2,1,.240,.532
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Kevin McGonigle LHB,Batting First ​,="95-314",.303,.490,0.187,13,16,2,37,13.0,54,.405,.895
+Gleyber Torres RHB,Batting Second ​,="43-164",.262,.366,0.104,5,2,0,20,17.9,33,.388,.754
+Dillon Dingler RHB,Batting Second ​,="38-143",.266,.434,0.168,5,9,0,16,24.0,5,.305,.739
+Colt Keith LHB,Batting Third ​,="39-145",.269,.366,0.097,1,9,1,10,20.8,8,.305,.671
+Riley Greene LHB,Batting Fourth ​,="89-323",.276,.480,0.204,14,20,2,54,29.0,36,.351,.831
+Eduardo Valencia RHB,Batting Fifth ​,="15-40",.375,.600,0.225,1,6,0,4,20.9,2,.405,1.005
+Brett Callahan LHB,Batting Sixth ​,="2-17",.118,.235,0.117,0,2,0,1,63.2,1,.211,.446
+Zach McKinstry LHB,Batting Seventh ​,="20-99",.202,.303,0.101,2,4,0,11,15.9,6,.255,.558
+Spencer Torkelson RHB,Batting Seventh ​,="36-159",.226,.465,0.239,10,8,0,22,37.4,21,.324,.789
+Max Clark LHB,Batting Seventh ​,="18-63",.286,.444,0.158,1,5,1,8,23.6,7,.375,.819
+Ben Malgeri RHB,Batting Eighth ​,="8-30",.267,.533,0.266,2,2,0,7,13.9,6,.389,.922
+Hao-Yu Lee RHB,Batting Eighth ​,="16-67",.239,.418,0.179,2,4,1,8,29.6,3,.271,.689
+Javier Baez RHB,Batting Ninth ​,="24-104",.231,.346,0.115,2,6,0,11,22.0,2,.257,.603
+John Peck RHB,Batting Ninth ​,="5-24",.208,.208,0.000,0,0,0,4,20.7,3,.310,.518

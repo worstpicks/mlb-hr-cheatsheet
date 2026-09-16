@@ -1,0 +1,31 @@
+﻿Matchup,SD @ COL
+Pitcher,Robbie Ray
+Pitcher Team,SD
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,21.1,1.13,="15-76",.197,.355,0.158,3,3,0,8,16.1,9,.276,.631
+Batting Second,17.1,1.90,="22-73",.301,.575,0.274,5,3,1,15,12.9,11,.388,.963
+Batting Third,20.0,1.45,="16-71",.225,.310,0.085,1,3,0,3,19.0,13,.345,.655
+Batting Fourth,16.1,1.71,="12-61",.197,.410,0.213,4,1,0,7,19.2,16,.372,.782
+Batting Fifth,15.2,1.72,="17-61",.279,.377,0.098,1,3,0,7,19.4,10,.380,.757
+Batting Sixth,18.0,1.11,="16-63",.254,.429,0.175,3,2,0,7,26.5,4,.294,.723
+Batting Seventh,18.1,0.65,="9-61",.148,.246,0.098,1,3,0,3,27.7,3,.188,.434
+Batting Eighth,15.1,0.98,="10-55",.182,.273,0.091,1,2,0,6,23.8,5,.242,.515
+Batting Ninth,12.0,1.92,="13-48",.271,.479,0.208,2,4,0,5,18.6,10,.390,.869
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="114-387",.295,.494,0.199,13,24,7,54,15.1,20,.337,.831
+Mickey Moniak LHB,Batting Second ​,="51-202",.252,.540,0.288,14,12,2,36,23.9,9,.286,.826
+Cole Carrigg SHB,Batting Second ​,="14-78",.179,.256,0.077,1,3,0,7,26.1,8,.273,.529
+Hunter Goodman RHB,Batting Third ​,="54-241",.224,.506,0.282,18,12,1,38,34.1,16,.276,.782
+TJ Rumfield LHB,Batting Fourth ​,="76-230",.330,.504,0.174,8,14,1,26,13.4,35,.428,.932
+Troy Johnston LHB,Batting Fifth ​,="33-120",.275,.342,0.067,0,6,1,15,14.2,15,.369,.711
+Connor Norby RHB,Batting Sixth ​,="18-70",.257,.343,0.086,1,3,0,4,25.9,8,.358,.701
+Jordan Beck RHB,Batting Seventh ​,="6-34",.176,.294,0.118,1,1,0,2,30.8,5,.282,.576
+Adael Amador SHB,Batting Seventh ​,="6-19",.316,.579,0.263,1,2,0,4,23.8,2,.381,.960
+Braxton Fulford RHB,Batting Eighth ​,="4-23",.174,.174,0.000,0,0,0,2,51.9,2,.259,.433
+Kyle Karros RHB,Batting Eighth ​,="25-89",.281,.494,0.213,3,8,1,10,19.4,18,.398,.892
+Brett Sullivan LHB,Batting Ninth ​,="17-75",.227,.373,0.146,3,2,0,8,22.8,2,.253,.626
+Ezequiel Tovar RHB,Batting Ninth ​,="33-132",.250,.402,0.152,5,5,0,16,21.6,10,.295,.697
+Zac Veen LHB,Batting Ninth ​,="5-21",.238,.333,0.095,0,0,1,3,33.3,2,.304,.637

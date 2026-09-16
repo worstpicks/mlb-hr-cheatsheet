@@ -9,13 +9,13 @@
       "game": "SD @ COL",
       "venue": "Coors Field",
       "venue_key": "coors field",
-      "hr_pct": 21,
-      "stadium_pct": 20,
-      "weather_pct": 0,
+      "hr_pct": 16,
+      "stadium_pct": 21,
+      "weather_pct": -6,
       "lhb_stadium_pct": 12,
-      "park_lhb_pct": 12,
+      "park_lhb_pct": 6,
       "rhb_stadium_pct": 6,
-      "park_rhb_pct": 6
+      "park_rhb_pct": 0
     },
     "LAD @ CIN": {
       "game": "LAD @ CIN",
@@ -29,6 +29,18 @@
       "rhb_stadium_pct": 7,
       "park_rhb_pct": 8
     },
+    "KC @ HOU": {
+      "game": "KC @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 8,
+      "stadium_pct": 8,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 9,
+      "park_lhb_pct": 9,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 8
+    },
     "PHI @ WAS": {
       "game": "PHI @ WAS",
       "venue": "Nationals Park",
@@ -39,6 +51,66 @@
       "lhb_stadium_pct": 1,
       "park_lhb_pct": 2,
       "rhb_stadium_pct": 2,
+      "park_rhb_pct": 3
+    },
+    "DET @ TOR": {
+      "game": "DET @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": -11,
+      "stadium_pct": 6,
+      "weather_pct": -17,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": -12,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": -11
+    },
+    "SF @ STL": {
+      "game": "SF @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -15,
+      "stadium_pct": -10,
+      "weather_pct": -5,
+      "lhb_stadium_pct": -19,
+      "park_lhb_pct": -24,
+      "rhb_stadium_pct": -15,
+      "park_rhb_pct": -20
+    },
+    "BAL @ NYM": {
+      "game": "BAL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": -3,
+      "stadium_pct": -2,
+      "weather_pct": -1,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": -8,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": -1
+    },
+    "ATH @ TB": {
+      "game": "ATH @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 11,
+      "park_rhb_pct": 12
+    },
+    "SEA @ LAA": {
+      "game": "SEA @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": -6,
+      "stadium_pct": -9,
+      "weather_pct": 3,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": 0,
       "park_rhb_pct": 3
     },
     "MIL @ PIT": {
@@ -65,66 +137,6 @@
       "rhb_stadium_pct": -2,
       "park_rhb_pct": -3
     },
-    "SEA @ LAA": {
-      "game": "SEA @ LAA",
-      "venue": "Angel Stadium",
-      "venue_key": "angel stadium",
-      "hr_pct": -6,
-      "stadium_pct": -9,
-      "weather_pct": 3,
-      "lhb_stadium_pct": 1,
-      "park_lhb_pct": 4,
-      "rhb_stadium_pct": 0,
-      "park_rhb_pct": 3
-    },
-    "DET @ TOR": {
-      "game": "DET @ TOR",
-      "venue": "Rogers Centre",
-      "venue_key": "rogers centre",
-      "hr_pct": -11,
-      "stadium_pct": 6,
-      "weather_pct": -17,
-      "lhb_stadium_pct": 5,
-      "park_lhb_pct": -12,
-      "rhb_stadium_pct": 6,
-      "park_rhb_pct": -11
-    },
-    "KC @ HOU": {
-      "game": "KC @ HOU",
-      "venue": "Daikin Park",
-      "venue_key": "daikin park",
-      "hr_pct": 5,
-      "stadium_pct": 5,
-      "weather_pct": 0,
-      "lhb_stadium_pct": 9,
-      "park_lhb_pct": 9,
-      "rhb_stadium_pct": 8,
-      "park_rhb_pct": 8
-    },
-    "BAL @ NYM": {
-      "game": "BAL @ NYM",
-      "venue": "Citi Field",
-      "venue_key": "citi field",
-      "hr_pct": -1,
-      "stadium_pct": -2,
-      "weather_pct": 1,
-      "lhb_stadium_pct": -7,
-      "park_lhb_pct": -6,
-      "rhb_stadium_pct": 0,
-      "park_rhb_pct": 1
-    },
-    "ATH @ TB": {
-      "game": "ATH @ TB",
-      "venue": "Tropicana Field",
-      "venue_key": "tropicana field",
-      "hr_pct": -3,
-      "stadium_pct": -4,
-      "weather_pct": 1,
-      "lhb_stadium_pct": -5,
-      "park_lhb_pct": -4,
-      "rhb_stadium_pct": 11,
-      "park_rhb_pct": 12
-    },
     "CHW @ CLE": {
       "game": "CHW @ CLE",
       "venue": "Progressive Field",
@@ -141,13 +153,25 @@
       "game": "BOS @ TEX",
       "venue": "Globe Life Field",
       "venue_key": "globe life field",
-      "hr_pct": -12,
-      "stadium_pct": -11,
-      "weather_pct": -1,
+      "hr_pct": -13,
+      "stadium_pct": -12,
+      "weather_pct": 0,
       "lhb_stadium_pct": -4,
-      "park_lhb_pct": -5,
+      "park_lhb_pct": -4,
       "rhb_stadium_pct": -5,
-      "park_rhb_pct": -6
+      "park_rhb_pct": -5
+    },
+    "ATL @ CHC": {
+      "game": "ATL @ CHC",
+      "venue": "Wrigley Field",
+      "venue_key": "wrigley field",
+      "hr_pct": -28,
+      "stadium_pct": -2,
+      "weather_pct": -26,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": -28,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": -18
     },
     "NYY @ MIN": {
       "game": "NYY @ MIN",
@@ -160,30 +184,6 @@
       "park_lhb_pct": -28,
       "rhb_stadium_pct": -4,
       "park_rhb_pct": -28
-    },
-    "SF @ STL": {
-      "game": "SF @ STL",
-      "venue": "Busch Stadium",
-      "venue_key": "busch stadium",
-      "hr_pct": -15,
-      "stadium_pct": -10,
-      "weather_pct": -5,
-      "lhb_stadium_pct": -19,
-      "park_lhb_pct": -24,
-      "rhb_stadium_pct": -15,
-      "park_rhb_pct": -20
-    },
-    "ATL @ CHC": {
-      "game": "ATL @ CHC",
-      "venue": "Wrigley Field",
-      "venue_key": "wrigley field",
-      "hr_pct": -34,
-      "stadium_pct": -2,
-      "weather_pct": -32,
-      "lhb_stadium_pct": -2,
-      "park_lhb_pct": -34,
-      "rhb_stadium_pct": 8,
-      "park_rhb_pct": -24
     }
   },
   "by_venue": {
@@ -191,13 +191,13 @@
       "game": "SD @ COL",
       "venue": "Coors Field",
       "venue_key": "coors field",
-      "hr_pct": 21,
-      "stadium_pct": 20,
-      "weather_pct": 0,
+      "hr_pct": 16,
+      "stadium_pct": 21,
+      "weather_pct": -6,
       "lhb_stadium_pct": 12,
-      "park_lhb_pct": 12,
+      "park_lhb_pct": 6,
       "rhb_stadium_pct": 6,
-      "park_rhb_pct": 6
+      "park_rhb_pct": 0
     },
     "great american ball park": {
       "game": "LAD @ CIN",
@@ -211,6 +211,18 @@
       "rhb_stadium_pct": 7,
       "park_rhb_pct": 8
     },
+    "daikin park": {
+      "game": "KC @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 8,
+      "stadium_pct": 8,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 9,
+      "park_lhb_pct": 9,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 8
+    },
     "nationals park": {
       "game": "PHI @ WAS",
       "venue": "Nationals Park",
@@ -221,6 +233,66 @@
       "lhb_stadium_pct": 1,
       "park_lhb_pct": 2,
       "rhb_stadium_pct": 2,
+      "park_rhb_pct": 3
+    },
+    "rogers centre": {
+      "game": "DET @ TOR",
+      "venue": "Rogers Centre",
+      "venue_key": "rogers centre",
+      "hr_pct": -11,
+      "stadium_pct": 6,
+      "weather_pct": -17,
+      "lhb_stadium_pct": 5,
+      "park_lhb_pct": -12,
+      "rhb_stadium_pct": 6,
+      "park_rhb_pct": -11
+    },
+    "busch stadium": {
+      "game": "SF @ STL",
+      "venue": "Busch Stadium",
+      "venue_key": "busch stadium",
+      "hr_pct": -15,
+      "stadium_pct": -10,
+      "weather_pct": -5,
+      "lhb_stadium_pct": -19,
+      "park_lhb_pct": -24,
+      "rhb_stadium_pct": -15,
+      "park_rhb_pct": -20
+    },
+    "citi field": {
+      "game": "BAL @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": -3,
+      "stadium_pct": -2,
+      "weather_pct": -1,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": -8,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": -1
+    },
+    "tropicana field": {
+      "game": "ATH @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 11,
+      "park_rhb_pct": 12
+    },
+    "angel stadium": {
+      "game": "SEA @ LAA",
+      "venue": "Angel Stadium",
+      "venue_key": "angel stadium",
+      "hr_pct": -6,
+      "stadium_pct": -9,
+      "weather_pct": 3,
+      "lhb_stadium_pct": 1,
+      "park_lhb_pct": 4,
+      "rhb_stadium_pct": 0,
       "park_rhb_pct": 3
     },
     "pnc park": {
@@ -247,66 +319,6 @@
       "rhb_stadium_pct": -2,
       "park_rhb_pct": -3
     },
-    "angel stadium": {
-      "game": "SEA @ LAA",
-      "venue": "Angel Stadium",
-      "venue_key": "angel stadium",
-      "hr_pct": -6,
-      "stadium_pct": -9,
-      "weather_pct": 3,
-      "lhb_stadium_pct": 1,
-      "park_lhb_pct": 4,
-      "rhb_stadium_pct": 0,
-      "park_rhb_pct": 3
-    },
-    "rogers centre": {
-      "game": "DET @ TOR",
-      "venue": "Rogers Centre",
-      "venue_key": "rogers centre",
-      "hr_pct": -11,
-      "stadium_pct": 6,
-      "weather_pct": -17,
-      "lhb_stadium_pct": 5,
-      "park_lhb_pct": -12,
-      "rhb_stadium_pct": 6,
-      "park_rhb_pct": -11
-    },
-    "daikin park": {
-      "game": "KC @ HOU",
-      "venue": "Daikin Park",
-      "venue_key": "daikin park",
-      "hr_pct": 5,
-      "stadium_pct": 5,
-      "weather_pct": 0,
-      "lhb_stadium_pct": 9,
-      "park_lhb_pct": 9,
-      "rhb_stadium_pct": 8,
-      "park_rhb_pct": 8
-    },
-    "citi field": {
-      "game": "BAL @ NYM",
-      "venue": "Citi Field",
-      "venue_key": "citi field",
-      "hr_pct": -1,
-      "stadium_pct": -2,
-      "weather_pct": 1,
-      "lhb_stadium_pct": -7,
-      "park_lhb_pct": -6,
-      "rhb_stadium_pct": 0,
-      "park_rhb_pct": 1
-    },
-    "tropicana field": {
-      "game": "ATH @ TB",
-      "venue": "Tropicana Field",
-      "venue_key": "tropicana field",
-      "hr_pct": -3,
-      "stadium_pct": -4,
-      "weather_pct": 1,
-      "lhb_stadium_pct": -5,
-      "park_lhb_pct": -4,
-      "rhb_stadium_pct": 11,
-      "park_rhb_pct": 12
-    },
     "progressive field": {
       "game": "CHW @ CLE",
       "venue": "Progressive Field",
@@ -323,13 +335,25 @@
       "game": "BOS @ TEX",
       "venue": "Globe Life Field",
       "venue_key": "globe life field",
-      "hr_pct": -12,
-      "stadium_pct": -11,
-      "weather_pct": -1,
+      "hr_pct": -13,
+      "stadium_pct": -12,
+      "weather_pct": 0,
       "lhb_stadium_pct": -4,
-      "park_lhb_pct": -5,
+      "park_lhb_pct": -4,
       "rhb_stadium_pct": -5,
-      "park_rhb_pct": -6
+      "park_rhb_pct": -5
+    },
+    "wrigley field": {
+      "game": "ATL @ CHC",
+      "venue": "Wrigley Field",
+      "venue_key": "wrigley field",
+      "hr_pct": -28,
+      "stadium_pct": -2,
+      "weather_pct": -26,
+      "lhb_stadium_pct": -2,
+      "park_lhb_pct": -28,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": -18
     },
     "target field": {
       "game": "NYY @ MIN",
@@ -342,30 +366,6 @@
       "park_lhb_pct": -28,
       "rhb_stadium_pct": -4,
       "park_rhb_pct": -28
-    },
-    "busch stadium": {
-      "game": "SF @ STL",
-      "venue": "Busch Stadium",
-      "venue_key": "busch stadium",
-      "hr_pct": -15,
-      "stadium_pct": -10,
-      "weather_pct": -5,
-      "lhb_stadium_pct": -19,
-      "park_lhb_pct": -24,
-      "rhb_stadium_pct": -15,
-      "park_rhb_pct": -20
-    },
-    "wrigley field": {
-      "game": "ATL @ CHC",
-      "venue": "Wrigley Field",
-      "venue_key": "wrigley field",
-      "hr_pct": -34,
-      "stadium_pct": -2,
-      "weather_pct": -32,
-      "lhb_stadium_pct": -2,
-      "park_lhb_pct": -34,
-      "rhb_stadium_pct": 8,
-      "park_rhb_pct": -24
     }
   }
 }

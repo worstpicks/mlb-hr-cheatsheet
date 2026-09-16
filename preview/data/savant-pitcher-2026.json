@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "source": "savant-pitcher-csv",
-  "pitchers": 628,
+  "pitchers": 629,
   "lookup": {
     "657612": {
       "source": "savant-pitcher",
@@ -9010,6 +9010,27 @@
       "xera": 4.25,
       "era": 2.62,
       "sierra": 4.25,
+      "sierraSource": "xera-proxy"
+    },
+    "802408": {
+      "source": "savant-pitcher",
+      "barrelPct": 12.1,
+      "hardHitPct": 33.3,
+      "avgEV": 88.8,
+      "fbPct": 27.3,
+      "hrFbPct": 22.2,
+      "pullPct": 33.3,
+      "zonePct": 42.4,
+      "edgePct": 40.3,
+      "whiffPct": 31.2,
+      "kPct": 25.4,
+      "sweetSpotPct": 51.5,
+      "meatballPct": 5.6,
+      "hrAllowed": 2,
+      "flyballsAllowed": 9,
+      "xera": 6.41,
+      "era": 7.94,
+      "sierra": 6.41,
       "sierraSource": "xera-proxy"
     },
     "667297": {

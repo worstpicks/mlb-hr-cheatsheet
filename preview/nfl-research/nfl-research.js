@@ -928,6 +928,21 @@
     };
     const PART_LABEL = { matchup: "Matchup", script: "Game script", coverage: "Coverage", usage: "Usage", volume: "Volume" };
 
+    /* A reason's number: its edge as a percent from normal (green helps him, red hurts),
+       with the grade points it moved in the tooltip. A slate built before reasons
+       carried a percent falls back to the points. */
+    function reasonPct(r) {
+        const n = r.points == null ? "" : Math.abs(r.points).toFixed(0);
+        const pts = r.points == null ? "" : `${r.points >= 0 ? "+" : "−"}${n} grade point${n === "1" ? "" : "s"}`;
+        if (r.pct != null) {
+            const cls = r.pct > 0 ? "nrs-up" : r.pct < 0 ? "nrs-down" : "nrs-br-dim";
+            const txt = r.pct === 0 ? "0%" : `${r.pct > 0 ? "+" : "−"}${Math.abs(r.pct)}%`;
+            return `<span class="${cls}"${pts ? ` title="${pts}"` : ""}>${txt}</span>`;
+        }
+        if (r.points == null) return `<span class="nrs-br-dim">—</span>`;
+        return `<span class="${r.points >= 0 ? "nrs-up" : "nrs-down"}">${r.points >= 0 ? "+" : ""}${r.points.toFixed(0)}</span>`;
+    }
+
     function normName(n) {
         return String(n || "").toLowerCase().replace(/[.'’]/g, "")
             .replace(/\b(jr|sr|ii|iii|iv|v)\b/g, "").replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
@@ -1230,7 +1245,7 @@
     function boardDetailHtml(p, game, board) {
         const reasons = (p.reasons || []).map((r) => {
             // an empty cell still has to hold its grid column, or the text slides into it
-            const pts = r.points == null ? `<span class="nrs-br-dim">—</span>` : `<span class="${r.points >= 0 ? "nrs-up" : "nrs-down"}">${r.points >= 0 ? "+" : ""}${r.points.toFixed(0)}</span>`;
+            const pts = reasonPct(r);
             return `<li><span class="nrs-why-part">${PART_LABEL[r.part] || r.part}</span>${pts}<span class="nrs-why-text">${r.text}</span></li>`;
         }).join("");
 
@@ -1407,8 +1422,7 @@
 
     function profileReadHtml(p, board) {
         const reasons = (p.reasons || []).map((r) => {
-            const pts = r.points == null ? `<span class="nrs-br-dim">—</span>`
-                : `<span class="${r.points >= 0 ? "nrs-up" : "nrs-down"}">${r.points >= 0 ? "+" : ""}${r.points.toFixed(0)}</span>`;
+            const pts = reasonPct(r);
             return `<li><span class="nrs-why-part">${PART_LABEL[r.part] || r.part}</span>${pts}<span class="nrs-why-text">${r.text}</span></li>`;
         }).join("");
         const e = (board.env || {})[p.team] || {};

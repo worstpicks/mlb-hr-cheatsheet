@@ -21,6 +21,18 @@
         rec_yds: "rec yds", rec: "rec", tgt: "tgt"
     };
     var PART_LABEL = { matchup: "Matchup", script: "Game script", coverage: "Coverage", usage: "Usage", volume: "Volume" };
+    // a reason's edge as a percent from normal, grade points in the tooltip (as nfl-research.js)
+    function reasonPct(r) {
+        var n = r.points == null ? "" : Math.abs(r.points).toFixed(0);
+        var pts = r.points == null ? "" : (r.points >= 0 ? "+" : "−") + n + " grade point" + (n === "1" ? "" : "s");
+        if (r.pct != null) {
+            var cls = r.pct > 0 ? "nrs-up" : r.pct < 0 ? "nrs-down" : "nrs-br-dim";
+            var txt = r.pct === 0 ? "0%" : (r.pct > 0 ? "+" : "−") + Math.abs(r.pct) + "%";
+            return '<span class="' + cls + '"' + (pts ? ' title="' + pts + '"' : "") + ">" + txt + "</span>";
+        }
+        if (r.points == null) return '<span class="nrs-br-dim">—</span>';
+        return '<span class="' + (r.points >= 0 ? "nrs-up" : "nrs-down") + '">' + (r.points >= 0 ? "+" : "") + r.points.toFixed(0) + "</span>";
+    }
     var TEAM_LOGO = function (abbr) {
         return abbr ? "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/" + abbr.toLowerCase() + ".png" : "";
     };
@@ -134,8 +146,7 @@
 
     function readHtml(p) {
         var reasons = (p.reasons || []).map(function (r) {
-            var pts = r.points == null ? '<span class="nrs-br-dim">—</span>'
-                : '<span class="' + (r.points >= 0 ? "nrs-up" : "nrs-down") + '">' + (r.points >= 0 ? "+" : "") + r.points.toFixed(0) + "</span>";
+            var pts = reasonPct(r);
             return '<li><span class="nrs-why-part">' + (PART_LABEL[r.part] || esc(r.part)) + "</span>" + pts +
                    '<span class="nrs-why-text">' + esc(r.text) + "</span></li>";
         }).join("");

@@ -1610,7 +1610,7 @@ html.theme-light .nrs-board-table th:first-child, html.theme-light .nrs-br td:fi
 @media (max-width: 1100px) { .nrs-bd-grid { grid-template-columns: 1fr; padding-left: 4px; } }
 .nrs-bd-grid h4 { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nrs-muted); margin-bottom: 6px; }
 .nrs-why { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
-.nrs-why li { display: grid; grid-template-columns: 86px 34px 1fr; gap: 8px; font-size: 0.78rem; align-items: baseline; }
+.nrs-why li { display: grid; grid-template-columns: 86px 48px 1fr; gap: 8px; font-size: 0.78rem; align-items: baseline; }
 .nrs-why-part { font-weight: 800; color: var(--wpz-color-text); }
 .nrs-why-text { color: var(--nrs-muted); line-height: 1.45; }
 .nrs-bd-lines { list-style: none; margin: 10px 0 0; padding: 10px 0 0; border-top: 1px solid rgba(148, 163, 184, 0.12); display: grid; gap: 5px; }
@@ -1689,7 +1689,7 @@ html.theme-light .nrs-grade.is-bad { color: #7f1d1d; }
 .nrs-pf-panel { display: none; }
 .nrs-pf-panel.is-active { display: block; }
 .nrs-pf-h { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nrs-muted); margin: 0 0 8px; }
-.nrs-pf-panel .nrs-why li { grid-template-columns: 96px 34px 1fr; }
+.nrs-pf-panel .nrs-why li { grid-template-columns: 96px 48px 1fr; }
 .nrs-pf-verdict { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 0.8rem; color: var(--nrs-muted); }
 .nrs-pf-table { margin-bottom: 12px; }
 .nrs-pf-table tfoot td { border-top: 1px solid rgba(148, 163, 184, 0.2); color: var(--nrs-muted); padding-top: 6px; }
@@ -1718,7 +1718,7 @@ html.theme-light .nrs-grade.is-bad { color: #7f1d1d; }
     .nrs-profile__name { font-size: 1.12rem; }
     .nrs-pf-hero { grid-template-columns: 1fr 1fr; }
     .nrs-pf-value { font-size: 1.25rem; }
-    .nrs-pf-panel .nrs-why li { grid-template-columns: 80px 30px 1fr; }
+    .nrs-pf-panel .nrs-why li { grid-template-columns: 80px 46px 1fr; }
 }
 
 html.theme-light .nrs-profile__inner { background: #fff; border-color: rgba(180, 83, 9, 0.3); }
@@ -1769,3 +1769,4 @@ html.theme-light .nrs-card-gear { background: #fff; border-color: rgba(3, 105, 1
 .nrs-br.is-linked > td:first-child { box-shadow: inset 3px 0 0 var(--wpz-accent-gold); }
 /* the Player Logs card a cheat-sheet link landed on */
 .nrs-matchup-card.is-linked { box-shadow: 0 0 0 2px var(--wpz-accent-gold); }
+.nrs-why li > span[title] { cursor: help; }

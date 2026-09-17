@@ -172,8 +172,12 @@ def build(season: int, week: int) -> Path:
     dz_rank = {t: i + 1 for i, (_, t) in enumerate(order)}
     implied_rank = {t: i + 1 for i, (t, _) in enumerate(sorted(implied.items(), key=lambda kv: -kv[1]))}
 
-    players = nfl.load_players().select(["gsis_id", "espn_id"]).drop_nulls()
-    espn_of = dict(zip(players["gsis_id"].to_list(), players["espn_id"].to_list()))
+    players = nfl.load_players().select(["gsis_id", "espn_id", "display_name", "latest_team"])
+    espn_of = {g: e for g, e in zip(players["gsis_id"].to_list(), players["espn_id"].to_list()) if g and e}
+    # name + team -> gsis id, for a listed player the depth chart has since dropped
+    gsis_by_name = {(norm(n), TEAM_FIX.get(t, t)): g for n, t, g in zip(
+        players["display_name"].to_list(), players["latest_team"].to_list(), players["gsis_id"].to_list())
+        if n and t and g}
 
     problems: list[str] = []
     rows: list[dict] = []
@@ -189,7 +193,14 @@ def build(season: int, week: int) -> Path:
                 problems.append(f"{p['name']}: {p['team']} vs {p['opp']} is not {key}")
             hit = [b for b in board if b["team"] == p["team"] and norm(b["name"]) == norm(p["name"])]
             if not hit:
-                problems.append(f"{p['name']} ({p['team']}) is not in the depth-chart lineup")
+                # A player on the list stays on the sheet even after the club drops him
+                # from its depth chart -- usually a move to injured reserve. He is shown
+                # with his ESPN status and nothing rated, so the list is never silently short.
+                problems.append(f"{p['name']} ({p['team']}) is off the depth chart; listed without numbers")
+                stub = {"player_id": gsis_by_name.get((norm(p["name"]), p["team"])), "name": p["name"],
+                        "role": p["slot"], "pos": p["slot"][:2], "team": p["team"], "opp": p["opp"],
+                        "games": 0, "xtd": 0.0, "matchup": {}, "share": None, "share_l3": None}
+                rows.append({"plan": p, "game": key, "b": stub, "avg": {}, "off_chart": True})
                 continue
             b = hit[0]
             if b["role"] != p["slot"]:
@@ -324,7 +335,8 @@ def build(season: int, week: int) -> Path:
         for r in [x for x in rows if x["game"] == key]:
             b, p = r["b"], r["plan"]
             sides[p["team"]].append({
-                "n": p["name"], "id": b.get("player_id"), "p": b["role"], "pos": b["pos"],
+                "n": p["name"], "id": None if r.get("off_chart") else b.get("player_id"),
+                "off": bool(r.get("off_chart")), "p": b["role"], "pos": b["pos"],
                 "mk": p["market"], "line": p["line"], "t": r["tags"], "st": r["status"], "inj": r["injury"],
                 "stl": r["status_label"],
                 "m": {
@@ -347,7 +359,7 @@ def build(season: int, week: int) -> Path:
     # context and defensive leaks the card quotes -- only what the card reads, so the
     # page carries ninety-odd players rather than the whole slate.
     cards, card_env, card_leaks = {}, {}, {}
-    for r in rows:
+    for r in [x for x in rows if not x.get("off_chart")]:
         b = r["b"]
         stats = list((b.get("proj") or {}).keys())
         m = b.get("matchup") or {}

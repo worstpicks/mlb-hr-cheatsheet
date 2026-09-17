@@ -483,29 +483,34 @@ def board_player(card: dict, prof: dict | None, team: str, opp: str, implied: di
         xtd = prof["window"]["rush_td"] * 0.9  # a QB's anytime TD is a rushing score
     td_chance = round(100 * (1 - math.exp(-xtd)))
 
-    # grade: each part lands in [-1, 1], weighted, then mapped to 0-100 around 50
+    # grade: each part lands in [-1, 1], weighted, then mapped to 0-100 around 50.
+    # Each part also carries `pct`, its edge in plain terms -- how far this factor sits
+    # from normal for him -- which is what the page shows; grade points are the tooltip.
     parts = []
     if d_role.get("index"):
         parts.append(("matchup", _clamp((d_role["index"] - 1) / 0.30),
-                      _leak_text(opp, role, d_role)))
+                      _leak_text(opp, role, d_role), 100 * (d_role["index"] - 1)))
     if team_pts:
         parts.append(("script", _clamp((team_pts - LEAGUE_TEAM_POINTS) / 6),
-                      f"{team} implied for {team_pts:g} points"))
+                      f"{team} implied for {team_pts:g} points (league average {LEAGUE_TEAM_POINTS:g})",
+                      100 * (team_pts / LEAGUE_TEAM_POINTS - 1)))
     if "cov" in notes:
         cvn = notes["cov"]
         parts.append(("coverage", _clamp((cvn["mult"] - 1) / 0.10),
-                      f'{opp} plays man {round(cvn["def_man"])}% · he averages {cvn["man_ypt"]} yds/tgt vs man, {cvn["zone_ypt"]} vs zone'))
+                      f'{opp} plays man {round(cvn["def_man"])}% · he averages {cvn["man_ypt"]} yds/tgt vs man, {cvn["zone_ypt"]} vs zone',
+                      100 * (cvn["mult"] - 1)))
     share_name = {"RB": "carry share", "QB": None}.get(pos, "target share")
     if share_name:
         trend = prof["share_l3"] - prof["share"]
         parts.append(("usage", _clamp(trend / 7),
-                      f"{share_name} {prof['share_l3']:g}% last 3 vs {prof['share']:g}% over {prof['games']} games"))
+                      f"{share_name} {prof['share_l3']:g}% last 3 vs {prof['share']:g}% over {prof['games']} games",
+                      100 * (prof["share_l3"] / prof["share"] - 1) if prof["share"] else None))
 
     weights = ({"matchup": .45, "script": .20, "coverage": .20, "usage": .15} if "cov" in notes
                else {"matchup": .60, "script": .25, "usage": .15})
-    present = {k for k, _, _ in parts}
+    present = {k for k, _, _, _ in parts}
     scale = sum(w for k, w in weights.items() if k in present) or 1.0
-    score = sum(weights[k] * v for k, v, _ in parts) / scale
+    score = sum(weights[k] * v for k, v, _, _ in parts) / scale
 
     # Reliability: an edge only pays if he has the role to use it. Weight current
     # usage as heavily as the window, so a back whose carries just jumped counts.
@@ -515,10 +520,12 @@ def board_player(card: dict, prof: dict | None, team: str, opp: str, implied: di
         reliability = _clamp(live_share / FULL_SHARE[pos], 0.0, 1.0)
         low_volume = reliability < LOW_VOLUME
     grade = max(1, min(99, round(50 + 50 * score * reliability)))
-    reasons = [{"part": k, "points": round(50 * weights[k] * v * reliability / scale, 1), "text": t}
-               for k, v, t in parts]
+    reasons = [{"part": k, "points": round(50 * weights[k] * v * reliability / scale, 1), "text": t,
+                "pct": None if pct is None else round(pct)}
+               for k, v, t, pct in parts]
     if reliability < 1:
-        reasons.append({"part": "volume", "points": None,
+        # shown as the discount on every edge above: counted at 45% reads as -55%
+        reasons.append({"part": "volume", "points": None, "pct": round(100 * reliability) - 100,
                         "text": f"{share_name} only {0.5 * prof['share'] + 0.5 * prof['share_l3']:.0f}% -- "
                                 f"edge counted at {round(100 * reliability)}% until he holds {FULL_SHARE[pos]:g}%"})
 

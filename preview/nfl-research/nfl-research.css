@@ -1767,3 +1767,5 @@ html.theme-light .nrs-card-gear { background: #fff; border-color: rgba(3, 105, 1
 /* the row a cheat-sheet link landed on */
 .nrs-br.is-linked > td { background: rgba(234, 179, 8, 0.1); }
 .nrs-br.is-linked > td:first-child { box-shadow: inset 3px 0 0 var(--wpz-accent-gold); }
+/* the Player Logs card a cheat-sheet link landed on */
+.nrs-matchup-card.is-linked { box-shadow: 0 0 0 2px var(--wpz-accent-gold); }

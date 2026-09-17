@@ -343,12 +343,34 @@ def build(season: int, week: int) -> Path:
             "sides": sides,
         })
 
+    # The player card popup: each listed player's Game Board entry, plus the team
+    # context and defensive leaks the card quotes -- only what the card reads, so the
+    # page carries ninety-odd players rather than the whole slate.
+    cards, card_env, card_leaks = {}, {}, {}
+    for r in rows:
+        b = r["b"]
+        stats = list((b.get("proj") or {}).keys())
+        m = b.get("matchup") or {}
+        cards[b["player_id"]] = {
+            **{k: b.get(k) for k in CARD_FIELDS},
+            "matchup": {k: m.get(k) for k in ("index", "rank", "of", "allowed", "league")} if m else None,
+            "log": [{**{k: g.get(k) for k in ("season", "week", "opp", "role")}, **{k: g.get(k) for k in stats}}
+                    for g in (b.get("log") or [])],
+        }
+        for t in (b["team"], b["opp"]):
+            e = env.get(t, {})
+            card_env[t] = {k: e.get(k) for k in ("rz_trips", "def_rz_td", "def_man", "def_pressure")}
+        g = by_game[r["game"]]
+        card_leaks[b["opp"]] = {role: {"index": v.get("index")}
+                                for role, v in ((g["board"].get("leaks") or {}).get(b["opp"]) or {}).items()}
+
     kicks = sorted(datetime.fromisoformat(g["kick"].replace("Z", "+00:00")) for g in games_out)
     sheet = {
         "season": season, "week": week, "root": "",
         "built": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "first_kick": kicks[0].isoformat(), "last_kick": kicks[-1].isoformat(),
         "games": games_out, "top5": top5, "tend": tend,
+        "cards": cards, "env": card_env, "leaks": card_leaks,
         "defense_source": bool(defense),
     }
     out = publish(sheet, season, week)
@@ -366,6 +388,10 @@ def build(season: int, week: int) -> Path:
 
 
 NFL_DIR = ROOT / "preview" / "nfl-research"
+# the Game Board fields the player card popup reads (atd-card.js)
+CARD_FIELDS = ("player_id", "name", "pos", "role", "team", "opp", "headshot", "games", "seasons",
+               "new_team", "team_games", "no_history", "share", "share_l3", "share_kind", "low_volume",
+               "rz_share", "proj", "window", "td_chance", "grade", "reasons", "cov")
 MANIFEST = NFL_DIR / "atd-manifest.json"
 
 

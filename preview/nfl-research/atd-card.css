@@ -1,0 +1,155 @@
+/* Worst Pickz — player card popup on the NFL cheat sheet.
+   The same card Player Logs opens in the Research tab, copied rule for rule from
+   nfl-research.css so the two read as one product. Loaded by atd-card.js. */
+
+.nrs-opp {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--wpz-color-text-soft);
+}
+.nrs-opp img { width: 16px; height: 16px; object-fit: contain; }
+html.theme-light .nrs-opp { color: #334155; }
+.nrs-depth-badge {
+    display: inline-block; vertical-align: 2px;
+    margin-left: 8px; padding: 1px 7px;
+    border-radius: 6px;
+    background: rgba(59, 130, 246, 0.18);
+    border: 1px solid rgba(96, 165, 250, 0.45);
+    color: #bfdbfe;
+    font-size: 0.64rem; font-weight: 800; letter-spacing: 0.04em;
+}
+html.theme-light .nrs-depth-badge { color: #1d4ed8; background: rgba(59, 130, 246, 0.12); }
+.nrs-up { color: #86efac; font-weight: 800; }
+.nrs-down { color: #fca5a5; font-weight: 800; }
+html.theme-light .nrs-up { color: #15803d; }
+html.theme-light .nrs-down { color: #b91c1c; }
+.nrs-br-dim { color: var(--nrs-muted); font-size: 0.76rem; }
+.nrs-bb {
+    display: inline-block; margin-left: 5px; padding: 1px 6px; border-radius: 6px;
+    font-size: 0.6rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: 2px;
+}
+.nrs-bb--inj { background: rgba(var(--warn), 0.2); border: 1px solid rgba(var(--warn), 0.5); color: #fdba74; }
+.nrs-bb--low { background: rgba(var(--bad), 0.14); border: 1px solid rgba(var(--bad), 0.4); color: #fca5a5; }
+.nrs-bb--new { background: rgba(56, 189, 248, 0.14); border: 1px solid rgba(56, 189, 248, 0.4); color: #7dd3fc; }
+.nrs-why { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.nrs-why li { display: grid; grid-template-columns: 86px 34px 1fr; gap: 8px; font-size: 0.78rem; align-items: baseline; }
+.nrs-why-part { font-weight: 800; color: var(--wpz-color-text); }
+.nrs-why-text { color: var(--nrs-muted); line-height: 1.45; }
+.nrs-bd-lines { list-style: none; margin: 10px 0 0; padding: 10px 0 0; border-top: 1px solid rgba(148, 163, 184, 0.12); display: grid; gap: 5px; }
+.nrs-bd-lines li { font-size: 0.78rem; color: var(--nrs-muted); line-height: 1.5; }
+.nrs-bd-lines b { color: var(--wpz-color-text); }
+.nrs-bd-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; font-variant-numeric: tabular-nums; }
+.nrs-bd-table th { text-align: left; font-size: 0.64rem; color: var(--nrs-muted); font-weight: 800; padding: 3px 6px; border-bottom: 1px solid rgba(148, 163, 184, 0.14); }
+.nrs-bd-table td { padding: 4px 6px; border-bottom: 1px solid rgba(148, 163, 184, 0.06); }
+.nrs-bd-table .nrs-opp img { width: 14px; height: 14px; }
+.nrs-bd-proj { margin-top: 8px; font-size: 0.78rem; color: var(--nrs-muted); }
+.nrs-bd-proj b { color: var(--wpz-accent-gold); }
+.nrs-mx-verdict {
+    padding: 5px 11px; border-radius: 999px; font-size: 0.76rem; font-weight: 900; letter-spacing: 0.02em;
+    background: rgba(148, 163, 184, 0.16); color: var(--wpz-color-text); white-space: nowrap;
+}
+.nrs-mx-verdict.is-soft { background: rgba(var(--good), 0.2); color: #86efac; border: 1px solid rgba(var(--good), 0.45); }
+.nrs-mx-verdict.is-tough { background: rgba(var(--bad), 0.18); color: #fca5a5; border: 1px solid rgba(var(--bad), 0.45); }
+.nrs-mx-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.nrs-mx-chip {
+    font-size: 0.72rem; color: var(--nrs-muted); padding: 5px 9px; border-radius: 8px;
+    background: var(--nrs-panel-2); border: 1px solid rgba(148, 163, 184, 0.12);
+}
+.nrs-mx-chip b { color: var(--wpz-color-text); }
+html.theme-light .nrs-mx-verdict.is-soft, html.theme-light .nrs-mx-chip.is-soft b { color: #15803d; }
+html.theme-light .nrs-mx-verdict.is-tough, html.theme-light .nrs-mx-chip.is-tough b { color: #b91c1c; }
+
+/* ═══ Player popup — laid out like the MLB research profile ════════════════ */
+.nrs-profile {
+    border: none; padding: 0; width: 100%; margin: auto;
+    max-width: min(720px, calc(100vw - 24px));
+    background: transparent; color: var(--wpz-color-text);
+}
+.nrs-profile::backdrop { background: rgba(2, 6, 23, 0.72); backdrop-filter: blur(4px); }
+.nrs-profile__inner {
+    --good: 34, 197, 94; --bad: 239, 68, 68; --warn: 251, 146, 60;
+    display: flex; flex-direction: column; max-height: min(92vh, 860px); overflow: hidden;
+    border-radius: 16px; border: 1px solid rgba(251, 146, 60, 0.28);
+    background: linear-gradient(160deg, rgba(19, 11, 8, 0.98) 0%, rgba(10, 17, 31, 0.98) 100%);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+}
+.nrs-profile__head {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    padding: 16px 18px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.14); flex-shrink: 0;
+}
+.nrs-profile__head-main { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+.nrs-profile__photo {
+    width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    border: 2px solid rgba(251, 146, 60, 0.35); background: rgba(15, 23, 42, 0.8);
+}
+.nrs-profile__name { margin: 0; font-size: 1.35rem; font-weight: 900; line-height: 1.15; display: flex; flex-wrap: wrap; align-items: center; gap: 2px; }
+.nrs-profile__sub { margin: 4px 0 0; font-size: 0.78rem; color: var(--nrs-muted); }
+.nrs-profile__head-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.nrs-profile__game { margin: 0; font-size: 0.72rem; font-weight: 700; color: var(--nrs-muted); text-align: right; white-space: pre-line; line-height: 1.35; }
+.nrs-profile__close {
+    border: none; background: rgba(148, 163, 184, 0.12); color: var(--wpz-color-text);
+    width: 34px; height: 34px; border-radius: 10px; font-size: 1.4rem; line-height: 1; cursor: pointer;
+}
+.nrs-profile__close:hover { background: rgba(251, 146, 60, 0.2); }
+.nrs-profile__body { overflow: auto; flex: 1; min-height: 0; padding: 14px 18px 16px; }
+.nrs-profile__foot {
+    display: flex; justify-content: flex-end; gap: 8px; padding: 10px 18px 14px;
+    border-top: 1px solid rgba(148, 163, 184, 0.14); flex-shrink: 0;
+}
+
+.nrs-pf-hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.nrs-pf-tile { padding: 10px 12px; border-radius: 12px; background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.12); }
+.nrs-pf-label { display: block; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nrs-muted); }
+.nrs-pf-value { display: block; font-size: 1.5rem; font-weight: 900; color: var(--wpz-color-heading); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.nrs-pf-sub { display: block; font-size: 0.68rem; color: var(--nrs-muted); }
+.nrs-pf-tile.is-great { background: rgba(var(--good), 0.28); border-color: rgba(var(--good), 0.55); }
+.nrs-pf-tile.is-good, .nrs-pf-tile.is-soft, .nrs-pf-tile.is-soft-lite { background: rgba(var(--good), 0.14); border-color: rgba(var(--good), 0.35); }
+.nrs-pf-tile.is-poor { background: rgba(var(--warn), 0.14); border-color: rgba(var(--warn), 0.35); }
+.nrs-pf-tile.is-bad, .nrs-pf-tile.is-tough, .nrs-pf-tile.is-tough-lite { background: rgba(var(--bad), 0.14); border-color: rgba(var(--bad), 0.35); }
+
+.nrs-pf-tabs { display: flex; gap: 4px; margin: 14px 0 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.16); overflow-x: auto; }
+.nrs-pf-tabs button {
+    background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer;
+    color: var(--nrs-muted); font: inherit; font-size: 0.82rem; font-weight: 800; padding: 8px 12px; white-space: nowrap;
+}
+.nrs-pf-tabs button.is-active { color: var(--wpz-accent-gold); border-bottom-color: var(--wpz-accent-gold); }
+.nrs-pf-panel { display: none; }
+.nrs-pf-panel.is-active { display: block; }
+.nrs-pf-h { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nrs-muted); margin: 0 0 8px; }
+.nrs-pf-panel .nrs-why li { grid-template-columns: 96px 34px 1fr; }
+.nrs-pf-verdict { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 0.8rem; color: var(--nrs-muted); }
+.nrs-pf-table { margin-bottom: 12px; }
+.nrs-pf-table tfoot td { border-top: 1px solid rgba(148, 163, 184, 0.2); color: var(--nrs-muted); padding-top: 6px; }
+.nrs-pf-chips { margin-top: 4px; }
+
+.nrs-profile__board {
+    border: 1px solid rgba(234, 179, 8, 0.4); background: rgba(234, 179, 8, 0.12); color: var(--wpz-accent-gold);
+    font: inherit; font-size: 0.8rem; font-weight: 800; padding: 8px 14px; border-radius: 10px; cursor: pointer;
+}
+.nrs-profile__board:hover { background: rgba(234, 179, 8, 0.22); }
+.nrs-profile__board[hidden] { display: none; }
+a.nrs-profile__board { display: inline-flex; align-items: center; text-decoration: none; }
+.nrs-profile__board--quiet { border-color: rgba(148, 163, 184, 0.35); background: transparent; color: var(--nrs-muted); }
+.nrs-profile__board--quiet:hover { color: var(--wpz-color-text); background: rgba(148, 163, 184, 0.12); }
+.nrs-empty { color: var(--nrs-muted); font-size: 0.85rem; }
+.atd-card-inj { margin: 0 0 10px; font-size: 0.78rem; color: #fdba74; }
+html.theme-light .atd-card-inj { color: #9a3412; }
+
+@media (max-width: 520px) {
+    .nrs-profile__head { padding: 14px 14px 10px; }
+    .nrs-profile__body { padding: 12px 14px 14px; }
+    .nrs-profile__photo { width: 44px; height: 44px; }
+    .nrs-profile__name { font-size: 1.12rem; }
+    .nrs-pf-hero { grid-template-columns: 1fr 1fr; }
+    .nrs-pf-value { font-size: 1.25rem; }
+    .nrs-pf-panel .nrs-why li { grid-template-columns: 80px 30px 1fr; }
+}
+
+html.theme-light .nrs-profile__inner { background: #fff; border-color: rgba(180, 83, 9, 0.3); }
+html.theme-light .nrs-pf-tile { background: #f8fafc; border-color: rgba(148, 163, 184, 0.3); }
+html.theme-light .nrs-pf-tile.is-great { background: rgba(34, 197, 94, 0.22); }
+html.theme-light .nrs-pf-tile.is-good, html.theme-light .nrs-pf-tile.is-soft, html.theme-light .nrs-pf-tile.is-soft-lite { background: rgba(34, 197, 94, 0.1); }
+html.theme-light .nrs-pf-tile.is-poor { background: rgba(251, 146, 60, 0.12); }
+html.theme-light .nrs-pf-tile.is-bad, html.theme-light .nrs-pf-tile.is-tough, html.theme-light .nrs-pf-tile.is-tough-lite { background: rgba(239, 68, 68, 0.1); }
+html.theme-light .nrs-pf-tabs button.is-active, html.theme-light .nrs-profile__board { color: #a16207; border-color: #a16207; }

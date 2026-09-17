@@ -728,8 +728,9 @@
         if (linked) revealLinked(linked);
     }
 
-    /* A link from the cheat sheet (?view=board&player=<gsis id>) lands on that
-       player's game with the Game Board open and his row expanded. It applies once:
+    /* A link from the cheat sheet (?view=logs&player=<gsis id>) lands on that player's
+       game in Player Logs, on his team's side, with his player card open in the popup.
+       ?view=board&player= still opens his Game Board row instead. It applies once:
        picking another week or game afterwards behaves normally. */
     function applyDeepLink(games) {
         const link = state.deepLink;
@@ -747,18 +748,30 @@
             state.boardFilter = { pos: "All", team: "both", sort: state.boardFilter.sort || "grade" };
             const key = `${p.team}|${p.role}|${p.player_id || normName(p.name)}`;
             if (state.hostView === "board") state.boardOpen.add(key);
-            return key;
+            return { key, player: p };
         }
         return null;
     }
 
-    function revealLinked(key) {
-        const toggle = document.querySelector(`[data-board-key="${key}"]`);
-        const row = toggle && toggle.closest("tr");
-        if (!row) return;
-        row.classList.add("is-linked");
-        // after layout settles, so the images above it do not push it off screen
-        requestAnimationFrame(() => row.scrollIntoView({ block: "center" }));
+    function revealLinked(linked) {
+        if (state.hostView === "board") {
+            const toggle = document.querySelector(`[data-board-key="${linked.key}"]`);
+            const row = toggle && toggle.closest("tr");
+            if (!row) return;
+            row.classList.add("is-linked");
+            // after layout settles, so the images above it do not push it off screen
+            requestAnimationFrame(() => row.scrollIntoView({ block: "center" }));
+            return;
+        }
+        // Player Logs: his card behind the popup, so closing it leaves him on screen
+        const p = linked.player;
+        const trigger = document.querySelector(`[data-profile-pid="${p.player_id}"]`);
+        const card = trigger && trigger.closest(".nrs-matchup-card");
+        if (card) {
+            card.classList.add("is-linked");
+            requestAnimationFrame(() => card.scrollIntoView({ block: "start" }));
+        }
+        openProfile(p);
     }
 
     // league average allowed per position/rank, from every defense on the slate
@@ -1402,7 +1415,7 @@
         const d = (board.env || {})[p.opp] || {};
         const facts = [];
         if (p.share != null) {
-            facts.push(`<b>${Math.round(p.share)}%</b> ${p.share_kind} over ${p.games} games · <b>${Math.round(p.share_l3)}%</b> over the last 3`);
+            facts.push(`<b>${Math.round(p.share)}%</b> ${p.share_kind} over ${p.games} game${p.games === 1 ? "" : "s"} · <b>${Math.round(p.share_l3)}%</b> over the last 3`);
         }
         if (p.pos !== "QB" && p.rz_share != null) {
             facts.push(`Handles <b>${Math.round(p.rz_share)}%</b> of ${p.team}'s red-zone work · ${p.team} reaches the 20 <b>${e.rz_trips != null ? e.rz_trips.toFixed(1) : "—"}</b> times a game · ${p.opp} lets <b>${d.def_rz_td != null ? Math.round(d.def_rz_td) : "—"}%</b> of those trips score`);
@@ -1479,7 +1492,7 @@
             (p.new_team ? `<span class="nrs-bb nrs-bb--new">New team</span>` : "");
         el("nrsProfileSub").textContent = p.no_history
             ? `${p.team} · on the depth chart, no games yet`
-            : `${p.team} · ${p.games} games in the sample${p.seasons && p.seasons.length > 1 ? ` · ${seasonSpan(p.seasons)}` : ""}`;
+            : `${p.team} · ${p.games} game${p.games === 1 ? "" : "s"} in the sample${p.seasons && p.seasons.length > 1 ? ` · ${seasonSpan(p.seasons)}` : ""}`;
         el("nrsProfileGame").textContent = `${game.away} @ ${game.home}\n${formatKickoff(game.kickoff)}`;
 
         const body = el("nrsProfileBody");

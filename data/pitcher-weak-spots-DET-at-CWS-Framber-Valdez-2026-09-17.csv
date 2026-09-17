@@ -1,0 +1,31 @@
+﻿Matchup,DET @ CWS
+Pitcher,Framber Valdez
+Pitcher Team,DET
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,20.1,1.38,="22-82",.268,.366,0.098,1,3,1,4,17.8,6,.333,.699
+Batting Second,19.1,1.66,="21-76",.276,.447,0.171,4,1,0,9,17.0,11,.375,.822
+Batting Third,18.0,1.67,="20-71",.282,.408,0.126,2,3,0,8,16.3,10,.395,.803
+Batting Fourth,17.2,1.75,="23-72",.319,.472,0.153,1,8,0,7,11.9,8,.405,.877
+Batting Fifth,19.1,1.24,="21-77",.273,.481,0.208,5,1,0,17,18.5,3,.296,.777
+Batting Sixth,17.2,1.36,="18-69",.261,.377,0.116,1,5,0,6,15.4,6,.333,.710
+Batting Seventh,17.1,1.27,="13-63",.206,.286,0.080,1,2,0,5,16.2,9,.306,.592
+Batting Eighth,18.0,0.89,="11-63",.175,.206,0.031,0,2,0,10,20.3,5,.246,.452
+Batting Ninth,16.0,1.00,="14-60",.233,.283,0.050,0,1,1,4,20.6,2,.270,.553
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="84-326",.258,.374,0.116,6,16,2,28,15.8,33,.358,.732
+Chase Meidroth RHB,Batting First ​,="46-160",.288,.513,0.225,8,12,0,18,22.8,20,.367,.880
+Munetaka Murakami LHB,Batting Second ​,="70-328",.213,.457,0.244,22,14,0,48,34.6,66,.348,.805
+Miguel Vargas RHB,Batting Third ​,="92-368",.250,.465,0.215,19,22,0,48,18.6,58,.356,.821
+Kyle Teel LHB,Batting Third ​,="5-22",.227,.545,0.318,2,1,0,9,33.3,2,.292,.837
+Randal Grichuk RHB,Batting Fourth ​,="23-56",.411,.750,0.339,4,7,0,14,20.0,4,.450,1.200
+Andrew Benintendi LHB,Batting Fourth ​,="21-95",.221,.379,0.158,3,6,0,13,19.0,9,.286,.665
+Colson Montgomery LHB,Batting Fourth ​,="66-300",.220,.450,0.230,19,12,0,49,34.5,28,.301,.751
+Braden Montgomery SHB,Batting Fifth ​,="21-107",.196,.280,0.084,1,4,1,11,18.3,13,.283,.563
+Brenton Doyle RHB,Batting Seventh ​,="6-39",.154,.154,0.000,0,0,0,0,34.9,4,.233,.387
+Tommy Pham RHB,Batting Eighth ​,="0-6",.000,.000,0.000,0,0,0,0,66.7,0,.000,.000
+Tristan Peters LHB,Batting Eighth ​,="52-181",.287,.536,0.249,9,12,3,31,16.5,14,.338,.874
+Jake Rogers RHB,Batting Ninth ​,="17-114",.149,.228,0.079,1,4,1,8,29.1,15,.248,.476
+Luisangel Acuna RHB,Batting Ninth ​,="20-89",.225,.281,0.056,1,2,0,5,16.7,4,.263,.544

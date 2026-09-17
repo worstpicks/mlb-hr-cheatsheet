@@ -1,0 +1,31 @@
+﻿Matchup,MIN @ LAA
+Pitcher,Taj Bradley
+Pitcher Team,MIN
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,21.0,1.33,="18-80",.225,.438,0.213,4,3,1,11,27.8,10,.311,.749
+Batting Second,17.2,1.81,="16-70",.229,.357,0.128,2,3,0,5,23.3,16,.372,.729
+Batting Third,17.2,1.70,="22-74",.297,.581,0.284,6,3,0,9,28.0,8,.366,.947
+Batting Fourth,20.2,0.92,="14-74",.189,.230,0.041,1,0,0,5,31.3,5,.250,.480
+Batting Fifth,19.2,1.07,="14-70",.200,.457,0.257,4,6,0,12,26.6,7,.278,.735
+Batting Sixth,18.2,1.02,="15-70",.214,.286,0.072,1,2,0,6,18.9,4,.257,.543
+Batting Seventh,16.2,1.32,="13-61",.213,.279,0.066,0,4,0,4,27.8,9,.319,.598
+Batting Eighth,18.1,0.76,="12-65",.185,.431,0.246,4,4,0,7,37.3,2,.209,.640
+Batting Ninth,15.0,1.40,="10-54",.185,.259,0.074,1,1,0,4,25.4,11,.333,.592
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="126-534",.236,.433,0.197,23,26,5,59,30.9,52,.317,.750
+Mike Trout RHB,Batting Second ​,="116-481",.241,.424,0.183,21,25,0,52,26.2,98,.379,.803
+Wade Meckler LHB,Batting Third ​,="27-85",.318,.412,0.094,0,8,0,11,17.0,15,.420,.832
+Vaughn Grissom RHB,Batting Fourth ​,="25-115",.217,.417,0.200,5,8,0,20,23.3,7,.281,.698
+Moisés Ballesteros LHB,Batting Fifth ​,="24-83",.289,.434,0.145,3,3,0,9,18.9,10,.368,.802
+Denzer Guzman RHB,Batting Sixth ​,="18-64",.281,.422,0.141,2,3,0,8,24.2,2,.303,.725
+Christian Moore RHB,Batting Sixth ​,="13-52",.250,.385,0.135,1,2,1,8,26.4,0,.264,.649
+Josh Lowe LHB,Batting Seventh ​,="32-145",.221,.414,0.193,8,4,0,14,32.5,11,.283,.697
+Oswald Peraza RHB,Batting Seventh ​,="19-86",.221,.349,0.128,3,2,0,7,31.2,5,.280,.629
+Travis d'Arnaud RHB,Batting Eighth ​,="7-39",.179,.282,0.103,1,1,0,3,24.4,4,.289,.571
+Jose Siri RHB,Batting Eighth ​,="13-54",.241,.426,0.185,2,4,0,9,32.2,3,.276,.702
+Kyren Paris RHB,Batting Eighth ​,="0-8",.000,.000,0.000,0,0,0,0,66.7,1,.111,.111
+Tyler Heineman SHB,Batting Ninth ​,="23-139",.165,.216,0.051,1,2,1,5,15.3,5,.216,.432
+Adam Frazier LHB,Batting Ninth ​,="25-102",.245,.353,0.108,1,6,1,9,25.6,8,.319,.672

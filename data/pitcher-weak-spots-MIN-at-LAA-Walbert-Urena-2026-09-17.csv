@@ -1,0 +1,31 @@
+﻿Matchup,MIN @ LAA
+Pitcher,Walbert Urena
+Pitcher Team,LAA
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.2,1.07,="13-69",.188,.261,0.073,1,2,0,4,28.9,7,.263,.524
+Batting Second,14.0,2.29,="22-61",.361,.508,0.147,1,6,0,9,17.8,10,.466,.974
+Batting Third,16.2,1.08,="8-60",.133,.183,0.050,0,3,0,3,21.1,10,.268,.451
+Batting Fourth,15.0,1.60,="17-59",.288,.407,0.119,1,4,0,9,20.6,7,.382,.789
+Batting Fifth,17.1,0.81,="8-59",.136,.153,0.017,0,1,0,4,21.5,6,.215,.368
+Batting Sixth,14.2,1.16,="7-48",.146,.208,0.062,1,0,0,4,24.6,10,.295,.503
+Batting Seventh,12.2,1.42,="10-47",.213,.383,0.170,2,2,0,3,22.8,8,.333,.716
+Batting Eighth,14.1,0.70,="8-52",.154,.231,0.077,1,1,0,6,35.7,2,.200,.431
+Batting Ninth,12.2,1.34,="10-46",.217,.391,0.174,2,2,0,4,9.4,7,.321,.712
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trevor Larnach LHB,Batting First ​,="46-151",.305,.503,0.198,7,9,0,24,12.6,15,.367,.870
+Austin Martin RHB,Batting First ​,="26-109",.239,.349,0.110,1,9,0,11,17.6,20,.375,.724
+Luke Keaschall RHB,Batting First ​,="35-109",.321,.440,0.119,2,7,0,9,10.4,9,.403,.843
+Brooks Lee SHB,Batting Second ​,="40-200",.200,.355,0.155,9,4,0,29,17.6,12,.250,.605
+Kody Clemens LHB,Batting Third ​,="44-200",.220,.485,0.265,15,8,0,36,22.6,17,.281,.766
+Josh Bell SHB,Batting Fourth ​,="63-271",.232,.410,0.178,10,16,1,42,23.1,23,.294,.704
+Ryan Jeffers RHB,Batting Fourth ​,="28-107",.262,.533,0.271,6,7,2,23,15.0,12,.342,.875
+Royce Lewis RHB,Batting Fifth ​,="37-137",.270,.489,0.219,8,6,0,17,17.6,14,.340,.829
+Victor Caratini SHB,Batting Sixth ​,="24-135",.178,.333,0.155,5,6,0,17,21.5,13,.278,.611
+Emmanuel Rodriguez LHB,Batting Seventh ​,="1-8",.125,.125,0.000,0,0,0,0,33.3,1,.222,.347
+Alex Jackson RHB,Batting Ninth ​,="17-55",.309,.436,0.127,1,4,0,5,27.6,1,.345,.781
+Ryan Kreidler RHB,Batting Ninth ​,="21-116",.181,.328,0.147,3,4,2,14,20.6,8,.240,.568
+Ben Ross RHB,Batting Ninth ​,="1-2",.500,1.000,0.500,0,1,0,0,0.0,0,.500,1.500
+Walker Jenkins LHB,Batting Ninth ​,="4-41",.098,.220,0.122,1,2,0,5,26.5,6,.229,.449

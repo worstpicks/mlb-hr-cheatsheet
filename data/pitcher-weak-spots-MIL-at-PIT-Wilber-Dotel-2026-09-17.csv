@@ -1,0 +1,31 @@
+﻿Matchup,MIL @ PIT
+Pitcher,Wilber Dotel
+Pitcher Team,PIT
+Opposing Team,MIL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,4.1,0.69,="2-15",.133,.200,0.067,0,1,0,1,18.8,1,.188,.388
+Batting Second,3.0,2.00,="6-15",.400,.800,0.400,2,0,0,5,13.3,0,.400,1.200
+Batting Third,3.1,1.20,="1-11",.091,.091,0.000,0,0,0,0,28.6,3,.286,.377
+Batting Fourth,3.1,2.40,="6-15",.400,.467,0.067,0,1,0,2,16.7,2,.444,.911
+Batting Fifth,4.1,1.38,="4-16",.250,.313,0.063,0,1,0,2,33.3,2,.333,.646
+Batting Sixth,4.1,1.38,="3-15",.200,.267,0.067,0,1,0,3,27.8,3,.333,.600
+Batting Seventh,4.1,0.69,="2-13",.154,.154,0.000,0,0,0,2,31.3,1,.200,.354
+Batting Eighth,4.1,1.38,="5-17",.294,.353,0.059,0,1,0,3,22.2,1,.333,.686
+Batting Ninth,3.2,1.64,="5-16",.313,.375,0.062,0,1,0,2,23.5,1,.353,.728
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Christian Yelich LHB,Batting First ​,="43-183",.235,.350,0.115,2,13,1,21,26.5,23,.327,.677
+Jackson Chourio RHB,Batting Second ​,="76-278",.273,.457,0.184,13,12,0,40,23.3,24,.334,.791
+Brice Turang LHB,Batting Third ​,="57-203",.281,.507,0.226,10,12,2,39,25.6,33,.380,.887
+Gary Sanchez RHB,Batting Fourth ​,="14-71",.197,.366,0.169,2,4,1,10,27.9,13,.326,.692
+William Contreras RHB,Batting Fourth ​,="55-234",.235,.372,0.137,7,11,0,30,17.0,22,.299,.671
+Jake Bauers LHB,Batting Fifth ​,="67-224",.299,.607,0.308,19,10,1,53,23.8,47,.425,1.032
+Garrett Mitchell LHB,Batting Sixth ​,="41-116",.353,.612,0.259,5,11,2,21,30.1,16,.436,1.048
+Andrew Vaughn RHB,Batting Sixth ​,="26-83",.313,.518,0.205,4,5,0,19,19.4,9,.387,.905
+Sal Frelick LHB,Batting Seventh ​,="37-167",.222,.305,0.083,2,8,0,20,9.5,16,.293,.598
+Luis Lara SHB,Batting Seventh ​,="17-63",.270,.365,0.095,0,6,0,10,21.1,6,.324,.689
+Bo Naylor LHB,Batting Eighth ​,="9-53",.170,.321,0.151,2,2,0,8,25.0,3,.214,.535
+Cooper Pratt RHB,Batting Eighth ​,="34-129",.264,.372,0.108,2,4,2,20,19.9,16,.344,.716
+David Hamilton LHB,Batting Ninth ​,="52-209",.249,.368,0.119,4,7,3,18,24.2,19,.314,.682
+Joey Ortiz RHB,Batting Ninth ​,="54-202",.267,.406,0.139,5,9,2,24,16.8,18,.323,.729

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-16T23:05:20Z",
+  "updated": "2026-09-17T11:59:30Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1443,13 +1443,27 @@
     {
       "date": "2026-09-16",
       "o05": {
-        "player": "Jackson Merrill",
+        "player": "Kyle Tucker",
+        "matchup": "LAD @ CIN",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Hunter Goodman",
         "matchup": "SD @ COL",
+        "result": "void"
+      }
+    },
+    {
+      "date": "2026-09-17",
+      "o05": {
+        "player": "Bryan Reynolds",
+        "matchup": "MIL @ PIT",
         "result": "pending"
       },
       "o15": {
-        "player": "Spencer Torkelson",
-        "matchup": "DET @ TOR",
+        "player": "Francisco Lindor",
+        "matchup": "PHI @ NYM",
         "result": "pending"
       }
     }

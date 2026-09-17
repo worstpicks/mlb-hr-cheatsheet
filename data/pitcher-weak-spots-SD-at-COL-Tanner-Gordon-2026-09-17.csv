@@ -1,0 +1,31 @@
+﻿Matchup,SD @ COL
+Pitcher,Tanner Gordon
+Pitcher Team,COL
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,12.0,1.58,="14-45",.311,.422,0.111,1,2,0,3,11.8,5,.373,.795
+Batting Second,12.1,1.14,="13-49",.265,.469,0.204,1,5,1,5,25.5,1,.275,.744
+Batting Third,12.1,1.14,="13-48",.271,.563,0.292,3,3,1,8,18.4,1,.286,.849
+Batting Fourth,9.0,2.33,="17-44",.386,.750,0.364,4,4,0,7,16.7,4,.438,1.188
+Batting Fifth,12.0,1.00,="11-47",.234,.362,0.128,1,3,0,5,10.4,1,.250,.612
+Batting Sixth,10.1,1.55,="16-44",.364,.545,0.181,1,5,0,6,21.7,0,.370,.915
+Batting Seventh,9.0,1.89,="15-42",.357,.643,0.286,3,3,0,9,20.0,2,.386,1.029
+Batting Eighth,10.2,1.41,="13-42",.310,.548,0.238,1,7,0,5,12.8,2,.356,.904
+Batting Ninth,9.1,1.71,="14-41",.341,.585,0.244,3,1,0,8,34.9,2,.372,.957
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="133-448",.297,.516,0.219,23,25,2,64,16.4,40,.360,.876
+Jake Cronenworth LHB,Batting Second ​,="33-144",.229,.319,0.090,3,4,0,15,27.7,14,.297,.616
+Samad Taylor RHB,Batting Second ​,="15-49",.306,.347,0.041,0,0,1,3,28.3,9,.424,.771
+Manny Machado RHB,Batting Third ​,="80-345",.232,.420,0.188,17,14,0,48,20.4,48,.324,.744
+Ty France RHB,Batting Fourth ​,="63-197",.320,.503,0.183,8,12,0,33,19.6,23,.396,.899
+Xander Bogaerts RHB,Batting Fifth ​,="40-167",.240,.311,0.071,3,3,0,16,19.4,17,.312,.623
+Jackson Merrill LHB,Batting Fifth ​,="73-232",.315,.578,0.263,15,10,3,46,22.1,15,.357,.935
+Luis Campusano RHB,Batting Sixth ​,="17-69",.246,.362,0.116,2,2,0,9,20.7,11,.366,.728
+Austin Hays RHB,Batting Seventh ​,="9-29",.310,.448,0.138,1,1,0,3,29.0,2,.355,.803
+Dustin Harris LHB,Batting Seventh ​,="5-25",.200,.280,0.080,0,0,1,2,33.3,2,.259,.539
+Jase Bowen RHB,Batting Eighth ​,="3-33",.091,.121,0.030,0,1,0,3,38.2,0,.118,.239
+Freddy Fermin RHB,Batting Ninth ​,="22-105",.210,.343,0.133,3,5,0,12,22.3,10,.280,.623
+Ethan Salas LHB,Batting Ninth ​,="3-11",.273,1.000,0.727,2,0,1,3,18.2,0,.273,1.273
+Sung-Mun Song LHB,Batting Ninth ​,="14-74",.189,.270,0.081,1,3,0,11,21.2,7,.256,.526

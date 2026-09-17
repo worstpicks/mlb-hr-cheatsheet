@@ -1,0 +1,31 @@
+﻿Matchup,MIL @ PIT
+Pitcher,Kyle Harrison
+Pitcher Team,MIL
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,14.0,1.50,="18-59",.305,.695,0.390,6,5,0,10,20.6,3,.349,1.044
+Batting Second,15.0,0.93,="10-55",.182,.364,0.182,3,1,0,7,36.7,4,.250,.614
+Batting Third,12.1,1.70,="17-53",.321,.566,0.245,3,2,1,7,20.7,4,.362,.928
+Batting Fourth,12.0,1.67,="15-50",.300,.520,0.220,3,2,0,7,20.0,5,.364,.884
+Batting Fifth,12.1,1.38,="9-47",.191,.319,0.128,1,3,0,5,29.1,8,.309,.628
+Batting Sixth,12.1,1.14,="12-48",.250,.417,0.167,2,2,0,6,29.4,2,.294,.711
+Batting Seventh,10.1,1.45,="11-42",.262,.333,0.071,1,0,0,3,37.0,4,.326,.659
+Batting Eighth,10.1,1.35,="11-41",.268,.415,0.147,1,3,0,2,22.2,3,.333,.748
+Batting Ninth,11.2,0.77,="9-42",.214,.262,0.048,0,2,0,2,42.9,0,.214,.476
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake Mangum SHB,Batting First ​,="43-151",.285,.404,0.119,3,7,1,12,22.6,8,.335,.739
+Oneil Cruz LHB,Batting First ​,="41-180",.228,.394,0.166,7,9,0,25,35.4,13,.287,.681
+Spencer Horwitz LHB,Batting First ​,="37-152",.243,.368,0.125,5,4,0,12,16.1,18,.339,.707
+Brandon Lowe LHB,Batting Second ​,="127-473",.268,.516,0.248,30,25,1,78,27.9,54,.342,.858
+Bryan Reynolds SHB,Batting Third ​,="147-560",.263,.425,0.162,17,36,2,69,23.4,84,.367,.792
+Ryan O'Hearn LHB,Batting Fourth ​,="53-187",.283,.444,0.161,8,6,0,35,26.2,13,.332,.776
+Nick Gonzales RHB,Batting Sixth ​,="58-160",.363,.475,0.112,3,9,0,17,14.9,12,.417,.892
+Ronny Simon SHB,Batting Seventh ​,="4-12",.333,.417,0.084,0,1,0,0,8.3,0,.333,.750
+Rafael Flores RHB,Batting Seventh ​,="11-30",.367,.600,0.233,2,1,0,4,22.6,1,.387,.987
+Jared Triolo RHB,Batting Eighth ​,="34-127",.268,.346,0.078,2,4,0,15,18.7,9,.326,.672
+Jacob Gonzalez LHB,Batting Eighth ​,="15-78",.192,.308,0.116,2,3,0,10,21.0,1,.210,.518
+Konnor Griffin RHB,Batting Eighth ​,="23-80",.288,.413,0.125,1,3,2,14,25.6,4,.326,.739
+Henry Davis RHB,Batting Ninth ​,="36-224",.161,.304,0.143,9,5,0,32,20.3,24,.264,.568
+Billy Cook RHB,Batting Ninth ​,="6-29",.207,.276,0.069,0,0,1,2,48.3,0,.207,.483

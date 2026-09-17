@@ -5,6 +5,18 @@
   "source_date": "2026-09-17",
   "hand_date": "2026-09-17",
   "by_game": {
+    "LAD @ CIN": {
+      "game": "LAD @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 18,
+      "stadium_pct": 14,
+      "weather_pct": 4,
+      "lhb_stadium_pct": 12,
+      "park_lhb_pct": 16,
+      "rhb_stadium_pct": 7,
+      "park_rhb_pct": 11
+    },
     "SD @ COL": {
       "game": "SD @ COL",
       "venue": "Coors Field",
@@ -17,17 +29,41 @@
       "rhb_stadium_pct": 6,
       "park_rhb_pct": 13
     },
-    "LAD @ CIN": {
-      "game": "LAD @ CIN",
-      "venue": "Great American BP",
-      "venue_key": "great american ball park",
-      "hr_pct": 18,
-      "stadium_pct": 14,
-      "weather_pct": 4,
-      "lhb_stadium_pct": 12,
-      "park_lhb_pct": 16,
-      "rhb_stadium_pct": 7,
-      "park_rhb_pct": 11
+    "PHI @ NYM": {
+      "game": "PHI @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 12,
+      "stadium_pct": -2,
+      "weather_pct": 15,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 15
+    },
+    "KC @ HOU": {
+      "game": "KC @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 5,
+      "stadium_pct": 6,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 9,
+      "park_lhb_pct": 9,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 8
+    },
+    "ATH @ TB": {
+      "game": "ATH @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 11,
+      "park_rhb_pct": 12
     },
     "MIL @ PIT": {
       "game": "MIL @ PIT",
@@ -45,49 +81,13 @@
       "game": "MIN @ LAA",
       "venue": "Angel Stadium",
       "venue_key": "angel stadium",
-      "hr_pct": -8,
+      "hr_pct": -6,
       "stadium_pct": -10,
-      "weather_pct": 2,
+      "weather_pct": 4,
       "lhb_stadium_pct": 1,
-      "park_lhb_pct": 3,
+      "park_lhb_pct": 5,
       "rhb_stadium_pct": 0,
-      "park_rhb_pct": 2
-    },
-    "KC @ HOU": {
-      "game": "KC @ HOU",
-      "venue": "Daikin Park",
-      "venue_key": "daikin park",
-      "hr_pct": 5,
-      "stadium_pct": 6,
-      "weather_pct": 0,
-      "lhb_stadium_pct": 9,
-      "park_lhb_pct": 9,
-      "rhb_stadium_pct": 8,
-      "park_rhb_pct": 8
-    },
-    "PHI @ NYM": {
-      "game": "PHI @ NYM",
-      "venue": "Citi Field",
-      "venue_key": "citi field",
-      "hr_pct": 3,
-      "stadium_pct": -2,
-      "weather_pct": 6,
-      "lhb_stadium_pct": -7,
-      "park_lhb_pct": -1,
-      "rhb_stadium_pct": 0,
-      "park_rhb_pct": 6
-    },
-    "ATH @ TB": {
-      "game": "ATH @ TB",
-      "venue": "Tropicana Field",
-      "venue_key": "tropicana field",
-      "hr_pct": -3,
-      "stadium_pct": -4,
-      "weather_pct": 1,
-      "lhb_stadium_pct": -5,
-      "park_lhb_pct": -4,
-      "rhb_stadium_pct": 11,
-      "park_rhb_pct": 12
+      "park_rhb_pct": 4
     },
     "BOS @ TEX": {
       "game": "BOS @ TEX",
@@ -105,16 +105,28 @@
       "game": "DET @ CHW",
       "venue": "Rate Field",
       "venue_key": "rate field",
-      "hr_pct": -14,
+      "hr_pct": -12,
       "stadium_pct": -5,
-      "weather_pct": -9,
+      "weather_pct": -7,
       "lhb_stadium_pct": 4,
-      "park_lhb_pct": -5,
+      "park_lhb_pct": -3,
       "rhb_stadium_pct": -4,
-      "park_rhb_pct": -13
+      "park_rhb_pct": -11
     }
   },
   "by_venue": {
+    "great american ball park": {
+      "game": "LAD @ CIN",
+      "venue": "Great American BP",
+      "venue_key": "great american ball park",
+      "hr_pct": 18,
+      "stadium_pct": 14,
+      "weather_pct": 4,
+      "lhb_stadium_pct": 12,
+      "park_lhb_pct": 16,
+      "rhb_stadium_pct": 7,
+      "park_rhb_pct": 11
+    },
     "coors field": {
       "game": "SD @ COL",
       "venue": "Coors Field",
@@ -127,17 +139,41 @@
       "rhb_stadium_pct": 6,
       "park_rhb_pct": 13
     },
-    "great american ball park": {
-      "game": "LAD @ CIN",
-      "venue": "Great American BP",
-      "venue_key": "great american ball park",
-      "hr_pct": 18,
-      "stadium_pct": 14,
-      "weather_pct": 4,
-      "lhb_stadium_pct": 12,
-      "park_lhb_pct": 16,
-      "rhb_stadium_pct": 7,
-      "park_rhb_pct": 11
+    "citi field": {
+      "game": "PHI @ NYM",
+      "venue": "Citi Field",
+      "venue_key": "citi field",
+      "hr_pct": 12,
+      "stadium_pct": -2,
+      "weather_pct": 15,
+      "lhb_stadium_pct": -7,
+      "park_lhb_pct": 8,
+      "rhb_stadium_pct": 0,
+      "park_rhb_pct": 15
+    },
+    "daikin park": {
+      "game": "KC @ HOU",
+      "venue": "Daikin Park",
+      "venue_key": "daikin park",
+      "hr_pct": 5,
+      "stadium_pct": 6,
+      "weather_pct": 0,
+      "lhb_stadium_pct": 9,
+      "park_lhb_pct": 9,
+      "rhb_stadium_pct": 8,
+      "park_rhb_pct": 8
+    },
+    "tropicana field": {
+      "game": "ATH @ TB",
+      "venue": "Tropicana Field",
+      "venue_key": "tropicana field",
+      "hr_pct": -3,
+      "stadium_pct": -4,
+      "weather_pct": 1,
+      "lhb_stadium_pct": -5,
+      "park_lhb_pct": -4,
+      "rhb_stadium_pct": 11,
+      "park_rhb_pct": 12
     },
     "pnc park": {
       "game": "MIL @ PIT",
@@ -155,49 +191,13 @@
       "game": "MIN @ LAA",
       "venue": "Angel Stadium",
       "venue_key": "angel stadium",
-      "hr_pct": -8,
+      "hr_pct": -6,
       "stadium_pct": -10,
-      "weather_pct": 2,
+      "weather_pct": 4,
       "lhb_stadium_pct": 1,
-      "park_lhb_pct": 3,
+      "park_lhb_pct": 5,
       "rhb_stadium_pct": 0,
-      "park_rhb_pct": 2
-    },
-    "daikin park": {
-      "game": "KC @ HOU",
-      "venue": "Daikin Park",
-      "venue_key": "daikin park",
-      "hr_pct": 5,
-      "stadium_pct": 6,
-      "weather_pct": 0,
-      "lhb_stadium_pct": 9,
-      "park_lhb_pct": 9,
-      "rhb_stadium_pct": 8,
-      "park_rhb_pct": 8
-    },
-    "citi field": {
-      "game": "PHI @ NYM",
-      "venue": "Citi Field",
-      "venue_key": "citi field",
-      "hr_pct": 3,
-      "stadium_pct": -2,
-      "weather_pct": 6,
-      "lhb_stadium_pct": -7,
-      "park_lhb_pct": -1,
-      "rhb_stadium_pct": 0,
-      "park_rhb_pct": 6
-    },
-    "tropicana field": {
-      "game": "ATH @ TB",
-      "venue": "Tropicana Field",
-      "venue_key": "tropicana field",
-      "hr_pct": -3,
-      "stadium_pct": -4,
-      "weather_pct": 1,
-      "lhb_stadium_pct": -5,
-      "park_lhb_pct": -4,
-      "rhb_stadium_pct": 11,
-      "park_rhb_pct": 12
+      "park_rhb_pct": 4
     },
     "globe life field": {
       "game": "BOS @ TEX",
@@ -215,13 +215,13 @@
       "game": "DET @ CHW",
       "venue": "Rate Field",
       "venue_key": "rate field",
-      "hr_pct": -14,
+      "hr_pct": -12,
       "stadium_pct": -5,
-      "weather_pct": -9,
+      "weather_pct": -7,
       "lhb_stadium_pct": 4,
-      "park_lhb_pct": -5,
+      "park_lhb_pct": -3,
       "rhb_stadium_pct": -4,
-      "park_rhb_pct": -13
+      "park_rhb_pct": -11
     }
   }
 }

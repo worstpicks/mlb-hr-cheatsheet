@@ -91,8 +91,21 @@ def fetch_start_times(sheet_date: str) -> dict[str, str]:
         {"sportId": 1, "date": sheet_date, "hydrate": "team,probablePitcher"}
     )
     url = f"https://statsapi.mlb.com/api/v1/schedule?{query}"
-    with urllib.request.urlopen(url, timeout=30) as resp:
-        data = json.loads(resp.read())
+    # A single DNS blip here killed two patch runs outright: this is the first network
+    # call of the run, it has no fallback, and the whole sheet build dies with it.
+    # Three tries with a short backoff; a genuine outage still raises, as it should.
+    import time
+
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(url, timeout=30) as resp:
+                data = json.loads(resp.read())
+            break
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            if attempt == 2:
+                raise
+            print(f"  MLB schedule fetch failed ({exc}); retrying in {2 * (attempt + 1)}s")
+            time.sleep(2 * (attempt + 1))
     out: dict[str, str] = {}
     # Collect all games per matchup so DH gameNumber is preserved.
     by_matchup: dict[str, list[tuple[int, str]]] = {}

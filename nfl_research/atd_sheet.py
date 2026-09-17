@@ -345,17 +345,13 @@ def build(season: int, week: int) -> Path:
 
     kicks = sorted(datetime.fromisoformat(g["kick"].replace("Z", "+00:00")) for g in games_out)
     sheet = {
-        "season": season, "week": week,
+        "season": season, "week": week, "root": "",
         "built": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "first_kick": kicks[0].isoformat(), "last_kick": kicks[-1].isoformat(),
         "games": games_out, "top5": top5, "tend": tend,
         "defense_source": bool(defense),
     }
-    html = TEMPLATE.read_text(encoding="utf-8")
-    html = html.replace("/*__SHEET__*/null", json.dumps(sheet, ensure_ascii=False, separators=(",", ":")))
-    html = html.replace("__WEEK__", str(week)).replace("__SEASON__", str(season))
-    out = ROOT / "preview" / "nfl-research" / f"atd-week{week}.html"
-    out.write_text(html, encoding="utf-8")
+    out = publish(sheet, season, week)
 
     n_plays = sum(len(s) for g in games_out for s in g["sides"].values())
     counts = {k: sum(1 for r in rows if k in r["tags"]) for k in ("fav", "val", "rz", "mat")}
@@ -367,6 +363,51 @@ def build(season: int, week: int) -> Path:
             print(f"[atd] status {r['plan']['name']} ({r['plan']['team']}): {r['status_label']} -- {r['injury'][:90]}")
     print(f"[atd] wrote {out}")
     return out
+
+
+NFL_DIR = ROOT / "preview" / "nfl-research"
+MANIFEST = NFL_DIR / "atd-manifest.json"
+
+
+def render(sheet: dict, season: int, week: int, root: str) -> str:
+    """The page for one week. `root` is the path back to preview/nfl-research/:
+    "" for the current-week page there, "../" for its copy in archive/."""
+    html = TEMPLATE.read_text(encoding="utf-8")
+    data = dict(sheet, root=root)
+    html = html.replace("/*__SHEET__*/null", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+    return html.replace("__ROOT__", root).replace("__WEEK__", str(week)).replace("__SEASON__", str(season))
+
+
+def publish(sheet: dict, season: int, week: int) -> Path:
+    """Laid out like the MLB sheet: the current week at nfl-research/atd.html, every week
+    (the current one included) in nfl-research/archive/, and atd-manifest.json feeding
+    the week dropdown. Only the newest week takes over atd.html, so rebuilding an old
+    week never replaces the current one."""
+    archive = NFL_DIR / "archive" / f"{season}-week-{week}.html"
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    archive.write_text(render(sheet, season, week, "../"), encoding="utf-8")
+
+    manifest = {"version": 1, "sheets": []}
+    if MANIFEST.exists():
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    key = f"{season}-W{week}"
+    entries = {e["key"]: e for e in manifest.get("sheets", [])}
+    entries[key] = {"key": key, "season": season, "week": week}
+    ordered = sorted(entries.values(), key=lambda e: (e["season"], e["week"]), reverse=True)
+    latest = ordered[0]
+    for e in ordered:
+        if e is latest:
+            e["label"], e["href"] = f"Week {e['week']} \u2014 current week", "atd.html"
+        else:
+            e["label"], e["href"] = f"Week {e['week']}", f"archive/{e['season']}-week-{e['week']}.html"
+    MANIFEST.write_text(json.dumps({"version": 1, "sheets": ordered}, indent=2, ensure_ascii=False) + "\n",
+                        encoding="utf-8")
+
+    if latest["key"] == key:
+        (NFL_DIR / "atd.html").write_text(render(sheet, season, week, ""), encoding="utf-8")
+        print(f"[atd] Week {week} is the current week: nfl-research/atd.html")
+    print(f"[atd] archived as {archive.relative_to(ROOT)}; the week list has {len(ordered)} weeks")
+    return archive
 
 
 def why(r, env, dz_rank, implied_rank, defense, rank_on_board):

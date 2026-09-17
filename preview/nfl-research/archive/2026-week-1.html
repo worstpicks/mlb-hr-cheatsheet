@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="sheet-week" content="2026-W1">
     <title>Week 1 ATD Cheat Sheet — Worst Pickz</title>
     <style>
     /* Worst Pickz — Week 1 Anytime TD cheat sheet.
@@ -325,16 +326,15 @@
     <div class="atd-container">
         <header class="atd-header">
             <div class="atd-header-actions">
-                <a class="atd-back atd-back--switch" href="../index.html" title="Go to the MLB home run cheat sheet"><span aria-hidden="true">&#9918;</span> MLB Cheat Sheet</a>
+                <a class="atd-back atd-back--switch" href="../../index.html" title="Go to the MLB home run cheat sheet"><span aria-hidden="true">&#9918;</span> MLB Cheat Sheet</a>
                 <div class="atd-header-actions-right">
-                    <a class="atd-back" href="atd-week2.html" title="This week's sheet">Week 2 &rarr;</a>
-                    <a class="atd-back" href="index.html" title="Open the NFL matchup research board">NFL Research &rarr;</a>
+                    <a class="atd-back" href="../index.html?season=2026&amp;week=1" title="Open the NFL matchup research board">NFL Research &rarr;</a>
                     <button type="button" class="atd-theme-toggle" id="atdTheme" title="Switch theme" aria-label="Switch theme">&#9728;&#65039;</button>
                 </div>
             </div>
             <div class="atd-header-brand">
                 <div class="atd-hero">
-                    <img src="../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot" decoding="async"
+                    <img src="../../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot" decoding="async"
                          onerror="this.onerror=null;this.src='https://worstpickz.win/assets/worst-pickz-hero.png'">
                 </div>
                 <div>
@@ -345,6 +345,13 @@
                 </div>
             </div>
         </header>
+
+        <nav class="atd-sheetnav" id="atdSheetNav" data-root="../" aria-label="Cheat sheet weeks">
+            <span class="atd-sheetnav__title">Sheet</span>
+            <label for="atdWeekSelect">Week <select id="atdWeekSelect" aria-label="Open a saved NFL cheat sheet by week"><option>Week 1</option></select></label>
+            <a class="atd-current-week" id="atdCurrentWeek" href="../atd.html" hidden>Current week</a>
+            <span class="atd-sheetnav__status" id="atdSheetStatus" role="status" aria-live="polite"></span>
+        </nav>
 
         <div class="atd-toolbar">
             <div class="atd-filters" id="atdFilters"></div>
@@ -1208,5 +1215,6 @@
         paintTheme();
     })();
     </script>
+    <script src="../atd-nav.js?v=2" defer></script>
 </body>
 </html>

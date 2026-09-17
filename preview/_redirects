@@ -2,3 +2,8 @@
 # Send old /preview/ links to the site root.
 /preview   /   301
 /preview/  /   301
+
+# NFL cheat sheets moved to the MLB layout: current week at /nfl-research/atd.html,
+# past weeks in /nfl-research/archive/. Old per-week links land on the same week.
+/nfl-research/atd-week1.html   /nfl-research/archive/2026-week-1.html   301
+/nfl-research/atd-week2.html   /nfl-research/archive/2026-week-2.html   301

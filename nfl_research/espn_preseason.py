@@ -23,11 +23,10 @@ SITE = "https://site.api.espn.com/apis/site/v2/sports/football/nfl"
 CACHE = Path(__file__).resolve().parent.parent / "data" / "espn-preseason-cache"
 
 POSITIONS = ("QB", "RB", "WR", "TE")
-STAT_KEYS = (
-    "pass_att", "pass_cmp", "pass_yds", "pass_td", "pass_int",
-    "rush_att", "rush_yds", "rush_td",
-    "tgt", "rec", "rec_yds", "rec_td",
-)
+# One list, owned by the aggregator. This module used to keep its own copy, and
+# when the aggregator gained columns the copy did not, every preseason row was
+# missing keys the aggregator then tried to sum.
+from nfl_research.nflverse_stats import STAT_KEYS  # noqa: E402
 
 
 def _get(url: str, cache_key: str | None = None, timeout: int = 45) -> dict:
@@ -189,7 +188,11 @@ def fetch_rows(season: int, teams: list[str]) -> list[dict]:
                                 row["rec_td"] += _num(value)
                             elif label == "TGTS":
                                 row["tgt"] += _num(value)
+                            elif label == "LONG":
+                                row["long"] = max(row["long"], _num(value))
 
+    for r in rows_by_key.values():
+        r["td"] = r["rush_td"] + r["rec_td"]
     # Keep only the four skill positions the tab renders.
     return [r for r in rows_by_key.values() if r["pos"] in POSITIONS]
 

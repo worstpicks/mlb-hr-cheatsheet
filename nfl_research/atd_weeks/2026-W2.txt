@@ -1,0 +1,117 @@
+# Week 2 ATD list, as exported from the NFL Research Prop List.
+# name | depth slot | team | opponent | over line | market (td = any touchdown, rush_td = QB rushing TD)
+DET@BUF
+Jahmyr Gibbs | RB1 | DET | BUF | 0.5 | td
+Amon-Ra St. Brown | WR1 | DET | BUF | 0.5 | td
+Sam LaPorta | TE1 | DET | BUF | 0.5 | td
+Josh Allen | QB1 | BUF | DET | 0.5 | rush_td
+DJ Moore | WR1 | BUF | DET | 0.5 | td
+Dalton Kincaid | TE1 | BUF | DET | 0.5 | td
+Khalil Shakir | WR2 | BUF | DET | 0.5 | td
+CAR@ATL
+Bijan Robinson | RB1 | ATL | CAR | 0.5 | td
+Drake London | WR1 | ATL | CAR | 0.5 | td
+Bryce Young | QB1 | CAR | ATL | 0.5 | rush_td
+Tetairoa McMillan | WR1 | CAR | ATL | 0.5 | td
+Chuba Hubbard | RB1 | CAR | ATL | 0.5 | td
+MIN@CHI
+Caleb Williams | QB1 | CHI | MIN | 0.5 | rush_td
+D'Andre Swift | RB1 | CHI | MIN | 0.5 | td
+Kyle Monangai | RB2 | CHI | MIN | 0.5 | td
+Kalif Raymond | WR3 | CHI | MIN | 0.5 | td
+Aaron Jones Sr. | RB1 | MIN | CHI | 0.5 | td
+Jordan Mason | RB2 | MIN | CHI | 0.5 | td
+Justin Jefferson | WR1 | MIN | CHI | 0.5 | td
+Jordan Addison | WR2 | MIN | CHI | 0.5 | td
+Josh Oliver | TE2 | MIN | CHI | 0.5 | td
+PHI@TEN
+Jalen Hurts | QB1 | PHI | TEN | 0.5 | rush_td
+Saquon Barkley | RB1 | PHI | TEN | 0.5 | td
+DeVonta Smith | WR1 | PHI | TEN | 0.5 | td
+Dallas Goedert | TE1 | PHI | TEN | 0.5 | td
+Wan'Dale Robinson | WR2 | TEN | PHI | 0.5 | td
+Cam Ward | QB1 | TEN | PHI | 0.5 | rush_td
+PIT@NE
+Rhamondre Stevenson | RB1 | NE | PIT | 0.5 | td
+DeMario Douglas | WR2 | NE | PIT | 0.5 | td
+Mack Hollins | WR3 | NE | PIT | 0.5 | td
+Jaylen Warren | RB1 | PIT | NE | 0.5 | td
+DK Metcalf | WR1 | PIT | NE | 0.5 | td
+GB@NYJ
+Breece Hall | RB1 | NYJ | GB | 0.5 | td
+Garrett Wilson | WR1 | NYJ | GB | 0.5 | td
+Christian Watson | WR1 | GB | NYJ | 0.5 | td
+Tucker Kraft | TE1 | GB | NYJ | 0.5 | td
+Matthew Golden | WR3 | GB | NYJ | 0.5 | td
+CLE@TB
+Quinshon Judkins | RB1 | CLE | TB | 0.5 | td
+KC Concepcion | WR2 | CLE | TB | 0.5 | td
+Baker Mayfield | QB1 | TB | CLE | 0.5 | rush_td
+Bucky Irving | RB1 | TB | CLE | 0.5 | td
+Emeka Egbuka | WR1 | TB | CLE | 0.5 | td
+Cade Otton | TE1 | TB | CLE | 0.5 | td
+NO@BAL
+Lamar Jackson | QB1 | BAL | NO | 0.5 | rush_td
+Derrick Henry | RB1 | BAL | NO | 0.5 | td
+Zay Flowers | WR1 | BAL | NO | 0.5 | td
+Mark Andrews | TE1 | BAL | NO | 0.5 | td
+Travis Etienne Jr. | RB1 | NO | BAL | 0.5 | td
+Chris Olave | WR1 | NO | BAL | 0.5 | td
+Devaughn Vele | WR2 | NO | BAL | 0.5 | td
+CIN@HOU
+Chase Brown | RB1 | CIN | HOU | 0.5 | td
+Tee Higgins | WR2 | CIN | HOU | 0.5 | td
+Mike Gesicki | TE1 | CIN | HOU | 0.5 | td
+David Montgomery | RB1 | HOU | CIN | 0.5 | td
+Nico Collins | WR1 | HOU | CIN | 0.5 | td
+Xavier Hutchinson | WR2 | HOU | CIN | 0.5 | td
+JAX@DEN
+Parker Washington | WR2 | JAX | DEN | 0.5 | td
+Evan Engram | TE1 | DEN | JAX | 0.5 | td
+Adam Trautman | TE2 | DEN | JAX | 0.5 | td
+LV@LAC
+Omarion Hampton | RB1 | LAC | LV | 0.5 | td
+Ladd McConkey | WR1 | LAC | LV | 0.5 | td
+David Njoku | TE2 | LAC | LV | 0.5 | td
+Ashton Jeanty | RB1 | LV | LAC | 0.5 | td
+Michael Mayer | TE2 | LV | LAC | 0.5 | td
+WSH@DAL
+Jayden Daniels | QB1 | WSH | DAL | 0.5 | rush_td
+Stefon Diggs | WR2 | WSH | DAL | 0.5 | td
+Antonio Williams | WR3 | WSH | DAL | 0.5 | td
+Javonte Williams | RB1 | DAL | WSH | 0.5 | td
+CeeDee Lamb | WR1 | DAL | WSH | 0.5 | td
+George Pickens | WR2 | DAL | WSH | 0.5 | td
+Jake Ferguson | TE1 | DAL | WSH | 0.5 | td
+SEA@ARI
+Tyler Allgeier | RB2 | ARI | SEA | 0.5 | td
+Michael Wilson | WR2 | ARI | SEA | 0.5 | td
+Trey McBride | TE1 | ARI | SEA | 0.5 | td
+Jaxon Smith-Njigba | WR1 | SEA | ARI | 0.5 | td
+AJ Barner | TE1 | SEA | ARI | 0.5 | td
+MIA@SF
+De'Von Achane | RB1 | MIA | SF | 0.5 | td
+Christian McCaffrey | RB1 | SF | MIA | 1.5 | td
+Kaelon Black | RB2 | SF | MIA | 0.5 | td
+Deebo Samuel | WR2 | SF | MIA | 0.5 | td
+Mike Evans | WR1 | SF | MIA | 0.5 | td
+Jake Tonges | TE2 | SF | MIA | 0.5 | td
+IND@KC
+Patrick Mahomes | QB1 | KC | IND | 0.5 | rush_td
+Kenneth Walker III | RB1 | KC | IND | 0.5 | td
+Rashee Rice | WR1 | KC | IND | 0.5 | td
+Xavier Worthy | WR2 | KC | IND | 0.5 | td
+Jonathan Taylor | RB1 | IND | KC | 0.5 | td
+Keenan Allen | WR3 | IND | KC | 0.5 | td
+NYG@LAR
+Jaxson Dart | QB1 | NYG | LAR | 0.5 | rush_td
+Cam Skattebo | RB1 | NYG | LAR | 0.5 | td
+Devin Singletary | RB2 | NYG | LAR | 0.5 | td
+Malik Nabers | WR1 | NYG | LAR | 0.5 | td
+Isaiah Likely | TE1 | NYG | LAR | 0.5 | td
+Theo Johnson | TE2 | NYG | LAR | 0.5 | td
+Kyren Williams | RB1 | LAR | NYG | 0.5 | td
+Blake Corum | RB2 | LAR | NYG | 0.5 | td
+Puka Nacua | WR1 | LAR | NYG | 0.5 | td
+Davante Adams | WR2 | LAR | NYG | 0.5 | td
+Colby Parkinson | TE1 | LAR | NYG | 0.5 | td

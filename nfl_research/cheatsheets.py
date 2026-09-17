@@ -782,6 +782,57 @@ def _newest(loader, season: int) -> tuple[object | None, int | None]:
     return None, None
 
 
+def current_depth_charts(season: int) -> tuple[dict[str, list[dict]], int | None]:
+    """Each club's most recent depth chart, as team -> ordered rows.
+
+    nflverse rebuilt this feed for 2026. It is now a stream of dated snapshots --
+    `dt`, `team`, `pos_abb`, `pos_rank`, `gsis_id` -- where the old one was weekly
+    rows keyed `week` / `club_code` / `depth_team`. Reading the old names threw on
+    the first line, the exception was swallowed, and every club came back with an
+    empty chart while the log still reported the season as loaded. The research
+    tab then fell back to ranking players by last season's yardage, which is how
+    a back who is fourth on the chart ended up headlining his team.
+
+    Takes each club's own latest snapshot rather than one league-wide timestamp,
+    so a team whose chart lags a day is not dropped. Returns the season actually
+    used, or None when nothing is published.
+    """
+    df, got = _newest(nfl.load_depth_charts, season)
+    if df is None:
+        return {}, None
+    needed = {"dt", "team", "player_name", "pos_abb", "pos_rank"}
+    if not needed.issubset(set(df.columns)):
+        # An older-format season. Say so rather than failing quietly again.
+        print(f"[nfl-research] depth chart {got}: unrecognised format "
+              f"({sorted(needed - set(df.columns))} missing), no chart used")
+        return {}, None
+
+    latest = df.group_by("team").agg(pl.col("dt").max().alias("dt"))
+    cur = df.join(latest, on=["team", "dt"], how="inner").filter(
+        pl.col("player_name").is_not_null() & pl.col("pos_rank").is_not_null()
+    )
+    has_gsis = "gsis_id" in cur.columns
+    has_espn = "espn_id" in cur.columns
+
+    out: dict[str, list[dict]] = defaultdict(list)
+    as_of: dict[str, str] = {}
+    for row in cur.sort(["team", "pos_abb", "pos_rank"]).iter_rows(named=True):
+        team = fix_team(row["team"])
+        out[team].append(
+            {
+                "name": row["player_name"],
+                "pos": row["pos_abb"],
+                "rank": row["pos_rank"],
+                "gsis_id": row.get("gsis_id") if has_gsis else None,
+                "espn_id": row.get("espn_id") if has_espn else None,
+            }
+        )
+        as_of[team] = row["dt"]
+    print(f"[nfl-research] depth chart {got}: {len(out)} teams, "
+          f"newest snapshot {max(as_of.values()) if as_of else 'n/a'}")
+    return dict(out), got
+
+
 def roster_context(season: int, teams: set[str]) -> dict:
     """Injuries, snap shares and depth chart for the slate's teams.
 
@@ -846,24 +897,10 @@ def roster_context(season: int, teams: set[str]) -> dict:
     except Exception:
         pass
 
-    depth, sources["depth"] = _newest(nfl.load_depth_charts, season)
-    try:
-        if depth is None:
-            raise ValueError("no depth table")
-        wk = depth["week"].max()
-        depth = depth.filter(pl.col("week") == wk)
-        for row in depth.iter_rows(named=True):
-            team = fix_team(row.get("team") or row.get("club_code"))
-            if team in out:
-                out[team]["depth"].append(
-                    {
-                        "name": row.get("player_name") or row.get("full_name"),
-                        "pos": row.get("depth_position") or row.get("position"),
-                        "rank": row.get("depth_team"),
-                    }
-                )
-    except Exception:
-        pass
+    charts, sources["depth"] = current_depth_charts(season)
+    for team, rows in charts.items():
+        if team in out:
+            out[team]["depth"] = rows
 
     for name, got in sources.items():
         if got is None:
@@ -1012,14 +1049,128 @@ def red_zone_projection(pbp: pl.DataFrame) -> dict:
     }
 
 
-def build_cheatsheets(stats_season: int, teams: set[str], season: int | None = None) -> dict:
+def player_game_extras(pbp: pl.DataFrame) -> dict[tuple[str, int, int], dict]:
+    """Per player-game numbers the weekly stats feed does not carry.
+
+    Keyed (gsis player_id, season, week) so they merge straight into the weekly rows.
+
+    receiving   long (longest reception), lng_td (longest receiving TD), rec_20
+                (receptions of 20+ yards), deep_tgt (targets 20+ air yards downfield),
+                rz_tgt / rz_rec (targets and catches inside the 20), rz_share (his
+                share of the team's red-zone targets), i10_tgt (targets inside the 10)
+    rushing     long_rush, rush_10 (runs of 10+), rz_car / i10_car / i5_car (carries
+                inside the 20, 10 and 5), rz_car_share (share of the team's red-zone
+                carries), scrambles
+    passing     long_pass, pass_20 (completions of 20+), deep_att (attempts 20+ air
+                yards), rz_pass_att / rz_pass_td
+    scoring     rz_td (touchdowns on plays that started inside the 20), first_td,
+                last_td
+
+    Two-point tries are left out throughout: they start at the 2 and would pad
+    every goal-line number with plays that are not scrimmage downs.
+
+    First and last touchdown are the markets books actually post, so they count
+    any touchdown by any player on either side -- a pick-six can be the first TD.
+    """
+    keys = ("long", "lng_td", "rec_20", "deep_tgt", "rz_tgt", "rz_share", "rz_rec", "i10_tgt",
+            "long_rush", "rush_10", "rz_car", "rz_car_share", "i10_car", "i5_car", "scrambles",
+            "long_pass", "pass_20", "deep_att", "rz_pass_att", "rz_pass_td",
+            "rz_td", "first_td", "last_td")
+    out: dict[tuple[str, int, int], dict] = defaultdict(lambda: {k: 0.0 for k in keys})
+
+    scrimmage = pbp.filter(pl.col("two_point_attempt").fill_null(0) == 0)
+    yl = pl.col("yardline_100")
+    complete = pl.col("complete_pass") == 1
+
+    def fold(frame, id_col, fields):
+        for r in frame.iter_rows(named=True):
+            rec = out[(r[id_col], int(r["season"]), int(r["week"]))]
+            for f in fields:
+                rec[f] = float(r[f] or 0)
+
+    # receivers
+    passes = scrimmage.filter(pl.col("receiver_player_id").is_not_null() & (pl.col("play_type") == "pass"))
+    per = passes.group_by(["receiver_player_id", "season", "week", "game_id", "posteam"]).agg(
+        pl.when(complete).then(pl.col("yards_gained")).otherwise(None).max().alias("long"),
+        pl.when(pl.col("pass_touchdown") == 1).then(pl.col("yards_gained")).otherwise(None).max().alias("lng_td"),
+        (complete & (pl.col("yards_gained") >= 20)).sum().alias("rec_20"),
+        (pl.col("air_yards") >= 20).sum().alias("deep_tgt"),
+        (yl <= 20).sum().alias("rz_tgt"),
+        ((yl <= 20) & complete).sum().alias("rz_rec"),
+        (yl <= 10).sum().alias("i10_tgt"),
+    )
+    team_rz = passes.filter(yl <= 20).group_by(["game_id", "posteam"]).agg(pl.len().alias("team_rz"))
+    per = per.join(team_rz, on=["game_id", "posteam"], how="left").with_columns(
+        pl.when(pl.col("team_rz") > 0).then((100.0 * pl.col("rz_tgt") / pl.col("team_rz")).round(1))
+        .otherwise(0.0).alias("rz_share")
+    )
+    fold(per, "receiver_player_id", ("long", "lng_td", "rec_20", "deep_tgt", "rz_tgt", "rz_rec", "i10_tgt", "rz_share"))
+
+    # ball carriers (scrambles are runs in this feed; kneels are their own play type)
+    runs = scrimmage.filter(pl.col("rusher_player_id").is_not_null() & (pl.col("play_type") == "run"))
+    per = runs.group_by(["rusher_player_id", "season", "week", "game_id", "posteam"]).agg(
+        pl.col("yards_gained").max().alias("long_rush"),
+        (pl.col("yards_gained") >= 10).sum().alias("rush_10"),
+        (yl <= 20).sum().alias("rz_car"),
+        (yl <= 10).sum().alias("i10_car"),
+        (yl <= 5).sum().alias("i5_car"),
+        (pl.col("qb_scramble").fill_null(0) == 1).sum().alias("scrambles"),
+    )
+    team_rz = runs.filter(yl <= 20).group_by(["game_id", "posteam"]).agg(pl.len().alias("team_rz"))
+    per = per.join(team_rz, on=["game_id", "posteam"], how="left").with_columns(
+        pl.when(pl.col("team_rz") > 0).then((100.0 * pl.col("rz_car") / pl.col("team_rz")).round(1))
+        .otherwise(0.0).alias("rz_car_share")
+    )
+    fold(per, "rusher_player_id", ("long_rush", "rush_10", "rz_car", "i10_car", "i5_car", "scrambles", "rz_car_share"))
+
+    # passers: attempts leave sacks out, as the box score does
+    throws = scrimmage.filter(pl.col("passer_player_id").is_not_null() & (pl.col("play_type") == "pass")
+                              & (pl.col("sack").fill_null(0) == 0))
+    per = throws.group_by(["passer_player_id", "season", "week"]).agg(
+        pl.when(complete).then(pl.col("yards_gained")).otherwise(None).max().alias("long_pass"),
+        (complete & (pl.col("yards_gained") >= 20)).sum().alias("pass_20"),
+        (pl.col("air_yards") >= 20).sum().alias("deep_att"),
+        ((yl <= 20) & (pl.col("pass_attempt") == 1)).sum().alias("rz_pass_att"),
+        ((yl <= 20) & (pl.col("pass_touchdown") == 1)).sum().alias("rz_pass_td"),
+    )
+    fold(per, "passer_player_id", ("long_pass", "pass_20", "deep_att", "rz_pass_att", "rz_pass_td"))
+
+    # red-zone touchdowns go to whoever scored: the runner, or the receiver
+    rz_tds = scrimmage.filter(pl.col("td_player_id").is_not_null() & (yl <= 20)
+                              & ((pl.col("rush_touchdown") == 1) | (pl.col("pass_touchdown") == 1)))
+    per = rz_tds.group_by(["td_player_id", "season", "week"]).agg(pl.len().alias("rz_td"))
+    fold(per, "td_player_id", ("rz_td",))
+
+    tds = pbp.filter(pl.col("td_player_id").is_not_null()).select(
+        ["game_id", "season", "week", "td_player_id", "order_sequence"]
+    )
+    if tds.height:
+        ends = tds.group_by("game_id").agg(
+            pl.col("order_sequence").min().alias("first"),
+            pl.col("order_sequence").max().alias("last"),
+        )
+        tds = tds.join(ends, on="game_id", how="left")
+        for r in tds.iter_rows(named=True):
+            key = (r["td_player_id"], int(r["season"]), int(r["week"]))
+            if r["order_sequence"] == r["first"]:
+                out[key]["first_td"] = 1.0
+            if r["order_sequence"] == r["last"]:
+                out[key]["last_td"] = 1.0
+    return dict(out)
+
+
+def build_cheatsheets(stats_season: int, teams: set[str], season: int | None = None,
+                      pbp: pl.DataFrame | None = None) -> dict:
     """Everything the Research tab's sheets need, in one payload.
 
     `stats_season` is where the play-by-play comes from; `season` is the one being
     played. They differ before a season starts, and roster context has to follow the
     second or it describes last year's team.
     """
-    pbp = load_pbp(stats_season)
+    # The slate builder loads play-by-play once and hands it in; it is the
+    # slowest thing this module does and there is no reason to pay for it twice.
+    if pbp is None:
+        pbp = load_pbp(stats_season)
     return {
         "stats_season": stats_season,
         "rushing_gaps": rushing_gaps(pbp),

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("worstpickz-theme") === "light") {
+                    document.documentElement.classList.add("theme-light");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Week 2 ATD Cheat Sheet — Worst Pickz</title>
+    <style>
+    /* Worst Pickz — weekly Anytime TD cheat sheet, built by nfl_research/atd_sheet.py.
+       Tokens lifted from preview/nfl-research/nfl-research.css so this reads as
+       the same product. Kept self-contained so it also opens standalone. */
+    :root {
+        --wpz-color-text: #f5efe9;
+        --wpz-color-heading: #fffbeb;
+        --wpz-bg-body: radial-gradient(ellipse at top, #0f1a14 0%, #0a0d0a 42%, #030201 100%);
+        --wpz-bg-container: linear-gradient(135deg, rgba(12, 28, 18, 0.97) 0%, rgba(22, 10, 14, 0.96) 48%, rgba(10, 18, 32, 0.97) 100%);
+        --wpz-border-container: rgba(234, 179, 8, 0.42);
+        --wpz-bg-header: linear-gradient(145deg, #071910 0%, #241010 38%, #152238 100%);
+        --wpz-border-header: rgba(248, 113, 113, 0.42);
+        --wpz-brand-tag-bg: rgba(8, 26, 16, 0.52);
+        --wpz-brand-tag-border: rgba(74, 222, 128, 0.38);
+        --wpz-brand-tag-text: #ecfccb;
+        --wpz-accent-gold: #facc15;
+        --nrs-panel: rgba(8, 15, 28, 0.82);
+        --nrs-panel-2: rgba(15, 23, 42, 0.66);
+        --nrs-border: rgba(251, 146, 60, 0.22);
+        --nrs-border-strong: rgba(234, 179, 8, 0.35);
+        --nrs-muted: #94a3b8;
+        --atd-row: rgba(30, 41, 59, 0.38);
+        --atd-fav-bg: rgba(250, 204, 21, 0.12);
+        --atd-fav-br: rgba(250, 204, 21, 0.55);
+    }
+    html.theme-light {
+        color-scheme: light;
+        --wpz-color-text: #1e293b;
+        --wpz-color-heading: #7c2d12;
+        --wpz-bg-body: #e2e8f0;
+        --wpz-bg-container: linear-gradient(135deg, #fff 0%, #f8fafc 48%, #fef3c7 100%);
+        --wpz-border-container: rgba(180, 83, 9, 0.35);
+        --wpz-bg-header: linear-gradient(145deg, #fff7ed 0%, #fef3c7 38%, #eff6ff 100%);
+        --wpz-border-header: rgba(234, 88, 12, 0.35);
+        --wpz-brand-tag-bg: rgba(22, 101, 52, 0.1);
+        --wpz-brand-tag-border: rgba(22, 163, 74, 0.35);
+        --wpz-brand-tag-text: #15803d;
+        --nrs-panel: #fff;
+        --nrs-panel-2: #f8fafc;
+        --nrs-border: rgba(180, 83, 9, 0.2);
+        --nrs-border-strong: rgba(180, 83, 9, 0.3);
+        --nrs-muted: #64748b;
+        --atd-row: #f1f5f9;
+        --atd-fav-bg: rgba(250, 204, 21, 0.2);
+        --atd-fav-br: rgba(180, 83, 9, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--wpz-bg-body);
+        color: var(--wpz-color-text);
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 16px;
+        line-height: 1.45;
+        -webkit-font-smoothing: antialiased;
+    }
+    button { font: inherit; touch-action: manipulation; }
+    a { color: #7dd3fc; text-decoration: none; }
+
+    .atd-container {
+        max-width: 1680px;
+        margin: 0 auto;
+        background: var(--wpz-bg-container);
+        border: 2px solid var(--wpz-border-container);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ── Header ── */
+    .atd-header {
+        padding: 20px;
+        background: var(--wpz-bg-header);
+        border-bottom: 3px solid var(--wpz-border-header);
+    }
+    .atd-header-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    .atd-header-actions-right { display: flex; align-items: center; gap: 8px; }
+    .atd-back, .atd-theme-toggle {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 7px 13px; border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(8, 15, 28, 0.6);
+        color: var(--wpz-color-text); cursor: pointer;
+        font-size: 0.82rem; font-weight: 700;
+    }
+    html.theme-light .atd-back, html.theme-light .atd-theme-toggle {
+        background: rgba(255, 255, 255, 0.85); border-color: rgba(180, 83, 9, 0.25); color: #334155;
+    }
+    .atd-back:hover, .atd-theme-toggle:hover { border-color: var(--wpz-accent-gold); }
+    /* Cross-sport switch back to the MLB board — mirrors the NFL button there. */
+    .atd-back--switch { border-color: rgba(234, 179, 8, 0.45); color: #fde68a; }
+    html.theme-light .atd-back--switch { border-color: rgba(180, 83, 9, 0.35); color: #7c2d12; }
+    .atd-header-brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .atd-hero { width: 88px; height: 88px; flex-shrink: 0; }
+    .atd-hero img { width: 100%; height: 100%; object-fit: contain; }
+    .atd-brand-tag {
+        display: inline-flex; padding: 5px 12px; margin-bottom: 8px; border-radius: 999px;
+        border: 1px solid var(--wpz-brand-tag-border);
+        background: var(--wpz-brand-tag-bg);
+        color: var(--wpz-brand-tag-text);
+        font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .atd-header h1 { color: var(--wpz-color-heading); font-size: clamp(1.4rem, 3.2vw, 2.1rem); line-height: 1.15; }
+    .atd-sub { color: var(--nrs-muted); font-size: 0.86rem; margin-top: 4px; }
+    .atd-counts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .atd-count {
+        padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
+        border: 1px solid var(--nrs-border); background: var(--nrs-panel); color: var(--nrs-muted);
+    }
+
+    /* ── Toolbar: legend + filters ── */
+    .atd-toolbar {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--nrs-border);
+        background: linear-gradient(135deg, rgba(19, 11, 8, 0.55) 0%, rgba(10, 17, 31, 0.6) 100%);
+        display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
+    }
+    html.theme-light .atd-toolbar { background: linear-gradient(135deg, #fff7ed 0%, #f8fafc 100%); }
+    .atd-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .atd-filter {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 14px; border-radius: 999px; cursor: pointer;
+        border: 1px solid var(--nrs-border);
+        background: var(--nrs-panel);
+        color: var(--wpz-color-text);
+        font-size: 0.8rem; font-weight: 800;
+        transition: border-color 0.15s, transform 0.15s;
+    }
+    .atd-filter:hover { border-color: rgba(251, 191, 36, 0.6); transform: translateY(-1px); }
+    .atd-filter.is-active { border-color: var(--wpz-accent-gold); box-shadow: 0 0 14px rgba(250, 204, 21, 0.22); }
+    .atd-filter__n { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; }
+    .atd-legend { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 0.78rem; color: var(--nrs-muted); }
+
+    /* ── Chips ── */
+    .chip {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 2px 8px; border-radius: 999px;
+        font-size: 0.7rem; font-weight: 800; letter-spacing: 0.02em;
+        white-space: nowrap; border: 1px solid transparent;
+    }
+    .chip--fav { background: rgba(250, 204, 21, 0.16); border-color: rgba(250, 204, 21, 0.5); color: #fde68a; }
+    .chip--val { background: rgba(56, 189, 248, 0.14); border-color: rgba(56, 189, 248, 0.45); color: #bae6fd; }
+    .chip--rz  { background: rgba(239, 68, 68, 0.14);  border-color: rgba(239, 68, 68, 0.45);  color: #fecaca; }
+    .chip--mat { background: rgba(34, 197, 94, 0.14);  border-color: rgba(74, 222, 128, 0.45); color: #bbf7d0; }
+    .chip--exp { background: rgba(168, 85, 247, 0.16); border-color: rgba(192, 132, 252, 0.5); color: #e9d5ff; }
+    html.theme-light .chip--fav { color: #854d0e; background: rgba(250, 204, 21, 0.28); }
+    html.theme-light .chip--val { color: #075985; background: rgba(56, 189, 248, 0.22); }
+    html.theme-light .chip--rz  { color: #991b1b; background: rgba(239, 68, 68, 0.18); }
+    html.theme-light .chip--mat { color: #14532d; background: rgba(34, 197, 94, 0.2); }
+    html.theme-light .chip--exp { color: #6b21a8; background: rgba(168, 85, 247, 0.2); }
+    /* Team tendency */
+    .chip--run  { background: rgba(163, 230, 53, 0.13); border-color: rgba(163, 230, 53, 0.42); color: #d9f99d; }
+    .chip--pass { background: rgba(125, 211, 252, 0.13); border-color: rgba(125, 211, 252, 0.42); color: #e0f2fe; }
+    .chip--agg  { background: rgba(244, 114, 182, 0.14); border-color: rgba(244, 114, 182, 0.45); color: #fbcfe8; }
+    html.theme-light .chip--run  { color: #3f6212; background: rgba(163, 230, 53, 0.25); }
+    html.theme-light .chip--pass { color: #075985; background: rgba(125, 211, 252, 0.3); }
+    html.theme-light .chip--agg  { color: #9d174d; background: rgba(244, 114, 182, 0.2); }
+    /* Availability */
+    .chip--q   { background: rgba(251, 191, 36, 0.18); border-color: rgba(251, 191, 36, 0.55); color: #fde68a; }
+    .chip--out { background: rgba(239, 68, 68, 0.2);  border-color: rgba(239, 68, 68, 0.6);  color: #fecaca; }
+    html.theme-light .chip--q   { color: #92400e; background: rgba(251, 191, 36, 0.3); }
+    html.theme-light .chip--out { color: #991b1b; background: rgba(239, 68, 68, 0.22); }
+
+    .chip--void { background: rgba(148, 163, 184, 0.22); border-color: rgba(148, 163, 184, 0.5); color: #cbd5e1; }
+    html.theme-light .chip--void { color: #475569; background: rgba(148, 163, 184, 0.3); }
+    .atd-play.is-void { opacity: 0.55; border-left-color: rgba(148, 163, 184, 0.6); }
+    .atd-count--void { border-color: rgba(148, 163, 184, 0.45); }
+
+    /* ── Measured inputs ── */
+    .atd-metrics { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+    .atd-m {
+        font-size: 0.66rem; font-weight: 700; letter-spacing: 0.03em;
+        padding: 1px 6px; border-radius: 5px;
+        background: rgba(148, 163, 184, 0.14); color: var(--nrs-muted);
+        font-variant-numeric: tabular-nums; cursor: help;
+    }
+    .atd-m b { color: var(--wpz-color-text); font-weight: 800; }
+    .atd-m--good { background: rgba(34, 197, 94, 0.2); color: #bbf7d0; }
+    .atd-m--bad  { background: rgba(239, 68, 68, 0.18); color: #fecaca; }
+    html.theme-light .atd-m { background: #eef2f7; }
+    html.theme-light .atd-m--good { color: #14532d; background: rgba(134, 239, 172, 0.5); }
+    html.theme-light .atd-m--bad  { color: #7f1d1d; background: rgba(252, 165, 165, 0.45); }
+
+    /* ── Top plays rail ── */
+    .atd-section { padding: 18px 20px; }
+    .atd-section-title {
+        color: #fb923c; font-size: 0.95rem; font-weight: 800;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    html.theme-light .atd-section-title { color: #9a3412; }
+    .atd-section-title::before { content: ""; width: 4px; height: 18px; border-radius: 2px; background: var(--wpz-accent-gold); }
+    .atd-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+    .atd-top-card {
+        display: grid; gap: 5px; padding: 12px 14px; border-radius: 14px;
+        border: 1px solid var(--atd-fav-br);
+        background: linear-gradient(145deg, var(--atd-fav-bg) 0%, var(--nrs-panel) 100%);
+    }
+    .atd-top-card__head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .atd-rank {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%;
+        background: var(--wpz-accent-gold); color: #1a1a1a;
+        font-size: 0.76rem; font-weight: 900;
+    }
+    .atd-top-card__name { font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; }
+    .atd-top-card__name img { width: 20px; height: 20px; object-fit: contain; flex-shrink: 0; }
+    .atd-top-card__meta { font-size: 0.72rem; color: var(--nrs-muted); font-variant-numeric: tabular-nums; }
+    .atd-why { font-size: 0.78rem; line-height: 1.5; color: var(--wpz-color-text); opacity: 0.9; margin-top: 2px; }
+
+    /* ── Game grid ── */
+    .atd-games { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 14px; }
+    @media (max-width: 520px) { .atd-games { grid-template-columns: 1fr; } }
+    .atd-game {
+        border-radius: 16px; overflow: hidden;
+        border: 1px solid var(--nrs-border);
+        background: var(--nrs-panel);
+    }
+    .atd-game__head {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--nrs-border);
+        background: linear-gradient(135deg, rgba(19, 11, 8, 0.7) 0%, rgba(10, 17, 31, 0.7) 100%);
+    }
+    html.theme-light .atd-game__head { background: linear-gradient(135deg, #fff7ed 0%, #f8fafc 100%); }
+    .atd-game__teams { display: flex; align-items: center; gap: 7px; font-weight: 800; font-size: 0.98rem; }
+    .atd-game__teams img { width: 26px; height: 26px; object-fit: contain; }
+    .atd-game__at { color: var(--nrs-muted); font-weight: 700; font-size: 0.8rem; }
+    .atd-game__when {
+        margin-left: auto;
+        display: inline-flex; align-items: center;
+        padding: 3px 10px; border-radius: 999px;
+        border: 1px solid var(--nrs-border);
+        background: var(--nrs-panel-2);
+        color: var(--nrs-muted);
+        font-size: 0.74rem; font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+    }
+    .atd-when__dot { margin: 0 5px; opacity: 0.55; }
+    @media (max-width: 380px) { .atd-game__when { margin-left: 0; } }
+    .atd-game__body { display: grid; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 520px) { .atd-game__body { grid-template-columns: 1fr; } }
+    .atd-side { padding: 10px 12px; }
+    .atd-side + .atd-side { border-left: 1px solid var(--nrs-border); }
+    @media (max-width: 520px) { .atd-side + .atd-side { border-left: 0; border-top: 1px solid var(--nrs-border); } }
+    .atd-side__head {
+        display: flex; align-items: center; gap: 6px; margin-bottom: 8px;
+        font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em;
+        text-transform: uppercase; color: var(--nrs-muted);
+    }
+    .atd-side__head img { width: 18px; height: 18px; object-fit: contain; }
+
+    .atd-play {
+        display: grid; gap: 4px; padding: 7px 9px; border-radius: 10px;
+        background: var(--atd-row); margin-bottom: 6px;
+        border-left: 3px solid transparent;
+    }
+    .atd-play:last-child { margin-bottom: 0; }
+    .atd-play.is-fav { border-left-color: var(--wpz-accent-gold); background: var(--atd-fav-bg); }
+    .atd-play__top { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+    .atd-play__name { font-weight: 700; font-size: 0.88rem; }
+    .atd-pos {
+        font-size: 0.64rem; font-weight: 800; letter-spacing: 0.04em;
+        padding: 1px 6px; border-radius: 5px;
+        background: rgba(148, 163, 184, 0.2); color: var(--nrs-muted);
+    }
+    .atd-pos--RB { background: rgba(34, 197, 94, 0.22); color: #86efac; }
+    .atd-pos--WR { background: rgba(56, 189, 248, 0.22); color: #7dd3fc; }
+    .atd-pos--TE { background: rgba(249, 115, 22, 0.22); color: #fdba74; }
+    html.theme-light .atd-pos--RB { color: #15803d; }
+    html.theme-light .atd-pos--WR { color: #0369a1; }
+    html.theme-light .atd-pos--TE { color: #c2410c; }
+    .atd-play__tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .atd-empty { color: var(--nrs-muted); font-size: 0.8rem; font-style: italic; padding: 8px 4px; }
+
+    .atd-scored-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .atd-scored-head .atd-section-title { margin-bottom: 0; }
+    .atd-scored-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .atd-scored-status { font-size: 0.78rem; color: var(--nrs-muted); }
+    .atd-scored-summary {
+        display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+    }
+    .atd-scored-note { font-size: 0.76rem; color: var(--nrs-muted); margin-top: 10px; line-height: 1.6; }
+    .atd-scored-card { border-color: rgba(74, 222, 128, 0.5); }
+    .chip--hit { background: rgba(34, 197, 94, 0.22); border-color: rgba(74, 222, 128, 0.6); color: #bbf7d0; }
+    html.theme-light .chip--hit { color: #14532d; background: rgba(134, 239, 172, 0.5); }
+    .atd-play.is-hit { border-left-color: #4ade80; }
+    .atd-scored-empty { color: var(--nrs-muted); font-size: 0.82rem; font-style: italic; }
+
+    .atd-foot { padding: 14px 20px 20px; color: var(--nrs-muted); font-size: 0.78rem; line-height: 1.6; }
+    .atd-foot strong { color: var(--wpz-color-text); }
+
+    .is-hidden { display: none !important; }
+
+    @media print {
+        body { background: #fff; padding: 0; }
+        .atd-toolbar, .atd-header-actions { display: none; }
+        .atd-container { border: 0; box-shadow: none; }
+        .atd-games { grid-template-columns: 1fr 1fr; }
+        .atd-game { break-inside: avoid; }
+    }
+
+    /* ── Week-2+ additions ── */
+    .atd-play__name { color: var(--wpz-color-text); }
+    a.atd-play__name, a.atd-top-card__name { text-decoration: underline dotted rgba(250, 204, 21, 0.5); text-underline-offset: 3px; }
+    a.atd-play__name:hover, a.atd-top-card__name:hover { color: var(--wpz-accent-gold); }
+    a.atd-top-card__name { color: var(--wpz-color-text); }
+    .atd-board-hint { font-size: 0.64rem; font-weight: 800; color: var(--nrs-muted); margin-left: auto; white-space: nowrap; }
+    a.atd-board-hint { color: #7dd3fc; }
+    .chip--new { background: rgba(56, 189, 248, 0.14); border-color: rgba(56, 189, 248, 0.45); color: #7dd3fc; }
+    .chip--mk  { background: rgba(148, 163, 184, 0.16); border-color: rgba(148, 163, 184, 0.4); color: #e2e8f0; }
+    .chip--d   { background: rgba(249, 115, 22, 0.2); border-color: rgba(249, 115, 22, 0.55); color: #fed7aa; }
+    html.theme-light .chip--new { color: #075985; }
+    html.theme-light .chip--mk  { color: #334155; }
+    html.theme-light .chip--d   { color: #9a3412; }
+    .atd-m--warn { background: rgba(251, 191, 36, 0.18); color: #fde68a; }
+    .atd-m--td { background: rgba(250, 204, 21, 0.16); color: #fde68a; }
+    .atd-m--td b { color: #fef3c7; }
+    html.theme-light .atd-m--warn { color: #92400e; background: rgba(251, 191, 36, 0.3); }
+    html.theme-light .atd-m--td { color: #854d0e; background: rgba(250, 204, 21, 0.28); }
+    html.theme-light .atd-m--td b { color: #713f12; }
+    .atd-side__imp {
+        margin-left: auto; text-transform: none; letter-spacing: 0; font-size: 0.7rem; font-weight: 700;
+        padding: 1px 7px; border-radius: 999px; border: 1px solid var(--nrs-border); color: var(--nrs-muted);
+        font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .atd-side__imp b { color: var(--wpz-color-text); }
+    .atd-side__head { flex-wrap: wrap; }
+    .atd-game__line { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .atd-inj { font-size: 0.7rem; color: #fdba74; line-height: 1.4; }
+    .atd-play.is-out { opacity: 0.6; }
+    html.theme-light .atd-inj { color: #9a3412; }
+    .atd-header-actions-right { flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 520px) {
+        .atd-header-actions { align-items: flex-start; }
+        .atd-back, .atd-theme-toggle { padding: 6px 10px; font-size: 0.76rem; }
+    }
+    </style>
+</head>
+<body>
+    <div class="atd-container">
+        <header class="atd-header">
+            <div class="atd-header-actions">
+                <a class="atd-back atd-back--switch" href="../index.html" title="Go to the MLB home run cheat sheet"><span aria-hidden="true">&#9918;</span> MLB Cheat Sheet</a>
+                <div class="atd-header-actions-right">
+                    <span id="atdPrevWeek"></span>
+                    <a class="atd-back" id="atdResearch" href="index.html" title="Open the NFL matchup research board">NFL Research &rarr;</a>
+                    <button type="button" class="atd-theme-toggle" id="atdTheme" title="Switch theme" aria-label="Switch theme">&#9728;&#65039;</button>
+                </div>
+            </div>
+            <div class="atd-header-brand">
+                <div class="atd-hero">
+                    <img src="../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot" decoding="async"
+                         onerror="this.onerror=null;this.src='https://worstpickz.win/assets/worst-pickz-hero.png'">
+                </div>
+                <div>
+                    <span class="atd-brand-tag">Worst Pickz Cheat Sheet</span>
+                    <h1>Week 2 &mdash; Anytime Touchdown</h1>
+                    <p class="atd-sub">Every listed play by game, tagged by role and matchup. Tap a filter to narrow the board, or a name to open his Game Board.</p>
+                    <div class="atd-counts" id="atdCounts"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="atd-toolbar">
+            <div class="atd-filters" id="atdFilters"></div>
+            <div class="atd-legend">
+                <span class="chip chip--fav">&#11088; Favorite</span>
+                <span class="chip chip--val">&#128142; Underrated</span>
+                <span class="chip chip--rz">&#128293; Red zone target</span>
+                <span class="chip chip--mat">&#129460; Defensive matchup</span>
+                <span class="chip chip--exp">&#9992;&#65039; Exploitable D</span>
+                <span class="chip chip--run">&#127939;&#127999;&#8205;&#9794;&#65039;&#8205;&#10145;&#65039; Run-first</span>
+                <span class="chip chip--pass">&#129653; Pass-first</span>
+                <span class="chip chip--agg">&#128162; Aggressive</span>
+                <span class="chip chip--q">Q</span>
+                <span class="chip chip--out">Out</span>
+                <span class="chip chip--new">New team</span>
+            </div>
+        </div>
+
+        <section class="atd-section">
+            <h2 class="atd-section-title">Top 5 plays &mdash; ranked on the data</h2>
+            <div class="atd-top" id="atdTop"></div>
+        </section>
+
+        <section class="atd-section">
+            <h2 class="atd-section-title" id="atdBoardTitle">Full board</h2>
+            <div class="atd-games" id="atdGames"></div>
+        </section>
+
+        <section class="atd-section">
+            <div class="atd-scored-head">
+                <h2 class="atd-section-title">Touchdowns scored</h2>
+                <div class="atd-scored-actions">
+                    <span class="atd-scored-status" id="atdScoredStatus" aria-live="polite">Tap Refresh to pull scoring plays from ESPN.</span>
+                    <button type="button" class="atd-filter" id="atdScoredRefresh">Refresh</button>
+                </div>
+            </div>
+            <div class="atd-scored-summary" id="atdScoredSummary" hidden></div>
+            <div class="atd-top" id="atdScoredList"></div>
+            <p class="atd-scored-note" id="atdScoredGames"></p>
+        </section>
+
+        <p class="atd-foot">
+            <strong>Tags:</strong> &#11088; favorite &mdash; the week's best touchdown odds among healthy players with a real sample;
+            &#128142; underrated &mdash; a secondary role scoring well above what his slot usually does this week, or a growing role
+            into a defense that leaks; &#128293; red-zone target &mdash; a back with 30%+ of his team's work inside the 20 or a
+            goal-line carry a game, a pass catcher with 18%+, a quarterback with half a carry a game inside the 5;
+            &#129460; defensive matchup &mdash; this defense has given up 10%+ more than league to his role, in production and
+            touchdowns combined, and is not a red-zone wall; &#9992;&#65039; exploitable D &mdash; the defense this team faces
+            carries a TARGET verdict in the team-defense scoring table.<br>
+            <strong>Team tendency</strong> is shown only where it helps that player, and is computed from the last 17 games:
+            &#127939;&#127999;&#8205;&#9794;&#65039;&#8205;&#10145;&#65039; run-first (a bottom-ten pass rate with the score close) lifts
+            the backfield, &#129653; pass-first (top ten) lifts the pass catchers, and &#128162; aggressive (a top-ten rate of going for
+            it on 4th-and-short) lifts everyone.<br>
+            <strong>Numbers:</strong> TD is the chance of at least one touchdown from the Game Board &mdash; his share of his team's
+            red-zone work &times; how often his team gets there &times; how often this defense lets a trip score, plus the scores he
+            gets from outside the 20 (quarterbacks: rushing touchdowns only). RZ is that red-zone share, GL his carries inside the
+            5 per game, and D#n the opponent's rank of 32 in red-zone touchdown rate allowed &mdash; green at 24+ is soft, red at 8
+            or better is a wall. Every number covers each player's and each defense's last 17 games, so it reaches back into
+            last season while this one is young.<br>
+            <strong>Top 5</strong> ranks healthy favorites on that TD chance, nudged by this week's implied points and by the
+            touchdowns this defense has allowed to his role.<br>
+            <strong>Caveats:</strong> <strong>New team</strong> means most of his sample was earned with another club, so his
+            share describes a role he may not hold now. A <strong>small sample</strong> player has fewer than four games and is
+            listed without a rating. Injury statuses come from ESPN's report when the sheet was built &mdash; check again before
+            kickoff.
+        </p>
+    </div>
+
+    <script>
+    (function () {
+        "use strict";
+
+        var SHEET = {"season":2026,"week":2,"built":"2026-09-17T04:06+00:00","first_kick":"2026-09-18T00:15:00+00:00","last_kick":"2026-09-22T00:15:00+00:00","games":[{"away":"DET","home":"BUF","kick":"2026-09-18T00:15Z","exp":[],"implied":{"DET":25.0,"BUF":29.5},"line":"BUF -4.5","total":54.5,"dverdict":{"DET":"EVEN","BUF":"EVEN"},"sides":{"DET":[{"n":"Jahmyr Gibbs","id":"00-0039139","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz"],"st":"","inj":"","stl":"","m":{"td":67,"td2":null,"rz":35.3,"gl":0.9,"dz":22,"edge":2,"g":17,"tg":17,"new":false,"small":false,"trend":12.9}},{"n":"Amon-Ra St. Brown","id":"00-0036963","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":47,"td2":null,"rz":23.6,"gl":0.0,"dz":22,"edge":-8,"g":17,"tg":17,"new":false,"small":false,"trend":8.0}},{"n":"Sam LaPorta","id":"00-0039065","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":26,"td2":null,"rz":8.0,"gl":0.0,"dz":22,"edge":-13,"g":10,"tg":10,"new":false,"small":false,"trend":0.8}}],"BUF":[{"n":"Josh Allen","id":"00-0034857","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":["fav","rz","mat"],"st":"","inj":"","stl":"","m":{"td":57,"td2":null,"rz":14.1,"gl":1.1,"dz":21,"edge":17,"g":17,"tg":17,"new":false,"small":false,"trend":0.0}},{"n":"DJ Moore","id":"00-0034827","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":36,"td2":null,"rz":8.5,"gl":0.0,"dz":21,"edge":28,"g":17,"tg":1,"new":true,"small":false,"trend":-0.5}},{"n":"Dalton Kincaid","id":"00-0038933","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":27,"td2":null,"rz":6.6,"gl":0.0,"dz":21,"edge":22,"g":13,"tg":13,"new":false,"small":false,"trend":-2.8}},{"n":"Khalil Shakir","id":"00-0037261","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":["val","mat"],"st":"","inj":"","stl":"","m":{"td":34,"td2":null,"rz":12.1,"gl":0.0,"dz":21,"edge":33,"g":17,"tg":17,"new":false,"small":false,"trend":2.3}}]}},{"away":"CAR","home":"ATL","kick":"2026-09-20T17:00Z","exp":[],"implied":{"CAR":23.0,"ATL":20.5},"line":"CAR -2.5","total":43.5,"dverdict":{"CAR":"EVEN","ATL":"EVEN"},"sides":{"CAR":[{"n":"Bryce Young","id":"00-0039150","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":15,"td2":null,"rz":6.6,"gl":0.1,"dz":10,"edge":-2,"g":17,"tg":17,"new":false,"small":false,"trend":0.0}},{"n":"Tetairoa McMillan","id":"00-0040124","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":32,"td2":null,"rz":12.5,"gl":0.0,"dz":10,"edge":36,"g":17,"tg":17,"new":false,"small":false,"trend":-4.7}},{"n":"Chuba Hubbard","id":"00-0036555","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":37,"td2":null,"rz":20.2,"gl":0.1,"dz":10,"edge":-17,"g":16,"tg":16,"new":false,"small":false,"trend":-2.4}}],"ATL":[{"n":"Bijan Robinson","id":"00-0038542","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz","mat"],"st":"","inj":"","stl":"","m":{"td":54,"td2":null,"rz":33.6,"gl":0.5,"dz":17,"edge":16,"g":17,"tg":17,"new":false,"small":false,"trend":1.9}},{"n":"Drake London","id":"00-0037238","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":29,"td2":null,"rz":19.5,"gl":0.0,"dz":17,"edge":6,"g":13,"tg":13,"new":false,"small":false,"trend":-9.8}}]}},{"away":"MIN","home":"CHI","kick":"2026-09-20T17:00Z","exp":["MIN"],"implied":{"MIN":22.0,"CHI":26.5},"line":"CHI -4.5","total":48.5,"dverdict":{"MIN":"AVOID","CHI":"TARGET"},"sides":{"MIN":[{"n":"Aaron Jones Sr.","id":"00-0033293","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":40,"td2":null,"rz":23.0,"gl":0.3,"dz":19,"edge":8,"g":13,"tg":13,"new":false,"small":false,"trend":10.8}},{"n":"Jordan Mason","id":"00-0037525","p":"RB2","pos":"RB","mk":"td","line":0.5,"t":[],"st":"out","inj":"Injured Reserve","stl":"Injured Reserve","m":{"td":31,"td2":null,"rz":20.0,"gl":0.5,"dz":19,"edge":-24,"g":17,"tg":17,"new":false,"small":false,"trend":-10.0}},{"n":"Justin Jefferson","id":"00-0036322","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":30,"td2":null,"rz":16.1,"gl":0.0,"dz":19,"edge":27,"g":17,"tg":17,"new":false,"small":false,"trend":6.3}},{"n":"Jordan Addison","id":"00-0038994","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":26,"td2":null,"rz":12.4,"gl":0.0,"dz":19,"edge":74,"g":15,"tg":15,"new":false,"small":false,"trend":-9.0}},{"n":"Josh Oliver","id":"00-0035249","p":"TE2","pos":"TE","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":18,"td2":null,"rz":6.5,"gl":0.0,"dz":19,"edge":14,"g":13,"tg":13,"new":false,"small":false,"trend":5.4}}],"CHI":[{"n":"Caleb Williams","id":"00-0039918","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":19,"td2":null,"rz":9.6,"gl":0.2,"dz":1,"edge":-35,"g":17,"tg":17,"new":false,"small":false,"trend":0.0}},{"n":"D'Andre Swift","id":"00-0036275","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["rz"],"st":"q","inj":"Swift (ankle/knee) was limited in Wednesday's practice.","stl":"Questionable","m":{"td":42,"td2":null,"rz":25.2,"gl":1.0,"dz":1,"edge":-28,"g":17,"tg":17,"new":false,"small":false,"trend":-0.4}},{"n":"Kyle Monangai","id":"00-0040236","p":"RB2","pos":"RB","mk":"td","line":0.5,"t":[],"st":"q","inj":"Monangai (hamstring) was limited in Wednesday's practice.","stl":"Questionable","m":{"td":31,"td2":null,"rz":21.4,"gl":0.6,"dz":1,"edge":6,"g":17,"tg":17,"new":false,"small":false,"trend":-1.8}},{"n":"Kalif Raymond","id":"00-0032464","p":"WR3","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":9,"td2":null,"rz":2.0,"gl":0.0,"dz":1,"edge":-15,"g":16,"tg":1,"new":true,"small":false,"trend":8.8}}]}},{"away":"PHI","home":"TEN","kick":"2026-09-20T17:00Z","exp":["PHI"],"implied":{"PHI":23.2,"TEN":16.2},"line":"PHI -7","total":39.5,"dverdict":{"PHI":"AVOID","TEN":"TARGET"},"sides":{"PHI":[{"n":"Jalen Hurts","id":"00-0036389","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":["rz","mat"],"st":"","inj":"","stl":"","m":{"td":34,"td2":null,"rz":16.7,"gl":0.7,"dz":31,"edge":14,"g":17,"tg":17,"new":false,"small":false,"trend":0.0}},{"n":"Saquon Barkley","id":"00-0034844","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz"],"st":"","inj":"","stl":"","m":{"td":56,"td2":null,"rz":35.0,"gl":0.8,"dz":31,"edge":6,"g":17,"tg":17,"new":false,"small":false,"trend":2.6}},{"n":"DeVonta Smith","id":"00-0036912","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":25,"td2":null,"rz":9.4,"gl":0.0,"dz":31,"edge":31,"g":17,"tg":17,"new":false,"small":false,"trend":-4.7}},{"n":"Dallas Goedert","id":"00-0034351","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":33,"td2":null,"rz":14.5,"gl":0.0,"dz":31,"edge":2,"g":16,"tg":16,"new":false,"small":false,"trend":-0.8}}],"TEN":[{"n":"Wan'Dale Robinson","id":"00-0038117","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":26,"td2":null,"rz":10.6,"gl":0.0,"dz":14,"edge":44,"g":17,"tg":1,"new":true,"small":false,"trend":8.9}},{"n":"Cam Ward","id":"00-0040676","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":10,"td2":null,"rz":6.4,"gl":0.1,"dz":14,"edge":-12,"g":17,"tg":17,"new":false,"small":false,"trend":0.0}}]}},{"away":"PIT","home":"NE","kick":"2026-09-20T17:00Z","exp":[],"implied":{"PIT":18.0,"NE":23.5},"line":"NE -5.5","total":41.5,"dverdict":{"PIT":"EVEN","NE":"AVOID"},"sides":{"PIT":[{"n":"Jaylen Warren","id":"00-0037228","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":49,"td2":null,"rz":28.5,"gl":0.8,"dz":20,"edge":-21,"g":17,"tg":17,"new":false,"small":false,"trend":-2.6}},{"n":"DK Metcalf","id":"00-0035640","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":32,"td2":null,"rz":11.0,"gl":0.0,"dz":20,"edge":0,"g":16,"tg":16,"new":false,"small":false,"trend":-2.1}}],"NE":[{"n":"Rhamondre Stevenson","id":"00-0036875","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":48,"td2":null,"rz":23.2,"gl":0.7,"dz":7,"edge":-37,"g":15,"tg":15,"new":false,"small":false,"trend":-0.1}},{"n":"DeMario Douglas","id":"00-0038621","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":16,"td2":null,"rz":6.1,"gl":0.0,"dz":7,"edge":8,"g":17,"tg":17,"new":false,"small":false,"trend":4.7}},{"n":"Mack Hollins","id":"00-0033555","p":"WR3","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":10,"td2":null,"rz":5.5,"gl":0.0,"dz":7,"edge":69,"g":15,"tg":15,"new":false,"small":false,"trend":8.4}}]}},{"away":"GB","home":"NYJ","kick":"2026-09-20T17:00Z","exp":["GB"],"implied":{"GB":24.0,"NYJ":20.5},"line":"GB -3.5","total":44.5,"dverdict":{"GB":"AVOID","NYJ":"TARGET"},"sides":{"GB":[{"n":"Christian Watson","id":"00-0038124","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":48,"td2":null,"rz":8.6,"gl":0.0,"dz":27,"edge":1,"g":11,"tg":11,"new":false,"small":false,"trend":2.7}},{"n":"Tucker Kraft","id":"00-0038996","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":34,"td2":null,"rz":13.8,"gl":0.0,"dz":27,"edge":6,"g":9,"tg":9,"new":false,"small":false,"trend":-2.1}},{"n":"Matthew Golden","id":"00-0040667","p":"WR3","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":10,"td2":null,"rz":4.9,"gl":0.0,"dz":27,"edge":-11,"g":15,"tg":15,"new":false,"small":false,"trend":10.4}}],"NYJ":[{"n":"Breece Hall","id":"00-0038120","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":45,"td2":null,"rz":27.4,"gl":0.4,"dz":28,"edge":-3,"g":17,"tg":17,"new":false,"small":false,"trend":4.8}},{"n":"Garrett Wilson","id":"00-0037740","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":34,"td2":null,"rz":10.8,"gl":0.0,"dz":28,"edge":36,"g":8,"tg":8,"new":false,"small":false,"trend":1.1}}]}},{"away":"CLE","home":"TB","kick":"2026-09-20T17:00Z","exp":[],"implied":{"CLE":16.5,"TB":25.0},"line":"TB -8.5","total":41.5,"dverdict":{"CLE":"EVEN","TB":"EVEN"},"sides":{"CLE":[{"n":"Quinshon Judkins","id":"00-0040784","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":40,"td2":null,"rz":28.9,"gl":0.8,"dz":24,"edge":13,"g":15,"tg":15,"new":false,"small":false,"trend":-14.1}},{"n":"KC Concepcion","id":"00-0041547","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":0,"td2":null,"rz":0.0,"gl":0.0,"dz":24,"edge":-27,"g":1,"tg":1,"new":false,"small":true,"trend":0.0}}],"TB":[{"n":"Baker Mayfield","id":"00-0034855","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":10,"td2":null,"rz":4.0,"gl":0.1,"dz":18,"edge":-6,"g":17,"tg":17,"new":false,"small":false,"trend":0.0}},{"n":"Bucky Irving","id":"00-0039361","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","mat"],"st":"","inj":"","stl":"","m":{"td":50,"td2":null,"rz":25.1,"gl":0.0,"dz":18,"edge":15,"g":11,"tg":11,"new":false,"small":false,"trend":-5.4}},{"n":"Emeka Egbuka","id":"00-0040129","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":30,"td2":null,"rz":12.1,"gl":0.0,"dz":18,"edge":4,"g":17,"tg":17,"new":false,"small":false,"trend":-8.0}},{"n":"Cade Otton","id":"00-0038129","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":15,"td2":null,"rz":7.9,"gl":0.0,"dz":18,"edge":-33,"g":16,"tg":16,"new":false,"small":false,"trend":5.3}}]}},{"away":"NO","home":"BAL","kick":"2026-09-20T17:00Z","exp":[],"implied":{"NO":19.0,"BAL":27.5},"line":"BAL -8.5","total":46.5,"dverdict":{"NO":"EVEN","BAL":"EVEN"},"sides":{"NO":[{"n":"Travis Etienne Jr.","id":"00-0036973","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":44,"td2":null,"rz":28.5,"gl":0.7,"dz":5,"edge":-17,"g":17,"tg":1,"new":true,"small":false,"trend":-2.0}},{"n":"Chris Olave","id":"00-0037239","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":36,"td2":null,"rz":15.3,"gl":0.0,"dz":5,"edge":-12,"g":17,"tg":17,"new":false,"small":false,"trend":4.4}},{"n":"Devaughn Vele","id":"00-0039424","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":12,"td2":null,"rz":9.4,"gl":0.0,"dz":5,"edge":-19,"g":10,"tg":10,"new":false,"small":false,"trend":6.9}}],"BAL":[{"n":"Lamar Jackson","id":"00-0034796","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":17,"td2":null,"rz":10.5,"gl":0.1,"dz":11,"edge":-9,"g":14,"tg":14,"new":false,"small":false,"trend":0.0}},{"n":"Derrick Henry","id":"00-0032764","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz"],"st":"","inj":"","stl":"","m":{"td":65,"td2":null,"rz":37.7,"gl":1.7,"dz":11,"edge":11,"g":17,"tg":17,"new":false,"small":false,"trend":9.0}},{"n":"Zay Flowers","id":"00-0039064","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"q","inj":"Flowers (hamstring) was listed as a non-participant for Wednesday's practice.","stl":"Questionable","m":{"td":34,"td2":null,"rz":8.9,"gl":0.0,"dz":11,"edge":-4,"g":17,"tg":17,"new":false,"small":false,"trend":-0.2}},{"n":"Mark Andrews","id":"00-0034753","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":31,"td2":null,"rz":12.8,"gl":0.2,"dz":11,"edge":-10,"g":17,"tg":17,"new":false,"small":false,"trend":2.7}}]}},{"away":"CIN","home":"HOU","kick":"2026-09-20T17:00Z","exp":["HOU"],"implied":{"CIN":22.0,"HOU":24.5},"line":"HOU -2.5","total":46.5,"dverdict":{"CIN":"TARGET","HOU":"AVOID"},"sides":{"CIN":[{"n":"Chase Brown","id":"00-0038597","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":46,"td2":null,"rz":30.7,"gl":0.8,"dz":15,"edge":-19,"g":17,"tg":17,"new":false,"small":false,"trend":-2.4}},{"n":"Tee Higgins","id":"00-0036410","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":["fav"],"st":"","inj":"","stl":"","m":{"td":51,"td2":null,"rz":13.8,"gl":0.0,"dz":15,"edge":4,"g":16,"tg":16,"new":false,"small":false,"trend":0.6}},{"n":"Mike Gesicki","id":"00-0034829","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":19,"td2":null,"rz":10.3,"gl":0.0,"dz":15,"edge":4,"g":13,"tg":13,"new":false,"small":false,"trend":-0.5}}],"HOU":[{"n":"David Montgomery","id":"00-0035685","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["rz","mat"],"st":"","inj":"","stl":"","m":{"td":45,"td2":null,"rz":20.3,"gl":1.1,"dz":25,"edge":10,"g":17,"tg":1,"new":true,"small":false,"trend":5.6}},{"n":"Nico Collins","id":"00-0036554","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"q","inj":"Collins was limited at Wednesday's practice due to a hamstring injury.","stl":"Questionable","m":{"td":44,"td2":null,"rz":16.7,"gl":0.0,"dz":25,"edge":-23,"g":16,"tg":16,"new":false,"small":false,"trend":-1.4}},{"n":"Xavier Hutchinson","id":"00-0038618","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":19,"td2":null,"rz":6.2,"gl":0.0,"dz":25,"edge":-38,"g":17,"tg":17,"new":false,"small":false,"trend":8.5}}]}},{"away":"JAX","home":"DEN","kick":"2026-09-20T20:05Z","exp":[],"implied":{"JAX":21.5,"DEN":24.0},"line":"DEN -2.5","total":45.5,"dverdict":{"JAX":"AVOID","DEN":"AVOID"},"sides":{"JAX":[{"n":"Parker Washington","id":"00-0038606","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":27,"td2":null,"rz":10.3,"gl":0.1,"dz":3,"edge":-26,"g":17,"tg":17,"new":false,"small":false,"trend":9.6}}],"DEN":[{"n":"Evan Engram","id":"00-0033881","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":15,"td2":null,"rz":8.3,"gl":0.0,"dz":16,"edge":11,"g":17,"tg":17,"new":false,"small":false,"trend":1.6}},{"n":"Adam Trautman","id":"00-0036422","p":"TE2","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":2,"td2":null,"rz":0.9,"gl":0.0,"dz":16,"edge":-18,"g":14,"tg":14,"new":false,"small":false,"trend":2.5}}]}},{"away":"LV","home":"LAC","kick":"2026-09-20T20:05Z","exp":["LAC"],"implied":{"LV":18.5,"LAC":25.0},"line":"LAC -6.5","total":43.5,"dverdict":{"LV":"TARGET","LAC":"AVOID"},"sides":{"LV":[{"n":"Ashton Jeanty","id":"00-0040122","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":45,"td2":null,"rz":38.8,"gl":0.5,"dz":2,"edge":6,"g":17,"tg":17,"new":false,"small":false,"trend":5.5}},{"n":"Michael Mayer","id":"00-0039066","p":"TE2","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":9,"td2":null,"rz":9.1,"gl":0.0,"dz":2,"edge":-63,"g":14,"tg":14,"new":false,"small":false,"trend":11.9}}],"LAC":[{"n":"Omarion Hampton","id":"00-0040666","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz"],"st":"","inj":"","stl":"","m":{"td":52,"td2":null,"rz":32.7,"gl":0.8,"dz":12,"edge":-7,"g":10,"tg":10,"new":false,"small":false,"trend":1.3}},{"n":"Ladd McConkey","id":"00-0039915","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"q","inj":"McConkey (ribs) won't practice Wednesday, Alex Insdorf of BoltBeat.com reports.","stl":"Questionable","m":{"td":29,"td2":null,"rz":12.0,"gl":0.0,"dz":12,"edge":15,"g":17,"tg":17,"new":false,"small":false,"trend":-3.5}},{"n":"David Njoku","id":"00-0033885","p":"TE2","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":20,"td2":null,"rz":11.9,"gl":0.0,"dz":12,"edge":-63,"g":12,"tg":1,"new":true,"small":false,"trend":-3.1}}]}},{"away":"WSH","home":"DAL","kick":"2026-09-20T20:25Z","exp":["WSH","DAL"],"implied":{"WSH":23.0,"DAL":27.5},"line":"DAL -4.5","total":50.5,"dverdict":{"WSH":"TARGET","DAL":"TARGET"},"sides":{"WSH":[{"n":"Jayden Daniels","id":"00-0039910","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":20,"td2":null,"rz":12.6,"gl":0.2,"dz":26,"edge":45,"g":8,"tg":8,"new":false,"small":false,"trend":0.0}},{"n":"Stefon Diggs","id":"00-0031588","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":16,"td2":null,"rz":9.2,"gl":0.0,"dz":26,"edge":2,"g":17,"tg":1,"new":true,"small":false,"trend":0.5}},{"n":"Antonio Williams","id":"00-0041040","p":"WR3","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":26,"td2":null,"rz":16.3,"gl":0.0,"dz":26,"edge":50,"g":1,"tg":1,"new":false,"small":true,"trend":0.0}}],"DAL":[{"n":"Javonte Williams","id":"00-0036997","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz","mat"],"st":"","inj":"","stl":"","m":{"td":62,"td2":null,"rz":34.1,"gl":1.4,"dz":32,"edge":25,"g":17,"tg":17,"new":false,"small":false,"trend":-14.8}},{"n":"CeeDee Lamb","id":"00-0036358","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":36,"td2":null,"rz":14.0,"gl":0.0,"dz":32,"edge":-8,"g":14,"tg":14,"new":false,"small":false,"trend":-5.6}},{"n":"George Pickens","id":"00-0037247","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":["fav","mat"],"st":"","inj":"","stl":"","m":{"td":49,"td2":null,"rz":14.0,"gl":0.0,"dz":32,"edge":55,"g":17,"tg":17,"new":false,"small":false,"trend":-7.4}},{"n":"Jake Ferguson","id":"00-0038041","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":["val","mat"],"st":"","inj":"","stl":"","m":{"td":37,"td2":null,"rz":15.1,"gl":0.0,"dz":32,"edge":75,"g":17,"tg":17,"new":false,"small":false,"trend":-8.8}}]}},{"away":"SEA","home":"ARI","kick":"2026-09-20T20:25Z","exp":["SEA"],"implied":{"SEA":22.0,"ARI":18.5},"line":"SEA -3.5","total":40.5,"dverdict":{"SEA":"AVOID","ARI":"TARGET"},"sides":{"SEA":[{"n":"Jaxon Smith-Njigba","id":"00-0038543","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":47,"td2":null,"rz":14.6,"gl":0.0,"dz":29,"edge":33,"g":17,"tg":17,"new":false,"small":false,"trend":4.9}},{"n":"AJ Barner","id":"00-0039793","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":26,"td2":null,"rz":10.6,"gl":0.1,"dz":29,"edge":55,"g":17,"tg":17,"new":false,"small":false,"trend":-3.3}}],"ARI":[{"n":"Tyler Allgeier","id":"00-0037263","p":"RB2","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":37,"td2":null,"rz":22.0,"gl":0.6,"dz":6,"edge":-7,"g":17,"tg":1,"new":true,"small":false,"trend":7.4}},{"n":"Michael Wilson","id":"00-0038559","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":32,"td2":null,"rz":11.5,"gl":0.0,"dz":6,"edge":-50,"g":17,"tg":17,"new":false,"small":false,"trend":5.9}},{"n":"Trey McBride","id":"00-0037744","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":37,"td2":null,"rz":25.0,"gl":0.0,"dz":6,"edge":-41,"g":17,"tg":17,"new":false,"small":false,"trend":5.5}}]}},{"away":"MIA","home":"SF","kick":"2026-09-20T20:25Z","exp":["SF"],"implied":{"MIA":15.5,"SF":29.0},"line":"SF -13.5","total":44.5,"dverdict":{"MIA":"TARGET","SF":"EVEN"},"sides":{"MIA":[{"n":"De'Von Achane","id":"00-0039040","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz","mat"],"st":"","inj":"","stl":"","m":{"td":59,"td2":null,"rz":33.3,"gl":0.3,"dz":13,"edge":17,"g":17,"tg":17,"new":false,"small":false,"trend":-3.4}}],"SF":[{"n":"Christian McCaffrey","id":"00-0033280","p":"RB1","pos":"RB","mk":"td","line":1.5,"t":["fav","rz","mat"],"st":"","inj":"","stl":"","m":{"td":69,"td2":33,"rz":47.2,"gl":1.2,"dz":30,"edge":19,"g":17,"tg":17,"new":false,"small":false,"trend":-8.4}},{"n":"Kaelon Black","id":"00-0041052","p":"RB2","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":0,"td2":null,"rz":0.0,"gl":0.0,"dz":30,"edge":10,"g":1,"tg":1,"new":false,"small":true,"trend":0.0}},{"n":"Deebo Samuel","id":"00-0035719","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":["val","mat"],"st":"","inj":"","stl":"","m":{"td":36,"td2":null,"rz":15.3,"gl":0.1,"dz":30,"edge":70,"g":17,"tg":1,"new":true,"small":false,"trend":-3.1}},{"n":"Mike Evans","id":"00-0031408","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":33,"td2":null,"rz":16.0,"gl":0.0,"dz":30,"edge":-23,"g":9,"tg":1,"new":true,"small":false,"trend":-8.7}},{"n":"Jake Tonges","id":"00-0037112","p":"TE2","pos":"TE","mk":"td","line":0.5,"t":[],"st":"out","inj":"Tonges (knee) requires surgery for an MCL tear and is done for the season, Cam Inman reports.","stl":"Injured Reserve","m":{"td":25,"td2":null,"rz":7.6,"gl":0.0,"dz":30,"edge":58,"g":10,"tg":10,"new":false,"small":false,"trend":-1.1}}]}},{"away":"IND","home":"KC","kick":"2026-09-21T00:20Z","exp":[],"implied":{"IND":20.0,"KC":26.5},"line":"KC -6.5","total":46.5,"dverdict":{"IND":"EVEN","KC":"AVOID"},"sides":{"IND":[{"n":"Jonathan Taylor","id":"00-0036223","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz"],"st":"","inj":"","stl":"","m":{"td":64,"td2":null,"rz":37.2,"gl":1.4,"dz":8,"edge":-36,"g":17,"tg":17,"new":false,"small":false,"trend":2.7}},{"n":"Keenan Allen","id":"00-0030279","p":"WR3","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":22,"td2":null,"rz":11.8,"gl":0.0,"dz":8,"edge":-33,"g":17,"tg":1,"new":true,"small":false,"trend":0.0}}],"KC":[{"n":"Patrick Mahomes","id":"00-0033873","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":30,"td2":null,"rz":8.7,"gl":0.1,"dz":9,"edge":3,"g":15,"tg":15,"new":false,"small":false,"trend":0.0}},{"n":"Kenneth Walker III","id":"00-0038134","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":43,"td2":null,"rz":21.7,"gl":0.5,"dz":9,"edge":7,"g":17,"tg":1,"new":true,"small":false,"trend":2.3}},{"n":"Rashee Rice","id":"00-0039067","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":46,"td2":null,"rz":25.1,"gl":0.2,"dz":9,"edge":15,"g":9,"tg":9,"new":false,"small":false,"trend":-2.6}},{"n":"Xavier Worthy","id":"00-0039894","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":10,"td2":null,"rz":4.9,"gl":0.0,"dz":9,"edge":-26,"g":15,"tg":15,"new":false,"small":false,"trend":0.9}}]}},{"away":"NYG","home":"LAR","kick":"2026-09-22T00:15Z","exp":["LAR"],"implied":{"NYG":20.2,"LAR":27.2},"line":"LAR -7","total":47.5,"dverdict":{"NYG":"TARGET","LAR":"EVEN"},"sides":{"NYG":[{"n":"Jaxson Dart","id":"00-0040691","p":"QB1","pos":"QB","mk":"rush_td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":42,"td2":null,"rz":13.4,"gl":0.5,"dz":4,"edge":1,"g":15,"tg":15,"new":false,"small":false,"trend":0.0}},{"n":"Cam Skattebo","id":"00-0040715","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["rz"],"st":"","inj":"","stl":"","m":{"td":45,"td2":null,"rz":32.7,"gl":1.2,"dz":4,"edge":-29,"g":9,"tg":9,"new":false,"small":false,"trend":-3.6}},{"n":"Devin Singletary","id":"00-0035250","p":"RB2","pos":"RB","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":28,"td2":null,"rz":14.8,"gl":0.6,"dz":4,"edge":-5,"g":17,"tg":17,"new":false,"small":false,"trend":0.3}},{"n":"Malik Nabers","id":"00-0039337","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":45,"td2":null,"rz":10.8,"gl":0.0,"dz":4,"edge":41,"g":5,"tg":5,"new":false,"small":false,"trend":-4.8}},{"n":"Isaiah Likely","id":"00-0037838","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":14,"td2":null,"rz":8.1,"gl":0.0,"dz":4,"edge":7,"g":13,"tg":1,"new":true,"small":false,"trend":4.9}},{"n":"Theo Johnson","id":"00-0039847","p":"TE2","pos":"TE","mk":"td","line":0.5,"t":[],"st":"","inj":"","stl":"","m":{"td":23,"td2":null,"rz":11.1,"gl":0.0,"dz":4,"edge":-24,"g":16,"tg":16,"new":false,"small":false,"trend":-6.4}}],"LAR":[{"n":"Kyren Williams","id":"00-0037840","p":"RB1","pos":"RB","mk":"td","line":0.5,"t":["fav","rz","mat"],"st":"","inj":"","stl":"","m":{"td":56,"td2":null,"rz":28.6,"gl":1.1,"dz":23,"edge":22,"g":17,"tg":17,"new":false,"small":false,"trend":-8.1}},{"n":"Blake Corum","id":"00-0039738","p":"RB2","pos":"RB","mk":"td","line":0.5,"t":["mat"],"st":"","inj":"","stl":"","m":{"td":34,"td2":null,"rz":12.2,"gl":0.8,"dz":23,"edge":32,"g":17,"tg":17,"new":false,"small":false,"trend":3.5}},{"n":"Puka Nacua","id":"00-0039075","p":"WR1","pos":"WR","mk":"td","line":0.5,"t":["fav"],"st":"","inj":"","stl":"","m":{"td":49,"td2":null,"rz":11.2,"gl":0.0,"dz":23,"edge":-14,"g":17,"tg":17,"new":false,"small":false,"trend":0.0}},{"n":"Davante Adams","id":"00-0031381","p":"WR2","pos":"WR","mk":"td","line":0.5,"t":["fav","rz","mat"],"st":"","inj":"","stl":"","m":{"td":53,"td2":null,"rz":21.3,"gl":0.0,"dz":23,"edge":56,"g":15,"tg":15,"new":false,"small":false,"trend":-3.2}},{"n":"Colby Parkinson","id":"00-0036244","p":"TE1","pos":"TE","mk":"td","line":0.5,"t":["val"],"st":"","inj":"","stl":"","m":{"td":44,"td2":null,"rz":15.4,"gl":0.0,"dz":23,"edge":-27,"g":15,"tg":15,"new":false,"small":false,"trend":3.9}}]}}],"top5":[{"id":"00-0033280","why":"69% to score, on 47% of SF's work inside the 20 and 1.2 goal-line carries a game. SF is implied for 29.0 points, 2nd of the week, and reaches the red zone 3.8 times a game. MIA lets 67% of red-zone trips end in a touchdown, among the softest (30 of 32). Against RB1s it has given up 19% more than league. The listed line is 2+ touchdowns: 33% on the same rate."},{"id":"00-0032764","why":"65% to score, on 38% of BAL's work inside the 20 and 1.7 goal-line carries a game. BAL is implied for 27.5 points, 3rd of the week, and reaches the red zone 3.6 times a game. NO lets 55% of red-zone trips end in a touchdown, tougher than average (11 of 32). Against RB1s it has given up 11% more than league."},{"id":"00-0039139","why":"67% to score, on 35% of DET's work inside the 20 and 0.9 goal-line carries a game. DET is implied for 25.0 points, 8th of the week, and reaches the red zone 3.9 times a game. BUF lets 64% of red-zone trips end in a touchdown, softer than average (22 of 32)."},{"id":"00-0036997","why":"62% to score, on 34% of DAL's work inside the 20 and 1.4 goal-line carries a game. DAL is implied for 27.5 points, 4th of the week, and reaches the red zone 3.9 times a game. WSH lets 69% of red-zone trips end in a touchdown, among the softest (32 of 32). Against RB1s it has given up 25% more than league."},{"id":"00-0034857","why":"57% to run one in: 0.9 rushing touchdowns a game over his last 17, with 1.1 carries a game inside the 5. BUF is implied for 29.5 points, 1st of the week, and reaches the red zone 3.8 times a game. DET lets 63% of red-zone trips end in a touchdown, softer than average (21 of 32)."}],"tend":{"DET":["agg"],"BUF":["run","agg"],"CAR":["run","agg"],"ATL":[],"MIN":[],"CHI":[],"PHI":["agg"],"TEN":[],"PIT":["pass"],"NE":[],"GB":["run","agg"],"NYJ":["run"],"CLE":["run"],"TB":["run","agg"],"NO":["pass"],"BAL":["run"],"CIN":["pass"],"HOU":[],"JAX":["pass"],"DEN":["pass"],"LV":[],"LAC":[],"WSH":["run","agg"],"DAL":["pass","agg"],"SEA":[],"ARI":["pass"],"MIA":["run"],"SF":[],"IND":["pass"],"KC":["pass","agg"],"NYG":["run","agg"],"LAR":["pass"]},"defense_source":true};
+        var GAMES = SHEET.games;
+        var TEND = SHEET.tend || {};
+
+        var KICK = {};
+        GAMES.forEach(function (g) { KICK[g.away + "@" + g.home] = g.kick; });
+
+        var TAG = {
+            fav: { cls: "fav", icon: "⭐", label: "Favorite" },
+            val: { cls: "val", icon: "💎", label: "Underrated" },
+            rz:  { cls: "rz",  icon: "🔥", label: "RZ target" },
+            mat: { cls: "mat", icon: "🦴", label: "Matchup" }
+        };
+        var FILTERS = [
+            { key: "all", icon: "",   label: "All plays" },
+            { key: "fav", icon: "⭐", label: "Favorites" },
+            { key: "val", icon: "💎", label: "Underrated" },
+            { key: "rz",  icon: "🔥", label: "Red zone" },
+            { key: "mat", icon: "🦴", label: "Matchup" },
+            { key: "exp", icon: "✈️", label: "Exploitable D" }
+        ];
+
+        var esc = function (s) {
+            return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+                return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+            });
+        };
+        var logo = function (t) {
+            return "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/" + String(t).toLowerCase() + ".png";
+        };
+        var teamImg = function (t, cls) {
+            return '<img src="' + logo(t) + '" alt="" loading="lazy" decoding="async"' +
+                   (cls ? ' class="' + cls + '"' : "") + ' onerror="this.style.visibility=\'hidden\'">';
+        };
+        var posClass = function (p) { return "atd-pos atd-pos--" + String(p).slice(0, 2); };
+
+        /* A name opens that player's row on the Game Board, already expanded. */
+        function boardHref(pl) {
+            return "index.html?season=" + SHEET.season + "&week=" + SHEET.week +
+                   "&view=board&player=" + encodeURIComponent(pl.id || "");
+        }
+
+        /* "Sun 9/20 · 1:00 PM" in the reader's own timezone. */
+        function fmtKick(iso) {
+            if (!iso) return "";
+            var d = new Date(iso);
+            if (isNaN(d)) return "";
+            var day = d.toLocaleDateString(undefined, { weekday: "short" });
+            var date = (d.getMonth() + 1) + "/" + d.getDate();
+            var time = d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+            return day + " " + date + '<span class="atd-when__dot">·</span>' + time;
+        }
+        function tzName() {
+            try {
+                var p = new Intl.DateTimeFormat(undefined, { timeZoneName: "short" }).formatToParts(new Date());
+                for (var i = 0; i < p.length; i++) if (p[i].type === "timeZoneName") return p[i].value;
+            } catch (e) {}
+            return "";
+        }
+        function dateSpan() {
+            var a = new Date(SHEET.first_kick), b = new Date(SHEET.last_kick);
+            var mon = function (d) { return d.toLocaleDateString(undefined, { month: "short" }); };
+            if (isNaN(a) || isNaN(b)) return "";
+            return mon(a) + " " + a.getDate() + "&ndash;" + (mon(a) === mon(b) ? "" : mon(b) + " ") + b.getDate();
+        }
+
+        function chips(tags) {
+            return tags.map(function (k) {
+                var d = TAG[k];
+                return d ? '<span class="chip chip--' + d.cls + '">' + d.icon + " " + d.label + "</span>" : "";
+            }).join("");
+        }
+
+        var TEND_CHIP = {
+            run:  { icon: "🏃🏿‍♂️‍➡️", label: "Run-first", t: "Run-first offense — lifts the backfield" },
+            pass: { icon: "🪽", label: "Pass-first", t: "Pass-first offense — lifts the pass catchers" },
+            agg:  { icon: "💢", label: "Aggressive", t: "Goes for it on 4th-and-short — more chances to score" }
+        };
+
+        /* A tendency is only shown where it actually helps this player. */
+        function tendChips(team, pos) {
+            var list = TEND[team] || [], isRB = String(pos).slice(0, 2) === "RB", isQB = String(pos).slice(0, 2) === "QB", out = [];
+            list.forEach(function (k) {
+                if (k === "run" && !isRB) return;
+                if (k === "pass" && (isRB || isQB)) return;
+                var d = TEND_CHIP[k];
+                out.push('<span class="chip chip--' + k + '" title="' + esc(d.t) + '">' + d.icon + " " + d.label + "</span>");
+            });
+            return out.join("");
+        }
+
+        var STATUS_CHIP = {
+            q:   { cls: "q",   label: "Q",   t: "Questionable" },
+            d:   { cls: "d",   label: "D",   t: "Doubtful" },
+            out: { cls: "out", label: "Out", t: "Ruled out or on injured reserve" }
+        };
+        function statusChips(pl) {
+            var out = "";
+            var d = STATUS_CHIP[pl.st];
+            if (d) {
+                var label = pl.st === "out" && /reserve/i.test(pl.stl || "") ? "Out · IR" : d.label;
+                out += '<span class="chip chip--' + d.cls + '" title="' + esc((pl.stl || d.t) + (pl.inj ? " — " + pl.inj : "")) + '">' + label + "</span>";
+            }
+            if (pl.m && pl.m.new) {
+                out += '<span class="chip chip--new" title="' + esc((pl.m.tg || 0) + " of his last " + pl.m.g +
+                       " games came with this team — his share was earned elsewhere") + '">New team</span>';
+            }
+            if (pl.mk === "rush_td") out += '<span class="chip chip--mk" title="A quarterback\'s anytime touchdown is a rushing score">Rush TD</span>';
+            if (pl.line >= 1.5) out += '<span class="chip chip--mk" title="Listed at over ' + pl.line + ' touchdowns">' + Math.ceil(pl.line) + "+ TD</span>";
+            return out;
+        }
+
+        /* Measured inputs, from the Game Board for this week. */
+        function metrics(pl) {
+            var m = pl.m || {}, out = [];
+            if (m.small) {
+                out.push('<span class="atd-m atd-m--warn" title="Only ' + m.g + ' NFL game' + (m.g === 1 ? "" : "s") +
+                         ' of data — listed, not rated">' + m.g + " g sample</span>");
+            }
+            if (m.td != null && !m.small) {
+                out.push('<span class="atd-m atd-m--td" title="Chance of at least one ' + (pl.mk === "rush_td" ? "rushing " : "") +
+                         'touchdown: red-zone share × team trips × opponent TD rate allowed, plus scores from outside the 20">' +
+                         (pl.mk === "rush_td" ? "Rush TD " : "TD ") + "<b>" + m.td + "%</b></span>");
+            }
+            if (m.td2 != null && !m.small) {
+                out.push('<span class="atd-m atd-m--td" title="Chance of two or more touchdowns at the same rate">2+ TD <b>' + m.td2 + "%</b></span>");
+            }
+            if (m.rz != null && pl.pos !== "QB" && !m.small) {
+                out.push('<span class="atd-m" title="His share of his team\'s red-zone work over his last ' + m.g +
+                         ' games (targets count 1, carries 0.75)">RZ <b>' + Math.round(m.rz) + "%</b></span>");
+            }
+            if (m.gl >= 0.5) {
+                out.push('<span class="atd-m" title="Carries inside the 5 per game">GL <b>' + m.gl.toFixed(1) + "</b>/g</span>");
+            }
+            if (m.dz != null) {
+                out.push('<span class="atd-m' + (m.dz >= 24 ? " atd-m--good" : (m.dz <= 8 ? " atd-m--bad" : "")) +
+                         '" title="Opponent rank of 32 in red-zone TD rate allowed over its last 17 games — 32 is the softest">D#' + m.dz + "</span>");
+            }
+            if (m.edge != null && Math.abs(m.edge) >= 10 && pl.pos !== "QB") {
+                out.push('<span class="atd-m ' + (m.edge > 0 ? "atd-m--good" : "atd-m--bad") +
+                         '" title="What this defense has allowed to ' + esc(pl.p) + 's against league average, production and touchdowns combined">vs ' +
+                         esc(pl.p) + " " + (m.edge > 0 ? "+" : "−") + Math.abs(m.edge) + "%</span>");
+            }
+            if (m.trend >= 6 && !m.small) {
+                out.push('<span class="atd-m atd-m--good" title="Share of targets or carries over his last 3 games, against his 17-game share">Share ▲ ' + m.trend.toFixed(0) + " pts</span>");
+            }
+            return out.length ? '<div class="atd-metrics">' + out.join("") + "</div>" : "";
+        }
+
+        function playHTML(pl, team, exp) {
+            var fav = pl.t.indexOf("fav") !== -1;
+            var tend = tendChips(team, pl.p);
+            var tags = pl.t.slice();
+            if (exp) tags.push("exp");
+            return '<div class="atd-play' + (fav ? " is-fav" : "") + (pl.st === "out" ? " is-out" : "") + '" data-tags="' + esc(tags.join(" ")) + '" data-need="' + Math.ceil(pl.line || 0.5) +
+                     '" data-mk="' + esc(pl.mk) + '">' +
+                     '<div class="atd-play__top">' +
+                       (pl.id ? '<a class="atd-play__name" href="' + boardHref(pl) + '" title="Open ' + esc(pl.n) + ' on the Game Board">' + esc(pl.n) + "</a>"
+                              : '<span class="atd-play__name">' + esc(pl.n) + "</span>") +
+                       '<span class="' + posClass(pl.p) + '">' + esc(pl.p) + "</span>" +
+                       statusChips(pl) +
+                     "</div>" +
+                     (pl.t.length || tend ? '<div class="atd-play__tags">' + chips(pl.t) + tend + "</div>" : "") +
+                     metrics(pl) +
+                     (pl.st && pl.inj ? '<div class="atd-inj">' + esc(pl.inj) + "</div>" : "") +
+                   "</div>";
+        }
+
+        function sideHTML(g, team) {
+            var plays = g.sides[team] || [];
+            var isExp = (g.exp || []).indexOf(team) !== -1;
+            var opp = team === g.away ? g.home : g.away;
+            var imp = g.implied && g.implied[team];
+            return '<div class="atd-side" data-team="' + esc(team) + '">' +
+                     '<div class="atd-side__head">' + teamImg(team) + "<span>" + esc(team) + "</span>" +
+                       (isExp ? ' <span class="chip chip--exp" title="' + esc(opp + " carries a TARGET verdict in the team-defense scoring table") + '">✈️ Exploitable D</span>' : "") +
+                       (imp != null ? '<span class="atd-side__imp" title="Implied points from the spread and total"><b>' + imp.toFixed(1) + "</b> implied</span>" : "") +
+                     "</div>" +
+                     (plays.length
+                        ? plays.map(function (pl) { return playHTML(pl, team, isExp); }).join("")
+                        : '<p class="atd-empty">No plays listed for ' + esc(team) + ".</p>") +
+                   "</div>";
+        }
+
+        function gameHTML(g) {
+            var line = [g.line, g.total != null ? "O/U " + g.total : ""].filter(Boolean).join(" · ");
+            return '<article class="atd-game">' +
+                     '<div class="atd-game__head">' +
+                       '<span class="atd-game__teams">' + teamImg(g.away) + esc(g.away) + "</span>" +
+                       '<span class="atd-game__at">@</span>' +
+                       '<span class="atd-game__teams">' + teamImg(g.home) + esc(g.home) + "</span>" +
+                       (line ? '<span class="atd-game__line">' + esc(line) + "</span>" : "") +
+                       '<span class="atd-game__when">' + fmtKick(g.kick) + "</span>" +
+                     "</div>" +
+                     '<div class="atd-game__body">' + sideHTML(g, g.away) + sideHTML(g, g.home) + "</div>" +
+                   "</article>";
+        }
+
+        /* Find a player anywhere on the board, with his game context. */
+        function locateId(id) {
+            for (var i = 0; i < GAMES.length; i++) {
+                var g = GAMES[i], teams = Object.keys(g.sides);
+                for (var j = 0; j < teams.length; j++) {
+                    var team = teams[j];
+                    var hit = g.sides[team].filter(function (p) { return p.id === id; })[0];
+                    if (hit) return { pl: hit, team: team, opp: team === g.away ? g.home : g.away,
+                                      at: team === g.away ? "@ " : "vs ", kick: g.kick };
+                }
+            }
+            return null;
+        }
+
+        function topHTML() {
+            return SHEET.top5.map(function (row, i) {
+                var f = locateId(row.id);
+                if (!f) return "";
+                return '<article class="atd-top-card">' +
+                         '<div class="atd-top-card__head">' +
+                           '<span class="atd-rank">' + (i + 1) + "</span>" +
+                           '<a class="atd-top-card__name" href="' + boardHref(f.pl) + '" title="Open on the Game Board">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                           statusChips(f.pl) +
+                         "</div>" +
+                         '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
+                           " &middot; " + fmtKick(f.kick) + "</span>" +
+                         metrics(f.pl) +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" +
+                       "</article>";
+            }).join("");
+        }
+
+        function counts() {
+            var c = { all: 0, fav: 0, val: 0, rz: 0, mat: 0, exp: 0 }, games = 0;
+            GAMES.forEach(function (g) {
+                games++;
+                Object.keys(g.sides).forEach(function (team) {
+                    var isExp = (g.exp || []).indexOf(team) !== -1;
+                    g.sides[team].forEach(function (pl) {
+                        c.all++;
+                        if (isExp) c.exp++;
+                        pl.t.forEach(function (k) { if (c[k] != null) c[k]++; });
+                    });
+                });
+            });
+            c.games = games;
+            return c;
+        }
+
+        var C = counts();
+
+        if (SHEET.week > 1) {
+            document.getElementById("atdPrevWeek").outerHTML =
+                '<a class="atd-back" href="atd-week' + (SHEET.week - 1) + '.html" title="Last week\'s sheet">&larr; Week ' + (SHEET.week - 1) + "</a>";
+        }
+        document.getElementById("atdResearch").href = "index.html?season=" + SHEET.season + "&week=" + SHEET.week;
+        document.getElementById("atdBoardTitle").innerHTML = "Full board &mdash; " + C.games + " games";
+
+        document.getElementById("atdCounts").innerHTML =
+            '<span class="atd-count">' + C.games + " games</span>" +
+            '<span class="atd-count">' + C.all + " plays</span>" +
+            '<span class="atd-count">' + C.fav + " favorites</span>" +
+            '<span class="atd-count">' + dateSpan() + (tzName() ? " &middot; times " + esc(tzName()) : "") + "</span>";
+
+        document.getElementById("atdFilters").innerHTML = FILTERS.map(function (f) {
+            var n = f.key === "all" ? C.all : C[f.key];
+            return '<button type="button" class="atd-filter' + (f.key === "all" ? " is-active" : "") +
+                   '" data-filter="' + f.key + '">' + (f.icon ? f.icon + " " : "") + f.label +
+                   ' <span class="atd-filter__n">' + n + "</span></button>";
+        }).join("");
+
+        document.getElementById("atdTop").innerHTML = topHTML();
+        document.getElementById("atdGames").innerHTML = GAMES.map(gameHTML).join("");
+
+        /* ── Filtering: hide plays that lack the tag, then hide emptied sides/games ── */
+        document.getElementById("atdFilters").addEventListener("click", function (e) {
+            var btn = e.target.closest(".atd-filter");
+            if (!btn) return;
+            var key = btn.dataset.filter;
+            Array.prototype.forEach.call(this.querySelectorAll(".atd-filter"), function (b) {
+                b.classList.toggle("is-active", b === btn);
+            });
+
+            Array.prototype.forEach.call(document.querySelectorAll(".atd-play"), function (p) {
+                var has = key === "all" || (" " + p.dataset.tags + " ").indexOf(" " + key + " ") !== -1;
+                p.classList.toggle("is-hidden", !has);
+            });
+            Array.prototype.forEach.call(document.querySelectorAll(".atd-game"), function (g) {
+                var shown = g.querySelectorAll(".atd-play:not(.is-hidden)").length;
+                g.classList.toggle("is-hidden", shown === 0);
+                Array.prototype.forEach.call(g.querySelectorAll(".atd-side"), function (s) {
+                    var n = s.querySelectorAll(".atd-play:not(.is-hidden)").length;
+                    var empty = s.querySelector(".atd-empty");
+                    if (empty) empty.classList.toggle("is-hidden", key !== "all");
+                    s.classList.toggle("is-hidden", n === 0 && key !== "all");
+                });
+            });
+        });
+
+        /* ── Touchdowns scored ──────────────────────────────────────────────
+           ESPN's scoreboard says which games have started; the per-game summary
+           carries the scoring plays. A touchdown reads "Javonte Williams 1 Yd
+           Rush (Kicker Kick)", so the scorer is everything before the yardage.
+           Results cache in localStorage so reopening the sheet mid-week does not
+           refetch sixteen games. */
+        var SCORED_SEASON = SHEET.season, SCORED_WEEK = SHEET.week;
+        var SCORED_KEY = "wpz-atd-scored-" + SCORED_SEASON + "-W" + SCORED_WEEK;
+        var ESPN = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/";
+
+        /* "Travis Etienne Jr." and "Travis Etienne" are the same man. */
+        function normName(n) {
+            return String(n || "").toLowerCase()
+                .replace(/[.'’]/g, "")
+                .replace(/\b(jr|sr|ii|iii|iv|v)\b/g, "")
+                .replace(/[^a-z ]/g, " ")
+                .replace(/\s+/g, " ").trim();
+        }
+
+        function rosterIndex() {
+            var idx = {};
+            GAMES.forEach(function (g) {
+                Object.keys(g.sides).forEach(function (team) {
+                    g.sides[team].forEach(function (pl) {
+                        idx[normName(pl.n)] = {
+                            name: pl.n, pos: pl.p, team: team, id: pl.id,
+                            fav: pl.t.indexOf("fav") !== -1,
+                            // what cashes the ticket: 2+ for an over 1.5, and only a
+                            // rushing score for a quarterback's rush-TD line
+                            need: Math.ceil(pl.line || 0.5), rushOnly: pl.mk === "rush_td"
+                        };
+                    });
+                });
+            });
+            return idx;
+        }
+
+        function readCache() {
+            try { return JSON.parse(localStorage.getItem(SCORED_KEY)) || null; } catch (e) { return null; }
+        }
+        function writeCache(v) {
+            try { localStorage.setItem(SCORED_KEY, JSON.stringify(v)); } catch (e) {}
+        }
+
+        async function fetchScored() {
+            var sb = await fetch(ESPN + "scoreboard?dates=" + SCORED_SEASON +
+                                 "&seasontype=2&week=" + SCORED_WEEK);
+            if (!sb.ok) throw new Error("ESPN scoreboard " + sb.status);
+            var events = (await sb.json()).events || [];
+
+            var started = events.filter(function (e) {
+                var n = e.status && e.status.type && e.status.type.name;
+                return n && n !== "STATUS_SCHEDULED" && n !== "STATUS_POSTPONED";
+            });
+
+            var scorers = [], played = [], out = [], gameState = {};
+
+            events.forEach(function (e) {
+                var c = (e.competitions && e.competitions[0]) || {};
+                var away = "", home = "";
+                (c.competitors || []).forEach(function (t) {
+                    var ab = (t.team || {}).abbreviation || "";
+                    if (t.homeAway === "home") home = ab; else away = ab;
+                });
+                var t = e.status && e.status.type;
+                gameState[away + "@" + home] =
+                    t && t.completed ? "final"
+                    : (t && t.name !== "STATUS_SCHEDULED" && t.name !== "STATUS_POSTPONED") ? "live"
+                    : "scheduled";
+            });
+
+            for (var i = 0; i < started.length; i++) {
+                try {
+                    var r = await fetch(ESPN + "summary?event=" + started[i].id);
+                    if (!r.ok) continue;
+                    var s = await r.json();
+
+                    (s.scoringPlays || []).forEach(function (p) {
+                        if (!p.type || p.type.abbreviation !== "TD") return;
+                        var m = /^(.+?)\s+\d+\s+Yd\b/i.exec(p.text || "");
+                        if (m) scorers.push({ name: m[1].trim(), team: (p.team || {}).abbreviation || "",
+                                              rush: /\d+\s+Yd\s+(Rush|Run)\b/i.test(p.text || "") });
+                    });
+
+                    // Anyone with an offensive stat line was on the field. A player
+                    // who dressed but never got a touch is a losing bet, not a void --
+                    // but at RB1/WR1/TE1, no touch at all almost always means no snaps.
+                    ((s.boxscore || {}).players || []).forEach(function (tm) {
+                        (tm.statistics || []).forEach(function (cat) {
+                            if (["rushing", "receiving", "passing"].indexOf(cat.name) === -1) return;
+                            (cat.athletes || []).forEach(function (a) {
+                                if (a.athlete && a.athlete.displayName) played.push(a.athlete.displayName);
+                            });
+                        });
+                    });
+
+                    // The injury report is the definitive read: ruled out means the
+                    // book voids the ticket rather than settling it a loss.
+                    (s.injuries || []).forEach(function (tm) {
+                        (tm.injuries || []).forEach(function (inj) {
+                            var st = String(inj.status || "").toLowerCase();
+                            if (st.indexOf("out") === -1 && st.indexOf("inactive") === -1) return;
+                            if (inj.athlete && inj.athlete.displayName) out.push(inj.athlete.displayName);
+                        });
+                    });
+                } catch (e) { /* one unreachable game should not sink the board */ }
+            }
+
+            return {
+                at: new Date().toISOString(),
+                total: events.length,
+                started: started.length,
+                final: events.filter(function (e) {
+                    return e.status && e.status.type && e.status.type.completed;
+                }).length,
+                pending: events.filter(function (e) {
+                    var t = e.status && e.status.type;
+                    return t && !t.completed && t.name !== "STATUS_SCHEDULED";
+                }).map(function (e) { return e.shortName; }),
+                scorers: scorers,
+                played: played,
+                out: out,
+                gameState: gameState
+            };
+        }
+
+        /* Which game is a player in, and has it finished? */
+        function gameKeyOf(team) {
+            for (var i = 0; i < GAMES.length; i++) {
+                var g = GAMES[i];
+                if (g.sides[team]) return g.away + "@" + g.home;
+            }
+            return null;
+        }
+
+        function paintScored(data) {
+            var statusEl = document.getElementById("atdScoredStatus");
+            var listEl = document.getElementById("atdScoredList");
+            var sumEl = document.getElementById("atdScoredSummary");
+            var gamesEl = document.getElementById("atdScoredGames");
+            if (!data) return;
+
+            var idx = rosterIndex(), hits = {}, offBoard = [];
+            data.scorers.forEach(function (sc) {
+                var key = normName(sc.name);
+                if (idx[key]) {
+                    hits[key] = hits[key] || { who: idx[key], n: 0, rush: 0 };
+                    hits[key].n++;
+                    if (sc.rush) hits[key].rush++;
+                } else {
+                    offBoard.push(sc.name);
+                }
+            });
+
+            var playedSet = {}, outSet = {};
+            (data.played || []).forEach(function (n) { playedSet[normName(n)] = 1; });
+            (data.out || []).forEach(function (n) { outSet[normName(n)] = 1; });
+            var state = data.gameState || {};
+
+            /* A listed player settles three ways:
+                 active  – his game is final and he took the field: the bet stood
+                 void    – his game is final and he never played, or he was ruled
+                           out: a book refunds these rather than settling them lost
+                 pending – his game has not finished, so nothing is decided yet
+               Only `active` belongs in the denominator. Counting a player who never
+               dressed as a miss is the same mistake as counting a voided ticket
+               as a loss. */
+            var settle = {};
+            Object.keys(idx).forEach(function (k) {
+                var who = idx[k];
+                var st = state[gameKeyOf(who.team)] || "scheduled";
+                if (st !== "final") { settle[k] = "pending"; return; }
+                settle[k] = (playedSet[k] && !outSet[k]) ? "active" : "void";
+            });
+
+            /* Only a void leaves the denominator. A player whose game has not
+               kicked off yet is still a live ticket -- he has not failed, but he
+               has not been refunded either, so he stays counted. */
+            var counts = { active: 0, void: 0, pending: 0, live: 0, favLive: 0 };
+            Object.keys(idx).forEach(function (k) {
+                counts[settle[k]]++;
+                if (settle[k] !== "void") {
+                    counts.live++;
+                    if (idx[k].fav) counts.favLive++;
+                }
+            });
+
+            Object.keys(hits).forEach(function (k) {
+                var h = hits[k];
+                h.count = h.who.rushOnly ? h.rush : h.n;
+                h.cashed = h.count >= h.who.need;
+            });
+            var rows = Object.keys(hits).map(function (k) { return hits[k]; })
+                .filter(function (r) { return r.count > 0; });
+            rows.sort(function (a, b) { return (b.cashed - a.cashed) || (b.who.fav - a.who.fav) || (b.count - a.count); });
+            var cashed = rows.filter(function (r) { return r.cashed; });
+            var favHit = cashed.filter(function (r) { return r.who.fav; }).length;
+
+            sumEl.hidden = false;
+            sumEl.innerHTML =
+                '<span class="atd-count">' + cashed.length + " of " + counts.live + " listed plays cashed</span>" +
+                '<span class="atd-count">' + favHit + " of " + counts.favLive + " favorites</span>" +
+                (counts["void"] ? '<span class="atd-count atd-count--void">' + counts["void"] +
+                    " voided &mdash; did not play</span>" : "") +
+                (counts.pending ? '<span class="atd-count">' + counts.pending + " still to play</span>" : "") +
+                '<span class="atd-count">' + data.final + " of " + data.total + " games final</span>";
+
+            listEl.innerHTML = rows.length
+                ? rows.map(function (r) {
+                    return '<div class="atd-top-card' + (r.cashed ? " atd-scored-card" : "") + '">' +
+                             '<div class="atd-top-card__head">' +
+                               '<span class="atd-top-card__name">' + teamImg(r.who.team) + esc(r.who.name) + "</span>" +
+                               '<span class="chip ' + (r.cashed ? "chip--hit" : "chip--void") + '">' +
+                                 (r.count > 1 ? r.count + " TD" : "TD") + (r.who.rushOnly ? " rush" : "") + "</span>" +
+                               (r.cashed ? "" : '<span class="chip chip--mk">needs ' + r.who.need + "+</span>") +
+                               (r.who.fav ? '<span class="chip chip--fav">⭐</span>' : "") +
+                             "</div>" +
+                             '<span class="atd-top-card__meta">' + esc(r.who.pos) + " &middot; " + esc(r.who.team) +
+                               (r.who.need > 1 ? " &middot; over " + (r.who.need - 0.5) : "") + "</span>" +
+                           "</div>";
+                  }).join("")
+                : '<p class="atd-scored-empty">No listed player has scored yet.</p>';
+
+            // Mark the board: a hit where you read the play, and a void where the
+            // player never took the field.
+            Array.prototype.forEach.call(document.querySelectorAll(".atd-play"), function (el) {
+                var nm = el.querySelector(".atd-play__name");
+                var key = nm ? normName(nm.textContent) : "";
+                var hit = hits[key] && hits[key].cashed ? hits[key] : null;
+                el.classList.toggle("is-hit", !!hit);
+                el.classList.toggle("is-void", settle[key] === "void");
+
+                var old = el.querySelector(".chip--hit, .chip--void");
+                if (old) old.remove();
+                var head = el.querySelector(".atd-play__top");
+                if (hit) {
+                    var chip = document.createElement("span");
+                    chip.className = "chip chip--hit";
+                    chip.textContent = hit.count > 1 ? hit.count + " TD" : "TD";
+                    head.appendChild(chip);
+                } else if (settle[key] === "void") {
+                    var v = document.createElement("span");
+                    v.className = "chip chip--void";
+                    v.textContent = "Voided";
+                    v.title = "Did not play — a book refunds this rather than settling it lost";
+                    head.appendChild(v);
+                }
+            });
+
+            var when = new Date(data.at);
+            statusEl.textContent = "Updated " +
+                when.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }) +
+                (data.started < data.total
+                    ? " · " + (data.total - data.started) + " games not started" : "");
+            gamesEl.textContent =
+                (data.pending.length ? "In progress: " + data.pending.join(", ") + ". " : "") +
+                (offBoard.length
+                    ? offBoard.length + " touchdown" + (offBoard.length > 1 ? "s" : "") +
+                      " by players not on this board (" + offBoard.slice(0, 6).join(", ") +
+                      (offBoard.length > 6 ? ", …" : "") + ")."
+                    : "");
+        }
+
+        /* Auto-refresh. The sheet is static, so there is no server to push scores
+           in -- the page keeps itself current in whoever's browser has it open.
+
+           Cadence follows the week rather than a fixed interval, because a fixed
+           one is wrong in both directions: too slow while a game is live, and
+           pure waste at 3am on a Wednesday.
+             ball in the air          -> every 90s
+             nothing live yet         -> sleep until just after the next kickoff
+             every game final         -> stand down entirely
+           Polling pauses while the tab is hidden; a page nobody is looking at
+           should not be spending requests. */
+        var POLL_LIVE = 90 * 1000;
+        var POLL_MAX = 30 * 60 * 1000;
+        var POLL_MIN = 60 * 1000;
+        var pollTimer = null, inFlight = false;
+
+        function nextPollDelay(data) {
+            if (!data) return POLL_MIN;
+            if (data.pending && data.pending.length) return POLL_LIVE;
+            if (data.final >= data.total) return null;   // week is done
+            var now = Date.now(), soonest = Infinity;
+            Object.keys(KICK).forEach(function (k) {
+                var t = new Date(KICK[k]).getTime();
+                if (t > now && t < soonest) soonest = t;
+            });
+            if (soonest === Infinity) return POLL_MAX;
+            // wake a little after kickoff -- nobody scores in the first 30 seconds
+            return Math.max(POLL_MIN, Math.min(soonest - now + 30000, POLL_MAX));
+        }
+
+        function describeNext(ms) {
+            if (ms == null) return " · all games final, auto-refresh off";
+            var mins = Math.round(ms / 60000);
+            return " · next check " + (mins < 1 ? "in under a minute" : "in " + mins + " min");
+        }
+
+        function schedulePoll(data) {
+            if (pollTimer) clearTimeout(pollTimer);
+            var d = nextPollDelay(data);
+            if (d == null) return;
+            pollTimer = setTimeout(function () { runRefresh(true); }, d);
+        }
+
+        async function runRefresh(auto) {
+            if (inFlight) return;
+            // A hidden tab gets rescheduled rather than fetched.
+            if (auto && document.hidden) { schedulePoll(readCache()); return; }
+
+            inFlight = true;
+            var statusEl = document.getElementById("atdScoredStatus");
+            if (!auto) {
+                scoredBtn.disabled = true;
+                scoredBtn.textContent = "Refreshing…";
+                statusEl.textContent = "Reading ESPN scoring plays…";
+            }
+            try {
+                var data = await fetchScored();
+                writeCache(data);
+                paintScored(data);
+                statusEl.textContent += describeNext(nextPollDelay(data));
+                schedulePoll(data);
+            } catch (e) {
+                statusEl.textContent = "Could not reach ESPN (" +
+                    (e && e.message ? e.message : e) + ")." +
+                    (auto ? " Retrying shortly." : "");
+                // A failed poll must not end the loop, or one blip stops the week.
+                if (pollTimer) clearTimeout(pollTimer);
+                pollTimer = setTimeout(function () { runRefresh(true); }, POLL_LIVE * 2);
+            } finally {
+                inFlight = false;
+                if (!auto) { scoredBtn.disabled = false; scoredBtn.textContent = "Refresh"; }
+            }
+        }
+
+        var scoredBtn = document.getElementById("atdScoredRefresh");
+        scoredBtn.addEventListener("click", function () { runRefresh(false); });
+
+        // Coming back to a tab that has been asleep should not show a stale board.
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) return;
+            var c = readCache();
+            var age = c ? Date.now() - new Date(c.at).getTime() : Infinity;
+            if (age > POLL_LIVE) runRefresh(true); else schedulePoll(c);
+        });
+
+        // Paint whatever was cached so the board is populated immediately, then
+        // go and get the truth.
+        paintScored(readCache());
+        runRefresh(true);
+
+        /* ── Theme toggle, shared worstpickz-theme key ── */
+        var tBtn = document.getElementById("atdTheme");
+        function paintTheme() {
+            var light = document.documentElement.classList.contains("theme-light");
+            tBtn.textContent = light ? "🌙" : "☀️";
+            tBtn.setAttribute("aria-pressed", light ? "true" : "false");
+        }
+        tBtn.addEventListener("click", function () {
+            var light = document.documentElement.classList.toggle("theme-light");
+            try { localStorage.setItem("worstpickz-theme", light ? "light" : "dark"); } catch (e) {}
+            paintTheme();
+        });
+        paintTheme();
+    })();
+    </script>
+</body>
+</html>
+

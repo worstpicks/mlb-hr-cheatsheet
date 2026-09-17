@@ -13,9 +13,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
-    <title>Week 1 ATD Cheat Sheet — Worst Pickz</title>
+    <title>Week __WEEK__ ATD Cheat Sheet — Worst Pickz</title>
     <style>
-    /* Worst Pickz — Week 1 Anytime TD cheat sheet.
+    /* Worst Pickz — weekly Anytime TD cheat sheet, built by nfl_research/atd_sheet.py.
        Tokens lifted from preview/nfl-research/nfl-research.css so this reads as
        the same product. Kept self-contained so it also opens standalone. */
     :root {
@@ -319,6 +319,42 @@
         .atd-games { grid-template-columns: 1fr 1fr; }
         .atd-game { break-inside: avoid; }
     }
+
+    /* ── Week-2+ additions ── */
+    .atd-play__name { color: var(--wpz-color-text); }
+    a.atd-play__name, a.atd-top-card__name { text-decoration: underline dotted rgba(250, 204, 21, 0.5); text-underline-offset: 3px; }
+    a.atd-play__name:hover, a.atd-top-card__name:hover { color: var(--wpz-accent-gold); }
+    a.atd-top-card__name { color: var(--wpz-color-text); }
+    .atd-board-hint { font-size: 0.64rem; font-weight: 800; color: var(--nrs-muted); margin-left: auto; white-space: nowrap; }
+    a.atd-board-hint { color: #7dd3fc; }
+    .chip--new { background: rgba(56, 189, 248, 0.14); border-color: rgba(56, 189, 248, 0.45); color: #7dd3fc; }
+    .chip--mk  { background: rgba(148, 163, 184, 0.16); border-color: rgba(148, 163, 184, 0.4); color: #e2e8f0; }
+    .chip--d   { background: rgba(249, 115, 22, 0.2); border-color: rgba(249, 115, 22, 0.55); color: #fed7aa; }
+    html.theme-light .chip--new { color: #075985; }
+    html.theme-light .chip--mk  { color: #334155; }
+    html.theme-light .chip--d   { color: #9a3412; }
+    .atd-m--warn { background: rgba(251, 191, 36, 0.18); color: #fde68a; }
+    .atd-m--td { background: rgba(250, 204, 21, 0.16); color: #fde68a; }
+    .atd-m--td b { color: #fef3c7; }
+    html.theme-light .atd-m--warn { color: #92400e; background: rgba(251, 191, 36, 0.3); }
+    html.theme-light .atd-m--td { color: #854d0e; background: rgba(250, 204, 21, 0.28); }
+    html.theme-light .atd-m--td b { color: #713f12; }
+    .atd-side__imp {
+        margin-left: auto; text-transform: none; letter-spacing: 0; font-size: 0.7rem; font-weight: 700;
+        padding: 1px 7px; border-radius: 999px; border: 1px solid var(--nrs-border); color: var(--nrs-muted);
+        font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .atd-side__imp b { color: var(--wpz-color-text); }
+    .atd-side__head { flex-wrap: wrap; }
+    .atd-game__line { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .atd-inj { font-size: 0.7rem; color: #fdba74; line-height: 1.4; }
+    .atd-play.is-out { opacity: 0.6; }
+    html.theme-light .atd-inj { color: #9a3412; }
+    .atd-header-actions-right { flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 520px) {
+        .atd-header-actions { align-items: flex-start; }
+        .atd-back, .atd-theme-toggle { padding: 6px 10px; font-size: 0.76rem; }
+    }
     </style>
 </head>
 <body>
@@ -327,8 +363,8 @@
             <div class="atd-header-actions">
                 <a class="atd-back atd-back--switch" href="../index.html" title="Go to the MLB home run cheat sheet"><span aria-hidden="true">&#9918;</span> MLB Cheat Sheet</a>
                 <div class="atd-header-actions-right">
-                    <a class="atd-back" href="atd-week2.html" title="This week's sheet">Week 2 &rarr;</a>
-                    <a class="atd-back" href="index.html" title="Open the NFL matchup research board">NFL Research &rarr;</a>
+                    <span id="atdPrevWeek"></span>
+                    <a class="atd-back" id="atdResearch" href="index.html" title="Open the NFL matchup research board">NFL Research &rarr;</a>
                     <button type="button" class="atd-theme-toggle" id="atdTheme" title="Switch theme" aria-label="Switch theme">&#9728;&#65039;</button>
                 </div>
             </div>
@@ -339,8 +375,8 @@
                 </div>
                 <div>
                     <span class="atd-brand-tag">Worst Pickz Cheat Sheet</span>
-                    <h1>Week 1 &mdash; Anytime Touchdown</h1>
-                    <p class="atd-sub">Every listed play by game, tagged by role and matchup. Tap a filter to narrow the board.</p>
+                    <h1>Week __WEEK__ &mdash; Anytime Touchdown</h1>
+                    <p class="atd-sub">Every listed play by game, tagged by role and matchup. Tap a filter to narrow the board, or a name to open his Game Board.</p>
                     <div class="atd-counts" id="atdCounts"></div>
                 </div>
             </div>
@@ -350,15 +386,16 @@
             <div class="atd-filters" id="atdFilters"></div>
             <div class="atd-legend">
                 <span class="chip chip--fav">&#11088; Favorite</span>
-                <span class="chip chip--val">&#128142; Value</span>
-                <span class="chip chip--rz">&#128293; Red zone</span>
-                <span class="chip chip--mat">&#129460; Matchup</span>
+                <span class="chip chip--val">&#128142; Underrated</span>
+                <span class="chip chip--rz">&#128293; Red zone target</span>
+                <span class="chip chip--mat">&#129460; Defensive matchup</span>
                 <span class="chip chip--exp">&#9992;&#65039; Exploitable D</span>
                 <span class="chip chip--run">&#127939;&#127999;&#8205;&#9794;&#65039;&#8205;&#10145;&#65039; Run-first</span>
                 <span class="chip chip--pass">&#129653; Pass-first</span>
                 <span class="chip chip--agg">&#128162; Aggressive</span>
                 <span class="chip chip--q">Q</span>
-                <span class="chip chip--out">Not projected</span>
+                <span class="chip chip--out">Out</span>
+                <span class="chip chip--new">New team</span>
             </div>
         </div>
 
@@ -368,7 +405,7 @@
         </section>
 
         <section class="atd-section">
-            <h2 class="atd-section-title">Full board &mdash; 16 games</h2>
+            <h2 class="atd-section-title" id="atdBoardTitle">Full board</h2>
             <div class="atd-games" id="atdGames"></div>
         </section>
 
@@ -386,26 +423,29 @@
         </section>
 
         <p class="atd-foot">
-            <strong>Tags:</strong> &#11088; favorite, &#128142; value, &#128293; red-zone role,
-            &#129460; defensive matchup to attack, &#9992;&#65039; the defense this team faces is exploitable.<br>
-            <strong>Team tendency</strong> is shown only where it helps that player:
-            &#127939;&#127999;&#8205;&#9794;&#65039;&#8205;&#10145;&#65039; run-first lifts the backfield,
-            &#129653; pass-first lifts the pass catchers, and &#128162; aggressive lifts everyone
-            &mdash; an offense that goes for it gets more chances to score.<br>
-            <strong>Numbers:</strong> RZ is red-zone TD chance and D#n is the opponent's rank of 32
-            inside the 20 &mdash; green at 24+ is soft, red at 8 or better is a wall. Both are computed
-            from nflverse play-by-play by <code>nfl_research/redzone.py</code> and read out of the
-            week's slate, so they rebuild with it rather than being pasted in.<br>
-            <strong>Top 5</strong> is ranked on RZ alone, restricted to projected Week 1 starters.
-            Red-zone chance is the only input here that measures scoring rather than yardage, so it
-            carries the ranking on its own.<br>
-            <strong>Basis and caveats:</strong> the red-zone model runs on 2025 play-by-play &mdash; Week 1
-            has no current-season sample. A player who changed teams earned his share with the old
-            offence and it is applied to the new one's trips, so those numbers describe a role he may
-            no longer hold. Availability is cross-checked against the Week 1 projected starters:
-            <strong>Q</strong> is questionable but still projected to start, <strong>Not projected</strong>
-            means the player is absent from that lineup and his role here is unconfirmed. Check those
-            before this goes out.
+            <strong>Tags:</strong> &#11088; favorite &mdash; the week's best touchdown odds among healthy players with a real sample;
+            &#128142; underrated &mdash; a secondary role scoring well above what his slot usually does this week, or a growing role
+            into a defense that leaks; &#128293; red-zone target &mdash; a back with 30%+ of his team's work inside the 20 or a
+            goal-line carry a game, a pass catcher with 18%+, a quarterback with half a carry a game inside the 5;
+            &#129460; defensive matchup &mdash; this defense has given up 10%+ more than league to his role, in production and
+            touchdowns combined, and is not a red-zone wall; &#9992;&#65039; exploitable D &mdash; the defense this team faces
+            carries a TARGET verdict in the team-defense scoring table.<br>
+            <strong>Team tendency</strong> is shown only where it helps that player, and is computed from the last 17 games:
+            &#127939;&#127999;&#8205;&#9794;&#65039;&#8205;&#10145;&#65039; run-first (a bottom-ten pass rate with the score close) lifts
+            the backfield, &#129653; pass-first (top ten) lifts the pass catchers, and &#128162; aggressive (a top-ten rate of going for
+            it on 4th-and-short) lifts everyone.<br>
+            <strong>Numbers:</strong> TD is the chance of at least one touchdown from the Game Board &mdash; his share of his team's
+            red-zone work &times; how often his team gets there &times; how often this defense lets a trip score, plus the scores he
+            gets from outside the 20 (quarterbacks: rushing touchdowns only). RZ is that red-zone share, GL his carries inside the
+            5 per game, and D#n the opponent's rank of 32 in red-zone touchdown rate allowed &mdash; green at 24+ is soft, red at 8
+            or better is a wall. Every number covers each player's and each defense's last 17 games, so it reaches back into
+            last season while this one is young.<br>
+            <strong>Top 5</strong> ranks healthy favorites on that TD chance, nudged by this week's implied points and by the
+            touchdowns this defense has allowed to his role.<br>
+            <strong>Caveats:</strong> <strong>New team</strong> means most of his sample was earned with another club, so his
+            share describes a role he may not hold now. A <strong>small sample</strong> player has fewer than four games and is
+            listed without a rating. Injury statuses come from ESPN's report when the sheet was built &mdash; check again before
+            kickoff.
         </p>
     </div>
 
@@ -413,224 +453,26 @@
     (function () {
         "use strict";
 
-        /* Tags: fav = favorite, val = value, rz = red zone, mat = matchup to attack.
-           `exp` on a side = that team faces an exploitable defense. */
-        var GAMES = [
-            { away: "NE", home: "SEA", sides: {
-                NE:  [ { n: "A.J. Brown", p: "WR1", t: ["rz"] }, { n: "Hunter Henry", p: "TE1", t: ["rz"] } ],
-                SEA: [ { n: "Jaxon Smith-Njigba", p: "WR1", t: [] }, { n: "Cooper Kupp", p: "WR3", t: ["val", "rz"] } ] } },
+        var SHEET = /*__SHEET__*/null;
+        var GAMES = SHEET.games;
+        var TEND = SHEET.tend || {};
 
-            { away: "SF", home: "LAR", sides: {
-                SF:  [ { n: "Christian McCaffrey", p: "RB1", t: ["fav", "rz"] }, { n: "George Kittle", p: "TE1", t: ["rz"] } ],
-                LAR: [ { n: "Kyren Williams", p: "RB1", t: ["fav", "rz"] }, { n: "Puka Nacua", p: "WR1", t: [] },
-                       { n: "Davante Adams", p: "WR2", t: ["rz"] }, { n: "Colby Parkinson", p: "TE1", t: ["val"] } ] } },
-
-            { away: "TB", home: "CIN", exp: ["TB"], sides: {
-                TB:  [ { n: "Bucky Irving", p: "RB1", t: ["mat", "rz"] } ],
-                CIN: [ { n: "Ja'Marr Chase", p: "WR1", t: ["mat", "fav", "rz"] }, { n: "Mike Gesicki", p: "TE1", t: ["val", "rz"] } ] } },
-
-            { away: "NO", home: "DET", exp: ["DET"], sides: {
-                NO:  [ { n: "Travis Etienne", p: "RB1", t: ["mat", "fav", "rz"] },
-                       { n: "Chris Olave", p: "WR1", t: [] }, { n: "Juwan Johnson", p: "TE1", t: ["val", "rz"] } ],
-                DET: [ { n: "Sam LaPorta", p: "TE1", t: ["mat", "rz"] } ] } },
-
-            { away: "NYJ", home: "TEN", exp: ["NYJ"], sides: {
-                NYJ: [ { n: "Adonai Mitchell", p: "WR1", t: ["val"] }, { n: "Garrett Wilson", p: "WR2", t: [] } ],
-                TEN: [ { n: "Tony Pollard", p: "RB1", t: ["rz"] }, { n: "Wan'Dale Robinson", p: "WR1", t: [] } ] } },
-
-            { away: "BAL", home: "IND", exp: ["BAL"], sides: {
-                BAL: [ { n: "Derrick Henry", p: "RB1", t: ["mat", "fav", "rz"] }, { n: "Zay Flowers", p: "WR1", t: [] },
-                       { n: "Rashod Bateman", p: "WR2", t: ["val", "rz"] }, { n: "Mark Andrews", p: "TE1", t: ["rz"] } ],
-                IND: [ { n: "Jonathan Taylor", p: "RB1", t: ["mat", "fav", "rz"] } ] } },
-
-            { away: "ATL", home: "PIT", sides: {
-                ATL: [ { n: "Bijan Robinson", p: "RB1", t: ["fav", "rz"] }, { n: "Drake London", p: "WR1", t: ["rz"] } ],
-                PIT: [ { n: "DK Metcalf", p: "WR1", t: ["rz"] } ] } },
-
-            { away: "CHI", home: "CAR", exp: ["CHI"], sides: {
-                CHI: [ { n: "D'Andre Swift", p: "RB1", t: ["mat", "fav", "rz"] }, { n: "Rome Odunze", p: "WR1", t: ["mat", "rz"] },
-                       { n: "Colston Loveland", p: "TE1", t: ["val", "rz"] } ],
-                CAR: [ { n: "Tetairoa McMillan", p: "WR1", t: ["rz"] } ] } },
-
-            { away: "CLE", home: "JAX", sides: {
-                CLE: [ { n: "Quinshon Judkins", p: "RB1", t: ["mat", "val", "rz"] }, { n: "Jerry Jeudy", p: "WR1", t: [] } ],
-                JAX: [ { n: "Chris Rodriguez Jr.", p: "RB1", t: ["val"] }, { n: "Jakobi Meyers", p: "WR2", t: ["val", "rz"] } ] } },
-
-            { away: "BUF", home: "HOU", sides: {
-                BUF: [ { n: "James Cook", p: "RB1", t: ["rz"] }, { n: "DJ Moore", p: "WR2", t: ["val"] },
-                       { n: "Dalton Kincaid", p: "TE1", t: ["rz"] } ],
-                HOU: [ { n: "David Montgomery", p: "RB1", t: ["val", "rz"] } ] } },
-
-            { away: "MIA", home: "LV", exp: ["MIA", "LV"], sides: {
-                MIA: [ { n: "De'Von Achane", p: "RB1", t: ["mat", "fav", "rz"] }, { n: "Jaylen Wright", p: "RB2", t: ["val"] } ],
-                LV:  [ { n: "Ashton Jeanty", p: "RB1", t: ["mat", "fav", "rz"] } ] } },
-
-            { away: "GB", home: "MIN", sides: {
-                GB:  [ { n: "Josh Jacobs", p: "RB1", t: ["rz"] },
-                       { n: "Tucker Kraft", p: "TE1", t: ["fav", "rz"] } ],
-                MIN: [ { n: "Aaron Jones", p: "RB1", t: ["val", "rz"] }, { n: "Jordan Mason", p: "RB2", t: [] } ] } },
-
-            { away: "WSH", home: "PHI", exp: ["PHI"], sides: {
-                WSH: [ { n: "Rachaad White", p: "RB2", t: ["val"] }, { n: "Stefon Diggs", p: "WR1", t: ["rz"] },
-                       { n: "Terry McLaurin", p: "WR2", t: ["rz"] } ],
-                PHI: [ { n: "Saquon Barkley", p: "RB1", t: ["mat", "fav", "rz"] }, { n: "DeVonta Smith", p: "WR1", t: ["rz"] },
-                       { n: "Dallas Goedert", p: "TE1", t: ["rz"] }, { n: "Grant Calcaterra", p: "TE2", t: ["val"] } ] } },
-
-            { away: "ARI", home: "LAC", sides: {
-                ARI: [ { n: "Trey McBride", p: "TE1", t: ["mat", "rz"] }, { n: "Bam Knight", p: "RB2", t: ["val"] } ],
-                LAC: [ { n: "Omarion Hampton", p: "RB1", t: ["val", "rz"] }, { n: "Kimani Vidal", p: "RB2", t: ["val"] },
-                       { n: "Ladd McConkey", p: "WR1", t: [] } ] } },
-
-            { away: "DAL", home: "NYG", exp: ["NYG"], sides: {
-                DAL: [ { n: "Javonte Williams", p: "RB1", t: ["mat", "fav", "rz"] }, { n: "George Pickens", p: "WR1", t: ["rz"] } ],
-                NYG: [ { n: "Cam Skattebo", p: "RB1", t: ["mat", "fav", "rz"] }, { n: "Tyrone Tracy Jr.", p: "RB2", t: [] },
-                       { n: "Darnell Mooney", p: "WR2", t: [] }, { n: "Theo Johnson", p: "TE1", t: ["rz"] } ] } },
-
-            { away: "DEN", home: "KC", sides: {
-                DEN: [ { n: "RJ Harvey", p: "RB2", t: ["val"] }, { n: "Evan Engram", p: "TE1", t: ["rz"] } ],
-                KC:  [ { n: "Rashee Rice", p: "WR1", t: ["rz"] }, { n: "Kenneth Walker III", p: "RB1", t: ["val", "rz"] },
-                       { n: "Xavier Worthy", p: "WR2", t: [] }, { n: "Travis Kelce", p: "TE1", t: ["rz"] } ] } }
-        ];
-
-        /* Kickoffs, from preview/data/nfl-research-2026-W1.json (fetched 2026-09-08).
-           Stored as UTC so the sheet prints in whatever timezone the reader is in. */
-        var KICK = {
-            "NE@SEA":  "2026-09-10T00:20Z",
-            "SF@LAR":  "2026-09-11T00:35Z",
-            "TB@CIN":  "2026-09-13T17:00Z",
-            "NO@DET":  "2026-09-13T17:00Z",
-            "NYJ@TEN": "2026-09-13T17:00Z",
-            "BAL@IND": "2026-09-13T17:00Z",
-            "ATL@PIT": "2026-09-13T17:00Z",
-            "CHI@CAR": "2026-09-13T17:00Z",
-            "CLE@JAX": "2026-09-13T17:00Z",
-            "BUF@HOU": "2026-09-13T17:00Z",
-            "MIA@LV":  "2026-09-13T20:25Z",
-            "GB@MIN":  "2026-09-13T20:25Z",
-            "WSH@PHI": "2026-09-13T20:25Z",
-            "ARI@LAC": "2026-09-13T20:25Z",
-            "DAL@NYG": "2026-09-14T00:20Z",
-            "DEN@KC":  "2026-09-15T00:15Z"
-        };
-
-        /* Team tendencies (PropFinder, 2025 season). A tendency only shows on a player
-           it actually helps: run-first lifts backs, pass-first lifts receivers, and
-           aggressive lifts everyone — an offense that goes for it scores more often. */
-        var TEND = {
-            LAR: ["pass", "agg"], SEA: ["run"],  IND: ["agg"],          NE:  ["pass"],
-            JAX: ["pass", "agg"], BUF: ["run", "agg"], PHI: ["run"],    HOU: [],
-            BAL: ["run", "agg"],  KC:  ["pass", "agg"], CHI: ["run", "agg"], DEN: ["pass"],
-            LAC: [],              DET: ["run", "agg"], MIN: [],         GB:  ["run", "agg"],
-            TB:  ["run", "agg"],  SF:  [],             DAL: ["agg"],    NYG: ["run", "agg"],
-            NO:  ["run", "agg"],  PIT: [],             ATL: ["run"],    CLE: ["run"],
-            MIA: ["run"],         WSH: ["run", "agg"], CIN: ["pass"],   CAR: ["run", "agg"],
-            ARI: ["pass", "agg"], LV:  ["agg"],        TEN: ["run", "agg"], NYJ: ["run", "agg"]
-        };
-
-        /* Red-zone projection, computed from nflverse play-by-play by
-           nfl_research/redzone.py and read out of the Week 1 slate. Regenerates
-           with the slate -- nothing here is pasted.
-           rz = TD chance % (share x team trips/game x opponent TD rate allowed,
-                turned into odds of at least one by 1 - exp(-xTD))
-           dz = that opponent's rank of 32 in red-zone TD rate allowed, 32 = softest */
-        var DATA = {
-            "Christian McCaffrey": { rz: 60, dz: 4 },
-            "Travis Etienne":      { rz: 58, dz: 21 },
-            "Javonte Williams":    { rz: 55, dz: 23 },
-            "Cam Skattebo":        { rz: 54, dz: 28 },
-            "Jonathan Taylor":     { rz: 53, dz: 6 },
-            "Kyren Williams":      { rz: 51, dz: 14 },
-            "Derrick Henry":       { rz: 50, dz: 8 },
-            "James Cook":          { rz: 49, dz: 18 },
-            "Omarion Hampton":     { rz: 48, dz: 24 },
-            "Saquon Barkley":      { rz: 46, dz: 32 },
-            "Bijan Robinson":      { rz: 44, dz: 12 },
-            "Ashton Jeanty":       { rz: 44, dz: 26 },
-            "Davante Adams":       { rz: 43, dz: 14 },
-            "Josh Jacobs":         { rz: 43, dz: 2 },
-            "Kimani Vidal":        { rz: 42, dz: 24 },
-            "Bucky Irving":        { rz: 40, dz: 27 },
-            "Chris Rodriguez Jr.": { rz: 40, dz: 17 },
-            "De'Von Achane":       { rz: 38, dz: 13 },
-            "Rashee Rice":         { rz: 38, dz: 1 },
-            "Quinshon Judkins":    { rz: 36, dz: 19 },
-            "D'Andre Swift":       { rz: 35, dz: 11 },
-            "David Montgomery":    { rz: 35, dz: 20 },
-            "RJ Harvey":           { rz: 35, dz: 9 },
-            "Ja'Marr Chase":       { rz: 33, dz: 29 },
-            "Trey McBride":        { rz: 33, dz: 3 },
-            "Colby Parkinson":     { rz: 32, dz: 14 },
-            "Jordan Mason":        { rz: 32, dz: 22 },
-            "Tyrone Tracy Jr.":    { rz: 32, dz: 28 },
-            "Aaron Jones":         { rz: 29, dz: 22 },
-            "George Pickens":      { rz: 29, dz: 23 },
-            "Drake London":        { rz: 28, dz: 12 },
-            "Hunter Henry":        { rz: 27, dz: 5 },
-            "Rachaad White":       { rz: 27, dz: 10 },
-            "Bam Knight":          { rz: 27, dz: 3 },
-            "Kenneth Walker III":  { rz: 26, dz: 1 },
-            "Jaxon Smith-Njigba":  { rz: 25, dz: 25 },
-            "Puka Nacua":          { rz: 24, dz: 14 },
-            "Chris Olave":         { rz: 24, dz: 21 },
-            "Tucker Kraft":        { rz: 24, dz: 2 },
-            "Ladd McConkey":       { rz: 23, dz: 24 },
-            "Theo Johnson":        { rz: 23, dz: 28 },
-            "Tony Pollard":        { rz: 22, dz: 30 },
-            "Wan'Dale Robinson":   { rz: 22, dz: 30 },
-            "Mark Andrews":        { rz: 22, dz: 8 },
-            "Dallas Goedert":      { rz: 22, dz: 32 },
-            "Cooper Kupp":         { rz: 21, dz: 25 },
-            "George Kittle":       { rz: 21, dz: 4 },
-            "Rome Odunze":         { rz: 21, dz: 11 },
-            "Jakobi Meyers":       { rz: 21, dz: 17 },
-            "Colston Loveland":    { rz: 20, dz: 11 },
-            "Jaylen Wright":       { rz: 20, dz: 13 },
-            "A.J. Brown":          { rz: 19, dz: 5 },
-            "Mike Gesicki":        { rz: 18, dz: 29 },
-            "Tetairoa McMillan":   { rz: 18, dz: 16 },
-            "Garrett Wilson":      { rz: 17, dz: 31 },
-            "Zay Flowers":         { rz: 17, dz: 8 },
-            "DK Metcalf":          { rz: 17, dz: 15 },
-            "DJ Moore":            { rz: 17, dz: 18 },
-            "Dalton Kincaid":      { rz: 17, dz: 18 },
-            "Terry McLaurin":      { rz: 16, dz: 10 },
-            "DeVonta Smith":       { rz: 16, dz: 32 },
-            "Rashod Bateman":      { rz: 15, dz: 8 },
-            "Stefon Diggs":        { rz: 15, dz: 10 },
-            "Sam LaPorta":         { rz: 14, dz: 7 },
-            "Darnell Mooney":      { rz: 14, dz: 28 },
-            "Evan Engram":         { rz: 14, dz: 9 },
-            "Travis Kelce":        { rz: 14, dz: 1 },
-            "Juwan Johnson":       { rz: 13, dz: 21 },
-            "Adonai Mitchell":     { rz: 12, dz: 31 },
-            "Jerry Jeudy":         { rz: 12, dz: 19 },
-            "Xavier Worthy":       { rz: 7, dz: 1 }
-        };
-
-        /* Top 5 for the slate, ranked on computed red-zone TD chance. That number
-           is share x team trips per game x opponent TD rate allowed, turned into
-           odds of at least one score -- the opponent is already priced in, so it
-           needs no second matchup term. Projected Week 1 starters only. */
-        var TOP5 = [
-            { n: "Christian McCaffrey", why: "The highest red-zone chance on the board at 60%, off a 49.5% share of San Francisco's work inside the 20 — the biggest share any back on this slate owns. He posts it into the fourth-toughest red-zone defence, which is what makes it hold up." },
-            { n: "Javonte Williams",    why: "55% on a 33.1% share and 3.88 trips a game, into a Giants defence that let 62.7% of red-zone trips finish in a touchdown — 23rd of 32." },
-            { n: "Cam Skattebo",        why: "54% into the softest defence any of these five draws: Dallas allowed a touchdown on 65.7% of red-zone trips, 28th of 32. Confirmed the starter, in a run-first offence." },
-            { n: "Jonathan Taylor",     why: "53% against a top-six red-zone defence. Indianapolis gets inside the 20 more than anyone here at 4.12 trips a game, so the volume carries a matchup that gives nothing away." },
-            { n: "Kyren Williams",      why: "51% on the strength of 4.53 red-zone trips a game — the most of any offence on the slate. His 28.7% share is the smallest in this five; the Rams simply get there often enough to cover it." }
-        ];
+        var KICK = {};
+        GAMES.forEach(function (g) { KICK[g.away + "@" + g.home] = g.kick; });
 
         var TAG = {
-            fav: { cls: "fav", icon: "⭐",            label: "Favorite" },
-            val: { cls: "val", icon: "💎",      label: "Value" },
-            rz:  { cls: "rz",  icon: "🔥",      label: "RZ" },
-            mat: { cls: "mat", icon: "🦴",      label: "Matchup" }
+            fav: { cls: "fav", icon: "⭐", label: "Favorite" },
+            val: { cls: "val", icon: "💎", label: "Underrated" },
+            rz:  { cls: "rz",  icon: "🔥", label: "RZ target" },
+            mat: { cls: "mat", icon: "🦴", label: "Matchup" }
         };
         var FILTERS = [
-            { key: "all", icon: "",             label: "All plays" },
-            { key: "fav", icon: "⭐",       label: "Favorites" },
-            { key: "val", icon: "💎", label: "Value" },
+            { key: "all", icon: "",   label: "All plays" },
+            { key: "fav", icon: "⭐", label: "Favorites" },
+            { key: "val", icon: "💎", label: "Underrated" },
             { key: "rz",  icon: "🔥", label: "Red zone" },
-            { key: "mat", icon: "🦴", label: "Matchup" }
+            { key: "mat", icon: "🦴", label: "Matchup" },
+            { key: "exp", icon: "✈️", label: "Exploitable D" }
         ];
 
         var esc = function (s) {
@@ -647,7 +489,13 @@
         };
         var posClass = function (p) { return "atd-pos atd-pos--" + String(p).slice(0, 2); };
 
-        /* "Sun 9/13 · 1:00 PM" in the reader's own timezone. */
+        /* A name opens that player's row on the Game Board, already expanded. */
+        function boardHref(pl) {
+            return "index.html?season=" + SHEET.season + "&week=" + SHEET.week +
+                   "&view=board&player=" + encodeURIComponent(pl.id || "");
+        }
+
+        /* "Sun 9/20 · 1:00 PM" in the reader's own timezone. */
         function fmtKick(iso) {
             if (!iso) return "";
             var d = new Date(iso);
@@ -664,6 +512,12 @@
             } catch (e) {}
             return "";
         }
+        function dateSpan() {
+            var a = new Date(SHEET.first_kick), b = new Date(SHEET.last_kick);
+            var mon = function (d) { return d.toLocaleDateString(undefined, { month: "short" }); };
+            if (isNaN(a) || isNaN(b)) return "";
+            return mon(a) + " " + a.getDate() + "&ndash;" + (mon(a) === mon(b) ? "" : mon(b) + " ") + b.getDate();
+        }
 
         function chips(tags) {
             return tags.map(function (k) {
@@ -675,134 +529,169 @@
         var TEND_CHIP = {
             run:  { icon: "🏃🏿‍♂️‍➡️", label: "Run-first", t: "Run-first offense — lifts the backfield" },
             pass: { icon: "🪽", label: "Pass-first", t: "Pass-first offense — lifts the pass catchers" },
-            agg:  { icon: "💢", label: "Aggressive", t: "Aggressive offense — goes for it, so more scoring chances" }
+            agg:  { icon: "💢", label: "Aggressive", t: "Goes for it on 4th-and-short — more chances to score" }
         };
 
         /* A tendency is only shown where it actually helps this player. */
         function tendChips(team, pos) {
-            var list = TEND[team] || [], isRB = String(pos).slice(0, 2) === "RB", out = [];
+            var list = TEND[team] || [], isRB = String(pos).slice(0, 2) === "RB", isQB = String(pos).slice(0, 2) === "QB", out = [];
             list.forEach(function (k) {
                 if (k === "run" && !isRB) return;
-                if (k === "pass" && isRB) return;
+                if (k === "pass" && (isRB || isQB)) return;
                 var d = TEND_CHIP[k];
-                out.push('<span class="chip chip--' + k + '" title="' + esc(d.t) + '">' +
-                         d.icon + " " + d.label + "</span>");
+                out.push('<span class="chip chip--' + k + '" title="' + esc(d.t) + '">' + d.icon + " " + d.label + "</span>");
             });
             return out.join("");
         }
 
-        /* Cross-checked against the Week 1 projected starters.
-           "q" = questionable but projected to start; "out" = not in the projected
-           lineup at all, so the role on this sheet is stale until it is confirmed. */
-        var STATUS = {
-            "George Kittle": "q", "D'Andre Swift": "q", "Rome Odunze": "q",
-            "Ja'Marr Chase": "q", "Sam LaPorta": "q", "Zay Flowers": "q",
-            "DK Metcalf": "q", "Jakobi Meyers": "q", "Wan'Dale Robinson": "q",
-            "Ashton Jeanty": "q", "Tucker Kraft": "q",
-            "Josh Jacobs": "out", "Jordan Mason": "out", "Kimani Vidal": "out",
-            "Chris Rodriguez Jr.": "out", "RJ Harvey": "out", "Bam Knight": "out",
-            "Rachaad White": "out", "Jaylen Wright": "out", "Tyrone Tracy Jr.": "out",
-            "Theo Johnson": "out", "Grant Calcaterra": "out"
-        };
         var STATUS_CHIP = {
-            q:   { cls: "q",   label: "Q", t: "Questionable, but still the projected starter" },
-            out: { cls: "out", label: "Not projected", t: "Not in the Week 1 projected starting lineup — role unconfirmed" }
+            q:   { cls: "q",   label: "Q",   t: "Questionable" },
+            d:   { cls: "d",   label: "D",   t: "Doubtful" },
+            out: { cls: "out", label: "Out", t: "Ruled out or on injured reserve" }
         };
-        function statusChip(name) {
-            var s = STATUS[name]; if (!s) return "";
-            var d = STATUS_CHIP[s];
-            return '<span class="chip chip--' + d.cls + '" title="' + esc(d.t) + '">' + d.label + "</span>";
+        function statusChips(pl) {
+            var out = "";
+            var d = STATUS_CHIP[pl.st];
+            if (d) {
+                var label = pl.st === "out" && /reserve/i.test(pl.stl || "") ? "Out · IR" : d.label;
+                out += '<span class="chip chip--' + d.cls + '" title="' + esc((pl.stl || d.t) + (pl.inj ? " — " + pl.inj : "")) + '">' + label + "</span>";
+            }
+            if (pl.m && pl.m.new) {
+                out += '<span class="chip chip--new" title="' + esc((pl.m.tg || 0) + " of his last " + pl.m.g +
+                       " games came with this team — his share was earned elsewhere") + '">New team</span>';
+            }
+            if (pl.mk === "rush_td") out += '<span class="chip chip--mk" title="A quarterback\'s anytime touchdown is a rushing score">Rush TD</span>';
+            if (pl.line >= 1.5) out += '<span class="chip chip--mk" title="Listed at over ' + pl.line + ' touchdowns">' + Math.ceil(pl.line) + "+ TD</span>";
+            return out;
         }
 
-        /* Measured inputs, shown only where a board actually covers the player. */
-        function metrics(name) {
-            var d = DATA[name];
-            if (!d) return "";
-            var out = [];
-            if (d.rz != null)  out.push('<span class="atd-m" title="Red-zone TD chance, computed from play-by-play: share x team trips per game x opponent TD rate allowed">RZ <b>' + d.rz + "%</b></span>");
-            if (d.dz != null)  out.push('<span class="atd-m' + (d.dz >= 24 ? " atd-m--good" : (d.dz <= 8 ? " atd-m--bad" : "")) +
-                                        '" title="Opponent rank of 32 in red-zone TD rate allowed, computed from play-by-play — 32 is the softest">D#' + d.dz + "</span>");
+        /* Measured inputs, from the Game Board for this week. */
+        function metrics(pl) {
+            var m = pl.m || {}, out = [];
+            if (m.small) {
+                out.push('<span class="atd-m atd-m--warn" title="Only ' + m.g + ' NFL game' + (m.g === 1 ? "" : "s") +
+                         ' of data — listed, not rated">' + m.g + " g sample</span>");
+            }
+            if (m.td != null && !m.small) {
+                out.push('<span class="atd-m atd-m--td" title="Chance of at least one ' + (pl.mk === "rush_td" ? "rushing " : "") +
+                         'touchdown: red-zone share × team trips × opponent TD rate allowed, plus scores from outside the 20">' +
+                         (pl.mk === "rush_td" ? "Rush TD " : "TD ") + "<b>" + m.td + "%</b></span>");
+            }
+            if (m.td2 != null && !m.small) {
+                out.push('<span class="atd-m atd-m--td" title="Chance of two or more touchdowns at the same rate">2+ TD <b>' + m.td2 + "%</b></span>");
+            }
+            if (m.rz != null && pl.pos !== "QB" && !m.small) {
+                out.push('<span class="atd-m" title="His share of his team\'s red-zone work over his last ' + m.g +
+                         ' games (targets count 1, carries 0.75)">RZ <b>' + Math.round(m.rz) + "%</b></span>");
+            }
+            if (m.gl >= 0.5) {
+                out.push('<span class="atd-m" title="Carries inside the 5 per game">GL <b>' + m.gl.toFixed(1) + "</b>/g</span>");
+            }
+            if (m.dz != null) {
+                out.push('<span class="atd-m' + (m.dz >= 24 ? " atd-m--good" : (m.dz <= 8 ? " atd-m--bad" : "")) +
+                         '" title="Opponent rank of 32 in red-zone TD rate allowed over its last 17 games — 32 is the softest">D#' + m.dz + "</span>");
+            }
+            if (m.edge != null && Math.abs(m.edge) >= 10 && pl.pos !== "QB") {
+                out.push('<span class="atd-m ' + (m.edge > 0 ? "atd-m--good" : "atd-m--bad") +
+                         '" title="What this defense has allowed to ' + esc(pl.p) + 's against league average, production and touchdowns combined">vs ' +
+                         esc(pl.p) + " " + (m.edge > 0 ? "+" : "−") + Math.abs(m.edge) + "%</span>");
+            }
+            if (m.trend >= 6 && !m.small) {
+                out.push('<span class="atd-m atd-m--good" title="Share of targets or carries over his last 3 games, against his 17-game share">Share ▲ ' + m.trend.toFixed(0) + " pts</span>");
+            }
             return out.length ? '<div class="atd-metrics">' + out.join("") + "</div>" : "";
         }
 
-        function playHTML(pl, team) {
+        function playHTML(pl, team, exp) {
             var fav = pl.t.indexOf("fav") !== -1;
             var tend = tendChips(team, pl.p);
-            return '<div class="atd-play' + (fav ? " is-fav" : "") + '" data-tags="' + esc(pl.t.join(" ")) + '">' +
+            var tags = pl.t.slice();
+            if (exp) tags.push("exp");
+            return '<div class="atd-play' + (fav ? " is-fav" : "") + (pl.st === "out" ? " is-out" : "") + '" data-tags="' + esc(tags.join(" ")) + '" data-need="' + Math.ceil(pl.line || 0.5) +
+                     '" data-mk="' + esc(pl.mk) + '">' +
                      '<div class="atd-play__top">' +
-                       '<span class="atd-play__name">' + esc(pl.n) + "</span>" +
+                       (pl.id ? '<a class="atd-play__name" href="' + boardHref(pl) + '" title="Open ' + esc(pl.n) + ' on the Game Board">' + esc(pl.n) + "</a>"
+                              : '<span class="atd-play__name">' + esc(pl.n) + "</span>") +
                        '<span class="' + posClass(pl.p) + '">' + esc(pl.p) + "</span>" +
-                       statusChip(pl.n) +
+                       statusChips(pl) +
                      "</div>" +
                      (pl.t.length || tend ? '<div class="atd-play__tags">' + chips(pl.t) + tend + "</div>" : "") +
-                     metrics(pl.n) +
+                     metrics(pl) +
+                     (pl.st && pl.inj ? '<div class="atd-inj">' + esc(pl.inj) + "</div>" : "") +
                    "</div>";
         }
 
         function sideHTML(g, team) {
             var plays = g.sides[team] || [];
             var isExp = (g.exp || []).indexOf(team) !== -1;
+            var opp = team === g.away ? g.home : g.away;
+            var imp = g.implied && g.implied[team];
             return '<div class="atd-side" data-team="' + esc(team) + '">' +
                      '<div class="atd-side__head">' + teamImg(team) + "<span>" + esc(team) + "</span>" +
-                       (isExp ? ' <span class="chip chip--exp">✈️ Exploitable D</span>' : "") +
+                       (isExp ? ' <span class="chip chip--exp" title="' + esc(opp + " carries a TARGET verdict in the team-defense scoring table") + '">✈️ Exploitable D</span>' : "") +
+                       (imp != null ? '<span class="atd-side__imp" title="Implied points from the spread and total"><b>' + imp.toFixed(1) + "</b> implied</span>" : "") +
                      "</div>" +
                      (plays.length
-                        ? plays.map(function (pl) { return playHTML(pl, team); }).join("")
+                        ? plays.map(function (pl) { return playHTML(pl, team, isExp); }).join("")
                         : '<p class="atd-empty">No plays listed for ' + esc(team) + ".</p>") +
                    "</div>";
         }
 
         function gameHTML(g) {
+            var line = [g.line, g.total != null ? "O/U " + g.total : ""].filter(Boolean).join(" · ");
             return '<article class="atd-game">' +
                      '<div class="atd-game__head">' +
                        '<span class="atd-game__teams">' + teamImg(g.away) + esc(g.away) + "</span>" +
                        '<span class="atd-game__at">@</span>' +
                        '<span class="atd-game__teams">' + teamImg(g.home) + esc(g.home) + "</span>" +
-                       '<span class="atd-game__when">' + fmtKick(KICK[g.away + "@" + g.home]) + "</span>" +
+                       (line ? '<span class="atd-game__line">' + esc(line) + "</span>" : "") +
+                       '<span class="atd-game__when">' + fmtKick(g.kick) + "</span>" +
                      "</div>" +
                      '<div class="atd-game__body">' + sideHTML(g, g.away) + sideHTML(g, g.home) + "</div>" +
                    "</article>";
         }
 
         /* Find a player anywhere on the board, with his game context. */
-        function locate(name) {
+        function locateId(id) {
             for (var i = 0; i < GAMES.length; i++) {
                 var g = GAMES[i], teams = Object.keys(g.sides);
                 for (var j = 0; j < teams.length; j++) {
                     var team = teams[j];
-                    var hit = g.sides[team].filter(function (p) { return p.n === name; })[0];
+                    var hit = g.sides[team].filter(function (p) { return p.id === id; })[0];
                     if (hit) return { pl: hit, team: team, opp: team === g.away ? g.home : g.away,
-                                      at: team === g.away ? "@ " : "vs ", kick: KICK[g.away + "@" + g.home] };
+                                      at: team === g.away ? "@ " : "vs ", kick: g.kick };
                 }
             }
             return null;
         }
 
         function topHTML() {
-            return TOP5.map(function (row, i) {
-                var f = locate(row.n);
+            return SHEET.top5.map(function (row, i) {
+                var f = locateId(row.id);
                 if (!f) return "";
                 return '<article class="atd-top-card">' +
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
-                           '<span class="atd-top-card__name">' + teamImg(f.team) + esc(row.n) + "</span>" +
-                           statusChip(row.n) +
+                           '<a class="atd-top-card__name" href="' + boardHref(f.pl) + '" title="Open on the Game Board">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                           statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
-                         metrics(row.n) +
+                         metrics(f.pl) +
                          '<p class="atd-why">' + esc(row.why) + "</p>" +
                        "</article>";
             }).join("");
         }
 
         function counts() {
-            var c = { all: 0, fav: 0, val: 0, rz: 0, mat: 0 }, games = 0;
+            var c = { all: 0, fav: 0, val: 0, rz: 0, mat: 0, exp: 0 }, games = 0;
             GAMES.forEach(function (g) {
                 games++;
                 Object.keys(g.sides).forEach(function (team) {
+                    var isExp = (g.exp || []).indexOf(team) !== -1;
                     g.sides[team].forEach(function (pl) {
                         c.all++;
+                        if (isExp) c.exp++;
                         pl.t.forEach(function (k) { if (c[k] != null) c[k]++; });
                     });
                 });
@@ -813,11 +702,18 @@
 
         var C = counts();
 
+        if (SHEET.week > 1) {
+            document.getElementById("atdPrevWeek").outerHTML =
+                '<a class="atd-back" href="atd-week' + (SHEET.week - 1) + '.html" title="Last week\'s sheet">&larr; Week ' + (SHEET.week - 1) + "</a>";
+        }
+        document.getElementById("atdResearch").href = "index.html?season=" + SHEET.season + "&week=" + SHEET.week;
+        document.getElementById("atdBoardTitle").innerHTML = "Full board &mdash; " + C.games + " games";
+
         document.getElementById("atdCounts").innerHTML =
             '<span class="atd-count">' + C.games + " games</span>" +
             '<span class="atd-count">' + C.all + " plays</span>" +
             '<span class="atd-count">' + C.fav + " favorites</span>" +
-            '<span class="atd-count">Sep 9&ndash;14' + (tzName() ? " &middot; times " + esc(tzName()) : "") + "</span>";
+            '<span class="atd-count">' + dateSpan() + (tzName() ? " &middot; times " + esc(tzName()) : "") + "</span>";
 
         document.getElementById("atdFilters").innerHTML = FILTERS.map(function (f) {
             var n = f.key === "all" ? C.all : C[f.key];
@@ -854,14 +750,13 @@
             });
         });
 
-
         /* ── Touchdowns scored ──────────────────────────────────────────────
            ESPN's scoreboard says which games have started; the per-game summary
            carries the scoring plays. A touchdown reads "Javonte Williams 1 Yd
            Rush (Kicker Kick)", so the scorer is everything before the yardage.
            Results cache in localStorage so reopening the sheet mid-week does not
            refetch sixteen games. */
-        var SCORED_SEASON = 2026, SCORED_WEEK = 1;
+        var SCORED_SEASON = SHEET.season, SCORED_WEEK = SHEET.week;
         var SCORED_KEY = "wpz-atd-scored-" + SCORED_SEASON + "-W" + SCORED_WEEK;
         var ESPN = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/";
 
@@ -880,8 +775,11 @@
                 Object.keys(g.sides).forEach(function (team) {
                     g.sides[team].forEach(function (pl) {
                         idx[normName(pl.n)] = {
-                            name: pl.n, pos: pl.p, team: team,
-                            fav: pl.t.indexOf("fav") !== -1
+                            name: pl.n, pos: pl.p, team: team, id: pl.id,
+                            fav: pl.t.indexOf("fav") !== -1,
+                            // what cashes the ticket: 2+ for an over 1.5, and only a
+                            // rushing score for a quarterback's rush-TD line
+                            need: Math.ceil(pl.line || 0.5), rushOnly: pl.mk === "rush_td"
                         };
                     });
                 });
@@ -932,7 +830,8 @@
                     (s.scoringPlays || []).forEach(function (p) {
                         if (!p.type || p.type.abbreviation !== "TD") return;
                         var m = /^(.+?)\s+\d+\s+Yd\b/i.exec(p.text || "");
-                        if (m) scorers.push({ name: m[1].trim(), team: (p.team || {}).abbreviation || "" });
+                        if (m) scorers.push({ name: m[1].trim(), team: (p.team || {}).abbreviation || "",
+                                              rush: /\d+\s+Yd\s+(Rush|Run)\b/i.test(p.text || "") });
                     });
 
                     // Anyone with an offensive stat line was on the field. A player
@@ -997,8 +896,9 @@
             data.scorers.forEach(function (sc) {
                 var key = normName(sc.name);
                 if (idx[key]) {
-                    hits[key] = hits[key] || { who: idx[key], n: 0 };
+                    hits[key] = hits[key] || { who: idx[key], n: 0, rush: 0 };
                     hits[key].n++;
+                    if (sc.rush) hits[key].rush++;
                 } else {
                     offBoard.push(sc.name);
                 }
@@ -1037,13 +937,20 @@
                 }
             });
 
-            var rows = Object.keys(hits).map(function (k) { return hits[k]; });
-            rows.sort(function (a, b) { return (b.who.fav - a.who.fav) || (b.n - a.n); });
-            var favHit = rows.filter(function (r) { return r.who.fav; }).length;
+            Object.keys(hits).forEach(function (k) {
+                var h = hits[k];
+                h.count = h.who.rushOnly ? h.rush : h.n;
+                h.cashed = h.count >= h.who.need;
+            });
+            var rows = Object.keys(hits).map(function (k) { return hits[k]; })
+                .filter(function (r) { return r.count > 0; });
+            rows.sort(function (a, b) { return (b.cashed - a.cashed) || (b.who.fav - a.who.fav) || (b.count - a.count); });
+            var cashed = rows.filter(function (r) { return r.cashed; });
+            var favHit = cashed.filter(function (r) { return r.who.fav; }).length;
 
             sumEl.hidden = false;
             sumEl.innerHTML =
-                '<span class="atd-count">' + rows.length + " of " + counts.live + " listed players scored</span>" +
+                '<span class="atd-count">' + cashed.length + " of " + counts.live + " listed plays cashed</span>" +
                 '<span class="atd-count">' + favHit + " of " + counts.favLive + " favorites</span>" +
                 (counts["void"] ? '<span class="atd-count atd-count--void">' + counts["void"] +
                     " voided &mdash; did not play</span>" : "") +
@@ -1052,13 +959,16 @@
 
             listEl.innerHTML = rows.length
                 ? rows.map(function (r) {
-                    return '<div class="atd-top-card atd-scored-card">' +
+                    return '<div class="atd-top-card' + (r.cashed ? " atd-scored-card" : "") + '">' +
                              '<div class="atd-top-card__head">' +
                                '<span class="atd-top-card__name">' + teamImg(r.who.team) + esc(r.who.name) + "</span>" +
-                               '<span class="chip chip--hit">' + (r.n > 1 ? r.n + " TD" : "TD") + "</span>" +
+                               '<span class="chip ' + (r.cashed ? "chip--hit" : "chip--void") + '">' +
+                                 (r.count > 1 ? r.count + " TD" : "TD") + (r.who.rushOnly ? " rush" : "") + "</span>" +
+                               (r.cashed ? "" : '<span class="chip chip--mk">needs ' + r.who.need + "+</span>") +
                                (r.who.fav ? '<span class="chip chip--fav">⭐</span>' : "") +
                              "</div>" +
-                             '<span class="atd-top-card__meta">' + esc(r.who.pos) + " &middot; " + esc(r.who.team) + "</span>" +
+                             '<span class="atd-top-card__meta">' + esc(r.who.pos) + " &middot; " + esc(r.who.team) +
+                               (r.who.need > 1 ? " &middot; over " + (r.who.need - 0.5) : "") + "</span>" +
                            "</div>";
                   }).join("")
                 : '<p class="atd-scored-empty">No listed player has scored yet.</p>';
@@ -1068,7 +978,7 @@
             Array.prototype.forEach.call(document.querySelectorAll(".atd-play"), function (el) {
                 var nm = el.querySelector(".atd-play__name");
                 var key = nm ? normName(nm.textContent) : "";
-                var hit = hits[key];
+                var hit = hits[key] && hits[key].cashed ? hits[key] : null;
                 el.classList.toggle("is-hit", !!hit);
                 el.classList.toggle("is-void", settle[key] === "void");
 
@@ -1078,7 +988,7 @@
                 if (hit) {
                     var chip = document.createElement("span");
                     chip.className = "chip chip--hit";
-                    chip.textContent = hit.n > 1 ? hit.n + " TD" : "TD";
+                    chip.textContent = hit.count > 1 ? hit.count + " TD" : "TD";
                     head.appendChild(chip);
                 } else if (settle[key] === "void") {
                     var v = document.createElement("span");
@@ -1210,3 +1120,4 @@
     </script>
 </body>
 </html>
+

@@ -3,7 +3,13 @@
 /preview   /   301
 /preview/  /   301
 
-# NFL cheat sheets moved to the MLB layout: current week at /nfl-research/atd.html,
+# NFL cheat sheets moved to the MLB layout: current week at /nfl-research/atd,
 # past weeks in /nfl-research/archive/. Old per-week links land on the same week.
-/nfl-research/atd-week1.html   /nfl-research/archive/2026-week-1.html   301
-/nfl-research/atd-week2.html   /nfl-research/archive/2026-week-2.html   301
+# The site drops ".html" from its own links, so the address people saved has no
+# extension -- each old page is covered with, without, and with a trailing slash.
+/nfl-research/atd-week1        /nfl-research/archive/2026-week-1   301
+/nfl-research/atd-week1/       /nfl-research/archive/2026-week-1   301
+/nfl-research/atd-week1.html   /nfl-research/archive/2026-week-1   301
+/nfl-research/atd-week2        /nfl-research/archive/2026-week-2   301
+/nfl-research/atd-week2/       /nfl-research/archive/2026-week-2   301
+/nfl-research/atd-week2.html   /nfl-research/archive/2026-week-2   301

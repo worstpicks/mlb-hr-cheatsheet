@@ -1,0 +1,99 @@
+/* Worst Pickz NHL Research — the NFL Research tab's stylesheet, on ice.
+ *
+ * The whole shell (container, header, rail, cards, log tables, heat cells, prop
+ * tracker, profile dialog) is imported from the NFL tab rather than copied. The
+ * NHL page renders the same `nrs-` DOM, so every layout fix made on one side
+ * lands on the other and the two tabs cannot drift apart.
+ *
+ * What follows is only what hockey needs on top: a colder accent, the extra
+ * position colours, and the pieces the NFL page has no equivalent for (a date
+ * picker instead of a week dropdown, goalie cards, line-rank badges).
+ */
+@import url("../nfl-research/nfl-research.css?v=35");
+
+:root {
+    /* Football's tab runs warm -- gridiron green into red. Hockey takes the same
+       structure toward rink blue so the two are instantly distinguishable while
+       staying obviously the same product. */
+    --wpz-bg-body: radial-gradient(ellipse at top, #0b1622 0%, #070c14 42%, #01030a 100%);
+    --wpz-bg-container: linear-gradient(135deg, rgba(10, 24, 38, 0.97) 0%, rgba(12, 18, 34, 0.96) 48%, rgba(8, 14, 30, 0.97) 100%);
+    --wpz-border-container: rgba(56, 189, 248, 0.42);
+    --wpz-bg-header: linear-gradient(145deg, #06182b 0%, #0d1f3d 38%, #131b3a 100%);
+    --wpz-border-header: rgba(125, 211, 252, 0.42);
+    --wpz-brand-tag-bg: rgba(8, 26, 44, 0.52);
+    --wpz-brand-tag-border: rgba(56, 189, 248, 0.38);
+    --wpz-brand-tag-text: #e0f2fe;
+    --wpz-hero-frame: rgba(56, 189, 248, 0.4);
+    --nrs-border: rgba(56, 189, 248, 0.22);
+    --nrs-border-strong: rgba(125, 211, 252, 0.35);
+    --nhl-ice: #7dd3fc;
+}
+
+/* ── no sheets rail yet, so the shell is one column ──
+   The NFL grid reserves a 190px rail beside the main panel. Without a rail
+   element to fill it the main content collapses into that 190px, which is
+   exactly what the first render did. */
+.nrs-shell { grid-template-columns: minmax(0, 1fr); }
+
+/* ── the column panel is a flow element here, not a floating dialog ── */
+.nrs-colset {
+    position: static;
+    width: auto;
+    max-width: 640px;
+    margin: 0 0 14px;
+}
+
+/* ── date picker: hockey's slate is a day, not a week ── */
+.nrs-date-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.nrs-date-nav button {
+    background: var(--nrs-panel-2);
+    border: 1px solid var(--nrs-border);
+    color: var(--wpz-color-text);
+    border-radius: 8px;
+    padding: 7px 11px;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 1;
+}
+.nrs-date-nav button:hover { border-color: var(--nhl-ice); color: var(--nhl-ice); }
+.nrs-date-input {
+    background: var(--nrs-panel);
+    border: 1px solid var(--nrs-border);
+    color: var(--wpz-color-text);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-weight: 600;
+}
+.nrs-date-input::-webkit-calendar-picker-indicator { filter: invert(0.8); cursor: pointer; }
+
+/* ── position colour coding on the depth badge ── */
+.nrs-depth-badge[data-pos="C"] { background: rgba(56, 189, 248, 0.22); color: #bae6fd; }
+.nrs-depth-badge[data-pos="L"] { background: rgba(167, 139, 250, 0.22); color: #ddd6fe; }
+.nrs-depth-badge[data-pos="R"] { background: rgba(251, 146, 60, 0.22); color: #fed7aa; }
+.nrs-depth-badge[data-pos="D"] { background: rgba(74, 222, 128, 0.2); color: #bbf7d0; }
+.nrs-depth-badge[data-pos="G"] { background: rgba(248, 113, 113, 0.22); color: #fecaca; }
+
+/* ── goalie cards read as one panel, not an offense/defense duo ── */
+.nrs-matchup-card--goalie .nrs-mc-panel--def .nrs-player-card__name { color: #fecaca; }
+
+/* ── the team logos NHL serves are SVG, and dark-on-dark without a lift ── */
+.nrs-card__photo--logo,
+.nrs-game__logo,
+.nrs-opp img,
+.nrs-def-overview__logo {
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.55));
+}
+
+/* ── ice-time cells are a clock, not a count: keep them from wrapping ── */
+.nrs-cell--toi { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* ── light theme: re-warm the few tokens the import leaves dark ── */
+:root.theme-light {
+    --wpz-bg-body: radial-gradient(ellipse at top, #eff6ff 0%, #e2e8f0 45%, #f8fafc 100%);
+    --wpz-bg-container: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+    --wpz-border-container: rgba(2, 132, 199, 0.35);
+}

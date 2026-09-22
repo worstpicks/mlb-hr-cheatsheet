@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-17T21:05:38Z",
+  "updated": "2026-09-22T14:53:52Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1459,11 +1459,26 @@
       "o05": {
         "player": "Bryan Reynolds",
         "matchup": "MIL @ PIT",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Francisco Lindor",
         "matchup": "PHI @ NYM",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-22",
+      "o05": {
+        "player": "Yordan Alvarez",
+        "matchup": "HOU @ SEA",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Henry Bolte",
+        "matchup": "LAA @ ATH",
         "result": "pending"
       }
     }

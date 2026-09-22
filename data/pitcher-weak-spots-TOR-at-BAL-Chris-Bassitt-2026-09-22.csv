@@ -1,0 +1,31 @@
+﻿Matchup,TOR @ BAL
+Pitcher,Chris Bassitt
+Pitcher Team,BAL
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,11.1,1.41,="13-47",.277,.298,0.021,0,1,0,2,24.5,3,.358,.656
+Batting Second,12.2,1.18,="13-50",.260,.340,0.080,1,1,0,4,11.3,2,.302,.642
+Batting Third,11.1,1.85,="12-43",.279,.442,0.163,2,1,0,5,5.7,9,.396,.838
+Batting Fourth,11.0,1.73,="13-45",.289,.489,0.200,1,6,0,9,19.2,6,.385,.874
+Batting Fifth,9.1,2.36,="16-43",.372,.465,0.093,1,1,0,3,13.5,6,.462,.927
+Batting Sixth,11.0,1.55,="12-43",.279,.442,0.163,1,4,0,4,16.0,5,.360,.802
+Batting Seventh,11.2,1.03,="10-43",.233,.326,0.093,1,1,0,8,28.9,2,.267,.593
+Batting Eighth,9.0,1.78,="16-40",.400,.700,0.300,3,3,0,9,16.7,0,.405,1.105
+Batting Ninth,8.2,1.38,="8-34",.235,.265,0.030,0,1,0,3,13.2,4,.316,.581
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-241",.220,.373,0.153,8,11,1,20,20.3,28,.308,.681
+Brett Bateman LHB,Batting First ​,="43-129",.333,.426,0.093,2,4,1,9,20.1,15,.408,.834
+Nathan Lukes LHB,Batting Second ​,="41-161",.255,.348,0.093,4,3,0,14,12.9,16,.326,.674
+Vladimir Guerrero Jr. RHB,Batting Third ​,="103-380",.271,.379,0.108,7,20,0,43,12.9,40,.343,.722
+Kazuma Okamoto RHB,Batting Fourth ​,="39-179",.218,.385,0.167,9,3,0,31,29.6,20,.300,.685
+Alejandro Kirk RHB,Batting Fifth ​,="22-85",.259,.435,0.176,4,3,0,10,16.5,12,.351,.786
+Ernie Clement RHB,Batting Seventh ​,="36-139",.259,.353,0.094,2,7,0,17,8.2,5,.279,.632
+Davis Schneider RHB,Batting Seventh ​,="3-34",.088,.235,0.147,1,2,0,3,35.6,9,.273,.508
+Sean Keys LHB,Batting Seventh ​,="2-13",.154,.154,0.000,0,0,0,2,38.5,0,.154,.308
+Andres Gimenez LHB,Batting Eighth ​,="49-205",.239,.376,0.137,6,10,0,30,17.6,5,.282,.658
+Josh Smith LHB,Batting Eighth ​,="17-77",.221,.312,0.091,2,1,0,3,23.9,9,.310,.622
+Charles McAdoo RHB,Batting Eighth ​,="2-19",.105,.105,0.000,0,0,0,1,25.0,1,.150,.255
+Myles Straw RHB,Batting Ninth ​,="26-101",.257,.376,0.119,0,10,1,9,7.0,11,.327,.703
+Brandon Valenzuela SHB,Batting Ninth ​,="20-101",.198,.416,0.218,6,4,0,13,22.2,16,.308,.724

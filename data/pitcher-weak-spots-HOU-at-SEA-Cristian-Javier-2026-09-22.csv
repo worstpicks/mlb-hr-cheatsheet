@@ -1,0 +1,31 @@
+﻿Matchup,HOU @ SEA
+Pitcher,Cristian Javier
+Pitcher Team,HOU
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.1,1.50,="6-28",.214,.393,0.179,1,2,0,5,24.2,5,.333,.726
+Batting Second,8.2,1.04,="5-29",.172,.172,0.000,0,0,0,3,21.2,4,.273,.445
+Batting Third,7.0,2.00,="10-29",.345,.586,0.241,1,2,1,3,12.1,4,.424,1.010
+Batting Fourth,7.1,1.23,="5-27",.185,.296,0.111,1,0,0,2,22.6,4,.290,.586
+Batting Fifth,7.2,1.04,="8-30",.267,.567,0.300,2,1,1,4,25.8,0,.290,.857
+Batting Sixth,6.2,1.80,="7-27",.259,.370,0.111,1,0,0,4,12.5,5,.375,.745
+Batting Seventh,6.0,1.50,="7-23",.304,.652,0.348,2,2,0,6,19.2,2,.346,.998
+Batting Eighth,5.2,1.24,="6-22",.273,.273,0.000,0,0,0,1,25.0,1,.333,.606
+Batting Ninth,4.2,2.14,="9-23",.391,.696,0.305,2,1,0,5,33.3,1,.417,1.113
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-287",.233,.331,0.098,5,11,1,21,20.6,43,.337,.668
+JP Crawford LHB,Batting First ​,="60-256",.234,.406,0.172,12,8,0,27,19.5,37,.343,.749
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Randy Arozarena RHB,Batting Second ​,="43-154",.279,.532,0.253,10,9,0,22,18.4,19,.380,.912
+Julio Rodriguez RHB,Batting Third ​,="58-255",.227,.373,0.146,9,10,0,31,25.5,17,.284,.657
+Dominic Canzone LHB,Batting Third ​,="45-178",.253,.421,0.168,5,11,2,25,21.6,20,.327,.748
+Josh Naylor LHB,Batting Fourth ​,="58-211",.275,.370,0.095,5,5,0,23,15.1,18,.336,.706
+Cole Young LHB,Batting Sixth ​,="30-128",.234,.320,0.086,2,5,0,12,17.0,8,.293,.613
+Michael Arroyo RHB,Batting Seventh ​,="3-8",.375,.375,0.000,0,0,0,0,9.1,3,.545,.920
+Jhonny Pereda RHB,Batting Eighth ​,="15-55",.273,.327,0.054,1,0,0,3,22.0,4,.322,.649
+Weston Wilson RHB,Batting Eighth ​,="16-69",.232,.348,0.116,2,2,0,4,30.4,10,.329,.677
+Victor Robles RHB,Batting Eighth ​,="15-59",.254,.356,0.102,0,2,2,6,16.2,7,.343,.699
+Lazaro Montes LHB,Batting Eighth ​,="3-22",.136,.409,0.273,2,0,0,4,52.2,1,.174,.583
+Brock Rodden SHB,Batting Ninth ​,="12-59",.203,.288,0.085,0,3,1,4,31.9,9,.304,.592

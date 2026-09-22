@@ -1,0 +1,31 @@
+﻿Matchup,MIN @ SF
+Pitcher,Taj Bradley
+Pitcher Team,MIN
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,22.0,1.27,="18-83",.217,.422,0.205,4,3,1,11,30.1,10,.301,.723
+Batting Second,18.1,1.80,="16-72",.222,.347,0.125,2,3,0,5,22.5,17,.371,.718
+Batting Third,18.1,1.69,="23-77",.299,.571,0.272,6,3,0,9,27.1,8,.365,.936
+Batting Fourth,21.1,0.94,="15-77",.195,.234,0.039,1,0,0,6,30.1,5,.253,.487
+Batting Fifth,20.1,1.08,="15-73",.205,.452,0.247,4,6,0,13,25.6,7,.280,.732
+Batting Sixth,19.2,0.97,="15-73",.205,.274,0.069,1,2,0,6,20.8,4,.247,.521
+Batting Seventh,17.0,1.41,="15-64",.234,.297,0.063,0,4,0,5,26.7,9,.333,.630
+Batting Eighth,19.1,0.72,="12-68",.176,.412,0.236,4,4,0,7,38.6,2,.200,.612
+Batting Ninth,16.0,1.31,="10-57",.175,.246,0.071,1,1,0,4,27.1,11,.319,.565
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jonah Cox RHB,Batting First ​,="15-52",.288,.404,0.116,1,1,1,5,37.3,5,.351,.755
+Bo Davidson LHB,Batting Third ​,="1-4",.250,.250,0.000,0,0,0,0,25.0,0,.250,.500
+Osleivis Basabe RHB,Batting Fifth ​,="6-32",.188,.250,0.062,0,2,0,1,14.3,2,.257,.507
+Brett Harris RHB,Batting Fifth ​,="3-12",.250,.333,0.083,0,1,0,2,28.6,1,.308,.641
+Turner Hill LHB,Batting Fifth ​,="5-29",.172,.241,0.069,0,2,0,1,21.2,3,.273,.514
+Andrew Knizner RHB,Batting Seventh ​,="7-23",.304,.478,0.174,1,1,0,3,4.0,1,.360,.838
+Marcelo Mayer LHB,Batting Seventh ​,="24-103",.233,.330,0.097,1,7,0,11,19.0,9,.296,.626
+Shay Whitcomb RHB,Batting Seventh ​,="4-29",.138,.345,0.207,2,0,0,2,19.4,2,.194,.539
+Victor Bericoto RHB,Batting Eighth ​,="6-23",.261,.348,0.087,0,2,0,3,26.1,0,.261,.609
+Grant McCray LHB,Batting Eighth ​,="9-54",.167,.352,0.185,2,2,1,4,28.6,7,.262,.614
+Drew Gilbert LHB,Batting Eighth ​,="29-142",.204,.275,0.071,2,4,0,14,16.7,18,.317,.592
+Drew Cavanaugh LHB,Batting Eighth ​,="11-37",.297,.378,0.081,1,0,0,4,20.9,6,.395,.773
+Scott Bandura LHB,Batting Eighth ​,="2-9",.222,.333,0.111,0,1,0,0,33.3,0,.222,.555
+Christian Koss RHB,Batting Ninth ​,="40-160",.250,.338,0.088,3,5,0,10,22.1,8,.286,.624

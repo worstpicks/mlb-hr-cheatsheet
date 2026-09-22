@@ -16,3 +16,6 @@ __pycache__/
 # Scratch
 *.bak
 *.log
+
+# NHL raw season pulls (rebuildable from the API)
+nhl_research/cache/

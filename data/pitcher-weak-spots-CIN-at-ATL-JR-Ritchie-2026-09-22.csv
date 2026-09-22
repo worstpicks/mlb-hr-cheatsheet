@@ -1,0 +1,31 @@
+﻿Matchup,CIN @ ATL
+Pitcher,JR Ritchie
+Pitcher Team,ATL
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.2,2.10,="10-29",.345,.897,0.552,4,2,1,12,11.4,4,.429,1.326
+Batting Second,8.2,1.04,="4-28",.143,.286,0.143,1,1,0,5,19.4,5,.306,.592
+Batting Third,8.2,1.27,="8-32",.250,.375,0.125,1,1,0,1,28.6,3,.314,.689
+Batting Fourth,7.0,2.00,="9-27",.333,.815,0.482,3,2,1,7,21.9,5,.438,1.253
+Batting Fifth,8.0,0.63,="3-27",.111,.148,0.037,0,1,0,0,31.0,2,.172,.320
+Batting Sixth,5.1,2.25,="5-22",.227,.500,0.273,2,0,0,4,23.3,7,.433,.933
+Batting Seventh,6.2,1.20,="5-25",.200,.200,0.000,0,0,0,0,21.4,3,.286,.486
+Batting Eighth,6.1,1.42,="6-24",.250,.292,0.042,0,1,0,4,18.5,3,.333,.625
+Batting Ninth,5.0,2.00,="4-18",.222,.222,0.000,0,0,0,2,11.5,6,.462,.684
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dane Myers RHB,Batting First ​,="21-96",.219,.406,0.187,5,3,0,10,27.7,15,.330,.736
+Elly De La Cruz SHB,Batting First ​,="52-209",.249,.450,0.201,9,9,3,20,25.4,30,.342,.792
+Carlos Jorge LHB,Batting First ​,="1-12",.083,.250,0.167,0,0,1,0,28.6,2,.214,.464
+Héctor Rodríguez LHB,Batting First ​,="11-36",.306,.583,0.277,3,1,0,4,27.0,1,.324,.907
+Matt McLain RHB,Batting Second ​,="23-119",.193,.294,0.101,2,6,0,9,27.1,19,.314,.608
+Sal Stewart RHB,Batting Second ​,="58-208",.279,.514,0.235,14,7,0,43,22.4,13,.325,.839
+JJ Bleday LHB,Batting Third ​,="40-182",.220,.407,0.187,9,5,1,17,23.1,29,.330,.737
+Tyler Stephenson RHB,Batting Fourth ​,="28-105",.267,.457,0.190,5,5,0,21,27.4,15,.363,.820
+Eugenio Suarez RHB,Batting Fifth ​,="52-242",.215,.430,0.215,14,10,0,44,31.0,29,.307,.737
+Oswaldo Cabrera SHB,Batting Seventh ​,="0-6",.000,.000,0.000,0,0,0,0,42.9,0,.000,.000
+Juan Brito SHB,Batting Seventh ​,="11-48",.229,.438,0.209,2,4,0,10,30.9,5,.309,.747
+Jose Trevino RHB,Batting Eighth ​,="22-93",.237,.387,0.150,4,2,0,14,13.4,1,.242,.629
+Will Banfield RHB,Batting Eighth ​,="1-6",.167,.167,0.000,0,0,0,0,16.7,0,.167,.334
+Ke'Bryan Hayes RHB,Batting Ninth ​,="29-196",.148,.230,0.082,4,2,1,8,19.1,11,.201,.431

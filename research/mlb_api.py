@@ -514,8 +514,40 @@ def _sheet_starters(sheet_date: str) -> dict[str, tuple[str, str]]:
         def arm(seg: str) -> str:
             return seg.rsplit(" (", 1)[0].replace("\U0001f9e4", "").strip()
 
-        out[key.split(" (G")[0].strip()] = (arm(away_seg), arm(home_seg))
+        out[key.strip()] = (arm(away_seg), arm(home_seg))
+    # A doubleheader is two games with two different pairs of starters. Stripping the
+    # "(G1)"/"(G2)" suffix collapsed both titles onto one key, so the later one won and
+    # BOTH research games were rebuilt around game two's arms -- on 2026-09-22 the 1:05
+    # game showed Rasmussen and Fried instead of Martinez and Rodon. Keep the full key,
+    # and only add the bare key when the matchup is played once, so single games keep
+    # matching by the plain name.
+    bases: dict[str, list[str]] = {}
+    for k in out:
+        bases.setdefault(k.split(" (G")[0].strip(), []).append(k)
+    for base, keys in bases.items():
+        if len(keys) == 1 and keys[0] != base:
+            out[base] = out[keys[0]]
     return out
+
+
+def dh_aware_keys(games: list[dict]) -> list[str]:
+    """One key per game, numbered (G1)/(G2) when a matchup is played twice today.
+
+    Games are numbered by start time so the numbering matches the schedule -- and the
+    cheat sheet, which names them the same way.
+    """
+    seen: dict[str, list[int]] = {}
+    for i, g in enumerate(games):
+        seen.setdefault(game_key(g.get("away") or "", g.get("home") or ""), []).append(i)
+    keys = [""] * len(games)
+    for base, rows in seen.items():
+        if len(rows) == 1:
+            keys[rows[0]] = base
+            continue
+        order = sorted(rows, key=lambda i: (games[i].get("startTime") or "", games[i].get("gamePk") or 0))
+        for n, i in enumerate(order, 1):
+            keys[i] = f"{base} (G{n})"
+    return keys
 
 
 def _same_person_diff_spelling(a: str, b: str, fold) -> bool:
@@ -565,9 +597,8 @@ def _align_pitchers_with_sheet(games: list[dict], sheet_date: str) -> dict:
         base = "".join(c for c in base if not unicodedata.combining(c))
         return re.sub(r"[^a-z]", "", base.lower())
 
-    for game in games:
-        key = game_key(game.get("away") or "", game.get("home") or "")
-        want = starters.get(key)
+    for key, game in zip(dh_aware_keys(games), games):
+        want = starters.get(key) or starters.get(key.split(" (G")[0].strip())
         if not want:
             continue
         for side, wanted in (("awayPitcher", want[0]), ("homePitcher", want[1])):

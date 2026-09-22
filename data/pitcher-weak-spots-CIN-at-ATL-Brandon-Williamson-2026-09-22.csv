@@ -1,0 +1,31 @@
+﻿Matchup,CIN @ ATL
+Pitcher,Brandon Williamson
+Pitcher Team,CIN
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.0,2.00,="7-21",.333,.333,0.000,0,0,0,2,29.2,3,.417,.750
+Batting Second,4.0,3.00,="4-15",.267,.733,0.466,1,2,1,6,8.3,8,.500,1.233
+Batting Third,6.1,0.79,="5-24",.208,.500,0.292,2,1,0,2,8.0,0,.240,.740
+Batting Fourth,4.0,3.00,="7-19",.368,.579,0.211,1,1,0,3,12.5,5,.500,1.079
+Batting Fifth,4.1,2.54,="8-20",.400,.750,0.350,2,1,0,6,8.7,3,.478,1.228
+Batting Sixth,6.0,0.83,="4-21",.190,.238,0.048,0,1,0,4,13.6,1,.227,.465
+Batting Seventh,5.1,0.56,="2-16",.125,.188,0.063,0,1,0,1,36.8,1,.211,.399
+Batting Eighth,3.1,2.10,="2-11",.182,.455,0.273,1,0,0,1,11.1,5,.500,.955
+Batting Ninth,5.1,0.38,="1-15",.067,.267,0.200,1,0,0,2,17.6,1,.118,.385
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ronald Acuna Jr. RHB,Batting First ​,="62-247",.251,.409,0.158,8,13,1,26,21.8,40,.364,.773
+Drake Baldwin LHB,Batting First ​,="77-245",.314,.522,0.208,13,12,0,39,21.1,31,.396,.918
+DaShawn Keirsey Jr. LHB,Batting Second ​,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,0,1.000,2.000
+Matt Olson LHB,Batting Third ​,="126-509",.248,.491,0.243,33,25,0,76,24.4,54,.321,.812
+Ozzie Albies SHB,Batting Fourth ​,="46-156",.295,.462,0.167,6,8,0,24,12.5,12,.341,.803
+Michael Harris II LHB,Batting Fourth ​,="50-194",.258,.392,0.134,4,12,1,20,17.2,7,.286,.678
+Mauricio Dubon RHB,Batting Fifth ​,="52-189",.275,.397,0.122,4,9,1,28,13.5,13,.322,.719
+Kyle Farmer RHB,Batting Seventh ​,="3-10",.300,.400,0.100,0,1,0,2,20.0,0,.300,.700
+Dominic Smith LHB,Batting Seventh ​,="27-88",.307,.432,0.125,3,2,0,17,12.4,4,.344,.776
+Austin Riley RHB,Batting Seventh ​,="32-140",.229,.421,0.192,7,6,0,21,33.5,16,.316,.737
+Mike Yastrzemski LHB,Batting Eighth ​,="23-113",.204,.310,0.106,3,3,0,10,20.9,13,.295,.605
+Sean Murphy RHB,Batting Ninth ​,="9-46",.196,.304,0.108,1,2,0,2,24.5,3,.245,.549
+Ha-Seong Kim RHB,Batting Ninth ​,="10-68",.147,.162,0.015,0,1,0,6,27.3,8,.247,.409
+Brewer Hicklen RHB,Batting Ninth ​,="8-18",.444,.722,0.278,0,5,0,3,28.6,3,.524,1.246

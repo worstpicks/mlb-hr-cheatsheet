@@ -13,3 +13,10 @@
 /nfl-research/atd-week2        /nfl-research/archive/2026-week-2   301
 /nfl-research/atd-week2/       /nfl-research/archive/2026-week-2   301
 /nfl-research/atd-week2.html   /nfl-research/archive/2026-week-2   301
+
+# NHL research + cheat sheet. The site drops ".html" from its own links, so the
+# bare paths are covered alongside the real files.
+/nhl            /nhl-research/index.html        200
+/nhl-research   /nhl-research/index.html        200
+/nhl-sheet      /nhl-research/atgs.html         200
+/nhl-research/atgs   /nhl-research/atgs.html    200

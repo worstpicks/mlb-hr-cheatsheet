@@ -1,0 +1,31 @@
+﻿Matchup,MIN @ SF
+Pitcher,Anthony Molina
+Pitcher Team,SF
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.2,1.36,="4-15",.267,.333,0.066,0,1,0,1,31.3,1,.313,.646
+Batting Second,3.2,1.36,="4-15",.267,.267,0.000,0,0,0,0,12.5,1,.313,.580
+Batting Third,4.0,0.25,="1-13",.077,.077,0.000,0,0,0,4,23.1,0,.077,.154
+Batting Fourth,3.1,0.60,="1-11",.091,.182,0.091,0,1,0,1,41.7,1,.167,.349
+Batting Fifth,2.1,1.29,="3-11",.273,.636,0.363,1,1,0,1,27.3,0,.273,.909
+Batting Sixth,2.2,1.13,="2-10",.200,.600,0.400,1,1,0,3,18.2,1,.273,.873
+Batting Seventh,2.2,1.13,="3-11",.273,.545,0.272,1,0,0,2,18.2,0,.273,.818
+Batting Eighth,1.2,4.20,="5-10",.500,.700,0.200,0,0,1,2,16.7,2,.583,1.283
+Batting Ninth,4.0,0.50,="2-12",.167,.333,0.166,0,2,0,2,8.3,0,.167,.500
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Austin Martin RHB,Batting First ​,="26-109",.239,.349,0.110,1,9,0,11,17.6,20,.375,.724
+Luke Keaschall RHB,Batting First ​,="38-122",.311,.426,0.115,2,8,0,10,11.5,9,.391,.817
+Brooks Lee SHB,Batting Second ​,="47-212",.222,.368,0.146,9,4,0,31,16.6,12,.266,.634
+Kody Clemens LHB,Batting Third ​,="45-211",.213,.464,0.251,15,8,0,36,21.8,18,.275,.739
+Josh Bell SHB,Batting Fourth ​,="69-284",.243,.412,0.169,10,16,1,44,23.0,24,.304,.716
+Ryan Jeffers RHB,Batting Fourth ​,="29-110",.264,.527,0.263,6,7,2,24,14.5,12,.339,.866
+Royce Lewis RHB,Batting Fifth ​,="37-137",.270,.489,0.219,8,6,0,17,17.6,14,.340,.829
+Victor Caratini SHB,Batting Sixth ​,="24-135",.178,.333,0.155,5,6,0,17,21.5,13,.278,.611
+Aaron Sabato RHB,Batting Seventh ​,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Alan Roden LHB,Batting Seventh ​,="7-29",.241,.310,0.069,0,2,0,4,17.6,4,.324,.634
+Emmanuel Rodriguez LHB,Batting Eighth ​,="4-10",.400,.900,0.500,1,2,0,2,10.0,0,.400,1.300
+Ryan Kreidler RHB,Batting Ninth ​,="22-123",.179,.341,0.162,4,4,2,15,20.9,9,.241,.582
+Ben Ross RHB,Batting Ninth ​,="3-14",.214,.357,0.143,0,2,0,1,57.1,0,.214,.571
+Walker Jenkins LHB,Batting Ninth ​,="4-41",.098,.220,0.122,1,2,0,5,26.5,6,.229,.449

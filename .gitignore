@@ -19,3 +19,11 @@ __pycache__/
 
 # NHL raw season pulls (rebuildable from the API)
 nhl_research/cache/
+
+# NHL research + cheat sheet: built and previewed locally, not published yet.
+# The daily build script runs `git add -A`, which swept these into a commit and
+# put them on the live site before the slate was ready -- this keeps that from
+# happening again. The nhl_research/ pipeline stays tracked; only the rendered
+# pages and slate data are held back.
+preview/nhl-research/
+preview/data/nhl-research-*.json

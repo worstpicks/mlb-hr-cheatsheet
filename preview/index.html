@@ -70,16 +70,11 @@
         }
         /* Cross-sport switch: the NFL board is a sibling page, not a section of
            this one, so it gets the opposite corner from the utility actions. */
-        .sheet-switches {
+        .sheet-switch {
             position: absolute;
             top: 14px;
             left: 14px;
             z-index: 20;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .sheet-switch {
             display: inline-flex;
             align-items: center;
             gap: 7px;
@@ -97,8 +92,7 @@
         .sheet-switch:hover { background: rgba(15, 23, 42, 0.9); border-color: #facc15; color: #fff; }
         .sheet-switch__emoji { font-size: 1rem; line-height: 1; }
         @media (max-width: 640px) {
-            .sheet-switches { top: 10px; left: 8px; gap: 6px; }
-            .sheet-switch { padding: 7px 11px; font-size: 0.76rem; }
+            .sheet-switch { top: 10px; left: 8px; padding: 7px 11px; font-size: 0.76rem; }
             .sheet-switch__label { display: none; }
         }
         html.theme-light .sheet-switch {
@@ -3785,10 +3779,7 @@ html body .player-pop__fav   { color: var(--wpz-heat-hot) !important; }
     <div class="container">
 
         <header>
-            <div class="sheet-switches">
-                <a class="sheet-switch" href="nfl-research/atd.html" title="Go to the NFL anytime-touchdown cheat sheet"><span class="sheet-switch__emoji" aria-hidden="true">🏈</span><span class="sheet-switch__label">NFL Cheat Sheet</span></a>
-                <a class="sheet-switch" href="nhl-research/atgs.html" title="Go to the NHL anytime-goal cheat sheet"><span class="sheet-switch__emoji" aria-hidden="true">🏒</span><span class="sheet-switch__label">NHL Cheat Sheet</span></a>
-            </div>
+            <a class="sheet-switch" href="nfl-research/atd.html" title="Go to the NFL anytime-touchdown cheat sheet"><span class="sheet-switch__emoji" aria-hidden="true">🏈</span><span class="sheet-switch__label">NFL Cheat Sheet</span></a>
             <div class="header-actions">
                 <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false" title="Switch to light mode" aria-label="Switch to light mode">☀️</button>
                 <button type="button" class="header-install-btn" id="installShortcutBtn" hidden title="Add Worst Pickz to your Home Screen — fullscreen app-style view, optimized on mobile" aria-label="Install Worst Pickz shortcut on your Home Screen"><span class="header-install-btn__long">Install shortcut</span><span class="header-install-btn__short" aria-hidden="true">Install</span></button>

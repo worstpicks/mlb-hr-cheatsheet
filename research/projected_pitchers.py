@@ -298,14 +298,22 @@ def apply_projected_pitcher_fallback_to_games(
     if not by_team:
         return stats
 
-    for game in games:
+    # One projected arm per team per day is all this source carries, so on a
+    # doubleheader it must fill at most ONE of the two games. Filling both asserted
+    # that a pitcher starts twice in an afternoon, which is never true; the second
+    # game is left TBD until a real source names it. Earliest game first, so the
+    # filled one is the one the source most likely meant.
+    used: set[tuple[str, str]] = set()
+    for game in sorted(games, key=lambda g: (g.get("startTime") or "", g.get("gamePk") or 0)):
         away = normalize_abbr(game.get("away") or "")
         home = normalize_abbr(game.get("home") or "")
-        if _pitcher_missing(game.get("awayPitcher")) and away in by_team:
+        if _pitcher_missing(game.get("awayPitcher")) and away in by_team and ("away", away) not in used:
             game["awayPitcher"] = dict(by_team[away])
+            used.add(("away", away))
             stats["pitchersFilled"] += 1
-        if _pitcher_missing(game.get("homePitcher")) and home in by_team:
+        if _pitcher_missing(game.get("homePitcher")) and home in by_team and ("home", home) not in used:
             game["homePitcher"] = dict(by_team[home])
+            used.add(("home", home))
             stats["pitchersFilled"] += 1
         # Keep matchup key consistent if callers attach extras.
         if away and home and not game.get("matchup"):

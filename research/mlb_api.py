@@ -571,6 +571,52 @@ def _same_person_diff_spelling(a: str, b: str, fold) -> bool:
     return False
 
 
+def _apply_manual_probables(games: list[dict], sheet_date: str) -> list[str]:
+    """Owner-supplied starters, per game, applied over whatever a feed guessed.
+
+    The whole pitcher dict is rebuilt from the name rather than renamed in place: a
+    rename alone would leave the previous arm's id, arsenal and Savant stats sitting
+    under someone else's name, which is worse than the gap it patches.
+    """
+    from research.manual_probables import manual_starters
+    from research.projected_pitchers import _resolve_projected_pitcher
+
+    wanted = manual_starters(sheet_date)
+    if not wanted:
+        return []
+    notes: list[str] = []
+    for key, game in zip(dh_aware_keys(games), games):
+        spec = wanted.get(key)
+        if not spec:
+            continue
+        for side, name in (("awayPitcher", spec[0]), ("homePitcher", spec[1])):
+            if not name:
+                continue
+            had = (game.get(side) or {}).get("name") or "TBD"
+            resolved = _resolve_projected_pitcher({"name": name}, source="owner")
+            if not resolved:
+                notes.append(f"WARN could not resolve owner-named starter {name} for {key}")
+                continue
+            if had != resolved["name"]:
+                notes.append(f"{key} {side[:4]}: {had} -> {resolved['name']} (owner)")
+            game[side] = resolved
+            # Nobody starts both halves of a doubleheader. The by-team projected fill
+            # runs before this and had already put Gibson in game one; naming him game
+            # two's starter here would leave him starting twice. Evict the duplicate
+            # and leave that slot TBD -- unknown is the truth until a feed names it.
+            for other_key, other in zip(dh_aware_keys(games), games):
+                if other is game:
+                    continue
+                cur = (other.get(side) or {}).get("name")
+                if cur and cur == resolved["name"]:
+                    other[side] = None
+                    notes.append(
+                        f"{other_key} {side[:4]}: cleared {cur} — he is the owner-named "
+                        f"starter of {key} and cannot start both"
+                    )
+    return notes
+
+
 def _align_pitchers_with_sheet(games: list[dict], sheet_date: str) -> dict:
     """Replace a research probable when the cheat sheet names a different arm.
 
@@ -920,6 +966,8 @@ def build_slate(sheet_date: str, *, with_stats: bool = True, savant_only: bool =
     except Exception as exc:
         projected_meta = {"source": "projected-pitchers", "error": str(exc)}
 
+    for line in _apply_manual_probables(games, sheet_date):
+        print(f"  {line}")
     align_meta = _align_pitchers_with_sheet(games, sheet_date)
     for line in align_meta.get("aligned", []):
         print(f"  research tab follows the sheet's starter — {line}")

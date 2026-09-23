@@ -1,0 +1,31 @@
+﻿Matchup,NYM @ TEX
+Pitcher,Cody Bradford
+Pitcher Team,TEX
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.2,3.00,="10-21",.476,.905,0.429,2,3,0,5,4.5,1,.500,1.405
+Batting Second,4.2,1.29,="6-20",.300,.550,0.250,1,2,0,2,9.5,0,.333,.883
+Batting Third,3.2,2.18,="5-15",.333,.333,0.000,0,0,0,1,21.1,3,.421,.754
+Batting Fourth,3.2,2.45,="7-16",.438,.563,0.125,0,2,0,3,5.6,2,.500,1.063
+Batting Fifth,5.2,0.53,="3-18",.167,.222,0.055,0,1,0,1,16.7,0,.167,.389
+Batting Sixth,4.0,1.50,="6-18",.333,.500,0.167,1,0,0,2,11.1,0,.333,.833
+Batting Seventh,4.1,1.15,="2-15",.133,.133,0.000,0,0,0,1,11.1,3,.278,.411
+Batting Eighth,4.0,1.50,="5-17",.294,.529,0.235,0,4,0,2,11.1,1,.333,.862
+Batting Ninth,4.1,0.92,="4-16",.250,.250,0.000,0,0,0,1,17.6,0,.250,.500
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Francisco Lindor SHB,Batting First ​,="42-207",.203,.391,0.188,10,5,2,21,21.6,21,.289,.680
+Carson Benge LHB,Batting First ​,="59-210",.281,.429,0.148,7,6,2,23,21.6,13,.335,.764
+A.J. Ewing LHB,Batting First ​,="35-166",.211,.301,0.090,2,9,0,8,26.2,14,.273,.574
+Juan Soto LHB,Batting Second ​,="60-227",.264,.467,0.203,12,8,1,36,15.3,47,.389,.856
+Bo Bichette RHB,Batting Third ​,="83-306",.271,.392,0.121,8,11,1,36,18.6,24,.320,.712
+Mark Vientos RHB,Batting Fourth ​,="25-127",.197,.394,0.197,6,7,0,19,20.9,6,.239,.633
+Marcus Semien RHB,Batting Sixth ​,="37-191",.194,.319,0.125,6,4,1,22,17.1,15,.252,.571
+Christopher Morel RHB,Batting Eighth ​,="7-26",.269,.462,0.193,1,2,0,4,33.3,3,.367,.829
+Brett Baty LHB,Batting Eighth ​,="31-135",.230,.385,0.155,4,9,0,15,24.7,12,.287,.672
+Luis Torrens RHB,Batting Ninth ​,="48-205",.234,.376,0.142,6,11,0,29,19.8,15,.298,.674
+Cristian Pache RHB,Batting Ninth ​,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Ronny Mauricio SHB,Batting Ninth ​,="6-27",.222,.333,0.111,1,0,0,2,27.6,1,.276,.609
+Francisco Alvarez RHB,Batting Ninth ​,="37-136",.272,.500,0.228,8,7,0,19,29.9,18,.365,.865
+Nick Morabito RHB,Batting Ninth ​,="4-17",.235,.235,0.000,0,0,0,1,9.5,3,.381,.616

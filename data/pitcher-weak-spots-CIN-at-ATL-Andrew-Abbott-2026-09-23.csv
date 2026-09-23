@@ -1,0 +1,31 @@
+﻿Matchup,CIN @ ATL
+Pitcher,Andrew Abbott
+Pitcher Team,CIN
+Opposing Team,ATL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.0,1.94,="23-78",.295,.474,0.179,3,5,0,9,11.1,12,.389,.863
+Batting Second,18.2,1.66,="19-74",.257,.446,0.189,2,6,1,12,17.2,12,.356,.802
+Batting Third,20.0,1.45,="24-79",.304,.519,0.215,5,2,0,13,16.1,5,.333,.852
+Batting Fourth,21.0,1.14,="16-75",.213,.440,0.227,4,3,1,15,21.2,8,.282,.722
+Batting Fifth,19.2,1.12,="15-74",.203,.324,0.121,2,3,0,9,13.4,7,.272,.596
+Batting Sixth,16.2,1.68,="18-67",.269,.403,0.134,2,3,0,6,16.7,10,.359,.762
+Batting Seventh,15.2,1.34,="15-58",.259,.431,0.172,2,4,0,4,15.2,6,.328,.759
+Batting Eighth,14.0,1.64,="13-54",.241,.352,0.111,1,3,0,2,28.1,10,.359,.711
+Batting Ninth,13.2,1.54,="16-57",.281,.439,0.158,3,0,0,7,25.8,5,.339,.778
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ronald Acuna Jr. RHB,Batting First ​,="62-248",.250,.407,0.157,8,13,1,26,21.7,40,.363,.770
+Drake Baldwin LHB,Batting First ​,="77-245",.314,.522,0.208,13,12,0,39,21.1,31,.396,.918
+DaShawn Keirsey Jr. LHB,Batting Second ​,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,0,1.000,2.000
+Matt Olson LHB,Batting Third ​,="127-513",.248,.489,0.241,33,25,0,76,24.2,54,.321,.810
+Ozzie Albies SHB,Batting Fourth ​,="46-160",.288,.450,0.162,6,8,0,24,12.8,12,.333,.783
+Michael Harris II LHB,Batting Fourth ​,="50-194",.258,.392,0.134,4,12,1,20,17.2,7,.286,.678
+Mauricio Dubon RHB,Batting Fifth ​,="52-189",.275,.397,0.122,4,9,1,28,13.5,13,.322,.719
+Kyle Farmer RHB,Batting Seventh ​,="3-10",.300,.400,0.100,0,1,0,2,20.0,0,.300,.700
+Dominic Smith LHB,Batting Seventh ​,="27-88",.307,.432,0.125,3,2,0,17,12.4,4,.344,.776
+Austin Riley RHB,Batting Seventh ​,="33-144",.229,.417,0.188,7,6,0,21,32.7,16,.315,.732
+Mike Yastrzemski LHB,Batting Eighth ​,="23-113",.204,.310,0.106,3,3,0,10,20.9,13,.295,.605
+Sean Murphy RHB,Batting Ninth ​,="9-46",.196,.304,0.108,1,2,0,2,24.5,3,.245,.549
+Ha-Seong Kim RHB,Batting Ninth ​,="10-71",.141,.155,0.014,0,1,0,6,26.3,8,.238,.393
+Brewer Hicklen RHB,Batting Ninth ​,="8-18",.444,.722,0.278,0,5,0,3,28.6,3,.524,1.246

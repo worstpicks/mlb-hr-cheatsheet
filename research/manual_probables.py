@@ -16,6 +16,7 @@ MANUAL_PROBABLES: dict[str, dict[str, tuple[str | None, str | None]]] = {
     "2026-09-23": {
         # Rain postponed 9/22 in Baltimore; it was made up as game one today, so the
         # second game needed its own pair. Owner's card: CJ Van Eyk and Trey Gibson.
+        "TOR @ BAL (G1)": ("Max Scherzer", "Chris Bassitt"),
         "TOR @ BAL (G2)": ("CJ Van Eyk", "Trey Gibson"),
     },
 }

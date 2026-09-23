@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-22T14:53:52Z",
+  "updated": "2026-09-23T15:27:58Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1474,12 +1474,14 @@
       "o05": {
         "player": "Yordan Alvarez",
         "matchup": "HOU @ SEA",
-        "result": "pending"
+        "result": "win",
+        "hr": 1
       },
       "o15": {
         "player": "Henry Bolte",
         "matchup": "LAA @ ATH",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       }
     }
   ]

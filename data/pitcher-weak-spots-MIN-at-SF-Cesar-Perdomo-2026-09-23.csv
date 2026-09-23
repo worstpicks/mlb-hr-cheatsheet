@@ -1,0 +1,31 @@
+﻿Matchup,MIN @ SF
+Pitcher,Cesar Perdomo
+Pitcher Team,SF
+Opposing Team,MIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,1.2,4.20,="3-7",.429,.857,0.428,1,0,0,1,9.1,4,.636,1.493
+Batting Second,2.2,1.50,="3-9",.333,.667,0.334,1,0,0,4,0.0,1,.364,1.031
+Batting Third,2.2,0.75,="2-10",.200,.200,0.000,0,0,0,1,10.0,0,.200,.400
+Batting Fourth,3.0,0.33,="1-10",.100,.100,0.000,0,0,0,0,30.0,0,.100,.200
+Batting Fifth,2.1,0.86,="2-9",.222,.556,0.334,1,0,0,1,33.3,0,.222,.778
+Batting Sixth,1.1,3.00,="4-8",.500,.625,0.125,0,1,0,0,25.0,0,.500,1.125
+Batting Seventh,2.0,1.50,="3-8",.375,.500,0.125,0,1,0,0,0.0,0,.375,.875
+Batting Eighth,2.0,1.50,="2-7",.286,.286,0.000,0,0,0,1,0.0,1,.375,.661
+Batting Ninth,1.2,1.80,="2-7",.286,.286,0.000,0,0,0,0,25.0,1,.375,.661
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Austin Martin RHB,Batting First ​,="26-109",.239,.349,0.110,1,9,0,11,17.6,20,.375,.724
+Luke Keaschall RHB,Batting First ​,="39-126",.310,.437,0.127,2,8,1,11,11.2,9,.387,.824
+Brooks Lee SHB,Batting Second ​,="49-216",.227,.370,0.143,9,4,0,32,16.7,12,.270,.640
+Kody Clemens LHB,Batting Third ​,="46-215",.214,.460,0.246,15,8,0,36,21.8,18,.274,.734
+Josh Bell SHB,Batting Fourth ​,="69-288",.240,.406,0.166,10,16,1,44,23.0,24,.300,.706
+Ryan Jeffers RHB,Batting Fourth ​,="29-110",.264,.527,0.263,6,7,2,24,14.5,12,.339,.866
+Royce Lewis RHB,Batting Fifth ​,="37-137",.270,.489,0.219,8,6,0,17,17.6,14,.340,.829
+Victor Caratini SHB,Batting Sixth ​,="24-135",.178,.333,0.155,5,6,0,17,21.5,13,.278,.611
+Aaron Sabato RHB,Batting Seventh ​,="0-3",.000,.000,0.000,0,0,0,0,33.3,0,.000,.000
+Alan Roden LHB,Batting Seventh ​,="7-29",.241,.310,0.069,0,2,0,4,17.6,4,.324,.634
+Emmanuel Rodriguez LHB,Batting Eighth ​,="4-10",.400,.900,0.500,1,2,0,2,10.0,0,.400,1.300
+Ryan Kreidler RHB,Batting Ninth ​,="23-126",.183,.341,0.158,4,4,2,15,21.2,9,.243,.584
+Ben Ross RHB,Batting Ninth ​,="3-14",.214,.357,0.143,0,2,0,1,57.1,0,.214,.571
+Walker Jenkins LHB,Batting Ninth ​,="4-41",.098,.220,0.122,1,2,0,5,26.5,6,.229,.449

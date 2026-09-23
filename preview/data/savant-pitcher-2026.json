@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "source": "savant-pitcher-csv",
-  "pitchers": 637,
+  "pitchers": 640,
   "lookup": {
     "687941": {
       "source": "savant-pitcher",
@@ -4243,6 +4243,27 @@
       "xera": 6.43,
       "era": 7.62,
       "sierra": 6.43,
+      "sierraSource": "xera-proxy"
+    },
+    "702566": {
+      "source": "savant-pitcher",
+      "barrelPct": 11.6,
+      "hardHitPct": 48.8,
+      "avgEV": 92.4,
+      "fbPct": 39.5,
+      "hrFbPct": 23.5,
+      "pullPct": 46.5,
+      "zonePct": 52.4,
+      "edgePct": 44.3,
+      "whiffPct": 19.2,
+      "kPct": 16.1,
+      "sweetSpotPct": 44.2,
+      "meatballPct": 11.3,
+      "hrAllowed": 4,
+      "flyballsAllowed": 17,
+      "xera": 7.53,
+      "era": 6.0,
+      "sierra": 7.53,
       "sierraSource": "xera-proxy"
     },
     "571578": {
@@ -9495,6 +9516,27 @@
       "sierra": 4.6,
       "sierraSource": "xera-proxy"
     },
+    "676467": {
+      "source": "savant-pitcher",
+      "barrelPct": 7.5,
+      "hardHitPct": 45.3,
+      "avgEV": 89.3,
+      "fbPct": 24.5,
+      "hrFbPct": 46.2,
+      "pullPct": 49.1,
+      "zonePct": 46.0,
+      "edgePct": 45.2,
+      "whiffPct": 17.2,
+      "kPct": 17.1,
+      "sweetSpotPct": 34.0,
+      "meatballPct": 4.8,
+      "hrAllowed": 6,
+      "flyballsAllowed": 13,
+      "xera": 6.11,
+      "era": 8.79,
+      "sierra": 6.11,
+      "sierraSource": "xera-proxy"
+    },
     "592094": {
       "source": "savant-pitcher",
       "barrelPct": 6.9,
@@ -12286,6 +12328,27 @@
       "xera": 4.24,
       "era": 3.89,
       "sierra": 4.24,
+      "sierraSource": "xera-proxy"
+    },
+    "701121": {
+      "source": "savant-pitcher",
+      "barrelPct": 7.1,
+      "hardHitPct": 46.4,
+      "avgEV": 90.8,
+      "fbPct": 25.0,
+      "hrFbPct": 14.3,
+      "pullPct": 32.1,
+      "zonePct": 55.8,
+      "edgePct": 49.3,
+      "whiffPct": 26.4,
+      "kPct": 20.0,
+      "sweetSpotPct": 28.6,
+      "meatballPct": 5.8,
+      "hrAllowed": 1,
+      "flyballsAllowed": 7,
+      "xera": 3.01,
+      "era": 1.8,
+      "sierra": 3.01,
       "sierraSource": "xera-proxy"
     },
     "670103": {

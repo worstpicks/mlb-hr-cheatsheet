@@ -1,0 +1,31 @@
+﻿Matchup,ARI @ COL
+Pitcher,Mason Adams
+Pitcher Team,COL
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,1.00,="2-11",.182,.182,0.000,0,0,0,0,30.8,1,.308,.490
+Batting Second,2.2,2.25,="4-11",.364,.818,0.454,1,0,1,4,15.4,2,.462,1.280
+Batting Third,3.2,0.55,="2-12",.167,.167,0.000,0,0,0,0,25.0,0,.167,.334
+Batting Fourth,2.2,1.13,="2-9",.222,.556,0.334,1,0,0,2,18.2,1,.273,.829
+Batting Fifth,2.0,2.50,="5-11",.455,.455,0.000,0,0,0,0,45.5,0,.455,.910
+Batting Sixth,1.2,4.20,="2-6",.333,1.333,1.000,2,0,0,2,18.2,5,.636,1.969
+Batting Seventh,2.1,1.71,="2-8",.250,.625,0.375,1,0,0,2,30.0,2,.400,1.025
+Batting Eighth,1.2,3.00,="4-9",.444,.667,0.223,0,2,0,0,10.0,1,.500,1.167
+Batting Ninth,3.0,1.00,="3-10",.300,.700,0.400,1,1,0,1,10.0,0,.300,1.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="95-362",.262,.470,0.208,17,20,2,56,15.2,28,.316,.786
+Corbin Carroll LHB,Batting Second ​,="85-306",.278,.546,0.268,13,19,12,40,19.8,46,.376,.922
+Gabriel Moreno RHB,Batting Third ​,="68-227",.300,.542,0.242,11,20,1,43,13.0,27,.378,.920
+Geraldo Perdomo SHB,Batting Third ​,="41-180",.228,.339,0.111,2,8,3,16,12.0,27,.324,.663
+Jesus Sanchez LHB,Batting Fourth ​,="30-103",.291,.466,0.175,4,6,0,14,19.5,6,.319,.785
+Ildemaro Vargas SHB,Batting Fifth ​,="22-99",.222,.273,0.051,1,2,0,9,9.4,6,.274,.547
+Lars Nootbaar LHB,Batting Fifth ​,="25-131",.191,.275,0.084,2,5,0,9,23.4,22,.305,.580
+Nolan Arenado RHB,Batting Sixth ​,="49-186",.263,.462,0.199,9,10,0,30,20.5,12,.315,.777
+Tim Tawa RHB,Batting Seventh ​,="24-107",.224,.346,0.122,3,2,1,10,24.6,8,.278,.624
+James McCann RHB,Batting Eighth ​,="21-70",.300,.471,0.171,3,3,0,13,20.0,4,.347,.818
+Pavin Smith LHB,Batting Eighth ​,="8-40",.200,.375,0.175,2,1,0,5,18.6,3,.256,.631
+Jose Fernandez RHB,Batting Eighth ​,="16-60",.267,.383,0.116,0,7,0,6,23.5,5,.333,.716
+Jordan Lawlar RHB,Batting Ninth ​,="9-40",.225,.375,0.150,1,1,1,6,35.6,2,.311,.686
+Ryan Waldschmidt RHB,Batting Ninth ​,="47-179",.263,.369,0.106,3,10,0,19,26.2,20,.345,.714

@@ -1,0 +1,31 @@
+﻿Matchup,HOU @ SEA
+Pitcher,Ethan Pecko
+Pitcher Team,HOU
+Opposing Team,SEA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.1,1.80,="4-14",.286,.500,0.214,1,0,0,2,6.3,2,.375,.875
+Batting Second,3.0,1.00,="2-11",.182,.455,0.273,1,0,0,1,23.1,1,.308,.763
+Batting Third,2.2,1.88,="5-13",.385,.692,0.307,1,1,0,2,15.4,0,.385,1.077
+Batting Fourth,3.2,0.27,="1-12",.083,.333,0.250,1,0,0,3,0.0,0,.083,.416
+Batting Fifth,2.1,2.14,="3-10",.300,.700,0.400,1,1,0,1,25.0,2,.417,1.117
+Batting Sixth,3.1,0.60,="1-11",.091,.091,0.000,0,0,0,0,16.7,1,.167,.258
+Batting Seventh,2.2,1.88,="2-9",.222,.333,0.111,0,1,0,0,8.3,3,.417,.750
+Batting Eighth,2.1,2.14,="2-9",.222,.333,0.111,0,1,0,2,41.7,3,.417,.750
+Batting Ninth,5.0,0.00,="0-13",.000,.000,0.000,0,0,0,0,14.3,0,.071,.071
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Taylor Ward RHB,Batting First ​,="67-287",.233,.331,0.098,5,11,1,21,20.6,43,.337,.668
+JP Crawford LHB,Batting First ​,="60-259",.232,.402,0.170,12,8,0,27,19.3,38,.342,.744
+Cal Raleigh SHB,Batting Second ​,="30-176",.170,.335,0.165,8,5,0,21,30.8,23,.264,.599
+Randy Arozarena RHB,Batting Second ​,="43-155",.277,.529,0.252,10,9,0,22,18.6,21,.388,.917
+Julio Rodriguez RHB,Batting Third ​,="58-255",.227,.373,0.146,9,10,0,31,25.5,17,.284,.657
+Dominic Canzone LHB,Batting Third ​,="46-182",.253,.418,0.165,5,11,2,25,21.7,20,.325,.743
+Josh Naylor LHB,Batting Fourth ​,="58-211",.275,.370,0.095,5,5,0,23,15.1,18,.336,.706
+Cole Young LHB,Batting Sixth ​,="30-128",.234,.320,0.086,2,5,0,12,17.0,8,.293,.613
+Michael Arroyo RHB,Batting Seventh ​,="3-8",.375,.375,0.000,0,0,0,0,9.1,3,.545,.920
+Jhonny Pereda RHB,Batting Eighth ​,="15-55",.273,.327,0.054,1,0,0,3,22.0,4,.322,.649
+Weston Wilson RHB,Batting Eighth ​,="16-69",.232,.348,0.116,2,2,0,4,30.4,10,.329,.677
+Victor Robles RHB,Batting Eighth ​,="15-59",.254,.356,0.102,0,2,2,6,16.2,7,.343,.699
+Lazaro Montes LHB,Batting Eighth ​,="3-26",.115,.346,0.231,2,0,0,4,51.9,1,.148,.494
+Brock Rodden SHB,Batting Ninth ​,="12-60",.200,.283,0.083,0,3,1,4,32.9,9,.300,.583

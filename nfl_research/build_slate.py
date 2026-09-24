@@ -77,6 +77,10 @@ def build_slate(season: int, week: int) -> dict:
     print(f"[nfl-research] snap counts merged into {snapped} of {len(rows)} player-games")
 
     players, defense = build_aggregates(rows, current_teams, cap=None)
+    # The newest regular-season game in the sample. A slate for a week further out
+    # than the next one is an early look, and the page says so.
+    last = max(((r.get("season") or 0, r["week"]) for r in rows), default=(None, None))
+    stats_through = {"season": last[0], "week": last[1]}
 
     # The lineup is whoever the club lists, not whoever gained the most yards last
     # year. See lineups.py for why that distinction put the wrong backs on top.
@@ -107,12 +111,18 @@ def build_slate(season: int, week: int) -> dict:
     # rows for a season before it starts. It rides alongside the real aggregates
     # as an opt-in source; it is never the default, because the snaps belong to
     # roster hopefuls rather than the players anyone is betting.
+    # Once two regular-season weeks are in, August snaps have nothing left to add
+    # and the toggle only offers a worse sample, so the source is dropped.
     teams_list = sorted({g["away"] for g in games} | {g["home"] for g in games})
-    try:
-        pre_players, pre_defense, pre_rows = build_preseason(season, teams_list)
-    except Exception as exc:
-        print(f"[nfl-research] preseason fetch failed ({exc}); regular season only")
-        pre_players, pre_defense, pre_rows = {}, {}, 0
+    reg_weeks = len({r["week"] for r in rows if r.get("season") == season})
+    pre_players, pre_defense, pre_rows = {}, {}, 0
+    if reg_weeks >= 2:
+        print(f"[nfl-research] preseason: skipped, {season} has {reg_weeks} regular-season weeks")
+    else:
+        try:
+            pre_players, pre_defense, pre_rows = build_preseason(season, teams_list)
+        except Exception as exc:
+            print(f"[nfl-research] preseason fetch failed ({exc}); regular season only")
     if pre_rows:
         print(f"[nfl-research] preseason: {pre_rows} player-game rows from ESPN")
         for game, slate_game in zip(games, slate_games):
@@ -160,6 +170,7 @@ def build_slate(season: int, week: int) -> dict:
         "has_preseason": bool(pre_rows),
         "preseason_rows": pre_rows,
         "fetched_at": datetime.now().isoformat(timespec="seconds"),
+        "stats_through": stats_through,
         "depth_season": depth_season,
         # seasons the game logs reach into, so the page can say "'25–'26"
         "log_seasons": sorted({r.get("season") for r in rows if r.get("season")}),

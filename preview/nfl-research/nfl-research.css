@@ -1222,6 +1222,9 @@ html.theme-light .nrs-chart-grid { stroke: rgba(100, 116, 139, 0.25); }
 
 /* stat-source toggle + its caveat */
 .nrs-src-toggle { display: inline-flex; border: 1px solid var(--nrs-border); border-radius: 8px; overflow: hidden; }
+/* the display rules above beat the browser's own [hidden], so a week without a
+   preseason sample still showed the 2026 REG / 2026 PRE switch */
+#nrsSrcToggle[hidden], .nrs-src-toggle[hidden] { display: none; }
 .nrs-src-toggle button {
     background: transparent; border: none; cursor: pointer;
     color: var(--nrs-muted); font: inherit; font-size: 0.72rem; font-weight: 700;
@@ -1770,3 +1773,13 @@ html.theme-light .nrs-card-gear { background: #fff; border-color: rgba(3, 105, 1
 /* the Player Logs card a cheat-sheet link landed on */
 .nrs-matchup-card.is-linked { box-shadow: 0 0 0 2px var(--wpz-accent-gold); }
 .nrs-why li > span[title] { cursor: help; }
+
+/* a slate for a week further out than the next one */
+.nrs-early {
+    margin: 10px 0 4px; padding: 9px 12px;
+    border: 1px solid rgba(56, 189, 248, 0.45); border-radius: 10px;
+    background: rgba(12, 74, 110, 0.25);
+    color: var(--wpz-color-paragraph); font-size: 0.8rem; line-height: 1.5;
+}
+.nrs-early[hidden] { display: none; }
+html.theme-light .nrs-early { background: #e0f2fe; border-color: rgba(3, 105, 161, 0.35); color: #0c4a6e; }

@@ -682,10 +682,9 @@
                 el("nrsWeek").value = String(state.week);
                 return loadSlate(bustCache);
             }
-            setStatus(
-                `No slate data for ${state.season} week ${state.week}. ` +
-                `Build it with: python fetch-nfl-research-slate.py --season ${state.season} --week ${state.week}`
-            );
+            setStatus(`Week ${state.week} of ${state.season} ${state.season < DEFAULT_SEASON ? "isn't available" : "isn't posted yet"} — pick another week above.`);
+            const earlyEl = el("nrsEarlyLook");
+            if (earlyEl) earlyEl.hidden = true;
             el("nrsLastUpdated").textContent = "";
             el("nrsSourceBadge").hidden = true;
             return;
@@ -699,6 +698,19 @@
         el("nrsSeasonNote").textContent =
             `Player averages over each player's last 17 games vs what each defense allowed per game — ` +
             `green means the player beats the defensive average.`;
+        // A week further out than the next one runs on stats that will change before
+        // it is played; say so rather than let it read as final.
+        const thru = state.slate.stats_through;
+        const early = thru && thru.season === state.slate.season && state.slate.week > thru.week + 1;
+        const earlyEl = el("nrsEarlyLook");
+        if (earlyEl) {
+            earlyEl.hidden = !early;
+            if (early) {
+                earlyEl.innerHTML = `<strong>Early look at Week ${state.slate.week}.</strong> Built on games through ` +
+                    `Week ${thru.week}, with today's depth charts and lines. Stats, injuries and lines will change ` +
+                    `before kickoff — this week is rebuilt as it gets closer.`;
+            }
+        }
         const propsHint = el("nrsPropsHint");
         if (state.slate.has_props) {
             propsHint.hidden = true;
@@ -998,7 +1010,9 @@
         const fav = imp[game.away] != null && imp[game.home] != null
             ? (imp[game.away] >= imp[game.home] ? game.away : game.home) : null;
         const w = game.weather;
+        // weeks more than about two out have no forecast yet: say so, not "NaN°F"
         const weather = !w ? "" : w.indoor ? "Indoors"
+            : w.temp_f == null ? "Forecast closer to kickoff"
             : `${Math.round(w.temp_f)}°F · wind ${Math.round(w.wind_mph)} mph${w.precip_pct >= 30 ? ` · ${w.precip_pct}% rain` : ""}`;
 
         const side = (team, logo) =>

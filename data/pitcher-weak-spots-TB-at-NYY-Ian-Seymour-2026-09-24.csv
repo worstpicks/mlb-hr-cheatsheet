@@ -1,0 +1,31 @@
+﻿Matchup,TB @ NYY
+Pitcher,Ian Seymour
+Pitcher Team,TB
+Opposing Team,NYY
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.15,="13-61",.213,.443,0.230,2,6,1,6,30.3,5,.273,.716
+Batting Second,16.0,0.75,="11-58",.190,.362,0.172,3,1,0,8,31.7,1,.200,.562
+Batting Third,15.1,1.17,="15-60",.250,.450,0.200,3,3,0,6,25.4,3,.286,.736
+Batting Fourth,14.0,1.50,="20-60",.333,.583,0.250,3,6,0,7,29.0,1,.355,.938
+Batting Fifth,14.1,1.26,="12-53",.226,.358,0.132,1,2,1,5,29.5,6,.311,.669
+Batting Sixth,12.1,1.54,="15-51",.294,.686,0.392,5,1,2,7,27.1,4,.379,1.065
+Batting Seventh,15.1,0.85,="8-52",.154,.154,0.000,0,0,0,3,28.8,5,.224,.378
+Batting Eighth,12.0,1.42,="11-47",.234,.617,0.383,5,1,1,10,32.1,6,.321,.938
+Batting Ninth,12.1,1.05,="8-44",.182,.409,0.227,3,1,0,5,27.5,5,.260,.669
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Paul Goldschmidt RHB,Batting First ​,="39-139",.281,.525,0.244,9,5,1,21,19.7,17,.363,.888
+Luis Garcia Jr. LHB,Batting Second ​,="84-280",.300,.607,0.307,20,16,5,66,17.5,11,.325,.932
+Ben Rice LHB,Batting Second ​,="80-325",.246,.486,0.240,19,15,3,52,24.7,39,.332,.818
+Amed Rosario RHB,Batting Third ​,="10-50",.200,.280,0.080,1,1,0,1,30.0,0,.200,.480
+Heliot Ramos RHB,Batting Third ​,="25-122",.205,.320,0.115,3,5,0,14,27.0,17,.312,.632
+Cody Bellinger LHB,Batting Fourth ​,="53-214",.248,.411,0.163,7,14,0,32,18.1,32,.341,.752
+Jazz Chisholm Jr. LHB,Batting Sixth ​,="40-184",.217,.348,0.131,5,7,1,18,31.2,19,.293,.641
+Spencer Jones LHB,Batting Sixth ​,="18-76",.237,.368,0.131,2,4,0,7,41.7,8,.310,.678
+George Lombard Jr. RHB,Batting Sixth ​,="10-52",.192,.346,0.154,2,2,0,7,20.0,5,.271,.617
+Anthony Volpe RHB,Batting Seventh ​,="16-58",.276,.328,0.052,0,3,0,6,27.4,4,.323,.651
+Ryan McMahon LHB,Batting Eighth ​,="31-133",.233,.406,0.173,5,8,0,22,28.5,9,.285,.691
+Ali Sanchez RHB,Batting Ninth ​,="15-61",.246,.328,0.082,1,2,0,7,28.8,1,.277,.605
+Austin Wells LHB,Batting Ninth ​,="27-176",.153,.290,0.137,7,3,0,14,27.2,15,.227,.517
+Jose Caballero RHB,Batting Ninth ​,="34-135",.252,.348,0.096,3,4,0,13,18.2,8,.313,.661

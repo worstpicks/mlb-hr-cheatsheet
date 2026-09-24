@@ -1,0 +1,31 @@
+﻿Matchup,MIL @ PHI
+Pitcher,Bryse Wilson
+Pitcher Team,MIL
+Opposing Team,PHI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.2,1.09,="4-14",.286,.286,0.000,0,0,0,1,13.3,0,.333,.619
+Batting Second,4.0,0.75,="3-14",.214,.214,0.000,0,0,0,3,21.4,0,.214,.428
+Batting Third,3.0,1.33,="4-13",.308,.308,0.000,0,0,0,0,28.6,0,.357,.665
+Batting Fourth,2.2,2.63,="6-14",.429,.571,0.142,0,0,1,1,13.3,1,.467,1.038
+Batting Fifth,3.2,1.64,="6-17",.353,.471,0.118,0,2,0,6,29.4,0,.353,.824
+Batting Sixth,5.0,0.80,="4-19",.211,.684,0.473,3,0,0,6,21.1,0,.211,.895
+Batting Seventh,5.2,0.18,="1-17",.059,.059,0.000,0,0,0,1,17.6,0,.059,.118
+Batting Eighth,3.2,1.91,="6-17",.353,.353,0.000,0,0,0,1,22.2,1,.389,.742
+Batting Ninth,2.2,3.00,="7-15",.467,.600,0.133,0,0,1,0,18.8,1,.500,1.100
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Trea Turner RHB,Batting First ​,="96-374",.257,.417,0.160,14,16,1,38,21.6,25,.305,.722
+Kyle Schwarber LHB,Batting Second ​,="77-314",.245,.576,0.331,30,12,1,58,34.1,56,.365,.941
+Bryce Harper LHB,Batting Third ​,="149-542",.275,.498,0.223,28,31,3,85,21.1,102,.386,.884
+Luis Arraez LHB,Batting Fourth ​,="55-198",.278,.374,0.096,2,11,1,22,4.2,9,.305,.679
+Edmundo Sosa RHB,Batting Fifth ​,="13-57",.228,.298,0.070,1,1,0,10,20.3,3,.270,.568
+Alec Bohm RHB,Batting Fifth ​,="72-251",.287,.442,0.155,7,16,1,47,15.4,20,.355,.797
+Brandon Marsh LHB,Batting Fifth ​,="44-143",.308,.462,0.154,5,7,0,19,21.6,9,.346,.808
+Bryson Stott LHB,Batting Sixth ​,="68-242",.281,.421,0.140,5,11,4,30,18.3,27,.354,.775
+Bryan De La Cruz RHB,Batting Seventh ​,="5-20",.250,.450,0.200,1,1,0,4,30.4,2,.304,.754
+J.T. Realmuto RHB,Batting Eighth ​,="36-151",.238,.404,0.166,6,7,0,23,20.0,17,.326,.730
+Garrett Stubbs LHB,Batting Ninth ​,="6-50",.120,.120,0.000,0,0,0,3,21.8,2,.182,.302
+Derek Hill RHB,Batting Ninth ​,="21-89",.236,.348,0.112,2,2,1,14,34.4,3,.269,.617
+Rafael Marchan SHB,Batting Ninth ​,="7-57",.123,.228,0.105,2,0,0,4,13.1,2,.180,.408
+Justin Crawford LHB,Batting Ninth ​,="67-250",.268,.364,0.096,2,14,2,23,19.5,18,.319,.683

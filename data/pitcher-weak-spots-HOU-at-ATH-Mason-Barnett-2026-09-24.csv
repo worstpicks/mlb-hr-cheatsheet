@@ -1,0 +1,31 @@
+﻿Matchup,HOU @ ATH
+Pitcher,Mason Barnett
+Pitcher Team,ATH
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.2,1.59,="6-24",.250,.667,0.417,3,1,0,3,14.8,3,.333,1.000
+Batting Second,4.2,2.79,="8-22",.364,.955,0.591,4,1,0,9,11.1,5,.481,1.436
+Batting Third,4.0,2.25,="5-17",.294,.529,0.235,1,1,0,2,28.6,4,.429,.958
+Batting Fourth,4.1,1.85,="5-17",.294,.471,0.177,1,0,0,2,10.0,3,.400,.871
+Batting Fifth,5.1,1.31,="5-16",.313,.375,0.062,0,1,0,1,15.8,2,.368,.743
+Batting Sixth,4.1,1.38,="4-17",.235,.412,0.177,1,0,0,3,35.0,2,.350,.762
+Batting Seventh,4.1,2.08,="6-19",.316,.526,0.210,1,1,0,7,27.3,3,.409,.935
+Batting Eighth,5.2,1.24,="4-21",.190,.190,0.000,0,0,0,2,16.7,3,.292,.482
+Batting Ninth,5.1,1.69,="6-21",.286,.571,0.285,1,1,1,6,28.0,3,.400,.971
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jeremy Pena RHB,Batting First ​,="114-413",.276,.477,0.201,20,19,2,48,23.6,21,.324,.801
+Yordan Alvarez LHB,Batting Second ​,="164-514",.319,.595,0.276,36,32,1,94,16.9,98,.435,1.030
+Isaac Paredes RHB,Batting Third ​,="103-382",.270,.432,0.162,14,18,1,64,11.6,49,.365,.797
+Jose Altuve RHB,Batting Fourth ​,="41-173",.237,.353,0.116,3,11,0,13,18.9,13,.295,.648
+Christian Walker RHB,Batting Fourth ​,="51-220",.232,.468,0.236,14,10,0,33,23.5,21,.312,.780
+Nelson Velazquez RHB,Batting Fourth ​,="12-47",.255,.532,0.277,3,4,0,10,24.1,5,.333,.865
+Daulton Varsho LHB,Batting Fifth ​,="35-158",.222,.354,0.132,4,5,2,16,20.3,13,.285,.639
+LaMonte Wade Jr. LHB,Batting Fifth ​,="3-35",.086,.086,0.000,0,0,0,2,26.2,7,.238,.324
+Cam Smith RHB,Batting Sixth ​,="28-140",.200,.379,0.179,6,5,1,13,25.2,14,.272,.651
+Taylor Trammell LHB,Batting Seventh ​,="16-79",.203,.405,0.202,4,2,1,10,31.0,8,.276,.681
+Yainer Diaz RHB,Batting Seventh ​,="28-91",.308,.538,0.230,5,6,0,16,16.8,1,.326,.864
+Nick Allen RHB,Batting Eighth ​,="13-59",.220,.254,0.034,0,2,0,8,26.9,4,.258,.512
+Lucas Spence LHB,Batting Eighth ​,="3-19",.158,.211,0.053,0,1,0,3,33.3,2,.238,.449
+Christian Vazquez RHB,Batting Ninth ​,="42-195",.215,.328,0.113,5,7,0,23,20.0,14,.267,.595

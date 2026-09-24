@@ -1,0 +1,31 @@
+﻿Matchup,STL @ PIT
+Pitcher,Paul Skenes
+Pitcher Team,PIT
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.0,2.11,="29-79",.367,.633,0.266,4,7,1,11,23.3,9,.433,1.066
+Batting Second,23.2,0.85,="16-84",.190,.286,0.096,2,2,0,12,30.0,4,.233,.519
+Batting Third,21.0,1.19,="18-75",.240,.493,0.253,5,4,0,12,27.1,7,.306,.799
+Batting Fourth,21.1,0.84,="12-76",.158,.303,0.145,2,5,0,7,29.3,6,.220,.523
+Batting Fifth,18.0,1.39,="21-74",.284,.514,0.230,3,8,0,12,22.8,4,.329,.843
+Batting Sixth,17.0,1.12,="14-62",.226,.306,0.080,0,3,1,8,29.2,5,.310,.616
+Batting Seventh,18.0,0.83,="10-63",.159,.190,0.031,0,2,0,2,33.3,5,.232,.422
+Batting Eighth,16.0,1.00,="13-58",.224,.362,0.138,2,2,0,3,27.4,3,.262,.624
+Batting Ninth,14.1,0.98,="10-51",.196,.255,0.059,1,0,0,3,30.0,4,.293,.548
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="127-520",.244,.369,0.125,17,14,0,50,16.8,64,.344,.713
+Ivan Herrera RHB,Batting Second ​,="130-537",.242,.372,0.130,16,20,1,61,18.6,72,.360,.732
+Alec Burleson LHB,Batting Third ​,="129-462",.279,.483,0.204,21,29,1,81,17.2,47,.352,.835
+Jordan Walker RHB,Batting Fourth ​,="96-370",.259,.465,0.206,19,19,0,71,27.7,31,.319,.784
+Nolan Gorman LHB,Batting Fifth ​,="35-166",.211,.319,0.108,5,3,0,24,29.4,18,.283,.602
+Leonardo Bernal SHB,Batting Fifth ​,="17-57",.298,.491,0.193,3,2,0,10,21.0,5,.355,.846
+Masyn Winn RHB,Batting Sixth ​,="82-333",.246,.333,0.087,4,13,2,44,21.4,34,.323,.656
+Bryan Torres LHB,Batting Seventh ​,="15-63",.238,.349,0.111,1,0,2,6,15.9,4,.294,.643
+Jose Fermin RHB,Batting Seventh ​,="21-83",.253,.373,0.120,2,4,0,10,13.0,7,.315,.688
+Nathan Church LHB,Batting Seventh ​,="47-193",.244,.373,0.129,6,7,0,24,15.0,10,.280,.653
+Pedro Pages RHB,Batting Eighth ​,="31-125",.248,.368,0.120,3,6,0,10,26.5,5,.286,.654
+Thomas Saggese RHB,Batting Eighth ​,="16-55",.291,.564,0.273,3,4,1,7,24.2,5,.339,.903
+Victor Scott II LHB,Batting Ninth ​,="30-155",.194,.258,0.064,2,4,0,9,23.4,16,.276,.534
+César Prieto LHB,Batting Ninth ​,="1-12",.083,.083,0.000,0,0,0,0,16.7,0,.083,.166

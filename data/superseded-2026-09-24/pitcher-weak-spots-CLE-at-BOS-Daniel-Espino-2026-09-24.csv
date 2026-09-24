@@ -1,0 +1,31 @@
+﻿Matchup,CLE @ BOS
+Pitcher,Daniel Espino
+Pitcher Team,CLE
+Opposing Team,BOS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.0,1.50,="1-7",.143,.571,0.428,1,0,0,1,33.3,2,.333,.904
+Batting Second,1.2,1.80,="3-8",.375,.375,0.000,0,0,0,1,50.0,0,.375,.750
+Batting Third,1.0,3.00,="1-4",.250,1.000,0.750,1,0,0,2,0.0,2,.500,1.500
+Batting Fourth,2.0,0.50,="1-7",.143,.571,0.428,1,0,0,3,42.9,0,.143,.714
+Batting Fifth,1.1,1.50,="2-6",.333,.500,0.167,0,1,0,1,16.7,0,.333,.833
+Batting Sixth,1.1,0.75,="0-4",.000,.000,0.000,0,0,0,0,80.0,1,.200,.200
+Batting Seventh,1.1,1.50,="1-5",.200,.200,0.000,0,0,0,0,33.3,1,.333,.533
+Batting Eighth,1.2,0.60,="1-6",.167,.167,0.000,0,0,0,0,50.0,0,.167,.334
+Batting Ninth,1.0,3.00,="2-5",.400,.400,0.000,0,0,0,0,33.3,1,.500,.900
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Nick Sogard SHB,Batting First ​,="18-82",.220,.305,0.085,1,4,0,6,20.0,15,.337,.642
+Roman Anthony LHB,Batting First ​,="41-179",.229,.358,0.129,4,7,2,13,27.6,23,.320,.678
+Ceddanne Rafaela RHB,Batting Second ​,="103-373",.276,.434,0.158,11,24,1,44,18.7,11,.301,.735
+Mickey Gasper SHB,Batting Second ​,="18-80",.225,.388,0.163,4,1,0,6,23.7,8,.315,.703
+Jahmai Jones RHB,Batting Third ​,="10-42",.238,.429,0.191,2,2,0,4,35.6,3,.289,.718
+Adley Rutschman SHB,Batting Third ​,="52-220",.236,.455,0.219,11,13,1,45,17.9,25,.311,.766
+Wilyer Abreu LHB,Batting Third ​,="96-403",.238,.439,0.201,18,21,3,54,20.3,48,.319,.758
+Willson Contreras RHB,Batting Fourth ​,="100-363",.275,.515,0.240,21,18,3,66,25.4,43,.380,.895
+Trevor Story RHB,Batting Fifth ​,="14-63",.222,.317,0.095,0,6,0,7,24.3,5,.271,.588
+Caleb Durbin RHB,Batting Sixth ​,="57-229",.249,.371,0.122,6,8,1,30,14.7,30,.353,.724
+Jarren Duran LHB,Batting Seventh ​,="40-188",.213,.362,0.149,6,6,2,26,25.1,15,.276,.638
+Andruw Monasterio RHB,Batting Eighth ​,="25-92",.272,.359,0.087,1,5,0,12,19.4,8,.320,.679
+Isiah Kiner-Falefa RHB,Batting Ninth ​,="12-57",.211,.281,0.070,1,1,0,9,14.3,5,.274,.555
+Connor Wong RHB,Batting Ninth ​,="29-115",.252,.383,0.131,3,6,0,10,23.6,7,.312,.695

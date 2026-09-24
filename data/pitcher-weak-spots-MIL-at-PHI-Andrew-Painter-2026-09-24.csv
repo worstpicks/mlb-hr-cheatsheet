@@ -1,0 +1,31 @@
+﻿Matchup,MIL @ PHI
+Pitcher,Andrew Painter
+Pitcher Team,PHI
+Opposing Team,MIL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.1,1.43,="15-61",.246,.361,0.115,1,4,0,4,21.4,7,.343,.704
+Batting Second,16.1,1.04,="13-60",.217,.333,0.116,2,1,0,6,27.3,4,.273,.606
+Batting Third,13.0,2.08,="20-58",.345,.466,0.121,1,2,1,10,15.4,7,.415,.881
+Batting Fourth,14.0,1.43,="16-53",.302,.623,0.321,5,2,0,9,13.3,4,.356,.979
+Batting Fifth,13.0,1.46,="14-52",.269,.346,0.077,1,1,0,9,22.4,5,.328,.674
+Batting Sixth,12.2,1.50,="14-50",.280,.600,0.320,5,1,0,11,12.7,5,.345,.945
+Batting Seventh,10.0,2.10,="17-48",.354,.521,0.167,2,2,0,8,18.9,4,.415,.936
+Batting Eighth,14.2,0.61,="5-43",.116,.186,0.070,1,0,0,4,25.5,4,.188,.374
+Batting Ninth,11.1,1.50,="13-46",.283,.565,0.282,3,4,0,6,26.0,4,.340,.905
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Christian Yelich LHB,Batting First ​,="43-183",.235,.350,0.115,2,13,1,21,26.5,23,.327,.677
+Jackson Chourio RHB,Batting Second ​,="77-285",.270,.449,0.179,13,12,0,40,24.0,25,.332,.781
+Brice Turang LHB,Batting Third ​,="60-211",.284,.521,0.237,11,13,2,40,26.0,33,.380,.901
+Gary Sanchez RHB,Batting Fourth ​,="14-71",.197,.366,0.169,2,4,1,10,27.9,13,.326,.692
+William Contreras RHB,Batting Fourth ​,="57-241",.237,.369,0.132,7,11,0,35,17.6,22,.298,.667
+Andrew Vaughn RHB,Batting Fourth ​,="26-88",.295,.375,0.080,0,3,2,7,14.7,11,.382,.757
+Jake Bauers LHB,Batting Fifth ​,="68-232",.293,.591,0.298,19,10,1,53,25.3,47,.416,1.007
+Garrett Mitchell LHB,Batting Sixth ​,="41-116",.353,.612,0.259,5,11,2,21,30.1,16,.436,1.048
+Sal Frelick LHB,Batting Seventh ​,="39-170",.229,.312,0.083,2,8,0,21,9.3,16,.298,.610
+Luis Lara SHB,Batting Seventh ​,="18-67",.269,.358,0.089,0,6,0,11,21.3,6,.320,.678
+Bo Naylor LHB,Batting Eighth ​,="10-56",.179,.375,0.196,3,2,0,10,25.0,4,.233,.608
+Cooper Pratt RHB,Batting Eighth ​,="34-133",.256,.361,0.105,2,4,2,20,20.0,16,.335,.696
+David Hamilton LHB,Batting Ninth ​,="54-220",.245,.359,0.114,4,7,3,19,24.6,20,.311,.670
+Joey Ortiz RHB,Batting Ninth ​,="54-202",.267,.406,0.139,5,9,2,24,16.8,18,.323,.729

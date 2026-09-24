@@ -14,7 +14,7 @@ SAVANT_PITCHER_CUSTOM_CSV = (
     "?year={season}&type=pitcher&filter=&min=10"
     "&selections=player_id,player_name,barrel_batted_rate,hard_hit_percent,exit_velocity_avg,"
     "flyballs_percent,hr_flyball_percent,pull_percent,in_zone_percent,edge_percent,whiff_percent,"
-    "k_percent,sweet_spot_percent,meatball_percent,home_run,flyballs,innings_pitched"
+    "k_percent,bb_percent,sweet_spot_percent,meatball_percent,home_run,flyballs,innings_pitched"
     "&chart=false&csv=true"
 )
 
@@ -58,6 +58,7 @@ def _parse_hand_search_row(all_row: dict, fly_row: dict | None = None) -> dict:
         "fbPct": fb_pct,
         "hrFbPct": hr_fb_pct,
         "kPct": _float(all_row.get("k_percent")),
+        "bbPct": _float(all_row.get("bb_percent")),
         "whiffPct": _float(all_row.get("swing_miss_percent")),
         "hrAllowed": hrs,
         "flyballsAllowed": fly_bip,
@@ -119,6 +120,7 @@ def _parse_custom_row(row: dict) -> dict:
         "edgePct": _float(row.get("edge_percent")),
         "whiffPct": _float(row.get("whiff_percent")),
         "kPct": _float(row.get("k_percent")),
+        "bbPct": _float(row.get("bb_percent")),
         "sweetSpotPct": _float(row.get("sweet_spot_percent")),
         "meatballPct": _float(row.get("meatball_percent")),
         "hrAllowed": hr,

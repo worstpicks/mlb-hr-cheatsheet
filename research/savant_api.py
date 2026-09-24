@@ -17,7 +17,7 @@ from research.savant_hr import fetch_hr_tracker_lookup
 SAVANT_CUSTOM_CSV = (
     "https://baseballsavant.mlb.com/leaderboard/custom"
     "?year={season}&type=batter&filter=&min=10"
-    "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,k_percent,whiff_percent,"
+    "&selections=player_id,player_name,woba,xwoba,xba,xiso,pa,home_run,k_percent,bb_percent,whiff_percent,"
     "barrel_batted_rate,hard_hit_percent,exit_velocity_avg,launch_angle_avg,sweet_spot_percent,flyballs_percent,"
     "groundballs_percent,linedrives_percent,flyballs,hr_flyball_percent,pull_percent"
     "&chart=false&csv=true"
@@ -119,6 +119,7 @@ def _parse_custom_row(row: dict) -> dict:
         "pa": _int(row.get("pa")),
         "hr": _int(row.get("home_run")),
         "kPct": _float(row.get("k_percent")),
+        "bbPct": _float(row.get("bb_percent")),
         "whiffPct": _float(row.get("whiff_percent")),
         "barrelPct": _float(row.get("barrel_batted_rate")),
         "hardHitPct": _float(row.get("hard_hit_percent")),
@@ -274,6 +275,9 @@ def merge_into_hitter_stats(
         "hrFbPct",
         "whiffPct",
         "kPct",
+        # walk rate: the one plate-discipline number the tab lacked. It is what puts
+        # a man on base without a hit, and the first-inning read leaned on it blind.
+        "bbPct",
         "pa",
         "recentForm",
         "hr",

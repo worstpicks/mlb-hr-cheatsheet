@@ -208,6 +208,7 @@
         { key: "boomPct", label: "Boom%", group: "contact", stat: "boomPct", fmt: (r) => fmtBoomWithTrend(hitterStats(r).boomPct, boomTrendForRow(r)), tip: "Boom% — slate-relative HR power score from contact quality (Barrel%, Blast%, Hard Hit%, Air%, FB%, Solid%), pitch-mix fit vs today's starter, and HR Form%. Higher = more homer upside today. Arrow tracks recent ISO + HR power vs prior 4 games." },
         { key: "whiffPct", label: "Whiff%", group: "plate", stat: "whiffPct", fmt: (r) => fmtPct(hitterStats(r).whiffPct), tip: "Whiff rate — swings and misses as a share of swings. Lower is better for contact hitters." },
         { key: "kPct", label: "K%", group: "plate", stat: "kPct", fmt: (r) => fmtPct(hitterStats(r).kPct), tip: "Strikeout rate — strikeouts as a share of plate appearances. Lower is better for contact." },
+        { key: "bbPct", label: "BB%", group: "plate", stat: "bbPct", fmt: (r) => fmtPct(hitterStats(r).bbPct), tip: "Walk rate — walks as a share of plate appearances. Higher means better plate discipline, more hitter's counts and more trips on base. League average is about 8.5%." },
         { key: "gbPct", label: "GB%", group: "batted", stat: "gbPct", fmt: (r) => fmtPct(hitterStats(r).gbPct), tip: "Ground ball rate — share of batted balls on the ground. Lower rates often correlate with more power and fly balls." },
         { key: "ldPct", label: "LD%", group: "batted", stat: "ldPct", fmt: (r) => fmtPct(hitterStats(r).ldPct), tip: "Line drive rate — share of batted balls hit on a line. A sign of solid, hard contact." },
         { key: "pullPct", label: "Pull%", group: "batted", stat: "pullPct", fmt: (r) => fmtPct(hitterStats(r).pullPct), tip: "Pull rate — share of batted balls hit to the pull side. Higher pull rates often mean more power, especially for same-side matchups." },
@@ -1986,6 +1987,7 @@
         { key: "edgePct", label: "Edge%", stat: "edgePct", group: "command", fmt: (s) => fmtPct(s.edgePct), tip: "Edge-of-zone pitch rate. Shows command shape; when edge-heavy profiles still leak barrels and fly balls, hitters can still find HR lanes.", hrHigherIsGreen: false },
         { key: "whiffPct", label: "Whiff%", stat: "whiffPct", group: "command", fmt: (s) => fmtPct(s.whiffPct), tip: "Swing-and-miss rate induced. Lower whiff often means more balls in play — which helps HR props when contact quality allowed is also high.", hrHigherIsGreen: false },
         { key: "kPct", label: "K%", stat: "kPct", group: "command", fmt: (s) => fmtPct(s.kPct), tip: "Strikeout rate. Lower K% = more contact opportunities. Contact-heavy arms can be HR-friendly when they also allow hard fly-ball damage.", hrHigherIsGreen: false },
+        { key: "bbPct", label: "BB%", stat: "bbPct", group: "command", fmt: (s) => fmtPct(s.bbPct), tip: "Walk rate allowed. More walks = more hitter's counts and more men on base, so a homer off a wild arm is often a multi-run one. Also the biggest first-inning run driver short of a homer. League average is about 8.5%.", hrHigherIsGreen: true },
         { key: "sierra", label: "SIERA", stat: "sierra", group: "command", fmt: (s) => fmtRate(s.sierra), tip: "Skill-interactive ERA proxy (Savant xERA). Higher = weaker contact suppression overall — more HR-friendly when paired with hard contact allowed.", hrHigherIsGreen: true },
         { key: "hr9", label: "HR/9", stat: "hr9", group: "command", fmt: (s) => (s.hr9 != null ? Number(s.hr9).toFixed(2) : "—"), tip: "Homers allowed per nine innings. Direct HR rate — higher HR/9 means this pitcher has already been taken deep often this season.", hrHigherIsGreen: true },
     ];
@@ -2652,12 +2654,15 @@
     }
 
     function renderPitcherKGrid(stats, statsList) {
-        const keys = ["whiffPct", "kPct", "edgePct", "zonePct"];
+        const keys = ["whiffPct", "kPct", "bbPct", "edgePct", "zonePct"];
         const cells = keys
             .map((key) => {
                 const metric = pitcherMetricByKey(key);
                 if (!metric) return "";
-                const kMetric = { ...metric, hrHigherIsGreen: key !== "zonePct" };
+                // Read from the strikeout-prop side: walks run up the pitch count and
+                // shorten the outing, so more BB% means fewer chances at a K -- red here,
+                // even though the same walk rate is green on the HR side.
+                const kMetric = { ...metric, hrHigherIsGreen: key !== "zonePct" && key !== "bbPct" };
                 return pitcherStatCellHtml(kMetric, stats, statsList);
             })
             .join("");
@@ -2668,7 +2673,7 @@
             ? `<p class="rs-pitcher-k__hand">${handBits.join(" · ")}</p>`
             : "";
         return `<div class="rs-pitcher-k">
-            <p class="rs-pitcher-k__lede">Read K props: <strong>Whiff%</strong> is swing-and-miss skill, <strong>K%</strong> is the outcome, <strong>Edge%</strong> shows command on the borders (chase + called strikes). Pair with the opposing lineup's K% in the score cards below.</p>
+            <p class="rs-pitcher-k__lede">Read K props: <strong>Whiff%</strong> is swing-and-miss skill, <strong>K%</strong> is the outcome, <strong>Edge%</strong> shows command on the borders (chase + called strikes), <strong>BB%</strong> is the pitch-count tax that shortens the outing. Pair with the opposing lineup's K% in the score cards below.</p>
             ${handLine}
             <div class="rs-pitcher-group__grid">${cells}</div>
         </div>`;
@@ -4775,6 +4780,7 @@
             "hrFbPct",
             "whiffPct",
             "kPct",
+            "bbPct",
             "hr",
             "expectedHr",
             "hrLuckDiff",
@@ -6324,6 +6330,7 @@
             pullPct: true,
             whiffPct: false,
             kPct: false,
+            bbPct: true,
         };
         return {
             colValues: Object.fromEntries(
@@ -7192,6 +7199,7 @@
                     profileStatCell("ISO", fmtRate(stats.iso)),
                     profileStatCell("Whiff%", fmtPct(stats.whiffPct)),
                     profileStatCell("K%", fmtPct(stats.kPct)),
+                    profileStatCell("BB%", fmtPct(stats.bbPct)),
                 ].join("")}</div>`
             )
         );

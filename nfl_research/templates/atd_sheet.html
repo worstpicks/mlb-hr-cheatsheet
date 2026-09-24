@@ -351,6 +351,13 @@
     .atd-game__line { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
     .atd-inj { font-size: 0.7rem; color: #fdba74; line-height: 1.4; }
     .atd-play.is-out { opacity: 0.6; }
+    .chip--first { background: rgba(250, 204, 21, 0.22); border-color: rgba(250, 204, 21, 0.65); color: #fef08a; }
+    html.theme-light .chip--first { color: #713f12; background: rgba(250, 204, 21, 0.35); }
+    .atd-first-odds { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-top: 2px; }
+    .atd-first-odds__pct { font-size: 1.35rem; font-weight: 900; color: var(--wpz-accent-gold); font-variant-numeric: tabular-nums; }
+    .atd-first-odds__fair { font-size: 0.78rem; font-weight: 700; color: var(--nrs-muted); }
+    .atd-first-odds__fair b { color: var(--wpz-color-text); }
+    html.theme-light .atd-first-odds__pct { color: #a16207; }
     html.theme-light .atd-inj { color: #9a3412; }
     .atd-header-actions-right { flex-wrap: wrap; justify-content: flex-end; }
     @media (max-width: 520px) {
@@ -412,6 +419,11 @@
             <div class="atd-top" id="atdTop"></div>
         </section>
 
+        <section class="atd-section" id="atdFirstSection">
+            <h2 class="atd-section-title">Top 5 first TD scorers &mdash; ranked on the data</h2>
+            <div class="atd-top" id="atdFirst"></div>
+        </section>
+
         <section class="atd-section">
             <h2 class="atd-section-title" id="atdBoardTitle">Full board</h2>
             <div class="atd-games" id="atdGames"></div>
@@ -437,7 +449,7 @@
             goal-line carry a game, a pass catcher with 18%+, a quarterback with half a carry a game inside the 5;
             &#129460; defensive matchup &mdash; this defense has given up 10%+ more than league to his role, in production and
             touchdowns combined, and is not a red-zone wall; &#9992;&#65039; exploitable D &mdash; the defense this team faces
-            carries a TARGET verdict in the team-defense scoring table.<br>
+            <span id="atdExpNote">carries a TARGET verdict in the team-defense scoring table</span>.<br>
             <strong>Team tendency</strong> is shown only where it helps that player, and is computed from the last 17 games:
             &#127939;&#127999;&#8205;&#9794;&#65039;&#8205;&#10145;&#65039; run-first (a bottom-ten pass rate with the score close) lifts
             the backfield, &#129653; pass-first (top ten) lifts the pass catchers, and &#128162; aggressive (a top-ten rate of going for
@@ -450,6 +462,11 @@
             last season while this one is young.<br>
             <strong>Top 5</strong> ranks healthy favorites on that TD chance, nudged by this week's implied points and by the
             touchdowns this defense has allowed to his role.<br>
+            <strong>1st TD</strong> is the chance he scores the game's first touchdown: his team's chance to score first &mdash;
+            its implied points turned into expected touchdowns, nudged by how often it scores on its first two drives against how
+            often this defense allows that, with defensive and special-teams scores counted too &mdash; times his share of his
+            team's expected touchdowns. <strong>Top 5 first TD</strong> ranks healthy players on it. <strong>Fair</strong> is that
+            chance as American odds with no bookmaker margin: a book price longer than fair is the value side.<br>
             <strong>Caveats:</strong> <strong>New team</strong> means most of his sample was earned with another club, so his
             share describes a role he may not hold now. A <strong>small sample</strong> player has fewer than four games and is
             listed without a rating. Injury statuses come from ESPN's report when the sheet was built &mdash; check again before
@@ -462,6 +479,9 @@
         "use strict";
 
         var SHEET = /*__SHEET__*/null;
+        var EXP_TEXT = SHEET.exp_source === "computed"
+            ? "is one of the ten softest defenses on points and red-zone touchdown rate allowed over its last 17 games"
+            : "carries a TARGET verdict in the team-defense scoring table";
         window.ATD_SHEET = SHEET;   // atd-card.js reads the player cards from here
         var GAMES = SHEET.games;
         var TEND = SHEET.tend || {};
@@ -591,6 +611,10 @@
                          'touchdown: red-zone share × team trips × opponent TD rate allowed, plus scores from outside the 20">' +
                          (pl.mk === "rush_td" ? "Rush TD " : "TD ") + "<b>" + m.td + "%</b></span>");
             }
+            if (m.ftd != null) {
+                out.push('<span class="atd-m" title="Chance he scores the game\'s first touchdown' +
+                         (m.ftd_fair ? " — fair odds " + m.ftd_fair : "") + '">1st TD <b>' + m.ftd.toFixed(0) + "%</b></span>");
+            }
             if (m.td2 != null && !m.small) {
                 out.push('<span class="atd-m atd-m--td" title="Chance of two or more touchdowns at the same rate">2+ TD <b>' + m.td2 + "%</b></span>");
             }
@@ -618,7 +642,7 @@
 
         function playHTML(pl, team, exp) {
             var fav = pl.t.indexOf("fav") !== -1;
-            var tend = tendChips(team, pl.p);
+            var tend = pl.st === "out" ? "" : tendChips(team, pl.p);   // ruled out: nothing to lift
             var tags = pl.t.slice();
             if (exp) tags.push("exp");
             return '<div class="atd-play' + (fav ? " is-fav" : "") + (pl.st === "out" ? " is-out" : "") + '" data-tags="' + esc(tags.join(" ")) + '" data-need="' + Math.ceil(pl.line || 0.5) +
@@ -642,7 +666,7 @@
             var imp = g.implied && g.implied[team];
             return '<div class="atd-side" data-team="' + esc(team) + '">' +
                      '<div class="atd-side__head">' + teamImg(team) + "<span>" + esc(team) + "</span>" +
-                       (isExp ? ' <span class="chip chip--exp" title="' + esc(opp + " carries a TARGET verdict in the team-defense scoring table") + '">✈️ Exploitable D</span>' : "") +
+                       (isExp ? ' <span class="chip chip--exp" title="' + esc(opp + " " + EXP_TEXT) + '">✈️ Exploitable D</span>' : "") +
                        (imp != null ? '<span class="atd-side__imp" title="Implied points from the spread and total"><b>' + imp.toFixed(1) + "</b> implied</span>" : "") +
                      "</div>" +
                      (plays.length
@@ -697,6 +721,29 @@
             }).join("");
         }
 
+        /* The five likeliest first touchdown scorers among the listed plays. Each card
+           carries its pick's team so the tracker can settle it against that game. */
+        function firstHTML() {
+            return SHEET.first5.map(function (row, i) {
+                var f = locateId(row.id);
+                if (!f) return "";
+                return '<article class="atd-top-card atd-first-card" data-first-team="' + esc(f.team) +
+                         '" data-first-name="' + esc(f.pl.n) + '">' +
+                         '<div class="atd-top-card__head">' +
+                           '<span class="atd-rank">' + (i + 1) + "</span>" +
+                           '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                           statusChips(f.pl) +
+                         "</div>" +
+                         '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
+                           " &middot; " + fmtKick(f.kick) + "</span>" +
+                         '<div class="atd-first-odds"><span class="atd-first-odds__pct">' + row.pct.toFixed(1) +
+                           '%</span><span class="atd-first-odds__fair">fair <b>' + esc(row.fair) + "</b></span></div>" +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" +
+                       "</article>";
+            }).join("");
+        }
+
         function counts() {
             var c = { all: 0, fav: 0, val: 0, rz: 0, mat: 0, exp: 0 }, games = 0;
             GAMES.forEach(function (g) {
@@ -733,6 +780,12 @@
         }).join("");
 
         document.getElementById("atdTop").innerHTML = topHTML();
+        document.getElementById("atdExpNote").textContent = EXP_TEXT;
+        if (SHEET.first5 && SHEET.first5.length) {
+            document.getElementById("atdFirst").innerHTML = firstHTML();
+        } else {
+            document.getElementById("atdFirstSection").hidden = true;
+        }
         document.getElementById("atdGames").innerHTML = GAMES.map(gameHTML).join("");
 
         /* ── Filtering: hide plays that lack the tag, then hide emptied sides/games ── */
@@ -815,7 +868,7 @@
                 return n && n !== "STATUS_SCHEDULED" && n !== "STATUS_POSTPONED";
             });
 
-            var scorers = [], played = [], out = [], gameState = {};
+            var scorers = [], played = [], out = [], gameState = {}, firstTD = {};
 
             events.forEach(function (e) {
                 var c = (e.competitions && e.competitions[0]) || {};
@@ -836,6 +889,20 @@
                     var r = await fetch(ESPN + "summary?event=" + started[i].id);
                     if (!r.ok) continue;
                     var s = await r.json();
+
+                    // scoring plays arrive in game order, so the first TD is the game's first
+                    var comp = (started[i].competitions && started[i].competitions[0]) || {};
+                    var gk = ["away", "home"].map(function (side) {
+                        var c = (comp.competitors || []).filter(function (t) { return t.homeAway === side; })[0];
+                        return c ? (c.team || {}).abbreviation || "" : "";
+                    }).join("@");
+                    var firstPlay = (s.scoringPlays || []).filter(function (p) {
+                        return p.type && p.type.abbreviation === "TD";
+                    })[0];
+                    if (firstPlay) {
+                        var fm = /^(.+?)\s+\d+\s+Yd\b/i.exec(firstPlay.text || "");
+                        firstTD[gk] = { name: fm ? fm[1].trim() : (firstPlay.text || ""), team: (firstPlay.team || {}).abbreviation || "" };
+                    }
 
                     (s.scoringPlays || []).forEach(function (p) {
                         if (!p.type || p.type.abbreviation !== "TD") return;
@@ -882,7 +949,8 @@
                 scorers: scorers,
                 played: played,
                 out: out,
-                gameState: gameState
+                gameState: gameState,
+                firstTD: firstTD
             };
         }
 
@@ -1008,6 +1076,59 @@
                     head.appendChild(v);
                 }
             });
+
+            // First touchdown of each game: the scorer gets a chip where his play is listed,
+            // and each first-TD pick settles against his own game.
+            var firstTD = data.firstTD || {};
+            var firstOf = {};
+            Object.keys(firstTD).forEach(function (gk) { firstOf[normName(firstTD[gk].name)] = gk; });
+            Array.prototype.forEach.call(document.querySelectorAll(".atd-play"), function (el) {
+                var nm = el.querySelector(".atd-play__name");
+                var key = nm ? normName(nm.textContent) : "";
+                var old = el.querySelector(".chip--first");
+                if (old) old.remove();
+                if (firstOf[key]) {
+                    var c = document.createElement("span");
+                    c.className = "chip chip--first";
+                    c.textContent = "1st TD";
+                    c.title = "Scored his game's first touchdown";
+                    el.querySelector(".atd-play__top").appendChild(c);
+                }
+            });
+            var firstHit = 0, firstDone = 0;
+            Array.prototype.forEach.call(document.querySelectorAll(".atd-first-card"), function (card) {
+                var old = card.querySelector(".atd-first-result");
+                if (old) old.remove();
+                var gk = gameKeyOf(card.dataset.firstTeam);
+                var ft = firstTD[gk];
+                var key = normName(card.dataset.firstName);
+                var res = null;
+                if (settle[key] === "void") {
+                    res = { cls: "chip--void", text: "Voided", title: "Did not play — refunded" };
+                } else if (ft) {
+                    firstDone++;
+                    if (normName(ft.name) === key) {
+                        firstHit++;
+                        res = { cls: "chip--hit", text: "Scored first ✓", title: "Scored the game's first touchdown" };
+                    } else {
+                        res = { cls: "chip--void", text: ft.name + " scored first", title: "The game's first touchdown went to someone else" };
+                    }
+                } else if (state[gk] === "final") {
+                    firstDone++;
+                    res = { cls: "chip--void", text: "No TD in game", title: "Nobody scored a touchdown" };
+                }
+                if (res) {
+                    var chip = document.createElement("span");
+                    chip.className = "chip " + res.cls + " atd-first-result";
+                    chip.textContent = res.text;
+                    chip.title = res.title;
+                    card.querySelector(".atd-top-card__head").appendChild(chip);
+                }
+            });
+            if (firstDone) {
+                sumEl.insertAdjacentHTML("beforeend", '<span class="atd-count">' + firstHit + " of " + firstDone +
+                    " first-TD picks hit</span>");
+            }
 
             var when = new Date(data.at);
             statusEl.textContent = "Updated " +

@@ -126,23 +126,36 @@ def espn_injuries(teams: set[str], wanted_espn_ids: set[str]) -> dict[str, dict]
     return newest
 
 
-def fourth_down_aggression(seasons: list[int], window: int = 17) -> dict[str, float]:
-    """Share of 4th-and-3-or-less snaps past a team's own 40 where it went for it,
-    over each offense's last `window` games, with the game still in the balance."""
+PBP_COLS = ["game_id", "season", "week", "season_type", "posteam", "defteam", "down", "ydstogo",
+            "yardline_100", "play_type", "wp", "fixed_drive", "fixed_drive_result", "touchdown",
+            "rush_touchdown", "pass_touchdown"]
+
+
+def load_recent_pbp(seasons: list[int]) -> pl.DataFrame:
     parts = []
-    for s in seasons:
+    for s_ in seasons:
         try:
-            parts.append(nfl.load_pbp(seasons=[s]).select(
-                ["game_id", "season", "week", "posteam", "down", "ydstogo", "yardline_100", "play_type", "wp",
-                 "season_type"]))
+            parts.append(nfl.load_pbp(seasons=[s_]).select(PBP_COLS))
         except Exception:
             pass
     if not parts:
-        return {}
+        return pl.DataFrame()
     pbp = pl.concat(parts, how="diagonal_relaxed").filter(pl.col("season_type") == "REG")
-    pbp = pbp.with_columns(pl.col("posteam").replace(TEAM_FIX))
-    games = (pbp.filter(pl.col("posteam").is_not_null()).select(["posteam", "season", "week"]).unique()
-             .sort(["season", "week"]).group_by("posteam").tail(window))
+    return pbp.with_columns(pl.col("posteam").replace(TEAM_FIX), pl.col("defteam").replace(TEAM_FIX))
+
+
+def _last_games(pbp: pl.DataFrame, team_col: str, window: int) -> pl.DataFrame:
+    """(team, season, week) for each team's last `window` games on that side of the ball."""
+    return (pbp.filter(pl.col(team_col).is_not_null()).select([team_col, "season", "week"]).unique()
+            .sort(["season", "week"]).group_by(team_col).tail(window))
+
+
+def fourth_down_aggression(pbp: pl.DataFrame, window: int = 17) -> dict[str, float]:
+    """Share of 4th-and-3-or-less snaps past a team's own 40 where it went for it,
+    over each offense's last `window` games, with the game still in the balance."""
+    if pbp.is_empty():
+        return {}
+    games = _last_games(pbp, "posteam", window)
     snaps = pbp.join(games, on=["posteam", "season", "week"], how="inner").filter(
         (pl.col("down") == 4) & (pl.col("ydstogo") <= 3) & (pl.col("yardline_100") <= 60)
         & pl.col("wp").is_between(0.10, 0.90)
@@ -152,6 +165,97 @@ def fourth_down_aggression(seasons: list[int], window: int = 17) -> dict[str, fl
         (pl.col("play_type").is_in(["run", "pass"]).sum() / pl.len()).alias("go")
     )
     return {r["posteam"]: float(r["go"]) for r in rates.iter_rows(named=True)}
+
+
+OPENING_DRIVES = 2      # "early" means each offense's first two possessions
+OPENING_PRIOR = 20      # drives of league average mixed into every team's opening rate
+
+
+def game_context(pbp: pl.DataFrame, seasons: list[int], window: int = 17) -> dict:
+    """What the first-touchdown model and the exploitable-defense flag need, all from
+    each team's last `window` games:
+
+      td_per_point  offensive touchdowns per point scored, league-wide -- turns an
+                    implied total into expected offensive touchdowns
+      other_td_pg   defensive and special-teams touchdowns per game, both teams
+      open_off[t]   share of t's first two drives of a game that ended in a touchdown,
+                    regressed toward league with OPENING_PRIOR drives
+      open_def[t]   the same allowed by t's defense
+      open_league   the league rate both are regressed toward
+      pa_pg[t]      points t's defense allowed per game
+    """
+    out = {"td_per_point": 0.105, "other_td_pg": 0.2, "open_off": {}, "open_def": {},
+           "open_league": 0.22, "pa_pg": {}}
+    if pbp.is_empty():
+        return out
+
+    tds = pbp.filter(pl.col("touchdown") == 1)
+    off_tds = tds.filter((pl.col("rush_touchdown") == 1) | (pl.col("pass_touchdown") == 1)).height
+    other_tds = tds.height - off_tds
+    n_games = pbp.select(pl.col("game_id").n_unique()).item()
+
+    try:
+        sched = nfl.load_schedules(seasons=seasons).filter(
+            (pl.col("game_type") == "REG") & pl.col("home_score").is_not_null())
+    except Exception:
+        sched = pl.DataFrame()
+    if sched.height:
+        points = sched.select((pl.col("home_score") + pl.col("away_score")).sum()).item()
+        if points:
+            out["td_per_point"] = off_tds / points
+        sides = pl.concat([
+            sched.select(pl.col("home_team").alias("def"), "season", "week", pl.col("away_score").alias("pa")),
+            sched.select(pl.col("away_team").alias("def"), "season", "week", pl.col("home_score").alias("pa")),
+        ]).with_columns(pl.col("def").replace(TEAM_FIX)).sort(["season", "week"]).group_by("def").tail(window)
+        for r in sides.group_by("def").agg(pl.col("pa").mean().alias("pa")).iter_rows(named=True):
+            out["pa_pg"][r["def"]] = float(r["pa"])
+    if n_games:
+        out["other_td_pg"] = other_tds / n_games
+
+    # each offense's first two possessions of every game, and how they ended
+    drives = (pbp.filter(pl.col("posteam").is_not_null() & pl.col("fixed_drive").is_not_null())
+              .group_by(["game_id", "season", "week", "posteam", "defteam", "fixed_drive"])
+              .agg(pl.col("fixed_drive_result").first().alias("result"))
+              .sort("fixed_drive").group_by(["game_id", "posteam"]).head(OPENING_DRIVES)
+              .with_columns((pl.col("result") == "Touchdown").cast(pl.Int32).alias("td")))
+    league = drives.select(pl.col("td").mean()).item() or 0.22
+    out["open_league"] = float(league)
+    for side, col in (("open_off", "posteam"), ("open_def", "defteam")):
+        recent = drives.join(_last_games(drives, col, window), on=[col, "season", "week"], how="inner")
+        for r in recent.group_by(col).agg(pl.col("td").sum().alias("td"), pl.len().alias("n")).iter_rows(named=True):
+            out[side][r[col]] = (r["td"] + OPENING_PRIOR * league) / (r["n"] + OPENING_PRIOR)
+    return out
+
+
+def first_td_team(ctx: dict, team: str, opp: str, implied: dict) -> tuple[float, float]:
+    """(chance `team` scores the game's first touchdown, its expected offensive TDs).
+
+    Touchdowns are treated as arriving at a steady rate through the game, so the first
+    one belongs to each source in proportion to its rate: this offense, the other one,
+    and the defensive/special-teams touchdowns either side can score. An offense's rate
+    is its implied points turned into touchdowns, nudged by how often it scores on its
+    opening drives against how often this defense allows it -- the first TD is usually
+    an early one."""
+    lg = ctx["open_league"] or 0.22
+
+    def rate(off, dfn):
+        base = ctx["td_per_point"] * (implied.get(off) or LEAGUE_POINTS)
+        early = (ctx["open_off"].get(off, lg) / lg) * (ctx["open_def"].get(dfn, lg) / lg)
+        return base, base * min(1.25, max(0.8, early ** 0.5))
+
+    base_a, lam_a = rate(team, opp)
+    _, lam_b = rate(opp, team)
+    total = lam_a + lam_b + ctx["other_td_pg"]
+    return lam_a / total * (1 - math.exp(-total)), base_a
+
+
+def fair_odds(p: float) -> str:
+    """American odds with no margin -- what the price would be if this chance were right."""
+    if p <= 0 or p >= 1:
+        return ""
+    if p >= 0.5:
+        return f"-{round(100 * p / (1 - p) / 5) * 5}"
+    return f"+{round(100 * (1 - p) / p / 5) * 5}"
 
 
 # ── the sheet ──────────────────────────────────────────────────────────────────
@@ -217,8 +321,13 @@ def build(season: int, week: int) -> Path:
     wanted = {espn_of[r["b"]["player_id"]] for r in rows if r["b"].get("player_id") in espn_of}
     injuries = espn_injuries(listed_teams, wanted)
     print(f"[atd] ESPN injury feed: {len(injuries)} listed players carry an entry")
-    aggression = fourth_down_aggression([season - 1, season])
-    agg_rank = {t: i + 1 for i, (t, _) in enumerate(sorted(aggression.items(), key=lambda kv: -kv[1]))}
+    pbp = load_recent_pbp([season - 1, season])
+    aggression = fourth_down_aggression(pbp)
+    ctx = game_context(pbp, [season - 1, season])
+    print(f"[atd] context: {ctx['td_per_point']:.3f} offensive TDs per point, "
+          f"{ctx['other_td_pg']:.2f} non-offensive TDs a game, opening-drive TD rate {ctx['open_league']:.1%}")
+    # ties broken by name, so the top-ten cut is the same on every run
+    agg_rank = {t: i + 1 for i, (t, _) in enumerate(sorted(aggression.items(), key=lambda kv: (-kv[1], kv[0])))}
 
     # ── per-play numbers ──
     for r in rows:
@@ -255,6 +364,23 @@ def build(season: int, week: int) -> Path:
         r["dz"] = dz_rank.get(opp)
         r["imp"] = imp
         r["trend"] = (b.get("share_l3") or 0) - (b.get("share") or 0) if b.get("share") is not None else 0.0
+
+    # ── first touchdown of the game ──
+    # His team's chance to score first, times his share of its expected touchdowns. The
+    # share's denominator is every lineup player's expected TDs plus whatever the team is
+    # expected to score beyond them (backups, fullbacks, trick plays) -- at least a tenth.
+    team_first, team_lambda, lineup_xtd = {}, {}, {}
+    for key, g in by_game.items():
+        for t, o in ((g["away"], g["home"]), (g["home"], g["away"])):
+            team_first[t], team_lambda[t] = first_td_team(ctx, t, o, implied)
+            lineup_xtd[t] = sum(float(b.get("xtd") or 0) for b in g["board"]["players"] if b["team"] == t)
+    for r in rows:
+        t = r["plan"]["team"]
+        others = max(0.1 * team_lambda[t], team_lambda[t] - lineup_xtd[t])
+        denom = lineup_xtd[t] + others
+        share = float(r["b"].get("xtd") or 0) / denom if denom else 0.0
+        r["td_share"] = share
+        r["first"] = team_first[t] * share
 
     # ── tags ──
     def rz_role(r):
@@ -304,8 +430,31 @@ def build(season: int, week: int) -> Path:
         if (secondary and above >= 0.08 and r["score"] >= 0.28) or growing:
             r["tags"].insert(0, "val")
 
-    # ✈️ exploitable defenses: the scoring table's TARGET verdict
-    exp_teams = {t for t, d in defense.items() if d["verdict"] == "TARGET"}
+    # ✈️ exploitable defenses: the scoring table's TARGET verdict when a table is
+    # supplied for the week; otherwise the ten softest defenses on our own numbers --
+    # points allowed a game and red-zone touchdown rate allowed, each ranked, averaged.
+    if defense:
+        exp_teams = {t for t, d in defense.items() if d["verdict"] == "TARGET"}
+        exp_source = "csv"
+    else:
+        def pct_rank(values):
+            # tied values share the average of their ranks, so the order the data
+            # happened to arrive in can never move a team across the cut
+            order = sorted(values.values())
+            n = len(order)
+            if n < 2:
+                return {}
+            first = {}
+            for i, v in enumerate(order):
+                first.setdefault(v, i)
+            return {t: (first[v] + order.count(v) / 2 - 0.5) / (n - 1) for t, v in values.items()}
+        pa = pct_rank(ctx["pa_pg"])
+        rz = pct_rank({t: v["def_rz_td"] for t, v in env.items() if v.get("def_rz_td") is not None})
+        soft = {t: (pa[t] + rz[t]) / 2 for t in pa if t in rz}
+        # a tie at the cut goes to the defense softer on opening drives, then by name
+        exp_teams = set(sorted(soft, key=lambda t: (-soft[t], -ctx["open_def"].get(t, 0), t))[:10])
+        exp_source = "computed"
+    print(f"[atd] exploitable defenses ({exp_source}): {', '.join(sorted(exp_teams))}")
 
     # ── team tendencies (computed, not pasted) ──
     tend = {}
@@ -324,6 +473,10 @@ def build(season: int, week: int) -> Path:
     top = [r for r in ranked if r["status"] == ""][:5]
     top5 = [{"id": r["b"]["player_id"], "why": why(r, env, dz_rank, implied_rank, defense, rank_on_board=i + 1)}
             for i, r in enumerate(top)]
+
+    first_ranked = sorted([r for r in rows if r["eligible"] and r["status"] == ""], key=lambda r: -r["first"])[:5]
+    first5 = [{"id": r["b"]["player_id"], "pct": round(100 * r["first"], 1), "fair": fair_odds(r["first"]),
+               "why": why_first(r, ctx, team_first, implied)} for r in first_ranked]
 
     games_out = []
     for gp in plan:
@@ -344,6 +497,8 @@ def build(season: int, week: int) -> Path:
                     "dz": r["dz"], "edge": None if r["edge"] is None else round(100 * r["edge"]),
                     "g": b.get("games"), "tg": b.get("team_games"), "new": bool(b.get("new_team")),
                     "small": r["small"], "trend": round(r["trend"], 1),
+                    "ftd": None if r.get("off_chart") or r["small"] else round(100 * r["first"], 1),
+                    "ftd_fair": None if r.get("off_chart") or r["small"] else fair_odds(r["first"]),
                 },
             })
         exp = [t for t in (gp["away"], gp["home"]) if (gp["home"] if t == gp["away"] else gp["away"]) in exp_teams]
@@ -381,7 +536,8 @@ def build(season: int, week: int) -> Path:
         "season": season, "week": week, "root": "",
         "built": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "first_kick": kicks[0].isoformat(), "last_kick": kicks[-1].isoformat(),
-        "games": games_out, "top5": top5, "tend": tend,
+        "games": games_out, "top5": top5, "first5": first5, "tend": tend,
+        "exp_source": exp_source,
         "cards": cards, "env": card_env, "leaks": card_leaks,
         "defense_source": bool(defense),
     }
@@ -392,6 +548,8 @@ def build(season: int, week: int) -> Path:
     print(f"[atd] {len(games_out)} games, {n_plays} plays, tags {counts}, "
           f"{sum(1 for r in rows if r['status'])} with an injury status, {sum(1 for r in rows if r['small'])} small samples")
     print("[atd] top 5: " + ", ".join(r["plan"]["name"] for r in top))
+    print("[atd] first TD top 5: " + ", ".join(f"{r['plan']['name']} {100 * r['first']:.1f}% ({fair_odds(r['first'])})"
+                                             for r in first_ranked))
     for r in rows:
         if r["status"]:
             print(f"[atd] status {r['plan']['name']} ({r['plan']['team']}): {r['status_label']} -- {r['injury'][:90]}")
@@ -446,6 +604,25 @@ def publish(sheet: dict, season: int, week: int) -> Path:
         print(f"[atd] Week {week} is the current week: nfl-research/atd.html")
     print(f"[atd] archived as {archive.relative_to(ROOT)}; the week list has {len(ordered)} weeks")
     return archive
+
+
+def why_first(r, ctx, team_first, implied):
+    p, b = r["plan"], r["b"]
+    team, opp = p["team"], p["opp"]
+    lg = ctx["open_league"]
+    off, dfn = ctx["open_off"].get(team), ctx["open_def"].get(opp)
+    # the card prints the chance and fair price above this, so the words start with why
+    bits = []
+    lead = f"{team} scores first {100 * team_first[team]:.0f}% of the time on these numbers"
+    if implied.get(team) is not None and implied.get(opp) is not None:
+        lead += f" — implied {implied[team]:.1f} to {implied[opp]:.1f}"
+    bits.append(lead + ".")
+    if off is not None and dfn is not None:
+        bits.append(f"Its first two drives end in a touchdown {100 * off:.0f}% of the time, and {opp} allows "
+                    f"{100 * dfn:.0f}% on its own (league {100 * lg:.0f}%).")
+    lead_in = "His own runs make up" if b["pos"] == "QB" else "He carries"
+    bits.append(f"{lead_in} {100 * r['td_share']:.0f}% of {team}'s expected touchdowns.")
+    return " ".join(bits)
 
 
 def why(r, env, dz_rank, implied_rank, defense, rank_on_board):

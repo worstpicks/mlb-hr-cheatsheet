@@ -1,0 +1,99 @@
+# Week 3 ATD list, as exported from the NFL Research Prop List.
+# name | depth slot | team | opponent | over line | market (td = any touchdown, rush_td = QB rushing TD)
+ATL@GB
+Bijan Robinson | RB1 | ATL | GB | 0.5 | td
+Drake London | WR1 | ATL | GB | 0.5 | td
+Christian Watson | WR1 | GB | ATL | 0.5 | td
+Tucker Kraft | TE1 | GB | ATL | 0.5 | td
+LAC@BUF
+Josh Allen | QB1 | BUF | LAC | 0.5 | rush_td
+James Cook III | RB1 | BUF | LAC | 0.5 | td
+Dalton Kincaid | TE1 | BUF | LAC | 0.5 | td
+Omarion Hampton | RB1 | LAC | BUF | 0.5 | td
+Ladd McConkey | WR1 | LAC | BUF | 0.5 | td
+Oronde Gadsden | TE1 | LAC | BUF | 0.5 | td
+CAR@CLE
+Bryce Young | QB1 | CAR | CLE | 0.5 | rush_td
+Chuba Hubbard | RB1 | CAR | CLE | 0.5 | td
+Tetairoa McMillan | WR1 | CAR | CLE | 0.5 | td
+Xavier Legette | WR3 | CAR | CLE | 0.5 | td
+Quinshon Judkins | RB1 | CLE | CAR | 0.5 | td
+NYJ@DET
+Jahmyr Gibbs | RB1 | DET | NYJ | 0.5 | td
+Amon-Ra St. Brown | WR1 | DET | NYJ | 0.5 | td
+Sam LaPorta | TE1 | DET | NYJ | 0.5 | td
+Breece Hall | RB1 | NYJ | DET | 0.5 | td
+Garrett Wilson | WR1 | NYJ | DET | 0.5 | td
+Adonai Mitchell | WR2 | NYJ | DET | 0.5 | td
+HOU@IND
+David Montgomery | RB1 | HOU | IND | 0.5 | td
+Nico Collins | WR1 | HOU | IND | 0.5 | td
+Jonathan Taylor | RB1 | IND | HOU | 0.5 | td
+Tyler Warren | TE1 | IND | HOU | 0.5 | td
+Alec Pierce | WR1 | IND | HOU | 0.5 | td
+KC@MIA
+De'Von Achane | RB1 | MIA | KC | 0.5 | td
+Kenneth Walker III | RB1 | KC | MIA | 0.5 | td
+Xavier Worthy | WR2 | KC | MIA | 0.5 | td
+TEN@NYG
+Cam Ward | QB1 | TEN | NYG | 0.5 | rush_td
+Tony Pollard | RB1 | TEN | NYG | 0.5 | td
+Wan'Dale Robinson | WR2 | TEN | NYG | 0.5 | td
+Cam Skattebo | RB1 | NYG | TEN | 0.5 | td
+Malik Nabers | WR1 | NYG | TEN | 0.5 | td
+Darnell Mooney | WR3 | NYG | TEN | 0.5 | td
+Isaiah Likely | TE1 | NYG | TEN | 0.5 | td
+CIN@PIT
+Jaylen Warren | RB1 | PIT | CIN | 0.5 | td
+SEA@WSH
+Rachaad White | RB2 | WSH | SEA | 0.5 | td
+Stefon Diggs | WR2 | WSH | SEA | 0.5 | td
+Jadarian Price | RB1 | SEA | WSH | 0.5 | td
+Jaxon Smith-Njigba | WR1 | SEA | WSH | 0.5 | td
+AJ Barner | TE1 | SEA | WSH | 0.5 | td
+NE@JAX
+TreVeyon Henderson | RB2 | NE | JAX | 0.5 | td
+Bhayshul Tuten | RB1 | JAX | NE | 0.5 | td
+Parker Washington | WR1 | JAX | NE | 0.5 | td
+Jakobi Meyers | WR3 | JAX | NE | 0.5 | td
+ARI@SF
+Christian McCaffrey | RB1 | SF | ARI | 0.5 | td
+Kaelon Black | RB2 | SF | ARI | 0.5 | td
+George Kittle | TE1 | SF | ARI | 0.5 | td
+Tyler Allgeier | RB2 | ARI | SF | 0.5 | td
+Trey McBride | TE1 | ARI | SF | 0.5 | td
+MIN@TB
+Aaron Jones Sr. | RB1 | MIN | TB | 0.5 | td
+Justin Jefferson | WR1 | MIN | TB | 0.5 | td
+T.J. Hockenson | TE1 | MIN | TB | 0.5 | td
+Emeka Egbuka | WR1 | TB | MIN | 0.5 | td
+Bucky Irving | RB1 | TB | MIN | 0.5 | td
+BAL@DAL
+Javonte Williams | RB1 | DAL | BAL | 0.5 | td
+CeeDee Lamb | WR1 | DAL | BAL | 0.5 | td
+George Pickens | WR2 | DAL | BAL | 0.5 | td
+Jake Ferguson | TE1 | DAL | BAL | 0.5 | td
+Lamar Jackson | QB1 | BAL | DAL | 0.5 | rush_td
+Derrick Henry | RB1 | BAL | DAL | 0.5 | td
+Mark Andrews | TE1 | BAL | DAL | 0.5 | td
+LV@NO
+Ashton Jeanty | RB1 | LV | NO | 0.5 | td
+Tre Tucker | WR1 | LV | NO | 0.5 | td
+Chris Olave | WR1 | NO | LV | 0.5 | td
+LAR@DEN
+Jaylen Waddle | WR1 | DEN | LAR | 0.5 | td
+Courtland Sutton | WR2 | DEN | LAR | 0.5 | td
+Kyren Williams | RB1 | LAR | DEN | 0.5 | td
+Puka Nacua | WR1 | LAR | DEN | 0.5 | td
+Davante Adams | WR2 | LAR | DEN | 0.5 | td
+Colby Parkinson | TE1 | LAR | DEN | 0.5 | td
+PHI@CHI
+Jalen Hurts | QB1 | PHI | CHI | 0.5 | rush_td
+Saquon Barkley | RB1 | PHI | CHI | 0.5 | td
+DeVonta Smith | WR1 | PHI | CHI | 0.5 | td
+Dallas Goedert | TE1 | PHI | CHI | 0.5 | td
+Zach Ertz | TE2 | PHI | CHI | 0.5 | td
+Caleb Williams | QB1 | CHI | PHI | 0.5 | rush_td
+D'Andre Swift | RB1 | CHI | PHI | 0.5 | td
+Colston Loveland | TE1 | CHI | PHI | 0.5 | td
+Rome Odunze | WR1 | CHI | PHI | 0.5 | td

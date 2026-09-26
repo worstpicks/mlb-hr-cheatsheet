@@ -1,0 +1,31 @@
+﻿Matchup,LAA @ SEA
+Pitcher,Kade Anderson
+Pitcher Team,SEA
+Opposing Team,LAA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.2,1.91,="5-16",.313,.625,0.312,0,1,2,1,16.7,2,.389,1.014
+Batting Second,5.0,1.00,="5-17",.294,.471,0.177,1,0,0,1,29.4,0,.294,.765
+Batting Third,3.0,2.33,="6-15",.400,.667,0.267,1,1,0,5,25.0,1,.438,1.105
+Batting Fourth,3.2,1.36,="5-15",.333,.600,0.267,1,1,0,2,12.5,0,.313,.913
+Batting Fifth,3.1,1.20,="1-11",.091,.091,0.000,0,0,0,0,35.7,3,.286,.377
+Batting Sixth,3.0,1.67,="3-12",.250,.500,0.250,1,0,0,1,7.1,2,.357,.857
+Batting Seventh,3.1,0.60,="2-12",.167,.167,0.000,0,0,0,0,25.0,0,.167,.334
+Batting Eighth,4.1,0.00,="0-11",.000,.000,0.000,0,0,0,1,25.0,0,.000,.000
+Batting Ninth,3.0,1.33,="4-12",.333,.333,0.000,0,0,0,0,16.7,0,.333,.666
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Zach Neto RHB,Batting First ​,="132-562",.235,.431,0.196,24,28,5,62,31.0,60,.322,.753
+Mike Trout RHB,Batting Second ​,="124-509",.244,.424,0.180,22,26,0,54,25.9,106,.384,.808
+Wade Meckler LHB,Batting Third ​,="36-108",.333,.435,0.102,0,9,1,12,16.8,16,.424,.859
+Vaughn Grissom RHB,Batting Fourth ​,="29-135",.215,.407,0.192,6,8,0,22,21.6,10,.289,.696
+Moisés Ballesteros LHB,Batting Fifth ​,="26-105",.248,.362,0.114,3,3,0,9,21.8,12,.328,.690
+Denzer Guzman RHB,Batting Sixth ​,="19-74",.257,.378,0.121,2,3,0,8,24.1,5,.304,.682
+Christian Moore RHB,Batting Sixth ​,="14-53",.264,.396,0.132,1,2,1,9,25.9,0,.278,.674
+Josh Lowe LHB,Batting Seventh ​,="35-156",.224,.417,0.193,8,6,0,14,32.0,11,.287,.704
+Oswald Peraza RHB,Batting Seventh ​,="21-89",.236,.360,0.124,3,2,0,8,30.2,5,.292,.652
+Travis d'Arnaud RHB,Batting Eighth ​,="7-43",.163,.256,0.093,1,1,0,3,22.4,4,.265,.521
+Jose Siri RHB,Batting Eighth ​,="15-65",.231,.431,0.200,3,4,0,11,36.6,4,.271,.702
+Tyler Heineman SHB,Batting Ninth ​,="24-146",.164,.212,0.048,1,2,1,5,15.8,5,.218,.430
+Adam Frazier LHB,Batting Ninth ​,="26-103",.252,.369,0.117,1,7,1,11,25.4,8,.325,.694
+Bryce Teodosio RHB,Batting Ninth ​,="10-52",.192,.231,0.039,0,2,0,3,35.7,4,.250,.481

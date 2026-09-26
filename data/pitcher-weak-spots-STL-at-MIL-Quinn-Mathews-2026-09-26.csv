@@ -1,0 +1,26 @@
+﻿Matchup,STL @ MIL
+Pitcher,Quinn Mathews
+Pitcher Team,STL
+Opposing Team,MIL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.0,1.80,="8-22",.364,.409,0.045,0,1,0,3,20.8,1,.375,.784
+Batting Second,6.2,0.75,="2-20",.100,.100,0.000,0,0,0,0,21.7,3,.217,.317
+Batting Third,4.2,1.93,="5-19",.263,.421,0.158,1,0,0,1,34.8,4,.391,.812
+Batting Fourth,5.2,1.06,="5-22",.227,.364,0.137,1,0,0,3,21.7,1,.261,.625
+Batting Fifth,4.1,2.31,="6-18",.333,.556,0.223,1,1,0,2,4.3,4,.455,1.011
+Batting Sixth,5.2,1.06,="5-20",.250,.350,0.100,0,2,0,2,23.8,1,.286,.636
+Batting Seventh,4.1,1.38,="4-17",.235,.235,0.000,0,0,0,2,10.0,2,.350,.585
+Batting Eighth,3.1,2.10,="6-14",.429,.571,0.142,0,2,0,2,23.5,1,.412,.983
+Batting Ninth,4.2,0.64,="2-15",.133,.400,0.267,1,1,0,2,25.0,1,.188,.588
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jackson Chourio RHB,Batting First ​,="60-199",.302,.518,0.216,10,13,0,27,24.0,17,.355,.873
+Brice Turang LHB,Batting Second ​,="47-191",.246,.377,0.131,5,10,0,24,24.5,27,.339,.716
+Jake Bauers LHB,Batting Third ​,="22-82",.268,.402,0.134,1,6,1,8,34.7,14,.378,.780
+William Contreras RHB,Batting Fourth ​,="57-241",.237,.369,0.132,7,11,0,35,17.6,22,.298,.667
+Gary Sanchez RHB,Batting Fifth ​,="9-53",.170,.358,0.188,3,1,0,8,16.9,17,.380,.738
+Luis Lara SHB,Batting Sixth ​,="17-62",.274,.387,0.113,1,2,1,10,22.1,5,.338,.725
+Cooper Pratt RHB,Batting Seventh ​,="12-36",.333,.361,0.028,0,1,0,6,18.6,4,.390,.751
+Brandon Lockridge RHB,Batting Eighth ​,="4-17",.235,.235,0.000,0,0,0,2,33.3,1,.278,.513
+David Hamilton LHB,Batting Ninth ​,="56-223",.251,.368,0.117,4,8,3,19,24.6,20,.318,.686

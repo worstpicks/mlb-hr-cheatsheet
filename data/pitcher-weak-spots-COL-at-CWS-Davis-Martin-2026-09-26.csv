@@ -1,0 +1,26 @@
+﻿Matchup,COL @ CWS
+Pitcher,Davis Martin
+Pitcher Team,CWS
+Opposing Team,COL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.1,1.31,="17-72",.236,.319,0.083,1,3,0,5,22.8,7,.304,.623
+Batting Second,17.2,1.47,="22-69",.319,.478,0.159,1,8,0,7,11.7,4,.377,.855
+Batting Third,18.0,1.22,="14-65",.215,.385,0.170,2,5,0,5,21.6,8,.311,.696
+Batting Fourth,19.1,0.88,="11-64",.172,.281,0.109,2,1,0,8,26.4,6,.250,.531
+Batting Fifth,14.1,1.88,="22-64",.344,.578,0.234,4,3,0,11,22.5,5,.408,.986
+Batting Sixth,17.1,0.92,="10-58",.172,.310,0.138,2,2,0,7,16.7,6,.258,.568
+Batting Seventh,16.1,0.80,="11-58",.190,.259,0.069,1,1,0,4,21.0,2,.242,.501
+Batting Eighth,11.0,2.09,="20-52",.385,.500,0.115,0,6,0,3,14.3,3,.418,.918
+Batting Ninth,11.2,1.71,="16-49",.327,.408,0.081,1,1,0,6,20.8,4,.377,.785
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake McCarthy LHB,Batting First ​,="122-422",.289,.486,0.197,13,24,10,57,15.7,21,.330,.816
+Cole Carrigg SHB,Batting Second ​,="14-82",.171,.244,0.073,1,3,0,7,26.1,8,.261,.505
+Hunter Goodman RHB,Batting Third ​,="59-257",.230,.510,0.280,19,13,1,41,32.7,16,.277,.787
+TJ Rumfield LHB,Batting Fourth ​,="81-247",.328,.506,0.178,9,15,1,28,12.8,38,.426,.932
+Connor Norby RHB,Batting Fifth ​,="18-59",.305,.508,0.203,2,6,0,5,25.4,6,.388,.896
+Adael Amador SHB,Batting Sixth ​,="3-14",.214,.286,0.072,0,1,0,1,6.3,2,.313,.599
+Mickey Moniak LHB,Batting Seventh ​,="5-42",.119,.310,0.191,2,0,1,4,34.8,3,.174,.484
+Brett Sullivan LHB,Batting Eighth ​,="19-71",.268,.479,0.211,3,4,1,17,10.4,4,.299,.778
+Ezequiel Tovar RHB,Batting Ninth ​,="39-156",.250,.410,0.160,6,7,0,17,23.3,10,.288,.698

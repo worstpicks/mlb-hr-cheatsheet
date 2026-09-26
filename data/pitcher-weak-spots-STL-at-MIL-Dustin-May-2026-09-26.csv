@@ -1,0 +1,26 @@
+﻿Matchup,STL @ MIL
+Pitcher,Dustin May
+Pitcher Team,MIL
+Opposing Team,STL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.1,1.47,="21-71",.296,.394,0.098,1,4,0,6,16.7,6,.359,.753
+Batting Second,18.1,1.20,="10-63",.159,.365,0.206,4,1,0,10,27.6,12,.303,.668
+Batting Third,16.2,1.38,="14-65",.215,.292,0.077,1,2,0,5,26.7,9,.320,.612
+Batting Fourth,17.2,1.25,="18-68",.265,.353,0.088,1,3,0,6,20.3,4,.297,.650
+Batting Fifth,16.0,1.38,="18-64",.281,.406,0.125,1,5,0,10,17.4,4,.333,.739
+Batting Sixth,13.2,1.61,="15-55",.273,.364,0.091,0,5,0,10,25.8,7,.394,.758
+Batting Seventh,15.1,1.17,="14-54",.259,.463,0.204,3,2,0,10,31.1,4,.328,.791
+Batting Eighth,13.1,1.05,="13-51",.255,.412,0.157,2,2,0,9,21.8,1,.264,.676
+Batting Ninth,12.2,1.42,="16-51",.314,.412,0.098,0,3,1,2,18.5,2,.352,.764
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+JJ Wetherholt LHB,Batting First ​,="129-528",.244,.369,0.125,17,15,0,50,16.6,64,.343,.712
+Ivan Herrera RHB,Batting Second ​,="132-545",.242,.376,0.134,17,20,1,62,19.2,72,.359,.735
+Alec Burleson LHB,Batting Third ​,="130-466",.279,.487,0.208,22,29,1,82,17.3,47,.351,.838
+Jordan Walker RHB,Batting Fourth ​,="96-373",.257,.461,0.204,19,19,0,71,27.9,32,.318,.779
+Leonardo Bernal SHB,Batting Fifth ​,="17-61",.279,.459,0.180,3,2,0,10,24.2,5,.333,.792
+Nolan Gorman LHB,Batting Sixth ​,="5-31",.161,.258,0.097,1,0,0,2,36.1,5,.278,.536
+Bryan Torres LHB,Batting Seventh ​,="15-63",.238,.349,0.111,1,0,2,6,15.9,4,.294,.643
+Masyn Winn RHB,Batting Eighth ​,="3-19",.158,.211,0.053,0,1,0,3,15.0,1,.200,.411
+Nathan Church LHB,Batting Ninth ​,="29-105",.276,.438,0.162,3,6,1,16,23.9,10,.336,.774

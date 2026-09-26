@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-24T11:30:06Z",
+  "updated": "2026-09-26T20:47:49Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1497,6 +1497,21 @@
         "matchup": "TB @ NYY",
         "result": "loss",
         "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-24",
+      "o05": {
+        "player": "Corbin Carroll",
+        "matchup": "ARI @ COL",
+        "result": "loss",
+        "hr": 0
+      },
+      "o15": {
+        "player": "Kyle Teel",
+        "matchup": "CWS @ KC",
+        "result": "loss",
+        "hr": 1
       }
     }
   ]

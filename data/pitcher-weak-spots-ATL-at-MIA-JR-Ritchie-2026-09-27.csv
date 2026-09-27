@@ -1,0 +1,31 @@
+﻿Matchup,ATL @ MIA
+Pitcher,JR Ritchie
+Pitcher Team,ATL
+Opposing Team,MIA
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,7.2,1.83,="10-32",.313,.813,0.500,4,2,1,12,15.8,4,.395,1.208
+Batting Second,8.2,1.38,="5-29",.172,.414,0.242,2,1,0,6,17.9,7,.359,.773
+Batting Third,9.0,1.44,="9-34",.265,.382,0.117,1,1,0,1,28.9,4,.342,.724
+Batting Fourth,8.0,1.75,="9-30",.300,.733,0.433,3,2,1,7,25.7,5,.400,1.133
+Batting Fifth,8.0,0.88,="5-29",.172,.207,0.035,0,1,0,0,29.0,2,.226,.433
+Batting Sixth,6.0,2.00,="5-24",.208,.458,0.250,2,0,0,4,21.9,7,.406,.864
+Batting Seventh,7.1,1.09,="5-27",.185,.185,0.000,0,0,0,0,23.3,3,.267,.452
+Batting Eighth,7.0,1.29,="6-26",.231,.269,0.038,0,1,0,4,24.1,3,.310,.579
+Batting Ninth,5.2,1.76,="4-20",.200,.200,0.000,0,0,0,2,10.7,6,.429,.629
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jakob Marsee LHB,Batting First ​,="28-146",.192,.295,0.103,2,3,3,11,20.9,25,.316,.611
+Heriberto Hernandez RHB,Batting Second ​,="25-108",.231,.463,0.232,7,2,1,12,29.8,14,.331,.794
+Kyle Stowers LHB,Batting Third ​,="27-118",.229,.466,0.237,6,6,2,23,30.9,16,.333,.799
+Otto Lopez RHB,Batting Third ​,="55-200",.275,.380,0.105,3,10,1,21,15.0,8,.308,.688
+Agustin Ramirez RHB,Batting Third ​,="21-72",.292,.389,0.097,1,4,0,11,19.5,3,.325,.714
+Griffin Conine LHB,Batting Fourth ​,="10-56",.179,.393,0.214,4,0,0,6,46.7,2,.233,.626
+Xavier Edwards SHB,Batting Fourth ​,="49-185",.265,.324,0.059,1,6,1,23,11.3,32,.365,.689
+Graham Pauley LHB,Batting Eighth ​,="22-74",.297,.554,0.257,4,5,1,19,20.5,6,.354,.908
+Deyvison De Los Santos RHB,Batting Eighth ​,="1-14",.071,.143,0.072,0,1,0,0,33.3,0,.133,.276
+Joe Mack LHB,Batting Eighth ​,="27-140",.193,.350,0.157,6,4,0,20,22.1,11,.255,.605
+Jared Serna RHB,Batting Eighth ​,="4-17",.235,.353,0.118,0,2,0,2,26.3,1,.263,.616
+Brian Navarreto RHB,Batting Ninth ​,="7-41",.171,.317,0.146,1,3,0,3,33.3,2,.222,.539
+Esteury Ruiz RHB,Batting Ninth ​,="13-62",.210,.371,0.161,2,4,0,3,27.6,8,.338,.709
+Javier Sanoja RHB,Batting Ninth ​,="51-158",.323,.462,0.139,3,13,0,19,7.8,8,.355,.817

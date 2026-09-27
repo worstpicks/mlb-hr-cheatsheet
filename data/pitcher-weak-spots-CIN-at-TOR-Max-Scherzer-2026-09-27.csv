@@ -1,0 +1,31 @@
+﻿Matchup,CIN @ TOR
+Pitcher,Max Scherzer
+Pitcher Team,TOR
+Opposing Team,CIN
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,9.2,1.66,="12-40",.300,.550,0.250,3,1,0,7,15.6,4,.378,.928
+Batting Second,10.1,1.45,="12-42",.286,.571,0.285,3,3,0,6,20.0,3,.333,.904
+Batting Third,9.1,1.61,="10-38",.263,.447,0.184,2,1,0,4,23.3,5,.349,.796
+Batting Fourth,10.0,1.30,="7-35",.200,.429,0.229,2,2,0,8,14.6,6,.317,.746
+Batting Fifth,8.1,1.44,="10-35",.286,.371,0.085,1,0,0,4,18.4,2,.342,.713
+Batting Sixth,8.0,1.13,="4-28",.143,.179,0.036,0,1,0,3,14.7,5,.265,.444
+Batting Seventh,6.0,2.17,="8-26",.308,.769,0.461,4,0,0,9,16.1,5,.419,1.188
+Batting Eighth,8.0,0.88,="4-27",.148,.185,0.037,0,1,0,3,20.0,3,.233,.418
+Batting Ninth,7.2,0.78,="5-28",.179,.250,0.071,0,2,0,4,20.0,1,.207,.457
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dane Myers RHB,Batting First ​,="21-96",.219,.406,0.187,5,3,0,10,27.7,15,.330,.736
+Elly De La Cruz SHB,Batting First ​,="52-209",.249,.450,0.201,9,9,3,20,25.4,30,.342,.792
+Carlos Jorge LHB,Batting First ​,="6-29",.207,.379,0.172,1,0,1,1,30.3,4,.303,.682
+Héctor Rodríguez LHB,Batting First ​,="11-36",.306,.583,0.277,3,1,0,4,27.0,1,.324,.907
+Matt McLain RHB,Batting Second ​,="23-119",.193,.294,0.101,2,6,0,9,27.1,19,.314,.608
+Sal Stewart RHB,Batting Second ​,="58-208",.279,.514,0.235,14,7,0,43,22.4,13,.325,.839
+JJ Bleday LHB,Batting Third ​,="40-182",.220,.407,0.187,9,5,1,17,23.1,29,.330,.737
+Tyler Stephenson RHB,Batting Fourth ​,="29-112",.259,.446,0.187,5,6,0,21,28.0,16,.356,.802
+Eugenio Suarez RHB,Batting Fifth ​,="54-249",.217,.438,0.221,15,10,0,45,31.6,29,.309,.747
+Oswaldo Cabrera SHB,Batting Seventh ​,="1-10",.100,.200,0.100,0,1,0,0,45.5,0,.100,.300
+Juan Brito SHB,Batting Seventh ​,="13-52",.250,.442,0.192,2,4,0,10,30.5,5,.322,.764
+Jose Trevino RHB,Batting Eighth ​,="23-97",.237,.381,0.144,4,2,0,14,12.9,1,.242,.623
+Will Banfield RHB,Batting Eighth ​,="1-8",.125,.125,0.000,0,0,0,1,22.2,0,.111,.236
+Ke'Bryan Hayes RHB,Batting Ninth ​,="29-203",.143,.222,0.079,4,2,1,8,18.5,11,.194,.416

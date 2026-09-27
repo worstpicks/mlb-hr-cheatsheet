@@ -1,0 +1,31 @@
+﻿Matchup,LAD @ SF
+Pitcher,Justin Wrobleski
+Pitcher Team,LAD
+Opposing Team,SF
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="19-67",.284,.358,0.074,1,2,0,6,22.2,.319,.677
+Batting Second,="10-65",.154,.338,0.184,3,3,0,6,22.9,.214,.552
+Batting Third,="14-65",.215,.369,0.154,2,4,0,6,25.4,.239,.608
+Batting Fourth,="15-61",.246,.557,0.311,5,4,0,10,15.6,.281,.838
+Batting Fifth,="18-61",.295,.508,0.213,3,4,0,9,18.5,.328,.836
+Batting Sixth,="12-58",.207,.328,0.121,2,1,0,4,17.5,.270,.598
+Batting Seventh,="15-57",.263,.404,0.141,2,2,0,8,28.3,.300,.704
+Batting Eighth,="11-50",.220,.380,0.160,2,2,0,5,16.1,.286,.666
+Batting Ninth,="13-47",.277,.340,0.063,1,0,0,3,13.0,.358,.698
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jonah Cox RHB,Batting First ​,="16-63",.254,.365,0.111,1,2,1,5,35.2,6,.319,.684
+Victor Bericoto RHB,Batting Third ​,="5-27",.185,.370,0.185,1,2,0,3,27.6,2,.241,.611
+Bo Davidson LHB,Batting Fourth ​,="4-9",.444,.444,0.000,0,0,0,1,30.0,0,.400,.844
+Osleivis Basabe RHB,Batting Fifth ​,="6-32",.188,.250,0.062,0,2,0,1,14.3,2,.257,.507
+Brett Harris RHB,Batting Fifth ​,="3-16",.188,.250,0.062,0,1,0,2,22.2,1,.235,.485
+Turner Hill LHB,Batting Fifth ​,="5-29",.172,.241,0.069,0,2,0,1,21.2,3,.273,.514
+Andrew Knizner RHB,Batting Seventh ​,="7-23",.304,.478,0.174,1,1,0,3,4.0,1,.360,.838
+Marcelo Mayer LHB,Batting Seventh ​,="24-107",.224,.318,0.094,1,7,0,11,18.9,11,.298,.616
+Shay Whitcomb RHB,Batting Seventh ​,="6-33",.182,.364,0.182,2,0,0,2,22.9,2,.229,.593
+Grant McCray LHB,Batting Eighth ​,="9-54",.167,.352,0.185,2,2,1,4,28.6,7,.262,.614
+Drew Gilbert LHB,Batting Eighth ​,="29-142",.204,.275,0.071,2,4,0,14,16.7,18,.317,.592
+Drew Cavanaugh LHB,Batting Eighth ​,="13-40",.325,.475,0.150,1,1,1,6,19.1,6,.413,.888
+Scott Bandura LHB,Batting Eighth ​,="3-14",.214,.286,0.072,0,1,0,0,50.0,0,.214,.500
+Christian Koss RHB,Batting Ninth ​,="41-172",.238,.320,0.082,3,5,0,10,24.2,8,.272,.592

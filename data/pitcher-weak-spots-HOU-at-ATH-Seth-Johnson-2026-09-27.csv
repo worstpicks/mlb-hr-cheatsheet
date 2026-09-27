@@ -1,0 +1,31 @@
+﻿Matchup,HOU @ ATH
+Pitcher,Seth Johnson
+Pitcher Team,ATH
+Opposing Team,HOU
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.1,1.50,="4-14",.286,.429,0.143,0,2,0,1,26.7,1,.333,.762
+Batting Second,3.2,1.91,="6-17",.353,.824,0.471,2,2,0,5,38.9,1,.389,1.213
+Batting Third,3.0,2.67,="7-16",.438,.813,0.375,2,0,0,7,27.8,1,.500,1.313
+Batting Fourth,5.1,1.31,="5-19",.263,.368,0.105,0,2,0,3,23.8,2,.333,.701
+Batting Fifth,3.0,2.67,="4-13",.308,.462,0.154,0,2,0,1,5.9,4,.471,.933
+Batting Sixth,3.1,2.10,="2-12",.167,.167,0.000,0,0,0,1,11.8,5,.412,.579
+Batting Seventh,3.2,1.09,="2-13",.154,.462,0.308,1,1,0,2,18.8,2,.313,.775
+Batting Eighth,3.1,1.80,="5-14",.357,.500,0.143,0,2,0,3,26.7,1,.400,.900
+Batting Ninth,3.1,0.60,="1-12",.083,.083,0.000,0,0,0,1,53.8,1,.154,.237
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jeremy Pena RHB,Batting First ​,="119-429",.277,.485,0.208,22,19,2,52,23.4,21,.323,.808
+Yordan Alvarez LHB,Batting Second ​,="168-526",.319,.597,0.278,37,33,1,97,17.2,100,.434,1.031
+Isaac Paredes RHB,Batting Third ​,="107-394",.272,.444,0.172,16,18,1,66,11.7,51,.367,.811
+Jose Altuve RHB,Batting Fourth ​,="43-184",.234,.342,0.108,3,11,0,16,18.7,14,.291,.633
+Christian Walker RHB,Batting Fourth ​,="51-220",.232,.468,0.236,14,10,0,33,23.5,21,.312,.780
+Nelson Velazquez RHB,Batting Fourth ​,="12-47",.255,.532,0.277,3,4,0,10,24.1,5,.333,.865
+LaMonte Wade Jr. LHB,Batting Fifth ​,="3-35",.086,.086,0.000,0,0,0,2,26.2,7,.238,.324
+Taylor Trammell LHB,Batting Seventh ​,="16-79",.203,.405,0.202,4,2,1,10,31.0,8,.276,.681
+Yainer Diaz RHB,Batting Seventh ​,="28-91",.308,.538,0.230,5,6,0,16,16.8,1,.326,.864
+Cam Smith RHB,Batting Seventh ​,="29-141",.206,.348,0.142,4,6,1,13,29.2,12,.266,.614
+Nick Allen RHB,Batting Eighth ​,="13-59",.220,.254,0.034,0,2,0,8,26.9,4,.258,.512
+Lucas Spence LHB,Batting Eighth ​,="6-27",.222,.593,0.371,3,1,0,8,31.0,2,.276,.869
+Christian Vazquez RHB,Batting Ninth ​,="43-199",.216,.327,0.111,5,7,0,23,20.1,14,.266,.593
+Jorge Barrosa SHB,Batting Ninth ​,="17-95",.179,.305,0.126,0,10,1,7,26.1,13,.282,.587

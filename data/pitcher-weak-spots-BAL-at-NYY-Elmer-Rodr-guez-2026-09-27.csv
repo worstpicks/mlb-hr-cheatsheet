@@ -1,0 +1,31 @@
+﻿Matchup,BAL @ NYY
+Pitcher,Elmer Rodríguez
+Pitcher Team,NYY
+Opposing Team,BAL
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,3.0,2.67,="5-14",.357,.429,0.072,0,1,0,1,22.2,3,.500,.929
+Batting Second,4.1,0.92,="3-15",.200,.200,0.000,0,0,0,4,17.6,1,.250,.450
+Batting Third,2.2,2.63,="3-10",.300,.300,0.000,0,0,0,0,14.3,4,.500,.800
+Batting Fourth,3.0,1.67,="3-11",.273,.364,0.091,0,1,0,3,7.1,2,.357,.721
+Batting Fifth,3.0,1.33,="3-12",.250,.500,0.250,1,0,0,2,30.8,1,.308,.808
+Batting Sixth,4.0,0.50,="1-12",.083,.083,0.000,0,0,0,0,7.7,1,.154,.237
+Batting Seventh,2.1,1.71,="3-10",.300,.400,0.100,0,1,0,1,25.0,1,.417,.817
+Batting Eighth,2.0,2.00,="2-8",.250,.625,0.375,1,0,0,3,16.7,2,.500,1.125
+Batting Ninth,2.1,1.71,="3-10",.300,.400,0.100,0,1,0,0,8.3,1,.417,.817
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Dylan Beavers LHB,Batting First ​,="18-91",.198,.330,0.132,3,3,0,13,31.4,11,.284,.614
+Gunnar Henderson LHB,Batting Second ​,="55-247",.223,.413,0.190,12,9,1,29,22.1,23,.301,.714
+Pete Alonso RHB,Batting Fourth ​,="63-258",.244,.469,0.225,16,10,0,49,23.8,35,.339,.808
+Christian Encarnacion-Strand RHB,Batting Fifth ​,="23-67",.343,.612,0.269,4,6,0,13,22.9,2,.362,.974
+Leody Taveras SHB,Batting Sixth ​,="40-169",.237,.331,0.094,1,9,2,15,23.4,17,.310,.641
+Heston Kjerstad LHB,Batting Seventh ​,="2-8",.250,.375,0.125,0,1,0,1,75.0,0,.250,.625
+Christian Franklin RHB,Batting Seventh ​,="3-29",.103,.138,0.035,0,1,0,0,30.3,3,.212,.350
+Colton Cowser LHB,Batting Seventh ​,="29-140",.207,.300,0.093,4,1,0,15,32.1,18,.298,.598
+Carlos Narvaez RHB,Batting Eighth ​,="20-116",.172,.250,0.078,2,3,0,7,28.9,9,.258,.508
+Rece Hinds RHB,Batting Eighth ​,="7-31",.226,.323,0.097,0,3,0,5,38.9,3,.306,.629
+Coby Mayo RHB,Batting Eighth ​,="19-94",.202,.319,0.117,3,2,0,11,32.0,8,.272,.591
+Yohel Pozo RHB,Batting Ninth ​,="5-24",.208,.333,0.125,1,0,0,1,16.0,1,.240,.573
+Jeremiah Jackson RHB,Batting Ninth ​,="21-87",.241,.368,0.127,2,5,0,14,20.4,3,.261,.629
+Jose Barrero RHB,Batting Ninth ​,="1-6",.167,.167,0.000,0,0,0,0,50.0,0,.167,.334

@@ -1,0 +1,31 @@
+﻿Matchup,TB @ PHI
+Pitcher,Zack Wheeler
+Pitcher Team,PHI
+Opposing Team,TB
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,18.1,1.42,="18-71",.254,.380,0.126,2,1,1,5,26.6,8,.329,.709
+Batting Second,20.0,1.00,="14-70",.200,.257,0.057,1,1,0,5,33.3,6,.269,.526
+Batting Third,16.0,1.69,="19-67",.284,.582,0.298,5,5,0,11,23.7,8,.368,.950
+Batting Fourth,17.2,1.30,="19-69",.275,.522,0.247,4,5,0,10,28.0,4,.320,.842
+Batting Fifth,20.0,0.80,="11-68",.162,.191,0.029,0,2,0,4,37.8,5,.216,.407
+Batting Sixth,17.1,0.98,="13-63",.206,.460,0.254,5,1,0,9,25.4,4,.254,.714
+Batting Seventh,16.2,0.84,="10-61",.164,.279,0.115,2,1,0,2,32.3,4,.215,.494
+Batting Eighth,14.1,0.77,="7-49",.143,.184,0.041,0,2,0,1,33.3,4,.222,.406
+Batting Ninth,15.0,0.73,="7-50",.140,.280,0.140,1,4,0,2,33.3,4,.204,.484
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Yandy Diaz RHB,Batting First ​,="144-490",.294,.435,0.141,15,22,1,67,15.0,43,.356,.791
+Jonathan Aranda LHB,Batting Second ​,="110-394",.279,.442,0.163,15,19,0,58,23.3,39,.354,.796
+Junior Caminero RHB,Batting Third ​,="99-363",.273,.545,0.272,27,16,1,66,19.1,46,.360,.905
+Ryan Vilade RHB,Batting Fourth ​,="32-104",.308,.548,0.240,6,5,1,21,18.5,16,.398,.946
+Liam Hicks LHB,Batting Fourth ​,="47-148",.318,.520,0.202,8,6,0,36,8.9,13,.385,.905
+Chandler Simpson LHB,Batting Fifth ​,="72-224",.321,.357,0.036,0,8,0,16,5.9,8,.342,.699
+Jonny DeLuca RHB,Batting Sixth ​,="33-134",.246,.381,0.135,4,6,0,18,20.0,6,.279,.660
+Victor Mesa Jr. LHB,Batting Sixth ​,="18-73",.247,.452,0.205,5,0,0,10,29.1,5,.304,.756
+Ben Williamson RHB,Batting Sixth ​,="18-96",.188,.240,0.052,0,3,1,5,21.4,6,.243,.483
+Cedric Mullins LHB,Batting Seventh ​,="27-135",.200,.341,0.141,5,2,1,18,17.2,10,.264,.605
+Nick Fortes RHB,Batting Eighth ​,="32-139",.230,.309,0.079,2,5,0,13,14.7,4,.270,.579
+Richie Palacios LHB,Batting Eighth ​,="29-114",.254,.439,0.185,5,6,0,21,11.9,17,.353,.792
+Jorge Mateo RHB,Batting Ninth ​,="21-99",.212,.263,0.051,1,2,0,6,37.5,3,.243,.506
+Taylor Walls SHB,Batting Ninth ​,="55-258",.213,.291,0.078,2,10,2,28,24.9,32,.302,.593

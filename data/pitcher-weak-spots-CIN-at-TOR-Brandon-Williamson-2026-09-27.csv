@@ -1,0 +1,31 @@
+﻿Matchup,CIN @ TOR
+Pitcher,Brandon Williamson
+Pitcher Team,CIN
+Opposing Team,TOR
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,6.0,1.67,="7-24",.292,.292,0.000,0,0,0,2,29.6,3,.370,.662
+Batting Second,4.1,3.00,="5-17",.294,.706,0.412,1,2,1,6,7.7,8,.500,1.206
+Batting Third,7.1,0.68,="5-26",.192,.462,0.270,2,1,0,2,7.4,0,.222,.684
+Batting Fourth,4.2,2.57,="7-21",.333,.524,0.191,1,1,0,3,11.5,5,.462,.986
+Batting Fifth,4.2,2.57,="9-22",.409,.727,0.318,2,1,0,6,8.0,3,.480,1.207
+Batting Sixth,6.2,0.90,="5-23",.217,.261,0.044,0,1,0,4,12.5,1,.250,.511
+Batting Seventh,6.0,0.50,="2-18",.111,.167,0.056,0,1,0,1,33.3,1,.190,.357
+Batting Eighth,4.0,1.75,="2-13",.154,.385,0.231,1,0,0,1,15.0,5,.450,.835
+Batting Ninth,6.0,0.33,="1-17",.059,.235,0.176,1,0,0,2,15.8,1,.105,.340
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+George Springer RHB,Batting First ​,="53-241",.220,.373,0.153,8,11,1,20,20.3,28,.308,.681
+Brett Bateman LHB,Batting First ​,="45-132",.341,.439,0.098,2,5,1,9,19.6,16,.417,.856
+Charles McAdoo RHB,Batting First ​,="6-21",.286,.333,0.047,0,1,0,1,33.3,2,.333,.666
+Nathan Lukes LHB,Batting Second ​,="41-164",.250,.341,0.091,4,3,0,14,12.6,17,.324,.665
+Vladimir Guerrero Jr. RHB,Batting Third ​,="104-389",.267,.373,0.106,7,20,0,44,13.3,40,.339,.712
+Kazuma Okamoto RHB,Batting Fourth ​,="39-183",.213,.377,0.164,9,3,0,31,30.0,20,.295,.672
+Alejandro Kirk RHB,Batting Fifth ​,="22-85",.259,.435,0.176,4,3,0,10,16.5,12,.351,.786
+Sean Keys LHB,Batting Fifth ​,="3-17",.176,.235,0.059,0,1,0,3,31.8,2,.286,.521
+Ernie Clement RHB,Batting Seventh ​,="36-139",.259,.353,0.094,2,7,0,17,8.2,5,.279,.632
+Davis Schneider RHB,Batting Seventh ​,="3-35",.086,.229,0.143,1,2,0,3,35.4,10,.298,.527
+Andres Gimenez LHB,Batting Eighth ​,="50-208",.240,.375,0.135,6,10,0,31,17.4,5,.283,.658
+Josh Smith LHB,Batting Eighth ​,="17-77",.221,.312,0.091,2,1,0,3,23.9,9,.310,.622
+Myles Straw RHB,Batting Ninth ​,="28-103",.272,.388,0.116,0,10,1,9,6.8,11,.339,.727
+Brandon Valenzuela SHB,Batting Ninth ​,="20-101",.198,.416,0.218,6,4,0,13,22.2,16,.308,.724

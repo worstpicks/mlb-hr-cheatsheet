@@ -1,0 +1,31 @@
+﻿Matchup,NYM @ WSH
+Pitcher,DJ Herz
+Pitcher Team,WSH
+Opposing Team,NYM
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,1.50,="0-2",.000,.000,0.000,0,0,0,0,0.0,1,.333,.333
+Batting Second,0.1,3.00,="1-2",.500,1.000,0.500,0,1,0,1,0.0,0,.500,1.500
+Batting Third,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Fourth,0.0,-.--,="2-2",1.000,1.500,0.500,0,1,0,0,0.0,0,1.000,2.500
+Batting Fifth,0.1,3.00,="1-2",.500,1.000,0.500,0,1,0,0,0.0,0,.500,1.500
+Batting Sixth,0.1,3.00,="0-1",.000,.000,0.000,0,0,0,0,50.0,1,.500,.500
+Batting Seventh,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Batting Eighth,0.1,3.00,="1-2",.500,2.000,1.500,1,0,0,2,50.0,0,.500,2.500
+Batting Ninth,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Francisco Lindor SHB,Batting First ​,="45-225",.200,.378,0.178,10,6,2,21,21.9,22,.283,.661
+Carson Benge LHB,Batting First ​,="59-210",.281,.429,0.148,7,6,2,23,21.6,13,.335,.764
+A.J. Ewing LHB,Batting First ​,="35-166",.211,.301,0.090,2,9,0,8,26.2,14,.273,.574
+Juan Soto LHB,Batting Second ​,="65-240",.271,.475,0.204,13,8,1,38,14.6,52,.401,.876
+Bo Bichette RHB,Batting Third ​,="86-322",.267,.394,0.127,9,12,1,38,18.1,27,.320,.714
+Mark Vientos RHB,Batting Fourth ​,="26-133",.195,.391,0.196,6,8,0,21,21.3,6,.234,.625
+Marcus Semien RHB,Batting Sixth ​,="38-197",.193,.330,0.137,7,4,1,23,17.1,16,.253,.583
+Christopher Morel RHB,Batting Eighth ​,="7-26",.269,.462,0.193,1,2,0,4,33.3,3,.367,.829
+Brett Baty LHB,Batting Eighth ​,="31-135",.230,.385,0.155,4,9,0,15,24.7,12,.287,.672
+Luis Torrens RHB,Batting Ninth ​,="48-205",.234,.376,0.142,6,11,0,29,19.8,15,.298,.674
+Cristian Pache RHB,Batting Ninth ​,="0-2",.000,.000,0.000,0,0,0,0,50.0,0,.000,.000
+Ronny Mauricio SHB,Batting Ninth ​,="8-31",.258,.548,0.290,3,0,0,5,24.2,1,.303,.851
+Francisco Alvarez RHB,Batting Ninth ​,="37-136",.272,.500,0.228,8,7,0,19,29.9,18,.365,.865
+Nick Morabito RHB,Batting Ninth ​,="6-24",.250,.292,0.042,0,1,0,1,21.4,3,.357,.649

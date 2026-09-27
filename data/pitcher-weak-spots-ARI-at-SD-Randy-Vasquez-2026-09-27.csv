@@ -1,0 +1,31 @@
+﻿Matchup,ARI @ SD
+Pitcher,Randy Vasquez
+Pitcher Team,SD
+Opposing Team,ARI
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,15.2,1.66,="20-65",.308,.431,0.123,1,3,1,6,12.5,6,.361,.792
+Batting Second,16.1,1.53,="18-65",.277,.400,0.123,2,2,0,3,15.3,7,.347,.747
+Batting Third,14.2,1.70,="20-60",.333,.650,0.317,4,7,0,11,14.5,5,.397,1.047
+Batting Fourth,16.0,1.19,="16-63",.254,.302,0.048,0,3,0,3,16.7,3,.288,.590
+Batting Fifth,13.2,1.68,="16-56",.286,.482,0.196,1,4,2,11,10.8,7,.369,.851
+Batting Sixth,15.1,1.04,="15-59",.254,.458,0.204,2,4,1,10,16.4,1,.279,.737
+Batting Seventh,14.0,1.21,="15-53",.283,.547,0.264,3,5,0,13,19.3,2,.298,.845
+Batting Eighth,14.2,0.75,="7-47",.149,.298,0.149,2,1,0,4,9.4,4,.226,.524
+Batting Ninth,13.0,1.00,="11-49",.224,.306,0.082,1,1,0,3,21.6,2,.255,.561
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Ketel Marte SHB,Batting First ​,="95-362",.262,.470,0.208,17,20,2,56,15.2,28,.316,.786
+Corbin Carroll LHB,Batting Second ​,="85-306",.278,.546,0.268,13,19,12,40,19.8,46,.376,.922
+Gabriel Moreno RHB,Batting Third ​,="75-243",.309,.547,0.238,12,20,1,49,12.9,29,.386,.933
+Geraldo Perdomo SHB,Batting Third ​,="41-180",.228,.339,0.111,2,8,3,16,12.0,27,.324,.663
+Adrian Del Castillo LHB,Batting Fourth ​,="14-77",.182,.299,0.117,2,3,0,11,31.3,2,.200,.499
+Ildemaro Vargas SHB,Batting Fifth ​,="22-100",.220,.270,0.050,1,2,0,9,9.3,6,.271,.541
+Lars Nootbaar LHB,Batting Fifth ​,="25-131",.191,.275,0.084,2,5,0,9,23.4,22,.305,.580
+Nolan Arenado RHB,Batting Sixth ​,="55-201",.274,.488,0.214,11,10,0,37,20.5,14,.333,.821
+Tim Tawa RHB,Batting Seventh ​,="25-111",.225,.342,0.117,3,2,1,10,23.6,9,.283,.625
+James McCann RHB,Batting Eighth ​,="24-79",.304,.532,0.228,5,3,0,17,20.2,4,.345,.877
+Pavin Smith LHB,Batting Eighth ​,="8-42",.190,.357,0.167,2,1,0,5,20.0,3,.244,.601
+Jose Fernandez RHB,Batting Eighth ​,="16-61",.262,.377,0.115,0,7,0,6,22.9,5,.338,.715
+Jordan Lawlar RHB,Batting Ninth ​,="10-44",.227,.432,0.205,2,1,1,7,34.7,2,.306,.738
+Ryan Waldschmidt RHB,Batting Ninth ​,="47-179",.263,.369,0.106,3,10,0,19,26.2,20,.345,.714

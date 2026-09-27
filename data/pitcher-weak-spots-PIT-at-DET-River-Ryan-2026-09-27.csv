@@ -1,0 +1,31 @@
+﻿Matchup,PIT @ DET
+Pitcher,River Ryan
+Pitcher Team,DET
+Opposing Team,PIT
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Batting Second,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Third,0.2,0.00,="0-2",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Fourth,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Fifth,0.0,-.--,="1-1",1.000,1.000,0.000,0,0,0,0,0.0,0,1.000,2.000
+Batting Sixth,0.0,-.--,="0-0",.000,.000,0.000,0,0,0,0,0.0,1,1.000,1.000
+Batting Seventh,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,100.0,0,.000,.000
+Batting Eighth,0.1,0.00,="0-1",.000,.000,0.000,0,0,0,0,0.0,0,.000,.000
+Batting Ninth,0.0,-.--,="1-1",1.000,2.000,1.000,0,1,0,0,0.0,0,1.000,3.000
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Jake Mangum SHB,Batting First ​,="43-151",.285,.404,0.119,3,7,1,12,22.6,8,.335,.739
+Oneil Cruz LHB,Batting First ​,="43-184",.234,.402,0.168,7,10,0,25,34.7,13,.291,.693
+Spencer Horwitz LHB,Batting First ​,="37-152",.243,.368,0.125,5,4,0,12,16.1,18,.339,.707
+Konnor Griffin RHB,Batting First ​,="29-108",.269,.380,0.111,1,5,2,9,20.5,7,.325,.705
+Brandon Lowe LHB,Batting Second ​,="130-494",.263,.512,0.249,32,25,1,81,27.6,56,.337,.849
+Bryan Reynolds SHB,Batting Third ​,="154-589",.261,.426,0.165,17,40,3,70,23.2,87,.365,.791
+Ryan O'Hearn LHB,Batting Fourth ​,="53-190",.279,.437,0.158,8,6,0,35,26.2,14,.330,.767
+Nick Gonzales RHB,Batting Sixth ​,="59-168",.351,.464,0.113,3,10,0,17,16.4,12,.404,.868
+Ronny Simon SHB,Batting Seventh ​,="6-25",.240,.320,0.080,0,2,0,0,11.5,1,.269,.589
+Rafael Flores RHB,Batting Seventh ​,="14-37",.378,.757,0.379,4,2,0,9,23.1,2,.410,1.167
+Jared Triolo RHB,Batting Eighth ​,="36-137",.263,.336,0.073,2,4,0,15,19.5,9,.318,.654
+Jacob Gonzalez LHB,Batting Eighth ​,="16-80",.200,.350,0.150,3,3,0,11,20.5,1,.217,.567
+Henry Davis RHB,Batting Ninth ​,="40-236",.169,.322,0.153,10,6,0,35,21.0,26,.272,.594
+Billy Cook RHB,Batting Ninth ​,="6-29",.207,.276,0.069,0,0,1,2,48.3,0,.207,.483

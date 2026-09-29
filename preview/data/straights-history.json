@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-27T09:23:08Z",
+  "updated": "2026-09-29T10:49:40Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1534,11 +1534,25 @@
       "o05": {
         "player": "Yordan Alvarez",
         "matchup": "HOU @ ATH",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Kyle Stowers",
         "matchup": "ATL @ MIA",
+        "result": "void"
+      }
+    },
+    {
+      "date": "2026-09-29",
+      "o05": {
+        "player": "Ben Rice",
+        "matchup": "BOS @ NYY",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Alex Bregman",
+        "matchup": "CHC @ SD",
         "result": "pending"
       }
     }

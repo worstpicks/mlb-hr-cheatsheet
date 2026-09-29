@@ -103,6 +103,8 @@ def fetch_records(season_id: int) -> dict:
     out = {}
     for row in rows:
         abbr = (row.get("teamAbbrev") or {}).get("default", "")
-        if abbr:
+        played = (row.get('wins', 0) or 0) + (row.get('losses', 0) or 0) + (row.get('otLosses', 0) or 0)
+        # Before a club has played, "0-0-0" is noise on every card; leave it blank.
+        if abbr and played:
             out[abbr] = f"{row.get('wins', 0)}-{row.get('losses', 0)}-{row.get('otLosses', 0)}"
     return out

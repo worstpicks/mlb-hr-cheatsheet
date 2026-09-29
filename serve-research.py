@@ -29,6 +29,24 @@ class ResearchHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(PREVIEW), **kwargs)
 
+    def end_headers(self) -> None:
+        """Make the dev server revalidate the files we edit.
+
+        Python's static handler sends Last-Modified and no Cache-Control, so
+        browsers fall back to heuristic caching and will happily serve a page
+        from earlier without asking. That pinned index.html to an old
+        ?v= script for a whole session -- the JS had been fixed, the page was
+        still running the previous build, and nothing about it looked stale.
+
+        "no-cache" keeps the cache but forces a conditional request, so an
+        unchanged file is still a cheap 304. Slate JSON is covered too, since a
+        rebuild reuses the same filename.
+        """
+        path = urlparse(self.path).path
+        if path.endswith((".html", ".js", ".css", ".json", "/")):
+            self.send_header("Cache-Control", "no-cache, must-revalidate")
+        super().end_headers()
+
     def do_OPTIONS(self) -> None:
         if (
             self._is_savant_api()

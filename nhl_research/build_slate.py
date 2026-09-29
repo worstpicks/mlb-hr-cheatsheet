@@ -23,6 +23,7 @@ from nhl_research.nhl_stats import (
 )
 from nhl_research.odds_api import fetch_props, normalize_name
 from nhl_research.shot_quality import load_shots, merge_into_goalies, merge_into_rows
+from nhl_research.preseason import fetch_preseason
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "preview" / "data"
 
@@ -73,6 +74,31 @@ def build_slate(date: str) -> dict:
         print(f"[nhl-research] WARN no {schedule_season} roster published; "
               f"players stay on their {stats_season} clubs")
 
+    # Preseason is folded straight into the same rows the board reads, rather
+    # than sitting behind a toggle. There is not much of it -- a handful of
+    # games a club -- so as a separate source it was too thin to stand on its
+    # own, while as the newest few entries in a 25-game window it is just his
+    # most recent hockey. Each row keeps a `pre` flag so the page can mark it.
+    calendar = season_bounds(date)
+    pre_count = 0
+    try:
+        pre_start = calendar.get("preseason_start")
+        if pre_start and pre_start <= date:
+            pre_skaters, pre_goalies = fetch_preseason(pre_start, date, schedule_season)
+            if pre_skaters:
+                pre_ids = sorted({r["game_id"] for r in pre_skaters})
+                pre_count = len(pre_ids)
+                # shot quality for these games too, or iCF/iFF/iSCF would read
+                # as a flat zero on every preseason row instead of "not played"
+                pre_shots = load_shots(schedule_season, pre_ids, game_type=1)
+                merge_into_rows(pre_skaters, pre_shots)
+                merge_into_goalies(pre_goalies, pre_shots)
+                rows = rows + pre_skaters
+                goalie_rows = goalie_rows + pre_goalies
+                print(f"[nhl-research] merged {pre_count} preseason games into the log")
+    except Exception as exc:
+        print(f"[nhl-research] preseason merge failed ({exc}); regular season only")
+
     players, allowed = build_aggregates(rows, current_teams, season_id=schedule_season)
     goalies, goalies_allowed = build_aggregates(
         goalie_rows, current_teams, season_id=schedule_season, keys=GOALIE_KEYS,
@@ -109,7 +135,6 @@ def build_slate(date: str) -> dict:
             "away_allowed": allowed.get(game["away"], {}),
             "home_allowed": allowed.get(game["home"], {}),
         })
-
     graded = sum(len(b) for g in slate_games
                  for side in ("away_skaters", "home_skaters")
                  for b in g[side].values())
@@ -120,8 +145,9 @@ def build_slate(date: str) -> dict:
         "season": schedule_season,
         "stats_season": stats_season,
         "has_props": bool(props),
+        "preseason_games": pre_count,
         "fetched_at": datetime.now().isoformat(timespec="seconds"),
-        "calendar": season_bounds(date),
+        "calendar": calendar,
         "league": league,
         "scales": scales,
         "games": slate_games,

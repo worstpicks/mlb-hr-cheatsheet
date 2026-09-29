@@ -332,8 +332,13 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
             for k in keys:
                 totals[k] += g["stats"].get(k, 0.0)
         team = current_teams.get(pid, latest["team"])
+        # Preseason boxscores abbreviate ("S. Reinhart"), and those rows are the
+        # most recent once preseason is merged in, so taking the latest row's
+        # name renamed half the board. The fullest spelling seen wins instead.
+        full_name = max((g["name"] for g in games if g.get("name")),
+                        key=len, default=latest["name"])
         player_totals[pid] = {
-            "name": latest["name"],
+            "name": full_name,
             "pos": latest["pos"],
             "team": team,
             "player_id": pid,
@@ -346,6 +351,8 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
                     "season": g["season"], "date": g["date"], "opp": g["opp"],
                     "ha": g["ha"], "toi": _toi_str(g["stats"].get("toi")),
                     "stats": _log_stats(g["stats"]),
+                    # only set when true, to keep the slate small
+                    **({"pre": True} if g.get("pre") else {}),
                 }
                 for g in games
             ],
@@ -391,6 +398,7 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
                 "season": season, "date": date, "opp": row["team"],
                 "who": row["name"], "toi": _toi_str(row["stats"].get("toi")),
                 "stats": _log_stats(row["stats"]),
+                **({"pre": True} if row.get("pre") else {}),
             })
 
     # ── assemble ──

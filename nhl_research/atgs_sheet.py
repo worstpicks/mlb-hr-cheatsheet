@@ -10,13 +10,19 @@ carried a note about team-label noise in the feed); this reads the slate the
 research tab already built, so the numbers and the uniforms are the same ones
 on the board.
 
-Input
-    preview/data/nhl-research-<date>.json   (fetch-nhl-research-slate.py)
+Inputs
+    preview/data/nhl-research-<date>.json   the slate (fetch-nhl-research-slate.py)
+    nhl_research/atgs_days/<date>.txt        optional: the day's plays, pasted as
+                                             exported from the research tab's Prop
+                                             List. With it, the sheet is those plays;
+                                             without it, every rated forward.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import re
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -27,12 +33,50 @@ DATA = ROOT / "preview" / "data"
 NHL_DIR = ROOT / "preview" / "nhl-research"
 TEMPLATE = Path(__file__).resolve().parent / "templates" / "atgs_sheet.html"
 MANIFEST = NHL_DIR / "atgs-manifest.json"
+PLAYS_DIR = Path(__file__).resolve().parent / "atgs_days"
+
+# One Prop List row, as the research tab exports it. The name and the line slot
+# arrive glued together ("Carter VerhaegheC4"), and so do the matchup and the
+# market ("FLA vs CAROver 0.5 Goals"), so the pattern pins the slot and the
+# three-letter codes rather than relying on spaces.
+PLAY_LINE = re.compile(
+    r"^(?P<name>.+?)(?P<role>[CLRDG]\d+)\s*\u00b7\s*"
+    r"(?P<team>[A-Z]{2,3})\s+vs\s+(?P<opp>[A-Z]{2,3})"
+    r"(?P<side>Over|Under)\s+(?P<line>\d+(?:\.\d+)?)\s+(?P<market>.+?)\s*$"
+)
 
 # A skater needs this many games before he is rated rather than merely shown.
 MIN_GAMES = 8
 # Forwards carry the market. A defenseman scores on about four percent of his
 # nights; he belongs on the research board for blocks and shots, not here.
 SCORING_POS = ("C", "L", "R")
+
+
+def norm_name(name: str) -> str:
+    """"Juraj Slafkovsk\u00fd" and "Juraj Slafkovsky" are the same man."""
+    text = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z]", "", text.lower())
+
+
+def load_plays(date: str) -> list[dict] | None:
+    """The day's plays from atgs_days/<date>.txt, or None when there is no list.
+
+    Anything that is not a play row -- the game headers, the "x" remove buttons
+    the export carries along -- simply does not match and is skipped.
+    """
+    path = PLAYS_DIR / f"{date}.txt"
+    if not path.exists():
+        return None
+    plays = []
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        m = PLAY_LINE.match(raw.strip())
+        if m:
+            plays.append({
+                "name": m["name"].strip(), "role": m["role"],
+                "team": m["team"], "opp": m["opp"],
+                "side": m["side"], "line": float(m["line"]), "market": m["market"].strip(),
+            })
+    return plays
 
 
 def _stat(node: dict, key: str, default: float = 0.0) -> float:
@@ -142,6 +186,11 @@ def rate(rows: list[dict], slate_scales: dict) -> list[dict]:
     return rows
 
 
+def pct3(value: float) -> str:
+    """Save percentage as hockey writes it: .893, not 0.893."""
+    return f"{value:.3f}".lstrip("0") if value < 1 else f"{value:.3f}"
+
+
 def why(r: dict) -> str:
     """The edge, in the voice the hand-built sheets used."""
     bits = [
@@ -155,8 +204,8 @@ def why(r: dict) -> str:
         bits.append(f"{r['opp']} holds {r['role']}s to {r['opp_g']:.2f} goals a game.")
     if r["g_name"] and r["g_sv_pct"]:
         trend = "a leaking" if r["parts"]["goalie"] / WEIGHTS["goalie"] >= 0.7 else "a steady"
-        bits.append(f"{r['g_name']} is {trend} {r['g_sv_pct']:.3f} with a "
-                    f"{r['g_hd_sv_pct']:.3f} high-danger rate.")
+        bits.append(f"{r['g_name']} is {trend} {pct3(r['g_sv_pct'])} with a "
+                    f"{pct3(r['g_hd_sv_pct'])} high-danger rate.")
     if r["pp_p"] >= 0.35:
         bits.append(f"He works the power play for {r['pp_p']:.2f} points a game.")
     if r["g5"] >= 3:
@@ -172,6 +221,23 @@ def build_sheet(date: str) -> dict:
     slate = json.loads(path.read_text(encoding="utf-8"))
 
     rows = rate(collect(slate), slate.get("scales") or {})
+
+    # With a play list the sheet is exactly those plays. Scoring happens first,
+    # against league-wide scales, so narrowing the board does not move a score.
+    plays = load_plays(date)
+    unmatched: list[dict] = []
+    if plays is not None:
+        index = {(norm_name(r["name"]), r["team"]): r for r in rows}
+        listed = []
+        for play in plays:
+            row = index.get((norm_name(play["name"]), play["team"]))
+            if row is None:
+                unmatched.append(play)
+                continue
+            row["market"] = f'{play["side"]} {play["line"]:g} {play["market"]}'
+            row["listed_role"] = play["role"]
+            listed.append(row)
+        rows = listed
     by_id = {r["id"]: r for r in rows}
 
     games_out = []
@@ -220,6 +286,8 @@ def build_sheet(date: str) -> dict:
         "has_props": slate.get("has_props", False),
         "weights": WEIGHTS,
         "by_id": by_id,
+        "listed": plays is not None,
+        "unmatched": unmatched,
     }
 
 
@@ -246,7 +314,11 @@ def publish(sheet: dict) -> Path:
     entries = {e["key"]: e for e in manifest.get("sheets", [])}
     entries[date] = {"key": date, "date": date}
     ordered = sorted(entries.values(), key=lambda e: e["date"], reverse=True)
-    latest = ordered[0]
+    # "Current" is the newest slate that has actually arrived. Taking the newest
+    # date outright let a slate built ahead of time sit on atgs.html and hide
+    # tonight's board behind the dropdown.
+    today = datetime.now().date().isoformat()
+    latest = next((e for e in ordered if e["date"] <= today), ordered[0])
     for e in ordered:
         # "%-d" strips the leading zero on Unix but raises on Windows, so the
         # zero comes off the formatted string instead.
@@ -279,6 +351,13 @@ def main() -> None:
     bands: dict = {}
     for r in rows:
         bands[r["band_label"]] = bands.get(r["band_label"], 0) + 1
+    if sheet["unmatched"]:
+        print(f"[atgs] WARN {len(sheet['unmatched'])} listed play(s) not on the slate:")
+        for play in sheet["unmatched"]:
+            print(f"[atgs]   {play['name']} ({play['team']} {play['role']}) -- not in the club's lineup")
+    moved = [r for r in rows if r.get("listed_role") and r["listed_role"] != r["role"]]
+    for r in moved:
+        print(f"[atgs] note {r['name']}: listed as {r['listed_role']}, slate has him at {r['role']}")
     print(f"[atgs] {len(sheet['games'])} games, {len(rows)} plays, bands {bands}, "
           f"{sum(1 for r in rows if r['small'])} small samples")
     print("[atgs] top 5: " + ", ".join(

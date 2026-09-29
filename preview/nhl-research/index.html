@@ -13,10 +13,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
-    <title>NFL Research — Worst Pickz</title>
+    <title>NHL Research — Worst Pickz</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
-    <link rel="stylesheet" href="nfl-research.css?v=37">
+    <link rel="stylesheet" href="nhl-research.css?v=6">
     <script>
         (function () {
             if (location.protocol !== "file:") return;
@@ -36,19 +36,19 @@
             <p>You opened the HTML file directly (<code>file://</code>). Browsers block loading slate data that way.</p>
             <p><strong>Use the local server instead:</strong></p>
             <pre>cd C:\Users\allmi\mlb-hr-cheatsheet-web
-python fetch-nfl-research-slate.py --season 2026 --week 1
+python fetch-nhl-research-slate.py --date 2026-09-29
 python serve-research.py</pre>
             <p>Then open in your browser:</p>
-            <a class="nrs-file-block__link" href="http://localhost:8080/nfl-research/index.html">http://localhost:8080/nfl-research/index.html</a>
+            <a class="nrs-file-block__link" href="http://localhost:8080/nhl-research/index.html">http://localhost:8080/nhl-research/index.html</a>
         </div>
     </div>
 
     <div class="nrs-container">
         <header class="nrs-header">
             <div class="nrs-header-actions">
-                <a class="nrs-back" href="atd.html">← NFL Cheat Sheet</a>
+                <a class="nrs-back" href="atgs.html">← NHL Cheat Sheet</a>
                 <div class="nrs-header-actions-right">
-                    <a class="nrs-back nrs-back--mlb" href="../nhl-research/index.html">NHL Research</a>
+                    <a class="nrs-back nrs-back--mlb" href="../nfl-research/index.html">NFL Research</a>
                     <a class="nrs-back nrs-back--mlb" href="../research/index.html">MLB Research</a>
                     <button type="button" class="nrs-theme-toggle" id="nrsThemeToggle" aria-pressed="false" title="Switch theme" aria-label="Switch theme">☀️</button>
                 </div>
@@ -59,20 +59,22 @@ python serve-research.py</pre>
                 </div>
                 <div class="nrs-header-intro">
                     <span class="nrs-brand-tag">Worst Pickz Research</span>
-                    <h1>NFL Matchup Research</h1>
-                    <p id="nrsSeasonNote">Offense vs what the defense allows — green means the player beats the defensive average.</p>
+                    <h1>NHL Matchup Research</h1>
+                    <p id="nrsSeasonNote">Skater vs what the opponent allows to that line slot — green means the player beats what that defense gives up.</p>
                 </div>
             </div>
         </header>
 
         <div class="nrs-toolbar">
             <div class="nrs-controls">
-                <label>Season
-                    <select id="nrsSeason" class="nrs-select"></select>
+                <label>Slate
+                    <span class="nrs-date-nav">
+                        <button type="button" id="nrsPrevDay" aria-label="Previous day">‹</button>
+                        <input type="date" id="nrsDate" class="nrs-date-input">
+                        <button type="button" id="nrsNextDay" aria-label="Next day">›</button>
+                    </span>
                 </label>
-                <label>Week
-                    <select id="nrsWeek" class="nrs-select"></select>
-                </label>
+                <button type="button" class="nrs-btn" id="nrsToday">Today</button>
                 <button type="button" class="nrs-btn nrs-btn--primary" id="nrsRefresh">Refresh</button>
                 <span class="nrs-updated" id="nrsLastUpdated" aria-live="polite"></span>
             </div>
@@ -80,26 +82,15 @@ python serve-research.py</pre>
         </div>
 
         <div class="nrs-shell">
-            <nav class="nrs-rail" id="nrsRail" aria-label="Research sheets"></nav>
-
             <div class="nrs-main">
             <p class="nrs-status" id="nrsStatus" role="alert" hidden></p>
 
-            <div id="nrsMatchupHost">
             <section class="nrs-section">
-                <h2 class="nrs-section-title">Week slate</h2>
+                <h2 class="nrs-section-title">Tonight's slate</h2>
                 <div class="nrs-games-wrap">
                     <div class="nrs-games" id="nrsGames"></div>
                 </div>
             </section>
-
-            <p class="nrs-early" id="nrsEarlyLook" hidden></p>
-            <div class="nrs-viewtabs" id="nrsViewTabs" role="tablist" aria-label="Game view" hidden>
-                <button type="button" data-hostview="logs" class="is-active">Player Logs</button>
-                <button type="button" data-hostview="board">Game Board</button>
-            </div>
-
-            <section class="nrs-section nrs-board" id="nrsBoardSection" hidden></section>
 
             <section class="nrs-section" id="nrsMatchupSection" hidden>
                 <div class="nrs-matchup-bar">
@@ -108,20 +99,18 @@ python serve-research.py</pre>
                         <span class="nrs-matchup-sub" id="nrsMatchupSub"></span>
                     </div>
                     <div class="nrs-matchup-bar__actions">
-                        <div class="nrs-src-toggle" id="nrsSrcToggle" role="group" aria-label="Stat source" hidden>
-                            <button type="button" data-src="reg" class="is-active">2025 REG</button>
-                            <button type="button" data-src="pre">2026 PRE</button>
-                        </div>
                         <button type="button" class="nrs-btn nrs-track-open" id="nrsTrackOpen" aria-expanded="false">
                             Prop List <span class="nrs-track-count" id="nrsTrackCount">0</span>
                         </button>
                         <button type="button" class="nrs-colgear" id="nrsColGear" aria-expanded="false" aria-haspopup="true" title="Choose columns" aria-label="Choose columns">&#9881;</button>
-                        <div class="nrs-side-toggle" role="group" aria-label="Offense team">
-                            <button type="button" id="nrsSideAway">AWY OFF</button>
-                            <button type="button" id="nrsSideHome">HOM OFF</button>
+                        <div class="nrs-side-toggle" role="group" aria-label="Which team's skaters">
+                            <button type="button" id="nrsSideAway">AWY</button>
+                            <button type="button" id="nrsSideHome">HOM</button>
                         </div>
                     </div>
                 </div>
+
+                <section class="nrs-col-panel" id="nrsColPanel" hidden aria-label="Choose columns"></section>
 
                 <section class="nrs-track-panel" id="nrsTrackPanel" hidden aria-label="Tracked props">
                     <header class="nrs-track-head">
@@ -132,52 +121,23 @@ python serve-research.py</pre>
                     <div id="nrsTrackBody"></div>
                 </section>
 
-                <p class="nrs-src-warn" id="nrsSrcWarn" hidden></p>
-
                 <div id="nrsPosSections"></div>
 
                 <p class="nrs-legend">
-                    <strong>Player log (left):</strong> each game colored vs the player's season average —
+                    <strong>Player log (left):</strong> each game colored vs the player's own average —
                     <span class="nrs-legend__chip nrs-cell-heat--good">green</span> above,
                     <span class="nrs-legend__chip nrs-cell-heat--bad">red</span> below.
-                    <strong>Defense log (right):</strong> what the D allowed to that position slot each week, colored vs league average —
+                    <strong>Opponent log (right):</strong> what that team allowed to this line slot each game, colored vs league average —
                     <span class="nrs-legend__chip nrs-cell-heat--good">green</span> gives up more (matchup to attack).
-                    <strong>Avg rows:</strong> player avg colored vs this defense; defense avg colored vs league.
+                    <strong>Avg rows:</strong> player avg colored vs this opponent; opponent avg colored vs the league.
                     Deeper color = bigger edge; near-even games stay neutral.
-                    The box under each card shows the sportsbook expected lines.
+                    Line slots (C1, D2, …) are ranked by ice time — the NHL publishes no depth chart, and the coach's top line is whoever he plays the most.
                 </p>
-                <p class="nrs-legend" id="nrsPropsHint" hidden></p>
             </section>
-            </div>
-
-            <div class="nrs-section nrs-sheet" id="nrsSheet" hidden></div>
             </div>
         </div>
     </div>
 
-    <dialog class="nrs-profile" id="nrsProfile" aria-labelledby="nrsProfileName">
-        <div class="nrs-profile__inner">
-            <header class="nrs-profile__head">
-                <div class="nrs-profile__head-main">
-                    <img class="nrs-profile__photo" id="nrsProfilePhoto" alt="" hidden>
-                    <div>
-                        <h2 class="nrs-profile__name" id="nrsProfileName"></h2>
-                        <p class="nrs-profile__sub" id="nrsProfileSub"></p>
-                    </div>
-                </div>
-                <div class="nrs-profile__head-right">
-                    <button type="button" class="nrs-profile__close" id="nrsProfileClose" aria-label="Close">&times;</button>
-                    <p class="nrs-profile__game" id="nrsProfileGame"></p>
-                </div>
-            </header>
-            <div class="nrs-profile__body" id="nrsProfileBody"></div>
-            <footer class="nrs-profile__foot">
-                <button type="button" class="nrs-profile__board" id="nrsProfileBoard">Open on Game Board &rarr;</button>
-            </footer>
-        </div>
-    </dialog>
-
-    <script src="nfl-sheets.js?v=5" defer></script>
-    <script src="nfl-research.js?v=52" defer></script>
+    <script src="nhl-research.js?v=10" defer></script>
 </body>
 </html>

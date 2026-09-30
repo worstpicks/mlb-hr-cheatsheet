@@ -1123,7 +1123,9 @@
             var cls = "sheet-ovr sheet-ovr--" + esc(pl.band) + (size ? " sheet-ovr--" + size : "");
             return '<span class="' + cls + '" title="' + esc(pl.band_label) + " · " +
                 pl.score.toFixed(1) + ' of 100">' +
-                '<b>' + Math.round(pl.score) + "</b>" +
+                // floor, not round: a 79.5 is a Playable, and a tile reading "80"
+                // in Playable yellow next to a Strong 80 in green looks like a bug
+                '<b>' + Math.floor(pl.score) + "</b>" +
                 (size === "lg" ? "<small>OVR</small>" : "") + "</span>";
         }
 

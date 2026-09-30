@@ -425,6 +425,11 @@
             <div class="atd-top" id="atdFirst"></div>
         </section>
 
+        <section class="atd-section" id="atdTwoSection">
+            <h2 class="atd-section-title">Top 5 2+ TD scorers &mdash; ranked on the data</h2>
+            <div class="atd-top" id="atdTwo"></div>
+        </section>
+
         <section class="atd-section">
             <h2 class="atd-section-title" id="atdBoardTitle">Full board</h2>
             <div class="atd-games" id="atdGames"></div>
@@ -466,7 +471,10 @@
             <strong>1st TD</strong> is the chance he scores the game's first touchdown: his team's chance to score first &mdash;
             its implied points turned into expected touchdowns, nudged by how often it scores on its first two drives against how
             often this defense allows that, with defensive and special-teams scores counted too &mdash; times his share of his
-            team's expected touchdowns. <strong>Top 5 first TD</strong> ranks healthy players on it. <strong>Fair</strong> is that
+            team's expected touchdowns. <strong>Top 5 first TD</strong> ranks healthy players on it.
+            <strong>Top 5 2+ TD</strong> ranks healthy players on their chance of two or more touchdowns, from the same
+            expected-touchdown number behind their TD % (one minus the chance of none and of exactly one); each card also
+            counts how often he actually scored 2+ over his last 17 games. <strong>Fair</strong> is that
             chance as American odds with no bookmaker margin: a book price longer than fair is the value side.<br>
             <strong>Caveats:</strong> <strong>New team</strong> means most of his sample was earned with another club, so his
             share describes a role he may not hold now. A <strong>small sample</strong> player has fewer than four games and is
@@ -745,6 +753,28 @@
             }).join("");
         }
 
+        /* The five likeliest to score two or more among the listed plays. */
+        function twoHTML() {
+            return SHEET.two5.map(function (row, i) {
+                var f = locateId(row.id);
+                if (!f) return "";
+                return '<article class="atd-top-card atd-two-card" data-two-team="' + esc(f.team) +
+                         '" data-two-name="' + esc(f.pl.n) + '">' +
+                         '<div class="atd-top-card__head">' +
+                           '<span class="atd-rank">' + (i + 1) + "</span>" +
+                           '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                           statusChips(f.pl) +
+                         "</div>" +
+                         '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
+                           " &middot; " + fmtKick(f.kick) + "</span>" +
+                         '<div class="atd-first-odds"><span class="atd-first-odds__pct">' + row.pct.toFixed(1) +
+                           '%</span><span class="atd-first-odds__fair">2+ TD &middot; fair <b>' + esc(row.fair) + "</b></span></div>" +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" +
+                       "</article>";
+            }).join("");
+        }
+
         function counts() {
             var c = { all: 0, fav: 0, val: 0, rz: 0, mat: 0, exp: 0 }, games = 0;
             GAMES.forEach(function (g) {
@@ -782,6 +812,11 @@
 
         document.getElementById("atdTop").innerHTML = topHTML();
         document.getElementById("atdExpNote").textContent = EXP_TEXT;
+        if (SHEET.two5 && SHEET.two5.length) {
+            document.getElementById("atdTwo").innerHTML = twoHTML();
+        } else {
+            document.getElementById("atdTwoSection").hidden = true;
+        }
         if (SHEET.first5 && SHEET.first5.length) {
             document.getElementById("atdFirst").innerHTML = firstHTML();
         } else {
@@ -1129,6 +1164,39 @@
             if (firstDone) {
                 sumEl.insertAdjacentHTML("beforeend", '<span class="atd-count">' + firstHit + " of " + firstDone +
                     " first-TD picks hit</span>");
+            }
+
+            // 2+ TD picks: cashed the moment a second score lands; lost only once his game is final
+            var twoHit = 0, twoDone = 0;
+            Array.prototype.forEach.call(document.querySelectorAll(".atd-two-card"), function (card) {
+                var old = card.querySelector(".atd-two-result");
+                if (old) old.remove();
+                var key = normName(card.dataset.twoName);
+                var gk = gameKeyOf(card.dataset.twoTeam);
+                var n = hits[key] ? hits[key].count : 0;
+                var res = null;
+                if (settle[key] === "void") {
+                    res = { cls: "chip--void", text: "Voided", title: "Did not play — refunded" };
+                } else if (n >= 2) {
+                    twoDone++; twoHit++;
+                    res = { cls: "chip--hit", text: n + " TD ✓", title: "Scored two or more" };
+                } else if (state[gk] === "final") {
+                    twoDone++;
+                    res = { cls: "chip--void", text: n ? "1 TD" : "No TD", title: "Finished short of two" };
+                } else if (n === 1) {
+                    res = { cls: "chip--mk", text: "1 TD so far", title: "One down, game still going" };
+                }
+                if (res) {
+                    var chip = document.createElement("span");
+                    chip.className = "chip " + res.cls + " atd-two-result";
+                    chip.textContent = res.text;
+                    chip.title = res.title;
+                    card.querySelector(".atd-top-card__head").appendChild(chip);
+                }
+            });
+            if (twoDone) {
+                sumEl.insertAdjacentHTML("beforeend", '<span class="atd-count">' + twoHit + " of " + twoDone +
+                    " 2+ TD picks hit</span>");
             }
 
             var when = new Date(data.at);

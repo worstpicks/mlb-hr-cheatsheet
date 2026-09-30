@@ -313,7 +313,7 @@ def build(season: int, week: int) -> Path:
             pos = b["pos"]
             off = next((o for o in g[side].get(pos, []) if o.get("player_id") == b.get("player_id")), None)
             avg = (off or {}).get("stats") or {}
-            rows.append({"plan": p, "game": key, "b": b, "avg": avg})
+            rows.append({"plan": p, "game": key, "b": b, "avg": avg, "log": (off or {}).get("log") or []})
     if problems:
         print("[atd] CHECK:\n  " + "\n  ".join(problems))
 
@@ -360,6 +360,13 @@ def build(season: int, week: int) -> Path:
         r["edge"] = edge
         lam_raw = xtd
         r["td2"] = round(100 * (1 - math.exp(-lam_raw) * (1 + lam_raw))) if p["line"] >= 1.5 else None
+        # Two or more: the same expected-touchdown number behind his TD %, so the two
+        # never disagree -- one minus the chance of none and of exactly one.
+        r["two"] = 1 - math.exp(-lam_raw) * (1 + lam_raw)
+        # how often he actually did it over his last 17 games (rushing only for a QB line)
+        key_td = "rush_td" if p["market"] == "rush_td" else "td"
+        recent = r.get("log", [])[-17:]
+        r["multi"] = (sum(1 for g in recent if (g.get("stats") or {}).get(key_td, 0) >= 2), len(recent))
         r["gl"] = float(avg.get("i5_car") or 0.0)
         r["dz"] = dz_rank.get(opp)
         r["imp"] = imp
@@ -474,6 +481,9 @@ def build(season: int, week: int) -> Path:
     top5 = [{"id": r["b"]["player_id"], "why": why(r, env, dz_rank, implied_rank, defense, rank_on_board=i + 1)}
             for i, r in enumerate(top)]
 
+    two_ranked = sorted([r for r in rows if r["eligible"] and r["status"] == ""], key=lambda r: -r["two"])[:5]
+    two5 = [{"id": r["b"]["player_id"], "pct": round(100 * r["two"], 1), "fair": fair_odds(r["two"]),
+             "why": why_two(r, env)} for r in two_ranked]
     first_ranked = sorted([r for r in rows if r["eligible"] and r["status"] == ""], key=lambda r: -r["first"])[:5]
     first5 = [{"id": r["b"]["player_id"], "pct": round(100 * r["first"], 1), "fair": fair_odds(r["first"]),
                "why": why_first(r, ctx, team_first, implied)} for r in first_ranked]
@@ -536,7 +546,7 @@ def build(season: int, week: int) -> Path:
         "season": season, "week": week, "root": "",
         "built": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "first_kick": kicks[0].isoformat(), "last_kick": kicks[-1].isoformat(),
-        "games": games_out, "top5": top5, "first5": first5, "tend": tend,
+        "games": games_out, "top5": top5, "first5": first5, "two5": two5, "tend": tend,
         "exp_source": exp_source,
         "cards": cards, "env": card_env, "leaks": card_leaks,
         "defense_source": bool(defense),
@@ -548,6 +558,8 @@ def build(season: int, week: int) -> Path:
     print(f"[atd] {len(games_out)} games, {n_plays} plays, tags {counts}, "
           f"{sum(1 for r in rows if r['status'])} with an injury status, {sum(1 for r in rows if r['small'])} small samples")
     print("[atd] top 5: " + ", ".join(r["plan"]["name"] for r in top))
+    print("[atd] 2+ TD top 5: " + ", ".join(f"{r['plan']['name']} {100 * r['two']:.1f}% ({fair_odds(r['two'])}) "
+                                          f"[{r['multi'][0]} of {r['multi'][1]}]" for r in two_ranked))
     print("[atd] first TD top 5: " + ", ".join(f"{r['plan']['name']} {100 * r['first']:.1f}% ({fair_odds(r['first'])})"
                                              for r in first_ranked))
     for r in rows:
@@ -604,6 +616,28 @@ def publish(sheet: dict, season: int, week: int) -> Path:
         print(f"[atd] Week {week} is the current week: nfl-research/atd.html")
     print(f"[atd] archived as {archive.relative_to(ROOT)}; the week list has {len(ordered)} weeks")
     return archive
+
+
+def why_two(r, env):
+    p, b = r["plan"], r["b"]
+    team, opp, pos = p["team"], p["opp"], b["pos"]
+    x = float(b.get("xtd") or 0)
+    e, d = env.get(team, {}), env.get(opp, {})
+    what = "rushing touchdowns" if p["market"] == "rush_td" else "touchdowns"
+    bits = [f"He projects for {x:.2f} {what} this game."]
+    if pos == "QB":
+        bits.append(f"That is {r['gl']:.1f} carries a game inside the 5 against a {opp} defense that lets "
+                    f"{d.get('def_rz_td', 0):.0f}% of red-zone trips score.")
+    else:
+        work = f"{b.get('rz_share', 0):.0f}% of {team}'s red-zone work"
+        if r["gl"] >= 0.7:
+            work += f" and {r['gl']:.1f} goal-line carries a game"
+        bits.append(f"He holds {work}; {team} reaches the 20 {e.get('rz_trips', 0):.1f} times a game and "
+                    f"{opp} lets {d.get('def_rz_td', 0):.0f}% of those trips score.")
+    done, games = r["multi"]
+    if games:
+        bits.append(f"He scored 2+ in {done} of his last {games} games.")
+    return " ".join(bits)
 
 
 def why_first(r, ctx, team_first, implied):

@@ -1,0 +1,31 @@
+﻿Matchup,CHC @ SD
+Pitcher,Nick Pivetta
+Pitcher Team,SD
+Opposing Team,CHC
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,5.1,0.56,="3-19",.158,.263,0.105,0,2,0,2,15.8,0,.158,.421
+Batting Second,4.1,1.15,="4-17",.235,.294,0.059,0,1,0,0,27.8,1,.278,.572
+Batting Third,3.2,1.09,="4-15",.267,.267,0.000,0,0,0,0,33.3,0,.267,.534
+Batting Fourth,3.1,1.20,="2-12",.167,.167,0.000,0,0,0,0,26.7,2,.333,.500
+Batting Fifth,4.1,0.46,="1-14",.071,.071,0.000,0,0,0,1,40.0,1,.133,.204
+Batting Sixth,2.2,2.63,="5-13",.385,.538,0.153,0,2,0,2,33.3,2,.467,1.005
+Batting Seventh,3.1,1.50,="3-13",.231,.462,0.231,1,0,0,3,33.3,2,.333,.795
+Batting Eighth,4.0,0.75,="3-15",.200,.200,0.000,0,0,0,2,33.3,0,.200,.400
+Batting Ninth,3.2,0.55,="2-13",.154,.462,0.308,1,1,0,1,30.8,0,.154,.616
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Pete Crow-Armstrong LHB,Batting First ​,="128-427",.300,.656,0.356,38,26,6,83,26.0,65,.398,1.054
+Seiya Suzuki RHB,Batting Second ​,="66-249",.265,.474,0.209,11,17,1,38,22.6,45,.382,.856
+Alex Bregman RHB,Batting Third ​,="68-240",.283,.521,0.238,15,12,0,48,14.1,26,.359,.880
+Michael Busch LHB,Batting Third ​,="66-286",.231,.374,0.143,11,8,0,38,24.6,44,.340,.714
+Ian Happ SHB,Batting Fifth ​,="62-253",.245,.478,0.233,12,19,2,40,26.0,31,.334,.812
+Nico Hoerner RHB,Batting Sixth ​,="79-272",.290,.357,0.067,2,10,1,31,10.0,10,.320,.677
+Carson Kelly RHB,Batting Seventh ​,="22-100",.220,.320,0.100,2,4,0,18,17.9,11,.304,.624
+Michael Conforto LHB,Batting Seventh ​,="21-88",.239,.432,0.193,5,2,0,13,29.3,9,.303,.735
+Gabriel Arias RHB,Batting Seventh ​,="13-57",.228,.246,0.018,0,1,0,3,40.0,3,.267,.513
+Pedro Ramirez SHB,Batting Seventh ​,="27-121",.223,.355,0.132,3,5,1,19,24.6,9,.286,.641
+Matt Shaw RHB,Batting Seventh ​,="16-49",.327,.673,0.346,4,1,2,10,22.6,4,.377,1.050
+Dansby Swanson RHB,Batting Ninth ​,="47-233",.202,.408,0.206,12,8,2,45,23.9,26,.285,.693
+Tyrone Taylor RHB,Batting Ninth ​,="13-50",.260,.340,0.080,0,4,0,2,11.1,2,.302,.642
+Miguel Amaya RHB,Batting Ninth ​,="34-118",.288,.483,0.195,5,8,0,20,24.1,11,.370,.853

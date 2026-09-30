@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-29T10:49:40Z",
+  "updated": "2026-09-30T13:21:50Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1548,11 +1548,26 @@
       "o05": {
         "player": "Ben Rice",
         "matchup": "BOS @ NYY",
-        "result": "pending"
+        "result": "win",
+        "hr": 2
       },
       "o15": {
         "player": "Alex Bregman",
         "matchup": "CHC @ SD",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "o05": {
+        "player": "Xander Bogaerts",
+        "matchup": "CHC @ SD",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Lucas Spence",
+        "matchup": "CWS @ HOU",
         "result": "pending"
       }
     }

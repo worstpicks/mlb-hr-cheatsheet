@@ -236,6 +236,9 @@ def build_sheet(date: str) -> dict:
                 continue
             row["market"] = f'{play["side"]} {play["line"]:g} {play["market"]}'
             row["listed_role"] = play["role"]
+            # what settles it on the page: a 0.5 line needs one goal, 1.5 needs two
+            row["line"] = play["line"]
+            row["side"] = play["side"]
             listed.append(row)
         rows = listed
     by_id = {r["id"]: r for r in rows}

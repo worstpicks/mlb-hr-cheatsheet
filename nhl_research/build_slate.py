@@ -2,11 +2,14 @@
 
 A hockey slate is a DATE, not a week, so this writes one file per day:
     preview/data/nhl-research-2026-09-29.json
+and keeps preview/data/nhl-research-manifest.json listing the days that exist,
+which is what lets the page fall back to a posted slate instead of going blank.
 """
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import date as _date
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from nhl_research.nhl_api import fetch_day_games, fetch_records, season_bounds
@@ -17,15 +20,19 @@ from nhl_research.nhl_stats import (
     build_aggregates,
     build_goalie_rows,
     build_rows,
-    current_team_lookup,
+    current_roster,
     league_averages,
     rating_scales,
 )
 from nhl_research.odds_api import fetch_props, normalize_name
-from nhl_research.shot_quality import load_shots, merge_into_goalies, merge_into_rows
 from nhl_research.preseason import fetch_preseason
+from nhl_research.shot_quality import load_shots, merge_into_goalies, merge_into_rows
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "preview" / "data"
+MANIFEST = OUT_DIR / "nhl-research-manifest.json"
+# Slates older than this are dropped from the site. A finished night's research
+# has little use, and at 5-15 MB a day they would otherwise pile up all season.
+KEEP_DAYS = 7
 
 
 def season_id_for(date: str) -> int:
@@ -35,56 +42,66 @@ def season_id_for(date: str) -> int:
     return int(f"{start}{start + 1}")
 
 
-def resolve_stats_season(schedule_season: int) -> tuple[int, list, list]:
-    """Use the schedule season's games if any are played, else fall back a year.
+# The league-wide half of a build is identical for every date in a run, so
+# building today and tomorrow back to back does the heavy part once.
+_LEAGUE: dict = {}
 
-    Mirrors the NFL tab: on opening night this season has no rows, so the board
-    would be empty. Last season's production is what everyone is actually
-    betting off in October.
+
+def load_league(date: str) -> dict:
+    """Every player's and every club's numbers, as of now.
+
+    The logs reach across three stretches, oldest first: last season, this
+    preseason, this season. That is the football tab's rule too -- "logs reach
+    back into last season alongside this one".
+
+    The first version of this picked ONE season: this one as soon as it had any
+    games, otherwise the last. On the second day of a season that meant five
+    games of data: twenty-two clubs with no players at all, and the other ten
+    rated on a single night.
     """
-    for season in (schedule_season, schedule_season - 10001):
-        rows = build_rows(season)
-        if rows:
-            return season, rows, build_goalie_rows(season)
-    raise RuntimeError(f"No NHL stats for {schedule_season} or the season before")
-
-
-def build_slate(date: str) -> dict:
-    games = fetch_day_games(date)
     schedule_season = season_id_for(date)
-    stats_season, rows, goalie_rows = resolve_stats_season(schedule_season)
-    if stats_season != schedule_season:
-        print(f"[nhl-research] {schedule_season} has no games played yet; "
-              f"reading {stats_season}")
+    calendar = season_bounds(date)
+    regular_start = calendar.get("regular_start")
+    key = (schedule_season, min(date, regular_start) if regular_start else date)
+    if key in _LEAGUE:
+        return _LEAGUE[key]
 
-    # iFF / iSCF are the heart of the rating model's shot-quality component and
-    # live only in the play-by-play, so they are folded onto each player-game
-    # before anything aggregates. Cached, so this costs one crawl per season.
-    game_ids = sorted({r["game_id"] for r in rows})
-    shots = load_shots(stats_season, game_ids)
-    merged = merge_into_rows(rows, shots)
-    merged_g = merge_into_goalies(goalie_rows, shots)
-    print(f"[nhl-research] shot quality merged into {merged} skater-games "
-          f"and {merged_g} goalie-games")
+    # ── last season: finished, so its cache is good for ever ──
+    prev_season = schedule_season - 10001
+    rows = build_rows(prev_season)
+    goalie_rows = build_goalie_rows(prev_season)
+    shots = load_shots(prev_season, sorted({r["game_id"] for r in rows}))
+    merge_into_rows(rows, shots)
+    merge_into_goalies(goalie_rows, shots)
 
-    # Stats come from whatever season is finished; the uniform comes from this
-    # one. Without the second half every summer move is invisible.
-    current_teams = current_team_lookup(schedule_season)
+    # ── this season: topped up on every build ──
+    cur_rows = build_rows(schedule_season, live=True)
+    cur_goalies = build_goalie_rows(schedule_season, live=True)
+    cur_games = sorted({r["game_id"] for r in cur_rows})
+    if cur_rows:
+        cur_shots = load_shots(schedule_season, cur_games)
+        merge_into_rows(cur_rows, cur_shots)
+        merge_into_goalies(cur_goalies, cur_shots)
+    stats_season = schedule_season if cur_rows else prev_season
+    print(f"[nhl-research] {prev_season}: {len(rows)} skater-games · "
+          f"{schedule_season}: {len(cur_rows)} skater-games over {len(cur_games)} games")
+
+    # Production comes from the games; the uniform comes from this season's
+    # roster. Without the second half every summer move is invisible.
+    current_teams, roster_names = current_roster(schedule_season)
     if not current_teams:
         print(f"[nhl-research] WARN no {schedule_season} roster published; "
-              f"players stay on their {stats_season} clubs")
+              f"players stay on the club they last played for")
 
-    # Preseason is folded straight into the same rows the board reads, rather
-    # than sitting behind a toggle. There is not much of it -- a handful of
-    # games a club -- so as a separate source it was too thin to stand on its
-    # own, while as the newest few entries in a 25-game window it is just his
-    # most recent hockey. Each row keeps a `pre` flag so the page can mark it.
-    calendar = season_bounds(date)
+    # ── preseason, folded into the same log and marked `pre` ──
+    pre_skaters: list = []
+    pre_goalies: list = []
     pre_count = 0
     try:
         pre_start = calendar.get("preseason_start")
         if pre_start and pre_start <= date:
-            pre_skaters, pre_goalies = fetch_preseason(pre_start, date, schedule_season)
+            pre_skaters, pre_goalies = fetch_preseason(
+                pre_start, date, schedule_season, regular_start)
             if pre_skaters:
                 pre_ids = sorted({r["game_id"] for r in pre_skaters})
                 pre_count = len(pre_ids)
@@ -93,15 +110,19 @@ def build_slate(date: str) -> dict:
                 pre_shots = load_shots(schedule_season, pre_ids, game_type=1)
                 merge_into_rows(pre_skaters, pre_shots)
                 merge_into_goalies(pre_goalies, pre_shots)
-                rows = rows + pre_skaters
-                goalie_rows = goalie_rows + pre_goalies
-                print(f"[nhl-research] merged {pre_count} preseason games into the log")
     except Exception as exc:
         print(f"[nhl-research] preseason merge failed ({exc}); regular season only")
 
-    players, allowed = build_aggregates(rows, current_teams, season_id=schedule_season)
+    # build_aggregates orders each log by (season, date); preseason rows carry
+    # this season's id and September dates, so they land between the two.
+    rows = rows + pre_skaters + cur_rows
+    goalie_rows = goalie_rows + pre_goalies + cur_goalies
+
+    players, allowed = build_aggregates(
+        rows, current_teams, season_id=schedule_season, names=roster_names)
     goalies, goalies_allowed = build_aggregates(
         goalie_rows, current_teams, season_id=schedule_season, keys=GOALIE_KEYS,
+        names=roster_names,
     )
     # Goalies ride in the same per-team bucket under "G".
     for team, bucket in goalies.items():
@@ -114,12 +135,29 @@ def build_slate(date: str) -> dict:
     league = league_averages(allowed, SKATER_KEYS)
     league["G"] = league_averages(goalies_allowed, GOALIE_KEYS).get("G", {})
 
-    # The cheat sheet's rating model scores each input against the league, not
-    # against the handful of clubs playing tonight, so the distributions are
-    # built here where every team is still in hand.
-    scales = rating_scales(players, allowed)
+    out = {
+        "schedule_season": schedule_season,
+        "stats_season": stats_season,
+        "log_seasons": sorted({r["season"] for r in rows}),
+        "season_games": len(cur_games),
+        "preseason_games": pre_count,
+        "calendar": calendar,
+        "players": players,
+        "allowed": allowed,
+        "league": league,
+        # The cheat sheet's rating model scores each input against the league,
+        # not against the handful of clubs playing tonight.
+        "scales": rating_scales(players, allowed),
+        "records": fetch_records(schedule_season),
+    }
+    _LEAGUE[key] = out
+    return out
 
-    records = fetch_records(schedule_season)
+
+def build_slate(date: str) -> dict:
+    games = fetch_day_games(date)
+    lg = load_league(date)
+    players, allowed = lg["players"], lg["allowed"]
     props = fetch_props(games)
 
     empty = {pos: [] for pos in POSITIONS}
@@ -128,8 +166,8 @@ def build_slate(date: str) -> dict:
         game_props = props.get(f"{game['away_name']} @ {game['home_name']}", {})
         slate_games.append({
             **game,
-            "away_record": records.get(game["away"], ""),
-            "home_record": records.get(game["home"], ""),
+            "away_record": lg["records"].get(game["away"], ""),
+            "home_record": lg["records"].get(game["home"], ""),
             "away_skaters": _with_lines(players.get(game["away"], empty), game_props),
             "home_skaters": _with_lines(players.get(game["home"], empty), game_props),
             "away_allowed": allowed.get(game["away"], {}),
@@ -138,18 +176,21 @@ def build_slate(date: str) -> dict:
     graded = sum(len(b) for g in slate_games
                  for side in ("away_skaters", "home_skaters")
                  for b in g[side].values())
-    print(f"[nhl-research] {len(slate_games)} games, {graded} player cards")
+    print(f"[nhl-research] {date}: {len(slate_games)} games, {graded} player cards")
 
     return {
         "date": date,
-        "season": schedule_season,
-        "stats_season": stats_season,
+        "season": lg["schedule_season"],
+        "stats_season": lg["stats_season"],
+        # seasons the logs reach into, so the page can say "25-26 + 26-27"
+        "log_seasons": lg["log_seasons"],
+        "season_games": lg["season_games"],
         "has_props": bool(props),
-        "preseason_games": pre_count,
+        "preseason_games": lg["preseason_games"],
         "fetched_at": datetime.now().isoformat(timespec="seconds"),
-        "calendar": calendar,
-        "league": league,
-        "scales": scales,
+        "calendar": lg["calendar"],
+        "league": lg["league"],
+        "scales": lg["scales"],
         "games": slate_games,
     }
 
@@ -164,10 +205,57 @@ def _with_lines(skaters: dict, game_props: dict) -> dict:
     }
 
 
-def write_slate(date: str) -> Path:
+def _unchanged(path: Path, payload: dict) -> bool:
+    """True when the slate on disk already says exactly this, bar the timestamp.
+
+    A scheduled build runs several times a day and mostly finds nothing new.
+    Rewriting the file anyway would stamp a new time on it, and every one of
+    those would be another multi-megabyte commit of the same numbers.
+    """
+    if not path.exists():
+        return False
+    try:
+        old = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    new = json.loads(json.dumps(payload))
+    old.pop("fetched_at", None)
+    new.pop("fetched_at", None)
+    return old == new
+
+
+def write_slate(date: str) -> tuple[Path, bool]:
+    """Build one day. Returns (path, whether the file actually changed)."""
     payload = build_slate(date)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out_path = OUT_DIR / f"nhl-research-{date}.json"
+    if _unchanged(out_path, payload):
+        return out_path, False
     # compact separators: game logs make this file large enough to matter
     out_path.write_text(json.dumps(payload, separators=(",", ":")) + "\n", encoding="utf-8")
-    return out_path
+    return out_path, True
+
+
+def slate_dates() -> list[str]:
+    """Every day that has a slate on disk, oldest first."""
+    return sorted(p.stem.replace("nhl-research-", "") for p in OUT_DIR.glob("nhl-research-20*.json"))
+
+
+def prune(today: str, keep_days: int = KEEP_DAYS) -> list[str]:
+    """Delete slates older than `keep_days` before `today`. Returns what went."""
+    cutoff = (_date.fromisoformat(today) - timedelta(days=keep_days)).isoformat()
+    gone = []
+    for day in slate_dates():
+        if day < cutoff:
+            (OUT_DIR / f"nhl-research-{day}.json").unlink()
+            gone.append(day)
+    return gone
+
+
+def write_manifest() -> list[str]:
+    """List the posted days, for the page to steer by."""
+    dates = slate_dates()
+    body = json.dumps({"version": 1, "dates": dates}, indent=2) + "\n"
+    if not MANIFEST.exists() or MANIFEST.read_text(encoding="utf-8") != body:
+        MANIFEST.write_text(body, encoding="utf-8")
+    return dates

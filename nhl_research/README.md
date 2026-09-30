@@ -16,14 +16,25 @@ Then <http://localhost:8080/nhl-research/index.html> and
 not a bare `python -m http.server`: it sends `Cache-Control: no-cache`, without
 which the browser keeps serving an old `index.html` pinned to an old `?v=` script.
 
-**The research tab only shows a date that has been built.** On the live site a
-day with no slate reads "No NHL research posted for …", so the two commands above
-need to run each game day, alongside the MLB build.
+### It builds itself
+
+`.github/workflows/nhl-research.yml` runs three times a day (about 5:30 am, 11 am
+and 5 pm Eastern) and on demand from the Actions tab. Each run builds **today and
+tomorrow**, so the next day's slate is already posted when the date rolls over at
+midnight and one failed run never leaves the page empty. It commits only when a
+slate actually changed, prunes slates more than a week old, and keeps
+`preview/data/nhl-research-manifest.json` -- the list of posted days the page
+steers by. If today is somehow not posted, the page opens on the nearest day that
+is and says so, rather than showing an empty board.
+
+Built by hand this went blank the first morning nobody ran it.
 
 ### The cheat sheet reads a play list
 
 Paste the day's plays, exactly as the research tab's Prop List exports them, into
 `nhl_research/atgs_days/<date>.txt` -- the NHL twin of `nfl_research/atd_weeks/`.
+Committing that file is enough: the workflow builds the sheet on the push. The
+sheet is never built without a list, so the page stays on the last one you made.
 With that file the sheet is those plays; without it, every rated forward. The
 build prints any listed play it could not find on the slate, so a name that
 drifted out of a club's lineup is reported rather than silently dropped.
@@ -48,7 +59,7 @@ All free, no key, all from NHL.com's own public API.
 
 ESPN is not used. It 403s from some networks, and the NHL's own feed is better.
 
-## Three things that will bite you
+## Four things that will bite you
 
 **The stats API pages unstably.** `skater/summary` caps at 100 rows a page and
 refuses to page past 10,000, while a season is ~47,000 rows. Worse, sorting on
@@ -58,11 +69,20 @@ duplicates *and* McDavid two games short of the 82 he played. Every pull is
 therefore chunked by team and sorted on `gameId` + `playerId`, which is unique.
 `build_rows` also dedupes on the way in. If you add a report, keep both.
 
-**Stats season ≠ schedule season.** On opening night the new season has no rows,
-so `resolve_stats_season` falls back a year, and `current_team_lookup` puts last
-season's production on this season's uniform. Skip the second half and every
-summer trade goes invisible — Dorofeyev sits under Vegas while playing for the
-Rangers.
+**The logs span seasons, and the live one has to refresh.** A log runs last
+season, then the preseason, then this season. Picking one season instead -- this
+one as soon as it had games -- left five games of data on day two: twenty-two
+clubs with no players. And a season's cache is only permanent once the season is
+over; `build_rows(..., live=True)` re-pulls from the last cached night onward on
+every build, and the play-by-play cache grows game by game. Both were
+frozen-on-first-pull before.
+
+**A lineup is the active roster.** `current_roster` gives each player's club and
+name. Anyone not on a roster is left off his club's board: that is cut camp
+invitees (who otherwise take line slots on preseason ice time) and also players
+on injured reserve, who cannot score tonight either. Names come from the roster
+too -- the stats feed's name field changed under us from "Jack Roslovic" to
+"John (Jack) Roslovic".
 
 **Line slots are ranked by ice time.** The NHL publishes no depth chart. C1/D2
 and the "allowed to C1" tables are both ordered by TOI within each game, which

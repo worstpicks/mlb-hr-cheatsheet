@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import unicodedata
 from datetime import datetime, timezone
@@ -302,6 +303,23 @@ def render(sheet: dict, root: str) -> str:
     return html.replace("__ROOT__", root).replace("__DATE__", sheet["date"])
 
 
+_BUILT_STAMP = re.compile(r'"built":"[^"]*"')
+
+
+def _write_if_changed(path: Path, text: str) -> bool:
+    """Write `text` unless the file already says the same thing bar the build time.
+
+    The scheduled build re-renders the sheet several times a day. Without this
+    every run would differ by its timestamp alone and commit the page again.
+    """
+    if path.exists():
+        old = path.read_text(encoding="utf-8")
+        if _BUILT_STAMP.sub('"built":""', old) == _BUILT_STAMP.sub('"built":""', text):
+            return False
+    path.write_text(text, encoding="utf-8")
+    return True
+
+
 def publish(sheet: dict) -> Path:
     """Current slate at nhl-research/atgs.html, every slate in archive/, and
     atgs-manifest.json feeding the date dropdown. Only the newest date takes
@@ -309,7 +327,7 @@ def publish(sheet: dict) -> Path:
     date = sheet["date"]
     archive = NHL_DIR / "archive" / f"{date}.html"
     archive.parent.mkdir(parents=True, exist_ok=True)
-    archive.write_text(render(sheet, "../"), encoding="utf-8")
+    changed = _write_if_changed(archive, render(sheet, "../"))
 
     manifest = {"version": 1, "sheets": []}
     if MANIFEST.exists():
@@ -320,7 +338,10 @@ def publish(sheet: dict) -> Path:
     # "Current" is the newest slate that has actually arrived. Taking the newest
     # date outright let a slate built ahead of time sit on atgs.html and hide
     # tonight's board behind the dropdown.
-    today = datetime.now().date().isoformat()
+    # The scheduled build runs on a UTC clock, where it is already tomorrow by
+    # 8 pm Eastern -- it passes the Eastern date in NHL_TODAY so an evening run
+    # does not promote the next day's sheet early.
+    today = os.environ.get("NHL_TODAY") or datetime.now().date().isoformat()
     latest = next((e for e in ordered if e["date"] <= today), ordered[0])
     for e in ordered:
         # "%-d" strips the leading zero on Unix but raises on Windows, so the
@@ -333,14 +354,15 @@ def publish(sheet: dict) -> Path:
             e["label"], e["href"] = f"{pretty} — current slate", "atgs.html"
         else:
             e["label"], e["href"] = pretty, f"archive/{e['date']}.html"
-    MANIFEST.write_text(
-        json.dumps({"version": 1, "sheets": ordered}, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8")
+    body = json.dumps({"version": 1, "sheets": ordered}, indent=2, ensure_ascii=False) + "\n"
+    if not MANIFEST.exists() or MANIFEST.read_text(encoding="utf-8") != body:
+        MANIFEST.write_text(body, encoding="utf-8")
 
     if latest["key"] == date:
-        (NHL_DIR / "atgs.html").write_text(render(sheet, ""), encoding="utf-8")
+        changed = _write_if_changed(NHL_DIR / "atgs.html", render(sheet, "")) or changed
         print(f"[atgs] {date} is the current slate: nhl-research/atgs.html")
-    print(f"[atgs] archived as {archive.relative_to(ROOT)}; the list has {len(ordered)} slates")
+    print(f"[atgs] {'archived as' if changed else 'unchanged:'} {archive.relative_to(ROOT)}; "
+          f"the list has {len(ordered)} slates")
     return archive
 
 

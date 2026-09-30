@@ -119,6 +119,10 @@ ROSTER_CAP = {"C": 4, "L": 4, "R": 4, "D": 6, "G": 2}
 
 # Averages and allowed-tables read each player's / team's last this-many games.
 STATS_WINDOW = 25
+# How many games of log each player and each allowed-by-slot table keeps. Logs
+# reach across last season, the preseason and this one, so without a cap a slate
+# doubles in size by April. One season's worth keeps L5 to All meaningful.
+LOG_KEEP = 82
 
 
 def _zero(keys=ALL_KEYS) -> dict:
@@ -154,10 +158,17 @@ def _get(url: str, tries: int = 3):
             time.sleep(1.5 * (attempt + 1))
 
 
-def _fetch_report(report: str, season_id: int, game_type: int, team: str) -> list[dict]:
-    """Every per-game row of one report for one club, paged to exhaustion."""
+def _fetch_report(report: str, season_id: int, game_type: int, team: str,
+                  since: str | None = None) -> list[dict]:
+    """Every per-game row of one report for one club, paged to exhaustion.
+
+    `since` ("2026-10-04") narrows the pull to that night onward, which is how
+    the live season tops itself up without refetching the whole year.
+    """
     exp = (f'seasonId={season_id} and gameTypeId={game_type} '
            f'and teamAbbrev="{team}"')
+    if since:
+        exp += f' and gameDate>="{since}"'
     # The sort has to be total, not just by date. Paging a feed ordered on
     # gameDate alone leaves every row of a given night in arbitrary order, so the
     # same row can land on two pages while another falls between them: the first
@@ -183,20 +194,41 @@ def _cache_path(report: str, season_id: int, game_type: int) -> Path:
 
 
 def load_report(report: str, season_id: int, game_type: int = 2,
-                refresh: bool = False, teams=TEAMS) -> list[dict]:
+                refresh: bool = False, teams=TEAMS, live: bool = False) -> list[dict]:
     """All per-game rows of one report for a season, cached on disk.
 
     A cold pull is ~32 clubs x ~15 pages; threaded it takes well under a minute.
-    Every later build reads the cache instead.
+    A finished season is then read from the cache for good.
+
+    `live` is for the season being played. Its cache cannot be trusted as-is --
+    read that way it froze on whatever was in the feed the first day it was
+    pulled -- so a live season is topped up on every build: everything from the
+    last cached night onward is fetched again and merged over what is there.
+    Re-pulling that last night, rather than starting the day after, picks up a
+    slate that was only half in the feed and any overnight stat corrections.
     """
     path = _cache_path(report, season_id, game_type)
+    cached: list[dict] = []
     if path.exists() and not refresh:
         with gzip.open(path, "rt", encoding="utf-8") as fh:
-            return json.load(fh)
+            cached = json.load(fh)
+        if not live:
+            return cached
+    since = None
+    if live and cached:
+        since = max(str(r.get("gameDate") or "") for r in cached)[:10] or None
     rows: list[dict] = []
     with ThreadPoolExecutor(max_workers=6) as pool:
-        for chunk in pool.map(lambda t: _fetch_report(report, season_id, game_type, t), teams):
+        for chunk in pool.map(
+                lambda t: _fetch_report(report, season_id, game_type, t, since), teams):
             rows.extend(chunk)
+    if live and cached:
+        merged = {(r.get("playerId"), r.get("gameId")): r for r in cached}
+        for r in rows:
+            merged[(r.get("playerId"), r.get("gameId"))] = r
+        # a fixed order, so an unchanged night produces a byte-identical slate
+        rows = sorted(merged.values(),
+                      key=lambda r: (r.get("gameId") or 0, r.get("playerId") or 0))
     if rows:
         CACHE.mkdir(parents=True, exist_ok=True)
         with gzip.open(path, "wt", encoding="utf-8") as fh:
@@ -215,10 +247,12 @@ def _key(row: dict) -> tuple:
     return (row.get("playerId"), row.get("gameId"))
 
 
-def build_rows(season_id: int, game_type: int = 2, refresh: bool = False) -> list[dict]:
+def build_rows(season_id: int, game_type: int = 2, refresh: bool = False,
+               live: bool = False) -> list[dict]:
     """One row per skater per game, with the realtime report merged in."""
-    summary = load_report("skater/summary", season_id, game_type, refresh)
-    realtime = {_key(r): r for r in load_report("skater/realtime", season_id, game_type, refresh)}
+    summary = load_report("skater/summary", season_id, game_type, refresh, live=live)
+    realtime = {_key(r): r for r in
+                load_report("skater/realtime", season_id, game_type, refresh, live=live)}
 
     rows = []
     merged = 0
@@ -259,14 +293,19 @@ def build_rows(season_id: int, game_type: int = 2, refresh: bool = False) -> lis
             "stats": stats,
         })
     print(f"[nhl-research] realtime merged into {merged} of {len(rows)} skater-games")
+    # One fixed order, however the cache was assembled. A cold pull arrives club
+    # by club and a topped-up one game by game; line slots break ice-time ties by
+    # row order, so without this the same data could rank two players differently.
+    rows.sort(key=lambda r: (r["game_id"] or 0, r["player_id"] or 0))
     return rows
 
 
-def build_goalie_rows(season_id: int, game_type: int = 2, refresh: bool = False) -> list[dict]:
+def build_goalie_rows(season_id: int, game_type: int = 2, refresh: bool = False,
+                      live: bool = False) -> list[dict]:
     """One row per goalie per game."""
     rows = []
     seen = set()
-    for src in load_report("goalie/summary", season_id, game_type, refresh):
+    for src in load_report("goalie/summary", season_id, game_type, refresh, live=live):
         if _key(src) in seen:
             continue
         seen.add(_key(src))
@@ -287,6 +326,7 @@ def build_goalie_rows(season_id: int, game_type: int = 2, refresh: bool = False)
             "season": season_id,
             "stats": stats,
         })
+    rows.sort(key=lambda r: (r["game_id"] or 0, r["player_id"] or 0))
     return rows
 
 
@@ -302,9 +342,24 @@ def _avg(totals: dict, games: int, keys) -> dict:
     return {k: round(totals.get(k, 0.0) / games, 4) for k in keys}
 
 
+def _display_name(games: list[dict], fallback: str) -> str:
+    """A player's name from his own rows, when no roster has him.
+
+    The newest row that spells the first name out. Preseason boxscores
+    abbreviate ("S. Reinhart") and are the newest rows once preseason is merged,
+    so "latest" alone renamed half the board; "longest" then picked up the
+    feed's formal variants ("Mats Zuccarello Aasen").
+    """
+    for g in reversed(games):
+        name = g.get("name") or ""
+        if name and not (len(name) > 2 and name[1] == "." and name[2] == " "):
+            return name
+    return fallback
+
+
 def build_aggregates(rows: list[dict], current_teams: dict | None = None,
                      cap: dict | None = ROSTER_CAP, season_id: int = 20252026,
-                     keys=None) -> tuple[dict, dict]:
+                     keys=None, names: dict | None = None) -> tuple[dict, dict]:
     """Return (players_by_team, allowed_vs_pos_by_team).
 
     players_by_team: { "EDM": { "C": [ {name, pos, gp, rank, headshot, stats{}, log[]} ] } }
@@ -316,6 +371,11 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
     """
     keys = keys or SKATER_KEYS
     current_teams = current_teams or {}
+    # Roster names, by player id. The stats feed's own name field is not stable:
+    # between two pulls a week apart it went from "Jack Roslovic" to
+    # "John (Jack) Roslovic" and from "Teddy Blueger" to "Theodor Blueger". The
+    # roster feed carries the name a player actually goes by.
+    names = names or {}
 
     # ── per player: rolling window of totals + a log of every game ──
     by_player: dict = defaultdict(list)
@@ -332,11 +392,7 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
             for k in keys:
                 totals[k] += g["stats"].get(k, 0.0)
         team = current_teams.get(pid, latest["team"])
-        # Preseason boxscores abbreviate ("S. Reinhart"), and those rows are the
-        # most recent once preseason is merged in, so taking the latest row's
-        # name renamed half the board. The fullest spelling seen wins instead.
-        full_name = max((g["name"] for g in games if g.get("name")),
-                        key=len, default=latest["name"])
+        full_name = names.get(pid) or _display_name(games, latest["name"])
         player_totals[pid] = {
             "name": full_name,
             "pos": latest["pos"],
@@ -354,7 +410,7 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
                     # only set when true, to keep the slate small
                     **({"pre": True} if g.get("pre") else {}),
                 }
-                for g in games
+                for g in games[-LOG_KEEP:]
             ],
         }
 
@@ -396,16 +452,27 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
                 rank_games[(opp, pos, idx)] += 1
             rank_logs[(opp, pos, idx)].append({
                 "season": season, "date": date, "opp": row["team"],
-                "who": row["name"], "toi": _toi_str(row["stats"].get("toi")),
+                "who": names.get(row["player_id"]) or row["name"],
+                "toi": _toi_str(row["stats"].get("toi")),
                 "stats": _log_stats(row["stats"]),
                 **({"pre": True} if row.get("pre") else {}),
             })
 
     # ── assemble ──
+    # A lineup is the club's current roster, ranked by ice time -- nobody else.
+    # With preseason merged in, a prospect who skated three exhibition games and
+    # was then cut is on no roster, so he fell back to the last club he played
+    # for and took a line slot there: eighteen of one night's 119 cards. The
+    # check is per club, so a roster that failed to load leaves that one club on
+    # the old fallback instead of emptying it.
+    rostered_clubs = set(current_teams.values())
     players_by_team: dict = defaultdict(lambda: defaultdict(list))
     for entry in player_totals.values():
-        if entry["pos"] in POSITIONS:
-            players_by_team[entry["team"]][entry["pos"]].append(entry)
+        if entry["pos"] not in POSITIONS:
+            continue
+        if entry["team"] in rostered_clubs and entry["player_id"] not in current_teams:
+            continue
+        players_by_team[entry["team"]][entry["pos"]].append(entry)
 
     for team, buckets in players_by_team.items():
         for pos, bucket in buckets.items():
@@ -427,7 +494,8 @@ def build_aggregates(rows: list[dict], current_teams: dict | None = None,
         node[str(idx)] = {
             "gp": games,
             "stats": _avg(totals, games, keys),
-            "log": sorted(rank_logs.get((team, pos, idx), []), key=lambda r: (r["season"], r["date"])),
+            "log": sorted(rank_logs.get((team, pos, idx), []),
+                          key=lambda r: (r["season"], r["date"]))[-LOG_KEEP:],
         }
 
     return ({k: dict(v) for k, v in players_by_team.items()}, dict(allowed_by_team))
@@ -472,14 +540,13 @@ def league_averages(allowed_by_team: dict, keys=None) -> dict:
     return league
 
 
-def current_team_lookup(season_id: int) -> dict:
-    """player id -> the club he plays for NOW, from this season's rosters.
+def current_roster(season_id: int) -> tuple[dict, dict]:
+    """(player id -> club, player id -> name) from this season's rosters.
 
-    Stats come from whatever season is finished; the uniform comes from this
-    one. Without the second half every summer move is invisible.
+    Stats come from whatever games have been played; the uniform and the name
+    come from the roster. Without the first every summer move is invisible;
+    without the second a card can read "John (Jack) Roslovic".
     """
-    from concurrent.futures import ThreadPoolExecutor
-
     def one(team: str) -> list[tuple]:
         try:
             payload = _get(f"https://api-web.nhle.com/v1/roster/{team}/{season_id}")
@@ -488,15 +555,27 @@ def current_team_lookup(season_id: int) -> dict:
         out = []
         for group in ("forwards", "defensemen", "goalies"):
             for player in payload.get(group) or []:
-                if player.get("id"):
-                    out.append((player["id"], team))
+                if not player.get("id"):
+                    continue
+                first = (player.get("firstName") or {}).get("default", "")
+                last = (player.get("lastName") or {}).get("default", "")
+                out.append((player["id"], team, f"{first} {last}".strip()))
         return out
 
-    lookup: dict = {}
+    teams: dict = {}
+    names: dict = {}
     with ThreadPoolExecutor(max_workers=6) as pool:
-        for pairs in pool.map(one, TEAMS):
-            lookup.update(dict(pairs))
-    return lookup
+        for triples in pool.map(one, TEAMS):
+            for pid, team, name in triples:
+                teams[pid] = team
+                if name:
+                    names[pid] = name
+    return teams, names
+
+
+def current_team_lookup(season_id: int) -> dict:
+    """player id -> the club he plays for NOW."""
+    return current_roster(season_id)[0]
 
 
 def percentile_breaks(values, buckets: int = 101) -> list:

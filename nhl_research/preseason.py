@@ -14,11 +14,14 @@ list of names nobody can bet.
 """
 from __future__ import annotations
 
+import gzip
+import json
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 
 from nhl_research.nhl_api import get_json
 from nhl_research.nhl_stats import (
+    CACHE,
     GOALIE_KEYS,
     SKATER_KEYS,
     _get,
@@ -151,14 +154,29 @@ def _game_rows(entry: tuple) -> list[dict]:
     return rows
 
 
-def fetch_preseason(start_date: str, through_date: str,
-                    season_id: int = 20262027) -> tuple[list, list]:
-    """(skater_rows, goalie_rows) for every finished preseason game so far."""
+def fetch_preseason(start_date: str, through_date: str, season_id: int = 20262027,
+                    regular_start: str | None = None) -> tuple[list, list]:
+    """(skater_rows, goalie_rows) for every finished preseason game.
+
+    Once the regular season has begun the preseason is a closed set, so it is
+    read once and cached. Left open-ended, every build walked the schedule a
+    week at a time from the first preseason game to today -- a walk that gets
+    one request longer every week of the season.
+    """
+    global _SEASON_ID
+    _SEASON_ID = season_id
+    over = bool(regular_start and through_date >= regular_start)
+    path = CACHE / f"preseason-{season_id}.json.gz"
+    if over and path.exists():
+        with gzip.open(path, "rt", encoding="utf-8") as fh:
+            saved = json.load(fh)
+        return saved["skaters"], saved["goalies"]
+    if regular_start:
+        through_date = min(through_date, regular_start)
+
     games = preseason_game_ids(start_date, through_date)
     if not games:
         return [], []
-    global _SEASON_ID
-    _SEASON_ID = season_id
     rows: list[dict] = []
     with ThreadPoolExecutor(max_workers=8) as pool:
         for chunk in pool.map(_game_rows, games):
@@ -167,6 +185,10 @@ def fetch_preseason(start_date: str, through_date: str,
     goalies = [r for r in rows if r["pos"] == "G"]
     print(f"[nhl-research] preseason: {len(games)} games, "
           f"{len(skaters)} skater lines, {len(goalies)} goalie lines")
+    if over and skaters:
+        CACHE.mkdir(parents=True, exist_ok=True)
+        with gzip.open(path, "wt", encoding="utf-8") as fh:
+            json.dump({"skaters": skaters, "goalies": goalies}, fh, separators=(",", ":"))
     return skaters, goalies
 
 

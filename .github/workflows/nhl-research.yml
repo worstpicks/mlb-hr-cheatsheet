@@ -1,0 +1,120 @@
+name: NHL research slate
+
+# The NHL research tab only shows days that have been built. Built by hand, it
+# went blank the first morning nobody ran it. This builds today and tomorrow
+# (Eastern) on a schedule, so the page is already posted when the date rolls
+# over at midnight and one failed run never leaves it empty.
+#
+# It also rebuilds the cheat sheet for either day when that day's play list is
+# in nhl_research/atgs_days/ -- commit the list and the sheet builds itself.
+
+on:
+  schedule:
+    # GitHub cron is UTC. Eastern is UTC-4 in summer, UTC-5 in winter.
+    - cron: "30 9 * * *"    # ~5:30 am ET: last night's West Coast finals are in
+    - cron: "0 15 * * *"    # ~11 am ET: morning roster moves; retries a failed run
+    - cron: "0 21 * * *"    # ~5 pm ET: last look before puck drop
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "First date to build, YYYY-MM-DD. Blank = today, Eastern."
+        required: false
+        default: ""
+  push:
+    branches: [main]
+    paths:
+      - "nhl_research/atgs_days/**"
+      - ".github/workflows/nhl-research.yml"
+
+permissions:
+  contents: write
+
+# One build at a time: two runs pushing the same files would only collide.
+concurrency:
+  group: nhl-research
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The builder has no dependencies beyond the standard library. What it
+      # does need is its cache of last season's pulls -- without it every run
+      # re-crawls ~1,400 games. A new key each run saves the topped-up cache;
+      # the restore key picks up the most recent one.
+      - name: Restore NHL API cache
+        uses: actions/cache@v4
+        with:
+          path: nhl_research/cache
+          key: nhl-cache-${{ github.run_id }}
+          restore-keys: |
+            nhl-cache-
+
+      - name: Pick the dates
+        env:
+          INPUT_DATE: ${{ github.event.inputs.date }}
+        run: |
+          TODAY=$(TZ=America/New_York date +%F)
+          DATE="${INPUT_DATE:-$TODAY}"
+          if ! [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "::error::date must be YYYY-MM-DD, got '$DATE'"
+            exit 1
+          fi
+          echo "DATE=$DATE" >> "$GITHUB_ENV"
+          echo "NHL_TODAY=$TODAY" >> "$GITHUB_ENV"
+          echo "Building $DATE and the day after (today in Eastern is $TODAY)"
+
+      - name: Build the research slates
+        run: |
+          # Whatever did build still gets published; the job is failed at the
+          # end so a bad day is visible instead of silently skipped.
+          python fetch-nhl-research-slate.py --date "$DATE" --days 2 --prune 7 \
+            || echo "BUILD_FAILED=1" >> "$GITHUB_ENV"
+
+      - name: Build cheat sheets that have a play list
+        run: |
+          for offset in 0 1; do
+            D=$(date -d "$DATE +$offset day" +%F)
+            if [ -f "nhl_research/atgs_days/$D.txt" ] && [ -f "preview/data/nhl-research-$D.json" ]; then
+              python -m nhl_research.atgs_sheet --date "$D" \
+                || echo "BUILD_FAILED=1" >> "$GITHUB_ENV"
+            else
+              echo "No play list for $D -- cheat sheet left as it is."
+            fi
+          done
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- preview/data preview/nhl-research
+          if git diff --cached --quiet; then
+            echo "Nothing changed since the last build."
+            exit 0
+          fi
+          git commit -q -m "NHL research: scheduled build for $DATE"
+          # Someone may have pushed while this ran. Rebase onto them and try again;
+          # on a clash over a slate file the fresh build wins.
+          for attempt in 1 2 3; do
+            if git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main; then
+              echo "Pushed."
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying."
+            sleep 10
+          done
+          echo "::error::could not push the build"
+          exit 1
+
+      - name: Report a partial build
+        if: env.BUILD_FAILED == '1'
+        run: |
+          echo "::error::at least one day failed to build -- see the build steps above"
+          exit 1

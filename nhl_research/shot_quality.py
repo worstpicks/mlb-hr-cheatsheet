@@ -74,6 +74,10 @@ def _game_shots(game_id: int) -> list[dict]:
         payload = _get(f"{WEB}/gamecenter/{game_id}/play-by-play")
     except Exception:
         return []
+    # Only a finished game is worth keeping. One caught mid-play would be cached
+    # with half its shots and never looked at again.
+    if payload.get("gameState") not in ("OFF", "FINAL"):
+        return []
     out = []
     for play in payload.get("plays") or []:
         kind = play.get("typeDescKey")
@@ -106,16 +110,26 @@ def load_shots(season_id: int, game_ids: list[int], game_type: int = 2,
 
     Also returns goalie rows under ("G", goalie_id, game_id) so the goalie
     component of the rating can read a real high-danger save rate.
+
+    The cache grows rather than being all-or-nothing: only games not already in
+    it are crawled. That is what lets the season in progress use it -- the
+    first version cached a season once and returned that forever, so every game
+    played after the first crawl would have had no shot quality at all.
     """
     path = _cache_path(season_id, game_type)
+    cached: dict = {}
     if path.exists() and not refresh:
         with gzip.open(path, "rt", encoding="utf-8") as fh:
-            raw = json.load(fh)
-        return {tuple(k.split("|")): v for k, v in raw.items()}
+            cached = json.load(fh)
+
+    have = {key.split("|", 1)[1] for key in cached}
+    missing = [g for g in game_ids if str(g) not in have]
+    if not missing:
+        return {tuple(k.split("|")): v for k, v in cached.items()}
 
     shots: list[dict] = []
     with ThreadPoolExecutor(max_workers=8) as pool:
-        for chunk in pool.map(_game_shots, game_ids):
+        for chunk in pool.map(_game_shots, missing):
             shots.extend(chunk)
 
     agg: dict = defaultdict(lambda: {"icf": 0, "iff": 0, "iscf": 0, "ihdcf": 0, "goals": 0})
@@ -142,13 +156,15 @@ def load_shots(season_id: int, game_ids: list[int], game_type: int = 2,
                 if s["high"]:
                     g["hd_ga"] += 1
 
-    out = {f"{pid}|{gid}": row for (pid, gid), row in agg.items()}
-    out.update({f"G{gid}|{game}": row for (gid, game), row in goalies.items()})
-    CACHE.mkdir(parents=True, exist_ok=True)
-    with gzip.open(path, "wt", encoding="utf-8") as fh:
-        json.dump(out, fh, separators=(",", ":"))
-    print(f"[nhl-research] shot quality: {len(shots)} attempts over {len(game_ids)} games")
-    return {tuple(k.split("|")): v for k, v in out.items()}
+    cached.update({f"{pid}|{gid}": row for (pid, gid), row in agg.items()})
+    cached.update({f"G{gid}|{game}": row for (gid, game), row in goalies.items()})
+    if shots:
+        CACHE.mkdir(parents=True, exist_ok=True)
+        with gzip.open(path, "wt", encoding="utf-8") as fh:
+            json.dump(cached, fh, separators=(",", ":"))
+    print(f"[nhl-research] shot quality: {len(shots)} attempts over "
+          f"{len(missing)} new games ({len(game_ids) - len(missing)} already cached)")
+    return {tuple(k.split("|")): v for k, v in cached.items()}
 
 
 def merge_into_rows(rows: list[dict], shots: dict) -> int:

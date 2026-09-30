@@ -170,6 +170,10 @@
         side: "away",
         leagueAvg: null,
         logFilter: { off: DEFAULT_FILTER, def: DEFAULT_FILTER },
+        // days that have a slate, from the manifest; null when it could not be read
+        posted: null,
+        // shown once under the toolbar after the next slate loads
+        notice: "",
         colSetPos: "C",
         cols: {},
     };
@@ -318,9 +322,11 @@
         const [y, m, d] = iso.split("-").map(Number);
         const mon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][m - 1];
-        const seasonStartYear = state.slate ? Math.floor(state.slate.stats_season / 10000) : y;
-        const sameSeason = y === seasonStartYear || y === seasonStartYear + 1;
-        return `${mon} ${d}${sameSeason ? "" : ` '${String(y).slice(-2)}`}`;
+        // A row from another season carries its year. Keyed on the row's own
+        // season rather than the calendar: January to April belongs to the
+        // season that started the autumn before.
+        const other = !!(state.slate && g.season && g.season !== state.slate.season);
+        return `${mon} ${d}${other ? ` '${String(y).slice(-2)}` : ""}`;
     }
     /* Preseason games sit at the top of the log as the most recent hockey
        played. They are marked rather than separated: the sample is only a few
@@ -348,6 +354,41 @@
             weekday: "short", month: "short", day: "numeric",
             hour: "numeric", minute: "2-digit",
         });
+    }
+
+    /* ── which days are posted ─────────────────────────────────────────────────
+       The build writes a manifest of the days it has produced. The page used to
+       assume today's slate existed and showed an empty board when it did not --
+       which is every morning before the day's build, and any day one is missed.
+       Now it opens on today if today is posted, and otherwise on the nearest
+       posted day, saying so. */
+    async function loadPosted() {
+        try {
+            const resp = await fetch("../data/nhl-research-manifest.json", { cache: "no-cache" });
+            if (!resp.ok) throw new Error(String(resp.status));
+            const dates = ((await resp.json()).dates || []).filter(Boolean).sort();
+            state.posted = dates.length ? dates : null;
+        } catch (err) {
+            state.posted = null;        // no manifest: behave as before
+        }
+    }
+
+    // today when it is up; otherwise the latest day before it, else the next after
+    function nearestPosted(target) {
+        const posted = state.posted;
+        if (!posted) return target;
+        if (posted.includes(target)) return target;
+        const before = posted.filter((d) => d < target);
+        return before.length ? before[before.length - 1] : posted[0];
+    }
+
+    // the neighbouring posted day in one direction, or null at the edge
+    function stepPosted(from, dir) {
+        const posted = state.posted;
+        if (!posted) return shiftDate(from, dir);
+        const pool = dir < 0 ? posted.filter((d) => d < from).reverse()
+                             : posted.filter((d) => d > from);
+        return pool.length ? pool[0] : null;
     }
 
     /* ── loading ───────────────────────────────────────────────────────────── */
@@ -405,14 +446,21 @@
             const statsSeason = payload.stats_season;
             const schedSeason = payload.season;
             const label = (id) => `${String(id).slice(2, 4)}–${String(id).slice(-2)}`;
+            const spans = (payload.log_seasons || []).filter(Boolean);
             badge.hidden = false;
-            badge.textContent = statsSeason === schedSeason
-                ? `${label(statsSeason)} season`
-                : `${label(statsSeason)} stats · ${label(schedSeason)} rosters`;
-            badge.title = statsSeason === schedSeason
-                ? "Averages and allowed tables read this season."
-                : "This season has no games played yet, so the numbers are last "
-                  + "season's production on this season's rosters.";
+            if (spans.length > 1 && statsSeason === schedSeason) {
+                badge.textContent = `${label(spans[0])} + ${label(schedSeason)} games`;
+                badge.title = "Each log reaches back into last season alongside this one, and "
+                    + "averages read a player's most recent 25 games wherever they fall.";
+            } else {
+                badge.textContent = statsSeason === schedSeason
+                    ? `${label(statsSeason)} season`
+                    : `${label(statsSeason)} stats · ${label(schedSeason)} rosters`;
+                badge.title = statsSeason === schedSeason
+                    ? "Averages and allowed tables read this season."
+                    : "This season has no games played yet, so the numbers are last "
+                      + "season's production on this season's rosters.";
+            }
         }
 
         const note = el("nrsSeasonNote");
@@ -423,7 +471,12 @@
                 + "green means the player beats what that defense gives up.";
         }
 
-        setStatus(games.length ? "" : `No NHL games on ${prettyDay(date)}.`);
+        if (state.notice) {
+            setStatus(state.notice, "warn");
+            state.notice = "";
+        } else {
+            setStatus(games.length ? "" : `No NHL games on ${prettyDay(date)}.`);
+        }
         renderGames();
         renderMatchup();
     }
@@ -953,9 +1006,27 @@
         };
         input.value = state.date;
         input.addEventListener("change", () => { if (input.value) goto(input.value); });
-        el("nrsPrevDay").addEventListener("click", () => goto(shiftDate(state.date, -1)));
-        el("nrsNextDay").addEventListener("click", () => goto(shiftDate(state.date, 1)));
-        el("nrsToday").addEventListener("click", () => goto(defaultDate()));
+        const step = (dir) => {
+            const next = stepPosted(state.date, dir);
+            if (next) { goto(next); return; }
+            setStatus(dir < 0 ? "That is the earliest slate posted."
+                              : "That is the latest slate posted \u2014 the next one goes up with the daily build.",
+                      "warn");
+        };
+        el("nrsPrevDay").addEventListener("click", () => step(-1));
+        el("nrsNextDay").addEventListener("click", () => step(1));
+        el("nrsToday").addEventListener("click", () => {
+            const want = defaultDate();
+            const got = nearestPosted(want);
+            if (got !== want) {
+                state.notice = `Today's slate is not posted yet \u2014 showing ${prettyDay(got)}.`;
+            }
+            goto(got);
+        });
+        if (state.posted) {
+            input.min = state.posted[0];
+            input.max = state.posted[state.posted.length - 1];
+        }
         el("nrsRefresh").addEventListener("click", () => loadSlate(true));
 
         el("nrsGames").addEventListener("click", (ev) => {
@@ -1034,12 +1105,26 @@
     }
 
     /* ── boot ──────────────────────────────────────────────────────────────── */
-    function init() {
+    async function init() {
         initTheme();
         loadColPrefs();
-        // a ?date= in the URL wins, so a saved link opens on its own slate
-        const params = new URLSearchParams(location.search);
-        state.date = params.get("date") || defaultDate();
+        await loadPosted();
+        // A ?date= in the URL wins, so a saved link opens on its own slate --
+        // unless that day is no longer posted, which is what an old bookmark
+        // turns into once its slate has been cleared away.
+        const asked = new URLSearchParams(location.search).get("date");
+        const want = asked || defaultDate();
+        state.date = nearestPosted(want);
+        if (state.date !== want) {
+            state.notice = asked
+                ? `No NHL research is posted for ${prettyDay(want)} \u2014 showing ${prettyDay(state.date)}.`
+                : `Today's slate is not posted yet \u2014 showing ${prettyDay(state.date)}.`;
+            if (asked) {
+                const url = new URL(location.href);
+                url.searchParams.delete("date");
+                history.replaceState(null, "", url);
+            }
+        }
         initControls();
         initColPicker();
         renderColPanel();

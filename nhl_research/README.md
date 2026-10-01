@@ -43,6 +43,20 @@ With that file the sheet is those plays; without it, every rated forward. The
 build prints any listed play it could not find on the slate, so a name that
 drifted out of a club's lineup is reported rather than silently dropped.
 
+Next to it, `nhl_research/atgs_days/<date>.lineup.txt` carries what the slate
+cannot know: tonight's starting goalies and who is scratched.
+
+    goalie PHI Joseph Woll | expected, back-to-back
+    out NJD Connor Brown | lower body, out at least two games
+
+Without it the opponent's goalie is the club's busiest by ice time, which on
+10/1 picked an injured-reserve goalie for EDM and VAN and the wrong healthy one
+for SEA, CGY and FLA; and the roster feed still lists injured-reserve players.
+Read the morning lineups (RotoWire lineups + injury report, DailyFaceoff
+starting goalies) and break ties with the NHL box scores (who started last
+night decides a back-to-back). A named goalie replaces the guess for every
+skater shooting at him; an `out` player comes off the sheet and is reported.
+
 The first slate of a season pulls and caches the whole year (~90s). Every build
 after that reads `nhl_research/cache/` and takes about ten seconds.
 

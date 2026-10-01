@@ -174,6 +174,8 @@
         posted: null,
         // shown once under the toolbar after the next slate loads
         notice: "",
+        // a player to open on, from a cheat-sheet card's link; cleared once shown
+        focusPid: "",
         colSetPos: "C",
         cols: {},
     };
@@ -602,6 +604,36 @@
             allowedOverviewHtml(allowed, meta) + head +
             `<div class="nrs-player-grid">${cards ||
                 `<p class="nrs-empty">No player data for ${esc(offName)}.</p>`}</div>`;
+        focusPlayer();
+    }
+
+    /* Arriving from a cheat-sheet player card: bring his card into view and ring
+       it for a moment. Once only -- after that the page is the reader's again. */
+    function focusPlayer() {
+        const pid = state.focusPid;
+        if (!pid) return;
+        state.focusPid = "";
+        const find = () => document.querySelector(`.nrs-matchup-card[data-pid="${CSS.escape(pid)}"]`);
+        if (!find()) return;
+        // Logos and headshots above him are still loading, and each one that
+        // lands pushes his card further down. Keep him centred while the page
+        // settles, and let go the moment the reader scrolls for themselves.
+        const center = () => { const c = find(); if (c) c.scrollIntoView({ block: "center" }); };
+        const grow = new ResizeObserver(center);
+        const hands = ["wheel", "touchstart", "keydown", "mousedown"];
+        const stop = () => {
+            grow.disconnect();
+            hands.forEach((e) => removeEventListener(e, stop, true));
+        };
+        hands.forEach((e) => addEventListener(e, stop, { capture: true, passive: true }));
+        requestAnimationFrame(() => {
+            center();
+            grow.observe(document.body);
+            setTimeout(stop, 4000);
+            const card = find();
+            card.classList.add("nrs-focus");
+            setTimeout(() => card.classList.remove("nrs-focus"), 3200);
+        });
     }
 
     // top strip: what this opponent allows per game to each position group
@@ -791,7 +823,8 @@
 
         return (
             `<article class="nrs-matchup-card${noHistory ? " nrs-matchup-card--new" : ""}` +
-            `${isGoalie ? " nrs-matchup-card--goalie" : ""}" data-card="${esc(cardKey)}">` +
+            `${isGoalie ? " nrs-matchup-card--goalie" : ""}" data-card="${esc(cardKey)}"` +
+            ` data-pid="${esc(player.player_id)}">` +
             `<div class="nrs-mc-duo">` +
             `<div class="nrs-mc-panel nrs-mc-panel--player">` +
             `<header class="nrs-mc-panel__head">${photo}<div>` +
@@ -1112,7 +1145,17 @@
         // A ?date= in the URL wins, so a saved link opens on its own slate --
         // unless that day is no longer posted, which is what an old bookmark
         // turns into once its slate has been cleared away.
-        const asked = new URLSearchParams(location.search).get("date");
+        const params = new URLSearchParams(location.search);
+        const asked = params.get("date");
+        // a cheat-sheet card links here with the game, the side and the player
+        if (params.get("game")) state.gameId = params.get("game");
+        if (params.get("side") === "home" || params.get("side") === "away") state.side = params.get("side");
+        if (params.get("player")) state.focusPid = params.get("player");
+        if (params.has("game") || params.has("side") || params.has("player")) {
+            const url = new URL(location.href);
+            ["game", "side", "player"].forEach((k) => url.searchParams.delete(k));
+            history.replaceState(null, "", url);
+        }
         const want = asked || defaultDate();
         state.date = nearestPosted(want);
         if (state.date !== want) {

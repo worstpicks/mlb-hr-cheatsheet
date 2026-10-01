@@ -115,3 +115,9 @@
     vertical-align: middle;
 }
 .nrs-log-pre .nrs-log-week { color: #fde68a; }
+
+/* ── arriving from a cheat-sheet card: ring the player for a moment ── */
+.nrs-matchup-card { transition: box-shadow 400ms ease; }
+.nrs-matchup-card.nrs-focus {
+    box-shadow: 0 0 0 2px #7dd3fc, 0 0 28px rgba(125, 211, 252, 0.35);
+}

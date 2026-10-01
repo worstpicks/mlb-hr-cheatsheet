@@ -16,11 +16,15 @@ Inputs
                                              exported from the research tab's Prop
                                              List. With it, the sheet is those plays;
                                              without it, every rated forward.
+    nhl_research/atgs_days/<date>.lineup.txt optional: tonight's starting goalies and
+                                             scratches, from the morning lineup
+                                             reports. See load_lineup.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import unicodedata
@@ -59,6 +63,47 @@ def norm_name(name: str) -> str:
     return re.sub(r"[^a-z]", "", text.lower())
 
 
+# One line of a lineup file:  goalie CGY Dustin Wolf | confirmed
+#                             out NJD Connor Brown | lower body
+LINEUP_LINE = re.compile(r"^(?P<kind>goalie|out)\s+(?P<team>[A-Z]{2,3})\s+(?P<name>[^|]+?)"
+                         r"\s*(?:\|\s*(?P<note>.*))?$", re.IGNORECASE)
+
+
+def load_lineup(date: str) -> dict:
+    """Tonight's starting goalies and scratches from atgs_days/<date>.lineup.txt.
+
+    The slate cannot know either. Its goalie is the club's busiest by average
+    ice time, which on opening night picked an injured-reserve goalie for two
+    clubs and the wrong healthy one for three more; and the roster feed it reads
+    still lists players on injured reserve. The morning lineup reports (RotoWire,
+    DailyFaceoff) know both, so the day's file carries them:
+
+        goalie PHI Joseph Woll | expected
+        out NJD Connor Brown | lower body, out at least two games
+
+    A named starter replaces the slate's guess for every skater shooting at him;
+    a scratched player comes off the sheet and is reported, not rated.
+    """
+    lineup: dict = {"goalies": {}, "out": {}}
+    path = PLAYS_DIR / f"{date}.lineup.txt"
+    if not path.exists():
+        return lineup
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.split("#", 1)[0].strip()
+        if not line:
+            continue
+        m = LINEUP_LINE.match(line)
+        if not m:
+            print(f"[atgs] WARN {path.name}: cannot read {raw.strip()!r}")
+            continue
+        team, name, note = m["team"].upper(), m["name"].strip(), (m["note"] or "").strip()
+        if m["kind"].lower() == "goalie":
+            lineup["goalies"][team] = {"name": name, "note": note}
+        else:
+            lineup["out"][(norm_name(name), team)] = {"name": name, "team": team, "note": note}
+    return lineup
+
+
 def load_plays(date: str) -> list[dict] | None:
     """The day's plays from atgs_days/<date>.txt, or None when there is no list.
 
@@ -93,25 +138,74 @@ def _allowed_slot(allowed: dict, pos: str, rank: int) -> dict:
     return (node.get("overall") or {}).get("stats") or {}
 
 
-def _starter(skaters: dict) -> dict:
-    """The opponent's likely starter: the goalie with the most ice time.
+def _starter(skaters: dict, named: str = "") -> dict:
+    """The opponent's starter: the one the lineup file names, else the busiest.
 
     The NHL names starters an hour before puck drop, long after this builds, so
-    the busiest goalie is the honest stand-in. Where a club has no goalie rows
-    the matchup component scores neutral rather than inventing an edge.
+    without a lineup file the goalie with the most ice time is the stand-in.
+    Where a club has no goalie rows the matchup component scores neutral rather
+    than inventing an edge.
     """
     goalies = skaters.get("G") or []
+    if named:
+        want = norm_name(named)
+        for goalie in goalies:
+            if norm_name(goalie.get("name", "")) == want:
+                return goalie
     return goalies[0] if goalies else {}
 
 
-def collect(slate: dict) -> list[dict]:
-    """One row per rateable skater on the slate, with every model input on it."""
+CARD_STATS = ("g", "sog", "iscf", "ihdcf")
+
+
+def _league_slot(league: dict, pos: str, rank: int) -> dict:
+    """What an average club gives up to this line slot -- the matchup's yardstick."""
+    node = league.get(pos) or {}
+    return (node.get("ranks") or {}).get(str(rank)) or node.get("overall") or {}
+
+
+def _card_log(log: list, n: int = 10) -> list[dict]:
+    """His last `n` games, trimmed to what the card's table shows."""
+    out = []
+    for g in log[-n:]:
+        st = g.get("stats") or {}
+        out.append({
+            "d": g.get("date"), "ha": g.get("ha"), "opp": g.get("opp"), "toi": g.get("toi"),
+            "g": int(st.get("g") or 0), "a": int(st.get("a") or 0),
+            "sog": int(st.get("sog") or 0), "iscf": int(st.get("iscf") or 0),
+            **({"pre": True} if g.get("pre") else {}),
+        })
+    return out
+
+
+def goal_chance(rate: float, mult: float) -> float:
+    """P(at least one goal) as a percent: his rate, moved by the matchup.
+
+    Goals arrive as rare independent events, which is what the Poisson tail
+    describes -- a 0.6-goal scorer is not 60% to score, he is 45%. The matchup
+    multiplier is clamped: 25 games of one line slot is thin enough that an
+    unclamped ratio would hand a 3x to whoever drew one bad defensive night.
+    """
+    lam = max(rate, 0.0) * max(0.72, min(1.38, mult))
+    return round(100 * (1 - math.exp(-lam)), 1)
+
+
+def collect(slate: dict, starters: dict | None = None) -> list[dict]:
+    """One row per rateable skater on the slate, with every model input on it.
+
+    `starters` maps a club to the goalie it is starting tonight (load_lineup).
+    """
     rows: list[dict] = []
+    league = slate.get("league") or {}
+    starters = starters or {}
     for game in slate.get("games") or []:
         for side, other in (("away", "home"), ("home", "away")):
             team, opp = game[side], game[other]
             allowed = game.get(f"{other}_allowed") or {}
-            goalie = _starter(game.get(f"{other}_skaters") or {})
+            named = starters.get(opp) or {}
+            goalie = _starter(game.get(f"{other}_skaters") or {}, named.get("name", ""))
+            # did the lineup file pick him, or is he the slate's guess?
+            g_set = bool(named) and norm_name(goalie.get("name", "")) == norm_name(named["name"])
             g_stats = goalie.get("stats") or {}
             hd_sa = _stat(g_stats, "hd_sa")
             for pos in SCORING_POS:
@@ -156,7 +250,25 @@ def collect(slate: dict) -> list[dict]:
                                     if _stat(g_stats, "sa") else 0.0,
                         "g_hd_sv_pct": round(_stat(g_stats, "hd_sv") / hd_sa, 4) if hd_sa else 0.0,
                         "g_ga": round(_stat(g_stats, "ga"), 2),
+                        "g_src": "lineup" if g_set else "model",
+                        "g_note": named.get("note", "") if g_set else "",
                         "lines": player.get("lines") or {},
+                        # ── for the player card ──
+                        "game_id": game.get("id"),
+                        "side": side,
+                        "kick": game.get("kickoff", ""),
+                        "seasons": player.get("seasons") or [],
+                        "a": round(_stat(stats, "a"), 3),
+                        "p": round(_stat(stats, "p"), 3),
+                        # hit rates over his window: the flags average to a share
+                        "hit": {k: round(100 * _stat(stats, k)) for k in
+                                ("g_1", "pts_1", "sog_2", "sog_3", "sog_4")},
+                        "slot": {k: round(_stat(slot, k), 3) for k in CARD_STATS},
+                        "lg_slot": {k: round(_stat(_league_slot(league, pos, rank), k), 3)
+                                    for k in CARD_STATS},
+                        "g_sa": round(_stat(g_stats, "sa"), 1),
+                        "g_gp": int(goalie.get("gp") or 0),
+                        "log10": _card_log(log),
                     })
     return rows
 
@@ -184,12 +296,51 @@ def rate(rows: list[dict], slate_scales: dict) -> list[dict]:
             tags.append("hot")
         r["tags"] = tags
         r["why"] = why(r)
+        lg_g = r["lg_slot"].get("g") or 0
+        r["mult"] = round(r["opp_g"] / lg_g, 3) if lg_g and r["opp_g"] else 1.0
+        r["chance"] = goal_chance(r["g"], r["mult"])
+        # where he sits among the league's forwards, for "top 12%" style reads
+        r["pctl"] = {k: round(100 * scales[k].of(r[k]))
+                     for k in ("sog", "icf", "iscf", "ihdcf", "g", "toi", "pp_p") if k in scales}
+        r["reasons"] = reasons(r)
     return rows
 
 
 def pct3(value: float) -> str:
     """Save percentage as hockey writes it: .893, not 0.893."""
     return f"{value:.3f}".lstrip("0") if value < 1 else f"{value:.3f}"
+
+
+def reasons(r: dict) -> list[dict]:
+    """The five components, each with its points and the numbers behind them."""
+    pc = r.get("pctl") or {}
+
+    def top(k):
+        v = pc.get(k)
+        return f"top {max(1, 100 - v)}% of forwards" if v is not None and v >= 50 else (
+            f"bottom {max(1, v)}%" if v is not None else "")
+
+    lg = r.get("lg_slot") or {}
+    diff = (r["mult"] - 1) * 100 if r.get("mult") else 0
+    lane = ("an average club" if abs(diff) < 4 else
+            f"{abs(diff):.0f}% {'more' if diff > 0 else 'less'} than an average club")
+    goalie = (f"{r['g_name']}: {pct3(r['g_sv_pct'])} save rate, {pct3(r['g_hd_sv_pct'])} on "
+              f"high-danger shots, {r['g_ga']:.2f} goals against a game"
+              if r.get("g_name") and r.get("g_sv_pct") else "No starter to read yet -- scored as neutral")
+    return [
+        {"part": "volume", "label": "Shot volume",
+         "text": f"{r['sog']:.1f} shots and {r['icf']:.1f} attempts a game \u2014 {top('sog')}"},
+        {"part": "quality", "label": "Shot quality",
+         "text": f"{r['iscf']:.1f} scoring chances a game, {r['ihdcf']:.1f} from the inner slot, "
+                 f"{r['iff']:.1f} unblocked \u2014 {top('iscf')}"},
+        {"part": "defense", "label": "Defensive lane",
+         "text": f"{r['opp']} gives up {r['opp_g']:.2f} goals and {r['opp_sog']:.1f} shots a game to "
+                 f"{r['role']}s \u2014 {lane} (league {lg.get('g', 0):.2f})"},
+        {"part": "goalie", "label": "Goalie", "text": goalie},
+        {"part": "form", "label": "Form & role",
+         "text": f"{int(r['g5'])} goals in his last 5 \u00b7 {r['toi']:.1f} minutes a night \u00b7 "
+                 f"{r['pp_p']:.2f} power-play points a game"},
+    ]
 
 
 def why(r: dict) -> str:
@@ -221,17 +372,33 @@ def build_sheet(date: str) -> dict:
             f"No slate for {date}. Run: python fetch-nhl-research-slate.py --date {date}")
     slate = json.loads(path.read_text(encoding="utf-8"))
 
-    rows = rate(collect(slate), slate.get("scales") or {})
+    lineup = load_lineup(date)
+    for team, named in lineup["goalies"].items():
+        clubs = [g for g in slate.get("games") or [] if team in (g["away"], g["home"])]
+        side = clubs and ("away" if clubs[0]["away"] == team else "home")
+        names = [norm_name(p.get("name", "")) for p in
+                 ((clubs[0].get(f"{side}_skaters") or {}).get("G") or [])] if clubs else []
+        if norm_name(named["name"]) not in names:
+            print(f"[atgs] WARN starter {named['name']} ({team}) is not in the slate's "
+                  f"goalies -- {team}'s opponents are scored against its busiest goalie")
+    rows = rate(collect(slate, lineup["goalies"]), slate.get("scales") or {})
+    out = lineup["out"]
+    rows = [r for r in rows if (norm_name(r["name"]), r["team"]) not in out]
 
     # With a play list the sheet is exactly those plays. Scoring happens first,
     # against league-wide scales, so narrowing the board does not move a score.
     plays = load_plays(date)
     unmatched: list[dict] = []
+    scratched: list[dict] = []
     if plays is not None:
         index = {(norm_name(r["name"]), r["team"]): r for r in rows}
         listed = []
         for play in plays:
-            row = index.get((norm_name(play["name"]), play["team"]))
+            key = (norm_name(play["name"]), play["team"])
+            if key in out:
+                scratched.append({**play, "note": out[key]["note"]})
+                continue
+            row = index.get(key)
             if row is None:
                 unmatched.append(play)
                 continue
@@ -239,7 +406,8 @@ def build_sheet(date: str) -> dict:
             row["listed_role"] = play["role"]
             # what settles it on the page: a 0.5 line needs one goal, 1.5 needs two
             row["line"] = play["line"]
-            row["side"] = play["side"]
+            # "ou", not "side": "side" is the home/away the card's research link needs
+            row["ou"] = play["side"]
             listed.append(row)
         rows = listed
     by_id = {r["id"]: r for r in rows}
@@ -292,6 +460,7 @@ def build_sheet(date: str) -> dict:
         "by_id": by_id,
         "listed": plays is not None,
         "unmatched": unmatched,
+        "scratched": scratched,
     }
 
 
@@ -380,6 +549,9 @@ def main() -> None:
         print(f"[atgs] WARN {len(sheet['unmatched'])} listed play(s) not on the slate:")
         for play in sheet["unmatched"]:
             print(f"[atgs]   {play['name']} ({play['team']} {play['role']}) -- not in the club's lineup")
+    for play in sheet["scratched"]:
+        print(f"[atgs] out: {play['name']} ({play['team']} {play['role']})"
+              f"{' -- ' + play['note'] if play['note'] else ''}")
     moved = [r for r in rows if r.get("listed_role") and r["listed_role"] != r["role"]]
     for r in moved:
         print(f"[atgs] note {r['name']}: listed as {r['listed_role']}, slate has him at {r['role']}")

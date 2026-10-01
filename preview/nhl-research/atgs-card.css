@@ -1,0 +1,85 @@
+/* NHL player card — the football sheet's card (../nfl-research/atd-card.css)
+ * with hockey's accents. The dialog, tiles, tabs and tables all come from that
+ * file, so a layout fix on either sheet's card lands on both; this only moves
+ * the gold accents to ice and adds the few hockey-only pieces. */
+
+/* Names are buttons that open the card: strip the button chrome (at zero
+   specificity, so the sheet's own name sizes still win) and let an ice
+   underline say "tap me" without shouting. */
+:where(button.sheet-play__name) {
+    background: none; border: 0; padding: 0; margin: 0;
+    font: inherit; line-height: inherit; letter-spacing: inherit; text-align: left;
+}
+button.sheet-play__name {
+    color: var(--wpz-color-text);
+    text-decoration: underline dotted rgba(125, 211, 252, 0.55);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
+    cursor: pointer;
+}
+button.sheet-play__name:hover { color: #7dd3fc; text-decoration-style: solid; }
+button.sheet-play__name:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 2px; border-radius: 3px; }
+
+/* ── the card, in ice ── */
+.atgs-card .nrs-profile__inner {
+    border-color: rgba(125, 211, 252, 0.3);
+    background: linear-gradient(160deg, rgba(8, 20, 34, 0.98) 0%, rgba(10, 17, 31, 0.98) 100%);
+}
+.atgs-card .nrs-profile__photo { border-color: rgba(125, 211, 252, 0.45); }
+.atgs-card .nrs-pf-tabs button.is-active { color: #7dd3fc; border-bottom-color: #7dd3fc; }
+.atgs-card .nrs-bd-proj b { color: #7dd3fc; }
+.atgs-card .nrs-profile__board {
+    border-color: rgba(125, 211, 252, 0.45);
+    background: rgba(56, 189, 248, 0.12);
+    color: #7dd3fc;
+}
+.atgs-card .nrs-profile__board:hover { background: rgba(56, 189, 248, 0.22); }
+.atgs-card .nrs-profile__board--quiet { background: none; color: var(--nrs-muted); border-color: rgba(148, 163, 184, 0.3); }
+
+/* Numbers in the same DIN face as the sheet's score tiles. */
+.atgs-card .nrs-pf-value,
+.atgs-card .nrs-bd-table td,
+.atgs-card .nrs-mx-chip b,
+.atgs-card .nrs-bd-lines b {
+    font-family: var(--num-font, "Bahnschrift", "DIN Alternate", system-ui, sans-serif);
+    font-stretch: 90%;
+    font-variant-numeric: tabular-nums;
+}
+.atgs-card .nrs-pf-value { font-size: 1.65rem; font-weight: 700; letter-spacing: -0.01em; }
+
+/* header: slot chip in its position colour, and the rating tile beside it */
+.atgs-card .nrs-profile__name { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.atgs-pos { margin-left: 2px; }
+.atgs-pos--C { background: rgba(56, 189, 248, 0.2); color: #bae6fd; }
+.atgs-pos--L { background: rgba(167, 139, 250, 0.22); color: #ddd6fe; }
+.atgs-pos--R { background: rgba(251, 146, 60, 0.2); color: #fed7aa; }
+.atgs-pos--D { background: rgba(74, 222, 128, 0.18); color: #bbf7d0; }
+.atgs-card-ovr { box-shadow: none; }
+
+/* The Read: the points column holds its width so the reasons line up */
+.atgs-card .nrs-why li > span:nth-child(2) {
+    min-width: 3.4em;
+    font-family: var(--num-font, "Bahnschrift", system-ui, sans-serif);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* last games */
+.atgs-pre {
+    display: inline-block; padding: 0 4px; border-radius: 4px;
+    font-size: 0.56rem; font-weight: 800; letter-spacing: 0.06em; vertical-align: middle;
+    background: rgba(250, 204, 21, 0.2); color: #fde68a;
+}
+.atgs-goal { font-weight: 900; }
+.atgs-pf-note { font-size: 0.74rem; color: var(--nrs-muted); margin-top: 10px; line-height: 1.55; }
+
+html.theme-light button.sheet-play__name:hover { color: #0369a1; }
+html.theme-light .atgs-card .nrs-pf-tabs button.is-active { color: #0369a1; border-bottom-color: #0369a1; }
+html.theme-light .atgs-card .nrs-profile__board { color: #0369a1; }
+
+/* The shared tab strip is a scroll container (so it can swipe on a narrow
+   phone), and Windows draws a classic scrollbar under it even when the three
+   tabs fit with room to spare. Hide the bar; the strip still scrolls. */
+.atgs-card .nrs-pf-tabs { scrollbar-width: none; -ms-overflow-style: none; }
+.atgs-card .nrs-pf-tabs::-webkit-scrollbar { display: none; }
+html.theme-light .atgs-card .nrs-profile__inner { border-color: rgba(3, 105, 161, 0.3); }

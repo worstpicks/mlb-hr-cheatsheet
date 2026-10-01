@@ -18,11 +18,15 @@ which the browser keeps serving an old `index.html` pinned to an old `?v=` scrip
 
 ### It builds itself
 
-`.github/workflows/nhl-research.yml` runs three times a day (about 5:30 am, 11 am
-and 5 pm Eastern) and on demand from the Actions tab. Each run builds **today and
-tomorrow**, so the next day's slate is already posted when the date rolls over at
-midnight and one failed run never leaves the page empty. It commits only when a
-slate actually changed, prunes slates more than a week old, and keeps
+`.github/workflows/nhl-research.yml` runs every two hours (at :47 past) and on
+demand from the Actions tab. Each run builds **today and the three days ahead**,
+so the days ahead are always posted and today's slate picks up last night's
+games once they are final. GitHub's scheduler is best-effort -- the first week it
+started runs hours late and dropped one outright, leaving today without last
+night's games -- so the schedule is deliberately dense: a late run is covered by
+the next one. It commits only when a slate actually changed (scores are kept out
+of the slate, so a run during the games has nothing to commit), prunes slates
+more than a week old, and keeps
 `preview/data/nhl-research-manifest.json` -- the list of posted days the page
 steers by. If today is somehow not posted, the page opens on the nearest day that
 is and says so, rather than showing an empty board.

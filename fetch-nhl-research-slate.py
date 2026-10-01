@@ -3,11 +3,11 @@
 
 Usage:
     python fetch-nhl-research-slate.py --date today
-    python fetch-nhl-research-slate.py --date 2026-10-04 --days 2 --prune 7
+    python fetch-nhl-research-slate.py --date 2026-10-04 --days 4 --prune 7
 
---days builds that date and the ones after it. The scheduled build uses 2, so
-tomorrow's slate is already posted when the date rolls over at midnight and a
-single failed run never leaves the page empty.
+--days builds that date and the ones after it. The scheduled build uses 4: today
+and the three days ahead are always posted, so the page can look ahead and a
+failed run never leaves the next day empty.
 """
 from __future__ import annotations
 

@@ -165,7 +165,10 @@ def build_slate(date: str) -> dict:
     for game in games:
         game_props = props.get(f"{game['away_name']} @ {game['home_name']}", {})
         slate_games.append({
-            **game,
+            # The research is the pre-game read; nothing on the page shows the
+            # score. Left in, a build that ran during the games would commit a
+            # fresh slate for every goal -- and then freeze on "LIVE 2-0".
+            **{k: v for k, v in game.items() if k not in LIVE_FIELDS},
             "away_record": lg["records"].get(game["away"], ""),
             "home_record": lg["records"].get(game["home"], ""),
             "away_skaters": _with_lines(players.get(game["away"], empty), game_props),
@@ -193,6 +196,9 @@ def build_slate(date: str) -> dict:
         "scales": lg["scales"],
         "games": slate_games,
     }
+
+
+LIVE_FIELDS = ("status", "away_score", "home_score")
 
 
 def _with_lines(skaters: dict, game_props: dict) -> dict:

@@ -1,19 +1,22 @@
 name: NHL research slate
 
 # The NHL research tab only shows days that have been built. Built by hand, it
-# went blank the first morning nobody ran it. This builds today and tomorrow
-# (Eastern) on a schedule, so the page is already posted when the date rolls
-# over at midnight and one failed run never leaves it empty.
+# went blank the first morning nobody ran it. This builds today and the next
+# three days (Eastern) on a schedule, so the days ahead are always posted and
+# today's slate picks up last night's games as soon as they are final.
 #
 # It also rebuilds the cheat sheet for either day when that day's play list is
 # in nhl_research/atgs_days/ -- commit the list and the sheet builds itself.
 
 on:
   schedule:
-    # GitHub cron is UTC. Eastern is UTC-4 in summer, UTC-5 in winter.
-    - cron: "30 9 * * *"    # ~5:30 am ET: last night's West Coast finals are in
-    - cron: "0 15 * * *"    # ~11 am ET: morning roster moves; retries a failed run
-    - cron: "0 21 * * *"    # ~5 pm ET: last look before puck drop
+    # Every two hours, at :47. GitHub's scheduler is best-effort: in the first
+    # week, runs set for 11 am and 5 pm ET started at 4 pm and 8 pm, and the
+    # 5:30 am run never fired at all, so today's slate sat without last night's
+    # games. The top of the hour is when it is busiest, hence the odd minute;
+    # running this often means a late or dropped run is covered by the next.
+    # A run that finds nothing new commits nothing, so most of these are free.
+    - cron: "47 */2 * * *"
   workflow_dispatch:
     inputs:
       date:
@@ -69,18 +72,19 @@ jobs:
           fi
           echo "DATE=$DATE" >> "$GITHUB_ENV"
           echo "NHL_TODAY=$TODAY" >> "$GITHUB_ENV"
-          echo "Building $DATE and the day after (today in Eastern is $TODAY)"
+          echo "DAYS=4" >> "$GITHUB_ENV"
+          echo "Building $DATE and the three days after (today in Eastern is $TODAY)"
 
       - name: Build the research slates
         run: |
           # Whatever did build still gets published; the job is failed at the
           # end so a bad day is visible instead of silently skipped.
-          python fetch-nhl-research-slate.py --date "$DATE" --days 2 --prune 7 \
+          python fetch-nhl-research-slate.py --date "$DATE" --days "$DAYS" --prune 7 \
             || echo "BUILD_FAILED=1" >> "$GITHUB_ENV"
 
       - name: Build cheat sheets that have a play list
         run: |
-          for offset in 0 1; do
+          for offset in $(seq 0 $((DAYS - 1))); do
             D=$(date -d "$DATE +$offset day" +%F)
             if [ -f "nhl_research/atgs_days/$D.txt" ] && [ -f "preview/data/nhl-research-$D.json" ]; then
               python -m nhl_research.atgs_sheet --date "$D" \

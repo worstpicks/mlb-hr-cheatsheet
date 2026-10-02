@@ -56,6 +56,13 @@ Read the morning lineups (RotoWire lineups + injury report, DailyFaceoff
 starting goalies) and break ties with the NHL box scores (who started last
 night decides a back-to-back). A named goalie replaces the guess for every
 skater shooting at him; an `out` player comes off the sheet and is reported.
+A named goalie the slate has no games for (a third goalie up on a back-to-back)
+is scored as neutral under his own name. For a healthy player missing from the
+projected lines, `doubt WSH Ivan Miroshnichenko | Projected scratch -- why`
+keeps the play (a bet on a player who sits is voided, not lost) and shows the
+first clause as a warning chip and the whole note on his card. Check every
+listed player against DailyFaceoff's line combinations, not just the injury
+report: a healthy scratch is on neither injury list.
 
 The first slate of a season pulls and caches the whole year (~90s). Every build
 after that reads `nhl_research/cache/` and takes about ten seconds.

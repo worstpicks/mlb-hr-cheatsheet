@@ -126,7 +126,11 @@
                    '<td class="' + cls + '">' + (edge == null ? "—" : (edge >= 0 ? "+" : "−") + Math.abs(Math.round(edge * 100)) + "%") + "</td></tr>";
         }).join("");
         var lane = r.mult == null ? ["No read", ""] : r.mult >= 1.08 ? ["Soft lane", "is-soft"] : r.mult <= 0.92 ? ["Tough lane", "is-tough"] : ["Even lane", ""];
-        var goalie = r.g_name
+        var goalie = r.g_name && !r.g_sv_pct
+            ? '<h4 class="nrs-pf-h">In net: ' + esc(r.g_name) + "</h4>" +
+              '<p class="atgs-pf-note">No NHL games in his sample, so the goalie component is scored as neutral.' +
+              (r.g_note ? " Tonight\u2019s projected starter (" + esc(r.g_note) + ")." : "") + "</p>"
+            : r.g_name
             ? '<h4 class="nrs-pf-h">In net: ' + esc(r.g_name) + "</h4>" +
               '<div class="nrs-mx-chips nrs-pf-chips">' +
                 '<span class="nrs-mx-chip"><b>' + pct3(r.g_sv_pct) + "</b> save rate</span>" +
@@ -217,6 +221,7 @@
 
         var tabs = [["read", "The Read"], ["matchup", "Matchup"], ["log", "Last games"]];
         $("atgsCardBody").innerHTML =
+            (r.doubt_note ? '<p class="atd-card-inj">' + esc(r.doubt_note) + "</p>" : "") +
             (r.small ? '<p class="atd-card-inj">Only ' + r.games + " game" + (r.games === 1 ? "" : "s") +
                 " of data &mdash; read these numbers as a placeholder, not a rating.</p>" : "") +
             heroHtml(r) +

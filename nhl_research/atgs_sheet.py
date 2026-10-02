@@ -65,7 +65,8 @@ def norm_name(name: str) -> str:
 
 # One line of a lineup file:  goalie CGY Dustin Wolf | confirmed
 #                             out NJD Connor Brown | lower body
-LINEUP_LINE = re.compile(r"^(?P<kind>goalie|out)\s+(?P<team>[A-Z]{2,3})\s+(?P<name>[^|]+?)"
+#                             doubt WSH Ivan Miroshnichenko | Projected scratch -- why
+LINEUP_LINE = re.compile(r"^(?P<kind>goalie|out|doubt)\s+(?P<team>[A-Z]{2,3})\s+(?P<name>[^|]+?)"
                          r"\s*(?:\|\s*(?P<note>.*))?$", re.IGNORECASE)
 
 
@@ -82,9 +83,14 @@ def load_lineup(date: str) -> dict:
         out NJD Connor Brown | lower body, out at least two games
 
     A named starter replaces the slate's guess for every skater shooting at him;
-    a scratched player comes off the sheet and is reported, not rated.
+    a scratched player comes off the sheet and is reported, not rated. `doubt`
+    is for the in-between -- healthy, but not in the projected lineup: the play
+    stays (a bet on a player who does not dress is voided, not lost) and carries
+    the note's first clause as its warning chip, and the whole note on his card.
+
+        doubt WSH Ivan Miroshnichenko | Projected scratch -- not in the 12 forwards
     """
-    lineup: dict = {"goalies": {}, "out": {}}
+    lineup: dict = {"goalies": {}, "out": {}, "doubt": {}}
     path = PLAYS_DIR / f"{date}.lineup.txt"
     if not path.exists():
         return lineup
@@ -97,10 +103,11 @@ def load_lineup(date: str) -> dict:
             print(f"[atgs] WARN {path.name}: cannot read {raw.strip()!r}")
             continue
         team, name, note = m["team"].upper(), m["name"].strip(), (m["note"] or "").strip()
-        if m["kind"].lower() == "goalie":
+        kind = m["kind"].lower()
+        if kind == "goalie":
             lineup["goalies"][team] = {"name": name, "note": note}
         else:
-            lineup["out"][(norm_name(name), team)] = {"name": name, "team": team, "note": note}
+            lineup[kind][(norm_name(name), team)] = {"name": name, "team": team, "note": note}
     return lineup
 
 
@@ -152,6 +159,11 @@ def _starter(skaters: dict, named: str = "") -> dict:
         for goalie in goalies:
             if norm_name(goalie.get("name", "")) == want:
                 return goalie
+        # A starter the slate has no games for -- a third goalie up on a
+        # back-to-back. Scored as neutral under his own name; falling back to
+        # the busiest goalie would rate tonight's shooters against a goalie
+        # who is not playing.
+        return {"name": named, "stats": {}}
     return goalies[0] if goalies else {}
 
 
@@ -326,7 +338,9 @@ def reasons(r: dict) -> list[dict]:
             f"{abs(diff):.0f}% {'more' if diff > 0 else 'less'} than an average club")
     goalie = (f"{r['g_name']}: {pct3(r['g_sv_pct'])} save rate, {pct3(r['g_hd_sv_pct'])} on "
               f"high-danger shots, {r['g_ga']:.2f} goals against a game"
-              if r.get("g_name") and r.get("g_sv_pct") else "No starter to read yet -- scored as neutral")
+              if r.get("g_name") and r.get("g_sv_pct") else
+              f"{r['g_name']} has no NHL games in the sample -- scored as neutral" if r.get("g_name")
+              else "No starter to read yet -- scored as neutral")
     return [
         {"part": "volume", "label": "Shot volume",
          "text": f"{r['sog']:.1f} shots and {r['icf']:.1f} attempts a game \u2014 {top('sog')}"},
@@ -379,11 +393,16 @@ def build_sheet(date: str) -> dict:
         names = [norm_name(p.get("name", "")) for p in
                  ((clubs[0].get(f"{side}_skaters") or {}).get("G") or [])] if clubs else []
         if norm_name(named["name"]) not in names:
-            print(f"[atgs] WARN starter {named['name']} ({team}) is not in the slate's "
-                  f"goalies -- {team}'s opponents are scored against its busiest goalie")
+            print(f"[atgs] note: starter {named['name']} ({team}) has no games in the slate -- "
+                  f"the goalie component is scored as neutral for {team}'s opponents")
     rows = rate(collect(slate, lineup["goalies"]), slate.get("scales") or {})
     out = lineup["out"]
     rows = [r for r in rows if (norm_name(r["name"]), r["team"]) not in out]
+    for r in rows:
+        doubt = lineup["doubt"].get((norm_name(r["name"]), r["team"]))
+        if doubt:
+            r["warning"] = doubt["note"].split(" -- ")[0] or "Lineup in doubt"
+            r["doubt_note"] = doubt["note"].replace(" -- ", ": ", 1)
 
     # With a play list the sheet is exactly those plays. Scoring happens first,
     # against league-wide scales, so narrowing the board does not move a score.
@@ -549,6 +568,9 @@ def main() -> None:
         print(f"[atgs] WARN {len(sheet['unmatched'])} listed play(s) not on the slate:")
         for play in sheet["unmatched"]:
             print(f"[atgs]   {play['name']} ({play['team']} {play['role']}) -- not in the club's lineup")
+    for r in rows:
+        if r.get("doubt_note"):
+            print(f"[atgs] doubt: {r['name']} ({r['team']} {r['role']}) -- {r['doubt_note']}")
     for play in sheet["scratched"]:
         print(f"[atgs] out: {play['name']} ({play['team']} {play['role']})"
               f"{' -- ' + play['note'] if play['note'] else ''}")

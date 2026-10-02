@@ -1,0 +1,27 @@
+# Friday 10/2 -- starting goalies and scratches, read the morning of the game
+# (RotoWire lineups + injury report, DailyFaceoff starting goalies and line
+# combinations, NHL box scores).
+
+# NYR is on a back-to-back: Shesterkin started 9/29 and 10/1, Garand backed up
+# last night, and Korpisalo is on IR. RotoWire has Garand; DailyFaceoff still
+# shows Shesterkin, unconfirmed. Garand has no games in the slate, so the goalie
+# component reads neutral for the DET plays.
+goalie NYR Dylan Garand | expected, back-to-back
+goalie DET John Gibson | expected
+goalie WSH Logan Thompson | confirmed
+# Bussi started CAR's opener; both sites have Kochetkov tonight.
+goalie CAR Pyotr Kochetkov | expected
+goalie BOS Jeremy Swayman | expected
+# Hellebuyck is suspended.
+goalie WPG Stuart Skinner | expected
+goalie STL Joel Hofer | expected
+goalie DAL Jake Oettinger | expected
+goalie ANA Lukas Dostal | expected
+goalie VGK Carter Hart | expected
+
+# Listed plays that will not dress.
+out DET Dylan Larkin | upper body, out (RotoWire); no games since April
+out DAL Matt Duchene | long-term injured reserve (lower body)
+
+# Healthy, but not in the projected lineup.
+doubt WSH Ivan Miroshnichenko | Projected scratch -- DailyFaceoff's WSH lines dress 12 of 14 forwards and leave him out with Ethen Frank

@@ -128,7 +128,10 @@ def score_row(r: dict, s: dict) -> dict:
 
 def warnings_for(r: dict, parts: dict) -> str:
     """The one thing most fighting this profile, or "" when nothing is."""
-    worst = min(parts.items(), key=lambda kv: kv[1] / WEIGHTS[kv[0]])
+    # A goalie with no sample is scored neutral, not read -- calling him "too
+    # hot" would invent a fact about a goalie the model has never seen.
+    readable = {k: v for k, v in parts.items() if k != "goalie" or r.get("g_sv_pct")}
+    worst = min(readable.items(), key=lambda kv: kv[1] / WEIGHTS[kv[0]])
     name, points = worst
     share = points / WEIGHTS[name]
     if share >= 0.62:

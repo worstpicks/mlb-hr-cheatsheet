@@ -129,11 +129,15 @@ def _game_rows(entry: tuple) -> list[dict]:
                 })
         for p in block.get("goalies") or []:
             stats = _zero(GOALIE_KEYS)
-            saves = float(p.get("saves") or 0)
+            shots = float(p.get("shotsAgainst") or 0)
+            goals = float(p.get("goalsAgainst") or 0)
+            # A few preseason box scores leave "saves" out; it is shots less goals.
+            saves = (float(p["saves"]) if p.get("saves") is not None
+                     else max(shots - goals, 0.0))
             stats.update({
                 "sv": saves,
-                "sa": float(p.get("shotsAgainst") or 0),
-                "ga": float(p.get("goalsAgainst") or 0),
+                "sa": shots,
+                "ga": goals,
                 "toi": _toi_seconds(p.get("toi")),
                 "start": 1.0,
                 "win": 1.0 if p.get("decision") == "W" else 0.0,
@@ -154,6 +158,25 @@ def _game_rows(entry: tuple) -> list[dict]:
     return rows
 
 
+def _fill_saves(goalies: list) -> list:
+    """Backfill saves the box score left out, in rows cached before the fix.
+
+    11 of 169 goalie games this preseason came back with shots and goals but no
+    saves, and were read as zero saves: Kochetkov's 23 saves on 28 shots counted
+    as 0, which put him at .792 instead of .884 and handed every shooter facing
+    him a goalie edge that was not there. Zero saves with fewer goals than shots
+    cannot happen, so those rows are repaired as shots less goals.
+    """
+    for row in goalies:
+        st = row["stats"]
+        if st.get("sa") and not st.get("sv") and st.get("ga", 0) < st["sa"]:
+            st["sv"] = st["sa"] - st.get("ga", 0)
+            st["sv_pct"] = st["sv"] / st["sa"]
+            for n in (25, 30, 35):
+                st[f"sv_{n}"] = float(st["sv"] >= n)
+    return goalies
+
+
 def fetch_preseason(start_date: str, through_date: str, season_id: int = 20262027,
                     regular_start: str | None = None) -> tuple[list, list]:
     """(skater_rows, goalie_rows) for every finished preseason game.
@@ -170,7 +193,7 @@ def fetch_preseason(start_date: str, through_date: str, season_id: int = 2026202
     if over and path.exists():
         with gzip.open(path, "rt", encoding="utf-8") as fh:
             saved = json.load(fh)
-        return saved["skaters"], saved["goalies"]
+        return saved["skaters"], _fill_saves(saved["goalies"])
     if regular_start:
         through_date = min(through_date, regular_start)
 

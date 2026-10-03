@@ -114,8 +114,11 @@ RANK_STAT = "toi"
 
 # How many line ranks the allowed-to-position breakdown keeps.
 MAX_RANKS = {"C": 4, "L": 4, "R": 4, "D": 6, "G": 1}
-# How many players per position each team panel shows.
-ROSTER_CAP = {"C": 4, "L": 4, "R": 4, "D": 6, "G": 2}
+# How many players per position each team panel shows. Three goalies, not two:
+# the roster feed keeps injured-reserve goalies, and on 10/3 Andersen (IR) and
+# Demko (IR) pushed tonight's actual starters, Jarry and Merilainen, off a
+# two-goalie panel -- leaving the cheat sheet nothing to read them by.
+ROSTER_CAP = {"C": 4, "L": 4, "R": 4, "D": 6, "G": 3}
 
 # Averages and allowed-tables read each player's / team's last this-many games.
 STATS_WINDOW = 25

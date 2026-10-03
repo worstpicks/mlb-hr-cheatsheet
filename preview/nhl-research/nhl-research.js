@@ -597,7 +597,8 @@
             `<header class="nrs-lineup-head">` +
             (offLogo ? `<img src="${offLogo}" alt="" loading="lazy" onerror="this.remove()">` : "") +
             `<div><h3>${esc(offAbbr)} Lineup</h3>` +
-            `<span>${count} players ranked by ice time · C1–4 · LW1–4 · RW1–4 · D1–6 · G1–2</span></div>` +
+            `<span>${count} players ranked by ice time · C1–4 · LW1–4 · RW1–4 · D1–6 · ` +
+            `G1–${(skaters.G || []).length || 2}</span></div>` +
             `</header>`;
 
         el("nrsPosSections").innerHTML =

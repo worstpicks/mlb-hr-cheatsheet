@@ -80,8 +80,9 @@
         var hit = r.hit || {};
         return '<div class="nrs-pf-hero">' +
             tile("Rating", Math.floor(r.score), esc(BAND_LABEL[r.band] || r.band_label || ""), "atgs-pf-ovr " + bandClass(r.band)) +
-            tile("Goal chance", r.small ? "—" : num(r.chance, 0) + "%",
-                 r.small ? "too few games to rate" : "scored in " + (hit.g_1 == null ? "—" : hit.g_1 + "%") + " of his last " + r.games) +
+            tile(r.need ? r.need + "+ goal chance" : "Goal chance", r.small ? "—" : num(r.chance, 0) + "%",
+                 r.small ? "too few games to rate" : (r.need ? "this bet needs " + r.need + " goals · " : "") +
+                 "scored in " + (hit.g_1 == null ? "—" : hit.g_1 + "%") + " of his last " + r.games) +
             tile("Shots", num(r.sog, 1), "a game · 2+ in " + (hit.sog_2 == null ? "—" : hit.sog_2 + "%")) +
             (r.mult != null ? tile(esc(r.opp) + " vs " + esc(r.role) + "s", signedPct(r.mult),
                  "goals allowed vs an average club", laneClass(r.mult)) : "") +
@@ -133,11 +134,13 @@
             : r.g_name
             ? '<h4 class="nrs-pf-h">In net: ' + esc(r.g_name) + "</h4>" +
               '<div class="nrs-mx-chips nrs-pf-chips">' +
-                '<span class="nrs-mx-chip"><b>' + pct3(r.g_sv_pct) + "</b> save rate</span>" +
-                '<span class="nrs-mx-chip"><b>' + pct3(r.g_hd_sv_pct) + "</b> on high-danger shots</span>" +
-                '<span class="nrs-mx-chip"><b>' + num(r.g_ga, 2) + "</b> goals against a game</span>" +
+                '<span class="nrs-mx-chip"><b>' + pct3(r.g_sv_raw || r.g_sv_pct) + "</b> save rate</span>" +
+                '<span class="nrs-mx-chip"><b>' + pct3(r.g_hd_raw || r.g_hd_sv_pct) + "</b> on high-danger shots</span>" +
+                '<span class="nrs-mx-chip"><b>' + num(r.g_ga_raw != null ? r.g_ga_raw : r.g_ga, 2) + "</b> goals against a game</span>" +
                 '<span class="nrs-mx-chip"><b>' + num(r.g_sa, 1) + "</b> shots faced a game</span>" +
               "</div>" +
+              (r.g_gp && r.g_gp < 10 ? '<p class="atgs-pf-note">Only ' + r.g_gp + " games in his sample, so the model reads him closer to league average (" +
+                pct3(r.g_sv_pct) + ").</p>" : "") +
               (r.g_src === "lineup"
                 ? '<p class="atgs-pf-note">Tonight\u2019s projected starter' + (r.g_note ? " (" + esc(r.g_note) + ")" : "") +
                   ", from the morning lineup reports. Teams confirm about an hour before puck drop.</p>"

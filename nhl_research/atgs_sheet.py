@@ -190,6 +190,13 @@ def _card_log(log: list, n: int = 10) -> list[dict]:
     return out
 
 
+def goals_chance(rate: float, mult: float, need: int) -> float:
+    """P(at least `need` goals) as a percent -- the same Poisson as goal_chance."""
+    lam = max(rate, 0.0) * max(0.72, min(1.38, mult))
+    below = sum(math.exp(-lam) * lam ** k / math.factorial(k) for k in range(need))
+    return round(100 * (1 - below), 1)
+
+
 def goal_chance(rate: float, mult: float) -> float:
     """P(at least one goal) as a percent: his rate, moved by the matchup.
 
@@ -200,6 +207,30 @@ def goal_chance(rate: float, mult: float) -> float:
     """
     lam = max(rate, 0.0) * max(0.72, min(1.38, mult))
     return round(100 * (1 - math.exp(-lam)), 1)
+
+
+# A goalie's save rates are read as if he had also faced this many shots at the
+# league's rate. A starter's 25 games (~650 shots) barely move; DiPietro's four
+# games at .935 on 10/3 come back to about .91 instead of branding every Wild
+# shooter "too hot" on a hundred shots.
+GOALIE_PRIOR_SHOTS = 150
+
+
+def _goalie_rates(g_stats: dict, gp: int, league_g: dict) -> tuple[float, float, float, float]:
+    """(save rate, high-danger save rate) as the model reads them, then as he posted them."""
+    sa, sv = _stat(g_stats, "sa"), _stat(g_stats, "sv")
+    hd_sa, hd_sv = _stat(g_stats, "hd_sa"), _stat(g_stats, "hd_sv")
+    if not sa:
+        return 0.0, 0.0, 0.0, 0.0
+    lg_sa, lg_hd_sa = _stat(league_g, "sa"), _stat(league_g, "hd_sa")
+    lg_sv = _stat(league_g, "sv") / lg_sa if lg_sa else 0.895
+    lg_hd = _stat(league_g, "hd_sv") / lg_hd_sa if lg_hd_sa else 0.81
+    games = max(gp, 1)
+    k = GOALIE_PRIOR_SHOTS
+    k_hd = k * (lg_hd_sa / lg_sa if lg_sa else 0.3)
+    read = (sv * games + k * lg_sv) / (sa * games + k)
+    read_hd = (hd_sv * games + k_hd * lg_hd) / (hd_sa * games + k_hd) if hd_sa else 0.0
+    return read, read_hd, sv / sa, (hd_sv / hd_sa if hd_sa else 0.0)
 
 
 def collect(slate: dict, starters: dict | None = None) -> list[dict]:
@@ -219,7 +250,12 @@ def collect(slate: dict, starters: dict | None = None) -> list[dict]:
             # did the lineup file pick him, or is he the slate's guess?
             g_set = bool(named) and norm_name(goalie.get("name", "")) == norm_name(named["name"])
             g_stats = goalie.get("stats") or {}
-            hd_sa = _stat(g_stats, "hd_sa")
+            league_g = (league.get("G") or {}).get("overall") or {}
+            g_gp = int(goalie.get("gp") or 0)
+            g_read, g_read_hd, g_raw, g_raw_hd = _goalie_rates(g_stats, g_gp, league_g)
+            lg_sa = _stat(league_g, "sa", 27.0)
+            prior_games = GOALIE_PRIOR_SHOTS / lg_sa
+            g_load = (_stat(g_stats, "sa") * g_gp + lg_sa * prior_games) / (g_gp + prior_games)
             for pos in SCORING_POS:
                 for player in (game.get(f"{side}_skaters") or {}).get(pos) or []:
                     stats = player.get("stats") or {}
@@ -258,10 +294,16 @@ def collect(slate: dict, starters: dict | None = None) -> list[dict]:
                         "opp_iscf": round(_stat(slot, "iscf"), 2),
                         # the goalie in his way
                         "g_name": goalie.get("name", ""),
-                        "g_sv_pct": round(_stat(g_stats, "sv") / _stat(g_stats, "sa", 1), 4)
-                                    if _stat(g_stats, "sa") else 0.0,
-                        "g_hd_sv_pct": round(_stat(g_stats, "hd_sv") / hd_sa, 4) if hd_sa else 0.0,
-                        "g_ga": round(_stat(g_stats, "ga"), 2),
+                        # what the model reads (shrunk by sample) and what he posted
+                        "g_sv_pct": round(g_read, 4),
+                        "g_hd_sv_pct": round(g_read_hd, 4),
+                        "g_sv_raw": round(g_raw, 4),
+                        "g_hd_raw": round(g_raw_hd, 4),
+                        # goals against as the model reads it: his workload at the read
+                        # save rate, the workload shrunk the same way -- a few relief
+                        # appearances make a light-looking night, not a stingy goalie
+                        "g_ga": round(g_load * (1 - g_read), 2) if g_read else round(_stat(g_stats, "ga"), 2),
+                        "g_ga_raw": round(_stat(g_stats, "ga"), 2),
                         "g_src": "lineup" if g_set else "model",
                         "g_note": named.get("note", "") if g_set else "",
                         "lines": player.get("lines") or {},
@@ -336,8 +378,11 @@ def reasons(r: dict) -> list[dict]:
     diff = (r["mult"] - 1) * 100 if r.get("mult") else 0
     lane = ("an average club" if abs(diff) < 4 else
             f"{abs(diff):.0f}% {'more' if diff > 0 else 'less'} than an average club")
-    goalie = (f"{r['g_name']}: {pct3(r['g_sv_pct'])} save rate, {pct3(r['g_hd_sv_pct'])} on "
-              f"high-danger shots, {r['g_ga']:.2f} goals against a game"
+    thin = r.get("g_gp", 25) < 10
+    goalie = (f"{r['g_name']}: {pct3(r.get('g_sv_raw') or r['g_sv_pct'])} save rate, "
+              f"{pct3(r.get('g_hd_raw') or r['g_hd_sv_pct'])} on high-danger shots, "
+              f"{r.get('g_ga_raw', r['g_ga']):.2f} goals against a game"
+              + (f" -- over only {r['g_gp']} games, so read as {pct3(r['g_sv_pct'])}" if thin else "")
               if r.get("g_name") and r.get("g_sv_pct") else
               f"{r['g_name']} has no NHL games in the sample -- scored as neutral" if r.get("g_name")
               else "No starter to read yet -- scored as neutral")
@@ -370,8 +415,12 @@ def why(r: dict) -> str:
         bits.append(f"{r['opp']} holds {r['role']}s to {r['opp_g']:.2f} goals a game.")
     if r["g_name"] and r["g_sv_pct"]:
         trend = "a leaking" if r["parts"]["goalie"] / WEIGHTS["goalie"] >= 0.7 else "a steady"
-        bits.append(f"{r['g_name']} is {trend} {pct3(r['g_sv_pct'])} with a "
-                    f"{pct3(r['g_hd_sv_pct'])} high-danger rate.")
+        if r.get("g_gp", 25) < 10:
+            bits.append(f"{r['g_name']} has {r['g_gp']} games to his name "
+                        f"({pct3(r.get('g_sv_raw') or r['g_sv_pct'])}), read as {pct3(r['g_sv_pct'])}.")
+        else:
+            bits.append(f"{r['g_name']} is {trend} {pct3(r.get('g_sv_raw') or r['g_sv_pct'])} with a "
+                        f"{pct3(r.get('g_hd_raw') or r['g_hd_sv_pct'])} high-danger rate.")
     if r["pp_p"] >= 0.35:
         bits.append(f"He works the power play for {r['pp_p']:.2f} points a game.")
     if r["g5"] >= 3:
@@ -425,6 +474,12 @@ def build_sheet(date: str) -> dict:
             row["listed_role"] = play["role"]
             # what settles it on the page: a 0.5 line needs one goal, 1.5 needs two
             row["line"] = play["line"]
+            # "Over 1 Goals" is a two-goal bet. The rating still reads his profile,
+            # but the chance has to be the one the bet needs.
+            need = int(math.floor(play["line"])) + 1
+            if need >= 2:
+                row["need"] = need
+                row["chance"] = goals_chance(row["g"], row["mult"], need)
             # "ou", not "side": "side" is the home/away the card's research link needs
             row["ou"] = play["side"]
             listed.append(row)
@@ -449,13 +504,15 @@ def build_sheet(date: str) -> dict:
         })
 
     rated = sorted((r for r in rows if not r["small"]), key=lambda r: r["score"], reverse=True)
-    top = [r["id"] for r in rated[:5]]
+    # The Top 5 is the one-goal board: a two-goal bet at the top would read as
+    # the night's best anytime scorer.
+    top = [r["id"] for r in rated if not r.get("need")][:5]
 
     # Plus-money value: the best scores that still pay better than even. Without
     # a price feed there is nothing to sort on, so the section stays empty
     # rather than inventing odds.
     value = [r["id"] for r in rated
-             if str(r["lines"].get("atgs", "")).startswith("+")][:5]
+             if not r.get("need") and str(r["lines"].get("atgs", "")).startswith("+")][:5]
 
     # Profile warnings: names the model likes less than their reputation would.
     warned = sorted((r for r in rated if r["warning"]), key=lambda r: r["score"])

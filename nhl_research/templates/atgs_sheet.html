@@ -1184,7 +1184,9 @@
                 nameLink(pl) +
                 '<span class="sheet-band">' + esc(pl.band_label) + "</span>" + priceHTML(pl) +
                 "</div>" +
-                '<div class="sheet-play__tags">' + chips(pl.tags) +
+                '<div class="sheet-play__tags">' +
+                (pl.need ? '<span class="chip chip--exp">' + pl.need + "+ goals needed</span>" : "") +
+                chips(pl.tags) +
                 (pl.small ? '<span class="chip chip--new">Small sample</span>' : "") +
                 (pl.warning ? '<span class="chip chip--out">' + esc(pl.warning) + "</span>" : "") +
                 "</div>" +
@@ -1766,6 +1768,6 @@
             .catch(function () { /* opened standalone: the dropdown stays a single date */ });
     })();
     </script>
-    <script src="__ROOT__atgs-card.js?v=5" defer></script>
+    <script src="__ROOT__atgs-card.js?v=7" defer></script>
 </body>
 </html>

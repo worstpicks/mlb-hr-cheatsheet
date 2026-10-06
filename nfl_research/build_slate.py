@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 
 import polars as pl
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from nfl_research.espn_api import fetch_week_games
@@ -169,7 +169,9 @@ def build_slate(season: int, week: int) -> dict:
         "has_props": bool(props),
         "has_preseason": bool(pre_rows),
         "preseason_rows": pre_rows,
-        "fetched_at": datetime.now().isoformat(timespec="seconds"),
+        # UTC with its offset: the scheduled build runs on a UTC clock, and a bare
+        # "09:26" read as local time put the build in the future on the page
+        "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "stats_through": stats_through,
         "depth_season": depth_season,
         # seasons the game logs reach into, so the page can say "'25–'26"
@@ -211,10 +213,46 @@ def _with_lines(offense: dict, game_props: dict) -> dict:
     return out
 
 
-def write_slate(season: int, week: int) -> Path:
+# The Tuesday each season's Week 1 begins -- the same table the page keeps.
+# A week turns over at 3 am Eastern Tuesday, after Monday Night Football.
+WEEK1_TUESDAY = {2026: datetime(2026, 9, 8, 7, tzinfo=timezone.utc)}
+
+
+def current_week(season: int, now: datetime | None = None) -> int:
+    """The week being played (or about to be): 1 before the season, 18 after."""
+    start = WEEK1_TUESDAY.get(season)
+    if start is None:
+        return 1
+    now = now or datetime.now(timezone.utc)
+    return max(1, min(18, (now - start) // timedelta(days=7) + 1))
+
+
+def _unchanged(path: Path, payload: dict) -> bool:
+    """True when the week on disk already says exactly this, bar the timestamp.
+
+    The scheduled build reruns a week several times before kickoff and mostly
+    finds nothing new; rewriting it anyway would commit a multi-megabyte file
+    that differs only in its build time.
+    """
+    if not path.exists():
+        return False
+    try:
+        old = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    new = json.loads(json.dumps(payload))
+    old.pop("fetched_at", None)
+    new.pop("fetched_at", None)
+    return old == new
+
+
+def write_slate(season: int, week: int) -> tuple[Path, bool]:
+    """Build one week. Returns (path, whether the file actually changed)."""
     payload = build_slate(season, week)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out_path = OUT_DIR / f"nfl-research-{season}-W{week}.json"
+    if _unchanged(out_path, payload):
+        return out_path, False
     # compact separators: game logs make this file large enough to matter
     out_path.write_text(json.dumps(payload, separators=(",", ":")) + "\n", encoding="utf-8")
-    return out_path
+    return out_path, True

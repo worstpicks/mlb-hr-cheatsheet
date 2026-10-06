@@ -4,6 +4,11 @@
 Usage:
     python fetch-nfl-research-slate.py --season 2026 --week 3
     python fetch-nfl-research-slate.py --season 2026 --week 3 --through 18
+    python fetch-nfl-research-slate.py --season 2026 --week current --ahead 1
+
+`--week current` is the week being played (it turns over at 3 am Eastern
+Tuesday); `--ahead 1` also builds the week after it. That is what the scheduled
+build runs.
 
 A range builds every week in one process: nflreadpy keeps what it downloads in
 memory, so weeks after the first reuse the same play-by-play and stats.
@@ -16,23 +21,28 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from nfl_research.build_slate import write_slate  # noqa: E402
+from nfl_research.build_slate import current_week, write_slate  # noqa: E402
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Fetch NFL Research week slate")
     parser.add_argument("--season", type=int, required=True, help="Schedule season, e.g. 2026")
-    parser.add_argument("--week", type=int, required=True, help="Regular-season week 1-18")
+    parser.add_argument("--week", required=True,
+                        help='Regular-season week 1-18, or "current" for the week being played')
     parser.add_argument("--through", type=int, default=None,
                         help="Also build every week after --week up to this one")
+    parser.add_argument("--ahead", type=int, default=0,
+                        help="Also build this many weeks after --week")
     args = parser.parse_args()
 
-    last = args.through or args.week
+    first = current_week(args.season) if args.week == "current" else int(args.week)
+    last = min(18, args.through or first + max(0, args.ahead))
+    print(f"[nfl-research] building {args.season} weeks {first}-{last}")
     failed = []
-    for week in range(args.week, last + 1):
+    for week in range(first, last + 1):
         try:
-            out_path = write_slate(args.season, week)
-            print(f"Wrote {out_path}")
+            out_path, changed = write_slate(args.season, week)
+            print(f"{'Wrote' if changed else 'Unchanged'} {out_path}")
         except Exception as exc:  # one bad week should not cost the rest of the run
             print(f"[nfl-research] week {week} FAILED: {exc}")
             failed.append(week)

@@ -8,7 +8,10 @@
     const DEFAULT_SEASON = 2026;
     // The Tuesday before each season's Week 1 kickoff. NFL weeks turn over on Tuesdays,
     // so the page opens on the week being played rather than on Week 1 all season.
-    const WEEK1_TUESDAY = { 2026: Date.UTC(2026, 8, 8, 12) };
+    // 07:00 UTC is 3 am Eastern, after Monday Night Football -- at 12:00 UTC the
+    // page spent Tuesday morning on the week that had just finished. The builder
+    // (nfl_research/build_slate.py WEEK1_TUESDAY) keeps the same clock.
+    const WEEK1_TUESDAY = { 2026: Date.UTC(2026, 8, 8, 7) };
     function currentWeek(season) {
         const start = WEEK1_TUESDAY[season];
         if (!start) return 1;
@@ -637,6 +640,23 @@
 
         el("nrsRefresh").addEventListener("click", () => loadSlate(true));
 
+        /* A tab left open across a Tuesday kept last week. Coming back to it after
+           a while moves to the new week if the reader was following the calendar,
+           and otherwise reloads the week on screen so a fresh build shows up. */
+        let hiddenAt = 0;
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) { hiddenAt = Date.now(); return; }
+            const away = hiddenAt ? Date.now() - hiddenAt : 0;
+            hiddenAt = 0;
+            if (away < 10 * 60000) return;
+            const week = currentWeek(state.season);
+            if (state.autoWeek && state.season === DEFAULT_SEASON && week !== state.week) {
+                state.week = week;
+                weekSel.value = String(week);
+            }
+            loadSlate();
+        });
+
         // log filters (delegated: cards re-render on every matchup draw). The choice
         // covers its whole side of every card, and the card clicked stays where it was.
         el("nrsPosSections").addEventListener("click", (e) => {
@@ -671,7 +691,9 @@
         el("nrsMatchupSection").hidden = true;
         el("nrsGames").innerHTML = "";
         try {
-            const resp = await fetch(url, { cache: bustCache ? "no-store" : "default" });
+            // "no-cache" revalidates, so a week the scheduled build just refreshed
+            // is never served from yesterday's copy
+            const resp = await fetch(url, { cache: bustCache ? "no-store" : "no-cache" });
             if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
             state.slate = await resp.json();
         } catch (err) {
@@ -694,7 +716,10 @@
         badge.hidden = false;
         const logSeasons = seasonSpan(state.slate.log_seasons || [state.slate.stats_season]);
         badge.textContent = `Stats: last 17 games · ${logSeasons} (nflverse)`;
-        el("nrsLastUpdated").textContent = state.slate.fetched_at ? `Updated ${state.slate.fetched_at.replace("T", " ")}` : "";
+        const built = state.slate.fetched_at ? new Date(state.slate.fetched_at) : null;
+        el("nrsLastUpdated").textContent = built && !isNaN(built)
+            ? `Updated ${built.toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`
+            : "";
         el("nrsSeasonNote").textContent =
             `Player averages over each player's last 17 games vs what each defense allowed per game — ` +
             `green means the player beats the defensive average.`;

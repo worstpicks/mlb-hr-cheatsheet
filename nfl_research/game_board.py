@@ -38,6 +38,14 @@ import polars as pl
 
 from nfl_research.cheatsheets import SCRIMMAGE_PLAYS, TEAM_FIX
 
+
+def _tie(r: dict) -> str:
+    """A fixed second key for sorts that can tie. Polars hands groups back in no
+    particular order, so without one two builds of the same data rank tied teams
+    and players differently -- and the scheduled build commits a new file for it."""
+    return str(r.get("player_id") or r.get("gsis_id") or r.get("id") or r.get("name")
+               or r.get("player") or r.get("team") or "")
+
 WINDOW = 17          # games per player and per defense
 TRAIL = 5            # games of usage that decide a role
 RECENT = 5           # games in the "recent form" split
@@ -174,7 +182,7 @@ def _player_rows(weekly: pl.DataFrame) -> list[dict]:
         by_game[(r["team"], r["season"], r["week"], r["pos"])].append(r)
     for (_, _, _, pos), grp in by_game.items():
         key = {"QB": "pass_att", "RB": "trail_car"}.get(pos, "trail_tgt")
-        grp.sort(key=lambda r: r[key], reverse=True)
+        grp.sort(key=lambda r: (-(r[key] or 0), _tie(r)))
         for i, r in enumerate(grp, start=1):
             r["role"] = f"{pos}{i}" if i <= ROLE_SLOTS[pos] else None
     for r in rows:
@@ -209,7 +217,7 @@ def defense_allowed(rows: list[dict], windows: dict) -> tuple[dict, dict]:
     # rank 32 is the softest, matching the D# convention on the ATD board
     for role in ROLES:
         teams = [d for d in allowed if role in allowed[d]]
-        for i, d in enumerate(sorted(teams, key=lambda t: allowed[t][role]["fp"]), start=1):
+        for i, d in enumerate(sorted(teams, key=lambda t: (allowed[t][role]["fp"], t)), start=1):
             row = allowed[d][role]
             row["rank"] = i
             row["of"] = len(teams)
@@ -295,7 +303,7 @@ def team_environment(pbp: pl.DataFrame, part: pl.DataFrame | None, windows: dict
     for key in ("pace", "neutral_pass", "rz_trips", "rz_td", "def_rz_td", "pressure_allowed",
                 "def_pressure", "def_man"):
         teams = [t for t in env if env[t].get(key) is not None]
-        for i, t in enumerate(sorted(teams, key=lambda t: env[t][key]), start=1):
+        for i, t in enumerate(sorted(teams, key=lambda t: (env[t][key], t)), start=1):
             env[t][key + "_rank"] = i
     return dict(env)
 
@@ -575,7 +583,7 @@ def attach_game_boards(slate_games: list[dict], lineups: dict, season: int) -> d
                     no_hist += bool(row.get("no_history"))
                     graded += row.get("grade") is not None
                     players.append(row)
-        players.sort(key=lambda r: (r["grade"] is None, -(r["grade"] or 0)))
+        players.sort(key=lambda r: (r["grade"] is None, -(r["grade"] or 0), _tie(r)))
         game["board"] = {
             "implied": implied,
             "env": {t: env.get(t, {}) for t in (game["away"], game["home"])},

@@ -24,6 +24,14 @@ from collections import defaultdict
 import nflreadpy as nfl
 import polars as pl
 
+
+def _tie(r: dict) -> str:
+    """A fixed second key for sorts that can tie. Polars hands groups back in no
+    particular order, so without one two builds of the same data rank tied teams
+    and players differently -- and the scheduled build commits a new file for it."""
+    return str(r.get("player_id") or r.get("gsis_id") or r.get("id") or r.get("name")
+               or r.get("player") or r.get("team") or "")
+
 # Red-zone share weights: a target converts more often than a handoff.
 TGT_WEIGHT = 1.00
 CAR_WEIGHT = 0.75
@@ -171,7 +179,7 @@ def rushing_gaps(pbp: pl.DataFrame) -> dict:
                 "gaps": mix,
             }
         )
-    out_players.sort(key=lambda r: r["att"], reverse=True)
+    out_players.sort(key=lambda r: (-r["att"], _tie(r)))
 
     defenses: dict[str, dict] = {}
     for row in runs.select(["defteam", "gap", "yards_gained", "success"]).iter_rows(named=True):
@@ -261,7 +269,7 @@ def red_zone(pbp: pl.DataFrame) -> dict:
                 "in10_touches": rec["in10_car"] + rec["in10_tgt"],
             }
         )
-    out_players.sort(key=lambda r: r["rz_touches"], reverse=True)
+    out_players.sort(key=lambda r: (-r["rz_touches"], _tie(r)))
 
     defenses: dict[str, dict] = {}
     for row in rz.select(["defteam", "touchdown", "play_type", "epa"]).iter_rows(named=True):
@@ -327,7 +335,7 @@ def explosive_plays(pbp: pl.DataFrame) -> dict:
                 "rec20_rate": _rate(rec["rec20"], rec["rec"]),
             }
         )
-    out_players.sort(key=lambda r: (r["rec20"] + r["rush20"]), reverse=True)
+    out_players.sort(key=lambda r: (-(r["rec20"] + r["rush20"]), _tie(r)))
 
     defenses: dict[str, dict] = {}
     for row in plays.select(
@@ -450,7 +458,7 @@ def team_share(pbp: pl.DataFrame) -> dict:
                 "rec_mix": _rate(rec["tgt"], touches),
             }
         )
-    out.sort(key=lambda r: r["touches"], reverse=True)
+    out.sort(key=lambda r: (-r["touches"], _tie(r)))
     return {"players": out}
 
 
@@ -503,7 +511,7 @@ def hit_rates(pbp: pl.DataFrame) -> dict:
                 ],
             }
         )
-    out.sort(key=lambda r: len(r["games"]), reverse=True)
+    out.sort(key=lambda r: (-len(r["games"]), _tie(r)))
     return {"players": out}
 
 
@@ -622,7 +630,7 @@ def coverage_players(season: int) -> dict:
                 "blitz": row.get("bltz"),
             }
         )
-    out.sort(key=lambda r: (r["rating_allowed"] if r["rating_allowed"] is not None else 999))
+    out.sort(key=lambda r: (r["rating_allowed"] if r["rating_allowed"] is not None else 999, _tie(r)))
     return {"players": out}
 
 
@@ -655,7 +663,7 @@ def receiving_value(season: int) -> dict:
                 "rating_when_targeted": row.get("rat"),
             }
         )
-    out.sort(key=lambda r: (r["yds"] or 0), reverse=True)
+    out.sort(key=lambda r: (-(r["yds"] or 0), _tie(r)))
     return {"players": out}
 
 
@@ -754,7 +762,7 @@ def power_ratings(pbp: pl.DataFrame, season: int) -> dict:
     out = []
     for team, r in ratings.items():
         out.append({"team": team, **r, **sos.get(team, {})})
-    out.sort(key=lambda r: r["rating"], reverse=True)
+    out.sort(key=lambda r: (-r["rating"], r["team"]))
     for i, r in enumerate(out, 1):
         r["rank"] = i
     return {"teams": out}
@@ -892,7 +900,7 @@ def roster_context(season: int, teams: set[str]) -> dict:
                     }
                 )
         for team in out:
-            out[team]["snaps"].sort(key=lambda r: r["off_pct"], reverse=True)
+            out[team]["snaps"].sort(key=lambda r: (-r["off_pct"], _tie(r)))
             out[team]["snaps"] = out[team]["snaps"][:24]
     except Exception:
         pass
@@ -979,7 +987,7 @@ def red_zone_projection(pbp: pl.DataFrame) -> dict:
         }
     # Rank 1 is the toughest defence, so the softest spot on a slate is the high number.
     for rank, team in enumerate(
-        sorted(out_def, key=lambda t: out_def[t]["td_rate_allowed"]), start=1
+        sorted(out_def, key=lambda t: (out_def[t]["td_rate_allowed"], t)), start=1
     ):
         out_def[team]["rank"] = rank
         out_def[team]["of"] = len(out_def)

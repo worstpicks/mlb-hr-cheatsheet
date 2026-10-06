@@ -1,0 +1,96 @@
+name: NFL research slate
+
+# The NFL research tab reads one file per week. Built by hand, the week being
+# played went stale between rebuilds: on 10/6 Week 5 still read "built on games
+# through Week 2". This rebuilds the current week and the one after it on a
+# schedule, so the week on screen always carries the latest games, depth charts
+# and injuries. Past weeks are left as they were built -- the read before kickoff.
+#
+# The week turns over at 3 am Eastern Tuesday, after Monday Night Football
+# (WEEK1_TUESDAY in nfl_research/build_slate.py and in the page agree on it).
+
+on:
+  schedule:
+    # Every four hours, at :23. GitHub's scheduler runs late and skips at the top
+    # of the hour (see nhl-research.yml); a run that finds nothing new commits
+    # nothing -- the builder leaves an unchanged week's file alone.
+    - cron: "23 */4 * * *"
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "Week to build, 1-18. Blank = the current week."
+        required: false
+        default: ""
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/nfl-research.yml"
+
+permissions:
+  contents: write
+
+# One build at a time: two runs pushing the same files would only collide.
+concurrency:
+  group: nfl-research
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # nflverse play-by-play and stats come through nflreadpy, read with polars.
+      # Pinned to the versions the builder was written against.
+      - name: Install the builder's dependencies
+        run: pip install --quiet nflreadpy==0.1.5 polars==1.42.1
+
+      - name: Build the research weeks
+        env:
+          INPUT_WEEK: ${{ github.event.inputs.week }}
+        run: |
+          WEEK="${INPUT_WEEK:-current}"
+          if ! [[ "$WEEK" =~ ^([0-9]{1,2}|current)$ ]]; then
+            echo "::error::week must be 1-18 or blank, got '$WEEK'"
+            exit 1
+          fi
+          # Whatever did build still gets published; the job is failed at the
+          # end so a bad week is visible instead of silently skipped.
+          python fetch-nfl-research-slate.py --season 2026 --week "$WEEK" --ahead 1 \
+            || echo "BUILD_FAILED=1" >> "$GITHUB_ENV"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- 'preview/data/nfl-research-*.json'
+          if git diff --cached --quiet; then
+            echo "Nothing changed since the last build."
+            exit 0
+          fi
+          WEEKS=$(git diff --cached --name-only | sed -n 's/.*-W\([0-9]*\)\.json/\1/p' | paste -sd, -)
+          git commit -q -m "NFL research: scheduled build, week(s) $WEEKS"
+          # Someone may have pushed while this ran (the NHL build commits too).
+          # Rebase onto them and try again; on a clash over a week file the fresh
+          # build wins.
+          for attempt in 1 2 3; do
+            if git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main; then
+              echo "Pushed."
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying."
+            sleep 10
+          done
+          echo "::error::could not push the build"
+          exit 1
+
+      - name: Report a partial build
+        if: env.BUILD_FAILED == '1'
+        run: |
+          echo "::error::at least one week failed to build -- see the build step above"
+          exit 1

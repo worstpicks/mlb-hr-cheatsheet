@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 from datetime import date as _date
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from nhl_research.nhl_api import fetch_day_games, fetch_records, season_bounds
@@ -190,7 +190,9 @@ def build_slate(date: str) -> dict:
         "season_games": lg["season_games"],
         "has_props": bool(props),
         "preseason_games": lg["preseason_games"],
-        "fetched_at": datetime.now().isoformat(timespec="seconds"),
+        # UTC with its offset: the scheduled build runs on a UTC clock, and a bare
+        # "09:26" read as local time put the build in the future on the page
+        "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "calendar": lg["calendar"],
         "league": lg["league"],
         "scales": lg["scales"],

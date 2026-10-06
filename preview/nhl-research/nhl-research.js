@@ -172,6 +172,8 @@
         logFilter: { off: DEFAULT_FILTER, def: DEFAULT_FILTER },
         // days that have a slate, from the manifest; null when it could not be read
         posted: null,
+        // following the calendar (true) or on a day the reader picked (false)
+        autoDate: true,
         // shown once under the toolbar after the next slate loads
         notice: "",
         // a player to open on, from a cheat-sheet card's link; cleared once shown
@@ -1032,9 +1034,13 @@
         const goto = (date) => {
             state.date = date;
             input.value = date;
-            // the address bar carries the slate, so a reload or a shared link lands here
+            // The address bar carries a day the reader picked, so a reload or a shared
+            // link lands on it. Today stays out of it: written in, it turned every
+            // bookmark and every tab left open into tomorrow's "old date".
+            state.autoDate = date === nearestPosted(defaultDate());
             const url = new URL(location.href);
-            url.searchParams.set("date", date);
+            if (state.autoDate) url.searchParams.delete("date");
+            else url.searchParams.set("date", date);
             history.replaceState(null, "", url);
             loadSlate();
         };
@@ -1062,6 +1068,26 @@
             input.max = state.posted[state.posted.length - 1];
         }
         el("nrsRefresh").addEventListener("click", () => loadSlate(true));
+
+        /* A tab left open overnight kept yesterday's slate and yesterday's list of
+           days. Coming back to it after a while re-reads the manifest, moves to
+           today if the reader was following the calendar, and otherwise reloads
+           the day on screen so a build that landed meanwhile shows up. */
+        let hiddenAt = 0;
+        document.addEventListener("visibilitychange", async () => {
+            if (document.hidden) { hiddenAt = Date.now(); return; }
+            const away = hiddenAt ? Date.now() - hiddenAt : 0;
+            hiddenAt = 0;
+            if (away < 10 * 60000) return;
+            await loadPosted();
+            if (state.posted) {
+                input.min = state.posted[0];
+                input.max = state.posted[state.posted.length - 1];
+            }
+            const today = nearestPosted(defaultDate());
+            if (state.autoDate && today !== state.date) goto(today);
+            else loadSlate();
+        });
 
         el("nrsGames").addEventListener("click", (ev) => {
             const btn = ev.target.closest("[data-game]");
@@ -1159,6 +1185,7 @@
         }
         const want = asked || defaultDate();
         state.date = nearestPosted(want);
+        state.autoDate = !asked || state.date === nearestPosted(defaultDate());
         if (state.date !== want) {
             state.notice = asked
                 ? `No NHL research is posted for ${prettyDay(want)} \u2014 showing ${prettyDay(state.date)}.`

@@ -64,6 +64,14 @@ first clause as a warning chip and the whole note on his card. Check every
 listed player against DailyFaceoff's line combinations, not just the injury
 report: a healthy scratch is on neither injury list.
 
+Season rates: `nhl_research/season_rates/skaters-*.csv` (a per-60 skater export,
+PLAYER like "Brady Tkachuk LW") steadies the sheet's shot and goal inputs. Each
+skater's 25-game window is blended with his full season, converted at the ice time
+he plays now, weighted games / (games + 50) -- ~0.62 for a full 82. The export
+counts scoring chances its own way, so ISCF is scaled by 0.78 and IHDCF by 1.12 to
+match our play-by-play counts (measured over 263 skaters on 10/6). Recent form
+(goals in the last 5) stays on the window. Drop in a newer export to update it.
+
 The first slate of a season pulls and caches the whole year (~90s). Every build
 after that reads `nhl_research/cache/` and takes about ten seconds.
 

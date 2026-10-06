@@ -1,26 +1,27 @@
-# Tuesday 10/6 -- starting goalies and scratches, read at 8 am ET
-# (RotoWire lineups + injury report, DailyFaceoff starting goalies and line
-# combinations, NHL box scores). The pasted list also carried 10/5's four games
-# (PHI@TBL, OTT@BOS, WPG@PIT, SJS@DAL); they are not on tonight's slate and were
-# left out of 2026-10-06.txt.
+# Tuesday 10/6 -- starting goalies and scratches. Read at 8 am ET (RotoWire
+# lineups + injury report, DailyFaceoff starting goalies and line combinations,
+# NHL box scores), then updated at 1 pm from the user's goalie export
+# (nhl-goalie-summary-2026-l5-2026-10-06.csv), which had 14 of 18 confirmed.
+# The pasted list also carried 10/5's four games (PHI@TBL, OTT@BOS, WPG@PIT,
+# SJS@DAL); they are not on tonight's slate and were left out of 2026-10-06.txt.
 
-goalie NSH Juuse Saros | expected
-goalie TOR Sergei Bobrovsky | expected
-goalie CAR Pyotr Kochetkov | expected
-goalie MTL Jakub Dobes | expected
+goalie NSH Juuse Saros | confirmed
+# Stolarz confirmed at 1 pm; the morning reports had Bobrovsky.
+goalie TOR Anthony Stolarz | confirmed
+# Bussi confirmed at 1 pm; the morning reports had Kochetkov.
+goalie CAR Brandon Bussi | confirmed
+goalie MTL Jakub Dobes | confirmed
 # OTT is on a back-to-back and Ullmark (started 10/3 and 10/5) is day-to-day.
 goalie OTT Samuel Ersson | expected, back-to-back
-goalie DET John Gibson | expected
-goalie UTA Karel Vejmelka | expected
-goalie NJD Jake Allen | expected
-goalie MIN Jesper Wallstedt | expected
-# Luukkonen started both BUF games; both sites have Ellis tonight.
-goalie BUF Colten Ellis | likely
-# Sorokin started both NYI games; RotoWire has Varlamov, DailyFaceoff Sorokin.
-goalie NYI Semyon Varlamov | expected, not yet confirmed
-goalie NYR Igor Shesterkin | expected
-goalie STL Joel Hofer | expected
-goalie CHI Spencer Knight | expected
+goalie DET John Gibson | confirmed
+goalie UTA Karel Vejmelka | confirmed
+goalie NJD Jake Allen | confirmed
+goalie MIN Jesper Wallstedt | confirmed
+goalie BUF Colten Ellis | confirmed
+goalie NYI Semyon Varlamov | confirmed
+goalie NYR Igor Shesterkin | confirmed
+goalie STL Joel Hofer | confirmed
+goalie CHI Spencer Knight | confirmed
 goalie VGK Carter Hart | expected
 goalie SEA Joey Daccord | expected
 goalie FLA Jacob Markstrom | expected

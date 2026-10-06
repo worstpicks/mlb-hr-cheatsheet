@@ -23,6 +23,7 @@ Inputs
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import os
@@ -68,6 +69,80 @@ def norm_name(name: str) -> str:
 #                             doubt WSH Ivan Miroshnichenko | Projected scratch -- why
 LINEUP_LINE = re.compile(r"^(?P<kind>goalie|out|doubt)\s+(?P<team>[A-Z]{2,3})\s+(?P<name>[^|]+?)"
                          r"\s*(?:\|\s*(?P<note>.*))?$", re.IGNORECASE)
+
+
+SEASON_DIR = Path(__file__).resolve().parent / "season_rates"
+# Columns of a season export (per 60) and the window key each one feeds.
+SEASON_COLS = {"g": "G/60", "sog": "SOG/60", "icf": "ICF/60", "iff": "IFF/60",
+               "iscf": "ISCF/60", "ihdcf": "IHDCF/60"}
+# The export counts chances its own way. Against our play-by-play counts for the
+# same 263 skaters (10/6), its scoring chances run 1/0.78 of ours and its
+# high-danger chances 1/1.12; shots, attempts and goals agree. Scaled to ours
+# before blending, so a blended number means what the window number means.
+SEASON_SCALE = {"iscf": 0.78, "ihdcf": 1.12}
+# Weight on the season: games / (games + this). A full 82-game season gets ~0.62,
+# a nine-game call-up ~0.15 -- the window still moves a role change.
+SEASON_PRIOR_GAMES = 50
+
+
+def load_season_rates() -> dict:
+    """{(name, "F"|"D"): row} from every season export in season_rates/.
+
+    The export (PLAYER = "Brady Tkachuk LW", per-60 rates) sits under a few
+    lines of settings; the table starts at its PLAYER header. Two players with
+    one name and one position group are both dropped rather than guessed.
+    """
+    out: dict = {}
+    seen: dict = {}
+    for path in sorted(SEASON_DIR.glob("skaters-*.csv")):
+        with path.open(encoding="utf-8-sig", newline="") as fh:
+            rows = list(csv.reader(fh))
+        start = next((i for i, r in enumerate(rows) if r and r[0] == "PLAYER"), None)
+        if start is None:
+            continue
+        head = rows[start]
+        for raw in rows[start + 1:]:
+            if not raw or not raw[0]:
+                continue
+            row = dict(zip(head, raw))
+            m = re.match(r"^(.*?)\s+(C|LW|RW|D)$", row["PLAYER"].strip())
+            name, pos = (m.group(1), m.group(2)) if m else (row["PLAYER"].strip(), "")
+            key = (norm_name(name), "D" if pos == "D" else "F")
+            seen[key] = seen.get(key, 0) + 1
+            out[key] = row
+    return {k: v for k, v in out.items() if seen[k] == 1}
+
+
+def blend_season(rows: list[dict], season: dict) -> int:
+    """Move each row's shot and goal rates toward his full season.
+
+    The window is 25 games stitched from the end of last season, the preseason
+    and the first nights of this one -- a few hot or cold nights move it a lot.
+    A full season of per-60 rates, converted at the ice time he is playing now,
+    is the steadier read of the same thing. Recent form (g5, last 5) is left
+    to the window on purpose. Returns how many rows were blended.
+    """
+    blended = 0
+    for r in rows:
+        s = season.get((norm_name(r["name"]), "D" if r["pos"] == "D" else "F"))
+        try:
+            gp = int(float(s["GP"])) if s else 0
+        except (KeyError, ValueError):
+            gp = 0
+        if not gp:
+            continue
+        w = gp / (gp + SEASON_PRIOR_GAMES)
+        for key, col in SEASON_COLS.items():
+            try:
+                per60 = float(s.get(col) or 0)
+            except ValueError:
+                continue
+            season_pg = per60 * r["toi"] / 60 * SEASON_SCALE.get(key, 1.0)
+            r[key] = round((1 - w) * r[key] + w * season_pg, 3)
+        r["season_gp"] = gp
+        r["season_w"] = round(w, 2)
+        blended += 1
+    return blended
 
 
 def load_lineup(date: str) -> dict:
@@ -388,7 +463,9 @@ def reasons(r: dict) -> list[dict]:
               else "No starter to read yet -- scored as neutral")
     return [
         {"part": "volume", "label": "Shot volume",
-         "text": f"{r['sog']:.1f} shots and {r['icf']:.1f} attempts a game \u2014 {top('sog')}"},
+         "text": f"{r['sog']:.1f} shots and {r['icf']:.1f} attempts a game \u2014 {top('sog')}"
+                 + (f" (his last {r['games']} games blended with his {r['season_gp']}-game 2025-26 season)"
+                    if r.get("season_gp") else "")},
         {"part": "quality", "label": "Shot quality",
          "text": f"{r['iscf']:.1f} scoring chances a game, {r['ihdcf']:.1f} from the inner slot, "
                  f"{r['iff']:.1f} unblocked \u2014 {top('iscf')}"},
@@ -444,7 +521,12 @@ def build_sheet(date: str) -> dict:
         if norm_name(named["name"]) not in names:
             print(f"[atgs] note: starter {named['name']} ({team}) has no games in the slate -- "
                   f"the goalie component is scored as neutral for {team}'s opponents")
-    rows = rate(collect(slate, lineup["goalies"]), slate.get("scales") or {})
+    rows = collect(slate, lineup["goalies"])
+    season = load_season_rates()
+    if season:
+        n = blend_season(rows, season)
+        print(f"[atgs] season rates: {n} of {len(rows)} skaters blended with 2025-26")
+    rows = rate(rows, slate.get("scales") or {})
     out = lineup["out"]
     rows = [r for r in rows if (norm_name(r["name"]), r["team"]) not in out]
     for r in rows:

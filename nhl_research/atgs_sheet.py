@@ -85,8 +85,14 @@ SEASON_SCALE = {"iscf": 0.78, "ihdcf": 1.12}
 SEASON_PRIOR_GAMES = 50
 
 
-def load_season_rates() -> dict:
-    """{(name, "F"|"D"): row} from every season export in season_rates/.
+# A day's last-5-games export rides on top as recent form: a quarter of the
+# rate at five games played, less with fewer. Five games is a role and a hot
+# hand, not a sample -- it nudges, it does not steer.
+RECENT_WEIGHT = 0.25
+
+
+def _read_rate_export(path: Path) -> dict:
+    """{(name, "F"|"D"): row} from one per-60 export.
 
     The export (PLAYER = "Brady Tkachuk LW", per-60 rates) sits under a few
     lines of settings; the table starts at its PLAYER header. Two players with
@@ -94,23 +100,71 @@ def load_season_rates() -> dict:
     """
     out: dict = {}
     seen: dict = {}
-    for path in sorted(SEASON_DIR.glob("skaters-*.csv")):
-        with path.open(encoding="utf-8-sig", newline="") as fh:
-            rows = list(csv.reader(fh))
-        start = next((i for i, r in enumerate(rows) if r and r[0] == "PLAYER"), None)
-        if start is None:
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        rows = list(csv.reader(fh))
+    start = next((i for i, r in enumerate(rows) if r and r[0] == "PLAYER"), None)
+    if start is None:
+        return out
+    head = rows[start]
+    for raw in rows[start + 1:]:
+        if not raw or not raw[0]:
             continue
-        head = rows[start]
-        for raw in rows[start + 1:]:
-            if not raw or not raw[0]:
-                continue
-            row = dict(zip(head, raw))
-            m = re.match(r"^(.*?)\s+(C|LW|RW|D)$", row["PLAYER"].strip())
-            name, pos = (m.group(1), m.group(2)) if m else (row["PLAYER"].strip(), "")
-            key = (norm_name(name), "D" if pos == "D" else "F")
-            seen[key] = seen.get(key, 0) + 1
-            out[key] = row
+        row = dict(zip(head, raw))
+        m = re.match(r"^(.*?)\s+(C|LW|RW|D)$", row["PLAYER"].strip())
+        name, pos = (m.group(1), m.group(2)) if m else (row["PLAYER"].strip(), "")
+        key = (norm_name(name), "D" if pos == "D" else "F")
+        seen[key] = seen.get(key, 0) + 1
+        out[key] = row
     return {k: v for k, v in out.items() if seen[k] == 1}
+
+
+def load_recent_rates(date: str) -> dict:
+    """The day's last-5 export, atgs_days/<date>.l5.csv, or {} without one."""
+    path = PLAYS_DIR / f"{date}.l5.csv"
+    return _read_rate_export(path) if path.exists() else {}
+
+
+def blend_recent(rows: list[dict], recent: dict) -> int:
+    """Lean each row's shot and goal rates a little toward his last five games.
+
+    The rate is taken at the ice time he is getting in those five games, so a
+    promotion to the top line shows up even before the window catches it.
+    """
+    blended = 0
+    for r in rows:
+        s = recent.get((norm_name(r["name"]), "D" if r["pos"] == "D" else "F"))
+        if not s:
+            continue
+        try:
+            gp = int(float(s["GP"]))
+            toi = float(s.get("TOI/G") or 0) or r["toi"]
+        except (KeyError, ValueError):
+            gp, toi = 0, r["toi"]
+        if not gp:
+            continue
+        w = RECENT_WEIGHT * min(gp, 5) / 5
+        for key, col in SEASON_COLS.items():
+            try:
+                per60 = float(s.get(col) or 0)
+            except ValueError:
+                continue
+            recent_pg = per60 * toi / 60 * SEASON_SCALE.get(key, 1.0)
+            r[key] = round((1 - w) * r[key] + w * recent_pg, 3)
+        r["recent_gp"] = gp
+        blended += 1
+    return blended
+
+
+def load_season_rates() -> dict:
+    """{(name, "F"|"D"): row} from every season export in season_rates/.
+
+    Each export covers the clubs on the night it was pulled, so the files add
+    up: a later file wins for a player who appears in two.
+    """
+    out: dict = {}
+    for path in sorted(SEASON_DIR.glob("skaters-*.csv")):
+        out.update(_read_rate_export(path))
+    return out
 
 
 def blend_season(rows: list[dict], season: dict) -> int:
@@ -464,8 +518,7 @@ def reasons(r: dict) -> list[dict]:
     return [
         {"part": "volume", "label": "Shot volume",
          "text": f"{r['sog']:.1f} shots and {r['icf']:.1f} attempts a game \u2014 {top('sog')}"
-                 + (f" (his last {r['games']} games blended with his {r['season_gp']}-game 2025-26 season)"
-                    if r.get("season_gp") else "")},
+                 + _blend_note(r)},
         {"part": "quality", "label": "Shot quality",
          "text": f"{r['iscf']:.1f} scoring chances a game, {r['ihdcf']:.1f} from the inner slot, "
                  f"{r['iff']:.1f} unblocked \u2014 {top('iscf')}"},
@@ -477,6 +530,16 @@ def reasons(r: dict) -> list[dict]:
          "text": f"{int(r['g5'])} goals in his last 5 \u00b7 {r['toi']:.1f} minutes a night \u00b7 "
                  f"{r['pp_p']:.2f} power-play points a game"},
     ]
+
+
+def _blend_note(r: dict) -> str:
+    """Where the rates came from, when more than the 25-game window went in."""
+    extra = []
+    if r.get("season_gp"):
+        extra.append(f"his {r['season_gp']}-game 2025-26 season")
+    if r.get("recent_gp"):
+        extra.append(f"his last {r['recent_gp']} games")
+    return f" (his last {r['games']} games blended with {' and '.join(extra)})" if extra else ""
 
 
 def why(r: dict) -> str:
@@ -526,6 +589,10 @@ def build_sheet(date: str) -> dict:
     if season:
         n = blend_season(rows, season)
         print(f"[atgs] season rates: {n} of {len(rows)} skaters blended with 2025-26")
+    recent = load_recent_rates(date)
+    if recent:
+        n = blend_recent(rows, recent)
+        print(f"[atgs] last-5 rates: {n} of {len(rows)} skaters leaned toward their last five games")
     rows = rate(rows, slate.get("scales") or {})
     out = lineup["out"]
     rows = [r for r in rows if (norm_name(r["name"]), r["team"]) not in out]

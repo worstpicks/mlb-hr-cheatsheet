@@ -1,0 +1,19 @@
+# Wednesday 10/7 -- starting goalies and scratches, read at 7 am ET: the user's
+# goalie export (nhl-goalie-summary-2026-l5-2026-10-07.csv), RotoWire lineups +
+# injury report, DailyFaceoff starting goalies and line combinations, NHL box
+# scores. The day's last-5 skater export is 2026-10-07.l5.csv.
+
+# Murashov started 10/5; the export and RotoWire have Silovs back tonight.
+# DailyFaceoff has Murashov, unconfirmed.
+goalie PIT Arturs Silovs | expected
+goalie WSH Logan Thompson | expected
+# Blackwood started both COL games; DailyFaceoff has Wedgewood, unconfirmed.
+goalie COL Mackenzie Blackwood | expected
+goalie WPG Stuart Skinner | expected
+goalie EDM Devon Levi | confirmed
+goalie ANA Lukas Dostal | expected
+
+# Listed plays that will not dress.
+out PIT Bryan Rust | injured reserve (upper body), has missed all three PIT games
+out EDM Zach Hyman | out (undisclosed), not in Edmonton's projected lines
+out EDM Matt Savoie | long-term injured reserve (lower body), no games since April

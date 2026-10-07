@@ -70,7 +70,12 @@ skater's 25-game window is blended with his full season, converted at the ice ti
 he plays now, weighted games / (games + 50) -- ~0.62 for a full 82. The export
 counts scoring chances its own way, so ISCF is scaled by 0.78 and IHDCF by 1.12 to
 match our play-by-play counts (measured over 263 skaters on 10/6). Recent form
-(goals in the last 5) stays on the window. Drop in a newer export to update it.
+(goals in the last 5) stays on the window. Drop in a newer export to update it. Each export only covers the clubs playing the night
+it was pulled, so the files stack -- add each night's as skaters-2025-26-<date>.csv.
+
+Last 5 games: a day's last-5 export saved as `nhl_research/atgs_days/<date>.l5.csv`
+leans that night's rates toward recent form -- 25% at five games played, at the
+ice time from those five games, after the season blend.
 
 The first slate of a season pulls and caches the whole year (~90s). Every build
 after that reads `nhl_research/cache/` and takes about ten seconds.

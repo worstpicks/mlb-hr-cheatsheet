@@ -764,7 +764,9 @@
 
         var C = counts();
 
-        document.getElementById("atdResearch").href = SHEET.root + "index.html?season=" + SHEET.season + "&week=" + SHEET.week;
+        // The header button opens the Research tab on its own current week. Pinning it to this
+        // sheet's week sent readers to last week's research until the next list was posted.
+        document.getElementById("atdResearch").href = SHEET.root + "index.html";
         document.getElementById("atdBoardTitle").innerHTML = "Full board &mdash; " + C.games + " games";
 
         document.getElementById("atdCounts").innerHTML =

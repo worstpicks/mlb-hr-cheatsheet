@@ -1,0 +1,31 @@
+﻿Matchup,CLE @ CWS
+Pitcher,Daniel Espino
+Pitcher Team,CLE
+Opposing Team,CWS
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,2.2,1.13,="1-9",.111,.444,0.333,1,0,0,1,36.4,2,.273,.717
+Batting Second,2.1,1.29,="3-10",.300,.300,0.000,0,0,0,1,50.0,0,.300,.600
+Batting Third,1.1,2.25,="1-5",.200,.800,0.600,1,0,0,2,14.3,2,.429,1.229
+Batting Fourth,2.0,0.50,="1-7",.143,.571,0.428,1,0,0,3,42.9,0,.143,.714
+Batting Fifth,1.1,1.50,="2-6",.333,.500,0.167,0,1,0,1,16.7,0,.333,.833
+Batting Sixth,1.1,0.75,="0-4",.000,.000,0.000,0,0,0,0,80.0,1,.200,.200
+Batting Seventh,1.1,1.50,="1-5",.200,.200,0.000,0,0,0,0,33.3,1,.333,.533
+Batting Eighth,1.2,0.60,="1-6",.167,.167,0.000,0,0,0,0,50.0,0,.167,.334
+Batting Ninth,1.1,2.25,="2-6",.333,.333,0.000,0,0,0,0,28.6,1,.429,.762
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Sam Antonacci LHB,Batting First ​,="92-346",.266,.379,0.113,6,17,2,31,14.9,34,.363,.742
+Chase Meidroth RHB,Batting First ​,="47-164",.287,.506,0.219,8,12,0,18,22.3,20,.364,.870
+Tommy Pham RHB,Batting Second ​,="1-11",.091,.091,0.000,0,0,0,0,20.0,4,.333,.424
+Kyle Teel LHB,Batting Second ​,="7-27",.259,.407,0.148,1,1,0,8,30.8,8,.447,.854
+Munetaka Murakami LHB,Batting Second ​,="70-328",.213,.457,0.244,22,14,0,48,34.6,66,.348,.805
+Miguel Vargas RHB,Batting Third ​,="97-387",.251,.463,0.212,20,22,0,53,18.8,65,.361,.824
+Randal Grichuk RHB,Batting Fourth ​,="23-59",.390,.712,0.322,4,7,0,14,18.8,5,.438,1.150
+Andrew Benintendi LHB,Batting Fourth ​,="21-95",.221,.379,0.158,3,6,0,13,19.0,9,.286,.665
+Colson Montgomery LHB,Batting Fourth ​,="66-300",.220,.450,0.230,19,12,0,49,34.5,28,.301,.751
+Braden Montgomery SHB,Batting Fifth ​,="21-108",.194,.278,0.084,1,4,1,11,18.2,13,.281,.559
+Brenton Doyle RHB,Batting Seventh ​,="9-50",.180,.260,0.080,1,1,0,1,33.3,4,.241,.501
+Tristan Peters LHB,Batting Eighth ​,="52-181",.287,.536,0.249,9,12,3,31,16.5,14,.338,.874
+Jake Rogers RHB,Batting Ninth ​,="17-114",.149,.228,0.079,1,4,1,8,29.1,15,.248,.476
+Luisangel Acuna RHB,Batting Ninth ​,="20-89",.225,.281,0.056,1,2,0,5,16.7,4,.263,.544

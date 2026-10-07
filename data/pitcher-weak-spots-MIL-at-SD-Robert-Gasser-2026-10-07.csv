@@ -1,0 +1,32 @@
+﻿Matchup,MIL @ SD
+Pitcher,Robert Gasser
+Pitcher Team,MIL
+Opposing Team,SD
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,="8-56",.143,.232,0.089,1,2,0,4,19.4,.226,.458
+Batting Second,="11-52",.212,.385,0.173,3,0,0,4,31.1,.328,.713
+Batting Third,="13-48",.271,.333,0.062,0,3,0,3,22.2,.333,.666
+Batting Fourth,="14-47",.298,.574,0.276,2,7,0,13,17.6,.353,.927
+Batting Fifth,="8-45",.178,.356,0.178,1,5,0,3,19.6,.275,.631
+Batting Sixth,="10-42",.238,.405,0.167,1,2,1,1,22.9,.333,.738
+Batting Seventh,="11-41",.268,.537,0.269,3,2,0,8,23.4,.362,.899
+Batting Eighth,="7-44",.159,.250,0.091,1,1,0,1,17.8,.159,.409
+Batting Ninth,="13-40",.325,.575,0.250,3,1,0,6,25.0,.372,.947
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Fernando Tatis Jr. RHB,Batting First ​,="145-483",.300,.522,0.222,25,28,2,69,16.6,44,.364,.886
+Jake Cronenworth LHB,Batting Second ​,="33-144",.229,.319,0.090,3,4,0,15,27.7,14,.297,.616
+Samad Taylor RHB,Batting Second ​,="16-53",.302,.340,0.038,0,0,1,3,28.1,9,.413,.753
+Dustin Harris LHB,Batting Second ​,="15-52",.288,.404,0.116,0,2,2,11,13.6,3,.339,.743
+Manny Machado RHB,Batting Third ​,="85-381",.223,.409,0.186,19,14,0,55,20.8,50,.311,.720
+Ty France RHB,Batting Fourth ​,="72-228",.316,.496,0.180,9,14,0,37,20.5,25,.390,.886
+Xander Bogaerts RHB,Batting Fifth ​,="40-167",.240,.311,0.071,3,3,0,16,19.4,17,.312,.623
+Jackson Merrill LHB,Batting Fifth ​,="79-262",.302,.557,0.255,16,11,4,49,23.2,16,.343,.900
+Miguel Andujar RHB,Batting Sixth ​,="16-57",.281,.439,0.158,1,4,1,9,14.8,3,.328,.767
+Gavin Sheets LHB,Batting Sixth ​,="15-84",.179,.345,0.166,3,5,0,11,26.7,5,.233,.578
+Luis Campusano RHB,Batting Sixth ​,="17-72",.236,.347,0.111,2,2,0,9,20.7,13,.368,.715
+Austin Hays RHB,Batting Seventh ​,="10-30",.333,.467,0.134,1,1,0,4,28.1,2,.375,.842
+Freddy Fermin RHB,Batting Ninth ​,="23-110",.209,.336,0.127,3,5,0,13,22.2,10,.276,.612
+Jase Bowen RHB,Batting Ninth ​,="5-33",.152,.333,0.181,1,1,1,1,45.9,1,.200,.533
+Ethan Salas LHB,Batting Ninth ​,="9-27",.333,.630,0.297,2,0,1,5,14.3,1,.357,.987

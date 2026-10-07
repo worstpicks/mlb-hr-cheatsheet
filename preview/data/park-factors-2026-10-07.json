@@ -1,0 +1,75 @@
+{
+  "source": "ballpark-pal",
+  "source_label": "Ballpark Pal",
+  "source_file": "ParkFactors_2026-10-07 00_00_00.csv",
+  "source_date": "2026-10-07",
+  "hand_date": "2026-10-07",
+  "by_game": {
+    "LAD @ ATL": {
+      "game": "LAD @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 3,
+      "stadium_pct": -2,
+      "weather_pct": 5
+    },
+    "CLE @ CHW": {
+      "game": "CLE @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 0
+    },
+    "TB @ NYY": {
+      "game": "TB @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 9,
+      "stadium_pct": 6,
+      "weather_pct": 3
+    },
+    "MIL @ SD": {
+      "game": "MIL @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": -5,
+      "stadium_pct": -3,
+      "weather_pct": -2
+    }
+  },
+  "by_venue": {
+    "truist park": {
+      "game": "LAD @ ATL",
+      "venue": "Truist Park",
+      "venue_key": "truist park",
+      "hr_pct": 3,
+      "stadium_pct": -2,
+      "weather_pct": 5
+    },
+    "rate field": {
+      "game": "CLE @ CHW",
+      "venue": "Rate Field",
+      "venue_key": "rate field",
+      "hr_pct": -4,
+      "stadium_pct": -4,
+      "weather_pct": 0
+    },
+    "yankee stadium": {
+      "game": "TB @ NYY",
+      "venue": "Yankee Stadium",
+      "venue_key": "yankee stadium",
+      "hr_pct": 9,
+      "stadium_pct": 6,
+      "weather_pct": 3
+    },
+    "petco park": {
+      "game": "MIL @ SD",
+      "venue": "Petco Park",
+      "venue_key": "petco park",
+      "hr_pct": -5,
+      "stadium_pct": -3,
+      "weather_pct": -2
+    }
+  }
+}

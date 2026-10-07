@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-30T13:21:50Z",
+  "updated": "2026-10-07T12:45:39Z",
   "entries": [
     {
       "date": "2026-05-29",
@@ -1563,11 +1563,26 @@
       "o05": {
         "player": "Xander Bogaerts",
         "matchup": "CHC @ SD",
-        "result": "pending"
+        "result": "loss",
+        "hr": 0
       },
       "o15": {
         "player": "Lucas Spence",
         "matchup": "CWS @ HOU",
+        "result": "loss",
+        "hr": 0
+      }
+    },
+    {
+      "date": "2026-10-07",
+      "o05": {
+        "player": "William Contreras",
+        "matchup": "MIL @ SD",
+        "result": "pending"
+      },
+      "o15": {
+        "player": "Ben Rice",
+        "matchup": "TB @ NYY",
         "result": "pending"
       }
     }

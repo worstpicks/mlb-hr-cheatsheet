@@ -173,7 +173,11 @@ def resolve_pitcher(pitcher_map: dict, chip: str):
     key = chip.lower().strip()
     if key in pitcher_map:
         return pitcher_map[key]
-    matches = [v for k, v in pitcher_map.items() if key in k or k.endswith(" " + key)]
+    # Whole words only. A bare substring test let the chip "Martin" (Davis Martin, a
+    # PRIM arm with no risk row on 2026-10-07) resolve to "nick martinez", so the
+    # Cleveland bats and Martin's game header printed Nick Martinez's HR risk.
+    words = f" {key} "
+    matches = [v for k, v in pitcher_map.items() if words in f" {k} "]
     if len(matches) == 1:
         return matches[0]
     last = key.split()[-1]

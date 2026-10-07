@@ -1,0 +1,32 @@
+﻿Matchup,TB @ NYY
+Pitcher,Nick Martinez
+Pitcher Team,TB
+Opposing Team,NYY
+
+SPLIT,IP,WHIP,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Batting First,21.2,1.34,="24-88",.273,.398,0.125,1,8,0,4,18.1,5,.309,.707
+Batting Second,20.2,1.45,="27-88",.307,.523,0.216,5,4,0,11,15.2,3,.337,.860
+Batting Third,22.1,1.12,="23-86",.267,.430,0.163,3,3,1,10,11.2,2,.292,.722
+Batting Fourth,18.0,1.67,="26-81",.321,.531,0.210,4,5,0,10,22.4,4,.353,.884
+Batting Fifth,21.1,0.84,="15-77",.195,.338,0.143,3,2,0,5,12.5,3,.225,.563
+Batting Sixth,22.0,0.77,="14-72",.194,.306,0.112,1,3,1,6,10.3,3,.224,.530
+Batting Seventh,16.1,1.47,="21-69",.304,.493,0.189,3,4,0,5,15.3,3,.333,.826
+Batting Eighth,19.1,0.57,="9-65",.138,.169,0.031,0,2,0,0,13.4,2,.164,.333
+Batting Ninth,17.0,0.76,="12-61",.197,.344,0.147,2,3,0,6,16.9,1,.219,.563
+
+PLAYER,SPLIT,H-AB,AVG,SLG,ISO,HR,2B,3B,RBI,K%,BB,OBP,OPS
+Paul Goldschmidt RHB,Batting First ​,="41-147",.279,.517,0.238,9,6,1,23,19.3,17,.355,.872
+Trent Grisham LHB,Batting First ​,="61-307",.199,.378,0.179,13,14,1,36,17.0,47,.303,.681
+Luis Garcia Jr. LHB,Batting Second ​,="84-280",.300,.607,0.307,20,16,5,66,17.5,11,.325,.932
+Ben Rice LHB,Batting Second ​,="81-330",.245,.482,0.237,19,15,3,52,25.2,39,.330,.812
+Heliot Ramos RHB,Batting Third ​,="29-133",.218,.338,0.120,3,5,1,15,26.8,18,.320,.658
+Cody Bellinger LHB,Batting Fourth ​,="53-214",.248,.411,0.163,7,14,0,32,18.1,32,.341,.752
+Giancarlo Stanton RHB,Batting Fifth ​,="13-47",.277,.319,0.042,0,2,0,7,28.0,3,.320,.639
+Jazz Chisholm Jr. LHB,Batting Sixth ​,="40-188",.213,.340,0.127,5,7,1,18,31.6,19,.287,.627
+Spencer Jones LHB,Batting Sixth ​,="19-80",.238,.363,0.125,2,4,0,7,40.9,8,.307,.670
+George Lombard Jr. RHB,Batting Sixth ​,="12-56",.214,.429,0.215,3,3,0,10,18.8,5,.286,.715
+Anthony Volpe RHB,Batting Seventh ​,="19-69",.275,.333,0.058,0,4,0,8,28.4,5,.324,.657
+Ryan McMahon LHB,Batting Eighth ​,="31-133",.233,.406,0.173,5,8,0,22,28.5,9,.285,.691
+Ali Sanchez RHB,Batting Ninth ​,="15-61",.246,.328,0.082,1,2,0,7,28.8,1,.277,.605
+Austin Wells LHB,Batting Ninth ​,="27-176",.153,.290,0.137,7,3,0,14,27.2,15,.227,.517
+Jose Caballero RHB,Batting Ninth ​,="34-141",.241,.333,0.092,3,4,0,13,20.0,9,.305,.638

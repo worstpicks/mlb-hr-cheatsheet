@@ -2,11 +2,18 @@
   "version": 1,
   "sheets": [
     {
+      "key": "2026-W5",
+      "season": 2026,
+      "week": 5,
+      "label": "Week 5 — current week",
+      "href": "atd.html"
+    },
+    {
       "key": "2026-W4",
       "season": 2026,
       "week": 4,
-      "label": "Week 4 — current week",
-      "href": "atd.html"
+      "label": "Week 4",
+      "href": "archive/2026-week-4.html"
     },
     {
       "key": "2026-W3",

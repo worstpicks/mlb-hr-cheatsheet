@@ -1,0 +1,96 @@
+# Week 5 ATD list, as exported from the NFL Research Prop List.
+# name | depth slot | team | opponent | over line | market (td = any touchdown, rush_td = QB rushing TD)
+# The pasted list was cut off mid-word on its last play (Colby Parkinson); it is read
+# as Anytime TD, like every other non-QB play on the list.
+TB@DAL
+Bucky Irving | RB1 | TB | DAL | 0.5 | td
+Cade Otton | TE1 | TB | DAL | 0.5 | td
+Emeka Egbuka | WR1 | TB | DAL | 0.5 | td
+Javonte Williams | RB1 | DAL | TB | 0.5 | td
+CeeDee Lamb | WR1 | DAL | TB | 0.5 | td
+George Pickens | WR2 | DAL | TB | 0.5 | td
+Jake Ferguson | TE1 | DAL | TB | 0.5 | td
+PHI@JAX
+DeVonta Smith | WR1 | PHI | JAX | 0.5 | td
+Dallas Goedert | TE1 | PHI | JAX | 0.5 | td
+Parker Washington | WR1 | JAX | PHI | 0.5 | td
+Jakobi Meyers | WR2 | JAX | PHI | 0.5 | td
+CHI@GB
+MarShawn Lloyd | RB1 | GB | CHI | 0.5 | td
+Christian Watson | WR1 | GB | CHI | 0.5 | td
+Tucker Kraft | TE1 | GB | CHI | 0.5 | td
+Matthew Golden | WR2 | GB | CHI | 0.5 | td
+D'Andre Swift | RB1 | CHI | GB | 0.5 | td
+Kyle Monangai | RB2 | CHI | GB | 0.5 | td
+Rome Odunze | WR1 | CHI | GB | 0.5 | td
+Kalif Raymond | WR3 | CHI | GB | 0.5 | td
+Colston Loveland | TE1 | CHI | GB | 0.5 | td
+HOU@TEN
+David Montgomery | RB1 | HOU | TEN | 0.5 | td
+Nico Collins | WR1 | HOU | TEN | 0.5 | td
+Dalton Schultz | TE1 | HOU | TEN | 0.5 | td
+Tony Pollard | RB1 | TEN | HOU | 0.5 | td
+Carnell Tate | WR1 | TEN | HOU | 0.5 | td
+CIN@MIA
+Chase Brown | RB1 | CIN | MIA | 0.5 | td
+Samaje Perine | RB2 | CIN | MIA | 0.5 | td
+Ja'Marr Chase | WR1 | CIN | MIA | 0.5 | td
+Tee Higgins | WR2 | CIN | MIA | 0.5 | td
+Mike Gesicki | TE1 | CIN | MIA | 0.5 | td
+Chris Bell | WR3 | MIA | CIN | 0.5 | td
+LV@NE
+Ashton Jeanty | RB1 | LV | NE | 0.5 | td
+Cody White | WR3 | LV | NE | 0.5 | td
+Brock Bowers | TE1 | LV | NE | 0.5 | td
+MIN@NO
+Aaron Jones Sr. | RB1 | MIN | NO | 0.5 | td
+Justin Jefferson | WR1 | MIN | NO | 0.5 | td
+T.J. Hockenson | TE1 | MIN | NO | 0.5 | td
+Jordan Addison | WR2 | MIN | NO | 0.5 | td
+Chris Olave | WR1 | NO | MIN | 0.5 | td
+CLE@NYJ
+Breece Hall | RB1 | NYJ | CLE | 0.5 | td
+Garrett Wilson | WR1 | NYJ | CLE | 0.5 | td
+Quinshon Judkins | RB1 | CLE | NYJ | 0.5 | td
+Denzel Boston | WR1 | CLE | NYJ | 0.5 | td
+Harold Fannin Jr. | TE1 | CLE | NYJ | 0.5 | td
+IND@PIT
+Jonathan Taylor | RB1 | IND | PIT | 1.5 | td
+Keenan Allen | WR2 | IND | PIT | 0.5 | td
+Tyler Warren | TE1 | IND | PIT | 0.5 | td
+NYG@WSH
+Cam Skattebo | RB1 | NYG | WSH | 0.5 | td
+Malik Nabers | WR1 | NYG | WSH | 0.5 | td
+Isaiah Likely | TE1 | NYG | WSH | 0.5 | td
+Theo Johnson | TE2 | NYG | WSH | 0.5 | td
+Jacory Croskey-Merritt | RB1 | WSH | NYG | 0.5 | td
+Terry McLaurin | WR1 | WSH | NYG | 0.5 | td
+Stefon Diggs | WR2 | WSH | NYG | 0.5 | td
+DEN@LAC
+Omarion Hampton | RB1 | LAC | DEN | 0.5 | td
+Ladd McConkey | WR1 | LAC | DEN | 0.5 | td
+Quentin Johnston | WR2 | LAC | DEN | 0.5 | td
+Jaylen Waddle | WR1 | DEN | LAC | 0.5 | td
+DET@ARI
+Jahmyr Gibbs | RB1 | DET | ARI | 0.5 | td
+Amon-Ra St. Brown | WR1 | DET | ARI | 0.5 | td
+Sam LaPorta | TE1 | DET | ARI | 0.5 | td
+SF@SEA
+Kaelon Black | RB2 | SF | SEA | 0.5 | td
+George Kittle | TE1 | SF | SEA | 0.5 | td
+Jaxon Smith-Njigba | WR1 | SEA | SF | 0.5 | td
+AJ Barner | TE1 | SEA | SF | 0.5 | td
+BAL@ATL
+Bijan Robinson | RB1 | ATL | BAL | 0.5 | td
+Drake London | WR1 | ATL | BAL | 0.5 | td
+Kyle Pitts Sr. | TE1 | ATL | BAL | 0.5 | td
+Zay Flowers | WR1 | BAL | ATL | 0.5 | td
+Mark Andrews | TE1 | BAL | ATL | 0.5 | td
+BUF@LAR
+Josh Allen | QB1 | BUF | LAR | 0.5 | rush_td
+James Cook III | RB1 | BUF | LAR | 0.5 | td
+DJ Moore | WR1 | BUF | LAR | 0.5 | td
+Khalil Shakir | WR2 | BUF | LAR | 0.5 | td
+Kyren Williams | RB1 | LAR | BUF | 0.5 | td
+Puka Nacua | WR1 | LAR | BUF | 0.5 | td
+Colby Parkinson | TE1 | LAR | BUF | 0.5 | td

@@ -16,7 +16,7 @@
     <title>NBA Research — Worst Pickz</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
-    <link rel="stylesheet" href="nba-research.css?v=4">
+    <link rel="stylesheet" href="nba-research.css?v=5">
     <script>
         (function () {
             if (location.protocol !== "file:") return;
@@ -86,7 +86,7 @@
                         <h2 class="nrs-section-title nrs-section-title--matchup" id="matchup">—</h2>
                         <span class="nrs-matchup-sub" id="context"></span>
                     </div>
-                    <div class="nrs-matchup-bar__actions">
+                    <div class="nrs-matchup-bar__actions"><label class="nba-roster-label">Players <select id="roster"><option value="15">Rotation · 15+ MIN</option><option value="20">Core · 20+ MIN</option><option value="0">All players</option></select></label>
                         <button type="button" class="nrs-btn nrs-track-open" id="props-toggle" aria-expanded="false">
                             Prop List <span class="nrs-track-count" id="prop-count">0</span>
                         </button>
@@ -112,6 +112,6 @@
 
 <details class="nba-method"><summary>Data & calculation details</summary><p>ESPN final box scores, current rosters and schedule. DNPs are excluded. Auto uses current regular-season appearances first, fills remaining places with current preseason, and uses previous regular-season games only when needed. After 10 current regular-season appearances, no preseason remains in a last-10 window. Venue filtering applies before the window. Historical logs can include a previous club; every row identifies the team.</p><p>Estimated usage = (FGA + 0.44 × FTA + turnovers) × team minutes ÷ 5, divided by player minutes × team possessions used. This box-score estimate is not official tracking usage. Possessions use FGA + 0.44 × FTA − offensive rebounds + turnovers. Game possession estimates are unadjusted for overtime and are labeled accordingly. Shooting percentages use summed makes ÷ summed attempts. No unverified starter prediction or player prop price is supplied.</p><a href="https://www.espn.com/nba/scoreboard" target="_blank" rel="noopener">ESPN NBA source</a></details>
 <dialog id="player-dialog" class="nba-dialog"><header><div><h2 id="player-name"></h2><p id="player-sub" class="nba-muted"></p></div><button id="close" class="nrs-btn" aria-label="Close player details">✕</button></header><nav class="nba-dialog-tabs" role="tablist"><button data-tab="read" role="tab" aria-selected="true">Why this player?</button><button data-tab="matchup" role="tab" aria-selected="false">Matchup</button><button data-tab="logs" role="tab" aria-selected="false">Game logs</button><button data-tab="prop" role="tab" aria-selected="false">Prop research</button></nav><div id="dialog-body"></div></dialog>
-    <script src="nba-research.js?v=4" defer></script>
+    <script src="nba-research.js?v=5" defer></script>
 </body>
 </html>

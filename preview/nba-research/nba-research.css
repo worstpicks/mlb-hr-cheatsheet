@@ -38,3 +38,5 @@ html.theme-light .nba-table td.below { background:#fecdd3; color:#881337; }
 .nba-venue { color:var(--nrs-muted); font-size:11px; font-weight:400; }
 .nba-table .nrs-log-week { font-weight:500; }
 .nba-pre { margin-left:6px; font-size:9px; color:var(--nrs-muted); }
+
+.nba-roster-label { display:flex; align-items:center; gap:7px; color:var(--nrs-muted); font-size:12px; } .nba-roster-label select { padding:7px 9px; border-radius:7px; border:1px solid var(--nrs-border); background:var(--nrs-panel); color:var(--nrs-text); }

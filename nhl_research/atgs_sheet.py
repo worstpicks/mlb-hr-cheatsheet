@@ -95,8 +95,14 @@ def _read_rate_export(path: Path) -> dict:
     """{(name, "F"|"D"): row} from one per-60 export.
 
     The export (PLAYER = "Brady Tkachuk LW", per-60 rates) sits under a few
-    lines of settings; the table starts at its PLAYER header. Two players with
-    one name and one position group are both dropped rather than guessed.
+    lines of settings; the table starts at its PLAYER header. A player on the
+    injury report carries a tag after his position ("Macklin Celebrini C DTD"),
+    kept as row["_status"]. Two players with one name and one position group
+    are both dropped rather than guessed.
+
+    Each row is also filed under ("~" + first initial + surname, group), so a
+    first name spelled two ways ("Max" / "Maxim Shabanov") still finds him --
+    see rate_row().
     """
     out: dict = {}
     seen: dict = {}
@@ -110,12 +116,26 @@ def _read_rate_export(path: Path) -> dict:
         if not raw or not raw[0]:
             continue
         row = dict(zip(head, raw))
-        m = re.match(r"^(.*?)\s+(C|LW|RW|D)$", row["PLAYER"].strip())
+        m = re.match(r"^(.*?)\s+(C|LW|RW|D)(?:\s+([A-Z][A-Za-z-]*))?$", row["PLAYER"].strip())
         name, pos = (m.group(1), m.group(2)) if m else (row["PLAYER"].strip(), "")
-        key = (norm_name(name), "D" if pos == "D" else "F")
-        seen[key] = seen.get(key, 0) + 1
-        out[key] = row
+        row["_status"] = (m.group(3) or "") if m else ""
+        group = "D" if pos == "D" else "F"
+        for key in ((norm_name(name), group), (_short_key(name), group)):
+            seen[key] = seen.get(key, 0) + 1
+            out[key] = row
     return {k: v for k, v in out.items() if seen[k] == 1}
+
+
+def _short_key(name: str) -> str:
+    """First initial + surname, the fallback key: "~mshabanov"."""
+    parts = (name or "").split()
+    return "~" + norm_name((parts[0][:1] if parts else "") + (parts[-1] if parts else ""))
+
+
+def rate_row(rates: dict, r: dict) -> dict | None:
+    """This row's export line: by full name, else by initial + surname."""
+    group = "D" if r["pos"] == "D" else "F"
+    return rates.get((norm_name(r["name"]), group)) or rates.get((_short_key(r["name"]), group))
 
 
 def load_recent_rates(date: str) -> dict:
@@ -132,9 +152,11 @@ def blend_recent(rows: list[dict], recent: dict) -> int:
     """
     blended = 0
     for r in rows:
-        s = recent.get((norm_name(r["name"]), "D" if r["pos"] == "D" else "F"))
+        s = rate_row(recent, r)
         if not s:
             continue
+        if s.get("_status"):
+            r["csv_status"] = s["_status"]
         try:
             gp = int(float(s["GP"]))
             toi = float(s.get("TOI/G") or 0) or r["toi"]
@@ -178,7 +200,7 @@ def blend_season(rows: list[dict], season: dict) -> int:
     """
     blended = 0
     for r in rows:
-        s = season.get((norm_name(r["name"]), "D" if r["pos"] == "D" else "F"))
+        s = rate_row(season, r)
         try:
             gp = int(float(s["GP"])) if s else 0
         except (KeyError, ValueError):
@@ -593,6 +615,9 @@ def build_sheet(date: str) -> dict:
     if recent:
         n = blend_recent(rows, recent)
         print(f"[atgs] last-5 rates: {n} of {len(rows)} skaters leaned toward their last five games")
+        tagged = [f"{r['name']} ({r['team']}) {r['csv_status']}" for r in rows if r.get("csv_status")]
+        if tagged:
+            print(f"[atgs] the export tags as injured: {', '.join(tagged)} -- check the lineup file")
     rows = rate(rows, slate.get("scales") or {})
     out = lineup["out"]
     rows = [r for r in rows if (norm_name(r["name"]), r["team"]) not in out]

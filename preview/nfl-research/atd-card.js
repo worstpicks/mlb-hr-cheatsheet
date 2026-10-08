@@ -134,7 +134,8 @@
         var tdSub = small ? "too few games to rate"
             : pl && pl.line >= 1.5 && pl.m && pl.m.td2 != null
             ? Math.ceil(pl.line) + "+ TD: " + pl.m.td2 + "%"
-            : (rushOnly ? "at least one rushing TD" : "at least one touchdown");
+            : (rushOnly ? "at least one rushing TD" : "at least one touchdown") +
+              (pl && pl.m && pl.m.book ? " · best " + pl.m.book : "");
         return '<div class="nrs-pf-hero">' +
             tile("Grade", p.grade == null ? "—" : p.grade, p.low_volume ? "discounted: low volume" : "50 is neutral for him",
                  "nrs-pf-grade " + gradeClass(p.grade)) +

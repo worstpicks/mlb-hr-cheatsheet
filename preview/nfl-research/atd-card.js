@@ -169,7 +169,7 @@
                        "</b> vs zone (" + p.cov.zone_t + ")" + (d.def_man != null ? " · " + esc(p.opp) + " plays man " + Math.round(d.def_man) + "%" : ""));
         }
         var stats = Object.keys(p.proj || {});
-        return '<h4 class="nrs-pf-h">Why ' + (p.grade == null ? "no grade" : "a " + p.grade) + "</h4>" +
+        return window.NFLInsights.summary(SHEET, p.player_id) + window.NFLInsights.bars(SHEET, p.player_id) + '<h4 class="nrs-pf-h">Why ' + (p.grade == null ? "no grade" : "a " + p.grade) + "</h4>" +
             '<ul class="nrs-why">' + (reasons || "<li>No components available.</li>") + "</ul>" +
             (facts.length ? '<ul class="nrs-bd-lines">' + facts.map(function (f) { return "<li>" + f + "</li>"; }).join("") + "</ul>" : "") +
             (stats.length ? '<p class="nrs-bd-proj">Projection: ' + stats.map(function (s) {
@@ -250,7 +250,7 @@
         if (p.headshot) { photo.src = thumb(p.headshot); photo.hidden = false; } else { photo.hidden = true; }
 
         var status = { q: "Q", d: "D", out: "Out" }[pl && pl.st];
-        $("atdCardName").innerHTML = esc(p.name) + '<span class="nrs-depth-badge">' + esc(p.role) + "</span>" +
+        $("atdCardName").innerHTML = esc(p.name) + window.NFLInsights.arrow(SHEET, p.player_id) + '<span class="nrs-depth-badge">' + esc(p.role) + "</span>" +
             (status ? '<span class="nrs-bb nrs-bb--inj" title="' + esc((pl.stl || "") + (pl.inj ? " — " + pl.inj : "")) + '">' + status + "</span>" : "") +
             (p.low_volume ? '<span class="nrs-bb nrs-bb--low">Low vol</span>' : "") +
             (p.new_team ? '<span class="nrs-bb nrs-bb--new">New team</span>' : "");

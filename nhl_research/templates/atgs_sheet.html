@@ -942,7 +942,13 @@
        with one scorer shows one card-sized card instead of a page-wide strip. */
     #sheetScoredList { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
     .sheet-scored-card .sheet-play__head .chip { margin-left: auto; flex-shrink: 0; }
-    </style>
+
+.nhl-trend-arrow { display:inline-block; position:relative; margin-left:6px; font-size:21px; font-weight:900; line-height:1; cursor:help; }
+.nhl-trend-arrow.is-up { color:#22c55e; }
+.nhl-trend-arrow.is-down { color:#ef4444; }
+.nhl-trend-arrow::after { content:attr(data-tooltip); position:absolute; z-index:100; top:calc(100% + 8px); right:0; width:210px; padding:10px 12px; border-radius:8px; background:#0f172a; color:#f8fafc; border:1px solid #475569; font-size:12px; font-weight:400; line-height:1.5; white-space:normal; text-align:left; pointer-events:none; visibility:hidden; }
+.nhl-trend-arrow:hover::after,.nhl-trend-arrow:focus::after { visibility:visible; }
+.nhl-detail { margin:18px 0; padding:16px; border:1px solid rgba(148,163,184,.3); border-radius:12px; } .nhl-detail h4 { margin:0 0 10px; } .nhl-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } .nhl-detail-tile { padding:12px; background:rgba(148,163,184,.08); border-radius:8px; } .nhl-detail-tile strong,.nhl-detail-tile small { display:block; margin-top:7px; } .nhl-detail-tile strong { font-size:21px; } @media(max-width:500px) { .nhl-detail-grid { grid-template-columns:1fr; } } </style>
     <!-- the player card: the football sheet's dialog, with hockey's accents on top -->
     <link rel="stylesheet" href="__ROOT__../nfl-research/atd-card.css?v=2">
     <link rel="stylesheet" href="__ROOT__atgs-card.css?v=4">
@@ -1038,6 +1044,7 @@
         <footer class="sheet-foot" id="sheetFoot"></footer>
     </div>
 
+    <script src="__ROOT__atgs-insights.js?v=2"></script>
     <script>
     (function () {
         "use strict";
@@ -1052,7 +1059,7 @@
         function nameLink(pl) {
             if (!pl) return "";
             return '<button type="button" class="sheet-play__name" data-pid="' + esc(pl.id) + '">' +
-                esc(pl.name) + "</button>";
+                esc(pl.name) + window.NHLInsights.arrow(pl) + "</button>";
         }
 
         var esc = function (s) {
@@ -1164,7 +1171,7 @@
             var W = SHEET.weights || {};
             return '<div class="sheet-parts">' + MODEL.map(function (m) {
                 var got = (pl.parts || {})[m[1]] || 0, max = W[m[1]] || 1;
-                return '<span class="sheet-part" title="' + esc(m[0]) + ": " + got + " of " + max + '">' +
+                return '<span class="sheet-part" title="' + esc(m[0]) + ": " + got + " of " + max + ". " + esc(window.NHLInsights.tooltip(pl, m[1])) + '">' +
                     '<span class="sheet-part__bar"><i style="width:' + Math.round(100 * got / max) + '%"></i></span>' +
                     '<span class="sheet-part__label">' + esc(PART_SHORT[m[1]]) + "</span></span>";
             }).join("") + "</div>";
@@ -1768,6 +1775,6 @@
             .catch(function () { /* opened standalone: the dropdown stays a single date */ });
     })();
     </script>
-    <script src="__ROOT__atgs-card.js?v=7" defer></script>
+    <script src="__ROOT__atgs-card.js?v=9" defer></script>
 </body>
 </html>

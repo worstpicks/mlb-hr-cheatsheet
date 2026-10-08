@@ -351,6 +351,24 @@
     .atd-game__line { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
     .atd-inj { font-size: 0.7rem; color: #fdba74; line-height: 1.4; }
     .atd-play.is-out { opacity: 0.6; }
+    .atd-player-why { margin: 12px 0 4px; font-size: 12px; line-height: 1.6; }
+    .atd-player-why > b { font-size: 12px; }
+    .atd-player-why p { margin: 4px 0; }
+    .atd-workload { color: var(--muted, #94a3b8); }
+    .atd-factor-bars { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .atd-factor { min-width: 0; font-size: 8px; line-height: 1.4; text-transform: uppercase; letter-spacing: 0; color: #94a3b8; cursor: help; }
+    .atd-factor > span { display: block; max-width: 100%; overflow-wrap: anywhere; }
+    .atd-factor-track { height: 3px; background: rgba(148,163,184,.25); margin-bottom: 5px; }
+    .atd-factor-track span { display: block; height: 100%; background: #38bdf8; }
+    .atd-factor.is-missing { opacity: .55; }
+    html.theme-light .atd-workload, html.theme-light .atd-factor { color: #475569; }
+    .atd-trend-arrow { position: relative; cursor: help; display: inline-block; font-size: 21px; font-weight: 900; line-height: 1; margin-left: 5px; flex-shrink: 0; }
+    .atd-trend-arrow::after { content: attr(data-tooltip); position: absolute; z-index: 100; top: calc(100% + 8px); right: 0; width: 210px; padding: 10px 12px; border-radius: 8px; background: #0f172a; color: #f8fafc; border: 1px solid #475569; box-shadow: 0 4px 16px rgba(0,0,0,.3); font-size: 12px; font-weight: 400; line-height: 1.5; white-space: normal; text-align: left; pointer-events: none; visibility: hidden; opacity: 0; }
+    .atd-trend-arrow:hover::after, .atd-trend-arrow:focus::after { visibility: visible; opacity: 1; }
+    .atd-trend-arrow.is-up { color: #22c55e; }
+    .atd-trend-arrow.is-down { color: #ef4444; }
+    html.theme-light .atd-trend-arrow.is-up { color: #15803d; }
+    html.theme-light .atd-trend-arrow.is-down { color: #dc2626; }
     .atd-value-verdict { font-weight: 700; color: #34d399; margin: 14px 0 10px; }
     html.theme-light .atd-value-verdict { color: #065f46; }
     .atd-chance__label { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; margin: 8px 0 4px; }
@@ -505,6 +523,7 @@
         </p>
     </div>
 
+    <script src="__ROOT__atd-insights.js?v=3"></script>
     <script>
     (function () {
         "use strict";
@@ -688,13 +707,14 @@
             return '<div class="atd-play' + (fav ? " is-fav" : "") + (pl.st === "out" ? " is-out" : "") + '" data-tags="' + esc(tags.join(" ")) + '" data-need="' + Math.ceil(pl.line || 0.5) +
                      '" data-mk="' + esc(pl.mk) + '">' +
                      '<div class="atd-play__top">' +
-                       (pl.id ? '<a class="atd-play__name" data-pid="' + esc(pl.id) + '" href="' + cardHref(pl) + '" title="Open ' + esc(pl.n) + '\'s player card">' + esc(pl.n) + "</a>"
+                       (pl.id ? '<a class="atd-play__name" data-pid="' + esc(pl.id) + '" href="' + cardHref(pl) + '" title="Open ' + esc(pl.n) + '\'s player card">' + esc(pl.n) + window.NFLInsights.arrow(SHEET, pl.id) + "</a>"
                               : '<span class="atd-play__name">' + esc(pl.n) + "</span>") +
                        '<span class="' + posClass(pl.p) + '">' + esc(pl.p) + "</span>" +
                        statusChips(pl) +
                      "</div>" +
                      (pl.t.length || tend ? '<div class="atd-play__tags">' + chips(pl.t) + tend + "</div>" : "") +
                      metrics(pl) +
+                     window.NFLInsights.bars(SHEET, pl.id) +
                      (pl.st && pl.inj ? '<div class="atd-inj">' + esc(pl.inj) + "</div>" : "") +
                    "</div>";
         }
@@ -750,12 +770,12 @@
                 return '<article class="atd-top-card">' +
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
-                           '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) + '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                           '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) + '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
-                         metrics(f.pl) +
+                         metrics(f.pl) + window.NFLInsights.bars(SHEET, f.pl.id) +
                          '<p class="atd-why">' + esc(row.why) + "</p>" +
                        "</article>";
             }).join("");
@@ -772,14 +792,14 @@
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
                            '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
-                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
                          '<div class="atd-first-odds"><span class="atd-first-odds__pct">' + row.pct.toFixed(1) +
                            '%</span><span class="atd-first-odds__fair">fair <b>' + esc(row.fair) + "</b></span></div>" +
-                         '<p class="atd-why">' + esc(row.why) + "</p>" +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" + window.NFLInsights.bars(SHEET, f.pl.id) +
                        "</article>";
             }).join("");
         }
@@ -794,7 +814,7 @@
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
                            '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
-                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
@@ -809,7 +829,7 @@
                          '</div>' +
                          '<p class="atd-why">About ' + row.ours.toFixed(0) + ' scores in 100 similar games by our model; ' +
                            row.implied.toFixed(0) + ' needed to break even at this price.</p>' +
-                         '<p class="atd-why">' + esc(row.why) + "</p>" +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" + window.NFLInsights.bars(SHEET, f.pl.id) +
                        "</article>";
             }).join("");
         }
@@ -824,14 +844,14 @@
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
                            '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
-                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + "</a>" +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
                          '<div class="atd-first-odds"><span class="atd-first-odds__pct">' + row.pct.toFixed(1) +
                            '%</span><span class="atd-first-odds__fair">2+ TD &middot; fair <b>' + esc(row.fair) + "</b></span></div>" +
-                         '<p class="atd-why">' + esc(row.why) + "</p>" +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" + window.NFLInsights.bars(SHEET, f.pl.id) +
                        "</article>";
             }).join("");
         }
@@ -1439,7 +1459,7 @@
     })();
     </script>
     <script src="__ROOT__atd-nav.js?v=2" defer></script>
-    <script src="__ROOT__atd-card.js?v=6" defer></script>
+    <script src="__ROOT__atd-card.js?v=8" defer></script>
 </body>
 </html>
 

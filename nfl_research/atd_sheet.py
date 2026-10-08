@@ -128,6 +128,33 @@ def load_odds_csv(path: Path) -> tuple[dict[tuple[str, str], dict], str]:
 ODD_PRICE = 0.6
 
 
+def load_insights_csv(path: Path) -> dict:
+    """Keep workload and matchup evidence, including players without an odds quote."""
+    if not path.exists():
+        return {}
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    start = next((i for i, line in enumerate(lines) if line.startswith("#,")), None)
+    if start is None:
+        return {}
+    def number(value):
+        match = re.search(r"[-+]?\d+(?:\.\d+)?", str(value or "").replace("−", "-"))
+        return float(match.group()) if match else None
+    out = {}
+    for row in csv.DictReader(lines[start:]):
+        out[(norm(row["Player"]), TEAM_FIX.get(row["Team"], row["Team"]))] = {
+            "volume": number(row.get("Vol")),
+            "volume_unit": "targets" if "tgt" in (row.get("Vol") or "") else "touches",
+            "low_volume": bool((row.get("Low Volume") or "").strip()),
+            "rz_looks": number(row.get("RZ Looks/G")),
+            "role_leak": number(row.get("Role Leak")),
+            "alignment_leak": number(row.get("Alignment Leak")),
+            "baseline": number(row.get("His TD/G")),
+            "projected": number(row.get("Proj TD/G")),
+            "delta": number(row.get("Delta")),
+        }
+    return out
+
+
 def implied_chance(american: int) -> float:
     """The chance a price implies, vig included -- the bar a bet has to clear."""
     return 100 / (american + 100) if american > 0 else -american / (-american + 100)
@@ -374,6 +401,7 @@ def build(season: int, week: int) -> Path:
     plan = load_plays(WEEKS / f"{season}-W{week}.txt")
     defense = load_defense_csv(WEEKS / f"defense-{season}-W{week}.csv")
     odds, odds_captured = load_odds_csv(WEEKS / f"odds-{season}-W{week}.csv")
+    insights = load_insights_csv(WEEKS / f"odds-{season}-W{week}.csv")
     cal = calibrate(season, week)
     c = cal["c"]
     print(f"[atd] calibration: x{c:.2f} on expected TDs from {cal['n']} graded plays "
@@ -674,6 +702,9 @@ def build(season: int, week: int) -> Path:
         m = b.get("matchup") or {}
         cards[b["player_id"]] = {
             **{k: b.get(k) for k in CARD_FIELDS},
+            "csv": insights.get((norm(r["plan"]["name"]), b["team"]), {}),
+            "workload_log": [{k: g.get(k) for k in ("season", "week", "team", "rush_att", "rec", "tgt")}
+                             for g in (b.get("log") or [])],
             "td_chance": round(100 * r["td_cal"]),
             "matchup": {k: m.get(k) for k in ("index", "rank", "of", "allowed", "league")} if m else None,
             "log": [{**{k: g.get(k) for k in ("season", "week", "opp", "role")}, **{k: g.get(k) for k in stats}}

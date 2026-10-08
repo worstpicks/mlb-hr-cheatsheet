@@ -138,6 +138,33 @@ def rate_row(rates: dict, r: dict) -> dict | None:
     return rates.get((norm_name(r["name"]), group)) or rates.get((_short_key(r["name"]), group))
 
 
+def load_goalie_evidence(date: str) -> dict:
+    paths = sorted(p for p in (ROOT / "data").glob("nhl-goalie-summary-*-????-??-??.csv")
+                   if p.stem[-10:] <= date)
+    if not paths:
+        return {}
+    path = paths[-1]
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    start = next((i for i, line in enumerate(lines) if line.startswith("Time,Goalie,")), None)
+    if start is None:
+        return {}
+    def number(value):
+        try:
+            return float(str(value).replace("%", ""))
+        except ValueError:
+            return None
+    out = {}
+    for row in csv.DictReader(lines[start:]):
+        out[(norm_name(row["Goalie"]), row["Team"])] = {
+            "date": path.stem[-10:], "gp": number(row["GP"]),
+            **{key: number(row.get(col, "")) for key, col in {
+                "sa": "SA/G", "hdsa": "HDSA/G", "sv": "SV%", "hdsv": "HDSV%",
+                "sa_pct": "SA Pctl", "hdsa_pct": "HDSA Pctl",
+                "sv_pct": "SV% Pctl", "hdsv_pct": "HDSV% Pctl"}.items()},
+        }
+    return out
+
+
 def load_recent_rates(date: str) -> dict:
     """The day's last-5 export, atgs_days/<date>.l5.csv, or {} without one."""
     path = PLAYS_DIR / f"{date}.l5.csv"
@@ -164,6 +191,17 @@ def blend_recent(rows: list[dict], recent: dict) -> int:
             gp, toi = 0, r["toi"]
         if not gp:
             continue
+        baseline = {key: r.get(key) for key in SEASON_COLS}
+        raw_recent = {}
+        for key, col in SEASON_COLS.items():
+            try:
+                raw_recent[key] = float(s[col]) * toi / 60
+            except (KeyError, ValueError):
+                raw_recent[key] = None
+        r["recent_evidence"] = {"gp": gp, "toi": toi, "baseline": baseline,
+                                "raw": raw_recent,
+                                "recent": {key: value * SEASON_SCALE.get(key, 1.0) if value is not None else None
+                                           for key, value in raw_recent.items()}}
         w = RECENT_WEIGHT * min(gp, 5) / 5
         for key, col in SEASON_COLS.items():
             try:
@@ -658,6 +696,9 @@ def build_sheet(date: str) -> dict:
             row["ou"] = play["side"]
             listed.append(row)
         rows = listed
+    goalie_evidence = load_goalie_evidence(date)
+    for r in rows:
+        r["goalie_evidence"] = goalie_evidence.get((norm_name(r.get("g_name", "")), r["opp"]), {})
     by_id = {r["id"]: r for r in rows}
 
     games_out = []

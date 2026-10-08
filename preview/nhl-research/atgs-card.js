@@ -110,7 +110,7 @@
             "<b>" + num(r.g, 2) + "</b> goals · <b>" + num(r.a, 2) + "</b> assists · <b>" + num(r.pp_p, 2) +
                 "</b> power-play points a game over his last " + r.games
         ];
-        return '<h4 class="nrs-pf-h">Why a ' + Math.floor(r.score) + "</h4>" +
+        return window.NHLInsights.why(r) + window.NHLInsights.creation(r) + '<h4 class="nrs-pf-h">Why a ' + Math.floor(r.score) + "</h4>" +
             '<ul class="nrs-why">' + (rows || "<li>No components available.</li>") + "</ul>" +
             '<ul class="nrs-bd-lines">' + lines.map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul>" +
             (r.why ? '<p class="nrs-bd-proj">' + esc(r.why) + "</p>" : "");
@@ -150,7 +150,7 @@
             "<span>for " + esc(r.team) + " " + esc(r.role) + "s against " + esc(r.opp) + "</span></div>" +
             '<h4 class="nrs-pf-h">What ' + esc(r.opp) + " allows to " + esc(r.role) + "s, per game</h4>" +
             '<table class="nrs-bd-table nrs-pf-table"><thead><tr><th></th><th>' + esc(r.opp) + "</th><th>League</th><th>Diff</th></tr></thead>" +
-            "<tbody>" + body + "</tbody></table>" + goalie;
+            "<tbody>" + body + "</tbody></table>" + window.NHLInsights.goalie(r);
     }
 
     function logHtml(r) {
@@ -212,7 +212,7 @@
         } else {
             photo.hidden = true;
         }
-        $("atgsCardName").innerHTML = esc(r.name) +
+        $("atgsCardName").innerHTML = esc(r.name) + window.NHLInsights.arrow(r) +
             '<span class="nrs-depth-badge atgs-pos atgs-pos--' + esc(String(r.pos || "").slice(0, 1)) + '">' + esc(r.role) + "</span>" +
             '<span class="sheet-ovr sheet-ovr--' + esc(r.band) + ' sheet-ovr--sm atgs-card-ovr"><b>' + Math.floor(r.score) + "</b></span>" +
             (r.small ? '<span class="nrs-bb nrs-bb--low">Small sample</span>' : "");

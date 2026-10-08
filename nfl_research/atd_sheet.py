@@ -691,7 +691,7 @@ def build(season: int, week: int) -> Path:
         "season": season, "week": week, "root": "",
         "built": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "first_kick": kicks[0].isoformat(), "last_kick": kicks[-1].isoformat(),
-        "games": games_out, "top5": top5, "first5": first5, "two5": two5, "value5": value5, "tend": tend,
+        "games": games_out, "top5": top5, "first5": first5, "two5": two5, "value5": value5, "value_min_edge": VALUE_EDGE, "tend": tend,
         "odds_captured": odds_captured, "has_odds": bool(odds),
         "calibration": {"c": c, "n": cal["n"], "hit": cal["hit"], "said": cal["said"]},
         "exp_source": exp_source,

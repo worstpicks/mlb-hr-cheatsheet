@@ -357,8 +357,6 @@
     .atd-chance__track { height: 9px; border-radius: 5px; background: rgba(148,163,184,.2); overflow: hidden; }
     .atd-chance__track span { display: block; height: 100%; background: #10b981; }
     .atd-chance__track--price span { background: #94a3b8; }
-    .atd-watch { margin-top: 18px; padding: 14px; border: 1px solid rgba(148,163,184,.35); border-radius: 10px; }
-    .atd-watch p { margin: 8px 0; font-size: 13px; line-height: 1.6; }
     .chip--edge { background: rgba(16, 185, 129, 0.18); border-color: rgba(52, 211, 153, 0.6); color: #a7f3d0; }
     html.theme-light .chip--edge { color: #065f46; background: rgba(16, 185, 129, 0.2); }
     .atd-m--price { background: rgba(16, 185, 129, 0.14); color: #a7f3d0; }
@@ -440,7 +438,6 @@
             <h2 class="atd-section-title" id="atdValueTitle">Top 5 value plays &mdash; our chance vs the best price</h2>
             <p class="atd-section-note" id="atdValueNote"></p>
             <div class="atd-top" id="atdValue"></div>
-            <div class="atd-watch" id="atdValueWatch" hidden></div>
         </section>
 
         <section class="atd-section" id="atdFirstSection">
@@ -884,34 +881,9 @@
         document.getElementById("atdValueNote").textContent =
             "A play qualifies when our adjusted scoring estimate exceeds the price's implied chance by at least " +
             valueMinimum + " percentage points, with no injury flag, enough game history and no price flagged for review. " +
-            (valueRows.length < 5 ? "Only " + valueRows.length + " qualify this week; the closest alternatives are explained below. " : "") +
+            (valueRows.length < 5 ? "Only " + valueRows.length + " qualify this week. " : "") +
             "These are model estimates, not guarantees." +
             (SHEET.odds_captured ? " Prices captured " + SHEET.odds_captured + "; check the current price." : "");
-        var considered = [];
-        GAMES.forEach(function (game) {
-            Object.keys(game.sides).forEach(function (team) {
-                game.sides[team].forEach(function (pl) {
-                    if (pl.m && pl.m.edge != null && pl.m.edge > 0 &&
-                        !valueRows.some(function (row) { return row.id === pl.id; })) considered.push(pl);
-                });
-            });
-        });
-        considered.sort(function (a, b) { return b.m.edge - a.m.edge || a.n.localeCompare(b.n); });
-        var near = considered.filter(function (pl) { return !pl.st && !pl.off && !pl.m.small && !pl.m.odd; }).slice(0, 2);
-        var held = considered.filter(function (pl) { return pl.st || pl.m.odd; }).slice(0, 4);
-        function watchLine(pl) {
-            var reason = pl.m.odd ? "price needs verification" : pl.st ?
-                (pl.stl || "injury status unresolved") : "advantage below our qualifying minimum";
-            return '<p><a href="' + cardHref(pl) + '">' + esc(pl.n) + '</a> — our estimate ' + pl.m.td +
-                '%, price implies ' + pl.m.pbook + '% at ' + esc(pl.m.book) + '. ' + esc(reason) + '.</p>';
-        }
-        if (near.length || held.length) {
-            var watch = document.getElementById("atdValueWatch");
-            watch.hidden = false;
-            watch.innerHTML = (near.length ? '<b>Closest alternatives — below the value cutoff</b>' + near.map(watchLine).join('') : '') +
-                (held.length ? '<p><b>Held back — check status or price first</b></p>' + held.map(watchLine).join('') : '') +
-                '<p>Comparisons here are rounded. These players are excluded from the value-play hit record.</p>';
-        }
         if (!SHEET.has_odds) {
             document.getElementById("atdValueSection").hidden = true;
             document.getElementById("atdValueLegend").hidden = true;

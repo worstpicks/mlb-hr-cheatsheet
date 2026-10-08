@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("worstpickz-theme") === "light") {
+                    document.documentElement.classList.add("theme-light");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <title>NBA Research — Worst Pickz</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/apple-touch-icon.png" type="image/png">
+    <link rel="stylesheet" href="nba-research.css?v=4">
+    <script>
+        (function () {
+            if (location.protocol !== "file:") return;
+            document.addEventListener("DOMContentLoaded", function () {
+                var block = document.getElementById("nrsFileBlock");
+                var shell = document.querySelector(".nrs-container");
+                if (block) block.classList.add("is-visible");
+                if (shell) shell.style.display = "none";
+            });
+        })();
+    </script>
+</head>
+<body>
+    <div class="nrs-container">
+        <header class="nrs-header">
+            <div class="nrs-header-actions">
+                <a class="nrs-back" href="prop-shop.html">← Prop Shop / Goblin’s Ledger</a>
+                <div class="nrs-header-actions-right">
+                    <a class="nrs-back nrs-back--mlb" href="../nhl-research/index.html">NHL Research</a>
+                    <a class="nrs-back nrs-back--mlb" href="../nfl-research/index.html">NFL Research</a>
+                    <a class="nrs-back nrs-back--mlb" href="../research/index.html">MLB Research</a>
+                    <button type="button" class="nrs-theme-toggle" id="theme" aria-pressed="false" title="Switch theme" aria-label="Switch theme">☀️</button>
+                </div>
+            </div>
+            <div class="nrs-header-brand">
+                <div class="nrs-hero-wrap">
+                    <img src="../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot" decoding="async" onerror="this.onerror=null;this.src='https://worstpickz.win/assets/worst-pickz-hero.png'">
+                </div>
+                <div class="nrs-header-intro">
+                    <span class="nrs-brand-tag">Worst Pickz Research</span>
+                    <h1>NBA Matchup Research</h1>
+                    <p id="nrsSeasonNote">Player logs vs what the opponent allows to his position — minutes, usage and basketball production.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="nrs-toolbar">
+            <div class="nrs-controls">
+                <label>Slate
+                    <span class="nrs-date-nav">
+                        <button type="button" id="prev-day" aria-label="Previous day">‹</button>
+                        <input type="date" id="date" class="nrs-date-input">
+                        <button type="button" id="next-day" aria-label="Next day">›</button>
+                    </span>
+                </label>
+                <button type="button" class="nrs-btn" id="today">Today</button>
+                <button type="button" class="nrs-btn nrs-btn--primary" id="refresh">Refresh</button>
+                <span class="nrs-updated" id="updated" aria-live="polite"></span>
+            </div>
+            <span class="nrs-badge" id="nrsSourceBadge" style="display:none" hidden></span>
+        </div>
+
+        <div class="nrs-shell">
+            <div class="nrs-main">
+            <p class="nrs-status" id="status" role="status" aria-live="polite"></p>
+
+            <section class="nrs-section">
+                <h2 class="nrs-section-title">Tonight's slate</h2>
+                <div class="nrs-games-wrap">
+                    <div class="nrs-games" id="games"></div>
+                </div>
+            </section>
+
+            <section class="nrs-section" id="research" hidden>
+                <div class="nrs-matchup-bar">
+                    <div>
+                        <h2 class="nrs-section-title nrs-section-title--matchup" id="matchup">—</h2>
+                        <span class="nrs-matchup-sub" id="context"></span>
+                    </div>
+                    <div class="nrs-matchup-bar__actions">
+                        <button type="button" class="nrs-btn nrs-track-open" id="props-toggle" aria-expanded="false">
+                            Prop List <span class="nrs-track-count" id="prop-count">0</span>
+                        </button>
+                        <button type="button" class="nrs-colgear" id="columns-toggle" aria-expanded="false" aria-haspopup="true" title="Choose columns" aria-label="Choose columns">&#9881;</button>
+                        <div class="nrs-side-toggle" id="sides" role="group" aria-label="Which team's players">
+                            <button type="button" id="nrsSideAway">AWY</button>
+                            <button type="button" id="nrsSideHome">HOM</button>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="nrs-col-panel" id="settings" hidden aria-label="Research filters and columns"><div class="nba-control-panel"><label>Sample <select id="sample"><option value="auto">Auto · preseason phases out</option><option value="pre">Current preseason only</option><option value="reg">Current regular season only</option><option value="prior">Previous regular season</option></select></label><label>Window <select id="window"><option value="10">Last 10</option><option value="5">Last 5</option><option value="3">Last 3</option></select></label><label>Venue <select id="venue"><option value="all">All games</option><option value="home">Home</option><option value="away">Away</option></select></label><label>Position <select id="position"><option value="all">All positions</option><option value="G">Guards</option><option value="F">Forwards</option><option value="C">Centers</option></select></label><label>Player <input id="search" type="search" placeholder="Search player"></label><label>Sort <select id="sort"><option value="min">Minutes</option><option value="pts">Points</option><option value="reb">Rebounds</option><option value="ast">Assists</option><option value="threem">Threes</option><option value="usage_est">Estimated usage</option></select></label><label class="nba-check"><input id="available" type="checkbox">Hide players marked out</label></div><div id="columns"></div></section>
+
+                <section class="nrs-track-panel" id="props" hidden aria-label="Tracked props"></section>
+
+                <p class="nrs-legend" id="sample-note"></p><div id="players"></div><button class="nrs-btn" id="more" hidden>Show more players</button>
+
+                <p class="nrs-legend">Left: each player appearance, colored against his own sample average. Right: opponent-position production per player appearance, colored against that opponent’s sample average. Position groups include starters and bench players; they describe team-level defense, not an individual defender. No historical frequency is presented as a predicted betting probability.</p>
+            </section>
+            </div>
+        </div>
+    </div>
+
+<details class="nba-method"><summary>Data & calculation details</summary><p>ESPN final box scores, current rosters and schedule. DNPs are excluded. Auto uses current regular-season appearances first, fills remaining places with current preseason, and uses previous regular-season games only when needed. After 10 current regular-season appearances, no preseason remains in a last-10 window. Venue filtering applies before the window. Historical logs can include a previous club; every row identifies the team.</p><p>Estimated usage = (FGA + 0.44 × FTA + turnovers) × team minutes ÷ 5, divided by player minutes × team possessions used. This box-score estimate is not official tracking usage. Possessions use FGA + 0.44 × FTA − offensive rebounds + turnovers. Game possession estimates are unadjusted for overtime and are labeled accordingly. Shooting percentages use summed makes ÷ summed attempts. No unverified starter prediction or player prop price is supplied.</p><a href="https://www.espn.com/nba/scoreboard" target="_blank" rel="noopener">ESPN NBA source</a></details>
+<dialog id="player-dialog" class="nba-dialog"><header><div><h2 id="player-name"></h2><p id="player-sub" class="nba-muted"></p></div><button id="close" class="nrs-btn" aria-label="Close player details">✕</button></header><nav class="nba-dialog-tabs" role="tablist"><button data-tab="read" role="tab" aria-selected="true">Why this player?</button><button data-tab="matchup" role="tab" aria-selected="false">Matchup</button><button data-tab="logs" role="tab" aria-selected="false">Game logs</button><button data-tab="prop" role="tab" aria-selected="false">Prop research</button></nav><div id="dialog-body"></div></dialog>
+    <script src="nba-research.js?v=4" defer></script>
+</body>
+</html>

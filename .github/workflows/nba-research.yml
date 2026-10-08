@@ -1,0 +1,45 @@
+name: NBA research slate
+on:
+  schedule:
+    - cron: '17 */4 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'First slate YYYY-MM-DD. Blank means today in Eastern time.'
+        required: false
+        default: ''
+permissions:
+  contents: write
+concurrency:
+  group: nba-research
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/cache@v4
+        with:
+          path: nba_research/cache
+          key: nba-cache-${{ github.run_id }}
+          restore-keys: nba-cache-
+      - name: Build research
+        env:
+          INPUT_DATE: ${{ inputs.date }}
+        run: |
+          DATE="${INPUT_DATE:-$(TZ=America/New_York date +%F)}"
+          python -m nba_research.build_slate --date "$DATE" --days 4
+      - name: Commit changed data
+        run: |
+          git config user.name "NBA research"
+          git config user.email "research@local"
+          git add preview/data/nba-research-*.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh NBA research slates"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

@@ -110,16 +110,16 @@ def build(first, days):
     start = date.fromisoformat(first)
     season = start.year + 1 if start.month >= 7 else start.year
     dates = [(start + timedelta(days=i)).isoformat() for i in range(days)]
-    boards = dict(zip(dates, parallel(dates, lambda d:fetch('scoreboard?dates='+d.replace('-','')))))
+    boards = dict(zip(dates, parallel(dates, lambda d:fetch('scoreboard?dates='+d.replace('-',''), ttl=300))))
     teams_data = fetch('teams?limit=100')
     teams = [entry['team'] for entry in teams_data.get('sports',[{}])[0].get('leagues',[{}])[0].get('teams',[])]
     if not teams:
         raise RuntimeError('NBA teams unavailable; no output written')
     print(f'[NBA] {len(teams)} teams; loading rosters and recent schedules', flush=True)
-    roster_results = parallel(teams, lambda t:fetch('teams/'+t['id']+'/roster'))
+    roster_results = parallel(teams, lambda t:fetch('teams/'+t['id']+'/roster', ttl=900))
     rosters = dict(zip([t['id'] for t in teams], roster_results))
     schedules = parallel([(t['id'],y,kind) for t in teams for y,kind in [(season,1),(season,2),(season-1,2)]],
-                         lambda args:fetch(f'teams/{args[0]}/schedule?season={args[1]}&seasontype={args[2]}'))
+                         lambda args:fetch(f'teams/{args[0]}/schedule?season={args[1]}&seasontype={args[2]}', ttl=900))
     events = {}
     cutoff = dates[-1]+'T23:59:59Z'
     for schedule in schedules:
@@ -138,7 +138,7 @@ def build(first, days):
         if 'events' not in board:
             print('[NBA] Skipping unavailable scoreboard '+d,flush=True)
             continue
-        prior = [g for g in logs if datetime.fromisoformat(g['date'].replace('Z', '+00:00')).astimezone(ZoneInfo('America/New_York')).date().isoformat() < d]
+        prior = [g for g in logs if datetime.fromisoformat(g['date'].replace('Z', '+00:00')).astimezone(ZoneInfo('America/New_York')).date().isoformat() <= d]
         team_logs = {t['id']:sorted([g for g in prior if g['team_id']==t['id']],key=lambda g:g['date']) for t in teams}
         player_logs = {}
         for game in prior:

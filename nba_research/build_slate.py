@@ -64,6 +64,8 @@ def stats(names, values):
         pair = str(data.get(key, '')).split('-')
         out[prefix+'m'] = number(pair[0]) if len(pair)==2 else None
         out[prefix+'a'] = number(pair[1]) if len(pair)==2 else None
+    out['twom'] = out['fgm'] - out['threem'] if out['fgm'] is not None and out['threem'] is not None else None
+    out['twoa'] = out['fga'] - out['threea'] if out['fga'] is not None and out['threea'] is not None else None
     for key, parts in {'pra':['pts','reb','ast'],'pr':['pts','reb'],'pa':['pts','ast'],'ra':['reb','ast'],'stocks':['stl','blk']}.items():
         out[key] = sum(out[k] for k in parts) if all(out.get(k) is not None for k in parts) else None
     double_stats = [out.get(k) for k in ('pts', 'reb', 'ast', 'stl', 'blk')]
@@ -170,7 +172,7 @@ def build(first, days):
                     groups={}
                     for pos in ('G','F','C'):
                         rows=[p for p in opp_game['players'] if p['pos']==pos]
-                        groups[pos]={k:sum(p[k] for p in rows if p.get(k) is not None) for k in ('pts','reb','ast','threem','stl','blk','tov','pra','pr','pa','ra','stocks','fga','fta','min')}
+                        groups[pos]={k:sum(p[k] for p in rows if p.get(k) is not None) for k in ('pts','reb','ast','threem','stl','blk','tov','pra','pr','pa','ra','stocks','fga','fgm','fta','ftm','threea','twom','twoa','oreb','dreb','pf','pm','dd','td','min')}
                         groups[pos]['players']=len(rows)
                     defensive.append({**{k:g[k] for k in ('date','event','season','type','opp','home')},'groups':groups,
                                       'allowed':opp_game['totals'],'own':g['totals'],'possessions_est':(g['possessions_est']+opp_game['possessions_est'])/2})

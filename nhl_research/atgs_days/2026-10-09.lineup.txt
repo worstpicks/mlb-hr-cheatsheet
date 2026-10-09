@@ -1,0 +1,16 @@
+# 10/9 source checks: user's nhl-goalie-summary-2026-l5-2026-10-09.csv
+# and https://www.dailyfaceoff.com/starting-goalies/2026-10-09
+# DailyFaceoff line-combinations pages checked for all eight clubs.
+# Only Gibson is confirmed at the time of this build.
+goalie SEA Joey Daccord | expected, not yet confirmed
+goalie DET John Gibson | confirmed
+goalie NYR Igor Shesterkin | expected, not yet confirmed
+goalie WSH Logan Thompson | expected, not yet confirmed
+goalie PIT Arturs Silovs | expected, not yet confirmed
+goalie CBJ Jet Greaves | expected, not yet confirmed
+goalie ANA Lukas Dostal | expected, not yet confirmed
+goalie WPG Stuart Skinner | expected, not yet confirmed
+# https://www.nhl.com/fr/news/red-wings-appleton-et-kasper-a-l-infirmerie
+out DET Marco Kasper | upper-body injury, week-to-week; not an active scoring pick
+# https://www.dailyfaceoff.com/teams/washington-capitals/line-combinations
+doubt WSH Ivan Miroshnichenko | Projected scratch -- absent from Washington's projected forward lines; verify he dresses before considering this play

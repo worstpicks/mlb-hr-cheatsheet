@@ -1,0 +1,33 @@
+Range,2026 L5
+Stats,Per Game
+Percentiles,Among 2026-27 goalies (higher = tougher goalie)
+
+Time,Goalie,Team,Status,Opp,GP,SA/G,SA Pctl,GA/G,GA Pctl,SV/G,SV%,SV% Pctl,HDSA/G,HDSA Pctl,HDGA/G,HDGA Pctl,HDSV%,HDSV% Pctl,MDSA/G,MDSA Pctl,MDGA/G,MDGA Pctl,MDSV%,MDSV% Pctl
+Sat 1:00 PM,Dan Vladar,PHI,Expected,@ BOS,2,36.5,6,5.0,8,31.5,86.3%,29,12.0,1,2.5,7,79.2%,48,9.0,16,2.5,3,72.2%,14
+Sat 1:00 PM,Jeremy Swayman,BOS,Expected,vs PHI,4,29.5,20,2.0,74,27.5,93.2%,86,9.0,9,1.0,60,88.9%,77,7.8,37,0.5,76,93.5%,79
+Sat 3:30 PM,Kevin Lankinen,VAN,Expected,@ NJ,4,25.8,46,5.5,3,20.5,79.6%,3,8.3,19,3.3,1,60.6%,3,7.5,40,1.0,41,86.7%,48
+Sat 3:30 PM,Jake Allen,NJD,Expected,vs VAN,2,28.0,34,3.5,22,24.5,87.5%,33,7.5,28,2.5,7,66.7%,9,7.0,47,0.0,96,100.0%,96
+Sat 4:00 PM,Tristan Jarry,EDM,Confirmed,@ SJ,1,23.0,67,6.0,1,17.0,73.9%,1,5.0,74,2.0,16,60.0%,2,8.0,31,3.0,1,62.5%,4
+Sat 4:00 PM,Yaroslav Askarov,SJS,Expected,vs EDM,3,29.0,23,4.0,18,25.0,86.2%,24,7.7,23,1.3,42,82.6%,63,7.0,47,2.3,10,66.7%,6
+Sat 6:00 PM,Jesper Wallstedt,MIN,Expected,@ FLA,4,27.5,38,2.0,74,25.5,92.7%,74,6.3,53,0.5,88,92.0%,86,9.3,12,1.0,41,89.2%,61
+Sat 6:00 PM,Jacob Markstrom,FLA,Expected,vs MIN,3,18.7,90,1.3,88,17.3,92.9%,79,4.7,80,0.7,79,85.7%,68,6.3,60,0.3,86,94.7%,87
+Sat 7:00 PM,Jet Greaves,CBJ,Expected,@ STL,2,28.5,29,3.5,22,25.0,87.7%,37,6.5,46,0.5,88,92.3%,89,4.5,90,1.0,41,77.8%,23
+Sat 7:00 PM,Joel Hofer,STL,Expected,vs CBJ,3,23.7,61,1.7,83,22.0,93.0%,83,5.3,70,1.0,60,81.3%,52,5.0,86,0.7,61,86.7%,48
+Sat 7:00 PM,Brandon Bussi,CAR,Expected,@ CHI,3,22.3,70,3.3,29,19.0,85.1%,17,6.0,59,1.7,26,72.2%,23,6.7,52,0.7,61,90.0%,63
+Sat 7:00 PM,Spencer Knight,CHI,Expected,vs CAR,3,30.7,14,3.3,29,27.3,89.1%,48,7.3,34,1.0,60,86.4%,70,9.3,9,1.7,20,82.1%,26
+Sat 7:00 PM,Juuse Saros,NSH,Expected,@ OTT,4,32.8,10,2.8,42,30.0,91.6%,68,7.5,28,1.8,21,76.7%,37,6.3,63,0.8,51,88.0%,53
+Sat 7:00 PM,Linus Ullmark,OTT,Expected,vs NSH,3,22.7,68,1.0,92,21.7,95.6%,92,8.0,21,0.7,79,91.7%,83,5.3,82,0.3,86,93.8%,82
+Sat 7:00 PM,Karel Vejmelka,UTA,Expected,@ BUF,4,20.8,81,2.3,66,18.5,89.2%,50,4.3,87,1.0,60,76.5%,34,7.5,40,1.0,41,86.7%,48
+Sat 7:00 PM,Ukko-Pekka Luukkonen,BUF,Expected,vs UTA,3,18.3,92,4.0,18,14.3,78.2%,1,4.7,80,1.3,42,71.4%,19,5.7,74,2.3,10,58.8%,3
+Sat 7:00 PM,Daniil Tarasov,DET,Confirmed,@ MTL,1,9.0,99,1.0,92,8.0,88.9%,44,2.0,99,0.0,98,100.0%,98,2.0,99,0.0,96,100.0%,96
+Sat 7:00 PM,Jakub Dobes,MTL,Expected,vs DET,3,30.3,17,4.3,14,26.0,85.7%,19,9.0,9,2.3,10,74.1%,28,8.0,31,1.3,32,83.3%,33
+Sat 7:00 PM,Jake Oettinger,DAL,Expected,@ PIT,3,20.3,83,0.7,97,19.7,96.7%,97,5.0,74,0.3,94,93.3%,94,4.3,92,0.3,86,92.3%,71
+Sat 7:00 PM,Arturs Silovs,PIT,Expected,vs DAL,3,23.7,61,3.3,29,20.3,85.9%,21,3.3,99,1.0,60,70.0%,14,8.0,31,2.3,10,70.8%,12
+Sat 7:00 PM,Sergei Bobrovsky,TOR,Expected,@ COL,3,32.0,12,3.0,37,29.0,90.6%,61,9.0,9,1.7,26,81.5%,54,6.3,60,0.3,86,94.7%,87
+Sat 7:00 PM,Mackenzie Blackwood,COL,Expected,vs TOR,3,25.3,48,2.7,49,22.7,89.5%,53,6.7,42,1.0,60,85.0%,66,4.0,96,0.7,61,83.3%,33
+Sat 7:30 PM,Andrei Vasilevskiy,TBL,Expected,@ NYI,3,19.7,86,2.0,74,17.7,89.8%,57,4.3,83,1.3,42,69.2%,12,5.3,82,0.0,96,100.0%,96
+Sat 7:30 PM,Ilya Sorokin,NYI,Expected,vs TB,3,28.7,26,1.0,92,27.7,96.5%,94,6.7,42,0.7,79,90.0%,81,8.7,19,0.3,86,96.2%,90
+Sat 10:00 PM,Ville Husso,ANA,Expected,@ CGY,1,2.0,99,0.0,99,2.0,100.0%,99,0.0,99,0.0,98,0.0%,,2.0,99,0.0,96,100.0%,96
+Sat 10:00 PM,Dustin Wolf,CGY,Expected,vs ANA,2,29.5,20,6.0,1,23.5,79.7%,6,8.5,17,3.0,3,64.7%,6,8.5,22,2.0,16,76.5%,19
+Sat 10:00 PM,Darcy Kuemper,LAK,Expected,@ VGK,2,28.5,29,5.0,8,23.5,82.5%,12,6.0,59,2.0,16,66.7%,9,11.0,2,2.5,3,77.3%,21
+Sat 10:00 PM,Carter Hart,VGK,Expected,vs LA,3,24.3,53,2.7,49,21.7,89.0%,46,5.7,64,1.0,60,82.4%,60,5.7,74,1.7,20,70.6%,10

@@ -1,0 +1,53 @@
+# October 10: CSV exports plus current DailyFaceoff goalie and all 28 lineup pages.
+# https://www.dailyfaceoff.com/starting-goalies/2026-10-10
+# Team pages: https://www.dailyfaceoff.com/teams/<team-slug>/line-combinations
+# Only Jarry and Tarasov confirmed at build time. Other starters are projections.
+# Conflicting projections are noted; no alternative goalie's CSV is substituted.
+goalie PHI Dan Vladar | expected, not confirmed; NHL.com also projects Joseph Woll
+goalie BOS Jeremy Swayman | expected, not yet confirmed
+goalie VAN Leevi Merilainen | expected, not confirmed; updated projection differs from CSV's Lankinen
+goalie NJD Jake Allen | expected, not confirmed; NHL.com also projects Nico Daws
+goalie EDM Tristan Jarry | confirmed
+goalie SJS Alex Nedeljkovic | expected, not confirmed; NHL.com and morning CSV project Askarov
+goalie MIN Jesper Wallstedt | expected, not yet confirmed
+goalie FLA Jacob Markstrom | expected, not yet confirmed
+goalie UTA Karel Vejmelka | expected, not yet confirmed
+goalie BUF Colten Ellis | expected, not confirmed; updated projection differs from CSV's Luukkonen
+goalie DET Daniil Tarasov | confirmed
+goalie MTL Jakub Dobes | expected, not yet confirmed
+goalie NSH Juuse Saros | expected, not yet confirmed
+goalie OTT Linus Ullmark | expected, not yet confirmed
+goalie DAL Jake Oettinger | expected, not yet confirmed
+goalie PIT Arturs Silovs | expected, not yet confirmed
+goalie CAR Brandon Bussi | expected, not yet confirmed
+goalie CHI Spencer Knight | expected, not yet confirmed
+goalie CBJ Jet Greaves | expected, not yet confirmed
+goalie STL Joel Hofer | expected, not yet confirmed
+goalie TOR Anthony Stolarz | expected, not confirmed; updated projection differs from CSV's Bobrovsky
+goalie COL Mackenzie Blackwood | expected, not yet confirmed
+goalie TBL Andrei Vasilevskiy | expected, not yet confirmed
+goalie NYI Ilya Sorokin | expected, not yet confirmed
+goalie ANA Ville Husso | expected, not yet confirmed
+goalie CGY Dustin Wolf | expected, not yet confirmed
+goalie LAK Darcy Kuemper | expected, not yet confirmed
+goalie VGK Carter Hart | expected, not yet confirmed
+# NHL.com projections confirm Brown unavailable. Other OUT/IR statuses checked against DFO team pages.
+# https://www.nhl.com/news/nhl-lineup-projections-2026-27-season
+out NJD Connor Brown | lower-body injury; unavailable
+out EDM Matt Savoie | injured reserve; listed as Matthew Savoie by DailyFaceoff
+out EDM Zach Hyman | injury; listed out of projected lineup
+out DET Marco Kasper | injured reserve, upper-body injury
+out DAL Matt Duchene | injured reserve; unavailable
+out CHI Connor Bedard | out following shoulder surgery
+out CGY Jonathan Huberdeau | injury; listed out of projected lineup
+out LAK Kevin Fiala | injury; listed out of projected lineup
+out VGK Victor Olofsson | injury; listed out of projected lineup
+# https://www.nhl.com/news/chicago-blackhawks-frank-nazar-suspended-two-games-for-illegal-check
+# Also tagged S in today's skater CSV.
+out CHI Frank Nazar | suspended two games
+# https://www.nhl.com/news/nhl-status-report-news-and-notes-october-9-2026
+out TOR John Tavares | personal absence; unavailable Saturday
+doubt NYI Bo Horvat | Questionable -- undergoing evaluation; status unresolved
+# https://www.nhl.com/news/san-jose-sharks-macklin-celebrini-injury-status-update-october-9-2026
+doubt SJS Macklin Celebrini | Game-time decision -- lower-body injury; confirm he dresses
+doubt UTA Michael Carcone | Day-to-day -- absent from projected forward lines; confirm he dresses

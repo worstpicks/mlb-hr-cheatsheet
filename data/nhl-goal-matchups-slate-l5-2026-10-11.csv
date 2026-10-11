@@ -1,0 +1,167 @@
+﻿Range,L5
+Position,All
+Scores,"0-100, higher = better spot to score. Score = Form × (0.7 + 0.3 × Matchup/100); Matchup = 80% Def (chances, HD chances, shots, goals allowed to position) + 20% Goalie; Form = goals/iSCF (50%, goals 0% under 10 GP ramping to 25% by 20) + PP TOI 20% + TOI 10% + iFF 10% + finishing 10%"
+Early season,Defense & goalie ranks use 2025-26 data
+
+#,Time,Player,Team,Pos,Lines,Opp,Score,Matchup,Form,"Sh% (2 seasons, shrunk)",Def Score,Def Rank,Def Pos,Def SCA/GP,Def HDSCA/GP,Def SA/GP,Def GA/GP,Opp Goalie,Goalie Status,Goalie SV%,Goalie Score,Odds,GP,TOI/G,PP TOI/G,Goals/G,AST/G,S/G,iCF/G,iFF/G,iSCF/G
+1,Sun 6:00 PM,Pavel Dorofeyev,NYR,RW,L3 · PP1,vs VAN,90,91,92,14.1,96,1,RW,8.34,3.96,7.60,1.20,Kevin Lankinen,Confirmed,.875,72,135,5,17:02,3:38,0.20,0.40,2.80,7.20,4.60,3.80
+2,Sun 6:00 PM,Alexis Lafreniere,NYR,RW,L1 · PP1,vs VAN,88,91,90,14.3,96,1,RW,8.34,3.96,7.60,1.20,Kevin Lankinen,Confirmed,.875,72,180,5,19:14,3:34,0.80,0.40,2.40,5.40,3.60,2.80
+3,Mon 1:00 PM,Matthew Tkachuk,FLA,RW,L1 · PP1,@ BUF,84,64,94,13.6,71,13,RW,7.74,3.49,7.46,0.89,Ukko-Pekka Luukkonen,Projected,.909,34,180,5,21:03,7:20,0.60,0.20,2.20,5.00,4.00,3.00
+4,Mon 1:00 PM,Tage Thompson,BUF,C,L2 · PP1,vs FLA,81,55,94,13.5,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Projected,.883,59,140,5,19:47,3:11,0.60,0.40,5.80,9.00,7.40,4.20
+5,Sun 5:00 PM,Alex Tuch,WSH,LW,L1 · PP2,vs SEA,79,62,89,15.0,63,4,LW,7.34,3.18,6.99,0.98,Joey Daccord,Expected,.897,58,190,5,18:49,2:34,0.80,0.00,2.80,4.60,4.20,2.80
+6,Sun 6:00 PM,Jake DeBrusk,VAN,LW,L1 · PP1,@ NYR,79,72,86,10.8,80,5,LW,7.76,3.48,6.87,0.96,Dylan Garand,Confirmed,.948,42,250,5,16:28,2:34,0.40,0.40,3.40,4.80,4.00,3.60
+7,Mon 1:00 PM,Sam Reinhart,FLA,C,L3 · PP1,@ BUF,79,39,97,14.5,40,24,C,7.18,3.51,6.82,0.83,Ukko-Pekka Luukkonen,Projected,.909,34,180,5,21:37,6:52,0.00,0.00,2.40,5.60,4.40,3.80
+8,Sun 5:00 PM,Jakob Chychrun,WSH,D,P1 · PP1,vs SEA,78,65,87,11.6,67,29,D,4.78,0.88,8.38,0.35,Joey Daccord,Expected,.897,58,330,5,24:16,2:58,0.40,0.40,2.00,7.00,4.40,2.40
+9,Mon 1:00 PM,Noah Ostlund,BUF,C,L1 · PP1,vs FLA,78,55,90,13.3,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Projected,.883,59,360,5,18:11,2:41,0.20,0.40,2.80,5.80,4.60,3.40
+10,Sun 6:00 PM,J.T. Miller,NYR,C,L3 · PP1,vs VAN,77,80,82,11.6,82,1,C,8.41,3.74,7.51,1.15,Kevin Lankinen,Confirmed,.875,72,220,5,18:10,2:58,0.20,0.40,1.40,3.60,2.60,2.40
+11,Sun 5:00 PM,Pierre-Luc Dubois,WSH,C,L1 · PP1,vs SEA,75,67,83,11.6,69,15,C,7.96,3.79,7.12,0.90,Joey Daccord,Expected,.897,58,290,5,16:56,2:32,0.20,0.80,1.40,4.00,2.80,2.60
+12,Sun 6:00 PM,Will Cuylle,NYR,LW,L2 · PP2,vs VAN,75,70,82,11.4,70,8,LW,7.44,3.45,6.65,0.94,Kevin Lankinen,Confirmed,.875,72,320,5,15:29,1:38,0.00,0.60,2.40,4.40,3.40,3.00
+13,Sun 5:00 PM,Alex Ovechkin,WSH,LW,L3 · PP1,vs SEA,74,62,83,12.4,63,4,LW,7.34,3.18,6.99,0.98,Joey Daccord,Expected,.897,58,210,5,14:38,3:59,0.00,0.40,1.80,6.20,3.40,2.40
+14,Sun 6:00 PM,Gabe Perreault,NYR,LW,L1 · PP2,vs VAN,74,70,81,14.0,70,8,LW,7.44,3.45,6.65,0.94,Kevin Lankinen,Confirmed,.875,72,285,5,14:56,1:18,0.40,0.40,1.60,3.00,3.00,2.80
+15,Sun 7:00 PM,Sebastian Aho,CAR,C,L1 · PP1,@ PHI,74,27,95,13.6,27,17,C,7.23,3.21,6.04,0.88,Joseph Woll,Expected,.899,26,185,5,19:17,4:31,1.00,0.80,3.60,6.20,5.60,4.00
+16,Mon 1:00 PM,Zach Benson,BUF,LW,L1 · PP1,vs FLA,73,48,86,10.8,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Projected,.883,59,320,5,19:24,3:16,0.00,0.20,1.80,4.80,4.00,2.80
+17,Sun 7:00 PM,Andrei Svechnikov,CAR,RW,L1 · PP1,@ PHI,72,24,93,14.0,24,29,RW,7.14,2.95,6.55,0.79,Joseph Woll,Expected,.899,26,185,5,17:11,4:28,0.60,0.60,3.80,7.00,5.40,3.40
+18,Mon 1:00 PM,Anton Lundell,FLA,C,L2 · PP2,@ BUF,72,39,88,11.5,40,24,C,7.18,3.51,6.82,0.83,Ukko-Pekka Luukkonen,Projected,.909,34,360,5,19:04,4:22,0.00,0.20,3.20,6.00,4.40,2.60
+19,Mon 1:00 PM,Carter Verhaeghe,FLA,LW,L1 · PP2,@ BUF,72,45,86,12.7,48,15,LW,6.86,3.42,6.53,0.86,Ukko-Pekka Luukkonen,Projected,.909,34,230,5,18:39,3:55,0.20,0.20,1.20,4.20,3.20,2.40
+20,Mon 1:00 PM,Sam Bennett,FLA,C,L1 · PP1,@ BUF,72,39,88,12.0,40,24,C,7.18,3.51,6.82,0.83,Ukko-Pekka Luukkonen,Projected,.909,34,210,5,20:26,5:17,0.00,0.60,1.80,4.60,2.60,2.60
+21,Sun 5:00 PM,Berkly Catton,SEA,C,L3 · PP2,@ WSH,71,68,79,10.6,80,18,C,8.32,4.05,7.18,0.88,Logan Thompson,Confirmed,.912,19,500,5,15:30,2:29,0.40,0.40,2.20,3.80,3.20,2.40
+22,Sun 5:00 PM,Jordan Eberle,SEA,RW,L1 · PP1,@ WSH,71,60,81,14.2,70,18,RW,7.84,3.41,7.27,0.85,Logan Thompson,Confirmed,.912,19,300,5,16:06,2:14,0.40,0.40,1.60,4.00,3.00,2.20
+23,Mon 1:00 PM,Brady Tkachuk,FLA,LW,L3 · PP1,@ BUF,70,45,84,10.0,48,15,LW,6.86,3.42,6.53,0.86,Ukko-Pekka Luukkonen,Projected,.909,34,180,5,17:23,5:55,0.00,0.00,2.40,5.00,3.60,2.60
+24,Sun 7:00 PM,Logan Stankoven,CAR,C,L2 · PP2,@ PHI,70,27,89,12.9,27,17,C,7.23,3.21,6.04,0.88,Joseph Woll,Expected,.899,26,270,5,17:17,1:48,0.80,0.20,3.20,5.60,4.20,4.20
+25,Sun 5:00 PM,Dylan Strome,WSH,C,L3 · PP1,vs SEA,69,67,77,12.0,69,15,C,7.96,3.79,7.12,0.90,Joey Daccord,Expected,.897,58,240,5,15:09,3:08,0.00,0.80,2.00,3.40,2.60,2.00
+26,Sun 6:00 PM,Mika Zibanejad,NYR,C,L1 · PP1,vs VAN,69,80,73,14.1,82,1,C,8.41,3.74,7.51,1.15,Kevin Lankinen,Confirmed,.875,72,170,5,20:47,3:34,0.20,0.80,1.80,4.00,3.20,1.20
+27,Sun 5:00 PM,Shane Wright,SEA,RW,L3 · PP2,@ WSH,69,60,78,12.3,70,18,RW,7.84,3.41,7.27,0.85,Logan Thompson,Confirmed,.912,19,625,5,14:29,1:47,0.40,0.20,1.40,3.00,2.60,2.40
+28,Sun 5:00 PM,Cole Hutson,WSH,D,P3 · PP2,vs SEA,68,65,76,11.0,67,29,D,4.78,0.88,8.38,0.35,Joey Daccord,Expected,.897,58,575,5,18:34,2:08,0.20,0.20,2.00,4.40,2.40,2.00
+29,Mon 1:00 PM,Jack Quinn,BUF,RW,L1 · PP1,vs FLA,68,18,90,10.9,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Projected,.883,59,235,5,20:00,3:28,0.40,0.00,2.80,6.80,5.20,3.80
+30,Sun 7:00 PM,Jackson Blake,CAR,RW,L2 · PP1,@ PHI,68,24,88,11.8,24,29,RW,7.14,2.95,6.55,0.79,Joseph Woll,Expected,.899,26,240,5,17:04,4:51,0.20,1.20,2.80,4.80,3.60,2.80
+31,Sun 7:00 PM,Tyson Foerster,PHI,LW,L2 · PP1,vs CAR,68,15,91,14.4,3,27,LW,5.87,2.72,5.48,0.71,Pyotr Kochetkov,Expected,.898,65,270,5,17:51,3:05,0.20,0.00,2.60,5.20,4.20,3.20
+32,Sun 6:00 PM,Liam Ohgren,VAN,LW,L2 · PP2,@ NYR,67,72,73,10.2,80,5,LW,7.76,3.48,6.87,0.96,Dylan Garand,Confirmed,.948,42,700,5,15:38,1:46,0.20,0.40,1.60,2.80,2.40,2.20
+33,Sun 5:00 PM,Tom Wilson,WSH,RW,L1 · PP1,vs SEA,67,47,80,16.6,44,11,RW,7.06,3.46,6.83,0.90,Joey Daccord,Expected,.897,58,220,5,18:31,2:26,0.40,0.80,1.80,2.60,2.20,2.00
+34,Sun 5:00 PM,Bobby McMann,SEA,LW,L1 · PP1,@ WSH,66,19,87,14.0,19,30,LW,6.46,2.94,6.49,0.66,Logan Thompson,Confirmed,.912,19,250,5,16:28,1:48,0.40,0.00,3.60,5.80,5.60,3.00
+35,Sun 6:00 PM,Brock Boeser,VAN,RW,L2 · PP1,@ NYR,66,47,78,12.5,48,17,RW,7.43,3.40,6.74,0.87,Dylan Garand,Confirmed,.948,42,300,5,17:57,4:08,0.20,0.40,1.40,3.80,2.20,1.80
+36,Sun 5:00 PM,Ryan Leonard,WSH,RW,L3 · PP2,vs SEA,66,47,79,12.6,44,11,RW,7.06,3.46,6.83,0.90,Joey Daccord,Expected,.897,58,340,5,13:56,1:59,0.40,0.20,2.40,4.80,3.80,2.20
+37,Mon 1:00 PM,Rasmus Dahlin,BUF,D,P1 · PP1,vs FLA,64,45,77,10.0,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Projected,.883,59,340,5,26:32,3:34,0.20,0.40,3.00,5.40,3.20,1.80
+38,Sun 7:00 PM,Shayne Gostisbehere,CAR,D,P3 · PP1,@ PHI,64,36,79,11.1,38,27,D,4.45,0.78,7.03,0.37,Joseph Woll,Expected,.899,26,500,5,18:33,4:23,0.20,0.60,1.80,5.60,3.40,1.80
+39,Mon 1:00 PM,Brad Marchand,FLA,RW,PP2,@ BUF,63,64,71,16.2,71,13,RW,7.74,3.49,7.46,0.89,Ukko-Pekka Luukkonen,Projected,.909,34,,5,12:18,2:19,0.20,0.20,1.60,3.20,2.40,1.60
+40,Mon 1:00 PM,Sandis Vilmanis,FLA,RW,L2,@ BUF,62,64,70,11.6,71,13,RW,7.74,3.49,7.46,0.89,Ukko-Pekka Luukkonen,Projected,.909,34,900,5,12:32,0:25,0.00,0.00,1.40,3.00,2.60,2.20
+41,Sun 7:00 PM,Travis Konecny,PHI,LW,PP2,vs CAR,61,15,82,13.8,3,27,LW,5.87,2.72,5.48,0.71,Pyotr Kochetkov,Expected,.898,65,,5,16:49,3:15,0.00,0.60,1.60,3.80,2.60,2.20
+42,Sun 5:00 PM,Jared McCann,SEA,LW,L2 · PP1,@ WSH,60,19,79,13.8,19,30,LW,6.46,2.94,6.49,0.66,Logan Thompson,Confirmed,.912,19,280,5,15:02,2:15,0.20,1.00,3.00,4.00,3.60,2.00
+43,Sun 6:00 PM,Marco Rossi,VAN,C,PP1,@ NYR,60,21,78,14.7,16,27,C,6.98,3.00,6.57,0.79,Dylan Garand,Confirmed,.948,42,375,5,17:43,4:08,0.40,0.20,2.20,3.80,2.60,1.60
+44,Sun 7:00 PM,Owen Tippett,PHI,RW,L3 · PP2,vs CAR,60,38,74,11.9,31,22,RW,6.91,3.53,6.03,0.83,Pyotr Kochetkov,Expected,.898,65,275,5,16:30,1:33,0.20,0.00,2.40,4.60,3.20,1.80
+45,Mon 1:00 PM,Eetu Luostarinen,FLA,LW,L2 · PP2,@ BUF,59,45,71,11.2,48,15,LW,6.86,3.42,6.53,0.86,Ukko-Pekka Luukkonen,Projected,.909,34,480,5,15:29,2:06,0.40,0.00,1.60,2.60,2.00,1.80
+46,Mon 1:00 PM,Josh Doan,BUF,RW,L2 · PP2,vs FLA,59,18,78,13.4,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Projected,.883,59,280,5,16:00,2:14,0.00,0.00,1.40,3.60,2.60,2.00
+47,Sun 7:00 PM,Taylor Hall,CAR,LW,L2 · PP2,@ PHI,59,24,76,12.8,24,19,LW,6.65,3.05,6.16,0.82,Joseph Woll,Expected,.899,26,330,5,13:47,1:35,0.60,0.40,2.60,4.20,3.20,2.20
+48,Sun 6:00 PM,Adam Fox,NYR,D,P2 · PP1,vs VAN,58,68,64,10.4,67,7,D,4.57,0.95,7.93,0.55,Kevin Lankinen,Confirmed,.875,72,430,5,22:06,3:40,0.00,1.00,0.60,3.00,1.60,1.20
+49,Sun 6:00 PM,Elias Pettersson,VAN,C,L1 · PP1,@ NYR,58,21,76,11.6,16,27,C,6.98,3.00,6.57,0.79,Dylan Garand,Confirmed,.948,42,,5,19:40,3:56,0.20,1.20,2.00,3.00,2.60,1.60
+50,Sun 7:00 PM,Matvei Michkov,PHI,RW,L4 · PP1,vs CAR,58,38,71,12.3,31,22,RW,6.91,3.53,6.03,0.83,Pyotr Kochetkov,Expected,.898,65,380,5,15:25,3:18,0.40,0.00,1.40,3.00,1.80,1.60
+51,Sun 7:00 PM,Trevor Zegras,PHI,C,L3 · PP1,vs CAR,58,41,71,13.6,35,25,C,7.24,3.47,6.42,0.82,Pyotr Kochetkov,Expected,.898,65,330,5,18:44,3:17,0.00,0.40,0.80,2.20,1.80,1.40
+52,Sun 5:00 PM,Mackie Samoskevich,SEA,RW,L2,@ WSH,57,60,65,9.7,70,18,RW,7.84,3.41,7.27,0.85,Logan Thompson,Confirmed,.912,19,350,5,14:56,0:37,0.60,0.20,1.60,2.80,2.00,2.00
+53,Sun 7:00 PM,Mark Jankowski,CAR,C,L3 · PP2,@ PHI,57,27,73,14.8,27,17,C,7.23,3.21,6.04,0.88,Joseph Woll,Expected,.899,26,600,5,13:11,0:41,0.60,0.20,1.40,2.40,2.20,2.20
+54,Sun 7:00 PM,Jordan Martinook,CAR,RW,L4,@ PHI,56,24,73,10.9,24,29,RW,7.14,2.95,6.55,0.79,Joseph Woll,Expected,.899,26,550,5,14:43,0:05,0.20,0.20,2.40,4.40,3.60,2.80
+55,Sun 6:00 PM,Drew O'Connor,VAN,LW,L3,@ NYR,55,72,60,12.0,80,5,LW,7.76,3.48,6.87,0.96,Dylan Garand,Confirmed,.948,42,700,5,15:28,1:28,0.20,0.00,1.00,2.20,1.80,1.20
+56,Mon 1:00 PM,Jiri Kulich,BUF,LW,L4,vs FLA,55,48,65,12.2,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Projected,.883,59,450,5,11:50,0:09,0.20,0.20,1.00,2.80,2.00,2.00
+57,Mon 1:00 PM,Seth Jones,FLA,D,P1 · PP1,@ BUF,55,49,65,9.6,53,30,D,4.76,0.77,7.75,0.35,Ukko-Pekka Luukkonen,Projected,.909,34,650,5,26:47,6:40,0.20,0.00,2.40,5.40,3.80,1.00
+58,Sun 5:00 PM,Brandon Montour,SEA,D,P1 · PP2,@ WSH,54,50,64,7.8,58,10,D,4.56,0.98,7.11,0.51,Logan Thompson,Confirmed,.912,19,650,5,23:22,2:25,0.00,0.80,1.40,5.00,3.40,1.20
+59,Sun 7:00 PM,K'Andre Miller,CAR,D,P1 · PP2,@ PHI,53,36,65,8.7,38,27,D,4.45,0.78,7.03,0.37,Joseph Woll,Expected,.899,26,725,5,21:56,1:40,0.20,0.40,1.60,4.00,2.60,1.40
+60,Mon 1:00 PM,Owen Power,BUF,D,P2 · PP2,vs FLA,53,45,63,8.9,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Projected,.883,59,900,5,26:02,1:37,0.20,0.80,1.00,3.60,1.80,1.40
+61,Mon 1:00 PM,Peyton Krebs,BUF,LW,L3,vs FLA,53,48,63,11.6,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Projected,.883,59,420,5,14:37,0:12,0.00,0.40,1.00,2.60,2.60,1.60
+62,Sun 5:00 PM,Chandler Stephenson,SEA,C,L1 · PP1,@ WSH,52,68,57,14.3,80,18,C,8.32,4.05,7.18,0.88,Logan Thompson,Confirmed,.912,19,475,5,17:04,2:07,0.20,0.80,0.80,1.20,1.00,1.00
+63,Sun 5:00 PM,Justin Sourdif,WSH,C,L4,vs SEA,52,67,58,12.9,69,15,C,7.96,3.79,7.12,0.90,Joey Daccord,Expected,.897,58,600,5,14:09,0:41,0.20,0.00,0.60,2.60,2.00,1.20
+64,Mon 1:00 PM,Joshua Norris,BUF,LW,L2 · PP2,vs FLA,51,48,60,13.9,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Projected,.883,59,350,5,16:05,1:50,0.00,0.20,1.00,2.40,2.00,1.00
+65,Sun 6:00 PM,Tye Kartye,NYR,LW,L3,vs VAN,51,70,56,11.9,70,8,LW,7.44,3.45,6.65,0.94,Kevin Lankinen,Confirmed,.875,72,450,5,15:11,0:01,0.00,0.40,1.00,2.00,1.20,1.60
+66,Sun 5:00 PM,Aliaksei Protas,WSH,LW,L2,vs SEA,50,62,56,13.9,63,4,LW,7.34,3.18,6.99,0.98,Joey Daccord,Expected,.897,58,370,5,16:13,0:00,0.00,0.20,1.20,2.40,2.20,1.40
+67,Sun 7:00 PM,Nikolaj Ehlers,CAR,LW,L4 · PP1,@ PHI,50,24,65,11.7,24,19,LW,6.65,3.05,6.16,0.82,Joseph Woll,Expected,.899,26,255,5,14:33,3:25,0.00,0.60,2.00,3.20,2.40,1.20
+68,Sun 5:00 PM,Boone Jenner,WSH,LW,L4,vs SEA,49,62,55,10.3,63,4,LW,7.34,3.18,6.99,0.98,Joey Daccord,Expected,.897,58,425,5,15:23,0:00,0.40,0.20,3.00,3.80,3.20,1.60
+69,Sun 7:00 PM,Jordan Staal,CAR,C,L4,@ PHI,49,27,63,14.7,27,17,C,7.23,3.21,6.04,0.88,Joseph Woll,Expected,.899,26,310,5,15:13,1:22,0.00,0.00,1.20,2.20,2.20,1.20
+70,Sun 6:00 PM,Brendan Gallagher,VAN,RW,L4,@ NYR,48,47,57,8.1,48,17,RW,7.43,3.40,6.74,0.87,Dylan Garand,Confirmed,.948,42,900,5,10:19,0:02,0.00,0.00,1.00,2.80,2.40,2.20
+71,Mon 1:00 PM,Ryan McLeod,BUF,C,L3 · PP2,vs FLA,48,55,55,13.0,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Projected,.883,59,,5,15:04,1:52,0.00,0.20,0.60,1.40,1.00,1.00
+72,Sun 7:00 PM,Sean Couturier,PHI,C,L1,vs CAR,48,41,58,10.3,35,25,C,7.24,3.47,6.42,0.82,Pyotr Kochetkov,Expected,.898,65,600,5,16:35,0:18,0.00,0.40,1.40,2.60,2.00,1.40
+73,Sun 7:00 PM,Alex Bump,PHI,LW,PP2,vs CAR,47,15,63,12.8,3,27,LW,5.87,2.72,5.48,0.71,Pyotr Kochetkov,Expected,.898,65,,5,12:57,0:51,0.20,0.00,1.20,2.60,1.80,1.60
+74,Sun 7:00 PM,Jalen Chatfield,CAR,D,P2,@ PHI,47,36,58,6.3,38,27,D,4.45,0.78,7.03,0.37,Joseph Woll,Expected,.899,26,1400,5,20:33,0:02,0.00,0.20,1.80,4.60,2.60,1.60
+75,Sun 5:00 PM,Matty Beniers,SEA,C,L2 · PP2,@ WSH,47,68,52,12.7,80,18,C,8.32,4.05,7.18,0.88,Logan Thompson,Confirmed,.912,19,400,5,16:37,2:25,0.20,0.40,0.80,1.60,1.20,0.80
+76,Sun 5:00 PM,Anthony Beauvillier,WSH,RW,L4,vs SEA,46,47,55,10.4,44,11,RW,7.06,3.46,6.83,0.90,Joey Daccord,Expected,.897,58,460,5,12:41,0:01,0.40,0.00,1.80,2.40,2.20,1.80
+77,Sun 7:00 PM,Christian Dvorak,PHI,C,L3 · PP2,vs CAR,46,41,56,11.5,35,25,C,7.24,3.47,6.42,0.82,Pyotr Kochetkov,Expected,.898,65,500,5,16:37,0:37,0.00,0.20,0.60,2.40,1.40,1.20
+78,Sun 6:00 PM,Jonathan Lekkerimäki,VAN,RW,L1 · PP2,@ NYR,46,47,55,12.9,48,17,RW,7.43,3.40,6.74,0.87,Dylan Garand,Confirmed,.948,42,650,5,13:10,1:50,0.20,0.40,1.20,2.60,1.60,1.00
+79,Sun 7:00 PM,Michael Bunting,PHI,LW,L4,vs CAR,46,15,62,11.0,3,27,LW,5.87,2.72,5.48,0.71,Pyotr Kochetkov,Expected,.898,65,600,5,11:03,0:37,0.00,0.00,1.60,3.80,3.00,1.60
+80,Sun 7:00 PM,Sean Walker,CAR,D,P1 · PP2,@ PHI,46,36,57,7.1,38,27,D,4.45,0.78,7.03,0.37,Joseph Woll,Expected,.899,26,800,5,21:31,1:04,0.00,0.80,1.60,4.60,2.40,1.20
+81,Sun 7:00 PM,William Carrier,CAR,LW,L1,@ PHI,46,24,60,9.6,24,19,LW,6.65,3.05,6.16,0.82,Joseph Woll,Expected,.899,26,500,5,12:38,0:00,0.00,0.60,1.80,3.40,3.00,2.60
+82,Sun 7:00 PM,Denver Barkey,PHI,LW,L4,vs CAR,45,15,60,11.2,3,27,LW,5.87,2.72,5.48,0.71,Pyotr Kochetkov,Expected,.898,65,625,5,14:17,1:04,0.00,0.40,0.80,2.20,1.80,1.40
+83,Sun 5:00 PM,Ilya Protas,WSH,C,L2 · PP2,vs SEA,45,67,50,11.2,69,15,C,7.96,3.79,7.12,0.90,Joey Daccord,Expected,.897,58,310,5,12:03,1:55,0.00,0.20,0.40,1.20,1.00,1.00
+84,Sun 6:00 PM,Linus Karlsson,VAN,RW,L3 · PP2,@ NYR,45,47,53,12.0,48,17,RW,7.43,3.40,6.74,0.87,Dylan Garand,Confirmed,.948,42,430,5,15:11,1:59,0.20,0.60,1.80,2.00,2.00,0.80
+85,Mon 1:00 PM,Aaron Ekblad,FLA,D,,@ BUF,44,49,52,7.5,53,30,D,4.76,0.77,7.75,0.35,Ukko-Pekka Luukkonen,Projected,.909,34,750,5,21:02,3:07,0.00,0.20,0.80,3.80,2.20,0.80
+86,Sun 5:00 PM,Frederick Gaudreau,SEA,C,L4,@ WSH,44,68,49,11.9,80,18,C,8.32,4.05,7.18,0.88,Logan Thompson,Confirmed,.912,19,950,5,14:47,0:00,0.60,0.00,1.40,2.40,2.20,1.20
+87,Sun 5:00 PM,Jordan Kyrou,WSH,RW,L2 · PP2,vs SEA,43,47,51,10.5,44,11,RW,7.06,3.46,6.83,0.90,Joey Daccord,Expected,.897,58,310,5,12:58,1:45,0.00,0.40,1.20,2.60,1.60,1.00
+88,Sun 6:00 PM,Eeli Tolvanen,NYR,RW,L2 · PP2,vs VAN,42,91,43,10.5,96,1,RW,8.34,3.96,7.60,1.20,Kevin Lankinen,Confirmed,.875,72,340,5,13:09,1:17,0.60,0.00,1.20,1.80,1.40,0.80
+89,Sun 6:00 PM,Filip Hronek,VAN,D,P2 · PP1,@ NYR,42,38,51,7.8,37,20,D,4.23,0.70,8.52,0.41,Dylan Garand,Confirmed,.948,42,700,5,24:20,3:49,0.00,0.60,1.20,3.20,1.40,0.80
+90,Sun 6:00 PM,Max Sasson,VAN,C,L3,@ NYR,42,21,55,15.0,16,27,C,6.98,3.00,6.57,0.79,Dylan Garand,Confirmed,.948,42,950,5,13:20,0:06,0.00,0.00,1.00,2.00,1.80,1.20
+91,Sun 5:00 PM,Ryan Winterton,SEA,LW,L4,@ WSH,42,19,55,7.8,19,30,LW,6.46,2.94,6.49,0.66,Logan Thompson,Confirmed,.912,19,850,5,13:52,0:00,0.00,0.60,1.60,3.60,2.40,2.20
+92,Sun 7:00 PM,Cam York,PHI,D,P2 · PP2,vs CAR,41,30,52,7.8,21,28,D,3.87,0.77,5.74,0.36,Pyotr Kochetkov,Expected,.898,65,,5,21:49,1:19,0.00,0.00,1.20,2.40,1.80,1.00
+93,Sun 7:00 PM,Eric Robinson,CAR,RW,L3,@ PHI,41,24,53,12.6,24,29,RW,7.14,2.95,6.55,0.79,Joseph Woll,Expected,.899,26,650,5,12:17,0:00,0.20,0.40,1.60,2.40,2.00,1.60
+94,Sun 6:00 PM,Jaroslav Chmelar,NYR,RW,L4,vs VAN,41,91,42,12.1,96,1,RW,8.34,3.96,7.60,1.20,Kevin Lankinen,Confirmed,.875,72,600,5,7:56,0:08,0.00,0.00,0.40,1.20,0.80,1.00
+95,Sun 7:00 PM,David Jiricek,PHI,D,P3,vs CAR,40,30,51,9.2,21,28,D,3.87,0.77,5.74,0.36,Pyotr Kochetkov,Expected,.898,65,800,5,17:20,1:41,0.00,0.20,1.20,3.00,1.40,1.00
+96,Sun 7:00 PM,Travis Sanheim,PHI,D,P1,vs CAR,40,30,51,11.3,21,28,D,3.87,0.77,5.74,0.36,Pyotr Kochetkov,Expected,.898,65,1100,5,25:54,0:16,0.20,0.20,1.20,2.60,2.00,0.80
+97,Sun 6:00 PM,Noah Laba,NYR,C,L2,vs VAN,39,80,41,11.4,82,1,C,8.41,3.74,7.51,1.15,Kevin Lankinen,Confirmed,.875,72,525,5,14:53,0:10,0.00,0.20,0.80,1.20,1.00,0.80
+98,Sun 6:00 PM,Sean Durzi,NYR,D,P1 · PP2,vs VAN,39,68,43,9.3,67,7,D,4.57,0.95,7.93,0.55,Kevin Lankinen,Confirmed,.875,72,700,5,19:55,1:22,0.20,0.20,0.40,1.40,0.60,0.80
+99,Sun 6:00 PM,Arshdeep Bains,VAN,LW,L4,@ NYR,38,72,41,10.8,80,5,LW,7.76,3.48,6.87,0.96,Dylan Garand,Confirmed,.948,42,1100,5,11:27,0:06,0.20,0.20,0.60,1.00,0.80,1.00
+100,Mon 1:00 PM,Lars Eller,FLA,C,L3,@ BUF,38,39,47,9.4,40,24,C,7.18,3.51,6.82,0.83,Ukko-Pekka Luukkonen,Projected,.909,34,500,5,13:49,0:41,0.00,0.60,1.20,2.40,1.80,1.00
+101,Mon 1:00 PM,Gustav Forsling,FLA,D,P3,@ BUF,37,49,44,6.5,53,30,D,4.76,0.77,7.75,0.35,Ukko-Pekka Luukkonen,Projected,.909,34,1100,5,19:20,0:49,0.20,0.00,1.20,3.40,1.80,0.80
+102,Sun 6:00 PM,Oliver Bjorkstrand,NYR,LW,L4 · PP2,vs VAN,37,70,41,10.5,70,8,LW,7.44,3.45,6.65,0.94,Kevin Lankinen,Confirmed,.875,72,425,5,10:22,1:13,0.40,0.20,1.00,1.60,1.40,0.80
+103,Sun 6:00 PM,Paul Cotter,VAN,C,L2,@ NYR,37,21,49,14.4,16,27,C,6.98,3.00,6.57,0.79,Dylan Garand,Confirmed,.948,42,575,5,15:46,0:45,0.40,0.40,0.80,2.00,1.40,0.80
+104,Sun 5:00 PM,Kaapo Kakko,SEA,RW,L3 · PP2,@ WSH,36,60,41,13.8,70,18,RW,7.84,3.41,7.27,0.85,Logan Thompson,Confirmed,.912,19,550,5,14:25,2:27,0.20,0.80,0.80,1.20,1.00,0.40
+105,Mon 1:00 PM,Konsta Helenius,BUF,RW,L3 · PP2,vs FLA,35,18,46,10.8,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Projected,.883,59,410,5,12:54,1:38,0.20,0.00,1.20,2.40,1.60,0.80
+106,Sun 6:00 PM,Zeev Buium,VAN,D,P2 · PP2,@ NYR,35,38,43,9.7,37,20,D,4.23,0.70,8.52,0.41,Dylan Garand,Confirmed,.948,42,900,5,22:28,2:13,0.00,0.20,0.80,2.40,1.00,0.60
+107,Sun 6:00 PM,Cole Beaudoin,NYR,C,,vs VAN,33,80,35,11.0,82,1,C,8.41,3.74,7.51,1.15,Kevin Lankinen,Confirmed,.875,72,600,2,10:26,0:07,0.00,0.00,0.50,1.00,0.50,0.50
+108,Sun 7:00 PM,Jaccob Slavin,CAR,D,P2,@ PHI,33,36,41,7.2,38,27,D,4.45,0.78,7.03,0.37,Joseph Woll,Expected,.899,26,1200,5,20:55,0:02,0.00,0.40,1.40,3.00,2.20,0.80
+109,Mon 1:00 PM,Niko Mikkola,FLA,D,P1,@ BUF,33,49,39,8.0,53,30,D,4.76,0.77,7.75,0.35,Ukko-Pekka Luukkonen,Projected,.909,34,1600,5,19:55,0:07,0.00,0.00,1.60,3.60,3.00,0.60
+110,Sun 5:00 PM,Ryker Evans,SEA,D,P1,@ WSH,33,50,39,12.7,58,10,D,4.56,0.98,7.11,0.51,Logan Thompson,Confirmed,.912,19,1700,5,21:55,0:14,0.00,0.40,0.80,1.80,1.20,0.40
+111,Sun 6:00 PM,Tom Willander,VAN,D,P1 · PP2,@ NYR,33,38,41,10.0,37,20,D,4.23,0.70,8.52,0.41,Dylan Garand,Confirmed,.948,42,1300,5,20:49,1:42,0.00,0.60,0.40,3.40,0.80,0.60
+112,Sun 5:00 PM,Vince Dunn,SEA,D,P2 · PP1,@ WSH,33,50,39,8.5,58,10,D,4.56,0.98,7.11,0.51,Logan Thompson,Confirmed,.912,19,700,5,21:47,1:59,0.40,0.60,1.20,3.00,1.60,0.40
+113,Sun 6:00 PM,Vladislav Gavrikov,NYR,D,P2,vs VAN,33,68,37,11.4,67,7,D,4.57,0.95,7.93,0.55,Kevin Lankinen,Confirmed,.875,72,1100,5,21:39,0:03,0.20,0.60,1.80,2.40,1.80,0.40
+114,Sun 6:00 PM,Braden Schneider,NYR,D,P3,vs VAN,32,68,35,6.3,67,7,D,4.57,0.95,7.93,0.55,Kevin Lankinen,Confirmed,.875,72,1800,5,17:40,0:08,0.00,0.00,1.20,3.20,2.00,0.60
+115,Sun 6:00 PM,Elias Pettersson,VAN,D,P3,@ NYR,32,38,39,9.9,37,20,D,4.23,0.70,8.52,0.41,Dylan Garand,Confirmed,.948,42,,5,16:55,0:03,0.20,0.00,0.80,2.20,1.40,0.80
+116,Sun 6:00 PM,Marcus Pettersson,NYR,D,P1,vs VAN,32,68,35,8.3,67,7,D,4.57,0.95,7.93,0.55,Kevin Lankinen,Confirmed,.875,72,1800,5,19:38,0:07,0.00,0.00,0.80,2.40,1.40,0.60
+117,Sun 7:00 PM,Porter Martone,PHI,RW,L2 · PP1,vs CAR,32,38,39,13.2,31,22,RW,6.91,3.53,6.03,0.83,Pyotr Kochetkov,Expected,.898,65,320,5,13:10,1:36,0.20,0.00,1.00,2.20,1.60,0.40
+118,Sun 6:00 PM,Alberts Smits,NYR,D,P3,vs VAN,31,68,34,10.9,67,7,D,4.57,0.95,7.93,0.55,Kevin Lankinen,Confirmed,.875,72,1600,5,14:20,0:05,0.00,0.00,0.40,1.80,1.20,0.60
+119,Sun 7:00 PM,Helge Grans,PHI,D,,vs CAR,29,30,37,11.1,21,28,D,3.87,0.77,5.74,0.36,Pyotr Kochetkov,Expected,.898,65,1350,1,12:26,0:00,0.00,0.00,0.00,0.00,0.00,0.00
+120,Mon 1:00 PM,Justin Danforth,BUF,LW,,vs FLA,29,48,34,10.8,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Projected,.883,59,,5,10:49,0:06,0.00,0.00,0.20,1.00,0.40,0.80
+121,Mon 1:00 PM,Mattias Samuelsson,BUF,D,P1,vs FLA,29,45,35,11.7,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Projected,.883,59,1100,5,20:12,0:00,0.20,0.20,1.20,2.80,2.20,0.40
+122,Sun 5:00 PM,Matt Roy,WSH,D,P1,vs SEA,28,65,31,6.8,67,29,D,4.78,0.88,8.38,0.35,Joey Daccord,Expected,.897,58,,5,19:17,0:03,0.00,0.00,0.20,1.80,1.00,0.60
+123,Sun 7:00 PM,Noah Cates,PHI,C,L2,vs CAR,28,41,34,12.3,35,25,C,7.24,3.47,6.42,0.82,Pyotr Kochetkov,Expected,.898,65,700,5,11:41,0:04,0.00,0.00,0.80,1.40,1.20,0.60
+124,Sun 5:00 PM,Ville Ottavainen,SEA,D,P3,@ WSH,28,50,33,10.9,58,10,D,4.56,0.98,7.11,0.51,Logan Thompson,Confirmed,.912,19,1064,2,14:45,0:00,0.00,0.00,1.00,1.50,1.00,0.50
+125,Sun 5:00 PM,Martin Fehervary,WSH,D,P2,vs SEA,27,65,30,9.3,67,29,D,4.78,0.88,8.38,0.35,Joey Daccord,Expected,.897,58,1600,5,20:46,0:05,0.00,0.00,0.40,1.20,1.00,0.40
+126,Mon 1:00 PM,Olen Zellweger,BUF,D,P2,vs FLA,27,45,32,8.2,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Projected,.883,59,1300,5,15:07,0:13,0.00,0.00,0.40,2.60,1.20,0.60
+127,Sun 5:00 PM,Ben Meyers,SEA,LW,L4,@ WSH,26,19,34,11.7,19,30,LW,6.46,2.94,6.49,0.66,Logan Thompson,Confirmed,.912,19,1000,5,12:22,0:00,0.20,0.40,1.00,1.40,1.40,0.80
+128,Sun 7:00 PM,Carl Grundstrom,PHI,LW,L1,vs CAR,26,15,35,12.6,3,27,LW,5.87,2.72,5.48,0.71,Pyotr Kochetkov,Expected,.898,65,,5,11:32,0:00,0.00,0.00,1.00,1.60,1.60,0.80
+129,Sun 7:00 PM,Jamie Drysdale,PHI,D,P2 · PP1,vs CAR,26,30,33,9.2,21,28,D,3.87,0.77,5.74,0.36,Pyotr Kochetkov,Expected,.898,65,700,5,22:19,2:56,0.00,0.00,1.20,1.80,1.40,0.00
+130,Sun 6:00 PM,Matt Rempe,NYR,RW,,vs VAN,25,91,26,10.4,96,1,RW,8.34,3.96,7.60,1.20,Kevin Lankinen,Confirmed,.875,72,,5,8:28,0:00,0.00,0.00,0.20,0.80,0.80,0.80
+131,Mon 1:00 PM,Radko Gudas,FLA,D,P2,@ BUF,25,49,29,7.9,53,30,D,4.76,0.77,7.75,0.35,Ukko-Pekka Luukkonen,Projected,.909,34,,5,13:16,0:00,0.00,0.00,0.60,2.80,1.40,0.80
+132,Sun 5:00 PM,Timothy Liljegren,WSH,D,,vs SEA,25,65,28,9.2,67,29,D,4.78,0.88,8.38,0.35,Joey Daccord,Expected,.897,58,1400,5,18:43,0:01,0.20,0.00,1.20,2.40,1.80,0.40
+133,Mon 1:00 PM,Uvis Balinskis,FLA,D,P2 · PP2,@ BUF,25,49,29,9.6,53,30,D,4.76,0.77,7.75,0.35,Ukko-Pekka Luukkonen,Projected,.909,34,,5,14:53,1:41,0.00,0.00,1.00,1.60,1.20,0.20
+134,Sun 5:00 PM,Adam Larsson,SEA,D,P2,@ WSH,24,50,28,8.6,58,10,D,4.56,0.98,7.11,0.51,Logan Thompson,Confirmed,.912,19,1400,5,21:29,0:02,0.00,0.00,1.20,2.00,1.20,0.40
+135,Mon 1:00 PM,Garnet Hathaway,FLA,RW,L4,@ BUF,24,64,27,9.0,71,13,RW,7.74,3.49,7.46,0.89,Ukko-Pekka Luukkonen,Projected,.909,34,1100,5,8:35,0:02,0.00,0.00,0.20,1.00,0.60,0.80
+136,Sun 7:00 PM,Charles-Alexis Legault,CAR,D,,@ PHI,23,36,29,10.6,38,27,D,4.45,0.78,7.03,0.37,Joseph Woll,Expected,.899,26,,5,14:29,0:00,0.00,0.00,0.60,2.60,1.60,0.60
+137,Sun 7:00 PM,Noel Acciari,PHI,RW,L1,vs CAR,23,38,28,12.4,31,22,RW,6.91,3.53,6.03,0.83,Pyotr Kochetkov,Expected,.898,65,1200,5,14:16,0:00,0.00,0.00,0.20,0.80,0.60,0.60
+138,Sun 6:00 PM,Aatu Raty,VAN,C,L4,@ NYR,22,21,29,9.6,16,27,C,6.98,3.00,6.57,0.79,Dylan Garand,Confirmed,.948,42,1000,5,10:50,0:06,0.20,0.00,1.00,1.60,1.40,0.60
+139,Sun 5:00 PM,Josh Mahura,SEA,D,P3,@ WSH,22,50,26,10.5,58,10,D,4.56,0.98,7.11,0.51,Logan Thompson,Confirmed,.912,19,2300,5,15:49,0:00,0.00,0.20,0.60,2.20,1.60,0.40
+140,Mon 1:00 PM,Sam Carrick,BUF,C,L4,vs FLA,22,55,25,11.4,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Projected,.883,59,750,5,8:17,0:02,0.00,0.00,0.80,1.60,1.40,0.40
+141,Sun 5:00 PM,Cale Fleury,SEA,D,,@ WSH,21,50,25,9.7,58,10,D,4.56,0.98,7.11,0.51,Logan Thompson,Confirmed,.912,19,,5,14:16,0:00,0.00,0.20,0.60,1.80,1.20,0.60
+142,Sun 6:00 PM,Jamie Oleksiak,VAN,D,P1,@ NYR,21,38,26,9.6,37,20,D,4.23,0.70,8.52,0.41,Dylan Garand,Confirmed,.948,42,1600,5,17:40,0:00,0.20,0.20,0.40,0.80,0.60,0.60
+143,Mon 1:00 PM,Dmitry Kulikov,FLA,D,P3,@ BUF,20,49,24,9.5,53,30,D,4.76,0.77,7.75,0.35,Ukko-Pekka Luukkonen,Projected,.909,34,,5,15:58,0:01,0.00,0.20,0.40,1.80,1.00,0.40
+144,Mon 1:00 PM,Louis Crevier,BUF,D,P3,vs FLA,18,45,21,8.3,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Projected,.883,59,,5,15:14,0:00,0.00,0.20,1.00,3.40,1.40,0.40
+145,Sun 6:00 PM,Luke Schenn,VAN,D,P3,@ NYR,17,38,21,8.8,37,20,D,4.23,0.70,8.52,0.41,Dylan Garand,Confirmed,.948,42,2500,5,13:09,0:04,0.00,0.40,0.60,2.00,1.60,0.20
+146,Mon 1:00 PM,Tyson Kozak,BUF,C,,vs FLA,17,55,20,10.1,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Projected,.883,59,900,5,10:29,0:00,0.00,0.40,0.60,1.20,1.00,0.40
+147,Sun 7:00 PM,Mike Reilly,CAR,RW,P3,@ PHI,16,24,21,7.2,24,29,RW,7.14,2.95,6.55,0.79,Joseph Woll,Expected,.899,26,1500,5,15:14,0:00,0.00,0.40,1.20,2.40,1.60,0.40
+148,Sun 7:00 PM,Jesperi Kotkaniemi,CAR,RW,L3,@ PHI,15,24,20,9.2,24,29,RW,7.14,2.95,6.55,0.79,Joseph Woll,Expected,.899,26,700,5,12:40,0:18,0.00,0.40,0.40,1.00,0.80,0.20
+149,Sun 7:00 PM,Nick Seeler,PHI,D,P3,vs CAR,15,30,19,7.7,21,28,D,3.87,0.77,5.74,0.36,Pyotr Kochetkov,Expected,.898,65,1800,5,17:56,0:01,0.00,0.20,0.60,2.20,1.20,0.20
+150,Sun 7:00 PM,Nicolas Deslauriers,CAR,LW,,@ PHI,15,24,20,9.4,24,19,LW,6.65,3.05,6.16,0.82,Joseph Woll,Expected,.899,26,,5,8:29,0:00,0.00,0.00,0.40,1.00,1.00,0.60
+151,Mon 1:00 PM,Zach Metsa,BUF,D,P3,vs FLA,15,45,18,10.5,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Projected,.883,59,,5,11:40,0:00,0.00,0.20,0.20,1.00,0.40,0.40
+152,Sun 5:00 PM,Curtis Douglas,SEA,LW,,@ WSH,14,19,18,9.3,19,30,LW,6.46,2.94,6.49,0.66,Logan Thompson,Confirmed,.912,19,,5,7:51,0:00,0.20,0.20,0.40,0.80,0.60,0.60
+153,Sun 5:00 PM,Vincent Desharnais,WSH,D,P2,vs SEA,14,65,16,9.0,67,29,D,4.78,0.88,8.38,0.35,Joey Daccord,Expected,.897,58,1600,5,19:56,0:00,0.00,0.20,0.20,0.80,0.40,0.20
+154,Mon 1:00 PM,Beck Malenstyn,BUF,RW,L4,vs FLA,13,18,17,10.5,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Projected,.883,59,1200,5,9:27,0:03,0.00,0.00,0.20,0.80,0.60,0.20
+155,Sun 7:00 PM,Garrett Wilson,PHI,LW,,vs CAR,11,15,15,10.8,3,27,LW,5.87,2.72,5.48,0.71,Pyotr Kochetkov,Expected,.898,65,1100,4,9:27,0:00,0.00,0.00,0.75,0.75,0.75,0.25
+156,Sun 6:00 PM,Victor Mancini,VAN,D,,@ NYR,11,38,14,9.8,37,20,D,4.23,0.70,8.52,0.41,Dylan Garand,Confirmed,.948,42,,5,13:12,0:00,0.00,0.40,0.60,1.60,0.80,0.20
+157,Sun 5:00 PM,Dylan McIlrath,WSH,D,P3,vs SEA,10,65,11,10.6,67,29,D,4.78,0.88,8.38,0.35,Joey Daccord,Expected,.897,58,2000,5,8:39,0:00,0.00,0.00,0.60,1.20,1.20,0.00
+158,Mon 1:00 PM,Bokondji Imama,FLA,LW,L4,@ BUF,9,45,11,10.5,48,15,LW,6.86,3.42,6.53,0.86,Ukko-Pekka Luukkonen,Projected,.909,34,1300,5,6:35,0:00,0.00,0.00,0.80,1.20,0.80,0.20
+159,Mon 1:00 PM,Matt Grzelcyk,BUF,D,,vs FLA,8,45,10,6.6,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Projected,.883,59,,5,13:55,0:00,0.00,0.00,0.20,1.00,0.40,0.20
+160,Mon 1:00 PM,Sam Lafferty,FLA,C,L4,@ BUF,8,39,10,11.1,40,24,C,7.18,3.51,6.82,0.83,Ukko-Pekka Luukkonen,Projected,.909,34,550,5,9:10,0:00,0.00,0.00,0.40,0.80,0.60,0.00
+161,Sun 7:00 PM,Simon Benoit,PHI,D,,vs CAR,6,30,8,6.9,21,28,D,3.87,0.77,5.74,0.36,Pyotr Kochetkov,Expected,.898,65,1900,5,14:17,0:00,0.00,0.00,0.20,0.80,0.20,0.00

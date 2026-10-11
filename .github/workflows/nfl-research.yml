@@ -11,10 +11,9 @@ name: NFL research slate
 
 on:
   schedule:
-    # Every four hours, at :23. GitHub's scheduler runs late and skips at the top
-    # of the hour (see nhl-research.yml); a run that finds nothing new commits
-    # nothing -- the builder leaves an unchanged week's file alone.
-    - cron: "23 */4 * * *"
+    # Once daily at 8 AM Eastern, including daylight saving time.
+    - cron: '0 8 * * *'
+      timezone: America/New_York
   workflow_dispatch:
     inputs:
       week:

@@ -10,13 +10,9 @@ name: NHL research slate
 
 on:
   schedule:
-    # Every two hours, at :47. GitHub's scheduler is best-effort: in the first
-    # week, runs set for 11 am and 5 pm ET started at 4 pm and 8 pm, and the
-    # 5:30 am run never fired at all, so today's slate sat without last night's
-    # games. The top of the hour is when it is busiest, hence the odd minute;
-    # running this often means a late or dropped run is covered by the next.
-    # A run that finds nothing new commits nothing, so most of these are free.
-    - cron: "47 */2 * * *"
+    # Once daily at 8 AM Eastern, including daylight saving time.
+    - cron: '0 8 * * *'
+      timezone: America/New_York
   workflow_dispatch:
     inputs:
       date:

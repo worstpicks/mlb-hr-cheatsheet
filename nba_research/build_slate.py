@@ -18,6 +18,22 @@ OUT = ROOT / 'preview' / 'data'
 API = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/'
 ERRORS = []
 
+def write_if_changed(path, data):
+    """Keep the prior build time when the research itself has not changed."""
+    try:
+        old = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        old = None
+    if isinstance(old, dict):
+        old.pop('built', None)
+        comparable = json.loads(json.dumps(data))
+        comparable.pop('built', None)
+        if old == comparable:
+            return False
+    path.write_text(json.dumps(data, separators=(',', ':')), encoding='utf-8')
+    return True
+
+
 def fetch(route, ttl=3600):
     CACHE.mkdir(parents=True, exist_ok=True)
     path = CACHE / (hashlib.sha256(route.encode()).hexdigest() + '.json')
@@ -199,7 +215,7 @@ def build(first, days):
               'games':games,'errors':ERRORS,
               'policy':'Auto: current regular season, then current preseason, then previous regular season to fill 10 appearances. DNPs excluded. Preseason phases out per player after 10 regular-season appearances.'}
         OUT.mkdir(parents=True,exist_ok=True)
-        (OUT/f'nba-research-{d}.json').write_text(json.dumps(data,separators=(',',':')),encoding='utf-8')
+        write_if_changed(OUT/f'nba-research-{d}.json', data)
         print(f'[NBA] {d}: {len(games)} games, {sum(len(s["players"]) for g in games for s in g["sides"].values())} rostered players',flush=True)
     manifest={'dates':sorted(p.stem.removeprefix('nba-research-') for p in OUT.glob('nba-research-????-??-??.json'))}
     (OUT/'nba-research-manifest.json').write_text(json.dumps(manifest),encoding='utf-8')

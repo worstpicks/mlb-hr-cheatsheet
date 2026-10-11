@@ -10,10 +10,7 @@ name: NFL research slate
 # (WEEK1_TUESDAY in nfl_research/build_slate.py and in the page agree on it).
 
 on:
-  schedule:
-    # Once daily at 8 AM Eastern, including daylight saving time.
-    - cron: '0 8 * * *'
-      timezone: America/New_York
+  # Daily scheduling is centralized in daily-research.yml (one publish).
   workflow_dispatch:
     inputs:
       week:
@@ -30,7 +27,7 @@ permissions:
 
 # One build at a time: two runs pushing the same files would only collide.
 concurrency:
-  group: nfl-research
+  group: research-publish
   cancel-in-progress: false
 
 jobs:

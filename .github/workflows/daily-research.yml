@@ -1,0 +1,99 @@
+name: Daily research update
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+      timezone: America/New_York
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Serialize with the individual manual/push workflows, which also write data.
+concurrency:
+  group: research-publish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/cache@v4
+        with:
+          path: nba_research/cache
+          key: nba-cache-${{ github.run_id }}
+          restore-keys: nba-cache-
+      - uses: actions/cache@v4
+        with:
+          path: nhl_research/cache
+          key: nhl-cache-${{ github.run_id }}
+          restore-keys: nhl-cache-
+      - name: Install NFL dependencies
+        id: nfl_dependencies
+        continue-on-error: true
+        run: pip install --quiet nflreadpy==0.1.5 polars==1.42.1
+      - name: Set Eastern date
+        run: |
+          TODAY=$(TZ=America/New_York date +%F)
+          echo "DATE=$TODAY" >> "$GITHUB_ENV"
+          echo "NHL_TODAY=$TODAY" >> "$GITHUB_ENV"
+      - name: Build NBA research
+        id: nba
+        continue-on-error: true
+        run: |
+          START=$(date -d "$DATE -1 day" +%F)
+          python -m nba_research.build_slate --date "$START" --days 5
+      - name: Build NFL research
+        id: nfl
+        if: steps.nfl_dependencies.outcome == 'success'
+        continue-on-error: true
+        run: python fetch-nfl-research-slate.py --season 2026 --week current --ahead 1
+      - name: Build NHL research
+        id: nhl
+        continue-on-error: true
+        run: python fetch-nhl-research-slate.py --date "$DATE" --days 4 --prune 7
+      - name: Build NHL cheat sheets
+        id: sheets
+        continue-on-error: true
+        run: |
+          FAILED=0
+          for offset in 0 1 2 3; do
+            D=$(date -d "$DATE +$offset day" +%F)
+            if [ -f "nhl_research/atgs_days/$D.txt" ] && [ -f "preview/data/nhl-research-$D.json" ]; then
+              python -m nhl_research.atgs_sheet --date "$D" || FAILED=1
+            fi
+          done
+          exit "$FAILED"
+      - name: Publish all changed research in one commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- 'preview/data/nba-research-*.json' 'preview/data/nfl-research-*.json' 'preview/data/nhl-research-*.json' preview/nhl-research
+          if git diff --cached --quiet; then
+            echo "No research changed; no production deployment needed."
+            exit 0
+          fi
+          git commit -m "Daily NBA, NFL and NHL research for $DATE"
+          for attempt in 1 2 3; do
+            # Never overwrite a concurrent editor's changes to resolve a clash.
+            git pull --rebase origin main || exit 1
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep 10
+          done
+          exit 1
+      - name: Report any incomplete research
+        if: >-
+          always() &&
+          (steps.nfl_dependencies.outcome == 'failure' ||
+           steps.nba.outcome == 'failure' || steps.nfl.outcome == 'failure' ||
+           steps.nhl.outcome == 'failure' || steps.sheets.outcome == 'failure')
+        run: |
+          echo "::error::Some research failed. Successfully generated files were still offered for publication; inspect the failed steps."
+          exit 1

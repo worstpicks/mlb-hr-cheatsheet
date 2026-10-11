@@ -1,6 +1,7 @@
 # Netlify: publish the preview sheet (static) + Savant CSV proxy function.
 
 [build]
+  ignore = "node ./tools/netlify-ignore.mjs"
   command = "node tools/build-ledger.mjs"
   publish = "dist"
   functions = "netlify/functions"

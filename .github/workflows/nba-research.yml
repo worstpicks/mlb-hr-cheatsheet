@@ -1,9 +1,6 @@
 name: NBA research slate
 on:
-  schedule:
-    # Once daily at 8 AM Eastern, including daylight saving time.
-    - cron: '0 8 * * *'
-      timezone: America/New_York
+  # Daily scheduling is centralized in daily-research.yml (one publish).
   workflow_dispatch:
     inputs:
       date:
@@ -18,7 +15,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: nba-research
+  group: research-publish
   cancel-in-progress: false
 jobs:
   build:

@@ -9,10 +9,7 @@ name: NHL research slate
 # in nhl_research/atgs_days/ -- commit the list and the sheet builds itself.
 
 on:
-  schedule:
-    # Once daily at 8 AM Eastern, including daylight saving time.
-    - cron: '0 8 * * *'
-      timezone: America/New_York
+  # Daily scheduling is centralized in daily-research.yml (one publish).
   workflow_dispatch:
     inputs:
       date:
@@ -30,7 +27,7 @@ permissions:
 
 # One build at a time: two runs pushing the same files would only collide.
 concurrency:
-  group: nhl-research
+  group: research-publish
   cancel-in-progress: false
 
 jobs:

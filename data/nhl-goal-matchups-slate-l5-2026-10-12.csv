@@ -1,0 +1,124 @@
+﻿Range,L5
+Position,All
+Scores,"0-100, higher = better spot to score. Score = Form × (0.7 + 0.3 × Matchup/100); Matchup = 80% Def (chances, HD chances, shots, goals allowed to position) + 20% Goalie; Form = goals/iSCF (50%, goals 0% under 10 GP ramping to 25% by 20) + PP TOI 20% + TOI 10% + iFF 10% + finishing 10%"
+Early season,Defense & goalie ranks use 2025-26 data
+
+#,Time,Player,Team,Pos,Lines,Opp,Score,Matchup,Form,"Sh% (2 seasons, shrunk)",Def Score,Def Rank,Def Pos,Def SCA/GP,Def HDSCA/GP,Def SA/GP,Def GA/GP,Opp Goalie,Goalie Status,Goalie SV%,Goalie Score,Odds,GP,TOI/G,PP TOI/G,Goals/G,AST/G,S/G,iCF/G,iFF/G,iSCF/G
+1,Mon 1:00 PM,Sam Reinhart,FLA,RW,L3 · PP1,@ BUF,87,65,97,14.5,71,13,RW,7.74,3.49,7.46,0.89,Colten Ellis,Expected,.903,43,190,5,21:37,6:52,0.00,0.00,2.40,5.60,4.40,3.80
+2,Mon 1:00 PM,Matthew Tkachuk,FLA,RW,L1 · PP1,@ BUF,84,65,94,13.6,71,13,RW,7.74,3.49,7.46,0.89,Colten Ellis,Expected,.903,43,180,5,21:03,7:20,0.60,0.20,2.20,5.00,4.00,3.00
+3,Mon 8:00 PM,Tomas Hertl,VGK,C,L3 · PP1,@ MIN,84,66,93,11.9,76,9,C,8.13,3.78,7.39,0.96,Jesper Wallstedt,Expected,.916,27,260,5,16:02,4:37,0.60,0.40,2.60,5.80,4.80,4.80
+4,Mon 1:00 PM,Tage Thompson,BUF,C,L2 · PP1,vs FLA,82,57,94,13.5,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Expected,.883,68,140,5,19:47,3:11,0.60,0.40,5.80,9.00,7.40,4.20
+5,Mon 7:00 PM,Drake Batherson,OTT,RW,L3 · PP1,@ NJ,78,68,86,17.1,74,11,RW,7.77,3.70,6.94,0.90,Jake Allen,Expected,.904,44,240,5,17:14,3:58,0.60,0.20,2.40,4.40,3.40,2.20
+6,Mon 8:00 PM,Jack Eichel,VGK,C,L1 · PP1,@ MIN,78,66,87,10.9,76,9,C,8.13,3.78,7.39,0.96,Jesper Wallstedt,Expected,.916,27,200,5,21:59,4:49,0.40,1.40,3.20,5.40,3.60,2.40
+7,Mon 1:00 PM,Noah Ostlund,BUF,C,L1 · PP1,vs FLA,78,57,90,13.3,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Expected,.883,68,350,5,18:11,2:41,0.20,0.40,2.80,5.80,4.60,3.40
+8,Mon 8:00 PM,Kirill Kaprizov,MIN,LW,L1 · PP1,vs VGK,76,29,96,16.4,16,18,LW,6.53,2.87,6.01,0.83,Carter Hart,Expected,.887,82,135,5,21:35,3:47,1.20,0.40,2.60,6.40,5.20,3.60
+9,Mon 8:00 PM,Mark Stone,VGK,RW,L1 · PP1,@ MIN,74,31,93,17.4,32,16,RW,6.96,3.19,7.10,0.87,Jesper Wallstedt,Expected,.916,27,220,5,19:49,4:21,0.40,0.80,2.60,4.20,3.80,3.00
+10,Mon 1:00 PM,Anton Lundell,FLA,C,L2 · PP2,@ BUF,72,41,88,11.5,40,24,C,7.18,3.51,6.82,0.83,Colten Ellis,Expected,.903,43,370,5,19:04,4:22,0.00,0.20,3.20,6.00,4.40,2.60
+11,Mon 1:00 PM,Carter Verhaeghe,FLA,LW,L1 · PP2,@ BUF,72,47,86,12.7,48,15,LW,6.86,3.42,6.53,0.86,Colten Ellis,Expected,.903,43,240,5,18:39,3:55,0.20,0.20,1.20,4.20,3.20,2.40
+12,Mon 7:00 PM,Dylan Cozens,OTT,C,L2 · PP1,@ NJ,72,32,90,12.4,29,12,C,7.12,3.34,6.34,0.93,Jake Allen,Expected,.904,44,270,5,18:53,4:00,0.00,0.20,2.20,5.00,3.20,3.20
+13,Mon 7:00 PM,Jack Hughes,NJ,C,L4 · PP1,vs OTT,72,23,94,11.4,9,23,C,6.67,3.06,5.94,0.84,Linus Ullmark,Expected,.890,77,150,5,21:11,4:32,0.20,0.60,3.40,7.40,5.00,4.20
+14,Mon 8:00 PM,Matt Boldy,MIN,RW,L3 · PP1,vs VGK,72,23,94,14.4,8,28,RW,6.51,2.62,6.24,0.80,Carter Hart,Expected,.887,82,150,5,21:13,3:57,0.20,0.20,4.60,7.80,6.40,3.00
+15,Mon 1:00 PM,Sam Bennett,FLA,C,L1 · PP1,@ BUF,72,41,88,12.0,40,24,C,7.18,3.51,6.82,0.83,Colten Ellis,Expected,.903,43,220,5,20:26,5:17,0.00,0.60,1.80,4.60,2.60,2.60
+16,Mon 7:00 PM,Shane Pinto,OTT,C,L1 · PP2,@ NJ,72,32,90,12.8,29,12,C,7.12,3.34,6.34,0.93,Jake Allen,Expected,.904,44,300,5,19:54,2:44,0.00,0.80,1.80,5.40,3.80,3.20
+17,Mon 1:00 PM,Zach Benson,BUF,LW,L1 · PP1,vs FLA,72,50,85,10.8,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Expected,.883,68,330,5,19:24,3:16,0.00,0.20,1.80,4.80,4.00,2.80
+18,Mon 1:00 PM,Brady Tkachuk,FLA,LW,L3 · PP1,@ BUF,70,47,83,10.0,48,15,LW,6.86,3.42,6.53,0.86,Colten Ellis,Expected,.903,43,190,5,17:23,5:55,0.00,0.00,2.40,5.00,3.60,2.60
+19,Mon 8:00 PM,Mitch Marner,VGK,RW,L2 · PP1,@ MIN,70,31,88,13.1,32,16,RW,6.96,3.19,7.10,0.87,Jesper Wallstedt,Expected,.916,27,230,5,21:03,4:34,0.40,0.60,2.80,6.20,3.80,2.20
+20,Mon 8:00 PM,Joel Eriksson Ek,MIN,C,L3 · PP1,vs VGK,69,36,86,9.8,24,14,C,7.08,3.23,6.21,0.91,Carter Hart,Expected,.887,82,225,5,19:36,3:29,0.00,0.40,2.80,4.80,4.20,3.40
+21,Mon 7:00 PM,Nico Hischier,NJ,C,L1 · PP1,vs OTT,69,23,90,12.9,9,23,C,6.67,3.06,5.94,0.84,Linus Ullmark,Expected,.890,77,190,5,19:38,4:22,0.40,0.20,1.80,3.80,2.60,3.00
+22,Mon 8:00 PM,William Karlsson,VGK,C,L2 · PP2,@ MIN,69,66,77,10.8,76,9,C,8.13,3.78,7.39,0.96,Jesper Wallstedt,Expected,.916,27,460,5,18:34,1:32,0.00,0.20,1.80,4.40,3.40,2.20
+23,Mon 1:00 PM,Jack Quinn,BUF,RW,L1 · PP1,vs FLA,68,20,90,10.9,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Expected,.883,68,225,5,20:00,3:28,0.40,0.00,2.80,6.80,5.20,3.80
+24,Mon 8:00 PM,Quinn Hughes,MIN,D,P1 · PP1,vs VGK,68,36,84,6.6,24,25,D,4.46,0.64,6.85,0.38,Carter Hart,Expected,.887,82,500,5,27:31,4:04,0.40,1.00,3.40,7.20,4.80,2.80
+25,Mon 7:00 PM,Tim Stutzle,OTT,C,L3 · PP1,@ NJ,68,32,86,16.1,29,12,C,7.12,3.34,6.34,0.93,Jake Allen,Expected,.904,44,225,5,21:57,4:14,0.80,0.80,2.20,4.20,3.00,2.00
+26,Mon 7:00 PM,Jesper Bratt,NJ,RW,L4 · PP1,vs OTT,66,22,86,11.7,8,19,RW,6.42,2.99,5.81,0.85,Linus Ullmark,Expected,.890,77,290,5,18:21,4:10,0.20,0.60,3.00,4.40,3.60,2.40
+27,Mon 7:00 PM,Luke Evangelista,NJ,RW,L1 · PP1,vs OTT,66,22,86,8.8,8,19,RW,6.42,2.99,5.81,0.85,Linus Ullmark,Expected,.890,77,300,5,17:44,4:31,0.40,0.60,3.00,5.00,4.40,3.60
+28,Mon 7:00 PM,Luke Hughes,NJ,D,P1 · PP1,vs OTT,66,34,82,6.9,23,15,D,4.01,0.74,6.69,0.47,Linus Ullmark,Expected,.890,77,575,5,23:55,4:37,0.20,0.20,2.80,6.80,3.40,2.40
+29,Mon 7:00 PM,Timo Meier,NJ,LW,L1 · PP2,vs OTT,66,30,83,9.0,18,20,LW,6.42,3.03,6.21,0.81,Linus Ullmark,Expected,.890,77,240,5,17:30,2:12,0.00,0.20,4.40,6.60,5.40,3.60
+30,Mon 1:00 PM,Rasmus Dahlin,BUF,D,P1 · PP1,vs FLA,65,47,77,10.0,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Expected,.883,68,350,5,26:32,3:34,0.20,0.40,3.00,5.40,3.20,1.80
+31,Mon 7:00 PM,Thomas Chabot,OTT,D,P1 · PP2,@ NJ,65,44,78,8.9,44,20,D,4.70,0.72,7.67,0.41,Jake Allen,Expected,.904,44,600,5,27:07,3:19,0.20,0.40,3.00,7.00,3.80,2.00
+32,Mon 8:00 PM,Trevor Connelly,VGK,LW,L3 · PP2,@ MIN,65,39,79,11.4,42,32,LW,6.88,3.37,6.54,0.60,Jesper Wallstedt,Expected,.916,27,400,5,12:50,2:50,0.20,0.40,2.20,3.80,3.40,2.40
+33,Mon 1:00 PM,Brad Marchand,FLA,RW,PP2,@ BUF,64,65,71,16.2,71,13,RW,7.74,3.49,7.46,0.89,Colten Ellis,Expected,.903,43,,5,12:18,2:19,0.20,0.20,1.60,3.20,2.40,1.60
+34,Mon 8:00 PM,Brett Howden,VGK,LW,L2,@ MIN,63,39,77,13.9,42,32,LW,6.88,3.37,6.54,0.60,Jesper Wallstedt,Expected,.916,27,425,5,15:46,0:04,0.20,0.20,1.40,3.60,2.80,3.20
+35,Mon 7:00 PM,Ridly Greig,OTT,LW,,@ NJ,62,47,74,10.4,48,16,LW,7.02,3.39,6.33,0.84,Jake Allen,Expected,.904,44,450,5,17:23,2:04,0.00,0.20,1.40,4.00,3.00,2.00
+36,Mon 1:00 PM,Sandis Vilmanis,FLA,RW,L2,@ BUF,62,65,69,11.6,71,13,RW,7.74,3.49,7.46,0.89,Colten Ellis,Expected,.903,43,900,5,12:32,0:25,0.00,0.00,1.40,3.00,2.60,2.20
+37,Mon 1:00 PM,Eetu Luostarinen,FLA,LW,L2 · PP2,@ BUF,60,47,71,11.2,48,15,LW,6.86,3.42,6.53,0.86,Colten Ellis,Expected,.903,43,500,5,15:29,2:06,0.40,0.00,1.60,2.60,2.00,1.80
+38,Mon 1:00 PM,Josh Doan,BUF,RW,L2 · PP2,vs FLA,59,20,78,13.4,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Expected,.883,68,275,5,16:00,2:14,0.00,0.00,1.40,3.60,2.60,2.00
+39,Mon 8:00 PM,Shea Theodore,VGK,D,P1 · PP1,@ MIN,59,71,65,9.1,82,9,D,5.15,0.80,8.65,0.52,Jesper Wallstedt,Expected,.916,27,750,5,21:42,2:32,0.20,0.00,2.80,5.20,3.20,1.20
+40,Mon 7:00 PM,Jake Sanderson,OTT,D,,@ NJ,58,44,70,10.2,44,20,D,4.70,0.72,7.67,0.41,Jake Allen,Expected,.904,44,,5,21:05,2:15,0.60,0.60,2.20,4.80,4.00,1.40
+41,Mon 8:00 PM,Max Shabanov,MIN,RW,L1 · PP1,vs VGK,58,23,76,10.6,8,28,RW,6.51,2.62,6.24,0.80,Carter Hart,Expected,.887,82,350,5,15:31,3:29,0.20,0.40,1.20,3.00,2.20,2.20
+42,Mon 7:00 PM,Michael Amadio,OTT,LW,L1,@ NJ,58,47,69,13.8,48,16,LW,7.02,3.39,6.33,0.84,Jake Allen,Expected,.904,44,700,5,16:46,0:02,0.40,0.20,1.40,2.60,2.00,2.20
+43,Mon 8:00 PM,Blake Coleman,MIN,LW,L3 · PP2,vs VGK,57,29,72,11.5,16,18,LW,6.53,2.87,6.01,0.83,Carter Hart,Expected,.887,82,295,5,15:11,1:11,0.40,0.20,2.20,3.20,2.80,2.00
+44,Mon 7:00 PM,Fabian Zetterlund,OTT,RW,L2 · PP2,@ NJ,56,68,62,11.8,74,11,RW,7.77,3.70,6.94,0.90,Jake Allen,Expected,.904,44,500,5,13:06,2:04,0.00,0.40,1.20,3.20,2.20,1.20
+45,Mon 1:00 PM,Seth Jones,FLA,D,P1 · PP1,@ BUF,56,51,66,9.6,53,30,D,4.76,0.77,7.75,0.35,Colten Ellis,Expected,.903,43,725,5,26:47,6:40,0.20,0.00,2.40,5.40,3.80,1.00
+46,Mon 7:00 PM,Dougie Hamilton,NJ,D,P2 · PP2,vs OTT,55,34,69,7.7,23,15,D,4.01,0.74,6.69,0.47,Linus Ullmark,Expected,.890,77,650,5,20:58,1:55,0.20,0.20,3.00,6.20,4.60,1.60
+47,Mon 1:00 PM,Jiri Kulich,BUF,LW,L4,vs FLA,55,50,65,12.2,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Expected,.883,68,425,5,11:50,0:09,0.20,0.20,1.00,2.80,2.00,2.00
+48,Mon 8:00 PM,Rasmus Andersson,VGK,D,P3 · PP2,@ MIN,55,71,60,9.8,82,9,D,5.15,0.80,8.65,0.52,Jesper Wallstedt,Expected,.916,27,725,5,18:18,1:35,0.00,0.20,1.60,3.80,2.40,1.20
+49,Mon 7:00 PM,Anthony Mantha,NJ,LW,L4 · PP2,vs OTT,54,30,68,17.2,18,20,LW,6.42,3.03,6.21,0.81,Linus Ullmark,Expected,.890,77,350,5,14:37,2:13,0.20,0.20,1.60,2.40,1.80,1.40
+50,Mon 7:00 PM,Arseny Gritsyuk,NJ,LW,L3 · PP2,vs OTT,54,30,68,9.4,18,20,LW,6.42,3.03,6.21,0.81,Linus Ullmark,Expected,.890,77,440,5,15:02,1:39,0.00,0.40,1.60,4.80,3.40,1.80
+51,Mon 1:00 PM,Peyton Krebs,BUF,LW,L3,vs FLA,54,50,64,11.6,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Expected,.883,68,450,5,14:37,0:12,0.00,0.40,1.00,2.60,2.60,1.60
+52,Mon 7:00 PM,Dawson Mercer,NJ,RW,L3,vs OTT,53,22,69,11.6,8,19,RW,6.42,2.99,5.81,0.85,Linus Ullmark,Expected,.890,77,550,5,14:34,0:12,0.00,0.00,2.60,3.60,3.40,2.00
+53,Mon 8:00 PM,Ivan Barbashev,VGK,LW,L1,@ MIN,53,39,65,14.2,42,32,LW,6.88,3.37,6.54,0.60,Jesper Wallstedt,Expected,.916,27,380,5,16:16,0:46,0.00,0.40,1.40,2.80,2.00,1.40
+54,Mon 1:00 PM,Owen Power,BUF,D,P2 · PP2,vs FLA,53,47,63,8.9,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Expected,.883,68,900,5,26:02,1:37,0.20,0.80,1.00,3.60,1.80,1.40
+55,Mon 7:00 PM,Stephen Halliday,OTT,C,L4 · PP2,@ NJ,53,32,67,11.6,29,12,C,7.12,3.34,6.34,0.93,Jake Allen,Expected,.904,44,750,5,10:01,2:34,0.20,0.00,1.00,2.60,1.60,1.80
+56,Mon 1:00 PM,Joshua Norris,BUF,LW,L2 · PP2,vs FLA,51,50,60,13.9,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Expected,.883,68,330,5,16:05,1:50,0.00,0.20,1.00,2.40,2.00,1.00
+57,Mon 8:00 PM,Ryan Hartman,MIN,C,L4 · PP2,vs VGK,50,36,62,12.6,24,14,C,7.08,3.23,6.21,0.91,Carter Hart,Expected,.887,82,400,5,12:37,1:16,0.00,0.20,0.80,3.00,1.80,1.40
+58,Mon 7:00 PM,Jesper Boqvist,NJ,RW,L2,vs OTT,48,22,63,10.1,8,19,RW,6.42,2.99,5.81,0.85,Linus Ullmark,Expected,.890,77,800,5,13:45,0:23,0.40,0.00,1.80,3.20,2.80,1.80
+59,Mon 1:00 PM,Ryan McLeod,BUF,C,L3 · PP2,vs FLA,48,57,55,13.0,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Expected,.883,68,246,5,15:04,1:52,0.00,0.20,0.60,1.40,1.00,1.00
+60,Mon 8:00 PM,Bobby Brink,MIN,RW,L4 · PP2,vs VGK,45,23,59,12.3,8,28,RW,6.51,2.62,6.24,0.80,Carter Hart,Expected,.887,82,480,5,11:52,1:25,0.00,0.60,1.80,3.00,2.20,1.20
+61,Mon 1:00 PM,Aaron Ekblad,FLA,D,,@ BUF,44,51,52,7.5,53,30,D,4.76,0.77,7.75,0.35,Colten Ellis,Expected,.903,43,850,5,21:02,3:07,0.00,0.20,0.80,3.80,2.20,0.80
+62,Mon 7:00 PM,Jordan Spence,OTT,D,P1,@ NJ,42,44,50,8.4,44,20,D,4.70,0.72,7.67,0.41,Jake Allen,Expected,.904,44,1100,5,23:01,0:19,0.00,0.00,1.20,2.80,1.80,1.00
+63,Mon 8:00 PM,Marcus Foligno,MIN,LW,L2,vs VGK,42,29,54,11.3,16,18,LW,6.53,2.87,6.01,0.83,Carter Hart,Expected,.887,82,,5,12:16,0:10,0.00,0.00,1.00,2.00,1.40,1.40
+64,Mon 8:00 PM,Rieger Lorenz,MIN,LW,,vs VGK,42,29,53,11.1,16,18,LW,6.53,2.87,6.01,0.83,Carter Hart,Expected,.887,82,825,1,7:12,0:00,0.00,0.00,0.00,3.00,2.00,3.00
+65,Mon 7:00 PM,Amadeus Lombardi,NJ,LW,L2,vs OTT,40,30,51,10.6,18,20,LW,6.42,3.03,6.21,0.81,Linus Ullmark,Expected,.890,77,850,4,10:08,0:25,0.00,0.25,1.25,1.75,1.50,1.25
+66,Mon 7:00 PM,Andre Burakovsky,OTT,LW,,@ NJ,40,47,48,11.9,48,16,LW,7.02,3.39,6.33,0.84,Jake Allen,Expected,.904,44,300,5,13:51,2:02,0.00,0.20,0.60,1.20,1.00,0.80
+67,Mon 7:00 PM,Claude Giroux,OTT,RW,L1 · PP2,@ NJ,40,68,44,10.2,74,11,RW,7.77,3.70,6.94,0.90,Jake Allen,Expected,.904,44,450,5,17:14,3:28,0.00,0.60,1.60,2.60,2.60,0.40
+68,Mon 7:00 PM,Cody Glass,NJ,C,L2,vs OTT,40,23,52,14.3,9,23,C,6.67,3.06,5.94,0.84,Linus Ullmark,Expected,.890,77,750,5,12:10,0:20,0.00,0.00,1.40,2.20,2.00,1.00
+69,Mon 8:00 PM,Marc Gatcomb,VGK,RW,L4,@ MIN,40,31,51,8.9,32,16,RW,6.96,3.19,7.10,0.87,Jesper Wallstedt,Expected,.916,27,950,5,9:22,0:02,0.20,0.00,2.20,2.60,2.60,1.60
+70,Mon 8:00 PM,Nic Dowd,VGK,C,L4,@ MIN,40,66,45,9.6,76,9,C,8.13,3.78,7.39,0.96,Jesper Wallstedt,Expected,.916,27,900,5,11:01,0:02,0.00,0.20,0.80,1.80,1.20,1.40
+71,Mon 1:00 PM,Lars Eller,FLA,C,L3,@ BUF,39,41,47,9.4,40,24,C,7.18,3.51,6.82,0.83,Colten Ellis,Expected,.903,43,525,5,13:49,0:41,0.00,0.60,1.20,2.40,1.80,1.00
+72,Mon 7:00 PM,Brett Pesce,NJ,D,P1,vs OTT,38,34,48,8.1,23,15,D,4.01,0.74,6.69,0.47,Linus Ullmark,Expected,.890,77,1700,5,20:49,0:06,0.00,0.00,1.40,3.40,2.00,1.00
+73,Mon 8:00 PM,Danila Yurov,MIN,C,L1 · PP2,vs VGK,38,36,47,13.1,24,14,C,7.08,3.23,6.21,0.91,Carter Hart,Expected,.887,82,475,5,13:13,0:56,0.20,0.20,1.20,1.60,1.40,0.80
+74,Mon 1:00 PM,Gustav Forsling,FLA,D,P3,@ BUF,38,51,44,6.5,53,30,D,4.76,0.77,7.75,0.35,Colten Ellis,Expected,.903,43,1100,5,19:20,0:49,0.20,0.00,1.20,3.40,1.80,0.80
+75,Mon 8:00 PM,Nico Sturm,MIN,RW,,vs VGK,38,23,49,11.6,8,28,RW,6.51,2.62,6.24,0.80,Carter Hart,Expected,.887,82,1300,5,11:51,0:00,0.00,0.00,0.80,2.00,2.00,1.40
+76,Mon 7:00 PM,Evan Rodrigues,NJ,C,L3 · PP2,vs OTT,37,23,48,8.4,9,23,C,6.67,3.06,5.94,0.84,Linus Ullmark,Expected,.890,77,460,5,12:49,1:50,0.00,0.00,0.60,3.00,1.60,1.00
+77,Mon 8:00 PM,Braeden Bowman,VGK,LW,L4 · PP2,@ MIN,36,39,44,11.1,42,32,LW,6.88,3.37,6.54,0.60,Jesper Wallstedt,Expected,.916,27,550,5,12:50,1:36,0.20,0.20,1.00,1.80,1.00,0.80
+78,Mon 1:00 PM,Konsta Helenius,BUF,RW,L3 · PP2,vs FLA,35,20,46,10.8,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Expected,.883,68,410,5,12:54,1:38,0.20,0.00,1.20,2.40,1.60,0.80
+79,Mon 8:00 PM,Noah Hanifin,VGK,D,P2,@ MIN,35,71,38,6.2,82,9,D,5.15,0.80,8.65,0.52,Jesper Wallstedt,Expected,.916,27,1400,5,20:27,0:37,0.00,0.00,1.20,2.20,1.80,0.60
+80,Mon 8:00 PM,Yakov Trenin,MIN,LW,L4,vs VGK,35,29,44,8.4,16,18,LW,6.53,2.87,6.01,0.83,Carter Hart,Expected,.887,82,1100,5,13:15,0:01,0.00,0.00,1.00,2.60,2.00,1.20
+81,Mon 7:00 PM,Carter Yakemchuk,OTT,D,P2 · PP1,@ NJ,34,44,41,11.7,44,20,D,4.70,0.72,7.67,0.41,Jake Allen,Expected,.904,44,800,5,16:55,3:21,0.20,0.20,1.40,2.60,2.00,0.20
+82,Mon 1:00 PM,Niko Mikkola,FLA,D,P1,@ BUF,33,51,39,8.0,53,30,D,4.76,0.77,7.75,0.35,Colten Ellis,Expected,.903,43,1700,5,19:55,0:07,0.00,0.00,1.60,3.60,3.00,0.60
+83,Mon 8:00 PM,Michael McCarron,MIN,C,L2,vs VGK,31,36,38,8.8,24,14,C,7.08,3.23,6.21,0.91,Carter Hart,Expected,.887,82,1000,5,13:37,0:00,0.00,0.60,1.80,2.80,2.20,1.00
+84,Mon 7:00 PM,Stefan Noesen,NJ,RW,,vs OTT,31,22,41,9.2,8,19,RW,6.42,2.99,5.81,0.85,Linus Ullmark,Expected,.890,77,,5,9:46,1:53,0.00,0.00,1.00,1.80,1.40,0.80
+85,Mon 8:00 PM,Jared Spurgeon,MIN,D,P1 · PP2,vs VGK,30,36,37,9.2,24,25,D,4.46,0.64,6.85,0.38,Carter Hart,Expected,.887,82,1100,5,22:08,0:53,0.20,0.80,1.20,2.60,1.80,0.40
+86,Mon 1:00 PM,Mattias Samuelsson,BUF,D,P1,vs FLA,29,47,35,11.7,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Expected,.883,68,1100,5,20:12,0:00,0.20,0.20,1.20,2.80,2.20,0.40
+87,Mon 1:00 PM,Olen Zellweger,BUF,D,P2,vs FLA,27,47,32,8.2,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Expected,.883,68,1200,5,15:07,0:13,0.00,0.00,0.40,2.60,1.20,0.60
+88,Mon 7:00 PM,Declan Chisholm,NJ,D,P3,vs OTT,26,34,32,9.9,23,15,D,4.01,0.74,6.69,0.47,Linus Ullmark,Expected,.890,77,2200,5,14:13,0:10,0.00,0.40,0.40,2.40,1.00,0.60
+89,Mon 7:00 PM,Jonas Siegenthaler,NJ,D,P2,vs OTT,26,34,33,6.9,23,15,D,4.01,0.74,6.69,0.47,Linus Ullmark,Expected,.890,77,2200,5,19:14,0:06,0.00,0.00,0.80,2.60,1.40,0.60
+90,Mon 1:00 PM,Justin Danforth,BUF,RW,,vs FLA,26,20,34,10.8,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Expected,.883,68,324,5,10:49,0:06,0.00,0.00,0.20,1.00,0.40,0.80
+91,Mon 7:00 PM,Nick Cousins,OTT,RW,L4,@ NJ,26,68,29,11.6,74,11,RW,7.77,3.70,6.94,0.90,Jake Allen,Expected,.904,44,950,5,9:07,0:02,0.20,0.20,0.60,1.00,0.80,0.60
+92,Mon 1:00 PM,Radko Gudas,FLA,D,P2,@ BUF,25,51,29,7.9,53,30,D,4.76,0.77,7.75,0.35,Colten Ellis,Expected,.903,43,747,5,13:16,0:00,0.00,0.00,0.60,2.80,1.40,0.80
+93,Mon 1:00 PM,Uvis Balinskis,FLA,D,P2 · PP2,@ BUF,25,51,29,9.6,53,30,D,4.76,0.77,7.75,0.35,Colten Ellis,Expected,.903,43,,5,14:53,1:41,0.00,0.00,1.00,1.60,1.20,0.20
+94,Mon 8:00 PM,Brayden McNabb,VGK,D,P1,@ MIN,24,71,26,8.7,82,9,D,5.15,0.80,8.65,0.52,Jesper Wallstedt,Expected,.916,27,1800,5,18:55,0:00,0.00,0.40,0.80,3.60,2.00,0.40
+95,Mon 1:00 PM,Garnet Hathaway,FLA,RW,L4,@ BUF,24,65,27,9.0,71,13,RW,7.74,3.49,7.46,0.89,Colten Ellis,Expected,.903,43,1200,5,8:35,0:02,0.00,0.00,0.20,1.00,0.60,0.80
+96,Mon 8:00 PM,Jonas Brodin,MIN,D,P2,vs VGK,24,36,30,8.4,24,25,D,4.46,0.64,6.85,0.38,Carter Hart,Expected,.887,82,2100,5,21:32,0:11,0.00,0.00,0.80,1.60,1.00,0.40
+97,Mon 8:00 PM,Olli Maatta,MIN,D,P2,vs VGK,24,36,30,9.7,24,25,D,4.46,0.64,6.85,0.38,Carter Hart,Expected,.887,82,2400,5,21:34,0:05,0.00,0.20,0.60,1.00,0.80,0.40
+98,Mon 7:00 PM,Tyler Kleven,OTT,D,P2,@ NJ,24,44,29,7.2,44,20,D,4.70,0.72,7.67,0.41,Jake Allen,Expected,.904,44,1700,5,20:43,0:04,0.00,0.20,1.00,2.00,1.20,0.40
+99,Mon 7:00 PM,Warren Foegele,OTT,LW,L3,@ NJ,24,47,29,11.7,48,16,LW,7.02,3.39,6.33,0.84,Jake Allen,Expected,.904,44,800,5,11:04,0:02,0.00,0.20,0.20,1.20,0.60,0.60
+100,Mon 8:00 PM,Parker Wotherspoon,VGK,D,P3,@ MIN,23,71,25,8.1,82,9,D,5.15,0.80,8.65,0.52,Jesper Wallstedt,Expected,.916,27,2200,5,17:53,0:08,0.00,0.00,0.80,2.40,1.60,0.20
+101,Mon 7:00 PM,Hoyt Stanley,OTT,D,P3,@ NJ,22,44,26,11.1,44,20,D,4.70,0.72,7.67,0.41,Jake Allen,Expected,.904,44,1401,2,9:40,0:01,0.00,0.00,0.00,0.00,0.00,0.00
+102,Mon 1:00 PM,Sam Carrick,BUF,C,L4,vs FLA,22,57,25,11.4,54,6,C,7.35,3.84,6.51,1.02,Jacob Markstrom,Expected,.883,68,800,5,8:17,0:02,0.00,0.00,0.80,1.60,1.40,0.40
+103,Mon 8:00 PM,Jeremy Lauzon,VGK,D,P2,@ MIN,21,71,23,6.6,82,9,D,5.15,0.80,8.65,0.52,Jesper Wallstedt,Expected,.916,27,2100,5,16:11,0:03,0.00,0.00,1.40,3.40,2.00,0.20
+104,Mon 8:00 PM,Raphael Lavoie,VGK,RW,,@ MIN,21,31,27,11.0,32,16,RW,6.96,3.19,7.10,0.87,Jesper Wallstedt,Expected,.916,27,750,3,8:43,0:00,0.00,0.00,0.33,2.00,1.33,0.67
+105,Mon 1:00 PM,Dmitry Kulikov,FLA,D,P3,@ BUF,20,51,24,9.5,53,30,D,4.76,0.77,7.75,0.35,Colten Ellis,Expected,.903,43,1034,5,15:58,0:01,0.00,0.20,0.40,1.80,1.00,0.40
+106,Mon 7:00 PM,Hayden Hodgson,OTT,RW,L4,@ NJ,19,68,21,10.7,74,11,RW,7.77,3.70,6.94,0.90,Jake Allen,Expected,.904,44,,5,6:44,0:02,0.00,0.00,0.40,1.00,0.80,0.40
+107,Mon 1:00 PM,Louis Crevier,BUF,D,P3,vs FLA,18,47,21,8.3,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Expected,.883,68,661,5,15:14,0:00,0.00,0.20,1.00,3.40,1.40,0.40
+108,Mon 1:00 PM,Tyson Kozak,BUF,LW,,vs FLA,17,50,20,10.1,45,2,LW,6.96,3.40,5.87,0.99,Jacob Markstrom,Expected,.883,68,900,5,10:29,0:00,0.00,0.40,0.60,1.20,1.00,0.40
+109,Mon 7:00 PM,Brenden Dillon,NJ,D,P3,vs OTT,16,34,20,9.1,23,15,D,4.01,0.74,6.69,0.47,Linus Ullmark,Expected,.890,77,2200,5,15:13,0:00,0.00,0.00,0.60,1.80,1.00,0.40
+110,Mon 7:00 PM,Nikolas Matinpalo,OTT,D,P3,@ NJ,16,44,19,7.9,44,20,D,4.70,0.72,7.67,0.41,Jake Allen,Expected,.904,44,2500,5,17:45,0:01,0.00,0.00,0.80,1.60,1.20,0.20
+111,Mon 8:00 PM,Zach Bogosian,MIN,D,P3,vs VGK,16,36,20,9.7,24,25,D,4.46,0.64,6.85,0.38,Carter Hart,Expected,.887,82,,5,15:39,0:01,0.00,0.00,1.00,1.60,1.00,0.20
+112,Mon 1:00 PM,Zach Metsa,BUF,D,P3,vs FLA,15,47,18,10.5,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Expected,.883,68,885,5,11:40,0:00,0.00,0.20,0.20,1.00,0.40,0.40
+113,Mon 1:00 PM,Beck Malenstyn,BUF,RW,L4,vs FLA,13,20,17,10.5,8,25,RW,6.43,2.79,6.07,0.82,Jacob Markstrom,Expected,.883,68,1200,5,9:27,0:03,0.00,0.00,0.20,0.80,0.60,0.20
+114,Mon 8:00 PM,Daemon Hunt,MIN,D,P3,vs VGK,10,36,12,9.2,24,25,D,4.46,0.64,6.85,0.38,Carter Hart,Expected,.887,82,2800,5,12:03,0:00,0.00,0.00,0.40,1.00,0.80,0.20
+115,Mon 1:00 PM,Bokondji Imama,FLA,LW,L4,@ BUF,9,47,11,10.5,48,15,LW,6.86,3.42,6.53,0.86,Colten Ellis,Expected,.903,43,1200,5,6:35,0:00,0.00,0.00,0.80,1.20,0.80,0.20
+116,Mon 8:00 PM,David Spacek,MIN,D,,vs VGK,8,36,10,11.0,24,25,D,4.46,0.64,6.85,0.38,Carter Hart,Expected,.887,82,2400,4,9:56,0:00,0.00,0.00,0.25,0.25,0.25,0.00
+117,Mon 1:00 PM,Matt Grzelcyk,BUF,D,,vs FLA,8,47,10,6.6,42,10,D,4.06,0.77,8.20,0.51,Jacob Markstrom,Expected,.883,68,,5,13:55,0:00,0.00,0.00,0.20,1.00,0.40,0.20
+118,Mon 1:00 PM,Sam Lafferty,FLA,C,L4,@ BUF,8,41,10,11.1,40,24,C,7.18,3.51,6.82,0.83,Colten Ellis,Expected,.903,43,575,5,9:10,0:00,0.00,0.00,0.40,0.80,0.60,0.00

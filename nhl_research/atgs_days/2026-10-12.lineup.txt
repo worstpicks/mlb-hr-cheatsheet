@@ -1,0 +1,12 @@
+# October 12 CSVs, DailyFaceoff starting goalies and all six team lineup pages.
+# https://www.dailyfaceoff.com/starting-goalies/2026-10-12
+# https://www.nhl.com/news/nhl-lineup-projections-2026-27-season
+# No starter confirmed at build time. Buffalo projections conflict.
+goalie FLA Jacob Markstrom | expected, not yet confirmed
+goalie BUF Colten Ellis | expected, not confirmed; CSV and NHL.com project Ellis, DailyFaceoff projects Luukkonen
+goalie OTT Linus Ullmark | expected, not yet confirmed
+goalie NJD Jake Allen | expected, not yet confirmed
+goalie VGK Carter Hart | expected, not yet confirmed
+goalie MIN Jesper Wallstedt | expected, not yet confirmed
+# https://www.dailyfaceoff.com/teams/ottawa-senators/line-combinations
+out OTT William Eklund | injured reserve; unavailable

@@ -82,6 +82,8 @@
             tile("Rating", Math.floor(r.score), esc(BAND_LABEL[r.band] || r.band_label || ""), "atgs-pf-ovr " + bandClass(r.band)) +
             tile(r.need ? r.need + "+ goal chance" : "Goal chance", r.small ? "—" : num(r.chance, 0) + "%",
                  r.small ? "too few games to rate" : (r.need ? "this bet needs " + r.need + " goals · " : "") +
+                 (r.price != null ? "price " + (r.price > 0 ? "+" : "") + r.price + " implies " + num(r.implied, 0) + "%" +
+                  (r.value ? " · 💰 value" : "") + " · " : "") +
                  "scored in " + (hit.g_1 == null ? "—" : hit.g_1 + "%") + " of his last " + r.games) +
             tile("Shots", num(r.sog, 1), "a game · 2+ in " + (hit.sog_2 == null ? "—" : hit.sog_2 + "%")) +
             (r.mult != null ? tile(esc(r.opp) + " vs " + esc(r.role) + "s", signedPct(r.mult),

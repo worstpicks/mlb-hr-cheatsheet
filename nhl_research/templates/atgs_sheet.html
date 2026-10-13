@@ -171,6 +171,21 @@
     .chip--rz  { background: rgba(239, 68, 68, 0.14);  border-color: rgba(239, 68, 68, 0.45);  color: #fecaca; }
     .chip--mat { background: rgba(34, 197, 94, 0.14);  border-color: rgba(74, 222, 128, 0.45); color: #bbf7d0; }
     .chip--exp { background: rgba(168, 85, 247, 0.16); border-color: rgba(192, 132, 252, 0.5); color: #e9d5ff; }
+    .chip--edge { background: rgba(16, 185, 129, 0.16); border-color: rgba(52, 211, 153, 0.5); color: #a7f3d0; }
+    html.theme-light .chip--edge { color: #065f46; background: rgba(16, 185, 129, 0.2); }
+    /* best value plays: our chance against the chance the price implies */
+    .sheet-section-note { font-size: 0.78rem; line-height: 1.5; color: var(--nrs-muted, #94a3b8); margin: -4px 0 12px; }
+    .sheet-value-verdict { font-weight: 700; color: #34d399; margin: 4px 0 2px; font-size: 0.86rem; }
+    html.theme-light .sheet-value-verdict { color: #065f46; }
+    .sheet-value-card--close { opacity: 0.88; }
+    .sheet-value-card--close .sheet-value-verdict { color: #fbbf24; }
+    html.theme-light .sheet-value-card--close .sheet-value-verdict { color: #92400e; }
+    .sheet-value-card--close .sheet-chance__track span { background: #f59e0b; }
+    .sheet-value-card--close .sheet-chance__track--price span { background: #94a3b8; }
+    .sheet-chance__label { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; margin: 8px 0 4px; }
+    .sheet-chance__track { height: 9px; border-radius: 5px; background: rgba(148, 163, 184, 0.2); overflow: hidden; }
+    .sheet-chance__track span { display: block; height: 100%; background: #10b981; }
+    .sheet-chance__track--price span { background: #94a3b8; }
     html.theme-light .chip--fav { color: #854d0e; background: rgba(250, 204, 21, 0.28); }
     html.theme-light .chip--val { color: #075985; background: rgba(56, 189, 248, 0.22); }
     html.theme-light .chip--rz  { color: #991b1b; background: rgba(239, 68, 68, 0.18); }
@@ -1014,8 +1029,9 @@
         </section>
 
         <section class="sheet-section" id="sheetValueSection" hidden>
-            <h2 class="sheet-section-title">Best Plus-Money Value</h2>
-            <div class="sheet-strip" id="sheetValue"></div>
+            <h2 class="sheet-section-title" id="sheetValueTitle">Best value plays</h2>
+            <p class="sheet-section-note" id="sheetValueNote"></p>
+            <div class="sheet-top" id="sheetValue"></div>
         </section>
 
         <section class="sheet-section" id="sheetWarnSection" hidden>
@@ -1105,9 +1121,10 @@
             qual: { icon: "💎", label: "Shot quality" },
             gl:   { icon: "🥅", label: "Goalie edge" },
             pp:   { icon: "⚡", label: "Power play" },
-            hot:  { icon: "🔥", label: "Hot stick" }
+            hot:  { icon: "🔥", label: "Hot stick" },
+            val:  { icon: "💰", label: "Value" }
         };
-        var TAG_CLASS = { fav: "fav", mat: "mat", vol: "exp", qual: "val", gl: "q", pp: "rz", hot: "agg" };
+        var TAG_CLASS = { fav: "fav", mat: "mat", vol: "exp", qual: "val", gl: "q", pp: "rz", hot: "agg", val: "edge" };
         var FILTERS = [
             { k: "all", label: "All plays" },
             { k: "fav", label: "⭐ Top rated" },
@@ -1116,7 +1133,8 @@
             { k: "qual", label: "💎 Shot quality" },
             { k: "gl", label: "🥅 Goalie edge" },
             { k: "pp", label: "⚡ Power play" },
-            { k: "hot", label: "🔥 Hot stick" }
+            { k: "hot", label: "🔥 Hot stick" },
+            { k: "val", label: "💰 Value" }
         ];
 
         function fmtKick(iso) {
@@ -1145,6 +1163,49 @@
                 // in Playable yellow next to a Strong 80 in green looks like a bug
                 '<b>' + Math.floor(pl.score) + "</b>" +
                 (size === "lg" ? "<small>OVR</small>" : "") + "</span>";
+        }
+
+        /* Best value plays: where our goal chance clears the chance the price
+           implies by the most, in a matchup on his side -- the football sheet's
+           value cards, in hockey. */
+        function valueHTML() {
+            var ids = (SHEET.value || []).concat(SHEET.value_close || []);
+            var nValue = (SHEET.value || []).length;
+            return ids.map(function (id, i) {
+                var pl = BY_ID[id];
+                if (!pl) return "";
+                var close = i >= nValue;
+                var ours = Number(pl.chance) || 0, implied = Number(pl.implied) || 0;
+                return '<article class="sheet-top-card sheet-value-card' + (close ? " sheet-value-card--close" : "") +
+                    " sheet-play--" + esc(pl.band) + '" data-id="' + esc(pl.id) + '">' +
+                    '<div class="sheet-play__head">' +
+                    '<span class="sheet-top-five-rank"><i>#</i>' + (i + 1) + "</span>" +
+                    '<span class="' + posClass(pl.pos) + '">' + esc(pl.role) + "</span>" +
+                    nameLink(pl) +
+                    ovr(pl, "sm") +
+                    priceHTML(pl) + "</div>" +
+                    '<div class="sheet-play__tags">' +
+                    '<span class="chip">' + esc(pl.team) + " vs " + esc(pl.opp) + "</span>" +
+                    '<span class="chip">' + esc(fmtKick(pl.kick)) + "</span>" +
+                    '<span class="chip">' + esc(pl.band_label) + "</span>" +
+                    '<span class="chip chip--mat">Matchup ' + Math.round(100 * (Number(pl.match) || 0)) + "/100</span>" +
+                    chips((pl.tags || []).filter(function (k) { return k === "mat" || k === "gl"; })) + "</div>" +
+                    '<p class="sheet-value-verdict">' +
+                      (!close && Number(pl.price) >= 300 ? "Priced like a long shot, plays better" : "Underpriced") + "</p>" +
+                    '<div class="sheet-chance" aria-label="Our goal chance ' + ours.toFixed(0) +
+                      ' percent; the price implies ' + implied.toFixed(0) + ' percent">' +
+                      '<div class="sheet-chance__label"><span>Our estimate</span><b>' + ours.toFixed(0) + "%</b></div>" +
+                      '<div class="sheet-chance__track"><span style="width:' + Math.min(100, ours) + '%"></span></div>' +
+                      '<div class="sheet-chance__label"><span>Price ' + esc(pl.lines.atgs) + " implies</span><b>" + implied.toFixed(0) + "%</b></div>" +
+                      '<div class="sheet-chance__track sheet-chance__track--price"><span style="width:' + Math.min(100, implied) + '%"></span></div>' +
+                    "</div>" +
+                    '<p class="sheet-why"><b>The odds:</b> ' + esc(pl.lines.atgs) + " treats him as a " + implied.toFixed(0) +
+                      "% shot to score. We have him at " + ours.toFixed(0) + "%" +
+                      (close ? ", a smaller edge than the plays above." : ", so the payout is bigger than the risk.") + "</p>" +
+                    '<p class="sheet-why"><b>The matchup:</b> ' + esc(pl.match_line || "") + "</p>" +
+                    '<p class="sheet-why"><b>His game:</b> ' + esc(pl.game_line || pl.why) + "</p>" +
+                    "</article>";
+            }).join("");
         }
 
         function chips(tags) {
@@ -1288,9 +1349,26 @@
         document.getElementById("sheetTop").innerHTML = topHTML();
         document.getElementById("sheetGames").innerHTML = GAMES.map(gameHTML).join("");
 
-        if ((SHEET.value || []).length) {
+        if ((SHEET.value || []).length || (SHEET.value_close || []).length) {
+            var nVal = (SHEET.value || []).length, nClose = (SHEET.value_close || []).length;
+            var valueCount = SHEET.value_count || nVal, valueBar = SHEET.value_edge || 4, shown = nVal + nClose;
+            var ranks = function (a, b) { return "#" + a + (b > a ? "\u2013#" + b : ""); };
             document.getElementById("sheetValueSection").hidden = false;
-            document.getElementById("sheetValue").innerHTML = stripHTML(SHEET.value);
+            document.getElementById("sheetValueTitle").textContent =
+                "Best value plays \u2014 top " + shown + (valueCount > nVal ? " of " + valueCount : "") + " tonight";
+            document.getElementById("sheetValueNote").textContent =
+                "Why hunt value: the likeliest scorer isn't always the best bet, because his price already expects him to score. " +
+                "Every price sets how often a player has to score for the bet to break even. When our rating has him scoring " +
+                "more often than that, the payout is bigger than the risk, and over a season those are the bets that come out ahead. " +
+                "Every play here also needs the matchup on its side, a soft defensive lane, a goalie to shoot on, or both, " +
+                "because a good price on a player walking into a wall is a trap. " +
+                "Ranked by the biggest cushion over the price" +
+                (!nClose ? "." : nVal
+                    ? ": " + ranks(1, nVal) + " beat" + (nVal === 1 ? "s" : "") + " it by " + valueBar + " or more games in 100, " +
+                      ranks(nVal + 1, shown) + " by less."
+                    : ". None beat it by " + valueBar + " or more games in 100 tonight, so these are the closest.") +
+                " No lineup doubts or thin samples. A lean against the price, not a lock.";
+            document.getElementById("sheetValue").innerHTML = valueHTML();
         }
         if ((SHEET.warnings || []).length) {
             document.getElementById("sheetWarnSection").hidden = false;
@@ -1359,7 +1437,10 @@
             "Built " + (built ? built.toLocaleString() : "—") +
             " · times " + esc(tzName()) +
             " · iFF and iSCF are computed from NHL play-by-play shot coordinates" +
-            (SHEET.has_props ? "" : " · no price feed connected, so the value section stays empty") +
+            (SHEET.has_props
+                ? " · prices from the day's goal-matchups export; 💰 Value marks a play whose goal chance beats its price by " +
+                  (SHEET.value_edge || 4) + "+ points in a good matchup"
+                : " · no price feed connected, so the value section stays empty") +
             (SHEET.stats_season && SHEET.stats_season !== SHEET.season
                 ? " · " + String(SHEET.stats_season).slice(2, 4) + "–" +
                   String(SHEET.stats_season).slice(-2) + " production on " +
@@ -1775,6 +1856,6 @@
             .catch(function () { /* opened standalone: the dropdown stays a single date */ });
     })();
     </script>
-    <script src="__ROOT__atgs-card.js?v=9" defer></script>
+    <script src="__ROOT__atgs-card.js?v=10" defer></script>
 </body>
 </html>

@@ -398,6 +398,118 @@ def goal_chance(rate: float, mult: float) -> float:
     return round(100 * (1 - math.exp(-lam)), 1)
 
 
+# The goal chance a rating stands for, fitted on graded nights: 1,584 rated
+# skaters from 9/29 to 10/11 against their box scores (the 10/12 review fit,
+# nhl_research/learned/model.json on claude/review-fixes-learning, "hand" curve).
+# Out of sample it beat the Poisson goal-rate chance (log loss .493 vs .516) and
+# a flat rate (.508). The Poisson chance ran hot at the top -- stars read 55-60%
+# and score about 40% -- which matters once a price is set against it.
+CHANCE_CURVE = (-3.27229, 3.07625)
+
+
+def rated_chance(score: float) -> float:
+    """P(at least one goal) as a percent from the rating, on the fitted curve."""
+    b0, b1 = CHANCE_CURVE
+    eta = max(-9.0, min(3.0, b0 + b1 * score / 100))
+    return round(100 * (1 - math.exp(-math.exp(eta))), 1)
+
+
+def at_least(pct_one: float, need: int) -> float:
+    """P(at least `need` goals) from P(at least one), keeping the Poisson shape."""
+    lam = -math.log(max(1e-9, 1 - pct_one / 100))
+    below = sum(math.exp(-lam) * lam ** k / math.factorial(k) for k in range(need))
+    return round(100 * (1 - below), 1)
+
+
+# A play is value when our goal chance clears the chance its price implies by
+# this many points -- the football sheet's bar.
+VALUE_EDGE = 4.0
+# ...and the matchup has to be on his side: the defensive lane and the goalie
+# together (35 of the rating's 100 points) at 70% or better, about the middle of
+# a slate. A good price on a player walking into a wall is a trap, not value.
+MATCHUP_FLOOR = 0.70
+
+
+def matchup_share(r: dict) -> float:
+    """The defensive lane and the goalie, as a share of the points they can earn."""
+    return (r["parts"]["defense"] + r["parts"]["goalie"]) / (WEIGHTS["defense"] + WEIGHTS["goalie"])
+
+
+def matchup_line(r: dict) -> str:
+    """The matchup in two sentences: the lane he skates into and the goalie at the end of it."""
+    diff = (r["mult"] - 1) * 100 if r.get("mult") else 0
+    lane = ("about what an average club allows" if abs(diff) < 4 else
+            f"{abs(diff):.0f}% {'more' if diff > 0 else 'less'} than an average club")
+    bits = [f"{r['opp']} gives up {r['opp_g']:.2f} goals and {r['opp_sog']:.1f} shots a game "
+            f"to {r['role']}s, {lane}."]
+    if r.get("g_name") and r.get("g_sv_pct"):
+        share = r["parts"]["goalie"] / WEIGHTS["goalie"]
+        read = ("one to shoot on" if share >= 0.7 else "about average" if share >= 0.5 else "a tough draw")
+        if r.get("g_gp", 25) < 10:
+            bits.append(f"{r['g_name']} has only {r['g_gp']} games ({pct3(r.get('g_sv_raw') or r['g_sv_pct'])}), "
+                        f"read as {pct3(r['g_sv_pct'])}: {read}.")
+        else:
+            bits.append(f"{r['g_name']} saves {pct3(r.get('g_sv_raw') or r['g_sv_pct'])} overall and "
+                        f"{pct3(r.get('g_hd_raw') or r['g_hd_sv_pct'])} on high-danger shots: {read}.")
+    else:
+        bits.append("No confirmed starter in net yet, so the goalie is scored as neutral.")
+    return " ".join(bits)
+
+
+def game_line(r: dict) -> str:
+    """His own game: volume, chances, minutes, recent scoring, power play."""
+    bits = [f"{r['sog']:.1f} shots and {r['iscf']:.1f} scoring chances a game on {r['toi']:.1f} minutes, "
+            f"scoring {r['g']:.2f} a night over his last {r['games']}."]
+    if r["pp_p"] >= 0.35:
+        bits.append(f"Works the power play for {r['pp_p']:.2f} points a game.")
+    if r["g5"] >= 3:
+        bits.append(f"{int(r['g5'])} goals in his last five.")
+    return " ".join(bits)
+# The export writes four clubs the short way.
+EXPORT_TEAMS = {"LA": "LAK", "NJ": "NJD", "SJ": "SJS", "TB": "TBL"}
+
+
+def load_prices(date: str) -> tuple[dict, str]:
+    """({(name, team): American price}, file name) from the day's goal-matchups
+    export, data/nhl-goal-matchups-slate-*-<date>.csv -- its Odds column is the
+    anytime-goal price. ({}, "") without one."""
+    paths = sorted((ROOT / "data").glob(f"nhl-goal-matchups-slate-*-{date}.csv"))
+    if not paths:
+        return {}, ""
+    lines = paths[-1].read_text(encoding="utf-8-sig").splitlines()
+    start = next((i for i, line in enumerate(lines) if line.startswith("#,")), None)
+    if start is None:
+        return {}, ""
+    out: dict = {}
+    seen: dict = {}
+    for row in csv.DictReader(lines[start:]):
+        team = EXPORT_TEAMS.get(row.get("Team", ""), row.get("Team", ""))
+        # keyed by position group too: VAN dresses a forward and a defenseman
+        # both named Elias Pettersson
+        key = (norm_name(row.get("Player", "")), team, "D" if row.get("Pos") == "D" else "F")
+        seen[key] = seen.get(key, 0) + 1
+        price = str(row.get("Odds") or "").strip().replace("+", "")
+        if re.fullmatch(r"-?\d{3,5}", price):
+            out[key] = int(price)
+    return {k: v for k, v in out.items() if seen[k] == 1}, paths[-1].name
+
+
+def implied_chance(american: int) -> float:
+    """The chance a price implies, as a percent, vig included -- the bar a bet has to clear."""
+    return 100 * (100 / (american + 100) if american > 0 else -american / (-american + 100))
+
+
+def attach_price(r: dict, prices: dict) -> None:
+    """His anytime-goal price, the chance it implies and our edge over it."""
+    price = prices.get((norm_name(r["name"]), r["team"], "D" if r["pos"] == "D" else "F"))
+    if price is None or r.get("need"):
+        return  # a two-goal line is a different bet from the anytime price
+    r["lines"] = dict(r.get("lines") or {}, atgs=f"+{price}" if price > 0 else str(price))
+    r["price"] = price
+    r["implied"] = round(implied_chance(price), 1)
+    r["edge"] = round(r["chance"] - r["implied"], 1)
+
+
 # A goalie's save rates are read as if he had also faced this many shots at the
 # league's rate. A starter's 25 games (~650 shots) barely move; DiPietro's four
 # games at .935 on 10/3 come back to about .91 instead of branding every Wild
@@ -541,7 +653,7 @@ def rate(rows: list[dict], slate_scales: dict) -> list[dict]:
         r["why"] = why(r)
         lg_g = r["lg_slot"].get("g") or 0
         r["mult"] = round(r["opp_g"] / lg_g, 3) if lg_g and r["opp_g"] else 1.0
-        r["chance"] = goal_chance(r["g"], r["mult"])
+        r["chance"] = rated_chance(r["score"])
         # where he sits among the league's forwards, for "top 12%" style reads
         r["pctl"] = {k: round(100 * scales[k].of(r[k]))
                      for k in ("sog", "icf", "iscf", "ihdcf", "g", "toi", "pp_p") if k in scales}
@@ -691,14 +803,33 @@ def build_sheet(date: str) -> dict:
             need = int(math.floor(play["line"])) + 1
             if need >= 2:
                 row["need"] = need
-                row["chance"] = goals_chance(row["g"], row["mult"], need)
+                row["chance"] = at_least(row["chance"], need)
             # "ou", not "side": "side" is the home/away the card's research link needs
             row["ou"] = play["side"]
             listed.append(row)
         rows = listed
     goalie_evidence = load_goalie_evidence(date)
+    prices, prices_from = load_prices(date)
     for r in rows:
         r["goalie_evidence"] = goalie_evidence.get((norm_name(r.get("g_name", "")), r["opp"]), {})
+        attach_price(r, prices)
+        # Value: our chance beats the price by VALUE_EDGE points or more, in a
+        # matchup at MATCHUP_FLOOR or better. A lineup doubt is never value -- the
+        # price assumes he plays -- and neither is a player with too few games to rate.
+        if (r.get("edge") is not None and r["edge"] >= VALUE_EDGE
+                and matchup_share(r) >= MATCHUP_FLOOR
+                and not r.get("doubt_note") and not r["small"]):
+            r["value"] = True
+            r["tags"] = r["tags"] + ["val"]
+    if prices:
+        print(f"[atgs] prices from {prices_from}: {sum(1 for r in rows if r.get('price'))} of "
+              f"{len(rows)} plays priced, {sum(1 for r in rows if r.get('value'))} past the "
+              f"{VALUE_EDGE:g}-point bar in a good matchup")
+        walled = [r for r in rows if r.get("edge") is not None and r["edge"] >= VALUE_EDGE
+                  and matchup_share(r) < MATCHUP_FLOOR]
+        if walled:
+            print("[atgs] priced well but left off for the matchup: " + ", ".join(
+                f"{r['name']} (+{r['edge']:g}, matchup {matchup_share(r):.2f})" for r in walled))
     by_id = {r["id"]: r for r in rows}
 
     games_out = []
@@ -723,11 +854,24 @@ def build_sheet(date: str) -> dict:
     # the night's best anytime scorer.
     top = [r["id"] for r in rated if not r.get("need")][:5]
 
-    # Plus-money value: the best scores that still pay better than even. Without
-    # a price feed there is nothing to sort on, so the section stays empty
-    # rather than inventing odds.
-    value = [r["id"] for r in rated
-             if not r.get("need") and str(r["lines"].get("atgs", "")).startswith("+")][:5]
+    # Best value: the widest gaps between our chance and the price's, up to five.
+    # Without the day's prices the section stays empty rather than inventing odds.
+    valued = sorted((r for r in rows if r.get("value")), key=lambda r: (-r["edge"], r["name"]))
+    value = [r["id"] for r in valued[:5]]
+    # Close calls fill the open slots on a thin night: still a positive edge, just
+    # under the bar, labeled as such on the page and never tagged Value. A lineup
+    # doubt or a thin sample sits out here too.
+    close = sorted((r for r in rows if r.get("edge") is not None and 0 < r["edge"] < VALUE_EDGE
+                    and matchup_share(r) >= MATCHUP_FLOOR
+                    and not r.get("doubt_note") and not r["small"] and not r.get("need")),
+                   key=lambda r: (-r["edge"], r["name"]))
+    value_close = [r["id"] for r in close[:max(0, 5 - len(value))]]
+    # The cards read the price, the matchup and his game separately.
+    for pid in value + value_close:
+        r = by_id[pid]
+        r["match"] = round(matchup_share(r), 2)
+        r["match_line"] = matchup_line(r)
+        r["game_line"] = game_line(r)
 
     # Profile warnings: names the model likes less than their reputation would.
     warned = sorted((r for r in rated if r["warning"]), key=lambda r: r["score"])
@@ -745,8 +889,13 @@ def build_sheet(date: str) -> dict:
         "games": games_out,
         "top5": top,
         "value": value,
+        "value_count": len(valued),
+        "value_close": value_close,
+        "value_edge": VALUE_EDGE,
+        "value_match_floor": MATCHUP_FLOOR,
+        "prices_from": prices_from,
         "warnings": warnings,
-        "has_props": slate.get("has_props", False),
+        "has_props": bool(prices) or slate.get("has_props", False),
         "weights": WEIGHTS,
         "by_id": by_id,
         "listed": plays is not None,

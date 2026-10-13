@@ -1,0 +1,67 @@
+# Tuesday 10/13 -- starting goalies and availability, read at 8 am ET from the
+# user's CSVs (nhl-goalie-summary-2026-l5 and nhl-goal-matchups-slate-l5, 10/13),
+# RotoWire lineups (agree with the CSVs on all 32 starters), DailyFaceoff starting
+# goalies and line combinations for all 32 clubs, and the 10/12 NHL box scores.
+# RotoWire's injury report had only 5 entries league-wide this morning, so
+# availability comes from DailyFaceoff and the matchup export's projected lines.
+# From the pasted list: Kaprizov's "Over 1 Goals" was entered as Over 0.5 and the
+# Zadorov assist prop was left off (one-goal sheet).
+
+# FLA, BUF, OTT, NJD, VGK and MIN played 10/12; each starts the other goalie
+# (Markstrom, Ellis, Ullmark, Daws, Hart and Wallstedt started last night).
+goalie NJD Jake Allen | confirmed, back-to-back
+# DailyFaceoff has Tarasov.
+goalie DET John Gibson | expected, not yet confirmed
+goalie FLA Akira Schmid | expected, back-to-back
+goalie CBJ Jet Greaves | expected
+goalie BUF Ukko-Pekka Luukkonen | expected, back-to-back
+# DailyFaceoff has Fowler.
+goalie MTL Jakub Dobes | expected, not yet confirmed
+goalie WSH Logan Thompson | expected
+goalie CAR Brandon Bussi | expected
+# DailyFaceoff has Grubauer.
+goalie SEA Joey Daccord | expected, not yet confirmed
+goalie PHI Dan Vladar | expected
+goalie TBL Andrei Vasilevskiy | expected
+goalie NYR Dylan Garand | expected
+goalie STL Joel Hofer | expected
+goalie OTT Samuel Ersson | expected, back-to-back
+# DailyFaceoff has Merilainen.
+goalie VAN Kevin Lankinen | expected, not yet confirmed
+goalie NYI Ilya Sorokin | expected
+# DailyFaceoff has Murashov.
+goalie PIT Arturs Silovs | expected, not yet confirmed
+goalie CHI Spencer Knight | expected
+goalie MIN Calvin Pickard | confirmed, back-to-back
+goalie WPG Stuart Skinner | expected
+goalie COL Mackenzie Blackwood | confirmed
+goalie DAL Jake Oettinger | expected
+goalie VGK Adin Hill | confirmed, back-to-back
+goalie NSH Juuse Saros | expected
+goalie TOR Sergei Bobrovsky | expected
+goalie UTA Karel Vejmelka | expected
+goalie CGY Devin Cooley | expected
+goalie ANA Lukas Dostal | expected
+goalie EDM Devon Levi | expected
+goalie LAK Darcy Kuemper | expected
+goalie BOS Jeremy Swayman | expected
+goalie SJS Yaroslav Askarov | expected
+
+# Listed plays that will not dress.
+out NJD Connor Brown | injured reserve (lower body), no games this season
+out DET Marco Kasper | injured reserve (upper body), week-to-week
+out OTT William Eklund | injured reserve (ankle)
+out DAL Matt Duchene | core surgery 10/12, expected to miss three months
+out UTA Michael Carcone | upper body, week-to-week
+out EDM Matt Savoie | long-term injured reserve, no games this season
+out CGY Jonathan Huberdeau | out (hip), no games this season
+out MTL Ivan Demidov | lower body, out two to four weeks
+out CHI Frank Nazar | suspended (two games from 10/9; CHI has played once since)
+
+# The plays stay, flagged (a bet on a player who sits is voided).
+doubt CHI Connor Bedard | Game-time decision -- shoulder; back in Chicago's projected lines, no games this season
+doubt WSH Alex Tuch | Game-time decision -- DailyFaceoff lists him as a game-time decision
+doubt DET Lucas Raymond | Game-time decision -- DailyFaceoff lists him as a game-time decision
+doubt ANA Cutter Gauthier | Game-time decision -- day-to-day (upper body), skipped line rushes 10/12
+doubt WSH Ivan Miroshnichenko | Projected scratch -- not in WSH's projected lines or the matchup export
+doubt SJS Adam Gaudette | Projected scratch -- not in SJS's projected lines or the matchup export

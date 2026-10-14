@@ -33,6 +33,12 @@
         if (r.points == null) return '<span class="nrs-br-dim">—</span>';
         return '<span class="' + (r.points >= 0 ? "nrs-up" : "nrs-down") + '">' + (r.points >= 0 ? "+" : "") + r.points.toFixed(0) + "</span>";
     }
+    // atd-insights.js (workload line, usage arrow) loads only on sheets from Week 5 on;
+    // older archive pages share this file, so every call goes through here.
+    function insight(name) {
+        var x = window.NFLInsights;
+        return x && typeof x[name] === "function" ? x[name](SHEET, arguments[1]) : "";
+    }
     var TEAM_LOGO = function (abbr) {
         return abbr ? "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/" + abbr.toLowerCase() + ".png" : "";
     };
@@ -158,6 +164,8 @@
             facts.push("<b>" + Math.round(p.share) + "%</b> " + esc(p.share_kind) + " over " + p.games + (p.games === 1 ? " game" : " games") + " · <b>" +
                        Math.round(p.share_l3) + "%</b> over the last 3");
         }
+        var load = insight("workload", p.player_id);
+        if (load) facts.push(load);
         if (p.pos !== "QB" && p.rz_share != null) {
             facts.push("Handles <b>" + Math.round(p.rz_share) + "%</b> of " + esc(p.team) + "'s red-zone work · " + esc(p.team) +
                        " reaches the 20 <b>" + (e.rz_trips != null ? e.rz_trips.toFixed(1) : "—") + "</b> times a game · " + esc(p.opp) +
@@ -169,7 +177,7 @@
                        "</b> vs zone (" + p.cov.zone_t + ")" + (d.def_man != null ? " · " + esc(p.opp) + " plays man " + Math.round(d.def_man) + "%" : ""));
         }
         var stats = Object.keys(p.proj || {});
-        return window.NFLInsights.summary(SHEET, p.player_id) + window.NFLInsights.bars(SHEET, p.player_id) + '<h4 class="nrs-pf-h">Why ' + (p.grade == null ? "no grade" : "a " + p.grade) + "</h4>" +
+        return '<h4 class="nrs-pf-h">Why ' + (p.grade == null ? "no grade" : "a " + p.grade) + "</h4>" +
             '<ul class="nrs-why">' + (reasons || "<li>No components available.</li>") + "</ul>" +
             (facts.length ? '<ul class="nrs-bd-lines">' + facts.map(function (f) { return "<li>" + f + "</li>"; }).join("") + "</ul>" : "") +
             (stats.length ? '<p class="nrs-bd-proj">Projection: ' + stats.map(function (s) {
@@ -250,7 +258,7 @@
         if (p.headshot) { photo.src = thumb(p.headshot); photo.hidden = false; } else { photo.hidden = true; }
 
         var status = { q: "Q", d: "D", out: "Out" }[pl && pl.st];
-        $("atdCardName").innerHTML = esc(p.name) + window.NFLInsights.arrow(SHEET, p.player_id) + '<span class="nrs-depth-badge">' + esc(p.role) + "</span>" +
+        $("atdCardName").innerHTML = esc(p.name) + insight("arrow", p.player_id) + '<span class="nrs-depth-badge">' + esc(p.role) + "</span>" +
             (status ? '<span class="nrs-bb nrs-bb--inj" title="' + esc((pl.stl || "") + (pl.inj ? " — " + pl.inj : "")) + '">' + status + "</span>" : "") +
             (p.low_volume ? '<span class="nrs-bb nrs-bb--low">Low vol</span>' : "") +
             (p.new_team ? '<span class="nrs-bb nrs-bb--new">New team</span>' : "");

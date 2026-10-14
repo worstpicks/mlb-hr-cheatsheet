@@ -166,9 +166,14 @@ def calibrate(season: int, week: int) -> dict:
     Every archived sheet of this season before `week` is graded against nflverse box
     scores (any touchdown, or a rushing one for a QB rush line). One factor `c` scales
     each player's expected touchdowns: c below 1 means the model has run hot. It is
-    re-fitted every build, so it tightens as the season adds results; under 100 graded
-    plays it stays at 1. Over-1.5 lines are left out -- they grade a different bet."""
-    out = {"c": 1.0, "n": 0, "hit": None, "said": None}
+    re-fitted every build; under 100 graded plays it stays at 1. Over-1.5 lines are left
+    out -- they grade a different bet.
+
+    The trim has to earn its place. Each graded week is also predicted by the trim fitted
+    on the weeks before it, and the trim is used only if those unseen-week predictions
+    beat the untrimmed chances. On 10/14 they did not: Week 2 ran hot, the trims fitted
+    from it ran too low, and Weeks 3-5 scored 35% against an untrimmed 36%."""
+    out = {"c": 1.0, "n": 0, "hit": None, "said": None, "fit": 1.0, "checked": None}
     rows = []
     try:
         stats = nfl.load_player_stats(seasons=season, summary_level="week").filter(
@@ -200,22 +205,40 @@ def calibrate(season: int, week: int) -> dict:
                     x = box.get((w, p.get("id")))
                     if td is None or x is None or p.get("line", 0.5) >= 1.5:
                         continue
-                    rows.append((min(td / 100, 0.999), (x[0] if p.get("mk") == "rush_td" else x[1]) >= 1))
+                    rows.append((w, min(td / 100, 0.999), (x[0] if p.get("mk") == "rush_td" else x[1]) >= 1))
     if len(rows) < 100:
         out["n"] = len(rows)
         return out
 
-    def loss(c):
+    def loss(c, sample):
         total = 0.0
-        for p, hit in rows:
+        for _, p, hit in sample:
             q = min(max(1 - math.exp(c * math.log(1 - p)), 1e-6), 1 - 1e-6)
             total -= math.log(q if hit else 1 - q)
         return total
 
-    out["c"] = min((loss(k / 100), k / 100) for k in range(50, 131))[1]
+    def fit(sample):
+        return min((loss(k / 100, sample), k / 100) for k in range(50, 131))[1]
+
+    # walk forward: every week after the first, predicted by the trim fitted before it
+    held, raw_loss, trim_loss = [], 0.0, 0.0
+    for w in sorted({r[0] for r in rows}):
+        train, test = [r for r in rows if r[0] < w], [r for r in rows if r[0] == w]
+        if len(train) < 50:
+            continue
+        c_then = fit(train)
+        raw_loss += loss(1.0, test)
+        trim_loss += loss(c_then, test)
+        held += test
+    out["fit"] = fit(rows)
+    out["c"] = out["fit"] if held and trim_loss < raw_loss else 1.0
+    if held:
+        out["checked"] = {"n": len(held), "said": round(100 * sum(p for _, p, _ in held) / len(held), 1),
+                          "hit": round(100 * sum(h for _, _, h in held) / len(held), 1),
+                          "ll_raw": round(raw_loss / len(held), 4), "ll_trim": round(trim_loss / len(held), 4)}
     out["n"] = len(rows)
-    out["hit"] = round(100 * sum(h for _, h in rows) / len(rows), 1)
-    out["said"] = round(100 * sum(p for p, _ in rows) / len(rows), 1)
+    out["hit"] = round(100 * sum(h for _, _, h in rows) / len(rows), 1)
+    out["said"] = round(100 * sum(p for _, p, _ in rows) / len(rows), 1)
     return out
 
 
@@ -404,8 +427,10 @@ def build(season: int, week: int) -> Path:
     insights = load_insights_csv(WEEKS / f"odds-{season}-W{week}.csv")
     cal = calibrate(season, week)
     c = cal["c"]
-    print(f"[atd] calibration: x{c:.2f} on expected TDs from {cal['n']} graded plays "
-          f"(model said {cal['said']}%, {cal['hit']}% hit); {len(odds)} prices"
+    chk = cal.get("checked") or {}
+    print(f"[atd] calibration: x{c:.2f} on expected TDs (fitted x{cal['fit']:.2f} from {cal['n']} graded plays, "
+          f"model said {cal['said']}%, {cal['hit']}% hit; on unseen weeks raw {chk.get('ll_raw')} vs trim "
+          f"{chk.get('ll_trim')} log loss over {chk.get('n')}); {len(odds)} prices"
           + (f" captured {odds_captured}" if odds_captured else ""))
     by_game = {f"{g['away']}@{g['home']}": g for g in slate["games"]}
 
@@ -496,6 +521,9 @@ def build(season: int, week: int) -> Path:
         m_mult = 1.0 if (pos == "QB" or td_index is None) else min(1.12, max(0.9, 1 + 0.2 * (td_index - 1)))
         lam = xtd * s_mult * m_mult
         r["score"] = 1 - math.exp(-lam)
+        # The bet itself: an over-1.5 line needs two, so it ranks on the chance of two --
+        # a 60% anytime scorer is a 23% over-1.5, and the favourites and Top 5 say so.
+        r["bet"] = r["score"] if p["line"] < 1.5 else 1 - math.exp(-lam) * (1 + lam)
         r["small"] = (b.get("games") or 0) < MIN_GAMES
         edge = None
         if m.get("index") is not None and td_index is not None:
@@ -571,7 +599,7 @@ def build(season: int, week: int) -> Path:
         r["tags"] = tags
         r["eligible"] = eligible
 
-    ranked = sorted([r for r in rows if r["eligible"] and r["status"] != "q"], key=lambda r: -r["score"])
+    ranked = sorted([r for r in rows if r["eligible"] and r["status"] != "q"], key=lambda r: -r["bet"])
     for r in ranked[:FAVORITES]:
         r["tags"].insert(0, "fav")
     fav_ids = {id(r) for r in ranked[:FAVORITES]}
@@ -584,7 +612,7 @@ def build(season: int, week: int) -> Path:
             by_slot.setdefault(r["b"]["role"][:2] + ("1" if r["b"]["role"].endswith("1") else "2+"), []).append(r["score"])
     medians = {k: sorted(v)[len(v) // 2] for k, v in by_slot.items()}
     for r in rows:
-        if id(r) in fav_ids or not r["eligible"]:
+        if id(r) in fav_ids or not r["eligible"] or r["plan"]["line"] >= 1.5:
             continue
         slot = r["b"]["role"][:2] + ("1" if r["b"]["role"].endswith("1") else "2+")
         above = r["score"] - medians.get(slot, r["score"])
@@ -593,16 +621,27 @@ def build(season: int, week: int) -> Path:
         if (secondary and above >= 0.08 and r["score"] >= 0.28) or growing:
             r["tags"].insert(0, "val")
 
-    # 💰 value: a healthy, rated play whose trimmed chance clears the chance its best
-    # price implies by VALUE_EDGE points or more.
-    value_rows = sorted([r for r in rows if r["eligible"] and r["status"] == "" and r.get("edge_pts") is not None
-                         and r["edge_pts"] >= VALUE_EDGE and not r["odd_price"]],
+    # 💰 value, as on the NHL sheet: our chance clears the chance the best price implies
+    # by VALUE_EDGE points or more, AND the matchup is on his side -- a good price on a
+    # player walking into a wall is a trap. Healthy, rated, a normal-looking price.
+    for r in rows:
+        r["match"] = matchup_score(r, len(dz_rank))
+    priced = [r for r in rows if r["eligible"] and r["status"] == "" and r.get("edge_pts") is not None
+              and not r["odd_price"]]
+    value_rows = sorted([r for r in priced if r["edge_pts"] >= VALUE_EDGE and r["match"] >= MATCHUP_FLOOR],
                         key=lambda r: (-r["edge_pts"], r["plan"]["name"]))
+    walled = sorted([r for r in priced if r["edge_pts"] >= VALUE_EDGE and r["match"] < MATCHUP_FLOOR],
+                    key=lambda r: (-r["edge_pts"], r["plan"]["name"]))
+    # A thin week fills the open slots with the next positive edges in a good matchup,
+    # shown as "Underpriced" and never tagged Value.
+    close_rows = sorted([r for r in priced if 0 < r["edge_pts"] < VALUE_EDGE and r["match"] >= MATCHUP_FLOOR],
+                        key=lambda r: (-r["edge_pts"], r["plan"]["name"]))[:max(0, 5 - len(value_rows))]
     for r in value_rows:
         r["tags"].append("edge")
     value5 = [{"id": r["b"]["player_id"], "edge": round(r["edge_pts"], 1), "ours": round(100 * r["td_cal"], 1),
-               "book": fmt_price(r["book"]), "implied": round(100 * r["p_book"], 1),
-               "why": why_value(r, env, cal)} for r in value_rows[:5]]
+               "book": fmt_price(r["book"]), "implied": round(100 * r["p_book"], 1), "close": close,
+               "match": r["match"], "match_line": matchup_line(r, env, len(dz_rank)), "game_line": game_line(r, env)}
+              for rs, close in ((value_rows[:5], False), (close_rows, True)) for r in rs]
 
     # ✈️ exploitable defenses: the scoring table's TARGET verdict when a table is
     # supplied for the week; otherwise the ten softest defenses on our own numbers --
@@ -722,9 +761,11 @@ def build(season: int, week: int) -> Path:
         "season": season, "week": week, "root": "",
         "built": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "first_kick": kicks[0].isoformat(), "last_kick": kicks[-1].isoformat(),
-        "games": games_out, "top5": top5, "first5": first5, "two5": two5, "value5": value5, "value_min_edge": VALUE_EDGE, "tend": tend,
+        "games": games_out, "top5": top5, "first5": first5, "two5": two5, "value5": value5, "value_min_edge": VALUE_EDGE,
+        "value_count": len(value_rows), "value_match_floor": MATCHUP_FLOOR, "teams": len(dz_rank), "tend": tend,
         "odds_captured": odds_captured, "has_odds": bool(odds),
-        "calibration": {"c": c, "n": cal["n"], "hit": cal["hit"], "said": cal["said"]},
+        "calibration": {"c": c, "fit": cal["fit"], "n": cal["n"], "hit": cal["hit"], "said": cal["said"],
+                        "checked": cal.get("checked")},
         "exp_source": exp_source,
         "cards": cards, "env": card_env, "leaks": card_leaks,
         "defense_source": bool(defense),
@@ -739,8 +780,14 @@ def build(season: int, week: int) -> Path:
     print("[atd] prices flagged out of line: " + ", ".join(
         f"{r['plan']['name']} {fmt_price(r['book'])}" for r in rows if r.get("odd_price")))
     print("[atd] value plays (" + str(len(value_rows)) + "): " + ", ".join(
-        f"{r['plan']['name']} +{r['edge_pts']:.1f} ({100 * r['td_cal']:.0f}% vs {100 * r['p_book']:.0f}% at {fmt_price(r['book'])})"
-        for r in value_rows))
+        f"{r['plan']['name']} +{r['edge_pts']:.1f} ({100 * r['td_cal']:.0f}% vs {100 * r['p_book']:.0f}% at "
+        f"{fmt_price(r['book'])}, matchup {r['match']})" for r in value_rows))
+    if close_rows:
+        print("[atd] underpriced fill-ins: " + ", ".join(
+            f"{r['plan']['name']} +{r['edge_pts']:.1f} (matchup {r['match']})" for r in close_rows))
+    if walled:
+        print("[atd] priced well but left off for the matchup: " + ", ".join(
+            f"{r['plan']['name']} +{r['edge_pts']:.1f} (matchup {r['match']})" for r in walled))
     print("[atd] 2+ TD top 5: " + ", ".join(f"{r['plan']['name']} {100 * r['two']:.1f}% ({fair_odds(r['two'])}) "
                                           f"[{r['multi'][0]} of {r['multi'][1]}]" for r in two_ranked))
     print("[atd] first TD top 5: " + ", ".join(f"{r['plan']['name']} {100 * r['first']:.1f}% ({fair_odds(r['first'])})"
@@ -810,21 +857,53 @@ def fmt_price(american_odds):
     return f"+{american_odds}" if american_odds > 0 else str(american_odds)
 
 
-def why_value(r, env, cal):
+# ...and the matchup has to be on his side: the lane (what this defense gives up to his
+# role) and the end zone (how often its red-zone trips allowed become touchdowns), each
+# as a percentile of this week's defenses, averaged. 50 is an average draw.
+MATCHUP_FLOOR = 50
+
+
+def matchup_score(r: dict, teams: int) -> int:
+    mu = r["b"].get("matchup") or {}
+    lane = (mu["rank"] - 1) / (mu["of"] - 1) if mu.get("rank") and (mu.get("of") or 0) > 1 else 0.5
+    zone = (r["dz"] - 1) / (teams - 1) if r.get("dz") and teams > 1 else 0.5
+    return round(100 * (lane + zone) / 2)
+
+
+def matchup_line(r: dict, env: dict, teams: int) -> str:
+    """The lane he runs into and the red zone at the end of it, in two plain clauses."""
     p, b = r["plan"], r["b"]
-    team, opp, pos = p["team"], p["opp"], b["pos"]
-    e, d = env.get(team, {}), env.get(opp, {})
-    bits = [f"The best price, {fmt_price(r['book'])}, needs him to score {100 * r['p_book']:.0f}% of the time; "
-            f"we have him at {100 * r['td_cal']:.0f}%."]
-    if cal["n"] and cal["c"] < 1:
-        bits.append(f"That is already trimmed from {100 * r['td_raw']:.0f}% for how the model has run "
-                    f"({cal['said']:.0f}% said, {cal['hit']:.0f}% hit over {cal['n']} plays).")
-    if pos == "QB":
-        bits.append(f"He averages {r['gl']:.1f} carries a game inside the 5.")
-    else:
-        bits.append(f"He holds {b.get('rz_share', 0):.0f}% of {team}'s red-zone work; {team} reaches the 20 "
-                    f"{e.get('rz_trips', 0):.1f} times a game and {opp} lets {d.get('def_rz_td', 0):.0f}% of those trips score.")
-    return " ".join(bits)
+    opp, role = p["opp"], b["role"]
+    mu, d = b.get("matchup") or {}, env.get(p["opp"], {})
+    bits = []
+    if mu.get("index") is not None:
+        pct = round((mu["index"] - 1) * 100)
+        lane = ("about what an average defense allows" if abs(pct) < 4 else
+                f"{abs(pct)}% {'more' if pct > 0 else 'less'} than an average defense")
+        bits.append(f"{opp} gives up {lane} to {role}s")
+    if d.get("def_rz_td") is not None and r.get("dz"):
+        soft = ("one of the softest" if r["dz"] > 0.75 * teams else "softer than average" if r["dz"] > teams / 2
+                else "tougher than average" if r["dz"] > teams / 4 else "one of the stingiest")
+        bits.append(f"lets {d['def_rz_td']:.0f}% of red-zone trips score, {soft}")
+    return (", and ".join(bits) + ".") if bits else "No matchup numbers for this defense yet."
+
+
+def game_line(r: dict, env: dict) -> str:
+    """His own role: the share he earns, the red-zone work, the goal-line carries."""
+    p, b = r["plan"], r["b"]
+    team = p["team"]
+    e = env.get(team, {})
+    bits = []
+    if b.get("share") is not None:
+        bits.append(f"{b['share']:.0f}% {b.get('share_kind') or 'share'} over his last {b.get('games')} games")
+    if b["pos"] != "QB" and b.get("rz_share") is not None:
+        bits.append(f"{b['rz_share']:.0f}% of {team}'s red-zone work")
+    if r["gl"] >= 0.5:
+        bits.append(f"{r['gl']:.1f} carries a game inside the 5")
+    line = (bits[0][0].upper() + bits[0][1:] if bits else "")
+    line = ", ".join([line] + bits[1:]) if bits else ""
+    trips = f"{team} reaches the red zone {e.get('rz_trips', 0):.1f} times a game."
+    return (line + ". " + trips) if line else trips
 
 
 def why_two(r, env):
@@ -888,7 +967,7 @@ def why(r, env, dz_rank, implied_rank, defense, rank_on_board):
     if d.get("def_rz_td") is not None and dz:
         soft = ("among the softest" if dz >= 25 else "softer than average" if dz >= 17
                 else "tougher than average" if dz >= 9 else "one of the stingiest")
-        bits.append(f"{opp} lets {d['def_rz_td']:.0f}% of red-zone trips end in a touchdown, {soft} ({dz} of 32).")
+        bits.append(f"{opp} lets {d['def_rz_td']:.0f}% of red-zone trips end in a touchdown, {soft} ({dz} of {len(dz_rank)}).")
     if pos != "QB" and r["edge"] is not None and abs(r["edge"]) >= 0.10:
         more = "more" if r["edge"] > 0 else "less"
         bits.append(f"Against {b['role']}s it has given up {abs(round(100 * r['edge']))}% {more} than league.")

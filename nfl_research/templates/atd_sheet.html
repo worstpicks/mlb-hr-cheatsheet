@@ -351,30 +351,29 @@
     .atd-game__line { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
     .atd-inj { font-size: 0.7rem; color: #fdba74; line-height: 1.4; }
     .atd-play.is-out { opacity: 0.6; }
-    .atd-player-why { margin: 12px 0 4px; font-size: 12px; line-height: 1.6; }
-    .atd-player-why > b { font-size: 12px; }
-    .atd-player-why p { margin: 4px 0; }
-    .atd-workload { color: var(--muted, #94a3b8); }
-    .atd-factor-bars { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
-    .atd-factor { min-width: 0; font-size: 8px; line-height: 1.4; text-transform: uppercase; letter-spacing: 0; color: #94a3b8; cursor: help; }
-    .atd-factor > span { display: block; max-width: 100%; overflow-wrap: anywhere; }
-    .atd-factor-track { height: 3px; background: rgba(148,163,184,.25); margin-bottom: 5px; }
-    .atd-factor-track span { display: block; height: 100%; background: #38bdf8; }
-    .atd-factor.is-missing { opacity: .55; }
-    html.theme-light .atd-workload, html.theme-light .atd-factor { color: #475569; }
-    .atd-trend-arrow { position: relative; cursor: help; display: inline-block; font-size: 21px; font-weight: 900; line-height: 1; margin-left: 5px; flex-shrink: 0; }
+    .atd-trend-arrow { position: relative; cursor: help; display: inline-block; font-size: 15px; font-weight: 900; line-height: 1; margin-left: 4px; flex-shrink: 0; }
     .atd-trend-arrow::after { content: attr(data-tooltip); position: absolute; z-index: 100; top: calc(100% + 8px); right: 0; width: 210px; padding: 10px 12px; border-radius: 8px; background: #0f172a; color: #f8fafc; border: 1px solid #475569; box-shadow: 0 4px 16px rgba(0,0,0,.3); font-size: 12px; font-weight: 400; line-height: 1.5; white-space: normal; text-align: left; pointer-events: none; visibility: hidden; opacity: 0; }
     .atd-trend-arrow:hover::after, .atd-trend-arrow:focus::after { visibility: visible; opacity: 1; }
     .atd-trend-arrow.is-up { color: #22c55e; }
     .atd-trend-arrow.is-down { color: #ef4444; }
     html.theme-light .atd-trend-arrow.is-up { color: #15803d; }
     html.theme-light .atd-trend-arrow.is-down { color: #dc2626; }
-    .atd-value-verdict { font-weight: 700; color: #34d399; margin: 14px 0 10px; }
-    html.theme-light .atd-value-verdict { color: #065f46; }
-    .atd-chance__label { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; margin: 8px 0 4px; }
-    .atd-chance__track { height: 9px; border-radius: 5px; background: rgba(148,163,184,.2); overflow: hidden; }
-    .atd-chance__track span { display: block; height: 100%; background: #10b981; }
+    .atd-value-verdict { font-weight: 800; font-size: 0.86rem; color: #34d399; margin: 8px 0 2px; }
+    html.theme-light .atd-value-verdict { color: #047857; }
+    .atd-chance__label { display: flex; justify-content: space-between; gap: 8px; font-size: 0.8rem; margin: 8px 0 4px; }
+    .atd-chance__label b { font-variant-numeric: tabular-nums; }
+    .atd-chance__track { height: 9px; border-radius: 5px; background: rgba(148, 163, 184, 0.18); overflow: hidden; }
+    .atd-chance__track span { display: block; height: 100%; border-radius: 5px; background: #10b981; }
     .atd-chance__track--price span { background: #94a3b8; }
+    .atd-value-card .atd-why b { color: var(--wpz-color-text); }
+    .atd-value-card .atd-why { margin-top: 6px; }
+    .atd-value-card--close { opacity: 0.9; }
+    .atd-value-card--close .atd-value-verdict { color: #fbbf24; }
+    html.theme-light .atd-value-card--close .atd-value-verdict { color: #92400e; }
+    .atd-value-card--close .atd-chance__track:not(.atd-chance__track--price) span { background: #f59e0b; }
+    .atd-value-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    /* a chip's display:flex beats the hidden attribute without this (the Value legend chip) */
+    .chip[hidden] { display: none; }
     .chip--edge { background: rgba(16, 185, 129, 0.18); border-color: rgba(52, 211, 153, 0.6); color: #a7f3d0; }
     html.theme-light .chip--edge { color: #065f46; background: rgba(16, 185, 129, 0.2); }
     .atd-m--price { background: rgba(16, 185, 129, 0.14); color: #a7f3d0; }
@@ -501,7 +500,7 @@
             <strong>Numbers:</strong> TD is the chance of at least one touchdown from the Game Board &mdash; his share of his team's
             red-zone work &times; how often his team gets there &times; how often this defense lets a trip score, plus the scores he
             gets from outside the 20 (quarterbacks: rushing touchdowns only). RZ is that red-zone share, GL his carries inside the
-            5 per game, and D#n the opponent's rank of 32 in red-zone touchdown rate allowed &mdash; green at 24+ is soft, red at 8
+            5 per game, and D#n the opponent's rank among this week's defenses in red-zone touchdown rate allowed &mdash; green at 24+ is soft, red at 8
             or better is a wall. Every number covers each player's and each defense's last 17 games, so it reaches back into
             last season while this one is young.<br>
             <span id="atdCalNote"></span>
@@ -523,7 +522,7 @@
         </p>
     </div>
 
-    <script src="__ROOT__atd-insights.js?v=3"></script>
+    <script src="__ROOT__atd-insights.js?v=5"></script>
     <script>
     (function () {
         "use strict";
@@ -651,6 +650,10 @@
         }
 
         /* Measured inputs, from the Game Board for this week. */
+        function arrow(id) {
+            return window.NFLInsights ? window.NFLInsights.arrow(SHEET, id) : "";
+        }
+
         function metrics(pl) {
             if (pl.off) return "";   // off the depth chart: nothing current to rate
             var m = pl.m || {}, out = [];
@@ -661,7 +664,7 @@
             if (m.td != null && !m.small) {
                 out.push('<span class="atd-m atd-m--td" title="Chance of at least one ' + (pl.mk === "rush_td" ? "rushing " : "") +
                          'touchdown: red-zone share × team trips × opponent TD rate allowed, plus scores from outside the 20">' +
-                         (pl.mk === "rush_td" ? "Rush TD " : "TD ") + "<b>" + m.td + "%</b></span>");
+                         (pl.mk === "rush_td" ? "Rush TD " : "TD ") + "<b>" + (m.td < 1 ? "&lt;1" : m.td) + "%</b></span>");
             }
             if (m.book) {
                 out.push('<span class="atd-m ' + (m.odd ? "atd-m--warn" : "atd-m--price") + '" title="Best anytime TD price across books' +
@@ -686,7 +689,8 @@
             }
             if (m.dz != null) {
                 out.push('<span class="atd-m' + (m.dz >= 24 ? " atd-m--good" : (m.dz <= 8 ? " atd-m--bad" : "")) +
-                         '" title="Opponent rank of 32 in red-zone TD rate allowed over its last 17 games — 32 is the softest">D#' + m.dz + "</span>");
+                         '" title="Opponent rank of ' + (SHEET.teams || 32) + ' in red-zone TD rate allowed over its last 17 games — ' +
+                         (SHEET.teams || 32) + ' is the softest">D#' + m.dz + "</span>");
             }
             if (m.dedge != null && Math.abs(m.dedge) >= 10 && pl.pos !== "QB") {
                 out.push('<span class="atd-m ' + (m.dedge > 0 ? "atd-m--good" : "atd-m--bad") +
@@ -707,14 +711,13 @@
             return '<div class="atd-play' + (fav ? " is-fav" : "") + (pl.st === "out" ? " is-out" : "") + '" data-tags="' + esc(tags.join(" ")) + '" data-need="' + Math.ceil(pl.line || 0.5) +
                      '" data-mk="' + esc(pl.mk) + '">' +
                      '<div class="atd-play__top">' +
-                       (pl.id ? '<a class="atd-play__name" data-pid="' + esc(pl.id) + '" href="' + cardHref(pl) + '" title="Open ' + esc(pl.n) + '\'s player card">' + esc(pl.n) + window.NFLInsights.arrow(SHEET, pl.id) + "</a>"
+                       (pl.id ? '<a class="atd-play__name" data-pid="' + esc(pl.id) + '" href="' + cardHref(pl) + '" title="Open ' + esc(pl.n) + '\'s player card">' + esc(pl.n) + arrow(pl.id) + "</a>"
                               : '<span class="atd-play__name">' + esc(pl.n) + "</span>") +
                        '<span class="' + posClass(pl.p) + '">' + esc(pl.p) + "</span>" +
                        statusChips(pl) +
                      "</div>" +
                      (pl.t.length || tend ? '<div class="atd-play__tags">' + chips(pl.t) + tend + "</div>" : "") +
                      metrics(pl) +
-                     window.NFLInsights.bars(SHEET, pl.id) +
                      (pl.st && pl.inj ? '<div class="atd-inj">' + esc(pl.inj) + "</div>" : "") +
                    "</div>";
         }
@@ -770,12 +773,12 @@
                 return '<article class="atd-top-card">' +
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
-                           '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) + '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
+                           '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) + '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + arrow(f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
-                         metrics(f.pl) + window.NFLInsights.bars(SHEET, f.pl.id) +
+                         metrics(f.pl) +
                          '<p class="atd-why">' + esc(row.why) + "</p>" +
                        "</article>";
             }).join("");
@@ -792,44 +795,64 @@
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
                            '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
-                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + arrow(f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
                          '<div class="atd-first-odds"><span class="atd-first-odds__pct">' + row.pct.toFixed(1) +
                            '%</span><span class="atd-first-odds__fair">fair <b>' + esc(row.fair) + "</b></span></div>" +
-                         '<p class="atd-why">' + esc(row.why) + "</p>" + window.NFLInsights.bars(SHEET, f.pl.id) +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" +
                        "</article>";
             }).join("");
         }
 
         /* Where our chance clears the best price by the most. */
+        // Sheets before Week 6 open the reason with the price and the trim, which the card's
+        // bars now show; keep only the football.
+        function whyValue(text) {
+            return String(text || "").replace(/^The best price, [^;]+; we have him at \d+%\. /, "")
+                                      .replace(/^That is already trimmed from [^)]+\)\. /, "");
+        }
+
+        /* Best value plays, as on the NHL sheet: where our chance clears the chance the
+           price implies by the most, in a matchup on his side. Week 6 on carries the
+           matchup score and lines; earlier sheets show their one reason instead. */
         function valueHTML() {
-            return SHEET.value5.map(function (row, i) {
+            return (SHEET.value5 || []).map(function (row, i) {
                 var f = locateId(row.id);
                 if (!f) return "";
-                return '<article class="atd-top-card atd-value-card" data-value-team="' + esc(f.team) +
-                         '" data-value-name="' + esc(f.pl.n) + '">' +
+                var ours = Math.round(row.ours), book = Math.round(row.implied), close = !!row.close;
+                var price = parseInt(String(row.book).replace("+", ""), 10);
+                return '<article class="atd-top-card atd-value-card' + (close ? " atd-value-card--close" : "") +
+                         '" data-value-team="' + esc(f.team) + '" data-value-name="' + esc(f.pl.n) + '">' +
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
                            '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
-                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + arrow(f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
-                         '<p class="atd-value-verdict">Better scoring chance than the price suggests</p>' +
-                         '<div class="atd-chance" aria-label="Our scoring estimate ' + row.ours.toFixed(0) +
-                           ' percent; price implies ' + row.implied.toFixed(0) + ' percent">' +
-                           '<div class="atd-chance__label">Our estimate <b>' + row.ours.toFixed(0) + '%</b></div>' +
-                           '<div class="atd-chance__track"><span style="width:' + row.ours + '%"></span></div>' +
-                           '<div class="atd-chance__label">Price implies <b>' + row.implied.toFixed(0) + '%</b> at ' + esc(row.book) + '</div>' +
-                           '<div class="atd-chance__track atd-chance__track--price"><span style="width:' + row.implied + '%"></span></div>' +
-                         '</div>' +
-                         '<p class="atd-why">About ' + row.ours.toFixed(0) + ' scores in 100 similar games by our model; ' +
-                           row.implied.toFixed(0) + ' needed to break even at this price.</p>' +
-                         '<p class="atd-why">' + esc(row.why) + "</p>" + window.NFLInsights.bars(SHEET, f.pl.id) +
+                         (row.match != null ? '<div class="atd-value-tags"><span class="chip chip--mat" title="The lane (what ' +
+                           esc(f.opp) + " gives up to his role) and the red zone, each against this week's defenses; 50 is an average draw" +
+                           '">Matchup ' + row.match + "/100</span></div>" : "") +
+                         '<p class="atd-value-verdict">' +
+                           (!close && price >= 300 ? "Priced like a long shot, plays better" : "Underpriced") + "</p>" +
+                         '<div class="atd-chance" role="img" aria-label="Our TD chance ' + ours +
+                           ' percent; the price implies ' + book + ' percent">' +
+                           '<div class="atd-chance__label"><span>Our estimate</span><b>' + ours + "%</b></div>" +
+                           '<div class="atd-chance__track"><span style="width:' + Math.min(100, ours) + '%"></span></div>' +
+                           '<div class="atd-chance__label"><span>Price ' + esc(row.book) + " implies</span><b>" + book + "%</b></div>" +
+                           '<div class="atd-chance__track atd-chance__track--price"><span style="width:' + Math.min(100, book) + '%"></span></div>' +
+                         "</div>" +
+                         '<p class="atd-why"><b>The odds:</b> ' + esc(row.book) + " treats him as a " + book +
+                           "% shot to score. We have him at " + ours + "%" +
+                           (close ? ", a smaller edge than the plays above." : ", so the payout is bigger than the risk.") + "</p>" +
+                         (row.match_line
+                           ? '<p class="atd-why"><b>The matchup:</b> ' + esc(row.match_line) + "</p>" +
+                             '<p class="atd-why"><b>His game:</b> ' + esc(row.game_line || "") + "</p>"
+                           : '<p class="atd-why"><b>Why:</b> ' + esc(whyValue(row.why)) + "</p>") +
                        "</article>";
             }).join("");
         }
@@ -844,14 +867,14 @@
                          '<div class="atd-top-card__head">' +
                            '<span class="atd-rank">' + (i + 1) + "</span>" +
                            '<a class="atd-top-card__name" data-pid="' + esc(f.pl.id) + '" href="' + cardHref(f.pl) +
-                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + window.NFLInsights.arrow(SHEET, f.pl.id) + "</a>" +
+                             '" title="Open his player card">' + teamImg(f.team) + esc(f.pl.n) + arrow(f.pl.id) + "</a>" +
                            statusChips(f.pl) +
                          "</div>" +
                          '<span class="atd-top-card__meta">' + esc(f.pl.p) + " &middot; " + f.at + esc(f.opp) +
                            " &middot; " + fmtKick(f.kick) + "</span>" +
                          '<div class="atd-first-odds"><span class="atd-first-odds__pct">' + row.pct.toFixed(1) +
                            '%</span><span class="atd-first-odds__fair">2+ TD &middot; fair <b>' + esc(row.fair) + "</b></span></div>" +
-                         '<p class="atd-why">' + esc(row.why) + "</p>" + window.NFLInsights.bars(SHEET, f.pl.id) +
+                         '<p class="atd-why">' + esc(row.why) + "</p>" +
                        "</article>";
             }).join("");
         }
@@ -886,7 +909,10 @@
             '<span class="atd-count">' + C.fav + " favorites</span>" +
             '<span class="atd-count">' + dateSpan() + (tzName() ? " &middot; times " + esc(tzName()) : "") + "</span>";
 
-        document.getElementById("atdFilters").innerHTML = FILTERS.map(function (f) {
+        // no prices this week, no Value filter (it could only ever read 0)
+        document.getElementById("atdFilters").innerHTML = FILTERS.filter(function (f) {
+            return f.key !== "edge" || SHEET.has_odds;
+        }).map(function (f) {
             var n = f.key === "all" ? C.all : C[f.key];
             return '<button type="button" class="atd-filter' + (f.key === "all" ? " is-active" : "") +
                    '" data-filter="' + f.key + '">' + (f.icon ? f.icon + " " : "") + f.label +
@@ -895,21 +921,40 @@
 
         document.getElementById("atdTop").innerHTML = topHTML();
         document.getElementById("atdExpNote").textContent = EXP_TEXT;
-        var valueRows = SHEET.value5 || [], valueMinimum = SHEET.value_min_edge || 4;
+        var valueRows = SHEET.value5 || [], valueBar = SHEET.value_min_edge || 4;
+        var nClose = valueRows.filter(function (r) { return r.close; }).length, nVal = valueRows.length - nClose;
+        var valueCount = SHEET.value_count != null ? SHEET.value_count : nVal, gated = SHEET.value_match_floor != null;
+        var ranks = function (a, b) { return "#" + a + (b > a ? "\u2013#" + b : ""); };
         document.getElementById("atdValue").innerHTML = valueHTML();
-        document.getElementById("atdValueTitle").textContent = "Best value plays — " + valueRows.length + " of up to 5 qualify";
+        document.getElementById("atdValueTitle").textContent = valueRows.length
+            ? "Best value plays \u2014 top " + valueRows.length + (valueCount > nVal ? " of " + valueCount : "") + " this week"
+            : "Best value plays \u2014 none this week";
         document.getElementById("atdValueNote").textContent =
-            "A play qualifies when our adjusted scoring estimate exceeds the price's implied chance by at least " +
-            valueMinimum + " percentage points, with no injury flag, enough game history and no price flagged for review. " +
-            (valueRows.length < 5 ? "Only " + valueRows.length + " qualify this week. " : "") +
-            "These are model estimates, not guarantees." +
-            (SHEET.odds_captured ? " Prices captured " + SHEET.odds_captured + "; check the current price." : "");
+            "Why hunt value: the likeliest scorer isn't always the best bet, because his price already expects him to score. " +
+            "Every price sets how often a player has to score for the bet to break even. When our numbers have him scoring " +
+            "more often than that, the payout is bigger than the risk, and over a season those are the bets that come out ahead. " +
+            (gated ? "Every play here also needs the matchup on his side \u2014 a defense that gives up production to his role, " +
+                     "a red zone that leaks, or both \u2014 because a good price on a player walking into a wall is a trap. " : "") +
+            (!valueRows.length ? "No healthy player cleared the price in a good matchup this week."
+                : "Ranked by the biggest cushion over the price" +
+                  (!nClose ? "." : nVal
+                      ? ": " + ranks(1, nVal) + " beat" + (nVal === 1 ? "s" : "") + " it by " + valueBar + " or more games in 100, " +
+                        ranks(nVal + 1, valueRows.length) + " by less."
+                      : ". None beat it by " + valueBar + " or more games in 100 this week, so these are the closest.")) +
+            " No injury tags, thin samples or suspicious prices. A lean against the price, not a lock." +
+            (SHEET.odds_captured ? " Prices captured " + SHEET.odds_captured + "; they move, so check yours." : "");
         if (!SHEET.has_odds) {
             document.getElementById("atdValueSection").hidden = true;
             document.getElementById("atdValueLegend").hidden = true;
         }
         var cal = SHEET.calibration || {};
-        if (cal.n && cal.c < 1) {
+        var chk = cal.checked;
+        if (cal.n && chk && !(cal.c < 1)) {
+            // the trim lost on weeks it had not seen, so the model's own chances stand
+            document.getElementById("atdCalNote").innerHTML = "<strong>Checked every week:</strong> each week is graded, and a trim " +
+                "fitted on the weeks before is tested on it. On " + chk.n + " plays from weeks it had not seen, the model said " +
+                chk.said + "% and " + chk.hit + "% scored, closer than any trim, so these chances are shown as the model has them.<br>";
+        } else if (cal.n && cal.c < 1) {
             document.getElementById("atdCalNote").innerHTML = "<strong>Trimmed:</strong> every chance on this sheet is scaled to how the model " +
                 "has actually hit &mdash; on " + cal.n + " graded plays it said " + cal.said + "% and " + cal.hit + "% scored, so each " +
                 "player's expected touchdowns are multiplied by " + cal.c.toFixed(2) + " (re-fitted every week). The Research tab shows the untrimmed model.<br>";
@@ -917,7 +962,9 @@
         if (SHEET.has_odds) {
             document.getElementById("atdPriceNote").innerHTML = "<strong>Best</strong> is the best anytime TD price across books" +
                 (SHEET.odds_captured ? ", captured " + esc(SHEET.odds_captured) : "") + ". &#128176; <strong>Value</strong> marks a healthy play whose " +
-                "chance here beats the chance that price implies by 4 points or more; <strong>Top 5 value</strong> ranks the widest gaps. " +
+                "chance here beats the chance that price implies by 4 points or more" +
+                (SHEET.value_match_floor != null ? ", in a matchup scoring " + SHEET.value_match_floor + "/100 or better" : "") +
+                "; the value plays up top are the widest gaps. " +
                 "A price marked &#9888; is far longer than the market's own projection for him &mdash; usually a boosted or one-book line &mdash; " +
                 "so it is shown but never called value. It is a lean against the market, not a lock.<br>";
         }
@@ -1459,7 +1506,7 @@
     })();
     </script>
     <script src="__ROOT__atd-nav.js?v=2" defer></script>
-    <script src="__ROOT__atd-card.js?v=8" defer></script>
+    <script src="__ROOT__atd-card.js?v=9" defer></script>
 </body>
 </html>
 

@@ -1201,7 +1201,8 @@
                     "</div>" +
                     '<p class="sheet-why"><b>The odds:</b> ' + esc(pl.lines.atgs) + " treats him as a " + implied.toFixed(0) +
                       "% shot to score. We have him at " + ours.toFixed(0) + "%" +
-                      (close ? ", a smaller edge than the plays above." : ", so the payout is bigger than the risk.") + "</p>" +
+                      (close ? (i ? ", a smaller edge than the plays above." : ", a slim edge, but the best on tonight's board.")
+                             : ", so the payout is bigger than the risk.") + "</p>" +
                     '<p class="sheet-why"><b>The matchup:</b> ' + esc(pl.match_line || "") + "</p>" +
                     '<p class="sheet-why"><b>His game:</b> ' + esc(pl.game_line || pl.why) + "</p>" +
                     "</article>";
@@ -1355,18 +1356,21 @@
             var ranks = function (a, b) { return "#" + a + (b > a ? "\u2013#" + b : ""); };
             document.getElementById("sheetValueSection").hidden = false;
             document.getElementById("sheetValueTitle").textContent =
-                "Best value plays \u2014 top " + shown + (valueCount > nVal ? " of " + valueCount : "") + " tonight";
+                shown === 1 ? "Best value play tonight"
+                    : "Best value plays \u2014 top " + shown + (valueCount > nVal ? " of " + valueCount : "") + " tonight";
             document.getElementById("sheetValueNote").textContent =
                 "Why hunt value: the likeliest scorer isn't always the best bet, because his price already expects him to score. " +
                 "Every price sets how often a player has to score for the bet to break even. When our rating has him scoring " +
                 "more often than that, the payout is bigger than the risk, and over a season those are the bets that come out ahead. " +
                 "Every play here also needs the matchup on its side, a soft defensive lane, a goalie to shoot on, or both, " +
                 "because a good price on a player walking into a wall is a trap. " +
-                "Ranked by the biggest cushion over the price" +
-                (!nClose ? "." : nVal
-                    ? ": " + ranks(1, nVal) + " beat" + (nVal === 1 ? "s" : "") + " it by " + valueBar + " or more games in 100, " +
-                      ranks(nVal + 1, shown) + " by less."
-                    : ". None beat it by " + valueBar + " or more games in 100 tonight, so these are the closest.") +
+                (shown === 1 && !nVal
+                    ? "No play beats its price by " + valueBar + " or more games in 100 tonight; this one comes closest."
+                    : "Ranked by the biggest cushion over the price" +
+                      (!nClose ? "." : nVal
+                        ? ": " + ranks(1, nVal) + " beat" + (nVal === 1 ? "s" : "") + " it by " + valueBar + " or more games in 100, " +
+                          ranks(nVal + 1, shown) + " by less."
+                        : ". None beat it by " + valueBar + " or more games in 100 tonight, so these are the closest.")) +
                 " No lineup doubts or thin samples. A lean against the price, not a lock.";
             document.getElementById("sheetValue").innerHTML = valueHTML();
         }

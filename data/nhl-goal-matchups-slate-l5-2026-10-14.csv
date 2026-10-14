@@ -1,0 +1,86 @@
+﻿Range,L5
+Position,All
+Rate,Per Game
+Scores,"0-100, higher = better spot to score. Score = Form × (0.7 + 0.3 × Matchup/100); Matchup = 80% Def (chances, HD chances, shots, goals allowed to position) + 20% Goalie; Form = goals/iSCF (50%, goals 0% under 10 GP ramping to 25% by 20) + PP TOI 20% + TOI 10% + iFF 10% + finishing 10%"
+Early season,Defense & goalie ranks use 2025-26 data
+
+#,Time,Player,Team,Pos,Lines,Opp,Score,Matchup,Form,"Sh% (2 seasons, shrunk)",Def Score,Def Rank,Def Pos,Def SCA/GP,Def HDSCA/GP,Def SA/GP,Def GA/GP,Opp Goalie,Goalie Status,Goalie SV%,Goalie Score,Odds,GP,TOI/G,PP TOI/G,Goals/G,AST/G,S/G,iCF/G,iFF/G,iSCF/G,iHDCF/G
+1,Wed 7:30 PM,Nick Suzuki,MTL,C,L1 · PP1,@ WSH,92,82,97,14.4,80,18,C,8.32,4.05,7.18,0.88,Charlie Lindgren,Expected,.879,91,210,5,23:02,4:09,0.60,1.00,3.00,6.80,6.20,3.80,1.60
+2,Wed 7:30 PM,Alex Tuch,WSH,LW,L1 · PP2,vs MTL,83,69,91,14.8,75,11,LW,7.40,3.71,6.73,0.90,Jakub Dobes,Confirmed,.901,47,190,5,19:19,2:15,0.20,0.00,2.60,5.20,4.80,3.40,1.60
+3,Wed 7:30 PM,Juraj Slafkovský,MTL,RW,L1 · PP1,@ WSH,78,74,85,14.1,70,18,RW,7.84,3.41,7.27,0.85,Charlie Lindgren,Expected,.879,91,220,5,19:26,4:08,0.20,0.40,3.20,4.60,3.60,2.00,0.40
+4,Wed 7:30 PM,Jakob Chychrun,WSH,D,P1 · PP1,vs MTL,76,70,83,11.2,76,14,D,5.01,0.97,7.66,0.48,Jakub Dobes,Confirmed,.901,47,320,5,25:50,3:01,0.00,0.20,3.20,7.20,5.20,2.00,0.40
+5,Wed 7:30 PM,Alex Ovechkin,WSH,RW,L2 · PP1,vs MTL,75,69,83,12.5,75,27,RW,7.89,3.62,7.02,0.80,Jakub Dobes,Confirmed,.901,47,205,5,14:19,3:29,0.20,0.00,1.80,5.60,3.80,2.40,1.20
+6,Wed 7:30 PM,Cole Caufield,MTL,LW,L1 · PP1,@ WSH,75,33,94,17.0,19,30,LW,6.46,2.94,6.49,0.66,Charlie Lindgren,Expected,.879,91,135,5,20:44,4:10,0.60,0.20,4.20,7.00,5.60,3.00,0.60
+7,Wed 7:30 PM,Ryan Leonard,WSH,LW,L3 · PP1,vs MTL,74,69,82,12.3,75,11,LW,7.40,3.71,6.73,0.90,Jakub Dobes,Confirmed,.901,47,340,5,14:00,2:21,0.20,0.80,2.60,6.20,3.80,2.60,0.60
+8,Wed 7:30 PM,Dylan Strome,WSH,C,L1 · PP1,vs MTL,73,49,86,11.9,50,20,C,7.70,3.51,6.73,0.86,Jakub Dobes,Confirmed,.901,47,280,5,16:45,2:56,0.00,0.60,1.80,4.00,3.00,3.00,1.20
+9,Wed 7:30 PM,Tom Wilson,WSH,RW,L1 · PP1,vs MTL,72,69,79,16.4,75,27,RW,7.89,3.62,7.02,0.80,Jakub Dobes,Confirmed,.901,47,220,5,19:52,2:32,0.40,0.40,2.00,2.80,2.20,1.80,1.00
+10,Wed 8:30 PM,Wyatt Johnston,DAL,C,L1 · PP1,@ COL,71,24,92,17.8,25,30,C,6.98,3.43,6.61,0.67,Scott Wedgewood,Expected,.921,19,,5,19:53,3:46,0.00,0.80,2.20,5.00,3.20,3.00,1.60
+11,Wed 7:30 PM,Pierre-Luc Dubois,WSH,C,,vs MTL,70,49,83,11.7,50,20,C,7.70,3.51,6.73,0.86,Jakub Dobes,Confirmed,.901,47,,5,16:56,2:32,0.20,0.80,1.40,4.00,2.80,2.60,1.40
+12,Wed 8:30 PM,Nathan MacKinnon,COL,C,L1 · PP1,vs DAL,69,11,94,14.6,5,28,C,6.61,3.03,5.88,0.75,Casey DeSmith,Confirmed,.906,35,110,5,20:13,4:16,0.60,1.40,3.40,7.00,5.40,3.20,1.20
+13,Wed 8:30 PM,Jason Robertson,DAL,LW,L2 · PP1,@ COL,68,13,92,14.2,12,29,LW,6.28,2.95,6.16,0.71,Scott Wedgewood,Expected,.921,19,175,5,19:09,2:53,0.40,0.60,2.80,6.20,4.40,3.40,1.40
+14,Wed 8:30 PM,Martin Necas,COL,RW,L1 · PP1,vs DAL,67,27,86,16.5,25,15,RW,6.76,3.12,6.93,0.88,Casey DeSmith,Confirmed,.906,35,175,5,20:56,4:29,0.80,0.40,2.60,5.20,4.00,1.80,0.80
+15,Wed 8:30 PM,Roope Hintz,DAL,C,L2 · PP1,@ COL,67,24,87,11.8,25,30,C,6.98,3.43,6.61,0.67,Scott Wedgewood,Expected,.921,19,240,5,16:45,2:45,0.40,0.40,2.40,4.80,4.00,3.20,1.80
+16,Wed 8:30 PM,Mikko Rantanen,DAL,RW,L1 · PP1,@ COL,66,30,83,14.0,33,26,RW,6.99,3.38,6.88,0.81,Scott Wedgewood,Expected,.921,19,205,5,20:20,3:05,0.40,0.80,2.40,3.80,2.80,2.00,0.60
+17,Wed 8:30 PM,T.J. Hughes,COL,RW,L3 · PP1,vs DAL,66,27,84,9.7,25,15,RW,6.76,3.12,6.93,0.88,Casey DeSmith,Confirmed,.906,35,320,5,15:05,3:56,0.00,0.20,2.60,5.00,3.80,3.40,0.60
+18,Wed 7:30 PM,Cole Hutson,WSH,D,P3 · PP2,vs MTL,65,70,71,10.6,76,14,D,5.01,0.97,7.66,0.48,Jakub Dobes,Confirmed,.901,47,725,5,19:01,1:58,0.00,0.40,2.20,4.00,2.60,1.60,0.00
+19,Wed 8:30 PM,Nazem Kadri,COL,RW,L2 · PP1,vs DAL,65,27,83,8.2,25,15,RW,6.76,3.12,6.93,0.88,Casey DeSmith,Confirmed,.906,35,260,5,19:29,3:50,0.00,0.20,3.20,5.20,4.20,2.80,1.60
+20,Wed 8:30 PM,Artturi Lehkonen,COL,LW,L1 · PP2,vs DAL,64,22,83,13.9,19,31,LW,6.70,3.10,5.78,0.65,Casey DeSmith,Confirmed,.906,35,310,5,18:50,1:44,0.40,0.20,1.00,2.60,2.40,2.60,1.00
+21,Wed 7:30 PM,Lane Hutson,MTL,D,P1 · PP1,@ WSH,63,65,70,10.2,58,10,D,4.56,0.98,7.11,0.51,Charlie Lindgren,Expected,.879,91,650,5,27:22,4:23,0.20,1.00,2.60,5.60,4.00,1.20,0.20
+22,Wed 8:30 PM,Tyler Seguin,DAL,RW,L3 · PP2,@ COL,63,30,80,13.5,33,26,RW,6.99,3.38,6.88,0.81,Scott Wedgewood,Expected,.921,19,250,5,15:02,0:49,0.40,0.20,2.80,5.00,4.40,2.60,1.20
+23,Wed 7:30 PM,Alex Newhook,MTL,C,L2 · PP2,@ WSH,62,82,66,15.1,80,18,C,8.32,4.05,7.18,0.88,Charlie Lindgren,Expected,.879,91,420,5,16:20,1:25,0.20,0.20,0.80,2.40,1.60,1.40,0.60
+24,Wed 7:30 PM,Chris Kreider,MTL,LW,L2 · PP1,@ WSH,62,33,78,14.0,19,30,LW,6.46,2.94,6.49,0.66,Charlie Lindgren,Expected,.879,91,250,5,15:07,3:58,0.20,0.60,0.80,3.00,2.60,1.80,1.40
+25,Wed 8:30 PM,Cale Makar,COL,D,PP1,vs DAL,61,37,75,10.9,38,12,D,4.15,0.76,7.82,0.51,Casey DeSmith,Confirmed,.906,35,,5,21:29,4:25,0.60,0.80,2.60,4.40,3.00,1.40,0.40
+26,Wed 7:30 PM,Zachary Bolduc,MTL,LW,L3 · PP2,@ WSH,60,33,75,12.2,19,30,LW,6.46,2.94,6.49,0.66,Charlie Lindgren,Expected,.879,91,370,5,14:27,1:19,0.40,0.20,1.80,3.20,2.40,2.20,1.20
+27,Wed 8:30 PM,Brock Nelson,COL,C,L2 · PP2,vs DAL,59,11,81,15.6,5,28,C,6.61,3.03,5.88,0.75,Casey DeSmith,Confirmed,.906,35,290,5,17:13,1:18,0.20,0.20,2.20,3.00,2.60,2.40,0.00
+28,Wed 7:30 PM,Boone Jenner,WSH,C,L3,vs MTL,58,49,68,10.9,50,20,C,7.70,3.51,6.73,0.86,Jakub Dobes,Confirmed,.901,47,450,5,15:35,0:02,0.60,0.20,3.00,3.80,3.40,2.20,1.20
+29,Wed 7:30 PM,Phillip Danault,MTL,C,L3,@ WSH,56,82,59,8.6,80,18,C,8.32,4.05,7.18,0.88,Charlie Lindgren,Expected,.879,91,850,5,15:44,0:16,0.00,0.20,1.80,3.00,2.40,1.60,1.20
+30,Wed 8:30 PM,Gabriel Landeskog,COL,LW,L2 · PP2,vs DAL,55,22,72,10.9,19,31,LW,6.70,3.10,5.78,0.65,Casey DeSmith,Confirmed,.906,35,340,5,15:40,2:22,0.00,0.40,1.40,2.80,2.40,1.80,0.40
+31,Wed 7:30 PM,Noah Dobson,MTL,D,P1 · PP2,@ WSH,54,65,60,8.6,58,10,D,4.56,0.98,7.11,0.51,Charlie Lindgren,Expected,.879,91,800,5,21:23,1:13,0.00,0.20,1.80,4.80,3.20,1.20,0.40
+32,Wed 8:30 PM,Jaden Schwartz,COL,LW,L3 · PP2,vs DAL,50,22,65,13.1,19,31,LW,6.70,3.10,5.78,0.65,Casey DeSmith,Confirmed,.906,35,450,5,13:01,1:33,0.60,0.20,1.80,3.00,2.20,1.40,0.60
+33,Wed 7:30 PM,Jordan Kyrou,WSH,RW,L3 · PP2,vs MTL,50,69,55,10.8,75,27,RW,7.89,3.62,7.02,0.80,Jakub Dobes,Confirmed,.901,47,320,5,13:05,1:59,0.20,0.20,0.80,2.00,1.20,1.20,0.00
+34,Wed 7:30 PM,Josh Anderson,MTL,RW,L2,@ WSH,50,74,54,13.5,70,18,RW,7.84,3.41,7.27,0.85,Charlie Lindgren,Expected,.879,91,490,5,13:40,0:02,0.20,0.20,1.80,3.00,2.40,1.20,0.60
+35,Wed 8:30 PM,Parker Kelly,COL,LW,L4,vs DAL,50,22,65,15.9,19,31,LW,6.70,3.10,5.78,0.65,Casey DeSmith,Confirmed,.906,35,725,5,12:53,0:02,0.00,0.60,0.80,3.40,1.60,2.20,0.40
+36,Wed 8:30 PM,Devon Toews,COL,D,P1,vs DAL,49,37,60,7.2,38,12,D,4.15,0.76,7.82,0.51,Casey DeSmith,Confirmed,.906,35,430,5,20:43,1:56,0.40,0.40,1.80,3.40,2.60,1.20,0.40
+37,Wed 8:30 PM,Sam Steel,DAL,LW,L1,@ COL,49,13,66,12.6,12,29,LW,6.28,2.95,6.16,0.71,Scott Wedgewood,Expected,.921,19,420,5,17:05,0:01,0.20,0.20,1.40,2.80,2.40,2.00,1.20
+38,Wed 7:30 PM,Alexandre Texier,MTL,RW,L3 · PP2,@ WSH,48,74,52,10.5,70,18,RW,7.84,3.41,7.27,0.85,Charlie Lindgren,Expected,.879,91,525,5,13:29,1:27,0.00,0.40,1.80,4.00,2.40,1.00,0.20
+39,Wed 8:30 PM,Brent Burns,COL,D,P2,vs DAL,48,37,59,8.2,38,12,D,4.15,0.76,7.82,0.51,Casey DeSmith,Confirmed,.906,35,1300,5,17:16,0:02,0.00,0.40,1.80,5.60,3.80,1.60,0.00
+40,Wed 7:30 PM,Alexandre Carrier,MTL,D,P2,@ WSH,47,65,53,11.7,58,10,D,4.56,0.98,7.11,0.51,Charlie Lindgren,Expected,.879,91,1700,5,17:47,0:01,0.00,0.00,1.00,2.80,1.80,1.20,0.20
+41,Wed 8:30 PM,Justin Hryckowian,DAL,LW,L3 · PP2,@ COL,47,13,64,13.3,12,29,LW,6.28,2.95,6.16,0.71,Scott Wedgewood,Expected,.921,19,340,5,14:08,0:35,0.00,0.00,1.00,2.40,1.60,1.60,0.80
+42,Wed 8:30 PM,Jamie Benn,DAL,RW,L2 · PP2,@ COL,45,30,57,15.1,33,26,RW,6.99,3.38,6.88,0.81,Scott Wedgewood,Expected,.921,19,550,5,12:55,0:26,0.20,0.20,1.60,2.60,2.00,1.20,0.60
+43,Wed 7:30 PM,Ilya Protas,WSH,C,L2 · PP2,vs MTL,44,49,52,10.8,50,20,C,7.70,3.51,6.73,0.86,Jakub Dobes,Confirmed,.901,47,360,5,11:42,1:37,0.00,0.20,1.00,1.20,1.00,1.20,0.40
+44,Wed 7:30 PM,Jake Evans,MTL,C,L4,@ WSH,44,82,46,12.7,80,18,C,8.32,4.05,7.18,0.88,Charlie Lindgren,Expected,.879,91,750,5,13:26,0:00,0.00,0.00,1.00,1.80,1.60,1.20,0.40
+45,Wed 8:30 PM,Nicolas Roy,COL,C,L4,vs DAL,44,11,60,11.4,5,28,C,6.61,3.03,5.88,0.75,Casey DeSmith,Confirmed,.906,35,900,5,11:35,0:00,0.20,0.40,1.60,3.40,2.60,2.20,0.60
+46,Wed 7:30 PM,Aliaksei Protas,WSH,LW,L2,vs MTL,43,69,47,13.7,75,11,LW,7.40,3.71,6.73,0.90,Jakub Dobes,Confirmed,.901,47,340,5,15:33,0:01,0.00,0.20,1.00,1.80,1.60,1.00,0.60
+47,Wed 7:30 PM,Justin Sourdif,WSH,C,L4,vs MTL,43,49,51,12.8,50,20,C,7.70,3.51,6.73,0.86,Jakub Dobes,Confirmed,.901,47,575,5,12:57,0:01,0.20,0.00,0.80,3.00,2.00,1.20,0.60
+48,Wed 8:30 PM,Zachary L'Heureux,COL,RW,,vs DAL,42,27,54,11.0,25,15,RW,6.76,3.12,6.93,0.88,Casey DeSmith,Confirmed,.906,35,432,5,10:49,0:08,0.00,0.20,1.40,1.80,1.80,1.40,0.80
+49,Wed 8:30 PM,Miro Heiskanen,DAL,D,P1 · PP1,@ COL,41,6,57,8.6,3,32,D,3.79,0.58,6.39,0.27,Scott Wedgewood,Expected,.921,19,600,5,24:05,2:49,0.40,0.60,1.80,4.20,2.00,1.00,0.00
+50,Wed 8:30 PM,Joel Kiviranta,DAL,RW,,@ COL,40,30,51,9.9,33,26,RW,6.99,3.38,6.88,0.81,Scott Wedgewood,Expected,.921,19,750,5,10:33,0:02,0.20,0.00,2.00,3.20,2.80,1.40,0.60
+51,Wed 8:30 PM,Arttu Hyry,DAL,C,L3,@ COL,39,24,50,10.9,25,30,C,6.98,3.43,6.61,0.67,Scott Wedgewood,Expected,.921,19,950,5,14:12,0:00,0.00,0.00,1.00,3.20,2.00,1.40,0.60
+52,Wed 7:30 PM,Kaiden Guhle,MTL,D,P2,@ WSH,39,65,44,9.3,58,10,D,4.56,0.98,7.11,0.51,Charlie Lindgren,Expected,.879,91,1400,5,20:18,0:07,0.00,0.20,1.60,3.00,2.20,0.80,0.20
+53,Wed 7:30 PM,Mike Matheson,MTL,D,,@ WSH,39,65,44,8.1,58,10,D,4.56,0.98,7.11,0.51,Charlie Lindgren,Expected,.879,91,,5,24:09,0:16,0.00,0.20,1.80,3.20,1.80,0.80,0.40
+54,Wed 7:30 PM,Ethen Frank,WSH,LW,L4 · PP2,vs MTL,37,69,41,12.1,75,11,LW,7.40,3.71,6.73,0.90,Jakub Dobes,Confirmed,.901,47,650,5,8:01,0:33,0.00,0.00,0.80,1.60,1.40,0.80,0.80
+55,Wed 7:30 PM,Anthony Beauvillier,WSH,RW,L4,vs MTL,34,69,37,10.3,75,27,RW,7.89,3.62,7.02,0.80,Jakub Dobes,Confirmed,.901,47,575,5,10:43,0:02,0.20,0.00,1.00,1.40,1.20,1.00,0.60
+56,Wed 8:30 PM,Radek Faksa,DAL,C,L4,@ COL,34,24,44,9.2,25,30,C,6.98,3.43,6.61,0.67,Scott Wedgewood,Expected,.921,19,1200,5,10:54,0:01,0.00,0.20,0.80,1.80,1.40,1.40,0.80
+57,Wed 7:30 PM,Kirby Dach,MTL,RW,L4 · PP2,@ WSH,32,74,35,12.9,70,18,RW,7.84,3.41,7.27,0.85,Charlie Lindgren,Expected,.879,91,625,5,9:15,1:02,0.00,0.00,0.00,1.00,0.60,0.60,0.20
+58,Wed 8:30 PM,Thomas Harley,DAL,D,P2 · PP2,@ COL,30,6,42,7.7,3,32,D,3.79,0.58,6.39,0.27,Scott Wedgewood,Expected,.921,19,850,5,24:25,0:32,0.00,0.20,1.80,4.60,2.80,0.60,0.20
+59,Wed 8:30 PM,Lian Bichsel,DAL,D,P3,@ COL,29,6,40,11.7,3,32,D,3.79,0.58,6.39,0.27,Scott Wedgewood,Expected,.921,19,2200,5,16:14,0:02,0.00,0.00,0.40,2.40,1.00,0.80,0.20
+60,Wed 7:30 PM,Owen Beck,MTL,LW,L4,@ WSH,29,33,36,10.8,19,30,LW,6.46,2.94,6.49,0.66,Charlie Lindgren,Expected,.879,91,725,5,8:47,0:00,0.00,0.00,0.80,1.60,1.60,1.00,0.60
+61,Wed 8:30 PM,Josh Manson,COL,D,P2,vs DAL,28,37,34,7.3,38,12,D,4.15,0.76,7.82,0.51,Casey DeSmith,Confirmed,.906,35,1600,5,17:47,0:00,0.20,0.40,1.20,2.20,2.20,0.80,0.40
+62,Wed 7:30 PM,Timothy Liljegren,WSH,D,P1,vs MTL,28,70,31,9.2,76,14,D,5.01,0.97,7.66,0.48,Jakub Dobes,Confirmed,.901,47,1700,5,18:43,0:01,0.20,0.00,0.80,2.20,1.60,0.60,0.00
+63,Wed 8:30 PM,Nils Lundkvist,DAL,D,P2,@ COL,27,6,38,9.4,3,32,D,3.79,0.58,6.39,0.27,Scott Wedgewood,Expected,.921,19,2100,5,17:45,0:01,0.00,0.20,0.60,3.20,1.60,0.80,0.00
+64,Wed 8:30 PM,Sam Malinski,COL,D,P1 · PP2,vs DAL,27,37,33,7.2,38,12,D,4.15,0.76,7.82,0.51,Casey DeSmith,Confirmed,.906,35,700,5,17:14,0:20,0.00,0.00,0.80,2.20,1.20,0.60,0.00
+65,Wed 7:30 PM,Adam Engstrom,MTL,D,P3,@ WSH,26,65,29,9.8,58,10,D,4.56,0.98,7.11,0.51,Charlie Lindgren,Expected,.879,91,2000,5,12:59,0:47,0.00,0.00,1.00,1.40,1.00,0.40,0.00
+66,Wed 8:30 PM,Fedor Svechkov,COL,C,L3,vs DAL,22,11,30,9.2,5,28,C,6.61,3.03,5.88,0.75,Casey DeSmith,Confirmed,.906,35,850,5,12:31,0:07,0.20,0.40,1.00,2.20,1.40,0.60,0.60
+67,Wed 7:30 PM,Florian Xhekaj,MTL,LW,,@ WSH,22,33,27,10.5,19,30,LW,6.46,2.94,6.49,0.66,Charlie Lindgren,Expected,.879,91,,5,8:55,0:00,0.00,0.00,0.60,1.60,0.80,0.80,0.60
+68,Wed 7:30 PM,Martin Fehervary,WSH,D,P2,vs MTL,21,70,23,9.3,76,14,D,5.01,0.97,7.66,0.48,Jakub Dobes,Confirmed,.901,47,1700,5,22:50,0:11,0.00,0.00,0.00,1.20,0.60,0.00,0.00
+69,Wed 8:30 PM,Oskar Back,DAL,LW,L4,@ COL,21,13,29,11.1,12,29,LW,6.28,2.95,6.16,0.71,Scott Wedgewood,Expected,.921,19,1100,5,12:56,0:00,0.00,0.20,0.80,1.40,1.20,0.60,0.60
+70,Wed 7:30 PM,Vincent Desharnais,WSH,D,P2,vs MTL,21,70,23,8.9,76,14,D,5.01,0.97,7.66,0.48,Jakub Dobes,Confirmed,.901,47,2800,5,19:19,0:01,0.00,0.20,0.40,1.00,0.60,0.40,0.00
+71,Wed 7:30 PM,Justin Holl,WSH,D,P3,vs MTL,20,70,22,12.2,76,14,D,5.01,0.97,7.66,0.48,Jakub Dobes,Confirmed,.901,47,2500,5,14:50,0:00,0.40,0.00,1.00,1.60,1.40,0.20,0.20
+72,Wed 8:30 PM,Brett Kulak,COL,D,P3,vs DAL,19,37,23,6.1,38,12,D,4.15,0.76,7.82,0.51,Casey DeSmith,Confirmed,.906,35,1300,5,17:49,0:05,0.00,0.80,0.80,2.60,1.40,0.20,0.00
+73,Wed 8:30 PM,Esa Lindell,DAL,D,P1 · PP2,@ COL,17,6,23,9.2,3,32,D,3.79,0.58,6.39,0.27,Scott Wedgewood,Expected,.921,19,1400,5,20:35,0:14,0.00,0.00,0.40,0.80,0.80,0.00,0.00
+74,Wed 7:30 PM,Arber Xhekaj,MTL,D,P3,@ WSH,16,65,18,8.5,58,10,D,4.56,0.98,7.11,0.51,Charlie Lindgren,Expected,.879,91,1800,5,11:22,0:02,0.00,0.00,0.40,1.40,0.40,0.40,0.00
+75,Wed 8:30 PM,Colin Blackwell,DAL,RW,L4,@ COL,16,30,20,9.1,33,26,RW,6.99,3.38,6.88,0.81,Scott Wedgewood,Expected,.921,19,1100,5,10:15,0:00,0.00,0.00,1.00,1.20,1.00,0.60,0.20
+76,Wed 8:30 PM,Kyle Capobianco,DAL,D,,@ COL,15,6,21,11.1,3,32,D,3.79,0.58,6.39,0.27,Scott Wedgewood,Expected,.921,19,1641,5,10:30,0:09,0.00,0.00,0.40,1.60,0.80,0.20,0.20
+77,Wed 8:30 PM,Noah Juulsen,COL,D,P3,vs DAL,15,37,19,9.5,38,12,D,4.15,0.76,7.82,0.51,Casey DeSmith,Confirmed,.906,35,1700,5,14:37,0:02,0.00,0.20,0.40,1.00,0.80,0.20,0.00
+78,Wed 8:30 PM,Tyler Myers,DAL,D,P3,@ COL,9,6,13,6.4,3,32,D,3.79,0.58,6.39,0.27,Scott Wedgewood,Expected,.921,19,2000,5,14:52,0:00,0.00,0.00,0.40,2.00,1.20,0.20,0.00
+79,Wed 7:30 PM,Dylan McIlrath,WSH,D,,vs MTL,8,70,9,10.6,76,14,D,5.01,0.97,7.66,0.48,Jakub Dobes,Confirmed,.901,47,,5,7:49,0:00,0.00,0.00,0.20,0.80,0.80,0.00,0.00

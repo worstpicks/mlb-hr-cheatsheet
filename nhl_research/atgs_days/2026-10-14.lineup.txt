@@ -1,0 +1,22 @@
+# Wednesday 10/14 -- starting goalies and availability, read at 9 am ET from the
+# user's CSVs (nhl-goalie-summary-2026-l5 and nhl-goal-matchups-slate-l5, 10/14),
+# RotoWire lineups and player news, DailyFaceoff starting goalies and line
+# combinations for MTL, WSH, DAL and COL, and the 10/13 NHL box scores.
+
+# All four clubs played 10/13 (BUF @ MTL, WSH @ CAR, COL @ DAL); each starts the
+# other goalie tonight (Fowler, Thompson, Blackwood and Oettinger started last night).
+goalie MTL Jakub Dobes | confirmed, back-to-back
+goalie WSH Charlie Lindgren | expected, back-to-back
+goalie DAL Casey DeSmith | confirmed, back-to-back
+# DailyFaceoff has Wedgewood as likely.
+goalie COL Scott Wedgewood | expected, back-to-back
+
+# Listed plays that will not dress.
+out DAL Wyatt Johnston | illness, did not travel to Colorado
+out DAL Matt Duchene | core surgery 10/12, expected to miss three months
+
+# The plays stay, flagged (a bet on a player who sits is voided).
+doubt DAL Roope Hintz | Game-time decision -- iced his hand after fighting MacKinnon on 10/13; Dallas is evaluating him
+
+# Tuch's game-time tag from 10/13 is stale: he played 18:50 at CAR, so no flag.
+# Not modeled: Cale Makar (COL) is out again (personal), as he was on 10/13.

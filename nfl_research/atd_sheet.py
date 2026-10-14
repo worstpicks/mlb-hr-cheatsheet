@@ -624,10 +624,15 @@ def build(season: int, week: int) -> Path:
     # 💰 value, as on the NHL sheet: our chance clears the chance the best price implies
     # by VALUE_EDGE points or more, AND the matchup is on his side -- a good price on a
     # player walking into a wall is a trap. Healthy, rated, a normal-looking price.
+    # A shrinking role is never value either: his 17-game chance still carries the bigger
+    # job, while the price is set on the one he has now (RJ Harvey, Week 6: RB1 in 2025,
+    # 31% of DEN's carries over 17 games, 17% over the last 3, 2-7 carries a game).
     for r in rows:
         r["match"] = matchup_score(r, len(dz_rank))
+        r["usage_z"] = usage_z(r["b"])
+    shrinking = [r for r in rows if r.get("edge_pts") is not None and r["usage_z"] is not None and r["usage_z"] <= -2]
     priced = [r for r in rows if r["eligible"] and r["status"] == "" and r.get("edge_pts") is not None
-              and not r["odd_price"]]
+              and not r["odd_price"] and r not in shrinking]
     value_rows = sorted([r for r in priced if r["edge_pts"] >= VALUE_EDGE and r["match"] >= MATCHUP_FLOOR],
                         key=lambda r: (-r["edge_pts"], r["plan"]["name"]))
     walled = sorted([r for r in priced if r["edge_pts"] >= VALUE_EDGE and r["match"] < MATCHUP_FLOOR],
@@ -785,6 +790,9 @@ def build(season: int, week: int) -> Path:
     if close_rows:
         print("[atd] underpriced fill-ins: " + ", ".join(
             f"{r['plan']['name']} +{r['edge_pts']:.1f} (matchup {r['match']})" for r in close_rows))
+    if shrinking:
+        print("[atd] left off for a shrinking role: " + ", ".join(
+            f"{r['plan']['name']} +{r['edge_pts']:.1f} (usage {r['usage_z']:+.1f} SD)" for r in shrinking if r["edge_pts"] > 0))
     if walled:
         print("[atd] priced well but left off for the matchup: " + ", ".join(
             f"{r['plan']['name']} +{r['edge_pts']:.1f} (matchup {r['match']})" for r in walled))
@@ -863,6 +871,21 @@ def fmt_price(american_odds):
 MATCHUP_FLOOR = 50
 
 
+# A club's targets and carries in a typical game: the denominators of a share.
+TEAM_VOLUME = {"target share": 33, "carry share": 26}
+
+
+def usage_z(b: dict) -> float | None:
+    """How far his last three games' share sits from his longer share, in standard
+    deviations of three games' chance swing -- the test behind the sheet's usage arrow
+    (atd-insights.js). None for a new team, a short sample or no share (quarterbacks)."""
+    share, recent = b.get("share"), b.get("share_l3")
+    if share is None or recent is None or not 0 < share < 100 or b.get("new_team") or (b.get("games") or 0) < 4:
+        return None
+    n = 3 * TEAM_VOLUME.get(b.get("share_kind"), 30)
+    return (recent - share) / math.sqrt(share * (100 - share) / n)
+
+
 def matchup_score(r: dict, teams: int) -> int:
     mu = r["b"].get("matchup") or {}
     lane = (mu["rank"] - 1) / (mu["of"] - 1) if mu.get("rank") and (mu.get("of") or 0) > 1 else 0.5
@@ -889,7 +912,8 @@ def matchup_line(r: dict, env: dict, teams: int) -> str:
 
 
 def game_line(r: dict, env: dict) -> str:
-    """His own role: the share he earns, the red-zone work, the goal-line carries."""
+    """His own role, then how often he has actually scored -- this season said apart, so a
+    chance that leans on last year (Trevor Lawrence, Week 6) says so on the card."""
     p, b = r["plan"], r["b"]
     team = p["team"]
     e = env.get(team, {})
@@ -900,10 +924,23 @@ def game_line(r: dict, env: dict) -> str:
         bits.append(f"{b['rz_share']:.0f}% of {team}'s red-zone work")
     if r["gl"] >= 0.5:
         bits.append(f"{r['gl']:.1f} carries a game inside the 5")
-    line = (bits[0][0].upper() + bits[0][1:] if bits else "")
-    line = ", ".join([line] + bits[1:]) if bits else ""
-    trips = f"{team} reaches the red zone {e.get('rz_trips', 0):.1f} times a game."
-    return (line + ". " + trips) if line else trips
+    out = []
+    if bits:
+        out.append(bits[0][0].upper() + bits[0][1:] + "".join(", " + x for x in bits[1:]) + ".")
+    rush = p["market"] == "rush_td"
+    recent = (r.get("log") or [])[-17:]
+    if recent:
+        key = "rush_td" if rush else "td"
+        scored = sum(1 for g in recent if (g.get("stats") or {}).get(key, 0) >= 1)
+        this = [g for g in recent if g.get("season") == recent[-1].get("season")]
+        this_scored = sum(1 for g in this if (g.get("stats") or {}).get(key, 0) >= 1)
+        what = "Rushed for a TD" if rush else "Scored"
+        line = f"{what} in {scored} of his last {len(recent)} games"
+        if len(this) < len(recent):
+            line += f", {'none' if this_scored == 0 else this_scored} of {len(this)} this season"
+        out.append(line + ".")
+    out.append(f"{team} reaches the red zone {e.get('rz_trips', 0):.1f} times a game.")
+    return " ".join(out)
 
 
 def why_two(r, env):

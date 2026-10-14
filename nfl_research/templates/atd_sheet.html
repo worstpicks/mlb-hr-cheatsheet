@@ -941,7 +941,7 @@
                       ? ": " + ranks(1, nVal) + " beat" + (nVal === 1 ? "s" : "") + " it by " + valueBar + " or more games in 100, " +
                         ranks(nVal + 1, valueRows.length) + " by less."
                       : ". None beat it by " + valueBar + " or more games in 100 this week, so these are the closest.")) +
-            " No injury tags, thin samples or suspicious prices. A lean against the price, not a lock." +
+            " No injury tags, shrinking roles, thin samples or suspicious prices. A lean against the price, not a lock." +
             (SHEET.odds_captured ? " Prices captured " + SHEET.odds_captured + "; they move, so check yours." : "");
         if (!SHEET.has_odds) {
             document.getElementById("atdValueSection").hidden = true;

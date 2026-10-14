@@ -633,14 +633,17 @@ def build(season: int, week: int) -> Path:
     shrinking = [r for r in rows if r.get("edge_pts") is not None and r["usage_z"] is not None and r["usage_z"] <= -2]
     priced = [r for r in rows if r["eligible"] and r["status"] == "" and r.get("edge_pts") is not None
               and not r["odd_price"] and r not in shrinking]
+    # Ranked on value and matchup together (the user, 10/14): the edge counts in full
+    # only in the softest matchup, so +11 in a 94/100 spot outranks +11 in a 51/100 one.
+    rank_key = lambda r: (-r["edge_pts"] * r["match"] / 100, r["plan"]["name"])  # noqa: E731
     value_rows = sorted([r for r in priced if r["edge_pts"] >= VALUE_EDGE and r["match"] >= MATCHUP_FLOOR],
-                        key=lambda r: (-r["edge_pts"], r["plan"]["name"]))
+                        key=rank_key)
     walled = sorted([r for r in priced if r["edge_pts"] >= VALUE_EDGE and r["match"] < MATCHUP_FLOOR],
                     key=lambda r: (-r["edge_pts"], r["plan"]["name"]))
     # A thin week fills the open slots with the next positive edges in a good matchup,
     # shown as "Underpriced" and never tagged Value.
     close_rows = sorted([r for r in priced if 0 < r["edge_pts"] < VALUE_EDGE and r["match"] >= MATCHUP_FLOOR],
-                        key=lambda r: (-r["edge_pts"], r["plan"]["name"]))[:max(0, 5 - len(value_rows))]
+                        key=rank_key)[:max(0, 5 - len(value_rows))]
     for r in value_rows:
         r["tags"].append("edge")
     value5 = [{"id": r["b"]["player_id"], "edge": round(r["edge_pts"], 1), "ours": round(100 * r["td_cal"], 1),
@@ -786,7 +789,7 @@ def build(season: int, week: int) -> Path:
         f"{r['plan']['name']} {fmt_price(r['book'])}" for r in rows if r.get("odd_price")))
     print("[atd] value plays (" + str(len(value_rows)) + "): " + ", ".join(
         f"{r['plan']['name']} +{r['edge_pts']:.1f} ({100 * r['td_cal']:.0f}% vs {100 * r['p_book']:.0f}% at "
-        f"{fmt_price(r['book'])}, matchup {r['match']})" for r in value_rows))
+        f"{fmt_price(r['book'])}, matchup {r['match']}, ranks on {r['edge_pts'] * r['match'] / 100:.1f})" for r in value_rows))
     if close_rows:
         print("[atd] underpriced fill-ins: " + ", ".join(
             f"{r['plan']['name']} +{r['edge_pts']:.1f} (matchup {r['match']})" for r in close_rows))

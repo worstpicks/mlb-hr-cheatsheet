@@ -936,7 +936,8 @@
             (gated ? "Every play here also needs the matchup on his side \u2014 a defense that gives up production to his role, " +
                      "a red zone that leaks, or both \u2014 because a good price on a player walking into a wall is a trap. " : "") +
             (!valueRows.length ? "No healthy player cleared the price in a good matchup this week."
-                : "Ranked by the biggest cushion over the price" +
+                : (gated ? "Ranked on value and matchup together: the bigger the cushion over the price and the softer the matchup, the higher he ranks"
+                         : "Ranked by the biggest cushion over the price") +
                   (!nClose ? "." : nVal
                       ? ": " + ranks(1, nVal) + " beat" + (nVal === 1 ? "s" : "") + " it by " + valueBar + " or more games in 100, " +
                         ranks(nVal + 1, valueRows.length) + " by less."

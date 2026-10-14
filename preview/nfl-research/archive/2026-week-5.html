@@ -942,6 +942,7 @@
                       ? ": " + ranks(1, nVal) + " beat" + (nVal === 1 ? "s" : "") + " it by " + valueBar + " or more games in 100, " +
                         ranks(nVal + 1, valueRows.length) + " by less."
                       : ". None beat it by " + valueBar + " or more games in 100 this week, so these are the closest.")) +
+            (gated ? " Plus-money prices only." : "") +
             " No injury tags, shrinking roles, thin samples or suspicious prices. A lean against the price, not a lock." +
             (SHEET.odds_captured ? " Prices captured " + SHEET.odds_captured + "; they move, so check yours." : "");
         if (!SHEET.has_odds) {
@@ -964,7 +965,7 @@
             document.getElementById("atdPriceNote").innerHTML = "<strong>Best</strong> is the best anytime TD price across books" +
                 (SHEET.odds_captured ? ", captured " + esc(SHEET.odds_captured) : "") + ". &#128176; <strong>Value</strong> marks a healthy play whose " +
                 "chance here beats the chance that price implies by 4 points or more" +
-                (SHEET.value_match_floor != null ? ", in a matchup scoring " + SHEET.value_match_floor + "/100 or better" : "") +
+                (SHEET.value_match_floor != null ? ", at plus money, in a matchup scoring " + SHEET.value_match_floor + "/100 or better" : "") +
                 "; the value plays up top are the widest gaps. " +
                 "A price marked &#9888; is far longer than the market's own projection for him &mdash; usually a boosted or one-book line &mdash; " +
                 "so it is shown but never called value. It is a lean against the market, not a lock.<br>";

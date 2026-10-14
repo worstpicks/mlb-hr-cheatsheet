@@ -631,8 +631,10 @@ def build(season: int, week: int) -> Path:
         r["match"] = matchup_score(r, len(dz_rank))
         r["usage_z"] = usage_z(r["b"])
     shrinking = [r for r in rows if r.get("edge_pts") is not None and r["usage_z"] is not None and r["usage_z"] <= -2]
+    # Plus money only (the owner, 10/14): a favourite's price is already short, so even a
+    # real edge pays too little to headline a value section.
     priced = [r for r in rows if r["eligible"] and r["status"] == "" and r.get("edge_pts") is not None
-              and not r["odd_price"] and r not in shrinking]
+              and not r["odd_price"] and r not in shrinking and r["book"] > 0]
     # Ranked on value and matchup together (the user, 10/14): the edge counts in full
     # only in the softest matchup, so +11 in a 94/100 spot outranks +11 in a 51/100 one.
     rank_key = lambda r: (-r["edge_pts"] * r["match"] / 100, r["plan"]["name"])  # noqa: E731

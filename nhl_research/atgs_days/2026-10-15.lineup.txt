@@ -6,6 +6,8 @@
 # From the pasted list: 18 defenseman point props ("Over 0.5 Points" and "Over 1
 # Points") were entered as Over 0.5 Goals, the user's rule since 10/15, and the
 # Weegar assist prop was left off (one-goal sheet).
+# STL @ MIN arrived later (4:30 am): three more defenseman point props entered as
+# Over 0.5 Goals, and Kaprizov's "Over 1 Goals" as Over 0.5.
 
 goalie BUF Ukko-Pekka Luukkonen | expected
 goalie TOR Sergei Bobrovsky | expected
@@ -32,6 +34,8 @@ goalie UTA Karel Vejmelka | expected
 goalie EDM Tristan Jarry | expected, not yet confirmed
 goalie CGY Dustin Wolf | expected
 goalie VGK Carter Hart | expected
+goalie STL Joel Hofer | expected
+goalie MIN Jesper Wallstedt | expected
 
 # Listed plays that will not dress.
 out BUF Conor Timmins | injured reserve (lower body)
@@ -42,6 +46,7 @@ out EDM Matt Savoie | long-term injured reserve, no games this season
 out UTA Michael Carcone | upper body, week-to-week since 10/10
 out VGK Victor Olofsson | injured reserve
 out CGY Jonathan Huberdeau | out (hip), no games this season
+out STL Logan Mailloux | hand surgery 9/28, to be re-evaluated in eight weeks
 
 # The plays stay, flagged (a bet on a player who sits is voided).
 doubt BUF Rasmus Dahlin | Doubtful -- upper body; hurt 10/12, sat 10/13, and Buffalo calls him doubtful in Toronto
@@ -50,5 +55,6 @@ doubt WPG Josh Morrissey | Game-time decision -- wrist, day-to-day; has sat Winn
 doubt EDM Zach Hyman | Game-time decision -- undisclosed; has missed five straight, though his coach called him close
 doubt NJD Luke Evangelista | Game-time decision -- illness; did not travel for 10/13
 doubt CHI Frank Nazar | Game-time decision -- two-game suspension served (sat 10/10 and 10/13), not back in Chicago's projected lines yet
+doubt MIN Jared Spurgeon | Game-time decision -- upper body, day-to-day; sat 10/13 at Winnipeg
 
 # Bedard and Raymond played 10/13 (21:06 and 19:30), so last week's game-time tags no longer apply.

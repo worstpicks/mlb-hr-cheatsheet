@@ -1,0 +1,54 @@
+# Thursday 10/15 -- starting goalies and availability, read at 9 am ET from the
+# user's CSVs (nhl-goalie-summary-2026-l5 and nhl-goal-matchups-slate-l5, 10/15),
+# RotoWire lineups and player news (agree with the CSVs on all 20 starters),
+# DailyFaceoff starting goalies and line combinations for all 20 clubs, and the
+# NHL box scores through 10/14. No club on this slate played 10/14.
+# From the pasted list: 18 defenseman point props ("Over 0.5 Points" and "Over 1
+# Points") were entered as Over 0.5 Goals, the user's rule since 10/15, and the
+# Weegar assist prop was left off (one-goal sheet).
+
+goalie BUF Ukko-Pekka Luukkonen | expected
+goalie TOR Sergei Bobrovsky | expected
+goalie NYI Ilya Sorokin | expected
+goalie OTT Linus Ullmark | expected
+goalie SEA Joey Daccord | expected
+goalie TBL Andrei Vasilevskiy | expected
+# DailyFaceoff has Merilainen (no report behind it).
+goalie VAN Kevin Lankinen | expected, not yet confirmed
+# DailyFaceoff has Schmid: Markstrom left 10/12 with tightness and sat 10/13 (day-to-day).
+goalie FLA Jacob Markstrom | expected, not yet confirmed
+goalie NYR Dylan Garand | expected
+goalie NJD Jake Allen | expected
+# DailyFaceoff has Woll (no report behind it).
+goalie PHI Dan Vladar | expected, not yet confirmed
+goalie DET Daniil Tarasov | confirmed
+goalie WPG Stuart Skinner | expected
+goalie CHI Spencer Knight | expected
+# DailyFaceoff has Nedeljkovic (no report behind it).
+goalie SJS Yaroslav Askarov | expected, not yet confirmed
+goalie NSH Juuse Saros | expected
+goalie UTA Karel Vejmelka | expected
+# DailyFaceoff has Levi (no report behind it).
+goalie EDM Tristan Jarry | expected, not yet confirmed
+goalie CGY Dustin Wolf | expected
+goalie VGK Carter Hart | expected
+
+# Listed plays that will not dress.
+out BUF Conor Timmins | injured reserve (lower body)
+out OTT William Eklund | injured reserve (ankle)
+out PHI Rasmus Ristolainen | injured reserve (upper body)
+out DET Marco Kasper | injured reserve (upper body), week-to-week
+out EDM Matt Savoie | long-term injured reserve, no games this season
+out UTA Michael Carcone | upper body, week-to-week since 10/10
+out VGK Victor Olofsson | injured reserve
+out CGY Jonathan Huberdeau | out (hip), no games this season
+
+# The plays stay, flagged (a bet on a player who sits is voided).
+doubt BUF Rasmus Dahlin | Doubtful -- upper body; hurt 10/12, sat 10/13, and Buffalo calls him doubtful in Toronto
+doubt OTT Jake Sanderson | Game-time decision -- lower body, day-to-day; has sat Ottawa's last two games
+doubt WPG Josh Morrissey | Game-time decision -- wrist, day-to-day; has sat Winnipeg's last two games
+doubt EDM Zach Hyman | Game-time decision -- undisclosed; has missed five straight, though his coach called him close
+doubt NJD Luke Evangelista | Game-time decision -- illness; did not travel for 10/13
+doubt CHI Frank Nazar | Game-time decision -- two-game suspension served (sat 10/10 and 10/13), not back in Chicago's projected lines yet
+
+# Bedard and Raymond played 10/13 (21:06 and 19:30), so last week's game-time tags no longer apply.

@@ -617,6 +617,15 @@ def rating_scales(players_by_team: dict, allowed_by_team: dict,
     def slot_col(key):
         return percentile_breaks([float(s.get(key) or 0) for s in slots])
 
+    # ... and to a defense pair slot. A blue-liner's lane is read against other
+    # blue-line lanes: every club gives a D1 a fraction of what it gives a top
+    # line, so on the forward scale every D lane would read as a wall.
+    d_slots = [node["stats"] for table in allowed_by_team.values()
+               for node in ((table.get("D") or {}).get("ranks") or {}).values() if node.get("gp")]
+
+    def d_slot_col(key):
+        return percentile_breaks([float(s.get(key) or 0) for s in d_slots])
+
     def goalie_rate(num, den):
         out = []
         for g in goalies:
@@ -633,6 +642,7 @@ def rating_scales(players_by_team: dict, allowed_by_team: dict,
         "pp_p": col(skaters, "pp_p"),
         "toi": col(skaters, "toi", 1 / 60),
         "opp_g": slot_col("g"), "opp_sog": slot_col("sog"), "opp_iscf": slot_col("iscf"),
+        "opp_g_d": d_slot_col("g"), "opp_sog_d": d_slot_col("sog"), "opp_iscf_d": d_slot_col("iscf"),
         "gsv": goalie_rate("sv", "sa"), "ghd": goalie_rate("hd_sv", "hd_sa"),
         "gga": col(goalies, "ga"),
     }

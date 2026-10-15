@@ -32,7 +32,7 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
-from nhl_research.rating import WEIGHTS, build_scales, score_row, warnings_for
+from nhl_research.rating import WEIGHTS, band, build_scales, score_row, warnings_for
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "preview" / "data"
@@ -53,9 +53,13 @@ PLAY_LINE = re.compile(
 
 # A skater needs this many games before he is rated rather than merely shown.
 MIN_GAMES = 8
-# Forwards carry the market. A defenseman scores on about four percent of his
-# nights; he belongs on the research board for blocks and shots, not here.
-SCORING_POS = ("C", "L", "R")
+# Forwards carry the market, but the owner lists defensemen too (10/15). A D is
+# rated on the same five parts against the same forward scales -- so his score
+# says how live he is next to the forwards -- except his lane, which is read
+# against blue-line lanes, and his chance, which has its own curve
+# (CHANCE_CURVE_D), carried as a blue-line discount on his rating. Nearly
+# every D lands in Dart, which is what a defenseman's goal is.
+SCORING_POS = ("C", "L", "R", "D")
 
 
 def norm_name(name: str) -> str:
@@ -405,6 +409,18 @@ def goal_chance(rate: float, mult: float) -> float:
 # a flat rate (.508). The Poisson chance ran hot at the top -- stars read 55-60%
 # and score about 40% -- which matters once a price is set against it.
 CHANCE_CURVE = (-3.27229, 3.07625)
+# Defensemen, fitted 10/15 on a replay of every 2026-27 night from 9/29 to 10/14:
+# each slate as committed before puck drop, every dressed skater rated by this
+# file, joined to the box scores -- 1,092 defenseman games, 79 with a goal.
+# The forward curve read them at 13.2% against 7.2% scored. The rating still
+# sorts them -- held out a night at a time, log loss .2563 against .2613 for a
+# flat 7% -- at the forward slope but from a lower base: a blue-liner turns the
+# same rating into a goal about half as often. That base assumes his lane is
+# scored against other blue-line lanes (the slate's league-wide opp_*_d scales);
+# a slate built before those shipped falls back to forward lanes, fitted the
+# same way at -3.915.
+CHANCE_CURVE_D = (-4.075, 3.07625)
+CHANCE_CURVE_D_FWD_LANES = (-3.915, 3.07625)
 
 
 def rated_chance(score: float) -> float:
@@ -501,6 +517,12 @@ def implied_chance(american: int) -> float:
 
 def attach_price(r: dict, prices: dict) -> None:
     """His anytime-goal price, the chance it implies and our edge over it."""
+    if r["pos"] == "D":
+        # The export's Odds for defensemen do not read as goal prices -- on 10/15
+        # Josi +246, Byram +325, Orlov +400 on 0.4 shots a game, where a blue-liner's
+        # anytime goal runs +500 to +2000 -- so a D goes unpriced and never into
+        # the value section until a real D goal price comes in.
+        return
     price = prices.get((norm_name(r["name"]), r["team"], "D" if r["pos"] == "D" else "F"))
     if price is None or r.get("need"):
         return  # a two-goal line is a different bet from the anytime price
@@ -631,8 +653,21 @@ def collect(slate: dict, starters: dict | None = None) -> list[dict]:
 def rate(rows: list[dict], slate_scales: dict) -> list[dict]:
     """Score every row, then tag it."""
     scales = build_scales(slate_scales)
+    # a defenseman's lane against blue-line lanes, when the slate ships them
+    d_lanes = all(scales.get(f"{k}_d") and scales[f"{k}_d"].breaks for k in ("opp_g", "opp_sog", "opp_iscf"))
+    scales_d = dict(scales, **{k: scales[f"{k}_d"] for k in ("opp_g", "opp_sog", "opp_iscf")}) if d_lanes else scales
+    curve_d = CHANCE_CURVE_D if d_lanes else CHANCE_CURVE_D_FWD_LANES
+    # A defenseman's rating carries a blue-line discount that puts it on the
+    # forwards' scale: a D at 45 has a forward-at-45's goal chance, so bands,
+    # board order and the top five read the same for both. His five parts stay
+    # as scored; the discount is the gap between the two fitted curves.
+    blue_line = round(100 * (curve_d[0] - CHANCE_CURVE[0]) / CHANCE_CURVE[1], 1)
     for r in rows:
-        r.update(score_row(r, scales))
+        r.update(score_row(r, scales_d if r["pos"] == "D" else scales))
+        if r["pos"] == "D":
+            r["blue_line"] = blue_line
+            r["score"] = round(r["score"] + blue_line, 1)
+            r["band"], r["band_label"] = band(r["score"])
         r["warning"] = warnings_for(r, r["parts"])
         tags = []
         if r["band"] in ("elite", "strong"):
@@ -653,7 +688,7 @@ def rate(rows: list[dict], slate_scales: dict) -> list[dict]:
         r["why"] = why(r)
         lg_g = r["lg_slot"].get("g") or 0
         r["mult"] = round(r["opp_g"] / lg_g, 3) if lg_g and r["opp_g"] else 1.0
-        r["chance"] = rated_chance(r["score"])
+        r["chance"] = rated_chance(r["score"])  # a D's score already carries his curve
         # where he sits among the league's forwards, for "top 12%" style reads
         r["pctl"] = {k: round(100 * scales[k].of(r[k]))
                      for k in ("sog", "icf", "iscf", "ihdcf", "g", "toi", "pp_p") if k in scales}
@@ -701,7 +736,11 @@ def reasons(r: dict) -> list[dict]:
         {"part": "form", "label": "Form & role",
          "text": f"{int(r['g5'])} goals in his last 5 \u00b7 {r['toi']:.1f} minutes a night \u00b7 "
                  f"{r['pp_p']:.2f} power-play points a game"},
-    ]
+    ] + ([{"part": "blue_line", "label": "Blue-line discount",
+           "text": f"{r['blue_line']:g} points: a defenseman turns the same profile into a goal about "
+                   f"half as often as a forward (1,092 defenseman games this season), so his rating "
+                   f"sits on the forwards' scale \u2014 the parts above add up to "
+                   f"{r['score'] - r['blue_line']:.0f} before it"}] if r.get("blue_line") else [])
 
 
 def _blend_note(r: dict) -> str:
@@ -783,14 +822,17 @@ def build_sheet(date: str) -> dict:
     unmatched: list[dict] = []
     scratched: list[dict] = []
     if plays is not None:
-        index = {(norm_name(r["name"]), r["team"]): r for r in rows}
+        # keyed by position group too: VAN dresses a center and a defenseman
+        # who are both Elias Pettersson
+        index = {(norm_name(r["name"]), r["team"], r["pos"] == "D"): r for r in rows}
         listed = []
         for play in plays:
             key = (norm_name(play["name"]), play["team"])
             if key in out:
                 scratched.append({**play, "note": out[key]["note"]})
                 continue
-            row = index.get(key)
+            is_d = play["role"].startswith("D")
+            row = index.get((*key, is_d)) or index.get((*key, not is_d))
             if row is None:
                 unmatched.append(play)
                 continue
@@ -832,6 +874,7 @@ def build_sheet(date: str) -> dict:
                 f"{r['name']} (+{r['edge']:g}, matchup {matchup_share(r):.2f})" for r in walled))
     by_id = {r["id"]: r for r in rows}
 
+    from_list = plays is not None
     games_out = []
     for game in slate.get("games") or []:
         key = f"{game['away']}@{game['home']}"
@@ -840,6 +883,8 @@ def build_sheet(date: str) -> dict:
             plays = [r for r in rows if r["game"] == key and r["team"] == team]
             plays.sort(key=lambda r: r["score"], reverse=True)
             sides[team] = plays
+        if from_list and not any(sides.values()):
+            continue  # a game with none of the listed players is not on the sheet (STL@MIN, 10/15)
         games_out.append({
             "away": game["away"], "home": game["home"],
             "away_name": game.get("away_name", ""), "home_name": game.get("home_name", ""),
@@ -898,7 +943,7 @@ def build_sheet(date: str) -> dict:
         "has_props": bool(prices) or slate.get("has_props", False),
         "weights": WEIGHTS,
         "by_id": by_id,
-        "listed": plays is not None,
+        "listed": from_list,
         "unmatched": unmatched,
         "scratched": scratched,
     }

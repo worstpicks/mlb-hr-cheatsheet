@@ -183,6 +183,29 @@ as `scales` (101 breakpoints per input). Scoring against the slate instead made
 the bands drift with its size — a five-game night is mostly depth forwards, and
 grading them against each other pushed nearly the whole board into Dart.
 
+### Defensemen (since 10/15)
+
+The owner lists defensemen for one goal too, so they are rated on the same five
+parts against the same forward scales, with two differences:
+
+- **His lane is read against blue-line lanes.** The slate ships `opp_g_d`,
+  `opp_sog_d` and `opp_iscf_d`: what every club gives up to each defense pair
+  slot. On the forward scale every D lane read as a wall.
+- **His goal chance has its own curve, shown as a blue-line discount.** A replay
+  of 9/29–10/14 rated every dressed skater from each night's slate as it stood
+  before puck drop: 1,092 defenseman games, 79 with a goal. The forward curve
+  read them at 13.2% against 7.2% scored. Held out a night at a time, the rating
+  at the forward slope from a lower base (`CHANCE_CURVE_D`, -4.075) beat a flat
+  7% (log loss .2563 vs .2613); a free slope, his own goal rate and
+  rating-plus-goal-rate did no better. The gap between the two bases is a
+  -26.1-point discount on his rating, which puts a D on the forwards' scale: a D
+  at 45 has a forward-at-45's chance, so bands, board order and the top five
+  mean the same for both. The player card lists the discount under "Why a ...".
+
+The goal-matchups export's Odds for defensemen do not read as goal prices
+(Josi +246, Orlov +400 on 0.4 shots a game), so a D goes unpriced and stays out
+of the value section.
+
 `iSCF` is an approximation. Natural Stat Trick draws its scoring-chance area as
 a "home plate" polygon it does not publish as a formula, so `shot_quality.py`
 uses the usual distance-and-angle reading of it. Applied identically to every

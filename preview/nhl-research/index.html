@@ -17,6 +17,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
     <link rel="stylesheet" href="nhl-research.css?v=6">
+    <link rel="stylesheet" href="../assets/wp-lines.css?v=1">
     <script>
         (function () {
             if (location.protocol !== "file:") return;
@@ -140,5 +141,12 @@ python serve-research.py</pre>
     </div>
 
     <script src="nhl-research.js?v=15" defer></script>
+    <script src="../assets/wp-lines.js?v=1" defer></script>
+    <script>
+        // Moneyline / spread tab beside the per-game research (preview/assets/wp-lines.js)
+        window.addEventListener("DOMContentLoaded", function () {
+            if (window.WPLines) window.WPLines.mount({ sport: "nhl", games: "#nrsGames", research: "#nrsMatchupSection", date: "#nrsDate", researchLabel: "Player Logs" });
+        });
+    </script>
 </body>
 </html>

@@ -17,6 +17,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
     <link rel="stylesheet" href="nfl-research.css?v=37">
+    <link rel="stylesheet" href="../assets/wp-lines.css?v=1">
     <script>
         (function () {
             if (location.protocol !== "file:") return;
@@ -98,9 +99,12 @@ python serve-research.py</pre>
             <div class="nrs-viewtabs" id="nrsViewTabs" role="tablist" aria-label="Game view" hidden>
                 <button type="button" data-hostview="logs" class="is-active">Player Logs</button>
                 <button type="button" data-hostview="board">Game Board</button>
+                <button type="button" data-hostview="lines">Moneyline &amp; Spread</button>
             </div>
 
             <section class="nrs-section nrs-board" id="nrsBoardSection" hidden></section>
+
+            <section class="nrs-section" id="nrsLinesSection" hidden></section>
 
             <section class="nrs-section" id="nrsMatchupSection" hidden>
                 <div class="nrs-matchup-bar">
@@ -178,7 +182,8 @@ python serve-research.py</pre>
         </div>
     </dialog>
 
+    <script src="../assets/wp-lines.js?v=1" defer></script>
     <script src="nfl-sheets.js?v=5" defer></script>
-    <script src="nfl-research.js?v=53" defer></script>
+    <script src="nfl-research.js?v=54" defer></script>
 </body>
 </html>

@@ -1330,6 +1330,22 @@
         );
     }
 
+    // Moneyline & Spread: both teams' recent games side by side, graded against
+    // tonight's spread / total (preview/assets/wp-lines.js, fed daily by research_lines.py)
+    function renderLines(game) {
+        const host = el("nrsLinesSection");
+        if (!host) return;
+        const show = !!game && state.hostView === "lines" && !!window.WPLines;
+        host.hidden = !show;
+        if (!show) { host.dataset.game = ""; return; }
+        if (host.dataset.game === String(game.id)) return;
+        host.dataset.game = String(game.id);
+        window.WPLines.render(host, "nfl", game.id, {
+            away: { abbr: game.away, name: game.away_name, logo: game.away_logo },
+            home: { abbr: game.home, name: game.home_name, logo: game.home_logo },
+        }, game.kickoff ? new Date(game.kickoff).toLocaleDateString("en-CA", { timeZone: "America/New_York" }) : "");
+    }
+
     function renderBoard() {
         const host = el("nrsBoardSection");
         const tabs = el("nrsViewTabs");
@@ -1339,6 +1355,7 @@
             tabs.hidden = !game;
             tabs.querySelectorAll("[data-hostview]").forEach((b) => b.classList.toggle("is-active", b.dataset.hostview === state.hostView));
         }
+        renderLines(game);
         if (!game || state.hostView !== "board") { host.hidden = true; return; }
         host.hidden = false;
         const board = game.board;

@@ -1,0 +1,55 @@
+/* Worst Pickz Lines: both teams' recent games next to each other (the Game
+   Board's .nrs-bt-grid), graded against tonight's number with the Player Logs'
+   green / red cells (.nrs-table--log, .nrs-cell-heat--good / --bad), so it reads
+   like the rest of the research tabs in both themes. */
+.wpl-hide { display: none !important; }
+.wpl-asof { font-size: 0.74rem; color: var(--nrs-muted, #94a3b8); margin: 12px 2px 0; line-height: 1.5; }
+.wpl-asof b { color: var(--wpz-color-heading, #fffbeb); }
+.wpl-k { font-size: 0.64rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wpz-accent-gold, #eab308); }
+
+.wpl-controls { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 0 0 12px; }
+
+.wpl-team {
+    border: 1px solid var(--nrs-border, rgba(251, 146, 60, 0.22)); border-radius: 16px;
+    background: var(--nrs-panel, rgba(8, 15, 28, 0.82)); padding: 14px 14px 12px; display: grid; gap: 10px; align-content: start;
+}
+.wpl-team__head { display: flex; align-items: center; gap: 10px; }
+.wpl-team__head img { width: 34px; height: 34px; object-fit: contain; }
+.wpl-team__head b { display: block; font-size: 1.05rem; font-weight: 900; color: var(--wpz-color-heading, #fffbeb); }
+.wpl-team__head span { font-size: 0.78rem; color: var(--nrs-muted, #94a3b8); }
+.wpl-team__head .wpl-side {
+    margin-left: auto; padding: 3px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 800;
+    letter-spacing: 0.04em; text-transform: uppercase; background: rgba(148, 163, 184, 0.14);
+}
+
+/* the log */
+.wpl-log td.wpl-c { text-align: center; white-space: nowrap; font-weight: 700; }
+.wpl-log td small { font-size: 0.7em; opacity: 0.75; margin-left: 2px; }
+.wpl-opp { display: inline-flex; align-items: center; gap: 5px; color: var(--wpz-color-text-soft, #ffedd5); }
+.wpl-opp img { width: 16px; height: 16px; object-fit: contain; }
+.wpl-w { color: #4ade80; }
+.wpl-l { color: #f87171; }
+html.theme-light .wpl-w { color: #15803d; }
+html.theme-light .wpl-l { color: #b91c1c; }
+/* the average row: the log table's footer background would hide the grade */
+.wpl-log tfoot td.nrs-cell-heat--good { background: var(--nrs-good-bg); color: var(--nrs-good-text); }
+.wpl-log tfoot td.nrs-cell-heat--bad { background: var(--nrs-bad-bg); color: var(--nrs-bad-text); }
+
+/* hit rate */
+.wpl-rate { display: flex; align-items: baseline; gap: 10px; padding: 8px 4px 2px; border-top: 1px solid var(--nrs-border, rgba(251, 146, 60, 0.22)); }
+.wpl-rate b { margin-left: auto; font-size: 1.35rem; font-weight: 900; color: var(--wpz-color-heading, #fffbeb); }
+.wpl-rate b.wpl-rate--good { color: #4ade80; }
+.wpl-rate b.wpl-rate--bad { color: #f87171; }
+html.theme-light .wpl-rate b.wpl-rate--good { color: #15803d; }
+html.theme-light .wpl-rate b.wpl-rate--bad { color: #b91c1c; }
+.wpl-rate small { font-size: 0.78rem; color: var(--nrs-muted, #94a3b8); }
+
+/* tonight's number for this side */
+.wpl-chip {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 9px 12px; border-radius: 12px;
+    border: 1px solid var(--nrs-border-strong, rgba(234, 179, 8, 0.35)); background: var(--nrs-cell-bg, rgba(30, 41, 59, 0.45));
+}
+.wpl-chip b { font-size: 1rem; font-weight: 900; color: var(--wpz-color-heading, #fffbeb); }
+.wpl-chip em { font-style: normal; font-weight: 800; color: var(--wpz-color-text, #f5efe9); }
+.wpl-chip small { font-size: 0.72rem; color: var(--nrs-muted, #94a3b8); }
+.wpl-chip .wpl-alt { margin-left: auto; }

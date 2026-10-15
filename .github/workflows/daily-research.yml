@@ -69,11 +69,18 @@ jobs:
             fi
           done
           exit "$FAILED"
+      # After the research builds, so each line lands on the slates' own game ids.
+      # Tonight's lines (The Rundown, free plan) and yesterday's results (ESPN); never fails the run.
+      - name: Pull game lines and results (The Rundown, ESPN)
+        continue-on-error: true
+        env:
+          RUNDOWN_API_KEY: ${{ secrets.RUNDOWN_API_KEY }}
+        run: python research_lines.py --date "$DATE"
       - name: Publish all changed research in one commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- 'preview/data/nba-research-*.json' 'preview/data/nfl-research-*.json' 'preview/data/nhl-research-*.json' preview/nhl-research
+          git add -A -- 'preview/data/nba-research-*.json' 'preview/data/nfl-research-*.json' 'preview/data/nhl-research-*.json' 'preview/data/lines-*.json' 'preview/data/results-*.json' preview/nhl-research
           if git diff --cached --quiet; then
             echo "No research changed; no production deployment needed."
             exit 0

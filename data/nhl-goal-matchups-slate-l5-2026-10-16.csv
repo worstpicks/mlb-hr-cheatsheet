@@ -1,0 +1,128 @@
+Range,L5
+Position,All
+Rate,Per Game
+Scores,"0-100, higher = better spot to score. Score = Form × (0.7 + 0.3 × Matchup/100); Matchup = 80% Def (chances, HD chances, shots, goals allowed to position) + 20% Goalie; Form = goals/iSCF (50%, goals 0% under 10 GP ramping to 25% by 20) + PP TOI 20% + TOI 10% + iFF 10% + finishing 10%"
+
+#,Player,Team,Pos,Lines,Score,Matchup,Form,"Sh% (2 seasons, shrunk)",Def Score,Def Rank,Def Pos,Def SCA/GP,Def HDSCA/GP,Def SA/GP,Def GA/GP,Time,Opp,Opp Goalie,Goalie Status,Goalie SV%,Goalie Score,Odds,GP,TOI/G,PP TOI/G,Goals/G,AST/G,S/G,iCF/G,iFF/G,iSCF/G,iHDCF/G
+1,Sebastian Aho,CAR,C,L1 · PP1,85,69,94,13.7,75,4,C,8.40,4.60,7.20,1.20,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,19:25,4:22,0.60,1.20,3.00,5.80,5.20,3.60,1.80
+2,Beckett Sennecke,ANA,RW,L1 · PP1,82,53,95,12.2,56,23,RW,6.80,4.00,8.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,190,5,21:27,4:26,0.60,0.60,3.20,6.60,5.40,3.60,1.80
+3,David Pastrnak,BOS,RW,L1 · PP1,82,78,88,10.9,83,23,RW,10.60,4.00,8.40,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,140,5,19:17,3:03,0.40,0.80,3.80,7.20,4.80,3.20,1.40
+4,Kyle Connor,WPG,LW,L1 · PP1,81,51,95,14.2,49,4,LW,7.20,2.60,6.40,1.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,20:52,3:06,1.00,0.20,4.20,6.80,5.80,4.20,1.80
+5,Nathan MacKinnon,COL,C,L1 · PP1,81,48,96,14.4,44,29,C,7.40,3.20,7.20,0.40,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,-120,5,21:38,4:19,0.60,0.80,3.40,7.60,5.40,3.40,0.80
+6,Jackson Blake,CAR,RW,L2 · PP1,78,51,91,11.7,53,23,RW,7.20,3.20,7.00,0.60,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,17:11,4:24,0.20,1.00,2.80,5.60,3.60,3.80,2.00
+7,Logan Stankoven,CAR,C,L2 · PP2,77,69,85,12.7,75,4,C,8.40,4.60,7.20,1.20,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,16:27,1:26,0.60,0.20,2.20,3.80,3.00,3.40,0.80
+8,Mikael Granlund,ANA,C,L2 · PP1,77,40,94,14.0,40,23,C,7.00,2.80,7.20,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,,5,20:10,4:28,0.40,1.00,2.40,4.40,4.20,3.20,1.60
+9,Cutter Gauthier,ANA,RW,,76,53,88,13.5,56,23,RW,6.80,4.00,8.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,140,5,16:42,3:40,0.40,0.40,3.40,7.40,6.20,2.60,0.20
+10,Evgeni Malkin,PIT,RW,L2 · PP1,76,50,89,12.7,54,14,RW,7.00,3.00,8.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,280,5,18:36,3:45,0.20,0.00,2.60,4.20,3.60,2.80,1.40
+11,Andrei Svechnikov,CAR,RW,L1 · PP1,75,51,88,14.6,53,23,RW,7.20,3.20,7.00,0.60,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,17:14,4:25,1.20,0.40,3.00,4.60,3.20,2.60,1.60
+12,Artturi Lehkonen,COL,LW,L1 · PP2,75,70,82,13.8,71,15,LW,7.40,3.40,8.00,0.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,290,5,19:21,1:45,0.20,0.20,0.80,2.60,2.20,2.60,0.80
+13,Mark Jankowski,CAR,C,L3 · PP2,75,69,83,15.6,75,4,C,8.40,4.60,7.20,1.20,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,14:36,1:07,1.00,0.20,2.20,4.00,3.20,3.20,1.00
+14,Nazem Kadri,COL,RW,L2 · PP1,75,71,82,8.2,72,1,RW,7.80,3.60,8.00,1.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,270,5,20:38,4:17,0.00,0.60,2.80,4.60,3.80,2.60,1.40
+15,Sidney Crosby,PIT,C,L1 · PP1,74,31,93,15.2,30,7,C,5.80,2.60,6.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,245,5,20:03,4:13,0.40,0.00,2.60,3.80,3.60,3.00,1.80
+16,Brock Nelson,COL,C,L2 · PP2,72,48,85,15.8,44,29,C,7.40,3.20,7.20,0.40,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,240,5,18:35,1:26,0.40,0.20,2.40,3.60,3.00,2.80,0.40
+17,Martin Necas,COL,RW,L1 · PP1,72,71,79,16.5,72,1,RW,7.80,3.60,8.00,1.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,170,5,21:33,4:23,0.40,0.20,1.80,4.40,3.20,1.40,0.60
+18,Gabriel Landeskog,COL,LW,L2 · PP2,71,70,78,11.3,71,15,LW,7.40,3.40,8.00,0.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,320,5,15:55,1:53,0.20,0.20,1.80,3.40,3.00,2.20,0.80
+19,T.J. Hughes,COL,RW,L3 · PP1,71,71,78,9.7,72,1,RW,7.80,3.60,8.00,1.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,310,5,13:59,3:52,0.00,0.20,2.20,4.20,3.00,2.60,0.60
+20,Cole Perfetti,WPG,RW,L1 · PP1,70,27,90,11.0,19,30,RW,6.00,2.60,5.40,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,19:18,3:02,0.80,0.00,2.40,5.40,4.00,4.20,1.20
+21,James Hagens,BOS,RW,L3 · PP2,70,78,75,11.6,83,23,RW,10.60,4.00,8.40,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,350,5,13:05,1:50,0.20,0.40,1.80,2.80,2.80,2.20,0.40
+22,Rickard Rakell,PIT,LW,L1 · PP1,70,19,93,12.6,15,24,LW,5.80,2.80,5.00,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,250,5,20:24,4:06,0.00,0.00,2.00,5.80,3.40,3.60,0.80
+23,Mark Scheifele,WPG,C,L1 · PP1,69,16,92,16.8,6,23,C,5.20,1.80,4.00,0.60,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,20:44,3:05,0.20,1.20,1.80,4.20,3.20,3.20,1.40
+24,Gabriel Vilardi,WPG,RW,L2 · PP1,68,27,87,15.8,19,30,RW,6.00,2.60,5.40,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,16:32,3:02,0.00,0.20,1.80,3.60,2.80,2.80,1.00
+25,Morgan Geekie,BOS,LW,L1 · PP1,68,59,78,17.8,60,4,LW,7.60,3.00,6.00,1.20,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,195,5,17:23,2:34,0.20,0.80,1.20,3.00,2.40,1.80,0.40
+26,Ben Kindel,PIT,C,L3 · PP1,67,31,84,11.5,30,7,C,5.80,2.60,6.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,340,5,18:25,3:58,0.20,0.40,2.20,3.80,3.20,2.20,1.80
+27,Leo Carlsson,ANA,C,L1 · PP1,67,40,82,14.1,40,23,C,7.00,2.80,7.20,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,175,5,20:37,4:25,0.20,1.20,1.20,3.00,2.40,1.80,1.00
+28,Fraser Minten,BOS,C,L2 · PP2,66,31,83,13.7,25,23,C,6.80,2.40,5.60,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,320,5,15:50,1:20,0.60,0.40,3.00,4.40,3.60,2.80,1.60
+29,Cale Makar,COL,D,,63,47,75,10.8,42,21,D,4.00,0.60,7.00,0.20,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,250,5,22:26,4:37,0.60,0.40,2.80,4.80,3.20,1.40,0.20
+30,Casey Mittelstadt,BOS,LW,L3 · PP2,63,59,72,14.9,60,4,LW,7.60,3.00,6.00,1.20,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,550,5,13:46,1:34,0.40,0.20,1.20,2.60,2.00,1.80,0.60
+31,Egor Chinakhov,PIT,LW,L2 · PP2,63,19,83,13.2,15,24,LW,5.80,2.80,5.00,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,390,5,15:16,1:58,0.00,0.00,1.60,4.80,3.60,2.60,0.80
+32,Erik Karlsson,PIT,D,P1 · PP1,62,41,75,9.1,42,6,D,4.00,0.80,4.80,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,550,5,24:14,4:13,0.00,0.80,1.60,6.60,3.60,1.60,0.20
+33,Shayne Gostisbehere,CAR,D,P3 · PP1,62,26,80,11.3,22,11,D,3.40,0.40,5.80,0.40,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,18:09,4:25,0.20,0.60,2.00,5.20,4.00,1.80,0.40
+34,Taylor Hall,CAR,LW,L2 · PP2,62,37,76,12.7,35,15,LW,6.40,2.80,6.40,0.80,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,12:07,1:03,0.60,0.40,2.60,3.40,3.20,2.60,2.20
+35,Elias Lindholm,BOS,C,L3 · PP1,61,31,77,13.1,25,23,C,6.80,2.40,5.60,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,340,5,15:59,2:13,0.00,0.40,1.00,3.20,2.00,2.00,1.00
+36,Alex Killorn,ANA,LW,L1 · PP2,60,72,66,10.4,80,15,LW,7.80,4.00,7.60,0.80,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,340,5,15:56,0:32,0.00,0.20,2.00,3.20,2.60,1.80,0.80
+37,Pavel Zacha,BOS,C,L1 · PP1,59,31,75,17.9,25,23,C,6.80,2.40,5.60,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,260,5,18:32,2:23,0.40,0.20,1.00,2.60,2.20,1.60,0.80
+38,Thomas Novak,PIT,C,L2 · PP2,59,31,74,12.6,30,7,C,5.80,2.60,6.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,370,5,15:27,2:16,0.20,0.00,1.40,3.60,2.40,1.80,1.20
+39,Jordan Martinook,CAR,RW,L3,58,51,68,10.8,53,23,RW,7.20,3.20,7.00,0.60,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,14:35,0:05,0.20,0.40,1.80,3.80,2.40,2.40,1.00
+40,A.J. Greer,ANA,RW,L3,57,53,66,13.1,56,23,RW,6.80,4.00,8.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,650,5,12:14,0:19,0.00,0.20,2.00,2.60,2.20,1.80,1.40
+41,Bryan Rust,PIT,RW,L1,57,50,67,14.7,54,14,RW,7.00,3.00,8.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,270,5,18:52,2:05,0.40,0.00,1.20,2.00,2.00,1.20,0.40
+42,Parker Kelly,COL,LW,L4,57,70,63,15.9,71,15,LW,7.40,3.40,8.00,0.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,700,5,11:51,0:02,0.00,0.20,0.60,3.20,1.60,2.00,0.40
+43,K'Andre Miller,CAR,D,P2 · PP2,56,26,72,8.6,22,11,D,3.40,0.40,5.80,0.40,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,21:52,1:25,0.20,0.20,2.40,5.20,3.80,1.80,0.00
+44,Charlie McAvoy,BOS,D,P1 · PP1,55,39,67,10.8,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,500,5,24:08,1:13,0.20,0.60,1.00,3.20,2.60,1.40,0.60
+45,Jackson LaCombe,ANA,D,P1 · PP1,54,41,66,8.5,41,6,D,4.80,0.20,6.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,500,5,25:58,4:14,0.20,0.60,0.40,3.00,1.40,1.40,0.20
+46,Neal Pionk,WPG,D,P2 · PP1,52,40,63,7.2,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,23:31,2:34,0.20,1.00,1.60,4.80,3.20,1.20,0.20
+47,Nino Niederreiter,WPG,LW,L2,52,51,61,10.1,49,4,LW,7.20,2.60,6.40,1.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,12:49,0:58,0.00,0.00,2.00,2.80,2.40,1.60,1.20
+48,Tim Washe,ANA,C,L4,52,40,64,10.3,40,23,C,7.00,2.80,7.20,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,900,5,15:49,0:34,0.20,0.20,0.80,2.40,1.80,1.80,1.20
+49,Andrei Kuzmenko,PIT,LW,L3 · PP2,51,19,67,14.0,15,24,LW,5.80,2.80,5.00,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,550,5,11:35,1:56,0.00,0.40,1.00,2.40,1.20,1.80,0.60
+50,Eric Robinson,CAR,LW,L4,51,37,63,12.8,35,15,LW,6.40,2.80,6.40,0.80,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,13:04,0:17,0.40,0.40,2.20,2.60,2.40,1.60,1.00
+51,Gavin Brindley,COL,RW,,51,71,56,10.5,72,1,RW,7.80,3.60,8.00,1.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,700,5,7:40,0:41,0.00,0.20,1.00,2.40,1.80,1.60,1.00
+52,Nicolas Roy,COL,C,L4,51,48,60,11.4,44,29,C,7.40,3.20,7.20,0.40,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,,5,11:35,0:00,0.20,0.40,1.60,3.40,2.60,2.20,0.60
+53,Nikolaj Ehlers,CAR,LW,L3 · PP1,51,37,63,11.5,35,15,LW,6.40,2.80,6.40,0.80,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,15:30,4:10,0.00,0.60,1.80,3.80,3.00,1.00,0.20
+54,Devon Toews,COL,D,P1 · PP1,50,47,60,7.2,42,21,D,4.00,0.60,7.00,0.20,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,600,5,21:31,2:11,0.40,0.40,1.80,3.20,2.20,1.20,0.40
+55,Jaden Schwartz,COL,LW,L3 · PP2,50,70,55,12.9,71,15,LW,7.40,3.40,8.00,0.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,265,5,12:55,1:31,0.60,0.20,1.60,3.00,2.00,1.00,0.20
+56,JJ Peterka,BOS,RW,L2 · PP2,50,78,53,14.1,83,23,RW,10.60,4.00,8.40,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,270,5,15:45,1:49,0.00,0.60,1.00,1.60,1.60,0.80,0.40
+57,Kris Letang,PIT,D,P3 · PP2,50,41,61,6.5,42,6,D,4.00,0.80,4.80,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,1100,5,20:13,1:55,0.00,0.00,1.60,4.80,3.20,1.20,0.00
+58,Connor Dewar,PIT,LW,L4,48,19,64,11.9,15,24,LW,5.80,2.80,5.00,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,900,5,12:52,0:01,0.20,0.20,1.80,3.60,2.60,2.20,1.40
+59,Mason Lohrei,BOS,D,P3 · PP2,48,39,59,11.4,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,1100,5,17:45,1:14,0.40,0.20,1.20,2.40,1.40,1.20,0.00
+60,Nicholas Robertson,PIT,RW,L4,48,50,57,13.0,54,14,RW,7.00,3.00,8.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,600,5,11:22,0:01,0.40,0.00,1.60,3.00,2.40,1.60,0.80
+61,Zachary L'Heureux,COL,RW,,48,71,53,11.0,72,1,RW,7.80,3.60,8.00,1.80,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,,5,10:49,0:08,0.00,0.20,1.40,1.80,1.80,1.40,0.80
+62,Judd Caulfield,ANA,RW,L4 · PP1,47,53,55,11.5,56,23,RW,6.80,4.00,8.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,400,5,12:04,1:16,0.20,0.40,1.20,1.60,1.60,1.20,0.80
+63,Roger McQueen,ANA,C,L3,47,40,57,11.0,40,23,C,7.00,2.80,7.20,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,380,1,11:26,2:02,0.00,0.00,1.00,3.00,3.00,2.00,1.00
+64,William Carrier,CAR,LW,L1,47,37,58,9.4,35,15,LW,6.40,2.80,6.40,0.80,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,12:56,0:00,0.00,0.80,2.00,3.20,2.80,2.40,0.80
+65,Josh Morrissey,WPG,D,,46,40,56,9.7,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,20:23,2:42,0.00,0.60,2.60,4.60,3.60,0.80,0.20
+66,Alex Iafallo,WPG,RW,L3 · PP2,45,27,57,11.8,19,30,RW,6.00,2.60,5.40,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,14:10,0:55,0.40,0.20,1.40,2.00,1.80,1.20,0.60
+67,Matthew Poitras,BOS,C,L4,44,31,55,12.4,25,23,C,6.80,2.40,5.60,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,750,5,11:30,0:25,0.40,0.20,1.40,2.20,2.20,1.20,0.60
+68,Blake Lizotte,PIT,C,L4,43,31,54,11.4,30,7,C,5.80,2.60,6.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,1200,5,12:35,0:01,0.00,0.60,1.20,2.40,1.80,1.60,0.80
+69,Brent Burns,COL,D,P2,43,47,51,8.2,42,21,D,4.00,0.60,7.00,0.20,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,1100,5,17:31,0:02,0.00,0.40,1.60,4.20,3.20,1.20,0.00
+70,Morgan Barron,WPG,C,L4,43,16,57,11.1,6,23,C,5.20,1.80,4.00,0.60,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,14:57,0:02,0.00,0.20,1.00,2.60,1.80,1.60,0.60
+71,Sam Colangelo,ANA,RW,L2 · PP2,42,53,49,11.8,56,23,RW,6.80,4.00,8.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,,5,11:41,0:33,0.20,0.00,1.20,2.40,1.80,1.00,0.60
+72,Marat Khusnutdinov,BOS,LW,L2,41,59,47,14.8,60,4,LW,7.60,3.00,6.00,1.20,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,750,5,13:28,0:00,0.20,0.20,1.20,1.80,1.40,1.20,0.20
+73,Fedor Svechkov,COL,C,L3,40,48,47,9.1,44,29,C,7.40,3.20,7.20,0.40,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,900,5,12:40,0:07,0.20,0.40,1.20,2.60,2.00,1.20,1.00
+74,Frank Vatrano,ANA,RW,PP2,40,53,47,9.5,56,23,RW,6.80,4.00,8.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,450,5,10:47,0:26,0.40,0.00,0.80,2.60,1.60,1.20,0.60
+75,Jalen Chatfield,CAR,D,P1,40,26,52,6.3,22,11,D,3.40,0.40,5.80,0.40,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,20:25,0:05,0.00,0.40,1.80,4.20,2.60,1.20,0.20
+76,Viggo Bjorck,WPG,C,L2 · PP2,40,16,53,10.4,6,23,C,5.20,1.80,4.00,0.60,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,14:14,0:50,0.00,0.00,0.80,2.00,1.60,1.20,0.60
+77,Sean Kuraly,BOS,C,,39,31,49,7.9,25,23,C,6.80,2.40,5.60,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,,5,13:53,0:00,0.20,0.80,2.00,3.20,2.60,1.60,0.40
+78,Ville Koivunen,PIT,RW,L3 · PP2,39,50,46,10.1,54,14,RW,7.00,3.00,8.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,,5,13:11,1:20,0.20,0.20,1.00,1.80,1.00,1.00,0.80
+79,Mark Kastelic,BOS,RW,L4,38,78,41,11.6,83,23,RW,10.60,4.00,8.40,0.60,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,800,5,11:51,0:04,0.00,0.60,1.00,2.20,1.80,0.80,0.60
+80,Nikita Nesterenko,ANA,LW,L2,38,72,42,10.2,80,15,LW,7.80,4.00,7.60,0.80,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,500,5,12:07,0:03,0.40,0.00,1.60,2.40,2.00,1.00,0.60
+81,Nikita Zadorov,BOS,D,P2,38,39,47,6.1,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,1700,5,19:41,0:10,0.00,0.20,1.80,3.00,2.20,1.00,0.00
+82,Adam Lowry,WPG,C,L3,37,16,49,9.7,6,23,C,5.20,1.80,4.00,0.60,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,15:05,0:07,0.20,0.00,0.80,2.20,1.80,1.20,0.60
+83,Elmer Soderblom,PIT,RW,,37,50,44,10.7,54,14,RW,7.00,3.00,8.00,1.00,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,725,5,12:42,0:01,0.20,0.20,0.60,1.80,1.40,1.20,0.40
+84,Vladislav Namestnikov,WPG,LW,L4 · PP2,37,51,43,10.5,49,4,LW,7.20,2.60,6.40,1.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,12:10,1:11,0.00,0.20,1.00,2.00,1.60,0.80,0.20
+85,Isak Rosen,WPG,LW,L3 · PP2,36,51,42,11.9,49,4,LW,7.20,2.60,6.40,1.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,12:44,0:56,0.00,0.20,1.60,3.40,2.20,0.60,0.20
+86,Jeff Malott,ANA,LW,L4,35,72,38,9.5,80,15,LW,7.80,4.00,7.60,0.80,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,1000,5,9:39,0:01,0.00,0.40,0.80,3.00,1.80,1.00,0.20
+87,Nikita Klepov,ANA,RW,,34,53,40,11.1,56,23,RW,6.80,4.00,8.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,400,1,10:03,0:48,0.00,0.00,0.00,1.00,0.00,0.00,0.00
+88,Hampus Lindholm,BOS,D,P1,33,39,41,8.2,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,1100,5,20:07,1:11,0.00,0.40,1.20,3.00,1.80,0.60,0.00
+89,Tristan Luneau,ANA,D,P3 · PP2,33,41,40,11.6,41,6,D,4.80,0.20,6.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,1000,5,20:52,0:35,0.00,0.00,0.60,3.00,1.60,0.40,0.00
+90,Cole Koepke,WPG,RW,L4,32,27,41,10.4,19,30,RW,6.00,2.60,5.40,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,10:17,0:00,0.20,0.00,1.40,2.40,2.00,1.20,0.80
+91,Dylan Samberg,WPG,D,P1,32,40,39,6.3,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,23:20,0:17,0.00,0.40,1.40,3.20,2.20,0.60,0.00
+92,Josh Manson,COL,D,P2,32,47,38,7.3,42,21,D,4.00,0.60,7.00,0.20,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,1600,5,16:58,0:00,0.00,0.20,1.00,2.00,2.00,1.00,0.40
+93,Pavel Mintyukov,ANA,D,P2 · PP2,32,41,39,10.4,41,6,D,4.80,0.20,6.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,1300,5,19:11,0:26,0.00,0.20,0.80,1.60,1.20,0.60,0.20
+94,Travis Mitchell,ANA,D,,32,41,39,11.3,41,6,D,4.80,0.20,6.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,,5,16:36,0:01,0.00,0.00,0.60,2.20,1.40,0.80,0.40
+95,Hendrix Lapierre,PIT,LW,,31,19,41,10.3,15,24,LW,5.80,2.80,5.00,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,,5,11:47,1:25,0.00,0.20,0.60,1.00,1.00,0.80,0.40
+96,Nicolas Deslauriers,CAR,RW,L4,31,51,36,9.3,53,23,RW,7.20,3.20,7.00,0.60,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,8:47,0:04,0.00,0.00,0.40,1.00,1.00,1.00,0.60
+97,Sam Malinski,COL,D,P1 · PP2,31,47,37,7.1,42,21,D,4.00,0.60,7.00,0.20,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,750,5,17:35,0:19,0.00,0.20,1.20,3.20,2.20,0.60,0.20
+98,Declan Carlile,PIT,D,P1,30,41,37,9.8,42,6,D,4.00,0.80,4.80,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,1700,5,18:46,0:00,0.20,0.20,1.20,2.80,2.00,0.80,0.20
+99,Samuel Girard,PIT,D,P2,30,41,37,10.0,42,6,D,4.00,0.80,4.80,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,2100,5,19:02,0:07,0.00,0.60,1.00,2.60,1.60,0.60,0.20
+100,Frederic Brunet,BOS,D,P3,29,39,36,10.6,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,1000,4,17:49,1:52,0.00,0.25,1.25,1.75,1.50,0.25,0.00
+101,Kaedan Korczak,PIT,D,P2,29,41,35,8.5,42,6,D,4.00,0.80,4.80,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,2400,5,17:10,0:02,0.00,0.20,0.60,2.80,1.00,0.80,0.20
+102,Drew Helleson,ANA,D,P2,28,41,34,9.4,41,6,D,4.80,0.20,6.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,2200,5,14:46,0:01,0.00,0.00,0.80,2.20,1.60,0.80,0.40
+103,Haydn Fleury,WPG,D,P3 · PP2,28,40,34,10.2,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,15:14,0:47,0.00,0.00,1.00,3.00,1.60,0.40,0.00
+104,Jaccob Slavin,CAR,D,P1,26,26,34,7.0,22,11,D,3.40,0.40,5.80,0.40,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,20:14,0:00,0.00,0.40,1.20,2.60,1.60,0.80,0.00
+105,Mike Reilly,CAR,RW,P3,26,51,31,7.1,53,23,RW,7.20,3.20,7.00,0.60,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,13:02,0:04,0.00,0.40,1.40,2.60,2.20,0.60,0.00
+106,Sean Walker,CAR,D,P2 · PP2,26,26,33,7.0,22,11,D,3.40,0.40,5.80,0.40,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,21:42,1:04,0.00,1.20,0.60,2.80,1.20,0.40,0.00
+107,Tanner Jeannot,BOS,LW,L4,24,59,27,10.1,60,4,LW,7.60,3.00,6.00,1.20,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,1100,5,11:41,0:05,0.20,0.00,0.40,1.20,0.60,0.60,0.00
+108,Charles-Alexis Legault,CAR,D,,23,26,29,10.6,22,11,D,3.40,0.40,5.80,0.40,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,14:29,0:00,0.00,0.00,0.60,2.60,1.60,0.60,0.00
+109,Connor Clifton,BOS,D,,23,39,28,9.3,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,,5,20:05,0:12,0.00,0.20,0.80,2.40,1.60,0.20,0.00
+110,Mario Ferraro,WPG,D,P2,23,40,28,9.5,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,20:38,0:01,0.00,0.00,0.80,2.80,1.60,0.40,0.00
+111,Dylan DeMelo,WPG,D,P1,22,40,27,8.5,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,21:26,0:01,0.00,0.40,0.80,2.20,1.20,0.40,0.20
+112,Jonathan Aspirot,BOS,D,,21,39,26,9.4,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,,5,17:38,0:02,0.00,0.00,1.40,2.60,2.40,0.20,0.20
+113,Tyson Hinds,ANA,D,P3,21,41,25,9.9,41,6,D,4.80,0.20,6.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,1700,5,14:42,0:00,0.00,0.00,1.60,3.60,2.20,0.40,0.20
+114,Jack St. Ivany,WPG,D,,20,40,24,9.4,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,16:49,0:00,0.00,0.00,0.40,2.40,1.20,0.40,0.00
+115,Noah Warren,ANA,D,P1,20,41,24,10.5,41,6,D,4.80,0.20,6.00,0.60,Fri 10:00 PM,vs BOS,Michael DiPietro,Confirmed,.897,41,2100,5,19:26,0:01,0.00,0.40,1.20,3.00,1.20,0.20,0.20
+116,Brad Lambert,WPG,RW,,19,27,24,10.9,19,30,RW,6.00,2.60,5.40,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,5,9:46,0:00,0.00,0.20,0.60,1.60,1.20,0.60,0.40
+117,Brett Kulak,COL,D,P3,19,47,23,6.1,42,21,D,4.00,0.60,7.00,0.20,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,2000,5,18:25,0:05,0.00,0.80,0.80,3.00,1.40,0.20,0.00
+118,Will Borgen,BOS,D,P2,16,39,20,10.0,35,11,D,4.00,0.40,6.20,0.40,Fri 10:00 PM,@ ANA,Lukas Dostal,Confirmed,.891,57,1900,5,19:19,0:01,0.20,0.20,0.40,0.80,0.60,0.20,0.00
+119,Jesperi Kotkaniemi,CAR,C,L4,15,69,16,9.0,75,4,C,8.40,4.60,7.20,1.20,Sat 3:30 PM,@ WPG,Stuart Skinner,Projected,.905,43,,5,11:18,0:17,0.00,0.40,0.60,1.20,1.00,0.00,0.00
+120,Noah Juulsen,COL,D,P3,14,47,17,9.4,42,21,D,4.00,0.60,7.00,0.20,Fri 9:00 PM,vs PIT,Arturs Silovs,Confirmed,.885,66,1800,5,11:56,0:02,0.00,0.20,0.60,1.00,1.00,0.20,0.00
+121,Spencer Stastney,PIT,D,P3,12,41,15,8.4,42,6,D,4.00,0.80,4.80,0.60,Fri 9:00 PM,@ COL,Mackenzie Blackwood,Confirmed,.879,36,2500,5,14:26,0:08,0.00,0.00,0.20,0.40,0.20,0.00,0.00
+122,Tyrel Bauer,WPG,D,P3,11,40,14,11.0,36,21,D,3.60,1.20,5.60,0.20,Sat 3:30 PM,vs CAR,Brandon Bussi,Projected,.871,57,,4,8:30,0:00,0.00,0.00,0.25,1.50,0.50,0.25,0.00

@@ -1,0 +1,49 @@
+# October 17: user CSV starters; expected starters remain unconfirmed.
+# https://www.dailyfaceoff.com/starting-goalies/2026-10-17
+# Checked DailyFaceoff line combinations for all 28 clubs and player news.
+# Defenseman point props converted to over 0.5 goals per confirmed standing user rule.
+# Partial skater export supplemented with same-day matchup CSV L5 per-game rates converted to per-60.
+# Normalized local CSV copies: NJ/TB/SJ/LA team codes and Yegor/Egor Chinakhov; downloads untouched.
+goalie NJD Jake Allen | expected, not yet confirmed
+goalie WSH Logan Thompson | expected, not yet confirmed
+goalie CAR Brandon Bussi | expected, not yet confirmed; CSV projects Brandon Bussi, DailyFaceoff projects Pyotr Kochetkov
+goalie WPG Clay Stevenson | expected, not yet confirmed
+goalie VAN Kevin Lankinen | expected, not yet confirmed; CSV projects Kevin Lankinen, DailyFaceoff projects Leevi Merilainen
+goalie TBL Andrei Vasilevskiy | expected, not yet confirmed
+goalie SEA Joey Daccord | expected, not yet confirmed
+goalie FLA Akira Schmid | expected, not yet confirmed
+goalie BUF Ukko-Pekka Luukkonen | expected, not yet confirmed
+goalie MTL Jakub Dobes | expected, not yet confirmed; CSV projects Jakub Dobes, DailyFaceoff projects Jacob Fowler
+goalie NYI Ilya Sorokin | expected, not yet confirmed
+goalie TOR Sergei Bobrovsky | expected, not yet confirmed; CSV projects Sergei Bobrovsky, DailyFaceoff projects Anthony Stolarz
+goalie SJS Yaroslav Askarov | expected, not yet confirmed; CSV projects Yaroslav Askarov, DailyFaceoff projects Alex Nedeljkovic
+goalie DET John Gibson | expected, not yet confirmed; CSV projects John Gibson, DailyFaceoff projects Daniil Tarasov
+goalie NYR Dylan Garand | expected, not yet confirmed
+goalie CBJ Jet Greaves | expected, not yet confirmed
+goalie OTT Linus Ullmark | expected, not yet confirmed
+goalie PHI Dan Vladar | expected, not yet confirmed
+goalie DAL Jake Oettinger | expected, not yet confirmed
+goalie CHI Spencer Knight | expected, not yet confirmed
+goalie STL Joel Hofer | expected, not yet confirmed; CSV projects Joel Hofer, DailyFaceoff projects Jordan Binnington
+goalie NSH Juuse Saros | expected, not yet confirmed; CSV projects Juuse Saros, DailyFaceoff projects Justus Annunen
+goalie BOS Michael DiPietro | expected, not yet confirmed; CSV projects Michael DiPietro, DailyFaceoff projects Jeremy Swayman
+goalie LAK Darcy Kuemper | expected, not yet confirmed; CSV projects Darcy Kuemper, DailyFaceoff projects Anton Forsberg
+goalie PIT Sergei Murashov | expected, not yet confirmed
+goalie VGK Carter Hart | expected, not yet confirmed; CSV projects Carter Hart, DailyFaceoff projects Adin Hill
+goalie EDM Tristan Jarry | confirmed
+goalie UTA Karel Vejmelka | expected, not yet confirmed
+out NJD Connor Brown | injured reserve
+out CAR Taylor Hall | listed out; absent from projected lineup
+out DET Marco Kasper | injured reserve
+out OTT William Eklund | injured reserve
+out MTL Ivan Demidov | injured reserve
+out PHI Travis Konecny | injured reserve
+out DAL Matt Duchene | injured reserve
+out LAK Kevin Fiala | listed out; absent from projected lineup
+out EDM Matt Savoie | injured reserve
+out VGK Victor Olofsson | listed out; absent from projected lineup
+# https://www.dailyfaceoff.com/players/news/wyatt-johnston/30835
+doubt DAL Wyatt Johnston | Game-time decision -- illness; hopes to return Saturday, not yet in projected lineup
+# https://www.dailyfaceoff.com/players/news/egor-chinakhov/30655
+doubt PIT Egor Chinakhov | Lineup in doubt -- lower-body injury; missed October 16 and remains day-to-day
+doubt EDM Zach Hyman | Game-time decision -- listed day-to-day despite appearing in projected lines

@@ -1,0 +1,13 @@
+﻿Range,2026 L5
+Stats,Per Game
+Percentiles,Among 2026-27 goalies (higher = tougher goalie)
+
+Time,Goalie,Team,Status,Opp,GP,SA/G,SA Pctl,GA/G,GA Pctl,SV/G,SV%,SV% Pctl,HDSA/G,HDSA Pctl,HDGA/G,HDGA Pctl,HDSV%,HDSV% Pctl,MDSA/G,MDSA Pctl,MDGA/G,MDGA Pctl,MDSV%,MDSV% Pctl,xGA/G,GSAx/G
+Mon 7:00 PM,Mackenzie Blackwood,COL,Expected,@ PHI,5,24.8,61,2.6,56,22.2,89.5%,52,7.6,18,1.0,60,86.8%,74,6.0,72,1.2,29,80.0%,19,2.35,-0.25
+Mon 7:00 PM,Dan Vladar,PHI,Expected,vs COL,5,32.4,2,3.6,16,28.8,88.9%,46,9.0,3,1.4,31,84.4%,60,10.2,1,2.0,9,80.4%,22,3.40,-0.20
+Mon 7:00 PM,Lukas Dostal,ANA,Expected,@ NYR,5,24.2,65,3.0,39,21.2,87.6%,31,6.2,56,1.4,31,77.4%,31,6.8,55,0.6,80,91.2%,82,2.90,-0.10
+Mon 7:00 PM,Dylan Garand,NYR,Expected,vs ANA,5,20.2,90,1.8,86,18.4,91.1%,76,4.2,94,0.2,97,95.2%,97,5.8,77,0.8,62,86.2%,47,1.89,+0.09
+Mon 7:30 PM,Yaroslav Askarov,SJ,Expected,@ TOR,5,26.4,39,4.0,10,22.4,84.8%,14,7.8,15,1.4,31,82.1%,52,6.6,59,2.2,4,66.7%,2,3.54,-0.46
+Mon 7:30 PM,Sergei Bobrovsky,TOR,Expected,vs SJ,5,31.6,5,3.4,23,28.2,89.2%,50,8.2,10,1.4,31,82.9%,55,7.8,29,1.4,25,82.1%,32,3.74,+0.34
+Mon 9:00 PM,Arturs Silovs,PIT,Expected,@ UTA,5,25.6,49,3.2,32,22.4,87.5%,27,4.4,91,1.4,31,68.2%,6,8.6,10,1.6,19,81.4%,28,3.02,-0.18
+Mon 9:00 PM,Karel Vejmelka,UTA,Expected,vs PIT,5,21.0,84,3.0,39,18.0,85.7%,15,5.4,69,1.0,60,81.5%,51,6.2,66,1.4,25,77.4%,15,2.23,-0.77

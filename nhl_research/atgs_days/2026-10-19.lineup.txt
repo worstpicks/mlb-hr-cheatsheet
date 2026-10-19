@@ -1,0 +1,23 @@
+# Monday 10/19 -- starting goalies and availability, read in the morning from the
+# user's CSVs (nhl-goalie-summary-2026-l5 and nhl-goal-matchups-slate-l5, 10/19),
+# RotoWire lineups (agree with the CSVs on all 8 starters), DailyFaceoff starting
+# goalies and line combinations for all 8 clubs, and the NHL box scores through
+# 10/18. No club on this slate played 10/18.
+
+goalie ANA Lukas Dostal | expected
+goalie NYR Dylan Garand | expected
+goalie COL Mackenzie Blackwood | expected
+goalie PHI Dan Vladar | expected
+goalie SJS Yaroslav Askarov | expected
+# DailyFaceoff has Stolarz (no report behind it); Bobrovsky started TOR's last two.
+goalie TOR Sergei Bobrovsky | expected, not yet confirmed
+goalie PIT Arturs Silovs | expected
+goalie UTA Karel Vejmelka | expected
+
+# Listed plays that will not dress.
+out PHI Travis Konecny | injured reserve (lower body) since 10/11
+out TOR John Tavares | lower body, out week to week; sat 10/17
+
+# The plays stay, flagged (a bet on a player who sits is voided).
+doubt ANA Mikael Granlund | Game-time decision -- upper body; sat 10/16, back at practice 10/17
+doubt PHI Tyson Foerster | Game-time decision -- hand; Philadelphia calls him a game-time decision tonight

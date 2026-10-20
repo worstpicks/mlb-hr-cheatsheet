@@ -1,8 +1,1671 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>WorstPickz Prop Shop — Goblin’s Ledger</title><link rel="stylesheet" href="prop-shop.css?v=3"><script>try{if(localStorage.getItem('worstpickz-theme')==='light')document.documentElement.classList.add('theme-light')}catch(e){}</script></head><body>
-<div class="sheet-container">
-<header class="sheet-header"><div class="sheet-header-actions"><a class="sheet-back" href="../index.html">← Worst Pickz</a><div class="sheet-header-actions-right"><a class="sheet-back" href="../nfl-research/atd.html">NFL Sheet</a><a class="sheet-back" href="../nhl-research/atgs.html">NHL Sheet</a><a class="sheet-back" href="index.html">NBA Research →</a><button class="sheet-theme-toggle" id="ledger-theme" aria-label="Switch theme">☀️</button></div></div><div class="sheet-header-brand"><div class="sheet-hero"><img src="../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot"></div><div><span class="sheet-brand-tag">Handpicked NBA Props</span><h1>WorstPickz Prop Shop</h1><p class="ledger-subtitle">Goblin’s Ledger</p><p class="sheet-sub">A short list of props I like. Each entry carries the line, the price and the reason it made the ledger.</p><div class="sheet-counts" id="ledger-counts"></div></div></div></header>
-<nav class="sheet-sheetnav" aria-label="Prop ledger slate"><span class="sheet-sheetnav__title">The Ledger</span><span id="ledger-date" hidden></span><span class="sheet-sheetnav__status" id="ledger-status" role="status" aria-live="polite">Loading…</span></nav>
-<section class="sheet-section"><h2 class="sheet-section-title">On the ledger</h2><div id="ledger-filters" class="sheet-filters" hidden></div><div id="ledger-picks" class="sheet-top"></div><div id="ledger-empty" class="ledger-empty" hidden><div class="ledger-closed-picture" role="img" aria-label="Hanging shop closed sign with Sorry underneath"><svg viewBox="0 0 240 170" aria-hidden="true"><path d="M65 59 L120 18 L175 59" fill="none" stroke="#a38b50" stroke-width="3"/><circle cx="120" cy="18" r="5" fill="#d6b565"/><rect x="28" y="56" width="184" height="83" rx="9" fill="#18231e" stroke="#c6a455" stroke-width="3"/><rect x="36" y="64" width="168" height="67" rx="5" fill="none" stroke="#c6a455" stroke-opacity=".35"/><text x="120" y="89" text-anchor="middle" fill="#c6a455" font-family="Arial,sans-serif" font-size="13" letter-spacing="4">SHOP</text><text x="120" y="117" text-anchor="middle" fill="#f3dc9d" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="2">CLOSED</text></svg><span>Sorry</span></div><h3 class="ledger-closed-title">Shop Closed Till the Goblin Opens Up</h3><p>The Goblin hasn’t opened the ledger yet. Check back for the next drop.</p><a class="sheet-back" href="index.html">Browse NBA Research →</a></div></section>
-<section class="sheet-section" id="ledger-results-section" hidden><h2 class="sheet-section-title">Settled entries</h2><div class="sheet-top" id="ledger-results"></div></section>
-<section class="sheet-section"><p class="ledger-note">The ledger follows your selections; there is no minimum pick count. NBA research provides the supporting logs. Odds and settlement are shown only when supplied for an entry.</p></section>
-</div><script src="prop-shop.js?v=2" defer></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("worstpickz-theme") === "light") {
+                    document.documentElement.classList.add("theme-light");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="sheet-date" content="2026-10-20">
+    <title>Worst Pickz NBA Prop Shop</title>
+    <style>
+    /* Worst Pickz — NBA Prop Shop, built by nba_research/prop_shop.py from the
+       NHL sheet's stylesheet (below, unchanged) with a hardwood palette and the
+       shop's own pieces added at the end.
+
+       Worst Pickz — Anytime Goal Scorer cheat sheet, built by
+       nhl_research/atgs_sheet.py.
+
+       The rules below are the NFL Anytime-TD sheet's own stylesheet with the
+       prefix renamed atd- -> sheet- and the palette moved from gridiron green
+       to rink blue. Keeping it byte-for-byte otherwise is what makes the two
+       cheat sheets read as one product. Self-contained, so the page also opens
+       standalone from the archive. */
+    /* Worst Pickz — weekly Anytime TD cheat sheet, built by nfl_research/atd_sheet.py.
+       Tokens lifted from preview/nfl-research/nfl-research.css so this reads as
+       the same product. Kept self-contained so it also opens standalone. */
+    :root {
+        --wpz-color-text: #f5efe9;
+        --wpz-color-heading: #fffbeb;
+        --wpz-bg-body: radial-gradient(ellipse at top, #0b1622 0%, #070c14 42%, #01030a 100%);
+        --wpz-bg-container: linear-gradient(135deg, rgba(10, 24, 38, 0.97) 0%, rgba(12, 18, 34, 0.96) 48%, rgba(8, 14, 30, 0.97) 100%);
+        --wpz-border-container: rgba(56, 189, 248, 0.42);
+        --wpz-bg-header: linear-gradient(145deg, #06182b 0%, #0d1f3d 38%, #131b3a 100%);
+        --wpz-border-header: rgba(125, 211, 252, 0.42);
+        --wpz-brand-tag-bg: rgba(8, 26, 16, 0.52);
+        --wpz-brand-tag-border: rgba(74, 222, 128, 0.38);
+        --wpz-brand-tag-text: #ecfccb;
+        --wpz-accent-gold: #facc15;
+        --nrs-panel: rgba(8, 15, 28, 0.82);
+        --nrs-panel-2: rgba(15, 23, 42, 0.66);
+        --nrs-border: rgba(251, 146, 60, 0.22);
+        --nrs-border-strong: rgba(234, 179, 8, 0.35);
+        --nrs-muted: #94a3b8;
+        --sheet-row: rgba(30, 41, 59, 0.38);
+        --sheet-fav-bg: rgba(250, 204, 21, 0.12);
+        --sheet-fav-br: rgba(250, 204, 21, 0.55);
+    }
+    html.theme-light {
+        color-scheme: light;
+        --wpz-color-text: #1e293b;
+        --wpz-color-heading: #7c2d12;
+        --wpz-bg-body: #e2e8f0;
+        --wpz-bg-container: linear-gradient(135deg, #fff 0%, #f8fafc 48%, #fef3c7 100%);
+        --wpz-border-container: rgba(180, 83, 9, 0.35);
+        --wpz-bg-header: linear-gradient(145deg, #fff7ed 0%, #fef3c7 38%, #eff6ff 100%);
+        --wpz-border-header: rgba(234, 88, 12, 0.35);
+        --wpz-brand-tag-bg: rgba(22, 101, 52, 0.1);
+        --wpz-brand-tag-border: rgba(22, 163, 74, 0.35);
+        --wpz-brand-tag-text: #15803d;
+        --nrs-panel: #fff;
+        --nrs-panel-2: #f8fafc;
+        --nrs-border: rgba(180, 83, 9, 0.2);
+        --nrs-border-strong: rgba(180, 83, 9, 0.3);
+        --nrs-muted: #64748b;
+        --sheet-row: #f1f5f9;
+        --sheet-fav-bg: rgba(250, 204, 21, 0.2);
+        --sheet-fav-br: rgba(180, 83, 9, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--wpz-bg-body);
+        color: var(--wpz-color-text);
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 16px;
+        line-height: 1.45;
+        -webkit-font-smoothing: antialiased;
+    }
+    button { font: inherit; touch-action: manipulation; }
+    a { color: #7dd3fc; text-decoration: none; }
+
+    .sheet-container {
+        max-width: 1680px;
+        margin: 0 auto;
+        background: var(--wpz-bg-container);
+        border: 2px solid var(--wpz-border-container);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ── Header ── */
+    .sheet-header {
+        padding: 20px;
+        background: var(--wpz-bg-header);
+        border-bottom: 3px solid var(--wpz-border-header);
+    }
+    .sheet-header-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    .sheet-header-actions-right { display: flex; align-items: center; gap: 8px; }
+    .sheet-back, .sheet-theme-toggle {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 7px 13px; border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(8, 15, 28, 0.6);
+        color: var(--wpz-color-text); cursor: pointer;
+        font-size: 0.82rem; font-weight: 700;
+    }
+    html.theme-light .sheet-back, html.theme-light .sheet-theme-toggle {
+        background: rgba(255, 255, 255, 0.85); border-color: rgba(180, 83, 9, 0.25); color: #334155;
+    }
+    .sheet-back:hover, .sheet-theme-toggle:hover { border-color: var(--wpz-accent-gold); }
+    /* Cross-sport switch back to the MLB board — mirrors the NFL button there. */
+    .sheet-back--switch { border-color: rgba(234, 179, 8, 0.45); color: #fde68a; }
+    html.theme-light .sheet-back--switch { border-color: rgba(180, 83, 9, 0.35); color: #7c2d12; }
+    .sheet-header-brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .sheet-hero { width: 88px; height: 88px; flex-shrink: 0; }
+    .sheet-hero img { width: 100%; height: 100%; object-fit: contain; }
+    .sheet-brand-tag {
+        display: inline-flex; padding: 5px 12px; margin-bottom: 8px; border-radius: 999px;
+        border: 1px solid var(--wpz-brand-tag-border);
+        background: var(--wpz-brand-tag-bg);
+        color: var(--wpz-brand-tag-text);
+        font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .sheet-header h1 { color: var(--wpz-color-heading); font-size: clamp(1.4rem, 3.2vw, 2.1rem); line-height: 1.15; }
+    .sheet-sub { color: var(--nrs-muted); font-size: 0.86rem; margin-top: 4px; }
+    .sheet-counts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .sheet-count {
+        padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
+        border: 1px solid var(--nrs-border); background: var(--nrs-panel); color: var(--nrs-muted);
+    }
+
+    /* ── Toolbar: legend + filters ── */
+    .sheet-toolbar {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--nrs-border);
+        background: linear-gradient(135deg, rgba(19, 11, 8, 0.55) 0%, rgba(10, 17, 31, 0.6) 100%);
+        display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
+    }
+    html.theme-light .sheet-toolbar { background: linear-gradient(135deg, #fff7ed 0%, #f8fafc 100%); }
+    .sheet-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sheet-filter {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 14px; border-radius: 999px; cursor: pointer;
+        border: 1px solid var(--nrs-border);
+        background: var(--nrs-panel);
+        color: var(--wpz-color-text);
+        font-size: 0.8rem; font-weight: 800;
+        transition: border-color 0.15s, transform 0.15s;
+    }
+    .sheet-filter:hover { border-color: rgba(251, 191, 36, 0.6); transform: translateY(-1px); }
+    .sheet-filter.is-active { border-color: var(--wpz-accent-gold); box-shadow: 0 0 14px rgba(250, 204, 21, 0.22); }
+    .sheet-filter__n { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; }
+    .sheet-legend { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 0.78rem; color: var(--nrs-muted); }
+
+    /* ── Chips ── */
+    .chip {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 2px 8px; border-radius: 999px;
+        font-size: 0.7rem; font-weight: 800; letter-spacing: 0.02em;
+        white-space: nowrap; border: 1px solid transparent;
+    }
+    .chip--fav { background: rgba(250, 204, 21, 0.16); border-color: rgba(250, 204, 21, 0.5); color: #fde68a; }
+    .chip--val { background: rgba(56, 189, 248, 0.14); border-color: rgba(56, 189, 248, 0.45); color: #bae6fd; }
+    .chip--rz  { background: rgba(239, 68, 68, 0.14);  border-color: rgba(239, 68, 68, 0.45);  color: #fecaca; }
+    .chip--mat { background: rgba(34, 197, 94, 0.14);  border-color: rgba(74, 222, 128, 0.45); color: #bbf7d0; }
+    .chip--exp { background: rgba(168, 85, 247, 0.16); border-color: rgba(192, 132, 252, 0.5); color: #e9d5ff; }
+    .chip--edge { background: rgba(16, 185, 129, 0.16); border-color: rgba(52, 211, 153, 0.5); color: #a7f3d0; }
+    html.theme-light .chip--edge { color: #065f46; background: rgba(16, 185, 129, 0.2); }
+    /* best value plays: our chance against the chance the price implies */
+    .sheet-section-note { font-size: 0.78rem; line-height: 1.5; color: var(--nrs-muted, #94a3b8); margin: -4px 0 12px; }
+    .sheet-value-verdict { font-weight: 700; color: #34d399; margin: 4px 0 2px; font-size: 0.86rem; }
+    html.theme-light .sheet-value-verdict { color: #065f46; }
+    .sheet-value-card--close { opacity: 0.88; }
+    .sheet-value-card--close .sheet-value-verdict { color: #fbbf24; }
+    html.theme-light .sheet-value-card--close .sheet-value-verdict { color: #92400e; }
+    .sheet-value-card--close .sheet-chance__track span { background: #f59e0b; }
+    .sheet-value-card--close .sheet-chance__track--price span { background: #94a3b8; }
+    .sheet-chance__label { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; margin: 8px 0 4px; }
+    .sheet-chance__track { height: 9px; border-radius: 5px; background: rgba(148, 163, 184, 0.2); overflow: hidden; }
+    .sheet-chance__track span { display: block; height: 100%; background: #10b981; }
+    .sheet-chance__track--price span { background: #94a3b8; }
+    html.theme-light .chip--fav { color: #854d0e; background: rgba(250, 204, 21, 0.28); }
+    html.theme-light .chip--val { color: #075985; background: rgba(56, 189, 248, 0.22); }
+    html.theme-light .chip--rz  { color: #991b1b; background: rgba(239, 68, 68, 0.18); }
+    html.theme-light .chip--mat { color: #14532d; background: rgba(34, 197, 94, 0.2); }
+    html.theme-light .chip--exp { color: #6b21a8; background: rgba(168, 85, 247, 0.2); }
+    /* Team tendency */
+    .chip--run  { background: rgba(163, 230, 53, 0.13); border-color: rgba(163, 230, 53, 0.42); color: #d9f99d; }
+    .chip--pass { background: rgba(125, 211, 252, 0.13); border-color: rgba(125, 211, 252, 0.42); color: #e0f2fe; }
+    .chip--agg  { background: rgba(244, 114, 182, 0.14); border-color: rgba(244, 114, 182, 0.45); color: #fbcfe8; }
+    html.theme-light .chip--run  { color: #3f6212; background: rgba(163, 230, 53, 0.25); }
+    html.theme-light .chip--pass { color: #075985; background: rgba(125, 211, 252, 0.3); }
+    html.theme-light .chip--agg  { color: #9d174d; background: rgba(244, 114, 182, 0.2); }
+    /* Availability */
+    .chip--q   { background: rgba(251, 191, 36, 0.18); border-color: rgba(251, 191, 36, 0.55); color: #fde68a; }
+    .chip--out { background: rgba(239, 68, 68, 0.2);  border-color: rgba(239, 68, 68, 0.6);  color: #fecaca; }
+    html.theme-light .chip--q   { color: #92400e; background: rgba(251, 191, 36, 0.3); }
+    html.theme-light .chip--out { color: #991b1b; background: rgba(239, 68, 68, 0.22); }
+
+    .chip--void { background: rgba(148, 163, 184, 0.22); border-color: rgba(148, 163, 184, 0.5); color: #cbd5e1; }
+    html.theme-light .chip--void { color: #475569; background: rgba(148, 163, 184, 0.3); }
+    .sheet-play.is-void { opacity: 0.55; border-left-color: rgba(148, 163, 184, 0.6); }
+    .sheet-count--void { border-color: rgba(148, 163, 184, 0.45); }
+
+    /* ── Measured inputs ── */
+    .sheet-metrics { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+    .sheet-m {
+        font-size: 0.66rem; font-weight: 700; letter-spacing: 0.03em;
+        padding: 1px 6px; border-radius: 5px;
+        background: rgba(148, 163, 184, 0.14); color: var(--nrs-muted);
+        font-variant-numeric: tabular-nums; cursor: help;
+    }
+    .sheet-m b { color: var(--wpz-color-text); font-weight: 800; }
+    .sheet-m--good { background: rgba(34, 197, 94, 0.2); color: #bbf7d0; }
+    .sheet-m--bad  { background: rgba(239, 68, 68, 0.18); color: #fecaca; }
+    html.theme-light .sheet-m { background: #eef2f7; }
+    html.theme-light .sheet-m--good { color: #14532d; background: rgba(134, 239, 172, 0.5); }
+    html.theme-light .sheet-m--bad  { color: #7f1d1d; background: rgba(252, 165, 165, 0.45); }
+
+    /* ── Top plays rail ── */
+    .sheet-section { padding: 18px 20px; }
+    .sheet-section-title {
+        color: #fb923c; font-size: 0.95rem; font-weight: 800;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    html.theme-light .sheet-section-title { color: #9a3412; }
+    .sheet-section-title::before { content: ""; width: 4px; height: 18px; border-radius: 2px; background: var(--wpz-accent-gold); }
+    .sheet-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+    .sheet-top-card {
+        display: grid; gap: 5px; padding: 12px 14px; border-radius: 14px;
+        border: 1px solid var(--sheet-fav-br);
+        background: linear-gradient(145deg, var(--sheet-fav-bg) 0%, var(--nrs-panel) 100%);
+    }
+    .sheet-top-card__head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .sheet-rank {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%;
+        background: var(--wpz-accent-gold); color: #1a1a1a;
+        font-size: 0.76rem; font-weight: 900;
+    }
+    .sheet-top-card__name { font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; }
+    .sheet-top-card__name img { width: 20px; height: 20px; object-fit: contain; flex-shrink: 0; }
+    .sheet-top-card__meta { font-size: 0.72rem; color: var(--nrs-muted); font-variant-numeric: tabular-nums; }
+    .sheet-why { font-size: 0.78rem; line-height: 1.5; color: var(--wpz-color-text); opacity: 0.9; margin-top: 2px; }
+
+    /* ── Straights of the Day: the owner's one-goal and two-goal picks, the MLB
+       sheet's straights card on ice (rose for one goal, gold for two) ── */
+    .sheet-straights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    @media (max-width: 900px) { .sheet-straights { grid-template-columns: 1fr; } }
+    .sheet-straight {
+        display: grid; gap: 10px; align-content: start; padding: 16px; border-radius: 16px;
+        background: var(--nrs-panel); border: 1px solid rgba(251, 113, 133, 0.35);
+    }
+    .sheet-straight--2 { border-color: rgba(250, 204, 21, 0.4); }
+    .sheet-straight__tag {
+        justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        background: rgba(190, 18, 60, 0.22); border: 1px solid rgba(251, 113, 133, 0.35); color: #fecdd3;
+    }
+    .sheet-straight--2 .sheet-straight__tag { background: rgba(161, 98, 7, 0.24); border-color: rgba(250, 204, 21, 0.35); color: #fef08a; }
+    .sheet-straight__chance { margin-left: auto; text-align: right; line-height: 1.05; }
+    .sheet-straight__chance b { display: block; font-size: 1.5rem; font-weight: 900; color: var(--wpz-color-heading); }
+    .sheet-straight__chance small { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nrs-muted); }
+    .sheet-straight__meta { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fda4af; }
+    .sheet-straight--2 .sheet-straight__meta { color: #fde68a; }
+    .sheet-straight__why { margin: 0; padding-left: 1.1rem; display: grid; gap: 8px; font-size: 0.86rem; line-height: 1.45; color: var(--wpz-color-text); }
+    .sheet-straight__why strong { color: #fecdd3; }
+    .sheet-straight--2 .sheet-straight__why strong { color: #fde047; }
+    .sheet-straight__why small { display: block; margin-top: 2px; font-size: 0.82rem; font-weight: 600; color: var(--wpz-color-paragraph, var(--wpz-color-text)); opacity: 0.92; }
+    html.theme-light .sheet-straight__tag { color: #be123c; }
+    html.theme-light .sheet-straight--2 .sheet-straight__tag { color: #a16207; }
+    html.theme-light .sheet-straight__meta { color: #be123c; }
+    html.theme-light .sheet-straight--2 .sheet-straight__meta { color: #a16207; }
+    html.theme-light .sheet-straight__why strong { color: #be123c; }
+    html.theme-light .sheet-straight--2 .sheet-straight__why strong { color: #a16207; }
+
+    /* ── Game grid ── */
+    .sheet-games { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 14px; }
+    @media (max-width: 520px) { .sheet-games { grid-template-columns: 1fr; } }
+    .sheet-game {
+        border-radius: 16px; overflow: hidden;
+        border: 1px solid var(--nrs-border);
+        background: var(--nrs-panel);
+    }
+    .sheet-game__head {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--nrs-border);
+        background: linear-gradient(135deg, rgba(19, 11, 8, 0.7) 0%, rgba(10, 17, 31, 0.7) 100%);
+    }
+    html.theme-light .sheet-game__head { background: linear-gradient(135deg, #fff7ed 0%, #f8fafc 100%); }
+    .sheet-game__teams { display: flex; align-items: center; gap: 7px; font-weight: 800; font-size: 0.98rem; }
+    .sheet-game__teams img { width: 26px; height: 26px; object-fit: contain; }
+    .sheet-game__at { color: var(--nrs-muted); font-weight: 700; font-size: 0.8rem; }
+    .sheet-game__when {
+        margin-left: auto;
+        display: inline-flex; align-items: center;
+        padding: 3px 10px; border-radius: 999px;
+        border: 1px solid var(--nrs-border);
+        background: var(--nrs-panel-2);
+        color: var(--nrs-muted);
+        font-size: 0.74rem; font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+    }
+    .sheet-when__dot { margin: 0 5px; opacity: 0.55; }
+    @media (max-width: 380px) { .sheet-game__when { margin-left: 0; } }
+    .sheet-game__body { display: grid; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 520px) { .sheet-game__body { grid-template-columns: 1fr; } }
+    .sheet-side { padding: 10px 12px; }
+    .sheet-side + .sheet-side { border-left: 1px solid var(--nrs-border); }
+    @media (max-width: 520px) { .sheet-side + .sheet-side { border-left: 0; border-top: 1px solid var(--nrs-border); } }
+    .sheet-side__head {
+        display: flex; align-items: center; gap: 6px; margin-bottom: 8px;
+        font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em;
+        text-transform: uppercase; color: var(--nrs-muted);
+    }
+    .sheet-side__head img { width: 18px; height: 18px; object-fit: contain; }
+
+    .sheet-play {
+        display: grid; gap: 4px; padding: 7px 9px; border-radius: 10px;
+        background: var(--sheet-row); margin-bottom: 6px;
+        border-left: 3px solid transparent;
+    }
+    .sheet-play:last-child { margin-bottom: 0; }
+    .sheet-play.is-fav { border-left-color: var(--wpz-accent-gold); background: var(--sheet-fav-bg); }
+    .sheet-play__top { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+    .sheet-play__name { font-weight: 700; font-size: 0.88rem; }
+    .sheet-pos {
+        font-size: 0.64rem; font-weight: 800; letter-spacing: 0.04em;
+        padding: 1px 6px; border-radius: 5px;
+        background: rgba(148, 163, 184, 0.2); color: var(--nrs-muted);
+    }
+    .sheet-pos--RB { background: rgba(34, 197, 94, 0.22); color: #86efac; }
+    .sheet-pos--WR { background: rgba(56, 189, 248, 0.22); color: #7dd3fc; }
+    .sheet-pos--TE { background: rgba(249, 115, 22, 0.22); color: #fdba74; }
+    html.theme-light .sheet-pos--RB { color: #15803d; }
+    html.theme-light .sheet-pos--WR { color: #0369a1; }
+    html.theme-light .sheet-pos--TE { color: #c2410c; }
+    .sheet-play__tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .sheet-empty { color: var(--nrs-muted); font-size: 0.8rem; font-style: italic; padding: 8px 4px; }
+
+    .sheet-scored-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .sheet-scored-head .sheet-section-title { margin-bottom: 0; }
+    .sheet-scored-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .sheet-scored-status { font-size: 0.78rem; color: var(--nrs-muted); }
+    .sheet-scored-summary {
+        display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+    }
+    .sheet-scored-note { font-size: 0.76rem; color: var(--nrs-muted); margin-top: 10px; line-height: 1.6; }
+    .sheet-scored-card { border-color: rgba(74, 222, 128, 0.5); }
+    .chip--hit { background: rgba(34, 197, 94, 0.22); border-color: rgba(74, 222, 128, 0.6); color: #bbf7d0; }
+    html.theme-light .chip--hit { color: #14532d; background: rgba(134, 239, 172, 0.5); }
+    .sheet-play.is-hit { border-left-color: #4ade80; }
+    .sheet-scored-empty { color: var(--nrs-muted); font-size: 0.82rem; font-style: italic; }
+
+    .sheet-foot { padding: 14px 20px 20px; color: var(--nrs-muted); font-size: 0.78rem; line-height: 1.6; }
+    .sheet-foot strong { color: var(--wpz-color-text); }
+
+    .is-hidden { display: none !important; }
+
+    @media print {
+        body { background: #fff; padding: 0; }
+        .sheet-toolbar, .sheet-header-actions { display: none; }
+        .sheet-container { border: 0; box-shadow: none; }
+        .sheet-games { grid-template-columns: 1fr 1fr; }
+        .sheet-game { break-inside: avoid; }
+    }
+
+    /* ── Week-2+ additions ── */
+    .sheet-play__name { color: var(--wpz-color-text); }
+    button.sheet-play__name { text-decoration: underline dotted rgba(250, 204, 21, 0.5); text-underline-offset: 3px; }
+    button.sheet-play__name:hover { color: var(--wpz-accent-gold); }
+    .sheet-board-hint { font-size: 0.64rem; font-weight: 800; color: var(--nrs-muted); margin-left: auto; white-space: nowrap; }
+    a.sheet-board-hint { color: #7dd3fc; }
+    .chip--new { background: rgba(56, 189, 248, 0.14); border-color: rgba(56, 189, 248, 0.45); color: #7dd3fc; }
+    .chip--mk  { background: rgba(148, 163, 184, 0.16); border-color: rgba(148, 163, 184, 0.4); color: #e2e8f0; }
+    .chip--d   { background: rgba(249, 115, 22, 0.2); border-color: rgba(249, 115, 22, 0.55); color: #fed7aa; }
+    html.theme-light .chip--new { color: #075985; }
+    html.theme-light .chip--mk  { color: #334155; }
+    html.theme-light .chip--d   { color: #9a3412; }
+    .sheet-m--warn { background: rgba(251, 191, 36, 0.18); color: #fde68a; }
+    .sheet-m--td { background: rgba(250, 204, 21, 0.16); color: #fde68a; }
+    .sheet-m--td b { color: #fef3c7; }
+    html.theme-light .sheet-m--warn { color: #92400e; background: rgba(251, 191, 36, 0.3); }
+    html.theme-light .sheet-m--td { color: #854d0e; background: rgba(250, 204, 21, 0.28); }
+    html.theme-light .sheet-m--td b { color: #713f12; }
+    .sheet-side__imp {
+        margin-left: auto; text-transform: none; letter-spacing: 0; font-size: 0.7rem; font-weight: 700;
+        padding: 1px 7px; border-radius: 999px; border: 1px solid var(--nrs-border); color: var(--nrs-muted);
+        font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .sheet-side__imp b { color: var(--wpz-color-text); }
+    .sheet-side__head { flex-wrap: wrap; }
+    .sheet-game__line { font-size: 0.72rem; color: var(--nrs-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .sheet-inj { font-size: 0.7rem; color: #fdba74; line-height: 1.4; }
+    .sheet-play.is-out { opacity: 0.6; }
+    html.theme-light .sheet-inj { color: #9a3412; }
+    .sheet-header-actions-right { flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 520px) {
+        .sheet-header-actions { align-items: flex-start; }
+        .sheet-back, .sheet-theme-toggle { padding: 6px 10px; font-size: 0.76rem; }
+    }
+
+    /* ── the rating model, the score bands, and the pieces the football sheet
+          has no equivalent for: a 0-100 score, its five components as bars,
+          and the value / warnings strips. ── */
+    .sheet-model, .sheet-bands {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 10px;
+    }
+    .sheet-criterion, .sheet-rating-box {
+        background: var(--nrs-panel, rgba(8, 15, 28, 0.82));
+        border: 1px solid var(--nrs-border, rgba(56, 189, 248, 0.22));
+        border-left-width: 3px;
+        border-radius: 12px;
+        padding: 12px 14px;
+    }
+    .sheet-criterion h3, .sheet-rating-box h3 {
+        font-size: 0.86rem;
+        margin-bottom: 5px;
+        color: #e0f2fe;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .sheet-criterion p, .sheet-rating-box p {
+        font-size: 0.78rem;
+        line-height: 1.5;
+        color: #94a3b8;
+    }
+    .sheet-pts {
+        font-size: 0.7rem;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.16);
+        color: #7dd3fc;
+        font-weight: 800;
+    }
+
+    /* One accent per band, used by the boxes, the score pill and each card. */
+    .sheet-play--elite    { border-left-color: #22c55e; }
+    .sheet-play--strong   { border-left-color: #84cc16; }
+    .sheet-play--playable { border-left-color: #facc15; }
+    .sheet-play--thin     { border-left-color: #fb923c; }
+    .sheet-play--dart     { border-left-color: #64748b; }
+    .sheet-rank--elite    { background: rgba(34, 197, 94, 0.22);  color: #bbf7d0; }
+    .sheet-rank--strong   { background: rgba(132, 204, 22, 0.22); color: #d9f99d; }
+    .sheet-rank--playable { background: rgba(250, 204, 21, 0.2);  color: #fef08a; }
+    .sheet-rank--thin     { background: rgba(251, 146, 60, 0.2);  color: #fed7aa; }
+    .sheet-rank--dart     { background: rgba(100, 116, 139, 0.2); color: #cbd5e1; }
+    .sheet-count--elite   { color: #bbf7d0; }
+    .sheet-count--strong  { color: #d9f99d; }
+
+    .sheet-play { border-left: 3px solid transparent; }
+    .sheet-rank {
+        font-weight: 900;
+        font-size: 0.92rem;
+        padding: 3px 9px;
+        border-radius: 8px;
+        font-variant-numeric: tabular-nums;
+    }
+    .sheet-band {
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        font-weight: 700;
+    }
+    .sheet-book {
+        margin-left: auto;
+        font-weight: 800;
+        font-size: 0.82rem;
+        color: #7dd3fc;
+        font-variant-numeric: tabular-nums;
+    }
+    .sheet-top-five-rank {
+        font-weight: 900;
+        color: var(--wpz-accent-gold, #facc15);
+        font-size: 0.95rem;
+    }
+
+    /* the five components, as bars under each card */
+    .sheet-parts { display: flex; gap: 7px; margin-top: 9px; }
+    .sheet-part { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .sheet-part__bar {
+        height: 5px;
+        border-radius: 3px;
+        background: rgba(148, 163, 184, 0.2);
+        overflow: hidden;
+    }
+    .sheet-part__bar i { display: block; height: 100%; background: #38bdf8; border-radius: 3px; }
+    .sheet-part__label {
+        font-size: 0.6rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #64748b;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .sheet-strip { display: grid; gap: 7px; }
+    .sheet-summary-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        flex-wrap: wrap;
+        background: var(--nrs-panel-2, rgba(15, 23, 42, 0.66));
+        border: 1px solid var(--nrs-border, rgba(56, 189, 248, 0.22));
+        border-radius: 10px;
+        padding: 8px 12px;
+    }
+    .sheet-summary-item .sheet-rank { margin-left: auto; }
+
+    .sheet-side__rec { font-size: 0.7rem; color: #64748b; font-weight: 600; }
+
+    @media (max-width: 640px) {
+        .sheet-parts { flex-wrap: wrap; }
+        .sheet-part { flex-basis: 30%; }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════════════════
+       TYPOGRAPHY & LAYOUT PASS
+       Everything above is the football sheet's stylesheet, inherited so the two
+       cheat sheets read as one product. This block fixes what did not survive
+       the port and tightens the type.
+
+       Three of these were outright bugs, not taste:
+         · .sheet-play__head had NO rule at all — the class is new to this sheet,
+           so the badge, name and band rendered as bare inline spans with no gap
+           and ran together ("Porter MartoneTHIN").
+         · .sheet-rank was a 22px circle in the inherited sheet; the pill rules
+           added later could not undo the fixed width, so a two-digit score sat
+           crushed inside it.
+         · The position chip only had football colours (RB/WR/TE), so every
+           hockey slot rendered flat grey.
+       ══════════════════════════════════════════════════════════════════════ */
+
+    /* Numbers are the whole point of this page: lock them to tabular figures so
+       columns of scores and rates line up instead of shimmering. */
+    .sheet-rank, .sheet-m, .sheet-book, .sheet-pos, .sheet-side__rec,
+    .sheet-game__meta, .sheet-count, .sheet-pts, .sheet-top-five-rank {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+
+    /* ── the play row ── */
+    .sheet-play {
+        gap: 7px;
+        padding: 11px 13px;
+        margin-bottom: 8px;
+        border-left-width: 3px;
+        transition: background 120ms ease, border-color 120ms ease;
+    }
+    .sheet-play:hover { background: rgba(148, 163, 184, 0.07); }
+
+    /* The header line: score · slot · name ······ band · price.
+       Name takes the slack so band and price settle on the right edge. */
+    .sheet-play__head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        min-width: 0;
+    }
+    .sheet-play__name {
+        flex: 1 1 auto;
+        min-width: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: -0.006em;
+        line-height: 1.25;
+    }
+
+    /* ── score badge: sized for two digits, not a 22px dot ── */
+    .sheet-rank {
+        width: auto;
+        height: auto;
+        min-width: 2.75ch;
+        padding: 5px 10px;
+        border-radius: 9px;
+        font-size: 0.98rem;
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+    }
+
+    /* ── band label: a quiet right-aligned caption, clear of the name ── */
+    .sheet-band {
+        flex-shrink: 0;
+        font-size: 0.63rem;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+        opacity: 0.85;
+    }
+    .sheet-play--elite    .sheet-band { color: #86efac; }
+    .sheet-play--strong   .sheet-band { color: #bef264; }
+    .sheet-play--playable .sheet-band { color: #fde047; }
+    .sheet-play--thin     .sheet-band { color: #fdba74; }
+    .sheet-play--dart     .sheet-band { color: #94a3b8; }
+
+    /* ── line slot chip, in hockey's colours ── */
+    .sheet-pos {
+        flex-shrink: 0;
+        padding: 3px 7px;
+        border-radius: 6px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        line-height: 1.2;
+    }
+    .sheet-pos--C { background: rgba(56, 189, 248, 0.18); color: #7dd3fc; }
+    .sheet-pos--L { background: rgba(167, 139, 250, 0.2);  color: #ddd6fe; }
+    .sheet-pos--R { background: rgba(251, 146, 60, 0.18);  color: #fed7aa; }
+    .sheet-pos--D { background: rgba(74, 222, 128, 0.16);  color: #bbf7d0; }
+    .sheet-pos--G { background: rgba(248, 113, 113, 0.18); color: #fecaca; }
+    html.theme-light .sheet-pos--C { color: #0369a1; background: rgba(56, 189, 248, 0.24); }
+    html.theme-light .sheet-pos--L { color: #6d28d9; background: rgba(167, 139, 250, 0.26); }
+    html.theme-light .sheet-pos--R { color: #c2410c; background: rgba(251, 146, 60, 0.24); }
+    html.theme-light .sheet-pos--D { color: #15803d; background: rgba(74, 222, 128, 0.24); }
+    html.theme-light .sheet-pos--G { color: #b91c1c; background: rgba(248, 113, 113, 0.24); }
+
+    /* ── price sits at the far right, as the number you act on ── */
+    .sheet-book {
+        flex-shrink: 0;
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        padding: 3px 8px;
+        border-radius: 7px;
+        background: rgba(56, 189, 248, 0.12);
+    }
+
+    /* ── tags and the reasoning line ── */
+    .sheet-play__tags { gap: 5px; margin-top: 1px; }
+    .chip {
+        padding: 3px 9px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        line-height: 1.35;
+    }
+    .sheet-why {
+        font-size: 0.8rem;
+        line-height: 1.6;
+        opacity: 0.86;
+        margin-top: 3px;
+        max-width: 78ch;
+    }
+
+    /* ── stat chips: readable, evenly set ── */
+    .sheet-metrics { gap: 6px; margin-top: 7px; }
+    .sheet-m {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 5px;
+        padding: 4px 9px;
+        border-radius: 7px;
+        font-size: 0.67rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+    .sheet-m b {
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-transform: none;
+    }
+
+    /* ── component bars ── */
+    .sheet-parts { gap: 9px; margin-top: 11px; }
+    .sheet-part__bar { height: 4px; }
+    .sheet-part__label { font-size: 0.58rem; letter-spacing: 0.07em; }
+
+    /* ── headings and section furniture ── */
+    .sheet-section-title { letter-spacing: 0.02em; }
+    .sheet-game__head { padding: 12px 16px; gap: 12px; }
+    .sheet-game__teams { font-size: 0.95rem; font-weight: 800; letter-spacing: -0.005em; }
+    .sheet-game__meta { font-size: 0.74rem; letter-spacing: 0.03em; opacity: 0.8; }
+    .sheet-side__head { gap: 8px; margin-bottom: 10px; font-size: 0.75rem; letter-spacing: 0.1em; }
+    .sheet-side__rec { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em; opacity: 0.75; }
+    .sheet-side { padding: 12px 13px; }
+
+    /* ── top-five cards get a touch more air than a board row ── */
+    .sheet-top-card { gap: 7px; padding: 14px 16px; }
+    .sheet-top-five-rank { font-size: 1.02rem; font-weight: 900; letter-spacing: -0.02em; }
+
+    /* ── the model / bands explainers ── */
+    .sheet-criterion h3, .sheet-rating-box h3 { letter-spacing: 0.01em; line-height: 1.35; }
+    .sheet-criterion p, .sheet-rating-box p { font-size: 0.79rem; line-height: 1.6; }
+    .sheet-pts { letter-spacing: 0.04em; }
+
+    @media (max-width: 640px) {
+        .sheet-play__name { flex-basis: 100%; order: 3; }
+        .sheet-band { order: 4; }
+        .sheet-book { order: 5; margin-left: auto; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════════════
+       SCOREBOARD PASS — the overall rating, numerals, nav, palette
+       ══════════════════════════════════════════════════════════════════════ */
+
+    /* Numbers are set in a DIN face -- the family scoreboards and broadcast
+       graphics use -- falling back through the Mac and Android equivalents.
+       All ship with the operating system, so the site's font-src policy needs
+       no change and nothing is downloaded. */
+    :root {
+        --num-font: "Bahnschrift", "DIN Alternate", "DIN Condensed", "Roboto Condensed",
+                    "Arial Narrow", system-ui, sans-serif;
+        /* the inherited sheet left this at football orange; ice, to match the tab */
+        --nrs-border: rgba(56, 189, 248, 0.2);
+    }
+
+    /* ── the overall rating ──────────────────────────────────────────────────
+       A fixed tile, not a pill that grows with its contents: every score on the
+       board sits in one column at one weight. Only the bands worth playing are
+       lit. Thin and Dart are deliberately dim, so the eye lands on the handful
+       of rows that matter. */
+    .sheet-ovr {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 46px;
+        height: 36px;
+        border-radius: 10px;
+        font-family: var(--num-font);
+        font-stretch: 88%;
+        line-height: 1;
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+            0 3px 8px -2px rgba(0, 0, 0, 0.55);
+    }
+    .sheet-ovr b {
+        font-size: 1.32rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        font-variant-numeric: tabular-nums lining-nums;
+    }
+    .sheet-ovr small {
+        margin-top: 3px;
+        font-size: 0.5rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        padding-left: 0.2em;
+        opacity: 0.78;
+    }
+    .sheet-ovr--elite {
+        background: linear-gradient(165deg, #4ade80 0%, #16a34a 52%, #166534 100%);
+        color: #ffffff; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    .sheet-ovr--strong {
+        background: linear-gradient(165deg, #d9f99d 0%, #84cc16 50%, #4d7c0f 100%);
+        color: #13240a;
+    }
+    .sheet-ovr--playable {
+        background: linear-gradient(165deg, #fef08a 0%, #eab308 52%, #a16207 100%);
+        color: #231a03;
+    }
+    .sheet-ovr--thin {
+        background: linear-gradient(165deg, #7c3a12 0%, #5b270c 100%);
+        color: #fdba74;
+        box-shadow: inset 0 0 0 1px rgba(251, 146, 60, 0.35), 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+    }
+    .sheet-ovr--dart {
+        background: linear-gradient(165deg, #2b3647 0%, #1c2433 100%);
+        color: #8795a8;
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.22);
+    }
+    .sheet-ovr--lg { width: 60px; height: 56px; border-radius: 13px; }
+    .sheet-ovr--lg b { font-size: 1.9rem; }
+    .sheet-ovr--sm { width: 38px; height: 29px; border-radius: 8px; }
+    .sheet-ovr--sm b { font-size: 1.05rem; }
+
+    /* ── the top-five rank ── */
+    .sheet-top-five-rank {
+        font-family: var(--num-font);
+        font-stretch: 88%;
+        font-size: 1.55rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: var(--wpz-accent-gold);
+        min-width: 1.6ch;
+    }
+    .sheet-top-five-rank i {
+        font-style: normal;
+        font-size: 0.6em;
+        opacity: 0.55;
+        margin-right: 1px;
+        vertical-align: 0.28em;
+    }
+    .sheet-top-card .sheet-play__head { gap: 12px; }
+    .sheet-top-card .sheet-play__name { font-size: 1.05rem; font-weight: 800; }
+
+    /* ── every other number, in the same face ── */
+    .sheet-m b, .sheet-book, .sheet-count, .sheet-side__rec,
+    .sheet-game__when, .sheet-pts {
+        font-family: var(--num-font);
+        font-stretch: 92%;
+    }
+    .sheet-m b { font-size: 0.9rem; font-weight: 700; }
+    .sheet-book { font-size: 0.95rem; font-weight: 700; }
+
+    /* ── title ── */
+    #sheetTitle {
+        font-size: 1.9rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin: 4px 0 6px;
+    }
+    .sheet-title-date {
+        font-family: var(--num-font);
+        font-stretch: 88%;
+        font-weight: 700;
+        color: #7dd3fc;
+        letter-spacing: -0.01em;
+    }
+    .sheet-title-sep { color: var(--nrs-muted); font-weight: 400; margin: 0 0.05em; }
+
+    /* ── slate nav: it had no styles at all ── */
+    .sheet-sheetnav {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        padding: 11px 20px;
+        border-top: 1px solid var(--nrs-border);
+        border-bottom: 1px solid var(--nrs-border);
+        background: rgba(8, 15, 28, 0.55);
+    }
+    .sheet-sheetnav__title {
+        font-size: 0.62rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--nrs-muted);
+    }
+    .sheet-sheetnav label {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--nrs-muted);
+    }
+    .sheet-sheetnav select {
+        -webkit-appearance: none;
+        appearance: none;
+        padding: 7px 32px 7px 12px;
+        border-radius: 9px;
+        border: 1px solid var(--nrs-border);
+        background:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%237dd3fc' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+                no-repeat right 12px center / 10px 6px,
+            var(--nrs-panel-2);
+        color: var(--wpz-color-text);
+        font: inherit;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: none;
+        cursor: pointer;
+    }
+    .sheet-sheetnav select:hover, .sheet-sheetnav select:focus-visible {
+        border-color: #7dd3fc;
+        outline: none;
+    }
+    .sheet-sheetnav select option { background: #0f172a; color: #e2e8f0; }
+    .sheet-current-week {
+        padding: 5px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(125, 211, 252, 0.45);
+        font-size: 0.74rem;
+        font-weight: 700;
+        color: #7dd3fc;
+        text-decoration: none;
+    }
+    .sheet-current-week:hover { background: rgba(125, 211, 252, 0.12); }
+    .sheet-sheetnav__status { font-size: 0.72rem; color: var(--nrs-muted); }
+
+    /* ── game cards ── */
+    .sheet-game__when { font-size: 0.74rem; letter-spacing: 0.02em; }
+    .sheet-game__body .sheet-side { min-width: 0; }
+
+    /* ── board rows line up on the tile; the body text hangs off the name ── */
+    .sheet-play__head { gap: 11px; }
+    .sheet-play > .sheet-play__tags,
+    .sheet-play > .sheet-why,
+    .sheet-play > .sheet-metrics,
+    .sheet-play > .sheet-parts { margin-left: 57px; }
+    .sheet-top-card > .sheet-play__tags,
+    .sheet-top-card > .sheet-why,
+    .sheet-top-card > .sheet-metrics,
+    .sheet-top-card > .sheet-parts { margin-left: 0; }
+
+    /* ── light theme ── */
+    html.theme-light .sheet-sheetnav { background: #f1f5f9; }
+    html.theme-light .sheet-sheetnav select option { background: #ffffff; color: #0f172a; }
+    html.theme-light .sheet-title-date { color: #0369a1; }
+    html.theme-light .sheet-ovr--thin { background: linear-gradient(165deg, #fed7aa, #fdba74); color: #7c2d12; }
+    html.theme-light .sheet-ovr--dart { background: linear-gradient(165deg, #e2e8f0, #cbd5e1); color: #475569; }
+
+    @media (max-width: 640px) {
+        #sheetTitle { font-size: 1.45rem; }
+        .sheet-play > .sheet-play__tags, .sheet-play > .sheet-why,
+        .sheet-play > .sheet-metrics, .sheet-play > .sheet-parts { margin-left: 0; }
+    }
+
+    /* The header must never wrap the score onto its own line. With wrapping
+       allowed, a name a few pixels too wide pushed the tile underneath it on
+       some cards and not others. The name now wraps inside its own box, and
+       the tile, slot and band hold their place. Phones keep the stacked layout. */
+    .sheet-play__head { flex-wrap: nowrap; }
+    .sheet-play__name { overflow-wrap: anywhere; }
+    .sheet-ovr, .sheet-pos, .sheet-band, .sheet-book, .sheet-top-five-rank { flex-shrink: 0; }
+    @media (max-width: 640px) {
+        .sheet-play__head { flex-wrap: wrap; }
+    }
+
+    /* One game per row. Two-across left each team column around 330px, which
+       wrapped every name and squeezed the reasoning into a narrow ribbon. Full
+       width gives each side room for the name, the band and a readable line. */
+    .sheet-games { grid-template-columns: 1fr; gap: 18px; }
+    .sheet-game__body { grid-template-columns: 1fr 1fr; }
+    .sheet-side { padding: 14px 16px; }
+    @media (max-width: 900px) {
+        .sheet-game__body { grid-template-columns: 1fr; }
+        .sheet-side + .sheet-side { border-left: 0; border-top: 1px solid var(--nrs-border); }
+    }
+
+    /* Stat labels keep their own case: it is iFF and iSCF, not IFF and ISCF. */
+    .sheet-m { text-transform: none; letter-spacing: 0.02em; }
+    .sheet-part__label { text-transform: uppercase; }
+
+    /* ── Skaters who scored ── */
+    .sheet-scored-head { margin-bottom: 14px; }
+    .sheet-scored-status { font-family: var(--num-font); font-stretch: 92%; letter-spacing: 0.01em; }
+    .sheet-scored-card { gap: 8px; border-width: 1px; }
+    .sheet-scored-card.is-cashed {
+        border-color: rgba(74, 222, 128, 0.55);
+        background: linear-gradient(145deg, rgba(34, 197, 94, 0.12) 0%, var(--nrs-panel) 70%);
+    }
+    .sheet-scored-card .sheet-top-card__meta {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 0.74rem; letter-spacing: 0.01em;
+    }
+    .sheet-scored-card .sheet-side__logo { width: 16px; height: 16px; object-fit: contain; }
+
+    /* results marked on the board */
+    .sheet-play.is-hit, .sheet-top-card.is-hit {
+        border-left-color: #4ade80;
+        background: linear-gradient(90deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.02) 60%);
+        box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.32);
+    }
+    .sheet-top-card.is-void, .sheet-play.is-void { opacity: 0.5; }
+    .chip--hit { font-weight: 800; }
+    .chip--first {
+        background: rgba(250, 204, 21, 0.18); border-color: rgba(250, 204, 21, 0.55); color: #fde68a;
+    }
+    .chip--miss {
+        background: rgba(148, 163, 184, 0.1); border-color: rgba(148, 163, 184, 0.3); color: #94a3b8;
+    }
+    html.theme-light .chip--first { color: #854d0e; background: rgba(250, 204, 21, 0.28); }
+    html.theme-light .chip--miss { color: #475569; }
+
+    /* Scorer cards keep their width: auto-fill leaves empty tracks, so a night
+       with one scorer shows one card-sized card instead of a page-wide strip. */
+    #sheetScoredList { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+    .sheet-scored-card .sheet-play__head .chip { margin-left: auto; flex-shrink: 0; }
+
+.nhl-trend-arrow { display:inline-block; position:relative; margin-left:6px; font-size:21px; font-weight:900; line-height:1; cursor:help; }
+.nhl-trend-arrow.is-up { color:#22c55e; }
+.nhl-trend-arrow.is-down { color:#ef4444; }
+.nhl-trend-arrow::after { content:attr(data-tooltip); position:absolute; z-index:100; top:calc(100% + 8px); right:0; width:210px; padding:10px 12px; border-radius:8px; background:#0f172a; color:#f8fafc; border:1px solid #475569; font-size:12px; font-weight:400; line-height:1.5; white-space:normal; text-align:left; pointer-events:none; visibility:hidden; }
+.nhl-trend-arrow:hover::after,.nhl-trend-arrow:focus::after { visibility:visible; }
+.nhl-detail { margin:18px 0; padding:16px; border:1px solid rgba(148,163,184,.3); border-radius:12px; } .nhl-detail h4 { margin:0 0 10px; } .nhl-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } .nhl-detail-tile { padding:12px; background:rgba(148,163,184,.08); border-radius:8px; } .nhl-detail-tile strong,.nhl-detail-tile small { display:block; margin-top:7px; } .nhl-detail-tile strong { font-size:21px; } @media(max-width:500px) { .nhl-detail-grid { grid-template-columns:1fr; } } 
+    /* ── NBA Prop Shop: the NHL sheet's rules on hardwood ─────────────────── */
+    :root {
+        --wpz-bg-body: radial-gradient(ellipse at top, #1c1208 0%, #0d0905 42%, #040302 100%);
+        --wpz-bg-container: linear-gradient(135deg, rgba(30, 18, 8, 0.97) 0%, rgba(22, 14, 10, 0.96) 48%, rgba(16, 11, 20, 0.97) 100%);
+        --wpz-border-container: rgba(251, 146, 60, 0.45);
+        --wpz-bg-header: linear-gradient(145deg, #2a1606 0%, #3a1d08 38%, #1d1230 100%);
+        --wpz-border-header: rgba(253, 186, 116, 0.45);
+        --wpz-brand-tag-bg: rgba(60, 30, 6, 0.55);
+        --wpz-brand-tag-border: rgba(251, 191, 36, 0.45);
+        --wpz-brand-tag-text: #fef3c7;
+    }
+    html.theme-light {
+        --wpz-bg-container: linear-gradient(135deg, #fff 0%, #fffaf3 48%, #ffedd5 100%);
+        --wpz-bg-header: linear-gradient(145deg, #fff7ed 0%, #ffedd5 38%, #fef3c7 100%);
+        --wpz-brand-tag-bg: rgba(194, 65, 12, 0.1);
+        --wpz-brand-tag-border: rgba(234, 88, 12, 0.4);
+        --wpz-brand-tag-text: #9a3412;
+    }
+    a { color: #fdba74; }
+    html.theme-light a { color: #c2410c; }
+    .sheet-pos--F { background: rgba(167, 139, 250, 0.2); color: #ddd6fe; }
+    html.theme-light .sheet-pos--F { color: #6d28d9; background: rgba(167, 139, 250, 0.26); }
+    .ledger-subtitle { color: var(--wpz-accent-gold); font-size: 1.05rem; font-weight: 700; margin: 4px 0 6px; letter-spacing: 0.04em; }
+
+    /* the OPEN sign: the shell's CLOSED sign, flipped for opening night */
+    .shop-open { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: center;
+        margin: 18px 22px 0; padding: 18px 20px; border-radius: 18px;
+        background: linear-gradient(135deg, rgba(22, 101, 52, 0.22), rgba(161, 98, 7, 0.18));
+        border: 1px solid rgba(74, 222, 128, 0.4); }
+    .shop-open svg { display: block; width: 100%; height: auto; }
+    .shop-open h2 { font-size: clamp(1.25rem, 3vw, 1.8rem); color: #bbf7d0; margin-bottom: 6px; }
+    .shop-open p { color: var(--wpz-color-text); opacity: 0.92; line-height: 1.55; }
+    .shop-open .shop-open__tag { display: inline-block; margin-bottom: 8px; padding: 3px 10px; border-radius: 999px;
+        font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+        background: rgba(250, 204, 21, 0.16); border: 1px solid rgba(250, 204, 21, 0.45); color: #fef08a; }
+    html.theme-light .shop-open h2 { color: #166534; }
+    html.theme-light .shop-open .shop-open__tag { color: #a16207; }
+    @media (max-width: 640px) { .shop-open { grid-template-columns: 1fr; margin: 14px 12px 0; } .shop-open svg { max-width: 170px; margin: 0 auto; } }
+    @keyframes shop-sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+    .shop-open svg .sign { transform-origin: 85px 14px; animation: shop-sway 4s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .shop-open svg .sign { animation: none; } }
+
+    /* the market on every card: "🧤 Over 0.5 Steals" */
+    .prop-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; margin: 2px 0 0; }
+    .prop-line__bet { font-size: 1.12rem; font-weight: 900; color: var(--wpz-color-heading); letter-spacing: 0.01em; }
+    .prop-line__chance { font-size: 0.86rem; font-weight: 800; color: #86efac; }
+    html.theme-light .prop-line__chance { color: #15803d; }
+    .sheet-top-card .prop-line__bet { font-size: 1.3rem; }
+
+    /* hit-rate strip: last 5 · last 10 · last season · preseason */
+    .prop-hits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 8px 0 2px; }
+    .prop-hit { padding: 6px 4px; border-radius: 9px; text-align: center; background: var(--nrs-panel-2);
+        border: 1px solid var(--nrs-border); line-height: 1.15; }
+    .prop-hit b { display: block; font-size: 0.98rem; font-weight: 900; }
+    .prop-hit small { display: block; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nrs-muted); }
+    .prop-hit--good b { color: #4ade80; } .prop-hit--mid b { color: #facc15; } .prop-hit--bad b { color: #f87171; }
+    html.theme-light .prop-hit--good b { color: #15803d; } html.theme-light .prop-hit--mid b { color: #a16207; } html.theme-light .prop-hit--bad b { color: #b91c1c; }
+    .prop-hit--none b { color: var(--nrs-muted); }
+
+    /* last ten games against the line */
+    .prop-spark { display: flex; align-items: flex-end; gap: 3px; height: 38px; margin: 8px 0 2px; position: relative; }
+    .prop-spark i { flex: 1; min-width: 6px; border-radius: 3px 3px 0 0; background: rgba(248, 113, 113, 0.75); position: relative; }
+    .prop-spark i.hit { background: rgba(74, 222, 128, 0.85); }
+    .prop-spark i.pre { opacity: 0.55; }
+    .prop-spark .line { position: absolute; left: 0; right: 0; border-top: 1px dashed rgba(250, 204, 21, 0.85); pointer-events: none; }
+    .prop-spark-cap { display: flex; justify-content: space-between; font-size: 0.66rem; color: var(--nrs-muted); }
+
+    .prop-reasons { margin-top: 8px; font-size: 0.8rem; }
+    .prop-reasons summary { cursor: pointer; color: var(--nrs-muted); font-weight: 700; }
+    .prop-reasons ul { margin: 8px 0 0; padding-left: 1rem; display: grid; gap: 5px; line-height: 1.45; }
+    .prop-reasons b { color: var(--wpz-color-heading); }
+
+    .chip--book { background: rgba(244, 114, 182, 0.14); border-color: rgba(244, 114, 182, 0.45); color: #fbcfe8; }
+    html.theme-light .chip--book { color: #9d174d; }
+    .chip--mins { background: rgba(56, 189, 248, 0.14); border-color: rgba(56, 189, 248, 0.45); color: #bae6fd; }
+    html.theme-light .chip--mins { color: #075985; }
+    .chip--track { background: rgba(167, 139, 250, 0.16); border-color: rgba(167, 139, 250, 0.45); color: #ddd6fe; }
+    html.theme-light .chip--track { color: #5b21b6; }
+    .chip--mkt { background: rgba(251, 146, 60, 0.14); border-color: rgba(251, 146, 60, 0.45); color: #fed7aa; }
+    html.theme-light .chip--mkt { color: #9a3412; }
+
+    /* first basket counter */
+    .fb-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    @media (max-width: 1000px) { .fb-grid { grid-template-columns: 1fr; } }
+    .fb-card { display: grid; gap: 10px; align-content: start; padding: 16px; border-radius: 16px; background: var(--nrs-panel);
+        border: 1px solid rgba(251, 146, 60, 0.4); }
+    .fb-card--bench { border-color: rgba(248, 113, 113, 0.55); }
+    .fb-card__tag { justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em;
+        text-transform: uppercase; background: rgba(194, 65, 12, 0.24); border: 1px solid rgba(251, 146, 60, 0.4); color: #fed7aa; }
+    html.theme-light .fb-card__tag { color: #9a3412; }
+    .fb-card__head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .fb-card__head img { width: 52px; height: 38px; object-fit: cover; object-position: top; border-radius: 8px; background: var(--nrs-panel-2); }
+    .fb-card__chance { margin-left: auto; text-align: right; line-height: 1.05; }
+    .fb-card__chance b { display: block; font-size: 1.5rem; font-weight: 900; color: var(--wpz-color-heading); }
+    .fb-card__chance small { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nrs-muted); }
+    .fb-card ul { margin: 0; padding-left: 1.05rem; display: grid; gap: 7px; font-size: 0.86rem; line-height: 1.45; }
+    .fb-card ul strong { color: #fdba74; }
+    html.theme-light .fb-card ul strong { color: #c2410c; }
+    .fb-warn { padding: 8px 10px; border-radius: 10px; background: rgba(239, 68, 68, 0.14); border: 1px solid rgba(248, 113, 113, 0.5);
+        color: #fecaca; font-size: 0.84rem; font-weight: 700; line-height: 1.4; }
+    html.theme-light .fb-warn { color: #991b1b; }
+
+    .shelf-off { display: grid; gap: 8px; }
+    .shelf-off__item { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding: 10px 12px; border-radius: 12px;
+        background: var(--nrs-panel-2); border: 1px dashed rgba(248, 113, 113, 0.5); font-size: 0.88rem; }
+    .shelf-off__item s { color: var(--nrs-muted); }
+
+    .sheet-play__name { color: inherit; }
+    a.sheet-play__name { text-decoration: none; }
+    a.sheet-play__name:hover { text-decoration: underline; }
+    .prop-result { font-weight: 900; }
+    /* the name keeps its words whole: with the OVR tile, the price and the bet
+       slip's "+" in one row, a narrow card wraps the row instead of the name */
+    .sheet-top-card .sheet-play__head, .fb-card__head { flex-wrap: wrap; row-gap: 6px; }
+    .sheet-top-card .sheet-play__name { flex: 1 1 7.5em; min-width: 7.5em; overflow-wrap: normal; word-break: normal; }
+</style>
+</head>
+<body>
+    <div class="sheet-container">
+        <header class="sheet-header">
+            <div class="sheet-header-actions">
+                <a class="sheet-back" href="../index.html" title="Worst Pickz home">&larr; Worst Pickz</a>
+                <div class="sheet-header-actions-right">
+                    <a class="sheet-back sheet-back--switch" href="../nhl-research/atgs.html" title="NHL anytime goal scorer cheat sheet"><span aria-hidden="true">&#127954;</span> NHL Sheet</a>
+                    <a class="sheet-back sheet-back--switch" href="../nfl-research/atd.html" title="NFL anytime touchdown cheat sheet"><span aria-hidden="true">&#127944;</span> NFL Sheet</a>
+                    <a class="sheet-back" href="index.html" title="Open the NBA research board">NBA Research &rarr;</a>
+                    <button type="button" class="sheet-theme-toggle" id="sheetTheme" title="Switch theme" aria-label="Switch theme">&#9728;&#65039;</button>
+                </div>
+            </div>
+            <div class="sheet-header-brand">
+                <div class="sheet-hero">
+                    <img src="../assets/worst-pickz-hero.png" width="88" height="88" alt="Worst Pickz mascot" decoding="async"
+                         onerror="this.onerror=null;this.src='https://worstpickz.win/assets/worst-pickz-hero.png'">
+                </div>
+                <div>
+                    <span class="sheet-brand-tag">&#128722; Handpicked NBA Props</span>
+                    <h1 id="sheetTitle">WorstPickz NBA Prop Shop</h1>
+                    <p class="ledger-subtitle">Goblin&rsquo;s Ledger</p>
+                    <p class="sheet-sub" id="sheetSub">Every prop on tonight&rsquo;s list, rated out of 100 on the model&rsquo;s chance, his track record at the line, the matchup, his role and the price. Tap a filter to narrow the shelf.</p>
+                    <div class="sheet-counts" id="sheetCounts"></div>
+                </div>
+            </div>
+        </header>
+
+        <section class="shop-open" id="shopOpen" hidden>
+            <svg viewBox="0 0 170 120" role="img" aria-label="Hanging shop sign that reads OPEN">
+                <g class="sign">
+                    <path d="M45 46 L85 12 L125 46" fill="none" stroke="#a38b50" stroke-width="3"/>
+                    <circle cx="85" cy="12" r="5" fill="#d6b565"/>
+                    <rect x="12" y="44" width="146" height="66" rx="9" fill="#0f2418" stroke="#4ade80" stroke-width="3"/>
+                    <rect x="19" y="51" width="132" height="52" rx="5" fill="none" stroke="#4ade80" stroke-opacity=".35"/>
+                    <text x="85" y="68" text-anchor="middle" fill="#86efac" font-family="Arial,sans-serif" font-size="10" letter-spacing="2">COME IN, WE&#8217;RE</text>
+                    <text x="85" y="95" text-anchor="middle" fill="#dcfce7" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="3">OPEN</text>
+                </g>
+            </svg>
+            <div>
+                <span class="shop-open__tag">&#128276; Opening Night &middot; 2026-27</span>
+                <h2 id="shopOpenTitle">The Prop Shop is open</h2>
+                <p id="shopOpenText"></p>
+            </div>
+        </section>
+
+        <nav class="sheet-sheetnav" id="sheetNav" data-root="" aria-label="Prop Shop nights">
+            <span class="sheet-sheetnav__title">Shop</span>
+            <label for="sheetDateSelect">Night <select id="sheetDateSelect" aria-label="Open a saved Prop Shop by date"><option>2026-10-20</option></select></label>
+            <a class="sheet-current-week" id="sheetCurrent" href="prop-shop.html" hidden>Tonight&rsquo;s shop</a>
+            <span class="sheet-sheetnav__status" id="sheetStatus" role="status" aria-live="polite"></span>
+        </nav>
+
+        <section class="sheet-section" id="fbSection" hidden>
+            <h2 class="sheet-section-title">&#127936; First Basket Counter</h2>
+            <p class="sheet-section-note" id="fbNote"></p>
+            <div class="fb-grid" id="fbCards"></div>
+        </section>
+
+        <section class="sheet-section">
+            <h2 class="sheet-section-title">Worst Pickz Prop Rating Model</h2>
+            <div class="sheet-model" id="sheetModel"></div>
+        </section>
+
+        <section class="sheet-section">
+            <h2 class="sheet-section-title">Score Bands</h2>
+            <div class="sheet-bands" id="sheetBands"></div>
+        </section>
+
+        <div class="sheet-toolbar">
+            <div class="sheet-filters" id="sheetFilters"></div>
+            <div class="sheet-legend" id="sheetLegend"></div>
+        </div>
+
+        <section class="sheet-section">
+            <h2 class="sheet-section-title">&#128722; Top Shelf &mdash; Top Rated Props</h2>
+            <div class="sheet-top" id="sheetTop"></div>
+        </section>
+
+        <section class="sheet-section" id="sheetValueSection" hidden>
+            <h2 class="sheet-section-title" id="sheetValueTitle">&#127991;&#65039; Bargain Bin &mdash; Best value</h2>
+            <p class="sheet-section-note" id="sheetValueNote"></p>
+            <div class="sheet-top" id="sheetValue"></div>
+        </section>
+
+        <section class="sheet-section">
+            <h2 class="sheet-section-title" id="sheetBoardTitle">The Shelf &mdash; every prop</h2>
+            <div class="sheet-games" id="sheetGames"></div>
+        </section>
+
+        <section class="sheet-section" id="offSection" hidden>
+            <h2 class="sheet-section-title">&#9888;&#65039; Off the Shelf</h2>
+            <p class="sheet-section-note">On tonight&rsquo;s list but not playing. A bet on a player who never checks in is voided, so these were pulled instead of rated.</p>
+            <div class="shelf-off" id="offList"></div>
+        </section>
+
+        <section class="sheet-section" id="sheetScored">
+            <div class="sheet-scored-head">
+                <h2 class="sheet-section-title">&#129534; Receipts &mdash; props that cashed</h2>
+                <div class="sheet-scored-actions">
+                    <span class="sheet-scored-status" id="sheetScoredStatus" aria-live="polite">Tap Refresh to pull tonight&rsquo;s box scores from ESPN.</span>
+                    <button type="button" class="sheet-filter" id="sheetScoredRefresh">Refresh</button>
+                </div>
+            </div>
+            <div class="sheet-scored-summary" id="sheetScoredSummary" hidden></div>
+            <div class="sheet-top" id="sheetScoredList"></div>
+        </section>
+
+        <footer class="sheet-foot" id="sheetFoot"></footer>
+    </div>
+
+    <script>
+    (function () {
+        "use strict";
+        var SHEET = {"date":"2026-10-20","season":"2026-27","stats_season":"2025-26","built":"2026-10-20T13:43+00:00","opening_night":true,"games":[{"id":"401909088","away":"BOS","home":"DET","away_name":"Boston Celtics","home_name":"Detroit Pistons","away_logo":"https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/bos.png","home_logo":"https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/det.png","kick":"2026-10-20T19:00Z","venue":"Little Caesars Arena","total":221.5,"spread":"BOS -1.5","sides":{"BOS":["3078576-threem-1.5","4065648-stl-1.5","4593841-stl-0.5"],"DET":["3157465-threem-2.5","4432166-stl-0.5","4278562-ast-1.5"]}},{"id":"401909089","away":"PHI","home":"NY","away_name":"Philadelphia 76ers","home_name":"New York Knicks","away_logo":"https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/phi.png","home_logo":"https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/ny.png","kick":"2026-10-20T23:00Z","venue":"Madison Square Garden","total":232.5,"spread":"NY -4.5","sides":{"PHI":["4431678-stl-0.5","1966-threem-0.5","5124612-ast-5.5","3917376-blk-0.5","4711297-reb-2.5"],"NY":["3062679-ast-2.5","3934672-stl-0.5","3062679-stl-0.5","3914044-threem-1.5"]}},{"id":"401909090","away":"OKC","home":"SA","away_name":"Oklahoma City Thunder","home_name":"San Antonio Spurs","away_logo":"https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/okc.png","home_logo":"https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/sa.png","kick":"2026-10-21T01:30Z","venue":"Frost Bank Center","total":233.5,"spread":"SA -1.5","sides":{"OKC":["4278073-stl-0.5","4278073-blk-0.5","4278073-threem-1.5","5174983-reb-7.5","4433255-threem-1.5"],"SA":["4395630-threem-1.5","4845367-stl-0.5","4066259-reb-3.5","5037871-reb-3.5","5037871-threem-1.5","5037871-stl-0.5"]}}],"by_id":{"4065648-stl-1.5":{"id":"4065648-stl-1.5","pid":"4065648","name":"Jayson Tatum","team":"BOS","opp":"DET","game":"401909088","kick":"2026-10-20T19:00Z","pos":"F","role":"Forward","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4065648.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":1.5,"need":2,"proj":1.48,"mean":1.36,"chance":38.7,"minutes":36.4,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.47,"ratio":1.015,"pace":0.979,"total":221.5,"hits":{"season":[7,16],"last10":[5,10],"last5":[2,5],"pre":[1,2]},"avg":{"season":1.38,"last10":1.6,"last5":1.6,"pre":1.5},"log":[{"d":"2026-10-14","opp":"CHA","v":2.0,"min":29,"pre":true,"team":"BOS"},{"d":"2026-10-11","opp":"PHI","v":1.0,"min":27,"pre":true,"team":"BOS"},{"d":"2026-04-09","opp":"NY","v":1,"min":40,"pre":false,"team":"BOS"},{"d":"2026-04-08","opp":"CHA","v":1,"min":39,"pre":false,"team":"BOS"},{"d":"2026-04-05","opp":"TOR","v":3,"min":34,"pre":false,"team":"BOS"},{"d":"2026-04-04","opp":"MIL","v":3,"min":31,"pre":false,"team":"BOS"},{"d":"2026-04-01","opp":"MIA","v":2,"min":37,"pre":false,"team":"BOS"},{"d":"2026-03-29","opp":"CHA","v":0.0,"min":31,"pre":false,"team":"BOS"},{"d":"2026-03-27","opp":"ATL","v":0.0,"min":37,"pre":false,"team":"BOS"},{"d":"2026-03-25","opp":"OKC","v":3,"min":35,"pre":false,"team":"BOS"}],"track":45.8,"match":69,"rank":10,"clubs":30,"opp36":1.24,"lg36":1.2,"price":132,"price_src":"2+ milestone","implied":43.1,"edge":-4.4,"parts":{"chance":12.5,"form":8.6,"matchup":10.3,"role":15.0,"price":2.8},"score":49.2,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"BOS","doubt_note":"","season_games":16,"pre_games":2,"book_mid":1.3,"tags":["mins"],"why":"Projected 1.4 steals on 36 minutes (39% to reach 2+ steals). Reached it in 7 of 16 games last season and 2 of his last 5.","reasons":[{"part":"chance","label":"Model chance","text":"39% to reach 2+ steals: 1.36 projected on 36 minutes (last season and the preseason), 1.47 per 36"},{"part":"form","label":"Track record","text":"Last season 7/16 · last 10 5/10 · last 5 2/5 · preseason 1/2"},{"part":"matchup","label":"Matchup","text":"DET allowed 1.24 steals per 36 to forwards last season (10th of 30; league 1.20)"},{"part":"role","label":"Role & minutes","text":"36 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings +132 (2+ milestone) asks for 43%; we have 39% (-4.4)"}]},"3078576-threem-1.5":{"id":"3078576-threem-1.5","pid":"3078576","name":"Derrick White","team":"BOS","opp":"DET","game":"401909088","kick":"2026-10-20T19:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3078576.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":1.5,"need":2,"proj":2.12,"mean":2.14,"chance":59.4,"minutes":32.5,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":2.5,"ratio":0.96,"pace":0.979,"total":221.5,"hits":{"season":[57,77],"last10":[4,10],"last5":[2,5],"pre":[0,2]},"avg":{"season":2.71,"last10":1.7,"last5":1.8,"pre":1.0},"log":[{"d":"2026-10-14","opp":"CHA","v":1.0,"min":20,"pre":true,"team":"BOS"},{"d":"2026-10-11","opp":"PHI","v":1.0,"min":26,"pre":true,"team":"BOS"},{"d":"2026-04-10","opp":"NO","v":3,"min":16,"pre":false,"team":"BOS"},{"d":"2026-04-09","opp":"NY","v":0.0,"min":38,"pre":false,"team":"BOS"},{"d":"2026-04-08","opp":"CHA","v":4,"min":37,"pre":false,"team":"BOS"},{"d":"2026-04-05","opp":"TOR","v":2,"min":35,"pre":false,"team":"BOS"},{"d":"2026-04-04","opp":"MIL","v":5,"min":31,"pre":false,"team":"BOS"},{"d":"2026-04-01","opp":"MIA","v":0.0,"min":34,"pre":false,"team":"BOS"},{"d":"2026-03-30","opp":"ATL","v":1,"min":36,"pre":false,"team":"BOS"},{"d":"2026-03-27","opp":"ATL","v":0.0,"min":34,"pre":false,"team":"BOS"}],"track":61.6,"match":10,"rank":27,"clubs":30,"opp36":2.11,"lg36":2.33,"price":-282,"price_src":"2+ milestone","implied":73.8,"edge":-14.4,"parts":{"chance":26.3,"form":13.9,"matchup":1.5,"role":13.8,"price":0.0},"score":55.5,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"BOS","doubt_note":"","season_games":77,"pre_games":2,"book_mid":2.5,"tags":["track","mins"],"why":"Projected 2.1 threes on 32 minutes (59% to reach 2+ threes). Reached it in 57 of 77 games last season and 2 of his last 5. DET gave up the 4th-fewest threes to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"59% to reach 2+ threes: 2.14 projected on 32 minutes (last season and the preseason), 2.50 per 36"},{"part":"form","label":"Track record","text":"Last season 57/77 · last 10 4/10 · last 5 2/5 · preseason 0/2"},{"part":"matchup","label":"Matchup","text":"DET allowed 2.11 threes per 36 to guards last season (27th of 30; league 2.33)"},{"part":"role","label":"Role & minutes","text":"32 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -282 (2+ milestone) asks for 74%; we have 59% (-14.4)"}]},"4593841-stl-0.5":{"id":"4593841-stl-0.5","pid":"4593841","name":"Baylor Scheierman","team":"BOS","opp":"DET","game":"401909088","kick":"2026-10-20T19:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4593841.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":0.71,"mean":0.74,"chance":50.1,"minutes":24.6,"min_src":"last season and the preseason","starting":false,"starters_known":true,"per36":1.06,"ratio":1.004,"pace":0.979,"total":221.5,"hits":{"season":[31,77],"last10":[4,10],"last5":[3,5],"pre":[2,4]},"avg":{"season":0.55,"last10":0.9,"last5":1.6,"pre":1.5},"log":[{"d":"2026-10-16","opp":"PHI","v":1.0,"min":19,"pre":true,"team":"BOS"},{"d":"2026-10-14","opp":"CHA","v":0.0,"min":17,"pre":true,"team":"BOS"},{"d":"2026-10-11","opp":"PHI","v":5.0,"min":19,"pre":true,"team":"BOS"},{"d":"2026-10-08","opp":"CLE","v":0.0,"min":23,"pre":true,"team":"BOS"},{"d":"2026-04-12","opp":"ORL","v":2,"min":39,"pre":false,"team":"BOS"},{"d":"2026-04-10","opp":"NO","v":0.0,"min":25,"pre":false,"team":"BOS"},{"d":"2026-04-09","opp":"NY","v":0.0,"min":30,"pre":false,"team":"BOS"},{"d":"2026-04-08","opp":"CHA","v":0.0,"min":9,"pre":false,"team":"BOS"},{"d":"2026-04-05","opp":"TOR","v":0.0,"min":17,"pre":false,"team":"BOS"},{"d":"2026-04-04","opp":"MIL","v":1,"min":23,"pre":false,"team":"BOS"}],"track":41.9,"match":55,"rank":14,"clubs":30,"opp36":1.38,"lg36":1.37,"price":null,"price_src":"","implied":null,"edge":null,"parts":{"chance":20.1,"form":7.3,"matchup":8.2,"role":7.9,"price":5.0},"score":48.5,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"BOS","doubt_note":"","season_games":77,"pre_games":4,"book_mid":null,"tags":[],"why":"Projected 0.7 steals on 25 minutes (50% to reach 1+ steal). Reached it in 31 of 77 games last season and 3 of his last 5.","reasons":[{"part":"chance","label":"Model chance","text":"50% to reach 1+ steal: 0.74 projected on 25 minutes (last season and the preseason), 1.06 per 36"},{"part":"form","label":"Track record","text":"Last season 31/77 · last 10 4/10 · last 5 3/5 · preseason 2/4"},{"part":"matchup","label":"Matchup","text":"DET allowed 1.38 steals per 36 to guards last season (14th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"25 projected minutes · off the bench"},{"part":"price","label":"Price check","text":"No DraftKings price at this line -- scored as neutral"}]},"4432166-stl-0.5":{"id":"4432166-stl-0.5","pid":"4432166","name":"Cade Cunningham","team":"DET","opp":"BOS","game":"401909088","kick":"2026-10-20T19:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4432166.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":1.08,"mean":1.04,"chance":62.5,"minutes":29.0,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.52,"ratio":0.895,"pace":0.979,"total":221.5,"hits":{"season":[46,64],"last10":[9,10],"last5":[4,5],"pre":[3,3]},"avg":{"season":1.44,"last10":1.3,"last5":0.8,"pre":1.0},"log":[{"d":"2026-10-16","opp":"TOR","v":1.0,"min":26,"pre":true,"team":"DET"},{"d":"2026-10-15","opp":"MIN","v":1.0,"min":25,"pre":true,"team":"DET"},{"d":"2026-10-05","opp":"PHX","v":1.0,"min":16,"pre":true,"team":"DET"},{"d":"2026-04-12","opp":"IND","v":0.0,"min":22,"pre":false,"team":"DET"},{"d":"2026-04-10","opp":"CHA","v":1,"min":28,"pre":false,"team":"DET"},{"d":"2026-04-08","opp":"MIL","v":1,"min":26,"pre":false,"team":"DET"},{"d":"2026-03-17","opp":"WSH","v":1,"min":5,"pre":false,"team":"DET"},{"d":"2026-03-15","opp":"TOR","v":2,"min":37,"pre":false,"team":"DET"},{"d":"2026-03-13","opp":"MEM","v":3,"min":30,"pre":false,"team":"DET"},{"d":"2026-03-12","opp":"PHI","v":2,"min":28,"pre":false,"team":"DET"}],"track":76.8,"match":0,"rank":30,"clubs":30,"opp36":1.03,"lg36":1.37,"price":-310,"price_src":"1+ milestone","implied":75.6,"edge":-13.1,"parts":{"chance":28.4,"form":18.9,"matchup":0.0,"role":11.3,"price":0.0},"score":58.6,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"DET","doubt_note":"","season_games":64,"pre_games":3,"book_mid":1.2,"tags":["track","hot"],"why":"Projected 1.0 steals on 29 minutes (62% to reach 1+ steal). Reached it in 46 of 64 games last season and 4 of his last 5. BOS gave up the fewest steals to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"62% to reach 1+ steal: 1.04 projected on 29 minutes (last season and the preseason), 1.52 per 36"},{"part":"form","label":"Track record","text":"Last season 46/64 · last 10 9/10 · last 5 4/5 · preseason 3/3"},{"part":"matchup","label":"Matchup","text":"BOS allowed 1.03 steals per 36 to guards last season (30th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"29 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -310 (1+ milestone) asks for 76%; we have 62% (-13.1)"}]},"3157465-threem-2.5":{"id":"3157465-threem-2.5","pid":"3157465","name":"Duncan Robinson","team":"DET","opp":"BOS","game":"401909088","kick":"2026-10-20T19:00Z","pos":"F","role":"Forward","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3157465.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":2.5,"need":3,"proj":2.9,"mean":2.92,"chance":53.3,"minutes":27.3,"min_src":"last season and the preseason, lifted for a projected start","starting":true,"starters_known":true,"per36":3.72,"ratio":1.048,"pace":0.979,"total":221.5,"hits":{"season":[47,77],"last10":[7,10],"last5":[2,5],"pre":[2,4]},"avg":{"season":2.86,"last10":2.9,"last5":2.2,"pre":2.5},"log":[{"d":"2026-10-16","opp":"TOR","v":1.0,"min":20,"pre":true,"team":"DET"},{"d":"2026-10-15","opp":"MIN","v":4.0,"min":24,"pre":true,"team":"DET"},{"d":"2026-10-10","opp":"WSH","v":2.0,"min":19,"pre":true,"team":"DET"},{"d":"2026-10-05","opp":"PHX","v":3.0,"min":13,"pre":true,"team":"DET"},{"d":"2026-04-12","opp":"IND","v":1,"min":22,"pre":false,"team":"DET"},{"d":"2026-04-10","opp":"CHA","v":3,"min":26,"pre":false,"team":"DET"},{"d":"2026-04-08","opp":"MIL","v":4,"min":24,"pre":false,"team":"DET"},{"d":"2026-04-04","opp":"PHI","v":3,"min":23,"pre":false,"team":"DET"},{"d":"2026-04-02","opp":"MIN","v":3,"min":29,"pre":false,"team":"DET"},{"d":"2026-04-01","opp":"TOR","v":5,"min":29,"pre":false,"team":"DET"}],"track":61.8,"match":93,"rank":3,"clubs":30,"opp36":2.13,"lg36":1.91,"price":-102,"price_src":"3+ milestone","implied":50.5,"edge":2.8,"parts":{"chance":22.2,"form":13.9,"matchup":13.9,"role":10.0,"price":6.4},"score":66.4,"band":"thin","band_label":"Thin","small":false,"new_team":false,"last_team":"DET","doubt_note":"","season_games":77,"pre_games":4,"book_mid":2.5,"tags":["fav","mat"],"why":"Projected 2.9 threes on 27 minutes (53% to reach 3+ threes). Reached it in 47 of 77 games last season and 2 of his last 5. BOS gave up the 3rd-most threes to forwards last season.","reasons":[{"part":"chance","label":"Model chance","text":"53% to reach 3+ threes: 2.92 projected on 27 minutes (last season and the preseason, lifted for a projected start), 3.72 per 36"},{"part":"form","label":"Track record","text":"Last season 47/77 · last 10 7/10 · last 5 2/5 · preseason 2/4"},{"part":"matchup","label":"Matchup","text":"BOS allowed 2.13 threes per 36 to forwards last season (3rd of 30; league 1.91)"},{"part":"role","label":"Role & minutes","text":"27 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -102 (3+ milestone) asks for 50%; we have 53% (+2.8)"}]},"4278562-ast-1.5":{"id":"4278562-ast-1.5","pid":"4278562","name":"Paul Reed","team":"DET","opp":"BOS","game":"401909088","kick":"2026-10-20T19:00Z","pos":"F","role":"Forward","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4278562.png","market":"ast","label":"Assists","word":"assists","icon":"🍽️","code":"AST","side":"over","line":1.5,"need":2,"proj":1.61,"mean":1.65,"chance":46.1,"minutes":18.6,"min_src":"last season and the preseason","starting":false,"starters_known":true,"per36":3.34,"ratio":0.952,"pace":0.979,"total":221.5,"hits":{"season":[19,65],"last10":[5,10],"last5":[4,5],"pre":[3,4]},"avg":{"season":1.23,"last10":1.6,"last5":2.4,"pre":2.25},"log":[{"d":"2026-10-16","opp":"TOR","v":1.0,"min":16,"pre":true,"team":"DET"},{"d":"2026-10-15","opp":"MIN","v":2.0,"min":16,"pre":true,"team":"DET"},{"d":"2026-10-10","opp":"WSH","v":3.0,"min":21,"pre":true,"team":"DET"},{"d":"2026-10-05","opp":"PHX","v":3.0,"min":21,"pre":true,"team":"DET"},{"d":"2026-04-12","opp":"IND","v":3,"min":22,"pre":false,"team":"DET"},{"d":"2026-04-10","opp":"CHA","v":0.0,"min":10,"pre":false,"team":"DET"},{"d":"2026-04-08","opp":"MIL","v":1,"min":10,"pre":false,"team":"DET"},{"d":"2026-04-06","opp":"ORL","v":2,"min":19,"pre":false,"team":"DET"},{"d":"2026-04-04","opp":"PHI","v":0.0,"min":18,"pre":false,"team":"DET"},{"d":"2026-04-02","opp":"MIN","v":1,"min":16,"pre":false,"team":"DET"}],"track":39.7,"match":7,"rank":28,"clubs":30,"opp36":2.88,"lg36":3.26,"price":133,"price_src":"2+ milestone","implied":42.9,"edge":3.2,"parts":{"chance":17.4,"form":6.6,"matchup":1.1,"role":3.5,"price":6.6},"score":35.2,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"DET","doubt_note":"","season_games":65,"pre_games":4,"book_mid":null,"tags":["hot"],"why":"Projected 1.6 assists on 19 minutes (46% to reach 2+ assists). Reached it in 19 of 65 games last season and 4 of his last 5. BOS gave up the 3rd-fewest assists to forwards last season.","reasons":[{"part":"chance","label":"Model chance","text":"46% to reach 2+ assists: 1.65 projected on 19 minutes (last season and the preseason), 3.34 per 36"},{"part":"form","label":"Track record","text":"Last season 19/65 · last 10 5/10 · last 5 4/5 · preseason 3/4"},{"part":"matchup","label":"Matchup","text":"BOS allowed 2.88 assists per 36 to forwards last season (28th of 30; league 3.26)"},{"part":"role","label":"Role & minutes","text":"19 projected minutes · off the bench"},{"part":"price","label":"Price check","text":"DraftKings +133 (2+ milestone) asks for 43%; we have 46% (+3.2)"}]},"3062679-stl-0.5":{"id":"3062679-stl-0.5","pid":"3062679","name":"Josh Hart","team":"NY","opp":"PHI","game":"401909089","kick":"2026-10-20T23:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3062679.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":1.02,"mean":1.0,"chance":61.1,"minutes":30.1,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.31,"ratio":0.933,"pace":1.003,"total":232.5,"hits":{"season":[43,67],"last10":[6,10],"last5":[4,5],"pre":[2,3]},"avg":{"season":1.15,"last10":0.8,"last5":1.0,"pre":0.67},"log":[{"d":"2026-10-12","opp":"MIN","v":1.0,"min":22,"pre":true,"team":"NY"},{"d":"2026-10-08","opp":"WSH","v":1.0,"min":21,"pre":true,"team":"NY"},{"d":"2026-10-05","opp":"PHI","v":0.0,"min":13,"pre":true,"team":"NY"},{"d":"2026-04-10","opp":"TOR","v":2,"min":30,"pre":false,"team":"NY"},{"d":"2026-04-09","opp":"BOS","v":1,"min":35,"pre":false,"team":"NY"},{"d":"2026-04-06","opp":"ATL","v":0.0,"min":31,"pre":false,"team":"NY"},{"d":"2026-04-03","opp":"CHI","v":0.0,"min":28,"pre":false,"team":"NY"},{"d":"2026-04-02","opp":"MEM","v":1,"min":25,"pre":false,"team":"NY"},{"d":"2026-04-01","opp":"HOU","v":0.0,"min":29,"pre":false,"team":"NY"},{"d":"2026-03-29","opp":"OKC","v":2,"min":34,"pre":false,"team":"NY"}],"track":62.7,"match":3,"rank":29,"clubs":30,"opp36":1.15,"lg36":1.37,"price":-247,"price_src":"1+ milestone","implied":71.2,"edge":-10.1,"parts":{"chance":27.4,"form":14.2,"matchup":0.5,"role":12.0,"price":0.0},"score":54.1,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"NY","doubt_note":"","season_games":67,"pre_games":3,"book_mid":1.1,"tags":["hot"],"why":"Projected 1.0 steals on 30 minutes (61% to reach 1+ steal). Reached it in 43 of 67 games last season and 4 of his last 5. PHI gave up the 2nd-fewest steals to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"61% to reach 1+ steal: 1.00 projected on 30 minutes (last season and the preseason), 1.31 per 36"},{"part":"form","label":"Track record","text":"Last season 43/67 · last 10 6/10 · last 5 4/5 · preseason 2/3"},{"part":"matchup","label":"Matchup","text":"PHI allowed 1.15 steals per 36 to guards last season (29th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"30 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -247 (1+ milestone) asks for 71%; we have 61% (-10.1)"}]},"3062679-ast-2.5":{"id":"3062679-ast-2.5","pid":"3062679","name":"Josh Hart","team":"NY","opp":"PHI","game":"401909089","kick":"2026-10-20T23:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3062679.png","market":"ast","label":"Assists","word":"assists","icon":"🍽️","code":"AST","side":"over","line":2.5,"need":3,"proj":4.24,"mean":4.28,"chance":75.5,"minutes":30.1,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":4.97,"ratio":1.017,"pace":1.003,"total":232.5,"hits":{"season":[56,67],"last10":[7,10],"last5":[3,5],"pre":[2,3]},"avg":{"season":4.78,"last10":2.9,"last5":2.2,"pre":2.0},"log":[{"d":"2026-10-12","opp":"MIN","v":3.0,"min":22,"pre":true,"team":"NY"},{"d":"2026-10-08","opp":"WSH","v":3.0,"min":21,"pre":true,"team":"NY"},{"d":"2026-10-05","opp":"PHI","v":0.0,"min":13,"pre":true,"team":"NY"},{"d":"2026-04-10","opp":"TOR","v":2,"min":30,"pre":false,"team":"NY"},{"d":"2026-04-09","opp":"BOS","v":3,"min":35,"pre":false,"team":"NY"},{"d":"2026-04-06","opp":"ATL","v":3,"min":31,"pre":false,"team":"NY"},{"d":"2026-04-03","opp":"CHI","v":4,"min":28,"pre":false,"team":"NY"},{"d":"2026-04-02","opp":"MEM","v":6,"min":25,"pre":false,"team":"NY"},{"d":"2026-04-01","opp":"HOU","v":2,"min":29,"pre":false,"team":"NY"},{"d":"2026-03-29","opp":"OKC","v":3,"min":34,"pre":false,"team":"NY"}],"track":78.1,"match":66,"rank":11,"clubs":30,"opp36":4.98,"lg36":4.79,"price":-382,"price_src":"3+ milestone","implied":79.3,"edge":-3.8,"parts":{"chance":37.0,"form":19.4,"matchup":9.9,"role":12.0,"price":3.1},"score":81.4,"band":"strong","band_label":"Strong","small":false,"new_team":false,"last_team":"NY","doubt_note":"","season_games":67,"pre_games":3,"book_mid":4.4,"tags":["fav","track"],"why":"Projected 4.3 assists on 30 minutes (76% to reach 3+ assists). Reached it in 56 of 67 games last season and 3 of his last 5.","reasons":[{"part":"chance","label":"Model chance","text":"76% to reach 3+ assists: 4.28 projected on 30 minutes (last season and the preseason), 4.97 per 36"},{"part":"form","label":"Track record","text":"Last season 56/67 · last 10 7/10 · last 5 3/5 · preseason 2/3"},{"part":"matchup","label":"Matchup","text":"PHI allowed 4.98 assists per 36 to guards last season (11th of 30; league 4.79)"},{"part":"role","label":"Role & minutes","text":"30 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -382 (3+ milestone) asks for 79%; we have 76% (-3.8)"}]},"3934672-stl-0.5":{"id":"3934672-stl-0.5","pid":"3934672","name":"Jalen Brunson","team":"NY","opp":"PHI","game":"401909089","kick":"2026-10-20T23:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3934672.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":0.89,"mean":0.89,"chance":56.9,"minutes":34.4,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.0,"ratio":0.933,"pace":1.003,"total":232.5,"hits":{"season":[36,75],"last10":[5,10],"last5":[3,5],"pre":[2,4]},"avg":{"season":0.76,"last10":0.9,"last5":1.2,"pre":1.0},"log":[{"d":"2026-10-15","opp":"TOR","v":0.0,"min":29,"pre":true,"team":"NY"},{"d":"2026-10-12","opp":"MIN","v":3.0,"min":22,"pre":true,"team":"NY"},{"d":"2026-10-08","opp":"WSH","v":1.0,"min":20,"pre":true,"team":"NY"},{"d":"2026-10-05","opp":"PHI","v":0.0,"min":15,"pre":true,"team":"NY"},{"d":"2026-04-10","opp":"TOR","v":2,"min":31,"pre":false,"team":"NY"},{"d":"2026-04-09","opp":"BOS","v":0.0,"min":37,"pre":false,"team":"NY"},{"d":"2026-04-06","opp":"ATL","v":2,"min":39,"pre":false,"team":"NY"},{"d":"2026-04-03","opp":"CHI","v":0.0,"min":30,"pre":false,"team":"NY"},{"d":"2026-04-01","opp":"HOU","v":1,"min":37,"pre":false,"team":"NY"},{"d":"2026-03-29","opp":"OKC","v":0.0,"min":37,"pre":false,"team":"NY"}],"track":49.7,"match":3,"rank":29,"clubs":30,"opp36":1.15,"lg36":1.37,"price":null,"price_src":"","implied":null,"edge":null,"parts":{"chance":24.6,"form":9.9,"matchup":0.5,"role":15.0,"price":5.0},"score":55.0,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"NY","doubt_note":"","season_games":75,"pre_games":4,"book_mid":null,"tags":["mins"],"why":"Projected 0.9 steals on 34 minutes (57% to reach 1+ steal). Reached it in 36 of 75 games last season and 3 of his last 5. PHI gave up the 2nd-fewest steals to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"57% to reach 1+ steal: 0.89 projected on 34 minutes (last season and the preseason), 1.00 per 36"},{"part":"form","label":"Track record","text":"Last season 36/75 · last 10 5/10 · last 5 3/5 · preseason 2/4"},{"part":"matchup","label":"Matchup","text":"PHI allowed 1.15 steals per 36 to guards last season (29th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"34 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"No DraftKings price at this line -- scored as neutral"}]},"3914044-threem-1.5":{"id":"3914044-threem-1.5","pid":"3914044","name":"Landry Shamet","team":"NY","opp":"PHI","game":"401909089","kick":"2026-10-20T23:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3914044.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":1.5,"need":2,"proj":1.68,"mean":1.69,"chance":47.7,"minutes":21.9,"min_src":"last season and the preseason","starting":false,"starters_known":true,"per36":2.77,"ratio":0.992,"pace":1.003,"total":232.5,"hits":{"season":[29,51],"last10":[5,10],"last5":[3,5],"pre":[2,4]},"avg":{"season":2.02,"last10":1.5,"last5":1.6,"pre":1.5},"log":[{"d":"2026-10-15","opp":"TOR","v":1.0,"min":24,"pre":true,"team":"NY"},{"d":"2026-10-12","opp":"MIN","v":0.0,"min":12,"pre":true,"team":"NY"},{"d":"2026-10-08","opp":"WSH","v":3.0,"min":16,"pre":true,"team":"NY"},{"d":"2026-10-05","opp":"PHI","v":2.0,"min":11,"pre":true,"team":"NY"},{"d":"2026-04-10","opp":"TOR","v":2,"min":28,"pre":false,"team":"NY"},{"d":"2026-04-09","opp":"BOS","v":1,"min":19,"pre":false,"team":"NY"},{"d":"2026-04-06","opp":"ATL","v":0.0,"min":21,"pre":false,"team":"NY"},{"d":"2026-04-03","opp":"CHI","v":2,"min":13,"pre":false,"team":"NY"},{"d":"2026-04-02","opp":"MEM","v":3,"min":31,"pre":false,"team":"NY"},{"d":"2026-03-20","opp":"BKN","v":1,"min":22,"pre":false,"team":"NY"}],"track":52.9,"match":48,"rank":16,"clubs":30,"opp36":2.29,"lg36":2.33,"price":-145,"price_src":"2+ milestone","implied":59.2,"edge":-11.5,"parts":{"chance":18.4,"form":11.0,"matchup":7.2,"role":5.9,"price":0.0},"score":42.5,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"NY","doubt_note":"","season_games":51,"pre_games":4,"book_mid":1.9,"tags":[],"why":"Projected 1.7 threes on 22 minutes (48% to reach 2+ threes). Reached it in 29 of 51 games last season and 3 of his last 5.","reasons":[{"part":"chance","label":"Model chance","text":"48% to reach 2+ threes: 1.69 projected on 22 minutes (last season and the preseason), 2.77 per 36"},{"part":"form","label":"Track record","text":"Last season 29/51 · last 10 5/10 · last 5 3/5 · preseason 2/4"},{"part":"matchup","label":"Matchup","text":"PHI allowed 2.29 threes per 36 to guards last season (16th of 30; league 2.33)"},{"part":"role","label":"Role & minutes","text":"22 projected minutes · off the bench"},{"part":"price","label":"Price check","text":"DraftKings -145 (2+ milestone) asks for 59%; we have 48% (-11.5)"}]},"3917376-blk-0.5":{"id":"3917376-blk-0.5","pid":"3917376","name":"Jaylen Brown","team":"PHI","opp":"NY","game":"401909089","kick":"2026-10-20T23:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3917376.png","market":"blk","label":"Blocks","word":"blocks","icon":"🚫","code":"BLK","side":"over","line":0.5,"need":1,"proj":0.37,"mean":0.39,"chance":30.4,"minutes":35.8,"min_src":"the preseason with his new club and last season","starting":true,"starters_known":true,"per36":0.39,"ratio":0.966,"pace":1.003,"total":232.5,"hits":{"season":[21,71],"last10":[3,10],"last5":[3,5],"pre":[2,3]},"avg":{"season":0.38,"last10":0.4,"last5":0.8,"pre":1.0},"log":[{"d":"2026-10-16","opp":"BOS","v":2.0,"min":31,"pre":true,"team":"PHI"},{"d":"2026-10-08","opp":"BKN","v":0.0,"min":24,"pre":true,"team":"PHI"},{"d":"2026-10-05","opp":"NY","v":1.0,"min":17,"pre":true,"team":"PHI"},{"d":"2026-04-10","opp":"NO","v":0.0,"min":29,"pre":false,"team":"BOS"},{"d":"2026-04-08","opp":"CHA","v":1,"min":43,"pre":false,"team":"BOS"},{"d":"2026-04-05","opp":"TOR","v":0.0,"min":35,"pre":false,"team":"BOS"},{"d":"2026-04-04","opp":"MIL","v":0.0,"min":30,"pre":false,"team":"BOS"},{"d":"2026-04-01","opp":"MIA","v":0.0,"min":37,"pre":false,"team":"BOS"},{"d":"2026-03-30","opp":"ATL","v":0.0,"min":40,"pre":false,"team":"BOS"},{"d":"2026-03-25","opp":"OKC","v":0.0,"min":39,"pre":false,"team":"BOS"}],"track":31.3,"match":28,"rank":22,"clubs":30,"opp36":0.41,"lg36":0.44,"price":null,"price_src":"","implied":null,"edge":null,"parts":{"chance":6.9,"form":3.8,"matchup":4.2,"role":15.0,"price":5.0},"score":34.9,"band":"dart","band_label":"Dart","small":false,"new_team":true,"last_team":"BOS","doubt_note":"","season_games":71,"pre_games":3,"book_mid":null,"tags":["mins"],"why":"Projected 0.4 blocks on 36 minutes (30% to reach 1+ block). Reached it in 21 of 71 games last season and 3 of his last 5. NY gave up the 9th-fewest blocks to guards last season. First regular-season game with PHI after last season with BOS.","reasons":[{"part":"chance","label":"Model chance","text":"30% to reach 1+ block: 0.39 projected on 36 minutes (the preseason with his new club and last season), 0.39 per 36"},{"part":"form","label":"Track record","text":"Last season 21/71 · last 10 3/10 · last 5 3/5 · preseason 2/3"},{"part":"matchup","label":"Matchup","text":"NY allowed 0.41 blocks per 36 to guards last season (22nd of 30; league 0.44)"},{"part":"role","label":"Role & minutes","text":"36 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"No DraftKings price at this line -- scored as neutral"}]},"5124612-ast-5.5":{"id":"5124612-ast-5.5","pid":"5124612","name":"VJ Edgecombe","team":"PHI","opp":"NY","game":"401909089","kick":"2026-10-20T23:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/5124612.png","market":"ast","label":"Assists","word":"assists","icon":"🍽️","code":"AST","side":"over","line":5.5,"need":6,"proj":4.69,"mean":4.72,"chance":34.1,"minutes":35.4,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":4.87,"ratio":0.977,"pace":1.003,"total":232.5,"hits":{"season":[17,75],"last10":[4,10],"last5":[2,5],"pre":[1,3]},"avg":{"season":4.2,"last10":5.3,"last5":5.6,"pre":4.0},"log":[{"d":"2026-10-11","opp":"BOS","v":4.0,"min":26,"pre":true,"team":"PHI"},{"d":"2026-10-08","opp":"BKN","v":1.0,"min":23,"pre":true,"team":"PHI"},{"d":"2026-10-05","opp":"NY","v":7.0,"min":20,"pre":true,"team":"PHI"},{"d":"2026-04-12","opp":"MIL","v":11,"min":31,"pre":false,"team":"PHI"},{"d":"2026-04-10","opp":"IND","v":5,"min":40,"pre":false,"team":"PHI"},{"d":"2026-04-10","opp":"HOU","v":8,"min":40,"pre":false,"team":"PHI"},{"d":"2026-04-07","opp":"SA","v":3,"min":41,"pre":false,"team":"PHI"},{"d":"2026-04-04","opp":"DET","v":1,"min":35,"pre":false,"team":"PHI"},{"d":"2026-04-03","opp":"MIN","v":3,"min":37,"pre":false,"team":"PHI"},{"d":"2026-04-01","opp":"WSH","v":10,"min":33,"pre":false,"team":"PHI"}],"track":29.0,"match":21,"rank":24,"clubs":30,"opp36":4.53,"lg36":4.79,"price":1020,"price_src":"6+ milestone","implied":8.9,"edge":25.2,"parts":{"chance":9.4,"form":3.0,"matchup":3.1,"role":15.0,"price":10.0},"score":40.5,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"PHI","doubt_note":"","season_games":75,"pre_games":3,"book_mid":2.6,"book_gap":"less","tags":["mins"],"why":"Projected 4.7 assists on 35 minutes (34% to reach 6+ assists). Reached it in 17 of 75 games last season and 2 of his last 5. NY gave up the 7th-fewest assists to guards last season. DraftKings sees a smaller night: its ladder centers on about 2.6 assists, where we have 4.7.","reasons":[{"part":"chance","label":"Model chance","text":"34% to reach 6+ assists: 4.72 projected on 35 minutes (last season and the preseason), 4.87 per 36"},{"part":"form","label":"Track record","text":"Last season 17/75 · last 10 4/10 · last 5 2/5 · preseason 1/3"},{"part":"matchup","label":"Matchup","text":"NY allowed 4.53 assists per 36 to guards last season (24th of 30; league 4.79)"},{"part":"role","label":"Role & minutes","text":"35 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings +1020 (6+ milestone) asks for 9%; we have 34% (+25.2)"}]},"4431678-stl-0.5":{"id":"4431678-stl-0.5","pid":"4431678","name":"Tyrese Maxey","team":"PHI","opp":"NY","game":"401909089","kick":"2026-10-20T23:00Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4431678.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":1.42,"mean":1.32,"chance":71.1,"minutes":34.7,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.55,"ratio":0.948,"pace":1.003,"total":232.5,"hits":{"season":[60,70],"last10":[7,10],"last5":[5,5],"pre":[3,3]},"avg":{"season":1.86,"last10":0.8,"last5":1.2,"pre":1.0},"log":[{"d":"2026-10-16","opp":"BOS","v":1.0,"min":30,"pre":true,"team":"PHI"},{"d":"2026-10-11","opp":"BOS","v":1.0,"min":18,"pre":true,"team":"PHI"},{"d":"2026-10-08","opp":"BKN","v":1.0,"min":19,"pre":true,"team":"PHI"},{"d":"2026-04-12","opp":"MIL","v":1,"min":27,"pre":false,"team":"PHI"},{"d":"2026-04-10","opp":"IND","v":2,"min":39,"pre":false,"team":"PHI"},{"d":"2026-04-10","opp":"HOU","v":0.0,"min":33,"pre":false,"team":"PHI"},{"d":"2026-04-07","opp":"SA","v":0.0,"min":40,"pre":false,"team":"PHI"},{"d":"2026-04-04","opp":"DET","v":1,"min":33,"pre":false,"team":"PHI"},{"d":"2026-04-03","opp":"MIN","v":0.0,"min":35,"pre":false,"team":"PHI"},{"d":"2026-04-01","opp":"WSH","v":1,"min":34,"pre":false,"team":"PHI"}],"track":80.1,"match":10,"rank":27,"clubs":30,"opp36":1.2,"lg36":1.37,"price":-401,"price_src":"1+ milestone","implied":80.0,"edge":-8.9,"parts":{"chance":34.1,"form":20.0,"matchup":1.5,"role":15.0,"price":0.5},"score":71.1,"band":"playable","band_label":"Playable","small":false,"new_team":false,"last_team":"PHI","doubt_note":"","season_games":70,"pre_games":3,"book_mid":1.5,"tags":["fav","track","mins","hot"],"why":"Projected 1.3 steals on 35 minutes (71% to reach 1+ steal). Reached it in 60 of 70 games last season and 5 of his last 5. NY gave up the 4th-fewest steals to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"71% to reach 1+ steal: 1.32 projected on 35 minutes (last season and the preseason), 1.55 per 36"},{"part":"form","label":"Track record","text":"Last season 60/70 · last 10 7/10 · last 5 5/5 · preseason 3/3"},{"part":"matchup","label":"Matchup","text":"NY allowed 1.20 steals per 36 to guards last season (27th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"35 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -401 (1+ milestone) asks for 80%; we have 71% (-8.9)"}]},"1966-threem-0.5":{"id":"1966-threem-0.5","pid":"1966","name":"LeBron James","team":"PHI","opp":"NY","game":"401909089","kick":"2026-10-20T23:00Z","pos":"F","role":"Forward","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/1966.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":0.5,"need":1,"proj":1.15,"mean":1.16,"chance":64.0,"minutes":31.4,"min_src":"the preseason with his new club and last season","starting":true,"starters_known":true,"per36":1.27,"ratio":1.042,"pace":1.003,"total":232.5,"hits":{"season":[43,60],"last10":[6,10],"last5":[2,5],"pre":[0,2]},"avg":{"season":1.28,"last10":0.9,"last5":1.0,"pre":0.0},"log":[{"d":"2026-10-16","opp":"BOS","v":0.0,"min":25,"pre":true,"team":"PHI"},{"d":"2026-10-08","opp":"BKN","v":0.0,"min":18,"pre":true,"team":"PHI"},{"d":"2026-04-13","opp":"UTAH","v":0.0,"min":17,"pre":false,"team":"LAL"},{"d":"2026-04-11","opp":"PHX","v":2,"min":32,"pre":false,"team":"LAL"},{"d":"2026-04-10","opp":"GS","v":3,"min":32,"pre":false,"team":"LAL"},{"d":"2026-04-05","opp":"DAL","v":1,"min":39,"pre":false,"team":"LAL"},{"d":"2026-04-03","opp":"OKC","v":1,"min":26,"pre":false,"team":"LAL"},{"d":"2026-04-01","opp":"CLE","v":1,"min":31,"pre":false,"team":"LAL"},{"d":"2026-03-31","opp":"WSH","v":1,"min":33,"pre":false,"team":"LAL"},{"d":"2026-03-28","opp":"BKN","v":0.0,"min":37,"pre":false,"team":"LAL"}],"track":65.0,"match":90,"rank":4,"clubs":30,"opp36":2.1,"lg36":1.91,"price":-344,"price_src":"1+ milestone","implied":77.5,"edge":-13.5,"parts":{"chance":29.3,"form":15.0,"matchup":13.5,"role":13.0,"price":0.0},"score":70.8,"band":"playable","band_label":"Playable","small":false,"new_team":true,"last_team":"LAL","doubt_note":"","season_games":60,"pre_games":2,"book_mid":1.4,"tags":["fav","mat","track"],"why":"Projected 1.2 threes on 31 minutes (64% to reach 1+ three). Reached it in 43 of 60 games last season and 2 of his last 5. NY gave up the 4th-most threes to forwards last season. First regular-season game with PHI after last season with LAL.","reasons":[{"part":"chance","label":"Model chance","text":"64% to reach 1+ three: 1.16 projected on 31 minutes (the preseason with his new club and last season), 1.27 per 36"},{"part":"form","label":"Track record","text":"Last season 43/60 · last 10 6/10 · last 5 2/5 · preseason 0/2"},{"part":"matchup","label":"Matchup","text":"NY allowed 2.10 threes per 36 to forwards last season (4th of 30; league 1.91)"},{"part":"role","label":"Role & minutes","text":"31 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -344 (1+ milestone) asks for 78%; we have 64% (-13.5)"}]},"4711297-reb-2.5":{"id":"4711297-reb-2.5","pid":"4711297","name":"Justin Edwards","team":"PHI","opp":"NY","game":"401909089","kick":"2026-10-20T23:00Z","pos":"F","role":"Forward","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4711297.png","market":"reb","label":"Rebounds","word":"rebounds","icon":"🪟","code":"REB","side":"over","line":2.5,"need":3,"proj":2.11,"mean":2.27,"chance":37.8,"minutes":19.9,"min_src":"last season and the preseason","starting":false,"starters_known":true,"per36":3.89,"ratio":0.978,"pace":1.003,"total":232.5,"hits":{"season":[14,63],"last10":[3,10],"last5":[3,5],"pre":[3,4]},"avg":{"season":1.49,"last10":2.2,"last5":3.6,"pre":4.25},"log":[{"d":"2026-10-16","opp":"BOS","v":6.0,"min":25,"pre":true,"team":"PHI"},{"d":"2026-10-11","opp":"BOS","v":5.0,"min":31,"pre":true,"team":"PHI"},{"d":"2026-10-08","opp":"BKN","v":5.0,"min":17,"pre":true,"team":"PHI"},{"d":"2026-10-05","opp":"NY","v":1.0,"min":24,"pre":true,"team":"PHI"},{"d":"2026-04-12","opp":"MIL","v":1,"min":23,"pre":false,"team":"PHI"},{"d":"2026-04-10","opp":"IND","v":1,"min":16,"pre":false,"team":"PHI"},{"d":"2026-04-10","opp":"HOU","v":2,"min":13,"pre":false,"team":"PHI"},{"d":"2026-04-07","opp":"SA","v":0.0,"min":5,"pre":false,"team":"PHI"},{"d":"2026-04-04","opp":"DET","v":0.0,"min":10,"pre":false,"team":"PHI"},{"d":"2026-04-01","opp":"WSH","v":1,"min":9,"pre":false,"team":"PHI"}],"track":29.5,"match":14,"rank":26,"clubs":30,"opp36":6.69,"lg36":7.07,"price":null,"price_src":"","implied":null,"edge":null,"parts":{"chance":11.9,"form":3.2,"matchup":2.1,"role":4.4,"price":5.0},"score":26.6,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"PHI","doubt_note":"","season_games":63,"pre_games":4,"book_mid":null,"tags":[],"why":"Projected 2.3 rebounds on 20 minutes (38% to reach 3+ rebounds). Reached it in 14 of 63 games last season and 3 of his last 5. NY gave up the 5th-fewest rebounds to forwards last season.","reasons":[{"part":"chance","label":"Model chance","text":"38% to reach 3+ rebounds: 2.27 projected on 20 minutes (last season and the preseason), 3.89 per 36"},{"part":"form","label":"Track record","text":"Last season 14/63 · last 10 3/10 · last 5 3/5 · preseason 3/4"},{"part":"matchup","label":"Matchup","text":"NY allowed 6.69 rebounds per 36 to forwards last season (26th of 30; league 7.07)"},{"part":"role","label":"Role & minutes","text":"20 projected minutes · off the bench"},{"part":"price","label":"Price check","text":"No DraftKings price at this line -- scored as neutral"}]},"4278073-stl-0.5":{"id":"4278073-stl-0.5","pid":"4278073","name":"Shai Gilgeous-Alexander","team":"OKC","opp":"SA","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4278073.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":1.24,"mean":1.17,"chance":66.9,"minutes":31.9,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.47,"ratio":0.945,"pace":1.005,"total":233.5,"hits":{"season":[54,68],"last10":[6,10],"last5":[3,5],"pre":[1,3]},"avg":{"season":1.4,"last10":0.8,"last5":0.8,"pre":0.33},"log":[{"d":"2026-10-16","opp":"HOU","v":0.0,"min":26,"pre":true,"team":"OKC"},{"d":"2026-10-14","opp":"IND","v":1.0,"min":23,"pre":true,"team":"OKC"},{"d":"2026-10-08","opp":"MIL","v":0.0,"min":18,"pre":true,"team":"OKC"},{"d":"2026-04-09","opp":"LAC","v":1,"min":30,"pre":false,"team":"OKC"},{"d":"2026-04-08","opp":"LAL","v":2,"min":28,"pre":false,"team":"OKC"},{"d":"2026-04-05","opp":"UTAH","v":1,"min":24,"pre":false,"team":"OKC"},{"d":"2026-04-03","opp":"LAL","v":0.0,"min":30,"pre":false,"team":"OKC"},{"d":"2026-03-31","opp":"DET","v":2,"min":41,"pre":false,"team":"OKC"},{"d":"2026-03-29","opp":"NY","v":1,"min":37,"pre":false,"team":"OKC"},{"d":"2026-03-28","opp":"CHI","v":0.0,"min":29,"pre":false,"team":"OKC"}],"track":70.6,"match":7,"rank":28,"clubs":30,"opp36":1.19,"lg36":1.37,"price":-362,"price_src":"1+ milestone","implied":78.4,"edge":-11.5,"parts":{"chance":31.2,"form":16.9,"matchup":1.1,"role":13.4,"price":0.0},"score":62.6,"band":"thin","band_label":"Thin","small":false,"new_team":false,"last_team":"OKC","doubt_note":"","season_games":68,"pre_games":3,"book_mid":1.3,"tags":["track"],"why":"Projected 1.2 steals on 32 minutes (67% to reach 1+ steal). Reached it in 54 of 68 games last season and 3 of his last 5. SA gave up the 3rd-fewest steals to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"67% to reach 1+ steal: 1.17 projected on 32 minutes (last season and the preseason), 1.47 per 36"},{"part":"form","label":"Track record","text":"Last season 54/68 · last 10 6/10 · last 5 3/5 · preseason 1/3"},{"part":"matchup","label":"Matchup","text":"SA allowed 1.19 steals per 36 to guards last season (28th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"32 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -362 (1+ milestone) asks for 78%; we have 67% (-11.5)"}]},"4278073-blk-0.5":{"id":"4278073-blk-0.5","pid":"4278073","name":"Shai Gilgeous-Alexander","team":"OKC","opp":"SA","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4278073.png","market":"blk","label":"Blocks","word":"blocks","icon":"🚫","code":"BLK","side":"over","line":0.5,"need":1,"proj":0.67,"mean":0.68,"chance":47.0,"minutes":31.9,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":0.75,"ratio":1.004,"pace":1.005,"total":233.5,"hits":{"season":[33,68],"last10":[5,10],"last5":[4,5],"pre":[3,3]},"avg":{"season":0.76,"last10":0.7,"last5":0.8,"pre":1.0},"log":[{"d":"2026-10-16","opp":"HOU","v":1.0,"min":26,"pre":true,"team":"OKC"},{"d":"2026-10-14","opp":"IND","v":1.0,"min":23,"pre":true,"team":"OKC"},{"d":"2026-10-08","opp":"MIL","v":1.0,"min":18,"pre":true,"team":"OKC"},{"d":"2026-04-09","opp":"LAC","v":1,"min":30,"pre":false,"team":"OKC"},{"d":"2026-04-08","opp":"LAL","v":0.0,"min":28,"pre":false,"team":"OKC"},{"d":"2026-04-05","opp":"UTAH","v":0.0,"min":24,"pre":false,"team":"OKC"},{"d":"2026-04-03","opp":"LAL","v":0.0,"min":30,"pre":false,"team":"OKC"},{"d":"2026-03-31","opp":"DET","v":0.0,"min":41,"pre":false,"team":"OKC"},{"d":"2026-03-29","opp":"NY","v":0.0,"min":37,"pre":false,"team":"OKC"},{"d":"2026-03-28","opp":"CHI","v":3,"min":29,"pre":false,"team":"OKC"}],"track":50.8,"match":55,"rank":14,"clubs":30,"opp36":0.45,"lg36":0.44,"price":-126,"price_src":"1+ milestone","implied":55.8,"edge":-8.8,"parts":{"chance":18.0,"form":10.3,"matchup":8.2,"role":13.4,"price":0.6},"score":50.5,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"OKC","doubt_note":"","season_games":68,"pre_games":3,"book_mid":0.7,"tags":["hot"],"why":"Projected 0.7 blocks on 32 minutes (47% to reach 1+ block). Reached it in 33 of 68 games last season and 4 of his last 5.","reasons":[{"part":"chance","label":"Model chance","text":"47% to reach 1+ block: 0.68 projected on 32 minutes (last season and the preseason), 0.75 per 36"},{"part":"form","label":"Track record","text":"Last season 33/68 · last 10 5/10 · last 5 4/5 · preseason 3/3"},{"part":"matchup","label":"Matchup","text":"SA allowed 0.45 blocks per 36 to guards last season (14th of 30; league 0.44)"},{"part":"role","label":"Role & minutes","text":"32 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -126 (1+ milestone) asks for 56%; we have 47% (-8.8)"}]},"4278073-threem-1.5":{"id":"4278073-threem-1.5","pid":"4278073","name":"Shai Gilgeous-Alexander","team":"OKC","opp":"SA","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4278073.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":1.5,"need":2,"proj":1.55,"mean":1.56,"chance":43.8,"minutes":31.9,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.77,"ratio":0.981,"pace":1.005,"total":233.5,"hits":{"season":[34,68],"last10":[6,10],"last5":[4,5],"pre":[2,3]},"avg":{"season":1.69,"last10":1.6,"last5":2.0,"pre":2.0},"log":[{"d":"2026-10-16","opp":"HOU","v":2.0,"min":26,"pre":true,"team":"OKC"},{"d":"2026-10-14","opp":"IND","v":1.0,"min":23,"pre":true,"team":"OKC"},{"d":"2026-10-08","opp":"MIL","v":3.0,"min":18,"pre":true,"team":"OKC"},{"d":"2026-04-09","opp":"LAC","v":2,"min":30,"pre":false,"team":"OKC"},{"d":"2026-04-08","opp":"LAL","v":2,"min":28,"pre":false,"team":"OKC"},{"d":"2026-04-05","opp":"UTAH","v":2,"min":24,"pre":false,"team":"OKC"},{"d":"2026-04-03","opp":"LAL","v":1,"min":30,"pre":false,"team":"OKC"},{"d":"2026-03-31","opp":"DET","v":2,"min":41,"pre":false,"team":"OKC"},{"d":"2026-03-29","opp":"NY","v":1,"min":37,"pre":false,"team":"OKC"},{"d":"2026-03-28","opp":"CHI","v":0.0,"min":29,"pre":false,"team":"OKC"}],"track":52.5,"match":28,"rank":22,"clubs":30,"opp36":2.23,"lg36":2.33,"price":-125,"price_src":"2+ milestone","implied":55.6,"edge":-11.7,"parts":{"chance":15.9,"form":10.8,"matchup":4.2,"role":13.4,"price":0.0},"score":44.3,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"OKC","doubt_note":"","season_games":68,"pre_games":3,"book_mid":1.7,"tags":["hot"],"why":"Projected 1.6 threes on 32 minutes (44% to reach 2+ threes). Reached it in 34 of 68 games last season and 4 of his last 5. SA gave up the 9th-fewest threes to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"44% to reach 2+ threes: 1.56 projected on 32 minutes (last season and the preseason), 1.77 per 36"},{"part":"form","label":"Track record","text":"Last season 34/68 · last 10 6/10 · last 5 4/5 · preseason 2/3"},{"part":"matchup","label":"Matchup","text":"SA allowed 2.23 threes per 36 to guards last season (22nd of 30; league 2.33)"},{"part":"role","label":"Role & minutes","text":"32 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -125 (2+ milestone) asks for 56%; we have 44% (-11.7)"}]},"4433255-threem-1.5":{"id":"4433255-threem-1.5","pid":"4433255","name":"Chet Holmgren","team":"OKC","opp":"SA","game":"401909090","kick":"2026-10-21T01:30Z","pos":"C","role":"Center","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4433255.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":1.5,"need":2,"proj":1.27,"mean":1.28,"chance":35.2,"minutes":27.2,"min_src":"last season's closing stretch, lifted for a projected start","starting":true,"starters_known":true,"per36":1.58,"ratio":1.057,"pace":1.005,"total":233.5,"hits":{"season":[22,69],"last10":[3,10],"last5":[2,5],"pre":[0,0]},"avg":{"season":1.28,"last10":1.4,"last5":2.0,"pre":null},"log":[{"d":"2026-04-09","opp":"LAC","v":3,"min":31,"pre":false,"team":"OKC"},{"d":"2026-04-08","opp":"LAL","v":1,"min":22,"pre":false,"team":"OKC"},{"d":"2026-04-05","opp":"UTAH","v":4,"min":22,"pre":false,"team":"OKC"},{"d":"2026-04-03","opp":"LAL","v":1,"min":18,"pre":false,"team":"OKC"},{"d":"2026-03-31","opp":"DET","v":1,"min":30,"pre":false,"team":"OKC"},{"d":"2026-03-29","opp":"NY","v":0.0,"min":33,"pre":false,"team":"OKC"},{"d":"2026-03-25","opp":"BOS","v":1,"min":26,"pre":false,"team":"OKC"},{"d":"2026-03-23","opp":"PHI","v":3,"min":30,"pre":false,"team":"OKC"},{"d":"2026-03-21","opp":"WSH","v":0.0,"min":27,"pre":false,"team":"OKC"},{"d":"2026-03-18","opp":"BKN","v":0.0,"min":22,"pre":false,"team":"OKC"}],"track":31.8,"match":79,"rank":7,"clubs":30,"opp36":1.09,"lg36":0.96,"price":181,"price_src":"2+ milestone","implied":35.6,"edge":-0.4,"parts":{"chance":10.1,"form":3.9,"matchup":11.8,"role":9.9,"price":4.8},"score":40.5,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"OKC","doubt_note":"","season_games":69,"pre_games":0,"book_mid":1.1,"tags":["mat"],"why":"Projected 1.3 threes on 27 minutes (35% to reach 2+ threes). Reached it in 22 of 69 games last season and 2 of his last 5. SA gave up the 7th-most threes to centers last season.","reasons":[{"part":"chance","label":"Model chance","text":"35% to reach 2+ threes: 1.28 projected on 27 minutes (last season's closing stretch, lifted for a projected start), 1.58 per 36"},{"part":"form","label":"Track record","text":"Last season 22/69 · last 10 3/10 · last 5 2/5"},{"part":"matchup","label":"Matchup","text":"SA allowed 1.09 threes per 36 to centers last season (7th of 30; league 0.96)"},{"part":"role","label":"Role & minutes","text":"27 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings +181 (2+ milestone) asks for 36%; we have 35% (-0.4)"}]},"5174983-reb-7.5":{"id":"5174983-reb-7.5","pid":"5174983","name":"Aday Mara","team":"OKC","opp":"SA","game":"401909090","kick":"2026-10-21T01:30Z","pos":"C","role":"Center","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/5174983.png","market":"reb","label":"Rebounds","word":"rebounds","icon":"🪟","code":"REB","side":"over","line":7.5,"need":8,"proj":7.33,"mean":7.17,"chance":42.0,"minutes":23.2,"min_src":"the preseason only","starting":false,"starters_known":true,"per36":11.37,"ratio":0.995,"pace":1.005,"total":233.5,"hits":{"season":[0,0],"last10":[3,5],"last5":[3,5],"pre":[3,5]},"avg":{"season":null,"last10":7.6,"last5":7.6,"pre":7.6},"log":[{"d":"2026-10-16","opp":"HOU","v":9.0,"min":21,"pre":true,"team":"OKC"},{"d":"2026-10-14","opp":"IND","v":4.0,"min":19,"pre":true,"team":"OKC"},{"d":"2026-10-12","opp":"ATL","v":10.0,"min":33,"pre":true,"team":"OKC"},{"d":"2026-10-08","opp":"MIL","v":6.0,"min":25,"pre":true,"team":"OKC"},{"d":"2026-10-07","opp":"NO","v":9.0,"min":18,"pre":true,"team":"OKC"}],"track":52.8,"match":45,"rank":17,"clubs":30,"opp36":10.83,"lg36":10.95,"price":null,"price_src":"","implied":null,"edge":null,"parts":{"chance":14.6,"form":10.9,"matchup":6.8,"role":6.9,"price":5.0},"score":44.2,"band":"dart","band_label":"Dart","small":true,"new_team":false,"last_team":"","doubt_note":"","season_games":0,"pre_games":5,"book_mid":null,"tags":[],"why":"Projected 7.2 rebounds on 23 minutes (42% to reach 8+ rebounds). Reached it in 3 of 5 preseason games.","reasons":[{"part":"chance","label":"Model chance","text":"42% to reach 8+ rebounds: 7.17 projected on 23 minutes (the preseason only), 11.37 per 36"},{"part":"form","label":"Track record","text":"Last season — · last 10 3/5 · last 5 3/5 · preseason 3/5"},{"part":"matchup","label":"Matchup","text":"SA allowed 10.83 rebounds per 36 to centers last season (17th of 30; league 10.95)"},{"part":"role","label":"Role & minutes","text":"23 projected minutes · off the bench"},{"part":"price","label":"Price check","text":"No DraftKings price at this line -- scored as neutral"}]},"4066259-reb-3.5":{"id":"4066259-reb-3.5","pid":"4066259","name":"De'Aaron Fox","team":"SA","opp":"OKC","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4066259.png","market":"reb","label":"Rebounds","word":"rebounds","icon":"🪟","code":"REB","side":"over","line":3.5,"need":4,"proj":3.81,"mean":3.92,"chance":51.1,"minutes":30.2,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":4.51,"ratio":1.004,"pace":1.005,"total":233.5,"hits":{"season":[36,73],"last10":[6,10],"last5":[3,5],"pre":[1,2]},"avg":{"season":3.73,"last10":3.9,"last5":4.2,"pre":4.5},"log":[{"d":"2026-10-17","opp":"SAC","v":6.0,"min":22,"pre":true,"team":"SA"},{"d":"2026-10-15","opp":"PHX","v":3.0,"min":19,"pre":true,"team":"SA"},{"d":"2026-04-13","opp":"DEN","v":6,"min":33,"pre":false,"team":"SA"},{"d":"2026-04-11","opp":"DAL","v":1,"min":28,"pre":false,"team":"SA"},{"d":"2026-04-09","opp":"POR","v":5,"min":35,"pre":false,"team":"SA"},{"d":"2026-04-07","opp":"PHI","v":0.0,"min":27,"pre":false,"team":"SA"},{"d":"2026-04-04","opp":"DEN","v":4,"min":40,"pre":false,"team":"SA"},{"d":"2026-04-03","opp":"LAC","v":8,"min":29,"pre":false,"team":"SA"},{"d":"2026-04-02","opp":"GS","v":4,"min":25,"pre":false,"team":"SA"},{"d":"2026-03-31","opp":"CHI","v":2,"min":23,"pre":false,"team":"SA"}],"track":52.4,"match":55,"rank":14,"clubs":30,"opp36":4.9,"lg36":4.86,"price":-108,"price_src":"4+ milestone","implied":51.9,"edge":-0.8,"parts":{"chance":20.7,"form":10.8,"matchup":8.2,"role":12.1,"price":4.6},"score":56.4,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"SA","doubt_note":"","season_games":73,"pre_games":2,"book_mid":3.6,"tags":[],"why":"Projected 3.9 rebounds on 30 minutes (51% to reach 4+ rebounds). Reached it in 36 of 73 games last season and 3 of his last 5.","reasons":[{"part":"chance","label":"Model chance","text":"51% to reach 4+ rebounds: 3.92 projected on 30 minutes (last season and the preseason), 4.51 per 36"},{"part":"form","label":"Track record","text":"Last season 36/73 · last 10 6/10 · last 5 3/5 · preseason 1/2"},{"part":"matchup","label":"Matchup","text":"OKC allowed 4.90 rebounds per 36 to guards last season (14th of 30; league 4.86)"},{"part":"role","label":"Role & minutes","text":"30 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -108 (4+ milestone) asks for 52%; we have 51% (-0.8)"}]},"4395630-threem-1.5":{"id":"4395630-threem-1.5","pid":"4395630","name":"Devin Vassell","team":"SA","opp":"OKC","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4395630.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":1.5,"need":2,"proj":2.52,"mean":2.54,"chance":68.2,"minutes":31.3,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":2.77,"ratio":1.041,"pace":1.005,"total":233.5,"hits":{"season":[45,68],"last10":[6,10],"last5":[3,5],"pre":[2,4]},"avg":{"season":2.47,"last10":1.9,"last5":1.8,"pre":1.5},"log":[{"d":"2026-10-17","opp":"SAC","v":2.0,"min":22,"pre":true,"team":"SA"},{"d":"2026-10-15","opp":"PHX","v":1.0,"min":25,"pre":true,"team":"SA"},{"d":"2026-10-11","opp":"PHX","v":1.0,"min":23,"pre":true,"team":"SA"},{"d":"2026-10-09","opp":"ATL","v":2.0,"min":18,"pre":true,"team":"SA"},{"d":"2026-04-13","opp":"DEN","v":3,"min":33,"pre":false,"team":"SA"},{"d":"2026-04-11","opp":"DAL","v":1,"min":27,"pre":false,"team":"SA"},{"d":"2026-04-09","opp":"POR","v":2,"min":31,"pre":false,"team":"SA"},{"d":"2026-04-07","opp":"PHI","v":1,"min":30,"pre":false,"team":"SA"},{"d":"2026-04-04","opp":"DEN","v":3,"min":39,"pre":false,"team":"SA"},{"d":"2026-04-03","opp":"LAC","v":3,"min":29,"pre":false,"team":"SA"}],"track":63.9,"match":86,"rank":5,"clubs":30,"opp36":2.56,"lg36":2.33,"price":-258,"price_src":"2+ milestone","implied":72.1,"edge":-3.9,"parts":{"chance":32.1,"form":14.6,"matchup":12.9,"role":13.0,"price":3.0},"score":75.6,"band":"playable","band_label":"Playable","small":false,"new_team":false,"last_team":"SA","doubt_note":"","season_games":68,"pre_games":4,"book_mid":2.4,"tags":["fav","mat"],"why":"Projected 2.5 threes on 31 minutes (68% to reach 2+ threes). Reached it in 45 of 68 games last season and 3 of his last 5. OKC gave up the 5th-most threes to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"68% to reach 2+ threes: 2.54 projected on 31 minutes (last season and the preseason), 2.77 per 36"},{"part":"form","label":"Track record","text":"Last season 45/68 · last 10 6/10 · last 5 3/5 · preseason 2/4"},{"part":"matchup","label":"Matchup","text":"OKC allowed 2.56 threes per 36 to guards last season (5th of 30; league 2.33)"},{"part":"role","label":"Role & minutes","text":"31 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -258 (2+ milestone) asks for 72%; we have 68% (-3.9)"}]},"4845367-stl-0.5":{"id":"4845367-stl-0.5","pid":"4845367","name":"Stephon Castle","team":"SA","opp":"OKC","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/4845367.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":1.0,"mean":0.98,"chance":60.4,"minutes":31.8,"min_src":"last season and the preseason","starting":true,"starters_known":true,"per36":1.19,"ratio":0.952,"pace":1.005,"total":233.5,"hits":{"season":[44,69],"last10":[7,10],"last5":[4,5],"pre":[3,4]},"avg":{"season":1.13,"last10":0.9,"last5":1.0,"pre":1.0},"log":[{"d":"2026-10-17","opp":"SAC","v":2.0,"min":23,"pre":true,"team":"SA"},{"d":"2026-10-15","opp":"PHX","v":0.0,"min":24,"pre":true,"team":"SA"},{"d":"2026-10-11","opp":"PHX","v":1.0,"min":21,"pre":true,"team":"SA"},{"d":"2026-10-09","opp":"ATL","v":1.0,"min":18,"pre":true,"team":"SA"},{"d":"2026-04-13","opp":"DEN","v":1,"min":29,"pre":false,"team":"SA"},{"d":"2026-04-07","opp":"PHI","v":2,"min":31,"pre":false,"team":"SA"},{"d":"2026-04-04","opp":"DEN","v":0.0,"min":40,"pre":false,"team":"SA"},{"d":"2026-04-03","opp":"LAC","v":0.0,"min":33,"pre":false,"team":"SA"},{"d":"2026-04-02","opp":"GS","v":1,"min":33,"pre":false,"team":"SA"},{"d":"2026-03-31","opp":"CHI","v":1,"min":35,"pre":false,"team":"SA"}],"track":65.6,"match":14,"rank":26,"clubs":30,"opp36":1.21,"lg36":1.37,"price":-244,"price_src":"1+ milestone","implied":70.9,"edge":-10.6,"parts":{"chance":26.9,"form":15.2,"matchup":2.1,"role":13.3,"price":0.0},"score":57.5,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"SA","doubt_note":"","season_games":69,"pre_games":4,"book_mid":1.1,"tags":["hot"],"why":"Projected 1.0 steals on 32 minutes (60% to reach 1+ steal). Reached it in 44 of 69 games last season and 4 of his last 5. OKC gave up the 5th-fewest steals to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"60% to reach 1+ steal: 0.98 projected on 32 minutes (last season and the preseason), 1.19 per 36"},{"part":"form","label":"Track record","text":"Last season 44/69 · last 10 7/10 · last 5 4/5 · preseason 3/4"},{"part":"matchup","label":"Matchup","text":"OKC allowed 1.21 steals per 36 to guards last season (26th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"32 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -244 (1+ milestone) asks for 71%; we have 60% (-10.6)"}]},"5037871-reb-3.5":{"id":"5037871-reb-3.5","pid":"5037871","name":"Dylan Harper","team":"SA","opp":"OKC","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/5037871.png","market":"reb","label":"Rebounds","word":"rebounds","icon":"🪟","code":"REB","side":"over","line":3.5,"need":4,"proj":4.12,"mean":4.22,"chance":55.9,"minutes":27.7,"min_src":"last season and the preseason, lifted for a projected start","starting":true,"starters_known":true,"per36":5.32,"ratio":1.004,"pace":1.005,"total":233.5,"hits":{"season":[32,70],"last10":[4,10],"last5":[2,5],"pre":[2,4]},"avg":{"season":3.44,"last10":3.4,"last5":3.2,"pre":3.25},"log":[{"d":"2026-10-17","opp":"SAC","v":0.0,"min":21,"pre":true,"team":"SA"},{"d":"2026-10-15","opp":"PHX","v":6.0,"min":23,"pre":true,"team":"SA"},{"d":"2026-10-11","opp":"PHX","v":3.0,"min":24,"pre":true,"team":"SA"},{"d":"2026-10-09","opp":"ATL","v":4.0,"min":19,"pre":true,"team":"SA"},{"d":"2026-04-13","opp":"DEN","v":3,"min":18,"pre":false,"team":"SA"},{"d":"2026-04-11","opp":"DAL","v":4,"min":26,"pre":false,"team":"SA"},{"d":"2026-04-09","opp":"POR","v":6,"min":33,"pre":false,"team":"SA"},{"d":"2026-04-07","opp":"PHI","v":3,"min":28,"pre":false,"team":"SA"},{"d":"2026-04-04","opp":"DEN","v":3,"min":20,"pre":false,"team":"SA"},{"d":"2026-04-03","opp":"LAC","v":2,"min":25,"pre":false,"team":"SA"}],"track":45.8,"match":55,"rank":14,"clubs":30,"opp36":4.9,"lg36":4.86,"price":-294,"price_src":"4+ milestone","implied":74.6,"edge":-18.7,"parts":{"chance":24.0,"form":8.6,"matchup":8.2,"role":10.2,"price":0.0},"score":51.0,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"SA","doubt_note":"","season_games":70,"pre_games":4,"book_mid":5.1,"tags":[],"why":"Projected 4.2 rebounds on 28 minutes (56% to reach 4+ rebounds). Reached it in 32 of 70 games last season and 2 of his last 5.","reasons":[{"part":"chance","label":"Model chance","text":"56% to reach 4+ rebounds: 4.22 projected on 28 minutes (last season and the preseason, lifted for a projected start), 5.32 per 36"},{"part":"form","label":"Track record","text":"Last season 32/70 · last 10 4/10 · last 5 2/5 · preseason 2/4"},{"part":"matchup","label":"Matchup","text":"OKC allowed 4.90 rebounds per 36 to guards last season (14th of 30; league 4.86)"},{"part":"role","label":"Role & minutes","text":"28 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -294 (4+ milestone) asks for 75%; we have 56% (-18.7)"}]},"5037871-stl-0.5":{"id":"5037871-stl-0.5","pid":"5037871","name":"Dylan Harper","team":"SA","opp":"OKC","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/5037871.png","market":"stl","label":"Steals","word":"steals","icon":"🧤","code":"STL","side":"over","line":0.5,"need":1,"proj":0.82,"mean":0.84,"chance":54.4,"minutes":27.7,"min_src":"last season and the preseason, lifted for a projected start","starting":true,"starters_known":true,"per36":1.12,"ratio":0.952,"pace":1.005,"total":233.5,"hits":{"season":[36,70],"last10":[6,10],"last5":[4,5],"pre":[3,4]},"avg":{"season":0.77,"last10":0.7,"last5":0.8,"pre":0.75},"log":[{"d":"2026-10-17","opp":"SAC","v":1.0,"min":21,"pre":true,"team":"SA"},{"d":"2026-10-15","opp":"PHX","v":0.0,"min":23,"pre":true,"team":"SA"},{"d":"2026-10-11","opp":"PHX","v":1.0,"min":24,"pre":true,"team":"SA"},{"d":"2026-10-09","opp":"ATL","v":1.0,"min":19,"pre":true,"team":"SA"},{"d":"2026-04-13","opp":"DEN","v":1,"min":18,"pre":false,"team":"SA"},{"d":"2026-04-11","opp":"DAL","v":0.0,"min":26,"pre":false,"team":"SA"},{"d":"2026-04-09","opp":"POR","v":2,"min":33,"pre":false,"team":"SA"},{"d":"2026-04-07","opp":"PHI","v":0.0,"min":28,"pre":false,"team":"SA"},{"d":"2026-04-04","opp":"DEN","v":0.0,"min":20,"pre":false,"team":"SA"},{"d":"2026-04-03","opp":"LAC","v":1,"min":25,"pre":false,"team":"SA"}],"track":55.3,"match":14,"rank":26,"clubs":30,"opp36":1.21,"lg36":1.37,"price":-272,"price_src":"1+ milestone","implied":73.1,"edge":-18.7,"parts":{"chance":22.9,"form":11.8,"matchup":2.1,"role":10.2,"price":0.0},"score":47.0,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"SA","doubt_note":"","season_games":70,"pre_games":4,"book_mid":1.2,"tags":["hot"],"why":"Projected 0.8 steals on 28 minutes (54% to reach 1+ steal). Reached it in 36 of 70 games last season and 4 of his last 5. OKC gave up the 5th-fewest steals to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"54% to reach 1+ steal: 0.84 projected on 28 minutes (last season and the preseason, lifted for a projected start), 1.12 per 36"},{"part":"form","label":"Track record","text":"Last season 36/70 · last 10 6/10 · last 5 4/5 · preseason 3/4"},{"part":"matchup","label":"Matchup","text":"OKC allowed 1.21 steals per 36 to guards last season (26th of 30; league 1.37)"},{"part":"role","label":"Role & minutes","text":"28 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings -272 (1+ milestone) asks for 73%; we have 54% (-18.7)"}]},"5037871-threem-1.5":{"id":"5037871-threem-1.5","pid":"5037871","name":"Dylan Harper","team":"SA","opp":"OKC","game":"401909090","kick":"2026-10-21T01:30Z","pos":"G","role":"Guard","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/5037871.png","market":"threem","label":"Threes","word":"threes","icon":"💦","code":"3PM","side":"over","line":1.5,"need":2,"proj":1.56,"mean":1.57,"chance":44.3,"minutes":27.7,"min_src":"last season and the preseason, lifted for a projected start","starting":true,"starters_known":true,"per36":1.94,"ratio":1.041,"pace":1.005,"total":233.5,"hits":{"season":[16,70],"last10":[5,10],"last5":[2,5],"pre":[2,4]},"avg":{"season":0.94,"last10":1.6,"last5":1.6,"pre":2.0},"log":[{"d":"2026-10-17","opp":"SAC","v":3.0,"min":21,"pre":true,"team":"SA"},{"d":"2026-10-15","opp":"PHX","v":1.0,"min":23,"pre":true,"team":"SA"},{"d":"2026-10-11","opp":"PHX","v":1.0,"min":24,"pre":true,"team":"SA"},{"d":"2026-10-09","opp":"ATL","v":3.0,"min":19,"pre":true,"team":"SA"},{"d":"2026-04-13","opp":"DEN","v":0.0,"min":18,"pre":false,"team":"SA"},{"d":"2026-04-11","opp":"DAL","v":0.0,"min":26,"pre":false,"team":"SA"},{"d":"2026-04-09","opp":"POR","v":1,"min":33,"pre":false,"team":"SA"},{"d":"2026-04-07","opp":"PHI","v":3,"min":28,"pre":false,"team":"SA"},{"d":"2026-04-04","opp":"DEN","v":2,"min":20,"pre":false,"team":"SA"},{"d":"2026-04-03","opp":"LAC","v":2,"min":25,"pre":false,"team":"SA"}],"track":34.2,"match":86,"rank":5,"clubs":30,"opp36":2.56,"lg36":2.33,"price":118,"price_src":"2+ milestone","implied":45.9,"edge":-1.6,"parts":{"chance":16.2,"form":4.7,"matchup":12.9,"role":10.2,"price":4.2},"score":48.2,"band":"dart","band_label":"Dart","small":false,"new_team":false,"last_team":"SA","doubt_note":"","season_games":70,"pre_games":4,"book_mid":1.4,"tags":["mat"],"why":"Projected 1.6 threes on 28 minutes (44% to reach 2+ threes). Reached it in 16 of 70 games last season and 2 of his last 5. OKC gave up the 5th-most threes to guards last season.","reasons":[{"part":"chance","label":"Model chance","text":"44% to reach 2+ threes: 1.57 projected on 28 minutes (last season and the preseason, lifted for a projected start), 1.94 per 36"},{"part":"form","label":"Track record","text":"Last season 16/70 · last 10 5/10 · last 5 2/5 · preseason 2/4"},{"part":"matchup","label":"Matchup","text":"OKC allowed 2.56 threes per 36 to guards last season (5th of 30; league 2.33)"},{"part":"role","label":"Role & minutes","text":"28 projected minutes · expected starter"},{"part":"price","label":"Price check","text":"DraftKings +118 (2+ milestone) asks for 46%; we have 44% (-1.6)"}]}},"top5":["3062679-ast-2.5","4395630-threem-1.5","4431678-stl-0.5","1966-threem-0.5","3157465-threem-2.5"],"value":[],"value_close":[],"value_count":0,"value_edge":4.0,"value_match_floor":50,"value_walled":["5124612-ast-5.5"],"first_basket":[{"name":"Daniss Jenkins","pid":"5107199","team":"DET","opp":"BOS","game":"401909088","kick":"2026-10-20T19:00Z","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/5107199.png","starting":false,"rec":{"games":15,"starts":9,"jumps":0,"jump_won":0,"team_first":5,"his_team_first_fg":2,"game_first_fg":1,"team_first_fga":4,"start_games":0,"clubs":["DET"]},"jumper":{"name":"Jalen Duren","id":"4433621","games":11,"starts":11,"jumps":11,"jump_won":6,"team_first":7,"his_team_first_fg":3,"game_first_fg":3,"team_first_fga":4,"start_games":0,"clubs":["DET"]},"opp_jumper":{"name":"Mitchell Robinson","id":"4351852","games":9,"starts":3,"jumps":3,"jump_won":3,"team_first":2,"his_team_first_fg":3,"game_first_fg":2,"team_first_fga":0,"start_games":0,"clubs":["BOS","NY"]},"p_tip":36.0,"p_first":48.0,"share":21.5,"chance":1.0,"chance_if_starts":10.3,"price":null,"implied":null,"edge":null,"team_first_fg_price":null},{"name":"Jaylen Brown","pid":"3917376","team":"PHI","opp":"NY","game":"401909089","kick":"2026-10-20T23:00Z","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/3917376.png","starting":true,"rec":{"games":10,"starts":10,"jumps":0,"jump_won":0,"team_first":3,"his_team_first_fg":3,"game_first_fg":2,"team_first_fga":5,"start_games":0,"clubs":["PHI","BOS"]},"jumper":{"name":"Joel Embiid","id":"3059318","games":7,"starts":7,"jumps":4,"jump_won":1,"team_first":3,"his_team_first_fg":1,"game_first_fg":0,"team_first_fga":2,"start_games":0,"clubs":["PHI"]},"opp_jumper":{"name":"Karl-Anthony Towns","id":"3136195","games":12,"starts":12,"jumps":12,"jump_won":3,"team_first":7,"his_team_first_fg":1,"game_first_fg":0,"team_first_fga":1,"start_games":0,"clubs":["NY"]},"p_tip":57.1,"p_first":51.0,"share":27.1,"chance":13.8,"chance_if_starts":13.8,"price":640,"implied":13.5,"edge":0.3,"team_first_fg_price":310},{"name":"Victor Wembanyama","pid":"5104157","team":"SA","opp":"OKC","game":"401909090","kick":"2026-10-21T01:30Z","headshot":"https://a.espncdn.com/i/headshots/nba/players/full/5104157.png","starting":true,"rec":{"games":11,"starts":11,"jumps":11,"jump_won":11,"team_first":5,"his_team_first_fg":6,"game_first_fg":3,"team_first_fga":7,"start_games":0,"clubs":["SA"]},"jumper":{"name":"Victor Wembanyama","id":"5104157","games":11,"starts":11,"jumps":11,"jump_won":11,"team_first":5,"his_team_first_fg":6,"game_first_fg":3,"team_first_fga":7,"start_games":0,"clubs":["SA"]},"opp_jumper":{"name":"Chet Holmgren","id":"4433255","games":7,"starts":7,"jumps":6,"jump_won":4,"team_first":5,"his_team_first_fg":1,"game_first_fg":0,"team_first_fga":3,"start_games":0,"clubs":["OKC"]},"p_tip":76.9,"p_first":53.8,"share":45.3,"chance":24.4,"chance_if_starts":24.4,"price":384,"implied":20.7,"edge":3.7,"team_first_fg_price":180}],"scratched":[{"name":"Otega Oweh","team":"OKC","line":0.5,"side":"over","market":"blk","label":"Blocks","icon":"🚫","note":"Achilles surgery 10/14 — out for the 2026-27 season (ESPN, DailyThunder)"},{"name":"Tobias Harris","team":"SA","line":1.5,"side":"over","market":"threem","label":"Threes","icon":"💦","note":"Calf — not ready for the opener (ESPN, SI.com)"}],"unmatched":[],"weights":{"chance":40,"form":20,"matchup":15,"role":15,"price":10},"prices_from":"DraftKings via ESPN","prices_captured":"2026-10-20T13:28+00:00","fit":{"label":"2025-26","test_rows":10522,"check":{"ast":[{"line":"2+","said":55.4,"hit":56.6,"logloss":0.5244,"base_logloss":0.6845,"quintiles":[[16.0,19.2],[36.6,39.1],[55.6,56.2],[75.1,75.3],[93.3,93.1]]},{"line":"3+","said":38.5,"hit":39.1,"logloss":0.4921,"base_logloss":0.6694,"quintiles":[[5.5,8.1],[17.0,17.6],[32.3,32.4],[54.2,53.9],[83.8,83.7]]},{"line":"5+","said":17.7,"hit":18.1,"logloss":0.3243,"base_logloss":0.4727,"quintiles":[[0.5,1.2],[2.8,3.1],[8.0,8.5],[20.7,21.5],[56.6,56.2]]},{"line":"7+","said":7.8,"hit":8.1,"logloss":0.1827,"base_logloss":0.2823,"quintiles":[[0.0,0.2],[0.4,0.6],[1.5,1.6],[5.8,6.7],[31.1,31.6]]}],"stl":[{"line":"1+","said":49.6,"hit":50.1,"logloss":0.6436,"base_logloss":0.6931,"quintiles":[[28.1,27.0],[42.6,41.9],[51.0,51.2],[58.1,59.5],[68.1,71.1]]},{"line":"2+","said":19.2,"hit":20.0,"logloss":0.4621,"base_logloss":0.5001,"quintiles":[[6.2,6.5],[12.9,13.1],[18.4,19.1],[24.1,23.7],[34.5,37.5]]}],"blk":[{"line":"1+","said":32.1,"hit":30.8,"logloss":0.5514,"base_logloss":0.6174,"quintiles":[[11.1,11.3],[20.3,19.8],[29.0,27.4],[40.0,37.1],[60.1,58.3]]},{"line":"2+","said":9.7,"hit":9.5,"logloss":0.2664,"base_logloss":0.3134,"quintiles":[[1.3,1.8],[3.2,3.3],[6.0,5.8],[11.1,9.9],[26.6,26.6]]}],"reb":[{"line":"3+","said":62.6,"hit":62.4,"logloss":0.5241,"base_logloss":0.6623,"quintiles":[[23.5,27.0],[49.2,47.4],[66.4,64.1],[80.3,79.5],[93.5,93.7]]},{"line":"5+","said":37.2,"hit":37.0,"logloss":0.505,"base_logloss":0.6587,"quintiles":[[6.0,7.7],[18.9,17.9],[33.3,31.5],[50.5,49.4],[77.0,78.3]]},{"line":"7+","said":19.9,"hit":19.5,"logloss":0.3693,"base_logloss":0.493,"quintiles":[[1.3,2.0],[5.8,5.6],[13.1,12.8],[25.1,22.9],[54.5,54.1]]},{"line":"9+","said":10.0,"hit":9.8,"logloss":0.2299,"base_logloss":0.3208,"quintiles":[[0.3,0.7],[1.5,1.7],[4.3,4.3],[10.3,8.0],[33.6,34.3]]}],"threem":[{"line":"1+","said":57.2,"hit":58.1,"logloss":0.5134,"base_logloss":0.6798,"quintiles":[[16.1,14.2],[44.0,45.9],[62.0,65.7],[75.5,76.2],[88.4,88.8]]},{"line":"2+","said":32.1,"hit":34.0,"logloss":0.515,"base_logloss":0.6413,"quintiles":[[3.4,4.3],[15.4,19.2],[29.6,33.9],[45.1,44.8],[67.0,68.1]]},{"line":"3+","said":16.9,"hit":18.1,"logloss":0.3837,"base_logloss":0.4728,"quintiles":[[0.7,1.5],[4.8,5.9],[12.0,14.4],[22.8,23.2],[44.2,45.4]]},{"line":"4+","said":8.4,"hit":8.9,"logloss":0.2442,"base_logloss":0.3003,"quintiles":[[0.2,0.4],[1.4,1.9],[4.4,5.3],[10.2,10.6],[26.1,26.3]]}]}},"root":""};
+        if (!SHEET) return;
+        var GAMES = SHEET.games || [];
+        var BY_ID = SHEET.by_id || {};
+        var GAME_BY_ID = {};
+        GAMES.forEach(function (g) { GAME_BY_ID[g.id] = g; });
+
+        var esc = function (s) {
+            return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+                return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+            });
+        };
+        var posClass = function (p) { return "sheet-pos sheet-pos--" + String(p || "G").slice(0, 1); };
+        function teamImg(url, cls) {
+            return url ? '<img class="' + cls + '" src="' + esc(url) + '" alt="" loading="lazy" onerror="this.remove()">' : "";
+        }
+        function fmtKick(iso) {
+            if (!iso) return "";
+            var d = new Date(iso);
+            return isNaN(d) ? "" : d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+        }
+        function prettyDate(iso) {
+            var p = String(iso || "").split("-");
+            if (p.length < 3) return iso || "";
+            return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).toLocaleDateString(undefined, { month: "numeric", day: "numeric", timeZone: "UTC" });
+        }
+        function tzName() { try { return new Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return ""; } }
+        function fmtPrice(p) { return p == null ? "" : (p > 0 ? "+" + p : String(p)); }
+
+        /* The research tab opens on the player when handed his game and id. */
+        function researchHref(pl) {
+            return SHEET.root + "index.html?date=" + encodeURIComponent(SHEET.date) +
+                "&game=" + encodeURIComponent(pl.game) + "&player=" + encodeURIComponent(pl.pid);
+        }
+        function nameLink(pl) {
+            return '<a class="sheet-play__name" href="' + esc(researchHref(pl)) + '" title="Open ' + esc(pl.name) + ' in NBA Research">' + esc(pl.name) + "</a>";
+        }
+        function betText(pl) { return (pl.side === "under" ? "Under " : "Over ") + pl.line + " " + pl.label; }
+        function ledgerPick(pl) {
+            var g = GAME_BY_ID[pl.game] || {};
+            return esc(JSON.stringify({ sport: "NBA", name: pl.name, market: betText(pl),
+                event: (g.away_name || g.away || "") + " @ " + (g.home_name || g.home || ""), date: pl.kick || SHEET.date }));
+        }
+
+        var MODEL = [
+            ["Model Chance", "chance", "The projection's chance to clear the line: projected minutes times his per-minute rate (last season and the preseason, shrunk toward his position), adjusted for the matchup and the game total. The scatter around it was fitted on 2025-26 and checked on games the model never saw."],
+            ["Track Record", "form", "How often he has actually cleared this exact line: last season, his last ten and the preseason, leaned on the model when the sample is thin."],
+            ["Matchup", "matchup", "What tonight's opponent allowed per minute to his position in this stat last season, ranked against the league. Rosters turned over, so it counts half as much in the projection."],
+            ["Role & Minutes", "role", "Projected minutes and whether he starts. Starters' preseason minutes run light, so they are scaled to a regular-season role. A lineup doubt costs points."],
+            ["Price Check", "price", "The model's chance against the chance DraftKings' price asks for. A fair or better price scores well; a heavily juiced line that asks for more than he delivers scores low."]
+        ];
+        var PART_SHORT = { chance: "Chance", form: "Record", matchup: "Matchup", role: "Role", price: "Price" };
+        var BAND_SHORT = { elite: "Elite", strong: "Strong", playable: "Playable", thin: "Thin", dart: "Dart" };
+        var BANDS = [
+            ["elite", "90-100 Elite", "The model, the record, the matchup and the price all agree. Top-shelf merchandise."],
+            ["strong", "80-89 Strong", "A sturdy play: a strong chance with either the record or the matchup backing it up."],
+            ["playable", "70-79 Playable", "Reasonable if the number fits, but one part of the profile is pushing back."],
+            ["thin", "60-69 Thin", "Needs the price or a specific script to help. More garnish than main course."],
+            ["dart", "59 or lower — Dart", "On the list, but the numbers aren't arguing for it tonight. Small stakes, big dreams."]
+        ];
+        var TAGS = {
+            fav:   { icon: "⭐", label: "Top shelf", cls: "fav" },
+            mat:   { icon: "🥊", label: "Soft matchup", cls: "mat" },
+            track: { icon: "🎯", label: "Track record", cls: "track" },
+            mins:  { icon: "⏱️", label: "Big minutes", cls: "mins" },
+            hot:   { icon: "🔥", label: "Heating up", cls: "agg" },
+            val:   { icon: "💰", label: "Value", cls: "edge" }
+        };
+        var MARKET_FILTERS = [["stl", "🧤 Steals"], ["blk", "🚫 Blocks"], ["threem", "💦 Threes"], ["ast", "🍽️ Assists"], ["reb", "🪟 Rebounds"], ["pts", "🏀 Points"]];
+
+        function ovr(pl, size) {
+            return '<span class="sheet-ovr sheet-ovr--' + esc(pl.band) + (size ? " sheet-ovr--" + size : "") + '" title="' +
+                esc(pl.band_label) + " · " + pl.score.toFixed(1) + ' of 100"><b>' + Math.floor(pl.score) + "</b>" +
+                (size === "lg" ? "<small>OVR</small>" : "") + "</span>";
+        }
+        function chips(pl) {
+            return (pl.tags || []).map(function (k) {
+                var t = TAGS[k];
+                return t ? '<span class="chip chip--' + t.cls + '">' + t.icon + " " + esc(t.label) + "</span>" : "";
+            }).join("");
+        }
+        function flagChips(pl) {
+            return (pl.small ? '<span class="chip chip--new">🐣 Small sample</span>' : "") +
+                (pl.new_team ? '<span class="chip chip--new">🧳 New team (was ' + esc(pl.last_team) + ")</span>" : "") +
+                (pl.book_gap ? '<span class="chip chip--book">' + (pl.book_gap === "less" ? "📉 Book sees less" : "📈 Book sees more") + "</span>" : "") +
+                (pl.doubt_note ? '<span class="chip chip--out">⚠️ ' + esc(pl.doubt_note) + "</span>" : "");
+        }
+        function priceHTML(pl) {
+            return pl.price != null ? '<span class="sheet-book" title="DraftKings, ' + esc(pl.price_src) + '">' + esc(fmtPrice(pl.price)) + "</span>" : "";
+        }
+        function lineHTML(pl) {
+            return '<div class="prop-line"><span class="prop-line__bet">' + pl.icon + " " + esc(betText(pl)) + "</span>" +
+                '<span class="prop-line__chance">' + pl.chance.toFixed(0) + "% model chance</span></div>";
+        }
+        function hitBox(label, h) {
+            if (!h || !h[1]) return '<span class="prop-hit prop-hit--none"><b>—</b><small>' + label + "</small></span>";
+            var r = h[0] / h[1], cls = r >= 0.7 ? "good" : r >= 0.5 ? "mid" : "bad";
+            return '<span class="prop-hit prop-hit--' + cls + '" title="' + h[0] + " of " + h[1] + " (" + Math.round(100 * r) + '%)"><b>' +
+                h[0] + "/" + h[1] + "</b><small>" + label + "</small></span>";
+        }
+        function hitsHTML(pl) {
+            var h = pl.hits || {};
+            return '<div class="prop-hits">' + hitBox("Last 5", h.last5) + hitBox("Last 10", h.last10) +
+                hitBox("2025-26", h.season) + hitBox("Preseason", h.pre) + "</div>";
+        }
+        /* his last ten games as bars against the line: green cleared it */
+        function sparkHTML(pl) {
+            var log = (pl.log || []).slice().reverse();
+            if (!log.length) return "";
+            var top = Math.max(pl.need + 1, Math.max.apply(null, log.map(function (l) { return l.v; })));
+            var bars = log.map(function (l) {
+                var hit = pl.side === "under" ? l.v < pl.need : l.v >= pl.need;
+                return '<i class="' + (hit ? "hit" : "") + (l.pre ? " pre" : "") + '" style="height:' + Math.max(6, Math.round(100 * l.v / top)) +
+                    '%" title="' + esc(l.d + " vs " + l.opp + (l.pre ? " (preseason)" : "") + ": " + l.v + " " + pl.word + ", " + l.min + " min") + '"></i>';
+            }).join("");
+            var lineAt = Math.round(100 * (pl.line + 0.5) / top);
+            return '<div class="prop-spark" aria-label="Last ' + log.length + ' games against the line">' + bars +
+                '<span class="line" style="bottom:' + Math.min(100, lineAt) + '%"></span></div>' +
+                '<div class="prop-spark-cap"><span>' + esc(log[0].d.slice(5)) + "</span><span>last " + log.length + " · faded = preseason</span><span>" + esc(log[log.length - 1].d.slice(5)) + "</span></div>";
+        }
+        function partsBar(pl) {
+            var W = SHEET.weights || {};
+            return '<div class="sheet-parts">' + MODEL.map(function (m) {
+                var got = (pl.parts || {})[m[1]] || 0, max = W[m[1]] || 1;
+                return '<span class="sheet-part" title="' + esc(m[0]) + ": " + got + " of " + max + '">' +
+                    '<span class="sheet-part__bar"><i style="width:' + Math.round(100 * got / max) + '%"></i></span>' +
+                    '<span class="sheet-part__label">' + esc(PART_SHORT[m[1]]) + "</span></span>";
+            }).join("") + "</div>";
+        }
+        function reasonsHTML(pl) {
+            return '<details class="prop-reasons"><summary>Why ' + Math.floor(pl.score) + "?</summary><ul>" +
+                (pl.reasons || []).map(function (r) {
+                    return "<li><b>" + esc(r.label) + " " + ((pl.parts || {})[r.part] || 0) + "/" + ((SHEET.weights || {})[r.part] || 0) + ":</b> " + esc(r.text) + "</li>";
+                }).join("") + "</ul></details>";
+        }
+
+        function playHTML(pl) {
+            return '<article class="sheet-play sheet-play--' + esc(pl.band) + '" data-tags="' + esc((pl.tags || []).concat([pl.market]).join(" ")) +
+                '" data-id="' + esc(pl.id) + '" data-ledger-pick="' + ledgerPick(pl) + '">' +
+                '<div class="sheet-play__head">' + ovr(pl) +
+                '<span class="' + posClass(pl.pos) + '">' + esc(pl.pos) + "</span>" + nameLink(pl) +
+                '<span class="sheet-band">' + esc(pl.band_label) + "</span>" + priceHTML(pl) + "</div>" +
+                lineHTML(pl) +
+                '<div class="sheet-play__tags">' + chips(pl) + flagChips(pl) + "</div>" +
+                '<p class="sheet-why">' + esc(pl.why) + "</p>" +
+                hitsHTML(pl) + sparkHTML(pl) + partsBar(pl) + reasonsHTML(pl) + "</article>";
+        }
+        function topCard(pl, i, extra) {
+            return '<article class="sheet-top-card sheet-play--' + esc(pl.band) + '" data-id="' + esc(pl.id) + '" data-ledger-pick="' + ledgerPick(pl) + '">' +
+                '<div class="sheet-play__head sheet-top-card__head">' +
+                '<span class="sheet-top-five-rank"><i>#</i>' + (i + 1) + "</span>" +
+                '<span class="' + posClass(pl.pos) + '">' + esc(pl.pos) + "</span>" + nameLink(pl) + ovr(pl, "lg") + priceHTML(pl) + "</div>" +
+                lineHTML(pl) +
+                '<div class="sheet-play__tags">' + chips(pl) + '<span class="chip">' + esc(pl.team) + " vs " + esc(pl.opp) + "</span>" +
+                '<span class="chip">' + esc(fmtKick(pl.kick)) + '</span><span class="chip">' + esc(pl.band_label) + "</span>" + flagChips(pl) + "</div>" +
+                (extra || "") +
+                '<p class="sheet-why">' + esc(pl.why) + "</p>" + hitsHTML(pl) + sparkHTML(pl) + partsBar(pl) + "</article>";
+        }
+
+        function valueHTML() {
+            var ids = (SHEET.value || []).concat(SHEET.value_close || []), nValue = (SHEET.value || []).length;
+            return ids.map(function (id, i) {
+                var pl = BY_ID[id];
+                if (!pl) return "";
+                var close = i >= nValue, ours = pl.chance, implied = pl.implied || 0;
+                var extra = '<p class="sheet-value-verdict">' + (close ? "Underpriced" : pl.price >= 250 ? "Priced like a long shot, plays better" : "Underpriced") + "</p>" +
+                    '<div class="sheet-chance"><div class="sheet-chance__label"><span>Our estimate</span><b>' + ours.toFixed(0) + "%</b></div>" +
+                    '<div class="sheet-chance__track"><span style="width:' + Math.min(100, ours) + '%"></span></div>' +
+                    '<div class="sheet-chance__label"><span>Price ' + esc(fmtPrice(pl.price)) + " implies</span><b>" + implied.toFixed(0) + "%</b></div>" +
+                    '<div class="sheet-chance__track sheet-chance__track--price"><span style="width:' + Math.min(100, implied) + '%"></span></div></div>' +
+                    '<p class="sheet-why"><b>The odds:</b> ' + esc(fmtPrice(pl.price)) + " treats this as a " + implied.toFixed(0) + "% shot. We have it at " + ours.toFixed(0) + "%.</p>" +
+                    '<p class="sheet-why"><b>The matchup:</b> ' + esc(pl.opp) + " ranked " + pl.rank + " of " + pl.clubs + " in " + esc(pl.word) + " allowed to his position last season.</p>";
+                return topCard(pl, i, extra).replace('class="sheet-top-card ', 'class="sheet-top-card sheet-value-card' + (close ? " sheet-value-card--close" : "") + " ");
+            }).join("");
+        }
+
+        function fbHTML() {
+            return (SHEET.first_basket || []).map(function (c) {
+                var g = GAME_BY_ID[c.game] || {}, rec = c.rec || {}, j = c.jumper, oj = c.opp_jumper;
+                var pick = esc(JSON.stringify({ sport: "NBA", name: c.name, market: "First Basket",
+                    event: (g.away_name || g.away || "") + " @ " + (g.home_name || g.home || ""), date: c.kick || SHEET.date }));
+                var items = [];
+                items.push("<li><strong>The tip</strong><br>" + (j ? esc(j.name) + " has won " + j.jump_won + " of his last " + j.jumps + " opening tips" : "No jumper on record") +
+                    (oj ? "; " + esc(oj.name) + " " + oj.jump_won + " of " + oj.jumps : "") + ". " + esc(c.team) + " wins it about " + Math.round(c.p_tip) + "% of the time.</li>");
+                items.push("<li><strong>His team first</strong><br>" + esc(c.team) + " scores the game's first basket about " + Math.round(c.p_first) + "% of the time tonight.</li>");
+                items.push("<li><strong>His share</strong><br>As a starter he scored his team's first basket in " + rec.his_team_first_fg + " of " + rec.starts +
+                    " games and took its first shot in " + rec.team_first_fga + "; he hit the game's first basket " + rec.game_first_fg + " time" + (rec.game_first_fg === 1 ? "" : "s") + ".</li>");
+                if (c.price != null) {
+                    items.push("<li><strong>The odds</strong><br>DraftKings " + esc(fmtPrice(c.price)) + " asks for " + c.implied.toFixed(1) + "%. We have " + c.chance.toFixed(1) + "%" +
+                        (c.edge >= 2 ? ", a real cushion." : c.edge >= -1 ? ", about a fair price." : ", so the price is short.") + "</li>");
+                } else {
+                    items.push("<li><strong>The odds</strong><br>DraftKings isn't offering him for first basket, a sign the book doesn't expect him on the floor for the tip.</li>");
+                }
+                return '<article class="fb-card' + (c.starting ? "" : " fb-card--bench") + '" data-ledger-pick="' + pick + '">' +
+                    '<span class="fb-card__tag">🏀 First Basket &middot; ' + esc(c.team) + " vs " + esc(c.opp) + " &middot; " + esc(fmtKick(c.kick)) + "</span>" +
+                    '<div class="fb-card__head sheet-top-card__head">' + (c.headshot ? '<img src="' + esc(c.headshot) + '" alt="" loading="lazy" onerror="this.remove()">' : "") +
+                    '<a class="sheet-play__name" href="' + esc(SHEET.root + "index.html?date=" + SHEET.date + "&game=" + c.game + "&player=" + c.pid) + '">' + esc(c.name) + "</a>" +
+                    (c.price != null ? '<span class="sheet-book">' + esc(fmtPrice(c.price)) + "</span>" : "") +
+                    '<span class="fb-card__chance"><b>' + c.chance.toFixed(0) + "%</b><small>first basket</small></span></div>" +
+                    (c.starting ? "" : '<div class="fb-warn">⚠️ Not in the expected starting five tonight. First baskets almost always come from the starters; if he starts after all, we have him at ' +
+                        c.chance_if_starts.toFixed(0) + "%.</div>") +
+                    "<ul>" + items.join("") + "</ul></article>";
+            }).join("");
+        }
+
+        // ── render ──
+        document.getElementById("sheetTitle").innerHTML = 'Worst Pickz <span class="sheet-title-date">' + esc(prettyDate(SHEET.date)) + "</span> NBA Prop Shop";
+        document.title = "Worst Pickz " + prettyDate(SHEET.date) + " NBA Prop Shop";
+        var all = Object.keys(BY_ID).map(function (k) { return BY_ID[k]; });
+
+        if (SHEET.opening_night) {
+            document.getElementById("shopOpen").hidden = false;
+            document.getElementById("shopOpenText").textContent =
+                "Doors open for the 2026-27 season. " + GAMES.length + " games tonight and " + all.length +
+                " props on the shelf, each one rated by the Worst Pickz model: last season's every game, this preseason, " +
+                "tonight's matchup and DraftKings' price. First tip " + fmtKick(GAMES.length ? GAMES[0].kick : "") + ".";
+        }
+
+        var W = SHEET.weights || {};
+        document.getElementById("sheetModel").innerHTML = MODEL.map(function (m) {
+            return '<div class="sheet-criterion"><h3>' + esc(m[0]) + ' <span class="sheet-pts">' + (W[m[1]] || 0) + " pts</span></h3><p>" + esc(m[2]) + "</p></div>";
+        }).join("");
+        document.getElementById("sheetBands").innerHTML = BANDS.map(function (b) {
+            return '<div class="sheet-rating-box sheet-play--' + b[0] + '"><h3>' + esc(b[1]) + "</h3><p>" + esc(b[2]) + "</p></div>";
+        }).join("");
+
+        if ((SHEET.first_basket || []).length) {
+            document.getElementById("fbSection").hidden = false;
+            document.getElementById("fbCards").innerHTML = fbHTML();
+            document.getElementById("fbNote").textContent =
+                "The first made field goal of the game; free throws don't count. Built from ESPN play-by-play of each player's last 15 games " +
+                "(last season's close and this preseason): who jumps, who wins the tip, and who takes and makes his team's first shot. " +
+                "The side that wins the tip scores first about 57% of the time.";
+        }
+
+        document.getElementById("sheetTop").innerHTML = (SHEET.top5 || []).map(function (id, i) { return BY_ID[id] ? topCard(BY_ID[id], i) : ""; }).join("");
+
+        var nVal = (SHEET.value || []).length, nClose = (SHEET.value_close || []).length;
+        var walled = (SHEET.value_walled || []).map(function (id) { return BY_ID[id]; }).filter(Boolean);
+        if (nVal || nClose || walled.length) {
+            document.getElementById("sheetValueSection").hidden = false;
+            document.getElementById("sheetValue").innerHTML = valueHTML();
+            var note = "Plus-money props where our chance beats the chance DraftKings' price asks for by " + (SHEET.value_edge || 4) +
+                " points or more, with a matchup of " + (SHEET.value_match_floor || 50) + "/100 or better. No lineup doubts, thin samples, " +
+                "or lines where the book has already moved off our number.";
+            if (!nVal && !nClose) {
+                note = "The bin is empty tonight. " + note + " Priced well but left off: " + walled.map(function (pl) {
+                    return pl.name + " " + betText(pl) + " (" + fmtPrice(pl.price) + ", +" + pl.edge.toFixed(0) + " pts" +
+                        (pl.book_gap ? ", but DraftKings has already moved his line" : pl.match < (SHEET.value_match_floor || 50) ? ", but the matchup fights back (" + pl.match + "/100)" : "") + ")";
+                }).join("; ") + ".";
+            }
+            document.getElementById("sheetValueNote").textContent = note;
+            document.getElementById("sheetValueTitle").innerHTML = "&#127991;&#65039; Bargain Bin &mdash; " +
+                (nVal + nClose ? "best value" + (nVal + nClose > 1 ? ", top " + (nVal + nClose) : "") : "empty tonight");
+        }
+
+        document.getElementById("sheetGames").innerHTML = GAMES.map(function (g) {
+            var side = function (team, logo) {
+                var ids = g.sides[team] || [];
+                return '<div class="sheet-side" data-team="' + esc(team) + '"><header class="sheet-side__head">' + teamImg(logo, "sheet-side__logo") +
+                    "<span>" + esc(team) + "</span></header>" +
+                    (ids.length ? ids.map(function (id) { return playHTML(BY_ID[id]); }).join("") : '<p class="sheet-empty">Nothing on the list.</p>') + "</div>";
+            };
+            return '<section class="sheet-game" data-game="' + esc(g.id) + '"><header class="sheet-game__head">' +
+                '<span class="sheet-game__teams">' + teamImg(g.away_logo, "sheet-game__logo") + esc(g.away_name || g.away) +
+                ' <span class="sheet-game__at">@</span> ' + teamImg(g.home_logo, "sheet-game__logo") + esc(g.home_name || g.home) + "</span>" +
+                '<span class="sheet-game__when">' + esc(fmtKick(g.kick)) + (g.venue ? " · " + esc(g.venue) : "") +
+                (g.total ? " · total " + esc(g.total) : "") + (g.spread ? " · " + esc(g.spread) : "") + "</span></header>" +
+                '<div class="sheet-game__body">' + side(g.away, g.away_logo) + side(g.home, g.home_logo) + "</div></section>";
+        }).join("");
+
+        if ((SHEET.scratched || []).length) {
+            document.getElementById("offSection").hidden = false;
+            document.getElementById("offList").innerHTML = SHEET.scratched.map(function (s) {
+                return '<div class="shelf-off__item"><span class="chip chip--out">OUT</span><b>' + esc(s.name) + "</b> <span>" + esc(s.team) + "</span>" +
+                    "<s>" + s.icon + " " + (s.side === "under" ? "Under " : "Over ") + s.line + " " + esc(s.label) + "</s><span>" + esc(s.note) + "</span></div>";
+            }).join("");
+        }
+
+        // counts, legend, filters
+        var bandCount = {}, tagCount = { all: all.length }, mktCount = {};
+        all.forEach(function (pl) {
+            bandCount[pl.band] = (bandCount[pl.band] || 0) + 1;
+            (pl.tags || []).forEach(function (k) { tagCount[k] = (tagCount[k] || 0) + 1; });
+            mktCount[pl.market] = (mktCount[pl.market] || 0) + 1;
+        });
+        document.getElementById("sheetCounts").innerHTML =
+            '<span class="sheet-count">' + all.length + " props</span>" + '<span class="sheet-count">' + GAMES.length + " games</span>" +
+            ((SHEET.first_basket || []).length ? '<span class="sheet-count">' + SHEET.first_basket.length + " first baskets</span>" : "") +
+            BANDS.map(function (b) { return bandCount[b[0]] ? '<span class="sheet-count sheet-count--' + b[0] + '">' + bandCount[b[0]] + " " + BAND_SHORT[b[0]] + "</span>" : ""; }).join("");
+        document.getElementById("sheetLegend").innerHTML = Object.keys(TAGS).map(function (k) {
+            return '<span class="chip chip--' + TAGS[k].cls + '">' + TAGS[k].icon + " " + esc(TAGS[k].label) + "</span>";
+        }).join("") + '<span class="chip chip--new">🧳 New team</span><span class="chip chip--book">📉 Book sees less</span><span class="chip chip--new">🐣 Small sample</span>';
+        var filters = [{ k: "all", label: "All props" }].concat(Object.keys(TAGS).map(function (k) { return { k: k, label: TAGS[k].icon + " " + TAGS[k].label }; }))
+            .concat(MARKET_FILTERS.filter(function (m) { return mktCount[m[0]]; }).map(function (m) { return { k: m[0], label: m[1] }; }));
+        document.getElementById("sheetFilters").innerHTML = filters.map(function (f) {
+            var n = f.k === "all" ? all.length : (tagCount[f.k] || mktCount[f.k] || 0);
+            return '<button type="button" class="sheet-filter' + (f.k === "all" ? " is-active" : "") + '" data-filter="' + f.k + '"' + (n ? "" : " disabled") + ">" +
+                esc(f.label) + '<span class="sheet-count">' + n + "</span></button>";
+        }).join("");
+        document.getElementById("sheetFilters").addEventListener("click", function (e) {
+            var btn = e.target.closest("[data-filter]");
+            if (!btn || btn.disabled) return;
+            var key = btn.dataset.filter;
+            Array.prototype.forEach.call(this.querySelectorAll(".sheet-filter"), function (b) { b.classList.toggle("is-active", b === btn); });
+            Array.prototype.forEach.call(document.querySelectorAll(".sheet-play"), function (p) {
+                p.hidden = key !== "all" && (" " + p.dataset.tags + " ").indexOf(" " + key + " ") < 0;
+            });
+            Array.prototype.forEach.call(document.querySelectorAll(".sheet-side"), function (s) { s.hidden = !s.querySelector(".sheet-play:not([hidden])"); });
+            Array.prototype.forEach.call(document.querySelectorAll(".sheet-game"), function (g) { g.hidden = !g.querySelector(".sheet-play:not([hidden])"); });
+            var shown = document.querySelectorAll(".sheet-play:not([hidden])").length;
+            document.getElementById("sheetBoardTitle").innerHTML = "The Shelf &mdash; " + (key === "all" ? "every prop" : shown + " props");
+        });
+
+        var theme = document.getElementById("sheetTheme");
+        theme.addEventListener("click", function () {
+            var light = !document.documentElement.classList.contains("theme-light");
+            document.documentElement.classList.toggle("theme-light", light);
+            theme.textContent = light ? "🌙" : "☀️";
+            try { localStorage.setItem("worstpickz-theme", light ? "light" : "dark"); } catch (e) {}
+        });
+        if (document.documentElement.classList.contains("theme-light")) theme.textContent = "🌙";
+
+        // the night picker
+        (function () {
+            var sel = document.getElementById("sheetDateSelect");
+            fetch(SHEET.root + "prop-shop-manifest.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (m) {
+                if (!m || !(m.sheets || []).length) return;
+                sel.innerHTML = m.sheets.map(function (e) {
+                    return '<option value="' + esc(SHEET.root + e.href) + '"' + (e.date === SHEET.date ? " selected" : "") + ">" + esc(e.label) + "</option>";
+                }).join("");
+                var cur = m.sheets.filter(function (e) { return e.href === "prop-shop.html"; })[0];
+                if (cur && cur.date !== SHEET.date) document.getElementById("sheetCurrent").hidden = false;
+            }).catch(function () {});
+            sel.addEventListener("change", function () { if (sel.value && sel.value.indexOf(".html") > 0) location.href = sel.value; });
+        })();
+
+        var built = SHEET.built ? new Date(SHEET.built) : null, fit = SHEET.fit || {};
+        document.getElementById("sheetFoot").innerHTML =
+            "Built " + (built ? built.toLocaleString() : "—") + " · times " + esc(tzName()) +
+            " · stats from ESPN box scores (" + esc(SHEET.stats_season) + " regular season and the 2026-27 preseason)" +
+            (SHEET.prices_from ? " · prices: " + esc(SHEET.prices_from) +
+                (SHEET.prices_captured ? ", captured " + new Date(SHEET.prices_captured).toLocaleString([], { hour: "numeric", minute: "2-digit", month: "numeric", day: "numeric" }) : "")
+                : " · no prices connected") +
+            (fit.label ? " · model fitted on " + esc(fit.label) + " and checked on " + Number(fit.test_rows || 0).toLocaleString() + " games it never saw" : "") +
+            " · research, not advice: play responsibly.";
+
+        /* ── Receipts: every prop graded from ESPN box scores in the browser ──
+           A player who never checks in voids his prop, so he is marked void, not
+           a miss. First basket settles on the first made field goal. */
+        var ESPN = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/";
+        var KEY = "wpz-propshop-receipts-" + SHEET.date;
+        var COL = { pts: "points", reb: "rebounds", ast: "assists", stl: "steals", blk: "blocks" };
+        function statOf(stats, keys, market) {
+            var parts = { pra: ["pts", "reb", "ast"], pr: ["pts", "reb"], pa: ["pts", "ast"], ra: ["reb", "ast"], stocks: ["stl", "blk"] }[market] || [market];
+            return parts.reduce(function (sum, m) {
+                if (m === "threem") { var i3 = keys.indexOf("threePointFieldGoalsMade-threePointFieldGoalsAttempted"); return sum + (i3 < 0 ? 0 : parseInt(String(stats[i3]).split("-")[0], 10) || 0); }
+                var i = keys.indexOf(COL[m]); return sum + (i < 0 ? 0 : parseInt(stats[i], 10) || 0);
+            }, 0);
+        }
+        async function fetchReceipts() {
+            var out = { at: new Date().toISOString(), players: {}, state: {}, first: {} };
+            for (var i = 0; i < GAMES.length; i++) {
+                var g = GAMES[i];
+                try {
+                    var r = await fetch(ESPN + "summary?event=" + g.id);
+                    if (!r.ok) continue;
+                    var s = await r.json();
+                    var st = ((((s.header || {}).competitions || [])[0] || {}).status || {}).type || {};
+                    out.state[g.id] = st.completed ? "final" : st.state === "in" ? "live" : "scheduled";
+                    ((s.boxscore || {}).players || []).forEach(function (tm) {
+                        (tm.statistics || []).forEach(function (cat) {
+                            (cat.athletes || []).forEach(function (a) {
+                                if (!a.athlete) return;
+                                out.players[a.athlete.id] = { keys: cat.keys || [], stats: a.stats || [], dnp: !!a.didNotPlay || !(a.stats || []).length };
+                            });
+                        });
+                    });
+                    var plays = (s.plays || []).slice().sort(function (a, b) { return Number(a.sequenceNumber) - Number(b.sequenceNumber); });
+                    for (var k = 0; k < plays.length; k++) {
+                        var p = plays[k], txt = ((p.type || {}).text) || "";
+                        if (p.scoringPlay && p.shootingPlay && txt.indexOf("Free Throw") < 0) {
+                            var who = ((p.participants || [])[0] || {}).athlete;
+                            if (who) out.first[g.id] = String(who.id);
+                            break;
+                        }
+                    }
+                } catch (e) { /* one game failing should not sink the rest */ }
+            }
+            return out;
+        }
+        function paintReceipts(data) {
+            if (!data) return;
+            var hit = 0, miss = 0, live = 0, voids = 0, rows = [];
+            all.slice().sort(function (a, b) { return b.score - a.score; }).forEach(function (pl) {
+                var state = data.state[pl.game] || "scheduled", rec = data.players[pl.pid];
+                if (state === "scheduled" || !rec) return;
+                var v = rec.dnp ? null : statOf(rec.stats, rec.keys, pl.market);
+                var over = pl.side !== "under", res;
+                if (v == null) res = state === "final" ? "void" : "live";
+                else if (over && v >= pl.need) res = "hit";
+                else if (!over && v >= pl.need) res = "miss";
+                else res = state === "final" ? (over ? "miss" : "hit") : "live";
+                if (res === "hit") hit++; else if (res === "miss") miss++; else if (res === "void") voids++; else live++;
+                var chip = { hit: '<span class="chip chip--fav prop-result">✅ Cashed</span>', miss: '<span class="chip chip--out prop-result">❌ Missed</span>',
+                    void: '<span class="chip prop-result">Void (DNP)</span>', live: '<span class="chip chip--mins prop-result">⏳ Live</span>' }[res];
+                rows.push('<div class="sheet-summary-item">' + chip + nameLink(pl) + '<span class="chip chip--mkt">' + pl.icon + " " + esc(betText(pl)) + "</span>" +
+                    '<span class="chip">' + (v == null ? "—" : v + " " + esc(pl.word)) + "</span>" + ovr(pl, "sm") + "</div>");
+            });
+            (SHEET.first_basket || []).forEach(function (c) {
+                var state = data.state[c.game] || "scheduled";
+                if (state === "scheduled" || !data.first[c.game]) return;
+                var won = data.first[c.game] === String(c.pid);
+                if (won) hit++; else miss++;
+                rows.push('<div class="sheet-summary-item">' + (won ? '<span class="chip chip--fav prop-result">✅ Cashed</span>' : '<span class="chip chip--out prop-result">❌ Missed</span>') +
+                    "<b>" + esc(c.name) + '</b><span class="chip chip--mkt">🏀 First Basket</span></div>');
+            });
+            var sum = document.getElementById("sheetScoredSummary");
+            sum.hidden = !(hit + miss + live + voids);
+            sum.textContent = hit + " cashed · " + miss + " missed" + (live ? " · " + live + " live" : "") + (voids ? " · " + voids + " void" : "");
+            document.getElementById("sheetScoredList").innerHTML = rows.join("");
+            document.getElementById("sheetScoredStatus").textContent = rows.length
+                ? "Updated " + new Date(data.at).toLocaleTimeString() + "."
+                : "No games have tipped yet. First tip " + fmtKick(GAMES.length ? GAMES[0].kick : "") + ".";
+        }
+        try { paintReceipts(JSON.parse(localStorage.getItem(KEY))); } catch (e) {}
+        document.getElementById("sheetScoredRefresh").addEventListener("click", async function () {
+            var btn = this, status = document.getElementById("sheetScoredStatus");
+            btn.disabled = true; status.textContent = "Pulling box scores…";
+            try {
+                var data = await fetchReceipts();
+                try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+                paintReceipts(data);
+            } catch (e) { status.textContent = "ESPN didn't answer. Try again in a minute."; }
+            btn.disabled = false;
+        });
+    })();
+    </script>
+</body>
+</html>

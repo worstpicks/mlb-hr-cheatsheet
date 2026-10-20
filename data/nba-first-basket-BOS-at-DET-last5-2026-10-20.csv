@@ -1,0 +1,69 @@
+﻿Game,Celtics @ Pistons
+Range,Last 5
+
+20.0%,Tip Win %,40.0%
+40.0%,First FG %,40.0%
+40.0%,First Point %,40.0%
+0.0%,First Three %,100.0%
+2.2,Avg Shots to First FG,2.2
+4.8,Avg Shots to First 3PT,2.0
+
+POSITION,COUNT,%
+C,3,60.0%
+PF,1,20.0%
+SG,1,20.0%
+
+POSITION,COUNT,%
+C,2,40.0%
+PF,1,20.0%
+PG,1,20.0%
+SG,1,20.0%
+
+SHOT TYPE,COUNT,%
+2pt jump shot,3,60.0%
+3pt jump shot,1,20.0%
+2pt dunk,1,20.0%
+
+SHOT TYPE,COUNT,%
+2pt dunk,2,40.0%
+2pt layup,2,40.0%
+2pt jump shot,1,20.0%
+
+PLAYER,TIP ATTEMPTS,TIPS WON,TIP WIN %
+Neemias Queta,4,1,25.0%
+Luka Garza,1,0,0.0%
+
+PLAYER,TIP ATTEMPTS,TIPS WON,TIP WIN %
+Jalen Duren,5,2,40.0%
+
+PLAYER,STARTS,FIRST GM FGA,FIRST TEAM FGA,1ST TEAM FGM,1ST FGM,1ST 3PTM,1ST POINT,1ST 3 FGA/GAME,FGA IN 1ST 3MIN,PTS IN 1ST 3MIN
+Jaylen Brown SF,5,0.0%,40.0%,1,1,0,1,1.00,1.20,0.40
+Daniss Jenkins PG,3,33.3%,66.7%,2,1,2,1,1.00,2.00,2.67
+Luka Garza C,1,0.0%,0.0%,0,0,0,0,1.00,0.50,0.00
+Tobias Harris PF,5,40.0%,40.0%,0,0,0,0,0.80,1.60,0.80
+Cade Cunningham PG,5,0.0%,0.0%,2,0,2,0,0.60,1.60,2.40
+Derrick White SG,5,0.0%,20.0%,2,0,0,0,0.60,1.20,0.80
+Sam Hauser PF,4,0.0%,25.0%,1,0,0,0,0.50,1.00,0.50
+Duncan Robinson SF,2,50.0%,50.0%,1,1,1,1,0.50,0.25,1.00
+Neemias Queta C,4,25.0%,25.0%,1,1,0,1,0.25,0.40,1.00
+Jalen Duren C,5,0.0%,0.0%,0,0,0,0,0.20,0.80,0.40
+Ausar Thompson SF,5,0.0%,0.0%,0,0,0,0,0.20,0.60,0.00
+Jayson Tatum PF,4,0.0%,0.0%,0,0,0,0,0.00,1.00,0.50
+Ron Harper Jr. SF,1,0.0%,0.0%,0,0,0,0,0.00,0.00,0.00
+Baylor Scheierman SG,1,0.0%,0.0%,0,0,0,0,0.00,0.00,0.00
+
+Player,1st FG,1st Team Basket,1st 3PT,Score in First 3 Min
+Jaylen Brown,N/A,N/A,N/A,N/A
+Daniss Jenkins,N/A,N/A,N/A,N/A
+Luka Garza,N/A,N/A,N/A,N/A
+Tobias Harris,N/A,N/A,N/A,N/A
+Cade Cunningham,N/A,N/A,N/A,N/A
+Derrick White,N/A,N/A,N/A,N/A
+Sam Hauser,N/A,N/A,N/A,N/A
+Duncan Robinson,N/A,N/A,N/A,N/A
+Neemias Queta,N/A,N/A,N/A,N/A
+Jalen Duren,N/A,N/A,N/A,N/A
+Ausar Thompson,N/A,N/A,N/A,N/A
+Jayson Tatum,N/A,N/A,N/A,N/A
+Ron Harper Jr.,N/A,N/A,N/A,N/A
+Baylor Scheierman,N/A,N/A,N/A,N/A

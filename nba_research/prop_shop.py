@@ -29,7 +29,7 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
-from nba_research import dk_props, first_basket, prop_model as pm
+from nba_research import dk_props, first_basket, prop_grade, prop_model as pm
 
 ROOT = Path(__file__).resolve().parents[1]
 HERE = ROOT / "nba_research"
@@ -561,6 +561,10 @@ def write_if_changed(path: Path, text: str) -> bool:
 
 def publish(sheet: dict) -> None:
     date = sheet["date"]
+    if date in prop_grade.graded_dates():
+        # the record was graded against this archive; a rebuild would change the sheet under it
+        raise SystemExit(f"[prop_shop] {date} is already graded in {prop_grade.RECORD.name}: its archive is the "
+                         "record and is not rebuilt")
     ARCHIVE.mkdir(parents=True, exist_ok=True)
     write_if_changed(ARCHIVE / f"{date}.html", render(sheet, "../"))
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {"version": 1, "sheets": []}

@@ -22,6 +22,8 @@ needs the owner's go, one deploy per night.
    the manifest and `preview/data/nba-prop-ledger.json` (the old shell's file, kept in step).
    The build log prints every prop's score, chance, price and edge, the props pulled and why,
    and the first-basket math.
+6. The next morning, `python -m nba_research.prop_grade` grades the night into `prop_shop_record.csv`
+   (below) and prints the record. Commit the CSV with that night's sheet so it rides the same deploy.
 
 ## The model (prop_model.py)
 
@@ -47,3 +49,45 @@ splits them and keeps the one that matches the main over/under.
 
 Refit after a season: `python -m nba_research.backtest --season <YYYY>` (box scores), then
 `python -m nba_research.prop_fit --season <YYYY>`.
+
+## Grading and the record (prop_grade.py)
+
+The morning after a night, once its games are final:
+
+    python -m nba_research.prop_grade                     # every archived night, then the report
+    python -m nba_research.prop_grade --date 2026-10-20   # one night
+    python -m nba_research.prop_grade --report            # the report only, no ESPN calls
+
+It reads each night's `var SHEET` from `preview/nba-research/prop-shop-archive/<date>.html` (the sheet as
+published, prices and all) and grades every prop on the shelf plus the first-basket cards against
+ESPN's final box scores (`build_slate.fetch` + `parse_summary`; first basket from `first_basket.opening`).
+Props "off the shelf" (scratched before the build) were never rated and are not graded.
+
+- **hit / miss**: an Over N.5 needs floor(N)+1, an Under N.5 floor(N) or fewer. A whole-number line that
+  lands exactly is a **push**.
+- **void**: he never checked in (a DNP or not in the box at all), or the game was postponed or canceled.
+  Seconds on the floor count as playing. First basket is void the same way, else a hit only if he made
+  the game's first field goal (free throws never settle it).
+- A game that isn't final yet stays ungraded and is picked up on the next run. Its in-progress summary is
+  deleted from `nba_research/cache` so the research build never reads a half-played box score as a final.
+
+Rows are appended to `nba_research/prop_shop_record.csv` (committed with the sheet): `date, pid, market,
+line, side, chance, price, implied, score, band, tags, result, actual`, then `name, team, opp, game,
+prop_id, edge, mean, minutes, actual_min`, the five rating parts (`pts_chance` ... `pts_price`) and a note.
+`chance`, `implied` and `edge` are percent; `price` is American and only set for overs DraftKings posted;
+`tags` holds `fav` (Top Shelf) and `val` (Bargain Bin). First-basket rows use market `first_basket`, side
+`yes`, `actual` 1/0 and name the scorer in the note.
+
+Rerunning is safe: a (date, prop_id) already in the record is never graded or written again. The grader
+never writes an archive, and once a night has a row `prop_shop.py` refuses to rebuild it, so the record
+always matches the page it was graded from. To rebuild a graded night on purpose, delete its rows first.
+
+The report prints hit rate by score band and by market, hit rate by model-chance bucket, Brier score and
+log loss for the model next to DraftKings' implied chance on the same priced props (DraftKings' number
+still has the vig in, which flatters the model a little), and flat 1-unit ROI at the listed price for all
+priced props, Top Shelf, Bargain Bin and first baskets.
+
+**Changing the model waits for the record.** Below 150 graded props it says so and stops. From 150 it says
+whether the record argues for a change: a higher band hitting less than a lower one, DraftKings beating
+the model on Brier, or a chance bucket (25+ props) more than 8 points off. That is a proposal for the owner.
+Nothing refits or reweights automatically; the rating weights stay 40/20/15/15/10 until the owner says.

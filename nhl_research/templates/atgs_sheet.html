@@ -1349,9 +1349,17 @@
                 var pl = BY_ID[s.id];
                 if (!pl) return "";
                 var two = s.need > 1;
-                return '<article class="sheet-straight sheet-straight--' + s.need + '" data-id="' + esc(pl.id) + '">' +
+                // The bet slip's "+": goblins-ledger.js adds one to any [data-ledger-pick]
+                // card, in its .sheet-top-card__head. Same fields the board's own "+"
+                // sends, so the one-goal straight and his board row are one pick.
+                var game = (SHEET.games || []).filter(function (g) { return g.away + "@" + g.home === pl.game; })[0] || {};
+                var pick = { sport: "NHL", name: pl.name, market: "Over " + (s.need - 0.5) + " goals",
+                             event: (game.away_name || game.away || "") + " @ " + (game.home_name || game.home || ""),
+                             date: game.kick || SHEET.date || "" };
+                return '<article class="sheet-straight sheet-straight--' + s.need + '" data-id="' + esc(pl.id) +
+                    '" data-ledger-pick="' + esc(JSON.stringify(pick)) + '">' +
                     '<span class="sheet-straight__tag">' + (two ? s.need + " Goals Straight" : "1 Goal Straight") + "</span>" +
-                    '<div class="sheet-play__head">' +
+                    '<div class="sheet-play__head sheet-top-card__head">' +
                       '<span class="' + posClass(pl.pos) + '">' + esc(pl.role) + "</span>" +
                       nameLink(pl) + ovr(pl, "sm") + (two ? "" : priceHTML(pl)) +
                       '<span class="sheet-straight__chance"><b>' + Number(s.chance).toFixed(0) + "%</b><small>" +

@@ -16,7 +16,7 @@
     <title>NBA Research — Worst Pickz</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png" type="image/png">
-    <link rel="stylesheet" href="nba-research.css?v=10">
+    <link rel="stylesheet" href="nba-research.css?v=12">
     <link rel="stylesheet" href="../assets/wp-lines.css?v=1">
     <script>
         (function () {
@@ -105,15 +105,15 @@
 
                 <p class="nrs-legend" id="sample-note"></p><div id="players"></div><button class="nrs-btn" id="more" hidden>Show more players</button>
 
-                <p class="nrs-legend">Left: each player appearance, colored against his own sample average. Right: opponent-position production per player appearance, colored against that opponent’s sample average. Position groups include starters and bench players; they describe team-level defense, not an individual defender. No historical frequency is presented as a predicted betting probability.</p>
+                <p class="nrs-legend"><b>How the colors work:</b> every stat with a line is colored by that line. Green means the game cleared it (or stayed under, on a U line) and red means it didn't. A deeper shade means a bigger margin. Lines start at the sportsbook's main line when one is posted (DraftKings first, then FanDuel and others), with that book's price underneath; hover it for the best price elsewhere. If no book has the player yet, the line starts at his average rounded to the half point. Change any line in the Line row and every color, average and hit rate updates. MIN, usage, +/- and percentages have no line and stay plain. Right side: the player's average, scaled game by game by what the opponent gave his position compared with the league rate, then checked against the same line. Position groups include bench players, so they describe team defense, not one defender. No historical frequency is presented as a predicted betting probability.</p>
             </section>
             </div>
         </div>
     </div>
 
-<details class="nba-method"><summary>Data & calculation details</summary><p>ESPN final box scores, current rosters and schedule. DNPs are excluded. Auto uses current regular-season appearances first, fills remaining places with current preseason, and uses previous regular-season games only when needed. After 10 current regular-season appearances, no preseason remains in a last-10 window. Venue filtering applies before the window. Historical logs can include a previous club; every row identifies the team.</p><p>Estimated usage = (FGA + 0.44 × FTA + turnovers) × team minutes ÷ 5, divided by player minutes × team possessions used. This box-score estimate is not official tracking usage. Possessions use FGA + 0.44 × FTA − offensive rebounds + turnovers. Game possession estimates are unadjusted for overtime and are labeled accordingly. Shooting percentages use summed makes ÷ summed attempts. No unverified starter prediction or player prop price is supplied.</p><a href="https://www.espn.com/nba/scoreboard" target="_blank" rel="noopener">ESPN NBA source</a></details>
+<details class="nba-method"><summary>Data & calculation details</summary><p>ESPN final box scores, current rosters and schedule. DNPs are excluded. Auto uses current regular-season appearances first, fills remaining places with current preseason, and uses previous regular-season games only when needed. After 10 current regular-season appearances, no preseason remains in a last-10 window. Venue filtering applies before the window. Historical logs can include a previous club; every row identifies the team.</p><p>Estimated usage = (FGA + 0.44 × FTA + turnovers) × team minutes ÷ 5, divided by player minutes × team possessions used. This box-score estimate is not official tracking usage. Possessions use FGA + 0.44 × FTA − offensive rebounds + turnovers. Game possession estimates are unadjusted for overtime and are labeled accordingly. Shooting percentages use summed makes ÷ summed attempts. No unverified starter prediction is supplied. Player prop lines and prices come from PropLine (prop-line.com), refreshed about every 30 minutes.</p><a href="https://www.espn.com/nba/scoreboard" target="_blank" rel="noopener">ESPN NBA source</a></details>
 <dialog id="player-dialog" class="nba-dialog"><header><div><h2 id="player-name"></h2><p id="player-sub" class="nba-muted"></p></div><button id="close" class="nrs-btn" aria-label="Close player details">✕</button></header><nav class="nba-dialog-tabs" role="tablist"><button data-tab="read" role="tab" aria-selected="true">Why this player?</button><button data-tab="matchup" role="tab" aria-selected="false">Matchup</button><button data-tab="logs" role="tab" aria-selected="false">Game logs</button><button data-tab="prop" role="tab" aria-selected="false">Prop research</button></nav><div id="dialog-body"></div></dialog>
-    <script src="nba-research.js?v=11" defer></script>
+    <script src="nba-research.js?v=13" defer></script>
     <script src="../assets/wp-lines.js?v=1" defer></script>
     <script>
         // Moneyline / spread tab beside the per-game research (preview/assets/wp-lines.js)

@@ -22,6 +22,9 @@ needs the owner's go, one deploy per night.
    the manifest and `preview/data/nba-prop-ledger.json` (the old shell's file, kept in step).
    The build log prints every prop's score, chance, price and edge, the props pulled and why,
    and the first-basket math.
+   A template change on a night already published: `python -m nba_research.prop_shop --date <date> --rerender`
+   re-renders the page from the SHEET it carries and refuses the write if any field would change, so a new
+   look never moves a pick, a rating or a price (safe on a graded night too).
 6. The next morning, `python -m nba_research.prop_grade` grades the night into `prop_shop_record.csv`
    (below) and prints the record. Commit the CSV with that night's sheet so it rides the same deploy.
 

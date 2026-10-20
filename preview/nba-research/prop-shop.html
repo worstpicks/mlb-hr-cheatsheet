@@ -17,8 +17,8 @@
     <title>Worst Pickz NBA Prop Shop</title>
     <style>
     /* Worst Pickz — NBA Prop Shop, built by nba_research/prop_shop.py from the
-       NHL sheet's stylesheet (below, unchanged) with a hardwood palette and the
-       shop's own pieces added at the end.
+       NHL sheet's stylesheet (below, unchanged) with the shop's own look added
+       at the end.
 
        Worst Pickz — Anytime Goal Scorer cheat sheet, built by
        nhl_research/atgs_sheet.py.
@@ -999,121 +999,309 @@
 .nhl-trend-arrow::after { content:attr(data-tooltip); position:absolute; z-index:100; top:calc(100% + 8px); right:0; width:210px; padding:10px 12px; border-radius:8px; background:#0f172a; color:#f8fafc; border:1px solid #475569; font-size:12px; font-weight:400; line-height:1.5; white-space:normal; text-align:left; pointer-events:none; visibility:hidden; }
 .nhl-trend-arrow:hover::after,.nhl-trend-arrow:focus::after { visibility:visible; }
 .nhl-detail { margin:18px 0; padding:16px; border:1px solid rgba(148,163,184,.3); border-radius:12px; } .nhl-detail h4 { margin:0 0 10px; } .nhl-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } .nhl-detail-tile { padding:12px; background:rgba(148,163,184,.08); border-radius:8px; } .nhl-detail-tile strong,.nhl-detail-tile small { display:block; margin-top:7px; } .nhl-detail-tile strong { font-size:21px; } @media(max-width:500px) { .nhl-detail-grid { grid-template-columns:1fr; } } 
-    /* ── NBA Prop Shop: the NHL sheet's rules on hardwood ─────────────────── */
+    /* ══ NBA Prop Shop ═══════════════════════════════════════════════════════
+       The NHL sheet's rules above, then the shop's own look: hardwood, a neon
+       OPEN sign, player cards with headshots in team colors, the bet in its
+       market's color, a ring for the model's chance and a price tag for
+       DraftKings' number. Results stamp straight onto the cards. */
     :root {
-        --wpz-bg-body: radial-gradient(ellipse at top, #1c1208 0%, #0d0905 42%, #040302 100%);
-        --wpz-bg-container: linear-gradient(135deg, rgba(30, 18, 8, 0.97) 0%, rgba(22, 14, 10, 0.96) 48%, rgba(16, 11, 20, 0.97) 100%);
-        --wpz-border-container: rgba(251, 146, 60, 0.45);
-        --wpz-bg-header: linear-gradient(145deg, #2a1606 0%, #3a1d08 38%, #1d1230 100%);
-        --wpz-border-header: rgba(253, 186, 116, 0.45);
-        --wpz-brand-tag-bg: rgba(60, 30, 6, 0.55);
-        --wpz-brand-tag-border: rgba(251, 191, 36, 0.45);
+        --wpz-bg-body: radial-gradient(ellipse at top, #1f1408 0%, #0e0a06 40%, #050403 100%);
+        --wpz-bg-container: linear-gradient(160deg, rgba(28, 18, 9, 0.98) 0%, rgba(16, 12, 10, 0.98) 50%, rgba(14, 10, 22, 0.98) 100%);
+        --wpz-border-container: rgba(251, 146, 60, 0.5);
+        --wpz-bg-header: #2a1607;
+        --wpz-border-header: rgba(253, 186, 116, 0.5);
+        --wpz-brand-tag-bg: rgba(60, 30, 6, 0.65);
+        --wpz-brand-tag-border: rgba(251, 191, 36, 0.5);
         --wpz-brand-tag-text: #fef3c7;
+        --shop-card: linear-gradient(165deg, rgba(36, 26, 18, 0.96) 0%, rgba(18, 14, 12, 0.98) 55%, rgba(14, 12, 20, 0.98) 100%);
+        --shop-card-br: rgba(253, 186, 116, 0.18);
+        --shop-ink: #fff7ed;
+        --shop-soft: #d6c4b0;
+        --shop-mute: #a8957f;
+        --wood-1: #7a4a22; --wood-2: #5b3416; --wood-3: #a0652f;
+        --hit: #22c55e; --miss: #ef4444; --live: #38bdf8;
     }
     html.theme-light {
-        --wpz-bg-container: linear-gradient(135deg, #fff 0%, #fffaf3 48%, #ffedd5 100%);
-        --wpz-bg-header: linear-gradient(145deg, #fff7ed 0%, #ffedd5 38%, #fef3c7 100%);
+        --wpz-bg-container: linear-gradient(160deg, #fffaf3 0%, #fff 50%, #fff7ed 100%);
+        --wpz-bg-header: #fde7cf;
         --wpz-brand-tag-bg: rgba(194, 65, 12, 0.1);
         --wpz-brand-tag-border: rgba(234, 88, 12, 0.4);
         --wpz-brand-tag-text: #9a3412;
+        --shop-card: linear-gradient(165deg, #ffffff 0%, #fffaf3 60%, #fff7ed 100%);
+        --shop-card-br: rgba(194, 65, 12, 0.22);
+        --shop-ink: #1c1208;
+        --shop-soft: #5b4636;
+        --shop-mute: #8a7462;
     }
     a { color: #fdba74; }
     html.theme-light a { color: #c2410c; }
     .sheet-pos--F { background: rgba(167, 139, 250, 0.2); color: #ddd6fe; }
     html.theme-light .sheet-pos--F { color: #6d28d9; background: rgba(167, 139, 250, 0.26); }
-    .ledger-subtitle { color: var(--wpz-accent-gold); font-size: 1.05rem; font-weight: 700; margin: 4px 0 6px; letter-spacing: 0.04em; }
 
-    /* the OPEN sign: the shell's CLOSED sign, flipped for opening night */
-    .shop-open { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: center;
-        margin: 18px 22px 0; padding: 18px 20px; border-radius: 18px;
-        background: linear-gradient(135deg, rgba(22, 101, 52, 0.22), rgba(161, 98, 7, 0.18));
-        border: 1px solid rgba(74, 222, 128, 0.4); }
-    .shop-open svg { display: block; width: 100%; height: auto; }
-    .shop-open h2 { font-size: clamp(1.25rem, 3vw, 1.8rem); color: #bbf7d0; margin-bottom: 6px; }
-    .shop-open p { color: var(--wpz-color-text); opacity: 0.92; line-height: 1.55; }
-    .shop-open .shop-open__tag { display: inline-block; margin-bottom: 8px; padding: 3px 10px; border-radius: 999px;
-        font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-        background: rgba(250, 204, 21, 0.16); border: 1px solid rgba(250, 204, 21, 0.45); color: #fef08a; }
-    html.theme-light .shop-open h2 { color: #166534; }
-    html.theme-light .shop-open .shop-open__tag { color: #a16207; }
-    @media (max-width: 640px) { .shop-open { grid-template-columns: 1fr; margin: 14px 12px 0; } .shop-open svg { max-width: 170px; margin: 0 auto; } }
+    /* ── header: hardwood, court lines ── */
+    .sheet-header {
+        position: relative; overflow: hidden;
+        background:
+            radial-gradient(ellipse 60% 120% at 100% 0%, rgba(251, 146, 60, 0.28), transparent 60%),
+            repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0 2px, transparent 2px 96px),
+            repeating-linear-gradient(90deg, rgba(255, 220, 170, 0.035) 0 1px, transparent 1px 13px),
+            linear-gradient(180deg, #4a2a10 0%, #2e1908 55%, #1d1006 100%);
+    }
+    html.theme-light .sheet-header {
+        background:
+            radial-gradient(ellipse 60% 120% at 100% 0%, rgba(251, 146, 60, 0.25), transparent 60%),
+            repeating-linear-gradient(90deg, rgba(120, 60, 20, 0.12) 0 2px, transparent 2px 96px),
+            linear-gradient(180deg, #f8d9b4 0%, #f3c895 100%);
+    }
+    .sheet-header::after {
+        content: ""; position: absolute; right: -60px; bottom: -150px; width: 420px; height: 420px;
+        border: 3px solid rgba(255, 236, 210, 0.13); border-radius: 50%; pointer-events: none;
+        box-shadow: 0 0 0 70px rgba(255, 236, 210, 0.025), inset 0 0 0 60px rgba(0, 0, 0, 0.0);
+    }
+    .sheet-header > * { position: relative; z-index: 1; }
+    .sheet-header h1 { text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35); letter-spacing: -0.01em; }
+    .shop-sub-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 4px 0 6px; }
+    .ledger-subtitle { color: #fcd34d; font-size: 1.05rem; font-weight: 800; letter-spacing: 0.05em; }
+    html.theme-light .ledger-subtitle { color: #a16207; }
+
+    /* ── the OPEN sign: neon on a hanging board ── */
+    .shop-open { display: grid; grid-template-columns: 190px 1fr; gap: 24px; align-items: center;
+        margin: 18px 22px 0; padding: 20px 22px; border-radius: 20px; position: relative; overflow: hidden;
+        background: radial-gradient(ellipse at 15% 50%, rgba(34, 197, 94, 0.22), transparent 55%),
+                    linear-gradient(135deg, rgba(20, 30, 22, 0.9), rgba(30, 20, 10, 0.9));
+        border: 1px solid rgba(74, 222, 128, 0.45); box-shadow: 0 10px 40px rgba(34, 197, 94, 0.12); }
+    html.theme-light .shop-open { background: linear-gradient(135deg, #ecfdf5, #fff7ed); }
+    .shop-open svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .shop-open .neon { fill: #dcfce7; filter: drop-shadow(0 0 4px #4ade80) drop-shadow(0 0 12px #22c55e); animation: neon 6s infinite; }
+    .shop-open .neon-tube { stroke: #4ade80; filter: drop-shadow(0 0 5px #22c55e); }
+    @keyframes neon { 0%, 18%, 22%, 62%, 66%, 100% { opacity: 1; } 20%, 64% { opacity: 0.55; } }
     @keyframes shop-sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-    .shop-open svg .sign { transform-origin: 85px 14px; animation: shop-sway 4s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) { .shop-open svg .sign { animation: none; } }
+    .shop-open svg .sign { transform-origin: 95px 10px; animation: shop-sway 5s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .shop-open svg .sign, .shop-open .neon { animation: none; } }
+    .shop-open h2 { font-size: clamp(1.35rem, 3.2vw, 2rem); color: #bbf7d0; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .shop-open p { color: var(--shop-soft); line-height: 1.6; }
+    .shop-open__tag { display: inline-block; margin-bottom: 8px; padding: 3px 11px; border-radius: 999px; font-size: 0.72rem;
+        font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(250, 204, 21, 0.16);
+        border: 1px solid rgba(250, 204, 21, 0.45); color: #fef08a; }
+    .shop-open__stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .shop-open__stats span { padding: 8px 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 0.78rem; color: var(--shop-mute); line-height: 1.1; }
+    .shop-open__stats b { display: block; font-size: 1.25rem; color: var(--shop-ink); font-weight: 900; }
+    html.theme-light .shop-open h2 { color: #166534; }
+    html.theme-light .shop-open__tag { color: #a16207; }
+    html.theme-light .shop-open__stats span { background: rgba(255, 255, 255, 0.7); }
+    @media (max-width: 640px) { .shop-open { grid-template-columns: 1fr; margin: 14px 12px 0; } .shop-open svg { max-width: 180px; margin: 0 auto; } }
 
-    /* the market on every card: "🧤 Over 0.5 Steals" */
-    .prop-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; margin: 2px 0 0; }
-    .prop-line__bet { font-size: 1.12rem; font-weight: 900; color: var(--wpz-color-heading); letter-spacing: 0.01em; }
-    .prop-line__chance { font-size: 0.86rem; font-weight: 800; color: #86efac; }
-    html.theme-light .prop-line__chance { color: #15803d; }
-    .sheet-top-card .prop-line__bet { font-size: 1.3rem; }
+    /* ── section titles get a badge ── */
+    .sheet-section-title { display: flex; align-items: center; gap: 10px; }
+    .shop-count-pill { margin-left: 6px; padding: 2px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
+        background: rgba(251, 146, 60, 0.16); border: 1px solid rgba(251, 146, 60, 0.4); color: #fed7aa; letter-spacing: 0.04em; }
 
-    /* hit-rate strip: last 5 · last 10 · last season · preseason */
-    .prop-hits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 8px 0 2px; }
-    .prop-hit { padding: 6px 4px; border-radius: 9px; text-align: center; background: var(--nrs-panel-2);
-        border: 1px solid var(--nrs-border); line-height: 1.15; }
-    .prop-hit b { display: block; font-size: 0.98rem; font-weight: 900; }
-    .prop-hit small { display: block; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nrs-muted); }
-    .prop-hit--good b { color: #4ade80; } .prop-hit--mid b { color: #facc15; } .prop-hit--bad b { color: #f87171; }
-    html.theme-light .prop-hit--good b { color: #15803d; } html.theme-light .prop-hit--mid b { color: #a16207; } html.theme-light .prop-hit--bad b { color: #b91c1c; }
-    .prop-hit--none b { color: var(--nrs-muted); }
+    /* ── the prop card ── */
+    .pcard { position: relative; display: grid; gap: 10px; align-content: start; padding: 14px 14px 12px;
+        border-radius: 18px; background: var(--shop-card); border: 1px solid var(--shop-card-br);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        overflow: hidden; isolation: isolate; color: var(--shop-ink); }
+    html.theme-light .pcard { box-shadow: 0 8px 24px rgba(120, 60, 20, 0.12); }
+    .pcard::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--mkt, #fb923c); opacity: 0.95; z-index: -1; }
+    .pcard::after { content: ""; position: absolute; top: -90px; right: -90px; width: 220px; height: 220px; border-radius: 50%;
+        background: radial-gradient(circle, var(--team, #fb923c), transparent 68%); z-index: -1; opacity: 0.16; }
+    .pcard.sheet-play, .pcard.sheet-top-card { border-left-width: 1px; }
+    .pcard__head { display: flex; align-items: center; gap: 11px; min-width: 0; }
+    .pcard__face { position: relative; flex: 0 0 auto; width: 58px; height: 58px; border-radius: 16px;
+        background: radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--team, #fb923c) 55%, #000) 0%, #120c08 100%);
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--team, #fb923c) 70%, transparent), 0 6px 16px rgba(0, 0, 0, 0.4); overflow: visible; }
+    .pcard__face img.hs { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; border-radius: 16px; }
+    .pcard__face img.lg { position: absolute; right: -7px; bottom: -7px; width: 24px; height: 24px; object-fit: contain;
+        background: #0f0b08; border-radius: 50%; padding: 2px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
+    html.theme-light .pcard__face img.lg { background: #fff; }
+    .pcard__face .ini { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 900; color: #fff; font-size: 1.1rem; }
+    .pcard__who { flex: 1 1 auto; min-width: 0; display: grid; gap: 2px; }
+    .pcard__name { font-size: 1.06rem; font-weight: 900; color: var(--shop-ink) !important; line-height: 1.15; text-decoration: none;
+        overflow-wrap: normal; word-break: normal; }
+    .pcard__name:hover { text-decoration: underline; }
+    .pcard__meta { font-size: 0.72rem; font-weight: 700; color: var(--shop-mute); letter-spacing: 0.02em; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .pcard__meta .sheet-pos { font-size: 0.62rem; padding: 1px 6px; }
+    .pcard__meta > span:not(.sheet-pos) + span:not(.sheet-pos)::before { content: "· "; opacity: 0.7; }
+    .pcard__who > * { order: 0 !important; }
+    .pcard .sheet-ovr { flex: 0 0 auto; }
+    .pcard__rank { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: 1.25rem; line-height: 1; text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); }
+    .pcard__rank i { font-style: normal; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+        background: #1c140c; border: 1px solid rgba(253, 186, 116, 0.5); color: #fed7aa; font-size: 0.78rem; font-weight: 900; }
 
-    /* last ten games against the line */
-    .prop-spark { display: flex; align-items: flex-end; gap: 3px; height: 38px; margin: 8px 0 2px; position: relative; }
-    .prop-spark i { flex: 1; min-width: 6px; border-radius: 3px 3px 0 0; background: rgba(248, 113, 113, 0.75); position: relative; }
-    .prop-spark i.hit { background: rgba(74, 222, 128, 0.85); }
-    .prop-spark i.pre { opacity: 0.55; }
-    .prop-spark .line { position: absolute; left: 0; right: 0; border-top: 1px dashed rgba(250, 204, 21, 0.85); pointer-events: none; }
-    .prop-spark-cap { display: flex; justify-content: space-between; font-size: 0.66rem; color: var(--nrs-muted); }
+    /* the bet: market-colored line, a chance ring and the price tag */
+    .pcard__bet { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px;
+        background: color-mix(in srgb, var(--mkt, #fb923c) 10%, rgba(0, 0, 0, 0.28));
+        border: 1px solid color-mix(in srgb, var(--mkt, #fb923c) 40%, transparent); }
+    html.theme-light .pcard__bet { background: color-mix(in srgb, var(--mkt, #fb923c) 12%, #fff); }
+    .pcard__line { flex: 1 1 auto; min-width: 0; line-height: 1.1; }
+    .pcard__line small { display: block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+        color: color-mix(in srgb, var(--mkt, #fb923c) 75%, #fff); margin-bottom: 3px; }
+    html.theme-light .pcard__line small { color: color-mix(in srgb, var(--mkt, #fb923c) 70%, #000); }
+    .pcard__line b { font-size: 1.28rem; font-weight: 900; color: var(--shop-ink); letter-spacing: -0.01em; }
+    .pcard__line .ic { margin-right: 4px; }
+    .ring { --p: 50; flex: 0 0 auto; position: relative; width: 52px; height: 52px; border-radius: 50%;
+        background: conic-gradient(var(--mkt, #fb923c) calc(var(--p) * 1%), rgba(148, 163, 184, 0.18) 0); }
+    .ring::before { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: #120d09; }
+    html.theme-light .ring::before { background: #fff; }
+    .ring b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 0.9rem; font-weight: 900; color: var(--shop-ink); padding-top: 0; }
+    .ring small { position: absolute; left: 0; right: 0; bottom: -13px; text-align: center; font-size: 0.55rem; font-weight: 800;
+        letter-spacing: 0.08em; text-transform: uppercase; color: var(--shop-mute); }
+    .tag { flex: 0 0 auto; position: relative; padding: 7px 12px 7px 18px; font-weight: 900; font-size: 0.95rem; color: #1c1208;
+        background: linear-gradient(180deg, #fde68a, #fbbf24); clip-path: polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%);
+        border-radius: 0 7px 7px 0; line-height: 1.05; text-align: center; }
+    .tag::before { content: ""; position: absolute; left: 7px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: #1c1208; opacity: 0.7; }
+    .tag small { display: block; font-size: 0.55rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.75; }
+    .tag--none { background: linear-gradient(180deg, #e7e5e4, #a8a29e); }
 
-    .prop-reasons { margin-top: 8px; font-size: 0.8rem; }
-    .prop-reasons summary { cursor: pointer; color: var(--nrs-muted); font-weight: 700; }
-    .prop-reasons ul { margin: 8px 0 0; padding-left: 1rem; display: grid; gap: 5px; line-height: 1.45; }
-    .prop-reasons b { color: var(--wpz-color-heading); }
+    /* market colors */
+    .mkt--stl { --mkt: #a78bfa; } .mkt--blk { --mkt: #f87171; } .mkt--threem { --mkt: #38bdf8; }
+    .mkt--ast { --mkt: #fbbf24; } .mkt--reb { --mkt: #2dd4bf; } .mkt--pts { --mkt: #fb923c; }
+    .mkt--pra, .mkt--pr, .mkt--pa, .mkt--ra, .mkt--stocks { --mkt: #f472b6; }
+
+    .pcard .sheet-play__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pcard .sheet-why { color: var(--shop-soft); font-size: 0.86rem; line-height: 1.5; margin: 0; }
+
+    /* hit-rate strip */
+    .prop-hits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+    .prop-hit { position: relative; padding: 7px 4px 6px; border-radius: 11px; text-align: center; overflow: hidden;
+        background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.06); line-height: 1.15; }
+    html.theme-light .prop-hit { background: rgba(255, 255, 255, 0.8); border-color: rgba(120, 60, 20, 0.12); }
+    .prop-hit::after { content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: var(--w, 0%); background: currentColor; opacity: 0.85; }
+    .prop-hit b { display: block; font-size: 1rem; font-weight: 900; }
+    .prop-hit small { display: block; font-size: 0.58rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--shop-mute); }
+    .prop-hit--good { color: #4ade80; } .prop-hit--mid { color: #facc15; } .prop-hit--bad { color: #f87171; } .prop-hit--none { color: var(--shop-mute); }
+    html.theme-light .prop-hit--good { color: #15803d; } html.theme-light .prop-hit--mid { color: #a16207; } html.theme-light .prop-hit--bad { color: #b91c1c; }
+
+    /* last ten against the line */
+    .prop-spark { display: flex; align-items: flex-end; gap: 4px; height: 44px; position: relative; padding-top: 4px; }
+    .prop-spark i { flex: 1; min-width: 6px; border-radius: 4px 4px 1px 1px; background: rgba(248, 113, 113, 0.55); position: relative; }
+    .prop-spark i.hit { background: linear-gradient(180deg, #4ade80, #16a34a); }
+    .prop-spark i.pre { opacity: 0.5; }
+    .prop-spark .line { position: absolute; left: 0; right: 0; border-top: 2px dashed rgba(250, 204, 21, 0.9); pointer-events: none; }
+    .prop-spark .line span { position: absolute; right: 0; top: -15px; font-size: 0.6rem; font-weight: 800; color: #fde68a; background: rgba(0, 0, 0, 0.5); padding: 0 4px; border-radius: 4px; }
+    .prop-spark-cap { display: flex; justify-content: space-between; font-size: 0.64rem; color: var(--shop-mute); margin-top: 3px; }
+
+    .pcard .sheet-parts { margin-top: 2px; }
+    .prop-reasons { font-size: 0.8rem; }
+    .prop-reasons summary { cursor: pointer; color: var(--shop-mute); font-weight: 800; list-style: none; }
+    .prop-reasons summary::-webkit-details-marker { display: none; }
+    .prop-reasons summary::before { content: "▸ "; }
+    .prop-reasons[open] summary::before { content: "▾ "; }
+    .prop-reasons ul { margin: 8px 0 0; padding-left: 1rem; display: grid; gap: 5px; line-height: 1.45; color: var(--shop-soft); }
+    .prop-reasons b { color: var(--shop-ink); }
 
     .chip--book { background: rgba(244, 114, 182, 0.14); border-color: rgba(244, 114, 182, 0.45); color: #fbcfe8; }
-    html.theme-light .chip--book { color: #9d174d; }
     .chip--mins { background: rgba(56, 189, 248, 0.14); border-color: rgba(56, 189, 248, 0.45); color: #bae6fd; }
-    html.theme-light .chip--mins { color: #075985; }
     .chip--track { background: rgba(167, 139, 250, 0.16); border-color: rgba(167, 139, 250, 0.45); color: #ddd6fe; }
-    html.theme-light .chip--track { color: #5b21b6; }
     .chip--mkt { background: rgba(251, 146, 60, 0.14); border-color: rgba(251, 146, 60, 0.45); color: #fed7aa; }
-    html.theme-light .chip--mkt { color: #9a3412; }
+    html.theme-light .chip--book { color: #9d174d; } html.theme-light .chip--mins { color: #075985; }
+    html.theme-light .chip--track { color: #5b21b6; } html.theme-light .chip--mkt { color: #9a3412; }
 
-    /* first basket counter */
-    .fb-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    @media (max-width: 1000px) { .fb-grid { grid-template-columns: 1fr; } }
-    .fb-card { display: grid; gap: 10px; align-content: start; padding: 16px; border-radius: 16px; background: var(--nrs-panel);
-        border: 1px solid rgba(251, 146, 60, 0.4); }
-    .fb-card--bench { border-color: rgba(248, 113, 113, 0.55); }
-    .fb-card__tag { justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em;
-        text-transform: uppercase; background: rgba(194, 65, 12, 0.24); border: 1px solid rgba(251, 146, 60, 0.4); color: #fed7aa; }
-    html.theme-light .fb-card__tag { color: #9a3412; }
-    .fb-card__head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .fb-card__head img { width: 52px; height: 38px; object-fit: cover; object-position: top; border-radius: 8px; background: var(--nrs-panel-2); }
-    .fb-card__chance { margin-left: auto; text-align: right; line-height: 1.05; }
-    .fb-card__chance b { display: block; font-size: 1.5rem; font-weight: 900; color: var(--wpz-color-heading); }
-    .fb-card__chance small { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nrs-muted); }
-    .fb-card ul { margin: 0; padding-left: 1.05rem; display: grid; gap: 7px; font-size: 0.86rem; line-height: 1.45; }
+    /* ── Top Shelf: the cards sit on a plank ── */
+    .shop-shelf { position: relative; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px 16px; padding-bottom: 8px; }
+    .pcard--top { overflow: visible; }
+    .pcard--top::after { display: none; }
+    .pcard--top .pcard__plank { position: absolute; left: -10px; right: -10px; bottom: -16px; height: 12px; border-radius: 4px; z-index: -2;
+        background: linear-gradient(180deg, var(--wood-3) 0%, var(--wood-1) 45%, var(--wood-2) 100%);
+        box-shadow: 0 8px 14px rgba(0, 0, 0, 0.5); }
+    .pcard--top .pcard__plank::before, .pcard--top .pcard__plank::after { content: ""; position: absolute; top: 12px; width: 8px; height: 14px; background: var(--wood-2); border-radius: 0 0 3px 3px; }
+    .pcard--top .pcard__plank::before { left: 18px; } .pcard--top .pcard__plank::after { right: 18px; }
+    .pcard--top { border-color: rgba(250, 204, 21, 0.35); }
+    .pcard--top.r1 { box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.55), 0 14px 40px rgba(250, 204, 21, 0.12); }
+
+    /* ── results, right on the card ── */
+    .pcard__stamp { position: absolute; top: 46%; left: 50%; z-index: 5; pointer-events: none;
+        transform: translate(-50%, -50%) rotate(-14deg) scale(1); padding: 6px 18px; border-radius: 10px;
+        font-size: 1.9rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap;
+        border: 4px solid currentColor; background: rgba(10, 8, 6, 0.72);
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0, 0, 0, 0.4); animation: stamp 0.35s ease-out; }
+    html.theme-light .pcard__stamp { background: rgba(255, 255, 255, 0.75); }
+    @keyframes stamp { from { transform: translate(-50%, -50%) rotate(-14deg) scale(1.6); opacity: 0; } to { transform: translate(-50%, -50%) rotate(-14deg) scale(1); opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .pcard__stamp { animation: none; } }
+    .pcard[data-result="hit"] .pcard__stamp { color: #4ade80; }
+    .pcard[data-result="miss"] .pcard__stamp { color: #f87171; font-size: 1.6rem; }
+    .pcard[data-result="void"] .pcard__stamp { color: #a8a29e; font-size: 1.4rem; }
+    html.theme-light .pcard[data-result="hit"] .pcard__stamp { color: #15803d; }
+    html.theme-light .pcard[data-result="miss"] .pcard__stamp { color: #b91c1c; }
+    .pcard[data-result="hit"] { border-color: rgba(74, 222, 128, 0.7); box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.5), 0 12px 34px rgba(34, 197, 94, 0.18);
+        background: linear-gradient(165deg, rgba(34, 197, 94, 0.18) 0%, rgba(18, 14, 12, 0.98) 60%); }
+    html.theme-light .pcard[data-result="hit"] { background: linear-gradient(165deg, rgba(34, 197, 94, 0.16) 0%, #fff 60%); }
+    .pcard[data-result="miss"] > :not(.pcard__stamp):not(.pcard__plank), .pcard[data-result="void"] > :not(.pcard__stamp):not(.pcard__plank) { opacity: 0.5; }
+    .pcard[data-result="miss"] { border-color: rgba(248, 113, 113, 0.45); }
+    .pcard__live { display: grid; gap: 5px; padding: 9px 11px; border-radius: 12px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.4); }
+    .pcard[data-result="hit"] .pcard__live { background: rgba(34, 197, 94, 0.1); border-color: rgba(74, 222, 128, 0.5); }
+    .pcard[data-result="miss"] .pcard__live { background: rgba(239, 68, 68, 0.08); border-color: rgba(248, 113, 113, 0.4); }
+    .pcard__live-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 0.8rem; font-weight: 800; }
+    .pcard__live-top b { font-size: 1.05rem; color: var(--shop-ink); }
+    .pcard__live-top span { color: var(--shop-mute); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .pcard__live-top .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #38bdf8; margin-right: 6px; box-shadow: 0 0 8px #38bdf8; animation: pulse 1.4s infinite; }
+    @keyframes pulse { 50% { opacity: 0.35; } }
+    .pcard__bar { height: 8px; border-radius: 6px; background: rgba(148, 163, 184, 0.2); overflow: hidden; }
+    .pcard__bar i { display: block; height: 100%; width: var(--w, 0%); background: linear-gradient(90deg, #38bdf8, #22d3ee); border-radius: 6px; transition: width 0.6s ease; }
+    .pcard[data-result="hit"] .pcard__bar i { background: linear-gradient(90deg, #22c55e, #4ade80); }
+    .pcard[data-result="miss"] .pcard__bar i { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+    /* ── First Basket Counter ── */
+    .fb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .fb-card .pcard__bet { --mkt: #fb923c; }
+    .fb-card ul { margin: 0; padding-left: 1.05rem; display: grid; gap: 7px; font-size: 0.86rem; line-height: 1.45; color: var(--shop-soft); }
     .fb-card ul strong { color: #fdba74; }
     html.theme-light .fb-card ul strong { color: #c2410c; }
+    .fb-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .fb-step { padding: 8px 6px; border-radius: 11px; text-align: center; background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.06); line-height: 1.15; }
+    html.theme-light .fb-step { background: rgba(255, 255, 255, 0.8); }
+    .fb-step b { display: block; font-size: 1.05rem; font-weight: 900; color: var(--shop-ink); }
+    .fb-step small { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--shop-mute); }
     .fb-warn { padding: 8px 10px; border-radius: 10px; background: rgba(239, 68, 68, 0.14); border: 1px solid rgba(248, 113, 113, 0.5);
         color: #fecaca; font-size: 0.84rem; font-weight: 700; line-height: 1.4; }
     html.theme-light .fb-warn { color: #991b1b; }
 
+    /* ── the shelf, by game ── */
+    .sheet-game { border-radius: 20px; overflow: hidden; }
+    .sheet-game__head { position: relative; background:
+            linear-gradient(90deg, color-mix(in srgb, var(--away, #444) 30%, transparent), transparent 40%, transparent 60%, color-mix(in srgb, var(--home, #444) 30%, transparent)),
+            rgba(0, 0, 0, 0.3); }
+    .sheet-game__logo { width: 34px !important; height: 34px !important; }
+    .sheet-side .pcard { margin-bottom: 12px; }
     .shelf-off { display: grid; gap: 8px; }
     .shelf-off__item { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding: 10px 12px; border-radius: 12px;
-        background: var(--nrs-panel-2); border: 1px dashed rgba(248, 113, 113, 0.5); font-size: 0.88rem; }
-    .shelf-off__item s { color: var(--nrs-muted); }
+        background: rgba(0, 0, 0, 0.2); border: 1px dashed rgba(248, 113, 113, 0.5); font-size: 0.88rem; }
+    .shelf-off__item s { color: var(--shop-mute); }
 
-    .sheet-play__name { color: inherit; }
-    a.sheet-play__name { text-decoration: none; }
-    a.sheet-play__name:hover { text-decoration: underline; }
-    .prop-result { font-weight: 900; }
-    /* the name keeps its words whole: with the OVR tile, the price and the bet
-       slip's "+" in one row, a narrow card wraps the row instead of the name */
-    .sheet-top-card .sheet-play__head, .fb-card__head { flex-wrap: wrap; row-gap: 6px; }
-    .sheet-top-card .sheet-play__name { flex: 1 1 7.5em; min-width: 7.5em; overflow-wrap: normal; word-break: normal; }
+    /* ── Receipts: a scoreboard ── */
+    .receipt-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .receipt-board div { padding: 12px; border-radius: 14px; text-align: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.07); }
+    html.theme-light .receipt-board div { background: #fff; border-color: rgba(120, 60, 20, 0.15); }
+    .receipt-board b { display: block; font-size: 1.8rem; font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums; }
+    .receipt-board small { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--shop-mute); }
+    .rb-hit b { color: #4ade80; } .rb-miss b { color: #f87171; } .rb-live b { color: #38bdf8; } .rb-void b { color: #a8a29e; }
+    @media (max-width: 560px) { .receipt-board { grid-template-columns: repeat(2, 1fr); } }
+    .receipt-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 9px 12px; border-radius: 12px; margin-bottom: 6px;
+        background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.86rem; }
+    html.theme-light .receipt-row { background: #fff; }
+    .receipt-row.hit { border-color: rgba(74, 222, 128, 0.5); } .receipt-row.miss { border-color: rgba(248, 113, 113, 0.35); opacity: 0.8; }
+    .receipt-row .r-res { font-weight: 900; min-width: 76px; }
+    .receipt-row.hit .r-res { color: #4ade80; } .receipt-row.miss .r-res { color: #f87171; } .receipt-row.live .r-res { color: #38bdf8; } .receipt-row.void .r-res { color: #a8a29e; }
+    .receipt-row .r-bet { color: var(--shop-soft); }
+    .receipt-row .r-val { margin-left: auto; font-weight: 900; font-variant-numeric: tabular-nums; }
+
+    /* hidden means hidden, whatever display the class sets */
+    .pcard__live[hidden], .receipt-board[hidden] { display: none !important; }
+    /* the top shelf's medals hang off the card's corner */
+    .pcard--top .pcard__rank { top: -14px; left: -10px; font-size: 2.1rem; }
+    .pcard--top .pcard__rank i { width: 34px; height: 34px; font-size: 0.9rem; }
+    .pcard--top .pcard__head { padding-left: 10px; }
+    /* one row: face, name, OVR and the bet slip's "+" */
+    .pcard .pcard__head { flex-wrap: nowrap; }
+    .pcard .pcard__head .gl-add { flex: 0 0 auto; align-self: center; }
+    @media (max-width: 480px) {
+        .pcard__face { width: 50px; height: 50px; }
+        .pcard__line b { font-size: 1.12rem; }
+        .ring { width: 46px; height: 46px; }
+        .pcard__stamp { font-size: 1.5rem; }
+        .shop-shelf, .fb-grid { grid-template-columns: 1fr; }
+    }
 </style>
 </head>
 <body>
@@ -1136,28 +1324,29 @@
                 <div>
                     <span class="sheet-brand-tag">&#128722; Handpicked NBA Props</span>
                     <h1 id="sheetTitle">WorstPickz NBA Prop Shop</h1>
-                    <p class="ledger-subtitle">Goblin&rsquo;s Ledger</p>
-                    <p class="sheet-sub" id="sheetSub">Every prop on tonight&rsquo;s list, rated out of 100 on the model&rsquo;s chance, his track record at the line, the matchup, his role and the price. Tap a filter to narrow the shelf.</p>
+                    <div class="shop-sub-row"><span class="ledger-subtitle">Goblin&rsquo;s Ledger</span></div>
+                    <p class="sheet-sub" id="sheetSub">Every prop on tonight&rsquo;s list, rated out of 100 on the model&rsquo;s chance, his track record at the line, the matchup, his role and the price. Results stamp onto each card as the games go.</p>
                     <div class="sheet-counts" id="sheetCounts"></div>
                 </div>
             </div>
         </header>
 
         <section class="shop-open" id="shopOpen" hidden>
-            <svg viewBox="0 0 170 120" role="img" aria-label="Hanging shop sign that reads OPEN">
+            <svg viewBox="0 0 190 130" role="img" aria-label="Neon shop sign that reads OPEN">
                 <g class="sign">
-                    <path d="M45 46 L85 12 L125 46" fill="none" stroke="#a38b50" stroke-width="3"/>
-                    <circle cx="85" cy="12" r="5" fill="#d6b565"/>
-                    <rect x="12" y="44" width="146" height="66" rx="9" fill="#0f2418" stroke="#4ade80" stroke-width="3"/>
-                    <rect x="19" y="51" width="132" height="52" rx="5" fill="none" stroke="#4ade80" stroke-opacity=".35"/>
-                    <text x="85" y="68" text-anchor="middle" fill="#86efac" font-family="Arial,sans-serif" font-size="10" letter-spacing="2">COME IN, WE&#8217;RE</text>
-                    <text x="85" y="95" text-anchor="middle" fill="#dcfce7" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="3">OPEN</text>
+                    <path d="M52 50 L95 10 L138 50" fill="none" stroke="#a38b50" stroke-width="3"/>
+                    <circle cx="95" cy="10" r="5" fill="#d6b565"/>
+                    <rect x="12" y="48" width="166" height="74" rx="12" fill="#0b1a10" stroke="#3f2a12" stroke-width="5"/>
+                    <rect x="22" y="58" width="146" height="54" rx="9" fill="none" class="neon-tube" stroke-width="2.5"/>
+                    <text x="95" y="75" text-anchor="middle" fill="#86efac" font-family="Arial,sans-serif" font-size="9" letter-spacing="2.5">COME IN, WE&#8217;RE</text>
+                    <text x="95" y="104" text-anchor="middle" class="neon" font-family="Arial Black,Arial,sans-serif" font-size="29" font-weight="900" letter-spacing="4">OPEN</text>
                 </g>
             </svg>
             <div>
                 <span class="shop-open__tag">&#128276; Opening Night &middot; 2026-27</span>
                 <h2 id="shopOpenTitle">The Prop Shop is open</h2>
                 <p id="shopOpenText"></p>
+                <div class="shop-open__stats" id="shopOpenStats"></div>
             </div>
         </section>
 
@@ -1168,10 +1357,49 @@
             <span class="sheet-sheetnav__status" id="sheetStatus" role="status" aria-live="polite"></span>
         </nav>
 
+        <section class="sheet-section">
+            <h2 class="sheet-section-title">&#128722; Top Shelf <span class="shop-count-pill">Top rated</span></h2>
+            <div class="shop-shelf" id="sheetTop"></div>
+        </section>
+
         <section class="sheet-section" id="fbSection" hidden>
             <h2 class="sheet-section-title">&#127936; First Basket Counter</h2>
             <p class="sheet-section-note" id="fbNote"></p>
             <div class="fb-grid" id="fbCards"></div>
+        </section>
+
+        <section class="sheet-section" id="sheetValueSection" hidden>
+            <h2 class="sheet-section-title" id="sheetValueTitle">&#127991;&#65039; Bargain Bin</h2>
+            <p class="sheet-section-note" id="sheetValueNote"></p>
+            <div class="shop-shelf" id="sheetValue"></div>
+        </section>
+
+        <div class="sheet-toolbar">
+            <div class="sheet-filters" id="sheetFilters"></div>
+            <div class="sheet-legend" id="sheetLegend"></div>
+        </div>
+
+        <section class="sheet-section">
+            <h2 class="sheet-section-title" id="sheetBoardTitle">&#128717;&#65039; The Shelf <span class="shop-count-pill" id="sheetBoardCount">every prop</span></h2>
+            <div class="sheet-games" id="sheetGames"></div>
+        </section>
+
+        <section class="sheet-section" id="offSection" hidden>
+            <h2 class="sheet-section-title">&#9888;&#65039; Off the Shelf</h2>
+            <p class="sheet-section-note">On tonight&rsquo;s list but not playing. A bet on a player who never checks in is voided, so these were pulled instead of rated.</p>
+            <div class="shelf-off" id="offList"></div>
+        </section>
+
+        <section class="sheet-section" id="sheetScored">
+            <div class="sheet-scored-head">
+                <h2 class="sheet-section-title">&#129534; Receipts</h2>
+                <div class="sheet-scored-actions">
+                    <span class="sheet-scored-status" id="sheetScoredStatus" aria-live="polite">Results stamp onto the cards once the games tip.</span>
+                    <button type="button" class="sheet-filter" id="sheetScoredRefresh">Refresh</button>
+                </div>
+            </div>
+            <div class="receipt-board" id="receiptBoard" hidden></div>
+            <div id="sheetScoredList"></div>
         </section>
 
         <section class="sheet-section">
@@ -1184,45 +1412,6 @@
             <div class="sheet-bands" id="sheetBands"></div>
         </section>
 
-        <div class="sheet-toolbar">
-            <div class="sheet-filters" id="sheetFilters"></div>
-            <div class="sheet-legend" id="sheetLegend"></div>
-        </div>
-
-        <section class="sheet-section">
-            <h2 class="sheet-section-title">&#128722; Top Shelf &mdash; Top Rated Props</h2>
-            <div class="sheet-top" id="sheetTop"></div>
-        </section>
-
-        <section class="sheet-section" id="sheetValueSection" hidden>
-            <h2 class="sheet-section-title" id="sheetValueTitle">&#127991;&#65039; Bargain Bin &mdash; Best value</h2>
-            <p class="sheet-section-note" id="sheetValueNote"></p>
-            <div class="sheet-top" id="sheetValue"></div>
-        </section>
-
-        <section class="sheet-section">
-            <h2 class="sheet-section-title" id="sheetBoardTitle">The Shelf &mdash; every prop</h2>
-            <div class="sheet-games" id="sheetGames"></div>
-        </section>
-
-        <section class="sheet-section" id="offSection" hidden>
-            <h2 class="sheet-section-title">&#9888;&#65039; Off the Shelf</h2>
-            <p class="sheet-section-note">On tonight&rsquo;s list but not playing. A bet on a player who never checks in is voided, so these were pulled instead of rated.</p>
-            <div class="shelf-off" id="offList"></div>
-        </section>
-
-        <section class="sheet-section" id="sheetScored">
-            <div class="sheet-scored-head">
-                <h2 class="sheet-section-title">&#129534; Receipts &mdash; props that cashed</h2>
-                <div class="sheet-scored-actions">
-                    <span class="sheet-scored-status" id="sheetScoredStatus" aria-live="polite">Tap Refresh to pull tonight&rsquo;s box scores from ESPN.</span>
-                    <button type="button" class="sheet-filter" id="sheetScoredRefresh">Refresh</button>
-                </div>
-            </div>
-            <div class="sheet-scored-summary" id="sheetScoredSummary" hidden></div>
-            <div class="sheet-top" id="sheetScoredList"></div>
-        </section>
-
         <footer class="sheet-foot" id="sheetFoot"></footer>
     </div>
 
@@ -1233,8 +1422,14 @@
         if (!SHEET) return;
         var GAMES = SHEET.games || [];
         var BY_ID = SHEET.by_id || {};
-        var GAME_BY_ID = {};
-        GAMES.forEach(function (g) { GAME_BY_ID[g.id] = g; });
+        var GAME_BY_ID = {}, LOGO = {};
+        GAMES.forEach(function (g) { GAME_BY_ID[g.id] = g; LOGO[g.away] = g.away_logo; LOGO[g.home] = g.home_logo; });
+        // vivid team colors for the card glow (ESPN abbreviations)
+        var TEAM = { ATL: "#e03a3e", BOS: "#14a44d", BKN: "#9ca3af", CHA: "#00a0b0", CHI: "#ce1141", CLE: "#a7194b", DAL: "#0064b1",
+            DEN: "#fec524", DET: "#e0303f", GS: "#ffc72c", HOU: "#ce1141", IND: "#fdbb30", LAC: "#1d6fd6", LAL: "#fdb927",
+            MEM: "#6d8bc7", MIA: "#d0153c", MIL: "#2f9e57", MIN: "#78be20", NO: "#c8a56c", NY: "#f58426", OKC: "#2a9be0",
+            ORL: "#0077c0", PHI: "#1d75d6", PHX: "#e56020", POR: "#e03a3e", SAC: "#7b4bb0", SA: "#c4ced4", TOR: "#ce1141",
+            UTAH: "#8f5ce0", WSH: "#e31837" };
 
         var esc = function (s) {
             return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -1242,9 +1437,6 @@
             });
         };
         var posClass = function (p) { return "sheet-pos sheet-pos--" + String(p || "G").slice(0, 1); };
-        function teamImg(url, cls) {
-            return url ? '<img class="' + cls + '" src="' + esc(url) + '" alt="" loading="lazy" onerror="this.remove()">' : "";
-        }
         function fmtKick(iso) {
             if (!iso) return "";
             var d = new Date(iso);
@@ -1257,20 +1449,18 @@
         }
         function tzName() { try { return new Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return ""; } }
         function fmtPrice(p) { return p == null ? "" : (p > 0 ? "+" + p : String(p)); }
+        // "1 steal", "2 steals": a single word loses its plural at one
+        function unit(v, word) { return v === 1 && /s$/.test(word) && word.indexOf(" ") < 0 ? word.slice(0, -1) : word; }
+        function initials(n) { return String(n || "").split(/\s+/).map(function (w) { return w.charAt(0); }).join("").slice(0, 2).toUpperCase(); }
 
-        /* The research tab opens on the player when handed his game and id. */
-        function researchHref(pl) {
-            return SHEET.root + "index.html?date=" + encodeURIComponent(SHEET.date) +
-                "&game=" + encodeURIComponent(pl.game) + "&player=" + encodeURIComponent(pl.pid);
-        }
-        function nameLink(pl) {
-            return '<a class="sheet-play__name" href="' + esc(researchHref(pl)) + '" title="Open ' + esc(pl.name) + ' in NBA Research">' + esc(pl.name) + "</a>";
+        function researchHref(game, pid) {
+            return SHEET.root + "index.html?date=" + encodeURIComponent(SHEET.date) + "&game=" + encodeURIComponent(game) + "&player=" + encodeURIComponent(pid);
         }
         function betText(pl) { return (pl.side === "under" ? "Under " : "Over ") + pl.line + " " + pl.label; }
-        function ledgerPick(pl) {
-            var g = GAME_BY_ID[pl.game] || {};
-            return esc(JSON.stringify({ sport: "NBA", name: pl.name, market: betText(pl),
-                event: (g.away_name || g.away || "") + " @ " + (g.home_name || g.home || ""), date: pl.kick || SHEET.date }));
+        function ledgerPick(name, market, game, kick) {
+            var g = GAME_BY_ID[game] || {};
+            return esc(JSON.stringify({ sport: "NBA", name: name, market: market,
+                event: (g.away_name || g.away || "") + " @ " + (g.home_name || g.home || ""), date: kick || SHEET.date }));
         }
 
         var MODEL = [
@@ -1298,6 +1488,7 @@
             val:   { icon: "💰", label: "Value", cls: "edge" }
         };
         var MARKET_FILTERS = [["stl", "🧤 Steals"], ["blk", "🚫 Blocks"], ["threem", "💦 Threes"], ["ast", "🍽️ Assists"], ["reb", "🪟 Rebounds"], ["pts", "🏀 Points"]];
+        var MEDAL = ["🥇", "🥈", "🥉"];
 
         function ovr(pl, size) {
             return '<span class="sheet-ovr sheet-ovr--' + esc(pl.band) + (size ? " sheet-ovr--" + size : "") + '" title="' +
@@ -1316,38 +1507,52 @@
                 (pl.book_gap ? '<span class="chip chip--book">' + (pl.book_gap === "less" ? "📉 Book sees less" : "📈 Book sees more") + "</span>" : "") +
                 (pl.doubt_note ? '<span class="chip chip--out">⚠️ ' + esc(pl.doubt_note) + "</span>" : "");
         }
-        function priceHTML(pl) {
-            return pl.price != null ? '<span class="sheet-book" title="DraftKings, ' + esc(pl.price_src) + '">' + esc(fmtPrice(pl.price)) + "</span>" : "";
+        function face(name, team, headshot) {
+            return '<div class="pcard__face" style="--team:' + (TEAM[team] || "#fb923c") + '">' +
+                '<span class="ini">' + esc(initials(name)) + "</span>" +
+                (headshot ? '<img class="hs" src="' + esc(headshot) + '" alt="" loading="lazy" onerror="this.remove()">' : "") +
+                (LOGO[team] ? '<img class="lg" src="' + esc(LOGO[team]) + '" alt="' + esc(team) + '" loading="lazy" onerror="this.remove()">' : "") + "</div>";
         }
-        function lineHTML(pl) {
-            return '<div class="prop-line"><span class="prop-line__bet">' + pl.icon + " " + esc(betText(pl)) + "</span>" +
-                '<span class="prop-line__chance">' + pl.chance.toFixed(0) + "% model chance</span></div>";
+        function headHTML(pl, rankHTML, size) {
+            return (rankHTML || "") +
+                '<div class="pcard__head sheet-play__head sheet-top-card__head">' + face(pl.name, pl.team, pl.headshot) +
+                '<div class="pcard__who"><a class="pcard__name" href="' + esc(researchHref(pl.game, pl.pid)) + '" title="Open ' + esc(pl.name) + ' in NBA Research">' + esc(pl.name) + "</a>" +
+                '<span class="pcard__meta"><span class="' + posClass(pl.pos) + '">' + esc(pl.pos) + "</span><span>" + esc(pl.team) + " vs " + esc(pl.opp) + "</span><span>" +
+                esc(fmtKick(pl.kick)) + "</span><span>" + esc(pl.band_label) + "</span></span></div>" +
+                ovr(pl, size) + "</div>";
+        }
+        function betHTML(pl) {
+            var price = pl.price != null
+                ? '<span class="tag" title="DraftKings, ' + esc(pl.price_src) + " — asks for " + (pl.implied || 0).toFixed(0) + '%"><small>DK</small>' + esc(fmtPrice(pl.price)) + "</span>"
+                : '<span class="tag tag--none" title="No DraftKings price at this line"><small>DK</small>—</span>';
+            return '<div class="pcard__bet"><div class="pcard__line"><small>' + esc(pl.label) + "</small><b><span class=\"ic\">" + pl.icon + "</span>" +
+                (pl.side === "under" ? "Under " : "Over ") + pl.line + "</b></div>" +
+                '<span class="ring" style="--p:' + Math.round(pl.chance) + '" title="Model chance ' + pl.chance.toFixed(1) + '%"><b>' + Math.round(pl.chance) + "%</b><small>model</small></span>" +
+                price + "</div>";
         }
         function hitBox(label, h) {
             if (!h || !h[1]) return '<span class="prop-hit prop-hit--none"><b>—</b><small>' + label + "</small></span>";
             var r = h[0] / h[1], cls = r >= 0.7 ? "good" : r >= 0.5 ? "mid" : "bad";
-            return '<span class="prop-hit prop-hit--' + cls + '" title="' + h[0] + " of " + h[1] + " (" + Math.round(100 * r) + '%)"><b>' +
+            return '<span class="prop-hit prop-hit--' + cls + '" style="--w:' + Math.round(100 * r) + '%" title="' + h[0] + " of " + h[1] + " (" + Math.round(100 * r) + '%)"><b>' +
                 h[0] + "/" + h[1] + "</b><small>" + label + "</small></span>";
         }
         function hitsHTML(pl) {
             var h = pl.hits || {};
-            return '<div class="prop-hits">' + hitBox("Last 5", h.last5) + hitBox("Last 10", h.last10) +
-                hitBox("2025-26", h.season) + hitBox("Preseason", h.pre) + "</div>";
+            return '<div class="prop-hits">' + hitBox("Last 5", h.last5) + hitBox("Last 10", h.last10) + hitBox("2025-26", h.season) + hitBox("Preseason", h.pre) + "</div>";
         }
-        /* his last ten games as bars against the line: green cleared it */
         function sparkHTML(pl) {
             var log = (pl.log || []).slice().reverse();
             if (!log.length) return "";
             var top = Math.max(pl.need + 1, Math.max.apply(null, log.map(function (l) { return l.v; })));
             var bars = log.map(function (l) {
                 var hit = pl.side === "under" ? l.v < pl.need : l.v >= pl.need;
-                return '<i class="' + (hit ? "hit" : "") + (l.pre ? " pre" : "") + '" style="height:' + Math.max(6, Math.round(100 * l.v / top)) +
+                return '<i class="' + (hit ? "hit" : "") + (l.pre ? " pre" : "") + '" style="height:' + Math.max(7, Math.round(100 * l.v / top)) +
                     '%" title="' + esc(l.d + " vs " + l.opp + (l.pre ? " (preseason)" : "") + ": " + l.v + " " + pl.word + ", " + l.min + " min") + '"></i>';
             }).join("");
-            var lineAt = Math.round(100 * (pl.line + 0.5) / top);
-            return '<div class="prop-spark" aria-label="Last ' + log.length + ' games against the line">' + bars +
-                '<span class="line" style="bottom:' + Math.min(100, lineAt) + '%"></span></div>' +
-                '<div class="prop-spark-cap"><span>' + esc(log[0].d.slice(5)) + "</span><span>last " + log.length + " · faded = preseason</span><span>" + esc(log[log.length - 1].d.slice(5)) + "</span></div>";
+            var lineAt = Math.min(100, Math.round(100 * (pl.line + 0.5) / top));
+            return '<div><div class="prop-spark" aria-label="Last ' + log.length + ' games against the line">' + bars +
+                '<span class="line" style="bottom:' + lineAt + '%"><span>' + pl.need + "+</span></span></div>" +
+                '<div class="prop-spark-cap"><span>' + esc(log[0].d.slice(5)) + "</span><span>last " + log.length + " · faded = preseason</span><span>" + esc(log[log.length - 1].d.slice(5)) + "</span></div></div>";
         }
         function partsBar(pl) {
             var W = SHEET.weights || {};
@@ -1364,28 +1569,23 @@
                     return "<li><b>" + esc(r.label) + " " + ((pl.parts || {})[r.part] || 0) + "/" + ((SHEET.weights || {})[r.part] || 0) + ":</b> " + esc(r.text) + "</li>";
                 }).join("") + "</ul></details>";
         }
+        var LIVE_SLOT = '<div class="pcard__live" hidden></div>';
 
         function playHTML(pl) {
-            return '<article class="sheet-play sheet-play--' + esc(pl.band) + '" data-tags="' + esc((pl.tags || []).concat([pl.market]).join(" ")) +
-                '" data-id="' + esc(pl.id) + '" data-ledger-pick="' + ledgerPick(pl) + '">' +
-                '<div class="sheet-play__head">' + ovr(pl) +
-                '<span class="' + posClass(pl.pos) + '">' + esc(pl.pos) + "</span>" + nameLink(pl) +
-                '<span class="sheet-band">' + esc(pl.band_label) + "</span>" + priceHTML(pl) + "</div>" +
-                lineHTML(pl) +
+            return '<article class="pcard sheet-play mkt--' + esc(pl.market) + " sheet-play--" + esc(pl.band) + '" style="--team:' + (TEAM[pl.team] || "#fb923c") + '" data-tags="' + esc((pl.tags || []).concat([pl.market]).join(" ")) +
+                '" data-id="' + esc(pl.id) + '" data-ledger-pick="' + ledgerPick(pl.name, betText(pl), pl.game, pl.kick) + '">' +
+                headHTML(pl) + betHTML(pl) + LIVE_SLOT +
                 '<div class="sheet-play__tags">' + chips(pl) + flagChips(pl) + "</div>" +
-                '<p class="sheet-why">' + esc(pl.why) + "</p>" +
-                hitsHTML(pl) + sparkHTML(pl) + partsBar(pl) + reasonsHTML(pl) + "</article>";
+                '<p class="sheet-why">' + esc(pl.why) + "</p>" + hitsHTML(pl) + sparkHTML(pl) + partsBar(pl) + reasonsHTML(pl) + "</article>";
         }
-        function topCard(pl, i, extra) {
-            return '<article class="sheet-top-card sheet-play--' + esc(pl.band) + '" data-id="' + esc(pl.id) + '" data-ledger-pick="' + ledgerPick(pl) + '">' +
-                '<div class="sheet-play__head sheet-top-card__head">' +
-                '<span class="sheet-top-five-rank"><i>#</i>' + (i + 1) + "</span>" +
-                '<span class="' + posClass(pl.pos) + '">' + esc(pl.pos) + "</span>" + nameLink(pl) + ovr(pl, "lg") + priceHTML(pl) + "</div>" +
-                lineHTML(pl) +
-                '<div class="sheet-play__tags">' + chips(pl) + '<span class="chip">' + esc(pl.team) + " vs " + esc(pl.opp) + "</span>" +
-                '<span class="chip">' + esc(fmtKick(pl.kick)) + '</span><span class="chip">' + esc(pl.band_label) + "</span>" + flagChips(pl) + "</div>" +
-                (extra || "") +
-                '<p class="sheet-why">' + esc(pl.why) + "</p>" + hitsHTML(pl) + sparkHTML(pl) + partsBar(pl) + "</article>";
+        function topCard(pl, i, extra, cls) {
+            var rank = '<span class="pcard__rank">' + (i < 3 ? MEDAL[i] : "<i>#" + (i + 1) + "</i>") + "</span>";
+            return '<article class="pcard pcard--top sheet-top-card r' + (i + 1) + " mkt--" + esc(pl.market) + (cls ? " " + cls : "") + '" style="--team:' + (TEAM[pl.team] || "#fb923c") + '" data-id="' + esc(pl.id) +
+                '" data-ledger-pick="' + ledgerPick(pl.name, betText(pl), pl.game, pl.kick) + '">' +
+                headHTML(pl, rank, "lg") + betHTML(pl) + LIVE_SLOT +
+                '<div class="sheet-play__tags">' + chips(pl) + flagChips(pl) + "</div>" + (extra || "") +
+                '<p class="sheet-why">' + esc(pl.why) + "</p>" + hitsHTML(pl) + sparkHTML(pl) + partsBar(pl) +
+                '<span class="pcard__plank" aria-hidden="true"></span></article>';
         }
 
         function valueHTML() {
@@ -1393,43 +1593,39 @@
             return ids.map(function (id, i) {
                 var pl = BY_ID[id];
                 if (!pl) return "";
-                var close = i >= nValue, ours = pl.chance, implied = pl.implied || 0;
-                var extra = '<p class="sheet-value-verdict">' + (close ? "Underpriced" : pl.price >= 250 ? "Priced like a long shot, plays better" : "Underpriced") + "</p>" +
-                    '<div class="sheet-chance"><div class="sheet-chance__label"><span>Our estimate</span><b>' + ours.toFixed(0) + "%</b></div>" +
-                    '<div class="sheet-chance__track"><span style="width:' + Math.min(100, ours) + '%"></span></div>' +
-                    '<div class="sheet-chance__label"><span>Price ' + esc(fmtPrice(pl.price)) + " implies</span><b>" + implied.toFixed(0) + "%</b></div>" +
-                    '<div class="sheet-chance__track sheet-chance__track--price"><span style="width:' + Math.min(100, implied) + '%"></span></div></div>' +
-                    '<p class="sheet-why"><b>The odds:</b> ' + esc(fmtPrice(pl.price)) + " treats this as a " + implied.toFixed(0) + "% shot. We have it at " + ours.toFixed(0) + "%.</p>" +
+                var close = i >= nValue, implied = pl.implied || 0;
+                var extra = '<p class="sheet-value-verdict">' + (!close && pl.price >= 250 ? "Priced like a long shot, plays better" : "Underpriced") + "</p>" +
+                    '<p class="sheet-why"><b>The odds:</b> ' + esc(fmtPrice(pl.price)) + " treats this as a " + implied.toFixed(0) + "% shot. We have it at " + pl.chance.toFixed(0) + "%.</p>" +
                     '<p class="sheet-why"><b>The matchup:</b> ' + esc(pl.opp) + " ranked " + pl.rank + " of " + pl.clubs + " in " + esc(pl.word) + " allowed to his position last season.</p>";
-                return topCard(pl, i, extra).replace('class="sheet-top-card ', 'class="sheet-top-card sheet-value-card' + (close ? " sheet-value-card--close" : "") + " ");
+                return topCard(pl, i, extra, "sheet-value-card" + (close ? " sheet-value-card--close" : ""));
             }).join("");
         }
 
         function fbHTML() {
             return (SHEET.first_basket || []).map(function (c) {
-                var g = GAME_BY_ID[c.game] || {}, rec = c.rec || {}, j = c.jumper, oj = c.opp_jumper;
-                var pick = esc(JSON.stringify({ sport: "NBA", name: c.name, market: "First Basket",
-                    event: (g.away_name || g.away || "") + " @ " + (g.home_name || g.home || ""), date: c.kick || SHEET.date }));
+                var rec = c.rec || {}, j = c.jumper, oj = c.opp_jumper;
                 var items = [];
-                items.push("<li><strong>The tip</strong><br>" + (j ? esc(j.name) + " has won " + j.jump_won + " of his last " + j.jumps + " opening tips" : "No jumper on record") +
-                    (oj ? "; " + esc(oj.name) + " " + oj.jump_won + " of " + oj.jumps : "") + ". " + esc(c.team) + " wins it about " + Math.round(c.p_tip) + "% of the time.</li>");
-                items.push("<li><strong>His team first</strong><br>" + esc(c.team) + " scores the game's first basket about " + Math.round(c.p_first) + "% of the time tonight.</li>");
-                items.push("<li><strong>His share</strong><br>As a starter he scored his team's first basket in " + rec.his_team_first_fg + " of " + rec.starts +
+                items.push("<li><strong>The tip:</strong> " + (j ? esc(j.name) + " has won " + j.jump_won + " of his last " + j.jumps + " opening tips" : "No jumper on record") +
+                    (oj ? "; " + esc(oj.name) + " " + oj.jump_won + " of " + oj.jumps : "") + ".</li>");
+                items.push("<li><strong>His share:</strong> as a starter he scored his team's first basket in " + rec.his_team_first_fg + " of " + rec.starts +
                     " games and took its first shot in " + rec.team_first_fga + "; he hit the game's first basket " + rec.game_first_fg + " time" + (rec.game_first_fg === 1 ? "" : "s") + ".</li>");
-                if (c.price != null) {
-                    items.push("<li><strong>The odds</strong><br>DraftKings " + esc(fmtPrice(c.price)) + " asks for " + c.implied.toFixed(1) + "%. We have " + c.chance.toFixed(1) + "%" +
-                        (c.edge >= 2 ? ", a real cushion." : c.edge >= -1 ? ", about a fair price." : ", so the price is short.") + "</li>");
-                } else {
-                    items.push("<li><strong>The odds</strong><br>DraftKings isn't offering him for first basket, a sign the book doesn't expect him on the floor for the tip.</li>");
-                }
-                return '<article class="fb-card' + (c.starting ? "" : " fb-card--bench") + '" data-ledger-pick="' + pick + '">' +
-                    '<span class="fb-card__tag">🏀 First Basket &middot; ' + esc(c.team) + " vs " + esc(c.opp) + " &middot; " + esc(fmtKick(c.kick)) + "</span>" +
-                    '<div class="fb-card__head sheet-top-card__head">' + (c.headshot ? '<img src="' + esc(c.headshot) + '" alt="" loading="lazy" onerror="this.remove()">' : "") +
-                    '<a class="sheet-play__name" href="' + esc(SHEET.root + "index.html?date=" + SHEET.date + "&game=" + c.game + "&player=" + c.pid) + '">' + esc(c.name) + "</a>" +
-                    (c.price != null ? '<span class="sheet-book">' + esc(fmtPrice(c.price)) + "</span>" : "") +
-                    '<span class="fb-card__chance"><b>' + c.chance.toFixed(0) + "%</b><small>first basket</small></span></div>" +
-                    (c.starting ? "" : '<div class="fb-warn">⚠️ Not in the expected starting five tonight. First baskets almost always come from the starters; if he starts after all, we have him at ' +
-                        c.chance_if_starts.toFixed(0) + "%.</div>") +
+                items.push(c.price != null
+                    ? "<li><strong>The odds:</strong> DraftKings " + esc(fmtPrice(c.price)) + " asks for " + c.implied.toFixed(1) + "%. We have " + c.chance.toFixed(1) + "%" +
+                      (c.edge >= 2 ? ", a real cushion." : c.edge >= -1 ? ", about a fair price." : ", so the price is short.") + "</li>"
+                    : "<li><strong>The odds:</strong> DraftKings isn't offering him for first basket, a sign the book doesn't expect him on the floor for the tip.</li>");
+                var pl = { name: c.name, team: c.team, opp: c.opp, pid: c.pid, game: c.game, kick: c.kick, headshot: c.headshot, pos: "", band: "", band_label: "First basket" };
+                var price = c.price != null ? '<span class="tag"><small>DK</small>' + esc(fmtPrice(c.price)) + "</span>" : '<span class="tag tag--none"><small>DK</small>—</span>';
+                return '<article class="pcard fb-card mkt--pts" data-fb="' + esc(c.pid) + '" data-game="' + esc(c.game) + '" data-ledger-pick="' + ledgerPick(c.name, "First Basket", c.game, c.kick) + '">' +
+                    '<div class="pcard__head sheet-top-card__head">' + face(c.name, c.team, c.headshot) +
+                    '<div class="pcard__who"><a class="pcard__name" href="' + esc(researchHref(c.game, c.pid)) + '">' + esc(c.name) + "</a>" +
+                    '<span class="pcard__meta">' + esc(c.team) + " vs " + esc(c.opp) + " · " + esc(fmtKick(c.kick)) + "</span></div></div>" +
+                    '<div class="pcard__bet"><div class="pcard__line"><small>First basket</small><b><span class="ic">🏀</span>Scores first</b></div>' +
+                    '<span class="ring" style="--p:' + Math.min(100, Math.round(c.chance * 2)) + '" title="Model chance ' + c.chance.toFixed(1) + '% (ring drawn at double scale)"><b>' + Math.round(c.chance) + "%</b><small>model</small></span>" + price + "</div>" +
+                    LIVE_SLOT +
+                    '<div class="fb-steps"><div class="fb-step"><b>' + Math.round(c.p_tip) + '%</b><small>' + esc(c.team) + ' wins tip</small></div>' +
+                    '<div class="fb-step"><b>' + Math.round(c.p_first) + '%</b><small>' + esc(c.team) + ' scores first</small></div>' +
+                    '<div class="fb-step"><b>' + Math.round(c.share) + '%</b><small>his share</small></div></div>' +
+                    (c.starting ? "" : '<div class="fb-warn">⚠️ Not in the expected starting five tonight. If he starts after all, we have him at ' + c.chance_if_starts.toFixed(0) + "%.</div>") +
                     "<ul>" + items.join("") + "</ul></article>";
             }).join("");
         }
@@ -1442,29 +1638,25 @@
         if (SHEET.opening_night) {
             document.getElementById("shopOpen").hidden = false;
             document.getElementById("shopOpenText").textContent =
-                "Doors open for the 2026-27 season. " + GAMES.length + " games tonight and " + all.length +
-                " props on the shelf, each one rated by the Worst Pickz model: last season's every game, this preseason, " +
-                "tonight's matchup and DraftKings' price. First tip " + fmtKick(GAMES.length ? GAMES[0].kick : "") + ".";
+                "Doors are open for the 2026-27 season. Every prop on the shelf is rated by the Worst Pickz model: last season's every game, " +
+                "this preseason, tonight's matchup and DraftKings' price.";
         }
+        var bandCount = {};
+        all.forEach(function (pl) { bandCount[pl.band] = (bandCount[pl.band] || 0) + 1; });
+        document.getElementById("shopOpenStats").innerHTML =
+            "<span><b>" + GAMES.length + "</b>games</span><span><b>" + all.length + "</b>props</span>" +
+            ((SHEET.first_basket || []).length ? "<span><b>" + SHEET.first_basket.length + "</b>first baskets</span>" : "") +
+            "<span><b>" + esc(fmtKick(GAMES.length ? GAMES[0].kick : "")) + "</b>first tip</span>";
 
-        var W = SHEET.weights || {};
-        document.getElementById("sheetModel").innerHTML = MODEL.map(function (m) {
-            return '<div class="sheet-criterion"><h3>' + esc(m[0]) + ' <span class="sheet-pts">' + (W[m[1]] || 0) + " pts</span></h3><p>" + esc(m[2]) + "</p></div>";
-        }).join("");
-        document.getElementById("sheetBands").innerHTML = BANDS.map(function (b) {
-            return '<div class="sheet-rating-box sheet-play--' + b[0] + '"><h3>' + esc(b[1]) + "</h3><p>" + esc(b[2]) + "</p></div>";
-        }).join("");
+        document.getElementById("sheetTop").innerHTML = (SHEET.top5 || []).map(function (id, i) { return BY_ID[id] ? topCard(BY_ID[id], i) : ""; }).join("");
 
         if ((SHEET.first_basket || []).length) {
             document.getElementById("fbSection").hidden = false;
             document.getElementById("fbCards").innerHTML = fbHTML();
             document.getElementById("fbNote").textContent =
-                "The first made field goal of the game; free throws don't count. Built from ESPN play-by-play of each player's last 15 games " +
-                "(last season's close and this preseason): who jumps, who wins the tip, and who takes and makes his team's first shot. " +
-                "The side that wins the tip scores first about 57% of the time.";
+                "The first made field goal of the game; free throws don't count. Built from ESPN play-by-play of each player's last 15 games: " +
+                "who jumps, who wins the tip, and who takes and makes his team's first shot. The side that wins the tip scores first about 57% of the time.";
         }
-
-        document.getElementById("sheetTop").innerHTML = (SHEET.top5 || []).map(function (id, i) { return BY_ID[id] ? topCard(BY_ID[id], i) : ""; }).join("");
 
         var nVal = (SHEET.value || []).length, nClose = (SHEET.value_close || []).length;
         var walled = (SHEET.value_walled || []).map(function (id) { return BY_ID[id]; }).filter(Boolean);
@@ -1481,21 +1673,24 @@
                 }).join("; ") + ".";
             }
             document.getElementById("sheetValueNote").textContent = note;
-            document.getElementById("sheetValueTitle").innerHTML = "&#127991;&#65039; Bargain Bin &mdash; " +
-                (nVal + nClose ? "best value" + (nVal + nClose > 1 ? ", top " + (nVal + nClose) : "") : "empty tonight");
+            document.getElementById("sheetValueTitle").innerHTML = "&#127991;&#65039; Bargain Bin <span class=\"shop-count-pill\">" +
+                (nVal + nClose ? (nVal + nClose) + " underpriced" : "empty tonight") + "</span>";
         }
 
         document.getElementById("sheetGames").innerHTML = GAMES.map(function (g) {
             var side = function (team, logo) {
                 var ids = g.sides[team] || [];
-                return '<div class="sheet-side" data-team="' + esc(team) + '"><header class="sheet-side__head">' + teamImg(logo, "sheet-side__logo") +
+                return '<div class="sheet-side" data-team="' + esc(team) + '"><header class="sheet-side__head">' +
+                    (logo ? '<img class="sheet-side__logo" src="' + esc(logo) + '" alt="" loading="lazy" onerror="this.remove()">' : "") +
                     "<span>" + esc(team) + "</span></header>" +
                     (ids.length ? ids.map(function (id) { return playHTML(BY_ID[id]); }).join("") : '<p class="sheet-empty">Nothing on the list.</p>') + "</div>";
             };
-            return '<section class="sheet-game" data-game="' + esc(g.id) + '"><header class="sheet-game__head">' +
-                '<span class="sheet-game__teams">' + teamImg(g.away_logo, "sheet-game__logo") + esc(g.away_name || g.away) +
-                ' <span class="sheet-game__at">@</span> ' + teamImg(g.home_logo, "sheet-game__logo") + esc(g.home_name || g.home) + "</span>" +
-                '<span class="sheet-game__when">' + esc(fmtKick(g.kick)) + (g.venue ? " · " + esc(g.venue) : "") +
+            return '<section class="sheet-game" data-game="' + esc(g.id) + '" style="--away:' + (TEAM[g.away] || "#555") + ";--home:" + (TEAM[g.home] || "#555") + '">' +
+                '<header class="sheet-game__head"><span class="sheet-game__teams">' +
+                (g.away_logo ? '<img class="sheet-game__logo" src="' + esc(g.away_logo) + '" alt="" loading="lazy" onerror="this.remove()">' : "") + esc(g.away_name || g.away) +
+                ' <span class="sheet-game__at">@</span> ' +
+                (g.home_logo ? '<img class="sheet-game__logo" src="' + esc(g.home_logo) + '" alt="" loading="lazy" onerror="this.remove()">' : "") + esc(g.home_name || g.home) + "</span>" +
+                '<span class="sheet-game__when" data-when="' + esc(g.id) + '">' + esc(fmtKick(g.kick)) + (g.venue ? " · " + esc(g.venue) : "") +
                 (g.total ? " · total " + esc(g.total) : "") + (g.spread ? " · " + esc(g.spread) : "") + "</span></header>" +
                 '<div class="sheet-game__body">' + side(g.away, g.away_logo) + side(g.home, g.home_logo) + "</div></section>";
         }).join("");
@@ -1508,10 +1703,17 @@
             }).join("");
         }
 
+        var W = SHEET.weights || {};
+        document.getElementById("sheetModel").innerHTML = MODEL.map(function (m) {
+            return '<div class="sheet-criterion"><h3>' + esc(m[0]) + ' <span class="sheet-pts">' + (W[m[1]] || 0) + " pts</span></h3><p>" + esc(m[2]) + "</p></div>";
+        }).join("");
+        document.getElementById("sheetBands").innerHTML = BANDS.map(function (b) {
+            return '<div class="sheet-rating-box sheet-play--' + b[0] + '"><h3>' + esc(b[1]) + "</h3><p>" + esc(b[2]) + "</p></div>";
+        }).join("");
+
         // counts, legend, filters
-        var bandCount = {}, tagCount = { all: all.length }, mktCount = {};
+        var tagCount = { all: all.length }, mktCount = {};
         all.forEach(function (pl) {
-            bandCount[pl.band] = (bandCount[pl.band] || 0) + 1;
             (pl.tags || []).forEach(function (k) { tagCount[k] = (tagCount[k] || 0) + 1; });
             mktCount[pl.market] = (mktCount[pl.market] || 0) + 1;
         });
@@ -1534,13 +1736,13 @@
             if (!btn || btn.disabled) return;
             var key = btn.dataset.filter;
             Array.prototype.forEach.call(this.querySelectorAll(".sheet-filter"), function (b) { b.classList.toggle("is-active", b === btn); });
-            Array.prototype.forEach.call(document.querySelectorAll(".sheet-play"), function (p) {
+            Array.prototype.forEach.call(document.querySelectorAll("#sheetGames .sheet-play"), function (p) {
                 p.hidden = key !== "all" && (" " + p.dataset.tags + " ").indexOf(" " + key + " ") < 0;
             });
             Array.prototype.forEach.call(document.querySelectorAll(".sheet-side"), function (s) { s.hidden = !s.querySelector(".sheet-play:not([hidden])"); });
             Array.prototype.forEach.call(document.querySelectorAll(".sheet-game"), function (g) { g.hidden = !g.querySelector(".sheet-play:not([hidden])"); });
-            var shown = document.querySelectorAll(".sheet-play:not([hidden])").length;
-            document.getElementById("sheetBoardTitle").innerHTML = "The Shelf &mdash; " + (key === "all" ? "every prop" : shown + " props");
+            var shown = document.querySelectorAll("#sheetGames .sheet-play:not([hidden])").length;
+            document.getElementById("sheetBoardCount").textContent = key === "all" ? "every prop" : shown + " props";
         });
 
         var theme = document.getElementById("sheetTheme");
@@ -1552,7 +1754,6 @@
         });
         if (document.documentElement.classList.contains("theme-light")) theme.textContent = "🌙";
 
-        // the night picker
         (function () {
             var sel = document.getElementById("sheetDateSelect");
             fetch(SHEET.root + "prop-shop-manifest.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (m) {
@@ -1576,34 +1777,42 @@
             (fit.label ? " · model fitted on " + esc(fit.label) + " and checked on " + Number(fit.test_rows || 0).toLocaleString() + " games it never saw" : "") +
             " · research, not advice: play responsibly.";
 
-        /* ── Receipts: every prop graded from ESPN box scores in the browser ──
-           A player who never checks in voids his prop, so he is marked void, not
-           a miss. First basket settles on the first made field goal. */
+        /* ── Results on the cards ────────────────────────────────────────────────
+           The same job the NHL sheet's "Skaters who scored" does: ESPN's public
+           box scores, read in the visitor's browser, painted onto every card where
+           you read the play -- a live tracker while the game is on, then a CASHED
+           or MISSED stamp. A player who never checks in voids his prop. First
+           basket settles on the first made field goal. Cached per night in
+           localStorage, refreshed every 90 seconds while a game is live. */
         var ESPN = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/";
-        var KEY = "wpz-propshop-receipts-" + SHEET.date;
+        var KEY = "wpz-propshop-receipts-v2-" + SHEET.date;
         var COL = { pts: "points", reb: "rebounds", ast: "assists", stl: "steals", blk: "blocks" };
-        function statOf(stats, keys, market) {
-            var parts = { pra: ["pts", "reb", "ast"], pr: ["pts", "reb"], pa: ["pts", "ast"], ra: ["reb", "ast"], stocks: ["stl", "blk"] }[market] || [market];
-            return parts.reduce(function (sum, m) {
-                if (m === "threem") { var i3 = keys.indexOf("threePointFieldGoalsMade-threePointFieldGoalsAttempted"); return sum + (i3 < 0 ? 0 : parseInt(String(stats[i3]).split("-")[0], 10) || 0); }
-                var i = keys.indexOf(COL[m]); return sum + (i < 0 ? 0 : parseInt(stats[i], 10) || 0);
+        var PARTS = { pra: ["pts", "reb", "ast"], pr: ["pts", "reb"], pa: ["pts", "ast"], ra: ["reb", "ast"], stocks: ["stl", "blk"] };
+        function statOf(rec, market) {
+            return (PARTS[market] || [market]).reduce(function (sum, m) {
+                if (m === "threem") { var i3 = rec.keys.indexOf("threePointFieldGoalsMade-threePointFieldGoalsAttempted"); return sum + (i3 < 0 ? 0 : parseInt(String(rec.stats[i3]).split("-")[0], 10) || 0); }
+                var i = rec.keys.indexOf(COL[m]); return sum + (i < 0 ? 0 : parseInt(rec.stats[i], 10) || 0);
             }, 0);
         }
         async function fetchReceipts() {
-            var out = { at: new Date().toISOString(), players: {}, state: {}, first: {} };
+            var out = { at: new Date().toISOString(), players: {}, state: {}, clock: {}, first: {} };
             for (var i = 0; i < GAMES.length; i++) {
                 var g = GAMES[i];
+                if (new Date(g.kick).getTime() > Date.now() + 60000) { out.state[g.id] = "scheduled"; continue; }
                 try {
                     var r = await fetch(ESPN + "summary?event=" + g.id);
                     if (!r.ok) continue;
                     var s = await r.json();
                     var st = ((((s.header || {}).competitions || [])[0] || {}).status || {}).type || {};
-                    out.state[g.id] = st.completed ? "final" : st.state === "in" ? "live" : "scheduled";
+                    out.state[g.id] = /POSTPON|CANCEL/.test(st.name || "") ? "postponed" : st.completed ? "final" : st.state === "in" ? "live" : "scheduled";
+                    out.clock[g.id] = st.shortDetail || "";
                     ((s.boxscore || {}).players || []).forEach(function (tm) {
                         (tm.statistics || []).forEach(function (cat) {
                             (cat.athletes || []).forEach(function (a) {
                                 if (!a.athlete) return;
-                                out.players[a.athlete.id] = { keys: cat.keys || [], stats: a.stats || [], dnp: !!a.didNotPlay || !(a.stats || []).length };
+                                var stats = a.stats || [], im = (cat.keys || []).indexOf("minutes");
+                                var played = stats.length && !a.didNotPlay && (im < 0 || String(stats[im]) !== "0" || stats.some(function (v, k) { return k !== im && String(v) !== "0" && String(v) !== "0-0"; }));
+                                out.players[a.athlete.id] = { keys: cat.keys || [], stats: stats, dnp: !!a.didNotPlay || !stats.length, played: !!played };
                             });
                         });
                     });
@@ -1612,7 +1821,7 @@
                         var p = plays[k], txt = ((p.type || {}).text) || "";
                         if (p.scoringPlay && p.shootingPlay && txt.indexOf("Free Throw") < 0) {
                             var who = ((p.participants || [])[0] || {}).athlete;
-                            if (who) out.first[g.id] = String(who.id);
+                            if (who) out.first[g.id] = { id: String(who.id), text: p.text || "" };
                             break;
                         }
                     }
@@ -1620,51 +1829,138 @@
             }
             return out;
         }
+
+        // one prop's state: {res: hit|miss|live|void|pending, v, state, clock}
+        function settle(pl, data) {
+            var state = data.state[pl.game] || "scheduled", rec = data.players[pl.pid];
+            if (state === "scheduled") return { res: "pending" };
+            if (state === "postponed") return { res: "void", state: state };
+            var v = rec && !rec.dnp ? statOf(rec, pl.market) : null, over = pl.side !== "under", res;
+            if (v == null) res = state === "final" ? "void" : "live";
+            else if (over && v >= pl.need) res = "hit";
+            else if (!over && v >= pl.need) res = "miss";
+            else res = state === "final" ? (over ? "miss" : "hit") : "live";
+            return { res: res, v: v, state: state, clock: data.clock[pl.game] || "" };
+        }
+        var STAMP = { hit: "Cashed ✓", miss: "Missed", void: "Void" };
+        function paintCard(el, s, need, word, liveText) {
+            var slot = el.querySelector(".pcard__live"), stamp = el.querySelector(".pcard__stamp");
+            if (s.res === "pending") { el.removeAttribute("data-result"); if (slot) slot.hidden = true; if (stamp) stamp.remove(); return; }
+            el.setAttribute("data-result", s.res);
+            if (STAMP[s.res]) {
+                if (!stamp) { stamp = document.createElement("span"); stamp.className = "pcard__stamp"; el.appendChild(stamp); }
+                stamp.textContent = STAMP[s.res];
+            } else if (stamp) stamp.remove();
+            if (slot) {
+                slot.hidden = false;
+                var pct = need ? Math.min(100, Math.round(100 * (s.v || 0) / need)) : 0;
+                slot.innerHTML = '<div class="pcard__live-top"><span>' + (s.res === "live" ? '<i class="dot"></i>Live' : s.state === "final" ? "Final" : esc(s.state || "")) +
+                    (s.clock && s.res === "live" ? " · " + esc(s.clock) : "") + "</span><b>" + esc(liveText) + "</b></div>" +
+                    (need ? '<div class="pcard__bar"><i style="--w:' + pct + '%"></i></div>' : "");
+            }
+        }
         function paintReceipts(data) {
             if (!data) return;
-            var hit = 0, miss = 0, live = 0, voids = 0, rows = [];
+            var n = { hit: 0, miss: 0, live: 0, void: 0 }, rows = [];
+            Array.prototype.forEach.call(document.querySelectorAll(".pcard[data-id]"), function (el) {
+                var pl = BY_ID[el.dataset.id];
+                if (!pl) return;
+                var s = settle(pl, data);
+                var text = s.v == null ? (s.res === "void" ? "Did not play" : "Not in yet") : s.v + " of " + pl.need + "+ " + pl.word;
+                paintCard(el, s, pl.need, pl.word, text);
+            });
             all.slice().sort(function (a, b) { return b.score - a.score; }).forEach(function (pl) {
-                var state = data.state[pl.game] || "scheduled", rec = data.players[pl.pid];
-                if (state === "scheduled" || !rec) return;
-                var v = rec.dnp ? null : statOf(rec.stats, rec.keys, pl.market);
-                var over = pl.side !== "under", res;
-                if (v == null) res = state === "final" ? "void" : "live";
-                else if (over && v >= pl.need) res = "hit";
-                else if (!over && v >= pl.need) res = "miss";
-                else res = state === "final" ? (over ? "miss" : "hit") : "live";
-                if (res === "hit") hit++; else if (res === "miss") miss++; else if (res === "void") voids++; else live++;
-                var chip = { hit: '<span class="chip chip--fav prop-result">✅ Cashed</span>', miss: '<span class="chip chip--out prop-result">❌ Missed</span>',
-                    void: '<span class="chip prop-result">Void (DNP)</span>', live: '<span class="chip chip--mins prop-result">⏳ Live</span>' }[res];
-                rows.push('<div class="sheet-summary-item">' + chip + nameLink(pl) + '<span class="chip chip--mkt">' + pl.icon + " " + esc(betText(pl)) + "</span>" +
-                    '<span class="chip">' + (v == null ? "—" : v + " " + esc(pl.word)) + "</span>" + ovr(pl, "sm") + "</div>");
+                var s = settle(pl, data);
+                if (s.res === "pending") return;
+                n[s.res]++;
+                rows.push('<div class="receipt-row ' + s.res + '"><span class="r-res">' + { hit: "✅ Cashed", miss: "❌ Missed", live: "⏳ Live", void: "Void" }[s.res] + "</span>" +
+                    "<b>" + esc(pl.name) + '</b><span class="r-bet">' + pl.icon + " " + esc(betText(pl)) + "</span>" +
+                    '<span class="r-val">' + (s.v == null ? "—" : s.v + " " + esc(unit(s.v, pl.word))) + "</span></div>");
             });
             (SHEET.first_basket || []).forEach(function (c) {
-                var state = data.state[c.game] || "scheduled";
-                if (state === "scheduled" || !data.first[c.game]) return;
-                var won = data.first[c.game] === String(c.pid);
-                if (won) hit++; else miss++;
-                rows.push('<div class="sheet-summary-item">' + (won ? '<span class="chip chip--fav prop-result">✅ Cashed</span>' : '<span class="chip chip--out prop-result">❌ Missed</span>') +
-                    "<b>" + esc(c.name) + '</b><span class="chip chip--mkt">🏀 First Basket</span></div>');
+                var el = document.querySelector('.fb-card[data-fb="' + c.pid + '"]');
+                var state = data.state[c.game] || "scheduled", first = data.first[c.game], rec = data.players[c.pid];
+                var s;
+                if (state === "scheduled") s = { res: "pending" };
+                else if (state === "postponed") s = { res: "void", state: state };
+                else if (!first) s = { res: rec && rec.dnp && state === "final" ? "void" : "live", state: state, clock: data.clock[c.game] };
+                else if (first.id === String(c.pid)) s = { res: "hit", state: state };
+                else s = { res: rec && rec.dnp ? "void" : "miss", state: state };
+                if (el) paintCard(el, s, 0, "", first ? "First basket: " + (first.text.split(" makes")[0] || "scored") : "Waiting on the first basket");
+                if (s.res !== "pending") {
+                    n[s.res]++;
+                    rows.push('<div class="receipt-row ' + s.res + '"><span class="r-res">' + { hit: "✅ Cashed", miss: "❌ Missed", live: "⏳ Live", void: "Void" }[s.res] + "</span>" +
+                        "<b>" + esc(c.name) + '</b><span class="r-bet">🏀 First Basket</span><span class="r-val">' + (first ? esc(first.text.split(" makes")[0]) : "—") + "</span></div>");
+                }
             });
-            var sum = document.getElementById("sheetScoredSummary");
-            sum.hidden = !(hit + miss + live + voids);
-            sum.textContent = hit + " cashed · " + miss + " missed" + (live ? " · " + live + " live" : "") + (voids ? " · " + voids + " void" : "");
+            // the game headers show the clock
+            GAMES.forEach(function (g) {
+                var w = document.querySelector('[data-when="' + g.id + '"]'), st = data.state[g.id];
+                if (w && st && st !== "scheduled") w.textContent = (st === "live" ? "🔴 " : "") + (data.clock[g.id] || st) + (g.venue ? " · " + g.venue : "");
+            });
+            var board = document.getElementById("receiptBoard");
+            board.hidden = !(n.hit + n.miss + n.live + n.void);
+            board.innerHTML = '<div class="rb-hit"><b>' + n.hit + "</b><small>Cashed</small></div>" + '<div class="rb-miss"><b>' + n.miss + "</b><small>Missed</small></div>" +
+                '<div class="rb-live"><b>' + n.live + "</b><small>Live</small></div>" + '<div class="rb-void"><b>' + n.void + "</b><small>Void</small></div>";
             document.getElementById("sheetScoredList").innerHTML = rows.join("");
-            document.getElementById("sheetScoredStatus").textContent = rows.length
-                ? "Updated " + new Date(data.at).toLocaleTimeString() + "."
+            var nStarted = GAMES.filter(function (g) { return (data.state[g.id] || "scheduled") !== "scheduled"; }).length;
+            document.getElementById("sheetScoredStatus").textContent = nStarted
+                ? "Updated " + new Date(data.at).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) + (nStarted < GAMES.length ? " · " + (GAMES.length - nStarted) + " not started" : "")
                 : "No games have tipped yet. First tip " + fmtKick(GAMES.length ? GAMES[0].kick : "") + ".";
         }
-        try { paintReceipts(JSON.parse(localStorage.getItem(KEY))); } catch (e) {}
-        document.getElementById("sheetScoredRefresh").addEventListener("click", async function () {
-            var btn = this, status = document.getElementById("sheetScoredStatus");
-            btn.disabled = true; status.textContent = "Pulling box scores…";
+
+        /* Auto-refresh, the NHL sheet's cadence: every 90s while a game is live,
+           asleep until just after the next tip otherwise, off once every game is
+           final. Paused while the tab is hidden. */
+        var POLL_LIVE = 90 * 1000, POLL_MAX = 30 * 60 * 1000, POLL_MIN = 60 * 1000, pollTimer = null, inFlight = false;
+        function readCache() { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } }
+        function writeCache(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
+        function nextDelay(data) {
+            var states = GAMES.map(function (g) { return (data && data.state[g.id]) || "scheduled"; });
+            if (states.indexOf("live") >= 0) return POLL_LIVE;
+            if (data && states.every(function (s) { return s === "final" || s === "postponed"; })) return null;
+            var now = Date.now(), soonest = Infinity;
+            GAMES.forEach(function (g) { var t = new Date(g.kick).getTime(); if (t > now && t < soonest) soonest = t; });
+            if (soonest === Infinity) return POLL_LIVE;
+            return Math.max(POLL_MIN, Math.min(soonest - now + 30000, POLL_MAX));
+        }
+        function schedule(data) {
+            if (pollTimer) clearTimeout(pollTimer);
+            var d = nextDelay(data);
+            if (d != null) pollTimer = setTimeout(function () { run(true); }, d);
+        }
+        var btn = document.getElementById("sheetScoredRefresh");
+        async function run(auto) {
+            if (inFlight) return;
+            if (auto && document.hidden) { schedule(readCache()); return; }
+            inFlight = true;
+            if (!auto) { btn.disabled = true; btn.textContent = "Refreshing…"; }
             try {
                 var data = await fetchReceipts();
-                try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
-                paintReceipts(data);
-            } catch (e) { status.textContent = "ESPN didn't answer. Try again in a minute."; }
-            btn.disabled = false;
+                writeCache(data); paintReceipts(data);
+                var d = nextDelay(data);
+                document.getElementById("sheetScoredStatus").textContent += d == null ? " · all games final" : " · auto-updating";
+                schedule(data);
+            } catch (e) {
+                document.getElementById("sheetScoredStatus").textContent = "Couldn't reach ESPN. Retrying shortly.";
+                if (pollTimer) clearTimeout(pollTimer);
+                pollTimer = setTimeout(function () { run(true); }, POLL_LIVE * 2);
+            } finally {
+                inFlight = false;
+                if (!auto) { btn.disabled = false; btn.textContent = "Refresh"; }
+            }
+        }
+        btn.addEventListener("click", function () { run(false); });
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) return;
+            var c = readCache(), age = c ? Date.now() - new Date(c.at).getTime() : Infinity;
+            if (age > POLL_LIVE) run(true); else schedule(c);
         });
+        // paint what we had, then go get the truth once the first game has tipped
+        var cached = readCache();
+        if (cached) paintReceipts(cached);
+        var tipped = GAMES.some(function (g) { return new Date(g.kick).getTime() <= Date.now(); });
+        if (tipped) run(true); else schedule(cached);
     })();
     </script>
 </body>

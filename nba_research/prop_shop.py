@@ -593,10 +593,46 @@ def publish(sheet: dict) -> None:
     (SLATES / "nba-prop-ledger.json").write_text(json.dumps(ledger, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+_SHEET = re.compile(r"var SHEET = (\{.*?\});\n", re.S)
+
+
+def embedded(path: Path) -> dict:
+    """The sheet a published page carries, as it was published."""
+    m = _SHEET.search(path.read_text(encoding="utf-8"))
+    if not m:
+        raise SystemExit(f"[prop_shop] no SHEET in {path.relative_to(ROOT)}")
+    return json.loads(m.group(1))
+
+
+def rerender(date: str) -> None:
+    """A new template on a night already published: layout only. The page is
+    re-rendered from the SHEET it carries -- nothing is re-projected, re-priced or
+    re-rated -- and the write is refused if a single field would change. Safe on a
+    graded night for the same reason: the record still matches the page."""
+    targets = [(ARCHIVE / f"{date}.html", "../")]
+    current = NBA_DIR / "prop-shop.html"
+    if current.exists() and embedded(current).get("date") == date:
+        targets.append((current, ""))
+    for path, root in targets:
+        before = embedded(path)
+        html = render({k: v for k, v in before.items() if k != "root"}, root)
+        after = json.loads(_SHEET.search(html).group(1))
+        if after != before:
+            raise SystemExit(f"[prop_shop] re-render would change {path.name}'s data -- refused")
+        changed = write_if_changed(path, html)
+        print(f"[prop_shop] {'re-rendered' if changed else 'unchanged:'} {path.relative_to(ROOT)} (data identical)")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Build the WorstPickz NBA Prop Shop")
     ap.add_argument("--date", required=True)
-    sheet = build(ap.parse_args().date)
+    ap.add_argument("--rerender", action="store_true",
+                    help="new layout for a published night, from the data it already carries")
+    args = ap.parse_args()
+    if args.rerender:
+        rerender(args.date)
+        return
+    sheet = build(args.date)
     rows = sorted(sheet["by_id"].values(), key=lambda r: -r["score"])
     for r in rows:
         print(f"  {r['score']:5.1f} {r['band_label']:8s} {r['name']:24s} {r['side']} {r['line']:g} {r['code']:4s} "

@@ -1,9 +1,14 @@
 name: Daily research update
 
 on:
+  # 3:07 AM Eastern, after the last West Coast games are final, so the research
+  # tabs carry last night's games by morning. GitHub's clock is UTC and Eastern
+  # moves an hour twice a year, so there is a trigger for each offset; the gate
+  # job lets only the first one at or after 3 AM Eastern publish each day.
+  # Seven past the hour, not on it: GitHub queues top-of-the-hour jobs longest.
   schedule:
-    - cron: '0 8 * * *'
-      timezone: America/New_York
+    - cron: '7 7 * * *'   # 3:07 AM EDT (2:07 AM EST: too early, gated off)
+    - cron: '7 8 * * *'   # 3:07 AM EST (4:07 AM EDT: already published, skipped)
   workflow_dispatch:
 
 permissions:
@@ -15,7 +20,35 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.check.outputs.go }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+      - name: Once a day, at or after 3 AM Eastern
+        id: check
+        run: |
+          TODAY=$(TZ=America/New_York date +%F)
+          HOUR=$(TZ=America/New_York date +%-H)
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"; exit 0      # Run workflow by hand: always
+          fi
+          if [ "$HOUR" -lt 3 ]; then
+            echo "It is $HOUR:xx Eastern; the 3 AM trigger takes today's update."
+            echo "go=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if [ -n "$(git log -1 --format=%h --fixed-strings --grep="Daily NBA, NFL and NHL research for $TODAY")" ]; then
+            echo "Today's research is already published."
+            echo "go=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          echo "go=true" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: gate
+    if: needs.gate.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 75
     steps:

@@ -1,0 +1,41 @@
+# Tuesday 10/20 -- starting goalies and availability, read in the morning from the
+# user's CSVs (nhl-goalie-summary-2026-l5 and nhl-goal-matchups-slate-l5, 10/20),
+# RotoWire lineups (agree with the CSVs on all 22 starters), DailyFaceoff starting
+# goalies and line combinations for all 22 clubs, and the NHL box scores through
+# 10/19. From the pasted list: Caufield's, Kaprizov's and McDavid's "Over 1 Goals"
+# were entered as Over 0.5 (one-goal sheet) and the Makar assist prop was left off.
+
+# ANA, COL, SJS and TOR played 10/19; each starts the other goalie
+# (Husso, Blackwood, Askarov and Bobrovsky started last night).
+goalie ANA Lukas Dostal | confirmed, back-to-back
+goalie NYI Ilya Sorokin | expected
+goalie COL Scott Wedgewood | confirmed, back-to-back
+# DailyFaceoff has Daws (no report behind it).
+goalie NJD Jake Allen | expected, not yet confirmed
+goalie SJS Alex Nedeljkovic | expected, back-to-back
+goalie MTL Jacob Fowler | expected
+goalie TOR Anthony Stolarz | confirmed, back-to-back
+goalie CBJ Jet Greaves | expected
+# DailyFaceoff has Forsberg (no report behind it); Forsberg started 10/17.
+goalie LAK Darcy Kuemper | expected, not yet confirmed
+goalie WSH Logan Thompson | expected
+goalie WPG Stuart Skinner | expected
+goalie STL Joel Hofer | expected
+goalie BOS Jeremy Swayman | expected
+goalie DAL Jake Oettinger | expected
+goalie MIN Jesper Wallstedt | expected
+goalie EDM Devon Levi | expected
+goalie DET Daniil Tarasov | confirmed
+# DailyFaceoff has Grubauer (no report behind it); Daccord started 10/17.
+goalie SEA Joey Daccord | expected, not yet confirmed
+goalie CAR Pyotr Kochetkov | expected
+goalie VAN Leevi Merilainen | expected
+goalie TBL Andrei Vasilevskiy | expected
+# DailyFaceoff has Hill (no report behind it); Hill started 10/17.
+goalie VGK Carter Hart | expected, not yet confirmed
+
+# Listed plays that will not dress.
+out CAR Taylor Hall | injured reserve (upper body), week to week
+out NYI Matias Maccelli | lower body, out two to four weeks (10/19)
+
+# Evangelista (illness) returns tonight per New Jersey; Granlund dressed 10/19 -- no flags.

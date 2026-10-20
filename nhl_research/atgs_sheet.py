@@ -263,6 +263,24 @@ def blend_season(rows: list[dict], season: dict) -> int:
     return blended
 
 
+def load_straights(date: str) -> list[tuple[int, str]]:
+    """The owner's Straights of the Day from atgs_days/<date>.straights.txt.
+
+    One pick a line, goals then name:  "1 Viktor Arvidsson" is the one-goal
+    straight, "2 Mason McTavish" the two-goal straight. Lines starting with #
+    are notes. No file, no section.
+    """
+    path = PLAYS_DIR / f"{date}.straights.txt"
+    if not path.exists():
+        return []
+    picks = []
+    for raw in path.read_text(encoding="utf-8-sig").splitlines():
+        m = re.match(r"^\s*([12])\s+(.+?)\s*$", raw)
+        if m and not raw.lstrip().startswith("#"):
+            picks.append((int(m[1]), m[2]))
+    return picks
+
+
 def load_lineup(date: str) -> dict:
     """Tonight's starting goalies and scratches from atgs_days/<date>.lineup.txt.
 
@@ -874,6 +892,24 @@ def build_sheet(date: str) -> dict:
                 f"{r['name']} (+{r['edge']:g}, matchup {matchup_share(r):.2f})" for r in walled))
     by_id = {r["id"]: r for r in rows}
 
+    # Straights of the Day: the owner names the players; the card reads them off
+    # the same board -- the chance the bet needs (two goals for the two-goal
+    # straight), the matchup and his own game.
+    straights = []
+    for need, name in load_straights(date):
+        row = next((r for r in rows if norm_name(r["name"]) == norm_name(name)), None)
+        if row is None:
+            print(f"[atgs] WARN straight pick {name} is not on tonight's board -- left off the card")
+            continue
+        one = row["chance"]
+        straights.append({"id": row["id"], "need": need, "chance1": one,
+                          "chance": one if need == 1 else at_least(one, need),
+                          "match": round(100 * matchup_share(row)),
+                          "match_line": matchup_line(row), "game_line": game_line(row)})
+    if straights:
+        print("[atgs] straights of the day: " + ", ".join(
+            f"{by_id[s['id']]['name']} {s['need']}+ goal{'s' if s['need'] > 1 else ''} ({s['chance']}%)" for s in straights))
+
     from_list = plays is not None
     games_out = []
     for game in slate.get("games") or []:
@@ -933,6 +969,7 @@ def build_sheet(date: str) -> dict:
         "last_kick": kicks[-1] if kicks else "",
         "games": games_out,
         "top5": top,
+        "straights": straights,
         "value": value,
         "value_count": len(valued),
         "value_close": value_close,

@@ -251,6 +251,37 @@
     .sheet-top-card__meta { font-size: 0.72rem; color: var(--nrs-muted); font-variant-numeric: tabular-nums; }
     .sheet-why { font-size: 0.78rem; line-height: 1.5; color: var(--wpz-color-text); opacity: 0.9; margin-top: 2px; }
 
+    /* ── Straights of the Day: the owner's one-goal and two-goal picks, the MLB
+       sheet's straights card on ice (rose for one goal, gold for two) ── */
+    .sheet-straights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    @media (max-width: 900px) { .sheet-straights { grid-template-columns: 1fr; } }
+    .sheet-straight {
+        display: grid; gap: 10px; align-content: start; padding: 16px; border-radius: 16px;
+        background: var(--nrs-panel); border: 1px solid rgba(251, 113, 133, 0.35);
+    }
+    .sheet-straight--2 { border-color: rgba(250, 204, 21, 0.4); }
+    .sheet-straight__tag {
+        justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        background: rgba(190, 18, 60, 0.22); border: 1px solid rgba(251, 113, 133, 0.35); color: #fecdd3;
+    }
+    .sheet-straight--2 .sheet-straight__tag { background: rgba(161, 98, 7, 0.24); border-color: rgba(250, 204, 21, 0.35); color: #fef08a; }
+    .sheet-straight__chance { margin-left: auto; text-align: right; line-height: 1.05; }
+    .sheet-straight__chance b { display: block; font-size: 1.5rem; font-weight: 900; color: var(--wpz-color-heading); }
+    .sheet-straight__chance small { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nrs-muted); }
+    .sheet-straight__meta { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fda4af; }
+    .sheet-straight--2 .sheet-straight__meta { color: #fde68a; }
+    .sheet-straight__why { margin: 0; padding-left: 1.1rem; display: grid; gap: 8px; font-size: 0.86rem; line-height: 1.45; color: var(--wpz-color-text); }
+    .sheet-straight__why strong { color: #fecdd3; }
+    .sheet-straight--2 .sheet-straight__why strong { color: #fde047; }
+    .sheet-straight__why small { display: block; margin-top: 2px; font-size: 0.82rem; font-weight: 600; color: var(--wpz-color-paragraph, var(--wpz-color-text)); opacity: 0.92; }
+    html.theme-light .sheet-straight__tag { color: #be123c; }
+    html.theme-light .sheet-straight--2 .sheet-straight__tag { color: #a16207; }
+    html.theme-light .sheet-straight__meta { color: #be123c; }
+    html.theme-light .sheet-straight--2 .sheet-straight__meta { color: #a16207; }
+    html.theme-light .sheet-straight__why strong { color: #be123c; }
+    html.theme-light .sheet-straight--2 .sheet-straight__why strong { color: #a16207; }
+
     /* ── Game grid ── */
     .sheet-games { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 14px; }
     @media (max-width: 520px) { .sheet-games { grid-template-columns: 1fr; } }
@@ -999,6 +1030,11 @@
             <span class="sheet-sheetnav__status" id="sheetStatus" role="status" aria-live="polite"></span>
         </nav>
 
+        <section class="sheet-section" id="sheetStraightSection" hidden>
+            <h2 class="sheet-section-title">Worst Pickz Straights of the Day</h2>
+            <div class="sheet-straights" id="sheetStraights"></div>
+        </section>
+
         <section class="sheet-section">
             <h2 class="sheet-section-title">Worst Pickz Rating Model</h2>
             <div class="sheet-model" id="sheetModel"></div>
@@ -1307,6 +1343,33 @@
             }).join("");
         }
 
+        /* Straights of the Day: the owner's picks, read off tonight's board. */
+        function straightsHTML() {
+            return (SHEET.straights || []).map(function (s) {
+                var pl = BY_ID[s.id];
+                if (!pl) return "";
+                var two = s.need > 1;
+                return '<article class="sheet-straight sheet-straight--' + s.need + '" data-id="' + esc(pl.id) + '">' +
+                    '<span class="sheet-straight__tag">' + (two ? s.need + " Goals Straight" : "1 Goal Straight") + "</span>" +
+                    '<div class="sheet-play__head">' +
+                      '<span class="' + posClass(pl.pos) + '">' + esc(pl.role) + "</span>" +
+                      nameLink(pl) + ovr(pl, "sm") + (two ? "" : priceHTML(pl)) +
+                      '<span class="sheet-straight__chance"><b>' + Number(s.chance).toFixed(0) + "%</b><small>" +
+                        (two ? "to score " + s.need + "+" : "to score") + "</small></span>" +
+                    "</div>" +
+                    '<span class="sheet-straight__meta">Over ' + (s.need - 0.5) + " Goals &middot; " + esc(pl.team) + " vs " + esc(pl.opp) +
+                      " &middot; " + esc(fmtKick(pl.kick)) + " &middot; matchup " + s.match + "/100</span>" +
+                    '<ul class="sheet-straight__why">' +
+                      "<li><strong>The matchup</strong><small>" + esc(s.match_line) + "</small></li>" +
+                      "<li><strong>His game</strong><small>" + esc(s.game_line) + "</small></li>" +
+                      (two ? "<li><strong>Two goals</strong><small>We have him at " + Number(s.chance1).toFixed(0) +
+                        "% to score at least once and " + Number(s.chance).toFixed(0) + "% to score twice.</small></li>" : "") +
+                      (pl.doubt_note ? "<li><strong>Lineup</strong><small>" + esc(pl.doubt_note) + "</small></li>" : "") +
+                    "</ul>" +
+                    "</article>";
+            }).join("");
+        }
+
         function stripHTML(ids, note) {
             return (ids || []).map(function (id) {
                 var pl = BY_ID[id];
@@ -1346,6 +1409,11 @@
             return '<div class="sheet-rating-box sheet-play--' + b[0] + '">' +
                 "<h3>" + esc(b[1]) + "</h3><p>" + esc(b[2]) + "</p></div>";
         }).join("");
+
+        if ((SHEET.straights || []).length) {
+            document.getElementById("sheetStraightSection").hidden = false;
+            document.getElementById("sheetStraights").innerHTML = straightsHTML();
+        }
 
         document.getElementById("sheetTop").innerHTML = topHTML();
         document.getElementById("sheetGames").innerHTML = GAMES.map(gameHTML).join("");

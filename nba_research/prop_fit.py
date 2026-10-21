@@ -75,7 +75,7 @@ def replay(games: list[dict], decay: float, min_decay: float) -> list[dict]:
                 lg = lg_rate[p["pos"]]
                 opp_rate = {s: a[s] / a["min"] for s in pm.STATS} if a and a["min"] else None
                 rows.append({
-                    "date": day, "id": key, "pos": p["pos"], "m": m,
+                    "date": day, "id": key, "team": tg["team"], "iso": tg["date"], "pos": p["pos"], "m": m,
                     "made": dict(s_made[key]), "mins": s_min[key], "lg": lg,
                     "opp": opp_rate, "opp_games": allowed_games[(opp, p["pos"])],
                     "y": {s: int(p.get(s) or 0) for s in pm.STATS}, "min": p["min"],

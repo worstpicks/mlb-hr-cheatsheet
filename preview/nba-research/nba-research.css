@@ -68,3 +68,19 @@ html.theme-light .nba-table td.nba-hitrate.is-bad b { color:#b91c1c; }
 .nba-roster-label { display:flex; align-items:center; gap:7px; color:var(--nrs-muted); font-size:12px; } .nba-roster-label select { padding:7px 9px; border-radius:7px; border:1px solid var(--nrs-border); background:var(--nrs-panel); color:var(--nrs-text); }
 
 #columns .nba-column-group { margin:14px 0; padding:14px; border:1px solid var(--nrs-border); border-radius:10px; } .nba-column-group legend { padding:0 7px; font-weight:700; } #columns .nba-column-group label { width:175px; align-items:start; margin:8px; } .nba-column-group small { display:block; margin-top:4px; font-size:11px; color:var(--nrs-muted); } .nba-settings-head { display:flex; align-items:center; justify-content:space-between; gap:12px; } #columns .nba-settings-head h3 { margin:12px 0; } #columns .nba-column-group b { font-size:12px; } .nrs-colgear { width:auto; white-space:nowrap; padding:0 10px; }
+
+/* With / without: greyed rows are samples under 5 games. */
+.nba-split-controls { display:flex; align-items:end; gap:12px; flex-wrap:wrap; margin:0 0 10px; }
+.nba-split-controls label { display:flex; flex-direction:column; gap:5px; font-size:12px; }
+.nba-split-controls select { padding:7px 9px; border:1px solid var(--nrs-border); border-radius:7px; background:var(--nrs-panel); color:var(--nrs-text); }
+.nba-split tbody th { text-align:left; vertical-align:top; font-weight:700; padding:9px 7px; border-bottom:1px solid var(--nrs-border); white-space:normal; min-width:130px; }
+.nba-split tbody th small { display:block; margin-top:3px; font-size:11px; font-weight:400; color:var(--nrs-muted); }
+.nba-split tbody th .nba-badge { margin-left:0; }
+.nba-split tbody.is-out th { box-shadow:inset 3px 0 0 #fbbf24; }
+.nba-split tr.is-thin td { color:var(--nrs-muted); opacity:.55; }
+.nba-split td small { color:var(--nrs-muted); font-size:.85em; }
+.nba-split .nba-split-delta { font-weight:700; }
+.nba-split-wrap { overflow-x:auto; }
+@media(max-width:600px) { .nba-split th,.nba-split td { padding:7px 4px; } .nba-split tbody th { min-width:92px; } .nba-split td small { display:block; } }
+.nba-wo { border:0; cursor:pointer; color:#fbbf24; font:inherit; font-size:10px; }
+.nba-wo:hover { background:rgba(251,191,36,.18); }

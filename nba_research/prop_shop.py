@@ -10,6 +10,7 @@ Reads, for the date:
   preview/data/nba-research-<date>.json           the research slate: rosters, recent logs, totals
   nba_research/season_rates/<last season>.json.gz every game of last season (prop_fit.py)
   nba_research/prop_shop_fit.json                 the fitted model
+  nba_research/splits_fit.json                    whether a teammate out moves a projection (splits.py)
   data/nba-dk-props-<date>.json                   DraftKings prices (dk_props.py)
 
 Every prop is projected (prop_model.py), given its chance to cash, and rated out
@@ -29,7 +30,7 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
-from nba_research import dk_props, first_basket, prop_grade, prop_model as pm
+from nba_research import dk_props, first_basket, prop_grade, prop_model as pm, splits
 
 ROOT = Path(__file__).resolve().parents[1]
 HERE = ROOT / "nba_research"
@@ -180,7 +181,8 @@ def matchup_rank(season: dict, opp: str, pos: str, market: str) -> tuple[int, in
 
 
 def rate_prop(play: dict, player: dict, side: dict, opp_side: dict, game: dict, season: dict,
-              fit: dict, lineup: dict, prices: dict) -> dict:
+              fit: dict, lineup: dict, prices: dict, ix: splits.Index | None = None,
+              knobs: dict | None = None) -> dict:
     market, line = play["market"], play["line"]
     team, opp, pos = side["abbr"], opp_side["abbr"], player["pos"]
     last = season_logs(season, player["id"])
@@ -209,6 +211,16 @@ def rate_prop(play: dict, player: dict, side: dict, opp_side: dict, game: dict, 
     made, mins = pm.decayed(logs, SEASON, fit["decay"], pre_weight=1.0 if new_team else 0.4)
     lg = season["league"].get(pos) or {}
     rate = pm.per_minute(made, mins, lg, fit["shrink"])
+    # A high-usage teammate out tonight: his games without him say how the role moves.
+    # The replay decides whether that moves the projection (splits_fit.json).
+    knobs = knobs or splits.load_fit()
+    mates = [t for t in side.get("players") or [] if t["id"] != player["id"] and is_out(t, team, lineup)]
+    without = splits.tonight(ix, player["id"], logs, mates, game["date"], rate, fit, knobs, SEASON,
+                             1.0 if new_team else 0.4) if ix and mates else {"mates": [], "effect": None}
+    moved = without["effect"] if knobs["enabled"] else None
+    if moved:
+        minutes = max(0.0, min(44.0, minutes + moved["d_min"]))
+        rate = {s: rate[s] * moved["ratio"][s] for s in pm.STATS}
     allowed = (season["allowed"].get(opp) or {}).get(pos)
     opp_rate = {s: allowed[s] / allowed["min"] for s in pm.STATS} if allowed and allowed["min"] else None
     # the season is a new one: last year's opponent is about half of tonight's
@@ -283,6 +295,8 @@ def rate_prop(play: dict, player: dict, side: dict, opp_side: dict, game: dict, 
         "small": small, "new_team": new_team, "last_team": reg_last[-1]["team"] if reg_last else "",
         "doubt_note": doubt or "", "season_games": len(reg_last), "pre_games": len(pre),
         "book_mid": book_mid,
+        "without": [without_note(m, market) for m in without["mates"] if m["effect"]],
+        "without_min": round(moved["d_min"], 1) if moved else None,
     }
     # DraftKings' ladder centered far from our projection: usually a role the
     # book has already moved (Edgecombe 10/20, with LeBron and Brown arriving)
@@ -292,6 +306,21 @@ def rate_prop(play: dict, player: dict, side: dict, opp_side: dict, game: dict, 
     row["tags"] = tags(row)
     row["why"] = why(row)
     return row
+
+
+def is_out(p: dict, team: str, lineup: dict) -> bool:
+    return (norm(p["name"]), team) in lineup["out"] or (p.get("injury") or "").lower() == "out"
+
+
+def without_note(mate: dict, market: str) -> dict:
+    """A teammate out tonight, and this player's games with and without him in this market."""
+    w, wo = mate["split"]["with"], mate["split"]["without"]
+    parts = pm.COMBOS.get(market, (market,))
+    return {"name": mate["name"], "games": wo["n"], "with_games": w["n"],
+            "min": round(wo["min"] / wo["n"], 1), "min_with": round(w["min"] / w["n"], 1),
+            "avg": round(sum(wo[s] for s in parts) / wo["n"], 1),
+            "avg_with": round(sum(w[s] for s in parts) / w["n"], 1),
+            "d_min": round(mate["effect"]["d_min"], 1)}
 
 
 def book_center(ladder: dict | None) -> float | None:
@@ -351,6 +380,12 @@ def why(r: dict) -> str:
         bits.append(f"{r['opp']} gave up {nth(r['rank'], 'most')} {r['word']} to {POS_WORD.get(r['pos'], 'his position')} last season.")
     elif r["rank"] and r["match"] <= 30:
         bits.append(f"{r['opp']} gave up {nth(r['clubs'] - r['rank'] + 1, 'fewest')} {r['word']} to {POS_WORD.get(r['pos'], 'his position')} last season.")
+    for m in r.get("without") or []:
+        bits.append(f"Without {m['name']}: {m['avg']:.1f} {r['word']} on {m['min']:.0f} minutes in "
+                    f"{plural(m['games'], 'game')} he sat, {m['avg_with']:.1f} on {m['min_with']:.0f} with him.")
+    if r.get("without_min"):
+        bits.append(f"Projected minutes {'up' if r['without_min'] > 0 else 'down'} "
+                    f"{abs(r['without_min']):.1f} for it.")
     if r["new_team"]:
         bits.append(f"First regular-season game with {r['team']} after last season with {r['last_team']}.")
     if r.get("book_gap"):
@@ -386,7 +421,10 @@ def reasons(r: dict) -> list[dict]:
         {"part": "role", "label": "Role & minutes",
          "text": f"{r['minutes']:.0f} projected minutes" + (" · expected starter" if r["starting"] else
                                                           " · off the bench" if r["starters_known"] else "")
-                 + (f" · {r['doubt_note']}" if r["doubt_note"] else "")},
+                 + (f" · {r['doubt_note']}" if r["doubt_note"] else "")
+                 + "".join(f" · without {m['name']}: {m['min']:.0f} min in {plural(m['games'], 'game')}, "
+                           f"{m['min_with']:.0f} with him" for m in r.get("without") or [])
+                 + (f" ({'+' if r['without_min'] > 0 else ''}{r['without_min']:.1f} projected)" if r.get("without_min") else "")},
         {"part": "price", "label": "Price check",
          "text": (f"DraftKings {fmt_price(r['price'])} ({r['price_src']}) asks for {r['implied']:.0f}%; we have "
                   f"{r['chance']:.0f}% ({'+' if r['edge'] >= 0 else ''}{r['edge']:.1f})") if r["price"] is not None
@@ -464,9 +502,10 @@ def first_basket_cards(date: str, picks: list[tuple[str, str]], slate: dict, lin
 
 # ── the sheet ──────────────────────────────────────────────────────────────────
 
-def build(date: str) -> dict:
+def build(date: str, ix: splits.Index | None = None) -> dict:
     slate = json.loads((SLATES / f"nba-research-{date}.json").read_text(encoding="utf-8"))
     season, fit, lineup, prices = load_season(), pm.load_fit(), load_lineup(date), load_prices(date)
+    ix, knobs = ix or splits.index(season), splits.load_fit()
     plays = load_list(date)
     index = {}
     for g in slate.get("games") or []:
@@ -490,7 +529,7 @@ def build(date: str) -> dict:
                               "icon": ICON[play["market"]],
                               "note": out_note or p.get("injury_note") or "Out"})
             continue
-        rows.append(rate_prop(play, p, side, opp_side, g, season, fit, lineup, prices))
+        rows.append(rate_prop(play, p, side, opp_side, g, season, fit, lineup, prices, ix, knobs))
 
     by_id = {r["id"]: r for r in rows}
     ranked = sorted(rows, key=lambda r: -r["score"])
@@ -543,7 +582,7 @@ def build(date: str) -> dict:
         "built": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "opening_night": opening, "games": games, "by_id": by_id, "top5": top,
         "value": value, "value_close": value_close, "value_count": len(valued), "value_edge": VALUE_EDGE,
-        "value_match_floor": MATCHUP_FLOOR, "value_walled": [r["id"] for r in walled[:4]], "first_basket": fb, "scratched": scratched,
+        "without_on": knobs["enabled"], "value_match_floor": MATCHUP_FLOOR, "value_walled": [r["id"] for r in walled[:4]], "first_basket": fb, "scratched": scratched,
         "unmatched": [u["name"] for u in unmatched], "weights": WEIGHTS,
         "prices_from": "DraftKings via ESPN" if prices else "", "prices_captured": prices.get("captured", ""),
         "fit": {"label": json.loads(pm.FIT.read_text(encoding="utf-8")).get("label") if pm.FIT.exists() else "",
@@ -641,7 +680,8 @@ def main() -> None:
     if args.rerender:
         rerender(args.date)
         return
-    sheet = build(args.date)
+    ix = splits.index()
+    sheet = build(args.date, ix)
     rows = sorted(sheet["by_id"].values(), key=lambda r: -r["score"])
     for r in rows:
         print(f"  {r['score']:5.1f} {r['band_label']:8s} {r['name']:24s} {r['side']} {r['line']:g} {r['code']:4s} "
@@ -658,8 +698,14 @@ def main() -> None:
         print(f"[prop_shop] first basket {c['name']} ({c['team']}): DK {fmt_price(c['price'])} ({c['implied']}%), "
               f"ours {c['chance']}% (tip {c['p_tip']}%, side first {c['p_first']}%, share {c['share']}%)"
               f"{'' if c['starting'] else ' -- PROJECTED BENCH'}; rec {c['rec']}")
+    for r in rows:
+        for m in r.get("without") or []:
+            print(f"[prop_shop] {r['name']} {r['code']}: without {m['name']} {m['avg']} in {m['games']} games "
+                  f"({m['avg_with']} in {m['with_games']} with), minutes {m['min']} vs {m['min_with']}"
+                  f"{'' if not r.get('without_min') else ', projected ' + format(r['without_min'], '+.1f')}")
     if TEMPLATE.exists():
         publish(sheet)
+        splits.write(ix)   # the research tab's with / without file, from the same games
     else:
         print("[prop_shop] no template yet -- built the data only")
 

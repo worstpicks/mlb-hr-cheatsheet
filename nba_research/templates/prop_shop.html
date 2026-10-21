@@ -1504,6 +1504,9 @@
         function flagChips(pl) {
             return (pl.small ? '<span class="chip chip--new">🐣 Small sample</span>' : "") +
                 (pl.new_team ? '<span class="chip chip--new">🧳 New team (was ' + esc(pl.last_team) + ")</span>" : "") +
+                ((pl.without || []).length ? '<span class="chip chip--new" title="' + esc(pl.without.map(function (m) {
+                    return "Without " + m.name + ": " + m.avg + " " + pl.word + " on " + m.min + " min in " + m.games + " games (" + m.avg_with + " on " + m.min_with + " with him)";
+                }).join(" · ")) + '">🪑 Without ' + esc(pl.without.map(function (m) { return m.name; }).join(", ")) + "</span>" : "") +
                 (pl.book_gap ? '<span class="chip chip--book">' + (pl.book_gap === "less" ? "📉 Book sees less" : "📈 Book sees more") + "</span>" : "") +
                 (pl.doubt_note ? '<span class="chip chip--out">⚠️ ' + esc(pl.doubt_note) + "</span>" : "");
         }
@@ -1723,7 +1726,7 @@
             BANDS.map(function (b) { return bandCount[b[0]] ? '<span class="sheet-count sheet-count--' + b[0] + '">' + bandCount[b[0]] + " " + BAND_SHORT[b[0]] + "</span>" : ""; }).join("");
         document.getElementById("sheetLegend").innerHTML = Object.keys(TAGS).map(function (k) {
             return '<span class="chip chip--' + TAGS[k].cls + '">' + TAGS[k].icon + " " + esc(TAGS[k].label) + "</span>";
-        }).join("") + '<span class="chip chip--new">🧳 New team</span><span class="chip chip--book">📉 Book sees less</span><span class="chip chip--new">🐣 Small sample</span>';
+        }).join("") + '<span class="chip chip--new">🧳 New team</span><span class="chip chip--new">🪑 Without a teammate</span><span class="chip chip--book">📉 Book sees less</span><span class="chip chip--new">🐣 Small sample</span>';
         var filters = [{ k: "all", label: "All props" }].concat(Object.keys(TAGS).map(function (k) { return { k: k, label: TAGS[k].icon + " " + TAGS[k].label }; }))
             .concat(MARKET_FILTERS.filter(function (m) { return mktCount[m[0]]; }).map(function (m) { return { k: m[0], label: m[1] }; }));
         document.getElementById("sheetFilters").innerHTML = filters.map(function (f) {

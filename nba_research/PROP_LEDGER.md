@@ -19,7 +19,8 @@ needs the owner's go, one deploy per night.
 4. `python -m nba_research.dk_props --date <date>`: DraftKings prices from ESPN's public odds API
    (no key) into `data/nba-dk-props-<date>.json`.
 5. `python -m nba_research.prop_shop --date <date>`: writes `prop-shop.html`, `prop-shop-archive/<date>.html`,
-   the manifest and `preview/data/nba-prop-ledger.json` (the old shell's file, kept in step).
+   the manifest and `preview/data/nba-prop-ledger.json` (the old shell's file, kept in step), and refreshes
+   the research tab's with / without file `preview/data/nba-splits.json` (below). Commit it with the sheet.
    The build log prints every prop's score, chance, price and edge, the props pulled and why,
    and the first-basket math.
    A template change on a night already published: `python -m nba_research.prop_shop --date <date> --rerender`
@@ -59,6 +60,54 @@ splits them and keeps the one that matches the main over/under.
 
 Refit after a season: `python -m nba_research.backtest --season <YYYY>` (box scores), then
 `python -m nba_research.prop_fit --season <YYYY>`.
+
+## A teammate out tonight (splits.py)
+
+From the 10/22 build on; every earlier archive is untouched. When a listed player's
+teammate who carries some of the offense is out tonight, his projected minutes lean toward his games
+without that teammate. The research tab shows the same split for any teammate (player dialog → "With /
+without"; `nba_research/README.md`).
+
+- **Out tonight**: an `out` line in `<date>.lineup.txt` or the slate's Out flag, on his club.
+- **Carries the offense**: 10+ points a game over the teammate's last 30 regular-season games.
+- **The split**: the player's regular-season games on a club the teammate was on, split by whether the
+  teammate is in the box. "Sat" = on the club and not in the box (DNP, injury, rest). On a club = from the
+  day after his last game for another club to the day before his first game for the next; a player on a
+  roster today is on it all season so far. Every 2025-26 game (`season_rates/2025-26.json.gz`) plus this
+  season's games from the slates. Needs 5+ games with him and 1+ without.
+- **The move**: minutes + (without minus with, in minutes a game) x n/(n+8) x (1 - the share of his minutes
+  projection that already came from games without him), n = games without. Several teammates out add up,
+  capped at 8 minutes either way. Per-minute rates are not moved: the replay below found the rate splits
+  were noise at every shrink it tried.
+- **On the card**: a 🪑 "Without X" chip; the why line says "Without X: 4.3 rebounds on 29 minutes in 18
+  games he sat, 3.5 on 23 with him. Projected minutes up 2.0 for it." (da Silva, 10/21 dry run); the Role
+  reason repeats the minutes. The build log prints each one.
+
+**The check** (`python -m nba_research.splits --backtest`, needs the backtest cache; writes `splits_fit.json`):
+2025-26 replayed exactly as `prop_fit.py` does, each morning's teammates out read from who was missing from
+that night's box, every split built only from games before that morning. The knobs (points gate 10/14/18,
+minutes shrink 4/8/16/off, rate shrink 3/9/off x the model's own, pooled or paired minutes gap) were picked
+on Oct-Jan (13,195 player-games); Feb-Apr (10,522, 7,165 of them moved) only checks them. Picked: 10 points,
+shrink 8, rates off, pooled gap. Held-out log loss, the six stats summed per player-game:
+
+| | off | on |
+|---|---|---|
+| all Feb-Apr player-games | 10.3614 | 10.3245 |
+| the 7,165 it moves | 10.5984 | 10.5487 |
+
+Every market improved held out (pts 3.0821 -> 3.0708, reb 2.1825 -> 2.1753, ast 1.8037 -> 1.7947,
+3pm 1.3324 -> 1.3272, stl 1.1478 -> 1.1449, blk 0.8129 -> 0.8117, pra 3.4241 -> 3.4091), and so did every
+"N+" check line on the moved rows (pts 15+ 0.4692 -> 0.4606, ast 5+ 0.3449 -> 0.3394, pra 25+ 0.4224 -> 0.4103).
+All 18 minutes-only settings in the grid improved held out (+0.015 to +0.038 log-likelihood per player-game);
+every setting that also moved per-minute rates did worse on Oct-Jan than minutes alone (best +0.0078 vs +0.0108).
+So `enabled` is true. The rule: on only if the knobs picked on Oct-Jan lower the Feb-Apr log loss, both
+overall and on the rows it moves. Rerunning the replay can turn it back off, nothing else does.
+
+Known soft spots: a teammate's "without" games can come from a different role era (Clifford 10/21: his four
+games without Raynaud were all early November, before Clifford's minutes grew, so it reads -4.3), and a
+three-game split with an injury exit in it (Franz Wagner without Anthony Black) still moves a couple of
+minutes. A paired gap (each without-game against his nearest with-games) was meant to fix the first; it
+scored a hair worse than the pooled gap on Oct-Jan, so the pooled gap runs. Review big moves before pushing.
 
 ## Grading and the record (prop_grade.py)
 

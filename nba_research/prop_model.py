@@ -82,20 +82,21 @@ def chance_over(line: float, proj: float, params: dict) -> float:
 
 # ── the pieces of a projection ─────────────────────────────────────────────────
 
-def rate_weight(log: dict, season: int) -> float:
+def rate_weight(log: dict, season: int, pre_weight: float = 0.4) -> float:
     """How much a game's per-minute line counts before recency. Preseason minutes
-    come against other clubs' fourth units; a rate from them counts less."""
+    come against other clubs' fourth units; a rate from them counts less -- unless
+    it is the only look at a new role (pre_weight 1.0 for a player on a new club)."""
     if log.get("type") == 2:
         return 1.0 if log.get("season") == season - 1 or log.get("season") == season else 0.7
-    return 0.4
+    return pre_weight
 
 
-def decayed(logs: list[dict], season: int, decay: float) -> tuple[dict, float]:
+def decayed(logs: list[dict], season: int, decay: float, pre_weight: float = 0.4) -> tuple[dict, float]:
     """(counts, minutes), each game weighted by rate_weight and faded by age."""
     made = {s: 0.0 for s in STATS}
     mins = 0.0
     for i, log in enumerate(sorted(logs, key=lambda l: l["date"], reverse=True)):
-        w = rate_weight(log, season) * decay ** i
+        w = rate_weight(log, season, pre_weight) * decay ** i
         mins += w * (log.get("min") or 0.0)
         for s in STATS:
             made[s] += w * (log.get(s) or 0.0)
@@ -104,6 +105,9 @@ def decayed(logs: list[dict], season: int, decay: float) -> tuple[dict, float]:
 
 def per_minute(made: dict, mins: float, prior: dict, shrink: dict) -> dict:
     return {s: (made[s] + shrink[s] * prior.get(s, 0.0)) / (mins + shrink[s]) for s in STATS}
+
+
+MAX_PRESEASON_ONLY = 34.0   # minutes, for a player with no regular season behind him
 
 
 def project_minutes(logs: list[dict], team: str, season: int, min_decay: float,
@@ -140,7 +144,9 @@ def project_minutes(logs: list[dict], team: str, season: int, min_decay: float,
     if m_reg is not None:
         return m_reg, "last season's closing stretch"
     if m_pre is not None:
-        return m_pre, "the preseason only"
+        # No regular season to anchor the lift: a rookie who logged 27 exhibition
+        # minutes is not a 40-minute player (Caleb Wilson read 39.9 on 10/21).
+        return min(m_pre, MAX_PRESEASON_ONLY), "the preseason only"
     return 0.0, "no games"
 
 

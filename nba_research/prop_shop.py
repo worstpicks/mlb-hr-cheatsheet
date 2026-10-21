@@ -203,7 +203,10 @@ def rate_prop(play: dict, player: dict, side: dict, opp_side: dict, game: dict, 
         elif not starting and minutes > 26:
             minutes -= 0.5 * (minutes - 26)
             min_src += ", trimmed: projected off the bench"
-    made, mins = pm.decayed(logs, SEASON, fit["decay"])
+    # a player on a new club: his preseason there is the only look at his new role
+    # (Morant 10/21: 8.0 assists a game in Memphis, 4.8 in four Portland exhibitions)
+    new_team = bool(reg_last) and reg_last[-1].get("team") != team
+    made, mins = pm.decayed(logs, SEASON, fit["decay"], pre_weight=1.0 if new_team else 0.4)
     lg = season["league"].get(pos) or {}
     rate = pm.per_minute(made, mins, lg, fit["shrink"])
     allowed = (season["allowed"].get(opp) or {}).get(pos)
@@ -245,7 +248,6 @@ def rate_prop(play: dict, player: dict, side: dict, opp_side: dict, game: dict, 
     if not doubt and status in ("day-to-day", "questionable", "doubtful"):
         doubt = player.get("injury_note") or player.get("injury")
     small = len(reg_last) + len(pre) < 8 or not reg_last
-    new_team = bool(reg_last) and reg_last[-1].get("team") != team
 
     score_parts = {
         "chance": round(WEIGHTS["chance"] * scale(chance, 0.20, 0.80), 1),
@@ -285,7 +287,7 @@ def rate_prop(play: dict, player: dict, side: dict, opp_side: dict, game: dict, 
     # DraftKings' ladder centered far from our projection: usually a role the
     # book has already moved (Edgecombe 10/20, with LeBron and Brown arriving)
     mean_ = row["mean"]
-    if book_mid and book_mid >= 2 and not 0.74 <= mean_ / book_mid <= 1.35:
+    if book_mid and book_mid >= 1.5 and not 0.74 <= mean_ / book_mid <= 1.35:
         row["book_gap"] = "less" if mean_ > book_mid else "more"
     row["tags"] = tags(row)
     row["why"] = why(row)
@@ -297,6 +299,11 @@ def book_center(ladder: dict | None) -> float | None:
     if not ladder:
         return None
     pts = sorted((int(k), dk_props.implied(v)) for k, v in ladder.items())
+    # A ladder that opens below even money (AJ Green 10/21: 3+ rebounds at +140)
+    # centers under its first rung: extend it one rung down along its own slope.
+    if len(pts) >= 2 and pts[0][1] < 0.5:
+        (n0, p0), (_, p1) = pts[0], pts[1]
+        pts.insert(0, (n0 - 1, min(0.99, p0 + max(p0 - p1, 0.05))))
     for (n0, p0), (n1, p1) in zip(pts, pts[1:]):
         if p0 >= 0.5 >= p1:
             return round(n0 + (p0 - 0.5) / (p0 - p1) * (n1 - n0) - 0.5, 1) if p0 != p1 else n0 - 0.5
@@ -487,7 +494,9 @@ def build(date: str) -> dict:
 
     by_id = {r["id"]: r for r in rows}
     ranked = sorted(rows, key=lambda r: -r["score"])
-    top = [r["id"] for r in ranked if not r["small"]][:5]
+    # the Top Shelf is the night's best spots; a line DraftKings has already moved
+    # off our number is a role question first (Morant 10/21), so it sits out
+    top = [r["id"] for r in ranked if not r["small"] and not r.get("book_gap")][:5]
     for pid in top:
         by_id[pid]["tags"] = ["fav"] + by_id[pid]["tags"]
 

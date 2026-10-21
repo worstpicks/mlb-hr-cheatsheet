@@ -38,10 +38,17 @@ and beat the base rate in every market (`prop_shop_fit.json` → `check`).
 Preseason minutes are scaled to a regular-season role: 1.5x for starters, 1.2x for bench players,
 measured on the opening-week rosters.
 
+A player on a new club counts his preseason there in full (it is the only look at his new role), not at
+the usual 0.4; a player with no regular season behind him (rookies, Lillard's missed year) is capped at
+34 projected minutes. Both from 10/21: Morant read 8 assists from his Memphis year against 4.8 in
+Portland's exhibitions, and Caleb Wilson read 39.9 minutes.
+
 Rating: Model chance 40 · Track record 20 · Matchup 15 · Role & minutes 15 · Price check 10.
 Bands: 90 Elite, 80 Strong, 70 Playable, 60 Thin, else Dart. Bargain Bin (value) = plus money,
 4+ points over DraftKings' implied chance, matchup 50/100+, no doubt, no thin sample, and no
-"book gap" (DraftKings' ladder centered >35% off our projection, usually a role it already moved).
+"book gap" (DraftKings' ladder centered >35% off our projection, usually a role it already moved;
+checked once the book centers on 1.5 or more, and a ladder that opens below even money is extended one
+rung down to find its center). A book-gap prop also sits out the Top Shelf.
 
 First basket (first_basket.py): ESPN play-by-play of each player's last 15 games gives the jumpers'
 tip records, his side's first basket and his share of it as a starter. Chance = side scores first

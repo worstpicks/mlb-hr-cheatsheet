@@ -80,8 +80,9 @@
         }
         var s = b["spread_" + side];
         var alt = view.alt[side];
-        if (sport === "nhl" && alt != null && (!s || alt !== s.line)) return { value: alt };
-        if (s) return { value: s.line, price: s.price, book: s.book };
+        // a switched line (the puck line's -1.5 / +1.5, a flipped spread) is graded without a price
+        if (alt != null && (!s || alt !== s.line)) return { value: alt, alt: true, base: s ? s.line : null };
+        if (s) return { value: s.line, price: s.price, book: s.book, base: s.line };
         return { value: sport === "nhl" ? (alt != null ? alt : -1.5) : 0, missing: true };
     }
 
@@ -169,9 +170,15 @@
         var what = view.market === "total" ? (view.ou === "over" ? "Over " : "Under ") + (line.value == null ? "—" : line.value)
             : view.market === "ml" ? "Moneyline"
             : labels.line + " " + (line.missing && sport !== "nhl" ? "—" : signed(line.value));
-        var alt = "";
-        if (sport === "nhl" && view.market === "spread") {
-            alt = '<span class="nrs-log-filter wpl-alt">' + [-1.5, 1.5].map(function (v) {
+        var alt = "", flips = null;
+        if (view.market === "spread") {
+            if (sport === "nhl") flips = [-1.5, 1.5];
+            // basketball and football: tonight's number either way (ATL +2.5 or ATL -2.5),
+            // so the log shows how the same team grades as the favorite and as the dog
+            else if (line.base != null && line.base !== 0) flips = [-Math.abs(line.base), Math.abs(line.base)];
+        }
+        if (flips) {
+            alt = '<span class="nrs-log-filter wpl-alt" title="Grade the log against either side of the number">' + flips.map(function (v) {
                 return '<button type="button" data-wpl-alt="' + side + '" data-wpl-v="' + v + '" class="' + (line.value === v ? "is-active" : "") + '">' + signed(v) + "</button>";
             }).join("") + "</span>";
         }
@@ -179,7 +186,9 @@
         var note = line.missing
             ? (view.market === "total" ? "graded against each game's closing total"
                : (past ? "no line saved for this game" : "no line posted yet") + (sport === "nhl" ? "" : " · graded straight up"))
-            : (line.book ? esc(line.book) : view.market === "spread" && sport === "nhl" ? "alt line" : "");
+            : (line.book ? esc(line.book)
+               : line.alt ? (sport === "nhl" ? "alt line" : "flipped from " + signed(line.base) + " · no price")
+               : "");
         return '<footer class="wpl-chip"><span class="wpl-k">' + (past ? "Line" : "Tonight") + "</span><b>" + esc(what) + "</b>" +
             (line.price != null ? "<em>" + price(line.price) + "</em>" : "") + (note ? "<small>" + note + "</small>" : "") + alt + "</footer>";
     }

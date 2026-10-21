@@ -109,11 +109,15 @@ jobs:
         env:
           RUNDOWN_API_KEY: ${{ secrets.RUNDOWN_API_KEY }}
         run: python research_lines.py --date "$DATE"
+      # After the lines, so tonight's projection is set against the book's number.
+      - name: NBA game model (our projected score, spread and total)
+        continue-on-error: true
+        run: python -m nba_research.game_model --date "$DATE"
       - name: Publish all changed research in one commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- 'preview/data/nba-research-*.json' 'preview/data/nfl-research-*.json' 'preview/data/nhl-research-*.json' 'preview/data/lines-*.json' 'preview/data/results-*.json' preview/nhl-research
+          git add -A -- 'preview/data/nba-research-*.json' 'preview/data/nfl-research-*.json' 'preview/data/nhl-research-*.json' 'preview/data/lines-*.json' 'preview/data/results-*.json' 'preview/data/nba-game-model-*.json' preview/nhl-research
           if git diff --cached --quiet; then
             echo "No research changed; no production deployment needed."
             exit 0

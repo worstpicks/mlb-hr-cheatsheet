@@ -9,7 +9,10 @@ Two files per sport, both refreshed once a day inside the daily research run:
   preview/data/lines-<sport>.json    tonight's and the coming days' moneyline,
       spread / puck line and total from The Rundown (therundown.io). Full-game main
       lines only, which the free plan carries: one request per sport and date, a
-      few dozen data points a game, well inside the free 20,000 a day.
+      few dozen data points a game, well inside the free 20,000 a day. NBA and NFL
+      games The Rundown leaves unpriced -- or every game, when no key reaches the run
+      (10/15-10/21 every daily run skipped the lines that way) -- get DraftKings'
+      lines from ESPN's public odds API instead, so the tab is never left without one.
 
 The Rundown key is read from the RUNDOWN_API_KEY environment variable (a GitHub
 Actions secret in the daily run), else from ~/.config/worstpickz/rundown.key on
@@ -230,6 +233,64 @@ def summarize(books: dict) -> dict:
     }
 
 
+# ---- DraftKings via ESPN: the fallback ------------------------------------------
+
+ESPN_CORE = {"nba": "basketball/leagues/nba", "nfl": "football/leagues/nfl"}
+
+
+def espn_event_lines(sport: str, event_id: str) -> dict | None:
+    """{"19": {ml, spread, total}} -- DraftKings (ESPN provider 100), keyed like The Rundown's book id."""
+    url = (f"https://sports.core.api.espn.com/v2/sports/{ESPN_CORE[sport]}/events/{event_id}"
+           f"/competitions/{event_id}/odds?lang=en&region=us")
+    try:
+        items = espn_get(url).get("items") or []
+    except Exception:
+        return None
+    it = next((x for x in items if str((x.get("provider") or {}).get("id")) == "100"), None)
+    if not it:
+        return None
+    b: dict = {}
+    a, h = it.get("awayTeamOdds") or {}, it.get("homeTeamOdds") or {}
+    if a.get("moneyLine") is not None and h.get("moneyLine") is not None:
+        b["ml"] = {"away": int(a["moneyLine"]), "home": int(h["moneyLine"])}
+    sp = {}
+    for side, o in (("away", a), ("home", h)):
+        line = _num((((o.get("current") or {}).get("pointSpread") or {}).get("american")))
+        if line is not None and o.get("spreadOdds") is not None:
+            sp[side] = [line, int(o["spreadOdds"])]
+    if len(sp) == 2:
+        b["spread"] = sp
+    if it.get("overUnder") is not None and it.get("overOdds") is not None and it.get("underOdds") is not None:
+        b["total"] = {"line": float(it["overUnder"]), "over": int(it["overOdds"]), "under": int(it["underOdds"])}
+    return {"19": b} if b else None
+
+
+def espn_fill(sport: str, start: Date, result: dict | None) -> dict | None:
+    """Price every site game The Rundown did not, from DraftKings via ESPN."""
+    if sport not in ESPN_CORE:
+        return result
+    days = [(start + timedelta(days=i)).isoformat() for i in range(SPORTS[sport][1])]
+    games = site_games(sport, days)
+    if not games:
+        return result
+    result = result or {"sport": sport, "source": "DraftKings via ESPN",
+                        "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "days": days, "games": {}}
+    filled = 0
+    for g in games:
+        if g["id"] in result["games"]:
+            continue
+        books = espn_event_lines(sport, g["id"])
+        if books:
+            result["games"][g["id"]] = {"date": g["date"], "kickoff": None, "away": g["away"], "home": g["home"],
+                                        "source": "DraftKings via ESPN", **summarize(books)}
+            filled += 1
+    if filled:
+        print(f"[lines] {sport}: {filled} game(s) priced from DraftKings via ESPN")
+        if result.get("source") == "The Rundown":
+            result["source"] = "The Rundown and DraftKings via ESPN"
+    return result
+
+
 # ---- the run -------------------------------------------------------------------
 
 def pull(sport: str, start: Date, key: str) -> dict | None:
@@ -443,10 +504,12 @@ def main() -> int:
 
     key = api_key()
     if not key:
-        print("[lines] RUNDOWN_API_KEY not set and no key file; tonight's lines left as they were")
-        return 0
+        # Said loudly: from 10/15 to 10/21 this line was the only sign every daily run had skipped the lines.
+        print("[lines] WARNING: RUNDOWN_API_KEY is not set (check the GitHub Actions secret); "
+              "NBA/NFL fall back to DraftKings via ESPN, NHL/MLB lines are left as they were")
     for sport in sports:
-        result = pull(sport, start, key)
+        result = pull(sport, start, key) if key else None
+        result = espn_fill(sport, start, result)
         if result:  # written even when nothing is priced yet, so the page's tab never asks for a missing file
             (DATA / f"lines-{sport}.json").write_text(json.dumps(result, separators=(",", ":")), encoding="utf-8")
     return 0

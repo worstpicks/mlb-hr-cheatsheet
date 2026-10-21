@@ -1,0 +1,373 @@
+{
+ "fitted": "2026-10-21T20:19+00:00",
+ "season": "2025-26",
+ "train_games": 597,
+ "coef": [
+  61.76945,
+  0.4544,
+  0.60772,
+  0.81763,
+  1.41447
+ ],
+ "margin_sd": 15.62,
+ "total_sd": 19.82,
+ "check": {
+  "games": 490,
+  "margin_mae": 12.16,
+  "margin_sd": 15.62,
+  "total_mae": 15.84,
+  "total_sd": 19.82,
+  "picked_winner": 72.4
+ },
+ "vs_book": {
+  "games": 169,
+  "book_margin_mae": 10.91,
+  "book_total_mae": 14.83,
+  "our_margin_mae": 12.62,
+  "our_total_mae": 16.8
+ },
+ "book_margin_sd": 14.73,
+ "record_vs_close": {
+  "spread": [
+   74,
+   95
+  ],
+  "total": [
+   78,
+   91
+  ]
+ },
+ "teams": {
+  "HOU": {
+   "pace": 99.42,
+   "def": 0.9768,
+   "off": 1.021,
+   "ortg": 115.9,
+   "drtg": 110.9,
+   "games": 82,
+   "pace_rank": 26,
+   "ortg_rank": 8,
+   "drtg_rank": 6
+  },
+  "OKC": {
+   "pace": 101.76,
+   "def": 0.931,
+   "off": 1.0304,
+   "ortg": 117.0,
+   "drtg": 105.7,
+   "games": 82,
+   "pace_rank": 17,
+   "ortg_rank": 5,
+   "drtg_rank": 1
+  },
+  "GS": {
+   "pace": 101.7,
+   "def": 0.9979,
+   "off": 0.9927,
+   "ortg": 112.7,
+   "drtg": 113.3,
+   "games": 82,
+   "pace_rank": 18,
+   "ortg_rank": 18,
+   "drtg_rank": 17
+  },
+  "LAL": {
+   "pace": 99.8,
+   "def": 1.0044,
+   "off": 1.0268,
+   "ortg": 116.6,
+   "drtg": 114.0,
+   "games": 82,
+   "pace_rank": 23,
+   "ortg_rank": 7,
+   "drtg_rank": 19
+  },
+  "BKN": {
+   "pace": 99.33,
+   "def": 1.0321,
+   "off": 0.9394,
+   "ortg": 106.6,
+   "drtg": 117.2,
+   "games": 82,
+   "pace_rank": 27,
+   "ortg_rank": 30,
+   "drtg_rank": 26
+  },
+  "CHA": {
+   "pace": 100.14,
+   "def": 0.9905,
+   "off": 1.0205,
+   "ortg": 115.9,
+   "drtg": 112.4,
+   "games": 82,
+   "pace_rank": 22,
+   "ortg_rank": 9,
+   "drtg_rank": 13
+  },
+  "CLE": {
+   "pace": 102.12,
+   "def": 0.9942,
+   "off": 1.031,
+   "ortg": 117.0,
+   "drtg": 112.9,
+   "games": 82,
+   "pace_rank": 14,
+   "ortg_rank": 6,
+   "drtg_rank": 16
+  },
+  "NY": {
+   "pace": 98.87,
+   "def": 0.9764,
+   "off": 1.0383,
+   "ortg": 117.9,
+   "drtg": 110.8,
+   "games": 83,
+   "pace_rank": 28,
+   "ortg_rank": 2,
+   "drtg_rank": 5
+  },
+  "MIA": {
+   "pace": 105.57,
+   "def": 0.9888,
+   "off": 1.0085,
+   "ortg": 114.5,
+   "drtg": 112.3,
+   "games": 82,
+   "pace_rank": 1,
+   "ortg_rank": 13,
+   "drtg_rank": 11
+  },
+  "ORL": {
+   "pace": 103.16,
+   "def": 0.9895,
+   "off": 0.9883,
+   "ortg": 112.2,
+   "drtg": 112.3,
+   "games": 82,
+   "pace_rank": 9,
+   "ortg_rank": 19,
+   "drtg_rank": 12
+  },
+  "TOR": {
+   "pace": 100.68,
+   "def": 0.9789,
+   "off": 1.003,
+   "ortg": 113.9,
+   "drtg": 111.1,
+   "games": 82,
+   "pace_rank": 21,
+   "ortg_rank": 15,
+   "drtg_rank": 8
+  },
+  "ATL": {
+   "pace": 103.82,
+   "def": 0.9861,
+   "off": 1.0051,
+   "ortg": 114.1,
+   "drtg": 111.9,
+   "games": 82,
+   "pace_rank": 7,
+   "ortg_rank": 14,
+   "drtg_rank": 10
+  },
+  "PHI": {
+   "pace": 102.4,
+   "def": 0.9931,
+   "off": 0.9969,
+   "ortg": 113.2,
+   "drtg": 112.7,
+   "games": 82,
+   "pace_rank": 13,
+   "ortg_rank": 16,
+   "drtg_rank": 15
+  },
+  "BOS": {
+   "pace": 97.46,
+   "def": 0.9717,
+   "off": 1.0381,
+   "ortg": 117.9,
+   "drtg": 110.3,
+   "games": 82,
+   "pace_rank": 30,
+   "ortg_rank": 3,
+   "drtg_rank": 4
+  },
+  "DET": {
+   "pace": 102.12,
+   "def": 0.9476,
+   "off": 1.0159,
+   "ortg": 115.3,
+   "drtg": 107.6,
+   "games": 82,
+   "pace_rank": 15,
+   "ortg_rank": 11,
+   "drtg_rank": 2
+  },
+  "CHI": {
+   "pace": 104.25,
+   "def": 1.0201,
+   "off": 0.9798,
+   "ortg": 111.2,
+   "drtg": 115.8,
+   "games": 82,
+   "pace_rank": 4,
+   "ortg_rank": 23,
+   "drtg_rank": 22
+  },
+  "NO": {
+   "pace": 103.01,
+   "def": 1.0258,
+   "off": 0.9879,
+   "ortg": 112.1,
+   "drtg": 116.5,
+   "games": 82,
+   "pace_rank": 10,
+   "ortg_rank": 20,
+   "drtg_rank": 23
+  },
+  "MEM": {
+   "pace": 104.11,
+   "def": 1.026,
+   "off": 0.9703,
+   "ortg": 110.1,
+   "drtg": 116.5,
+   "games": 82,
+   "pace_rank": 5,
+   "ortg_rank": 25,
+   "drtg_rank": 24
+  },
+  "WSH": {
+   "pace": 103.85,
+   "def": 1.0599,
+   "off": 0.9576,
+   "ortg": 108.7,
+   "drtg": 120.3,
+   "games": 82,
+   "pace_rank": 6,
+   "ortg_rank": 29,
+   "drtg_rank": 30
+  },
+  "MIL": {
+   "pace": 99.46,
+   "def": 1.034,
+   "off": 0.9799,
+   "ortg": 111.2,
+   "drtg": 117.4,
+   "games": 82,
+   "pace_rank": 25,
+   "ortg_rank": 24,
+   "drtg_rank": 27
+  },
+  "LAC": {
+   "pace": 98.47,
+   "def": 1.0005,
+   "off": 1.0177,
+   "ortg": 115.5,
+   "drtg": 113.6,
+   "games": 82,
+   "pace_rank": 29,
+   "ortg_rank": 10,
+   "drtg_rank": 18
+  },
+  "UTAH": {
+   "pace": 105.21,
+   "def": 1.057,
+   "off": 0.9845,
+   "ortg": 111.8,
+   "drtg": 120.0,
+   "games": 82,
+   "pace_rank": 2,
+   "ortg_rank": 21,
+   "drtg_rank": 29
+  },
+  "SA": {
+   "pace": 101.91,
+   "def": 0.9636,
+   "off": 1.035,
+   "ortg": 117.5,
+   "drtg": 109.4,
+   "games": 83,
+   "pace_rank": 16,
+   "ortg_rank": 4,
+   "drtg_rank": 3
+  },
+  "DAL": {
+   "pace": 104.63,
+   "def": 1.01,
+   "off": 0.9608,
+   "ortg": 109.1,
+   "drtg": 114.7,
+   "games": 82,
+   "pace_rank": 3,
+   "ortg_rank": 28,
+   "drtg_rank": 20
+  },
+  "MIN": {
+   "pace": 102.72,
+   "def": 0.9778,
+   "off": 1.0119,
+   "ortg": 114.9,
+   "drtg": 111.0,
+   "games": 82,
+   "pace_rank": 12,
+   "ortg_rank": 12,
+   "drtg_rank": 7
+  },
+  "POR": {
+   "pace": 103.58,
+   "def": 0.9907,
+   "off": 0.9821,
+   "ortg": 111.5,
+   "drtg": 112.5,
+   "games": 82,
+   "pace_rank": 8,
+   "ortg_rank": 22,
+   "drtg_rank": 14
+  },
+  "SAC": {
+   "pace": 101.26,
+   "def": 1.0459,
+   "off": 0.9656,
+   "ortg": 109.6,
+   "drtg": 118.7,
+   "games": 82,
+   "pace_rank": 20,
+   "ortg_rank": 26,
+   "drtg_rank": 28
+  },
+  "PHX": {
+   "pace": 99.59,
+   "def": 0.983,
+   "off": 0.9958,
+   "ortg": 113.0,
+   "drtg": 111.6,
+   "games": 82,
+   "pace_rank": 24,
+   "ortg_rank": 17,
+   "drtg_rank": 9
+  },
+  "IND": {
+   "pace": 102.97,
+   "def": 1.0266,
+   "off": 0.9618,
+   "ortg": 109.2,
+   "drtg": 116.5,
+   "games": 82,
+   "pace_rank": 11,
+   "ortg_rank": 27,
+   "drtg_rank": 25
+  },
+  "DEN": {
+   "pace": 101.51,
+   "def": 1.0158,
+   "off": 1.0593,
+   "ortg": 120.3,
+   "drtg": 115.3,
+   "games": 82,
+   "pace_rank": 19,
+   "ortg_rank": 1,
+   "drtg_rank": 21
+  }
+ },
+ "league_pace": 101.83
+}

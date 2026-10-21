@@ -8,7 +8,10 @@
  *
  * Results:  preview/data/results-<sport>.json  (final scores + DraftKings'
  *           closing lines from ESPN, a rolling log the daily run extends)
- * Tonight:  preview/data/lines-<sport>.json    (The Rundown, pulled once a day)
+ * Tonight:  preview/data/lines-<sport>.json    (The Rundown, else DraftKings via ESPN; once a day)
+ * NBA also: preview/data/nba-game-model-<date>.json (nba_research/game_model.py): what
+ *           DraftKings' numbers say with the vig out, what's behind them, and our own
+ *           projected score with its record against the closing line.
  * Both are written by research_lines.py. Pages call WPLines.render() inside
  * their own view tabs (NFL) or let WPLines.mount() add a tab row (NHL, NBA).
  */
@@ -22,7 +25,8 @@
         nba: { tab: "Moneyline & Spread", line: "Spread" }
     };
     // shared by both sides, and kept while you move between games
-    var view = { market: "spread", ou: "over", span: "l10", venue: "all", alt: {} };
+    // preseason off by default: starters sit, and exhibition lines are soft
+    var view = { market: "spread", ou: "over", span: "l10", venue: "all", pre: "off", alt: {} };
 
     function esc(s) {
         return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -97,6 +101,7 @@
     function panel(sport, team, side, opp, results, tonight, before) {
         var all = teamGames(results, team.abbr, before);
         var games = all.filter(function (g) {
+            if (view.pre === "off" && g.pre) return false;
             if (view.venue === "home") return g.home;
             if (view.venue === "away") return !g.home;
             if (view.venue === "vs") return g.opp === opp;
@@ -179,6 +184,86 @@
             (line.price != null ? "<em>" + price(line.price) + "</em>" : "") + (note ? "<small>" + note + "</small>" : "") + alt + "</footer>";
     }
 
+
+    /* ── Tonight's number, explained (NBA) ───────────────────────────────────
+       What DraftKings' three numbers say once the vig is out, what sits behind
+       them (last season's pace, offense and defense; who is out), and our own
+       roster-built projection -- shown with its record against the closing line,
+       because the book's number has been the better guide. */
+    function pct(v) { return v == null ? "—" : Math.round(v) + "%"; }
+    function ord(n) { return n == null ? "" : n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th")); }
+    function agree(edge, small, mid, homeAbbr, awayAbbr, word) {
+        if (edge == null) return { cls: "", text: "" };
+        var a = Math.abs(edge);
+        if (a <= small) return { cls: "wpl-ag--yes", text: "Agrees with the book" };
+        var who = word === "total" ? (edge > 0 ? "higher on the total" : "lower on the total")
+                                   : (edge > 0 ? "higher on " + homeAbbr : "higher on " + awayAbbr);
+        if (a <= mid) return { cls: "wpl-ag--close", text: "Close: we're " + round1(a) + " " + who };
+        return { cls: "wpl-ag--far", text: "We're " + round1(a) + " " + who + ": check why" };
+    }
+    function modelCard(sport, m, meta, teams) {
+        var A = m.away, H = m.home, mk = m.market || {}, vs = m.vs || {}, tm = m.teams || {};
+        var tiles = [];
+        if (vs.ml) {
+            var gap = mk.ml_minus_spread, note = "";
+            if (gap != null && vs.spread) {
+                var homeFav = vs.spread.home_line < 0, fav = homeFav ? H : A;
+                var favSpreadWin = homeFav ? mk.spread_win_home : 100 - mk.spread_win_home;
+                if (Math.abs(gap) < 2.5) {
+                    note = "Matches the spread: a " + Math.abs(vs.spread.home_line) + "-point favorite usually wins about " + pct(favSpreadWin) + " of the time.";
+                } else {
+                    var bigger = (gap > 0) === homeFav;
+                    note = "The moneyline makes " + fav + " " + (bigger ? "a bigger" : "a smaller") + " favorite than the spread does (" + pct(favSpreadWin) + " from the spread).";
+                }
+            }
+            tiles.push('<div class="wpl-mt"><span class="wpl-k">Moneyline</span><b>' + esc(A) + " " + price(vs.ml.away) + " · " + esc(H) + " " + price(vs.ml.home) + "</b>" +
+                '<div class="wpl-split"><i style="width:' + (mk.win ? mk.win.away : 50) + '%"></i></div>' +
+                '<div class="wpl-split__lab"><span>' + esc(A) + " " + pct(mk.win && mk.win.away) + "</span><span>" + esc(H) + " " + pct(mk.win && mk.win.home) + "</span></div>" +
+                "<small>Win chances with DraftKings' vig taken out. " + esc(note) + "</small></div>");
+        }
+        if (vs.spread) {
+            var fav2 = vs.spread.home_line < 0 ? H : A, by = Math.abs(vs.spread.home_line);
+            tiles.push('<div class="wpl-mt"><span class="wpl-k">Spread</span><b>' + esc(H) + " " + signed(vs.spread.home_line) + " <em>" + price(vs.spread.price) + "</em></b>" +
+                "<p>The book has <strong>" + esc(fav2) + " by " + by + "</strong>" +
+                (mk.score ? ". With the total, the book's score is " + esc(H) + " " + mk.score.home + " – " + esc(A) + " " + mk.score.away + "." : ".") + "</p>" +
+                "<small>DraftKings' closing spread has missed the final margin by about " +
+                Math.round((meta.vs_book && meta.vs_book.book_margin_mae) || 11) + " points on average, so a " + by + "-point line is a lean, not a lock.</small></div>");
+        }
+        if (vs.total) {
+            var ta = tm.away || {}, th = tm.home || {};
+            tiles.push('<div class="wpl-mt"><span class="wpl-k">Total</span><b>' + vs.total.line + " <em>o " + price(vs.total.over_price) + " / u " + price(vs.total.under_price) + "</em></b>" +
+                "<p>Over " + pct(mk.over) + " · Under " + pct(mk.over == null ? null : 100 - mk.over) + "</p>" +
+                "<small>Pace last season: " + esc(A) + " " + (ta.pace ? round1(ta.pace) : "—") + " possessions a game (" + ord(ta.pace_rank) + "), " + esc(H) + " " +
+                (th.pace ? round1(th.pace) : "—") + " (" + ord(th.pace_rank) + "); league " + (m.league_pace ? round1(m.league_pace) : "—") + ". More possessions, more points.</small></div>");
+        }
+        function side(abbr, k) {
+            var t = tm[k] || {}, top = (m.top || {})[k] || [], out = (m.out || {})[k] || [];
+            return '<div class="wpl-ws"><b>' + esc(abbr) + "</b>" +
+                "<span>Offense " + (t.ortg || "—") + " per 100 (" + ord(t.ortg_rank) + ")</span>" +
+                "<span>Defense " + (t.drtg || "—") + " allowed (" + ord(t.drtg_rank) + ")</span>" +
+                "<span>Top scorers tonight: " + top.map(function (p) { return esc(p.name.split(" ").slice(-1)[0]) + " " + Math.round(p.pts); }).join(", ") + "</span>" +
+                (out.length ? '<span class="wpl-out">Out: ' + out.map(esc).join(", ") + "</span>" : "<span>Out: nobody listed</span>") + "</div>";
+        }
+        var sAg = vs.spread ? agree(vs.spread.edge, 1.5, 4, H, A, "spread") : { text: "", cls: "" };
+        var tAg = vs.total ? agree(vs.total.edge, 3, 6, H, A, "total") : { text: "", cls: "" };
+        var rec = meta.record_vs_close || {}, vb = meta.vs_book || {};
+        var recText = rec.spread
+            ? "Against DraftKings' closing lines last spring it went " + rec.spread[0] + "-" + rec.spread[1] + " on spreads and " + (rec.total || [0, 0])[0] + "-" + (rec.total || [0, 0])[1] +
+              " on totals, and missed margins by " + (vb.our_margin_mae || "—") + " points to the book's " + (vb.book_margin_mae || "—") + "."
+            : "";
+        return '<section class="wpl-model">' +
+            '<header class="wpl-model__head"><span class="wpl-k">Tonight\'s number, explained</span><small>' + esc(vs.book || "DraftKings") + "</small></header>" +
+            '<div class="wpl-mtiles">' + tiles.join("") + "</div>" +
+            '<div class="wpl-why"><span class="wpl-k">What\'s behind it · last season</span><div class="wpl-wgrid">' + side(A, "away") + side(H, "home") + "</div></div>" +
+            '<div class="wpl-ours"><span class="wpl-k">Our projection</span>' +
+              "<b>" + esc(A) + " " + m.proj.away + " – " + esc(H) + " " + m.proj.home + "</b>" +
+              '<span class="wpl-ag ' + sAg.cls + '">Spread: ' + esc(sAg.text || "—") + "</span>" +
+              '<span class="wpl-ag ' + tAg.cls + '">Total ' + m.total + ": " + esc(tAg.text || "—") + "</span>" +
+              "<small>Built from tonight's rotations: each player's projected minutes times his scoring rate, adjusted for the other defense, pace and home court. " +
+              esc(recText) + " So the book's number is the better guide. A big gap here usually means a rotation or injury story the book has already priced: worth reading, not betting against.</small>" +
+            "</div></section>";
+    }
+
     function todayET() {
         return new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
     }
@@ -197,17 +282,22 @@
         if (host.dataset.wplGame !== String(gameId)) view.alt = {};   // a new game starts on its own lines
         host.dataset.wplGame = String(gameId);
         if (!host.querySelector(".wpl")) host.innerHTML = '<p class="nrs-empty">Loading…</p>';
-        return Promise.all([load("results-" + sport), load("lines-" + sport)]).then(function (got) {
+        var day = before || todayET();
+        return Promise.all([load("results-" + sport), load("lines-" + sport),
+                            sport === "nba" ? load("nba-game-model-" + day) : Promise.resolve(null)]).then(function (got) {
             var results = got[0], lines = got[1];
+            var model = got[2] && got[2].games && got[2].games[String(gameId)];
             var tonight = lines && lines.games && lines.games[String(gameId)];
             var since = (results && results.games && results.games.length)
                 ? new Date(results.games[0].date + "T12:00:00").toLocaleDateString([], { month: "short", day: "numeric" }) : "";
             host.innerHTML = '<div class="wpl">' +
+                (model ? modelCard(sport, model, got[2].model || {}, teams) : "") +
                 '<div class="wpl-controls">' +
                   seg("market", [["spread", labels.line], ["ml", "Moneyline"], ["total", "Total"]]) +
                   (view.market === "total" ? seg("ou", [["over", "Over"], ["under", "Under"]]) : "") +
                   seg("span", [["l5", "L5"], ["l10", "L10"], ["all", "All"]]) +
                   seg("venue", [["all", "Both"], ["home", "Home"], ["away", "Away"], ["vs", "H2H"]]) +
+                  seg("pre", [["off", "No preseason"], ["on", "+ Preseason"]]) +
                 "</div>" +
                 '<div class="nrs-bt-grid wpl-grid">' +
                   panel(sport, teams.away, "away", teams.home.abbr, results, tonight, before) +
@@ -217,7 +307,9 @@
                 "Margin reads like a spread: −3 is a three-" + (sport === "nhl" ? "goal" : "point") + " win, +2 a two-" + (sport === "nhl" ? "goal" : "point") + " loss" +
                 (sport === "nhl" ? " (shootout goals count, as books settle the puck line)" : "") + ". " +
                 "O/U is that game's closing total. Scores and closing lines from ESPN" + (since ? ", logged since " + since : "") +
-                "; tonight's lines from The Rundown. The log grows a day at a time.</p>" +
+                "; tonight's lines from " + esc((lines && lines.source) || "The Rundown") +
+                (lines && lines.fetched_at ? " (" + new Date(lines.fetched_at).toLocaleString([], { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" }) + ")" : "") +
+                ". Preseason games are left out unless you add them back. The log grows a day at a time.</p>" +
                 "</div>";
             host.querySelectorAll("[data-wpl-f]").forEach(function (b) {
                 b.addEventListener("click", function () {

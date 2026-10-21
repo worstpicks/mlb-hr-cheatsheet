@@ -53,3 +53,34 @@ html.theme-light .wpl-rate b.wpl-rate--bad { color: #b91c1c; }
 .wpl-chip em { font-style: normal; font-weight: 800; color: var(--wpz-color-text, #f5efe9); }
 .wpl-chip small { font-size: 0.72rem; color: var(--nrs-muted, #94a3b8); }
 .wpl-chip .wpl-alt { margin-left: auto; }
+
+/* Tonight's number, explained (NBA): the book's three numbers, what's behind them, our projection */
+.wpl-model { border: 1px solid var(--nrs-border-strong, rgba(234, 179, 8, 0.35)); border-radius: 16px; padding: 14px; margin: 0 0 14px;
+    background: var(--nrs-panel, rgba(8, 15, 28, 0.82)); display: grid; gap: 12px; }
+.wpl-model__head { display: flex; align-items: baseline; gap: 10px; }
+.wpl-model__head small { margin-left: auto; font-size: 0.72rem; color: var(--nrs-muted, #94a3b8); }
+.wpl-mtiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 820px) { .wpl-mtiles { grid-template-columns: 1fr; } }
+.wpl-mt { display: grid; gap: 6px; align-content: start; padding: 11px 12px; border-radius: 12px;
+    background: var(--nrs-cell-bg, rgba(30, 41, 59, 0.45)); border: 1px solid var(--nrs-border, rgba(251, 146, 60, 0.22)); }
+.wpl-mt b { font-size: 1.02rem; font-weight: 900; color: var(--wpz-color-heading, #fffbeb); }
+.wpl-mt b em { font-style: normal; font-weight: 700; font-size: 0.85rem; color: var(--nrs-muted, #94a3b8); }
+.wpl-mt p { margin: 0; font-size: 0.86rem; color: var(--wpz-color-text, #f5efe9); line-height: 1.45; }
+.wpl-mt p strong { color: var(--wpz-color-heading, #fffbeb); }
+.wpl-mt small, .wpl-ours small { font-size: 0.74rem; line-height: 1.45; color: var(--nrs-muted, #94a3b8); }
+.wpl-split { height: 9px; border-radius: 6px; overflow: hidden; background: #f97316; }
+.wpl-split i { display: block; height: 100%; background: #38bdf8; }
+.wpl-split__lab { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; color: var(--wpz-color-text, #f5efe9); }
+.wpl-why { display: grid; gap: 8px; }
+.wpl-wgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 560px) { .wpl-wgrid { grid-template-columns: 1fr; } }
+.wpl-ws { display: grid; gap: 3px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--nrs-border, rgba(251, 146, 60, 0.22)); font-size: 0.82rem; }
+.wpl-ws b { font-size: 0.95rem; color: var(--wpz-color-heading, #fffbeb); }
+.wpl-ws span { color: var(--wpz-color-text, #f5efe9); }
+.wpl-ws .wpl-out { color: #fca5a5; }
+html.theme-light .wpl-ws .wpl-out { color: #b91c1c; }
+.wpl-ours { display: grid; gap: 6px; padding: 11px 12px; border-radius: 12px; border: 1px dashed var(--nrs-border, rgba(251, 146, 60, 0.3)); }
+.wpl-ours b { font-size: 1.05rem; font-weight: 900; color: var(--wpz-color-heading, #fffbeb); }
+.wpl-ag { font-size: 0.84rem; font-weight: 800; color: var(--wpz-color-text, #f5efe9); }
+.wpl-ag--yes { color: #4ade80; } .wpl-ag--close { color: #facc15; } .wpl-ag--far { color: #fb923c; }
+html.theme-light .wpl-ag--yes { color: #15803d; } html.theme-light .wpl-ag--close { color: #a16207; } html.theme-light .wpl-ag--far { color: #c2410c; }

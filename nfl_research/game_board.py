@@ -21,9 +21,11 @@ Two choices matter more than the rest:
     Ranking by that game's yards -- what the older sheets did -- makes a defense
     look tough on WR1s whenever the WR2 happens to have the big day.
 
-  * The window rolls across seasons: each player's and each defense's last
-    seventeen regular-season games. In September that is mostly last season,
-    which is the honest sample; a veteran who missed week one still has one.
+  * This season only (the owner's call, 10/14/2026): each player's and each
+    defense's games this season, up to seventeen. The rolling window used to reach
+    back into last season, and a role that changed over the summer kept reading
+    as last year's -- RJ Harvey was DEN's lead back in 2025 and a backup in 2026.
+    Last season is read only before this one has a game.
 
 Everything here is free data: nflverse weekly stats, play-by-play and
 participation (coverage, pressure), plus the ESPN line already on the slate.
@@ -50,6 +52,16 @@ WINDOW = 17          # games per player and per defense
 TRAIL = 5            # games of usage that decide a role
 RECENT = 5           # games in the "recent form" split
 LEAGUE_TEAM_POINTS = 22.5   # a typical implied team total, the script baseline
+
+# 2026 data only means small samples, so each piece of a TD expectation is blended
+# toward its 2026 average until the player's (or club's) own games fill in: his red-zone
+# share, long touchdowns and (QB) rushing touchdowns with BLEND_GAMES games of his role's
+# average, his club's red-zone trips with BLEND_GAMES games of the league's, and the
+# defense's red-zone TD rate with BLEND_TRIPS trips at the league rate. Fitted 10/21 on
+# the Week 3-6 lists, each week rebuilt from 2026 games before it: log loss .594 against
+# .596 for the old 17-game window (.755 unblended), and .528 vs .584 on Week 6 alone.
+BLEND_GAMES = 6
+BLEND_TRIPS = 40
 
 # Leak ratios get a fantasy-point buffer on both sides before dividing. A TE2 is
 # worth about two points a game league-wide, so one decent outing against a
@@ -104,9 +116,21 @@ def _clamp(x: float, lo: float = -1.0, hi: float = 1.0) -> float:
 
 # ── loading ──────────────────────────────────────────────────────────────────
 
+def model_seasons(season: int) -> list[int]:
+    """The seasons every number reads: this one once it has a regular-season game,
+    last season only before that (Week 1)."""
+    try:
+        weekly = nfl.load_player_stats(seasons=[season], summary_level="week")
+        if weekly.filter(pl.col("season_type") == "REG").height:
+            return [season]
+    except Exception:
+        pass
+    return [season - 1]
+
+
 def load_frames(season: int) -> dict:
-    """Last season and this one, whichever of each feed is published."""
-    seasons = [season - 1, season]
+    """The model's seasons (see model_seasons), whichever of each feed is published."""
+    seasons = model_seasons(season)
 
     weekly = nfl.load_player_stats(seasons=seasons, summary_level="week").filter(
         (pl.col("season_type") == "REG") & pl.col("position").is_in(list(SKILL))
@@ -440,8 +464,32 @@ def _leak_text(opp, role, d_role):
     return f"{opp} gives up {abs(pct)}% {more} than league to {role}s ({where} of {of})"
 
 
+def td_prior(rows: list[dict], profiles: dict, env: dict, windows: dict) -> dict:
+    """The 2026 averages the TD expectation blends toward: per role (by each player's
+    latest usage role), and the league's red-zone trips and TD rate."""
+    last_role: dict[str, str] = {}
+    for r in sorted(rows, key=lambda r: (r["season"], r["week"])):
+        if r.get("role"):
+            last_role[r["player_id"]] = r["role"]
+    by_role: dict[str, dict[str, list]] = defaultdict(lambda: {"rz": [], "long": [], "rush_td": []})
+    for pid, p in profiles.items():
+        role = last_role.get(pid)
+        if role and p["games"] >= 2:
+            by_role[role]["rz"].append(p["rz_share"])
+            by_role[role]["long"].append(p["long_td_pg"])
+            by_role[role]["rush_td"].append(p["window"]["rush_td"])
+    role = {k: {s: (sum(v[s]) / len(v[s]) if v[s] else 0.0) for s in v} for k, v in by_role.items()}
+    trips = [e["rz_trips"] for e in env.values() if e.get("rz_trips")]
+    rates = [e["def_rz_td"] for e in env.values() if e.get("def_rz_td") is not None]
+    return {"role": role,
+            "lg_trips": sum(trips) / len(trips) if trips else 0.0,
+            "lg_rate": sum(rates) / len(rates) if rates else 0.0,
+            "games": {t: len(w["off"]) for t, w in windows.items()},
+            "def_games": {t: len(w["def"]) for t, w in windows.items()}}
+
+
 def board_player(card: dict, prof: dict | None, team: str, opp: str, implied: dict | None,
-                 allowed: dict, league: dict, env: dict) -> dict:
+                 allowed: dict, league: dict, env: dict, prior: dict | None = None) -> dict:
     """One row of the board: projection, TD chance, grade and the reasons behind it."""
     pos, role = card["pos"], f'{card["pos"]}{card["rank"]}'
     base = {
@@ -482,13 +530,28 @@ def board_player(card: dict, prof: dict | None, team: str, opp: str, implied: di
         proj[stat] = round(mean * m_mult * s_mult * c_mult, 1)
 
     # touchdowns: red-zone work x trips x how often this defense lets a trip score,
-    # plus the scores he gets from outside the 20
+    # plus the scores he gets from outside the 20 -- each blended toward 2026 averages
+    # (see BLEND_GAMES) so five games of luck can't read as a 90% scorer
     e_team, e_opp = env.get(team, {}), env.get(opp, {})
-    xtd = prof["long_td_pg"]
+    pri = prior or {}
+    ra = (pri.get("role") or {}).get(role) or {"rz": 0.0, "long": 0.0, "rush_td": 0.0}
+    n, k = prof["games"], BLEND_GAMES
+
+    def blend(own, avg):
+        return (n * own + k * avg) / (n + k)
+
+    xtd = blend(prof["long_td_pg"], ra["long"])
     if e_team.get("rz_trips") and e_opp.get("def_rz_td") is not None:
-        xtd += (prof["rz_share"] / 100) * e_team["rz_trips"] * (e_opp["def_rz_td"] / 100)
+        g = (pri.get("games") or {}).get(team, 0)
+        dg = (pri.get("def_games") or {}).get(opp, 0)
+        lg_trips, lg_rate = pri.get("lg_trips", e_team["rz_trips"]), pri.get("lg_rate", e_opp["def_rz_td"])
+        trips = (g * e_team["rz_trips"] + k * lg_trips) / (g + k) if g + k else e_team["rz_trips"]
+        faced = dg * lg_trips   # red-zone trips this defense has faced, at a typical rate
+        rate = (faced * e_opp["def_rz_td"] + BLEND_TRIPS * lg_rate) / (faced + BLEND_TRIPS)
+        xtd += (blend(prof["rz_share"], ra["rz"]) / 100) * trips * (rate / 100)
     if pos == "QB":
-        xtd = prof["window"]["rush_td"] * 0.9  # a QB's anytime TD is a rushing score
+        # a QB's anytime TD is a rushing score
+        xtd = blend(prof["window"]["rush_td"], ra["rush_td"]) * 0.9
     td_chance = round(100 * (1 - math.exp(-xtd)))
 
     # grade: each part lands in [-1, 1], weighted, then mapped to 0-100 around 50.
@@ -570,6 +633,7 @@ def attach_game_boards(slate_games: list[dict], lineups: dict, season: int) -> d
     allowed, league = defense_allowed(rows, windows)
     env = team_environment(frames["pbp"], frames["part"], windows)
     profiles = player_profiles(rows, frames["pbp"], frames["part"])
+    prior = td_prior(rows, profiles, env, windows)
 
     graded = no_hist = 0
     for game in slate_games:
@@ -579,7 +643,7 @@ def attach_game_boards(slate_games: list[dict], lineups: dict, season: int) -> d
             for pos in SKILL:
                 for card in (lineups.get(team, {}).get(pos) or []):
                     row = board_player(card, profiles.get(card.get("player_id") or ""), team, opp,
-                                       implied, allowed, league, env)
+                                       implied, allowed, league, env, prior)
                     no_hist += bool(row.get("no_history"))
                     graded += row.get("grade") is not None
                     players.append(row)

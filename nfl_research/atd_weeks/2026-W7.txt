@@ -1,0 +1,110 @@
+# Week 7 ATD list, as exported from the NFL Research Prop List.
+# name | depth slot | team | opponent | over line | market (td = any touchdown, rush_td = QB rushing TD)
+# The pasted list was cut off on its last play (Dallas Goedert, "TE1 · PHI vs DAL");
+# it is read as Anytime TD O0.5, like every other play on the list.
+NE@CHI
+Rhamondre Stevenson | RB1 | NE | CHI | 0.5 | td
+A.J. Brown | WR1 | NE | CHI | 0.5 | td
+Hunter Henry | TE1 | NE | CHI | 0.5 | td
+D'Andre Swift | RB1 | CHI | NE | 0.5 | td
+Rome Odunze | WR1 | CHI | NE | 0.5 | td
+Luther Burden III | WR2 | CHI | NE | 0.5 | td
+PIT@NO
+Alvin Kamara | RB1 | NO | PIT | 0.5 | td
+Chris Olave | WR1 | NO | PIT | 0.5 | td
+Juwan Johnson | TE1 | NO | PIT | 0.5 | td
+Jaylen Warren | RB1 | PIT | NO | 0.5 | td
+DK Metcalf | WR1 | PIT | NO | 0.5 | td
+Darnell Washington | TE1 | PIT | NO | 0.5 | td
+SF@ATL
+Bijan Robinson | RB1 | ATL | SF | 0.5 | td
+Drake London | WR1 | ATL | SF | 0.5 | td
+Kyle Pitts Sr. | TE1 | ATL | SF | 0.5 | td
+Christian McCaffrey | RB1 | SF | ATL | 0.5 | td
+Mike Evans | WR1 | SF | ATL | 0.5 | td
+Deebo Samuel | WR2 | SF | ATL | 0.5 | td
+George Kittle | TE1 | SF | ATL | 0.5 | td
+CLE@TEN
+Quinshon Judkins | RB1 | CLE | TEN | 0.5 | td
+Denzel Boston | WR1 | CLE | TEN | 0.5 | td
+Jerry Jeudy | WR3 | CLE | TEN | 0.5 | td
+Harold Fannin Jr. | TE1 | CLE | TEN | 0.5 | td
+Tony Pollard | RB1 | TEN | CLE | 0.5 | td
+Carnell Tate | WR1 | TEN | CLE | 0.5 | td
+Wan'Dale Robinson | WR2 | TEN | CLE | 0.5 | td
+IND@MIN
+Jonathan Taylor | RB1 | IND | MIN | 0.5 | td
+Keenan Allen | WR2 | IND | MIN | 0.5 | td
+Aaron Jones Sr. | RB1 | MIN | IND | 0.5 | td
+Justin Jefferson | WR1 | MIN | IND | 0.5 | td
+Jordan Addison | WR2 | MIN | IND | 0.5 | td
+T.J. Hockenson | TE1 | MIN | IND | 0.5 | td
+MIA@NYJ
+Breece Hall | RB1 | NYJ | MIA | 0.5 | td
+Garrett Wilson | WR1 | NYJ | MIA | 0.5 | td
+Ollie Gordon II | RB1 | MIA | NYJ | 0.5 | td
+Malik Washington | WR1 | MIA | NYJ | 0.5 | td
+Caleb Douglas | WR2 | MIA | NYJ | 0.5 | td
+TB@CAR
+Bucky Irving | RB1 | TB | CAR | 0.5 | td
+Emeka Egbuka | WR1 | TB | CAR | 0.5 | td
+Cade Otton | TE1 | TB | CAR | 0.5 | td
+Chuba Hubbard | RB1 | CAR | TB | 0.5 | td
+Tetairoa McMillan | WR1 | CAR | TB | 0.5 | td
+Jalen Coker | WR2 | CAR | TB | 0.5 | td
+Tommy Tremble | TE1 | CAR | TB | 0.5 | td
+Darren Waller | TE2 | CAR | TB | 0.5 | td
+CIN@BAL
+Chase Brown | RB1 | CIN | BAL | 0.5 | td
+Ja'Marr Chase | WR1 | CIN | BAL | 0.5 | td
+Mike Gesicki | TE1 | CIN | BAL | 0.5 | td
+Derrick Henry | RB1 | BAL | CIN | 0.5 | td
+Zay Flowers | WR1 | BAL | CIN | 0.5 | td
+Rashod Bateman | WR2 | BAL | CIN | 0.5 | td
+Mark Andrews | TE1 | BAL | CIN | 0.5 | td
+NYG@HOU
+David Montgomery | RB1 | HOU | NYG | 0.5 | td
+Woody Marks | RB2 | HOU | NYG | 0.5 | td
+Nico Collins | WR1 | HOU | NYG | 0.5 | td
+Cam Skattebo | RB1 | NYG | HOU | 0.5 | td
+Malik Nabers | WR1 | NYG | HOU | 0.5 | td
+Isaiah Likely | TE1 | NYG | HOU | 0.5 | td
+DEN@ARI
+J.K. Dobbins | RB1 | DEN | ARI | 0.5 | td
+Jaylen Waddle | WR1 | DEN | ARI | 0.5 | td
+Evan Engram | TE1 | DEN | ARI | 0.5 | td
+Jeremiyah Love | RB1 | ARI | DEN | 0.5 | td
+Tyler Allgeier | RB2 | ARI | DEN | 0.5 | td
+Kendrick Bourne | WR2 | ARI | DEN | 0.5 | td
+Trey McBride | TE1 | ARI | DEN | 0.5 | td
+GB@DET
+Jahmyr Gibbs | RB1 | DET | GB | 0.5 | td
+Amon-Ra St. Brown | WR1 | DET | GB | 0.5 | td
+Isaac TeSlaa | WR3 | DET | GB | 0.5 | td
+Sam LaPorta | TE1 | DET | GB | 0.5 | td
+MarShawn Lloyd | RB1 | GB | DET | 0.5 | td
+Christian Watson | WR1 | GB | DET | 0.5 | td
+Matthew Golden | WR2 | GB | DET | 0.5 | td
+Tucker Kraft | TE1 | GB | DET | 0.5 | td
+LAR@LV
+Kyren Williams | RB1 | LAR | LV | 0.5 | td
+Puka Nacua | WR1 | LAR | LV | 0.5 | td
+Ashton Jeanty | RB1 | LV | LAR | 0.5 | td
+Tre Tucker | WR1 | LV | LAR | 0.5 | td
+Brock Bowers | TE1 | LV | LAR | 0.5 | td
+KC@SEA
+Emanuel Wilson | RB1 | SEA | KC | 0.5 | td
+AJ Barner | TE1 | SEA | KC | 0.5 | td
+Jaxon Smith-Njigba | WR1 | SEA | KC | 0.5 | td
+Kenneth Walker III | RB1 | KC | SEA | 0.5 | td
+Rashee Rice | WR1 | KC | SEA | 0.5 | td
+Noah Gray | TE2 | KC | SEA | 0.5 | td
+DAL@PHI
+Javonte Williams | RB1 | DAL | PHI | 0.5 | td
+CeeDee Lamb | WR1 | DAL | PHI | 0.5 | td
+George Pickens | WR2 | DAL | PHI | 0.5 | td
+Jake Ferguson | TE1 | DAL | PHI | 0.5 | td
+Saquon Barkley | RB1 | PHI | DAL | 0.5 | td
+DeVonta Smith | WR1 | PHI | DAL | 0.5 | td
+Dontayvion Wicks | WR2 | PHI | DAL | 0.5 | td
+Dallas Goedert | TE1 | PHI | DAL | 0.5 | td

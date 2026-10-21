@@ -36,6 +36,8 @@ from pathlib import Path
 import nflreadpy as nfl
 import polars as pl
 
+from nfl_research.game_board import model_seasons
+
 ROOT = Path(__file__).resolve().parent.parent
 WEEKS = Path(__file__).resolve().parent / "atd_weeks"
 TEMPLATE = Path(__file__).resolve().parent / "templates" / "atd_sheet.html"
@@ -489,9 +491,10 @@ def build(season: int, week: int) -> Path:
     wanted = {espn_of[r["b"]["player_id"]] for r in rows if r["b"].get("player_id") in espn_of}
     injuries = espn_injuries(listed_teams, wanted)
     print(f"[atd] ESPN injury feed: {len(injuries)} listed players carry an entry")
-    pbp = load_recent_pbp([season - 1, season])
+    seasons = model_seasons(season)   # this season's games only, once it has some
+    pbp = load_recent_pbp(seasons)
     aggression = fourth_down_aggression(pbp)
-    ctx = game_context(pbp, [season - 1, season])
+    ctx = game_context(pbp, seasons)
     print(f"[atd] context: {ctx['td_per_point']:.3f} offensive TDs per point, "
           f"{ctx['other_td_pg']:.2f} non-offensive TDs a game, opening-drive TD rate {ctx['open_league']:.1%}")
     # ties broken by name, so the top-ten cut is the same on every run
@@ -547,7 +550,7 @@ def build(season: int, week: int) -> Path:
         r["p_book"] = implied_chance(r["book"]) if r["book"] is not None else None
         r["edge_pts"] = (100 * (r["td_cal"] - r["p_book"])
                          if r["p_book"] is not None and p["line"] < 1.5 else None)
-        # how often he actually did it over his last 17 games (rushing only for a QB line)
+        # how often he actually did it this season (rushing only for a QB line)
         key_td = "rush_td" if p["market"] == "rush_td" else "td"
         recent = r.get("log", [])[-17:]
         r["multi"] = (sum(1 for g in recent if (g.get("stats") or {}).get(key_td, 0) >= 2), len(recent))

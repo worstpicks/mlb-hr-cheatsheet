@@ -715,13 +715,15 @@
         const badge = el("nrsSourceBadge");
         badge.hidden = false;
         const logSeasons = seasonSpan(state.slate.log_seasons || [state.slate.stats_season]);
-        badge.textContent = `Stats: last 17 games · ${logSeasons} (nflverse)`;
+        const oneSeason = (state.slate.log_seasons || []).length === 1;
+        badge.textContent = oneSeason ? `Stats: ${logSeasons} games only (nflverse)` : `Stats: last 17 games · ${logSeasons} (nflverse)`;
         const built = state.slate.fetched_at ? new Date(state.slate.fetched_at) : null;
         el("nrsLastUpdated").textContent = built && !isNaN(built)
             ? `Updated ${built.toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`
             : "";
         el("nrsSeasonNote").textContent =
-            `Player averages over each player's last 17 games vs what each defense allowed per game — ` +
+            (oneSeason ? `Player averages over this season's games vs what each defense allowed per game — `
+                       : `Player averages over each player's last 17 games vs what each defense allowed per game — `) +
             `green means the player beats the defensive average.`;
         // A week further out than the next one runs on stats that will change before
         // it is played; say so rather than let it read as final.
@@ -1390,8 +1392,9 @@
         const seasons = [...new Set(board.players.flatMap((p) => p.seasons || []))].sort();
         host.innerHTML =
             boardScriptHtml(game, board) +
-            `<p class="nrs-board-window">Each player's and each defense's last 17 games` +
-            (seasons.length > 1 ? `, reaching back into ${seasons[0]} while ${seasons[seasons.length - 1]} is young. Rosters and roles have changed since — treat early reads as leans.` : ".") +
+            (seasons.length > 1
+                ? `<p class="nrs-board-window">Each player's and each defense's last 17 games, reaching back into ${seasons[0]} while ${seasons[seasons.length - 1]} is young. Rosters and roles have changed since — treat early reads as leans.`
+                : `<p class="nrs-board-window">Each player's and each defense's ${seasons[0] || "this season's"} games only.`) +
             `</p>` +
             `<div class="nrs-bt-grid">${boardTeamHtml(game, board, game.away, game.home)}${boardTeamHtml(game, board, game.home, game.away)}</div>` +
             `<div class="nrs-board-controls">` +

@@ -493,7 +493,7 @@
             &#129460; defensive matchup &mdash; this defense has given up 10%+ more than league to his role, in production and
             touchdowns combined, and is not a red-zone wall; &#9992;&#65039; exploitable D &mdash; the defense this team faces
             <span id="atdExpNote">carries a TARGET verdict in the team-defense scoring table</span>.<br>
-            <strong>Team tendency</strong> is shown only where it helps that player, and is computed from the last 17 games:
+            <strong>Team tendency</strong> is shown only where it helps that player, and is computed from this season's games:
             &#127939;&#127999;&#8205;&#9794;&#65039;&#8205;&#10145;&#65039; run-first (a bottom-ten pass rate with the score close) lifts
             the backfield, &#129653; pass-first (top ten) lifts the pass catchers, and &#128162; aggressive (a top-ten rate of going for
             it on 4th-and-short) lifts everyone.<br>
@@ -501,8 +501,9 @@
             red-zone work &times; how often his team gets there &times; how often this defense lets a trip score, plus the scores he
             gets from outside the 20 (quarterbacks: rushing touchdowns only). RZ is that red-zone share, GL his carries inside the
             5 per game, and D#n the opponent's rank among this week's defenses in red-zone touchdown rate allowed &mdash; green at 24+ is soft, red at 8
-            or better is a wall. Every number covers each player's and each defense's last 17 games, so it reaches back into
-            last season while this one is young.<br>
+            or better is a wall. Every number covers this season's games only &mdash; nothing carries over from last year. A
+            player with only a few games leans on the 2026 average for his role until his own games fill in, and a team's
+            red-zone numbers lean on the league's the same way.<br>
             <span id="atdCalNote"></span>
             <span id="atdPriceNote"></span>
             <strong>Top 5</strong> ranks healthy favorites on that TD chance, nudged by this week's implied points and by the
@@ -513,7 +514,7 @@
             team's expected touchdowns. <strong>Top 5 first TD</strong> ranks healthy players on it.
             <strong>Top 5 2+ TD</strong> ranks healthy players on their chance of two or more touchdowns, from the same
             expected-touchdown number behind their TD % (one minus the chance of none and of exactly one); each card also
-            counts how often he actually scored 2+ over his last 17 games. <strong>Fair</strong> is that
+            counts how often he actually scored 2+ this season. <strong>Fair</strong> is that
             chance as American odds with no bookmaker margin: a book price longer than fair is the value side.<br>
             <strong>Caveats:</strong> <strong>New team</strong> means most of his sample was earned with another club, so his
             share describes a role he may not hold now. A <strong>small sample</strong> player has fewer than four games and is
@@ -529,7 +530,7 @@
 
         var SHEET = /*__SHEET__*/null;
         var EXP_TEXT = SHEET.exp_source === "computed"
-            ? "is one of the ten softest defenses on points and red-zone touchdown rate allowed over its last 17 games"
+            ? "is one of the ten softest defenses on points and red-zone touchdown rate allowed this season"
             : "carries a TARGET verdict in the team-defense scoring table";
         window.ATD_SHEET = SHEET;   // atd-card.js reads the player cards from here
         var GAMES = SHEET.games;
@@ -689,7 +690,7 @@
             }
             if (m.dz != null) {
                 out.push('<span class="atd-m' + (m.dz >= 24 ? " atd-m--good" : (m.dz <= 8 ? " atd-m--bad" : "")) +
-                         '" title="Opponent rank of ' + (SHEET.teams || 32) + ' in red-zone TD rate allowed over its last 17 games — ' +
+                         '" title="Opponent rank of ' + (SHEET.teams || 32) + ' in red-zone TD rate allowed this season — ' +
                          (SHEET.teams || 32) + ' is the softest">D#' + m.dz + "</span>");
             }
             if (m.dedge != null && Math.abs(m.dedge) >= 10 && pl.pos !== "QB") {
@@ -698,7 +699,7 @@
                          esc(pl.p) + " " + (m.dedge > 0 ? "+" : "−") + Math.abs(m.dedge) + "%</span>");
             }
             if (m.trend >= 6 && !m.small) {
-                out.push('<span class="atd-m atd-m--good" title="Share of targets or carries over his last 3 games, against his 17-game share">Share ▲ ' + m.trend.toFixed(0) + " pts</span>");
+                out.push('<span class="atd-m atd-m--good" title="Share of targets or carries over his last 3 games, against his season share">Share ▲ ' + m.trend.toFixed(0) + " pts</span>");
             }
             return out.length ? '<div class="atd-metrics">' + out.join("") + "</div>" : "";
         }

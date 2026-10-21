@@ -58,19 +58,11 @@ def build_slate(season: int, week: int) -> dict:
     # Play-by-play once, up front: the per-game extras need it before aggregation,
     # and the sheets reuse the same frame instead of downloading it a second time.
     pbp = load_pbp(stats_season)
-    extras_pbp = pbp
+    # This season only (the owner's call, 10/14/2026): logs, player averages and
+    # defense tables no longer reach back into last season once this one has games.
+    # Last season's play-by-play is read only for the early-season sheets below.
     prev_pbp = None
-    # Once the season is underway, reach back into the last one: a player's log then
-    # holds his actual last five or ten games rather than one week of this season.
-    if stats_season == season:
-        try:
-            rows = download_weekly_stats(season - 1) + rows
-            prev_pbp = load_pbp(season - 1)
-            extras_pbp = pl.concat([prev_pbp, pbp], how="diagonal_relaxed")
-            print(f"[nfl-research] logs reach back into {season - 1} alongside {season}")
-        except FileNotFoundError:
-            pass
-    touched = merge_game_extras(rows, player_game_extras(extras_pbp))
+    touched = merge_game_extras(rows, player_game_extras(pbp))
     print(f"[nfl-research] play-by-play extras merged into {touched} player-games")
     log_seasons = sorted({r.get("season") for r in rows if r.get("season")})
     snapped = merge_game_extras(rows, snap_extras(log_seasons), SNAP_KEYS)
@@ -138,10 +130,14 @@ def build_slate(season: int, week: int) -> dict:
     # The sheets (red zone, rushing gaps, hit rates, team share...) aggregate a whole
     # season of play-by-play. Early in a new one that is a sample of a game or two --
     # the Week 2 red-zone sheet had 20 players -- so until SHEETS_MIN_WEEKS are in they
-    # keep reading last season, the way Week 1 did. Logs and the Game Board are not
-    # affected: they run on each player's rolling window across both seasons.
+    # keep reading last season, the way Week 1 did.
     sheets_season, sheets_pbp = stats_season, pbp
     weeks_in = pbp.select(pl.col("week").n_unique()).item() if pbp.height else 0
+    if stats_season == season and weeks_in < SHEETS_MIN_WEEKS:
+        try:
+            prev_pbp = load_pbp(season - 1)
+        except FileNotFoundError:
+            prev_pbp = None
     if stats_season == season and weeks_in < SHEETS_MIN_WEEKS and prev_pbp is not None:
         sheets_season, sheets_pbp = season - 1, prev_pbp
         print(f"[nfl-research] sheets: {season} has {weeks_in} week(s) of play-by-play; "
@@ -155,8 +151,8 @@ def build_slate(season: int, week: int) -> dict:
           f"{rz_report['skipped']} without an input, {rz_report['moved']} on a share "
           f"earned with another team")
 
-    # The Game Board: every lineup player graded against this week's opponent, on a
-    # rolling window that reaches back into last season while this one is young.
+    # The Game Board: every lineup player graded against this week's opponent, on
+    # this season's games (game_board.model_seasons).
     board_report = attach_game_boards(slate_games, players, season)
     print(f"[nfl-research] game board: {board_report['graded']} players graded on "
           f"{board_report['seasons']} games, {board_report['no_history']} without a sample, "

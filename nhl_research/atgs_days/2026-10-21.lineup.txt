@@ -1,0 +1,16 @@
+# Wednesday 10/21 -- starting goalies and availability, read in the morning from the
+# user's CSVs (nhl-goalie-summary-2026-l5 and nhl-goal-matchups-slate-l5, 10/21),
+# RotoWire lineups and DailyFaceoff starting goalies (both agree with the CSVs on all
+# four starters), DailyFaceoff line combinations for PHI, BUF, FLA and OTT, and the
+# NHL box scores through 10/20. No back-to-backs: PHI last played 10/19, BUF, FLA
+# and OTT on 10/17.
+goalie PHI Dan Vladar | expected
+goalie BUF Ukko-Pekka Luukkonen | expected
+goalie FLA Akira Schmid | expected
+goalie OTT Linus Ullmark | expected
+
+# On the pasted list but on injured reserve (DailyFaceoff and RotoWire); none of the
+# three is in the 10/21 matchup export and none dressed in their club's last game.
+out PHI Travis Konecny | injured reserve
+out PHI Owen Tippett | injured reserve
+out OTT William Eklund | injured reserve

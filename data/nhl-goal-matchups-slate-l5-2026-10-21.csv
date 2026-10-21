@@ -1,0 +1,87 @@
+﻿Range,L5
+Position,All
+Rate,Per Game
+Scores,"0-100, higher = better spot to score. Score = Form × (0.7 + 0.3 × Matchup/100); Matchup = 80% Def (chances, HD chances, shots, goals allowed to position) + 20% Goalie; Form = goals/iSCF (50%, goals 0% under 10 GP ramping to 25% by 20) + PP TOI 20% + TOI 10% + iFF 10% + finishing 10%"
+
+#,Player,Team,Pos,Lines,Score,Matchup,Form,"Sh% (2 seasons, shrunk)",Def Score,Def Rank,Def Pos,Def SCA/GP,Def HDSCA/GP,Def SA/GP,Def GA/GP,Time,Opp,Opp Goalie,Goalie Status,Goalie SV%,Goalie Score,Odds,GP,TOI/G,PP TOI/G,Goals/G,AST/G,S/G,iCF/G,iFF/G,iSCF/G,iHDCF/G
+1,Sam Reinhart,FLA,C,L2 · PP1,80,40,97,15.4,49,15,C,7.20,3.20,7.20,0.80,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,215,5,19:58,4:41,1.00,0.60,3.80,6.20,5.80,4.00,2.40
+2,Carter Verhaeghe,FLA,LW,L2 · PP1,79,47,94,14.0,57,6,LW,6.60,3.40,6.80,1.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,225,5,18:31,4:25,1.00,0.20,1.80,6.60,4.60,3.20,0.60
+3,Zach Benson,BUF,LW,L2 · PP1,79,70,87,10.4,78,28,LW,9.00,4.40,7.20,0.20,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,275,5,20:21,4:04,0.00,1.00,2.20,4.40,3.60,3.00,2.20
+4,Tage Thompson,BUF,C,L1 · PP1,78,47,93,13.6,49,22,C,8.00,3.60,6.00,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,135,5,20:10,4:04,0.60,0.40,3.80,6.40,5.20,3.00,1.00
+5,Brady Tkachuk,FLA,LW,L1 · PP1,77,47,91,11.1,57,6,LW,6.60,3.40,6.80,1.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,160,5,16:47,3:54,1.20,0.80,4.20,7.00,6.40,5.00,3.00
+6,Jack Quinn,BUF,RW,L2 · PP1,76,53,88,11.5,56,16,RW,7.20,3.80,6.20,0.80,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,230,5,19:18,4:11,0.60,0.80,2.40,4.00,3.60,2.60,1.00
+7,Noah Ostlund,BUF,C,L2 · PP1,76,47,90,13.4,49,22,C,8.00,3.60,6.00,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,330,5,19:37,4:11,0.20,0.40,2.20,4.60,3.40,2.60,1.40
+8,Tyson Foerster,PHI,RW,,75,81,80,13.7,82,2,RW,8.40,4.00,8.40,1.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,,5,17:09,2:23,0.00,0.00,1.80,4.60,2.80,2.00,0.60
+9,Drake Batherson,OTT,RW,L1 · PP1,74,30,94,16.9,25,16,RW,5.40,3.00,5.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,230,5,19:00,4:35,0.40,0.20,2.40,4.80,3.60,3.20,1.80
+10,Tim Stutzle,OTT,C,L1 · PP1,72,32,91,16.1,28,15,C,6.40,3.40,5.60,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,210,5,23:10,4:55,0.40,0.80,1.80,4.00,2.60,2.40,1.00
+11,Trevor Zegras,PHI,LW,L1 · PP1,72,68,80,13.6,66,9,LW,7.60,3.40,7.60,1.00,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,260,5,18:33,2:35,0.40,0.60,3.00,4.80,3.60,1.80,0.60
+12,Sam Bennett,FLA,C,L1 · PP2,71,40,86,12.5,49,15,C,7.20,3.20,7.20,0.80,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,215,5,16:55,2:06,0.60,0.00,2.80,4.60,3.80,3.00,1.20
+13,Dylan Cozens,OTT,C,L2 · PP1,68,32,86,12.2,28,15,C,6.40,3.40,5.60,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,250,5,17:37,4:14,0.00,0.40,1.80,4.80,2.80,2.40,0.60
+14,Matvei Michkov,PHI,RW,L2 · PP1,68,81,72,13.5,82,2,RW,8.40,4.00,8.40,1.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,240,5,14:05,2:29,0.80,0.20,1.20,3.60,2.80,1.60,1.00
+15,Anton Lundell,FLA,C,L3 · PP2,66,40,81,11.5,49,15,C,7.20,3.20,7.20,0.80,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,400,5,17:08,2:17,0.20,0.20,3.00,4.60,3.80,2.20,1.00
+16,Matthew Tkachuk,FLA,RW,L1 · PP1,66,7,91,13.1,7,28,RW,5.40,1.80,5.00,0.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,230,5,17:50,4:16,0.20,2.00,2.40,5.20,3.40,3.20,1.20
+17,Travis Sanheim,PHI,D,P1,66,78,71,10.8,78,12,D,4.80,1.40,9.40,0.40,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,1400,5,26:32,0:12,0.00,0.20,2.20,5.00,3.40,1.80,1.00
+18,Oliver Bonk,PHI,D,P1 · PP2,64,78,68,11.4,78,12,D,4.80,1.40,9.40,0.40,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,1100,5,20:01,0:54,0.00,0.40,1.00,3.00,2.00,1.60,0.60
+19,Porter Martone,PHI,RW,L1 · PP2,64,81,68,11.9,82,2,RW,8.40,4.00,8.40,1.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,270,5,13:20,2:17,0.20,0.20,1.40,3.20,2.20,1.60,0.80
+20,Shane Pinto,OTT,C,L3 · PP2,64,32,81,13.0,28,15,C,6.40,3.40,5.60,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,300,5,19:24,2:37,0.20,0.40,1.00,4.00,2.80,2.00,0.80
+21,Jamie Drysdale,PHI,D,P2 · PP2,62,78,66,8.8,78,12,D,4.80,1.40,9.40,0.40,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,800,5,22:55,2:16,0.00,0.00,1.80,3.40,2.40,1.40,0.60
+22,Rasmus Dahlin,BUF,D,,60,39,74,10.2,39,6,D,3.80,0.20,8.40,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,370,5,23:10,2:56,0.40,0.40,3.00,4.80,3.20,1.60,0.00
+23,Josh Doan,BUF,RW,L1 · PP2,59,53,69,13.5,56,16,RW,7.20,3.80,6.20,0.80,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,275,5,16:06,1:33,0.20,0.20,1.60,2.40,1.80,1.60,0.80
+24,Michael Bunting,PHI,RW,L3 · PP2,59,81,63,10.7,82,2,RW,8.40,4.00,8.40,1.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,410,5,11:05,1:54,0.00,0.20,1.40,2.80,2.20,1.60,1.00
+25,Claude Giroux,OTT,RW,L2 · PP2,58,30,73,10.4,25,16,RW,5.40,3.00,5.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,420,5,18:03,3:28,0.20,0.40,1.40,3.40,2.20,1.80,0.40
+26,Fabian Zetterlund,OTT,RW,L4 · PP2,58,30,73,11.8,25,16,RW,5.40,3.00,5.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,480,5,12:00,1:51,0.20,0.00,1.80,4.60,2.60,2.00,0.20
+27,Jake Sanderson,OTT,D,,57,39,70,10.2,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,500,5,21:05,2:15,0.60,0.60,2.20,4.80,4.00,1.40,0.60
+28,Alex Bump,PHI,LW,L2 · PP1,55,68,61,12.7,66,9,LW,7.60,3.40,7.60,1.00,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,525,5,12:50,0:58,0.20,0.00,1.20,2.60,1.80,1.40,0.60
+29,Seth Jones,FLA,D,P2 · PP1,54,48,64,9.0,59,22,D,5.00,1.00,5.60,0.20,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,650,5,23:45,4:16,0.00,1.80,3.20,6.00,4.40,1.00,0.20
+30,Stephen Halliday,OTT,LW,L1 · PP1,54,34,67,11.7,30,9,LW,6.20,2.40,5.20,1.00,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,440,5,12:27,3:07,0.20,0.20,1.40,2.20,1.80,1.60,0.80
+31,Ridly Greig,OTT,C,L4,53,32,67,10.6,28,15,C,6.40,3.40,5.60,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,550,5,16:46,0:58,0.20,0.00,0.80,2.60,2.20,1.80,1.20
+32,Denver Barkey,PHI,LW,L3 · PP1,52,68,57,11.0,66,9,LW,7.60,3.40,7.60,1.00,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,400,5,15:44,2:23,0.00,0.40,0.60,1.80,0.80,1.20,0.40
+33,Jiri Kulich,BUF,C,L4,52,47,62,11.8,49,22,C,8.00,3.60,6.00,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,380,5,13:52,1:07,0.00,0.40,1.20,2.40,2.00,1.40,0.80
+34,Joshua Norris,BUF,C,L3 · PP2,52,47,62,14.4,49,22,C,8.00,3.60,6.00,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,350,5,13:50,1:39,0.40,0.00,1.40,2.20,2.00,1.20,1.00
+35,Olen Zellweger,BUF,D,P1 · PP2,52,39,64,8.4,39,6,D,3.80,0.20,8.40,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,725,5,21:55,0:56,0.40,0.20,3.80,7.20,4.80,1.40,0.40
+36,Eetu Luostarinen,FLA,LW,L3 · PP2,50,47,60,11.0,57,6,LW,6.60,3.40,6.80,1.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,600,5,16:10,1:50,0.00,0.00,1.40,3.20,1.80,1.20,0.80
+37,Owen Power,BUF,D,P2 · PP1,49,39,60,9.1,39,6,D,3.80,0.20,8.40,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,650,5,27:08,3:50,0.20,0.40,1.20,3.80,1.80,1.00,0.20
+38,Thomas Chabot,OTT,D,P1 · PP2,49,39,60,8.8,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,,5,24:13,3:11,0.00,0.40,1.40,4.60,2.40,1.00,0.00
+39,Noel Acciari,PHI,C,L4,48,45,58,12.4,37,22,C,6.80,3.60,5.60,0.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,700,5,14:10,0:00,0.20,0.00,1.60,2.60,2.00,1.80,0.60
+40,Christian Dvorak,PHI,C,L1 · PP2,47,45,56,12.1,37,22,C,6.80,3.60,5.60,0.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,290,5,18:44,1:33,0.40,0.20,1.00,1.80,1.00,1.00,0.00
+41,Carter Yakemchuk,OTT,D,P2 · PP1,46,39,56,11.1,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,750,5,21:04,3:26,0.00,0.00,1.40,3.00,1.40,0.80,0.00
+42,Aaron Ekblad,FLA,D,P1 · PP2,45,48,53,7.2,59,22,D,5.00,1.00,5.60,0.20,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,1200,5,21:06,1:41,0.00,0.40,2.20,5.60,3.80,0.80,0.20
+43,Cole Knuble,PHI,RW,L4,44,81,47,11.0,82,2,RW,8.40,4.00,8.40,1.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,550,1,13:44,0:00,0.00,0.00,1.00,4.00,2.00,1.00,0.00
+44,Warren Foegele,OTT,LW,L4,44,34,55,11.3,30,9,LW,6.20,2.40,5.20,1.00,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,400,5,11:56,0:06,0.00,0.20,1.40,3.00,2.00,1.40,1.00
+45,Michael Amadio,OTT,RW,L3,43,30,55,13.7,25,16,RW,5.40,3.00,5.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,500,5,14:41,0:01,0.00,0.20,0.60,1.60,1.40,1.40,0.20
+46,Mattias Samuelsson,BUF,D,P1,39,39,48,11.8,39,6,D,3.80,0.20,8.40,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,800,5,25:26,0:12,0.20,0.80,1.60,3.60,2.40,0.60,0.20
+47,Niko Mikkola,FLA,D,P2,38,48,45,8.4,59,22,D,5.00,1.00,5.60,0.20,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,2000,5,19:03,0:02,0.20,0.20,0.80,3.00,1.80,1.00,0.20
+48,Artem Zub,OTT,D,P1,37,39,45,8.2,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,1600,5,22:28,0:10,0.00,0.40,1.40,2.60,2.00,0.80,0.00
+49,Konsta Helenius,BUF,RW,L3 · PP2,37,53,43,10.4,56,16,RW,7.20,3.80,6.20,0.80,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,480,5,13:25,1:41,0.00,0.20,1.20,2.20,2.00,0.60,0.40
+50,Ryan McLeod,BUF,LW,L1 · PP2,35,70,38,13.3,78,28,LW,9.00,4.40,7.20,0.20,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,360,5,15:49,0:46,0.20,0.00,0.80,1.00,1.00,0.40,0.40
+51,Lars Eller,FLA,RW,L2 · PP2,34,7,47,9.3,7,28,RW,5.40,1.80,5.00,0.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,750,5,16:07,1:35,0.00,0.40,0.60,2.00,1.60,0.80,0.60
+52,Noah Cates,PHI,C,L2,33,45,40,12.0,37,22,C,6.80,3.60,5.60,0.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,550,5,13:50,0:02,0.00,0.20,1.00,1.80,1.20,0.80,0.20
+53,Sean Couturier,PHI,C,L3,32,45,38,10.0,37,22,C,6.80,3.60,5.60,0.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,650,5,17:50,0:10,0.00,0.20,1.20,2.00,1.60,0.60,0.40
+54,Gustav Forsling,FLA,D,P1,31,48,37,6.4,59,22,D,5.00,1.00,5.60,0.20,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,1400,5,21:19,0:29,0.00,0.20,1.20,4.80,2.40,0.40,0.00
+55,David Jiricek,PHI,D,P3 · PP1,30,78,32,9.1,78,12,D,4.80,1.40,9.40,0.40,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,900,5,13:14,2:08,0.00,0.00,0.20,2.20,0.80,0.40,0.00
+56,Peyton Krebs,BUF,LW,L3,30,70,33,11.6,78,28,LW,9.00,4.40,7.20,0.20,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,490,5,13:19,0:12,0.00,0.40,0.60,1.80,1.40,0.40,0.20
+57,Sandis Vilmanis,FLA,RW,L3,30,7,42,11.2,7,28,RW,5.40,1.80,5.00,0.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,625,5,13:44,0:17,0.00,0.20,0.80,2.00,1.00,0.80,0.20
+58,Jacob Gaucher,PHI,C,,28,45,33,10.7,37,22,C,6.80,3.60,5.60,0.60,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,800,5,9:36,0:01,0.00,0.00,0.80,1.20,1.00,0.80,0.20
+59,Tyler Kleven,OTT,D,P2,27,39,33,7.6,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,1600,5,21:37,0:02,0.20,0.00,1.00,2.40,1.20,0.60,0.00
+60,Andre Burakovsky,OTT,LW,L2 · PP2,26,34,33,11.8,30,9,LW,6.20,2.40,5.20,1.00,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,490,5,12:49,2:57,0.00,0.00,0.40,0.60,0.60,0.20,0.00
+61,Jordan Spence,OTT,D,P3,26,39,32,8.4,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,950,5,22:13,0:13,0.00,0.20,0.80,1.80,1.00,0.40,0.00
+62,Louis Crevier,BUF,D,P3,25,39,30,8.1,39,6,D,3.80,0.20,8.40,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,950,5,14:42,0:01,0.00,0.00,1.00,3.00,1.80,0.60,0.20
+63,Nick Cousins,OTT,LW,L3,25,34,31,11.5,30,9,LW,6.20,2.40,5.20,1.00,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,900,5,9:38,0:00,0.00,0.00,0.20,1.00,1.00,0.80,0.60
+64,Bokondji Imama,FLA,LW,L4,24,47,28,10.3,57,6,LW,6.60,3.40,6.80,1.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,1200,5,8:32,0:00,0.00,0.00,1.00,1.40,1.20,0.80,0.60
+65,Justin Danforth,BUF,LW,,24,70,26,10.8,78,28,LW,9.00,4.40,7.20,0.20,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,,5,9:20,0:01,0.00,0.00,0.20,1.00,0.60,0.60,0.00
+66,Hunter McDonald,PHI,D,,23,78,25,11.1,78,12,D,4.80,1.40,9.40,0.40,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,,2,12:35,0:00,0.00,0.50,0.00,0.50,0.00,0.00,0.00
+67,Zach Metsa,BUF,D,P2,23,39,28,10.3,39,6,D,3.80,0.20,8.40,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,2100,5,14:10,0:01,0.00,0.20,0.40,1.20,0.40,0.60,0.20
+68,Simon Benoit,PHI,D,P3,21,78,23,6.7,78,12,D,4.80,1.40,9.40,0.40,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,2500,5,14:26,0:01,0.00,0.00,1.00,2.20,1.40,0.40,0.20
+69,Cameron Crotty,OTT,D,P3,19,39,23,10.6,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,2100,5,12:47,0:01,0.00,0.00,0.60,1.20,0.60,0.40,0.20
+70,Garnet Hathaway,FLA,RW,L4,19,7,26,8.9,7,28,RW,5.40,1.80,5.00,0.40,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,1400,5,10:41,0:00,0.00,0.00,0.40,0.80,0.60,0.80,0.20
+71,Nick Seeler,PHI,D,P2,19,78,20,7.5,78,12,D,4.80,1.40,9.40,0.40,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,2000,5,21:58,0:02,0.00,0.20,1.00,2.20,1.20,0.00,0.00
+72,Tyson Kozak,BUF,LW,,19,70,21,10.1,78,28,LW,9.00,4.40,7.20,0.20,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,,5,10:28,0:00,0.00,0.40,0.60,1.40,1.20,0.40,0.20
+73,Uvis Balinskis,FLA,D,P3,19,48,23,9.6,59,22,D,5.00,1.00,5.60,0.20,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,,5,14:43,1:17,0.00,0.20,0.20,0.80,0.40,0.00,0.00
+74,Hayden Hodgson,OTT,RW,,17,30,22,10.7,25,16,RW,5.40,3.00,5.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,,5,6:44,0:02,0.00,0.00,0.40,1.00,0.80,0.40,0.20
+75,Dennis Gilbert,BUF,D,P3,15,39,18,11.8,39,6,D,3.80,0.20,8.40,0.60,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,,5,12:49,0:00,0.20,0.20,0.20,1.20,0.60,0.20,0.00
+76,Dmitry Kulikov,FLA,D,P3,15,48,18,9.3,59,22,D,5.00,1.00,5.60,0.20,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,2100,5,14:22,0:00,0.00,0.20,0.80,2.40,1.80,0.20,0.00
+77,Sam Carrick,BUF,RW,L4,15,53,18,11.4,56,16,RW,7.20,3.80,6.20,0.80,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,,5,7:16,0:02,0.00,0.00,0.40,1.20,0.80,0.20,0.00
+78,Beck Malenstyn,BUF,LW,L4,13,70,14,10.5,78,28,LW,9.00,4.40,7.20,0.20,Wed 7:30 PM,vs PHI,Dan Vladar,Expected,.889,39,1100,5,10:52,0:02,0.00,0.40,0.00,0.60,0.40,0.00,0.00
+79,Garrett Wilson,PHI,LW,L4,12,68,13,10.8,66,9,LW,7.60,3.40,7.60,1.00,Wed 7:30 PM,@ BUF,Ukko-Pekka Luukkonen,Expected,.860,78,,5,9:08,0:00,0.00,0.00,0.60,0.60,0.60,0.20,0.20
+80,Nikolas Matinpalo,OTT,D,,11,39,13,7.8,37,3,D,3.60,0.20,9.40,0.80,Wed 7:30 PM,vs FLA,Akira Schmid,Expected,.876,49,2200,5,13:48,0:00,0.00,0.00,0.60,1.60,1.00,0.20,0.00
+81,Radko Gudas,FLA,D,,10,48,12,7.9,59,22,D,5.00,1.00,5.60,0.20,Wed 7:30 PM,@ OTT,Linus Ullmark,Expected,.945,6,2200,5,13:37,0:00,0.00,0.00,0.60,2.80,1.60,0.00,0.00

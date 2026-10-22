@@ -1,0 +1,486 @@
+﻿Range,L5
+Position,All
+Rate,Per Game
+Scores,"0-100, higher = better spot to score. Score = Form × (0.7 + 0.3 × Matchup/100); Matchup = 80% Def (chances, HD chances, shots, goals allowed to position) + 20% Goalie; Form = goals/iSCF (50%, goals 0% under 10 GP ramping to 25% by 20) + PP TOI 20% + TOI 10% + iFF 10% + finishing 10%"
+
+#,Player,Team,Pos,Lines,Score,Matchup,Form,"Sh% (2 seasons, shrunk)",Def Score,Def Rank,Def Pos,Def SCA/GP,Def HDSCA/GP,Def SA/GP,Def GA/GP,Time,Opp,Opp Goalie,Goalie Status,Goalie SV%,Goalie Score,Odds,GP,TOI/G,PP TOI/G,Goals/G,AST/G,S/G,iCF/G,iFF/G,iSCF/G,iHDCF/G
+1,Alex DeBrincat,DET,LW,L2 · PP1,95,93,97,13.8,92,1,LW,9.80,4.20,10.00,2.20,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,140,5,21:27,4:19,0.80,0.40,4.80,10.80,8.00,4.20,1.60
+2,Viktor Arvidsson,DET,LW,L1 · PP2,94,93,96,13.7,92,1,LW,9.80,4.20,10.00,2.20,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,245,5,20:16,4:07,0.20,0.20,2.60,6.60,5.20,5.00,1.80
+3,Lucas Raymond,DET,RW,L1 · PP2,93,90,96,12.5,88,1,RW,8.40,5.00,8.80,1.80,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,230,5,21:19,4:32,0.20,0.20,2.60,7.00,5.40,4.80,1.20
+4,Matt Boldy,MIN,RW,L1 · PP1,89,77,96,14.7,73,11,RW,8.60,3.20,7.60,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,140,5,22:13,3:26,0.80,0.60,4.20,9.20,6.80,4.00,1.20
+5,Sebastian Aho,CAR,C,L1 · PP1,89,77,96,13.4,86,15,C,9.60,5.80,7.60,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,200,5,20:27,5:00,0.20,0.80,2.40,6.80,5.00,4.20,2.00
+6,William Nylander,TOR,RW,L2 · PP1,87,70,96,16.3,86,21,RW,9.80,5.20,8.20,0.60,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,200,5,20:41,4:27,0.20,0.60,3.00,5.20,4.80,3.40,1.40
+7,Joel Eriksson Ek,MIN,C,L1 · PP1,85,81,90,9.8,78,9,C,8.60,4.80,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,220,5,21:23,3:17,0.40,0.60,3.80,7.40,5.60,5.40,4.60
+8,Kirill Kaprizov,MIN,LW,L1 · PP1,85,59,97,16.8,51,9,LW,7.00,2.60,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,105,5,21:23,3:29,1.00,0.80,4.00,8.40,7.20,4.60,2.00
+9,Macklin Celebrini,SJ,C,L1 · PP1,85,54,99,14.4,45,15,C,7.00,3.40,6.80,0.80,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,150,5,23:06,4:55,0.80,0.80,5.20,9.40,7.80,5.60,0.80
+10,Jesper Bratt,NJ,RW,L1 · PP1,84,87,87,11.7,91,21,RW,11.80,6.40,10.20,0.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,250,5,17:11,2:23,0.20,0.40,1.80,5.60,3.80,3.20,0.80
+11,Ryan O'Reilly,NSH,C,L1 · PP1,84,68,93,14.8,81,22,C,9.60,4.60,7.40,0.60,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,275,5,21:34,4:14,0.80,0.20,2.40,3.80,3.40,2.80,2.00
+12,Adrian Kempe,LA,RW,L1 · PP1,83,61,94,14.4,73,16,RW,8.20,4.60,7.00,0.80,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,185,5,20:50,3:23,0.40,0.40,2.80,6.20,4.80,3.60,1.60
+13,Auston Matthews,TOR,C,L1 · PP1,83,66,92,12.8,81,15,C,9.40,4.40,7.80,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,140,5,20:05,4:31,0.80,0.80,2.40,4.40,4.20,2.80,2.20
+14,Mikko Rantanen,DAL,RW,L1 · PP1,83,60,94,14.7,69,16,RW,7.60,4.00,7.60,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,175,5,21:46,4:09,0.60,0.40,2.40,4.80,3.40,3.20,1.20
+15,Jack Hughes,NJ,C,L1 · PP1,81,66,90,11.0,65,9,C,8.80,3.80,6.60,1.00,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,155,5,20:17,2:28,0.20,0.80,4.00,9.40,6.00,4.40,1.80
+16,Logan Stankoven,CAR,C,L2,81,77,87,12.8,86,15,C,9.60,5.80,7.60,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,250,5,17:31,1:54,0.40,0.40,3.20,5.00,4.20,3.00,1.40
+17,Wyatt Johnston,DAL,C,L1 · PP1,81,47,96,17.3,53,5,C,7.80,3.60,6.20,1.20,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,165,5,19:10,4:16,0.00,0.60,2.80,6.20,4.80,4.40,2.80
+18,Bo Horvat,NYI,C,L1 · PP1,80,53,93,13.3,47,26,C,7.60,3.00,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,190,5,21:51,4:01,0.20,0.80,3.00,5.40,4.60,3.00,1.40
+19,Connor McDavid,EDM,C,L1 · PP1,80,47,95,15.3,43,9,C,7.60,2.20,7.00,1.00,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,155,5,23:23,2:46,0.60,2.20,2.80,6.20,4.60,4.40,2.60
+20,Luke Evangelista,NJ,RW,L2 · PP1,80,87,83,8.9,91,21,RW,11.80,6.40,10.20,0.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,325,5,16:58,3:33,0.60,0.20,2.80,4.00,3.60,3.20,1.80
+21,Mark Jankowski,CAR,C,PP2,80,77,86,15.8,86,15,C,9.60,5.80,7.60,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,,5,14:42,1:04,1.00,0.00,2.60,4.60,4.00,4.20,1.60
+22,Mark Scheifele,WPG,C,L1 · PP1,80,55,92,16.8,67,26,C,8.20,4.20,7.60,0.40,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,270,5,20:04,3:09,0.40,0.80,2.00,3.60,3.00,3.20,1.60
+23,Tim Stutzle,OTT,C,L1 · PP1,80,77,86,16.4,82,1,C,8.80,4.20,8.60,1.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,195,5,21:53,5:31,0.40,0.80,1.20,3.00,1.60,2.20,1.00
+24,Alexis Lafreniere,NYR,RW,L1 · PP1,79,46,94,14.8,49,3,RW,6.80,2.80,7.00,1.60,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,195,5,18:57,4:18,0.60,0.80,2.00,4.80,3.40,3.40,1.40
+25,Jason Robertson,DAL,LW,L2 · PP1,79,42,96,14.0,47,14,LW,6.60,3.80,5.40,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,145,5,21:53,3:51,0.20,1.00,3.60,7.20,5.20,4.20,2.00
+26,Nico Hischier,NJ,C,L2 · PP1,79,66,88,13.1,65,9,C,8.80,3.80,6.60,1.00,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,175,5,17:16,2:22,0.40,0.20,2.20,4.60,3.60,3.20,1.40
+27,Pavel Dorofeyev,NYR,RW,L2 · PP1,79,46,94,13.7,49,3,RW,6.80,2.80,7.00,1.60,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,175,5,18:14,3:31,0.20,0.20,3.20,6.20,4.20,4.40,2.20
+28,Carter Verhaeghe,FLA,LW,L2 · PP1,78,48,92,13.9,50,2,LW,6.60,3.60,5.60,2.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,220,5,17:59,3:52,1.00,0.20,2.00,6.40,4.60,3.20,0.60
+29,Jimmy Snuggerud,STL,RW,L1 · PP1,78,60,89,12.8,61,8,RW,7.80,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,260,5,18:09,2:40,0.80,0.00,2.60,5.20,3.80,3.20,1.60
+30,David Pastrnak,BOS,RW,L1 · PP1,77,56,89,11.2,55,21,RW,8.20,2.60,7.40,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,145,5,20:15,3:27,0.40,0.80,3.00,7.00,4.40,3.00,1.60
+31,Kailer Yamamoto,UTA,LW,L2 · PP2,77,89,80,15.1,97,2,LW,12.20,5.20,9.40,2.00,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,425,5,14:40,1:07,0.40,0.60,2.40,3.00,3.00,2.40,1.00
+32,Leon Draisaitl,EDM,RW,L1 · PP1,77,47,91,17.1,43,21,RW,6.60,3.80,5.80,0.60,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,130,5,21:31,2:48,1.00,0.40,2.80,4.80,4.60,2.60,1.20
+33,Brady Tkachuk,FLA,LW,L1 · PP1,76,48,90,11.3,50,2,LW,6.60,3.60,5.60,2.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,150,5,15:55,3:25,1.40,0.80,4.60,7.60,7.00,5.00,3.00
+34,Brayden Schenn,NYI,C,L2 · PP1,76,53,88,13.1,47,26,C,7.60,3.00,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,340,5,17:14,3:36,0.20,0.00,2.00,3.80,3.00,2.80,0.60
+35,Dylan Cozens,OTT,C,L2 · PP1,76,77,82,12.0,82,1,C,8.80,4.20,8.60,1.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,235,5,17:14,4:58,0.00,0.40,2.00,4.60,3.00,2.00,0.60
+36,Mason Marchment,SJ,LW,L3 · PP2,76,70,83,13.9,65,6,LW,7.00,3.60,7.60,1.40,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,280,5,15:37,2:05,0.40,0.00,2.20,4.20,3.20,2.40,1.20
+37,Andrei Svechnikov,CAR,LW,L1 · PP1,75,38,92,14.2,37,14,LW,6.20,2.40,6.20,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,195,5,18:28,5:07,0.60,0.40,3.00,6.00,4.20,2.80,1.60
+38,Danila Yurov,MIN,C,L3 · PP2,75,81,80,14.1,78,9,C,8.60,4.80,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,430,5,14:05,1:32,0.60,0.00,1.80,4.00,2.60,2.40,1.00
+39,Jack Roslovic,TOR,RW,L1 · PP2,75,70,82,13.2,86,21,RW,9.80,5.20,8.20,0.60,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,300,5,16:42,1:07,0.40,0.60,2.80,4.20,3.80,2.60,1.60
+40,Stephen Halliday,OTT,C,L4 · PP1,75,77,81,12.1,82,1,C,8.80,4.20,8.60,1.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,460,5,13:49,4:25,0.40,0.40,2.20,2.60,2.60,2.20,1.20
+41,Drake Batherson,OTT,RW,L2 · PP1,74,39,91,16.8,34,30,RW,7.00,2.80,4.80,0.20,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,205,5,18:35,5:10,0.20,0.40,2.00,4.20,2.80,2.60,1.40
+42,Emmitt Finnie,DET,C,L2 · PP1,74,81,78,11.3,77,26,C,9.40,4.60,7.40,0.40,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,270,5,18:49,1:40,0.40,0.60,2.80,4.60,3.60,2.00,1.20
+43,Filip Forsberg,NSH,LW,L2 · PP1,74,33,92,14.2,38,29,LW,6.80,2.80,5.80,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,230,5,21:24,4:23,0.20,0.80,3.80,8.80,6.00,2.40,1.20
+44,Jackson Blake,CAR,RW,L2 · PP1,74,28,94,11.2,24,32,RW,6.60,2.60,5.00,0.00,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,255,5,19:16,4:56,0.00,0.80,3.20,6.80,4.60,4.80,2.40
+45,Matty Beniers,SEA,C,L1 · PP2,74,52,86,12.7,47,9,C,6.60,4.40,6.20,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,370,5,18:01,2:11,0.20,0.00,1.60,4.00,3.40,2.80,1.40
+46,Will Smith,SJ,RW,L1 · PP1,74,25,96,13.1,8,30,RW,5.20,2.20,4.60,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,250,5,21:20,4:48,0.20,0.60,3.60,6.60,5.40,4.00,1.20
+47,Connor Brown,NJ,LW,L4,73,78,78,13.5,80,5,LW,8.80,4.40,6.60,1.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,340,5,17:32,1:14,0.20,0.60,1.20,3.20,2.40,2.20,0.80
+48,Ivar Stenberg,SJ,LW,L2 · PP1,73,70,80,11.4,65,6,LW,7.00,3.60,7.60,1.40,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,350,5,16:06,4:41,0.40,0.60,2.00,3.20,2.80,2.00,0.60
+49,Dylan Larkin,DET,C,L1 · PP2,72,81,76,13.4,77,26,C,9.40,4.60,7.40,0.40,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,175,5,22:59,4:35,0.00,0.60,3.00,4.80,3.80,1.20,0.00
+50,Evan Bouchard,EDM,D,P1 · PP1,72,40,88,11.1,35,20,D,3.80,0.80,5.00,0.20,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,390,5,25:59,2:58,0.20,1.20,2.80,7.60,5.20,2.60,0.00
+51,Jordan Eberle,SEA,RW,L1 · PP1,72,32,90,13.8,22,11,RW,4.80,2.80,5.00,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,250,5,16:25,2:49,0.20,0.40,3.00,4.80,4.00,3.60,2.20
+52,Mason McTavish,STL,C,L2 · PP2,72,40,88,12.1,36,5,C,6.60,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,280,5,16:18,2:26,0.60,0.60,3.20,5.20,4.40,3.80,2.20
+53,Matthew Schaefer,NYI,D,P1 · PP1,72,38,89,9.7,28,12,D,3.80,0.20,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,350,5,26:32,4:00,0.00,1.00,4.20,9.00,5.60,3.20,0.80
+54,Michael Brandsegg-Nygård,DET,RW,L2 · PP1,72,90,74,9.4,88,1,RW,8.40,5.00,8.80,1.80,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,340,5,16:27,1:44,0.20,0.40,1.60,3.20,2.80,2.20,1.20
+55,Mikael Granlund,ANA,C,L2 · PP1,72,37,89,13.8,28,3,C,6.20,2.40,6.60,1.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,340,5,18:42,3:01,0.20,0.80,2.20,4.60,4.20,2.60,0.80
+56,Pavel Buchnevich,STL,RW,L3 · PP2,72,60,82,12.6,61,8,RW,7.80,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,380,5,18:38,2:35,0.20,0.60,1.80,4.20,2.60,2.20,1.20
+57,Rickard Rakell,PIT,LW,L1 · PP1,72,26,93,12.5,20,20,LW,5.80,2.00,5.80,0.60,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,200,5,19:48,3:19,0.20,0.20,3.00,7.00,5.40,4.20,2.00
+58,Shane Pinto,OTT,C,L3 · PP2,72,77,77,13.2,82,1,C,8.80,4.20,8.60,1.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,270,5,19:10,2:29,0.40,0.20,1.40,3.20,2.40,1.80,0.80
+59,Artemi Panarin,LA,LW,L1 · PP1,71,31,89,12.5,36,9,LW,6.00,2.80,5.80,1.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,195,5,21:20,3:59,0.40,0.40,3.20,6.00,3.80,2.40,0.40
+60,Dylan Guenther,UTA,RW,L2 · PP1,71,41,86,14.6,37,28,RW,7.00,2.40,6.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,155,5,16:11,3:28,0.20,0.40,2.60,8.40,5.40,2.20,0.60
+61,Jonathan Lekkerimäki,VAN,RW,L3 · PP1,71,66,79,12.8,64,21,RW,8.80,3.80,5.60,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,370,5,15:37,3:02,0.20,0.40,1.80,2.80,2.60,2.00,1.00
+62,Leo Carlsson,ANA,C,L1 · PP1,71,37,88,13.9,28,3,C,6.20,2.40,6.60,1.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,280,5,19:46,3:41,0.20,0.60,1.80,4.20,3.20,2.40,1.00
+63,Mark Stone,VGK,RW,L1 · PP1,71,35,88,18.9,39,3,RW,6.20,2.40,7.40,1.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,180,5,16:48,4:14,1.00,0.60,1.60,2.80,2.80,2.40,2.00
+64,Pavel Zacha,BOS,C,L1 · PP1,71,46,85,17.5,42,5,C,7.60,2.80,5.80,1.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,250,5,18:20,2:44,0.40,0.60,1.60,3.40,2.40,2.40,0.80
+65,Beckett Sennecke,ANA,RW,L2 · PP1,70,31,88,12.2,21,28,RW,6.60,2.00,5.80,0.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,240,5,21:25,3:59,0.40,0.00,2.80,6.20,5.00,2.20,1.40
+66,Gabe Perreault,NYR,LW,L1 · PP2,70,27,89,13.9,25,29,LW,5.60,3.20,5.20,0.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,350,5,17:45,2:08,0.40,0.20,3.00,4.40,3.40,3.40,1.00
+67,Ivan Barbashev,VGK,LW,L1 · PP2,70,54,81,14.1,63,9,LW,7.80,3.20,7.20,1.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,400,5,15:50,1:30,0.20,0.60,1.60,3.60,2.60,2.40,0.60
+68,Kyle Connor,WPG,LW,L1 · PP1,70,18,93,14.0,20,20,LW,6.00,2.20,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,165,5,20:52,3:05,0.60,0.20,3.40,6.60,5.00,3.40,1.20
+69,Linus Karlsson,VAN,RW,L1 · PP2,70,66,78,12.3,64,21,RW,8.80,3.80,5.60,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,350,5,12:49,1:11,0.40,0.20,2.00,3.60,2.60,2.80,1.80
+70,Nikolaj Ehlers,CAR,LW,L2 · PP1,70,38,86,12.2,37,14,LW,6.20,2.40,6.20,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,250,5,17:23,4:43,0.60,0.40,2.40,4.80,4.00,2.20,0.40
+71,Sam Reinhart,FLA,C,L2 · PP1,70,13,95,15.4,6,22,C,4.80,2.20,5.40,0.60,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,175,5,19:05,4:07,1.00,0.60,3.40,5.40,5.00,3.60,2.00
+72,Sidney Crosby,PIT,C,L1 · PP1,70,40,85,15.3,38,3,C,6.40,3.80,6.00,1.40,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,185,5,19:43,3:19,0.60,0.20,1.40,3.00,2.60,2.20,0.80
+73,Timo Meier,NJ,LW,L2 · PP2,70,78,75,8.9,80,5,LW,8.80,4.40,6.60,1.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,260,5,15:02,0:54,0.20,0.40,3.20,6.80,5.00,2.80,1.80
+74,Zach Hyman,EDM,LW,L2 · PP1,70,19,92,16.2,9,24,LW,4.60,1.20,5.20,0.40,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,210,5,19:01,3:35,0.20,0.20,1.80,4.80,2.60,3.80,2.60
+75,Dawson Mercer,NJ,RW,L3,69,87,72,11.2,91,21,RW,11.80,6.40,10.20,0.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,310,5,16:08,0:58,0.00,0.80,2.00,3.80,2.80,2.00,1.20
+76,Fraser Minten,BOS,C,L2 · PP2,69,46,82,13.3,42,5,C,7.60,2.80,5.80,1.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,280,5,17:34,1:40,0.60,0.60,2.80,5.60,3.80,2.20,1.40
+77,Kyle Palmieri,NYI,RW,L1 · PP1,69,66,77,10.2,64,8,RW,8.00,3.00,7.20,1.20,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,270,5,16:36,3:53,0.40,0.20,1.60,3.00,2.20,2.20,0.60
+78,Morgan Frost,CGY,C,L2 · PP1,69,55,80,14.0,65,9,C,7.80,4.20,6.80,1.00,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,275,5,15:56,2:31,0.40,0.40,1.80,3.00,2.40,2.20,1.40
+79,Ryan Hartman,MIN,C,L2 · PP2,69,81,73,12.7,78,9,C,8.60,4.80,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,360,5,13:55,1:12,0.20,0.00,1.00,2.80,2.60,2.00,0.80
+80,Tyler Seguin,DAL,RW,L2 · PP2,69,60,78,13.0,69,16,RW,7.60,4.00,7.60,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,300,5,15:02,1:12,0.40,0.40,3.00,4.20,3.60,2.20,0.80
+81,Alexander Wennberg,SJ,C,L3 · PP1,68,54,79,14.0,45,15,C,7.00,3.40,6.80,0.80,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,,5,20:23,4:25,0.00,0.40,1.60,2.80,2.40,1.60,1.00
+82,Cole Perfetti,WPG,RW,L1 · PP1,68,18,90,11.1,21,21,RW,6.20,2.60,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,290,5,18:48,3:07,0.60,0.00,2.80,5.80,4.00,4.40,2.00
+83,Dylan Holloway,STL,LW,L1 · PP1,68,59,77,12.3,60,29,LW,8.40,3.60,6.00,0.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,230,5,18:33,2:35,0.20,1.20,1.80,4.60,2.60,1.80,0.60
+84,Gabriel Vilardi,WPG,RW,L2 · PP1,68,18,90,15.6,21,21,RW,6.20,2.60,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,340,5,18:07,3:13,0.00,0.40,1.60,3.80,2.80,3.20,1.20
+85,Jake Neighbours,STL,LW,L3 · PP1,68,59,77,14.6,60,29,LW,8.40,3.60,6.00,0.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,325,5,15:18,2:34,0.60,0.40,2.00,2.60,2.00,2.00,1.40
+86,Matthew Tkachuk,FLA,RW,L1 · PP1,68,29,86,13.0,26,11,RW,5.80,2.20,6.80,1.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,195,5,17:37,4:13,0.00,2.20,2.00,4.80,2.60,2.40,0.80
+87,Quinn Hughes,MIN,D,P1 · PP1,68,86,71,6.4,84,1,D,5.00,1.60,8.40,1.20,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,400,5,26:35,3:57,0.00,1.20,2.60,4.80,4.20,1.40,0.20
+88,Roman Josi,NSH,D,P1 · PP1,68,51,80,8.4,60,20,D,4.80,1.20,6.20,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,525,5,25:40,4:28,0.00,1.20,3.00,6.20,3.80,2.00,0.20
+89,Amadeus Lombardi,NJ,LW,,67,78,72,9.8,80,5,LW,8.80,4.40,6.60,1.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,,5,11:57,0:21,0.00,0.60,2.00,4.60,3.40,3.20,1.80
+90,James Hagens,BOS,RW,L3 · PP2,67,56,77,11.9,55,21,RW,8.20,2.60,7.40,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,425,5,12:10,1:28,0.20,0.60,2.00,3.40,2.80,2.60,0.40
+91,Jared McCann,SEA,LW,L1 · PP1,67,24,87,14.0,12,14,LW,4.20,2.00,4.80,0.80,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,225,5,17:06,2:50,0.40,0.00,2.40,5.80,4.40,2.60,0.60
+92,Morgan Geekie,BOS,RW,L2 · PP1,67,56,77,17.6,55,21,RW,8.20,2.60,7.40,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,220,5,17:50,3:11,0.00,0.80,0.80,3.00,2.40,1.60,1.00
+93,Quinton Byfield,LA,C,L2 · PP1,67,26,86,12.3,30,26,C,6.80,3.60,5.20,0.40,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,240,5,17:29,3:05,0.00,0.00,1.40,3.60,3.00,2.60,1.00
+94,Alex Laferriere,LA,C,L1 · PP2,66,26,85,10.6,30,26,C,6.80,3.60,5.20,0.40,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,280,5,19:08,3:01,0.40,0.40,2.40,5.00,3.60,2.80,1.20
+95,Andrew Copp,DET,C,L3 · PP1,66,81,70,9.1,77,26,C,9.40,4.60,7.40,0.40,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,370,5,18:20,1:32,0.20,0.00,1.80,2.80,2.20,2.00,1.00
+96,Arseny Gritsyuk,NJ,LW,L1 · PP2,66,78,71,10.5,80,5,LW,8.80,4.40,6.60,1.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,360,5,15:48,1:07,0.80,0.20,2.60,4.00,3.40,2.00,1.00
+97,Elias Pettersson,VAN,C,L1 · PP1,66,66,74,11.8,64,15,C,10.00,2.40,7.80,0.80,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,,5,19:17,2:59,0.20,0.40,1.00,4.00,2.40,1.60,0.40
+98,Evan Rodrigues,NJ,C,L3 · PP2,66,66,73,8.8,65,9,C,8.80,3.80,6.60,1.00,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,440,5,15:40,1:43,0.40,0.40,2.20,4.40,3.40,2.20,0.60
+99,Joel Farabee,CGY,LW,L1 · PP1,66,23,86,11.9,25,24,LW,6.00,2.80,3.80,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,280,5,19:45,2:31,0.00,0.80,2.80,4.40,3.60,2.60,1.40
+100,K'Andre Miller,CAR,D,P2 · PP2,66,65,74,8.4,71,6,D,4.60,0.80,9.60,0.60,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,800,5,22:11,1:42,0.00,0.20,2.00,4.80,3.20,2.00,0.60
+101,Kirill Marchenko,TOR,LW,L2 · PP1,66,5,92,12.5,5,24,LW,3.80,2.00,3.40,0.40,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,180,5,18:08,4:24,0.80,0.40,2.80,4.20,3.80,3.20,0.80
+102,Tomas Hertl,VGK,C,L3 · PP1,66,21,87,11.8,22,22,C,6.60,2.80,5.40,0.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,230,5,16:33,4:16,0.20,0.20,2.20,3.20,2.80,2.80,1.40
+103,Will Cuylle,NYR,LW,L3 · PP2,66,27,84,12.0,25,29,LW,5.60,3.20,5.20,0.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,360,5,16:09,1:20,0.60,0.00,2.40,4.20,3.60,3.20,1.80
+104,Matthew Wood,NSH,C,L2 · PP2,65,68,72,13.5,81,22,C,9.60,4.60,7.40,0.60,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,460,5,14:23,1:46,0.20,0.00,1.60,3.00,2.00,1.80,1.00
+105,Brock Boeser,VAN,RW,L2 · PP1,64,66,71,12.6,64,21,RW,8.80,3.80,5.60,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,230,5,20:22,3:06,0.20,0.60,1.00,2.80,1.80,1.40,0.60
+106,Clayton Keller,UTA,LW,L1 · PP1,64,89,66,11.8,97,2,LW,12.20,5.20,9.40,2.00,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,160,5,17:15,3:28,0.60,0.60,1.60,3.40,2.00,1.20,0.40
+107,Cody Glass,NJ,C,L4,64,66,71,14.3,65,9,C,8.80,3.80,6.60,1.00,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,650,5,12:48,0:19,0.20,0.00,1.60,2.80,2.20,2.20,1.60
+108,Elias Lindholm,BOS,C,L3 · PP1,64,46,76,13.5,42,5,C,7.60,2.80,5.80,1.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,280,5,16:57,2:52,0.40,0.40,1.60,3.00,2.20,1.80,1.00
+109,Fabian Zetterlund,OTT,LW,L1 · PP2,64,64,72,11.7,65,14,LW,7.80,4.40,5.80,0.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,380,5,12:51,2:04,0.20,0.00,2.00,4.20,2.20,2.00,0.20
+110,Igor Chernyshov,SJ,LW,L1 · PP2,64,70,70,14.1,65,6,LW,7.00,3.60,7.60,1.40,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,360,5,14:45,1:28,0.00,0.20,1.40,3.00,1.60,1.80,0.40
+111,Jean-Gabriel Pageau,NYI,C,L3,64,53,75,15.3,47,26,C,7.60,3.00,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,550,5,16:23,0:17,0.20,0.40,1.40,3.20,2.40,2.20,1.40
+112,Mavrik Bourque,NSH,C,,64,68,71,12.3,81,22,C,9.60,4.60,7.40,0.60,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,490,5,16:08,1:25,0.20,0.20,1.60,2.60,2.00,1.80,0.80
+113,Roope Hintz,DAL,C,L2 · PP1,64,47,76,12.0,53,5,C,7.80,3.60,6.20,1.20,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,205,5,18:01,3:04,0.40,0.20,1.40,2.80,1.60,2.00,0.80
+114,Simon Holmstrom,NYI,LW,L1 · PP1,64,55,74,16.2,50,14,LW,6.80,3.20,6.00,0.80,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,320,5,16:45,1:56,0.60,0.00,2.00,3.40,2.60,1.60,0.60
+115,Yegor Chinakhov,PIT,LW,L2 · PP2,64,26,82,13.5,20,20,LW,5.80,2.00,5.80,0.60,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,300,5,15:34,1:36,0.20,0.00,1.80,5.60,4.00,2.40,0.80
+116,Anders Lee,UTA,RW,L3 · PP2,63,41,77,10.1,37,28,RW,7.00,2.40,6.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,290,5,13:44,1:04,0.20,0.20,1.80,4.80,4.00,3.20,2.60
+117,Braeden Bowman,VGK,LW,L4 · PP2,63,54,73,11.2,63,9,LW,7.80,3.20,7.20,1.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,550,5,14:42,1:40,0.20,0.20,1.40,2.40,2.40,2.00,0.80
+118,Jake Sanderson,OTT,D,P1 · PP1,63,81,67,10.0,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,460,5,20:14,3:03,0.60,0.80,2.60,4.40,3.80,1.20,0.60
+119,Jonatan Berggren,STL,RW,L2 · PP2,63,60,72,12.4,61,8,RW,7.80,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,500,5,15:18,1:22,0.40,0.20,1.80,3.40,2.60,1.80,1.20
+120,Logan Cooley,UTA,C,L2 · PP1,63,37,78,17.0,33,5,C,6.60,2.40,6.80,1.20,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,230,5,17:50,3:28,0.20,0.80,1.80,3.80,2.80,1.60,0.80
+121,Steven Stamkos,NSH,LW,L1 · PP1,63,33,79,18.0,38,29,LW,6.80,2.80,5.80,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,200,5,19:22,4:25,0.20,1.00,1.20,3.00,2.40,1.60,0.80
+122,Trevor Connelly,VGK,LW,L3 · PP1,63,54,73,12.5,63,9,LW,7.80,3.20,7.20,1.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,340,5,15:39,4:14,0.40,0.20,1.20,3.40,1.80,1.60,0.40
+123,Barrett Hayton,UTA,LW,L3,62,89,64,9.8,97,2,LW,12.20,5.20,9.40,2.00,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,390,5,14:11,1:04,0.20,0.80,1.40,3.60,2.40,1.80,1.00
+124,Bobby McMann,SEA,LW,L2 · PP1,62,24,80,14.0,12,14,LW,4.20,2.00,4.80,0.80,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,240,5,16:38,2:14,0.20,0.20,1.80,3.60,3.00,2.00,0.60
+125,J.T. Miller,NYR,C,L2 · PP1,62,28,79,11.7,27,26,C,6.00,2.80,7.00,0.40,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,265,5,19:23,4:19,0.20,0.60,1.00,3.00,1.80,2.00,1.00
+126,Philip Broberg,STL,D,P1 · PP1,62,73,67,8.8,77,6,D,5.00,1.40,7.60,0.60,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,700,5,23:20,1:43,0.40,0.40,2.40,4.60,2.80,1.40,0.80
+127,Sam Bennett,FLA,C,L1 · PP2,62,13,84,12.4,6,22,C,4.80,2.20,5.40,0.60,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,210,5,16:07,1:41,0.60,0.00,2.80,4.40,3.60,2.80,1.20
+128,Warren Foegele,OTT,LW,L2,62,64,69,11.5,65,14,LW,7.80,4.40,5.80,0.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,450,5,12:59,0:08,0.20,0.20,2.20,3.80,2.80,2.20,1.00
+129,William Karlsson,VGK,C,L2 · PP2,62,21,81,11.4,22,22,C,6.60,2.80,5.40,0.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,400,5,15:55,1:31,0.40,0.40,2.00,3.60,3.40,2.60,0.80
+130,Blake Coleman,MIN,LW,L2 · PP2,61,59,69,11.3,51,9,LW,7.00,2.60,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,290,5,16:46,1:31,0.00,0.00,1.40,3.00,2.40,1.60,0.20
+131,Claude Giroux,OTT,RW,L1 · PP2,61,39,75,10.7,34,30,RW,7.00,2.80,4.80,0.20,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,370,5,17:05,3:25,0.40,0.40,1.40,3.20,2.00,2.00,0.60
+132,Colton Dach,EDM,C,L2,61,47,72,9.5,43,9,C,7.60,2.20,7.00,1.00,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,600,5,14:29,0:54,0.00,0.00,2.40,3.40,3.40,2.40,1.60
+133,Luke Hughes,NJ,D,P1 · PP1,61,45,73,7.3,38,12,D,4.40,0.40,5.00,0.40,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,450,5,23:58,2:38,0.40,0.00,3.20,7.20,4.00,1.80,0.20
+134,Roger McQueen,ANA,C,L3 · PP2,61,37,75,10.3,28,3,C,6.20,2.40,6.60,1.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,500,4,13:24,1:31,0.00,0.00,2.00,5.00,3.25,2.50,1.75
+135,Simon Nemec,CGY,D,P1 · PP2,61,50,72,10.3,59,12,D,5.00,0.60,7.20,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,950,5,21:19,1:22,0.00,0.40,1.40,5.60,3.00,1.80,0.60
+136,Yegor Sharangovich,CGY,RW,L2 · PP2,61,22,80,10.9,24,6,RW,6.00,2.00,6.00,1.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,390,5,16:37,1:20,0.40,0.20,2.80,5.60,5.00,2.60,0.60
+137,Alex Killorn,ANA,LW,L1 · PP2,60,40,73,10.7,32,7,LW,6.00,2.60,5.60,1.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,500,5,17:06,1:27,0.20,0.40,2.20,3.60,2.80,2.00,1.00
+138,Ben Kindel,PIT,C,L3 · PP2,60,40,73,11.2,38,3,C,6.40,3.80,6.00,1.40,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,,5,17:12,2:56,0.00,0.00,2.00,3.00,2.80,1.60,0.80
+139,MacKenzie Weegar,UTA,D,P1,60,73,65,6.3,78,12,D,5.20,1.00,8.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,800,5,22:26,0:16,0.20,0.00,1.80,4.80,2.80,1.80,0.20
+140,Marco Rossi,VAN,C,,60,66,67,14.4,64,15,C,10.00,2.40,7.80,0.80,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,390,5,16:22,2:27,0.00,0.00,1.80,2.60,2.40,1.20,1.00
+141,Max Sasson,VAN,C,L4,60,66,67,15.5,64,15,C,10.00,2.40,7.80,0.80,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,800,5,12:18,0:04,0.40,0.00,1.40,3.00,2.40,2.00,1.20
+142,Michael Misa,SJ,C,L2 · PP2,60,54,70,12.7,45,15,C,7.00,3.40,6.80,0.80,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,425,5,13:08,1:33,0.20,0.00,1.20,3.00,2.00,1.80,1.00
+143,Mika Zibanejad,NYR,C,L1 · PP1,60,28,77,14.1,27,26,C,6.00,2.80,7.00,0.40,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,200,5,21:13,4:20,0.20,0.60,1.60,3.00,2.60,1.40,0.80
+144,Shane Wright,SEA,RW,L3 · PP2,60,32,75,12.2,22,11,RW,4.80,2.80,5.00,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,400,5,13:07,1:44,0.20,0.00,2.00,3.00,2.40,2.20,1.20
+145,Victor Eklund,NYI,RW,L2 · PP2,60,66,67,11.5,64,8,RW,8.00,3.00,7.20,1.20,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,400,5,13:23,0:32,0.20,0.00,1.40,3.40,2.80,1.80,1.60
+146,Cutter Gauthier,ANA,RW,L3 · PP1,59,31,75,13.1,21,28,RW,6.60,2.00,5.80,0.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,200,5,15:08,2:55,0.00,0.20,2.40,6.20,4.40,1.60,0.80
+147,Erik Haula,LA,LW,L3 · PP2,59,31,75,10.9,36,9,LW,6.00,2.80,5.80,1.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,450,5,16:17,1:07,0.00,0.40,2.20,4.20,3.40,2.20,0.80
+148,Evgeni Malkin,PIT,RW,L2 · PP2,59,26,76,13.2,20,16,RW,5.20,2.80,4.40,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,230,5,17:21,3:01,0.40,0.00,2.00,2.80,2.20,1.80,0.80
+149,Jonathan Marchessault,NSH,RW,L2 · PP1,59,29,75,10.1,33,11,RW,5.40,2.80,6.80,1.00,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,325,5,17:16,3:59,0.40,0.20,2.20,4.00,3.20,1.80,0.80
+150,Mikael Backlund,CGY,C,L1,59,55,68,9.4,65,9,C,7.80,4.20,6.80,1.00,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,525,5,18:05,0:00,0.20,0.20,3.00,5.60,4.20,3.00,1.20
+151,Shayne Gostisbehere,CAR,D,P3 · PP1,59,65,66,11.0,71,6,D,4.60,0.80,9.60,0.60,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,525,5,17:19,4:59,0.20,0.40,2.20,4.60,3.60,1.00,0.00
+152,Vincent Trocheck,UTA,C,L3 · PP2,59,37,73,13.0,33,5,C,6.60,2.40,6.80,1.20,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,300,5,15:42,1:15,0.20,0.20,1.00,2.40,2.00,2.00,1.00
+153,Jack McBain,UTA,LW,L4,58,89,60,9.8,97,2,LW,12.20,5.20,9.40,2.00,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,900,5,12:02,0:08,0.00,0.40,0.80,2.80,2.20,2.00,1.00
+154,Matias Maccelli,NYI,LW,,58,55,67,13.4,50,14,LW,6.80,3.20,6.00,0.80,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,,5,13:53,2:42,0.40,0.60,1.80,2.40,2.00,1.40,0.60
+155,Nick Schmaltz,UTA,C,L1 · PP1,58,37,71,15.4,33,5,C,6.60,2.40,6.80,1.20,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,175,5,18:00,3:14,0.40,0.80,2.00,3.00,2.60,1.20,0.60
+156,Liam Ohgren,VAN,LW,L3 · PP2,57,63,64,10.5,61,24,LW,8.60,2.80,8.00,0.40,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,650,5,13:39,1:20,0.20,0.00,0.80,2.80,2.40,1.60,0.40
+157,Max Shabanov,MIN,RW,L3 · PP1,57,77,61,10.9,73,11,RW,8.60,3.20,7.60,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,350,5,14:23,3:19,0.20,0.40,1.00,2.00,1.80,1.20,0.20
+158,Mikhail Sergachev,UTA,D,P1 · PP1,57,73,62,8.4,78,12,D,5.20,1.00,8.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,475,5,23:56,3:17,0.40,0.60,3.00,5.00,3.80,1.00,0.40
+159,Moritz Seider,DET,D,P1 · PP1,57,85,60,7.0,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,340,5,27:24,4:31,0.00,0.60,1.60,3.80,2.00,1.00,0.00
+160,Oliver Bjorkstrand,NYR,LW,L4 · PP2,57,27,73,11.0,25,29,LW,5.60,3.20,5.20,0.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,425,5,10:10,1:14,0.40,0.00,1.60,2.80,2.60,2.60,1.00
+161,Thomas Chabot,OTT,D,,57,81,60,8.8,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,,5,24:13,3:11,0.00,0.40,1.40,4.60,2.40,1.00,0.00
+162,Thomas Novak,PIT,C,L4 · PP1,57,40,70,12.2,38,3,C,6.40,3.80,6.00,1.40,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,310,5,14:39,1:35,0.00,0.60,1.40,3.00,2.60,1.60,1.40
+163,Tyler Toffoli,SJ,RW,L3 · PP2,57,25,74,11.3,8,30,RW,5.20,2.20,4.60,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,380,5,12:50,1:43,0.20,0.40,2.20,4.60,2.60,2.20,0.80
+164,Charlie McAvoy,BOS,D,P1 · PP1,56,52,66,10.6,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,650,5,24:34,2:44,0.20,0.20,1.40,3.00,2.20,1.20,0.60
+165,Judd Caulfield,ANA,RW,L4,56,31,70,11.3,21,28,RW,6.60,2.00,5.80,0.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,,5,13:23,2:17,0.20,0.40,1.20,2.40,2.40,1.80,1.00
+166,Mitch Marner,VGK,RW,L2 · PP1,56,35,70,12.7,39,3,RW,6.20,2.40,7.40,1.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,270,5,18:02,4:22,0.00,1.40,2.00,3.60,2.40,1.20,0.60
+167,Neal Pionk,WPG,D,P1 · PP1,56,34,70,7.1,41,29,D,4.00,0.80,6.20,0.00,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,775,5,24:55,3:02,0.20,0.80,1.80,5.00,2.80,1.60,0.20
+168,Ridly Greig,OTT,LW,L3 · PP2,56,64,63,10.6,65,14,LW,7.80,4.40,5.80,0.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,500,5,16:08,0:47,0.20,0.00,1.00,2.40,2.20,1.60,1.40
+169,Ryan Strome,CGY,RW,L3 · PP2,56,22,73,11.5,24,6,RW,6.00,2.00,6.00,1.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,475,5,13:52,1:24,0.00,0.40,2.40,3.00,2.80,2.00,1.00
+170,Anton Lundell,FLA,C,L3 · PP2,55,13,75,11.5,6,22,C,4.80,2.20,5.40,0.60,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,333,5,17:04,1:34,0.20,0.20,2.00,3.40,2.60,2.00,0.60
+171,Arttu Hyry,DAL,C,L3,55,47,65,12.3,53,5,C,7.80,3.60,6.20,1.20,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,500,5,13:55,0:00,0.60,0.00,2.40,4.80,3.80,2.20,1.00
+172,Aydar Suniev,CGY,LW,L2 · PP2,55,23,71,11.3,25,24,LW,6.00,2.80,3.80,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,490,5,14:10,1:20,0.40,0.20,1.40,3.40,2.40,2.00,1.40
+173,Gavin McKenna,TOR,LW,L3 · PP1,55,5,77,11.8,5,24,LW,3.80,2.00,3.40,0.40,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,375,5,13:14,3:11,0.40,0.00,2.00,3.20,3.20,2.00,0.60
+174,JJ Peterka,BOS,LW,L1 · PP2,55,30,69,14.2,22,20,LW,5.60,2.40,5.80,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,390,5,16:22,1:27,0.20,0.60,1.60,2.80,2.40,1.40,0.00
+175,Justin Hryckowian,DAL,LW,L3 · PP2,55,42,66,13.1,47,14,LW,6.60,3.80,5.40,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,440,5,14:03,1:05,0.00,0.00,1.40,2.20,2.00,1.60,0.80
+176,Matt Coronato,CGY,RW,L1 · PP1,55,22,72,9.8,24,6,RW,6.00,2.00,6.00,1.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,260,5,17:46,2:26,0.20,0.60,2.40,3.60,2.80,1.80,0.60
+177,Nick Paul,TOR,C,L2 · PP2,55,66,61,11.2,81,15,C,9.40,4.40,7.80,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,460,5,16:19,0:09,0.20,0.00,0.80,2.20,1.80,1.60,0.80
+178,Seth Jones,FLA,D,P2 · PP1,55,25,71,8.9,21,3,D,2.60,0.20,7.20,0.80,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,550,5,23:22,3:44,0.00,2.00,3.20,5.80,4.20,1.40,0.20
+179,Zayne Parekh,CGY,D,P3 · PP1,55,50,65,9.3,59,12,D,5.00,0.60,7.20,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,750,5,17:22,2:30,0.00,0.20,1.40,4.00,2.60,1.40,0.00
+180,Adam Edstrom,NSH,RW,L4,54,29,69,12.4,33,11,RW,5.40,2.80,6.80,1.00,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,725,5,14:07,0:04,0.80,0.00,1.40,2.80,2.40,2.20,1.40
+181,Alexander Kerfoot,NSH,RW,L1 · PP2,54,29,69,14.2,33,11,RW,5.40,2.80,6.80,1.00,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,600,5,16:55,1:35,0.20,0.40,0.80,2.00,1.40,1.60,0.80
+182,Casey Mittelstadt,BOS,LW,L3 · PP2,54,30,68,14.7,22,20,LW,5.60,2.40,5.80,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,480,5,13:18,1:16,0.20,0.40,1.20,2.60,2.40,1.60,0.40
+183,Erik Karlsson,PIT,D,P1 · PP1,54,40,66,9.3,37,3,D,3.40,0.20,9.60,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,490,5,23:37,3:11,0.20,1.00,1.40,6.60,2.80,1.20,0.20
+184,Martin Pospisil,CGY,C,L3,54,55,62,9.8,65,9,C,7.80,4.20,6.80,1.00,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,800,5,13:14,0:01,0.20,0.20,2.00,3.40,2.40,2.40,1.40
+185,Robert Thomas,STL,C,L1 · PP1,54,40,66,17.6,36,5,C,6.60,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,300,5,20:28,2:44,0.20,0.80,0.80,1.80,1.00,1.20,0.40
+186,Sean Walker,CAR,D,P2,54,65,60,6.9,71,6,D,4.60,0.80,9.60,0.60,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,1000,5,21:50,0:37,0.00,0.40,1.40,3.40,1.60,1.60,0.20
+187,Brett Howden,VGK,LW,L2,53,54,61,15.1,63,9,LW,7.80,3.20,7.20,1.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,360,5,15:04,0:01,0.60,0.40,1.40,2.60,2.40,1.60,1.00
+188,Carter Mazur,DET,RW,L3,53,90,55,10.4,88,1,RW,8.40,5.00,8.80,1.80,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,700,5,10:18,0:04,0.00,0.20,0.80,2.20,1.80,1.80,1.20
+189,Connor McMichael,STL,LW,L2 · PP2,53,59,60,10.7,60,29,LW,8.40,3.60,6.00,0.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,390,5,16:37,2:27,0.00,0.40,0.40,2.80,1.60,1.20,0.80
+190,Emil Heineman,NYI,LW,L2 · PP2,53,55,61,12.5,50,14,LW,6.80,3.20,6.00,0.80,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,400,5,15:08,0:02,0.00,0.20,1.20,2.80,2.40,1.60,0.80
+191,Jack Eichel,VGK,C,L1 · PP1,53,21,69,11.1,22,22,C,6.60,2.80,5.40,0.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,220,5,18:11,4:24,0.40,0.80,2.00,3.40,2.60,1.20,0.60
+192,Mats Zuccarello,LA,RW,L2 · PP1,53,61,60,11.6,73,16,RW,8.20,4.60,7.00,0.80,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,380,5,17:44,3:56,0.00,0.80,1.00,2.40,1.20,1.00,0.40
+193,Morgan Barron,WPG,C,L4,53,55,61,11.0,67,26,C,8.20,4.20,7.60,0.40,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,1100,5,13:04,0:02,0.00,0.20,1.20,3.00,2.00,2.00,0.80
+194,Sam Steel,DAL,LW,L1 · PP2,53,42,64,12.6,47,14,LW,6.60,3.80,5.40,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,525,5,17:04,0:19,0.00,0.20,0.80,2.20,1.60,1.60,0.40
+195,Vasily Podkolzin,EDM,LW,L1 · PP1,53,19,70,14.2,9,24,LW,4.60,1.20,5.20,0.40,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,235,5,19:39,2:23,0.60,0.60,1.20,1.80,1.60,1.40,0.80
+196,Brendan Gallagher,VAN,RW,L4,52,66,58,8.0,64,21,RW,8.80,3.80,5.60,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,900,5,10:38,0:01,0.00,0.40,1.00,3.20,2.60,2.20,1.00
+197,Carter Yakemchuk,OTT,D,P3 · PP2,52,81,55,11.1,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,750,5,20:50,3:35,0.00,0.00,1.20,2.80,1.20,0.80,0.00
+198,Filip Chytil,VAN,C,L2 · PP2,52,66,58,11.0,64,15,C,10.00,2.40,7.80,0.80,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,440,5,15:52,0:48,0.00,0.40,1.40,3.20,2.20,1.20,0.40
+199,Kasperi Kapanen,EDM,RW,L2 · PP2,52,47,62,12.5,43,21,RW,6.60,3.80,5.80,0.60,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,460,5,17:46,1:45,0.20,0.00,0.80,2.20,1.20,1.20,0.60
+200,A.J. Greer,ANA,LW,L3,51,40,62,13.2,32,7,LW,6.00,2.60,5.60,1.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,700,5,12:05,0:02,0.20,0.20,1.80,3.00,2.60,1.80,0.80
+201,Adam Lowry,WPG,C,L3,51,55,59,9.6,67,26,C,8.20,4.20,7.60,0.40,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,750,5,14:56,0:08,0.00,0.20,0.60,2.20,2.00,1.80,0.80
+202,Anthony Mantha,NJ,LW,L3 · PP2,51,78,55,17.2,80,5,LW,8.80,4.40,6.60,1.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,350,5,13:12,0:57,0.20,0.20,1.20,2.20,1.80,1.00,0.80
+203,Darren Raddysh,TOR,D,P1 · PP1,51,48,61,9.8,59,3,D,5.20,0.20,8.20,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,500,5,24:40,4:25,0.00,0.60,3.00,4.60,3.80,0.80,0.20
+204,Easton Cowan,TOR,LW,L1 · PP2,51,5,71,12.2,5,24,LW,3.80,2.00,3.40,0.40,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,400,5,15:26,0:59,0.20,0.80,2.00,4.00,3.00,1.80,1.20
+205,Eetu Luostarinen,FLA,LW,L3 · PP2,51,48,60,10.9,50,2,LW,6.60,3.60,5.60,2.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,490,5,16:44,1:37,0.00,0.00,1.40,3.00,1.80,1.20,0.60
+206,Jack Drury,NSH,C,L4,51,68,56,10.6,81,22,C,9.60,4.60,7.40,0.60,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,1000,5,17:40,0:02,0.20,0.20,1.60,2.20,2.00,1.40,0.20
+207,Jake DeBrusk,VAN,LW,L1 · PP1,51,63,57,10.9,61,24,LW,8.60,2.80,8.00,0.40,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,240,5,15:19,3:04,0.20,0.40,1.20,2.60,1.60,1.00,0.60
+208,Otto Stenberg,STL,RW,L4,51,60,58,10.7,61,8,RW,7.80,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,,5,12:04,0:03,0.20,0.00,1.20,2.00,2.00,1.80,1.20
+209,Alex Iafallo,WPG,LW,L2 · PP2,50,18,66,11.9,20,20,LW,6.00,2.20,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,600,5,14:54,0:48,0.40,0.00,2.00,2.60,2.40,1.60,0.80
+210,Berkly Catton,SEA,C,L3 · PP2,50,52,58,10.3,47,9,C,6.60,4.40,6.20,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,390,5,14:20,2:26,0.00,0.60,1.20,2.20,1.80,1.20,0.40
+211,Bobby Brink,MIN,RW,L2 · PP2,50,77,54,12.0,73,11,RW,8.60,3.20,7.60,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,500,5,13:59,1:25,0.00,0.40,1.00,2.60,1.60,1.00,0.40
+212,Bryan Rust,PIT,RW,L1 · PP1,50,26,64,14.9,20,16,RW,5.20,2.80,4.40,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,200,5,16:44,1:16,0.20,0.40,0.80,2.00,2.00,1.20,0.80
+213,Cam Fowler,STL,D,P3 · PP2,50,73,54,7.5,77,6,D,5.00,1.40,7.60,0.60,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,950,5,21:02,2:34,0.00,0.80,1.20,2.60,1.60,1.00,0.00
+214,Dalibor Dvorsky,STL,C,L3,50,40,61,12.2,36,5,C,6.60,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,500,5,12:02,1:19,0.00,0.20,1.20,2.80,1.80,1.40,0.40
+215,Eric Robinson,CAR,LW,L3,50,38,61,12.5,37,14,LW,6.20,2.40,6.20,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,550,5,12:39,0:17,0.20,0.40,1.80,3.00,2.60,1.40,0.80
+216,Lawson Crouse,UTA,RW,L1,50,41,61,14.1,37,28,RW,7.00,2.40,6.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,350,5,15:03,0:05,0.00,0.40,1.40,2.40,2.20,1.40,0.40
+217,Adam Klapka,CGY,RW,L4,49,22,64,10.0,24,6,RW,6.00,2.00,6.00,1.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,700,5,10:53,0:25,0.40,0.00,1.60,3.80,3.00,2.00,0.80
+218,Cole Schwindt,FLA,C,L4,49,13,66,12.8,6,22,C,4.80,2.20,5.40,0.60,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,1000,5,13:37,0:31,0.20,0.00,1.80,3.00,2.80,1.60,0.60
+219,Jacob Trouba,SJ,D,P2,49,72,53,7.9,67,20,D,5.40,1.20,5.80,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,1200,5,22:18,0:33,0.20,0.20,1.40,3.80,2.60,1.00,0.20
+220,Justin Faulk,DET,D,P2,49,85,51,11.1,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,650,5,18:55,1:32,0.20,0.40,1.20,2.20,1.40,0.80,0.00
+221,Morgan Rielly,TOR,D,P2 · PP2,49,48,58,8.7,59,3,D,5.20,0.20,8.20,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,800,5,19:17,1:08,0.00,0.60,1.60,3.20,2.60,1.20,0.40
+222,Pius Suter,STL,C,L4,49,40,60,13.2,36,5,C,6.60,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,650,5,14:24,0:12,0.40,0.40,1.20,2.60,1.80,1.40,0.00
+223,Teddy Blueger,TOR,C,L4,49,66,55,12.4,81,15,C,9.40,4.40,7.80,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,800,5,13:50,0:01,0.00,0.00,1.60,2.00,1.80,1.40,1.00
+224,Thomas Harley,DAL,D,P1 · PP2,49,28,63,7.5,30,12,D,2.80,0.60,7.00,0.40,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,750,5,25:20,0:51,0.00,0.60,2.60,4.60,3.00,1.40,0.40
+225,William Carrier,CAR,RW,L1,49,28,63,9.1,24,32,RW,6.60,2.60,5.00,0.00,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,550,5,13:37,0:00,0.00,0.60,2.00,4.00,3.60,2.80,1.40
+226,Barclay Goodrow,SJ,LW,L4,48,70,53,9.2,65,6,LW,7.00,3.60,7.60,1.40,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,1100,5,11:09,0:00,0.00,0.00,1.60,2.40,2.40,2.00,1.40
+227,Connor Dewar,PIT,RW,L4,48,26,62,11.7,20,16,RW,5.20,2.80,4.40,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,575,5,12:41,0:01,0.20,0.20,1.80,3.60,2.60,2.00,1.00
+228,Eeli Tolvanen,NYR,RW,L3 · PP2,48,46,57,10.2,49,3,RW,6.80,2.80,7.00,1.60,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,550,5,12:51,1:02,0.00,0.20,1.20,2.80,2.00,1.40,1.00
+229,Kiefer Sherwood,SJ,RW,L2,48,25,62,12.4,8,30,RW,5.20,2.20,4.60,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,420,5,15:11,0:20,0.00,0.40,1.60,2.60,2.20,1.40,0.20
+230,Luca Cagnoni,SJ,D,P3 · PP2,48,72,52,10.5,67,20,D,5.40,1.20,5.80,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,,5,16:19,2:56,0.00,0.00,1.20,3.80,1.80,0.80,0.20
+231,Nick Blankenburg,TOR,D,,48,48,57,11.3,59,3,D,5.20,0.20,8.20,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,,5,13:25,0:36,0.20,0.00,1.20,3.40,2.40,1.20,0.00
+232,Sheldon Dries,DET,LW,,48,93,49,10.4,92,1,LW,9.80,4.20,10.00,2.20,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,700,5,9:28,0:00,0.00,0.00,0.20,1.80,1.20,1.80,1.00
+233,Tye Kartye,NYR,LW,L2,48,27,62,12.5,25,29,LW,5.60,3.20,5.20,0.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,550,5,15:31,0:00,0.40,0.60,1.80,3.00,2.20,2.00,0.80
+234,Adam Fox,NYR,D,P1 · PP1,47,84,49,10.0,96,1,D,6.20,1.60,10.80,1.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,575,5,21:34,4:17,0.00,1.00,1.80,4.20,2.80,0.40,0.20
+235,Frank Vatrano,ANA,LW,L2 · PP2,47,40,57,9.8,32,7,LW,6.00,2.60,5.60,1.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,550,5,12:04,1:14,0.40,0.20,1.20,2.60,2.20,1.40,0.60
+236,Jesper Boqvist,NJ,RW,L4,47,87,49,10.2,91,21,RW,11.80,6.40,10.20,0.60,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,650,5,11:47,0:23,0.20,0.20,1.40,2.00,1.60,1.20,1.00
+237,Juuso Valimaki,CAR,D,P3,47,65,53,11.0,71,6,D,4.60,0.80,9.60,0.60,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,2000,1,11:29,0:00,0.00,1.00,1.00,4.00,4.00,2.00,1.00
+238,Marat Khusnutdinov,BOS,LW,L2,47,30,59,15.0,22,20,LW,5.60,2.40,5.80,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,550,5,13:34,0:00,0.40,0.40,1.60,2.20,2.00,1.80,1.00
+239,Matvei Gridin,CGY,LW,L3 · PP1,47,23,61,9.8,25,24,LW,6.00,2.80,3.80,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,400,5,14:42,2:31,0.20,0.20,1.80,4.20,2.80,1.20,0.20
+240,Viggo Bjorck,WPG,C,L2 · PP2,47,55,54,10.3,67,26,C,8.20,4.20,7.60,0.40,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,650,5,15:10,0:50,0.00,0.00,0.60,2.00,1.80,1.20,0.60
+241,Dougie Hamilton,NJ,D,P2 · PP2,46,45,55,7.4,38,12,D,4.40,0.40,5.00,0.40,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,550,5,21:04,1:13,0.00,0.60,2.80,5.40,3.40,1.00,0.20
+242,Jesperi Kotkaniemi,CAR,C,L4 · PP2,46,77,49,10.0,86,15,C,9.60,5.80,7.60,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,550,5,11:47,1:06,0.40,0.20,1.80,2.80,2.20,1.00,0.80
+243,Jordan Martinook,CAR,C,L3,46,77,49,10.6,86,15,C,9.60,5.80,7.60,0.80,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,600,5,13:55,0:00,0.00,0.20,1.20,3.20,2.00,1.40,1.00
+244,Michael Amadio,OTT,RW,L3,46,39,56,13.6,34,30,RW,7.00,2.80,4.80,0.20,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,480,5,14:29,0:03,0.00,0.20,0.60,1.60,1.40,1.40,0.20
+245,Nicholas Robertson,PIT,RW,L3,46,26,59,12.7,20,16,RW,5.20,2.80,4.40,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,390,5,12:08,0:01,0.20,0.00,2.20,4.20,3.20,1.60,0.80
+246,Trevor Moore,LA,LW,L2,46,31,58,9.2,36,9,LW,6.00,2.80,5.80,1.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,400,5,17:16,0:55,0.00,0.20,2.00,3.80,3.00,1.20,0.80
+247,Yakov Trenin,MIN,LW,L3,46,59,52,8.2,51,9,LW,7.00,2.60,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,700,5,12:58,0:03,0.00,0.40,1.00,2.40,2.00,1.60,0.80
+248,Alex Formenton,EDM,LW,L3,45,19,60,10.8,9,24,LW,4.60,1.20,5.20,0.40,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,800,5,13:59,0:04,0.20,0.20,1.60,2.20,2.00,1.80,1.20
+249,Anthony Duclair,NYI,RW,L3 · PP2,45,66,50,13.7,64,8,RW,8.00,3.00,7.20,1.20,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,475,5,12:37,0:31,0.20,0.20,0.80,3.20,1.40,1.00,0.60
+250,Collin Graf,SJ,RW,L4,45,25,58,14.3,8,30,RW,5.20,2.20,4.60,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,500,5,14:29,0:06,0.00,0.00,1.60,2.60,2.40,1.20,0.60
+251,Colton Sissons,TOR,C,L3,45,66,50,10.2,81,15,C,9.40,4.40,7.80,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,800,5,15:43,0:05,0.20,0.60,1.00,1.60,1.40,1.20,0.00
+252,Frederick Gaudreau,SEA,C,L4,45,52,53,12.7,47,9,C,6.60,4.40,6.20,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,700,5,15:50,0:04,0.40,0.40,1.00,1.80,1.20,1.20,0.40
+253,Isak Rosen,WPG,RW,L3 · PP2,45,18,60,11.7,21,21,RW,6.20,2.60,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,800,5,14:04,0:55,0.00,0.20,1.60,4.00,3.00,1.20,0.40
+254,Matthew Poitras,BOS,C,L4,45,46,54,13.7,42,5,C,7.60,2.80,5.80,1.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,600,5,10:23,0:08,0.60,0.20,1.60,2.20,2.20,1.20,0.80
+255,Trent Frederic,EDM,C,L4,45,47,54,8.7,43,9,C,7.60,2.20,7.00,1.00,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,950,5,9:37,0:50,0.00,0.00,1.20,2.20,1.80,1.60,1.40
+256,Vinni Lettieri,TOR,RW,L3 · PP2,45,70,49,11.0,86,21,RW,9.80,5.20,8.20,0.60,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,950,2,9:04,1:53,0.00,0.00,0.50,2.00,1.00,1.00,0.50
+257,Brady Skjei,NSH,D,P2 · PP2,44,51,51,6.5,60,20,D,4.80,1.20,6.20,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,1200,5,19:23,1:15,0.00,0.20,1.00,3.00,2.00,1.00,0.00
+258,Brandon Montour,SEA,D,,44,41,54,7.9,34,6,D,4.00,0.20,6.80,0.60,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,450,5,23:56,2:19,0.20,0.60,1.80,4.40,2.80,0.80,0.20
+259,Felix Unger Sorum,CAR,RW,L3 · PP2,44,28,56,10.8,24,32,RW,6.60,2.60,5.00,0.00,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,650,4,12:39,1:16,0.00,0.25,0.75,2.00,1.50,1.25,0.50
+260,Jalen Chatfield,CAR,D,P1,44,65,49,6.5,71,6,D,4.60,0.80,9.60,0.60,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,1300,5,20:40,0:07,0.20,0.20,2.00,4.00,2.80,1.00,0.00
+261,Jared Wright,LA,RW,,44,61,50,8.2,73,16,RW,8.20,4.60,7.00,0.80,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,900,5,11:38,0:00,0.00,0.00,1.60,2.60,2.40,1.80,1.20
+262,Ondrej Palat,NYI,LW,L3 · PP2,44,55,51,9.4,50,14,LW,6.80,3.20,6.00,0.80,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,600,5,14:07,0:08,0.20,0.20,0.60,1.80,1.20,1.40,0.80
+263,Rasmus Andersson,VGK,D,P2 · PP2,44,19,58,10.1,19,29,D,2.80,0.40,7.00,0.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,700,5,19:23,1:35,0.40,0.40,2.40,3.60,2.80,1.00,0.40
+264,Taylor Raddysh,NYR,RW,L4,44,46,52,13.2,49,3,RW,6.80,2.80,7.00,1.60,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,1000,5,8:52,0:29,0.00,0.40,1.00,1.60,1.40,1.20,0.60
+265,Andre Lee,LA,LW,L4,43,31,54,11.0,36,9,LW,6.00,2.80,5.80,1.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,900,5,10:14,0:00,0.00,0.00,1.00,2.40,1.80,2.00,1.20
+266,Chandler Stephenson,SEA,C,L2 · PP1,43,52,50,14.1,47,9,C,6.60,4.40,6.20,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,400,5,17:56,2:49,0.00,0.80,0.60,1.40,1.00,0.60,0.40
+267,Erik Gustafsson,LA,D,P1 · PP2,43,30,55,11.1,35,29,D,4.00,0.60,5.40,0.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,1300,5,17:13,1:17,0.20,0.20,1.20,3.40,1.80,1.00,0.20
+268,Paul Cotter,VAN,LW,L2 · PP2,43,63,48,14.2,61,24,LW,8.60,2.80,8.00,0.40,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,550,5,15:39,0:52,0.00,0.20,0.40,1.80,0.80,0.80,0.20
+269,Tristan Luneau,ANA,D,P2 · PP2,43,34,54,11.1,24,20,D,3.00,0.40,7.00,0.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,1100,5,20:13,1:07,0.00,0.20,1.20,4.60,2.40,0.80,0.00
+270,Corey Perry,LA,RW,L4 · PP2,42,61,48,12.9,73,16,RW,8.20,4.60,7.00,0.80,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,575,5,12:26,1:28,0.00,0.00,0.60,1.60,1.20,0.80,0.60
+271,Guillaume Brisebois,VAN,D,,42,61,47,10.9,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,,1,12:44,0:00,0.00,0.00,2.00,2.00,2.00,1.00,0.00
+272,Jackson LaCombe,ANA,D,P1 · PP1,42,34,52,8.5,24,20,D,3.00,0.40,7.00,0.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,800,5,23:59,4:05,0.20,0.40,0.60,1.80,1.20,0.80,0.40
+273,Jonathan Castagna,CGY,C,L4,42,55,49,10.6,65,9,C,7.80,4.20,6.80,1.00,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,750,5,11:17,0:00,0.00,0.20,1.00,3.00,2.00,1.60,0.60
+274,Kaapo Kakko,SEA,LW,L3 · PP2,42,24,55,14.0,12,14,LW,4.20,2.00,4.80,0.80,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,425,5,13:24,2:16,0.20,0.40,0.80,1.60,1.20,1.00,0.20
+275,Olli Maatta,MIN,D,,42,86,44,9.6,84,1,D,5.00,1.60,8.40,1.20,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,,5,21:22,0:02,0.00,0.20,0.60,1.60,1.00,1.00,0.40
+276,Vitali Pinchuk,NSH,C,L3 · PP2,42,68,47,10.7,81,22,C,9.60,4.60,7.40,0.60,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,,4,8:44,1:25,0.00,0.25,1.00,1.25,1.25,1.00,0.25
+277,Blake Lizotte,PIT,LW,L4,41,26,53,11.2,20,20,LW,5.80,2.00,5.80,0.60,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,850,5,13:01,0:01,0.00,0.40,1.00,2.60,2.00,1.40,0.60
+278,Elias Pettersson,VAN,D,P1,41,61,46,10.8,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,,5,20:41,0:00,0.40,0.00,1.20,3.00,2.00,1.00,0.00
+279,Mathieu Joseph,EDM,RW,L3,41,47,49,10.4,43,21,RW,6.60,3.80,5.80,0.60,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,1000,5,13:53,0:07,0.40,0.40,1.40,1.80,1.60,1.20,0.80
+280,Michael Rasmussen,DET,LW,L3,41,93,42,9.8,92,1,LW,9.80,4.20,10.00,2.20,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,450,5,17:09,1:34,0.00,0.40,0.80,2.00,1.40,0.60,0.40
+281,Nikita Nesterenko,ANA,LW,,41,40,50,10.0,32,7,LW,6.00,2.60,5.60,1.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,550,5,12:22,0:00,0.40,0.20,2.00,3.00,2.60,1.60,1.00
+282,Nino Niederreiter,WPG,LW,L3 · PP2,41,18,55,10.0,20,20,LW,6.00,2.20,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,600,5,12:30,0:50,0.00,0.00,1.80,2.00,1.80,1.40,1.40
+283,Aaron Ekblad,FLA,D,P1 · PP2,40,25,51,7.2,21,3,D,2.60,0.20,7.20,0.80,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,950,5,20:40,1:22,0.00,0.40,1.60,4.40,2.80,0.80,0.20
+284,Andrei Kuzmenko,PIT,LW,L3 · PP2,40,26,52,13.8,20,20,LW,5.80,2.00,5.80,0.60,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,525,5,12:38,1:06,0.00,0.20,0.80,2.20,1.40,1.00,0.40
+285,Filip Hronek,VAN,D,P1 · PP1,40,61,45,7.7,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,700,5,26:55,2:56,0.00,0.20,0.60,2.20,1.20,0.60,0.00
+286,Gustav Forsling,FLA,D,P1,40,25,52,6.4,21,3,D,2.60,0.20,7.20,0.80,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,1200,5,22:10,0:37,0.00,0.20,1.20,5.20,2.40,1.00,0.00
+287,Justin Barron,STL,RW,P1,40,60,46,7.9,61,8,RW,7.80,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,2000,5,16:10,0:05,0.00,0.20,1.80,3.40,2.40,1.00,0.00
+288,Niko Mikkola,FLA,D,P2,40,25,51,8.3,21,3,D,2.60,0.20,7.20,0.80,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,1700,5,19:37,0:05,0.20,0.20,1.20,3.40,2.00,1.20,0.40
+289,Adam Jiricek,STL,D,P2,39,73,42,10.5,77,6,D,5.00,1.40,7.60,0.60,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,1200,5,13:45,0:53,0.20,0.00,1.80,3.00,2.40,0.60,0.20
+290,Arshdeep Bains,VAN,LW,L4,39,63,44,10.6,61,24,LW,8.60,2.80,8.00,0.40,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,,5,10:25,0:02,0.00,0.20,0.60,1.20,1.20,1.20,0.40
+291,Mackie Samoskevich,SEA,RW,L2,39,32,49,9.9,22,11,RW,4.80,2.80,5.00,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,400,5,15:38,1:01,0.20,0.20,1.20,2.40,1.60,1.00,0.60
+292,Max Jones,EDM,LW,,39,19,51,11.1,9,24,LW,4.60,1.20,5.20,0.40,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,,5,10:28,0:14,0.00,0.00,1.00,2.20,1.80,1.20,0.40
+293,Scott Laughton,LA,C,L3,39,26,50,12.1,30,26,C,6.80,3.60,5.20,0.40,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,750,5,14:58,0:01,0.20,0.20,2.00,3.40,2.60,1.00,0.40
+294,Sean Durzi,NYR,D,P2 · PP2,39,84,41,9.6,96,1,D,6.20,1.60,10.80,1.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,950,5,20:12,1:19,0.20,0.20,0.60,2.20,1.00,0.60,0.00
+295,Vince Dunn,SEA,D,P1 · PP1,39,41,47,8.2,34,6,D,4.00,0.20,6.80,0.60,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,500,5,25:10,3:07,0.00,0.40,2.20,4.60,3.80,0.40,0.00
+296,Brennan Othmann,CGY,LW,L4 · PP2,38,23,50,11.2,25,24,LW,6.00,2.80,3.80,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,900,5,10:35,0:19,0.20,0.20,0.80,2.40,1.40,1.20,0.60
+297,Darnell Nurse,SJ,D,P1,38,72,42,6.8,67,20,D,5.40,1.20,5.80,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,850,5,21:07,0:00,0.00,0.00,3.00,4.40,3.60,0.80,0.20
+298,Kris Letang,PIT,D,P3 · PP2,38,40,46,6.3,37,3,D,3.40,0.20,9.60,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,850,5,20:31,1:32,0.00,0.00,1.40,4.60,3.00,0.60,0.20
+299,Logan Stanley,NYI,D,P1,38,38,47,10.0,28,12,D,3.80,0.20,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,1400,5,21:50,0:16,0.00,0.00,0.80,3.60,1.80,0.80,0.00
+300,Mark Kastelic,BOS,RW,L4,38,56,44,11.5,55,21,RW,8.20,2.60,7.40,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,850,5,11:12,0:00,0.00,0.20,1.00,2.20,1.60,1.20,0.80
+301,Miro Heiskanen,DAL,D,P1 · PP1,38,28,48,8.9,30,12,D,2.80,0.60,7.00,0.40,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,500,5,27:52,3:37,0.20,0.80,0.80,4.00,1.40,0.60,0.00
+302,Rieger Lorenz,MIN,LW,,38,59,43,10.9,51,9,LW,7.00,2.60,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,,5,8:39,0:01,0.00,0.20,0.40,1.60,1.40,1.20,0.80
+303,Sam Colangelo,ANA,RW,,38,31,48,11.7,21,28,RW,6.60,2.00,5.80,0.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,750,5,11:55,0:25,0.20,0.00,1.00,2.00,1.60,1.00,0.60
+304,Tim Washe,ANA,C,L4,38,37,47,10.7,28,3,C,6.20,2.40,6.60,1.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,850,5,14:35,0:01,0.20,0.00,1.20,1.80,1.60,1.20,1.00
+305,Tony DeAngelo,NYI,D,P3 · PP2,38,38,47,6.6,28,12,D,3.80,0.20,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,900,5,15:40,0:34,0.20,0.20,1.40,2.60,2.00,1.00,0.40
+306,Vladislav Namestnikov,WPG,C,,38,55,44,10.5,67,26,C,8.20,4.20,7.60,0.40,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,,5,12:10,1:11,0.00,0.20,1.00,2.00,1.60,0.80,0.40
+307,Andrew Peeke,UTA,D,P3,37,73,40,9.0,78,12,D,5.20,1.00,8.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,1600,5,16:09,0:01,0.00,0.20,0.60,2.60,1.20,1.00,0.00
+308,Jamie Benn,DAL,RW,L3 · PP2,37,60,42,14.8,69,16,RW,7.60,4.00,7.60,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,475,5,12:36,0:36,0.00,0.00,1.00,2.20,1.40,0.60,0.20
+309,Joel Armia,LA,RW,L3,37,61,42,12.5,73,16,RW,8.20,4.60,7.00,0.80,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,550,5,13:53,0:01,0.00,0.20,1.20,2.40,1.80,0.80,0.60
+310,Jonas Brodin,MIN,D,P1,37,86,39,8.1,84,1,D,5.00,1.60,8.40,1.20,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,1050,5,23:20,0:13,0.00,0.40,1.40,2.80,1.60,0.60,0.00
+311,Michael Kesselring,SJ,D,P1,37,72,40,7.1,67,20,D,5.40,1.20,5.80,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,1400,5,20:06,0:04,0.00,0.40,1.00,3.80,1.40,0.80,0.00
+312,Tyler Kleven,OTT,D,P2,37,81,39,7.6,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,1500,5,21:49,0:20,0.20,0.00,1.00,3.00,1.60,0.60,0.00
+313,Albert Johansson,DET,D,P3,36,85,38,8.1,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,1400,5,14:25,0:10,0.00,0.00,1.20,2.20,1.40,0.80,0.00
+314,Artem Zub,OTT,D,P1,36,81,38,8.2,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,1100,5,20:56,0:09,0.00,0.40,1.40,2.20,1.80,0.60,0.00
+315,Declan Carlile,PIT,D,P1,36,40,44,10.2,37,3,D,3.40,0.20,9.60,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,1200,5,18:55,0:00,0.20,0.00,1.20,3.80,2.20,1.00,0.00
+316,Drew O'Connor,VAN,C,L3,36,66,40,11.8,64,15,C,10.00,2.40,7.80,0.80,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,500,5,15:42,0:00,0.00,0.20,0.80,2.20,1.80,0.80,0.00
+317,Jake Middleton,CGY,D,P2,36,50,42,8.2,59,12,D,5.00,0.60,7.20,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,1700,5,17:23,0:00,0.20,0.20,1.20,2.00,1.40,1.20,0.40
+318,Jason Dickinson,EDM,C,,36,47,43,10.4,43,9,C,7.60,2.20,7.00,1.00,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,,5,12:49,0:00,0.00,0.40,0.80,2.40,1.80,1.20,0.40
+319,Kyle MacLean,NYI,LW,L4,36,55,42,9.1,50,14,LW,6.80,3.20,6.00,0.80,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,900,5,10:07,0:02,0.00,0.00,0.60,1.80,1.40,1.20,1.20
+320,Nick Jensen,ANA,D,P3,36,34,45,11.8,24,20,D,3.00,0.40,7.00,0.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,,5,17:34,0:00,0.20,0.20,0.60,2.20,1.00,1.00,0.00
+321,Radek Faksa,DAL,C,L4,36,47,43,9.0,53,5,C,7.80,3.60,6.20,1.20,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,1300,5,10:34,0:00,0.00,0.00,0.80,2.00,1.80,1.40,0.60
+322,Ryan Winterton,SEA,RW,L4,36,32,45,8.4,22,11,RW,4.80,2.80,5.00,1.00,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,900,5,12:58,0:00,0.40,0.20,1.60,2.60,2.20,1.40,1.00
+323,Shea Theodore,VGK,D,P1 · PP2,36,19,48,9.2,19,29,D,2.80,0.40,7.00,0.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,650,5,21:00,1:42,0.20,0.00,1.60,4.60,2.60,0.60,0.20
+324,Tyson Hinds,ANA,D,P2,36,34,45,9.1,24,20,D,3.00,0.40,7.00,0.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,2900,5,18:07,0:02,0.00,0.00,1.40,4.00,1.80,1.00,0.20
+325,Ville Koivunen,PIT,RW,,36,26,46,9.9,20,16,RW,5.20,2.80,4.40,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,575,5,13:18,0:56,0.00,0.40,0.80,1.60,1.20,1.00,0.60
+326,Cole Koepke,WPG,LW,L4,35,18,46,10.4,20,20,LW,6.00,2.20,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,,5,9:22,0:05,0.20,0.00,1.40,2.20,1.80,1.20,0.60
+327,Daniil But,UTA,RW,L4 · PP2,35,41,42,10.5,37,28,RW,7.00,2.40,6.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,600,5,11:17,0:02,0.20,0.40,1.40,2.60,1.80,1.00,0.60
+328,John Marino,UTA,D,P2 · PP2,35,73,38,10.5,78,12,D,5.20,1.00,8.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,,5,20:15,2:08,0.40,0.40,1.20,2.20,1.80,0.20,0.00
+329,Kevin Bahl,CGY,D,P1,35,50,41,9.7,59,12,D,5.00,0.60,7.20,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,1700,5,21:54,0:00,0.20,0.00,1.60,2.80,1.80,0.80,0.00
+330,Noah Laba,NYR,C,L3,35,28,45,11.1,27,26,C,6.00,2.80,7.00,0.40,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,850,5,15:20,0:08,0.00,0.20,1.00,2.00,1.80,0.80,0.60
+331,Ryan Shea,EDM,D,P2,35,40,43,10.2,35,20,D,3.80,0.80,5.00,0.20,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,1400,5,22:47,0:50,0.00,0.00,0.60,2.60,1.40,0.60,0.00
+332,Adam Wilsby,NSH,D,P3,34,51,40,7.3,60,20,D,4.80,1.20,6.20,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,1800,5,20:50,0:02,0.00,0.60,0.80,3.40,1.80,0.80,0.20
+333,Brandt Clarke,LA,D,P1 · PP1,34,30,43,7.3,35,29,D,4.00,0.60,5.40,0.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,700,5,19:26,3:01,0.20,0.40,2.00,4.40,2.60,0.40,0.00
+334,Calum Ritchie,NYI,C,,34,53,39,13.6,47,26,C,7.60,3.00,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,,5,10:38,0:40,0.00,0.00,0.40,1.60,1.20,0.60,0.40
+335,Dmitry Orlov,SJ,D,P3 · PP1,34,72,37,7.6,67,20,D,5.40,1.20,5.80,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,800,5,18:14,3:46,0.20,0.40,1.20,3.00,2.20,0.20,0.00
+336,Drew Helleson,ANA,D,,34,34,43,9.2,24,20,D,3.00,0.40,7.00,0.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,2500,5,17:38,0:01,0.00,0.00,0.60,2.60,1.80,1.00,0.20
+337,Hendrix Lapierre,PIT,C,L2,34,40,42,10.3,38,3,C,6.40,3.80,6.00,1.40,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,525,5,11:47,1:25,0.00,0.20,0.60,1.00,1.00,0.80,0.40
+338,Mason Lohrei,BOS,D,P3,34,52,40,11.2,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,1300,5,16:04,0:19,0.20,0.20,1.00,2.20,1.20,0.60,0.00
+339,Maxim Tsyplakov,CGY,LW,,34,23,44,9.1,25,24,LW,6.00,2.80,3.80,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,,5,10:56,1:01,0.00,0.20,0.40,1.60,1.40,1.00,0.40
+340,Zeev Buium,VAN,D,P3 · PP2,34,61,39,9.5,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,1200,5,18:23,0:51,0.00,0.20,0.60,2.80,1.20,0.60,0.00
+341,Braden Schneider,NYR,D,P3,33,84,35,6.1,96,1,D,6.20,1.60,10.80,1.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,2000,5,17:47,0:03,0.00,0.40,1.60,3.60,2.20,0.60,0.00
+342,Daemon Hunt,MIN,D,P2,33,86,34,9.0,84,1,D,5.00,1.60,8.40,1.20,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,1700,5,15:50,0:01,0.00,0.00,0.40,1.80,1.00,0.80,0.20
+343,David Spacek,MIN,D,P3 · PP2,33,86,34,10.3,84,1,D,5.00,1.60,8.40,1.20,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,1300,5,13:58,0:50,0.00,0.00,1.40,2.20,1.60,0.40,0.00
+344,Hampus Lindholm,BOS,D,P1,33,52,39,8.2,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,1300,5,21:22,0:25,0.00,0.20,0.80,2.40,1.40,0.60,0.00
+345,Marc Gatcomb,VGK,RW,L4,33,35,41,8.6,39,3,RW,6.20,2.40,7.40,1.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,900,5,12:47,0:03,0.00,0.00,1.20,3.00,1.80,1.00,0.60
+346,Nolan Allan,SJ,D,,33,72,36,11.6,67,20,D,5.40,1.20,5.80,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,1900,5,16:40,0:00,0.20,0.00,1.00,2.40,2.00,0.60,0.00
+347,Ross Colton,NSH,LW,L3 · PP2,33,33,41,8.1,38,29,LW,6.80,2.80,5.80,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,550,5,11:59,0:49,0.20,0.20,0.80,3.20,2.20,0.80,0.20
+348,Ty Dellandrea,SJ,RW,,33,25,42,8.6,8,30,RW,5.20,2.20,4.60,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,850,5,13:28,0:12,0.00,0.00,1.00,1.60,1.40,1.00,0.80
+349,Colton Parayko,STL,D,P2,32,73,35,6.9,77,6,D,5.00,1.40,7.60,0.60,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,1300,5,21:32,0:08,0.00,0.60,1.40,3.20,2.40,0.40,0.20
+350,Johnathan Kovacevic,NJ,D,P3,32,45,38,8.3,38,12,D,4.40,0.40,5.00,0.40,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,1800,5,16:17,0:01,0.00,0.00,1.00,3.20,2.00,0.80,0.20
+351,Kevin Stenlund,UTA,C,L4,32,37,39,9.3,33,5,C,6.60,2.40,6.80,1.20,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,750,5,14:00,0:10,0.20,0.60,0.80,2.40,1.40,0.80,0.60
+352,Nick DeSimone,UTA,D,,32,73,35,9.7,78,12,D,5.20,1.00,8.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,1100,5,13:52,0:01,0.00,0.20,0.80,1.60,1.20,0.80,0.00
+353,Nikita Zadorov,BOS,D,P2,32,52,37,6.1,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,1400,5,20:18,0:11,0.00,0.40,1.40,2.80,1.80,0.60,0.00
+354,Ryker Evans,SEA,D,P2 · PP2,32,41,39,13.6,34,6,D,4.00,0.20,6.80,0.60,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,1100,5,23:17,1:07,0.40,0.20,1.00,2.20,1.40,0.20,0.00
+355,Sam Dickinson,SJ,D,P2,32,72,35,6.8,67,20,D,5.40,1.20,5.80,0.20,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,2000,5,19:56,0:04,0.00,0.00,1.00,3.40,1.60,0.60,0.20
+356,Sandis Vilmanis,FLA,RW,L3,32,29,41,11.2,26,11,RW,5.80,2.20,6.80,1.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,600,5,13:23,0:17,0.00,0.20,0.80,2.00,1.00,0.80,0.20
+357,Sean Kuraly,BOS,C,,32,46,38,7.9,42,5,C,7.60,2.80,5.80,1.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,,5,13:46,0:00,0.00,0.40,2.00,3.40,2.40,1.00,0.00
+358,Alberts Smits,NYR,D,P3,31,84,33,10.6,96,1,D,6.20,1.60,10.80,1.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,1700,5,15:26,0:03,0.00,0.00,0.60,1.60,1.00,0.60,0.00
+359,Jake Walman,EDM,D,P3 · PP2,31,40,38,9.5,35,20,D,3.80,0.80,5.00,0.20,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,1300,5,14:38,1:20,0.00,0.00,1.00,4.00,2.60,0.40,0.00
+360,Jeff Malott,ANA,LW,L4,31,40,38,9.3,32,7,LW,6.00,2.60,5.60,1.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,700,5,10:35,0:00,0.00,0.00,0.60,2.80,1.40,1.20,0.40
+361,Lars Eller,FLA,RW,L2 · PP2,31,29,40,9.2,26,11,RW,5.80,2.20,6.80,1.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,600,5,15:58,1:10,0.00,0.40,0.60,2.40,1.60,0.60,0.40
+362,Nate Danielson,DET,C,L4 · PP2,31,81,33,9.7,77,26,C,9.40,4.60,7.40,0.40,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,,5,11:01,0:02,0.00,0.40,0.60,1.80,1.20,0.80,0.40
+363,Nicolas Deslauriers,CAR,RW,L4,31,28,40,10.8,24,32,RW,6.60,2.60,5.00,0.00,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,800,5,9:05,0:04,0.40,0.20,0.80,1.20,1.20,1.00,0.60
+364,Noah Hanifin,VGK,D,P3,31,19,41,6.5,19,29,D,2.80,0.40,7.00,0.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,1500,5,20:01,0:04,0.20,0.40,1.00,3.20,1.80,0.80,0.20
+365,Samuel Girard,PIT,D,P2,31,40,38,9.9,37,3,D,3.40,0.20,9.60,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,,5,18:02,0:08,0.00,0.60,1.00,2.40,1.60,0.60,0.20
+366,Theo Lindstein,STL,D,,31,73,34,10.7,77,6,D,5.00,1.40,7.60,0.60,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,,5,14:45,0:11,0.20,0.20,1.20,2.00,1.80,0.40,0.40
+367,Troy Stecher,TOR,D,P2,31,48,37,8.3,59,3,D,5.20,0.20,8.20,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,2100,5,20:11,0:13,0.00,0.20,0.80,1.60,1.40,0.60,0.00
+368,Aleksanteri Kaskimaki,STL,LW,L4,30,59,34,10.5,60,29,LW,8.40,3.60,6.00,0.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,1200,5,9:44,0:13,0.00,0.00,1.00,1.60,1.60,0.60,0.20
+369,Colin Blackwell,DAL,RW,L4,30,60,34,8.9,69,16,RW,7.60,4.00,7.60,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,800,5,10:07,0:00,0.00,0.00,1.40,2.40,1.80,1.00,0.40
+370,Frederic Brunet,BOS,D,P3 · PP2,30,52,35,11.2,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,900,5,16:15,1:46,0.20,0.20,1.00,2.40,1.20,0.20,0.00
+371,Haydn Fleury,WPG,D,P3 · PP2,30,34,38,10.0,41,29,D,4.00,0.80,6.20,0.00,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,1500,5,16:31,1:13,0.00,0.00,1.20,3.80,2.00,0.40,0.20
+372,Marcus Pettersson,NYR,D,P2,30,84,32,8.2,96,1,D,6.20,1.60,10.80,1.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,1800,5,20:25,0:02,0.00,0.40,0.40,1.60,0.60,0.60,0.00
+373,Nick Cousins,OTT,LW,L4,30,64,34,11.4,65,14,LW,7.80,4.40,5.80,0.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,850,5,9:15,0:16,0.00,0.00,0.60,1.20,1.20,0.60,0.60
+374,Raphael Lavoie,VGK,RW,L3,30,35,37,10.3,39,3,RW,6.20,2.40,7.40,1.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,950,5,12:02,0:00,0.00,0.40,1.40,2.40,1.80,1.00,0.20
+375,Tyler Pitlick,MIN,RW,L4,30,77,32,10.1,73,11,RW,8.60,3.20,7.60,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,1100,5,7:12,0:00,0.00,0.00,0.80,1.40,1.20,1.00,0.40
+376,Vladislav Gavrikov,NYR,D,P1,30,84,31,11.2,96,1,D,6.20,1.60,10.80,1.20,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,1100,5,20:35,0:08,0.00,0.20,1.00,1.40,1.40,0.20,0.00
+377,Yan Kuznetsov,CGY,D,P3,30,50,35,8.7,59,12,D,5.00,0.60,7.20,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,1700,5,17:53,0:00,0.00,0.20,1.20,2.40,1.60,0.80,0.20
+378,Andre Burakovsky,OTT,LW,,29,64,33,11.8,65,14,LW,7.80,4.40,5.80,0.80,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,,5,12:49,2:57,0.00,0.00,0.40,0.60,0.60,0.20,0.00
+379,Ben Meyers,SEA,LW,L4,29,24,38,11.3,12,14,LW,4.20,2.00,4.80,0.80,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,800,5,13:18,0:02,0.00,0.40,1.00,1.20,1.00,0.80,0.20
+380,Brett Pesce,NJ,D,P1,29,45,35,7.9,38,12,D,4.40,0.40,5.00,0.40,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,1500,5,21:48,0:00,0.00,0.40,0.80,3.40,1.40,0.80,0.00
+381,Connor Clifton,BOS,D,,29,52,34,9.3,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,,5,20:05,0:12,0.00,0.20,0.80,2.40,1.60,0.40,0.00
+382,Drew Doughty,LA,D,P2 · PP2,29,30,37,7.8,35,29,D,4.00,0.60,5.40,0.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,1200,5,20:05,0:54,0.00,0.00,0.80,3.00,1.00,0.60,0.40
+383,Ilya Solovyov,PIT,D,,29,40,35,9.9,37,3,D,3.40,0.20,9.60,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,2100,5,15:42,0:00,0.00,0.20,0.60,2.20,1.60,0.80,0.00
+384,Nico Sturm,MIN,LW,L4,29,59,33,11.6,51,9,LW,7.00,2.60,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,850,5,10:14,0:00,0.00,0.00,0.40,1.60,1.40,0.80,0.40
+385,Nils Lundkvist,DAL,D,P2,29,28,37,9.2,30,12,D,2.80,0.60,7.00,0.40,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,1900,5,17:01,0:02,0.00,0.20,0.40,2.20,1.20,0.80,0.00
+386,Zach Whitecloud,CGY,D,P2,29,50,34,7.5,59,12,D,5.00,0.60,7.20,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,2000,5,20:24,0:02,0.00,0.00,1.00,3.40,1.40,0.60,0.00
+387,Brian Dumoulin,LA,D,P3,28,30,36,8.4,35,29,D,4.00,0.60,5.40,0.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,2500,5,16:26,0:01,0.00,0.00,1.00,1.60,1.40,0.80,0.60
+388,Dylan Samberg,WPG,D,P1,28,34,35,6.2,41,29,D,4.00,0.80,6.20,0.00,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,2200,5,23:05,0:09,0.00,0.00,1.40,3.40,2.20,0.40,0.00
+389,Lian Bichsel,DAL,D,P2,28,28,36,11.5,30,12,D,2.80,0.60,7.00,0.40,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,2100,5,14:27,0:01,0.00,0.00,1.00,2.80,1.60,0.60,0.20
+390,Matthew Kessel,NYI,D,P3,28,38,34,10.7,28,12,D,3.80,0.20,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,1700,5,13:30,0:05,0.00,0.40,0.80,1.60,1.40,0.60,0.20
+391,Reid Schaefer,NSH,LW,L4,28,33,35,12.1,38,29,LW,6.80,2.80,5.80,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,1000,5,10:27,0:02,0.00,0.00,0.80,2.40,2.00,0.60,0.00
+392,Adam Larsson,SEA,D,P1,27,41,33,8.4,34,6,D,4.00,0.20,6.80,0.60,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,1600,5,22:41,0:04,0.00,0.40,1.00,2.80,1.80,0.40,0.00
+393,Jaccob Slavin,CAR,D,P1,27,65,30,6.7,71,6,D,4.60,0.80,9.60,0.60,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,1600,5,20:32,0:00,0.00,0.20,2.60,4.40,3.60,0.40,0.00
+394,Jack Ahcan,NSH,D,,27,51,32,10.2,60,20,D,4.80,1.20,6.20,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,,5,9:20,0:37,0.00,0.20,0.80,1.80,1.00,0.60,0.20
+395,Jonathan Aspirot,BOS,D,,27,52,31,9.4,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,,5,17:46,0:02,0.00,0.00,1.20,2.40,2.00,0.40,0.20
+396,Matt Kiersted,MIN,D,P3,27,86,28,10.4,84,1,D,5.00,1.60,8.40,1.20,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,1600,5,15:01,0:00,0.00,0.00,0.60,1.20,1.00,0.60,0.20
+397,Oliver Ekman-Larsson,TOR,D,P3,27,48,32,9.0,59,3,D,5.20,0.20,8.20,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,1400,5,18:47,0:30,0.00,0.20,0.40,1.20,1.00,0.40,0.20
+398,Ben Chiarot,DET,D,P1,26,85,27,7.8,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,1300,5,20:34,0:14,0.00,0.20,0.80,2.40,1.40,0.20,0.20
+399,Dmitri Simashev,UTA,D,P3,26,73,28,8.2,78,12,D,5.20,1.00,8.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,1500,5,14:16,0:00,0.00,0.00,1.20,2.80,2.20,0.60,0.20
+400,Filip Hallander,EDM,LW,L4 · PP2,26,19,35,10.3,9,24,LW,4.60,1.20,5.20,0.40,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,1000,5,10:31,0:38,0.00,0.00,0.60,1.60,1.40,0.60,0.40
+401,Jordan Spence,OTT,D,P2,26,81,28,8.3,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,850,5,21:06,0:44,0.00,0.20,0.80,2.00,1.80,0.00,0.00
+402,Nick Perbix,NSH,D,P2,26,51,31,7.7,60,20,D,4.80,1.20,6.20,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,,5,17:34,0:06,0.00,0.00,0.20,1.60,0.60,0.60,0.20
+403,Nicolas Hague,NSH,D,P3,26,51,31,8.6,60,20,D,4.80,1.20,6.20,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,2200,5,17:16,0:02,0.00,0.20,1.20,2.80,2.20,0.40,0.00
+404,Zack Ostapchuk,SJ,C,L4,26,54,30,9.8,45,15,C,7.00,3.40,6.80,0.80,Thu 7:00 PM,@ OTT,Samuel Ersson,Expected,.831,91,1000,5,10:13,0:06,0.00,0.00,1.00,1.20,1.20,0.60,0.00
+405,Bo Groulx,TOR,RW,,25,70,27,12.0,86,21,RW,9.80,5.20,8.20,0.60,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,,5,8:01,0:10,0.00,0.00,0.40,0.60,0.40,0.40,0.00
+406,Declan Chisholm,NJ,D,P3,25,45,30,10.6,38,12,D,4.40,0.40,5.00,0.40,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,1800,5,15:08,0:16,0.20,0.00,0.40,1.40,0.40,0.40,0.00
+407,Garnet Hathaway,FLA,RW,L4,25,29,32,8.9,26,11,RW,5.80,2.20,6.80,1.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,950,5,10:43,0:00,0.00,0.00,0.60,1.20,1.20,1.00,0.60
+408,Jeremy Lauzon,VGK,D,P2,25,19,33,6.5,19,29,D,2.80,0.40,7.00,0.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,1700,5,18:13,0:04,0.00,0.00,1.00,2.80,1.40,0.60,0.00
+409,Mattias Ekholm,EDM,D,P1 · PP2,25,40,31,7.6,35,20,D,3.80,0.80,5.00,0.20,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,1300,5,22:00,0:37,0.20,0.20,1.20,2.80,1.80,0.20,0.00
+410,Michael McCarron,MIN,C,L4,25,81,27,8.5,78,9,C,8.60,4.80,7.20,1.00,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,700,5,13:44,0:03,0.00,0.20,1.60,3.00,1.80,0.40,0.00
+411,Mitchell Chaffee,NYI,RW,L4,25,66,28,10.1,64,8,RW,8.00,3.00,7.20,1.20,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,,5,9:35,0:05,0.00,0.20,0.40,1.00,0.60,0.60,0.60
+412,Tom Willander,VAN,D,P2,25,61,28,9.7,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,1800,5,19:59,0:41,0.00,0.00,1.00,2.20,1.60,0.00,0.00
+413,Dylan Coghlan,VGK,D,P3,24,19,32,10.1,19,29,D,2.80,0.40,7.00,0.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,1800,5,15:02,0:00,0.00,0.20,1.60,3.20,2.40,0.60,0.00
+414,Isaac Howard,EDM,RW,L4 · PP2,24,47,29,9.1,43,21,RW,6.60,3.80,5.80,0.60,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,750,5,9:05,0:55,0.00,0.20,0.80,2.60,1.80,0.40,0.20
+415,Joel Edmundson,LA,D,P2,24,30,31,6.1,35,29,D,4.00,0.60,5.40,0.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,2100,5,16:31,0:00,0.00,0.00,2.00,3.20,2.80,0.60,0.20
+416,Nils Hoglander,NSH,RW,L3,24,29,31,11.1,33,11,RW,5.40,2.80,6.80,1.00,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,700,5,11:03,0:25,0.00,0.00,1.20,1.60,1.20,0.40,0.00
+417,Samuel Helenius,LA,C,L4,24,26,31,11.4,30,26,C,6.80,3.60,5.20,0.40,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,1400,5,8:37,0:00,0.00,0.00,0.80,1.20,1.00,0.80,0.40
+418,Ville Ottavainen,SEA,D,P3,24,41,29,10.9,34,6,D,4.00,0.20,6.80,0.60,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,2000,5,11:11,0:00,0.20,0.00,1.80,2.20,1.80,0.60,0.00
+419,Adam Pelech,NYI,D,P2,23,38,28,6.5,28,12,D,3.80,0.20,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,1700,5,20:34,0:13,0.00,0.00,1.60,3.60,3.00,0.00,0.00
+420,Elmer Soderblom,PIT,RW,,23,26,30,10.7,20,16,RW,5.20,2.80,4.40,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,274,5,11:34,0:00,0.20,0.00,0.40,1.00,1.00,0.80,0.40
+421,Jake McCabe,TOR,D,P1,23,48,27,8.7,59,3,D,5.20,0.20,8.20,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,1400,5,17:49,0:07,0.00,0.00,0.40,0.60,0.40,0.40,0.00
+422,Jayden Struble,NSH,D,P1,23,51,27,10.5,60,20,D,4.80,1.20,6.20,0.20,Thu 7:00 PM,@ BOS,Jeremy Swayman,Expected,.928,15,2400,5,15:46,0:02,0.00,0.00,0.00,1.00,0.60,0.40,0.20
+423,Joel Kiviranta,DAL,LW,L4,23,42,28,9.8,47,14,LW,6.60,3.80,5.40,0.80,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,900,5,11:32,0:02,0.20,0.00,0.80,1.40,1.00,0.60,0.20
+424,Matt Rempe,NYR,RW,,23,46,27,10.5,49,3,RW,6.80,2.80,7.00,1.60,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,,5,7:14,0:00,0.00,0.00,0.20,0.80,0.80,0.80,0.60
+425,Scott Mayfield,NYI,D,,23,38,28,7.7,28,12,D,3.80,0.20,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,,5,14:20,0:03,0.00,0.20,0.80,1.60,0.80,0.60,0.00
+426,William Wallinder,DET,D,P2,23,85,24,11.7,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,,4,14:14,0:00,0.25,0.25,1.00,3.25,1.50,0.25,0.25
+427,Zach Bogosian,MIN,D,P2,23,86,24,9.3,84,1,D,5.00,1.60,8.40,1.20,Thu 9:00 PM,@ CGY,Dustin Wolf,Expected,.834,92,2000,5,18:33,0:10,0.00,0.00,1.20,2.00,1.60,0.00,0.00
+428,Anton Johansson,DET,D,P3,22,85,23,11.4,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,1400,5,11:53,0:00,0.20,0.40,0.60,1.80,1.20,0.40,0.00
+429,Cameron Crotty,OTT,D,,22,81,23,10.6,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,,5,12:47,0:01,0.00,0.00,0.60,1.20,0.60,0.40,0.20
+430,Jonas Siegenthaler,NJ,D,P2,22,45,26,6.9,38,12,D,4.40,0.40,5.00,0.40,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,2000,5,19:28,0:05,0.00,0.40,0.00,0.60,0.20,0.40,0.20
+431,Kaedan Korczak,PIT,D,P2,22,40,27,8.4,37,3,D,3.40,0.20,9.60,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,1250,5,19:10,0:02,0.00,0.20,0.60,1.80,0.80,0.40,0.00
+432,Mario Ferraro,WPG,D,P2,22,34,28,9.3,41,29,D,4.00,0.80,6.20,0.00,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,2400,5,20:05,0:00,0.00,0.00,1.40,3.20,2.00,0.40,0.00
+433,Owen Michaels,EDM,C,L3,22,47,26,12.2,43,9,C,7.60,2.20,7.00,1.00,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,550,5,13:53,0:08,0.00,0.40,0.60,1.00,0.80,0.20,0.00
+434,Tanner Jeannot,BOS,LW,L4,22,30,28,9.9,22,20,LW,5.60,2.40,5.80,0.60,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,1000,5,11:25,0:00,0.00,0.20,0.60,1.20,0.80,0.80,0.20
+435,Josh Mahura,SEA,D,P3,21,41,26,10.2,34,6,D,4.00,0.20,6.80,0.60,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,1400,5,14:11,0:00,0.00,0.20,0.80,1.80,0.80,0.60,0.00
+436,Kyle Capobianco,DAL,D,P3,21,28,27,11.1,30,12,D,2.80,0.60,7.00,0.40,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,1800,5,10:43,0:09,0.00,0.00,0.20,1.40,0.60,0.40,0.00
+437,Nate Schmidt,UTA,D,P2,21,73,23,8.7,78,12,D,5.20,1.00,8.80,0.40,Thu 10:00 PM,@ SEA,Joey Daccord,Expected,.882,55,1300,5,19:36,0:12,0.20,0.20,1.00,2.20,1.20,0.00,0.00
+438,Nikita Klepov,ANA,RW,L1 · PP2,21,31,27,11.1,21,28,RW,6.60,2.00,5.80,0.40,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,,3,13:28,2:07,0.00,0.00,0.00,0.67,0.00,0.00,0.00
+439,Brayden McNabb,VGK,D,P1,20,19,27,8.4,19,29,D,2.80,0.40,7.00,0.00,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,1400,5,18:02,0:00,0.00,0.40,1.20,3.00,2.20,0.40,0.00
+440,Cale Fleury,SEA,D,,20,41,24,9.6,34,6,D,4.00,0.20,6.80,0.60,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,,5,16:01,0:00,0.00,0.20,0.80,2.00,1.40,0.40,0.00
+441,Ryan Pulock,NYI,D,P2,20,38,24,7.2,28,12,D,3.80,0.20,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,1700,5,20:03,0:01,0.00,0.00,0.20,2.80,0.60,0.40,0.00
+442,Zack MacEwen,TOR,RW,L4,20,70,22,10.5,86,21,RW,9.80,5.20,8.20,0.60,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,1400,5,6:22,0:00,0.00,0.00,0.40,1.00,0.60,0.60,0.40
+443,Bokondji Imama,FLA,LW,L4,19,48,22,10.3,50,2,LW,6.60,3.60,5.60,2.00,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,1100,5,8:30,0:00,0.00,0.00,0.40,0.80,0.60,0.60,0.60
+444,Brandon Carlo,STL,D,P3,19,73,21,6.5,77,6,D,5.00,1.40,7.60,0.60,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,2900,5,16:44,0:00,0.00,0.20,0.40,1.40,1.20,0.40,0.20
+445,Brandon Duhaime,TOR,LW,L4,19,5,27,8.9,5,24,LW,3.80,2.00,3.40,0.40,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,1000,5,11:26,0:02,0.00,0.00,0.40,1.60,1.20,0.60,0.20
+446,Connor Murphy,EDM,D,P2,19,40,23,9.2,35,20,D,3.80,0.80,5.00,0.20,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,1900,5,22:06,0:02,0.00,0.20,0.60,1.20,0.60,0.20,0.00
+447,Marshall Rifai,TOR,D,P3,19,48,22,11.8,59,3,D,5.20,0.20,8.20,0.80,Thu 7:00 PM,vs NYR,Dylan Garand,Expected,.929,4,2800,3,12:40,0:03,0.33,0.00,1.00,1.67,1.33,0.00,0.00
+448,Pavel Mintyukov,ANA,D,P3,19,34,24,10.4,24,20,D,3.00,0.40,7.00,0.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,1400,5,16:33,0:08,0.00,0.40,0.40,0.80,0.40,0.20,0.20
+449,Shakir Mukhamadullin,EDM,D,,19,40,23,11.4,35,20,D,3.80,0.80,5.00,0.20,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,,5,11:52,0:12,0.20,0.00,0.20,1.40,0.40,0.20,0.00
+450,Andreas Englund,DET,D,,18,85,19,10.5,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,1900,5,11:26,0:00,0.00,0.00,0.80,1.60,0.80,0.40,0.00
+451,Axel Sandin-Pellikka,DET,D,PP2,18,85,19,10.4,81,29,D,6.60,1.00,10.00,0.00,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,1400,5,11:22,0:26,0.00,0.20,0.20,1.20,0.60,0.00,0.00
+452,Dmitry Kulikov,FLA,D,P3,18,25,23,9.3,21,3,D,2.60,0.20,7.20,0.80,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,2000,5,14:46,0:00,0.00,0.20,0.60,2.20,1.60,0.40,0.00
+453,Dylan DeMelo,WPG,D,P2,18,34,22,8.4,41,29,D,4.00,0.80,6.20,0.00,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,2500,5,21:12,0:01,0.00,0.20,0.80,1.80,1.00,0.20,0.00
+454,Esa Lindell,DAL,D,,18,28,23,9.2,30,12,D,2.80,0.60,7.00,0.40,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,,5,21:56,0:17,0.00,0.00,0.40,0.80,0.60,0.00,0.00
+455,Hayden Hodgson,OTT,RW,L4,18,39,22,10.7,34,30,RW,7.00,2.80,4.80,0.20,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,1100,5,6:31,0:02,0.00,0.00,0.40,1.00,0.80,0.40,0.20
+456,Uvis Balinskis,FLA,D,,18,25,23,9.6,21,3,D,2.60,0.20,7.20,0.80,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,,5,14:43,1:17,0.00,0.20,0.20,0.80,0.40,0.00,0.00
+457,Victor Mancini,VAN,D,,18,61,20,9.8,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,,5,13:07,0:00,0.00,0.20,0.40,2.20,1.00,0.40,0.00
+458,Cody Ceci,LA,D,,17,30,21,7.4,35,29,D,4.00,0.60,5.40,0.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,,5,16:01,0:00,0.00,0.00,1.00,1.80,1.20,0.40,0.00
+459,Luke Schenn,VAN,D,P3,17,61,19,8.7,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,2500,5,13:55,0:02,0.00,0.20,0.60,1.60,1.20,0.20,0.00
+460,Mike Reilly,CAR,RW,,17,28,22,7.1,24,32,RW,6.60,2.60,5.00,0.00,Thu 9:00 PM,@ EDM,Devon Levi,Expected,.898,43,,5,12:22,0:04,0.00,0.40,1.20,2.80,2.20,0.20,0.00
+461,Will Borgen,BOS,D,P2,17,52,20,9.9,50,20,D,4.00,0.60,8.40,0.20,Thu 7:00 PM,vs NSH,Juuse Saros,Expected,.907,61,1900,5,18:43,0:03,0.20,0.20,0.40,0.60,0.40,0.00,0.00
+462,Casey Cizikas,NYI,C,L4,16,53,19,11.9,47,26,C,7.60,3.00,7.00,0.40,Thu 7:30 PM,vs LA,Darcy Kuemper,Expected,.867,76,700,5,12:00,0:01,0.00,0.00,0.20,0.80,0.40,0.20,0.00
+463,Jamie Oleksiak,VAN,D,P2,16,61,18,9.3,58,6,D,4.40,0.60,7.80,0.60,Thu 10:00 PM,vs DET,John Gibson,Expected,.873,72,2200,5,17:29,0:00,0.00,0.20,1.00,1.20,1.20,0.20,0.00
+464,Curtis Douglas,SEA,LW,,15,24,20,9.3,12,14,LW,4.20,2.00,4.80,0.80,Thu 10:00 PM,vs UTA,Karel Vejmelka,Expected,.879,70,,5,7:51,0:00,0.20,0.20,0.40,0.80,0.60,0.60,0.60
+465,Justin Dowling,NYR,C,L4,15,28,19,11.0,27,26,C,6.00,2.80,7.00,0.40,Thu 7:00 PM,@ TOR,Sergei Bobrovsky,Expected,.901,34,1300,5,7:29,0:00,0.00,0.00,0.20,0.80,0.80,0.40,0.20
+466,Mikey Anderson,LA,D,P3,15,30,19,9.2,35,29,D,4.00,0.60,5.40,0.00,Thu 7:30 PM,@ NYI,Ilya Sorokin,Expected,.934,11,2200,5,16:59,0:04,0.00,0.00,0.20,0.80,0.80,0.00,0.00
+467,Noah Warren,ANA,D,P1,15,34,19,10.4,24,20,D,3.00,0.40,7.00,0.20,Thu 7:00 PM,@ NJ,Jake Allen,Expected,.883,72,2600,5,17:07,0:01,0.00,0.20,0.80,2.20,1.00,0.00,0.00
+468,Nic Dowd,VGK,C,L4,14,21,18,9.6,22,22,C,6.60,2.80,5.40,0.60,Thu 8:00 PM,@ STL,Joel Hofer,Expected,.918,19,1000,5,13:33,0:03,0.00,0.00,0.00,0.40,0.20,0.20,0.20
+469,Joel Hanley,CGY,D,,13,50,15,7.8,59,12,D,5.00,0.60,7.20,0.40,Thu 9:00 PM,vs MIN,Jesper Wallstedt,Expected,.915,13,,5,15:14,0:00,0.00,0.00,0.80,1.40,1.20,0.20,0.00
+470,Spencer Stastney,PIT,D,P3,13,40,16,8.3,37,3,D,3.40,0.20,9.60,0.80,Thu 7:00 PM,vs FLA,Cooper Black,Expected,,50,1300,5,17:20,0:00,0.00,0.20,0.60,1.00,0.80,0.20,0.00
+471,Tyler Myers,DAL,D,P3,13,28,17,6.4,30,12,D,2.80,0.60,7.00,0.40,Thu 8:00 PM,vs WPG,Stuart Skinner,Expected,.909,22,2100,5,14:11,0:00,0.00,0.00,0.20,1.60,0.60,0.40,0.00
+472,Brenden Dillon,NJ,D,,12,45,14,9.1,38,12,D,4.40,0.40,5.00,0.40,Thu 7:00 PM,vs ANA,Lukas Dostal,Expected,.881,71,,5,14:26,0:00,0.00,0.00,0.20,2.00,0.80,0.20,0.00
+473,Zach Dean,STL,C,,12,40,15,11.1,36,5,C,6.60,3.40,6.20,1.20,Thu 8:00 PM,vs VGK,Carter Hart,Expected,.888,57,,3,9:45,0:02,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+474,Brad Lambert,WPG,RW,L4,11,18,15,10.9,21,21,RW,6.20,2.60,4.20,0.60,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,1000,5,7:40,0:00,0.00,0.20,0.00,0.80,0.60,0.20,0.00
+475,Jack St. Ivany,WPG,D,,11,34,14,9.4,41,29,D,4.00,0.80,6.20,0.00,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,,5,15:01,0:00,0.00,0.00,0.20,1.60,0.60,0.00,0.00
+476,Keegan Kolesar,DET,RW,L4,11,90,11,10.1,88,1,RW,8.40,5.00,8.80,1.80,Thu 10:00 PM,@ VAN,Kevin Lankinen,Expected,.807,99,800,5,9:25,0:00,0.00,0.00,0.00,0.20,0.20,0.20,0.20
+477,Ty Emberson,EDM,D,P3,11,40,14,8.8,35,20,D,3.80,0.80,5.00,0.20,Thu 9:00 PM,vs CAR,Brandon Bussi,Expected,.882,61,2200,5,12:17,0:00,0.00,0.20,0.80,1.60,1.40,0.20,0.00
+478,Nikolas Matinpalo,OTT,D,P3,10,81,11,7.8,87,6,D,6.00,1.00,11.40,0.60,Thu 7:00 PM,vs SJ,Yaroslav Askarov,Expected,.865,58,1600,5,13:07,0:00,0.00,0.20,0.20,1.00,0.40,0.20,0.00
+479,Tyrel Bauer,WPG,D,P3,10,34,13,10.9,41,29,D,4.00,0.80,6.20,0.00,Thu 8:00 PM,@ DAL,Jake Oettinger,Expected,.945,8,2900,5,8:29,0:00,0.00,0.00,0.40,1.40,0.60,0.20,0.00
+480,Radko Gudas,FLA,D,P3,9,25,11,7.9,21,3,D,2.60,0.20,7.20,0.80,Thu 7:00 PM,@ PIT,Sergei Murashov,Expected,.880,42,2500,5,14:19,0:00,0.00,0.00,0.40,2.20,1.20,0.00,0.00

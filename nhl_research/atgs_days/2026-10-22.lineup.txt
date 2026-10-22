@@ -1,0 +1,51 @@
+# Thursday 10/22 -- starting goalies and availability, read in the morning from the
+# user's CSVs (nhl-goalie-summary-2026-l5 and nhl-goal-matchups-slate-l5, 10/22),
+# RotoWire lineups (agree with the CSVs on all 24 starters), DailyFaceoff starting
+# goalies and line combinations for all 24 clubs, and the NHL box scores through
+# 10/21. From the pasted list: Kaprizov's, McDavid's and Draisaitl's "Over 1 Goals"
+# were entered as Over 0.5 (one-goal sheet), the Schaefer, Heiskanen and Seider
+# points props as Over 0.5 Goals, and the Seth Jones assist prop was left off.
+
+# FLA and OTT played 10/21; each starts the other goalie
+# (Schmid and Ullmark started last night).
+goalie FLA Cooper Black | expected, back-to-back
+goalie PIT Sergei Murashov | expected
+goalie SJS Yaroslav Askarov | expected
+goalie OTT Samuel Ersson | expected, back-to-back
+goalie NSH Juuse Saros | expected
+goalie BOS Jeremy Swayman | expected
+goalie NYR Dylan Garand | expected
+goalie TOR Sergei Bobrovsky | expected
+goalie ANA Lukas Dostal | expected
+# DailyFaceoff has Daws (no report behind it); Allen started 10/20.
+goalie NJD Jake Allen | expected, not yet confirmed
+# DailyFaceoff has Forsberg (no report behind it); Kuemper started 10/20.
+goalie LAK Darcy Kuemper | expected, not yet confirmed
+goalie NYI Ilya Sorokin | expected
+# DailyFaceoff has Hill (no report behind it); Hart started 10/20.
+goalie VGK Carter Hart | expected, not yet confirmed
+goalie STL Joel Hofer | expected
+goalie WPG Stuart Skinner | expected
+goalie DAL Jake Oettinger | expected
+goalie MIN Jesper Wallstedt | expected
+# DailyFaceoff has Cooley (no report behind it); Cooley started 10/18.
+goalie CGY Dustin Wolf | expected, not yet confirmed
+goalie CAR Brandon Bussi | expected
+goalie EDM Devon Levi | expected
+goalie UTA Karel Vejmelka | expected
+goalie SEA Joey Daccord | expected
+goalie DET John Gibson | expected
+goalie VAN Kevin Lankinen | expected
+
+# On the pasted list but on injured reserve or ruled out (DailyFaceoff and RotoWire);
+# none has a line in the 10/22 matchup export.
+out TOR John Tavares | injured reserve
+out OTT William Eklund | injured reserve
+out DAL Matt Duchene | injured reserve
+out CGY Jonathan Huberdeau | injured reserve
+out CAR Taylor Hall | injured reserve
+out UTA Michael Carcone | injured reserve
+out NYI Matias Maccelli | ruled out (RotoWire); missed 10/20
+
+doubt ANA Judd Caulfield | Day-to-day -- missed ANA's last game (10/20); DailyFaceoff and RotoWire list him day-to-day and the export has no price for him
+doubt CGY Mikael Backlund | Day-to-day -- RotoWire lists him day-to-day; DailyFaceoff (last updated 10/19) still has him centering the top line

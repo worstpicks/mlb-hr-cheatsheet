@@ -1,0 +1,62 @@
+﻿Game,Cavaliers @ 76ers
+Range,Last 5
+
+60.0%,Tip Win %,80.0%
+60.0%,First FG %,80.0%
+60.0%,First Point %,80.0%
+40.0%,First Three %,40.0%
+1.6,Avg Shots to First FG,1.6
+3.4,Avg Shots to First 3PT,2.6
+
+POSITION,COUNT,%
+SF,2,40.0%
+PG,2,40.0%
+C,1,20.0%
+
+POSITION,COUNT,%
+SF,3,60.0%
+SG,2,40.0%
+
+SHOT TYPE,COUNT,%
+2pt jump shot,3,60.0%
+3pt jump shot,2,40.0%
+
+SHOT TYPE,COUNT,%
+2pt layup,3,60.0%
+2pt dunk,1,20.0%
+3pt jump shot,1,20.0%
+
+PLAYER,TIP ATTEMPTS,TIPS WON,TIP WIN %
+Jarrett Allen GTD,5,3,60.0%
+
+PLAYER,TIP ATTEMPTS,TIPS WON,TIP WIN %
+Joel Embiid,4,4,100.0%
+Andre Drummond,1,0,0.0%
+
+PLAYER,STARTS,FIRST GM FGA,FIRST TEAM FGA,1ST TEAM FGM,1ST FGM,1ST 3PTM,1ST POINT,1ST 3 FGA/GAME,FGA IN 1ST 3MIN,PTS IN 1ST 3MIN
+Kelly Oubre Jr. SF,5,20.0%,40.0%,2,2,0,2,0.40,0.60,0.80
+Evan Mobley PF,5,60.0%,80.0%,3,2,0,2,1.00,1.80,2.20
+Tyrese Maxey PG,5,20.0%,20.0%,1,1,0,1,0.40,0.60,0.80
+James Harden PG,5,0.0%,0.0%,1,1,0,1,0.20,0.20,0.40
+Joel Embiid C,4,50.0%,50.0%,1,1,0,1,0.50,1.00,0.50
+VJ Edgecombe SG,5,0.0%,0.0%,1,0,1,0,0.40,1.20,1.80
+Paul George PF,5,0.0%,0.0%,0,0,1,0,0.80,1.80,2.40
+Jarrett Allen C GTD,5,0.0%,20.0%,0,0,0,0,0.60,1.40,2.40
+Donovan Mitchell SG,5,0.0%,0.0%,1,0,2,0,0.40,1.40,2.80
+Dean Wade PF GTD,3,0.0%,0.0%,0,0,0,0,0.00,0.00,0.00
+Max Strus SF,2,0.0%,0.0%,0,0,0,0,0.00,0.25,0.00
+Andre Drummond C,1,0.0%,0.0%,0,0,0,0,0.00,0.00,0.00
+
+Player,1st FG,1st Team Basket,1st 3PT,Score in First 3 Min
+Kelly Oubre Jr.,N/A,N/A,N/A,N/A
+Evan Mobley,+260,N/A,N/A,-128
+Tyrese Maxey,+340,N/A,N/A,-143
+James Harden,+1060,N/A,N/A,-117
+Joel Embiid,+575,N/A,N/A,-195
+VJ Edgecombe,+1400,N/A,N/A,+149
+Paul George,+750,N/A,N/A,N/A
+Jarrett Allen,+700,N/A,N/A,-105
+Donovan Mitchell,+650,N/A,N/A,-160
+Dean Wade,N/A,N/A,N/A,N/A
+Max Strus,N/A,N/A,N/A,N/A
+Andre Drummond,N/A,N/A,N/A,N/A

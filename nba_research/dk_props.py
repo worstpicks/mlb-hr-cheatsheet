@@ -19,7 +19,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 SLATES = ROOT / "preview" / "data"
-CORE = "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/{id}/competitions/{id}/odds/100/propBets?lang=en&region=us&limit=1000&page={page}"
+# 250 a page: at limit=1000 ESPN's second page came back empty on 10/22 (1,000 of 1,243 prices,
+# Embiid's points ladder among the lost), while 250-item pages return every one.
+CORE = "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/{id}/competitions/{id}/odds/100/propBets?lang=en&region=us&limit=250&page={page}"
 
 # ESPN's market names → the research tab's stat keys
 MILESTONES = {"Points Milestones": "pts", "Rebounds Milestones": "reb", "Assists Milestones": "ast",
@@ -132,14 +134,16 @@ def fetch(date: str) -> Path:
     slate = json.loads((SLATES / f"nba-research-{date}.json").read_text(encoding="utf-8"))
     games = {}
     for g in slate.get("games") or []:
-        items = []
-        for page in range(1, 6):
+        items, count = [], None
+        for page in range(1, 16):
             got = _get(CORE.format(id=g["id"], page=page))
+            count = count or got.get("count")
             items += got.get("items") or []
-            if page >= (got.get("pageCount") or 1):
+            if page >= (got.get("pageCount") or 1) or not got.get("items"):
                 break
         games[g["id"]] = {"label": g.get("label", ""), "players": board(items), "items": len(items)}
-        print(f"[dk_props] {g.get('label')}: {len(items)} prices for {len(games[g['id']]['players'])} players")
+        short = f" -- WARNING: ESPN lists {count}, so {count - len(items)} are missing" if count and len(items) < count else ""
+        print(f"[dk_props] {g.get('label')}: {len(items)} prices for {len(games[g['id']]['players'])} players{short}")
     out = {"date": date, "book": "DraftKings", "source": "ESPN core odds API (provider 100)",
            "captured": datetime.now(timezone.utc).isoformat(timespec="minutes"), "games": games}
     path = DATA / f"nba-dk-props-{date}.json"

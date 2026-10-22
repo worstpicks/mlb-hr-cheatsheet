@@ -1,0 +1,64 @@
+﻿Game,Nuggets @ Thunder
+Range,Last 5
+
+0.0%,Tip Win %,0.0%
+40.0%,First FG %,20.0%
+40.0%,First Point %,20.0%
+40.0%,First Three %,0.0%
+2.8,Avg Shots to First FG,2.4
+3.4,Avg Shots to First 3PT,3.6
+
+POSITION,COUNT,%
+PF,4,80.0%
+SG,1,20.0%
+
+POSITION,COUNT,%
+C,2,40.0%
+PG,2,40.0%
+SF,1,20.0%
+
+SHOT TYPE,COUNT,%
+2pt jump shot,2,40.0%
+3pt jump shot,2,40.0%
+2pt dunk,1,20.0%
+
+SHOT TYPE,COUNT,%
+3pt jump shot,3,60.0%
+2pt jump shot,1,20.0%
+2pt layup,1,20.0%
+
+PLAYER,TIP ATTEMPTS,TIPS WON,TIP WIN %
+Nikola Jokic,5,0,0.0%
+
+PLAYER,TIP ATTEMPTS,TIPS WON,TIP WIN %
+Chet Holmgren,5,0,0.0%
+
+PLAYER,STARTS,FIRST GM FGA,FIRST TEAM FGA,1ST TEAM FGM,1ST FGM,1ST 3PTM,1ST POINT,1ST 3 FGA/GAME,FGA IN 1ST 3MIN,PTS IN 1ST 3MIN
+Chet Holmgren C,5,0.0%,40.0%,2,1,0,1,1.00,1.40,1.20
+Jamal Murray PG,5,0.0%,40.0%,2,1,1,1,0.80,1.20,1.20
+Nikola Jokic C,5,0.0%,40.0%,2,1,0,1,0.60,1.80,1.60
+Isaiah Hartenstein C,5,0.0%,40.0%,3,0,0,0,0.40,1.20,2.00
+Luguentz Dort SF,5,0.0%,20.0%,0,0,0,0,0.20,0.80,0.60
+Shai Gilgeous-Alexander PG,5,0.0%,0.0%,0,0,0,0,0.60,1.00,0.40
+Christian Braun SG,5,0.0%,0.0%,0,0,1,0,0.20,0.80,1.00
+Cameron Johnson PF,5,0.0%,20.0%,1,0,0,0,0.40,0.80,0.80
+Spencer Jones SF GTD,3,0.0%,0.0%,0,0,0,0,0.00,0.00,0.00
+Jared McCain SG,2,0.0%,0.0%,0,0,0,0,1.00,0.40,0.00
+Cason Wallace SG,2,0.0%,0.0%,0,0,0,0,0.00,0.25,0.00
+Aaron Gordon PF,2,0.0%,0.0%,0,0,0,0,0.50,1.00,0.00
+Ajay Mitchell SG,1,0.0%,0.0%,0,0,0,0,1.00,1.00,0.00
+
+Player,1st FG,1st Team Basket,1st 3PT,Score in First 3 Min
+Chet Holmgren,+660,N/A,N/A,N/A
+Jamal Murray,+600,N/A,N/A,N/A
+Nikola Jokic,+600,N/A,N/A,N/A
+Isaiah Hartenstein,+900,N/A,N/A,N/A
+Luguentz Dort,N/A,N/A,N/A,N/A
+Shai Gilgeous-Alexander,+575,N/A,N/A,N/A
+Christian Braun,+1100,N/A,N/A,N/A
+Cameron Johnson,+1340,N/A,N/A,N/A
+Spencer Jones,N/A,N/A,N/A,N/A
+Jared McCain,N/A,N/A,N/A,N/A
+Cason Wallace,+600,N/A,N/A,N/A
+Aaron Gordon,+380,N/A,N/A,N/A
+Ajay Mitchell,N/A,N/A,N/A,N/A

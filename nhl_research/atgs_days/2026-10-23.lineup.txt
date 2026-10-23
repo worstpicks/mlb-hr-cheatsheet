@@ -1,0 +1,10 @@
+# October 23 CSVs, RotoWire lineups and DailyFaceoff line combinations for all four clubs.
+# https://www.rotowire.com/hockey/nhl-lineups.php
+# https://www.dailyfaceoff.com/starting-goalies/2026-10-23
+# All four CSV starter projections agree with RotoWire; no confirmations at build time.
+goalie MTL Jakub Dobes | expected, not confirmed; CSV and RotoWire project Dobes, DailyFaceoff projects Fowler
+goalie CHI Spencer Knight | expected, not yet confirmed
+goalie TBL Andrei Vasilevskiy | expected, not yet confirmed
+goalie COL Mackenzie Blackwood | expected, not yet confirmed
+# RotoWire lists Suzuki OUT; absent from DailyFaceoff's projected lineup.
+out MTL Nick Suzuki | listed out; absent from projected lineup
